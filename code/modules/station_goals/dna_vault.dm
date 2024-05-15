@@ -33,7 +33,7 @@
 
 /datum/station_goal/dna_vault/get_report()
 	return {"Our long term prediction systems indicate a 99% chance of system-wide cataclysm in the near future.
-	 We need you to construct a DNA Vault aboard your station.
+	 We need you to construct a DNA Vault aboard my station.
 
 	 The DNA Vault needs to contain samples of:
 	 [animal_count] unique animal data
@@ -44,11 +44,11 @@
 
 
 /datum/station_goal/dna_vault/on_report()
-	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_vault]
-	P.special_enabled = TRUE
+//	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_vault]
+//	P.special_enabled = TRUE
 
-	P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_probes]
-	P.special_enabled = TRUE
+//	P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_probes]
+//	P.special_enabled = TRUE
 
 /datum/station_goal/dna_vault/check_completion()
 	if(..())
@@ -61,7 +61,7 @@
 
 /obj/item/dna_probe
 	name = "DNA Sampler"
-	desc = "Can be used to take chemical and genetic samples of pretty much anything."
+	desc = ""
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -120,7 +120,7 @@
 
 /obj/machinery/dna_vault
 	name = "DNA Vault"
-	desc = "Break glass in case of apocalypse."
+	desc = ""
 	icon = 'icons/obj/machines/dna_vault.dmi'
 	icon_state = "vault"
 	density = TRUE
@@ -256,17 +256,17 @@
 	var/datum/species/S = H.dna.species
 	switch(upgrade_type)
 		if(VAULT_TOXIN)
-			to_chat(H, "<span class='notice'>You feel resistant to airborne toxins.</span>")
+			to_chat(H, "<span class='notice'>I feel resistant to airborne toxins.</span>")
 			if(locate(/obj/item/organ/lungs) in H.internal_organs)
 				var/obj/item/organ/lungs/L = H.internal_organs_slot[ORGAN_SLOT_LUNGS]
 				L.tox_breath_dam_min = 0
 				L.tox_breath_dam_max = 0
 			ADD_TRAIT(H, TRAIT_VIRUSIMMUNE, "dna_vault")
 		if(VAULT_NOBREATH)
-			to_chat(H, "<span class='notice'>Your lungs feel great.</span>")
+			to_chat(H, "<span class='notice'>My lungs feel great.</span>")
 			ADD_TRAIT(H, TRAIT_NOBREATH, "dna_vault")
 		if(VAULT_FIREPROOF)
-			to_chat(H, "<span class='notice'>You feel fireproof.</span>")
+			to_chat(H, "<span class='notice'>I feel fireproof.</span>")
 			S.burnmod = 0.5
 			ADD_TRAIT(H, TRAIT_RESISTHEAT, "dna_vault")
 			ADD_TRAIT(H, TRAIT_NOFIRE, "dna_vault")
@@ -274,13 +274,13 @@
 			to_chat(H, "<span class='notice'>Nothing can keep you down for long.</span>")
 			S.stunmod = 0.5
 		if(VAULT_ARMOUR)
-			to_chat(H, "<span class='notice'>You feel tough.</span>")
+			to_chat(H, "<span class='notice'>I feel tough.</span>")
 			S.armor = 30
 			ADD_TRAIT(H, TRAIT_PIERCEIMMUNE, "dna_vault")
 		if(VAULT_SPEED)
-			to_chat(H, "<span class='notice'>Your legs feel faster.</span>")
+			to_chat(H, "<span class='notice'>My legs feel faster.</span>")
 			H.add_movespeed_modifier(MOVESPEED_ID_DNA_VAULT, update=TRUE, priority=100, multiplicative_slowdown=-1, blacklisted_movetypes=(FLYING|FLOATING))
 		if(VAULT_QUICK)
-			to_chat(H, "<span class='notice'>Your arms move as fast as lightning.</span>")
+			to_chat(H, "<span class='notice'>My arms move as fast as lightning.</span>")
 			H.next_move_modifier = 0.5
 	power_lottery[H] = list()

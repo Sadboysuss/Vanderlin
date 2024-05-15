@@ -8,7 +8,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 /mob/camera/blob
 	name = "Blob Overmind"
 	real_name = "Blob Overmind"
-	desc = "The overmind. It controls the blob."
+	desc = ""
 	icon = 'icons/mob/cameramob.dmi'
 	icon_state = "marker"
 	mouse_opacity = MOUSE_OPACITY_ICON
@@ -97,8 +97,8 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	if(!blob_core)
 		if(!placed)
 			if(manualplace_min_time && world.time >= manualplace_min_time)
-				to_chat(src, "<b><span class='big'><font color=\"#EE4000\">You may now place your blob core.</font></span></b>")
-				to_chat(src, "<span class='big'><font color=\"#EE4000\">You will automatically place your blob core in [DisplayTimeText(autoplace_max_time - world.time)].</font></span>")
+				to_chat(src, "<b><span class='big'><font color=\"#EE4000\">I may now place your blob core.</font></span></b>")
+				to_chat(src, "<span class='big'><font color=\"#EE4000\">I will automatically place your blob core in [DisplayTimeText(autoplace_max_time - world.time)].</font></span>")
 				manualplace_min_time = 0
 			if(autoplace_max_time && world.time >= autoplace_max_time)
 				place_blob_core(1)
@@ -112,14 +112,14 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 		blob_points = INFINITY
 		addtimer(CALLBACK(src, .proc/victory), 450)
 	else if(!free_strain_rerolls && (last_reroll_time + BLOB_REROLL_TIME<world.time))
-		to_chat(src, "<b><span class='big'><font color=\"#EE4000\">You have gained another free strain re-roll.</font></span></b>")
+		to_chat(src, "<b><span class='big'><font color=\"#EE4000\">I have gained another free strain re-roll.</font></span></b>")
 		free_strain_rerolls = 1
 
 	if(!victory_in_progress && max_count < blobs_legit.len)
 		max_count = blobs_legit.len
 
 /mob/camera/blob/proc/victory()
-	sound_to_playing_players('sound/machines/alarm.ogg')
+	sound_to_playing_players('sound/blank.ogg')
 	sleep(100)
 	for(var/i in GLOB.mob_living_list)
 		var/mob/living/L = i
@@ -136,7 +136,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 			continue
 
 		if(!(ROLE_BLOB in L.faction))
-			playsound(L, 'sound/effects/splat.ogg', 50, TRUE)
+			playsound(L, 'sound/blank.ogg', 50, TRUE)
 			L.death()
 			new/mob/living/simple_animal/hostile/blob/blobspore(T)
 		else
@@ -183,7 +183,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 
 /mob/camera/blob/Login()
 	..()
-	to_chat(src, "<span class='notice'>You are the overmind!</span>")
+	to_chat(src, "<span class='notice'>I are the overmind!</span>")
 	blob_help()
 	update_health_hud()
 	add_points(0)
@@ -210,7 +210,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, "<span class='boldwarning'>You cannot send IC messages (muted).</span>")
+			to_chat(src, "<span class='boldwarning'>I cannot send IC messages (muted).</span>")
 			return
 		if (!(ignore_spam || forced) && src.client.handle_spam_prevention(message,MUTE_IC))
 			return

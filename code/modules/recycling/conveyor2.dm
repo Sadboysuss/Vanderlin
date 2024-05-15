@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "conveyor_map"
 	name = "conveyor belt"
-	desc = "A conveyor belt."
+	desc = ""
 	layer = BELOW_OPEN_DOOR_LAYER
 	var/operating = 0	// 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1	// true if can operate (no broken segments in this belt run)
@@ -142,13 +142,13 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 /obj/machinery/conveyor/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_CROWBAR)
 		user.visible_message("<span class='notice'>[user] struggles to pry up \the [src] with \the [I].</span>", \
-		"<span class='notice'>You struggle to pry up \the [src] with \the [I].</span>")
+		"<span class='notice'>I struggle to pry up \the [src] with \the [I].</span>")
 		if(I.use_tool(src, user, 40, volume=40))
 			if(!(stat & BROKEN))
 				var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
 				C.id = id
 				transfer_fingerprints_to(C)
-			to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
+			to_chat(user, "<span class='notice'>I remove the conveyor belt.</span>")
 			qdel(src)
 
 	else if(I.tool_behaviour == TOOL_WRENCH)
@@ -156,15 +156,15 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 			I.play_tool_sound(src)
 			setDir(turn(dir,-45))
 			update_move_direction()
-			to_chat(user, "<span class='notice'>You rotate [src].</span>")
+			to_chat(user, "<span class='notice'>I rotate [src].</span>")
 
 	else if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!(stat & BROKEN))
 			verted = verted * -1
 			update_move_direction()
-			to_chat(user, "<span class='notice'>You reverse [src]'s direction.</span>")
+			to_chat(user, "<span class='notice'>I reverse [src]'s direction.</span>")
 
-	else if(user.a_intent != INTENT_HARM)
+	else if(user.used_intent.type != INTENT_HARM)
 		user.transferItemToLoc(I, drop_location())
 	else
 		return ..()
@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/machinery/conveyor_switch
 	name = "conveyor switch"
-	desc = "A conveyor control switch."
+	desc = ""
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	speed_process = TRUE
@@ -310,12 +310,12 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 		var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
 		C.id = id
 		transfer_fingerprints_to(C)
-		to_chat(user, "<span class='notice'>You detach the conveyor switch.</span>")
+		to_chat(user, "<span class='notice'>I detach the conveyor switch.</span>")
 		qdel(src)
 
 /obj/machinery/conveyor_switch/oneway
 	icon_state = "conveyor_switch_oneway"
-	desc = "A conveyor control switch. It appears to only go in one direction."
+	desc = ""
 	oneway = TRUE
 
 /obj/machinery/conveyor_switch/oneway/Initialize()
@@ -331,14 +331,14 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "conveyor_construct"
 	name = "conveyor belt assembly"
-	desc = "A conveyor belt assembly."
+	desc = ""
 	w_class = WEIGHT_CLASS_BULKY
 	var/id = "" //inherited by the belt
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
 	..()
 	if(istype(I, /obj/item/conveyor_switch_construct))
-		to_chat(user, "<span class='notice'>You link the switch to the conveyor belt assembly.</span>")
+		to_chat(user, "<span class='notice'>I link the switch to the conveyor belt assembly.</span>")
 		var/obj/item/conveyor_switch_construct/C = I
 		id = C.id
 
@@ -348,7 +348,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 		return
 	var/cdir = get_dir(A, user)
 	if(A == user.loc)
-		to_chat(user, "<span class='warning'>You cannot place a conveyor belt under yourself!</span>")
+		to_chat(user, "<span class='warning'>I cannot place a conveyor belt under yourself!</span>")
 		return
 	var/obj/machinery/conveyor/C = new/obj/machinery/conveyor(A, cdir, id)
 	transfer_fingerprints_to(C)
@@ -356,7 +356,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/item/conveyor_switch_construct
 	name = "conveyor switch assembly"
-	desc = "A conveyor control switch assembly."
+	desc = ""
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = WEIGHT_CLASS_BULKY
@@ -369,7 +369,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 /obj/item/conveyor_switch_construct/attack_self(mob/user)
 	for(var/obj/item/conveyor_construct/C in view())
 		C.id = id
-	to_chat(user, "<span class='notice'>You have linked all nearby conveyor belt assemblies to this switch.</span>")
+	to_chat(user, "<span class='notice'>I have linked all nearby conveyor belt assemblies to this switch.</span>")
 
 /obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)
 	. = ..()
@@ -389,4 +389,4 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/item/paper/guides/conveyor
 	name = "paper- 'Nano-it-up U-build series, #9: Build your very own conveyor belt, in SPACE'"
-	info = "<h1>Congratulations!</h1><p>You are now the proud owner of the best conveyor set available for space mail order! We at Nano-it-up know you love to prepare your own structures without wasting time, so we have devised a special streamlined assembly procedure that puts all other mail-order products to shame!</p><p>Firstly, you need to link the conveyor switch assembly to each of the conveyor belt assemblies. After doing so, you simply need to install the belt assemblies onto the floor, et voila, belt built. Our special Nano-it-up smart switch will detected any linked assemblies as far as the eye can see! This convenience, you can only have it when you Nano-it-up. Stay nano!</p>"
+	info = "<h1>Congratulations!</h1><p>I are now the proud owner of the best conveyor set available for space mail order! We at Nano-it-up know you love to prepare your own structures without wasting time, so we have devised a special streamlined assembly procedure that puts all other mail-order products to shame!</p><p>Firstly, you need to link the conveyor switch assembly to each of the conveyor belt assemblies. After doing so, you simply need to install the belt assemblies onto the floor, et voila, belt built. Our special Nano-it-up smart switch will detected any linked assemblies as far as the eye can see! This convenience, you can only have it when you Nano-it-up. Stay nano!</p>"

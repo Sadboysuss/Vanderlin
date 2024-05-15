@@ -8,7 +8,7 @@
 //They'll attempt to leap at their target from afar using their hatchets.
 /mob/living/simple_animal/hostile/jungle/mook
 	name = "wanderer"
-	desc = "This unhealthy looking primitive is wielding a rudimentary hatchet, swinging it with wild abandon. One isn't much of a threat, but in numbers they can quickly overwhelm a superior opponent."
+	desc = ""
 	icon = 'icons/mob/jungle/mook.dmi'
 	icon_state = "mook"
 	icon_living = "mook"
@@ -25,8 +25,8 @@
 	pass_flags = LETPASSTHROW
 	robust_searching = TRUE
 	stat_attack = UNCONSCIOUS
-	attack_sound = 'sound/weapons/rapierhit.ogg'
-	deathsound = 'sound/voice/mook_death.ogg'
+	attack_sound = 'sound/blank.ogg'
+	deathsound = 'sound/blank.ogg'
 	aggro_vision_range = 15 //A little more aggressive once in combat to balance out their really low HP
 	var/attack_state = MOOK_ATTACK_NEUTRAL
 	var/struck_target_leap = FALSE
@@ -41,7 +41,7 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/jungle/mook/death()
-	desc = "A deceased primitive. Upon closer inspection, it was suffering from severe cellular degeneration and its garments are machine made..."//Can you guess the twist
+	desc = ""//Can you guess the twist
 	return ..()
 
 /mob/living/simple_animal/hostile/jungle/mook/AttackingTarget()
@@ -100,7 +100,7 @@
 			return
 		var/swing_turf = get_step(src,mob_direction)
 		new /obj/effect/temp_visual/kinetic_blast(swing_turf)
-		playsound(src, 'sound/weapons/slashmiss.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /mob/living/simple_animal/hostile/jungle/mook/proc/LeapAttack()
 	if(target && !stat && attack_state == MOOK_ATTACK_WARMUP)
@@ -110,8 +110,8 @@
 		melee_damage_upper = 30
 		update_icons()
 		new /obj/effect/temp_visual/mook_dust(get_turf(src))
-		playsound(src, 'sound/weapons/thudswoosh.ogg', 25, TRUE)
-		playsound(src, 'sound/voice/mook_leap_yell.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 25, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 		var/target_turf = get_turf(target)
 		throw_at(target_turf, 7, 1, src, FALSE, callback = CALLBACK(src, .proc/AttackRecovery))
 		return
@@ -212,7 +212,7 @@
 
 /obj/effect/temp_visual/mook_dust
 	name = "dust"
-	desc = "It's just a dust cloud!"
+	desc = ""
 	icon = 'icons/mob/jungle/mook.dmi'
 	icon_state = "mook_leap_cloud"
 	layer = BELOW_MOB_LAYER

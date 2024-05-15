@@ -65,7 +65,7 @@
 //whether the machine can have an item inserted in its current state.
 /obj/machinery/rnd/proc/is_insertion_ready(mob/user)
 	if(panel_open)
-		to_chat(user, "<span class='warning'>You can't load [src] while it's opened!</span>")
+		to_chat(user, "<span class='warning'>I can't load [src] while it's opened!</span>")
 		return FALSE
 	if(disabled)
 		to_chat(user, "<span class='warning'>The insertion belts of [src] won't engage!</span>")

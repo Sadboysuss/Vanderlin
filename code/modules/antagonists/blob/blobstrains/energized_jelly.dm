@@ -2,7 +2,7 @@
 /datum/blobstrain/reagent/energized_jelly
 	name = "Energized Jelly"
 	description = "will cause low stamina and high oxygen damage, and cause targets to be unable to breathe."
-	effectdesc = "will also conduct electricity, but takes damage from EMPs."
+	effectdesc = ""
 	analyzerdescdamage = "Does low stamina damage, high oxygen damage, and prevents targets from breathing."
 	analyzerdesceffect = "Is immune to electricity and will easily conduct it, but is weak to EMPs."
 	color = "#EFD65A"

@@ -5,7 +5,7 @@
   */
 /obj/item/grenade/smokebomb
 	name = "smoke grenade"
-	desc = "Real bruh moment if you ever see this. Probably tell a c*der or something."
+	desc = ""
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "smokewhite"
 	item_state = "smoke"
@@ -16,12 +16,12 @@
 ///Here we generate the extremely insightful description.
 /obj/item/grenade/smokebomb/Initialize()
 	. = ..()
-	desc = "The word '[pick(bruh_moment)]' is scribbled on it in crayon."
+	desc = ""
 
 ///Here we generate some smoke and also damage blobs??? for some reason. Honestly not sure why we do that.
 /obj/item/grenade/smokebomb/prime()
 	update_mob()
-	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -3)
 	var/datum/effect_system/smoke_spread/bad/smoke = new
 	smoke.set_up(4, src)
 	smoke.start()

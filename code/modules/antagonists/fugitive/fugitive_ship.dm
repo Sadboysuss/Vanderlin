@@ -2,7 +2,7 @@
 
 /obj/machinery/fugitive_capture
 	name = "bluespace capture machine"
-	desc = "Much, MUCH bigger on the inside to transport prisoners safely."
+	desc = ""
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "bluespace-prison"
 	density = TRUE
@@ -29,7 +29,7 @@
 /obj/machinery/fugitive_capture/proc/add_prisoner(mob/living/carbon/human/fugitive, datum/antagonist/fugitive/antag)
 	fugitive.forceMove(src)
 	antag.is_captured = TRUE
-	to_chat(fugitive, "<span class='userdanger'>You are thrown into a vast void of bluespace, and as you fall further into oblivion the comparatively small entrance to reality gets smaller and smaller until you cannot see it anymore. You have failed to avoid capture.</span>")
+	to_chat(fugitive, "<span class='danger'>I are thrown into a vast void of bluespace, and as you fall further into oblivion the comparatively small entrance to reality gets smaller and smaller until you cannot see it anymore. You have failed to avoid capture.</span>")
 	fugitive.ghostize(TRUE) //so they cannot suicide, round end stuff.
 
 /obj/machinery/computer/shuttle/hunter
@@ -39,7 +39,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate/hunter
 	name = "shuttle navigation computer"
-	desc = "Used to designate a precise transit location to travel to."
+	desc = ""
 	shuttleId = "huntership"
 	lock_override = CAMERA_LOCK_STATION
 	shuttlePortId = "huntership_custom"

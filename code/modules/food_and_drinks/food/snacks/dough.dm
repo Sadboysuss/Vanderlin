@@ -4,7 +4,7 @@
 
 /obj/item/reagent_containers/food/snacks/dough
 	name = "dough"
-	desc = "A piece of dough."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "dough"
 	cooked_type = /obj/item/reagent_containers/food/snacks/store/bread/plain
@@ -19,10 +19,10 @@
 	if(istype(I, /obj/item/kitchen/rollingpin))
 		if(isturf(loc))
 			new /obj/item/reagent_containers/food/snacks/flatdough(loc)
-			to_chat(user, "<span class='notice'>You flatten [src].</span>")
+			to_chat(user, "<span class='notice'>I flatten [src].</span>")
 			qdel(src)
 		else
-			to_chat(user, "<span class='warning'>You need to put [src] on a surface to roll it out!</span>")
+			to_chat(user, "<span class='warning'>I need to put [src] on a surface to roll it out!</span>")
 	else
 		..()
 
@@ -30,7 +30,7 @@
 // sliceable into 3xdoughslices
 /obj/item/reagent_containers/food/snacks/flatdough
 	name = "flat dough"
-	desc = "A flattened dough."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/reagent_containers/food/snacks/doughslice
@@ -43,7 +43,7 @@
 
 /obj/item/reagent_containers/food/snacks/pizzabread
 	name = "pizza bread"
-	desc = "Add ingredients to make a pizza."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "pizzabread"
 	custom_food_type = /obj/item/reagent_containers/food/snacks/customizable/pizza
@@ -55,7 +55,7 @@
 
 /obj/item/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
-	desc = "A slice of dough. Can be cooked into a bun."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "doughslice"
 	cooked_type = /obj/item/reagent_containers/food/snacks/bun
@@ -66,7 +66,7 @@
 
 /obj/item/reagent_containers/food/snacks/bun
 	name = "bun"
-	desc = "A base for any self-respecting burger."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "bun"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
@@ -77,7 +77,7 @@
 
 /obj/item/reagent_containers/food/snacks/cakebatter
 	name = "cake batter"
-	desc = "Cook it to get a cake."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "cakebatter"
 	cooked_type = /obj/item/reagent_containers/food/snacks/store/cake/plain
@@ -91,16 +91,16 @@
 	if(istype(I, /obj/item/kitchen/rollingpin))
 		if(isturf(loc))
 			new /obj/item/reagent_containers/food/snacks/piedough(loc)
-			to_chat(user, "<span class='notice'>You flatten [src].</span>")
+			to_chat(user, "<span class='notice'>I flatten [src].</span>")
 			qdel(src)
 		else
-			to_chat(user, "<span class='warning'>You need to put [src] on a surface to roll it out!</span>")
+			to_chat(user, "<span class='warning'>I need to put [src] on a surface to roll it out!</span>")
 	else
 		..()
 
 /obj/item/reagent_containers/food/snacks/piedough
 	name = "pie dough"
-	desc = "Cook it to get a pie."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "piedough"
 	slice_path = /obj/item/reagent_containers/food/snacks/rawpastrybase
@@ -113,7 +113,7 @@
 
 /obj/item/reagent_containers/food/snacks/rawpastrybase
 	name = "raw pastry base"
-	desc = "Must be cooked before use."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawpastrybase"
 	cooked_type = /obj/item/reagent_containers/food/snacks/pastrybase
@@ -124,7 +124,7 @@
 
 /obj/item/reagent_containers/food/snacks/pastrybase
 	name = "pastry base"
-	desc = "A base for any self-respecting pastry."
+	desc = ""
 	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "pastrybase"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1)

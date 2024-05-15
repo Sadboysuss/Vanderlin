@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/stickman
 	name = "Angry Stick Man"
-	desc = "A being from a realm with only 2 dimensions. At least it's trying to stay faced towards you."
+	desc = ""
 	icon_state = "stickman"
 	icon_living = "stickman"
 	icon_dead = "stickman_dead"
@@ -21,7 +21,7 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 15
@@ -38,13 +38,13 @@
 	icon_state = "stickmanranged"
 	icon_living = "stickmanranged"
 	casingtype = /obj/item/ammo_casing/c45
-	projectilesound = 'sound/misc/bang.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/pistol/stickman)
 
 
 /mob/living/simple_animal/hostile/stickman/dog
 	name = "Angry Stick Dog"
-	desc = "Stickman's best friend, if he could see him at least."
+	desc = ""
 	icon_state = "stickdog"
 	icon_living = "stickdog"
 	icon_dead = "stickdog_dead"

@@ -22,7 +22,7 @@
 	var/l_hacking = 0
 	var/open = FALSE
 	w_class = WEIGHT_CLASS_NORMAL
-	desc = "This shouldn't exist. If it does, create an issue report."
+	desc = ""
 
 /obj/item/storage/secure/ComponentInitialize()
 	. = ..()
@@ -39,7 +39,7 @@
 		if (W.tool_behaviour == TOOL_SCREWDRIVER)
 			if (W.use_tool(src, user, 20))
 				open =! open
-				to_chat(user, "<span class='notice'>You [open ? "open" : "close"] the service panel.</span>")
+				to_chat(user, "<span class='notice'>I [open ? "open" : "close"] the service panel.</span>")
 			return
 		if (W.tool_behaviour == TOOL_WIRECUTTER)
 			to_chat(user, "<span class='danger'>[src] is protected from this sort of tampering, yet it appears the internal memory wires can still be <b>pulsed</b>.</span>")
@@ -54,7 +54,7 @@
 				else
 					l_hacking = 0
 			else
-				to_chat(user, "<span class='warning'>You must <b>unscrew</b> the service panel before you can pulse the wiring!</span>")
+				to_chat(user, "<span class='warning'>I must <b>unscrew</b> the service panel before you can pulse the wiring!</span>")
 			return
 		//At this point you have exhausted all the special things to do when locked
 		// ... but it's still locked.
@@ -122,7 +122,7 @@
 	item_state = "sec-case"
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/briefcase_righthand.dmi'
-	desc = "A large briefcase with a digital locking system."
+	desc = ""
 	force = 8
 	hitsound = "swing_hit"
 	throw_speed = 2
@@ -162,7 +162,7 @@
 	icon_opened = "safe0"
 	icon_locking = "safeb"
 	icon_sparking = "safespark"
-	desc = "Excellent for securing things away from grubby hands."
+	desc = ""
 	force = 8
 	w_class = WEIGHT_CLASS_GIGANTIC
 	anchored = TRUE

@@ -1,6 +1,6 @@
 /obj/machinery/power/tesla_coil
 	name = "tesla coil"
-	desc = "For the union!"
+	desc = ""
 	icon = 'icons/obj/tesla_engine/tesla_coil.dmi'
 	icon_state = "coil0"
 	anchored = FALSE
@@ -86,7 +86,7 @@
 		var/power_produced = powernet ? power / power_loss : power
 		add_avail(power_produced*input_power_multiplier)
 		flick("coilhit", src)
-		playsound(src.loc, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
+		playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 5)
 		tesla_zap(src, 5, power_produced, tesla_flags, shocked_targets)
 		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_ENG)
 		if(D)
@@ -106,14 +106,14 @@
 	coeff = max(coeff, 10)
 	var/power = (powernet.avail/2)
 	add_load(power)
-	playsound(src.loc, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 5)
 	tesla_zap(src, 10, power/(coeff/2), tesla_flags)
 	tesla_buckle_check(power/(coeff/2))
 
 // Tesla R&D researcher
 /obj/machinery/power/tesla_coil/research
 	name = "Tesla Corona Analyzer"
-	desc = "A modified Tesla Coil used to study the effects of Edison's Bane for research."
+	desc = ""
 	icon_state = "rpcoil0"
 	circuit = /obj/item/circuitboard/machine/tesla_coil/research
 	power_loss = 20 // something something, high voltage + resistance
@@ -124,7 +124,7 @@
 		var/power_produced = powernet ? power / power_loss : power
 		add_avail(power_produced*input_power_multiplier)
 		flick("rpcoilhit", src)
-		playsound(src.loc, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
+		playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 5)
 		tesla_zap(src, 5, power_produced, tesla_flags, shocked_things)
 		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_ENG)
 		if(D)
@@ -155,7 +155,7 @@
 
 /obj/machinery/power/grounding_rod
 	name = "grounding rod"
-	desc = "Keep an area from being fried from Edison's Bane."
+	desc = ""
 	icon = 'icons/obj/tesla_engine/tesla_coil.dmi'
 	icon_state = "grounding_rod0"
 	anchored = FALSE
@@ -185,7 +185,7 @@
 
 	return ..()
 
-/obj/machinery/power/grounding_rod/tesla_act(var/power)
+/obj/machinery/power/grounding_rod/tesla_act(power)
 	if(anchored && !panel_open)
 		flick("grounding_rodhit", src)
 		tesla_buckle_check(power)

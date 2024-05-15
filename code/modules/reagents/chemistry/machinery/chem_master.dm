@@ -1,6 +1,6 @@
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	desc = ""
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	icon = 'icons/obj/chemical.dmi'
@@ -91,14 +91,14 @@
 	if(istype(I, /obj/item/reagent_containers) && !(I.item_flags & ABSTRACT) && I.is_open_container())
 		. = TRUE // no afterattack
 		if(panel_open)
-			to_chat(user, "<span class='warning'>You can't use the [src.name] while its panel is opened!</span>")
+			to_chat(user, "<span class='warning'>I can't use the [src.name] while its panel is opened!</span>")
 			return
 		var/obj/item/reagent_containers/B = I
 		. = TRUE // no afterattack
 		if(!user.transferItemToLoc(B, src))
 			return
 		replace_beaker(user, B)
-		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
+		to_chat(user, "<span class='notice'>I add [B] to [src].</span>")
 		updateUsrDialog()
 		update_icon()
 	else if(!condi && istype(I, /obj/item/storage/pill_bottle))
@@ -108,7 +108,7 @@
 		if(!user.transferItemToLoc(I, src))
 			return
 		bottle = I
-		to_chat(user, "<span class='notice'>You add [I] into the dispenser slot.</span>")
+		to_chat(user, "<span class='notice'>I add [I] into the dispenser slot.</span>")
 		updateUsrDialog()
 	else
 		return ..()
@@ -143,8 +143,8 @@
 										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
-		assets.send(user)
+//		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
+//		assets.send(user)
 
 		ui = new(user, src, ui_key, "chem_master", name, ui_x, ui_y, master_ui, state)
 		ui.open()
@@ -309,7 +309,7 @@
 				else
 					P.icon_state = "pill[chosenPillStyle]"
 				if(P.icon_state == "pill4")
-					P.desc = "A tablet or capsule, but not just any, a red one, one taken by the ones not scared of knowledge, freedom, uncertainty and the brutal truths of reality."
+					P.desc = ""
 				adjust_item_drop_location(P)
 				reagents.trans_to(P, vol_each, transfered_by = usr)
 			return TRUE
@@ -335,7 +335,7 @@
 				P = new/obj/item/reagent_containers/food/condiment/pack(drop_location())
 				P.originalname = name
 				P.name = trim("[name] pack")
-				P.desc = "A small condiment pack. The label says it contains [name]."
+				P.desc = ""
 				reagents.trans_to(P, vol_each, transfered_by = usr)
 			return TRUE
 		if(item_type == "condimentBottle")
@@ -406,5 +406,5 @@
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
-	desc = "Used to create condiments and other cooking supplies."
+	desc = ""
 	condi = TRUE

@@ -22,7 +22,7 @@ other types of metals and chemistry for reagents).
 
 /datum/design						//Datum for object designs, used in construction
 	var/name = "Name"					//Name of the created object.
-	var/desc = "Desc"					//Description of the created object.
+	var/desc = ""					//Description of the created object.
 	var/id = DESIGN_ID_IGNORE						//ID of the created object for easy refernece. Alphanumeric, lower-case, no symbols
 	var/build_type = null				//Flag as to what kind machine the design is built in. See defines.
 	var/list/materials = list()			//List of materials. Format: "id" = amount.
@@ -42,14 +42,14 @@ other types of metals and chemistry for reagents).
 
 /datum/design/error_design
 	name = "ERROR"
-	desc = "This usually means something in the database has corrupted. If this doesn't go away automatically, inform Central Comamnd so their techs can fix this ASAP(tm)"
+	desc = ""
 
 /datum/design/Destroy()
 	SSresearch.techweb_designs -= id
 	return ..()
 
 /datum/design/proc/InitializeMaterials()
-	var/list/temp_list = list() 
+	var/list/temp_list = list()
 	for(var/i in materials) //Go through all of our materials, get the subsystem instance, and then replace the list.
 		var/amount = materials[i]
 		if(!istext(i)) //Not a category, so get the ref the normal way
@@ -61,7 +61,7 @@ other types of metals and chemistry for reagents).
 
 /datum/design/proc/icon_html(client/user)
 	var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/research_designs)
-	sheet.send(user)
+//	sheet.send(user)
 	return sheet.icon_tag(id)
 
 ////////////////////////////////////////
@@ -70,7 +70,7 @@ other types of metals and chemistry for reagents).
 
 /obj/item/disk/design_disk
 	name = "Component Design Disk"
-	desc = "A disk for storing device design data for construction in lathes."
+	desc = ""
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron =300, /datum/material/glass =100)
 	var/list/blueprints = list()
@@ -85,6 +85,6 @@ other types of metals and chemistry for reagents).
 
 /obj/item/disk/design_disk/adv
 	name = "Advanced Component Design Disk"
-	desc = "A disk for storing device design data for construction in lathes. This one has extra storage space."
+	desc = ""
 	custom_materials = list(/datum/material/iron =300, /datum/material/glass = 100, /datum/material/silver = 50)
 	max_blueprints = 5

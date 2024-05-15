@@ -1,4 +1,4 @@
-//These procs handle putting s tuff in your hands
+//These procs handle putting s tuff in my hands
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
 //Returns the thing we're currently holding
@@ -39,7 +39,7 @@
 
 
 //Check we have an organ for this hand slot (Dismemberment), Only relevant for humans
-/mob/proc/has_hand_for_held_index(i)
+/mob/proc/has_hand_for_held_index(i,extra_checks)
 	return TRUE
 
 
@@ -155,9 +155,12 @@
 		if(hand_index == null)
 			return FALSE
 		if(get_item_for_held_index(hand_index) != null)
-			dropItemToGround(get_item_for_held_index(hand_index), force = TRUE)
+			return FALSE
+//			dropItemToGround(get_item_for_held_index(hand_index), force = TRUE)
 		I.forceMove(src)
 		held_items[hand_index] = I
+		if(I.possible_item_intents)
+			update_a_intents()
 		I.layer = ABOVE_HUD_LAYER
 		I.plane = ABOVE_HUD_PLANE
 		I.equipped(src, SLOT_HANDS)
@@ -166,6 +169,10 @@
 		update_inv_hands()
 		I.pixel_x = initial(I.pixel_x)
 		I.pixel_y = initial(I.pixel_y)
+		if(hud_used)
+			hud_used.throw_icon?.update_icon()
+			hud_used.give_intent?.update_icon()
+		givingto = null
 		return hand_index || TRUE
 	return FALSE
 
@@ -181,6 +188,8 @@
 	return FALSE					//nonliving mobs don't have hands
 
 /mob/living/put_in_hand_check(obj/item/I)
+	if(I.twohands_required && get_inactive_held_item())
+		return FALSE
 	if(istype(I) && ((mobility_flags & MOBILITY_PICKUP) || (I.item_flags & ABSTRACT)))
 		return TRUE
 	return FALSE
@@ -191,8 +200,8 @@
 
 
 //Puts the item into our inactive hand if possible, returns TRUE on success
-/mob/proc/put_in_inactive_hand(obj/item/I)
-	return put_in_hand(I, get_inactive_hand_index())
+/mob/proc/put_in_inactive_hand(obj/item/I, forced = FALSE, ignore_animation = TRUE)
+	return put_in_hand(I, get_inactive_hand_index(), forced, ignore_animation)
 
 
 //Puts the item our active hand if possible. Failing that it tries other hands. Returns TRUE on success.
@@ -213,13 +222,13 @@
 		if (merge_stacks)
 			if (istype(active_stack) && istype(I_stack, active_stack.merge_type))
 				if (I_stack.merge(active_stack))
-					to_chat(usr, "<span class='notice'>Your [active_stack.name] stack now contains [active_stack.get_amount()] [active_stack.singular_name]\s.</span>")
+					to_chat(usr, "<span class='notice'>My [active_stack.name] stack now contains [active_stack.get_amount()] [active_stack.singular_name]\s.</span>")
 					return TRUE
 			else
 				var/obj/item/stack/inactive_stack = get_inactive_held_item()
 				if (istype(inactive_stack) && istype(I_stack, inactive_stack.merge_type))
 					if (I_stack.merge(inactive_stack))
-						to_chat(usr, "<span class='notice'>Your [inactive_stack.name] stack now contains [inactive_stack.get_amount()] [inactive_stack.singular_name]\s.</span>")
+						to_chat(usr, "<span class='notice'>My [inactive_stack.name] stack now contains [inactive_stack.get_amount()] [inactive_stack.singular_name]\s.</span>")
 						return TRUE
 
 	if(put_in_active_hand(I, forced))
@@ -273,11 +282,11 @@
   * * Will pass FALSE if the item can not be dropped due to TRAIT_NODROP via doUnEquip()
   * If the item can be dropped, it will be forceMove()'d to the ground and the turf's Entered() will be called.
 */
-/mob/proc/dropItemToGround(obj/item/I, force = FALSE, silent = FALSE)
+/mob/proc/dropItemToGround(obj/item/I, force = FALSE, silent = TRUE)
 	. = doUnEquip(I, force, drop_location(), FALSE, silent = silent)
 	if(. && I) //ensure the item exists and that it was dropped properly.
-		I.pixel_x = rand(-6,6)
-		I.pixel_y = rand(-6,6)
+		I.pixel_x = initial(I.pixel_x) += rand(-6,6)
+		I.pixel_y = initial(I.pixel_x) += rand(-6,6)
 
 //for when the item will be immediately placed in a loc other than the ground
 /mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, silent = TRUE)
@@ -295,6 +304,8 @@
 													//Use no_move if the item is just gonna be immediately moved afterward
 													//Invdrop is used to prevent stuff in pockets dropping. only set to false if it's going to immediately be replaced
 	if(!I) //If there's nothing to drop, the drop is automatically succesfull. If(unEquip) should generally be used to check for TRAIT_NODROP.
+		update_inv_hands()
+		update_a_intents()
 		return TRUE
 
 	if(HAS_TRAIT(I, TRAIT_NODROP) && !force)
@@ -304,6 +315,8 @@
 	if(hand_index)
 		held_items[hand_index] = null
 		update_inv_hands()
+	if(atkswinging)
+		stop_attack(FALSE)
 	if(I)
 		if(client)
 			client.screen -= I
@@ -316,6 +329,11 @@
 			else
 				I.forceMove(newloc)
 		I.dropped(src, silent)
+	if(hud_used)
+		hud_used.throw_icon?.update_icon()
+		hud_used.give_intent?.update_icon()
+	givingto = null
+	update_a_intents()
 	return TRUE
 
 //Outdated but still in use apparently. This should at least be a human proc.
@@ -339,6 +357,14 @@
 	var/list/items = ..()
 	if(belt)
 		items += belt
+	if(beltr)
+		items += beltr
+	if(beltl)
+		items += beltl
+	if(backr)
+		items += backr
+	if(backl)
+		items += backl
 	if(ears)
 		items += ears
 	if(glasses)
@@ -347,12 +373,20 @@
 		items += gloves
 	if(shoes)
 		items += shoes
-	if(wear_id)
-		items += wear_id
-	if(wear_suit)
-		items += wear_suit
-	if(w_uniform)
-		items += w_uniform
+	if(wear_ring)
+		items += wear_ring
+	if(wear_wrists)
+		items += wear_wrists
+	if(wear_armor)
+		items += wear_armor
+	if(wear_pants)
+		items += wear_pants
+	if(cloak)
+		items += cloak
+	if(mouth)
+		items += mouth
+	if(wear_shirt)
+		items += wear_shirt
 	if(include_pockets)
 		if(l_store)
 			items += l_store
@@ -385,23 +419,24 @@
 		obscured |= SLOT_WEAR_MASK
 	if(hidden_slots & HIDEEYES)
 		obscured |= SLOT_GLASSES
-	if(hidden_slots & HIDEEARS)
-		obscured |= SLOT_EARS
 	if(hidden_slots & HIDEGLOVES)
 		obscured |= SLOT_GLOVES
 	if(hidden_slots & HIDEJUMPSUIT)
-		obscured |= SLOT_W_UNIFORM
+		obscured |= SLOT_PANTS
 	if(hidden_slots & HIDESHOES)
 		obscured |= SLOT_SHOES
+	if(hidden_slots & HIDEBELT)
+		obscured |= SLOT_BELT_R
+		obscured |= SLOT_BELT_L
+		obscured |= SLOT_BELT
 	if(hidden_slots & HIDESUITSTORAGE)
 		obscured |= SLOT_S_STORE
 
 	return obscured
 
-
 /obj/item/proc/equip_to_best_slot(mob/M)
 	if(src != M.get_active_held_item())
-		to_chat(M, "<span class='warning'>You are not holding anything to equip!</span>")
+		to_chat(M, "<span class='warning'>I are not holding anything to equip!</span>")
 		return FALSE
 
 	if(M.equip_to_appropriate_slot(src))
@@ -422,7 +457,7 @@
 		if(SEND_SIGNAL(I, COMSIG_TRY_STORAGE_INSERT, src, M))
 			return TRUE
 
-	to_chat(M, "<span class='warning'>You are unable to equip that!</span>")
+	to_chat(M, "<span class='warning'>I couldn't equip that.</span>")
 	return FALSE
 
 

@@ -13,7 +13,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/area_conversion
 	name = "Area Conversion"
-	desc = "This spell instantly converts a small area around you."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 50
@@ -26,14 +26,14 @@
 	action_background_icon_state = "bg_cult"
 
 /obj/effect/proc_holder/spell/aoe_turf/area_conversion/cast(list/targets, mob/user = usr)
-	playsound(get_turf(user), 'sound/items/welder.ogg', 75, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 75, TRUE)
 	for(var/turf/T in targets)
 		T.narsie_act(FALSE, TRUE, 100 - (get_dist(user, T) * 25))
 
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/floor
 	name = "Summon Cult Floor"
-	desc = "This spell constructs a cult floor."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 20
@@ -49,7 +49,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/wall
 	name = "Summon Cult Wall"
-	desc = "This spell constructs a cult wall."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 100
@@ -66,7 +66,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/wall/reinforced
 	name = "Greater Construction"
-	desc = "This spell constructs a reinforced metal wall."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 300
@@ -79,7 +79,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone
 	name = "Summon Soulstone"
-	desc = "This spell reaches into Nar'Sie's realm, summoning one of the legendary fragments across time and space."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 2400
@@ -105,7 +105,7 @@
 
 /obj/effect/proc_holder/spell/targeted/forcewall/cult
 	name = "Shield"
-	desc = "This spell creates a temporary forcefield to shield yourself and allies from incoming fire."
+	desc = ""
 	school = "transmutation"
 	charge_max = 400
 	clothes_req = FALSE
@@ -120,7 +120,7 @@
 
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift
 	name = "Phase Shift"
-	desc = "This spell allows you to pass through walls."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 250
@@ -142,7 +142,7 @@
 
 /obj/effect/proc_holder/spell/targeted/projectile/magic_missile/lesser
 	name = "Lesser Magic Missile"
-	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
+	desc = ""
 
 	school = "evocation"
 	charge_max = 400
@@ -160,7 +160,7 @@
 
 /obj/effect/proc_holder/spell/targeted/smoke/disable
 	name = "Paralysing Smoke"
-	desc = "This spell spawns a cloud of paralysing smoke."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 200
@@ -179,7 +179,7 @@
 
 /obj/effect/proc_holder/spell/targeted/abyssal_gaze
 	name = "Abyssal Gaze"
-	desc = "This spell instills a deep terror in your target, temporarily chilling and blinding it."
+	desc = ""
 
 	charge_max = 750
 	range = 5
@@ -209,12 +209,12 @@
 		return
 
 	if(target.anti_magic_check(TRUE, TRUE))
-		to_chat(target, "<span class='warning'>You feel a freezing darkness closing in on you, but it rapidly dissipates.</span>")
+		to_chat(target, "<span class='warning'>I feel a freezing darkness closing in on you, but it rapidly dissipates.</span>")
 		return
 
-	to_chat(target, "<span class='userdanger'>A freezing darkness surrounds you...</span>")
-	target.playsound_local(get_turf(target), 'sound/hallucinations/i_see_you1.ogg', 50, 1)
-	user.playsound_local(get_turf(user), 'sound/effects/ghost2.ogg', 50, 1)
+	to_chat(target, "<span class='danger'>A freezing darkness surrounds you...</span>")
+	target.playsound_local(get_turf(target), 'sound/blank.ogg', 50, 1)
+	user.playsound_local(get_turf(user), 'sound/blank.ogg', 50, 1)
 	target.become_blind(ABYSSAL_GAZE_BLIND)
 	addtimer(CALLBACK(src, .proc/cure_blindness, target), 40)
 	target.adjust_bodytemperature(-200)
@@ -226,7 +226,7 @@
 
 /obj/effect/proc_holder/spell/targeted/dominate
 	name = "Dominate"
-	desc = "This spell dominates the mind of a lesser creature to the will of Nar'Sie, allying it only to her direct followers."
+	desc = ""
 
 	charge_max = 600
 	range = 7
@@ -272,7 +272,7 @@
 
 	S.add_atom_colour("#990000", FIXED_COLOUR_PRIORITY)
 	S.faction = list("cult")
-	playsound(get_turf(S), 'sound/effects/ghost.ogg', 100, TRUE)
+	playsound(get_turf(S), 'sound/blank.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/cult/sac(get_turf(S))
 
 /obj/effect/proc_holder/spell/targeted/dominate/can_target(mob/living/target)
@@ -290,14 +290,14 @@
 
 /obj/effect/proc_holder/spell/targeted/projectile/dumbfire/juggernaut
 	name = "Gauntlet Echo"
-	desc = "Channels energy into your gauntlet - firing its essence forward in a slow moving, yet devastating, attack."
+	desc = ""
 	proj_type = /obj/projectile/magic/spell/juggernaut
 	charge_max = 350
 	clothes_req = FALSE
 	action_icon = 'icons/mob/actions/actions_cult.dmi'
 	action_icon_state = "cultfist"
 	action_background_icon_state = "bg_demon"
-	sound = 'sound/weapons/resonator_blast.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/projectile/magic/spell/juggernaut
 	name = "Gauntlet Echo"
@@ -306,7 +306,7 @@
 	damage = 30
 	damage_type = BRUTE
 	knockdown = 50
-	hitsound = 'sound/weapons/punch3.ogg'
+	hitsound = 'sound/blank.ogg'
 	trigger_range = 0
 	check_holy = TRUE
 	ignored_factions = list("cult")
@@ -316,7 +316,7 @@
 /obj/projectile/magic/spell/juggernaut/on_hit(atom/target, blocked)
 	. = ..()
 	var/turf/T = get_turf(src)
-	playsound(T, 'sound/weapons/resonator_blast.ogg', 100, FALSE)
+	playsound(T, 'sound/blank.ogg', 100, FALSE)
 	new /obj/effect/temp_visual/cult/sac(T)
 	for(var/obj/O in range(src,1))
 		if(O.density && !istype(O, /obj/structure/destructible/cult))

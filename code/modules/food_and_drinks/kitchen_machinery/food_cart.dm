@@ -4,7 +4,7 @@
 
 /obj/machinery/food_cart
 	name = "food cart"
-	desc = "New generation hot dog stand."
+	desc = ""
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "foodcart"
 	density = TRUE

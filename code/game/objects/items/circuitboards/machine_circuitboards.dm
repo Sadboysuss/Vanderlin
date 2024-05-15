@@ -141,7 +141,7 @@
 /obj/item/circuitboard/machine/tesla_coil
 	name = "Tesla Controller (Machine Board)"
 	icon_state = "engineering"
-	desc = "You can use a screwdriver to switch between Research and Power Generation."
+	desc = ""
 	build_path = /obj/machinery/power/tesla_coil
 	req_components = list(/obj/item/stock_parts/capacitor = 1)
 	needs_anchored = FALSE
@@ -168,7 +168,7 @@
 		name = initial(new_type.name)
 		build_path = initial(new_type.build_path)
 		I.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You change the circuitboard setting to \"[new_setting]\".</span>")
+		to_chat(user, "<span class='notice'>I change the circuitboard setting to \"[new_setting]\".</span>")
 	else
 		return ..()
 
@@ -317,7 +317,7 @@
 /obj/item/circuitboard/machine/thermomachine
 	name = "Thermomachine (Machine Board)"
 	icon_state = "engineering"
-	desc = "You can use a screwdriver to switch between heater and freezer."
+	desc = ""
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/micro_laser = 2,
@@ -351,7 +351,7 @@
 		name = initial(new_type.name)
 		build_path = initial(new_type.build_path)
 		I.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You change the circuitboard setting to \"[new_setting]\".</span>")
+		to_chat(user, "<span class='notice'>I change the circuitboard setting to \"[new_setting]\".</span>")
 	else
 		return ..()
 
@@ -451,7 +451,7 @@
 		var/position = fridges_name_paths.Find(build_path, fridges_name_paths)
 		position = (position == fridges_name_paths.len) ? 1 : (position + 1)
 		build_path = fridges_name_paths[position]
-		to_chat(user, "<span class='notice'>You set the board to [fridges_name_paths[build_path]].</span>")
+		to_chat(user, "<span class='notice'>I set the board to [fridges_name_paths[build_path]].</span>")
 	else
 		return ..()
 
@@ -485,7 +485,7 @@
 
 /obj/item/circuitboard/machine/vendor
 	name = "Custom Vendor (Machine Board)"
-	desc = "You can turn the \"brand selection\" dial using a screwdriver."
+	desc = ""
 	custom_premium_price = 30
 	build_path = /obj/machinery/vending/custom
 	req_components = list(/obj/item/vending_refill/custom = 1)
@@ -604,7 +604,7 @@
 	name = "ChemMaster 3000 (Machine Board)"
 	icon_state = "medical"
 	build_path = /obj/machinery/chem_master
-	desc = "You can turn the \"mode selection\" dial using a screwdriver."
+	desc = ""
 	req_components = list(
 		/obj/item/reagent_containers/glass/beaker = 2,
 		/obj/item/stock_parts/manipulator = 1,
@@ -622,7 +622,7 @@
 
 		build_path = new_path
 		name = "[new_name] 3000 (Machine Board)"
-		to_chat(user, "<span class='notice'>You change the circuit board setting to \"[new_name]\".</span>")
+		to_chat(user, "<span class='notice'>I change the circuit board setting to \"[new_name]\".</span>")
 	else
 		return ..()
 
@@ -979,13 +979,13 @@
 
 /obj/item/circuitboard/machine/dish_drive/attack_self(mob/living/user)
 	suction = !suction
-	to_chat(user, "<span class='notice'>You [suction ? "enable" : "disable"] the board's suction function.</span>")
+	to_chat(user, "<span class='notice'>I [suction ? "enable" : "disable"] the board's suction function.</span>")
 
 /obj/item/circuitboard/machine/dish_drive/AltClick(mob/living/user)
 	if(!user.Adjacent(src))
 		return
 	transmit = !transmit
-	to_chat(user, "<span class='notice'>You [transmit ? "enable" : "disable"] the board's automatic disposal transmission.</span>")
+	to_chat(user, "<span class='notice'>I [transmit ? "enable" : "disable"] the board's automatic disposal transmission.</span>")
 
 /obj/item/circuitboard/machine/gibber
 	name = "Gibber (Machine Board)"

@@ -1,6 +1,6 @@
 /obj/item/folder
 	name = "folder"
-	desc = "A folder."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "folder"
 	w_class = WEIGHT_CLASS_SMALL
@@ -12,19 +12,19 @@
 	return OXYLOSS
 
 /obj/item/folder/blue
-	desc = "A blue folder."
+	desc = ""
 	icon_state = "folder_blue"
 
 /obj/item/folder/red
-	desc = "A red folder."
+	desc = ""
 	icon_state = "folder_red"
 
 /obj/item/folder/yellow
-	desc = "A yellow folder."
+	desc = ""
 	icon_state = "folder_yellow"
 
 /obj/item/folder/white
-	desc = "A white folder."
+	desc = ""
 	icon_state = "folder_white"
 
 
@@ -38,20 +38,20 @@
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/documents))
 		if(!user.transferItemToLoc(W, src))
 			return
-		to_chat(user, "<span class='notice'>You put [W] into [src].</span>")
+		to_chat(user, "<span class='notice'>I put [W] into [src].</span>")
 		update_icon()
 	else if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on the cover of [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on the cover of [src]!</span>")
 			return
 
 		var/inputvalue = input(user, "What would you like to label the folder?", "Folder Labelling", null) as text|null
-		
+
 		if (isnull(inputvalue))
 			return
-		
+
 		var/n_name = copytext(sanitize(inputvalue), 1, MAX_NAME_LEN)
-		
+
 		if(user.canUseTopic(src, BE_CLOSE))
 			name = "folder[(n_name ? " - '[n_name]'" : null)]"
 
@@ -90,7 +90,7 @@
 
 /obj/item/folder/documents
 	name = "folder- 'TOP SECRET'"
-	desc = "A folder stamped \"Top Secret - Property of Nanotrasen Corporation. Unauthorized distribution is punishable by death.\""
+	desc = ""
 
 /obj/item/folder/documents/Initialize()
 	. = ..()
@@ -100,7 +100,7 @@
 /obj/item/folder/syndicate
 	icon_state = "folder_syndie"
 	name = "folder- 'TOP SECRET'"
-	desc = "A folder stamped \"Top Secret - Property of The Syndicate.\""
+	desc = ""
 
 /obj/item/folder/syndicate/red
 	icon_state = "folder_sred"

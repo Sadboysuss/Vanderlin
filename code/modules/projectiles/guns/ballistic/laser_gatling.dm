@@ -3,7 +3,7 @@
 //The ammo/gun is stored in a back slot item
 /obj/item/minigunpack
 	name = "backpack power source"
-	desc = "The massive external power source for the laser gatling gun."
+	desc = ""
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "holstered"
 	item_state = "backpack"
@@ -30,19 +30,19 @@
 	overheat = max(0, overheat - heat_diffusion)
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/minigunpack/attack_hand(var/mob/living/carbon/user)
+/obj/item/minigunpack/attack_hand(mob/living/carbon/user)
 	if(src.loc == user)
 		if(!armed)
 			if(user.get_item_by_slot(SLOT_BACK) == src)
 				armed = 1
 				if(!user.put_in_hands(gun))
 					armed = 0
-					to_chat(user, "<span class='warning'>You need a free hand to hold the gun!</span>")
+					to_chat(user, "<span class='warning'>I need a free hand to hold the gun!</span>")
 					return
 				update_icon()
 				user.update_inv_back()
 		else
-			to_chat(user, "<span class='warning'>You are already holding the gun!</span>")
+			to_chat(user, "<span class='warning'>I are already holding the gun!</span>")
 	else
 		..()
 
@@ -80,13 +80,13 @@
 	else
 		icon_state = "holstered"
 
-/obj/item/minigunpack/proc/attach_gun(var/mob/user)
+/obj/item/minigunpack/proc/attach_gun(mob/user)
 	if(!gun)
 		gun = new(src)
 	gun.forceMove(src)
 	armed = 0
 	if(user)
-		to_chat(user, "<span class='notice'>You attach the [gun.name] to the [name].</span>")
+		to_chat(user, "<span class='notice'>I attach the [gun.name] to the [name].</span>")
 	else
 		src.visible_message("<span class='warning'>The [gun.name] snaps back onto the [name]!</span>")
 	update_icon()
@@ -95,7 +95,7 @@
 
 /obj/item/gun/ballistic/minigun
 	name = "laser gatling gun"
-	desc = "An advanced laser cannon with an incredible rate of fire. Requires a bulky backpack power source to use."
+	desc = ""
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "minigun_spin"
 	item_state = "minigun"
@@ -108,7 +108,7 @@
 	automatic = 0
 	fire_delay = 1
 	weapon_weight = WEAPON_HEAVY
-	fire_sound = 'sound/weapons/laser.ogg'
+	fire_sound = 'sound/blank.ogg'
 	mag_type = /obj/item/ammo_box/magazine/internal/minigun
 	tac_reloads = FALSE
 	casing_ejector = FALSE
@@ -143,5 +143,5 @@
 
 /obj/item/gun/ballistic/minigun/afterattack(atom/target, mob/living/user, flag, params)
 	if(!ammo_pack || ammo_pack.loc != user)
-		to_chat(user, "<span class='warning'>You need the backpack power source to fire the gun!</span>")
+		to_chat(user, "<span class='warning'>I need the backpack power source to fire the gun!</span>")
 	. = ..()

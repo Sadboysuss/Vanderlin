@@ -1,7 +1,7 @@
 //PIMP-CART
 /obj/vehicle/ridden/janicart
 	name = "janicart (pimpin' ride)"
-	desc = "A brave janitor cyborg gave its life to produce such an amazing combination of speed and utility."
+	desc = ""
 	icon_state = "pussywagon"
 	key_type = /obj/item/key/janitor
 	var/obj/item/storage/bag/trash/mybag = null
@@ -24,7 +24,7 @@
 
 /obj/item/janiupgrade
 	name = "floor buffer upgrade"
-	desc = "An upgrade for mobile janicarts."
+	desc = ""
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "upgrade"
 
@@ -40,7 +40,7 @@
 			return
 		if(!user.transferItemToLoc(I, src))
 			return
-		to_chat(user, "<span class='notice'>You hook the trashbag onto [src].</span>")
+		to_chat(user, "<span class='notice'>I hook the trashbag onto [src].</span>")
 		mybag = I
 		update_icon()
 	else if(istype(I, /obj/item/janiupgrade))
@@ -49,7 +49,7 @@
 			return
 		floorbuffer = TRUE
 		qdel(I)
-		to_chat(user, "<span class='notice'>You upgrade [src] with the floor buffer.</span>")
+		to_chat(user, "<span class='notice'>I upgrade [src] with the floor buffer.</span>")
 		AddElement(/datum/element/cleaning)
 		update_icon()
 	else

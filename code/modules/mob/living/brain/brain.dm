@@ -5,11 +5,12 @@
 	var/datum/dna/stored/stored_dna // dna var for brain. Used to store dna, brain dna is not considered like actual dna, brain.has_dna() returns FALSE.
 	stat = DEAD //we start dead by default
 	see_invisible = SEE_INVISIBLE_LIVING
-	possible_a_intents = list(INTENT_HELP, INTENT_HARM) //for mechas
+	base_intents = list(INTENT_HELP, INTENT_HARM) //for mechas
 	speech_span = SPAN_ROBOT
 
 /mob/living/brain/Initialize()
 	. = ..()
+	testing("WWOLFDNA")
 	create_dna(src)
 	stored_dna.initialize_dna(random_blood_type())
 	if(isturf(loc)) //not spawned in an MMI or brain organ (most likely adminspawned)
@@ -30,7 +31,8 @@
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		if(mind)	//You aren't allowed to return to brains that don't exist
 			mind.current = null
-		ghostize()		//Ghostize checks for key so nothing else is necessary.
+		testing("BASEDLOL ")
+		ghostize(drawskip=TRUE)		//Ghostize checks for key so nothing else is necessary.
 	container = null
 	return ..()
 
@@ -58,6 +60,7 @@
 /mob/living/brain/can_be_revived()
 	. = 1
 	if(!container || health <= HEALTH_THRESHOLD_DEAD)
+		testing("noresbrain")
 		return 0
 
 /mob/living/brain/fully_replace_character_name(oldname,newname)
@@ -88,7 +91,6 @@
 /mob/living/brain/update_mouse_pointer()
 	if (!client)
 		return
-	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
 	if(!container)
 		return
 	if (container.mecha)

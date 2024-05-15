@@ -1,7 +1,7 @@
 //after a delay, creates a rune below you. for constructs creating runes.
 /datum/action/innate/cult/create_rune
 	name = "Summon Rune"
-	desc = "Summons a rune"
+	desc = ""
 	background_icon_state = "bg_demon"
 	var/obj/effect/rune/rune_type
 	var/cooldown = 0
@@ -23,7 +23,7 @@
 	if(!T)
 		return FALSE
 	if(isspaceturf(T))
-		to_chat(owner, "<span class='warning'>You cannot scribe runes in space!</span>")
+		to_chat(owner, "<span class='warning'>I cannot scribe runes in space!</span>")
 		return FALSE
 	if(locate(/obj/effect/rune) in T)
 		to_chat(owner, "<span class='cult'>There is already a rune here.</span>")
@@ -65,7 +65,7 @@
 		var/scribe_mod = scribe_time
 		if(istype(T, /turf/open/floor/engine/cult))
 			scribe_mod *= 0.5
-		playsound(T, 'sound/magic/enter_blood.ogg', 100, FALSE)
+		playsound(T, 'sound/blank.ogg', 100, FALSE)
 		if(do_after(owner, scribe_mod, target = owner, extra_checks = CALLBACK(owner, /mob.proc/break_do_after_checks, health, action_interrupt)))
 			var/obj/effect/rune/new_rune = new rune_type(owner.loc)
 			new_rune.keyword = chosen_keyword
@@ -83,7 +83,7 @@
 //teleport rune
 /datum/action/innate/cult/create_rune/tele
 	name = "Summon Teleport Rune"
-	desc = "Summons a teleport rune to your location, as though it has been there all along..."
+	desc = ""
 	button_icon_state = "telerune"
 	rune_type = /obj/effect/rune/teleport
 	rune_word_type = /obj/effect/temp_visual/cult/rune_spawn/rune2
@@ -93,7 +93,7 @@
 
 /datum/action/innate/cult/create_rune/wall
 	name = "Summon Barrier Rune"
-	desc = "Summons an active barrier rune to your location, as though it has been there all along..."
+	desc = ""
 	button_icon_state = "barrier"
 	rune_type = /obj/effect/rune/wall
 	rune_word_type = /obj/effect/temp_visual/cult/rune_spawn/rune4
@@ -109,7 +109,7 @@
 
 /datum/action/innate/cult/create_rune/revive
 	name = "Summon Revive Rune"
-	desc = "Summons a revive rune to your location, as though it has been there all along..."
+	desc = ""
 	button_icon_state = "revive"
 	rune_type = /obj/effect/rune/raise_dead
 	rune_word_type = /obj/effect/temp_visual/cult/rune_spawn/rune1

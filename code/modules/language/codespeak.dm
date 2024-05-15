@@ -1,7 +1,7 @@
 /datum/language/codespeak
 	name = "Codespeak"
-	desc = "Syndicate operatives can use a series of codewords to convey complex information, while sounding like random concepts and drinks to anyone listening in."
-	key = "t"
+	desc = ""
+	key = "14"
 	default_priority = 0
 	flags = TONGUELESS_SPEECH | LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
 	icon_state = "codespeak"
@@ -32,7 +32,7 @@
 
 /obj/item/codespeak_manual
 	name = "codespeak manual"
-	desc = "The book's cover reads: \"Codespeak(tm) - Secure your communication with metaphors so elaborate, they seem randomly generated!\""
+	desc = ""
 	icon = 'icons/obj/library.dmi'
 	icon_state = "book2"
 	var/charges = 1
@@ -42,10 +42,10 @@
 		return
 
 	if(user.has_language(/datum/language/codespeak))
-		to_chat(user, "<span class='boldwarning'>You start skimming through [src], but you already know Codespeak.</span>")
+		to_chat(user, "<span class='boldwarning'>I start skimming through [src], but you already know Codespeak.</span>")
 		return
 
-	to_chat(user, "<span class='boldannounce'>You start skimming through [src], and suddenly your mind is filled with codewords and responses.</span>")
+	to_chat(user, "<span class='boldannounce'>I start skimming through [src], and suddenly your mind is filled with codewords and responses.</span>")
 	user.grant_language(/datum/language/codespeak)
 
 	use_charge(user)
@@ -60,11 +60,11 @@
 	playsound(loc, "punch", 25, TRUE, -1)
 
 	if(M.stat == DEAD)
-		M.visible_message("<span class='danger'>[user] smacks [M]'s lifeless corpse with [src].</span>", "<span class='userdanger'>[user] smacks your lifeless corpse with [src].</span>", "<span class='hear'>You hear smacking.</span>")
+		M.visible_message("<span class='danger'>[user] smacks [M]'s lifeless corpse with [src].</span>", "<span class='danger'>[user] smacks your lifeless corpse with [src].</span>", "<span class='hear'>I hear smacking.</span>")
 	else if(M.has_language(/datum/language/codespeak))
-		M.visible_message("<span class='danger'>[user] beats [M] over the head with [src]!</span>", "<span class='userdanger'>[user] beats you over the head with [src]!</span>", "<span class='hear'>You hear smacking.</span>")
+		M.visible_message("<span class='danger'>[user] beats [M] over the head with [src]!</span>", "<span class='danger'>[user] beats you over the head with [src]!</span>", "<span class='hear'>I hear smacking.</span>")
 	else
-		M.visible_message("<span class='notice'>[user] teaches [M] by beating [M.p_them()] over the head with [src]!</span>", "<span class='boldnotice'>As [user] hits you with [src], codewords and responses flow through your mind.</span>", "<span class='hear'>You hear smacking.</span>")
+		M.visible_message("<span class='notice'>[user] teaches [M] by beating [M.p_them()] over the head with [src]!</span>", "<span class='boldnotice'>As [user] hits you with [src], codewords and responses flow through your mind.</span>", "<span class='hear'>I hear smacking.</span>")
 		M.grant_language(/datum/language/codespeak)
 		use_charge(user)
 

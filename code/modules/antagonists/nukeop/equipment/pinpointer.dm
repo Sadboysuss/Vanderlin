@@ -25,10 +25,10 @@
 			if(bomb.timing)
 				if(!alert)
 					alert = TRUE
-					playsound(src, 'sound/items/nuke_toy_lowpower.ogg', 50, FALSE)
+					playsound(src, 'sound/blank.ogg', 50, FALSE)
 					if(isliving(loc))
 						var/mob/living/L = loc
-						to_chat(L, "<span class='userdanger'>Your [name] vibrates and lets out a tinny alarm. Uh oh.</span>")
+						to_chat(L, "<span class='danger'>My [name] vibrates and lets out a tinny alarm. Uh oh.</span>")
 
 /obj/item/pinpointer/nuke/scan_for_target()
 	target = null
@@ -52,19 +52,19 @@
 /obj/item/pinpointer/nuke/proc/switch_mode_to(new_mode)
 	if(isliving(loc))
 		var/mob/living/L = loc
-		to_chat(L, "<span class='userdanger'>Your [name] beeps as it reconfigures it's tracking algorithms.</span>")
-		playsound(L, 'sound/machines/triple_beep.ogg', 50, TRUE)
+		to_chat(L, "<span class='danger'>My [name] beeps as it reconfigures it's tracking algorithms.</span>")
+		playsound(L, 'sound/blank.ogg', 50, TRUE)
 	mode = new_mode
 	scan_for_target()
 
 /obj/item/pinpointer/nuke/syndicate // Syndicate pinpointers automatically point towards the infiltrator once the nuke is active.
 	name = "syndicate pinpointer"
-	desc = "A handheld tracking device that locks onto certain signals. It's configured to switch tracking modes once it detects the activation signal of a nuclear device."
+	desc = ""
 	icon_state = "pinpointer_syndicate"
 
 /obj/item/pinpointer/syndicate_cyborg // Cyborg pinpointers just look for a random operative.
 	name = "cyborg syndicate pinpointer"
-	desc = "An integrated tracking device, jury-rigged to search for living Syndicate operatives."
+	desc = ""
 	flags_1 = NONE
 
 /obj/item/pinpointer/syndicate_cyborg/Initialize()

@@ -10,7 +10,7 @@
 
 /datum/design/c38_trac
 	name = "Speed Loader (.38 TRAC)"
-	desc = "Designed to quickly reload revolvers. TRAC bullets embed a tracking implant within the target's body."
+	desc = ""
 	id = "c38_trac"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 20000, /datum/material/silver = 5000, /datum/material/gold = 1000)
@@ -20,7 +20,7 @@
 
 /datum/design/c38_hotshot
 	name = "Speed Loader (.38 Hot Shot)"
-	desc = "Designed to quickly reload revolvers. Hot Shot bullets contain an incendiary payload."
+	desc = ""
 	id = "c38_hotshot"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 20000, /datum/material/plasma = 5000)
@@ -30,7 +30,7 @@
 
 /datum/design/c38_iceblox
 	name = "Speed Loader (.38 Iceblox)"
-	desc = "Designed to quickly reload revolvers. Iceblox bullets contain a cryogenic payload."
+	desc = ""
 	id = "c38_iceblox"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 20000, /datum/material/plasma = 5000)
@@ -76,7 +76,7 @@
 
 /datum/design/pin_testing
 	name = "Test-Range Firing Pin"
-	desc = "This safety firing pin allows firearms to be operated within proximity to a firing range."
+	desc = ""
 	id = "pin_testing"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 500, /datum/material/glass = 300)
@@ -86,7 +86,7 @@
 
 /datum/design/pin_mindshield
 	name = "Mindshield Firing Pin"
-	desc = "This is a security firing pin which only authorizes users who are mindshield-implanted."
+	desc = ""
 	id = "pin_loyalty"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/silver = 600, /datum/material/diamond = 600, /datum/material/uranium = 200)
@@ -96,7 +96,7 @@
 
 /datum/design/stunrevolver
 	name = "Tesla Revolver"
-	desc = "A high-tech revolver that fires internal, reusable shock cartridges in a revolving cylinder. The cartridges can be recharged using conventional rechargers."
+	desc = ""
 	id = "stunrevolver"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 10000, /datum/material/glass = 10000, /datum/material/silver = 10000)
@@ -106,7 +106,7 @@
 
 /datum/design/nuclear_gun
 	name = "Advanced Energy Gun"
-	desc = "An energy gun with an experimental miniaturized reactor."
+	desc = ""
 	id = "nuclear_gun"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 10000, /datum/material/glass = 2000, /datum/material/uranium = 3000, /datum/material/titanium = 1000)
@@ -116,7 +116,7 @@
 
 /datum/design/tele_shield
 	name = "Telescopic Riot Shield"
-	desc = "An advanced riot shield made of lightweight materials that collapses for easy storage."
+	desc = ""
 	id = "tele_shield"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000, /datum/material/glass = 4000, /datum/material/silver = 300, /datum/material/titanium = 200)
@@ -126,7 +126,7 @@
 
 /datum/design/beamrifle
 	name = "Beam Marksman Rifle"
-	desc = "A powerful long ranged anti-material rifle that fires charged particle beams to obliterate targets."
+	desc = ""
 	id = "beamrifle"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 10000, /datum/material/glass = 5000, /datum/material/diamond = 5000, /datum/material/uranium = 8000, /datum/material/silver = 4500, /datum/material/gold = 5000)
@@ -136,7 +136,7 @@
 
 /datum/design/decloner
 	name = "Decloner"
-	desc = "Your opponent will bubble into a messy pile of goop."
+	desc = ""
 	id = "decloner"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/gold = 5000,/datum/material/uranium = 10000)
@@ -147,7 +147,7 @@
 
 /datum/design/rapidsyringe
 	name = "Rapid Syringe Gun"
-	desc = "A gun that fires many syringes."
+	desc = ""
 	id = "rapidsyringe"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 5000, /datum/material/glass = 1000)
@@ -157,7 +157,7 @@
 
 /datum/design/temp_gun
 	name = "Temperature Gun"
-	desc = "A gun that shoots temperature bullet energythings to change temperature."//Change it if you want
+	desc = ""//Change it if you want
 	id = "temp_gun"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 5000, /datum/material/glass = 500, /datum/material/silver = 3000)
@@ -167,7 +167,7 @@
 
 /datum/design/flora_gun
 	name = "Floral Somatoray"
-	desc = "A tool that discharges controlled radiation which induces mutation in plant cells. Harmless to other organic life."
+	desc = ""
 	id = "flora_gun"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000, /datum/material/glass = 500)
@@ -178,7 +178,7 @@
 
 /datum/design/large_grenade
 	name = "Large Grenade"
-	desc = "A grenade that affects a larger area and use larger containers."
+	desc = ""
 	id = "large_Grenade"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3000)
@@ -188,7 +188,7 @@
 
 /datum/design/pyro_grenade
 	name = "Pyro Grenade"
-	desc = "An advanced grenade that is able to self ignite its mixture."
+	desc = ""
 	id = "pyro_Grenade"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000, /datum/material/plasma = 500)
@@ -198,7 +198,7 @@
 
 /datum/design/cryo_grenade
 	name = "Cryo Grenade"
-	desc = "An advanced grenade that rapidly cools its contents upon detonation."
+	desc = ""
 	id = "cryo_Grenade"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000, /datum/material/silver = 500)
@@ -208,7 +208,7 @@
 
 /datum/design/adv_grenade
 	name = "Advanced Release Grenade"
-	desc = "An advanced grenade that can be detonated several times, best used with a repeating igniter."
+	desc = ""
 	id = "adv_Grenade"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3000, /datum/material/glass = 500)
@@ -218,7 +218,7 @@
 
 /datum/design/xray
 	name = "X-ray Laser Gun"
-	desc = "Not quite as menacing as it sounds"
+	desc = ""
 	id = "xray_laser"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/gold = 5000, /datum/material/uranium = 4000, /datum/material/iron = 5000, /datum/material/titanium = 2000, /datum/material/bluespace = 2000)
@@ -228,7 +228,7 @@
 
 /datum/design/ioncarbine
 	name = "Ion Carbine"
-	desc = "How to dismantle a cyborg : The gun."
+	desc = ""
 	id = "ioncarbine"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/silver = 6000, /datum/material/iron = 8000, /datum/material/uranium = 2000)
@@ -238,7 +238,7 @@
 
 /datum/design/wormhole_projector
 	name = "Bluespace Wormhole Projector"
-	desc = "A projector that emits high density quantum-coupled bluespace beams."
+	desc = ""
 	id = "wormholeprojector"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/silver = 2000, /datum/material/iron = 5000, /datum/material/diamond = 2000, /datum/material/bluespace = 3000)
@@ -250,7 +250,7 @@
 
 /datum/design/mag_oldsmg
 	name = "WT-550 Auto Gun Magazine (4.6x30mm)"
-	desc = "A 20 round magazine for the out of date security WT-550 Auto Rifle"
+	desc = ""
 	id = "mag_oldsmg"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000)
@@ -260,7 +260,7 @@
 
 /datum/design/mag_oldsmg/ap_mag
 	name = "WT-550 Auto Gun Armour Piercing Magazine (4.6x30mm AP)"
-	desc = "A 20 round armour piercing magazine for the out of date security WT-550 Auto Rifle"
+	desc = ""
 	id = "mag_oldsmg_ap"
 	materials = list(/datum/material/iron = 6000, /datum/material/silver = 600)
 	build_path = /obj/item/ammo_box/magazine/wt550m9/wtap
@@ -268,7 +268,7 @@
 
 /datum/design/mag_oldsmg/ic_mag
 	name = "WT-550 Auto Gun Incendiary Magazine (4.6x30mm IC)"
-	desc = "A 20 round armour piercing magazine for the out of date security WT-550 Auto Rifle"
+	desc = ""
 	id = "mag_oldsmg_ic"
 	materials = list(/datum/material/iron = 6000, /datum/material/silver = 600, /datum/material/glass = 1000)
 	build_path = /obj/item/ammo_box/magazine/wt550m9/wtic
@@ -276,7 +276,7 @@
 
 /datum/design/stunshell
 	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
+	desc = ""
 	id = "stunshell"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200)
@@ -286,7 +286,7 @@
 
 /datum/design/techshell
 	name = "Unloaded Technological Shotshell"
-	desc = "A high-tech shotgun shell which can be loaded with materials to produce unique effects."
+	desc = ""
 	id = "techshotshell"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 1000, /datum/material/glass = 200)
@@ -296,7 +296,7 @@
 
 /datum/design/suppressor
 	name = "Suppressor"
-	desc = "A reverse-engineered suppressor that fits on most small arms with threaded barrels."
+	desc = ""
 	id = "suppressor"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000, /datum/material/silver = 500)
@@ -306,7 +306,7 @@
 
 /datum/design/gravitygun
 	name = "One-point Bluespace-gravitational Manipulator"
-	desc = "A multi-mode device that blasts one-point bluespace-gravitational bolts that locally distort gravity."
+	desc = ""
 	id = "gravitygun"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/silver = 8000, /datum/material/uranium = 8000, /datum/material/glass = 12000, /datum/material/iron = 12000, /datum/material/diamond = 3000, /datum/material/bluespace = 3000)
@@ -316,7 +316,7 @@
 
 /datum/design/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A reverse-engineered energy crossbow favored by syndicate infiltration teams and carp hunters."
+	desc = ""
 	id = "largecrossbow"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 5000, /datum/material/glass = 1500, /datum/material/uranium = 1500, /datum/material/silver = 1500)
@@ -326,7 +326,7 @@
 
 /datum/design/cryostasis_shotgun_dart
 	name = "Cryostasis Shotgun Dart"
-	desc = "A shotgun dart designed with similar internals to that of a cryostasis beaker, allowing reagents to not react when inside."
+	desc = ""
 	id = "shotgundartcryostasis"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3500)
@@ -336,7 +336,7 @@
 
 /datum/design/cleric_mace
 	name = "Cleric Mace"
-	desc = "A mace fit for a cleric. Useful for bypassing plate armor, but too bulky for much else."
+	desc = ""
 	id = "cleric_mace"
 	build_type = AUTOLATHE
 	materials = list(MAT_CATEGORY_RIGID = 12000)

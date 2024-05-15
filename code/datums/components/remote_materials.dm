@@ -97,7 +97,7 @@ handles linking back and forth.
 		silo.connected += src
 		silo.updateUsrDialog()
 		mat_container = silo.GetComponent(/datum/component/material_container)
-		to_chat(user, "<span class='notice'>You connect [parent] to [silo] from the multitool's buffer.</span>")
+		to_chat(user, "<span class='notice'>I connect [parent] to [silo] from the multitool's buffer.</span>")
 		return COMPONENT_BLOCK_TOOL_ATTACK
 
 /datum/component/remote_materials/proc/on_hold()

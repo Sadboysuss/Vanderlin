@@ -1,6 +1,6 @@
 /obj/item/computer_hardware/hard_drive/portable
 	name = "data disk"
-	desc = "Removable disk used to store data."
+	desc = ""
 	power_usage = 10
 	icon_state = "datadisk6"
 	w_class = WEIGHT_CLASS_TINY
@@ -26,7 +26,7 @@
 
 /obj/item/computer_hardware/hard_drive/portable/super
 	name = "super data disk"
-	desc = "Removable disk used to store large amounts of data."
+	desc = ""
 	power_usage = 40
 	icon_state = "datadisk3"
 	max_capacity = 256

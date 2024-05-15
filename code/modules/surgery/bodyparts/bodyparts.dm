@@ -1,22 +1,23 @@
 
 /obj/item/bodypart
 	name = "limb"
-	desc = "Why is it detached..."
+	desc = ""
 	force = 3
 	throwforce = 3
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/mob/human_parts.dmi'
 	icon_state = ""
 	layer = BELOW_MOB_LAYER //so it isn't hidden behind objects when on the floor
-	var/mob/living/carbon/owner = null
-	var/mob/living/carbon/original_owner = null
+	var/mob/living/carbon/owner = 0
+	var/mob/living/carbon/original_owner = 0
 	var/status = BODYPART_ORGANIC
 	var/needs_processing = FALSE
 
+	var/static_icon = FALSE
 	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc , used for def_zone
 	var/aux_zone // used for hands
 	var/aux_layer
-	var/body_part = null //bitflag used to check which clothes cover this bodypart
+	var/body_part = 0 //bitflag used to check which clothes cover this bodypart
 	var/use_digitigrade = NOT_DIGITIGRADE //Used for alternate legs, useless elsewhere
 	var/list/embedded_objects = list()
 	var/held_index = 0 //are we a hand? if so, which one!
@@ -47,9 +48,11 @@
 	var/species_color = ""
 	var/mutation_color = ""
 	var/no_update = 0
+	var/species_icon = ""
 
-	var/animal_origin = null //for nonhuman bodypart (e.g. monkey)
+	var/animal_origin = 0 //for nonhuman bodypart (e.g. monkey)
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
+	var/disableable = 1
 
 	var/px_x = 0
 	var/px_y = 0
@@ -58,13 +61,40 @@
 	var/dmg_overlay_type //the type of damage overlay (if any) to use when this bodypart is bruised/burned.
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "bruised"
-	var/medium_brute_msg = "battered"
-	var/heavy_brute_msg = "mangled"
+	var/light_brute_msg = "is a little bruised"
+	var/medium_brute_msg = "is bruised"
+	var/heavy_brute_msg = "is heavily bruised"
 
-	var/light_burn_msg = "numb"
-	var/medium_burn_msg = "blistered"
-	var/heavy_burn_msg = "peeling away"
+	var/light_burn_msg = "is blistered"
+	var/medium_burn_msg = "is burned"
+	var/heavy_burn_msg = "is peeling away"
+
+	var/add_extra = FALSE
+	var/offset
+	var/offset_f
+
+	var/last_disable = 0
+	var/last_crit = 0
+
+	var/list/subtargets = list()		//these are subtargets that can be attacked with weapons (crits)
+	var/list/grabtargets = list()		//these are subtargets that can be grabbed
+
+	var/rotted = 0
+	var/skeletonized = 0
+
+	var/fingers = TRUE
+
+	resistance_flags = FLAMMABLE
+
+/obj/item/bodypart/grabbedintents(mob/living/user, precise)
+	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+
+/obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
+	if(precise)
+		switch(precise)
+			if("groin")
+				return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist)
+	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/shove)
 
 /obj/item/bodypart/examine(mob/user)
 	. = ..()
@@ -79,7 +109,22 @@
 /obj/item/bodypart/Destroy()
 	if(owner)
 		owner.bodyparts -= src
-		owner = null
+		owner = 0
+	if(bandage)
+		QDEL_NULL(bandage)
+	return ..()
+
+
+/obj/item/bodypart/onbite(mob/living/carbon/human/user)
+	if((user.mind && user.mind.has_antag_datum(/datum/species/zombie)) || istype(user.dna.species, /datum/species/werewolf))
+		if(do_after(user, 50, target = src))
+			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
+			"<span class='notice'>I consume [src]!</span>")
+			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
+			new /obj/effect/gibspawner/generic(get_turf(src), user)
+			user.fully_heal()
+			qdel(src)
+		return
 	return ..()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
@@ -89,43 +134,80 @@
 			if(!H.get_bodypart(body_zone) && !animal_origin)
 				if(H == user)
 					H.visible_message("<span class='warning'>[H] jams [src] into [H.p_their()] empty socket!</span>",\
-					"<span class='notice'>You force [src] into your empty socket, and it locks into place!</span>")
+					"<span class='notice'>I force [src] into my empty socket, and it locks into place!</span>")
 				else
 					H.visible_message("<span class='warning'>[user] jams [src] into [H]'s empty socket!</span>",\
-					"<span class='notice'>[user] forces [src] into your empty socket, and it locks into place!</span>")
+					"<span class='notice'>[user] forces [src] into my empty socket, and it locks into place!</span>")
 				user.temporarilyRemoveItemFromInventory(src, TRUE)
 				attach_limb(C)
 				return
 	..()
-
+/*
 /obj/item/bodypart/attackby(obj/item/W, mob/user, params)
 	if(W.get_sharpness())
 		add_fingerprint(user)
 		if(!contents.len)
-			to_chat(user, "<span class='warning'>There is nothing left inside [src]!</span>")
+//			to_chat(user, "<span class='warning'>There is nothing left inside [src]!</span>")
 			return
-		playsound(loc, 'sound/weapons/slice.ogg', 50, TRUE, -1)
+		playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
-			"<span class='notice'>You begin to cut open [src]...</span>")
+			"<span class='notice'>I begin to cut open [src]...</span>")
 		if(do_after(user, 54, target = src))
 			drop_organs(user, TRUE)
 	else
 		return ..()
-
+*/
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	..()
 	if(status != BODYPART_ROBOTIC)
-		playsound(get_turf(src), 'sound/misc/splort.ogg', 50, TRUE, -1)
+		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
 	pixel_x = rand(-3, 3)
 	pixel_y = rand(-3, 3)
+	if(!skeletonized)
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
 	var/turf/T = get_turf(src)
 	if(status != BODYPART_ROBOTIC)
-		playsound(T, 'sound/misc/splort.ogg', 50, TRUE, -1)
+		playsound(T, 'sound/blank.ogg', 50, TRUE, -1)
 	for(var/obj/item/I in src)
 		I.forceMove(T)
+
+/obj/item/bodypart/proc/skeletonize()
+	var/turf/T = get_turf(src)
+	if(T)
+		for(var/obj/item/I in embedded_objects)
+			embedded_objects -= I
+			I.forceMove(T)
+		for(var/obj/item/organ/I in src) //dust organs
+			qdel(I)
+		for(var/obj/item/I in src) //everything else gets dumped
+			if(I != bandage)
+				I.forceMove(T)
+	else
+		for(var/obj/item/I in embedded_objects)
+			embedded_objects -= I
+			qdel(I)
+		for(var/obj/item/I in src) //dust organs
+			qdel(I)
+	skeletonized = TRUE
+
+/obj/item/bodypart/chest/skeletonize()
+	. = ..()
+	if(owner)
+		if(iscarbon(owner))
+			var/mob/living/carbon/C = owner
+			if(!(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits)))
+				owner.death()
+
+/obj/item/bodypart/head/skeletonize()
+	. = ..()
+	if(owner)
+		if(iscarbon(owner))
+			var/mob/living/carbon/C = owner
+			if(!(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits)))
+				owner.death()
 
 /obj/item/bodypart/proc/consider_processing()
 	if(stamina_dam > DAMAGE_PRECISION)
@@ -141,10 +223,23 @@
 		heal_damage(0, 0, INFINITY, null, FALSE)
 		. |= BODYPART_LIFE_UPDATE_HEALTH
 
+/obj/item/bodypart/Initialize()
+	..()
+	update_HP()
+
+/obj/item/bodypart/proc/update_HP()
+	var/old_max_damage = max_damage
+	if(is_organic_limb())
+		if(owner)
+			var/new_max_damage = initial(max_damage) * (owner.STACON / 10)
+			if(new_max_damage != old_max_damage)
+				max_damage = new_max_damage
+
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
 //Cannot apply negative damage
 /obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null)
+	update_HP()
 	var/hit_percent = (100-blocked)/100
 	if((!brute && !burn && !stamina) || hit_percent <= 0)
 		return FALSE
@@ -169,22 +264,26 @@
 		if(ALIEN_BODYPART,LARVA_BODYPART) //aliens take double burn //nothing can burn with so much snowflake code around
 			burn *= 2
 
-	var/can_inflict = max_damage - get_damage()
-	if(can_inflict <= 0)
-		return FALSE
-
-	var/total_damage = brute + burn
-
-	if(total_damage > can_inflict)
-		brute = round(brute * (can_inflict / total_damage),DAMAGE_PRECISION)
-		burn = round(burn * (can_inflict / total_damage),DAMAGE_PRECISION)
-
-	brute_dam += brute
-	burn_dam += burn
+	//cap at maxdamage
+	if(brute_dam + brute > max_damage)
+		brute_dam = max_damage
+	else
+		brute_dam += brute
+	if(burn_dam + burn > max_damage)
+		burn_dam = max_damage
+	else
+		burn_dam += burn
 
 	//We've dealt the physical damages, if there's room lets apply the stamina damage.
 	stamina_dam += round(CLAMP(stamina, 0, max_stamina_damage - stamina_dam), DAMAGE_PRECISION)
 
+	if(owner)
+		if((brute + burn) < 10)
+			owner.flash_fullscreen("redflash1")
+		else if((brute + burn) < 20)
+			owner.flash_fullscreen("redflash2")
+		else if((brute + burn) >= 20)
+			owner.flash_fullscreen("redflash3")
 
 	if(owner && updating_health)
 		owner.updatehealth()
@@ -200,7 +299,7 @@
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, stamina, required_status, updating_health = TRUE)
-
+	update_HP()
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
@@ -210,7 +309,7 @@
 	if(owner && updating_health)
 		owner.updatehealth()
 	consider_processing()
-	update_disabled()
+	update_disabled(TRUE)
 	cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
 	return update_bodypart_damage_state()
 
@@ -222,17 +321,28 @@
 	return total
 
 //Checks disabled status thresholds
-/obj/item/bodypart/proc/update_disabled()
-	set_disabled(is_disabled())
+/obj/item/bodypart/proc/update_disabled(heal = FALSE)
+	update_HP()
+	if(heal)
+		if(world.time > (last_disable + 10))
+			set_disabled(is_disabled(TRUE))
+	else if(!disabled)
+		set_disabled(is_disabled())
 
-/obj/item/bodypart/proc/is_disabled()
+/obj/item/bodypart/proc/is_disabled(heal = FALSE)
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return BODYPART_DISABLED_PARALYSIS
-	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+	if(can_disable() && !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if((get_damage(TRUE) >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (get_damage(TRUE) >= (max_damage * 0.6)))) //Easy limb disable disables the limb at 40% health instead of 0%
+		if((brute_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (brute_dam >= (max_damage * 0.6))))
 			return BODYPART_DISABLED_DAMAGE
-		if(disabled && (get_damage(TRUE) <= (max_damage * 0.5)))
+		if(burn_dam >= max_damage)
+			return BODYPART_DISABLED_PARALYSIS
+		if(heal)
+//			if(disabled == BODYPART_DISABLED_DAMAGE && (get_damage(TRUE) <= (max_damage * 0.5)))
+//				return BODYPART_NOT_DISABLED
+			for(var/datum/wound/fracture/F in wounds)
+				return BODYPART_DISABLED_CRIT
 			return BODYPART_NOT_DISABLED
 	else
 		return BODYPART_NOT_DISABLED
@@ -240,7 +350,10 @@
 /obj/item/bodypart/proc/set_disabled(new_disabled)
 	if(disabled == new_disabled)
 		return
+	if(new_disabled == BODYPART_DISABLED_FALL)
+		playsound(owner, "drybreak", 100, FALSE)
 	disabled = new_disabled
+	last_disable = world.time
 	owner.update_health_hud() //update the healthdoll
 	owner.update_body()
 	owner.update_mobility()
@@ -268,7 +381,7 @@
 
 	if(change_icon_to_default)
 		if(status == BODYPART_ORGANIC)
-			icon = DEFAULT_BODYPART_ICON_ORGANIC
+			icon = species_icon
 		else if(status == BODYPART_ROBOTIC)
 			icon = DEFAULT_BODYPART_ICON_ROBOTIC
 
@@ -307,10 +420,16 @@
 	if(!animal_origin)
 		var/mob/living/carbon/human/H = C
 		should_draw_greyscale = FALSE
-
+		if(!H.dna || !H.dna.species)
+			return
 		var/datum/species/S = H.dna.species
 		species_id = S.limbs_id
+		if(H.gender == MALE)
+			species_icon = S.limbs_icon_m
+		else
+			species_icon = S.limbs_icon_f
 		species_flags_list = H.dna.species.species_traits
+
 
 		if(S.use_skintones)
 			skin_tone = H.skin_tone
@@ -359,22 +478,28 @@
 	add_overlay(standing)
 
 //Gives you a proper icon appearance for the dismembered limb
-/obj/item/bodypart/proc/get_limb_icon(dropped)
+/obj/item/bodypart/proc/get_limb_icon(dropped, hideaux = FALSE)
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
+	var/icon_gender = (body_gender == FEMALE) ? "f" : "m" //gender of the icon, if applicable
 
 	var/image_dir = 0
-	if(dropped)
+	if(dropped && !skeletonized)
+		if(static_icon)
+			icon = initial(icon)
+			icon_state = initial(icon_state)
+			return
 		image_dir = SOUTH
 		if(dmg_overlay_type)
 			if(brutestate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER, image_dir)
+				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
 			if(burnstate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER, image_dir)
+				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
 
 	var/image/limb = image(layer = -BODYPARTS_LAYER, dir = image_dir)
 	var/image/aux
+
 	. += limb
 
 	if(animal_origin)
@@ -389,20 +514,21 @@
 			limb.icon_state = "[animal_origin]_[body_zone]"
 		return
 
-	var/icon_gender = (body_gender == FEMALE) ? "f" : "m" //gender of the icon, if applicable
+//	if((body_zone != BODY_ZONE_HEAD && body_zone != BODY_ZONE_CHEST))
+//		should_draw_gender = FALSE
+	should_draw_gender = TRUE
 
-	if((body_zone != BODY_ZONE_HEAD && body_zone != BODY_ZONE_CHEST))
-		should_draw_gender = FALSE
+	var/skel = skeletonized ? "_s" : ""
 
 	if(is_organic_limb())
 		if(should_draw_greyscale)
-			limb.icon = 'icons/mob/human_parts_greyscale.dmi'
+			limb.icon = species_icon
 			if(should_draw_gender)
-				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
+				limb.icon_state = "[body_zone][skel]"
 			else if(use_digitigrade)
 				limb.icon_state = "digitigrade_[use_digitigrade]_[body_zone]"
 			else
-				limb.icon_state = "[species_id]_[body_zone]"
+				limb.icon_state = "[body_zone][skel]"
 		else
 			limb.icon = 'icons/mob/human_parts.dmi'
 			if(should_draw_gender)
@@ -410,26 +536,27 @@
 			else
 				limb.icon_state = "[species_id]_[body_zone]"
 		if(aux_zone)
-			aux = image(limb.icon, "[species_id]_[aux_zone]", -aux_layer, image_dir)
-			. += aux
+			if(!hideaux)
+				aux = image(limb.icon, "[aux_zone][skel]", -aux_layer, image_dir)
+				. += aux
 
 	else
-		limb.icon = icon
-		if(should_draw_gender)
-			limb.icon_state = "[body_zone]_[icon_gender]"
-		else
-			limb.icon_state = "[body_zone]"
+		limb.icon = species_icon
+		limb.icon_state = "pr_[body_zone]"
 		if(aux_zone)
-			aux = image(limb.icon, "[aux_zone]", -aux_layer, image_dir)
-			. += aux
+			if(!hideaux)
+				aux = image(limb.icon, "pr_[aux_zone]", -aux_layer, image_dir)
+				. += aux
 		return
 
 
-	if(should_draw_greyscale)
-		var/draw_color = mutation_color || species_color || (skin_tone && skintone2hex(skin_tone))
+	if(should_draw_greyscale && !skeletonized)
+		var/draw_color = mutation_color || species_color || (skin_tone)
+		if(draw_color && rotted)
+			draw_color = "878f79"
 		if(draw_color)
 			limb.color = "#[draw_color]"
-			if(aux_zone)
+			if(aux_zone && !hideaux)
 				aux.color = "#[draw_color]"
 
 /obj/item/bodypart/deconstruct(disassembled = TRUE)
@@ -438,7 +565,7 @@
 
 /obj/item/bodypart/chest
 	name = BODY_ZONE_CHEST
-	desc = "It's impolite to stare at a person's chest."
+	desc = ""
 	icon_state = "default_human_chest"
 	max_damage = 200
 	body_zone = BODY_ZONE_CHEST
@@ -448,11 +575,21 @@
 	stam_damage_coeff = 1
 	max_stamina_damage = 120
 	var/obj/item/cavity_item
+	aux_zone = "boob"
+	aux_layer = BODYPARTS_LAYER
+	subtargets = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN)
+	grabtargets = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN)
+	offset = OFFSET_ARMOR
+	offset_f = OFFSET_ARMOR_F
+	dismemberable = FALSE
 
-/obj/item/bodypart/chest/can_dismember(obj/item/I)
-	if(!((owner.stat == DEAD) || owner.InFullCritical()))
-		return FALSE
-	return ..()
+/obj/item/bodypart/chest/set_disabled(new_disabled)
+	. = ..()
+	if(!.)
+		return
+	if(disabled == BODYPART_DISABLED_DAMAGE|BODYPART_DISABLED_FALL)
+		if(owner.stat < DEAD)
+			to_chat(owner, "<span class='warning'>I feel a sharp pain in my back!</span>")
 
 /obj/item/bodypart/chest/Destroy()
 	QDEL_NULL(cavity_item)
@@ -490,22 +627,23 @@
 
 /obj/item/bodypart/l_arm
 	name = "left arm"
-	desc = "Did you know that the word 'sinister' stems originally from the \
-		Latin 'sinestra' (left hand), because the left hand was supposed to \
-		be possessed by the devil? This arm appears to be possessed by no \
-		one though."
+	desc = ""
 	icon_state = "default_human_l_arm"
 	attack_verb = list("slapped", "punched")
-	max_damage = 50
+	max_damage = 100
 	max_stamina_damage = 50
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
 	aux_zone = BODY_ZONE_PRECISE_L_HAND
 	aux_layer = HANDS_PART_LAYER
-	body_damage_coeff = 0.75
+	body_damage_coeff = 1
 	held_index = 1
 	px_x = -6
 	px_y = 0
+	subtargets = list(BODY_ZONE_PRECISE_L_HAND)
+	grabtargets = list(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM)
+	offset = OFFSET_GLOVES
+	offset_f = OFFSET_GLOVES_F
 
 /obj/item/bodypart/l_arm/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))
@@ -517,15 +655,13 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
-			owner.emote("scream")
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
+			to_chat(owner, "<span class='boldwarning'>I can no longer move my [name]!</span>")
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
@@ -556,20 +692,23 @@
 
 /obj/item/bodypart/r_arm
 	name = "right arm"
-	desc = "Over 87% of humans are right handed. That figure is much lower \
-		among humans missing their right arm."
+	desc = ""
 	icon_state = "default_human_r_arm"
 	attack_verb = list("slapped", "punched")
-	max_damage = 50
+	max_damage = 100
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
 	aux_layer = HANDS_PART_LAYER
-	body_damage_coeff = 0.75
+	body_damage_coeff = 1
 	held_index = 2
 	px_x = 6
 	px_y = 0
 	max_stamina_damage = 50
+	subtargets = list(BODY_ZONE_PRECISE_R_HAND)
+	grabtargets = list(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_R_ARM)
+	offset = OFFSET_GLOVES
+	offset_f = OFFSET_GLOVES_F
 
 /obj/item/bodypart/r_arm/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_ARM))
@@ -581,15 +720,13 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
-			owner.emote("scream")
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
@@ -620,17 +757,20 @@
 
 /obj/item/bodypart/l_leg
 	name = "left leg"
-	desc = "Some athletes prefer to tie their left shoelaces first for good \
-		luck. In this instance, it probably would not have helped."
+	desc = ""
 	icon_state = "default_human_l_leg"
 	attack_verb = list("kicked", "stomped")
-	max_damage = 50
+	max_damage = 100
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
-	body_damage_coeff = 0.75
+	body_damage_coeff = 1
 	px_x = -2
 	px_y = 12
 	max_stamina_damage = 50
+	aux_zone = "l_leg_above"
+	aux_layer = LEG_PART_LAYER
+	subtargets = list(BODY_ZONE_PRECISE_L_FOOT)
+	grabtargets = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_L_LEG)
 
 /obj/item/bodypart/l_leg/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_LEG))
@@ -642,13 +782,11 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
-			owner.emote("scream")
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
 
 /obj/item/bodypart/l_leg/digitigrade
 	name = "left digitigrade leg"
@@ -676,19 +814,21 @@
 
 /obj/item/bodypart/r_leg
 	name = "right leg"
-	desc = "You put your right leg in, your right leg out. In, out, in, out, \
-		shake it all about. And apparently then it detaches.\n\
-		The hokey pokey has certainly changed a lot since space colonisation."
+	desc = ""
 	// alternative spellings of 'pokey' are availible
 	icon_state = "default_human_r_leg"
 	attack_verb = list("kicked", "stomped")
-	max_damage = 50
+	max_damage = 100
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
-	body_damage_coeff = 0.75
+	body_damage_coeff = 1
 	px_x = 2
 	px_y = 12
 	max_stamina_damage = 50
+	aux_zone = "r_leg_above"
+	aux_layer = LEG_PART_LAYER
+	subtargets = list(BODY_ZONE_PRECISE_R_FOOT)
+	grabtargets = list(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_R_LEG)
 
 /obj/item/bodypart/r_leg/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_LEG))
@@ -700,13 +840,11 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
-			owner.emote("scream")
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
+			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
 
 /obj/item/bodypart/r_leg/digitigrade
 	name = "right digitigrade leg"

@@ -6,7 +6,7 @@
 //the nuke core - objective item
 /obj/item/nuke_core
 	name = "plutonium core"
-	desc = "Extremely radioactive. Wear goggles."
+	desc = ""
 	icon = 'icons/obj/nuke_tools.dmi'
 	icon_state = "plutonium_core"
 	item_state = "plutoniumcore"
@@ -42,7 +42,7 @@
 //nuke core box, for carrying the core
 /obj/item/nuke_core_container
 	name = "nuke core container"
-	desc = "Solid container for radioactive objects."
+	desc = ""
 	icon = 'icons/obj/nuke_tools.dmi'
 	icon_state = "core_container_empty"
 	item_state = "tile"
@@ -68,7 +68,7 @@
 	if(istype(core))
 		STOP_PROCESSING(SSobj, core)
 		icon_state = "core_container_sealed"
-		playsound(src, 'sound/items/deconstruct.ogg', 60, TRUE)
+		playsound(src, 'sound/blank.ogg', 60, TRUE)
 		if(ismob(loc))
 			to_chat(loc, "<span class='warning'>[src] is permanently sealed, [core]'s radiation is contained.</span>")
 
@@ -85,7 +85,7 @@
 //snowflake screwdriver, works as a key to start nuke theft, traitor only
 /obj/item/screwdriver/nuke
 	name = "screwdriver"
-	desc = "A screwdriver with an ultra thin tip that's carefully designed to boost screwing speed."
+	desc = ""
 	icon = 'icons/obj/nuke_tools.dmi'
 	icon_state = "screwdriver_nuke"
 	item_state = "screwdriver_nuke"
@@ -111,7 +111,7 @@
 	<li>Approach an active supermatter crystal with radiation shielded personal protective equipment. DO NOT MAKE PHYSICAL CONTACT.</li>\
 	<li>Use a supermatter scalpel (provided) to slice off a sliver of the crystal.</li>\
 	<li>Use supermatter extraction tongs (also provided) to safely pick up the sliver you sliced off.</li>\
-	<li>Physical contact of any object with the sliver will dust the object, as well as yourself.</li>\
+	<li>Physical contact of any object with the sliver will dust the object, as well as myself.</li>\
 	<li>Use the tongs to place the sliver into the provided container, which will take some time to seal.</li>\
 	<li>Get the hell out before the crystal delaminates.</li>\
 	<li>???</li>\
@@ -119,7 +119,7 @@
 
 /obj/item/nuke_core/supermatter_sliver
 	name = "supermatter sliver"
-	desc = "A tiny, highly volatile sliver of a supermatter crystal. Do not handle without protection!"
+	desc = ""
 	icon_state = "supermatter_sliver"
 	item_state = "supermattersliver"
 	pulseicon = "supermatter_sliver_pulse"
@@ -139,13 +139,13 @@
 		forceMove(tongs)
 		tongs.sliver = src
 		tongs.update_icon()
-		to_chat(user, "<span class='notice'>You carefully pick up [src] with [tongs].</span>")
+		to_chat(user, "<span class='notice'>I carefully pick up [src] with [tongs].</span>")
 	else if(istype(W, /obj/item/scalpel/supermatter) || istype(W, /obj/item/nuke_core_container/supermatter/)) // we don't want it to dust
 		return
 	else
 		to_chat(user, "<span class='notice'>As it touches \the [src], both \the [src] and \the [W] burst into dust!</span>")
 		radiation_pulse(user, 100)
-		playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		qdel(W)
 		qdel(src)
 
@@ -155,15 +155,15 @@
 		return FALSE
 	var/mob/ded = user
 	user.visible_message("<span class='danger'>[ded] reaches out and tries to pick up [src]. [ded.p_their()] body starts to glow and bursts into flames before flashing into dust!</span>",\
-			"<span class='userdanger'>You reach for [src] with your hands. That was dumb.</span>",\
+			"<span class='danger'>I reach for [src] with your hands. That was dumb.</span>",\
 			"<span class='hear'>Everything suddenly goes silent.</span>")
 	radiation_pulse(user, 500, 2)
-	playsound(get_turf(user), 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	ded.dust()
 
 /obj/item/nuke_core_container/supermatter
 	name = "supermatter bin"
-	desc = "A tiny receptacle that releases an inert hyper-noblium mix upon sealing, allowing a sliver of a supermatter crystal to be safely stored."
+	desc = ""
 	var/obj/item/nuke_core/supermatter_sliver/sliver
 
 /obj/item/nuke_core_container/supermatter/Destroy()
@@ -186,7 +186,7 @@
 	if(istype(sliver))
 		STOP_PROCESSING(SSobj, sliver)
 		icon_state = "core_container_sealed"
-		playsound(src, 'sound/items/Deconstruct.ogg', 60, TRUE)
+		playsound(src, 'sound/blank.ogg', 60, TRUE)
 		if(ismob(loc))
 			to_chat(loc, "<span class='warning'>[src] is permanently sealed, [sliver] is safely contained.</span>")
 
@@ -199,12 +199,12 @@
 
 /obj/item/scalpel/supermatter
 	name = "supermatter scalpel"
-	desc = "A scalpel with a fragile tip of condensed hyper-noblium gas, searingly cold to the touch, that can safely shave a sliver off a supermatter crystal."
+	desc = ""
 	icon = 'icons/obj/nuke_tools.dmi'
 	icon_state = "supermatter_scalpel"
 	toolspeed = 0.5
 	damtype = "fire"
-	usesound = 'sound/weapons/bladeslice.ogg'
+	usesound = 'sound/blank.ogg'
 	var/usesLeft
 
 /obj/item/scalpel/supermatter/Initialize()
@@ -213,7 +213,7 @@
 
 /obj/item/hemostat/supermatter
 	name = "supermatter extraction tongs"
-	desc = "A pair of tongs made from condensed hyper-noblium gas, searingly cold to the touch, that can safely grip a supermatter sliver."
+	desc = ""
 	icon = 'icons/obj/nuke_tools.dmi'
 	icon_state = "supermatter_tongs"
 	toolspeed = 0.75
@@ -256,10 +256,10 @@
 		qdel(AM)
 	if (user)
 		user.visible_message("<span class='danger'>As [user] touches [AM] with \the [src], both flash into dust and silence fills the room...</span>",\
-			"<span class='userdanger'>You touch [AM] with [src], and everything suddenly goes silent.\n[AM] and [sliver] flash into dust, and soon as you can register this, you do as well.</span>",\
+			"<span class='danger'>I touch [AM] with [src], and everything suddenly goes silent.\n[AM] and [sliver] flash into dust, and soon as you can register this, you do as well.</span>",\
 			"<span class='hear'>Everything suddenly goes silent.</span>")
 		user.dust()
 	radiation_pulse(src, 500, 2)
-	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	QDEL_NULL(sliver)
 	update_icon()

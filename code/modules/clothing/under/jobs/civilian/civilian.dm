@@ -5,21 +5,21 @@
 	mob_overlay_icon = 'icons/mob/clothing/under/civilian.dmi'
 
 /obj/item/clothing/under/rank/civilian/bartender
-	desc = "It looks like it could use some more flair."
+	desc = ""
 	name = "bartender's uniform"
 	icon_state = "barman"
 	item_state = "bar_suit"
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/civilian/bartender/purple
-	desc = "It looks like it has lots of flair!"
+	desc = ""
 	name = "purple bartender's uniform"
 	icon_state = "purplebartender"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/bartender/skirt
 	name = "bartender's skirt"
-	desc = "It looks like it could use some more flair."
+	desc = ""
 	icon_state = "barman_skirt"
 	item_state = "bar_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -27,7 +27,7 @@
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/rank/civilian/chaplain
-	desc = "It's a black jumpsuit, often worn by religious folk."
+	desc = ""
 	name = "chaplain's jumpsuit"
 	icon_state = "chaplain"
 	item_state = "bl_suit"
@@ -35,7 +35,7 @@
 
 /obj/item/clothing/under/rank/civilian/chaplain/skirt
 	name = "chaplain's jumpskirt"
-	desc = "It's a black jumpskirt. If you wear this, you probably need religious help more than you will be providing it."
+	desc = ""
 	icon_state = "chapblack_skirt"
 	item_state = "bl_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -44,20 +44,20 @@
 
 /obj/item/clothing/under/rank/civilian/chef
 	name = "cook's suit"
-	desc = "A suit which is given only to the most <b>hardcore</b> cooks in space."
+	desc = ""
 	icon_state = "chef"
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/civilian/chef/skirt
 	name = "cook's skirt"
-	desc = "A skirt which is given only to the most <b>hardcore</b> cooks in space."
+	desc = ""
 	icon_state = "chef_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/rank/civilian/head_of_personnel
-	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
+	desc = ""
 	name = "head of personnel's jumpsuit"
 	icon_state = "hop"
 	item_state = "b_suit"
@@ -65,7 +65,7 @@
 
 /obj/item/clothing/under/rank/civilian/head_of_personnel/skirt
 	name = "head of personnel's jumpskirt"
-	desc = "It's a jumpskirt worn by someone who works in the position of \"Head of Personnel\"."
+	desc = ""
 	icon_state = "hop_skirt"
 	item_state = "b_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -74,14 +74,14 @@
 
 /obj/item/clothing/under/rank/civilian/head_of_personnel/suit
 	name = "head of personnel's suit"
-	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
+	desc = ""
 	icon_state = "teal_suit"
 	item_state = "g_suit"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/head_of_personnel/suit/skirt
 	name = "teal suitskirt"
-	desc = "A teal suitskirt and yellow necktie. An authoritative yet tacky ensemble."
+	desc = ""
 	icon_state = "teal_suit_skirt"
 	item_state = "g_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -89,7 +89,7 @@
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/rank/civilian/hydroponics
-	desc = "It's a jumpsuit designed to protect against minor plant-related hazards."
+	desc = ""
 	name = "botanist's jumpsuit"
 	icon_state = "hydroponics"
 	item_state = "g_suit"
@@ -97,7 +97,7 @@
 
 /obj/item/clothing/under/rank/civilian/hydroponics/skirt
 	name = "botanist's jumpskirt"
-	desc = "It's a jumpskirt designed to protect against minor plant-related hazards."
+	desc = ""
 	icon_state = "hydroponics_skirt"
 	item_state = "g_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -105,14 +105,14 @@
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/rank/civilian/janitor
-	desc = "It's the official uniform of the station's janitor. It has minor protection from biohazards."
+	desc = ""
 	name = "janitor's jumpsuit"
 	icon_state = "janitor"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/under/rank/civilian/janitor/skirt
 	name = "janitor's jumpskirt"
-	desc = "It's the official skirt of the station's janitor. It has minor protection from biohazards."
+	desc = ""
 	icon_state = "janitor_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
@@ -120,7 +120,7 @@
 
 /obj/item/clothing/under/rank/civilian/janitor/maid
 	name = "maid uniform"
-	desc = "A simple maid uniform for housekeeping."
+	desc = ""
 	icon_state = "janimaid"
 	item_state = "janimaid"
 	body_parts_covered = CHEST|GROIN
@@ -128,7 +128,7 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/lawyer
-	desc = "Slick threads."
+	desc = ""
 	name = "Lawyer suit"
 	can_adjust = FALSE
 
@@ -186,7 +186,7 @@
 
 /obj/item/clothing/under/rank/civilian/lawyer/bluesuit
 	name = "blue suit"
-	desc = "A classy suit and tie."
+	desc = ""
 	icon_state = "bluesuit"
 	item_state = "b_suit"
 	can_adjust = TRUE
@@ -194,7 +194,7 @@
 
 /obj/item/clothing/under/rank/civilian/lawyer/bluesuit/skirt
 	name = "blue suitskirt"
-	desc = "A classy suitskirt and tie."
+	desc = ""
 	icon_state = "bluesuit_skirt"
 	item_state = "b_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -231,5 +231,5 @@
 
 /obj/item/clothing/under/rank/civilian/cookjorts
 	name = "grilling shorts"
-	desc = "For when all you want in life is to grill for god's sake!"
+	desc = ""
 	icon_state = "cookjorts"

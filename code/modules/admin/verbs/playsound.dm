@@ -32,14 +32,79 @@
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client.prefs.toggles & SOUND_MIDI)
-			var/user_vol = M.client.chatOutput.adminMusicVolume
+			var/user_vol = M.client.prefs.musicvol
 			if(user_vol)
 				admin_sound.volume = vol * (user_vol / 100)
 			SEND_SOUND(M, admin_sound)
-			admin_sound.volume = vol
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/verb/change_music_vol()
+	set category = "Options"
+	set name = "ChangeMusicPower"
+
+	if(prefs)
+/*		if(blacklisted() == 1)
+			var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+			vol = 100
+			prefs.musicvol = vol
+			prefs.save_preferences()
+			mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
+			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
+			mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
+		else*/
+		var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+		if(!vol)
+			if(vol != 0)
+				return
+		vol = min(vol, 100)
+		prefs.musicvol = vol
+		prefs.save_preferences()
+
+		mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
+		mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
+		mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
+
+
+/client/verb/show_rolls()
+	set category = "Options"
+	set name = "ShowRolls"
+
+	if(prefs)
+		prefs.showrolls = !prefs.showrolls
+		prefs.save_preferences()
+		if(prefs.showrolls)
+			to_chat(src, "ShowRolls Enabled")
+		else
+			to_chat(src, "ShowRolls Disabled")
+
+/client/verb/change_master_vol()
+	set category = "Options"
+	set name = "ChangeVolPower"
+
+	if(prefs)
+		var/vol = input(usr, "Current volume power: [prefs.mastervol]",, 100) as null|num
+		if(!vol)
+			if(vol != 0)
+				return
+		vol = min(vol, 100)
+		prefs.mastervol = vol
+		prefs.save_preferences()
+
+		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.mastervol)
+/*
+/client/verb/help_rpguide()
+	set category = "Options"
+	set name = "zHelp-RPGuide"
+
+	src << link("https://cdn.discordapp.com/attachments/844865105040506891/938971395445112922/rpguide.jpg")
+
+/client/verb/help_uihelp()
+	set category = "Options"
+	set name = "zHelp-UIGuide"
+
+	src << link("https://cdn.discordapp.com/attachments/844865105040506891/938275090414579762/unknown.png")
+*/
 
 /client/proc/play_local_sound(S as sound)
 	set category = "Fun"

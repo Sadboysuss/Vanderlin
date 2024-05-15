@@ -11,8 +11,8 @@
 		A.add_fingerprint(user)
 		remove_from_storage(I, get_turf(user))
 		if(!user.put_in_hands(I))
-			to_chat(user, "<span class='notice'>You fumble for [I] and it falls on the floor.</span>")
+			to_chat(user, "<span class='notice'>I fumble for [I] and it falls on the floor.</span>")
 			return
-		user.visible_message("<span class='warning'>[user] draws [I] from [parent]!</span>", "<span class='notice'>You draw [I] from [parent].</span>")
+		user.visible_message("<span class='warning'>[user] draws [I] from [parent]!</span>", "<span class='notice'>I draw [I] from [parent].</span>")
 		return
 	..()

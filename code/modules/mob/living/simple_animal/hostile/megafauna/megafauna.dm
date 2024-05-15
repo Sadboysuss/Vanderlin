@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/megafauna
 	name = "boss of this gym"
-	desc = "Attack the weak point for massive damage."
+	desc = ""
 	health = 1000
 	maxHealth = 1000
 	spacewalk = TRUE
@@ -116,7 +116,7 @@
 		return FALSE
 	visible_message(
 		"<span class='danger'>[src] devours [L]!</span>",
-		"<span class='userdanger'>You feast on [L], restoring your health!</span>")
+		"<span class='danger'>I feast on [L], restoring your health!</span>")
 	if(!is_station_level(z) || client) //NPC monsters won't heal while on station
 		adjustBruteLoss(-L.maxHealth/2)
 	L.gib()

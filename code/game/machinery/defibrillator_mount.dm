@@ -3,7 +3,7 @@
 //Not being adjacent will cause the paddles to snap back
 /obj/machinery/defibrillator_mount
 	name = "defibrillator mount"
-	desc = "Holds and recharges defibrillators. You can grab the paddles if one is mounted."
+	desc = ""
 	icon = 'icons/obj/machines/defib_mount.dmi'
 	icon_state = "defibrillator_mount"
 	density = FALSE
@@ -40,18 +40,18 @@
 
 /obj/machinery/defibrillator_mount/update_overlays()
 	. = ..()
-	
+
 	if(!defib)
 		return
-	
+
 	. += "defib"
-	
+
 	if(defib.powered)
 		. += (defib.safety ? "online" : "emagged")
 		var/ratio = defib.cell.charge / defib.cell.maxcharge
 		ratio = CEILING(ratio * 4, 1) * 25
 		. += "charge[ratio]"
-	
+
 	if(clamps_locked)
 		. += "clamps"
 
@@ -78,8 +78,8 @@
 			to_chat(user, "<span class='warning'>[I] is stuck to your hand!</span>")
 			return
 		user.visible_message("<span class='notice'>[user] hooks up [I] to [src]!</span>", \
-		"<span class='notice'>You press [I] into the mount, and it clicks into place.</span>")
-		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		"<span class='notice'>I press [I] into the mount, and it clicks into place.</span>")
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		defib = I
 		update_icon()
 		return
@@ -90,7 +90,7 @@
 	if(id)
 		if(check_access(id) || GLOB.security_level >= SEC_LEVEL_RED) //anyone can toggle the clamps in red alert!
 			if(!defib)
-				to_chat(user, "<span class='warning'>You can't engage the clamps on a defibrillator that isn't there.</span>")
+				to_chat(user, "<span class='warning'>I can't engage the clamps on a defibrillator that isn't there.</span>")
 				return
 			clamps_locked = !clamps_locked
 			to_chat(user, "<span class='notice'>Clamps [clamps_locked ? "" : "dis"]engaged.</span>")
@@ -109,13 +109,13 @@
 		to_chat(user, "<span class='warning'>[src]'s clamps are disengaged!</span>")
 		return TRUE
 	user.visible_message("<span class='notice'>[user] presses [multitool] into [src]'s ID slot...</span>", \
-	"<span class='notice'>You begin overriding the clamps on [src]...</span>")
-	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+	"<span class='notice'>I begin overriding the clamps on [src]...</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(!do_after(user, 100, target = src) || !clamps_locked)
 		return
 	user.visible_message("<span class='notice'>[user] pulses [multitool], and [src]'s clamps slide up.</span>", \
-	"<span class='notice'>You override the locking clamps on [src]!</span>")
-	playsound(src, 'sound/machines/locktoggle.ogg', 50, TRUE)
+	"<span class='notice'>I override the locking clamps on [src]!</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	clamps_locked = FALSE
 	update_icon()
 	return TRUE
@@ -127,21 +127,21 @@
 		to_chat(user, "<span class='warning'>It'd be hard to remove a defib unit from a mount that has none.</span>")
 		return
 	if(clamps_locked)
-		to_chat(user, "<span class='warning'>You try to tug out [defib], but the mount's clamps are locked tight!</span>")
+		to_chat(user, "<span class='warning'>I try to tug out [defib], but the mount's clamps are locked tight!</span>")
 		return
 	if(!user.put_in_hands(defib))
-		to_chat(user, "<span class='warning'>You need a free hand!</span>")
+		to_chat(user, "<span class='warning'>I need a free hand!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] unhooks [defib] from [src].</span>", \
-	"<span class='notice'>You slide out [defib] from [src] and unhook the charging cables.</span>")
-	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+	"<span class='notice'>I slide out [defib] from [src] and unhook the charging cables.</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	defib = null
 	update_icon()
 
 //wallframe, for attaching the mounts easily
 /obj/item/wallframe/defib_mount
 	name = "unhooked defibrillator mount"
-	desc = "A frame for a defibrillator mount. It can't be removed once it's placed."
+	desc = ""
 	icon = 'icons/obj/machines/defib_mount.dmi'
 	icon_state = "defibrillator_mount"
 	custom_materials = list(/datum/material/iron = 300, /datum/material/glass = 100)

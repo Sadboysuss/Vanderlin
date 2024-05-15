@@ -4,7 +4,7 @@
 	name = "imp"
 	real_name = "imp"
 	unique_name = TRUE
-	desc = "A large, menacing creature covered in armored black scales."
+	desc = ""
 	speak_emote = list("cackles")
 	emote_hear = list("cackles","screeches")
 	response_help_continuous = "thinks better of touching"
@@ -21,7 +21,7 @@
 	a_intent = INTENT_HARM
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attack_sound = 'sound/magic/demon_attack1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 250 //Weak to cold
 	maxbodytemp = INFINITY
@@ -39,11 +39,11 @@
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	del_on_death = TRUE
 	deathmessage = "screams in agony as it sublimates into a sulfurous smoke."
-	deathsound = 'sound/magic/demon_dies.ogg'
+	deathsound = 'sound/blank.ogg'
 	var/boost = 0
 	bloodcrawl = BLOODCRAWL_EAT
 	var/list/consumed_mobs = list()
-	var/playstyle_string = "<span class='big bold'>You are an imp,</span><B> a mischievous creature from hell. You are the lowest rank on the hellish totem pole \
+	var/playstyle_string = "<span class='big bold'>I are an imp,</span><B> a mischievous creature from hell. You are the lowest rank on the hellish totem pole \
 							Though you are not obligated to help, perhaps by aiding a higher ranking devil, you might just get a promotion. However, you are incapable	\
 							of intentionally harming a fellow devil.</B>"
 

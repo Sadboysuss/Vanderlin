@@ -31,7 +31,7 @@
 
 /obj/item/onetankbomb/wrench_act(mob/living/user, obj/item/I)
 	..()
-	to_chat(user, "<span class='notice'>You disassemble [src]!</span>")
+	to_chat(user, "<span class='notice'>I disassemble [src]!</span>")
 	if(bombassembly)
 		bombassembly.forceMove(drop_location())
 		bombassembly.master = null
@@ -65,7 +65,7 @@
 
 /obj/item/onetankbomb/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	audible_message("[icon2html(src, hearers(src))] *beep* *beep* *beep*")
-	playsound(src, 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+	playsound(src, 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 	sleep(10)
 	if(QDELETED(src))
 		return
@@ -136,7 +136,7 @@
 	bomb.update_icon()
 
 	user.put_in_hands(bomb)		//Equips the bomb if possible, or puts it on the floor.
-	to_chat(user, "<span class='notice'>You attach [assembly] to [src].</span>")
+	to_chat(user, "<span class='notice'>I attach [assembly] to [src].</span>")
 	return
 
 /obj/item/tank/proc/ignite()	//This happens when a bomb is told to explode

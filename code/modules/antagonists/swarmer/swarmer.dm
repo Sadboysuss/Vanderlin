@@ -1,14 +1,14 @@
 ////Deactivated swarmer shell////
 /obj/item/deactivated_swarmer
 	name = "deactivated swarmer"
-	desc = "A shell of swarmer that was completely powered down. It can no longer activate itself."
+	desc = ""
 	icon = 'icons/mob/swarmer.dmi'
 	icon_state = "swarmer_unactivated"
 	custom_materials = list(/datum/material/iron=10000, /datum/material/glass=4000)
 
 /obj/effect/mob_spawn/swarmer
 	name = "unactivated swarmer"
-	desc = "A currently unactivated swarmer. Swarmers can self activate at any time, so it would be wise to immediately dispose of this."
+	desc = ""
 	icon = 'icons/mob/swarmer.dmi'
 	icon_state = "swarmer_unactivated"
 	density = FALSE
@@ -19,7 +19,7 @@
 	death = FALSE
 	roundstart = FALSE
 	flavour_text = {"
-	<b>You are a swarmer, a weapon of a long dead civilization. Until further orders from your original masters are received, you must continue to consume and replicate.</b>
+	<b>I are a swarmer, a weapon of a long dead civilization. Until further orders from your original masters are received, you must continue to consume and replicate.</b>
 	<b>Clicking on any object will try to consume it, either deconstructing it into its components, destroying it, or integrating any materials it has into you if successful.</b>
 	<b>Ctrl-Clicking on a mob will attempt to remove it from the area and place it in a safe environment for storage.</b>
 	<b>Objectives:</b>
@@ -32,7 +32,7 @@
 	. = ..()
 	var/area/A = get_area(src)
 	if(A)
-		notify_ghosts("A swarmer shell has been created in [A.name].", 'sound/effects/bin_close.ogg', source = src, action = NOTIFY_ATTACK, flashwindow = FALSE)
+		notify_ghosts("A swarmer shell has been created in [A.name].", 'sound/blank.ogg', source = src, action = NOTIFY_ATTACK, flashwindow = FALSE)
 
 /obj/effect/mob_spawn/swarmer/attack_hand(mob/living/user)
 	. = ..()
@@ -41,10 +41,10 @@
 	to_chat(user, "<span class='notice'>Picking up the swarmer may cause it to activate. You should be careful about this.</span>")
 
 /obj/effect/mob_spawn/swarmer/attackby(obj/item/W, mob/user, params)
-	if(W.tool_behaviour == TOOL_SCREWDRIVER && user.a_intent != INTENT_HARM)
+	if(W.tool_behaviour == TOOL_SCREWDRIVER && user.used_intent.type != INTENT_HARM)
 		user.visible_message("<span class='warning'>[usr.name] deactivates [src].</span>",
 			"<span class='notice'>After some fiddling, you find a way to disable [src]'s power source.</span>",
-			"<span class='hear'>You hear clicking.</span>")
+			"<span class='hear'>I hear clicking.</span>")
 		new /obj/item/deactivated_swarmer(get_turf(src))
 		qdel(src)
 	else
@@ -56,7 +56,7 @@
 	name = "Swarmer"
 	unique_name = 1
 	icon = 'icons/mob/swarmer.dmi'
-	desc = "Robotic constructs of unknown design, swarmers seek only to consume materials and replicate themselves indefinitely."
+	desc = ""
 	speak_emote = list("tones")
 	initial_language_holder = /datum/language_holder/swarmer
 	bubble_icon = "swarmer"
@@ -83,7 +83,7 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	attack_verb_continuous = "shocks"
 	attack_verb_simple = "shock"
-	attack_sound = 'sound/effects/empulse.ogg'
+	attack_sound = 'sound/blank.ogg'
 	friendly_verb_continuous = "pinches"
 	friendly_verb_simple = "pinch"
 	speed = 0
@@ -95,7 +95,7 @@
 	ranged = 1
 	projectiletype = /obj/projectile/beam/disabler
 	ranged_cooldown_time = 20
-	projectilesound = 'sound/weapons/taser2.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/effect/decal/cleanable/robot_debris, /obj/item/stack/ore/bluespace_crystal)
 	del_on_death = 1
 	deathmessage = "explodes with a sharp pop!"
@@ -413,7 +413,7 @@
 	if(resources >= fabrication_cost)
 		resources -= fabrication_cost
 	else
-		to_chat(src, "<span class='warning'>You do not have the necessary resources to fabricate this object.</span>")
+		to_chat(src, "<span class='warning'>I do not have the necessary resources to fabricate this object.</span>")
 		return
 	return new fabrication_object(loc)
 
@@ -479,7 +479,7 @@
 	var/datum/effect_system/spark_spread/S = new
 	S.set_up(4,0,get_turf(target))
 	S.start()
-	playsound(src,'sound/effects/sparks4.ogg',50,TRUE)
+	playsound(src,'sound/blank.ogg',50,TRUE)
 	do_teleport(target, F, 0, channel = TELEPORT_CHANNEL_BLUESPACE)
 
 /mob/living/simple_animal/hostile/swarmer/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
@@ -552,9 +552,9 @@
 /obj/structure/swarmer/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
-			playsound(src, 'sound/weapons/egloves.ogg', 80, TRUE)
+			playsound(src, 'sound/blank.ogg', 80, TRUE)
 		if(BURN)
-			playsound(src, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/swarmer/emp_act()
 	. = ..()
@@ -564,7 +564,7 @@
 
 /obj/structure/swarmer/trap
 	name = "swarmer trap"
-	desc = "A quickly assembled trap that electrifies living beings and overwhelms machine sensors. Will not retain its form if damaged enough."
+	desc = ""
 	icon_state = "trap"
 	max_integrity = 10
 	density = FALSE
@@ -573,7 +573,7 @@
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(!istype(L, /mob/living/simple_animal/hostile/swarmer))
-			playsound(loc,'sound/effects/snap.ogg',50, TRUE, -1)
+			playsound(loc,'sound/blank.ogg',50, TRUE, -1)
 			L.electrocute_act(0, src, 1, flags = SHOCK_NOGLOVES|SHOCK_ILLUSION)
 			if(iscyborg(L))
 				L.Paralyze(100)
@@ -583,7 +583,7 @@
 /mob/living/simple_animal/hostile/swarmer/proc/CreateTrap()
 	set name = "Create trap"
 	set category = "Swarmer"
-	set desc = "Creates a simple trap that will non-lethally electrocute anything that steps on it. Costs 5 resources."
+	set desc = ""
 	if(locate(/obj/structure/swarmer/trap) in loc)
 		to_chat(src, "<span class='warning'>There is already a trap here. Aborting.</span>")
 		return
@@ -593,7 +593,7 @@
 /mob/living/simple_animal/hostile/swarmer/proc/CreateBarricade()
 	set name = "Create barricade"
 	set category = "Swarmer"
-	set desc = "Creates a barricade that will stop anything but swarmers and disabler beams from passing through."
+	set desc = ""
 	if(locate(/obj/structure/swarmer/blockade) in loc)
 		to_chat(src, "<span class='warning'>There is already a blockade here. Aborting.</span>")
 		return
@@ -606,7 +606,7 @@
 
 /obj/structure/swarmer/blockade
 	name = "swarmer blockade"
-	desc = "A quickly assembled energy blockade. Will not retain its form if damaged enough, but disabler beams and swarmers pass right through."
+	desc = ""
 	icon_state = "barricade"
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	max_integrity = 50
@@ -620,7 +620,7 @@
 /mob/living/simple_animal/hostile/swarmer/proc/CreateSwarmer()
 	set name = "Replicate"
 	set category = "Swarmer"
-	set desc = "Creates a shell for a new swarmer. Swarmers will self activate."
+	set desc = ""
 	to_chat(src, "<span class='info'>We are attempting to replicate ourselves. We will need to stand still until the process is complete.</span>")
 	if(resources < 50)
 		to_chat(src, "<span class='warning'>We do not have the resources for this!</span>")
@@ -631,7 +631,7 @@
 	if(do_mob(src, src, 100))
 		var/createtype = SwarmerTypeToCreate()
 		if(createtype && Fabricate(createtype, 50))
-			playsound(loc,'sound/items/poster_being_created.ogg',50, TRUE, -1)
+			playsound(loc,'sound/blank.ogg',50, TRUE, -1)
 
 
 /mob/living/simple_animal/hostile/swarmer/proc/SwarmerTypeToCreate()
@@ -641,7 +641,7 @@
 /mob/living/simple_animal/hostile/swarmer/proc/RepairSelf()
 	set name = "Self Repair"
 	set category = "Swarmer"
-	set desc = "Attempts to repair damage to our body. You will have to remain motionless until repairs are complete."
+	set desc = ""
 	if(!isturf(loc))
 		return
 	to_chat(src, "<span class='info'>Attempting to repair damage to our body, stand by...</span>")

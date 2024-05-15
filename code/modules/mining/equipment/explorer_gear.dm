@@ -1,7 +1,7 @@
 /****************Explorer's Suit and Mask****************/
 /obj/item/clothing/suit/hooded/explorer
 	name = "explorer suit"
-	desc = "An armoured suit for exploring harsh environments."
+	desc = ""
 	icon_state = "explorer"
 	item_state = "explorer"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
@@ -16,7 +16,7 @@
 
 /obj/item/clothing/head/hooded/explorer
 	name = "explorer hood"
-	desc = "An armoured hood for exploring harsh environments."
+	desc = ""
 	icon_state = "explorer"
 	body_parts_covered = HEAD
 	flags_inv = HIDEHAIR|HIDEFACE|HIDEEARS
@@ -35,7 +35,7 @@
 
 /obj/item/clothing/mask/gas/explorer
 	name = "explorer gas mask"
-	desc = "A military-grade gas mask that can be connected to an air supply."
+	desc = ""
 	icon_state = "gas_mining"
 	visor_flags = BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	visor_flags_inv = HIDEFACIALHAIR
@@ -57,7 +57,7 @@
 
 /obj/item/clothing/suit/space/hostile_environment
 	name = "H.E.C.K. suit"
-	desc = "Hostile Environment Cross-Kinetic Suit: A suit designed to withstand the wide variety of hazards from Lavaland. It wasn't enough for its last owner."
+	desc = ""
 	icon_state = "hostile_env"
 	item_state = "hostile_env"
 	clothing_flags = THICKMATERIAL //not spaceproof
@@ -87,7 +87,7 @@
 
 /obj/item/clothing/head/helmet/space/hostile_environment
 	name = "H.E.C.K. helmet"
-	desc = "Hostile Environiment Cross-Kinetic Helmet: A helmet designed to withstand the wide variety of hazards from Lavaland. It wasn't enough for its last owner."
+	desc = ""
 	icon_state = "hostile_env"
 	item_state = "hostile_env"
 	w_class = WEIGHT_CLASS_NORMAL

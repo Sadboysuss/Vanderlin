@@ -1,7 +1,7 @@
 /datum/computer_file/program/nttransfer
 	filename = "nttransfer"
-	filedesc = "P2P Transfer Client"
-	extended_desc = "This program allows for simple file transfer via direct peer to peer connection."
+	filedesc = ""
+	extended_desc = ""
 	program_icon_state = "comm_logs"
 	size = 7
 	requires_ntnet = 1
@@ -71,7 +71,7 @@
 	finalize_download()
 
 //  Crashes the download and displays specific error message
-/datum/computer_file/program/nttransfer/proc/crash_download(var/message)
+/datum/computer_file/program/nttransfer/proc/crash_download(message)
 	error = message ? message : "An unknown error has occurred during download"
 	finalize_download()
 

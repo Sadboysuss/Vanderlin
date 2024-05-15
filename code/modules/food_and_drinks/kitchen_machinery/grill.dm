@@ -2,7 +2,7 @@
 
 /obj/machinery/grill
 	name = "grill"
-	desc = "Just like the old days."
+	desc = ""
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grill_open"
 	density = TRUE
@@ -29,7 +29,7 @@
 	if(istype(I, /obj/item/stack/sheet/mineral/coal) || istype(I, /obj/item/stack/sheet/mineral/wood))
 		var/obj/item/stack/S = I
 		var/stackamount = S.get_amount()
-		to_chat(user, "<span class='notice'>You put [stackamount] [I]s in [src].</span>")
+		to_chat(user, "<span class='notice'>I put [stackamount] [I]s in [src].</span>")
 		if(istype(I, /obj/item/stack/sheet/mineral/coal))
 			grill_fuel += (500 * stackamount)
 		else
@@ -38,7 +38,7 @@
 		update_icon()
 		return
 	if(I.resistance_flags & INDESTRUCTIBLE)
-		to_chat(user, "<span class='warning'>You don't feel it would be wise to grill [I]...</span>")
+		to_chat(user, "<span class='warning'>I don't feel it would be wise to grill [I]...</span>")
 		return ..()
 	if(istype(I, /obj/item/reagent_containers))
 		if(istype(I, /obj/item/reagent_containers/food) && !istype(I, /obj/item/reagent_containers/food/drinks))
@@ -49,14 +49,14 @@
 				return
 			else if(!grilled_item && user.transferItemToLoc(I, src))
 				grilled_item = I
-				to_chat(user, "<span class='notice'>You put the [grilled_item] on [src].</span>")
+				to_chat(user, "<span class='notice'>I put the [grilled_item] on [src].</span>")
 				update_icon()
 				grill_loop.start()
 				return
 		else
 			if(I.reagents.has_reagent(/datum/reagent/consumable/monkey_energy))
 				grill_fuel += (20 * (I.reagents.get_reagent_amount(/datum/reagent/consumable/monkey_energy)))
-				to_chat(user, "<span class='notice'>You pour the Monkey Energy in [src].</span>")
+				to_chat(user, "<span class='notice'>I pour the Monkey Energy in [src].</span>")
 				I.reagents.remove_reagent(/datum/reagent/consumable/monkey_energy, I.reagents.get_reagent_amount(/datum/reagent/consumable/monkey_energy))
 				update_icon()
 				return
@@ -111,7 +111,7 @@
 
 /obj/machinery/grill/attack_hand(mob/user)
 	if(grilled_item)
-		to_chat(user, "<span class='notice'>You take out [grilled_item] from [src].</span>")
+		to_chat(user, "<span class='notice'>I take out [grilled_item] from [src].</span>")
 		grilled_item.forceMove(drop_location())
 		update_icon()
 		return
@@ -121,18 +121,18 @@
 	switch(grill_time) //no 0-9 to prevent spam
 		if(10 to 15)
 			grilled_item.name = "lightly-grilled [grilled_item.name]"
-			grilled_item.desc = "[grilled_item.desc] It's been lightly grilled."
+			grilled_item.desc = ""
 		if(16 to 39)
 			grilled_item.name = "grilled [grilled_item.name]"
-			grilled_item.desc = "[grilled_item.desc] It's been grilled."
+			grilled_item.desc = ""
 			grilled_item.foodtype |= FRIED
 		if(40 to 50)
 			grilled_item.name = "heavily grilled [grilled_item.name]"
-			grilled_item.desc = "[grilled_item.desc] It's been heavily grilled."
+			grilled_item.desc = ""
 			grilled_item.foodtype |= FRIED
 		if(51 to INFINITY) //grill marks reach max alpha
 			grilled_item.name = "Powerfully Grilled [grilled_item.name]"
-			grilled_item.desc = "A [grilled_item.name]. Reminds you of your wife, wait, no, it's prettier!"
+			grilled_item.desc = ""
 			grilled_item.foodtype |= FRIED
 	grill_time = 0
 	grill_loop.stop()

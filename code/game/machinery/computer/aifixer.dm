@@ -1,6 +1,6 @@
 /obj/machinery/computer/aifixer
 	name = "\improper AI system integrity restorer"
-	desc = "Used with intelliCards containing nonfunctional AIs to restore them to working order."
+	desc = ""
 	req_access = list(ACCESS_CAPTAIN, ACCESS_ROBOTICS, ACCESS_HEADS)
 	var/mob/living/silicon/ai/occupier = null
 	var/active = 0
@@ -84,7 +84,7 @@
 		occupier.revive(full_heal = FALSE, admin_revive = FALSE)
 		if(!occupier.radio_enabled)
 			occupier.radio_enabled = TRUE
-			to_chat(occupier, "<span class='warning'>Your Subspace Transceiver has been enabled!</span>")
+			to_chat(occupier, "<span class='warning'>My Subspace Transceiver has been enabled!</span>")
 	return occupier.health < 100
 
 /obj/machinery/computer/aifixer/process()
@@ -101,7 +101,7 @@
 		return
 	if(href_list["fix"])
 		to_chat(usr, "<span class='notice'>Reconstruction in progress. This will take several minutes.</span>")
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 25, FALSE)
+		playsound(src, 'sound/blank.ogg', 25, FALSE)
 		active = TRUE
 		if(occupier)
 			var/mob/living/silicon/ai/A = occupier
@@ -113,7 +113,7 @@
 	. = ..()
 	if(stat & (NOPOWER|BROKEN))
 		return
-	
+
 	if(active)
 		. += "ai-fixer-on"
 	if (occupier)
@@ -137,14 +137,14 @@
 		occupier = AI
 		AI.control_disabled = TRUE
 		AI.radio_enabled = FALSE
-		to_chat(AI, "<span class='alert'>You have been uploaded to a stationary terminal. Sadly, there is no remote access from here.</span>")
+		to_chat(AI, "<span class='alert'>I have been uploaded to a stationary terminal. Sadly, there is no remote access from here.</span>")
 		to_chat(user, "<span class='notice'>Transfer successful</span>: [AI.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed.")
 		card.AI = null
 		update_icon()
 
 	else //Uploading AI from terminal to card
 		if(occupier && !active)
-			to_chat(occupier, "<span class='notice'>You have been downloaded to a mobile storage device. Still no remote access.</span>")
+			to_chat(occupier, "<span class='notice'>I have been downloaded to a mobile storage device. Still no remote access.</span>")
 			to_chat(user, "<span class='notice'>Transfer successful</span>: [occupier.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 			occupier.forceMove(card)
 			card.AI = occupier

@@ -1,7 +1,7 @@
 //An ore-devouring but easily scared creature
 /mob/living/simple_animal/hostile/asteroid/goldgrub
 	name = "goldgrub"
-	desc = "A worm that grows fat from eating everything in its sight. Seems to enjoy precious metals and other shiny things, hence the name."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "Goldgrub"
 	icon_living = "Goldgrub"
@@ -21,7 +21,7 @@
 	melee_damage_upper = 0
 	attack_verb_continuous = "barrels into"
 	attack_verb_simple = "barrel into"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HELP
 	speak_emote = list("screeches")
 	throw_message = "sinks in slowly, before being pushed out of "

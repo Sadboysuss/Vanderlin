@@ -83,12 +83,12 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 	if(href_list["move"])
 		if(!is_station_level(z) && shuttleId == "colony_drop")
-			to_chat(usr, "<span class='warning'>You can't move the base again!</span>")
+			to_chat(usr, "<span class='warning'>I can't move the base again!</span>")
 			return
 		var/shuttle_error = SSshuttle.moveShuttle(shuttleId, href_list["move"], 1)
 		if(launch_warning)
 			say("<span class='danger'>Launch sequence activated! Prepare for drop!!</span>")
-			playsound(loc, 'sound/machines/warning-buzzer.ogg', 70, FALSE)
+			playsound(loc, 'sound/blank.ogg', 70, FALSE)
 			launch_warning = FALSE
 		else if(!shuttle_error)
 			say("Shuttle request uploaded. Please stand away from the doors.")
@@ -188,7 +188,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	desc = "Deploy to designate the landing zone of the auxillary base."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	shuttle_id = "colony_drop"
 	var/setting = FALSE
@@ -198,7 +198,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 	if(setting)
 		return
 
-	to_chat(user, "<span class='notice'>You begin setting the landing zone parameters...</span>")
+	to_chat(user, "<span class='notice'>I begin setting the landing zone parameters...</span>")
 	setting = TRUE
 	if(!do_after(user, 50, target = user)) //You get a few seconds to cancel if you do not want to drop there.
 		setting = FALSE
@@ -230,7 +230,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 /obj/item/assault_pod/mining/unrestricted
 	name = "omni-locational landing field designator"
-	desc = "Allows the deployment of the mining base ANYWHERE. Use with caution."
+	desc = ""
 	no_restrictions = TRUE
 
 
@@ -261,7 +261,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 /obj/structure/mining_shuttle_beacon
 	name = "mining shuttle beacon"
-	desc = "A bluespace beacon calibrated to mark a landing spot for the mining shuttle when deployed near the auxillary mining base."
+	desc = ""
 	anchored = FALSE
 	density = FALSE
 	var/shuttle_ID = "landing_zone_dock"
@@ -361,7 +361,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 	aux_base_console.set_mining_mode() //Lets the colony park the shuttle there, now that it has a dock.
 	to_chat(user, "<span class='notice'>Mining shuttle calibration successful! Shuttle interface available at base console.</span>")
 	anchored = TRUE //Locks in place to mark the landing zone.
-	playsound(loc, 'sound/machines/ping.ogg', 50, FALSE)
+	playsound(loc, 'sound/blank.ogg', 50, FALSE)
 
 /obj/structure/mining_shuttle_beacon/proc/clear_cooldown()
 	anti_spam_cd = 0

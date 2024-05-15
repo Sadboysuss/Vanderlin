@@ -13,7 +13,7 @@
 	if(!user.transferItemToLoc(src, M))
 		to_chat(user, "<span class='warning'>\The [src] is stuck to your hand, you cannot put it in \the [M]!</span>")
 		return FALSE
-	user.visible_message("<span class='notice'>[user] attaches [src] to [M].</span>", "<span class='notice'>You attach [src] to [M].</span>")
+	user.visible_message("<span class='notice'>[user] attaches [src] to [M].</span>", "<span class='notice'>I attach [src] to [M].</span>")
 	return TRUE
 
 /obj/item/mecha_parts/part/try_attach_part(mob/user, obj/mecha/M)
@@ -38,27 +38,27 @@
 
 /obj/item/mecha_parts/part/ripley_torso
 	name = "\improper Ripley torso"
-	desc = "A torso part of Ripley APLU. Contains power unit, processing core and life support systems."
+	desc = ""
 	icon_state = "ripley_harness"
 
 /obj/item/mecha_parts/part/ripley_left_arm
 	name = "\improper Ripley left arm"
-	desc = "A Ripley APLU left arm. Data and power sockets are compatible with most exosuit tools."
+	desc = ""
 	icon_state = "ripley_l_arm"
 
 /obj/item/mecha_parts/part/ripley_right_arm
 	name = "\improper Ripley right arm"
-	desc = "A Ripley APLU right arm. Data and power sockets are compatible with most exosuit tools."
+	desc = ""
 	icon_state = "ripley_r_arm"
 
 /obj/item/mecha_parts/part/ripley_left_leg
 	name = "\improper Ripley left leg"
-	desc = "A Ripley APLU left leg. Contains somewhat complex servodrives and balance maintaining systems."
+	desc = ""
 	icon_state = "ripley_l_leg"
 
 /obj/item/mecha_parts/part/ripley_right_leg
 	name = "\improper Ripley right leg"
-	desc = "A Ripley APLU right leg. Contains somewhat complex servodrives and balance maintaining systems."
+	desc = ""
 	icon_state = "ripley_r_leg"
 
 ///////// Odysseus
@@ -69,7 +69,7 @@
 
 /obj/item/mecha_parts/part/odysseus_head
 	name = "\improper Odysseus head"
-	desc = "An Odysseus head. Contains an integrated medical HUD scanner."
+	desc = ""
 	icon_state = "odysseus_head"
 
 /obj/item/mecha_parts/part/odysseus_torso
@@ -79,22 +79,22 @@
 
 /obj/item/mecha_parts/part/odysseus_left_arm
 	name = "\improper Odysseus left arm"
-	desc = "An Odysseus left arm. Data and power sockets are compatible with specialized medical equipment."
+	desc = ""
 	icon_state = "odysseus_l_arm"
 
 /obj/item/mecha_parts/part/odysseus_right_arm
 	name = "\improper Odysseus right arm"
-	desc = "An Odysseus right arm. Data and power sockets are compatible with specialized medical equipment."
+	desc = ""
 	icon_state = "odysseus_r_arm"
 
 /obj/item/mecha_parts/part/odysseus_left_leg
 	name = "\improper Odysseus left leg"
-	desc = "An Odysseus left leg. Contains complex servodrives and balance maintaining systems to maintain stability for critical patients."
+	desc = ""
 	icon_state = "odysseus_l_leg"
 
 /obj/item/mecha_parts/part/odysseus_right_leg
 	name = "\improper Odysseus right leg"
-	desc = "An odysseus right leg. Contains complex servodrives and balance maintaining systems to maintain stability for critical patients."
+	desc = ""
 	icon_state = "odysseus_r_leg"
 
 ///////// Gygax
@@ -105,38 +105,38 @@
 
 /obj/item/mecha_parts/part/gygax_torso
 	name = "\improper Gygax torso"
-	desc = "A torso part of Gygax. Contains power unit, processing core and life support systems."
+	desc = ""
 	icon_state = "gygax_harness"
 
 /obj/item/mecha_parts/part/gygax_head
 	name = "\improper Gygax head"
-	desc = "A Gygax head. Houses advanced surveillance and targeting sensors."
+	desc = ""
 	icon_state = "gygax_head"
 
 /obj/item/mecha_parts/part/gygax_left_arm
 	name = "\improper Gygax left arm"
-	desc = "A Gygax left arm. Data and power sockets are compatible with most exosuit tools and weapons."
+	desc = ""
 	icon_state = "gygax_l_arm"
 
 /obj/item/mecha_parts/part/gygax_right_arm
 	name = "\improper Gygax right arm"
-	desc = "A Gygax right arm. Data and power sockets are compatible with most exosuit tools and weapons."
+	desc = ""
 	icon_state = "gygax_r_arm"
 
 /obj/item/mecha_parts/part/gygax_left_leg
 	name = "\improper Gygax left leg"
-	desc = "A Gygax left leg. Constructed with advanced servomechanisms and actuators to enable faster speed."
+	desc = ""
 	icon_state = "gygax_l_leg"
 
 /obj/item/mecha_parts/part/gygax_right_leg
 	name = "\improper Gygax right leg"
-	desc = "A Gygax right leg. Constructed with advanced servomechanisms and actuators to enable faster speed."
+	desc = ""
 	icon_state = "gygax_r_leg"
 
 /obj/item/mecha_parts/part/gygax_armor
 	gender = PLURAL
 	name = "\improper Gygax armor plates"
-	desc = "A set of armor plates designed for the Gygax. Designed to effectively deflect damage with a lightweight construction."
+	desc = ""
 	icon_state = "gygax_armor"
 
 
@@ -148,38 +148,38 @@
 
 /obj/item/mecha_parts/part/durand_torso
 	name = "\improper Durand torso"
-	desc = "A torso part of Durand. Contains power unit, processing core and life support systems within a robust protective frame."
+	desc = ""
 	icon_state = "durand_harness"
 
 /obj/item/mecha_parts/part/durand_head
 	name = "\improper Durand head"
-	desc = "A Durand head. Houses advanced surveillance and targeting sensors."
+	desc = ""
 	icon_state = "durand_head"
 
 /obj/item/mecha_parts/part/durand_left_arm
 	name = "\improper Durand left arm"
-	desc = "A Durand left arm. Data and power sockets are compatible with most exosuit tools and weapons. Packs a really mean punch as well."
+	desc = ""
 	icon_state = "durand_l_arm"
 
 /obj/item/mecha_parts/part/durand_right_arm
 	name = "\improper Durand right arm"
-	desc = "A Durand right arm. Data and power sockets are compatible with most exosuit tools and weapons. Packs a really mean punch as well."
+	desc = ""
 	icon_state = "durand_r_arm"
 
 /obj/item/mecha_parts/part/durand_left_leg
 	name = "\improper Durand left leg"
-	desc = "A Durand left leg. Built particularly sturdy to support the Durand's heavy weight and defensive needs."
+	desc = ""
 	icon_state = "durand_l_leg"
 
 /obj/item/mecha_parts/part/durand_right_leg
 	name = "\improper Durand right leg"
-	desc = "A Durand right leg. Built particularly sturdy to support the Durand's heavy weight and defensive needs."
+	desc = ""
 	icon_state = "durand_r_leg"
 
 /obj/item/mecha_parts/part/durand_armor
 	gender = PLURAL
 	name = "\improper Durand armor plates"
-	desc = "A set of armor plates for the Durand. Built heavy to resist an incredible amount of brute force."
+	desc = ""
 	icon_state = "durand_armor"
 
 ////////// Firefighter
@@ -197,32 +197,32 @@
 
 /obj/item/mecha_parts/part/honker_torso
 	name = "\improper H.O.N.K torso"
-	desc = "A torso part of H.O.N.K. Contains chuckle unit, bananium core and honk support systems."
+	desc = ""
 	icon_state = "honker_harness"
 
 /obj/item/mecha_parts/part/honker_head
 	name = "\improper H.O.N.K head"
-	desc = "A H.O.N.K head. Appears to lack a face plate."
+	desc = ""
 	icon_state = "honker_head"
 
 /obj/item/mecha_parts/part/honker_left_arm
 	name = "\improper H.O.N.K left arm"
-	desc = "A H.O.N.K left arm. With unique sockets that accept odd weaponry designed by clown scientists."
+	desc = ""
 	icon_state = "honker_l_arm"
 
 /obj/item/mecha_parts/part/honker_right_arm
 	name = "\improper H.O.N.K right arm"
-	desc = "A H.O.N.K right arm. With unique sockets that accept odd weaponry designed by clown scientists."
+	desc = ""
 	icon_state = "honker_r_arm"
 
 /obj/item/mecha_parts/part/honker_left_leg
 	name = "\improper H.O.N.K left leg"
-	desc = "A H.O.N.K left leg. The foot appears just large enough to fully accommodate a clown shoe."
+	desc = ""
 	icon_state = "honker_l_leg"
 
 /obj/item/mecha_parts/part/honker_right_leg
 	name = "\improper H.O.N.K right leg"
-	desc = "A H.O.N.K right leg. The foot appears just large enough to fully accommodate a clown shoe."
+	desc = ""
 	icon_state = "honker_r_leg"
 
 
@@ -281,7 +281,7 @@
 	force = 5
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 
 /obj/item/circuitboard/mecha/ripley/peripherals

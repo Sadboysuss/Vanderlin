@@ -1,7 +1,7 @@
 //This one's from bay12
 /obj/machinery/vending/robotics
 	name = "\improper Robotech Deluxe"
-	desc = "All the tools you need to create your own robot army."
+	desc = ""
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	req_access = list(ACCESS_ROBOTICS)

@@ -1,6 +1,6 @@
 /obj/machinery/rnd/production/circuit_imprinter
 	name = "circuit imprinter"
-	desc = "Manufactures circuit boards for the construction of machines."
+	desc = ""
 	icon_state = "circuit_imprinter"
 	circuit = /obj/item/circuitboard/machine/circuit_imprinter
 	categories = list(

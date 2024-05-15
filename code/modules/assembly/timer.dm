@@ -1,6 +1,6 @@
 /obj/item/assembly/timer
 	name = "timer"
-	desc = "Used to time things. Works well with contraptions which has to count down. Tick tock."
+	desc = ""
 	icon_state = "timer"
 	custom_materials = list(/datum/material/iron=500, /datum/material/glass=50)
 	attachable = TRUE
@@ -14,7 +14,7 @@
 /obj/item/assembly/timer/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] looks at the timer and decides [user.p_their()] fate! It looks like [user.p_theyre()] going to commit suicide!</span>")
 	activate()//doesnt rely on timer_end to prevent weird metas where one person can control the timer and therefore someone's life. (maybe that should be how it works...)
-	addtimer(CALLBACK(src, .proc/manual_suicide, user), time*10)//kill yourself once the time runs out
+	addtimer(CALLBACK(src, .proc/manual_suicide, user), time*10)//kill myself once the time runs out
 	return MANUAL_SUICIDE
 
 /obj/item/assembly/timer/proc/manual_suicide(mob/living/user)
@@ -61,7 +61,7 @@
 	for(var/CHM in get_hearers_in_view(hearing_range, src))
 		if(ismob(CHM))
 			var/mob/LM = CHM
-			LM.playsound_local(get_turf(src), 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+			LM.playsound_local(get_turf(src), 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 	if(loop)
 		timing = TRUE
 	update_icon()

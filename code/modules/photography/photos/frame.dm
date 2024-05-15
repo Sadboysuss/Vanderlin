@@ -2,7 +2,7 @@
 
 /obj/item/wallframe/picture
 	name = "picture frame"
-	desc = "The perfect showcase for your favorite deathtrap memories."
+	desc = ""
 	icon = 'icons/obj/decals.dmi'
 	custom_materials = null
 	flags_1 = 0
@@ -29,7 +29,7 @@
 	if(contents.len)
 		var/obj/item/I = pick(contents)
 		user.put_in_hands(I)
-		to_chat(user, "<span class='notice'>You carefully remove the photo from \the [src].</span>")
+		to_chat(user, "<span class='notice'>I carefully remove the photo from \the [src].</span>")
 		displayed = null
 		update_icon()
 	return ..()
@@ -61,7 +61,7 @@
 
 /obj/structure/sign/picture_frame
 	name = "picture frame"
-	desc = "Every time you look it makes you laugh."
+	desc = ""
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "frame-empty"
 	var/obj/item/photo/framed
@@ -117,10 +117,10 @@
 
 /obj/structure/sign/picture_frame/attackby(obj/item/I, mob/user, params)
 	if(can_decon && (I.tool_behaviour == TOOL_SCREWDRIVER || I.tool_behaviour == TOOL_WRENCH))
-		to_chat(user, "<span class='notice'>You start unsecuring [name]...</span>")
+		to_chat(user, "<span class='notice'>I start unsecuring [name]...</span>")
 		if(I.use_tool(src, user, 30, volume=50))
-			playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-			to_chat(user, "<span class='notice'>You unsecure [name].</span>")
+			playsound(loc, 'sound/blank.ogg', 50, TRUE)
+			to_chat(user, "<span class='notice'>I unsecure [name].</span>")
 			deconstruct()
 
 	else if(I.tool_behaviour == TOOL_WIRECUTTER && framed)

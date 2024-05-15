@@ -10,7 +10,7 @@
 
 /obj/item/geiger_counter //DISCLAIMER: I know nothing about how real-life Geiger counters work. This will not be realistic. ~Xhuis
 	name = "\improper Geiger counter"
-	desc = "A handheld device used for detecting and measuring radiation pulses."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "geiger_off"
 	item_state = "multitool"
@@ -133,12 +133,12 @@
 
 /obj/item/geiger_counter/afterattack(atom/target, mob/user)
 	. = ..()
-	if(user.a_intent == INTENT_HELP)
+	if(user.used_intent.type == INTENT_HELP)
 		if(!(obj_flags & EMAGGED))
-			user.visible_message("<span class='notice'>[user] scans [target] with [src].</span>", "<span class='notice'>You scan [target]'s radiation levels with [src]...</span>")
+			user.visible_message("<span class='notice'>[user] scans [target] with [src].</span>", "<span class='notice'>I scan [target]'s radiation levels with [src]...</span>")
 			addtimer(CALLBACK(src, .proc/scan, target, user), 20, TIMER_UNIQUE) // Let's not have spamming GetAllContents
 		else
-			user.visible_message("<span class='notice'>[user] scans [target] with [src].</span>", "<span class='danger'>You project [src]'s stored radiation into [target]!</span>")
+			user.visible_message("<span class='notice'>[user] scans [target] with [src].</span>", "<span class='danger'>I project [src]'s stored radiation into [target]!</span>")
 			target.rad_act(radiation_count)
 			radiation_count = 0
 		return TRUE
@@ -170,10 +170,10 @@
 		if(scanning)
 			to_chat(user, "<span class='warning'>Turn off [src] before you perform this action!</span>")
 			return 0
-		user.visible_message("<span class='notice'>[user] unscrews [src]'s maintenance panel and begins fiddling with its innards...</span>", "<span class='notice'>You begin resetting [src]...</span>")
+		user.visible_message("<span class='notice'>[user] unscrews [src]'s maintenance panel and begins fiddling with its innards...</span>", "<span class='notice'>I begin resetting [src]...</span>")
 		if(!I.use_tool(src, user, 40, volume=50))
 			return 0
-		user.visible_message("<span class='notice'>[user] refastens [src]'s maintenance panel!</span>", "<span class='notice'>You reset [src] to its factory settings!</span>")
+		user.visible_message("<span class='notice'>[user] refastens [src]'s maintenance panel!</span>", "<span class='notice'>I reset [src] to its factory settings!</span>")
 		obj_flags &= ~EMAGGED
 		radiation_count = 0
 		update_icon()
@@ -188,7 +188,7 @@
 		to_chat(usr, "<span class='warning'>[src] must be on to reset its radiation level!</span>")
 		return 0
 	radiation_count = 0
-	to_chat(usr, "<span class='notice'>You flush [src]'s radiation counts, resetting it to normal.</span>")
+	to_chat(usr, "<span class='notice'>I flush [src]'s radiation counts, resetting it to normal.</span>")
 	update_icon()
 
 /obj/item/geiger_counter/emag_act(mob/user)
@@ -197,7 +197,7 @@
 	if(scanning)
 		to_chat(user, "<span class='warning'>Turn off [src] before you perform this action!</span>")
 		return 0
-	to_chat(user, "<span class='warning'>You override [src]'s radiation storing protocols. It will now generate small doses of radiation, and stored rads are now projected into creatures you scan.</span>")
+	to_chat(user, "<span class='warning'>I override [src]'s radiation storing protocols. It will now generate small doses of radiation, and stored rads are now projected into creatures you scan.</span>")
 	obj_flags |= EMAGGED
 
 

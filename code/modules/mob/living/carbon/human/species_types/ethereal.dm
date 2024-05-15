@@ -4,8 +4,8 @@
 	name = "Ethereal"
 	id = "ethereal"
 	attack_verb = "burn"
-	attack_sound = 'sound/weapons/etherealhit.ogg'
-	miss_sound = 'sound/weapons/etherealmiss.ogg'
+	attack_sound = 'sound/blank.ogg'
+	miss_sound = 'sound/blank.ogg'
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/ethereal
 	mutantstomach = /obj/item/organ/stomach/ethereal
 	exotic_blood = /datum/reagent/consumable/liquidelectricity //Liquid Electricity. fuck you think of something better gamer
@@ -72,7 +72,7 @@
 /datum/species/ethereal/proc/on_emp_act(mob/living/carbon/human/H, severity)
 	EMPeffect = TRUE
 	spec_updatehealth(H)
-	to_chat(H, "<span class='notice'>You feel the light of your body leave you.</span>")
+	to_chat(H, "<span class='notice'>I feel the light of your body leave you.</span>")
 	switch(severity)
 		if(EMP_LIGHT)
 			addtimer(CALLBACK(src, .proc/stop_emp, H), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE) //We're out for 10 seconds
@@ -84,7 +84,7 @@
 		return
 	emageffect = TRUE
 	if(user)
-		to_chat(user, "<span class='notice'>You tap [H] on the back with your card.</span>")
+		to_chat(user, "<span class='notice'>I tap [H] on the back with your card.</span>")
 	H.visible_message("<span class='danger'>[H] starts flickering in an array of colors!</span>")
 	handle_emag(H)
 	addtimer(CALLBACK(src, .proc/stop_emag, H), 30 SECONDS) //Disco mode for 30 seconds! This doesn't affect the ethereal at all besides either annoying some players, or making someone look badass.
@@ -98,7 +98,7 @@
 /datum/species/ethereal/proc/stop_emp(mob/living/carbon/human/H)
 	EMPeffect = FALSE
 	spec_updatehealth(H)
-	to_chat(H, "<span class='notice'>You feel more energized as your shine comes back.</span>")
+	to_chat(H, "<span class='notice'>I feel more energized as your shine comes back.</span>")
 
 
 /datum/species/ethereal/proc/handle_emag(mob/living/carbon/human/H)

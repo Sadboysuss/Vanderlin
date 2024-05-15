@@ -31,17 +31,17 @@
 	if(..())	//To allow surgery to return properly.
 		return
 
-	switch(M.a_intent)
-		if("help")
+	switch(M.used_intent.type)
+		if(INTENT_HELP)
 			help_shake_act(M)
-		if("grab")
+		if(INTENT_GRAB)
 			grabbedby(M)
-		if("harm")
+		if(INTENT_HARM)
 			M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
 			if (prob(75))
 				visible_message("<span class='danger'>[M] punches [name]!</span>", \
-								"<span class='userdanger'>[M] punches you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
-				to_chat(M, "<span class='danger'>You punch [name]!</span>")
+								"<span class='danger'>[M] punches you!</span>", "<span class='hear'>I hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
+				to_chat(M, "<span class='danger'>I punch [name]!</span>")
 
 				playsound(loc, "punch", 25, TRUE, -1)
 				var/damage = rand(5, 10)
@@ -50,8 +50,8 @@
 					if(AmountUnconscious() < 100 && health > 0)
 						Unconscious(rand(200, 300))
 						visible_message("<span class='danger'>[M] knocks [name] out!</span>", \
-										"<span class='userdanger'>[M] knocks you out!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", 5, M)
-						to_chat(M, "<span class='danger'>You knock [name] out!</span>")
+										"<span class='danger'>[M] knocks you out!</span>", "<span class='hear'>I hear a sickening sound of flesh hitting flesh!</span>", 5, M)
+						to_chat(M, "<span class='danger'>I knock [name] out!</span>")
 				var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
 				if(!affecting)
 					affecting = get_bodypart(BODY_ZONE_CHEST)
@@ -59,43 +59,43 @@
 				log_combat(M, src, "attacked")
 
 			else
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 				visible_message("<span class='danger'>[M]'s punch misses [name]!</span>", \
-								"<span class='danger'>You avoid [M]'s punch!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
-				to_chat(M, "<span class='warning'>Your punch misses [name]!</span>")
-		if("disarm")
+								"<span class='danger'>I avoid [M]'s punch!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
+				to_chat(M, "<span class='warning'>My punch misses [name]!</span>")
+		if(INTENT_DISARM)
 			if(!IsUnconscious())
 				M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 				if (prob(25))
 					Paralyze(40)
-					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+					playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 					log_combat(M, src, "pushed")
 					visible_message("<span class='danger'>[M] pushes [src] down!</span>", \
-									"<span class='userdanger'>[M] pushes you down!</span>", "<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", null, M)
-					to_chat(M, "<span class='danger'>You push [src] down!</span>")
+									"<span class='danger'>[M] pushes you down!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", null, M)
+					to_chat(M, "<span class='danger'>I push [src] down!</span>")
 				else if(dropItemToGround(get_active_held_item()))
-					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+					playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 					visible_message("<span class='danger'>[M] disarms [src]!</span>", \
-									"<span class='userdanger'>[M] disarms you!</span>", "<span class='hear'>You hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='danger'>You disarm [src]!</span>")
+									"<span class='danger'>[M] disarms you!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, M)
+					to_chat(M, "<span class='danger'>I disarm [src]!</span>")
 
 /mob/living/carbon/monkey/attack_alien(mob/living/carbon/alien/humanoid/M)
 	if(..()) //if harm or disarm intent.
-		if (M.a_intent == INTENT_HARM)
+		if (M.used_intent.type == INTENT_HARM)
 			if ((prob(95) && health > 0))
-				playsound(loc, 'sound/weapons/slice.ogg', 25, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 				var/damage = rand(15, 30)
 				if (damage >= 25)
 					damage = rand(20, 40)
 					if(AmountUnconscious() < 300)
 						Unconscious(rand(200, 300))
 					visible_message("<span class='danger'>[M] wounds [name]!</span>", \
-									"<span class='userdanger'>[M] wounds you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='danger'>You wound [name]!</span>")
+									"<span class='danger'>[M] wounds you!</span>", "<span class='hear'>I hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
+					to_chat(M, "<span class='danger'>I wound [name]!</span>")
 				else
 					visible_message("<span class='danger'>[M] slashes [name]!</span>", \
-									"<span class='userdanger'>[M] slashes you!</span>", "<span class='hear'>You hear a sickening sound of a slice!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='danger'>You slash [name]!</span>")
+									"<span class='danger'>[M] slashes you!</span>", "<span class='hear'>I hear a sickening sound of a slice!</span>", COMBAT_MESSAGE_RANGE, M)
+					to_chat(M, "<span class='danger'>I slash [name]!</span>")
 
 				var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
 				log_combat(M, src, "attacked")
@@ -106,25 +106,25 @@
 				apply_damage(damage, BRUTE, affecting)
 
 			else
-				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 				visible_message("<span class='danger'>[M]'s lunge misses [name]!</span>", \
-								"<span class='danger'>You avoid [M]'s lunge!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
-				to_chat(M, "<span class='warning'>Your lunge misses [name]!</span>")
+								"<span class='danger'>I avoid [M]'s lunge!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
+				to_chat(M, "<span class='warning'>My lunge misses [name]!</span>")
 
-		if (M.a_intent == INTENT_DISARM)
+		if (M.used_intent.type == INTENT_DISARM)
 			var/obj/item/I = null
-			playsound(loc, 'sound/weapons/pierce.ogg', 25, TRUE, -1)
+			playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 			if(prob(95))
 				Paralyze(20)
 				visible_message("<span class='danger'>[M] tackles [name] down!</span>", \
-								"<span class='userdanger'>[M] tackles you down!</span>", "<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, M)
-				to_chat(M, "<span class='danger'>You tackle [name] down!</span>")
+								"<span class='danger'>[M] tackles you down!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, M)
+				to_chat(M, "<span class='danger'>I tackle [name] down!</span>")
 			else
 				I = get_active_held_item()
 				if(dropItemToGround(I))
 					visible_message("<span class='danger'>[M] disarms [name]!</span>", \
-									"<span class='userdanger'>[M] disarms you!</span>", "<span class='hear'>You hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='danger'>You disarm [name]!</span>")
+									"<span class='danger'>[M] disarms you!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, M)
+					to_chat(M, "<span class='danger'>I disarm [name]!</span>")
 				else
 					I = null
 			log_combat(M, src, "disarmed", "[I ? " removing \the [I]" : ""]")
@@ -163,13 +163,13 @@
 			if(!(wear_mask.resistance_flags & UNACIDABLE))
 				wear_mask.acid_act(acidpwr, acid_volume)
 			else
-				to_chat(src, "<span class='warning'>Your mask protects you from the acid.</span>")
+				to_chat(src, "<span class='warning'>My mask protects you from the acid.</span>")
 			return
 		if(head)
 			if(!(head.resistance_flags & UNACIDABLE))
 				head.acid_act(acidpwr, acid_volume)
 			else
-				to_chat(src, "<span class='warning'>Your hat protects you from the acid.</span>")
+				to_chat(src, "<span class='warning'>My hat protects you from the acid.</span>")
 			return
 	take_bodypart_damage(acidpwr * min(0.6, acid_volume*0.1))
 

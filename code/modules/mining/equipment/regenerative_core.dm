@@ -3,7 +3,7 @@
 	name = "stabilizing serum"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle19"
-	desc = "Inject certain types of monster organs with this stabilizer to preserve their healing powers indefinitely."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/hivelordstabilizer/afterattack(obj/item/organ/M, mob/user, proximity)
@@ -16,13 +16,13 @@
 		return ..()
 
 	C.preserved()
-	to_chat(user, "<span class='notice'>You inject the [M] with the stabilizer. It will no longer go inert.</span>")
+	to_chat(user, "<span class='notice'>I inject the [M] with the stabilizer. It will no longer go inert.</span>")
 	qdel(src)
 
 /************************Hivelord core*******************/
 /obj/item/organ/regenerative_core
 	name = "regenerative core"
-	desc = "All that remains of a hivelord. It can be used to help keep your body going, but it will rapidly decay into uselessness."
+	desc = ""
 	icon_state = "roro core 2"
 	item_flags = NOBLUDGEON
 	slot = ORGAN_SLOT_REGENERATIVE_CORE
@@ -43,7 +43,7 @@
 	inert = FALSE
 	preserved = TRUE
 	update_icon()
-	desc = "All that remains of a hivelord. It is preserved, allowing you to use it to heal completely without danger of decay."
+	desc = ""
 	if(implanted)
 		SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "implanted"))
 	else
@@ -52,7 +52,7 @@
 /obj/item/organ/regenerative_core/proc/go_inert()
 	inert = TRUE
 	name = "decayed regenerative core"
-	desc = "All that remains of a hivelord. It has decayed, and is completely useless."
+	desc = ""
 	SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "inert"))
 	update_icon()
 
@@ -83,7 +83,7 @@
 				H.visible_message("<span class='notice'>[user] forces [H] to apply [src]... Black tendrils entangle and reinforce [H.p_them()]!</span>")
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "other"))
 			else
-				to_chat(user, "<span class='notice'>You start to smear [src] on yourself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?</span>")
+				to_chat(user, "<span class='notice'>I start to smear [src] on myself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?</span>")
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "self"))
 			H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "core", /datum/mood_event/healsbadman) //Now THIS is a miner buff (fixed - nerf)
@@ -115,7 +115,7 @@
 
 /*************************Legion core********************/
 /obj/item/organ/regenerative_core/legion
-	desc = "A strange rock that crackles with power. It can be used to heal completely, but it will rapidly decay into uselessness."
+	desc = ""
 	icon_state = "legion_soul"
 
 /obj/item/organ/regenerative_core/legion/Initialize()
@@ -133,8 +133,8 @@
 
 /obj/item/organ/regenerative_core/legion/go_inert()
 	..()
-	desc = "[src] has become inert. It has decayed, and is completely useless."
+	desc = ""
 
 /obj/item/organ/regenerative_core/legion/preserved(implanted = 0)
 	..()
-	desc = "[src] has been stabilized. It is preserved, allowing you to use it to heal completely without danger of decay."
+	desc = ""

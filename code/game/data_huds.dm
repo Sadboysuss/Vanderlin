@@ -25,7 +25,7 @@
 /datum/atom_hud/data/human/medical/basic/proc/check_sensors(mob/living/carbon/human/H)
 	if(!istype(H))
 		return 0
-	var/obj/item/clothing/under/U = H.w_uniform
+	var/obj/item/clothing/under/U = H.wear_pants
 	if(!istype(U))
 		return 0
 	if(U.sensor_mode <= SENSOR_VITALS)
@@ -224,8 +224,8 @@
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
 	holder.icon_state = "hudno_id"
-	if(wear_id?.GetID())
-		holder.icon_state = "hud[ckey(wear_id.GetJobName())]"
+	if(wear_ring?.GetID())
+		holder.icon_state = "hud[ckey(wear_ring.GetJobName())]"
 	sec_hud_set_security_status()
 
 /mob/living/proc/sec_hud_set_implants()

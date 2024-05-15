@@ -2,7 +2,7 @@
 //Currently works for head and hands.
 /obj/item/clothing/head/mob_holder
 	name = "bugged mob"
-	desc = "Yell at coderbrush."
+	desc = ""
 	icon = null
 	icon_state = ""
 	item_flags = DROPDEL
@@ -74,7 +74,7 @@
 	if(!isdrone(L))
 		qdel(src)
 	name = "drone (hiding)"
-	desc = "This drone is scared and has curled up into a ball!"
+	desc = ""
 
 /obj/item/clothing/head/mob_holder/drone/update_visuals(mob/living/L)
 	var/mob/living/simple_animal/drone/D = L

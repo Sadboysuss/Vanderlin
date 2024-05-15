@@ -1,6 +1,6 @@
 /datum/action/changeling/biodegrade
 	name = "Biodegrade"
-	desc = "Dissolves restraints or other objects preventing free movement. Costs 30 chemicals."
+	desc = ""
 	helptext = "This is obvious to nearby people, and can destroy standard restraints and closets."
 	button_icon_state = "biodegrade"
 	chemical_cost = 30 //High cost to prevent spam
@@ -23,8 +23,8 @@
 		addtimer(CALLBACK(src, .proc/dissolve_handcuffs, user, O), 30)
 		used = TRUE
 
-	if(user.wear_suit && user.wear_suit.breakouttime && !used)
-		var/obj/item/clothing/suit/S = user.get_item_by_slot(SLOT_WEAR_SUIT)
+	if(user.wear_armor && user.wear_armor.breakouttime && !used)
+		var/obj/item/clothing/suit/S = user.get_item_by_slot(SLOT_ARMOR)
 		if(!istype(S))
 			return 0
 		user.visible_message("<span class='warning'>[user] vomits a glob of acid across the front of [user.p_their()] [S]!</span>", \
@@ -60,7 +60,7 @@
 		qdel(O)
 
 /datum/action/changeling/biodegrade/proc/dissolve_straightjacket(mob/living/carbon/human/user, obj/S)
-	if(S && user.wear_suit == S)
+	if(S && user.wear_armor == S)
 		user.visible_message("<span class='warning'>[S] dissolves into a puddle of sizzling goop.</span>")
 		new /obj/effect/decal/cleanable/greenglow(S.drop_location())
 		qdel(S)

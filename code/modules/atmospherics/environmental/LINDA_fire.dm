@@ -5,11 +5,12 @@
 
 
 
-/turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+/turf/proc/hotspot_expose(added, maxstacks, soh = 0)
 	return
 
 
-/turf/open/hotspot_expose(exposed_temperature, exposed_volume, soh)
+/turf/open/hotspot_expose(added, maxstacks, soh)
+	return
 	var/list/air_gases = air?.gases
 	if(!air_gases)
 		return
@@ -25,15 +26,15 @@
 	if(active_hotspot)
 		if(soh)
 			if(tox > 0.5 || trit > 0.5)
-				if(active_hotspot.temperature < exposed_temperature)
-					active_hotspot.temperature = exposed_temperature
-				if(active_hotspot.volume < exposed_volume)
-					active_hotspot.volume = exposed_volume
+				if(active_hotspot.temperature < added)
+					active_hotspot.temperature = added
+				if(active_hotspot.volume < maxstacks)
+					active_hotspot.volume = maxstacks
 		return
 
-	if((exposed_temperature > PLASMA_MINIMUM_BURN_TEMPERATURE) && (tox > 0.5 || trit > 0.5))
+	if((added > PLASMA_MINIMUM_BURN_TEMPERATURE) && (tox > 0.5 || trit > 0.5))
 
-		active_hotspot = new /obj/effect/hotspot(src, exposed_volume*25, exposed_temperature)
+		active_hotspot = new /obj/effect/hotspot(src, maxstacks*25, added)
 
 		active_hotspot.just_spawned = (current_cycle < SSair.times_fired)
 			//remove just_spawned protection if no longer processing this cell
@@ -55,6 +56,13 @@
 	var/just_spawned = TRUE
 	var/bypassing = FALSE
 	var/visual_update_tick = 0
+	var/life = 20
+	var/firelevel = 1 //RTD new firehotspot mechanics
+
+//obj/effect/hotspot/extinguish() handled in other_reagents
+//	if(isturf(loc))
+//		new /obj/effect/temp_visual/small_smoke(src.loc)
+//	qdel(src)
 
 /obj/effect/hotspot/Initialize(mapload, starting_volume, starting_temperature)
 	. = ..()
@@ -66,8 +74,10 @@
 	perform_exposure()
 	setDir(pick(GLOB.cardinals))
 	air_update_turf()
+	addtimer(CALLBACK(src, .proc/trigger_weather), rand(5,20))
 
 /obj/effect/hotspot/proc/perform_exposure()
+
 	var/turf/open/location = loc
 	if(!istype(location) || !(location.air))
 		return
@@ -91,7 +101,7 @@
 	for(var/A in location)
 		var/atom/AT = A
 		if(!QDELETED(AT) && AT != src) // It's possible that the item is deleted in temperature_expose
-			AT.fire_act(temperature, volume)
+			AT.fire_act(3, 20)
 	return
 
 /obj/effect/hotspot/proc/gauss_lerp(x, x1, x2)
@@ -163,6 +173,17 @@
 		qdel(src)
 		return
 
+	icon_state = "[rand(1,3)]"
+
+	life--
+
+	if(life <= 0)
+		qdel(src)
+		return
+
+	perform_exposure()
+	return
+
 	if(location.excited_group)
 		location.excited_group.reset_cooldowns()
 
@@ -178,7 +199,7 @@
 		qdel(src)
 		return
 
-	perform_exposure()
+//	perform_exposure()
 
 	if(bypassing)
 		icon_state = "3"
@@ -198,8 +219,8 @@
 		else
 			icon_state = "1"
 
-	if((visual_update_tick++ % 7) == 0)
-		update_color()
+//	if((visual_update_tick++ % 7) == 0)
+//		update_color()
 
 	if(temperature > location.max_fire_temperature_sustained)
 		location.max_fire_temperature_sustained = temperature
@@ -236,7 +257,7 @@
 	..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		L.fire_act(temperature, volume)
+		L.fire_act(3, 20)
 
 /obj/effect/hotspot/singularity_pull()
 	return

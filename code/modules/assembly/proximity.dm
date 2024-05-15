@@ -1,6 +1,6 @@
 /obj/item/assembly/prox_sensor
 	name = "proximity sensor"
-	desc = "Used for scanning and alerting when someone enters a certain proximity."
+	desc = ""
 	icon_state = "prox"
 	custom_materials = list(/datum/material/iron=800, /datum/material/glass=200)
 	attachable = TRUE
@@ -71,7 +71,7 @@
 	for(var/CHM in get_hearers_in_view(hearing_range, src))
 		if(ismob(CHM))
 			var/mob/LM = CHM
-			LM.playsound_local(get_turf(src), 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+			LM.playsound_local(get_turf(src), 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 	next_activate = world.time + 30
 	return TRUE
 

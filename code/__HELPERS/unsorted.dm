@@ -296,14 +296,14 @@ Turf and target are separate in case you want to teleport some distance from a t
 	return .
 
 //Returns a list of all items of interest with their name
-/proc/getpois(mobs_only=0,skip_mindless=0)
+/proc/getpois(mobs_only=0,skip_mindless=0,team=null)
 	var/list/mobs = sortmobs()
 	var/list/namecounts = list()
 	var/list/pois = list()
 	for(var/mob/M in mobs)
-		if(skip_mindless && (!M.mind && !M.ckey))
-			if(!isbot(M) && !iscameramob(M) && !ismegafauna(M))
-				continue
+		if(skip_mindless && (!M.mind || !M.ckey))
+//			if(!isbot(M) && !iscameramob(M) && !ismegafauna(M))
+			continue
 		if(M.client && M.client.holder && M.client.holder.fakekey) //stealthmins
 			continue
 		var/name = avoid_assoc_duplicate_keys(M.name, namecounts)
@@ -311,10 +311,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		if(M.real_name && M.real_name != M.name)
 			name += " \[[M.real_name]\]"
 		if(M.stat == DEAD)
-			if(isobserver(M))
+			continue
+/*			if(isobserver(M))
 				name += " \[ghost\]"
 			else
-				name += " \[dead\]"
+				name += " \[dead\]"*/
 		pois[name] = M
 
 	if(!mobs_only)
@@ -454,20 +455,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-#if DM_VERSION > 513
-#warn 513 is definitely stable now, remove this
-#endif
-#if DM_VERSION < 513
-/proc/arctan(x)
-	var/y=arcsin(x/sqrt(1+x*x))
-	return y
-#endif
-
 /*
 	Gets all contents of contents and returns them all in a list.
 */
 
-/atom/proc/GetAllContents(var/T)
+/atom/proc/GetAllContents(T)
 	var/list/processing_list = list(src)
 	var/list/assembled = list()
 	if(T)
@@ -538,6 +530,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		if(A.density && A.anchored)
 			return 1
 	return 0
+
+/proc/type2area(type)
+	for(var/area/A in world)
+		if(A.type == type)
+			return A
 
 /proc/get_step_towards2(atom/ref , atom/trg)
 	var/base_dir = get_dir(ref, get_step_towards(ref,trg))
@@ -680,6 +677,66 @@ Turf and target are separate in case you want to teleport some distance from a t
 		return "left foot"
 	else if (zone == BODY_ZONE_PRECISE_R_FOOT)
 		return "right foot"
+	else if (zone == BODY_ZONE_PRECISE_NECK)
+		return "throat"
+	else if (zone == BODY_ZONE_PRECISE_GROIN)
+		return "groin"
+	else if (zone == BODY_ZONE_PRECISE_EARS)	//we want the chatlog to say 'grabbed his ear' not 'grabbed his ears' etc
+		return "ear"
+	else if (zone == BODY_ZONE_PRECISE_R_EYE)
+		return "eyes"
+	else if (zone == BODY_ZONE_PRECISE_L_EYE)
+		return "eyes"
+	else if (zone == BODY_ZONE_PRECISE_NOSE)
+		return "nose"
+	else if (zone == BODY_ZONE_R_INHAND)
+		return "right hand"
+	else if (zone == BODY_ZONE_L_INHAND)
+		return "left hand"
+	else if (zone == BODY_ZONE_PRECISE_HAIR)
+		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_MOUTH)
+		return "mouth"
+	else
+		return zone
+
+/mob/living/carbon/proc/parse_zone(zone, mob/living/target)
+	if(zone == BODY_ZONE_PRECISE_R_HAND)
+		return "right hand"
+	else if (zone == BODY_ZONE_PRECISE_L_HAND)
+		return "left hand"
+	else if (zone == BODY_ZONE_L_ARM)
+		return "left arm"
+	else if (zone == BODY_ZONE_R_ARM)
+		return "right arm"
+	else if (zone == BODY_ZONE_L_LEG)
+		return "left leg"
+	else if (zone == BODY_ZONE_R_LEG)
+		return "right leg"
+	else if (zone == BODY_ZONE_PRECISE_L_FOOT)
+		return "left foot"
+	else if (zone == BODY_ZONE_PRECISE_R_FOOT)
+		return "right foot"
+	else if (zone == BODY_ZONE_PRECISE_NECK)
+		return "throat"
+	else if (zone == BODY_ZONE_PRECISE_GROIN)
+		return "groin"
+	else if (zone == BODY_ZONE_PRECISE_EARS)	//we want the chatlog to say 'grabbed his ear' not 'grabbed his ears' etc
+		return "ear"
+	else if (zone == BODY_ZONE_PRECISE_R_EYE)
+		return "right eye"
+	else if (zone == BODY_ZONE_PRECISE_L_EYE)
+		return "left eye"
+	else if (zone == BODY_ZONE_PRECISE_NOSE)
+		return "nose"
+	else if (zone == BODY_ZONE_R_INHAND)
+		return parse_inhand(zone)
+	else if (zone == BODY_ZONE_L_INHAND)
+		return parse_inhand(zone)
+	else if (zone == BODY_ZONE_PRECISE_HAIR)
+		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_MOUTH)
+		return "mouth"
 	else
 		return zone
 
@@ -861,7 +918,7 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 			return "white"
 
 /proc/params2turf(scr_loc, turf/origin, client/C)
-	if(!scr_loc)
+	if(!scr_loc || !origin)
 		return null
 	var/tX = splittext(scr_loc, ",")
 	var/tY = splittext(tX[2], ":")
@@ -942,7 +999,7 @@ B --><-- A
 // eg: center_image(I, 32,32)
 // eg2: center_image(I, 96,96)
 
-/proc/center_image(var/image/I, x_dimension = 0, y_dimension = 0)
+/proc/center_image(image/I, x_dimension = 0, y_dimension = 0)
 	if(!I)
 		return
 
@@ -1099,7 +1156,7 @@ B --><-- A
 
 	return L
 
-/atom/proc/contains(var/atom/A)
+/atom/proc/contains(atom/A)
 	if(!A)
 		return 0
 	for(var/atom/location = A.loc, location, location = location.loc)
@@ -1252,7 +1309,7 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 	pixel_x = initialpixelx
 	pixel_y = initialpixely
 
-/proc/weightclass2text(var/w_class)
+/proc/weightclass2text(w_class)
 	switch(w_class)
 		if(WEIGHT_CLASS_TINY)
 			. = "tiny"
@@ -1570,7 +1627,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	for(var/i in L)
 		if(condition.Invoke(i))
 			. |= i
-/proc/generate_items_inside(list/items_list,var/where_to)
+/proc/generate_items_inside(list/items_list,where_to)
 	for(var/each_item in items_list)
 		for(var/i in 1 to items_list[each_item])
 			new each_item(where_to)
@@ -1655,3 +1712,14 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			return "."
 		if(189)
 			return "-"
+
+
+// Roguetown
+
+/proc/minone(input)
+	if(!input)
+		return FALSE
+	if(input > 0)
+		return input
+	else
+		return 1

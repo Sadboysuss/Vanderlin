@@ -1,26 +1,26 @@
 /obj/machinery/computer/shuttle/white_ship
 	name = "White Ship Console"
-	desc = "Used to control the White Ship."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/white_ship
 	shuttleId = "whiteship"
 	possible_destinations = "whiteship_away;whiteship_home;whiteship_z4;whiteship_lavaland;whiteship_custom"
 
 /obj/machinery/computer/shuttle/white_ship/pod
 	name = "Salvage Pod Console"
-	desc = "Used to control the Salvage Pod."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/white_ship/pod
 	shuttleId = "whiteship_pod"
 	possible_destinations = "whiteship_pod_home;whiteship_pod_custom"
 
 /obj/machinery/computer/shuttle/white_ship/pod/recall
 	name = "Salvage Pod Recall Console"
-	desc = "Used to recall the Salvage Pod."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/white_ship/pod/recall
 	possible_destinations = "whiteship_pod_home"
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/whiteship
 	name = "White Ship Navigation Computer"
-	desc = "Used to designate a precise transit location for the White Ship."
+	desc = ""
 	shuttleId = "whiteship"
 	lock_override = NONE
 	shuttlePortId = "whiteship_custom"
@@ -32,7 +32,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/whiteship/pod
 	name = "Salvage Pod Navigation Computer"
-	desc = "Used to designate a precise transit location for the Salvage Pod."
+	desc = ""
 	shuttleId = "whiteship_pod"
 	shuttlePortId = "whiteship_pod_custom"
 	jumpto_ports = list("whiteship_pod_home" = 1)

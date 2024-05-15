@@ -1,6 +1,6 @@
 /obj/machinery/nanite_chamber
 	name = "nanite chamber"
-	desc = "A device that can scan, reprogram, and inject nanites."
+	desc = ""
 	circuit = /obj/item/circuitboard/machine/nanite_chamber
 	icon = 'icons/obj/machines/nanite_chamber.dmi'
 	icon_state = "nanite_chamber"
@@ -152,15 +152,15 @@
 		return
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+		"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open || !locked || busy)
 			return
 		locked = FALSE
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/nanite_chamber/close_machine(mob/living/carbon/user)

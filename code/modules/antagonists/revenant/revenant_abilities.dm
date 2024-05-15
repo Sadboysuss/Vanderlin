@@ -20,17 +20,17 @@
 	if(!castcheck(0))
 		return
 	if(draining)
-		to_chat(src, "<span class='revenwarning'>You are already siphoning the essence of a soul!</span>")
+		to_chat(src, "<span class='revenwarning'>I are already siphoning the essence of a soul!</span>")
 		return
 	if(!target.stat)
 		to_chat(src, "<span class='revennotice'>[target.p_their(TRUE)] soul is too strong to harvest.</span>")
 		if(prob(10))
-			to_chat(target, "<span class='revennotice'>You feel as if you are being watched.</span>")
+			to_chat(target, "<span class='revennotice'>I feel as if you are being watched.</span>")
 		return
 	face_atom(target)
 	draining = TRUE
 	essence_drained += rand(15, 20)
-	to_chat(src, "<span class='revennotice'>You search for the soul of [target].</span>")
+	to_chat(src, "<span class='revennotice'>I search for the soul of [target].</span>")
 	if(do_after(src, rand(10, 20), 0, target)) //did they get deleted in that second?
 		if(target.ckey)
 			to_chat(src, "<span class='revennotice'>[target.p_their(TRUE)] soul burns with intelligence.</span>")
@@ -53,13 +53,13 @@
 			if(do_after(src, rand(15, 25), 0, target)) //how about now
 				if(!target.stat)
 					to_chat(src, "<span class='revenwarning'>[target.p_theyre(TRUE)] now powerful enough to fight off your draining.</span>")
-					to_chat(target, "<span class='boldannounce'>You feel something tugging across your body before subsiding.</span>")
+					to_chat(target, "<span class='boldannounce'>I feel something tugging across your body before subsiding.</span>")
 					draining = 0
 					essence_drained = 0
 					return //hey, wait a minute...
-				to_chat(src, "<span class='revenminor'>You begin siphoning essence from [target]'s soul.</span>")
+				to_chat(src, "<span class='revenminor'>I begin siphoning essence from [target]'s soul.</span>")
 				if(target.stat != DEAD)
-					to_chat(target, "<span class='warning'>You feel a horribly unpleasant draining sensation as your grip on life weakens...</span>")
+					to_chat(target, "<span class='warning'>I feel a horribly unpleasant draining sensation as your grip on life weakens...</span>")
 				if(target.stat == SOFT_CRIT)
 					target.Stun(46)
 				reveal(46)
@@ -93,7 +93,7 @@
 											   "<span class='revenwarning'>Violets lights, dancing in your vision, receding--</span>")
 				qdel(B)
 			else
-				to_chat(src, "<span class='revenwarning'>You are not close enough to siphon [target ? "[target]'s":"[target.p_their()]"] soul. The link has been broken.</span>")
+				to_chat(src, "<span class='revenwarning'>I are not close enough to siphon [target ? "[target]'s":"[target.p_their()]"] soul. The link has been broken.</span>")
 	draining = FALSE
 	essence_drained = 0
 
@@ -101,7 +101,7 @@
 /obj/effect/proc_holder/spell/targeted/night_vision/revenant
 	charge_max = 0
 	panel = "Revenant Abilities"
-	message = "<span class='revennotice'>You toggle your night vision.</span>"
+	message = "<span class='revennotice'>I toggle your night vision.</span>"
 	action_icon = 'icons/mob/actions/actions_revenant.dmi'
 	action_icon_state = "r_nightvision"
 	action_background_icon_state = "bg_revenant"
@@ -163,7 +163,7 @@
 			charge_counter = charge_max
 			return FALSE
 		name = "[initial(name)] ([cast_amount]E)"
-		to_chat(user, "<span class='revennotice'>You have unlocked [initial(name)]!</span>")
+		to_chat(user, "<span class='revennotice'>I have unlocked [initial(name)]!</span>")
 		panel = "Revenant Abilities"
 		locked = FALSE
 		charge_counter = charge_max
@@ -181,7 +181,7 @@
 //Overload Light: Breaks a light that's online and sends out lightning bolts to all nearby people.
 /obj/effect/proc_holder/spell/aoe_turf/revenant/overload
 	name = "Overload Lights"
-	desc = "Directs a large amount of essence into nearby electrical lights, causing lights to shock those nearby."
+	desc = ""
 	charge_max = 200
 	range = 5
 	stun = 30
@@ -218,12 +218,12 @@
 		if(!M.anti_magic_check(FALSE, TRUE))
 			M.electrocute_act(shock_damage, L, flags = SHOCK_NOGLOVES)
 		do_sparks(4, FALSE, M)
-		playsound(M, 'sound/machines/defib_zap.ogg', 50, TRUE, -1)
+		playsound(M, 'sound/blank.ogg', 50, TRUE, -1)
 
 //Defile: Corrupts nearby stuff, unblesses floor tiles.
 /obj/effect/proc_holder/spell/aoe_turf/revenant/defile
 	name = "Defile"
-	desc = "Twists and corrupts the nearby area as well as dispelling holy auras on floors."
+	desc = ""
 	charge_max = 150
 	range = 4
 	stun = 20
@@ -275,7 +275,7 @@
 //Malfunction: Makes bad stuff happen to robots and machines.
 /obj/effect/proc_holder/spell/aoe_turf/revenant/malfunction
 	name = "Malfunction"
-	desc = "Corrupts and damages nearby machines and mechanical objects."
+	desc = ""
 	charge_max = 200
 	range = 4
 	cast_amount = 60
@@ -300,7 +300,7 @@
 			continue
 		if(human.anti_magic_check(FALSE, TRUE))
 			continue
-		to_chat(human, "<span class='revenwarning'>You feel [pick("your sense of direction flicker out", "a stabbing pain in your head", "your mind fill with static")].</span>")
+		to_chat(human, "<span class='revenwarning'>I feel [pick("your sense of direction flicker out", "a stabbing pain in your head", "your mind fill with static")].</span>")
 		new /obj/effect/temp_visual/revenant(human.loc)
 		human.emp_act(EMP_HEAVY)
 	for(var/obj/thing in T)
@@ -314,7 +314,7 @@
 			if(!istype(thing, /obj/machinery/clonepod)) //I hate everything but mostly the fact there's no better way to do this without just not affecting it at all
 				thing.emp_act(EMP_HEAVY)
 	for(var/mob/living/silicon/robot/S in T) //Only works on cyborgs, not AI
-		playsound(S, 'sound/machines/warning-buzzer.ogg', 50, TRUE)
+		playsound(S, 'sound/blank.ogg', 50, TRUE)
 		new /obj/effect/temp_visual/revenant(S.loc)
 		S.spark_system.start()
 		S.emp_act(EMP_HEAVY)
@@ -322,7 +322,7 @@
 //Blight: Infects nearby humans and in general messes living stuff up.
 /obj/effect/proc_holder/spell/aoe_turf/revenant/blight
 	name = "Blight"
-	desc = "Causes nearby living things to waste away."
+	desc = ""
 	charge_max = 200
 	range = 3
 	cast_amount = 50
@@ -353,7 +353,7 @@
 						blight.stage++
 				if(!blightfound)
 					H.ForceContractDisease(new /datum/disease/revblight(), FALSE, TRUE)
-					to_chat(H, "<span class='revenminor'>You feel [pick("suddenly sick", "a surge of nausea", "like your skin is <i>wrong</i>")].</span>")
+					to_chat(H, "<span class='revenminor'>I feel [pick("suddenly sick", "a surge of nausea", "like your skin is <i>wrong</i>")].</span>")
 			else
 				if(mob.reagents)
 					mob.reagents.add_reagent(/datum/reagent/toxin/plasma, 5)

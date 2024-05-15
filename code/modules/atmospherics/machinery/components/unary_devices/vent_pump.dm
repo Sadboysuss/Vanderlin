@@ -9,7 +9,7 @@
 	icon_state = "vent_map-2"
 
 	name = "air vent"
-	desc = "Has a valve and pump attached to it."
+	desc = ""
 
 	use_power = IDLE_POWER_USE
 	can_unwrench = TRUE
@@ -250,13 +250,13 @@
 	..()
 	if(!I.tool_start_check(user, amount=0))
 		return TRUE
-	to_chat(user, "<span class='notice'>You begin welding the vent...</span>")
+	to_chat(user, "<span class='notice'>I begin welding the vent...</span>")
 	if(I.use_tool(src, user, 20, volume=50))
 		if(!welded)
-			user.visible_message("<span class='notice'>[user] welds the vent shut.</span>", "<span class='notice'>You weld the vent shut.</span>", "<span class='hear'>You hear welding.</span>")
+			user.visible_message("<span class='notice'>[user] welds the vent shut.</span>", "<span class='notice'>I weld the vent shut.</span>", "<span class='hear'>I hear welding.</span>")
 			welded = TRUE
 		else
-			user.visible_message("<span class='notice'>[user] unwelded the vent.</span>", "<span class='notice'>You unweld the vent.</span>", "<span class='hear'>You hear welding.</span>")
+			user.visible_message("<span class='notice'>[user] unwelded the vent.</span>", "<span class='notice'>I unweld the vent.</span>", "<span class='hear'>I hear welding.</span>")
 			welded = FALSE
 		update_icon()
 		pipe_vision_img = image(src, loc, layer = ABOVE_HUD_LAYER, dir = dir)
@@ -268,7 +268,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational())
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
 /obj/machinery/atmospherics/components/unary/vent_pump/examine(mob/user)
@@ -286,12 +286,12 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/attack_alien(mob/user)
 	if(!welded || !(do_after(user, 20, target = src)))
 		return
-	user.visible_message("<span class='warning'>[user] furiously claws at [src]!</span>", "<span class='notice'>You manage to clear away the stuff blocking the vent.</span>", "<span class='hear'>You hear loud scraping noises.</span>")
+	user.visible_message("<span class='warning'>[user] furiously claws at [src]!</span>", "<span class='notice'>I manage to clear away the stuff blocking the vent.</span>", "<span class='hear'>I hear loud scraping noises.</span>")
 	welded = FALSE
 	update_icon()
 	pipe_vision_img = image(src, loc, layer = ABOVE_HUD_LAYER, dir = dir)
 	pipe_vision_img.plane = ABOVE_HUD_PLANE
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 100, TRUE)
+	playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/machinery/atmospherics/components/unary/vent_pump/high_volume
 	name = "large air vent"

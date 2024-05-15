@@ -1,6 +1,6 @@
 /obj/item/gun/energy/ionrifle
 	name = "ion rifle"
-	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
+	desc = ""
 	icon_state = "ionrifle"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	can_flashlight = TRUE
@@ -17,7 +17,7 @@
 
 /obj/item/gun/energy/ionrifle/carbine
 	name = "ion carbine"
-	desc = "The MK.II Prototype Ion Projector is a lightweight carbine version of the larger ion rifle, built to be ergonomic and efficient."
+	desc = ""
 	icon_state = "ioncarbine"
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BELT
@@ -28,7 +28,7 @@
 
 /obj/item/gun/energy/decloner
 	name = "biological demolecularisor"
-	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
+	desc = ""
 	icon_state = "decloner"
 	ammo_type = list(/obj/item/ammo_casing/energy/declone)
 	pin = null
@@ -46,7 +46,7 @@
 
 /obj/item/gun/energy/floragun
 	name = "floral somatoray"
-	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
+	desc = ""
 	icon_state = "flora"
 	item_state = "gun"
 	ammo_type = list(/obj/item/ammo_casing/energy/flora/yield, /obj/item/ammo_casing/energy/flora/mut)
@@ -56,7 +56,7 @@
 
 /obj/item/gun/energy/meteorgun
 	name = "meteor gun"
-	desc = "For the love of god, make sure you're aiming this the right way!"
+	desc = ""
 	icon_state = "meteor_gun"
 	item_state = "c20r"
 	w_class = WEIGHT_CLASS_BULKY
@@ -67,7 +67,7 @@
 
 /obj/item/gun/energy/meteorgun/pen
 	name = "meteor pen"
-	desc = "The pen is mightier than the sword."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
@@ -77,7 +77,7 @@
 
 /obj/item/gun/energy/mindflayer
 	name = "\improper Mind Flayer"
-	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
+	desc = ""
 	icon_state = "xray"
 	item_state = null
 	ammo_type = list(/obj/item/ammo_casing/energy/mindflayer)
@@ -85,7 +85,7 @@
 
 /obj/item/gun/energy/kinetic_accelerator/crossbow
 	name = "mini energy crossbow"
-	desc = "A weapon favored by syndicate stealth specialists."
+	desc = ""
 	icon_state = "crossbow"
 	item_state = "crossbow"
 	w_class = WEIGHT_CLASS_SMALL
@@ -102,14 +102,14 @@
 
 /obj/item/gun/energy/kinetic_accelerator/crossbow/halloween
 	name = "candy corn crossbow"
-	desc = "A weapon favored by Syndicate trick-or-treaters."
+	desc = ""
 	icon_state = "crossbow_halloween"
 	item_state = "crossbow"
 	ammo_type = list(/obj/item/ammo_casing/energy/bolt/halloween)
 
 /obj/item/gun/energy/kinetic_accelerator/crossbow/large
 	name = "energy crossbow"
-	desc = "A reverse engineered weapon using syndicate technology."
+	desc = ""
 	icon_state = "crossbowlarge"
 	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron=4000)
@@ -120,7 +120,7 @@
 
 /obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
-	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off xenos! Or, you know, mine stuff."
+	desc = ""
 	icon_state = "plasmacutter"
 	item_state = "plasmacutter"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
@@ -131,7 +131,7 @@
 	can_charge = FALSE
 
 	heat = 3800
-	usesound = list('sound/items/welder.ogg', 'sound/items/welder2.ogg')
+	usesound = list('sound/blank.ogg')
 	tool_behaviour = TOOL_WELDER
 	toolspeed = 0.7 //plasmacutters can be used as welders, and are faster than standard welders
 	var/progress_flash_divisor = 10  //copypasta is best pasta
@@ -140,7 +140,7 @@
 
 /obj/item/gun/energy/plasmacutter/Initialize()
 	. = ..()
-	AddComponent(/datum/component/butchering, 25, 105, 0, 'sound/weapons/plasma_cutter.ogg')
+	AddComponent(/datum/component/butchering, 25, 105, 0, 'sound/blank.ogg')
 
 /obj/item/gun/energy/plasmacutter/examine(mob/user)
 	. = ..()
@@ -155,11 +155,11 @@
 		charge_multiplier = 1
 	if(charge_multiplier)
 		if(cell.charge == cell.maxcharge)
-			to_chat(user, "<span class='notice'>You try to insert [I] into [src], but it's fully charged.</span>") //my cell is round and full
+			to_chat(user, "<span class='notice'>I try to insert [I] into [src], but it's fully charged.</span>") //my cell is round and full
 			return
 		I.use(1)
 		cell.give(500*charge_multiplier)
-		to_chat(user, "<span class='notice'>You insert [I] in [src], recharging it.</span>")
+		to_chat(user, "<span class='notice'>I insert [I] in [src], recharging it.</span>")
 	else
 		..()
 
@@ -180,7 +180,7 @@
 	// Then it'll drain 125 at first and 25 periodically, but fail if charge dips below 125 even though it still can finish action
 	// Alternately it'll need to drain amount*charge_weld every period, which is either obscene or makes it free for other uses
 	if(amount ? cell.charge < charge_weld * amount : cell.charge < charge_weld)
-		to_chat(user, "<span class='warning'>You need more charge to complete this task!</span>")
+		to_chat(user, "<span class='warning'>I need more charge to complete this task!</span>")
 		return FALSE
 
 	return TRUE
@@ -218,7 +218,7 @@
 
 /obj/item/gun/energy/wormhole_projector
 	name = "bluespace wormhole projector"
-	desc = "A projector that emits high density quantum-coupled bluespace beams."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/wormhole, /obj/item/ammo_casing/energy/wormhole/orange)
 	item_state = null
 	icon_state = "wormhole_projector"
@@ -287,7 +287,7 @@
 
 /obj/item/gun/energy/printer
 	name = "cyborg lmg"
-	desc = "An LMG that fires 3D-printed flechettes. They are slowly resupplied using the cyborg's internal power source."
+	desc = ""
 	icon_state = "l6_cyborg"
 	icon = 'icons/obj/guns/projectile.dmi'
 	cell_type = "/obj/item/stock_parts/cell/secborg"
@@ -304,21 +304,21 @@
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
 	icon_state = "freezegun"
-	desc = "A gun that changes temperatures."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/temp, /obj/item/ammo_casing/energy/temp/hot)
 	cell_type = "/obj/item/stock_parts/cell/high"
 	pin = null
 
 /obj/item/gun/energy/temperature/security
 	name = "security temperature gun"
-	desc = "A weapon that can only be used to its full potential by the truly robust."
+	desc = ""
 	pin = /obj/item/firing_pin
 
 /obj/item/gun/energy/laser/instakill
 	name = "instakill rifle"
 	icon_state = "instagib"
 	item_state = "instagib"
-	desc = "A specialized ASMD laser-rifle, capable of flat-out disintegrating most targets in a single hit."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/instakill)
 	force = 60
 	charge_sections = 5
@@ -326,13 +326,13 @@
 	shaded_charge = FALSE
 
 /obj/item/gun/energy/laser/instakill/red
-	desc = "A specialized ASMD laser-rifle, capable of flat-out disintegrating most targets in a single hit. This one has a red design."
+	desc = ""
 	icon_state = "instagibred"
 	item_state = "instagibred"
 	ammo_type = list(/obj/item/ammo_casing/energy/instakill/red)
 
 /obj/item/gun/energy/laser/instakill/blue
-	desc = "A specialized ASMD laser-rifle, capable of flat-out disintegrating most targets in a single hit. This one has a blue design."
+	desc = ""
 	icon_state = "instagibblue"
 	item_state = "instagibblue"
 	ammo_type = list(/obj/item/ammo_casing/energy/instakill/blue)
@@ -342,7 +342,7 @@
 
 /obj/item/gun/energy/gravity_gun
 	name = "one-point bluespace-gravitational manipulator"
-	desc = "An experimental, multi-mode device that fires bolts of Zero-Point Energy, causing local distortions in gravity."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/gravity/repulse, /obj/item/ammo_casing/energy/gravity/attract, /obj/item/ammo_casing/energy/gravity/chaos)
 	item_state = "gravity_gun"
 	icon_state = "gravity_gun"

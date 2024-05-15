@@ -1,6 +1,6 @@
 /obj/machinery/rnd/production
 	name = "technology fabricator"
-	desc = "Makes researched and prototype items with materials and energy."
+	desc = ""
 	layer = BELOW_OBJ_LAYER
 	var/consoleless_interface = FALSE			//Whether it can be used without a console.
 	var/efficiency_coeff = 1				//Materials needed / coeff = actual.
@@ -96,7 +96,7 @@
 			I.set_custom_materials(matlist.Copy())
 	SSblackbox.record_feedback("nested tally", "item_printed", amount, list("[type]", "[path]"))
 
-/obj/machinery/rnd/production/proc/check_mat(datum/design/being_built, var/mat)	// now returns how many times the item can be built with the material
+/obj/machinery/rnd/production/proc/check_mat(datum/design/being_built, mat)	// now returns how many times the item can be built with the material
 	if (!materials.mat_container)  // no connected silo
 		return 0
 	var/list/all_materials = being_built.reagents_list + being_built.materials

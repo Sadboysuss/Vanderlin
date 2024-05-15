@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/food/snacks/sandwich
 	name = "sandwich"
-	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce! Arthur Dent would be proud."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "sandwich"
 	trash = /obj/item/trash/plate
@@ -12,7 +12,7 @@
 
 /obj/item/reagent_containers/food/snacks/toastedsandwich
 	name = "toasted sandwich"
-	desc = "Now if you only had a pepper bar."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "toastedsandwich"
 	trash = /obj/item/trash/plate
@@ -23,7 +23,7 @@
 
 /obj/item/reagent_containers/food/snacks/grilledcheese
 	name = "cheese sandwich"
-	desc = "Goes great with Tomato soup!"
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "toastedsandwich"
 	trash = /obj/item/trash/plate
@@ -34,7 +34,7 @@
 
 /obj/item/reagent_containers/food/snacks/jellysandwich
 	name = "jelly sandwich"
-	desc = "You wish you had some peanut butter to go with this..."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "jellysandwich"
 	trash = /obj/item/trash/plate
@@ -54,7 +54,7 @@
 
 /obj/item/reagent_containers/food/snacks/notasandwich
 	name = "not-a-sandwich"
-	desc = "Something seems to be wrong with this, you can't quite figure what. Maybe it's his moustache."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "notasandwich"
 	trash = /obj/item/trash/plate
@@ -65,7 +65,7 @@
 
 /obj/item/reagent_containers/food/snacks/jelliedtoast
 	name = "jellied toast"
-	desc = "A slice of toast covered with delicious jam."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "jellytoast"
 	trash = /obj/item/trash/plate
@@ -85,7 +85,7 @@
 
 /obj/item/reagent_containers/food/snacks/butteredtoast
 	name = "buttered toast"
-	desc = "Butter lightly spread over a piece of toast."
+	desc = ""
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "butteredtoast"
 	bitesize = 3
@@ -97,7 +97,7 @@
 
 /obj/item/reagent_containers/food/snacks/twobread
 	name = "two bread"
-	desc = "This seems awfully bitter."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "twobread"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)

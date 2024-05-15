@@ -29,7 +29,7 @@ Possible to do for anyone motivated enough:
 
 /obj/machinery/holopad
 	name = "holopad"
-	desc = "It's a floor-mounted device for projecting holographic images."
+	desc = ""
 	icon_state = "holopad0"
 	layer = LOW_OBJ_LAYER
 	plane = FLOOR_PLANE
@@ -164,7 +164,7 @@ Possible to do for anyone motivated enough:
 			return
 		if (!user.transferItemToLoc(P,src))
 			return
-		to_chat(user,"<span class='notice'>You insert [P] into [src].</span>")
+		to_chat(user,"<span class='notice'>I insert [P] into [src].</span>")
 		disk = P
 		updateDialog()
 		return
@@ -250,7 +250,7 @@ Possible to do for anyone motivated enough:
 			for(var/mob/living/silicon/ai/AI in GLOB.silicon_mobs)
 				if(!AI.client)
 					continue
-				to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=[REF(AI)];jumptoholopad=[REF(src)]'>\the [area]</a>.</span>")
+				to_chat(AI, "<span class='info'>My presence is requested at <a href='?src=[REF(AI)];jumptoholopad=[REF(src)]'>\the [area]</a>.</span>")
 		else
 			temp = "A request for AI presence was already sent recently.<BR>"
 			temp += "<A href='?src=[REF(src)];mainmenu=1'>Main Menu</A>"
@@ -366,7 +366,7 @@ Possible to do for anyone motivated enough:
 			if(outgoing_call)
 				HC.Disconnect(src)//can't answer calls while calling
 			else
-				playsound(src, 'sound/machines/twobeep.ogg', 100)	//bring, bring!
+				playsound(src, 'sound/blank.ogg', 100)	//bring, bring!
 				ringing = TRUE
 
 	update_icon()
@@ -402,7 +402,7 @@ Possible to do for anyone motivated enough:
 		move_hologram()
 
 		set_holo(user, Hologram)
-		visible_message("<span class='notice'>A holographic image of [user] flickers to life before your eyes!</span>")
+		visible_message("<span class='notice'>A holographic image of [user] flickers to life before my eyes!</span>")
 
 		return Hologram
 	else
@@ -558,7 +558,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	Hologram.setAnchored(TRUE)//So space wind cannot drag it.
 	Hologram.name = "[record.caller_name] (Hologram)"//If someone decides to right click.
 	Hologram.set_light(2)	//hologram lighting
-	visible_message("<span class='notice'>A holographic image of [record.caller_name] flickers to life before your eyes!</span>")
+	visible_message("<span class='notice'>A holographic image of [record.caller_name] flickers to life before my eyes!</span>")
 	return Hologram
 
 /obj/machinery/holopad/proc/replay_start()

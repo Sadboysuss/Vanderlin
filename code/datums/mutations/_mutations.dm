@@ -4,7 +4,7 @@
 
 /datum/mutation/human
 	name = "mutation"
-	var/desc = "A mutation."
+	var/desc = ""
 	var/locked
 	var/quality
 	var/get_chance = 100
@@ -67,7 +67,7 @@
 		var/datum/mutation/human/mewtayshun = M
 		if(!(mewtayshun.type in conflicts) && !(type in mewtayshun.conflicts))
 			continue
-		to_chat(H, "<span class='warning'>You feel your genes resisting something.</span>")
+		to_chat(H, "<span class='warning'>I feel your genes resisting something.</span>")
 		return TRUE
 	owner = H
 	dna = H.dna

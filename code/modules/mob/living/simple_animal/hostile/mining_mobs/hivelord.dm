@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/asteroid/hivelord
 	name = "hivelord"
-	desc = "A truly alien creature, it is a mass of unknown organic material, constantly fluctuating. When attacking, pieces of it split off and attack in tandem with the original."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "Hivelord"
 	icon_living = "Hivelord"
@@ -22,7 +22,7 @@
 	attack_verb_continuous = "lashes out at"
 	attack_verb_simple = "lash out at"
 	speak_emote = list("telepathically cries")
-	attack_sound = 'sound/weapons/pierce.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "falls right through the strange body of the"
 	ranged_cooldown = 0
 	ranged_cooldown_time = 20
@@ -58,7 +58,7 @@
 //A fragile but rapidly produced creature
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood
 	name = "hivelord brood"
-	desc = "A fragment of the original Hivelord, rallying behind its original. One isn't much of a threat, but..."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "Hivelordbrood"
 	icon_living = "Hivelordbrood"
@@ -80,7 +80,7 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	speak_emote = list("telepathically cries")
-	attack_sound = 'sound/weapons/pierce.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "falls right through the strange body of the"
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
@@ -96,7 +96,7 @@
 //Legion
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion
 	name = "legion"
-	desc = "You can still see what was once a human under the shifting mass of corruption."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion"
 	icon_living = "legion"
@@ -111,7 +111,7 @@
 	attack_verb_continuous = "lashes out at"
 	attack_verb_simple = "lash out at"
 	speak_emote = list("echoes")
-	attack_sound = 'sound/weapons/pierce.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "bounces harmlessly off of"
 	crusher_loot = /obj/item/crusher_trophy/legion_skull
 	loot = list(/obj/item/organ/regenerative_core/legion)
@@ -130,7 +130,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/dwarf
 	name = "dwarf legion"
-	desc = "You can still see what was once a rather small human under the shifting mass of corruption."
+	desc = ""
 	icon_state = "dwarf_legion"
 	icon_living = "dwarf_legion"
 	icon_aggro = "dwarf_legion"
@@ -162,7 +162,7 @@
 //Legion skull
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion
 	name = "legion"
-	desc = "One of many."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_head"
 	icon_living = "legion_head"
@@ -180,7 +180,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	speak_emote = list("echoes")
-	attack_sound = 'sound/weapons/pierce.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "is shrugged off by"
 	del_on_death = TRUE
 	stat_attack = UNCONSCIOUS
@@ -226,7 +226,7 @@
 //Legion that spawns Legions
 /mob/living/simple_animal/hostile/big_legion
 	name = "legion"
-	desc = "One of many."
+	desc = ""
 	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
 	icon_state = "legion"
 	icon_living = "legion"

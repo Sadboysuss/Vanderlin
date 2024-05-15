@@ -18,10 +18,10 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/name = "Reagent"
 	var/description = ""
 	var/specific_heat = SPECIFIC_HEAT_DEFAULT		//J/(K*mol)
-	var/taste_description = "metaphorical salt"
+	var/taste_description = ""
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/glass_name = "glass of ...what?" // use for specialty drinks.
-	var/glass_desc = "You can't really tell what this is."
+	var/glass_desc = ""
 	var/glass_icon_state = null // Otherwise just sets the icon to a normal glass with the mixture of the reagents in the glass.
 	var/shot_glass_icon_state = null
 	var/datum/reagents/holder = null
@@ -30,6 +30,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/current_cycle = 0
 	var/volume = 0									//pretend this is moles
 	var/color = "#000000" // rgb: 0, 0, 0
+	var/alpha = 255
 	var/can_synth = TRUE // can this reagent be synthesized? (for example: odysseus syringe gun)
 	var/metabolization_rate = REAGENTS_METABOLISM //how fast the reagent is metabolized by the mob
 	var/overrides_metab = 0
@@ -65,8 +66,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M)
 	current_cycle++
-	holder.remove_reagent(type, metabolization_rate * M.metabolism_efficiency) //By default it slowly disappears.
-	return
+	if(holder)
+		holder.remove_reagent(type, metabolization_rate) //By default it slowly disappears.
+	return TRUE
 
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	return
@@ -114,26 +116,26 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 /datum/reagent/proc/overdose_start(mob/living/M)
-	to_chat(M, "<span class='userdanger'>You feel like you took too much of [name]!</span>")
+	to_chat(M, "<span class='danger'>I feel like you took too much of [name]!</span>")
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/overdose, name)
 	return
 
 /datum/reagent/proc/addiction_act_stage1(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/withdrawal_light, name)
 	if(prob(30))
-		to_chat(M, "<span class='notice'>You feel like having some [name] right about now.</span>")
+		to_chat(M, "<span class='notice'>I feel like having some [name] right about now.</span>")
 	return
 
 /datum/reagent/proc/addiction_act_stage2(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/withdrawal_medium, name)
 	if(prob(30))
-		to_chat(M, "<span class='notice'>You feel like you need [name]. You just can't get enough.</span>")
+		to_chat(M, "<span class='notice'>I feel like you need [name]. You just can't get enough.</span>")
 	return
 
 /datum/reagent/proc/addiction_act_stage3(mob/living/M)
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/withdrawal_severe, name)
 	if(prob(30))
-		to_chat(M, "<span class='danger'>You have an intense craving for [name].</span>")
+		to_chat(M, "<span class='danger'>I have an intense craving for [name].</span>")
 	return
 
 /datum/reagent/proc/addiction_act_stage4(mob/living/M)

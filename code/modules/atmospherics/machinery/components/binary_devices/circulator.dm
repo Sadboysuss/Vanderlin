@@ -5,7 +5,7 @@
 
 /obj/machinery/atmospherics/components/binary/circulator
 	name = "circulator/heat exchanger"
-	desc = "A gas circulator pump and heat exchanger."
+	desc = ""
 	icon_state = "circ-off-0"
 
 	var/active = FALSE
@@ -90,7 +90,7 @@
 	I.play_tool_sound(src)
 	if(generator)
 		disconnectFromGenerator()
-	to_chat(user, "<span class='notice'>You [anchored?"secure":"unsecure"] [src].</span>")
+	to_chat(user, "<span class='notice'>I [anchored?"secure":"unsecure"] [src].</span>")
 
 
 	var/obj/machinery/atmospherics/node1 = nodes[1]
@@ -141,7 +141,7 @@
 	if(generator)
 		disconnectFromGenerator()
 	mode = !mode
-	to_chat(user, "<span class='notice'>You set [src] to [mode?"cold":"hot"] mode.</span>")
+	to_chat(user, "<span class='notice'>I set [src] to [mode?"cold":"hot"] mode.</span>")
 	return TRUE
 
 /obj/machinery/atmospherics/components/binary/circulator/screwdriver_act(mob/user, obj/item/I)
@@ -149,7 +149,7 @@
 		return TRUE
 	panel_open = !panel_open
 	I.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You [panel_open?"open":"close"] the panel on [src].</span>")
+	to_chat(user, "<span class='notice'>I [panel_open?"open":"close"] the panel on [src].</span>")
 	return TRUE
 
 /obj/machinery/atmospherics/components/binary/circulator/crowbar_act(mob/user, obj/item/I)
@@ -175,7 +175,7 @@
 
 /obj/machinery/atmospherics/components/binary/circulator/verb/circulator_flip()
 	set name = "Flip"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 
 	if(!ishuman(usr))
@@ -186,5 +186,5 @@
 		return
 
 	flipped = !flipped
-	to_chat(usr, "<span class='notice'>You flip [src].</span>")
+	to_chat(usr, "<span class='notice'>I flip [src].</span>")
 	update_icon()

@@ -1,4 +1,4 @@
-/*! 
+/*!
 This subsystem mostly exists to populate and manage the skill singletons.
 */
 
@@ -7,9 +7,9 @@ SUBSYSTEM_DEF(skills)
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_SKILLS
 	///Dictionary of skill.type || skill ref
-	var/list/all_skills = list() 
+	var/list/all_skills = list()
 	///Static assoc list of levels (ints) - strings
-	var/list/level_names = list("Novice", "Apprentice", "Journeyman", "Expert", "Master", "Legendary")//This list is already in the right order, due to indexing
+	var/list/level_names = list("<span class='info'>Weak</span>", "<span class='info'>Average</span>", "<span class='biginfo'>Skilled</span>", "<span class='biginfo'>Expert</span>", "<B>Master</B>", "<span class='greentext'>Legendary</span>")//This list is already in the right order, due to indexing
 
 
 /datum/controller/subsystem/skills/Initialize(timeofday)

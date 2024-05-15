@@ -1,7 +1,7 @@
 //The effect when you wrap a dead body in gift wrap
 /obj/effect/spresent
 	name = "strange present"
-	desc = "It's a ... present?"
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "strangepresent"
 	density = TRUE
@@ -32,7 +32,7 @@
 
 /obj/effect/overlay/thermite
 	name = "thermite"
-	desc = "Looks hot."
+	desc = ""
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "2" //what?
 	anchored = TRUE
@@ -73,7 +73,7 @@
 
 /obj/effect/dummy/lighting_obj
 	name = "lighting fx obj"
-	desc = "Tell a coder if you're seeing this."
+	desc = ""
 	icon_state = "nothing"
 	light_color = "#FFFFFF"
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE

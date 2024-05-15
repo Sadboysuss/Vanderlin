@@ -1,8 +1,8 @@
 // Carrot
 /obj/item/seeds/carrot
 	name = "pack of carrot seeds"
-	desc = "These seeds grow into carrots."
-	icon_state = "seed-carrot"
+	desc = ""
+	icon_state = "seed"
 	species = "carrot"
 	plantname = "Carrots"
 	product = /obj/item/reagent_containers/food/snacks/grown/carrot
@@ -17,7 +17,7 @@
 /obj/item/reagent_containers/food/snacks/grown/carrot
 	seed = /obj/item/seeds/carrot
 	name = "carrot"
-	desc = "It's good for the eyes!"
+	desc = ""
 	icon_state = "carrot"
 	filling_color = "#FFA500"
 	bitesize_mod = 2
@@ -27,7 +27,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/carrot/attackby(obj/item/I, mob/user, params)
 	if(I.get_sharpness())
-		to_chat(user, "<span class='notice'>You sharpen the carrot into a shiv with [I].</span>")
+		to_chat(user, "<span class='notice'>I sharpen the carrot into a shiv with [I].</span>")
 		var/obj/item/kitchen/knife/carrotshiv/Shiv = new /obj/item/kitchen/knife/carrotshiv
 		remove_item_from_storage(user)
 		qdel(src)
@@ -38,8 +38,8 @@
 // Parsnip
 /obj/item/seeds/carrot/parsnip
 	name = "pack of parsnip seeds"
-	desc = "These seeds grow into parsnips."
-	icon_state = "seed-parsnip"
+	desc = ""
+	icon_state = "seed"
 	species = "parsnip"
 	plantname = "Parsnip"
 	product = /obj/item/reagent_containers/food/snacks/grown/parsnip
@@ -50,7 +50,7 @@
 /obj/item/reagent_containers/food/snacks/grown/parsnip
 	seed = /obj/item/seeds/carrot/parsnip
 	name = "parsnip"
-	desc = "Closely related to carrots."
+	desc = ""
 	icon_state = "parsnip"
 	bitesize_mod = 2
 	foodtype = VEGETABLES
@@ -61,8 +61,8 @@
 // White-Beet
 /obj/item/seeds/whitebeet
 	name = "pack of white-beet seeds"
-	desc = "These seeds grow into sugary beet producing plants."
-	icon_state = "seed-whitebeet"
+	desc = ""
+	icon_state = "seed"
 	species = "whitebeet"
 	plantname = "White-Beet Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/whitebeet
@@ -77,7 +77,7 @@
 /obj/item/reagent_containers/food/snacks/grown/whitebeet
 	seed = /obj/item/seeds/whitebeet
 	name = "white-beet"
-	desc = "You can't beat white-beet."
+	desc = ""
 	icon_state = "whitebeet"
 	filling_color = "#F4A460"
 	bitesize_mod = 2
@@ -87,8 +87,8 @@
 // Red Beet
 /obj/item/seeds/redbeet
 	name = "pack of redbeet seeds"
-	desc = "These seeds grow into red beet producing plants."
-	icon_state = "seed-redbeet"
+	desc = ""
+	icon_state = "seed"
 	species = "redbeet"
 	plantname = "Red-Beet Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/redbeet
@@ -103,7 +103,7 @@
 /obj/item/reagent_containers/food/snacks/grown/redbeet
 	seed = /obj/item/seeds/redbeet
 	name = "red beet"
-	desc = "You can't beat red beet."
+	desc = ""
 	icon_state = "redbeet"
 	bitesize_mod = 2
 	foodtype = VEGETABLES

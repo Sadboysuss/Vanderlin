@@ -1,18 +1,18 @@
 /obj/item/etherealballdeployer
 	name = "Portable Ethereal Disco Ball"
-	desc = "Press the button for a deployment of slightly-unethical PARTY!"
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "ethdisco"
 
 /obj/item/etherealballdeployer/attack_self(mob/living/carbon/user)
 	.=..()
-	to_chat(user, "<span class='notice'>You deploy the Ethereal Disco Ball.</span>")
+	to_chat(user, "<span class='notice'>I deploy the Ethereal Disco Ball.</span>")
 	new /obj/structure/etherealball(user.loc)
 	qdel(src)
 
 /obj/structure/etherealball
 	name = "Ethereal Disco Ball"
-	desc = "The ethics of this discoball are questionable."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "ethdisco_head_0"
 	anchored = TRUE
@@ -31,18 +31,18 @@
 	. = ..()
 	if(TurnedOn)
 		TurnOff()
-		to_chat(user, "<span class='notice'>You turn the disco ball off!</span>")
+		to_chat(user, "<span class='notice'>I turn the disco ball off!</span>")
 	else
 		TurnOn()
-		to_chat(user, "<span class='notice'>You turn the disco ball on!</span>")
+		to_chat(user, "<span class='notice'>I turn the disco ball on!</span>")
 
 /obj/structure/etherealball/AltClick(mob/living/carbon/human/user)
 	. = ..()
 	if(anchored)
-		to_chat(user, "<span class='notice'>You unlock the disco ball.</span>")
+		to_chat(user, "<span class='notice'>I unlock the disco ball.</span>")
 		anchored = FALSE
 	else
-		to_chat(user, "<span class='notice'>You lock the disco ball.</span>")
+		to_chat(user, "<span class='notice'>I lock the disco ball.</span>")
 		anchored = TRUE
 
 /obj/structure/etherealball/proc/TurnOn()

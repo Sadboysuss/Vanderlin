@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/personal
-	desc = "It's a secure locker for personnel. The first card swiped gains control."
+	desc = ""
 	name = "personal closet"
 	req_access = list(ACCESS_ALL_PERSONAL_LOCKERS)
 	var/registered_name = null
@@ -25,8 +25,8 @@
 	icon_state = "cabinet"
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
-	open_sound = 'sound/machines/wooden_closet_open.ogg'
-	close_sound = 'sound/machines/wooden_closet_close.ogg'
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
 	open_sound_volume = 25
 	close_sound_volume = 50
 
@@ -50,7 +50,7 @@
 
 			if(!registered_name)
 				registered_name = I.registered_name
-				desc = "Owned by [I.registered_name]."
+				desc = ""
 		else
 			to_chat(user, "<span class='danger'>Access Denied.</span>")
 	else

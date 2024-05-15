@@ -13,18 +13,18 @@
 	var/postHeaderColor = "#FF0000"
 	var/background = "wanted_background"
 	var/postName = "wanted poster"
-	var/postDesc = "A wanted poster for"
+	var/postDesc = ""
 
 /obj/item/poster/wanted/missing
 	postName = "missing poster"
-	postDesc = "A missing poster for"
+//	postdesc = ""
 	postHeaderText = "MISSING" // MAX 7 Characters
 	postHeaderColor = "#0000FF"
 
 /obj/item/poster/wanted/Initialize(mapload, icon/person_icon, wanted_name, description, headerText)
 	. = ..(mapload, new /obj/structure/sign/poster/wanted(src, person_icon, wanted_name, description, headerText, postHeaderColor, background, postName, postDesc))
 	name = "[postName] ([wanted_name])"
-	desc = "[postDesc] [wanted_name]."
+	desc = ""
 	postHeaderText = headerText
 
 /obj/structure/sign/poster/wanted
@@ -45,7 +45,7 @@
 	posterHeaderColor = postHeaderColor
 	wanted_name = person_name
 
-	name = "[postName] ([wanted_name])"	
+	name = "[postName] ([wanted_name])"
 	desc = description
 
 	person_icon = icon(person_icon, dir = SOUTH)//copy the image so we don't mess with the one in the record.
@@ -57,11 +57,11 @@
 
 	// Print text on top of poster.
 	print_across_top(the_icon, postHeaderText, postHeaderColor)
-	
+
 	the_icon.Insert(the_icon, "wanted")
 	the_icon.Insert(icon('icons/obj/contraband.dmi', "poster_being_set"), "poster_being_set")
 	the_icon.Insert(icon('icons/obj/contraband.dmi', "poster_ripped"), "poster_ripped")
-	
+
 	icon = the_icon
 
 /*
@@ -83,13 +83,13 @@
 		letter_icon.Shift(SOUTH, 2)
 		letter_icon.SwapColor(rgb(255,255,255), color)
 		poster_icon.Blend(letter_icon, ICON_OVERLAY)
-		startX = startX + 4	
+		startX = startX + 4
 
 /obj/structure/sign/poster/wanted/roll_and_drop(turf/location)
 	var/obj/item/poster/wanted/P = ..(location)
 	P.name = "[postName] ([wanted_name])"
-	P.desc = "[postDesc] [wanted_name]."
+	P.desc = ""
 	P.postHeaderText = posterHeaderText
 	P.postHeaderColor = posterHeaderColor
 	return P
-	
+

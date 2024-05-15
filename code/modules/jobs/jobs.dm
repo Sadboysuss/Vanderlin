@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(supply_positions, list(
 
 GLOBAL_LIST_INIT(civilian_positions, list(
 	"Bartender",
-	"Botanist",
+	"Kek",
 	"Cook",
 	"Janitor",
 	"Curator",
@@ -59,8 +59,102 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"Cyborg",
 	ROLE_PAI))
 
+GLOBAL_LIST_INIT(noble_positions, list(
+	"King",
+	"Queen",
+	"Prince",
+	"Captain",
+	"Steward",
+	"Court Magician"
+	))
+
+GLOBAL_LIST_INIT(garrison_positions, list(
+	"Garrison Guard",
+	"Royal Guard",
+	"Veteran",
+	"Dungeoneer",
+	"Garrison Archer",
+	"Village Elder"
+	))
+
+GLOBAL_LIST_INIT(church_positions, list(
+	"Priest",
+	"Cleric",
+	"Acolyte",
+	"Witch Hunter",
+	"Confessor"
+	))
+
+GLOBAL_LIST_INIT(serf_positions, list(
+	"Merchant",
+	"Barkeep",
+	"Archivist",
+	"Armorer",
+	"Weaponsmith",
+	"Tailor",
+	"Alchemist",
+	"Mason",
+	"Scribe"
+	))
+
+GLOBAL_LIST_INIT(peasant_positions, list(
+	"Soilson",
+	"Butcher",
+	"Cook",
+	"Gravedigger",
+	"Jester",
+	"Miner",
+	"Hunter",
+	"Fisher",
+	"Lumberjack",
+	"Butler",
+	"Adventurer",
+	"Towner",
+	"Pilgrim",
+	"Grabber",
+	"Mercenary",
+	"Nightman",
+	"Nightmaiden",
+	"Docker",
+	"Prisoner",
+	"Beggar"
+	))
+
+GLOBAL_LIST_INIT(youngfolk_positions, list(
+	"Squire",
+	"Smithy Apprentice",
+	"Magician's Apprentice",
+	"Churchling",
+	"Servant",
+	"Orphan"
+	))
+
+GLOBAL_LIST_INIT(allmig_positions, list(
+	"Adventurer",
+	"Pilgrim"
+	))
+
+GLOBAL_LIST_INIT(roguewar_positions, list(
+	"Adventurer"
+	))
+
+GLOBAL_LIST_INIT(roguefight_positions, list(
+	"Red Captain",
+	"Red Caster",
+	"Red Ranger",
+	"Red Fighter",
+	"Green Captain",
+	"Green Caster",
+	"Green Ranger",
+	"Green Fighter"
+	))
+
+GLOBAL_LIST_INIT(test_positions, list(
+	"Tester"
+	))
+
 GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_CREW = list("titles" = command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions
+	EXP_TYPE_CREW = list("titles" = peasant_positions | command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions
 	EXP_TYPE_COMMAND = list("titles" = command_positions),
 	EXP_TYPE_ENGINEERING = list("titles" = engineering_positions),
 	EXP_TYPE_MEDICAL = list("titles" = medical_positions),

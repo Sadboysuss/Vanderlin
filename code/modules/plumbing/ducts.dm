@@ -121,7 +121,7 @@ All the important duct code:
 			duct.add_duct(D)
 	add_neighbour(D, direction)
 	//tell our buddy its time to pass on the torch of connecting to pipes. This shouldn't ever infinitely loop since it only works on pipes that havent been inductrinated
-	D.attempt_connect() 
+	D.attempt_connect()
 
 	return TRUE
 ///connect to a plumbing object
@@ -162,25 +162,25 @@ All the important duct code:
 			var/obj/machinery/duct/D = AM
 			if(D.duct)
 				if(D.duct == duct) //we're already connected
-					continue 
-				else 
+					continue
+				else
 					duct.assimilate(D.duct)
-					continue 
-			else 
+					continue
+			else
 				duct.add_duct(D)
 				D.reconnect()
-		else 
+		else
 			var/datum/component/plumbing/P = AM.GetComponent(/datum/component/plumbing)
 			if(AM in get_step(src, neighbours[AM])) //did we move?
 				if(P)
 					connect_plumber(P, neighbours[AM])
-			else 
+			else
 				neighbours -= AM //we moved
 
 ///Special proc to draw a new connect frame based on neighbours. not the norm so we can support multiple duct kinds
 /obj/machinery/duct/proc/generate_connects()
 	if(lock_connects)
-		return 
+		return
 	connects = 0
 	for(var/A in neighbours)
 		connects |= neighbours[A]
@@ -257,16 +257,16 @@ All the important duct code:
 	if(anchored)
 		user.visible_message( \
 		"[user] unfastens \the [src].", \
-		"<span class='notice'>You unfasten \the [src].</span>", \
-		"<span class='hear'>You hear ratcheting.</span>")
+		"<span class='notice'>I unfasten \the [src].</span>", \
+		"<span class='hear'>I hear ratcheting.</span>")
 		disconnect_duct()
 	else if(can_anchor())
 		anchored = TRUE
 		active = TRUE
 		user.visible_message( \
 		"[user] fastens \the [src].", \
-		"<span class='notice'>You fasten \the [src].</span>", \
-		"<span class='hear'>You hear ratcheting.</span>")
+		"<span class='notice'>I fasten \the [src].</span>", \
+		"<span class='hear'>I hear ratcheting.</span>")
 		attempt_connect()
 	return TRUE
 ///collection of all the sanity checks to prevent us from stacking ducts that shouldnt be stacked
@@ -296,7 +296,7 @@ All the important duct code:
 	var/obj/machinery/duct/D = A
 	var/obj/item/I = user.get_active_held_item()
 	if(I?.tool_behaviour != TOOL_WRENCH)
-		to_chat(user, "<span class='warning'>You need to be holding a wrench in your active hand to do that!</span>")
+		to_chat(user, "<span class='warning'>I need to be holding a wrench in your active hand to do that!</span>")
 		return
 	if(get_dist(src, D) != 1)
 		return
@@ -304,13 +304,13 @@ All the important duct code:
 	if(!(direction in GLOB.cardinals))
 		return
 	if(duct_layer != D.duct_layer)
-		return 
+		return
 
 	add_connects(direction) //the connect of the other duct is handled in connect_network, but do this here for the parent duct because it's not necessary in normal cases
 	add_neighbour(D, direction)
 	connect_network(D, direction, TRUE)
 	update_icon()
-///has a total of 5 layers and doesnt give a shit about color. its also dumb so doesnt autoconnect. 
+///has a total of 5 layers and doesnt give a shit about color. its also dumb so doesnt autoconnect.
 /obj/machinery/duct/multilayered
 	name = "duct layer-manifold"
 	icon = 'icons/obj/2x2.dmi'
@@ -358,7 +358,7 @@ All the important duct code:
 
 /obj/item/stack/ducts
 	name = "stack of duct"
-	desc = "A stack of fluid ducts."
+	desc = ""
 	singular_name = "duct"
 	icon = 'icons/obj/plumbing/fluid_ducts.dmi'
 	icon_state = "ducts"
@@ -372,7 +372,7 @@ All the important duct code:
 	///Default layer of our duct
 	var/duct_layer = "Default Layer"
 	///Assoc index with all the available layers. yes five might be a bit much. Colors uses a global by the way
-	var/list/layers = list("First Layer" = FIRST_DUCT_LAYER, "Second Layer" = SECOND_DUCT_LAYER, "Default Layer" = DUCT_LAYER_DEFAULT, 
+	var/list/layers = list("First Layer" = FIRST_DUCT_LAYER, "Second Layer" = SECOND_DUCT_LAYER, "Default Layer" = DUCT_LAYER_DEFAULT,
 		"Fourth Layer" = FOURTH_DUCT_LAYER, "Fifth Layer" = FIFTH_DUCT_LAYER)
 
 /obj/item/stack/ducts/examine(mob/user)
@@ -400,7 +400,7 @@ All the important duct code:
 	if(istype(A, /turf/open) && use(1))
 		var/turf/open/OT = A
 		new /obj/machinery/duct(OT, FALSE, GLOB.pipe_paint_colors[duct_color], layers[duct_layer])
-		playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE)
+		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/stack/ducts/fifty
 	amount = 50

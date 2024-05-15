@@ -1,6 +1,6 @@
 /obj/machinery/pdapainter
 	name = "\improper PDA painter"
-	desc = "A PDA painting machine. To use, simply insert your PDA and choose the desired preset paint scheme."
+	desc = ""
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdapainter"
 	density = TRUE
@@ -66,16 +66,16 @@
 
 /obj/machinery/pdapainter/attackby(obj/item/O, mob/user, params)
 	if(stat & BROKEN)
-		if(O.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
+		if(O.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM)
 			if(!O.tool_start_check(user, amount=0))
 				return
 			user.visible_message("<span class='notice'>[user] is repairing [src].</span>", \
-							"<span class='notice'>You begin repairing [src]...</span>", \
-							"<span class='hear'>You hear welding.</span>")
+							"<span class='notice'>I begin repairing [src]...</span>", \
+							"<span class='hear'>I hear welding.</span>")
 			if(O.use_tool(src, user, 40, volume=50))
 				if(!(stat & BROKEN))
 					return
-				to_chat(user, "<span class='notice'>You repair [src].</span>")
+				to_chat(user, "<span class='notice'>I repair [src].</span>")
 				stat &= ~BROKEN
 				obj_integrity = max_integrity
 				update_icon()
@@ -111,7 +111,7 @@
 	if(storedpda)
 		if(stat & BROKEN)	//otherwise the PDA is stuck until repaired
 			ejectpda()
-			to_chat(user, "<span class='info'>You manage to eject the loaded PDA.</span>")
+			to_chat(user, "<span class='info'>I manage to eject the loaded PDA.</span>")
 		else
 			var/obj/item/pda/P
 			P = input(user, "Select your color!", "PDA Painting") as null|anything in sortNames(colorlist)
@@ -131,7 +131,7 @@
 
 /obj/machinery/pdapainter/verb/ejectpda()
 	set name = "Eject PDA"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 
 	if(usr.stat || usr.restrained())

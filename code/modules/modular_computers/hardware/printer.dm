@@ -1,6 +1,6 @@
 /obj/item/computer_hardware/printer
 	name = "printer"
-	desc = "Computer-integrated printer with paper recycling module."
+	desc = ""
 	power_usage = 100
 	icon_state = "printer"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -41,12 +41,12 @@
 /obj/item/computer_hardware/printer/try_insert(obj/item/I, mob/living/user = null)
 	if(istype(I, /obj/item/paper))
 		if(stored_paper >= max_paper)
-			to_chat(user, "<span class='warning'>You try to add \the [I] into [src], but its paper bin is full!</span>")
+			to_chat(user, "<span class='warning'>I try to add \the [I] into [src], but its paper bin is full!</span>")
 			return FALSE
 
 		if(user && !user.temporarilyRemoveItemFromInventory(I))
 			return FALSE
-		to_chat(user, "<span class='notice'>You insert \the [I] into [src]'s paper recycler.</span>")
+		to_chat(user, "<span class='notice'>I insert \the [I] into [src]'s paper recycler.</span>")
 		qdel(I)
 		stored_paper++
 		return TRUE
@@ -54,7 +54,7 @@
 
 /obj/item/computer_hardware/printer/mini
 	name = "miniprinter"
-	desc = "A small printer with paper recycling module."
+	desc = ""
 	power_usage = 50
 	icon_state = "printer_mini"
 	w_class = WEIGHT_CLASS_TINY

@@ -32,7 +32,7 @@
 	damage = 30
 	paralyze = 15
 	knockdown = 80
-	hitsound = 'sound/effects/meteorimpact.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/projectile/bullet/shotgun_meteorslug/on_hit(atom/target, blocked = FALSE)
 	. = ..()

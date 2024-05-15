@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/bloodcrawl
 	name = "Blood Crawl"
-	desc = "Use pools of blood to phase out of existence."
+	desc = ""
 	charge_max = 0
 	clothes_req = FALSE
 	//If you couldn't cast this while phased, you'd have a problem
@@ -33,4 +33,4 @@
 		start_recharge()
 		return
 	revert_cast()
-	to_chat(user, "<span class='warning'>You are unable to blood crawl!</span>")
+	to_chat(user, "<span class='warning'>I are unable to blood crawl!</span>")

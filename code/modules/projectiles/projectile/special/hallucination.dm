@@ -48,7 +48,7 @@
 
 /obj/projectile/hallucination/proc/target_on_hit(mob/M)
 	if(M == hal_target)
-		to_chat(hal_target, "<span class='userdanger'>[M] is hit by \a [src] in the chest!</span>")
+		to_chat(hal_target, "<span class='danger'>[M] is hit by \a [src] in the chest!</span>")
 		hal_apply_effect()
 	else if(M in view(hal_target))
 		to_chat(hal_target, "<span class='danger'>[M] is hit by \a [src] in the chest!!</span>")
@@ -127,7 +127,7 @@
 	name = "bullet"
 	hal_icon_state = "bullet"
 	hal_fire_sound = "gunshot"
-	hal_hitsound = 'sound/weapons/pierce.ogg'
+	hal_hitsound = 'sound/blank.ogg'
 	hal_hitsound_wall = "ricochet"
 	hal_impact_effect = "impact_bullet"
 	hal_impact_effect_wall = "impact_bullet"
@@ -141,9 +141,9 @@
 	name = "laser"
 	damage_type = BURN
 	hal_icon_state = "laser"
-	hal_fire_sound = 'sound/weapons/laser.ogg'
-	hal_hitsound = 'sound/weapons/sear.ogg'
-	hal_hitsound_wall = 'sound/weapons/effects/searwall.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
+	hal_hitsound = 'sound/blank.ogg'
+	hal_hitsound_wall = 'sound/blank.ogg'
 	hal_impact_effect = "impact_laser"
 	hal_impact_effect_wall = "impact_laser_wall"
 	hit_duration = 4
@@ -159,8 +159,8 @@
 	damage_type = BURN
 	hal_icon_state = "spark"
 	color = "#FFFF00"
-	hal_fire_sound = 'sound/weapons/taser.ogg'
-	hal_hitsound = 'sound/weapons/taserhit.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
+	hal_hitsound = 'sound/blank.ogg'
 	hal_hitsound_wall = null
 	hal_impact_effect = null
 	hal_impact_effect_wall = null
@@ -177,9 +177,9 @@
 	name = "disabler beam"
 	damage_type = STAMINA
 	hal_icon_state = "omnilaser"
-	hal_fire_sound = 'sound/weapons/taser2.ogg'
-	hal_hitsound = 'sound/weapons/tap.ogg'
-	hal_hitsound_wall = 'sound/weapons/effects/searwall.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
+	hal_hitsound = 'sound/blank.ogg'
+	hal_hitsound_wall = 'sound/blank.ogg'
 	hal_impact_effect = "impact_laser_blue"
 	hal_impact_effect_wall = null
 	hit_duration = 4
@@ -192,7 +192,7 @@
 	name = "bolt"
 	damage_type = TOX
 	hal_icon_state = "cbbolt"
-	hal_fire_sound = 'sound/weapons/genhit.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
 	hal_hitsound = null
 	hal_hitsound_wall = null
 	hal_impact_effect = null
@@ -207,7 +207,7 @@
 	name = "bolt of change"
 	damage_type = BURN
 	hal_icon_state = "ice_1"
-	hal_fire_sound = 'sound/magic/staff_change.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
 	hal_hitsound = null
 	hal_hitsound_wall = null
 	hal_impact_effect = null
@@ -220,7 +220,7 @@
 	name = "bolt of death"
 	damage_type = BURN
 	hal_icon_state = "pulse1_bl"
-	hal_fire_sound = 'sound/magic/wandodeath.ogg'
+	hal_fire_sound = 'sound/blank.ogg'
 	hal_hitsound = null
 	hal_hitsound_wall = null
 	hal_impact_effect = null

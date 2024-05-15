@@ -3,7 +3,9 @@
 //The effects include: stun, knockdown, unconscious, sleeping, resting, jitteriness, dizziness, ear damage,
 // eye damage, eye_blind, eye_blurry, druggy, TRAIT_BLIND trait, and TRAIT_NEARSIGHT trait.
 
-
+///Set the slowdown of a mob
+/mob/proc/Slowdown(amount)
+	return
 
 ///Set the jitter of a mob
 /mob/proc/Jitter(amount)
@@ -47,15 +49,17 @@
 /// proc that adds and removes blindness overlays when necessary
 /mob/proc/update_blindness()
 	if(stat == UNCONSCIOUS || HAS_TRAIT(src, TRAIT_BLIND) || eye_blind) // UNCONSCIOUS or has blind trait, or has temporary blindness
-		if(stat == CONSCIOUS || stat == SOFT_CRIT)
-			throw_alert("blind", /obj/screen/alert/blind)
-		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		if(stat == CONSCIOUS)
+//			throw_alert("blind", /obj/screen/alert/blind)
+			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		else
+			overlay_fullscreen("blind", /obj/screen/fullscreen/blackimageoverlay)
 		// You are blind why should you be able to make out details like color, only shapes near you
-		add_client_colour(/datum/client_colour/monochrome/blind)
+//		add_client_colour(/datum/client_colour/monochrome/blind)
 	else // CONSCIOUS no blind trait, no blindness
-		clear_alert("blind")
+//		clear_alert("blind")
 		clear_fullscreen("blind")
-		remove_client_colour(/datum/client_colour/monochrome/blind)
+//		remove_client_colour(/datum/client_colour/monochrome/blind)
 /**
   * Make the mobs vision blurry
   */
@@ -84,6 +88,10 @@
 	var/obj/screen/plane_master/game_world/GW = locate(/obj/screen/plane_master/game_world) in client.screen
 	GW.backdrop(src)
 	OT.backdrop(src)
+	GW = locate(/obj/screen/plane_master/game_world_fov_hidden) in client.screen
+	GW.backdrop(src)
+	GW = locate(/obj/screen/plane_master/game_world_above) in client.screen
+	GW.backdrop(src)
 
 ///Adjust the drugginess of a mob
 /mob/proc/adjust_drugginess(amount)

@@ -6,7 +6,7 @@
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	layer = HIGH_OBJ_LAYER
-	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artefact's power."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BELT
 	var/usability = FALSE
@@ -60,7 +60,7 @@
 	return ..()
 
 /obj/item/soulstone/proc/hot_potato(mob/living/user)
-	to_chat(user, "<span class='userdanger'>Holy magics residing in \the [src] burn your hand!</span>")
+	to_chat(user, "<span class='danger'>Holy magics residing in \the [src] burn my hand!</span>")
 	var/obj/item/bodypart/affecting = user.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
 	affecting.receive_damage( 0, 10 )	// 10 burn damage
 	user.emote("scream")
@@ -72,7 +72,7 @@
 /obj/item/soulstone/attack(mob/living/carbon/human/M, mob/living/user)
 	if(!iscultist(user) && !iswizard(user) && !usability)
 		user.Unconscious(100)
-		to_chat(user, "<span class='userdanger'>Your body is wracked with debilitating pain!</span>")
+		to_chat(user, "<span class='danger'>My body is wracked with debilitating pain!</span>")
 		return
 	if(spent)
 		to_chat(user, "<span class='warning'>There is no power left in the shard.</span>")
@@ -84,7 +84,7 @@
 		return
 	if(iscultist(M))
 		if(iscultist(user))
-			to_chat(user, "<span class='cultlarge'>\"Come now, do not capture your bretheren's soul.\"</span>")
+			to_chat(user, "<span class='cultlarge'>\"Come now, do not capture my bretheren's soul.\"</span>")
 			return
 	if(purified && iscultist(user))
 		hot_potato(user)
@@ -99,7 +99,7 @@
 		return
 	if(!iscultist(user) && !iswizard(user) && !usability)
 		user.Unconscious(100)
-		to_chat(user, "<span class='userdanger'>Your body is wracked with debilitating pain!</span>")
+		to_chat(user, "<span class='danger'>My body is wracked with debilitating pain!</span>")
 		return
 	if(purified && iscultist(user))
 		hot_potato(user)
@@ -118,9 +118,9 @@
 			icon_state = "soulstone"
 		name = initial(name)
 		if(iswizard(user) || usability)
-			to_chat(A, "<b>You have been released from your prison, but you are still bound to [user.real_name]'s will. Help [user.p_them()] succeed in [user.p_their()] goals at all costs.</b>")
+			to_chat(A, "<b>I have been released from my prison, but you are still bound to [user.real_name]'s will. Help [user.p_them()] succeed in [user.p_their()] goals at all costs.</b>")
 		else if(iscultist(user))
-			to_chat(A, "<b>You have been released from your prison, but you are still bound to the cult's will. Help them succeed in their goals at all costs.</b>")
+			to_chat(A, "<b>I have been released from my prison, but you are still bound to the cult's will. Help them succeed in their goals at all costs.</b>")
 		was_used()
 
 ///////////////////////////Transferring to constructs/////////////////////////////////////////////////////
@@ -128,13 +128,13 @@
 	name = "empty shell"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct-cult"
-	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
+	desc = ""
 
 /obj/structure/constructshell/examine(mob/user)
 	. = ..()
 	if(iscultist(user) || iswizard(user) || user.stat == DEAD)
 		. += {"<span class='cult'>A construct shell, used to house bound souls from a soulstone.\n
-		Placing a soulstone with a soul into this shell allows you to produce your choice of the following:\n
+		Placing a soulstone with a soul into this shell allows you to produce my choice of the following:\n
 		An <b>Artificer</b>, which can produce <b>more shells and soulstones</b>, as well as fortifications.\n
 		A <b>Wraith</b>, which does high damage and can jaunt through walls, though it is quite fragile.\n
 		A <b>Juggernaut</b>, which is very hard to kill and can produce temporary walls, but is slow.</span>"}
@@ -171,7 +171,7 @@
 				init_shade(T, user)
 				return TRUE
 			else
-				to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soul has already fled its mortal frame. You attempt to bring it back...")
+				to_chat(user, "<span class='danger'>Capture failed!</span>: The soul has already fled its mortal frame. You attempt to bring it back...")
 				return getCultGhost(T,user)
 
 		if("VICTIM")
@@ -184,11 +184,11 @@
 					to_chat(user, "<span class='danger'>The soulstone seems to reject this soul.</span>")
 				return FALSE
 			if(contents.len)
-				to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soulstone is full! Free an existing soul to make room.")
+				to_chat(user, "<span class='danger'>Capture failed!</span>: The soulstone is full! Free an existing soul to make room.")
 			else
 				if((!old_shard && T.stat != CONSCIOUS) || (old_shard && T.stat == DEAD))
 					if(T.client == null)
-						to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soul has already fled its mortal frame. You attempt to bring it back...")
+						to_chat(user, "<span class='danger'>Capture failed!</span>: The soul has already fled its mortal frame. You attempt to bring it back...")
 						getCultGhost(T,user)
 					else
 						for(var/obj/item/W in T)
@@ -196,12 +196,12 @@
 						init_shade(T, user, message_user = 1)
 						qdel(T)
 				else
-					to_chat(user, "<span class='userdanger'>Capture failed!</span>: Kill or maim the victim first!")
+					to_chat(user, "<span class='danger'>Capture failed!</span>: Kill or maim the victim first!")
 
 		if("SHADE")
 			var/mob/living/simple_animal/shade/T = target
 			if(contents.len)
-				to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soulstone is full! Free an existing soul to make room.")
+				to_chat(user, "<span class='danger'>Capture failed!</span>: The soulstone is full! Free an existing soul to make room.")
 			else
 				T.AddComponent(/datum/component/soulstoned, src)
 				if(purified)
@@ -211,7 +211,7 @@
 				else
 					icon_state = "soulstone2"
 				name = "soulstone: Shade of [T.real_name]"
-				to_chat(T, "<span class='notice'>Your soul has been captured by the soulstone. Its arcane energies are reknitting your ethereal form.</span>")
+				to_chat(T, "<span class='notice'>My soul has been captured by the soulstone. Its arcane energies are reknitting my ethereal form.</span>")
 				if(user != T)
 					to_chat(user, "<span class='info'><b>Capture successful!</b>:</span> [T.real_name]'s soul has been captured and stored within the soulstone.")
 
@@ -253,7 +253,7 @@
 				qdel(T)
 				qdel(src)
 			else
-				to_chat(user, "<span class='userdanger'>Creation failed!</span>: The soul stone is empty! Go kill someone!")
+				to_chat(user, "<span class='danger'>Creation failed!</span>: The soul stone is empty! Go kill someone!")
 
 
 /proc/makeNewConstruct(mob/living/simple_animal/hostile/construct/ctype, mob/target, mob/stoner = null, cultoverride = 0, loc_override = null)
@@ -270,9 +270,9 @@
 	if(newstruct.mind && ((stoner && iscultist(stoner)) || cultoverride) && SSticker && SSticker.mode)
 		SSticker.mode.add_cultist(newstruct.mind, 0)
 	if(iscultist(stoner) || cultoverride)
-		to_chat(newstruct, "<b>You are still bound to serve the cult[stoner ? " and [stoner]":""], follow [stoner ? stoner.p_their() : "their"] orders and help [stoner ? stoner.p_them() : "them"] complete [stoner ? stoner.p_their() : "their"] goals at all costs.</b>")
+		to_chat(newstruct, "<b>I are still bound to serve the cult[stoner ? " and [stoner]":""], follow [stoner ? stoner.p_their() : "their"] orders and help [stoner ? stoner.p_them() : "them"] complete [stoner ? stoner.p_their() : "their"] goals at all costs.</b>")
 	else if(stoner)
-		to_chat(newstruct, "<b>You are still bound to serve your creator, [stoner], follow [stoner.p_their()] orders and help [stoner.p_them()] complete [stoner.p_their()] goals at all costs.</b>")
+		to_chat(newstruct, "<b>I are still bound to serve my creator, [stoner], follow [stoner.p_their()] orders and help [stoner.p_them()] complete [stoner.p_their()] goals at all costs.</b>")
 	newstruct.clear_alert("bloodsense")
 	BS = newstruct.throw_alert("bloodsense", /obj/screen/alert/bloodsense)
 	if(BS)

@@ -17,12 +17,12 @@ effective or pretty fucking useless.
 
 /obj/item/batterer
 	name = "mind batterer"
-	desc = "A strange device with twin antennas."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "batterer"
 	throwforce = 5
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	flags_1 = CONDUCT_1
 	item_state = "electronic"
@@ -45,13 +45,13 @@ effective or pretty fucking useless.
 		if(prob(50))
 
 			M.Paralyze(rand(200,400))
-			to_chat(M, "<span class='userdanger'>You feel a tremendous, paralyzing wave flood your mind.</span>")
+			to_chat(M, "<span class='danger'>I feel a tremendous, paralyzing wave flood your mind.</span>")
 
 		else
-			to_chat(M, "<span class='userdanger'>You feel a sudden, electric jolt travel through your head.</span>")
+			to_chat(M, "<span class='danger'>I feel a sudden, electric jolt travel through your head.</span>")
 
-	playsound(src.loc, 'sound/misc/interference.ogg', 50, TRUE)
-	to_chat(user, "<span class='notice'>You trigger [src].</span>")
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I trigger [src].</span>")
 	times_used += 1
 	if(times_used >= max_uses)
 		icon_state = "battererburnt"
@@ -173,7 +173,7 @@ effective or pretty fucking useless.
 
 /obj/item/shadowcloak
 	name = "cloaker belt"
-	desc = "Makes you invisible for short periods of time. Recharges in darkness."
+	desc = ""
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
@@ -202,14 +202,14 @@ effective or pretty fucking useless.
 /obj/item/shadowcloak/proc/Activate(mob/living/carbon/human/user)
 	if(!user)
 		return
-	to_chat(user, "<span class='notice'>You activate [src].</span>")
+	to_chat(user, "<span class='notice'>I activate [src].</span>")
 	src.user = user
 	START_PROCESSING(SSobj, src)
 	old_alpha = user.alpha
 	on = TRUE
 
 /obj/item/shadowcloak/proc/Deactivate()
-	to_chat(user, "<span class='notice'>You deactivate [src].</span>")
+	to_chat(user, "<span class='notice'>I deactivate [src].</span>")
 	STOP_PROCESSING(SSobj, src)
 	if(user)
 		user.alpha = old_alpha
@@ -237,14 +237,14 @@ effective or pretty fucking useless.
 
 /obj/item/jammer
 	name = "radio jammer"
-	desc = "Device used to disrupt nearby radio communication."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "jammer"
 	var/active = FALSE
 	var/range = 12
 
 /obj/item/jammer/attack_self(mob/user)
-	to_chat(user,"<span class='notice'>You [active ? "deactivate" : "activate"] [src].</span>")
+	to_chat(user,"<span class='notice'>I [active ? "deactivate" : "activate"] [src].</span>")
 	active = !active
 	if(active)
 		GLOB.active_jammers |= src

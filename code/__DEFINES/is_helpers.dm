@@ -1,16 +1,10 @@
 // simple is_type and similar inline helpers
 
-#if DM_VERSION < 513
-#define islist(L) (istype(L, /list))
-#endif
 
 #define in_range(source, user) (get_dist(source, user) <= 1 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
 
-#if DM_VERSION < 513
-#define ismovableatom(A) (istype(A, /atom/movable))
-#else
 #define ismovableatom(A) ismovable(A)
-#endif
+
 
 #define isatom(A) (isloc(A))
 
@@ -24,8 +18,20 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 	/turf/open/chasm,
 	/turf/open/lava,
 	/turf/open/water,
-	/turf/open/openspace
+	/turf/open/transparent/openspace
 	)))
+
+GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
+	/area/rogue/outdoors/woods,
+	/area/rogue/indoors/shelter/woods,
+	/area/rogue/outdoors/river,
+	/area/rogue/outdoors/bog,
+	/area/rogue/indoors/shelter/bog,
+	/area/rogue/outdoors/rtfield,
+	/area/rogue/indoors/shelter/rtfield
+	)))
+
+#define isforestsex(A) (is_type_in_typecache(A, GLOB.our_forest_sex))
 
 #define isgroundlessturf(A) (is_type_in_typecache(A, GLOB.turfs_without_ground))
 
@@ -50,6 +56,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ischasm(A) (istype(A, /turf/open/chasm))
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
+
+#define istransparentturf(A) (istype(A, /turf/open/transparent) || istype(A, /turf/closed/transparent))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))

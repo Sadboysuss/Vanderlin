@@ -1,7 +1,7 @@
 
 /obj/item/clothing/gloves/fingerless
 	name = "fingerless gloves"
-	desc = "Plain black gloves without fingertips for the hard working."
+	desc = ""
 	icon_state = "fingerless"
 	item_state = "fingerless"
 	transfer_prints = TRUE
@@ -14,7 +14,7 @@
 
 /obj/item/clothing/gloves/botanic_leather
 	name = "botanist's leather gloves"
-	desc = "These leather gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin.  They're also quite warm."
+	desc = ""
 	icon_state = "leather"
 	item_state = "ggloves"
 	permeability_coefficient = 0.9
@@ -27,7 +27,7 @@
 
 /obj/item/clothing/gloves/combat
 	name = "combat gloves"
-	desc = "These tactical gloves are fireproof and electrically insulated."
+	desc = ""
 	icon_state = "black"
 	item_state = "blackgloves"
 	siemens_coefficient = 0
@@ -42,7 +42,7 @@
 
 /obj/item/clothing/gloves/bracer
 	name = "bone bracers"
-	desc = "For when you're expecting to get slapped on the wrist. Offers modest protection to your arms."
+	desc = ""
 	icon_state = "bracers"
 	item_state = "bracers"
 	transfer_prints = TRUE
@@ -57,7 +57,7 @@
 
 /obj/item/clothing/gloves/rapid
 	name = "Gloves of the North Star"
-	desc = "Just looking at these fills you with an urge to beat the shit out of people."
+	desc = ""
 	icon_state = "rapid"
 	item_state = "rapid"
 	transfer_prints = TRUE

@@ -48,7 +48,7 @@
 	name = "Death Berries"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/berries/death)
 	multiplier = 2
-	bonus_desc = "He insists that \"he knows what he's doing\"."
+	bonus_desc = ""
 	foodtype = "sorbet"
 
 /datum/bounty/item/botany/berries_glow
@@ -62,28 +62,28 @@
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/cannabis)
 	exclude_types = list(/obj/item/reagent_containers/food/snacks/grown/cannabis/white, /obj/item/reagent_containers/food/snacks/grown/cannabis/death, /obj/item/reagent_containers/food/snacks/grown/cannabis/ultimate)
 	multiplier = 4 //hush money
-	bonus_desc = "Do not mention this shipment to security."
+	bonus_desc = ""
 	foodtype = "batch of \"muffins\""
-	
+
 /datum/bounty/item/botany/cannabis_white
 	name = "Lifeweed Leaves"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/cannabis/white)
 	multiplier = 6
-	bonus_desc = "Do not mention this shipment to security."
+	bonus_desc = ""
 	foodtype = "\"meal\""
 
 /datum/bounty/item/botany/cannabis_death
 	name = "Deathweed Leaves"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/cannabis/death)
 	multiplier = 6
-	bonus_desc = "Do not mention this shipment to security."
+	bonus_desc = ""
 	foodtype = "\"meal\""
 
 /datum/bounty/item/botany/cannabis_ultimate
 	name = "Omega Weed Leaves"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/cannabis/ultimate)
 	multiplier = 6
-	bonus_desc = "Under no circumstances mention this shipment to security."
+	bonus_desc = ""
 	foodtype = "batch of \"brownies\""
 
 /datum/bounty/item/botany/wheat
@@ -121,24 +121,24 @@
 /datum/bounty/item/botany/citrus_oranges
 	name = "Oranges"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/citrus/orange)
-	bonus_desc = "Do not ship lemons or limes." //I vanted orahnge!
+	bonus_desc = "" //I vanted orahnge!
 	foodtype = "sorbet"
 
 /datum/bounty/item/botany/eggplant
 	name = "Eggplants"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/eggplant)
-	bonus_desc = "Not to be confused with egg-plants."
+	bonus_desc = ""
 
 /datum/bounty/item/botany/eggplant_eggy
 	name = "Egg-plants"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/shell/eggy)
-	bonus_desc = "Not to be confused with eggplants."
+	bonus_desc = ""
 	multiplier = 2
 
 /datum/bounty/item/botany/kudzu
 	name = "Kudzu Pods"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/kudzupod)
-	bonus_desc = "Store in a dry, dark place."
+	bonus_desc = ""
 	multiplier = 4
 
 /datum/bounty/item/botany/watermelon
@@ -174,13 +174,13 @@
 	name = "Death Nettles"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/nettle/death)
 	multiplier = 2
-	bonus_desc = "Wear protection when handling them."
+	bonus_desc = ""
 	foodtype = "cheese"
 
 /datum/bounty/item/botany/pineapples
 	name = "Pineapples"
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/pineapple)
-	bonus_desc = "Not for human consumption."
+	bonus_desc = ""
 	foodtype = "ashtray"
 
 /datum/bounty/item/botany/tomato
@@ -198,4 +198,4 @@
 	wanted_types = list(/obj/item/reagent_containers/food/snacks/grown/oat)
 	multiplier = 2
 	foodtype = "batch of oatmeal"
-	bonus_desc = "Squats and oats. We're all out of oats."
+	bonus_desc = ""

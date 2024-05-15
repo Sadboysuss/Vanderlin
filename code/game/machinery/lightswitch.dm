@@ -3,7 +3,7 @@
 	name = "light switch"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light1"
-	desc = "Make dark."
+	desc = ""
 	power_channel = LIGHT
 	/// Set this to a string, path, or area instance to control that area
 	/// instead of the switch's location.

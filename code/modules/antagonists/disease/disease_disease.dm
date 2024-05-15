@@ -1,7 +1,7 @@
 /datum/disease/advance/sentient_disease
 	form = "Virus"
 	name = "Sentient Virus"
-	desc = "An apparently sentient virus, extremely adaptable and resistant to outside sources of mutation."
+	desc = ""
 	viable_mobtypes = list(/mob/living/carbon/human)
 	mutable = FALSE
 	var/mob/camera/disease/overmind
@@ -19,7 +19,7 @@
 		overmind.remove_infection(src)
 	..()
 
-/datum/disease/advance/sentient_disease/infect(var/mob/living/infectee, make_copy = TRUE)
+/datum/disease/advance/sentient_disease/infect(mob/living/infectee, make_copy = TRUE)
 	if(make_copy && overmind && (overmind.disease_template != src))
 		overmind.disease_template.infect(infectee, TRUE) //get an updated version of the virus
 	else

@@ -1,11 +1,11 @@
 /obj/structure/chair/pew
 	name = "wooden pew"
-	desc = "Kneel here and pray."
+	desc = ""
 	icon = 'icons/obj/sofa.dmi'
 	icon_state = "pewmiddle"
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
-	buildstacktype = /obj/item/stack/sheet/mineral/wood
+	buildstacktype
 	buildstackamount = 3
 	item_chair = null
 

@@ -1,6 +1,6 @@
 /obj/machinery/nanite_programmer
 	name = "nanite programmer"
-	desc = "A device that can edit nanite program disks to adjust their functionality."
+	desc = ""
 	var/obj/item/disk/nanite_program/disk
 	var/datum/nanite_program/program
 	icon = 'icons/obj/machines/research.dmi'
@@ -18,8 +18,8 @@
 		if(disk)
 			eject(user)
 		if(user.transferItemToLoc(N, src))
-			to_chat(user, "<span class='notice'>You insert [N] into [src]</span>")
-			playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+			to_chat(user, "<span class='notice'>I insert [N] into [src]</span>")
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 			disk = N
 			program = N.program
 	else

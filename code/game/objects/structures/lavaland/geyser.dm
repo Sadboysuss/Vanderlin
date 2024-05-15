@@ -38,7 +38,7 @@
 		to_chat(user, "<span class'warning'>The [name] is already active!</span>")
 		return
 
-	to_chat(user, "<span class='notice'>You start vigorously plunging [src]!</span>")
+	to_chat(user, "<span class='notice'>I start vigorously plunging [src]!</span>")
 	if(do_after(user, 50*P.plunge_mod, target = src) && !activated)
 		start_chemming()
 
@@ -52,7 +52,7 @@
 
 /obj/item/plunger
 	name = "plunger"
-	desc = "It's a plunger for plunging."
+	desc = ""
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "plunger"
 
@@ -67,7 +67,7 @@
 
 /obj/item/plunger/reinforced
 	name = "reinforced plunger"
-	desc = "It's an M. 7 Reinforced Plunger© for heavy duty plunging."
+	desc = ""
 	icon_state = "reinforced_plunger"
 
 	reinforced = TRUE

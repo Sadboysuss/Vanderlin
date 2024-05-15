@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/tree
 	name = "pine tree"
-	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
+	desc = ""
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
 	icon_living = "pine_1"
@@ -26,7 +26,7 @@
 	melee_damage_upper = 12
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/blank.ogg'
 	speak_emote = list("pines")
 	emote_taunt = list("growls")
 	taunt_chance = 20
@@ -60,11 +60,11 @@
 		if(prob(15))
 			C.Paralyze(60)
 			C.visible_message("<span class='danger'>\The [src] knocks down \the [C]!</span>", \
-					"<span class='userdanger'>\The [src] knocks you down!</span>")
+					"<span class='danger'>\The [src] knocks you down!</span>")
 
 /mob/living/simple_animal/hostile/tree/festivus
 	name = "festivus pole"
-	desc = "Serenity now... SERENITY NOW!"
+	desc = ""
 	icon_state = "festivus_pole"
 	icon_living = "festivus_pole"
 	icon_dead = "festivus_pole"

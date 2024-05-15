@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 
 /obj/item/stack/sheet/metal
 	name = "metal"
-	desc = "Sheets made out of metal."
+	desc = ""
 	singular_name = "metal sheet"
 	icon_state = "sheet-metal"
 	item_state = "sheet-metal"
@@ -106,6 +106,9 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	point_value = 2
 	tableVariant = /obj/structure/table
 	material_type = /datum/material/iron
+
+/obj/item/stack/sheet/metal/New()
+	qdel()
 
 /obj/item/stack/sheet/metal/narsie_act()
 	new /obj/item/stack/sheet/runed_metal(loc, amount)
@@ -153,7 +156,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
-	desc = "This sheet is an alloy of iron and plasma."
+	desc = ""
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	custom_materials = list(/datum/material/iron=2000, /datum/material/plasma=2000)
@@ -220,7 +223,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/wood
 	name = "wooden plank"
-	desc = "One can only guess that this is a bunch of wood."
+	desc = ""
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	item_state = "sheet-wood"
@@ -231,6 +234,9 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 	merge_type = /obj/item/stack/sheet/mineral/wood
 	novariants = TRUE
 	grind_results = list(/datum/reagent/cellulose = 20) //no lignocellulose or lignin reagents yet,
+
+/obj/item/stack/sheet/mineral/wood/New()
+	qdel()
 
 /obj/item/stack/sheet/mineral/wood/get_main_recipes()
 	. = ..()
@@ -250,7 +256,7 @@ GLOBAL_LIST_INIT(bamboo_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/bamboo
 	name = "bamboo cuttings"
-	desc = "Finely cut bamboo sticks."
+	desc = ""
 	singular_name = "cut bamboo"
 	icon_state = "sheet-bamboo"
 	item_state = "sheet-bamboo"
@@ -298,7 +304,7 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 
 /obj/item/stack/sheet/cloth
 	name = "cloth"
-	desc = "Is it cotton? Linen? Denim? Burlap? Canvas? You can't tell."
+	desc = ""
 	singular_name = "cloth roll"
 	icon_state = "sheet-cloth"
 	item_state = "sheet-cloth"
@@ -306,8 +312,8 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 	force = 0
 	throwforce = 0
 	merge_type = /obj/item/stack/sheet/cloth
-	drop_sound = 'sound/items/handling/cloth_drop.ogg'
-	pickup_sound =  'sound/items/handling/cloth_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 	grind_results = list(/datum/reagent/cellulose = 20)
 
 /obj/item/stack/sheet/cloth/get_main_recipes()
@@ -329,7 +335,7 @@ GLOBAL_LIST_INIT(durathread_recipes, list ( \
 
 /obj/item/stack/sheet/durathread
 	name = "durathread"
-	desc = "A fabric sown from incredibly durable threads, known for its usefulness in armor production."
+	desc = ""
 	singular_name = "durathread roll"
 	icon_state = "sheet-durathread"
 	item_state = "sheet-cloth"
@@ -337,8 +343,8 @@ GLOBAL_LIST_INIT(durathread_recipes, list ( \
 	force = 0
 	throwforce = 0
 	merge_type = /obj/item/stack/sheet/durathread
-	drop_sound = 'sound/items/handling/cloth_drop.ogg'
-	pickup_sound =  'sound/items/handling/cloth_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 /obj/item/stack/sheet/durathread/get_main_recipes()
 	. = ..()
@@ -346,7 +352,7 @@ GLOBAL_LIST_INIT(durathread_recipes, list ( \
 
 /obj/item/stack/sheet/cotton
 	name = "raw cotton bundle"
-	desc = "A bundle of raw cotton ready to be spun on the loom."
+	desc = ""
 	singular_name = "raw cotton ball"
 	icon_state = "sheet-cotton"
 	resistance_flags = FLAMMABLE
@@ -359,7 +365,7 @@ GLOBAL_LIST_INIT(durathread_recipes, list ( \
 
 /obj/item/stack/sheet/cotton/durathread
 	name = "raw durathread bundle"
-	desc = "A bundle of raw durathread ready to be spun on the loom."
+	desc = ""
 	singular_name = "raw durathread ball"
 	icon_state = "sheet-durathreadraw"
 	merge_type = /obj/item/stack/sheet/cotton/durathread
@@ -422,7 +428,7 @@ GLOBAL_LIST_INIT(cardboard_recipes, list (														\
 
 /obj/item/stack/sheet/cardboard	//BubbleWrap //it's cardboard you fuck
 	name = "cardboard"
-	desc = "Large sheets of card, like boxes folded flat."
+	desc = ""
 	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
 	item_state = "sheet-card"
@@ -444,8 +450,8 @@ GLOBAL_LIST_INIT(cardboard_recipes, list (														\
 	if(istype(I, /obj/item/stamp/clown) && !istype(loc, /obj/item/storage))
 		var/atom/droploc = drop_location()
 		if(use(1))
-			playsound(I, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
-			to_chat(user, "<span class='notice'>You stamp the cardboard! It's a clown box! Honk!</span>")
+			playsound(I, 'sound/blank.ogg', 50, TRUE, -1)
+			to_chat(user, "<span class='notice'>I stamp the cardboard! It's a clown box! Honk!</span>")
 			if (amount >= 0)
 				new/obj/item/storage/box/clown(droploc) //bugfix
 	else
@@ -467,7 +473,7 @@ GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
 
 /obj/item/stack/sheet/runed_metal
 	name = "runed metal"
-	desc = "Sheets of cold metal with shifting inscriptions writ upon them."
+	desc = ""
 	singular_name = "runed metal sheet"
 	icon_state = "sheet-runed"
 	item_state = "sheet-runed"
@@ -522,7 +528,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 
 /obj/item/stack/tile/bronze
 	name = "brass"
-	desc = "On closer inspection, what appears to be wholly-unsuitable-for-building brass is actually more structurally stable bronze."
+	desc = ""
 	singular_name = "bronze sheet"
 	icon_state = "sheet-brass"
 	item_state = "sheet-brass"
@@ -555,7 +561,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
  */
 /obj/item/stack/sheet/lessergem
 	name = "lesser gems"
-	desc = "Rare kind of gems which are only gained by blood sacrifice to minor deities. They are needed in crafting powerful objects."
+	desc = ""
 	singular_name = "lesser gem"
 	icon_state = "sheet-lessergem"
 	item_state = "sheet-lessergem"
@@ -564,7 +570,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 
 /obj/item/stack/sheet/greatergem
 	name = "greater gems"
-	desc = "Rare kind of gems which are only gained by blood sacrifice to minor deities. They are needed in crafting powerful objects."
+	desc = ""
 	singular_name = "greater gem"
 	icon_state = "sheet-greatergem"
 	item_state = "sheet-greatergem"
@@ -579,7 +585,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	icon_state = "bone"
 	item_state = "sheet-bone"
 	singular_name = "bone"
-	desc = "Someone's been drinking their milk."
+	desc = ""
 	force = 7
 	throwforce = 5
 	max_amount = 12
@@ -601,7 +607,7 @@ GLOBAL_LIST_INIT(plastic_recipes, list(
 
 /obj/item/stack/sheet/plastic
 	name = "plastic"
-	desc = "Compress dinosaur over millions of years, then refine, split and mold, and voila! You have plastic."
+	desc = ""
 	singular_name = "plastic sheet"
 	icon_state = "sheet-plastic"
 	item_state = "sheet-plastic"
@@ -625,7 +631,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 
 /obj/item/stack/sheet/paperframes
 	name = "paper frames"
-	desc = "A thin wooden frame with paper attached."
+	desc = ""
 	singular_name = "paper frame"
 	icon_state = "sheet-paper"
 	item_state = "sheet-paper"
@@ -645,12 +651,12 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 
 /obj/item/stack/sheet/capitalisium
 	name = "capitalisium sheet"
-	desc = "A source of raw capitalism, capable of bringing forth the prophesized Capitalist Golem."
+	desc = ""
 	icon_state = "sheet-capitalisium"
 	merge_type = /obj/item/stack/sheet/capitalisium
 
 /obj/item/stack/sheet/stalinium
 	name = "stalinium sheet"
-	desc = "A source of raw socialism, capable of bringing forth the prophesized Soviet Golem."
+	desc = ""
 	icon_state = "sheet-stalinium"
 	merge_type = /obj/item/stack/sheet/stalinium

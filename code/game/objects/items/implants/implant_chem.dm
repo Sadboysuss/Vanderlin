@@ -1,6 +1,6 @@
 /obj/item/implant/chem
 	name = "chem implant"
-	desc = "Injects things."
+	desc = ""
 	icon_state = "reagents"
 	activated = FALSE
 
@@ -46,15 +46,15 @@
 	else
 		injectamount = cause
 	reagents.trans_to(R, injectamount)
-	to_chat(R, "<span class='hear'>You hear a faint beep.</span>")
+	to_chat(R, "<span class='hear'>I hear a faint beep.</span>")
 	if(!reagents.total_volume)
-		to_chat(R, "<span class='hear'>You hear a faint click from your chest.</span>")
+		to_chat(R, "<span class='hear'>I hear a faint click from your chest.</span>")
 		qdel(src)
 
 
 /obj/item/implantcase/chem
 	name = "implant case - 'Remote Chemical'"
-	desc = "A glass case containing a remote chemical implant."
+	desc = ""
 	imp_type = /obj/item/implant/chem
 
 /obj/item/implantcase/chem/attackby(obj/item/W, mob/user, params)

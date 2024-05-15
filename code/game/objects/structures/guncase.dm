@@ -1,7 +1,7 @@
 //GUNCASES//
 /obj/structure/guncase
 	name = "gun locker"
-	desc = "A locker that holds guns."
+	desc = ""
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "shotguncase"
 	anchored = FALSE
@@ -41,13 +41,13 @@
 		if(LAZYLEN(contents) < capacity)
 			if(!user.transferItemToLoc(I, src))
 				return
-			to_chat(user, "<span class='notice'>You place [I] in [src].</span>")
+			to_chat(user, "<span class='notice'>I place [I] in [src].</span>")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>[src] is full.</span>")
 		return
 
-	else if(user.a_intent != INTENT_HARM)
+	else if(user.used_intent.type != INTENT_HARM)
 		open = !open
 		update_icon()
 	else
@@ -101,13 +101,13 @@
 
 /obj/structure/guncase/shotgun
 	name = "shotgun locker"
-	desc = "A locker that holds shotguns."
+	desc = ""
 	case_type = "shotgun"
 	gun_category = /obj/item/gun/ballistic/shotgun
 
 /obj/structure/guncase/ecase
 	name = "energy gun locker"
-	desc = "A locker that holds energy guns."
+	desc = ""
 	icon_state = "ecase"
 	case_type = "egun"
 	gun_category = /obj/item/gun/energy/e_gun

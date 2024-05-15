@@ -2,7 +2,7 @@
 	name = "recharger"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
-	desc = "A charging dock for energy based weaponry."
+	desc = ""
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 4
 	active_power_usage = 250
@@ -56,7 +56,7 @@
 			return
 		setAnchored(!anchored)
 		power_change()
-		to_chat(user, "<span class='notice'>You [anchored ? "attached" : "detached"] [src].</span>")
+		to_chat(user, "<span class='notice'>I [anchored ? "attached" : "detached"] [src].</span>")
 		G.play_tool_sound(src)
 		return
 
@@ -76,7 +76,7 @@
 			if (istype(G, /obj/item/gun/energy))
 				var/obj/item/gun/energy/E = G
 				if(!E.can_charge)
-					to_chat(user, "<span class='notice'>Your gun has no external power connector.</span>")
+					to_chat(user, "<span class='notice'>My gun has no external power connector.</span>")
 					return 1
 
 			if(!user.transferItemToLoc(G, src))

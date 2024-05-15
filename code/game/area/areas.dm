@@ -5,7 +5,7 @@
   */
 /area
 	level = null
-	name = "Space"
+	name = "unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
@@ -20,7 +20,7 @@
 	var/blob_allowed = TRUE // If blobs can spawn there and if it counts towards their score.
 
 	var/fire = null
-	var/atmos = TRUE
+//	var/atmos = TRUE
 	var/atmosalm = FALSE
 	var/poweralm = TRUE
 	var/lightswitch = TRUE
@@ -61,12 +61,39 @@
 	/// If false, loading multiple maps with this area type will create multiple instances.
 	var/unique = TRUE
 
-	var/no_air = null
+//	var/no_air = null
 
 	var/parallax_movedir = 0
 
 	var/list/ambientsounds = GENERIC
+	var/list/ambientrain = null
+	var/list/ambientnight = null
+
+	var/min_ambience_cooldown = 70 SECONDS
+	var/max_ambience_cooldown = 120 SECONDS
+
+	var/droningniqqa = TRUE
+	var/loopniqqa = TRUE
+
+	var/droning_sound_current = null
+	var/droning_sound_dawn = null
+	var/droning_sound = null
+	var/droning_sound_dusk = null
+	var/droning_sound_night = null
+	var/droning_vary = 0
+	var/droning_repeat = TRUE
+	var/droning_wait = 0
+	var/droning_volume = 100
+	var/droning_channel = CHANNEL_BUZZ
+	var/droning_frequency = 0
+
+	var/list/spookysounds = null
+	var/list/spookynight = null
+
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
+	var/soundenv = 0
+
+	var/first_time_text = null
 
 	var/list/firedoors
 	var/list/cameras
@@ -76,6 +103,13 @@
 	var/xenobiology_compatible = FALSE
 	/// typecache to limit the areas that atoms in this area can smooth with, used for shuttles IIRC
 	var/list/canSmoothWithAreas
+
+	var/list/ambush_types
+	var/list/ambush_mobs
+	var/list/ambush_times
+
+	var/converted_type
+
 
 /**
   * A list of teleport locations
@@ -121,6 +155,9 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		GLOB.areas_by_type[type] = src
 	return ..()
 
+/area/proc/can_craft_here()
+	return TRUE
+
 /**
   * Initalize this area
   *
@@ -130,7 +167,11 @@ GLOBAL_LIST_EMPTY(teleportlocs)
   * returns INITIALIZE_HINT_LATELOAD
   */
 /area/Initialize()
-	icon_state = ""
+	if(!outdoors)
+		plane = INDOOR_PLANE
+		icon_state = "mask"
+	else
+		icon_state = ""
 	layer = AREA_LAYER
 	map_name = name // Save the initial (the name set in the map) name of the area.
 	canSmoothWithAreas = typecacheof(canSmoothWithAreas)
@@ -152,7 +193,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 
 	. = ..()
 
-	blend_mode = BLEND_MULTIPLY // Putting this in the constructor so that it stops the icons being screwed up in the map editor.
+//	blend_mode = BLEND_MULTIPLY // Putting this in the constructor so that it stops the icons being screwed up in the map editor.
 
 	if(!IS_DYNAMIC_LIGHTING(src))
 		add_overlay(/obj/effect/fullbright)
@@ -446,14 +487,15 @@ GLOBAL_LIST_EMPTY(teleportlocs)
   * states on areas?? where the heck would that even display?
   */
 /area/update_icon_state()
-	var/weather_icon
-	for(var/V in SSweather.processing)
-		var/datum/weather/W = V
-		if(W.stage != END_STAGE && (src in W.impacted_areas))
-			W.update_areas()
-			weather_icon = TRUE
-	if(!weather_icon)
-		icon_state = null
+//	var/weather_icon
+///	for(var/V in SSweather.curweathers)
+//	/	var/datum/weather/W = V
+//		if(W.stage != END_STAGE && (src in W.impacted_areas))
+//			W.update_areas()
+//			weather_icon = TRUE
+//	if(!weather_icon)
+//		icon_state = null
+	return
 
 /**
   * Update the icon of the area (overridden to always be null for space
@@ -569,7 +611,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
   *
   * If the area has ambience, then it plays some ambience music to the ambience channel
   */
-/area/Entered(atom/movable/M)
+/area/Entered(atom/movable/M, OldLoc)
 	set waitfor = FALSE
 	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, M)
 	SEND_SIGNAL(M, COMSIG_ENTER_AREA, src) //The atom that enters the area
@@ -577,24 +619,67 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		return
 
 	var/mob/living/L = M
-	if(!L.ckey)
+	if(!L.ckey || L.stat == DEAD)
 		return
 
 	// Ambience goes down here -- make sure to list each area separately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(L.client && !L.client.ambience_playing && L.client.prefs.toggles & SOUND_SHIP_AMBIENCE)
-		L.client.ambience_playing = 1
-		SEND_SOUND(L, sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 35, channel = CHANNEL_BUZZ))
+//	if(L.client && !L.client.ambience_playing && L.client.prefs.toggles & SOUND_SHIP_AMBIENCE)
+//		L.client.ambience_playing = 1
+//		SEND_SOUND(L, sound('sound/blank.ogg', repeat = 1, wait = 0, volume = 35, channel = CHANNEL_BUZZ))
 
-	if(!(L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))
-		return //General ambience check is below the ship ambience so one can play without the other
+	if(first_time_text)
+		L.intro_area(src)
 
-	if(prob(35))
-		var/sound = pick(ambientsounds)
+//	L.play_ambience(src)
 
-		if(!L.client.played)
-			SEND_SOUND(L, sound(sound, repeat = 0, wait = 0, volume = 25, channel = CHANNEL_AMBIENCE))
-			L.client.played = TRUE
-			addtimer(CALLBACK(L.client, /client/proc/ResetAmbiencePlayed), 600)
+/client
+	var/musicfading = 0
+
+/mob/living/proc/intro_area(area/A)
+	if(!mind)
+		return
+	if(A.first_time_text in mind.areas_entered)
+		return
+	if(!client)
+		return
+	mind.areas_entered += A.first_time_text
+	var/obj/screen/area_text/T = new()
+	client.screen += T
+	T.maptext = {"<span style='vertical-align:top; text-align:center;
+				color: #820000; font-size: 300%;
+				text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+				font-family: "Blackmoor LET", "Pterra";'>[A.first_time_text]</span>"}
+	T.maptext_width = 205
+	T.maptext_height = 209
+	T.maptext_x = 12
+	T.maptext_y = 64
+	playsound_local(src, 'sound/misc/area.ogg', 100, FALSE)
+	animate(T, alpha = 255, time = 10, easing = EASE_IN)
+	addtimer(CALLBACK(src, .proc/clear_area_text, T), 35)
+
+/mob/living/proc/clear_area_text(obj/screen/A)
+	if(!A)
+		return
+	if(!client)
+		return
+	animate(A, alpha = 0, time = 10, easing = EASE_OUT)
+	sleep(11)
+	if(client)
+		if(client.screen && A)
+			client.screen -= A
+			qdel(A)
+
+/mob/living/proc/clear_time_icon(obj/screen/A)
+	if(!A)
+		return
+	if(!client)
+		return
+	animate(A, alpha = 0, time = 20, easing = EASE_OUT)
+	sleep(21)
+	if(client)
+		if(client.screen && A)
+			client.screen -= A
+			qdel(A)
 
 ///Divides total beauty in the room by roomsize to allow us to get an average beauty per tile.
 /area/proc/update_beauty()
@@ -619,8 +704,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /**
   * Reset the played var to false on the client
   */
-/client/proc/ResetAmbiencePlayed()
-	played = FALSE
 
 /**
   * Setup an area (with the given name)
@@ -664,3 +747,44 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /// A hook so areas can modify the incoming args (of what??)
 /area/proc/PlaceOnTopReact(list/new_baseturfs, turf/fake_turf_type, flags)
 	return flags
+
+/area/Entered(atom/movable/arrived, area/old_area)
+	var/mob/living/living_arrived = arrived
+	if(istype(living_arrived) && living_arrived.client && !living_arrived.cmode)
+		//Ambience if combat mode is off
+		SSdroning.area_entered(src, living_arrived.client)
+		SSdroning.play_loop(src, living_arrived.client)
+		var/found = FALSE
+		for(var/datum/weather/rain/R in SSweather.curweathers)
+			found = TRUE
+		if(found)
+			SSdroning.play_rain(src, living_arrived.client)
+
+/area/proc/on_joining_game(mob/living/boarder)
+	return
+
+/area/proc/reconnect_game(mob/living/boarder)
+	return
+
+/area/on_joining_game(mob/living/boarder)
+	. = ..()
+	if(istype(boarder) && boarder.client)
+		SSdroning.area_entered(src, boarder.client)
+		boarder.client.update_ambience_pref()
+		SSdroning.play_loop(src, boarder.client)
+		var/found = FALSE
+		for(var/datum/weather/rain/R in SSweather.curweathers)
+			found = TRUE
+		if(found)
+			SSdroning.play_rain(get_area(boarder.client), boarder.client)
+
+/area/reconnect_game(mob/living/boarder)
+	. = ..()
+	if(istype(boarder) && boarder.client)
+		SSdroning.area_entered(src, boarder.client)
+		SSdroning.play_loop(src, boarder.client)
+		var/found = FALSE
+		for(var/datum/weather/rain/R in SSweather.curweathers)
+			found = TRUE
+		if(found)
+			SSdroning.play_rain(get_area(boarder.client), boarder.client)

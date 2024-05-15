@@ -18,7 +18,7 @@ Bonus
 /datum/symptom/fire
 
 	name = "Spontaneous Combustion"
-	desc = "The virus turns fat into an extremely flammable compound, and raises the body's temperature, making the host burst into flames spontaneously."
+	desc = ""
 	stealth = -1
 	resistance = -4
 	stage_speed = -3
@@ -57,12 +57,12 @@ Bonus
 		if(4)
 			Firestacks_stage_4(M, A)
 			M.IgniteMob()
-			to_chat(M, "<span class='userdanger'>Your skin bursts into flames!</span>")
+			to_chat(M, "<span class='danger'>My skin bursts into flames!</span>")
 			M.emote("scream")
 		if(5)
 			Firestacks_stage_5(M, A)
 			M.IgniteMob()
-			to_chat(M, "<span class='userdanger'>Your skin erupts into an inferno!</span>")
+			to_chat(M, "<span class='danger'>My skin erupts into an inferno!</span>")
 			M.emote("scream")
 
 /datum/symptom/fire/proc/Firestacks_stage_4(mob/living/M, datum/disease/advance/A)
@@ -100,7 +100,7 @@ Bonus
 /datum/symptom/alkali
 
 	name = "Alkali perspiration"
-	desc = "The virus attaches to sudoriparous glands, synthesizing a chemical that bursts into flames when reacting with water, leading to self-immolation."
+	desc = ""
 	stealth = 2
 	resistance = -2
 	stage_speed = -2
@@ -142,7 +142,7 @@ Bonus
 				explosion(get_turf(M),-1,(-1 + explosion_power),(2 * explosion_power))
 			Alkali_fire_stage_4(M, A)
 			M.IgniteMob()
-			to_chat(M, "<span class='userdanger'>Your sweat bursts into flames!</span>")
+			to_chat(M, "<span class='danger'>My sweat bursts into flames!</span>")
 			M.emote("scream")
 		if(5)
 			if(M.fire_stacks < 0)
@@ -150,7 +150,7 @@ Bonus
 				explosion(get_turf(M),-1,(-1 + explosion_power),(2 * explosion_power))
 			Alkali_fire_stage_5(M, A)
 			M.IgniteMob()
-			to_chat(M, "<span class='userdanger'>Your skin erupts into an inferno!</span>")
+			to_chat(M, "<span class='danger'>My skin erupts into an inferno!</span>")
 			M.emote("scream")
 
 /datum/symptom/alkali/proc/Alkali_fire_stage_4(mob/living/M, datum/disease/advance/A)

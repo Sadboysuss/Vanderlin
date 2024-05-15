@@ -17,12 +17,12 @@
 
 /mob/living/simple_animal/drone
 	name = "Drone"
-	desc = "A maintenance drone, an expendable robot built to perform station repairs."
+	desc = ""
 	icon = 'icons/mob/drone.dmi'
 	icon_state = "drone_maint_grey"
 	icon_living = "drone_maint_grey"
 	icon_dead = "drone_maint_dead"
-	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
+	base_intents = list(INTENT_HELP, INTENT_HARM)
 	health = 30
 	maxHealth = 30
 	unsuitable_atmos_damage = 0
@@ -58,7 +58,7 @@
 	var/colour = "grey"	//Stored drone color, so we can go back when unhacked.
 	var/list/drone_overlays[DRONE_TOTAL_LAYERS]
 	var/laws = \
-	"1. You may not involve yourself in the matters of another being, even if such matters conflict with Law Two or Law Three, unless the other being is another Drone.\n"+\
+	"1. You may not involve myself in the matters of another being, even if such matters conflict with Law Two or Law Three, unless the other being is another Drone.\n"+\
 	"2. You may not harm any being, regardless of intent or circumstance.\n"+\
 	"3. Your goals are to actively build, maintain, repair, improve, and provide power to the best of your abilities within the facility that housed your activation." //for derelict drones so they don't go to station.
 	var/heavy_emp_damage = 25 //Amount of damage sustained if hit by a heavy EMP pulse
@@ -205,7 +205,7 @@
 	to_chat(src, "<span class='danger'><b>ER@%R: MME^RY CO#RU9T!</b> R&$b@0tin)...</span>")
 	if(severity == 1)
 		adjustBruteLoss(heavy_emp_damage)
-		to_chat(src, "<span class='userdanger'>HeAV% DA%^MMA+G TO I/O CIR!%UUT!</span>")
+		to_chat(src, "<span class='danger'>HeAV% DA%^MMA+G TO I/O CIR!%UUT!</span>")
 
 
 /mob/living/simple_animal/drone/proc/triggerAlarm(class, area/A, O, obj/alarmsource)

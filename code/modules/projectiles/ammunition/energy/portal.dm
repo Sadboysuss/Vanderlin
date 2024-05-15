@@ -2,7 +2,7 @@
 	projectile_type = /obj/projectile/beam/wormhole
 	e_cost = 0
 	harmful = FALSE
-	fire_sound = 'sound/weapons/pulse3.ogg'
+	fire_sound = 'sound/blank.ogg'
 	select_name = "blue"
 	var/obj/item/gun/energy/wormhole_projector/gun
 

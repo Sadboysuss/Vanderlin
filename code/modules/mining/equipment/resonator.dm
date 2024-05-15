@@ -6,7 +6,7 @@
 	item_state = "resonator"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
-	desc = "A handheld device that creates small fields of energy that resonate until they detonate, crushing rock. It does increased damage in low pressure."
+	desc = ""
 	w_class = WEIGHT_CLASS_NORMAL
 	force = 15
 	throwforce = 10
@@ -17,7 +17,7 @@
 
 /obj/item/resonator/upgraded
 	name = "upgraded resonator"
-	desc = "An upgraded version of the resonator that can produce more fields at once, as well as having no damage penalty for bursting a resonance field early."
+	desc = ""
 	icon_state = "resonator_u"
 	item_state = "resonator_u"
 	fieldlimit = 6
@@ -26,10 +26,10 @@
 /obj/item/resonator/attack_self(mob/user)
 	if(burst_time == 50)
 		burst_time = 30
-		to_chat(user, "<span class='info'>You set the resonator's fields to detonate after 3 seconds.</span>")
+		to_chat(user, "<span class='info'>I set the resonator's fields to detonate after 3 seconds.</span>")
 	else
 		burst_time = 50
-		to_chat(user, "<span class='info'>You set the resonator's fields to detonate after 5 seconds.</span>")
+		to_chat(user, "<span class='info'>I set the resonator's fields to detonate after 5 seconds.</span>")
 
 /obj/item/resonator/proc/CreateResonance(target, mob/user)
 	var/turf/T = get_turf(target)
@@ -50,7 +50,7 @@
 //resonance field, crushes rock, damages mobs
 /obj/effect/temp_visual/resonance
 	name = "resonance field"
-	desc = "A resonating field that significantly damages anything inside of it when the field eventually ruptures. More damaging in low pressure environments."
+	desc = ""
 	icon_state = "shield1"
 	layer = ABOVE_ALL_MOB_LAYER
 	duration = 50
@@ -66,7 +66,7 @@
 	res = set_resonator
 	if(res)
 		res.fields += src
-	playsound(src,'sound/weapons/resonator_fire.ogg',50,TRUE)
+	playsound(src,'sound/blank.ogg',50,TRUE)
 	transform = matrix()*0.75
 	animate(src, transform = matrix()*1.5, time = duration)
 	deltimer(timerid)
@@ -97,11 +97,11 @@
 		var/turf/closed/mineral/M = T
 		M.gets_drilled(creator)
 	check_pressure(T)
-	playsound(T,'sound/weapons/resonator_blast.ogg',50,TRUE)
+	playsound(T,'sound/blank.ogg',50,TRUE)
 	for(var/mob/living/L in T)
 		if(creator)
 			log_combat(creator, L, "used a resonator field on", "resonator")
-		to_chat(L, "<span class='userdanger'>[src] ruptured with you in it!</span>")
+		to_chat(L, "<span class='danger'>[src] ruptured with you in it!</span>")
 		L.apply_damage(resonance_damage, BRUTE)
 	qdel(src)
 

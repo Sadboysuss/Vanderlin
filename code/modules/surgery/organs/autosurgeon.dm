@@ -2,7 +2,7 @@
 
 /obj/item/autosurgeon
 	name = "autosurgeon"
-	desc = "A device that automatically inserts an implant or organ into the user without the hassle of extensive surgery. It has a slot to insert implants/organs and a screwdriver slot for removing accidentally added items."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "autoimplanter"
 	item_state = "nothing"
@@ -17,7 +17,7 @@
 	if(starting_organ)
 		insert_organ(new starting_organ(src))
 
-/obj/item/autosurgeon/proc/insert_organ(var/obj/item/I)
+/obj/item/autosurgeon/proc/insert_organ(obj/item/I)
 	storedorgan = I
 	I.forceMove(src)
 	name = "[initial(name)] ([storedorgan.name])"
@@ -30,14 +30,14 @@
 		to_chat(user, "<span class='alert'>[src] currently has no implant stored.</span>")
 		return
 	storedorgan.Insert(user)//insert stored organ into the user
-	user.visible_message("<span class='notice'>[user] presses a button on [src], and you hear a short mechanical noise.</span>", "<span class='notice'>You feel a sharp sting as [src] plunges into your body.</span>")
-	playsound(get_turf(user), 'sound/weapons/circsawhit.ogg', 50, TRUE)
+	user.visible_message("<span class='notice'>[user] presses a button on [src], and you hear a short mechanical noise.</span>", "<span class='notice'>I feel a sharp sting as [src] plunges into my body.</span>")
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	storedorgan = null
 	name = initial(name)
 	if(uses != INFINITE)
 		uses--
 	if(!uses)
-		desc = "[initial(desc)] Looks like it's been used up."
+		desc = ""
 
 /obj/item/autosurgeon/attack_self_tk(mob/user)
 	return //stops TK fuckery
@@ -53,7 +53,7 @@
 		if(!user.transferItemToLoc(I, src))
 			return
 		storedorgan = I
-		to_chat(user, "<span class='notice'>You insert the [I] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert the [I] into [src].</span>")
 	else
 		return ..()
 
@@ -68,17 +68,17 @@
 			var/atom/movable/AM = J
 			AM.forceMove(drop_loc)
 
-		to_chat(user, "<span class='notice'>You remove the [storedorgan] from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove the [storedorgan] from [src].</span>")
 		I.play_tool_sound(src)
 		storedorgan = null
 		if(uses != INFINITE)
 			uses--
 		if(!uses)
-			desc = "[initial(desc)] Looks like it's been used up."
+			desc = ""
 	return TRUE
 
 /obj/item/autosurgeon/cmo
-	desc = "A single use autosurgeon that contains a medical heads-up display augment. A screwdriver can be used to remove it, but implants can't be placed back in."
+	desc = ""
 	uses = 1
 	starting_organ = /obj/item/organ/cyberimp/eyes/hud/medical
 

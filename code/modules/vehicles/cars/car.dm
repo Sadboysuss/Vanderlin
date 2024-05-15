@@ -3,7 +3,7 @@
 	anchored = TRUE
 	default_driver_move = FALSE
 	var/car_traits = NONE //Bitflag for special behavior such as kidnapping
-	var/engine_sound = 'sound/vehicles/carrev.ogg'
+	var/engine_sound = 'sound/blank.ogg'
 	var/last_enginesound_time
 	var/engine_sound_length = 20 //Set this to the length of the engine sound
 	var/escape_time = 60 //Time it takes to break out of the car
@@ -43,7 +43,7 @@
 
 /obj/vehicle/sealed/car/mob_try_exit(mob/M, mob/user, silent = FALSE)
 	if(M == user && (occupants[M] & VEHICLE_CONTROL_KIDNAPPED))
-		to_chat(user, "<span class='notice'>You push against the back of \the [src]'s trunk to try and get out.</span>")
+		to_chat(user, "<span class='notice'>I push against the back of \the [src]'s trunk to try and get out.</span>")
 		if(!do_after(user, escape_time, target = src))
 			return FALSE
 		to_chat(user,"<span class='danger'>[user] gets out of [src].</span>")
@@ -56,7 +56,7 @@
 	if(!I.force)
 		return
 	if(occupants[user])
-		to_chat(user, "<span class='notice'>Your attack bounces off \the [src]'s padded interior.</span>")
+		to_chat(user, "<span class='notice'>My attack bounces off \the [src]'s padded interior.</span>")
 		return
 	return ..()
 
@@ -66,7 +66,7 @@
 		return
 	if(occupants[user])
 		return
-	to_chat(user, "<span class='notice'>You start opening [src]'s trunk.</span>")
+	to_chat(user, "<span class='notice'>I start opening [src]'s trunk.</span>")
 	if(do_after(user, 30))
 		if(return_amount_of_controllers_with_flag(VEHICLE_CONTROL_KIDNAPPED))
 			to_chat(user, "<span class='notice'>The people stuck in [src]'s trunk all come tumbling out.</span>")

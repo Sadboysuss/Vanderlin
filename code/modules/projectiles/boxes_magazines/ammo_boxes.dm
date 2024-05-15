@@ -1,6 +1,6 @@
 /obj/item/ammo_box/a357
 	name = "speed loader (.357)"
-	desc = "Designed to quickly reload revolvers."
+	desc = ""
 	icon_state = "357"
 	ammo_type = /obj/item/ammo_casing/a357
 	max_ammo = 7
@@ -9,7 +9,7 @@
 
 /obj/item/ammo_box/c38
 	name = "speed loader (.38)"
-	desc = "Designed to quickly reload revolvers."
+	desc = ""
 	icon_state = "38"
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 6
@@ -18,17 +18,17 @@
 
 /obj/item/ammo_box/c38/trac
 	name = "speed loader (.38 TRAC)"
-	desc = "Designed to quickly reload revolvers. TRAC bullets embed a tracking implant within the target's body."
+	desc = ""
 	ammo_type = /obj/item/ammo_casing/c38/trac
 
 /obj/item/ammo_box/c38/hotshot
 	name = "speed loader (.38 Hot Shot)"
-	desc = "Designed to quickly reload revolvers. Hot Shot bullets contain an incendiary payload."
+	desc = ""
 	ammo_type = /obj/item/ammo_casing/c38/hotshot
 
 /obj/item/ammo_box/c38/iceblox
 	name = "speed loader (.38 Iceblox)"
-	desc = "Designed to quickly reload revolvers. Iceblox bullets contain a cryogenic payload."
+	desc = ""
 	ammo_type = /obj/item/ammo_casing/c38/iceblox
 
 /obj/item/ammo_box/c9mm
@@ -58,7 +58,7 @@
 
 /obj/item/ammo_box/a762
 	name = "stripper clip (7.62mm)"
-	desc = "A stripper clip."
+	desc = ""
 	icon_state = "762"
 	ammo_type = /obj/item/ammo_casing/a762
 	max_ammo = 5

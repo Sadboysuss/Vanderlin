@@ -1,6 +1,6 @@
 /obj/machinery/aug_manipulator
 	name = "\improper augment manipulator"
-	desc = "A machine for custom fitting augmentations, with in-built spraypainter."
+	desc = ""
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdapainter"
 	density = TRUE
@@ -73,19 +73,19 @@
 			O.add_fingerprint(user)
 			update_icon()
 
-	else if(O.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
+	else if(O.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM)
 		if(obj_integrity < max_integrity)
 			if(!O.tool_start_check(user, amount=0))
 				return
 
 			user.visible_message("<span class='notice'>[user] begins repairing [src].</span>", \
-				"<span class='notice'>You begin repairing [src]...</span>", \
-				"<span class='hear'>You hear welding.</span>")
+				"<span class='notice'>I begin repairing [src]...</span>", \
+				"<span class='hear'>I hear welding.</span>")
 
 			if(O.use_tool(src, user, 40, volume=50))
 				if(!(stat & BROKEN))
 					return
-				to_chat(user, "<span class='notice'>You repair [src].</span>")
+				to_chat(user, "<span class='notice'>I repair [src].</span>")
 				stat &= ~BROKEN
 				obj_integrity = max(obj_integrity, max_integrity)
 				update_icon()

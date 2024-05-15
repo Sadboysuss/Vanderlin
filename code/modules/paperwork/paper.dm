@@ -5,12 +5,49 @@
  * lipstick wiping is in code/game/objects/items/weapons/cosmetics.dm!
  */
 
+#ifdef TESTSERVER
+
+/client/verb/textperp()
+	set category = "PAPER"
+	set name = "textper+"
+	set desc = ""
+
+	var/obj/item/I
+	I = mob.get_active_held_item()
+	if(I)
+		if(istype(I,/obj/item/paper))
+			var/obj/item/paper/P = I
+			P.textper++
+			P.read(mob)
+		if(istype(I,/obj/item/book))
+			var/obj/item/book/P = I
+			P.textper++
+			P.read(mob)
+
+/client/verb/textperm()
+	set category = "PAPER"
+	set name = "textper-"
+	set desc = ""
+
+	var/obj/item/I
+	I = mob.get_active_held_item()
+	if(I)
+		if(istype(I,/obj/item/paper))
+			var/obj/item/paper/P = I
+			P.textper--
+			P.read(mob)
+		if(istype(I,/obj/item/book))
+			var/obj/item/book/P = I
+			P.textper--
+			P.read(mob)
+
+#endif
+
 /obj/item/paper
-	name = "paper"
+	name = "parchment"
 	gender = NEUTER
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "paper"
-	item_state = "paper"
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 	throw_range = 1
@@ -19,10 +56,10 @@
 	slot_flags = ITEM_SLOT_HEAD
 	body_parts_covered = HEAD
 	resistance_flags = FLAMMABLE
-	max_integrity = 50
+	max_integrity = 30
 	dog_fashion = /datum/dog_fashion/head
-	drop_sound = 'sound/items/handling/paper_drop.ogg'
-	pickup_sound =  'sound/items/handling/paper_pickup.ogg'
+	drop_sound = 'sound/foley/dropsound/paper_drop.ogg'
+	pickup_sound =  'sound/blank.ogg'
 	grind_results = list(/datum/reagent/cellulose = 3)
 
 
@@ -37,7 +74,30 @@
 	var/spam_flag = 0
 	var/contact_poison // Reagent ID to transfer on contact
 	var/contact_poison_volume = 0
+	dropshrink = 0.5
+	var/textper = 100
+	var/maxlen = 2000
 
+	var/cached_mailer
+	var/cached_mailedto
+
+/obj/item/paper/get_real_price()
+	if(info)
+		return 0
+	else
+		return sellprice
+
+/obj/item/paper/spark_act()
+	fire_act()
+
+/obj/item/paper/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.3,"sx" = 0,"sy" = -1,"nx" = 13,"ny" = -1,"wx" = 4,"wy" = 0,"ex" = 7,"ey" = -1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 2,"sflip" = 0,"wflip" = 0,"eflip" = 8)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/paper/pickup(user)
 	if(contact_poison && ishuman(user))
@@ -48,6 +108,9 @@
 			contact_poison = null
 	..()
 
+/obj/item/paper/update_icon()
+	. = ..()
+	update_icon_state()
 
 /obj/item/paper/Initialize()
 	. = ..()
@@ -56,37 +119,57 @@
 	update_icon_state()
 	updateinfolinks()
 
-
 /obj/item/paper/update_icon_state()
-
-	if(resistance_flags & ON_FIRE)
-		icon_state = "paper_onfire"
+	if(mailer)
+		icon_state = "paper_prep"
+		name = "letter"
+		throw_range = 7
 		return
+	name = initial(name)
+	throw_range = initial(throw_range)
 	if(info)
-		icon_state = "paper_words"
+		icon_state = "paperwrite"
 		return
 	icon_state = "paper"
 
-
 /obj/item/paper/examine(mob/user)
 	. = ..()
-	var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/paper)
-	assets.send(user)
+	if(!mailer)
+		. += "<a href='?src=[REF(src)];read=1'>Read</a> (<a href='?src=[REF(src)];Help=1'>Help</a>)"
+	else
+		. += "It's from [mailer], addressed to [mailedto].</a>"
 
+/obj/item/paper/proc/read(mob/user)
+//	var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/paper)
+//	assets.send(user)
+	if(!user.client || !user.hud_used)
+		return
+	if(!user.hud_used.reads)
+		return
+	if(!user.can_read(src))
+		return
+	if(mailer)
+		return
+	if(in_range(user, src) || isobserver(user))
+//		var/obj/screen/read/R = user.hud_used.reads
+		format_browse(info, user)
+	else
+		return "<span class='warning'>I'm too far away to read it.</span>"
+
+/*
 	if(in_range(user, src) || isobserver(user))
 		if(user.is_literate())
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[info]<HR>[stamps]</BODY></HTML>", "window=paper[md5(name)]")
+			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[info]<HR></BODY></HTML>", "window=paper[md5(name)]")
 			onclose(user, "paper[md5(name)]")
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[stars(info)]<HR>[stamps]</BODY></HTML>", "window=paper[md5(name)]")
+			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[stars(info)]<HR></BODY></HTML>", "window=paper[md5(name)]")
 			onclose(user, "paper[md5(name)]")
 	else
-		. += "<span class='warning'>You're too far away to read it!</span>"
-
-
+		return "<span class='warning'>You're too far away to read it.</span>"
+*/
 /obj/item/paper/verb/rename()
 	set name = "Rename paper"
-	set category = "Object"
+	set hidden = 1
 	set src in usr
 
 	if(usr.incapacitated() || !usr.is_literate())
@@ -94,7 +177,7 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		if(HAS_TRAIT(H, TRAIT_CLUMSY) && prob(25))
-			to_chat(H, "<span class='warning'>You cut yourself on the paper! Ahhhh! Ahhhhh!</span>")
+			to_chat(H, "<span class='warning'>I cut myself on the paper! Ahhhh! Ahhhhh!</span>")
 			H.damageoverlaytemp = 9001
 			H.update_damage_hud()
 			return
@@ -112,11 +195,19 @@
 	spam_flag = FALSE
 
 /obj/item/paper/attack_self(mob/user)
-	user.examinate(src)
+	if(mailer)
+		user.visible_message("<span class='notice'>[user] opens the letter from [mailer].</span>")
+		cached_mailer = mailer
+		cached_mailedto = mailedto
+		mailer = null
+		mailedto = null
+		update_icon()
+		return
+	read(user)
 	if(rigged && (SSevents.holidays && SSevents.holidays[APRIL_FOOLS]))
 		if(!spam_flag)
 			spam_flag = TRUE
-			playsound(loc, 'sound/items/bikehorn.ogg', 50, TRUE)
+			playsound(loc, 'sound/blank.ogg', 50, TRUE)
 			addtimer(CALLBACK(src, .proc/reset_spamflag), 20)
 
 
@@ -175,8 +266,8 @@
 /obj/item/paper/proc/updateinfolinks()
 	info_links = info
 	for(var/i in 1 to min(fields, 15))
-		addtofield(i, "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=[i]'>write</A></font>", 1)
-	info_links = info_links + "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=end'>write</A></font>"
+		addtofield(i, "<A href='?src=[REF(src)];write=[i]'>write</A> (<A href='?src=[REF(src)];help=1'>\[?\]</A>)", 1)
+	info_links = info_links + "<A href='?src=[REF(src)];write=end'>write</A> <A href='?src=[REF(src)];help=1'>\[?\]</A>"
 
 
 /obj/item/paper/proc/clearpaper()
@@ -188,14 +279,21 @@
 	update_icon_state()
 
 
-/obj/item/paper/proc/parsepencode(t, obj/item/pen/P, mob/user, iscrayon = 0)
+/obj/item/paper/proc/parsepencode(t, obj/item/P, mob/user, iscrayon = 0)
 	if(length(t) < 1)		//No input means nothing needs to be parsed
 		return
 
 	t = parsemarkdown(t, user, iscrayon)
 
 	if(!iscrayon)
-		t = "<font face=\"[P.font]\" color=[P.colour]>[t]</font>"
+		if(istype(P, /obj/item/pen))
+			var/obj/item/pen/J = P
+			t = "<font face=\"[J.font]\" color=[J.colour]>[t]</font>"
+		else if(istype(P, /obj/item/natural/thorn))
+			t = "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#862f20>[t]</font>"
+		else if(istype(P, /obj/item/natural/feather))
+			t = "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#14103f>[t]</font>"
+
 	else
 		var/obj/item/toy/crayon/C = P
 		t = "<font face=\"[CRAYON_FONT]\" color=[C.paint_color]><b>[t]</b></font>"
@@ -228,8 +326,6 @@
 	<BODY>
 		You can use backslash (\\) to escape special characters.<br>
 		<br>
-		<b><center>Crayon&Pen commands</center></b><br>
-		<br>
 		# text : Defines a header.<br>
 		|text| : Centers the text.<br>
 		**text** : Makes the text <b>bold</b>.<br>
@@ -237,8 +333,6 @@
 		^text^ : Increases the <font size = \"4\">size</font> of the text.<br>
 		%s : Inserts a signature of your name in a foolproof way.<br>
 		%f : Inserts an invisible field which lets you start type from there. Useful for forms.<br>
-		<br>
-		<b><center>Pen exclusive commands</center></b><br>
 		((text)) : Decreases the <font size = \"1\">size</font> of the text.<br>
 		* item : An unordered list item.<br>
 		&nbsp;&nbsp;* item: An unordered list child item.<br>
@@ -248,13 +342,28 @@
 
 /obj/item/paper/Topic(href, href_list)
 	..()
+
+	if(!usr)
+		return
+
+	if(href_list["close"])
+		var/mob/user = usr
+		if(user?.client && user.hud_used)
+			if(user.hud_used.reads)
+				user.hud_used.reads.destroy_read()
+			user << browse(null, "window=reading")
+
 	var/literate = usr.is_literate()
 	if(!usr.canUseTopic(src, BE_CLOSE, literate))
 		return
 
+	if(href_list["read"])
+		read(usr)
+
 	if(href_list["help"])
 		openhelp(usr)
 		return
+
 	if(href_list["write"])
 		var/id = href_list["write"]
 		var/t =  stripped_multiline_input("Enter what you want to write:", "Write", no_trim=TRUE)
@@ -263,9 +372,12 @@
 		var/obj/item/i = usr.get_active_held_item()	//Check to see if he still got that darn pen, also check if he's using a crayon or pen.
 		var/iscrayon = 0
 		if(!istype(i, /obj/item/pen))
-			if(!istype(i, /obj/item/toy/crayon))
-				return
-			iscrayon = 1
+			if(istype(i, /obj/item/toy/crayon))
+				iscrayon = 1
+			else
+				if(!istype(i, /obj/item/natural/thorn))
+					if(!istype(i, /obj/item/natural/feather))
+						return
 
 		if(!in_range(src, usr) && loc != usr && !istype(loc, /obj/item/clipboard) && loc.loc != usr && usr.get_active_held_item() != i)	//Some check to see if he's allowed to write
 			return
@@ -274,33 +386,76 @@
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
 		if(t != null)	//No input from the user means nothing needs to be added
+			if((length(info) + length(t)) > maxlen)
+				to_chat(usr, "<span class='warning'>Too long. Try again.</span>")
+				return
 			if(id!="end")
 				addtofield(text2num(id), t) // He wants to edit a field, let him.
 			else
 				info += t // Oh, he wants to edit to the end of the file, let him.
+				testing("[length(info)]")
+				testing("[findtext(info, "\n")]")
 				updateinfolinks()
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links]<HR>[stamps]</BODY><div align='right'style='position:fixed;bottom:0;font-style:bold;'><A href='?src=[REF(src)];help=1'>\[?\]</A></div></HTML>", "window=[name]") // Update the window
+			playsound(src, 'sound/items/write.ogg', 100, FALSE)
+			format_browse(info_links, usr)
 			update_icon_state()
 
+/obj/item/paper/proc/format_browse(t, mob/user)
+	user << browse_rsc('html/book.png')
+	var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
+			<html><head><style type=\"text/css\">
+			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
+	dat += "[t]<br>"
+	dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+	dat += "</body></html>"
+	user << browse(dat, "window=reading;size=500x400;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 
 /obj/item/paper/attackby(obj/item/P, mob/living/carbon/human/user, params)
-	..()
-
 	if(resistance_flags & ON_FIRE)
-		return
+		return ..()
+
+	if(mailer)
+		return ..()
 
 	if(is_blind(user))
-		return
+		return ..()
 
-	if(istype(P, /obj/item/pen) || istype(P, /obj/item/toy/crayon))
-		if(user.is_literate())
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links]<HR>[stamps]</BODY><div align='right'style='position:fixed;bottom:0;font-style:bold;'><A href='?src=[REF(src)];help=1'>\[?\]</A></div></HTML>", "window=[name]")
+	if(istype(P, /obj/item/pen) || istype(P, /obj/item/natural/thorn)|| istype(P, /obj/item/natural/feather))
+		if(length(info) > maxlen)
+			to_chat(user, "<span class='warning'>[src] is full of verba.</span>")
+			return
+		if(user.can_read(src))
+			format_browse(info_links, user)
+			update_icon_state()
 			return
 		else
-			to_chat(user, "<span class='warning'>You don't know how to read or write!</span>")
+			to_chat(user, "<span class='warning'>I can't write.</span>")
 			return
+		return
 
-	else if(istype(P, /obj/item/stamp))
+	if(!P.can_be_package_wrapped())
+		return ..()
+
+	to_chat(user, "<span class='info'>I start to wrap [P] in [src]...</span>")
+	if(do_after(user, 30, 0, target = src))
+		if(user.is_holding(P))
+			if(!user.dropItemToGround(P))
+				return
+		else if(!isturf(P.loc))
+			return
+		var/obj/item/smallDelivery/D = new /obj/item/smallDelivery(get_turf(P.loc))
+		if(user.Adjacent(D))
+			D.add_fingerprint(user)
+			P.add_fingerprint(user)
+			user.put_in_hands(D)
+		P.forceMove(D)
+		var/size = round(P.w_class)
+		D.name = "[weightclass2text(size)] package"
+		D.w_class = size
+		size = min(size, 5)
+		D.icon_state = "deliverypackage[size]"
+
+/*	else if(istype(P, /obj/item/stamp))
 
 		if(!in_range(src, user))
 			return
@@ -316,12 +471,12 @@
 		LAZYADD(stamped, P.icon_state)
 		add_overlay(stampoverlay)
 
-		to_chat(user, "<span class='notice'>You stamp the paper with your rubber stamp.</span>")
+		to_chat(user, "<span class='notice'>I stamp the paper with your rubber stamp.</span>")
 
 	if(P.get_temperature())
 		if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(10))
 			user.visible_message("<span class='warning'>[user] accidentally ignites [user.p_them()]self!</span>", \
-								"<span class='userdanger'>You miss the paper and accidentally light yourself on fire!</span>")
+								"<span class='danger'>I miss the paper and accidentally light myself on fire!</span>")
 			user.dropItemToGround(P)
 			user.adjust_fire_stacks(1)
 			user.IgniteMob()
@@ -331,13 +486,13 @@
 			return
 
 		user.dropItemToGround(src)
-		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>You light [src] on fire!</span>")
-		fire_act()
-
+		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>I light [src] on fire!</span>")
+		fire_act()*/
 
 	add_fingerprint(user)
+	return ..()
 
-/obj/item/paper/fire_act(exposed_temperature, exposed_volume)
+/obj/item/paper/fire_act(added, maxstacks)
 	..()
 	if(!(resistance_flags & FIRE_PROOF))
 		add_overlay("paper_onfire_overlay")

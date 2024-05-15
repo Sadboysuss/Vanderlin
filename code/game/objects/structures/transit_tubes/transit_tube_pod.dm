@@ -32,7 +32,7 @@
 		if(!moving)
 			I.play_tool_sound(src)
 			if(contents.len)
-				user.visible_message("<span class='notice'>[user] empties \the [src].</span>", "<span class='notice'>You empty \the [src].</span>")
+				user.visible_message("<span class='notice'>[user] empties \the [src].</span>", "<span class='notice'>I empty \the [src].</span>")
 				empty_pod()
 			else
 				deconstruct(TRUE, user)
@@ -45,7 +45,7 @@
 		if(user)
 			location = user.loc
 			add_fingerprint(user)
-			user.visible_message("<span class='notice'>[user] removes [src].</span>", "<span class='notice'>You remove [src].</span>")
+			user.visible_message("<span class='notice'>[user] removes [src].</span>", "<span class='notice'>I remove [src].</span>")
 		var/obj/structure/c_transit_tube_pod/R = new/obj/structure/c_transit_tube_pod(location)
 		transfer_fingerprints_to(R)
 		R.setDir(dir)
@@ -73,9 +73,9 @@
 	if(!moving)
 		user.changeNext_move(CLICK_CD_BREAKOUT)
 		user.last_special = world.time + CLICK_CD_BREAKOUT
-		to_chat(user, "<span class='notice'>You start trying to escape from the pod...</span>")
+		to_chat(user, "<span class='notice'>I start trying to escape from the pod...</span>")
 		if(do_after(user, 1 MINUTES, target = src))
-			to_chat(user, "<span class='notice'>You manage to open the pod.</span>")
+			to_chat(user, "<span class='notice'>I manage to open the pod.</span>")
 			empty_pod()
 
 /obj/structure/transit_tube_pod/proc/empty_pod(atom/location)
@@ -195,7 +195,7 @@
 
 /obj/structure/transit_tube_pod/dispensed
 	name = "temporary transit tube pod"
-	desc = "Hits the skrrrt (tube station), then hits the dirt (nonexistence). You know how it is."
+	desc = ""
 	icon_state = "temppod"
 	occupied_icon_state = "temppod_occupied"
 

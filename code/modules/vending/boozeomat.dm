@@ -1,6 +1,6 @@
 /obj/machinery/vending/boozeomat
 	name = "\improper Booze-O-Mat"
-	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
+	desc = ""
 	icon_state = "boozeomat"
 	icon_deny = "boozeomat-deny"
 	products = list(/obj/item/reagent_containers/food/drinks/drinkingglass = 30,
@@ -50,7 +50,7 @@
 	payment_department = ACCOUNT_SRV
 
 /obj/machinery/vending/boozeomat/all_access
-	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one. This model appears to have no access restrictions."
+	desc = ""
 	req_access = null
 
 /obj/machinery/vending/boozeomat/pubby_maint //abandoned bar on Pubbystation

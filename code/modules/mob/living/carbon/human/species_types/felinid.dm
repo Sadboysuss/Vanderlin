@@ -143,7 +143,7 @@
 		kitty_tail.Insert(H, TRUE, FALSE)
 	if(!silent)
 		to_chat(H, "<span class='boldnotice'>Something is nya~t right.</span>")
-		playsound(get_turf(H), 'sound/effects/meow1.ogg', 50, TRUE, -1)
+		playsound(get_turf(H), 'sound/blank.ogg', 50, TRUE, -1)
 
 /proc/purrbation_remove(mob/living/carbon/human/H, silent = FALSE)
 	if(isfelinid(H))
@@ -163,4 +163,4 @@
 				var/obj/item/organ/new_ears = new target_species.mutantears
 				new_ears.Insert(H, TRUE, FALSE)
 	if(!silent)
-		to_chat(H, "<span class='boldnotice'>You are no longer a cat.</span>")
+		to_chat(H, "<span class='boldnotice'>I are no longer a cat.</span>")

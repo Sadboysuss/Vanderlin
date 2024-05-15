@@ -1,6 +1,6 @@
 /obj/machinery/computer/launchpad
 	name = "\improper launchpad control console"
-	desc = "Used to teleport objects to and from a launchpad."
+	desc = ""
 	icon_screen = "teleport"
 	icon_keyboard = "teleport_key"
 	circuit = /obj/item/circuitboard/computer/launchpad_console
@@ -17,7 +17,7 @@
 	. = ..()
 
 /obj/machinery/computer/launchpad/attack_paw(mob/user)
-	to_chat(user, "<span class='warning'>You are too primitive to use this computer!</span>")
+	to_chat(user, "<span class='warning'>I are too primitive to use this computer!</span>")
 	return
 
 /obj/machinery/computer/launchpad/attackby(obj/item/W, mob/user, params)
@@ -29,7 +29,7 @@
 			if(LAZYLEN(launchpads) < maximum_pads)
 				launchpads |= M.buffer
 				M.buffer = null
-				to_chat(user, "<span class='notice'>You upload the data from the [W.name]'s buffer.</span>")
+				to_chat(user, "<span class='notice'>I upload the data from the [W.name]'s buffer.</span>")
 			else
 				to_chat(user, "<span class='warning'>[src] cannot handle any more connections!</span>")
 	else

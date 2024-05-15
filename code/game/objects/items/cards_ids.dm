@@ -14,7 +14,7 @@
 
 /obj/item/card
 	name = "card"
-	desc = "Does card things."
+	desc = ""
 	icon = 'icons/obj/card.dmi'
 	w_class = WEIGHT_CLASS_TINY
 
@@ -26,7 +26,7 @@
 
 /obj/item/card/data
 	name = "data card"
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has a stripe running down the middle."
+	desc = ""
 	icon_state = "data_1"
 	obj_flags = UNIQUE_RENAME
 	var/function = "storage"
@@ -35,7 +35,6 @@
 	item_state = "card-id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
-	var/detail_color = COLOR_ASSEMBLY_ORANGE
 
 /obj/item/card/data/Initialize()
 	.=..()
@@ -50,18 +49,18 @@
 	add_overlay(detail_overlay)
 
 /obj/item/card/data/full_color
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has the entire card colored."
+	desc = ""
 	icon_state = "data_2"
 
 /obj/item/card/data/disk
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
+	desc = ""
 	icon_state = "data_3"
 
 /*
  * ID CARDS
  */
 /obj/item/card/emag
-	desc = "It's a card with a magnetic strip attached to some circuitry."
+	desc = ""
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
@@ -72,7 +71,7 @@
 
 /obj/item/card/emag/bluespace
 	name = "bluespace cryptographic sequencer"
-	desc = "It's a blue card with a magnetic strip attached to some circuitry. It appears to have some sort of transmitter attached to it."
+	desc = ""
 	color = rgb(40, 130, 255)
 	prox_check = FALSE
 
@@ -88,7 +87,7 @@
 	A.emag_act(user)
 
 /obj/item/card/emagfake
-	desc = "It's a card with a magnetic strip attached to some circuitry. Closer inspection shows that this card is a poorly made replica, with a \"DonkCo\" logo stamped on the back."
+	desc = ""
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
@@ -97,16 +96,16 @@
 
 /obj/item/card/emagfake/afterattack()
 	. = ..()
-	playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/card/id
 	name = "identification card"
-	desc = "A card used to provide ID and determine access across the station."
+	desc = ""
 	icon_state = "id"
 	item_state = "card-id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
-	slot_flags = ITEM_SLOT_ID
+	slot_flags = ITEM_SLOT_RING
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/id_type_name = "identification card"
@@ -134,7 +133,7 @@
 
 /obj/item/card/id/attack_self(mob/user)
 	if(Adjacent(user))
-		user.visible_message("<span class='notice'>[user] shows you: [icon2html(src, viewers(user))] [src.name].</span>", "<span class='notice'>You show \the [src.name].</span>")
+		user.visible_message("<span class='notice'>[user] shows you: [icon2html(src, viewers(user))] [src.name].</span>", "<span class='notice'>I show \the [src.name].</span>")
 	add_fingerprint(user)
 
 /obj/item/card/id/vv_edit_var(var_name, var_value)
@@ -161,7 +160,7 @@
 		var/money_added = mass_insert_money(money_contained, user)
 
 		if (money_added)
-			to_chat(user, "<span class='notice'>You stuff the contents into the card! They disappear in a puff of bluespace smoke, adding [money_added] worth of credits to the linked account.</span>")
+			to_chat(user, "<span class='notice'>I stuff the contents into the card! They disappear in a puff of bluespace smoke, adding [money_added] worth of credits to the linked account.</span>")
 		return
 	else
 		return ..()
@@ -178,9 +177,9 @@
 
 	registered_account.adjust_money(cash_money)
 	if(physical_currency)
-		to_chat(user, "<span class='notice'>You stuff [I] into [src]. It disappears in a small puff of bluespace smoke, adding [cash_money] credits to the linked account.</span>")
+		to_chat(user, "<span class='notice'>I stuff [I] into [src]. It disappears in a small puff of bluespace smoke, adding [cash_money] credits to the linked account.</span>")
 	else
-		to_chat(user, "<span class='notice'>You insert [I] into [src], adding [cash_money] credits to the linked account.</span>")
+		to_chat(user, "<span class='notice'>I insert [I] into [src], adding [cash_money] credits to the linked account.</span>")
 
 	to_chat(user, "<span class='notice'>The linked account now reports a balance of $[registered_account.account_balance].</span>")
 	qdel(I)
@@ -215,7 +214,7 @@
 	. = FALSE
 	var/datum/bank_account/old_account = registered_account
 
-	var/new_bank_id = input(user, "Enter your account ID number.", "Account Reclamation", 111111) as num | null
+	var/new_bank_id = input(user, "Enter my account ID number.", "Account Reclamation", 111111) as num | null
 
 	if (isnull(new_bank_id))
 		return
@@ -265,7 +264,7 @@
 	if(registered_account.adjust_money(-amount_to_remove))
 		var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
 		user.put_in_hands(holochip)
-		to_chat(user, "<span class='notice'>You withdraw [amount_to_remove] credits into a holochip.</span>")
+		to_chat(user, "<span class='notice'>I withdraw [amount_to_remove] credits into a holochip.</span>")
 		return
 	else
 		var/difference = amount_to_remove - registered_account.account_balance
@@ -282,9 +281,9 @@
 			if(D)
 				. += "The [D.account_holder] reports a balance of $[D.account_balance]."
 		. += "<span class='info'>Alt-Click the ID to pull money from the linked account in the form of holochips.</span>"
-		. += "<span class='info'>You can insert credits into the linked account by pressing holochips, cash, or coins against the ID.</span>"
+		. += "<span class='info'>I can insert credits into the linked account by pressing holochips, cash, or coins against the ID.</span>"
 		if(registered_account.account_holder == user.real_name)
-			. += "<span class='boldnotice'>If you lose this ID card, you can reclaim your account by Alt-Clicking a blank ID card while holding it and entering your account ID number.</span>"
+			. += "<span class='boldnotice'>If you lose this ID card, you can reclaim my account by Alt-Clicking a blank ID card while holding it and entering my account ID number.</span>"
 	else
 		. += "<span class='info'>There is no registered account linked to this card. Alt-Click to add one.</span>"
 
@@ -343,7 +342,7 @@ update_label()
 /obj/item/card/id/silver
 	name = "silver identification card"
 	id_type_name = "silver identification card"
-	desc = "A silver card which shows honour and dedication."
+	desc = ""
 	icon_state = "silver"
 	item_state = "silver_id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
@@ -358,7 +357,7 @@ update_label()
 /obj/item/card/id/gold
 	name = "gold identification card"
 	id_type_name = "gold identification card"
-	desc = "A golden card which shows power and might."
+	desc = ""
 	icon_state = "gold"
 	item_state = "gold_id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
@@ -430,7 +429,7 @@ update_label()
 			assignment = u
 			update_label()
 			forged = TRUE
-			to_chat(user, "<span class='notice'>You successfully forge the ID card.</span>")
+			to_chat(user, "<span class='notice'>I successfully forge the ID card.</span>")
 
 
 			// First time use automatically sets the account id to the user.
@@ -443,14 +442,14 @@ update_label()
 						if(account.account_id == accountowner.account_id)
 							account.bank_cards += src
 							registered_account = account
-							to_chat(user, "<span class='notice'>Your account number has been automatically assigned.</span>")
+							to_chat(user, "<span class='notice'>My account number has been automatically assigned.</span>")
 			return
 		else if (popup_input == "Forge/Reset" && forged)
 			registered_name = initial(registered_name)
 			assignment = initial(assignment)
 			update_label()
 			forged = FALSE
-			to_chat(user, "<span class='notice'>You successfully reset the ID card.</span>")
+			to_chat(user, "<span class='notice'>I successfully reset the ID card.</span>")
 			return
 		else if (popup_input == "Change Account ID")
 			set_new_account(user)
@@ -467,7 +466,7 @@ update_label()
 /obj/item/card/id/syndicate_command
 	name = "syndicate ID card"
 	id_type_name = "syndicate ID card"
-	desc = "An ID straight from the Syndicate."
+	desc = ""
 	registered_name = "Syndicate"
 	assignment = "Syndicate Overlord"
 	icon_state = "syndie"
@@ -477,7 +476,7 @@ update_label()
 /obj/item/card/id/captains_spare
 	name = "captain's spare ID"
 	id_type_name = "captain's spare ID"
-	desc = "The spare ID of the High Lord himself."
+	desc = ""
 	icon_state = "gold"
 	item_state = "gold_id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
@@ -501,7 +500,7 @@ update_label()
 /obj/item/card/id/centcom
 	name = "\improper CentCom ID"
 	id_type_name = "\improper CentCom ID"
-	desc = "An ID straight from Central Command."
+	desc = ""
 	icon_state = "centcom"
 	registered_name = "Central Command"
 	assignment = "General"
@@ -514,7 +513,7 @@ update_label()
 /obj/item/card/id/ert
 	name = "\improper CentCom ID"
 	id_type_name = "\improper CentCom ID"
-	desc = "An ERT ID card."
+	desc = ""
 	icon_state = "ert_commander"
 	registered_name = "Emergency Response Team Commander"
 	assignment = "Emergency Response Team Commander"
@@ -572,7 +571,7 @@ update_label()
 /obj/item/card/id/prisoner
 	name = "prisoner ID card"
 	id_type_name = "prisoner ID card"
-	desc = "You are a number, you are not a free man."
+	desc = ""
 	icon_state = "orange"
 	item_state = "orange-id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
@@ -584,7 +583,7 @@ update_label()
 	var/points = 0
 
 /obj/item/card/id/prisoner/attack_self(mob/user)
-	to_chat(usr, "<span class='notice'>You have accumulated [points] out of the [goal] points you need for freedom.</span>")
+	to_chat(usr, "<span class='notice'>I have accumulated [points] out of the [goal] points you need for freedom.</span>")
 
 /obj/item/card/id/prisoner/one
 	name = "Prisoner #13-001"
@@ -627,14 +626,14 @@ update_label()
 
 /obj/item/card/id/away
 	name = "a perfectly generic identification card"
-	desc = "A perfectly generic identification card. Looks like it could use some flavor."
+	desc = ""
 	access = list(ACCESS_AWAY_GENERAL)
 	icon_state = "retro"
 	uses_overlays = FALSE
 
 /obj/item/card/id/away/hotel
 	name = "Staff ID"
-	desc = "A staff ID used to access the hotel's doors."
+	desc = ""
 	access = list(ACCESS_AWAY_GENERAL, ACCESS_AWAY_MAINT)
 
 /obj/item/card/id/away/hotel/securty
@@ -643,29 +642,29 @@ update_label()
 
 /obj/item/card/id/away/old
 	name = "a perfectly generic identification card"
-	desc = "A perfectly generic identification card. Looks like it could use some flavor."
+	desc = ""
 
 /obj/item/card/id/away/old/sec
 	name = "Charlie Station Security Officer's ID card"
-	desc = "A faded Charlie Station ID card. You can make out the rank \"Security Officer\"."
+	desc = ""
 	assignment = "Charlie Station Security Officer"
 	access = list(ACCESS_AWAY_GENERAL, ACCESS_AWAY_SEC)
 
 /obj/item/card/id/away/old/sci
 	name = "Charlie Station Scientist's ID card"
-	desc = "A faded Charlie Station ID card. You can make out the rank \"Scientist\"."
+	desc = ""
 	assignment = "Charlie Station Scientist"
 	access = list(ACCESS_AWAY_GENERAL)
 
 /obj/item/card/id/away/old/eng
 	name = "Charlie Station Engineer's ID card"
-	desc = "A faded Charlie Station ID card. You can make out the rank \"Station Engineer\"."
+	desc = ""
 	assignment = "Charlie Station Engineer"
 	access = list(ACCESS_AWAY_GENERAL, ACCESS_AWAY_ENGINE)
 
 /obj/item/card/id/away/old/apc
 	name = "APC Access ID"
-	desc = "A special ID card that allows access to APC terminals."
+	desc = ""
 	access = list(ACCESS_ENGINE_EQUIP)
 
 /obj/item/card/id/away/deep_storage //deepstorage.dmm space ruin
@@ -673,7 +672,7 @@ update_label()
 
 /obj/item/card/id/departmental_budget
 	name = "departmental card (FUCK)"
-	desc = "Provides access to the departmental budget."
+	desc = ""
 	icon_state = "budgetcard"
 	uses_overlays = FALSE
 	var/department_ID = ACCOUNT_CIV
@@ -687,7 +686,7 @@ update_label()
 		if(!B.bank_cards.Find(src))
 			B.bank_cards += src
 		name = "departmental card ([department_name])"
-		desc = "Provides access to the [department_name]."
+		desc = ""
 	SSeconomy.dep_cards += src
 
 /obj/item/card/id/departmental_budget/Destroy()

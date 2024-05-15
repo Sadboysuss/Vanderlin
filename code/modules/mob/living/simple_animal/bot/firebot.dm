@@ -6,7 +6,7 @@
 
 /mob/living/simple_animal/bot/firebot
 	name = "\improper Firebot"
-	desc = "A little fire extinguishing bot. He looks rather anxious."
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "firebot"
 	density = FALSE
@@ -178,10 +178,10 @@
 		return
 
 	if(prob(1) && target_fire == null)
-		var/list/messagevoice = list("No fires detected." = 'sound/voice/firebot/nofires.ogg',
-		"Only you can prevent station fires." = 'sound/voice/firebot/onlyyou.ogg',
-		"Temperature nominal." = 'sound/voice/firebot/tempnominal.ogg',
-		"Keep it cool." = 'sound/voice/firebot/keepitcool.ogg')
+		var/list/messagevoice = list("No fires detected." = 'sound/blank.ogg',
+		"Only you can prevent station fires." = 'sound/blank.ogg',
+		"Temperature nominal." = 'sound/blank.ogg',
+		"Keep it cool." = 'sound/blank.ogg')
 		var/message = pick(messagevoice)
 		speak(message)
 		playsound(src, messagevoice[message], 50)

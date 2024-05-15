@@ -63,7 +63,7 @@
 	return FALSE
 
 // The actual holidays
-
+/*
 /datum/holiday/new_year
 	name = NEW_YEAR
 	begin_day = 30
@@ -164,12 +164,12 @@
 /datum/holiday/april_fools
 	name = APRIL_FOOLS
 	begin_day = 1
-	end_day = 5
+	end_day = 1
 	begin_month = APRIL
 
 /datum/holiday/april_fools/celebrate()
 	SSjob.set_overflow_role("Clown")
-	SSticker.login_music = 'sound/ambience/clown.ogg'
+	SSticker.login_music = 'sound/blank.ogg'
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/P = i
 		if(P.client)
@@ -597,4 +597,4 @@ Since Ramadan is an entire month that lasts 29.5 days on average, the start and 
 	begin_month = MARCH
 
 /datum/holiday/ianbirthday/greet()
-	return "Happy birthday, Ian!"
+	return "Happy birthday, Ian!"*/

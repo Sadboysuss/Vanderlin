@@ -3,7 +3,7 @@
 /mob/living/simple_animal/slaughter
 	name = "slaughter demon"
 	real_name = "slaughter demon"
-	desc = "A large, menacing creature covered in armored black scales."
+	desc = ""
 	speak_emote = list("gurgles")
 	emote_hear = list("wails","screeches")
 	response_help_continuous = "thinks better of touching"
@@ -20,9 +20,9 @@
 	a_intent = INTENT_HARM
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attack_sound = 'sound/magic/demon_attack1.ogg'
-	var/feast_sound = 'sound/magic/demon_consume.ogg'
-	deathsound = 'sound/magic/demon_dies.ogg'
+	attack_sound = 'sound/blank.ogg'
+	var/feast_sound = 'sound/blank.ogg'
+	deathsound = 'sound/blank.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = INFINITY
@@ -39,7 +39,7 @@
 	see_in_dark = 8
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	bloodcrawl = BLOODCRAWL_EAT
-	var/playstyle_string = "<span class='big bold'>You are a slaughter demon,</span><B> a terrible creature from another realm. You have a single desire: To kill. \
+	var/playstyle_string = "<span class='big bold'>I are a slaughter demon,</span><B> a terrible creature from another realm. You have a single desire: To kill. \
 							You may use the \"Blood Crawl\" ability near blood pools to travel through them, appearing and disappearing from the station at will. \
 							Pulling a dead or unconscious mob while you enter a pool will pull them in with you, allowing you to feast and regain your health. \
 							You move quickly upon leaving a pool of blood, but the material world will soon sap your strength and leave you sluggish. </B>"
@@ -59,7 +59,7 @@
 
 /obj/effect/decal/cleanable/blood/innards
 	name = "pile of viscera"
-	desc = "A repulsive pile of guts and gore."
+	desc = ""
 	gender = NEUTER
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "innards"
@@ -74,7 +74,7 @@
 //The loot from killing a slaughter demon - can be consumed to allow the user to blood crawl
 /obj/item/organ/heart/demon
 	name = "demon heart"
-	desc = "Still it beats furiously, emanating an aura of utter hate."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "demon_heart-on"
 	decay_factor = 0
@@ -87,14 +87,14 @@
 		return ..()
 	user.visible_message("<span class='warning'>[user] raises [src] to [user.p_their()] mouth and tears into it with [user.p_their()] teeth!</span>", \
 						 "<span class='danger'>An unnatural hunger consumes you. You raise [src] your mouth and devour it!</span>")
-	playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
+	playsound(user, 'sound/blank.ogg', 50, TRUE)
 	for(var/obj/effect/proc_holder/spell/knownspell in user.mind.spell_list)
 		if(knownspell.type == /obj/effect/proc_holder/spell/bloodcrawl)
 			to_chat(user, "<span class='warning'>...and you don't feel any different.</span>")
 			qdel(src)
 			return
 	user.visible_message("<span class='warning'>[user]'s eyes flare a deep crimson!</span>", \
-						 "<span class='userdanger'>You feel a strange power seep into your body... you have absorbed the demon's blood-travelling powers!</span>")
+						 "<span class='danger'>I feel a strange power seep into your body... you have absorbed the demon's blood-travelling powers!</span>")
 	user.temporarilyRemoveItemFromInventory(src, TRUE)
 	src.Insert(user) //Consuming the heart literally replaces your heart with a demon heart. H A R D C O R E
 
@@ -116,16 +116,16 @@
 	// them so much, it wants to hug everyone at once!
 	name = "laughter demon"
 	real_name = "laughter demon"
-	desc = "A large, adorable creature covered in armor with pink bows."
+	desc = ""
 	speak_emote = list("giggles","titters","chuckles")
 	emote_hear = list("guffaws","laughs")
 	response_help_continuous = "hugs"
 	attack_verb_continuous = "wildly tickles"
 	attack_verb_simple = "wildly tickle"
 
-	attack_sound = 'sound/items/bikehorn.ogg'
-	feast_sound = 'sound/spookoween/scary_horn2.ogg'
-	deathsound = 'sound/misc/sadtrombone.ogg'
+	attack_sound = 'sound/blank.ogg'
+	feast_sound = 'sound/blank.ogg'
+	deathsound = 'sound/blank.ogg'
 
 	icon_state = "bowmon"
 	icon_living = "bowmon"
@@ -136,7 +136,7 @@
 	// Keep the people we hug!
 	var/list/consumed_mobs = list()
 
-	playstyle_string = "<span class='big bold'>You are a laughter \
+	playstyle_string = "<span class='big bold'>I are a laughter \
 	demon,</span><B> a wonderful creature from another realm. You have a single \
 	desire: <span class='clown'>To hug and tickle.</span><BR>\
 	You may use the \"Blood Crawl\" ability near blood pools to travel \
@@ -177,9 +177,9 @@
 		if(M.revive(full_heal = TRUE, admin_revive = TRUE))
 			M.grab_ghost(force = TRUE)
 			playsound(T, feast_sound, 50, TRUE, -1)
-			to_chat(M, "<span class='clown'>You leave [src]'s warm embrace,	and feel ready to take on the world.</span>")
+			to_chat(M, "<span class='clown'>I leave [src]'s warm embrace,	and feel ready to take on the world.</span>")
 
-/mob/living/simple_animal/slaughter/laughter/bloodcrawl_swallow(var/mob/living/victim)
+/mob/living/simple_animal/slaughter/laughter/bloodcrawl_swallow(mob/living/victim)
 	if(consumed_mobs)
 		// Keep their corpse so rescue is possible
 		consumed_mobs += victim

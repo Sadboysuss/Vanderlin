@@ -21,7 +21,7 @@
 	var/list/active_timers
 	/// Status traits attached to this datum
 	var/list/status_traits
-	
+
 	/// Components attached to this datum
 	/// Lazy associated list in the structure of `type:component/list of components`
 	var/list/datum_components
@@ -33,12 +33,20 @@
 	/// Is this datum capable of sending signals?
 	/// Set to true when a signal has been registered
 	var/signal_enabled = FALSE
-	
+
 	/// Datum level flags
 	var/datum_flags = NONE
 
 	/// A weak reference to another datum
 	var/datum/weakref/weak_reference
+
+		/*
+	* Lazy associative list of currently active cooldowns.
+	*
+	* cooldowns [ COOLDOWN_INDEX ] = add_timer()
+	* add_timer() returns the truthy value of -1 when not stoppable, and else a truthy numeric index
+	*/
+	var/list/cooldowns
 
 #ifdef TESTING
 	var/running_find_references
@@ -60,10 +68,10 @@
 
 /**
   * Default implementation of clean-up code.
-  * 
+  *
   * This should be overridden to remove all references pointing to the object being destroyed, if
   * you do override it, make sure to call the parent and return it's return value by default
-  * 
+  *
   * Return an appropriate QDEL_HINT to modify handling of your deletion;
   * in most cases this is QDEL_HINT_QUEUE.
   *
@@ -73,9 +81,9 @@
   * * Notifying datums listening to signals from this datum that we are going away
   *
   * Returns QDEL_HINT_QUEUE
-  */ 
+  */
 /datum/proc/Destroy(force=FALSE, ...)
-	SHOULD_CALL_PARENT(1)
+	SHOULD_CALL_PARENT(TRUE)
 	tag = null
 	datum_flags &= ~DF_USE_TAG //In case something tries to REF us
 	weak_reference = null	//ensure prompt GCing of weakref.
@@ -214,3 +222,34 @@
 		qdel(D)
 	else
 		return returned
+
+/**
+  * Callback called by a timer to end an associative-list-indexed cooldown.
+  *
+  * Arguments:
+  * * source - datum storing the cooldown
+  * * index - string index storing the cooldown on the cooldowns associative list
+  *
+  * This sends a signal reporting the cooldown end.
+  */
+/proc/end_cooldown(datum/source, index)
+	if(QDELETED(source))
+		return
+	SEND_SIGNAL(source, COMSIG_CD_STOP(index))
+	TIMER_COOLDOWN_END(source, index)
+
+
+/**
+  * Proc used by stoppable timers to end a cooldown before the time has ran out.
+  *
+  * Arguments:
+  * * source - datum storing the cooldown
+  * * index - string index storing the cooldown on the cooldowns associative list
+  *
+  * This sends a signal reporting the cooldown end, passing the time left as an argument.
+  */
+/proc/reset_cooldown(datum/source, index)
+	if(QDELETED(source))
+		return
+	SEND_SIGNAL(source, COMSIG_CD_RESET(index), S_TIMER_COOLDOWN_TIMELEFT(source, index))
+	TIMER_COOLDOWN_END(source, index)

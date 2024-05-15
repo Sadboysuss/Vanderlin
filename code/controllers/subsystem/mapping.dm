@@ -218,8 +218,9 @@ SUBSYSTEM_DEF(mapping)
 		var/datum/parsed_map/pm = P
 		if (!pm.load(1, 1, start_z + parsed_maps[P], no_changeturf = TRUE))
 			errorList |= pm.original_path
-	if(!silent)
-		INIT_ANNOUNCE("Loaded [name] in [(REALTIMEOFDAY - start_time)/10]s!")
+
+	log_game("Loaded [name] in [(REALTIMEOFDAY - start_time)/10]s!")
+
 	return parsed_maps
 
 /datum/controller/subsystem/mapping/proc/loadWorld()
@@ -231,15 +232,34 @@ SUBSYSTEM_DEF(mapping)
 
 	// load the station
 	station_start = world.maxz + 1
+	#ifdef TESTING
 	INIT_ANNOUNCE("Loading [config.map_name]...")
+	#endif
+
 	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION)
- 
+
+	var/list/otherZ = list()
+
+	#ifndef FASTLOAD
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/smallforest.json")
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/smalldecap.json")
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/smallswamp.json")
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/underworld.json")
+	#endif
+	#ifdef ROGUEWORLD
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/rogueworld.json")
+	#endif
+//	otherZ += load_map_config("_maps/map_files/roguetown/otherz/special.json")
+	if(otherZ.len)
+		for(var/datum/map_config/OtherZ in otherZ)
+			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION)
+
 	if(SSdbcore.Connect())
 		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery("UPDATE [format_table_name("round")] SET map_name = '[config.map_name]' WHERE id = [GLOB.round_id]")
 		query_round_map_name.Execute()
 		qdel(query_round_map_name)
 
-#ifndef LOWMEMORYMODE
+	#ifndef LOWMEMORYMODE
 	// TODO: remove this when the DB is prepared for the z-levels getting reordered
 	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
@@ -250,7 +270,7 @@ SUBSYSTEM_DEF(mapping)
 		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
 	else if (!isnull(config.minetype))
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
-#endif
+	#endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
 		var/msg = "RED ALERT! The following map files failed to load: [FailedZs[1]]"
@@ -266,7 +286,7 @@ SUBSYSTEM_DEF(mapping)
 		fdel("_maps/custom/[config.map_file]")
 		// And as the file is now removed set the next map to default.
 		next_map_config = load_map_config(default_to_box = TRUE)
-	
+
 GLOBAL_LIST_EMPTY(the_station_areas)
 
 /datum/controller/subsystem/mapping/proc/generate_station_area_list()
@@ -283,11 +303,13 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 	if(!GLOB.the_station_areas.len)
 		log_world("ERROR: Station areas list failed to generate!")
 
+
+
 /datum/controller/subsystem/mapping/proc/maprotate()
 	if(map_voted)
 		map_voted = FALSE
 		return
-	
+
 	var/players = GLOB.clients.len
 	var/list/mapvotes = list()
 	//count votes
@@ -337,7 +359,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 	if (. && VM.map_name != config.map_name)
 		to_chat(world, "<span class='boldannounce'>Map rotation has chosen [VM.map_name] for next round!</span>")
 
-/datum/controller/subsystem/mapping/proc/changemap(var/datum/map_config/VM)
+/datum/controller/subsystem/mapping/proc/changemap(datum/map_config/VM)
 	if(!VM.MakeNextMap())
 		next_map_config = load_map_config(default_to_box = TRUE)
 		message_admins("Failed to set new map with next_map.json for [VM.map_name]! Using default as backup!")

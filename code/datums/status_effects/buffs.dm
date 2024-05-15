@@ -7,12 +7,12 @@
 
 /obj/screen/alert/status_effect/shadow_mend
 	name = "Shadow Mend"
-	desc = "Shadowy energies wrap around your wounds, sealing them at a price. After healing, you will slowly lose health every three seconds for thirty seconds."
+	desc = ""
 	icon_state = "shadow_mend"
 
 /datum/status_effect/shadow_mend/on_apply()
-	owner.visible_message("<span class='notice'>Violet light wraps around [owner]'s body!</span>", "<span class='notice'>Violet light wraps around your body!</span>")
-	playsound(owner, 'sound/magic/teleport_app.ogg', 50, TRUE)
+	owner.visible_message("<span class='notice'>Violet light wraps around [owner]'s body!</span>", "<span class='notice'>Violet light wraps around my body!</span>")
+	playsound(owner, 'sound/blank.ogg', 50, TRUE)
 	return ..()
 
 /datum/status_effect/shadow_mend/tick()
@@ -21,7 +21,7 @@
 
 /datum/status_effect/shadow_mend/on_remove()
 	owner.visible_message("<span class='warning'>The violet light around [owner] glows black!</span>", "<span class='warning'>The tendrils around you cinch tightly and reap their toll...</span>")
-	playsound(owner, 'sound/magic/teleport_diss.ogg', 50, TRUE)
+	playsound(owner, 'sound/blank.ogg', 50, TRUE)
 	owner.apply_status_effect(STATUS_EFFECT_VOID_PRICE)
 
 
@@ -33,11 +33,11 @@
 
 /obj/screen/alert/status_effect/void_price
 	name = "Void Price"
-	desc = "Black tendrils cinch tightly against you, digging wicked barbs into your flesh."
+	desc = ""
 	icon_state = "shadow_mend"
 
 /datum/status_effect/void_price/tick()
-	SEND_SOUND(owner, sound('sound/magic/summon_karp.ogg', volume = 25))
+	SEND_SOUND(owner, sound('sound/blank.ogg', volume = 25))
 	owner.adjustBruteLoss(3)
 
 
@@ -54,7 +54,7 @@
 
 /obj/screen/alert/status_effect/power_regen
 	name = "Power Regeneration"
-	desc = "You are quickly regenerating power!"
+	desc = ""
 	icon_state = "power_regen"
 
 /datum/status_effect/cyborg_power_regen/tick()
@@ -62,7 +62,7 @@
 	if(!istype(cyborg) || !cyborg.cell)
 		qdel(src)
 		return
-	playsound(cyborg, 'sound/effects/light_flicker.ogg', 50, TRUE)
+	playsound(cyborg, 'sound/blank.ogg', 50, TRUE)
 	cyborg.cell.give(power_to_give)
 
 /datum/status_effect/his_grace
@@ -74,7 +74,7 @@
 
 /obj/screen/alert/status_effect/his_grace
 	name = "His Grace"
-	desc = "His Grace hungers, and you must feed Him."
+	desc = ""
 	icon_state = "his_grace"
 	alerttooltipstyle = "hisgrace"
 
@@ -122,17 +122,17 @@
 	alert_type = /obj/screen/alert/status_effect/wish_granters_gift
 
 /datum/status_effect/wish_granters_gift/on_apply()
-	to_chat(owner, "<span class='notice'>Death is not your end! The Wish Granter's energy suffuses you, and you begin to rise...</span>")
+	to_chat(owner, "<span class='notice'>Death is not my end! The Wish Granter's energy suffuses you, and you begin to rise...</span>")
 	return ..()
 
 /datum/status_effect/wish_granters_gift/on_remove()
 	owner.revive(full_heal = TRUE, admin_revive = TRUE)
-	owner.visible_message("<span class='warning'>[owner] appears to wake from the dead, having healed all wounds!</span>", "<span class='notice'>You have regenerated.</span>")
+	owner.visible_message("<span class='warning'>[owner] appears to wake from the dead, having healed all wounds!</span>", "<span class='notice'>I have regenerated.</span>")
 	owner.update_mobility()
 
 /obj/screen/alert/status_effect/wish_granters_gift
 	name = "Wish Granter's Immortality"
-	desc = "You are being resurrected!"
+	desc = ""
 	icon_state = "wish_granter"
 
 /datum/status_effect/cult_master
@@ -149,7 +149,7 @@
 	for(var/datum/mind/B in SSticker.mode.cult)
 		if(isliving(B.current))
 			var/mob/living/M = B.current
-			SEND_SOUND(M, sound('sound/hallucinations/veryfar_noise.ogg'))
+			SEND_SOUND(M, sound('sound/blank.ogg'))
 			to_chat(M, "<span class='cultlarge'>The Cult's Master, [owner], has fallen in \the [A]!</span>")
 
 /datum/status_effect/cult_master/tick()
@@ -179,7 +179,7 @@
 
 /obj/screen/alert/status_effect/blooddrunk
 	name = "Blood-Drunk"
-	desc = "You are drunk on blood! Your pulse thunders in your ears! Nothing can harm you!" //not true, and the item description mentions its actual effect
+	desc = "" //not true, and the item description mentions its actual effect
 	icon_state = "blooddrunk"
 
 /datum/status_effect/blooddrunk/on_apply()
@@ -210,7 +210,7 @@
 		last_staminaloss = owner.getStaminaLoss()
 		owner.log_message("gained blood-drunk stun immunity", LOG_ATTACK)
 		owner.add_stun_absorption("blooddrunk", INFINITY, 4)
-		owner.playsound_local(get_turf(owner), 'sound/effects/singlebeat.ogg', 40, 1)
+		owner.playsound_local(get_turf(owner), 'sound/blank.ogg', 40, 1)
 
 /datum/status_effect/blooddrunk/tick() //multiply the effect of healing by 10
 	if(owner.health > last_health)
@@ -265,7 +265,7 @@
 
 		if(needs_health_update)
 			owner.updatehealth()
-			owner.playsound_local(get_turf(owner), 'sound/effects/singlebeat.ogg', 40, 1)
+			owner.playsound_local(get_turf(owner), 'sound/blank.ogg', 40, 1)
 	last_health = owner.health
 
 /datum/status_effect/blooddrunk/on_remove()
@@ -305,12 +305,12 @@
 	owner.spin(duration,1)
 	animate(owner, color = oldcolor, time = duration, easing = EASE_IN)
 	addtimer(CALLBACK(owner, /atom/proc/update_atom_colour), duration)
-	playsound(owner, 'sound/weapons/fwoosh.ogg', 75, FALSE)
+	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
 
 
 /datum/status_effect/sword_spin/tick()
-	playsound(owner, 'sound/weapons/fwoosh.ogg', 75, FALSE)
+	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	var/obj/item/slashy
 	slashy = owner.get_active_held_item()
 	for(var/mob/living/M in orange(1,owner))
@@ -340,7 +340,7 @@
 
 /obj/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"
-	desc = "Our wounds are rapidly healing. <i>This effect is prevented if we are on fire.</i>"
+	desc = ""
 	icon_state = "fleshmend"
 
 /datum/status_effect/exercised
@@ -391,8 +391,8 @@
 			healSnake.poison_type = pick(chems)
 			healSnake.name = "Asclepius's Snake"
 			healSnake.real_name = "Asclepius's Snake"
-			healSnake.desc = "A mystical snake previously trapped upon the Rod of Asclepius, now freed of its burden. Unlike the average snake, its bites contain chemicals with minor healing properties."
-			new /obj/effect/decal/cleanable/ash(owner.loc)
+			healSnake.desc = ""
+			new /obj/item/ash(owner.loc)
 			new /obj/item/rod_of_asclepius(owner.loc)
 			qdel(owner)
 	else
@@ -412,11 +412,11 @@
 						var/obj/item/bodypart/L = itemUser.newBodyPart(BODY_ZONE_L_ARM, FALSE, FALSE)
 						L.attach_limb(itemUser)
 						itemUser.put_in_hand(newRod, hand, forced = TRUE)
-					to_chat(itemUser, "<span class='notice'>Your arm suddenly grows back with the Rod of Asclepius still attached!</span>")
+					to_chat(itemUser, "<span class='notice'>My arm suddenly grows back with the Rod of Asclepius still attached!</span>")
 				else
 					//Otherwise get rid of whatever else is in their hand and return the rod to said hand
 					itemUser.put_in_hand(newRod, hand, forced = TRUE)
-					to_chat(itemUser, "<span class='notice'>The Rod of Asclepius suddenly grows back out of your arm!</span>")
+					to_chat(itemUser, "<span class='notice'>The Rod of Asclepius suddenly grows back out of my arm!</span>")
 			//Because a servant of medicines stops at nothing to help others, lets keep them on their toes and give them an additional boost.
 			if(itemUser.health < itemUser.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(itemUser), "#375637")
@@ -462,7 +462,7 @@
 
 /obj/screen/alert/status_effect/regenerative_core
 	name = "Regenerative Core Tendrils"
-	desc = "You can move faster than your broken body could normally handle!"
+	desc = ""
 	icon_state = "regenerative_core"
 
 /datum/status_effect/regenerative_core
@@ -491,7 +491,7 @@
 	owner.visible_message("<span class='notice'>[owner] is coated with a dull aura!</span>")
 	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
 	//glowing wings overlay
-	playsound(owner, 'sound/weapons/fwoosh.ogg', 75, FALSE)
+	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
 
 /datum/status_effect/antimagic/on_remove()

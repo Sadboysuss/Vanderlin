@@ -1,6 +1,6 @@
 /datum/surgery/advanced/pacify
 	name = "Pacification"
-	desc = "A surgical procedure which permanently inhibits the aggression center of the brain, making the patient unwilling to cause direct harm."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/saw,
@@ -24,19 +24,19 @@
 	time = 40
 
 /datum/surgery_step/pacify/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You begin to pacify [target]...</span>",
+	display_results(user, target, "<span class='notice'>I begin to pacify [target]...</span>",
 		"<span class='notice'>[user] begins to fix [target]'s brain.</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target]'s brain.</span>")
 
 /datum/surgery_step/pacify/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You succeed in neurologically pacifying [target].</span>",
+	display_results(user, target, "<span class='notice'>I succeed in neurologically pacifying [target].</span>",
 		"<span class='notice'>[user] successfully fixes [target]'s brain!</span>",
 		"<span class='notice'>[user] completes the surgery on [target]'s brain.</span>")
 	target.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_LOBOTOMY)
 	return TRUE
 
 /datum/surgery_step/pacify/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You screw up, rewiring [target]'s brain the wrong way around...</span>",
+	display_results(user, target, "<span class='notice'>I screw up, rewiring [target]'s brain the wrong way around...</span>",
 			"<span class='warning'>[user] screws up, causing brain damage!</span>",
 			"<span class='notice'>[user] completes the surgery on [target]'s brain.</span>")
 	target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)

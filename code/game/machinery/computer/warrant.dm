@@ -1,6 +1,6 @@
 /obj/machinery/computer/warrant//TODO:SANITY
 	name = "security warrant console"
-	desc = "Used to view crewmember security records"
+	desc = ""
 	icon_screen = "security"
 	icon_keyboard = "security_key"
 	circuit = /obj/item/circuitboard/computer/warrant
@@ -119,11 +119,11 @@
 				for(var/datum/data/record/R in GLOB.data_core.security)
 					if(R.fields["name"] == authenticated)
 						current = R
-				playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 		if("Logout")
 			current = null
 			authenticated = null
-			playsound(src, 'sound/machines/terminal_off.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 		if("Pay")
 			for(var/datum/data/crime/p in current.fields["citation"])
@@ -136,7 +136,7 @@
 						else
 							var/diff = p.fine - p.paid
 							GLOB.data_core.payCitation(current.fields["id"], text2num(href_list["cdataid"]), pay)
-							to_chat(M, "<span class='notice'>You have paid [pay] credit\s towards your fine.</span>")
+							to_chat(M, "<span class='notice'>I have paid [pay] credit\s towards your fine.</span>")
 							if (pay == diff || pay > diff || pay >= diff)
 								investigate_log("Citation Paid off: <strong>[p.crimeName]</strong> Fine: [p.fine] | Paid off by [key_name(usr)]", INVESTIGATE_RECORDS)
 								to_chat(M, "<span class='notice'>The fine has been paid in full.</span>")

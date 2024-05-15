@@ -10,7 +10,7 @@
  */
 /obj/item/storage/firstaid
 	name = "first-aid kit"
-	desc = "It's an emergency medical kit for those serious boo-boos."
+	desc = ""
 	icon_state = "firstaid"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -21,7 +21,7 @@
 
 /obj/item/storage/firstaid/regular
 	icon_state = "firstaid"
-	desc = "A first aid kit with the ability to heal common types of injuries."
+	desc = ""
 
 /obj/item/storage/firstaid/regular/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins giving [user.p_them()]self aids with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -41,7 +41,7 @@
 	name = "medical aid kit"
 	icon_state = "firstaid_surgery"
 	item_state = "firstaid"
-	desc = "A high capacity aid kit for doctors, full of medical supplies and basic surgical equipment"
+	desc = ""
 
 /obj/item/storage/firstaid/medical/ComponentInitialize()
 	. = ..()
@@ -115,7 +115,7 @@
 
 /obj/item/storage/firstaid/ancient
 	icon_state = "firstaid"
-	desc = "A first aid kit with the ability to heal common types of injuries."
+	desc = ""
 
 /obj/item/storage/firstaid/ancient/PopulateContents()
 	if(empty)
@@ -128,7 +128,7 @@
 
 /obj/item/storage/firstaid/fire
 	name = "burn treatment kit"
-	desc = "A specialized medical kit for when the toxins lab <i>-spontaneously-</i> burns down."
+	desc = ""
 	icon_state = "ointment"
 	item_state = "firstaid-ointment"
 	damagetype_healed = BURN
@@ -153,7 +153,7 @@
 
 /obj/item/storage/firstaid/toxin
 	name = "toxin treatment kit"
-	desc = "Used to treat toxic blood content and radiation poisoning."
+	desc = ""
 	icon_state = "antitoxin"
 	item_state = "firstaid-toxin"
 	damagetype_healed = TOX
@@ -178,7 +178,7 @@
 
 /obj/item/storage/firstaid/o2
 	name = "oxygen deprivation treatment kit"
-	desc = "A box full of oxygen goodies."
+	desc = ""
 	icon_state = "o2"
 	item_state = "firstaid-o2"
 	damagetype_healed = OXY
@@ -203,7 +203,7 @@
 
 /obj/item/storage/firstaid/brute
 	name = "brute trauma treatment kit"
-	desc = "A first aid kit for when you get toolboxed."
+	desc = ""
 	icon_state = "brute"
 	item_state = "firstaid-brute"
 	damagetype_healed = BRUTE
@@ -228,7 +228,7 @@
 
 /obj/item/storage/firstaid/advanced
 	name = "advanced first aid kit"
-	desc = "An advanced kit to help deal with advanced wounds."
+	desc = ""
 	icon_state = "radfirstaid"
 	item_state = "firstaid-rad"
 	custom_premium_price = 600
@@ -245,7 +245,7 @@
 
 /obj/item/storage/firstaid/tactical
 	name = "combat medical kit"
-	desc = "I hope you've got insurance."
+	desc = ""
 	icon_state = "bezerk"
 
 /obj/item/storage/firstaid/tactical/ComponentInitialize()
@@ -272,7 +272,7 @@
 
 	//Making a medibot!
 	if(contents.len >= 1)
-		to_chat(user, "<span class='warning'>You need to empty [src] out first!</span>")
+		to_chat(user, "<span class='warning'>I need to empty [src] out first!</span>")
 		return
 
 	var/obj/item/bot_assembly/medbot/A = new
@@ -285,7 +285,7 @@
 	else if(istype(src, /obj/item/storage/firstaid/brute))
 		A.set_skin("brute")
 	user.put_in_hands(A)
-	to_chat(user, "<span class='notice'>You add [S] to [src].</span>")
+	to_chat(user, "<span class='notice'>I add [S] to [src].</span>")
 	A.robot_arm = S.type
 	A.firstaid = type
 	qdel(S)
@@ -297,7 +297,7 @@
 
 /obj/item/storage/pill_bottle
 	name = "pill bottle"
-	desc = "It's an airtight container for storing medication."
+	desc = ""
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
 	item_state = "contsolid"
@@ -318,7 +318,7 @@
 
 /obj/item/storage/pill_bottle/multiver
 	name = "bottle of multiver pills"
-	desc = "Contains pills used to counter toxins."
+	desc = ""
 
 /obj/item/storage/pill_bottle/multiver/PopulateContents()
 	for(var/i in 1 to 7)
@@ -332,7 +332,7 @@
 
 /obj/item/storage/pill_bottle/epinephrine
 	name = "bottle of epinephrine pills"
-	desc = "Contains pills used to stabilize patients."
+	desc = ""
 
 /obj/item/storage/pill_bottle/epinephrine/PopulateContents()
 	for(var/i in 1 to 7)
@@ -340,7 +340,7 @@
 
 /obj/item/storage/pill_bottle/mutadone
 	name = "bottle of mutadone pills"
-	desc = "Contains pills used to treat genetic abnormalities."
+	desc = ""
 
 /obj/item/storage/pill_bottle/mutadone/PopulateContents()
 	for(var/i in 1 to 7)
@@ -348,7 +348,7 @@
 
 /obj/item/storage/pill_bottle/potassiodide
 	name = "bottle of potassium iodide pills"
-	desc = "Contains pills used to reduce radiation damage."
+	desc = ""
 
 /obj/item/storage/pill_bottle/potassiodide/PopulateContents()
 	for(var/i in 1 to 3)
@@ -356,7 +356,7 @@
 
 /obj/item/storage/pill_bottle/trophazole
 	name = "bottle of trophazole pills"
-	desc = "Contains pills used to treat brute damage.The tag in the bottle states 'Eat before ingesting'."
+	desc = ""
 
 /obj/item/storage/pill_bottle/trophazole/PopulateContents()
 	for(var/i in 1 to 4)
@@ -364,7 +364,7 @@
 
 /obj/item/storage/pill_bottle/iron
 	name = "bottle of iron pills"
-	desc = "Contains pills used to reduce blood loss slowly.The tag in the bottle states 'Only take one each five minutes'."
+	desc = ""
 
 /obj/item/storage/pill_bottle/iron/PopulateContents()
 	for(var/i in 1 to 4)
@@ -372,7 +372,7 @@
 
 /obj/item/storage/pill_bottle/mannitol
 	name = "bottle of mannitol pills"
-	desc = "Contains pills used to treat brain damage."
+	desc = ""
 
 /obj/item/storage/pill_bottle/mannitol/PopulateContents()
 	for(var/i in 1 to 7)
@@ -380,7 +380,7 @@
 
 /obj/item/storage/pill_bottle/stimulant
 	name = "bottle of stimulant pills"
-	desc = "Guaranteed to give you that extra burst of energy during a long shift!"
+	desc = ""
 
 /obj/item/storage/pill_bottle/stimulant/PopulateContents()
 	for(var/i in 1 to 5)
@@ -388,7 +388,7 @@
 
 /obj/item/storage/pill_bottle/mining
 	name = "bottle of patches"
-	desc = "Contains patches used to treat brute and burn damage."
+	desc = ""
 
 /obj/item/storage/pill_bottle/mining/PopulateContents()
 	new /obj/item/reagent_containers/pill/patch/aiuri(src)
@@ -397,7 +397,7 @@
 
 /obj/item/storage/pill_bottle/zoom
 	name = "suspicious pill bottle"
-	desc = "The label is pretty old and almost unreadable, you recognize some chemical compounds."
+	desc = ""
 
 /obj/item/storage/pill_bottle/zoom/PopulateContents()
 	for(var/i in 1 to 5)
@@ -405,7 +405,7 @@
 
 /obj/item/storage/pill_bottle/happy
 	name = "suspicious pill bottle"
-	desc = "There is a smiley on the top."
+	desc = ""
 
 /obj/item/storage/pill_bottle/happy/PopulateContents()
 	for(var/i in 1 to 5)
@@ -413,7 +413,7 @@
 
 /obj/item/storage/pill_bottle/lsd
 	name = "suspicious pill bottle"
-	desc = "There is a crude drawing which could be either a mushroom, or a deformed moon."
+	desc = ""
 
 /obj/item/storage/pill_bottle/lsd/PopulateContents()
 	for(var/i in 1 to 5)
@@ -421,7 +421,7 @@
 
 /obj/item/storage/pill_bottle/aranesp
 	name = "suspicious pill bottle"
-	desc = "The label has 'fuck disablers' hastily scrawled in black marker."
+	desc = ""
 
 /obj/item/storage/pill_bottle/aranesp/PopulateContents()
 	for(var/i in 1 to 5)
@@ -429,7 +429,7 @@
 
 /obj/item/storage/pill_bottle/psicodine
 	name = "bottle of psicodine pills"
-	desc = "Contains pills used to treat mental distress and traumas."
+	desc = ""
 
 /obj/item/storage/pill_bottle/psicodine/PopulateContents()
 	for(var/i in 1 to 7)
@@ -437,7 +437,7 @@
 
 /obj/item/storage/pill_bottle/happiness
 	name = "happiness pill bottle"
-	desc = "The label is long gone, in its place an 'H' written with a marker."
+	desc = ""
 
 /obj/item/storage/pill_bottle/happiness/PopulateContents()
 	for(var/i in 1 to 5)
@@ -445,7 +445,7 @@
 
 /obj/item/storage/pill_bottle/penacid
 	name = "bottle of pentetic acid pills"
-	desc = "Contains pills to expunge radiation and toxins."
+	desc = ""
 
 /obj/item/storage/pill_bottle/penacid/PopulateContents()
 	for(var/i in 1 to 3)
@@ -454,7 +454,7 @@
 
 /obj/item/storage/pill_bottle/neurine
 	name = "bottle of neurine pills"
-	desc = "Contains pills to treat non-severe mental traumas."
+	desc = ""
 
 /obj/item/storage/pill_bottle/neurine/PopulateContents()
 	for(var/i in 1 to 5)
@@ -462,7 +462,7 @@
 
 /obj/item/storage/pill_bottle/floorpill
 	name = "bottle of floorpills"
-	desc = "An old pill bottle. It smells musty."
+	desc = ""
 
 /obj/item/storage/pill_bottle/floorpill/Initialize()
 	. = ..()

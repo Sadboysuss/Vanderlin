@@ -10,8 +10,9 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/target_amount = 0				//If they are focused on a particular number. Steal objectives have their own counter.
 	var/completed = 0					//currently only used for custom objectives.
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
+	var/triumph_count = 1
 
-/datum/objective/New(var/text)
+/datum/objective/New(text)
 	if(text)
 		explanation_text = text
 
@@ -55,14 +56,10 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		return FALSE
 	if(M.force_escaped)
 		return TRUE
-	if(SSticker.force_ending || SSticker.mode.station_was_nuked) // Just let them win.
-		return TRUE
-	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
+	var/area/A = get_area(M.current)
+	if(istype(A, /area/rogue/indoors/town/cell))
 		return FALSE
-	var/turf/location = get_turf(M.current)
-	if(!location || istype(location, /turf/open/floor/plasteel/shuttle/red) || istype(location, /turf/open/floor/mineral/plastitanium/red/brig)) // Fails if they are in the shuttle brig
-		return FALSE
-	return location.onCentCom() || location.onSyndieBase()
+	return TRUE
 
 /datum/objective/proc/check_completion()
 	return completed
@@ -170,7 +167,8 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 /datum/objective/assassinate
 	name = "assasinate"
 	var/target_role_type=FALSE
-	martyr_compatible = 1
+	martyr_compatible = 0
+	triumph_count = 3
 
 /datum/objective/assassinate/find_target_by_role(role, role_type=FALSE,invert=FALSE)
 	if(!invert)
@@ -178,14 +176,12 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	..()
 
 /datum/objective/assassinate/check_completion()
-	return completed || (!considered_alive(target) || considered_afk(target) || considered_exiled(target))
+	return completed || (!considered_alive(target))
 
 /datum/objective/assassinate/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Assassinate [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
-	else
-		explanation_text = "Free Objective"
+		explanation_text = "Put [target.name] the [!target_role_type ? target.assigned_role : target.special_role] to sleep forever."
 
 /datum/objective/assassinate/admin_edit(mob/admin)
 	admin_simple_target_pick(admin)
@@ -313,6 +309,8 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	martyr_compatible = 0 //Technically you won't get both anyway.
 
 /datum/objective/hijack/check_completion() // Requires all owners to escape.
+	if(!SSshuttle.emergency)
+		return FALSE
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
 		return FALSE
 	var/list/datum/mind/owners = get_owners()
@@ -327,6 +325,8 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	martyr_compatible = 1
 
 /datum/objective/block/check_completion()
+	if(!SSshuttle.emergency)
+		return FALSE
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
 		return TRUE
 	for(var/mob/living/player in GLOB.player_list)
@@ -367,10 +367,15 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 				counter++
 	return counter >= 8
 
+/datum/objective/escape/prisoner
+	name = "survive"
+	explanation_text = "Escape the prison."
+	team_explanation_text = "Escape the prison."
+
 /datum/objective/escape
-	name = "escape"
-	explanation_text = "Escape on the shuttle or an escape pod alive and without being in custody."
-	team_explanation_text = "Have all members of your team escape on a shuttle or pod alive, without being in custody."
+	name = "survive"
+	explanation_text = "Survive without facing justice."
+	team_explanation_text = "Survive without facing justice."
 
 /datum/objective/escape/check_completion()
 	// Require all owners escape safely.
@@ -379,6 +384,34 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		if(!considered_escaped(M))
 			return FALSE
 	return TRUE
+
+/datum/objective/escape/boat
+	name = "escape"
+	explanation_text = "Escape on the last boat out of ROGUETOWN."
+	team_explanation_text = "Escape on the last boat out of ROGUETOWN."
+
+/datum/objective/escape/boat/check_completion()
+	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
+		return FALSE
+	var/list/datum/mind/owners = get_owners()
+	for(var/datum/mind/M in owners)
+		if(!considered_escaped(M) || !SSshuttle.emergency.shuttle_areas[get_area(M.current)])
+			return FALSE
+	return TRUE
+
+
+
+/datum/objective/dungeoneer
+	name = "protect"
+	explanation_text = "Keep the prisoner alive and in their cell."
+	team_explanation_text = "Keep the prisoner alive and in their cell."
+	var/mob/prisoner
+
+/datum/objective/dungeoneer/check_completion()
+	// Require all owners escape safely.
+	if(prisoner)
+		return TRUE
+
 
 /datum/objective/escape/escape_with_identity
 	name = "escape with identity"
@@ -450,7 +483,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	for(var/datum/mind/M in owners)
 		if(considered_alive(M))
 			return FALSE
-		if(M.current?.suiciding) //killing yourself ISN'T glorious.
+		if(M.current?.suiciding) //killing myself ISN'T glorious.
 			return FALSE
 	return TRUE
 
@@ -477,7 +510,7 @@ GLOBAL_LIST_EMPTY(possible_items)
 /datum/objective/steal/New()
 	..()
 	if(!GLOB.possible_items.len)//Only need to fill the list when it's needed.
-		for(var/I in subtypesof(/datum/objective_item/steal))
+		for(var/I in subtypesof(/datum/objective_item/steal/rogue))
 			new I
 
 /datum/objective/steal/find_target(dupe_search_range)
@@ -619,8 +652,8 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 			var/mob/M = owner.current			//Yeah if you get morphed and you eat a quantum tech disk with the RD's latest backup good on you soldier.
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
-				if(H && (H.stat != DEAD) && istype(H.wear_suit, /obj/item/clothing/suit/space/space_ninja))
-					var/obj/item/clothing/suit/space/space_ninja/S = H.wear_suit
+				if(H && (H.stat != DEAD) && istype(H.wear_armor, /obj/item/clothing/suit/space/space_ninja))
+					var/obj/item/clothing/suit/space/space_ninja/S = H.wear_armor
 					S.stored_research.copy_research_to(checking)
 			var/list/otherwise = M.GetAllContents()
 			for(var/obj/item/disk/tech_disk/TD in otherwise)

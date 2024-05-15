@@ -1,17 +1,17 @@
 /obj/effect/decal/cleanable/generic
 	name = "clutter"
-	desc = "Someone should clean that up."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shards"
 	beauty = -50
 
 /obj/effect/decal/cleanable/ash
 	name = "ashes"
-	desc = "Ashes to ashes, dust to dust, and into space."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ash"
 	mergeable_decal = FALSE
-	beauty = -50	
+	beauty = -50
 
 /obj/effect/decal/cleanable/ash/Initialize()
 	. = ..()
@@ -34,7 +34,7 @@
 
 /obj/effect/decal/cleanable/glass
 	name = "tiny shards"
-	desc = "Back to sand."
+	desc = ""
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "tiny"
 	beauty = -100
@@ -51,7 +51,7 @@
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"
-	desc = "Someone should clean that up."
+	desc = ""
 	icon_state = "dirt"
 	canSmoothWith = list(/obj/effect/decal/cleanable/dirt, /turf/closed/wall, /obj/structure/falsewall)
 	smooth = SMOOTH_FALSE
@@ -74,11 +74,11 @@
 
 /obj/effect/decal/cleanable/dirt/dust
 	name = "dust"
-	desc = "A thin layer of dust coating the floor."
+	desc = ""
 
 /obj/effect/decal/cleanable/greenglow
 	name = "glowing goo"
-	desc = "Jeez. I hope that's not for lunch."
+	desc = ""
 	icon_state = "greenglow"
 	light_power = 3
 	light_range = 2
@@ -94,19 +94,21 @@
 
 /obj/effect/decal/cleanable/cobweb
 	name = "cobweb"
-	desc = "Somebody should remove that."
+	desc = ""
 	gender = NEUTER
-	layer = WALL_OBJ_LAYER
+	layer = 4.2
+	plane = -1
 	icon_state = "cobweb1"
 	resistance_flags = FLAMMABLE
 	beauty = -100
+	alpha = 200
 
 /obj/effect/decal/cleanable/cobweb/cobweb2
 	icon_state = "cobweb2"
 
 /obj/effect/decal/cleanable/molten_object
 	name = "gooey grey mass"
-	desc = "It looks like a melted... something."
+	desc = ""
 	gender = NEUTER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "molten"
@@ -121,11 +123,12 @@
 //Vomit (sorry)
 /obj/effect/decal/cleanable/vomit
 	name = "vomit"
-	desc = "Gosh, how unpleasant."
+	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "vomit_1"
 	random_icon_states = list("vomit_1", "vomit_2", "vomit_3", "vomit_4")
 	beauty = -150
+	alpha = 160
 
 /obj/effect/decal/cleanable/vomit/attack_hand(mob/user)
 	. = ..()
@@ -134,7 +137,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(isflyperson(H))
-			playsound(get_turf(src), 'sound/items/drink.ogg', 50, TRUE) //slurp
+			playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE) //slurp
 			H.visible_message("<span class='alert'>[H] extends a small proboscis into the vomit pool, sucking it with a slurping sound.</span>")
 			if(reagents)
 				for(var/datum/reagent/R in reagents.reagent_list)
@@ -147,8 +150,8 @@
 			qdel(src)
 
 /obj/effect/decal/cleanable/vomit/old
-	name = "crusty dried vomit"
-	desc = "You try not to look at the chunks, and fail."
+	name = "dried vomit"
+	desc = ""
 
 /obj/effect/decal/cleanable/vomit/old/Initialize(mapload, list/datum/disease/diseases)
 	. = ..()
@@ -156,14 +159,14 @@
 
 /obj/effect/decal/cleanable/chem_pile
 	name = "chemical pile"
-	desc = "A pile of chemicals. You can't quite tell what's inside it."
+	desc = ""
 	gender = NEUTER
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ash"
 
 /obj/effect/decal/cleanable/shreds
 	name = "shreds"
-	desc = "The shredded remains of what appears to be clothing."
+	desc = ""
 	icon_state = "shreds"
 	gender = PLURAL
 	mergeable_decal = FALSE
@@ -176,12 +179,12 @@
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
 	if(!isnull(oldname))
-		desc = "The sad remains of what used to be [oldname]"
+		desc = ""
 	. = ..()
 
 /obj/effect/decal/cleanable/glitter
 	name = "generic glitter pile"
-	desc = "The herpes of arts and crafts."
+	desc = ""
 	icon = 'icons/effects/atmospherics.dmi'
 	icon_state = "plasma_old"
 	gender = NEUTER
@@ -201,21 +204,21 @@
 
 /obj/effect/decal/cleanable/plasma
 	name = "stabilized plasma"
-	desc = "A puddle of stabilized plasma."
+	desc = ""
 	icon_state = "flour"
 	icon = 'icons/effects/tomatodecal.dmi'
 	color = "#2D2D2D"
 
 /obj/effect/decal/cleanable/insectguts
 	name = "insect guts"
-	desc = "One bug squashed. Four more will rise in its place."
+	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "xfloor1"
 	random_icon_states = list("xfloor1", "xfloor2", "xfloor3", "xfloor4", "xfloor5", "xfloor6", "xfloor7")
 
 /obj/effect/decal/cleanable/confetti
 	name = "confetti"
-	desc = "Tiny bits of colored paper thrown about for the janitor to enjoy!"
+	desc = ""
 	icon = 'icons/effects/confetti_and_decor.dmi'
 	icon_state = "confetti"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT //the confetti itself might be annoying enough

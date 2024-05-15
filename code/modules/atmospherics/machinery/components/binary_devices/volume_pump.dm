@@ -13,7 +13,7 @@
 /obj/machinery/atmospherics/components/binary/volume_pump
 	icon_state = "volpump_map-2"
 	name = "volumetric gas pump"
-	desc = "A pump that moves gas by volume."
+	desc = ""
 
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE
@@ -182,7 +182,7 @@
 /obj/machinery/atmospherics/components/binary/volume_pump/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational())
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
 /obj/machinery/atmospherics/components/binary/volume_pump/multitool_act(mob/living/user, obj/item/I)

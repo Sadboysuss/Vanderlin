@@ -1,8 +1,8 @@
 // Chili
 /obj/item/seeds/chili
 	name = "pack of chili seeds"
-	desc = "These seeds grow into chili plants. HOT! HOT! HOT!"
-	icon_state = "seed-chili"
+	desc = ""
+	icon_state = "seed"
 	species = "chili"
 	plantname = "Chili Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/chili
@@ -21,7 +21,7 @@
 /obj/item/reagent_containers/food/snacks/grown/chili
 	seed = /obj/item/seeds/chili
 	name = "chili"
-	desc = "It's spicy! Wait... IT'S BURNING ME!!"
+	desc = ""
 	icon_state = "chilipepper"
 	filling_color = "#FF0000"
 	bitesize_mod = 2
@@ -31,8 +31,8 @@
 // Ice Chili
 /obj/item/seeds/chili/ice
 	name = "pack of ice pepper seeds"
-	desc = "These seeds grow into ice pepper plants."
-	icon_state = "seed-icepepper"
+	desc = ""
+	icon_state = "seed"
 	species = "chiliice"
 	plantname = "Ice Pepper Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/icepepper
@@ -46,7 +46,7 @@
 /obj/item/reagent_containers/food/snacks/grown/icepepper
 	seed = /obj/item/seeds/chili/ice
 	name = "ice pepper"
-	desc = "It's a mutant strain of chili."
+	desc = ""
 	icon_state = "icepepper"
 	filling_color = "#0000CD"
 	bitesize_mod = 2
@@ -56,8 +56,8 @@
 // Ghost Chili
 /obj/item/seeds/chili/ghost
 	name = "pack of ghost chili seeds"
-	desc = "These seeds grow into a chili said to be the hottest in the galaxy."
-	icon_state = "seed-chilighost"
+	desc = ""
+	icon_state = "seed"
 	species = "chilighost"
 	plantname = "Ghost Chili Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/ghost_chili
@@ -72,7 +72,7 @@
 /obj/item/reagent_containers/food/snacks/grown/ghost_chili
 	seed = /obj/item/seeds/chili/ghost
 	name = "ghost chili"
-	desc = "It seems to be vibrating gently."
+	desc = ""
 	icon_state = "ghostchilipepper"
 	var/mob/living/carbon/human/held_mob
 	filling_color = "#F8F8FF"
@@ -95,7 +95,7 @@
 				return
 			held_mob.adjust_bodytemperature(15 * TEMPERATURE_DAMAGE_COEFFICIENT)
 			if(prob(10))
-				to_chat(held_mob, "<span class='warning'>Your hand holding [src] burns!</span>")
+				to_chat(held_mob, "<span class='warning'>My hand holding [src] burns!</span>")
 	else
 		held_mob = null
 		..()

@@ -1,6 +1,6 @@
 /obj/item/quantum_keycard
 	name = "quantum keycard"
-	desc = "A keycard able to link to a quantum pad's particle signature, allowing other quantum pads to travel there instead of their linked pad."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "quantum_keycard"
 	item_state = "card-id"
@@ -20,7 +20,7 @@
 /obj/item/quantum_keycard/AltClick(mob/living/user)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
-	to_chat(user, "<span class='notice'>You start pressing [src]'s unlink button...</span>")
+	to_chat(user, "<span class='notice'>I start pressing [src]'s unlink button...</span>")
 	if(do_after(user, 40, target = src))
 		to_chat(user, "<span class='notice'>The keycard beeps twice and disconnects the quantum link.</span>")
 		qpad = null

@@ -13,7 +13,7 @@
 
 /datum/design/mmi
 	name = "Man-Machine Interface"
-	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity."
+	desc = ""
 	id = "mmi"
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(/datum/material/iron = 1000, /datum/material/glass = 500)
@@ -24,7 +24,7 @@
 
 /datum/design/posibrain
 	name = "Positronic Brain"
-	desc = "The latest in Artificial Intelligences."
+	desc = ""
 	id = "mmi_posi"
 	build_type = PROTOLATHE | MECHFAB
 	materials = list(/datum/material/iron = 1700, /datum/material/glass = 1350, /datum/material/gold = 500) //Gold, because SWAG.
@@ -35,7 +35,7 @@
 
 /datum/design/bluespacebeaker
 	name = "Bluespace Beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	desc = ""
 	id = "bluespacebeaker"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 5000, /datum/material/plasma = 3000, /datum/material/diamond = 1000, /datum/material/bluespace = 1000)
@@ -45,7 +45,7 @@
 
 /datum/design/noreactbeaker
 	name = "Cryostasis Beaker"
-	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	desc = ""
 	id = "splitbeaker"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3000)
@@ -73,7 +73,7 @@
 
 /datum/design/bluespacesyringe
 	name = "Bluespace Syringe"
-	desc = "An advanced syringe that can hold 60 units of chemicals"
+	desc = ""
 	id = "bluespacesyringe"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 2000, /datum/material/plasma = 1000, /datum/material/diamond = 1000, /datum/material/bluespace = 500)
@@ -83,7 +83,7 @@
 
 /datum/design/cloning_disk
 	name = "Cloning Data Disk"
-	desc = "Produce additional disks for storing genetic data."
+	desc = ""
 	id = "cloning_disk"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 300, /datum/material/glass = 100, /datum/material/silver = 50)
@@ -93,7 +93,7 @@
 
 /datum/design/noreactsyringe
 	name = "Cryo Syringe"
-	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
+	desc = ""
 	id = "noreactsyringe"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 2000, /datum/material/gold = 1000)
@@ -103,7 +103,7 @@
 
 /datum/design/piercesyringe
 	name = "Piercing Syringe"
-	desc = "A diamond-tipped syringe that pierces armor when launched at high velocity. It can hold up to 10 units."
+	desc = ""
 	id = "piercesyringe"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 2000, /datum/material/diamond = 1000)
@@ -113,7 +113,7 @@
 
 /datum/design/bluespacebodybag
 	name = "Bluespace Body Bag"
-	desc = "A bluespace body bag, powered by experimental bluespace technology. It can hold loads of bodies and the largest of creatures."
+	desc = ""
 	id = "bluespacebodybag"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3000, /datum/material/plasma = 2000, /datum/material/diamond = 500, /datum/material/bluespace = 500)
@@ -123,7 +123,7 @@
 
 /datum/design/plasmarefiller
 	name = "Plasma-Man Jumpsuit Refill"
-	desc = "A refill pack for the auto-extinguisher on Plasma-man suits."
+	desc = ""
 	id = "plasmarefiller" //Why did this have no plasmatech
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 4000, /datum/material/plasma = 1000)
@@ -133,7 +133,7 @@
 
 /datum/design/crewpinpointer
 	name = "Crew Pinpointer"
-	desc = "Allows tracking of someone's location if their suit sensors are turned to tracking beacon."
+	desc = ""
 	id = "crewpinpointer"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3000, /datum/material/glass = 1500, /datum/material/gold = 200)
@@ -143,7 +143,7 @@
 
 /datum/design/defibrillator
 	name = "Defibrillator"
-	desc = "A portable defibrillator, used for resuscitating recently deceased crew."
+	desc = ""
 	id = "defibrillator"
 	build_type = PROTOLATHE
 	build_path = /obj/item/defibrillator
@@ -153,7 +153,7 @@
 
 /datum/design/defibrillator_mount
 	name = "Defibrillator Wall Mount"
-	desc = "An all-in-one mounted frame for holding defibrillators, complete with ID-locked clamps and recharging cables."
+	desc = ""
 	id = "defibmount"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000, /datum/material/glass = 1000)
@@ -163,7 +163,7 @@
 
 /datum/design/defibrillator_compact
 	name = "Compact Defibrillator"
-	desc = "A compact defibrillator that can be worn on a belt."
+	desc = ""
 	id = "defibrillator_compact"
 	build_type = PROTOLATHE
 	build_path = /obj/item/defibrillator/compact
@@ -173,7 +173,7 @@
 
 /datum/design/genescanner
 	name = "Genetic Sequence Analyzer"
-	desc = "A handy hand-held analyzers for quickly determining mutations and collecting the full sequence."
+	desc = ""
 	id = "genescanner"
 	build_path = /obj/item/sequence_scanner
 	build_type = PROTOLATHE
@@ -183,7 +183,7 @@
 
 /datum/design/healthanalyzer_advanced
 	name = "Advanced Health Analyzer"
-	desc = "A hand-held body scanner able to distinguish vital signs of the subject with high accuracy."
+	desc = ""
 	id = "healthanalyzer_advanced"
 	build_path = /obj/item/healthanalyzer/advanced
 	build_type = PROTOLATHE
@@ -193,7 +193,7 @@
 
 /datum/design/medigel
 	name = "Medical Gel"
-	desc = "A medical gel applicator bottle, designed for precision application, with an unscrewable cap."
+	desc = ""
 	id = "medigel"
 	build_path = /obj/item/reagent_containers/medigel
 	build_type = PROTOLATHE
@@ -212,7 +212,7 @@
 
 /datum/design/laserscalpel
 	name = "Laser Scalpel"
-	desc = "A laser scalpel used for precise cutting."
+	desc = ""
 	id = "laserscalpel"
 	build_path = /obj/item/scalpel/advanced
 	build_type = PROTOLATHE
@@ -222,7 +222,7 @@
 
 /datum/design/mechanicalpinches
 	name = "Mechanical Pinches"
-	desc = "These pinches can be either used as retractor or hemostat."
+	desc = ""
 	id = "mechanicalpinches"
 	build_path = /obj/item/retractor/advanced
 	build_type = PROTOLATHE
@@ -232,7 +232,7 @@
 
 /datum/design/searingtool
 	name = "Searing Tool"
-	desc = "Used to mend tissue together. Or drill tissue away."
+	desc = ""
 	id = "searingtool"
 	build_path = /obj/item/surgicaldrill/advanced
 	build_type = PROTOLATHE
@@ -242,7 +242,7 @@
 
 /datum/design/medical_spray_bottle
 	name = "Medical Spray Bottle"
-	desc = "A traditional spray bottle used to generate a fine mist. Not to be confused with a medspray."
+	desc = ""
 	id = "med_spray_bottle"
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
@@ -252,7 +252,7 @@
 
 /datum/design/chem_pack
 	name = "Intravenous Medicine Bag"
-	desc = "A plastic pressure bag for IV administration of drugs."
+	desc = ""
 	id = "chem_pack"
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
@@ -262,7 +262,7 @@
 
 /datum/design/blood_pack
 	name = "Blood Pack"
-	desc = "Is used to contain blood used for transfusion. Must be attached to an IV drip."
+	desc = ""
 	id = "blood_pack"
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
@@ -276,7 +276,7 @@
 
 /datum/design/cyberimp_welding
 	name = "Welding Shield Eyes"
-	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
+	desc = ""
 	id = "ci-welding"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -287,7 +287,7 @@
 
 /datum/design/cyberimp_gloweyes
 	name = "Luminescent Eyes"
-	desc = "A pair of cybernetic eyes that can emit multicolored light"
+	desc = ""
 	id = "ci-gloweyes"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -298,7 +298,7 @@
 
 /datum/design/cyberimp_breather
 	name = "Breathing Tube Implant"
-	desc = "This simple implant adds an internals connector to your back, allowing you to use internals without a mask and protecting you from being choked."
+	desc = ""
 	id = "ci-breather"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 35
@@ -309,7 +309,7 @@
 
 /datum/design/cyberimp_surgical
 	name = "Surgical Arm Implant"
-	desc = "A set of surgical tools hidden behind a concealed panel on the user's arm."
+	desc = ""
 	id = "ci-surgery"
 	build_type = PROTOLATHE | MECHFAB
 	materials = list (/datum/material/iron = 2500, /datum/material/glass = 1500, /datum/material/silver = 1500)
@@ -320,7 +320,7 @@
 
 /datum/design/cyberimp_toolset
 	name = "Toolset Arm Implant"
-	desc = "A stripped-down version of engineering cyborg toolset, designed to be installed on subject's arm."
+	desc = ""
 	id = "ci-toolset"
 	build_type = PROTOLATHE | MECHFAB
 	materials = list (/datum/material/iron = 2500, /datum/material/glass = 1500, /datum/material/silver = 1500)
@@ -331,7 +331,7 @@
 
 /datum/design/cyberimp_medical_hud
 	name = "Medical HUD Implant"
-	desc = "These cybernetic eyes will display a medical HUD over everything you see. Wiggle eyes to control."
+	desc = ""
 	id = "ci-medhud"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -342,7 +342,7 @@
 
 /datum/design/cyberimp_security_hud
 	name = "Security HUD Implant"
-	desc = "These cybernetic eyes will display a security HUD over everything you see. Wiggle eyes to control."
+	desc = ""
 	id = "ci-sechud"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -353,7 +353,7 @@
 
 /datum/design/cyberimp_diagnostic_hud
 	name = "Diagnostic HUD Implant"
-	desc = "These cybernetic eyes will display a diagnostic HUD over everything you see. Wiggle eyes to control."
+	desc = ""
 	id = "ci-diaghud"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -364,7 +364,7 @@
 
 /datum/design/cyberimp_xray
 	name = "X-ray Eyes"
-	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
+	desc = ""
 	id = "ci-xray"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
@@ -375,7 +375,7 @@
 
 /datum/design/cyberimp_thermals
 	name = "Thermal Eyes"
-	desc = "These cybernetic eyes will give you Thermal vision. Vertical slit pupil included."
+	desc = ""
 	id = "ci-thermals"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
@@ -386,7 +386,7 @@
 
 /datum/design/cyberimp_antidrop
 	name = "Anti-Drop Implant"
-	desc = "This cybernetic brain implant will allow you to force your hand muscles to contract, preventing item dropping. Twitch ear to toggle."
+	desc = ""
 	id = "ci-antidrop"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
@@ -397,7 +397,7 @@
 
 /datum/design/cyberimp_antistun
 	name = "CNS Rebooter Implant"
-	desc = "This implant will automatically give you back control over your central nervous system, reducing downtime when stunned."
+	desc = ""
 	id = "ci-antistun"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
@@ -408,7 +408,7 @@
 
 /datum/design/cyberimp_nutriment
 	name = "Nutriment Pump Implant"
-	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are starving."
+	desc = ""
 	id = "ci-nutriment"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -419,7 +419,7 @@
 
 /datum/design/cyberimp_nutriment_plus
 	name = "Nutriment Pump Implant PLUS"
-	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are hungry."
+	desc = ""
 	id = "ci-nutrimentplus"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -430,7 +430,7 @@
 
 /datum/design/cyberimp_reviver
 	name = "Reviver Implant"
-	desc = "This implant will attempt to revive you if you lose consciousness. For the faint of heart!"
+	desc = ""
 	id = "ci-reviver"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
@@ -441,7 +441,7 @@
 
 /datum/design/cyberimp_thrusters
 	name = "Thrusters Set Implant"
-	desc = "This implant will allow you to use gas from environment or your internals for propulsion in zero-gravity areas."
+	desc = ""
 	id = "ci-thrusters"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 80
@@ -456,7 +456,7 @@
 
 /datum/design/implanter
 	name = "Implanter"
-	desc = "A sterile automatic implant injector."
+	desc = ""
 	id = "implanter"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 200)
@@ -466,7 +466,7 @@
 
 /datum/design/implantcase
 	name = "Implant Case"
-	desc = "A glass case for containing an implant."
+	desc = ""
 	id = "implantcase"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 500)
@@ -476,7 +476,7 @@
 
 /datum/design/implant_sadtrombone
 	name = "Sad Trombone Implant Case"
-	desc = "Makes death amusing."
+	desc = ""
 	id = "implant_trombone"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 500, /datum/material/bananium = 500)
@@ -486,7 +486,7 @@
 
 /datum/design/implant_chem
 	name = "Chemical Implant Case"
-	desc = "A glass case containing an implant."
+	desc = ""
 	id = "implant_chem"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 700)
@@ -496,7 +496,7 @@
 
 /datum/design/implant_tracking
 	name = "Tracking Implant Case"
-	desc = "A glass case containing an implant."
+	desc = ""
 	id = "implant_tracking"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 500, /datum/material/glass = 500)
@@ -508,7 +508,7 @@
 
 /datum/design/cybernetic_liver
 	name = "Cybernetic Liver"
-	desc = "A cybernetic liver"
+	desc = ""
 	id = "cybernetic_liver"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -519,7 +519,7 @@
 
 /datum/design/cybernetic_liver_u
 	name = "Upgraded Cybernetic Liver"
-	desc = "An upgraded cybernetic liver"
+	desc = ""
 	id = "cybernetic_liver_u"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -530,7 +530,7 @@
 
 /datum/design/cybernetic_heart
 	name = "Cybernetic Heart"
-	desc = "A cybernetic heart"
+	desc = ""
 	id = "cybernetic_heart"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -541,7 +541,7 @@
 
 /datum/design/cybernetic_heart_u
 	name = "Upgraded Cybernetic Heart"
-	desc = "An upgraded cybernetic heart"
+	desc = ""
 	id = "cybernetic_heart_u"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -552,7 +552,7 @@
 
 /datum/design/cybernetic_lungs
 	name = "Cybernetic Lungs"
-	desc = "A pair of cybernetic lungs."
+	desc = ""
 	id = "cybernetic_lungs"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -563,7 +563,7 @@
 
 /datum/design/cybernetic_lungs_u
 	name = "Upgraded Cybernetic Lungs"
-	desc = "A pair of upgraded cybernetic lungs."
+	desc = ""
 	id = "cybernetic_lungs_u"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 50
@@ -574,7 +574,7 @@
 
 /datum/design/cybernetic_ears
 	name = "Cybernetic Ears"
-	desc = "A pair of cybernetic ears."
+	desc = ""
 	id = "cybernetic_ears"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 30
@@ -585,7 +585,7 @@
 
 /datum/design/cybernetic_ears_u
 	name = "Upgraded Cybernetic Ears"
-	desc = "A pair of upgraded cybernetic ears."
+	desc = ""
 	id = "cybernetic_ears_u"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
@@ -598,7 +598,7 @@
 /////////////////////
 /datum/design/surgery
 	name = "Surgery Design"
-	desc = "what"
+	desc = ""
 	id = "surgery_parent"
 	research_icon = 'icons/obj/surgery.dmi'
 	research_icon_state = "surgery_any"
@@ -606,7 +606,7 @@
 
 /datum/design/surgery/experimental_dissection
 	name = "Advanced Dissection"
-	desc = "A surgical procedure which analyzes the biology of a corpse, and automatically adds new findings to the research database."
+	desc = ""
 	id = "surgery_adv_dissection"
 	surgery = /datum/surgery/advanced/experimental_dissection/adv
 	research_icon_state = "surgery_chest"
@@ -623,28 +623,28 @@
 
 /datum/design/surgery/lobotomy
 	name = "Lobotomy"
-	desc = "An invasive surgical procedure which guarantees removal of almost all brain traumas, but might cause another permanent trauma in return."
+	desc = ""
 	id = "surgery_lobotomy"
 	surgery = /datum/surgery/advanced/lobotomy
 	research_icon_state = "surgery_head"
 
 /datum/design/surgery/pacify
 	name = "Pacification"
-	desc = "A surgical procedure which permanently inhibits the aggression center of the brain, making the patient unwilling to cause direct harm."
+	desc = ""
 	id = "surgery_pacify"
 	surgery = /datum/surgery/advanced/pacify
 	research_icon_state = "surgery_head"
 
 /datum/design/surgery/viral_bonding
 	name = "Viral Bonding"
-	desc = "A surgical procedure that forces a symbiotic relationship between a virus and its host. The patient must be dosed with spaceacillin, virus food, and formaldehyde."
+	desc = ""
 	id = "surgery_viral_bond"
 	surgery = /datum/surgery/advanced/viral_bonding
 	research_icon_state = "surgery_chest"
 
 /datum/design/surgery/healing //PLEASE ACCOUNT FOR UNIQUE HEALING BRANCHES IN THE hptech HREF (currently 2 for Brute/Burn; Combo is bonus)
 	name = "Tend Wounds"
-	desc = "An upgraded version of the original surgery."
+	desc = ""
 	id = "surgery_healing_base" //holder because travis cries otherwise. Not used in techweb unlocks.
 	research_icon_state = "surgery_chest"
 
@@ -670,7 +670,7 @@
 
 /datum/design/surgery/healing/combo
 	name = "Tend Wounds (Physical)"
-	desc = "A surgical procedure that repairs both bruises and burns. Repair efficiency is not as high as the individual surgeries but it is faster."
+	desc = ""
 	surgery = /datum/surgery/healing/combo
 	id = "surgery_heal_combo"
 
@@ -681,48 +681,48 @@
 
 /datum/design/surgery/healing/combo_upgrade_2
 	name = "Tend Wounds (Physical) Upgrade"
-	desc = "A surgical procedure that repairs both bruises and burns faster than their individual counterparts. It is more effective than both the individual surgeries."
+	desc = ""
 	surgery = /datum/surgery/healing/combo/upgraded/femto
 	id = "surgery_heal_combo_upgrade_femto"
 
 /datum/design/surgery/revival
 	name = "Revival"
-	desc = "An experimental surgical procedure which involves reconstruction and reactivation of the patient's brain even long after death. The body must still be able to sustain life."
+	desc = ""
 	id = "surgery_revival"
 	surgery = /datum/surgery/advanced/revival
 	research_icon_state = "surgery_head"
 
 /datum/design/surgery/brainwashing
 	name = "Brainwashing"
-	desc = "A surgical procedure which directly implants a directive into the patient's brain, making it their absolute priority. It can be cleared using a mindshield implant."
+	desc = ""
 	id = "surgery_brainwashing"
 	surgery = /datum/surgery/advanced/brainwashing
 	research_icon_state = "surgery_head"
 
 /datum/design/surgery/nerve_splicing
 	name = "Nerve Splicing"
-	desc = "A surgical procedure which splices the patient's nerves, making them more resistant to stuns."
+	desc = ""
 	id = "surgery_nerve_splice"
 	surgery = /datum/surgery/advanced/bioware/nerve_splicing
 	research_icon_state = "surgery_chest"
 
 /datum/design/surgery/nerve_grounding
 	name = "Nerve Grounding"
-	desc = "A surgical procedure which makes the patient's nerves act as grounding rods, protecting them from electrical shocks."
+	desc = ""
 	id = "surgery_nerve_ground"
 	surgery = /datum/surgery/advanced/bioware/nerve_grounding
 	research_icon_state = "surgery_chest"
 
 /datum/design/surgery/vein_threading
 	name = "Vein Threading"
-	desc = "A surgical procedure which severely reduces the amount of blood lost in case of injury."
+	desc = ""
 	id = "surgery_vein_thread"
 	surgery = /datum/surgery/advanced/bioware/vein_threading
 	research_icon_state = "surgery_chest"
 
 /datum/design/surgery/muscled_veins
 	name = "Vein Muscle Membrane"
-	desc = "A surgical procedure which adds a muscled membrane to blood vessels, allowing them to pump blood without a heart."
+	desc = ""
 	id = "surgery_muscled_veins"
 	surgery = /datum/surgery/advanced/bioware/muscled_veins
 	research_icon_state = "surgery_chest"
@@ -745,7 +745,7 @@
 
 /datum/design/surgery/necrotic_revival
 	name = "Necrotic Revival"
-	desc = "An experimental surgical procedure that stimulates the growth of a Romerol tumor inside the patient's brain. Requires zombie powder or rezadone."
+	desc = ""
 	id = "surgery_zombie"
 	surgery = /datum/surgery/advanced/necrotic_revival
 	research_icon_state = "surgery_head"

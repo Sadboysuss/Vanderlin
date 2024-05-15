@@ -1,6 +1,6 @@
 /obj/item/toy/plush
 	name = "plush"
-	desc = "This is the special coder plush, do not steal."
+	desc = ""
 	icon = 'icons/obj/plushes.dmi'
 	icon_state = "debug"
 	attack_verb = list("thumped", "whomped", "bumped")
@@ -106,21 +106,21 @@
 /obj/item/toy/plush/attack_self(mob/user)
 	. = ..()
 	if(stuffed || grenade)
-		to_chat(user, "<span class='notice'>You pet [src]. D'awww.</span>")
+		to_chat(user, "<span class='notice'>I pet [src]. D'awww.</span>")
 		if(grenade && !grenade.active)
 			log_game("[key_name(user)] activated a hidden grenade in [src].")
 			grenade.preprime(user, msg = FALSE, volume = 10)
 	else
-		to_chat(user, "<span class='notice'>You try to pet [src], but it has no stuffing. Aww...</span>")
+		to_chat(user, "<span class='notice'>I try to pet [src], but it has no stuffing. Aww...</span>")
 
 /obj/item/toy/plush/attackby(obj/item/I, mob/living/user, params)
 	if(I.get_sharpness())
 		if(!grenade)
 			if(!stuffed)
-				to_chat(user, "<span class='warning'>You already murdered it!</span>")
+				to_chat(user, "<span class='warning'>I already murdered it!</span>")
 				return
 			if(!divine)
-				user.visible_message("<span class='notice'>[user] tears out the stuffing from [src]!</span>", "<span class='notice'>You rip a bunch of the stuffing from [src]. Murderer.</span>")
+				user.visible_message("<span class='notice'>[user] tears out the stuffing from [src]!</span>", "<span class='notice'>I rip a bunch of the stuffing from [src]. Murderer.</span>")
 				I.play_tool_sound(src)
 				stuffed = FALSE
 			else
@@ -135,16 +135,16 @@
 					to_chat(user, "<span class='notice'>There is no escape. No recall or intervention can work in this place.</span>")
 				else
 					to_chat(user, "<span class='notice'>There is no escape. Although recall or intervention can work in this place, attempting to flee from [src]'s immense power would be futile.</span>")
-				user.visible_message("<span class='notice'>[user] lays down their weapons and begs for [src]'s mercy!</span>", "<span class='notice'>You lay down your weapons and beg for [src]'s mercy.</span>")
+				user.visible_message("<span class='notice'>[user] lays down their weapons and begs for [src]'s mercy!</span>", "<span class='notice'>I lay down your weapons and beg for [src]'s mercy.</span>")
 				user.drop_all_held_items()
 		else
-			to_chat(user, "<span class='notice'>You remove the grenade from [src].</span>")
+			to_chat(user, "<span class='notice'>I remove the grenade from [src].</span>")
 			user.put_in_hands(grenade)
 			grenade = null
 		return
 	if(istype(I, /obj/item/grenade))
 		if(stuffed)
-			to_chat(user, "<span class='warning'>You need to remove some stuffing first!</span>")
+			to_chat(user, "<span class='warning'>I need to remove some stuffing first!</span>")
 			return
 		if(grenade)
 			to_chat(user, "<span class='warning'>[src] already has a grenade!</span>")
@@ -152,7 +152,7 @@
 		if(!user.transferItemToLoc(I, src))
 			return
 		user.visible_message("<span class='warning'>[user] slides [grenade] into [src].</span>", \
-		"<span class='danger'>You slide [I] into [src].</span>")
+		"<span class='danger'>I slide [I] into [src].</span>")
 		grenade = I
 		var/turf/grenade_turf = get_turf(src)
 		log_game("[key_name(user)] added a grenade ([I.name]) to [src] at [AREACOORD(grenade_turf)].")
@@ -196,7 +196,7 @@
 
 		if(prob(chance))	//did we bag a date?
 			user.visible_message("<span class='notice'>[user] makes [Kisser] kiss [src]!</span>",
-									"<span class='notice'>You make [Kisser] kiss [src]!</span>")
+									"<span class='notice'>I make [Kisser] kiss [src]!</span>")
 			if(lover)	//who cares for the past, we live in the present
 				lover.heartbreak(src)
 			new_lover(Kisser)
@@ -208,7 +208,7 @@
 	//then comes marriage
 	else if(Kisser.lover == src && Kisser.partner != src)	//need to be lovers (assumes loving is a two way street) but not married (also assumes similar)
 		user.visible_message("<span class='notice'>[user] pronounces [Kisser] and [src] married! D'aw.</span>",
-									"<span class='notice'>You pronounce [Kisser] and [src] married!</span>")
+									"<span class='notice'>I pronounce [Kisser] and [src] married!</span>")
 		new_partner(Kisser)
 		Kisser.new_partner(src)
 
@@ -223,7 +223,7 @@
 	//then comes protection, or abstinence if we are catholic
 	else if(Kisser.partner == src && plush_child)
 		user.visible_message("<span class='notice'>[user] makes [Kisser] nuzzle [src]!</span>",
-									"<span class='notice'>You make [Kisser] nuzzle [src]!</span>")
+									"<span class='notice'>I make [Kisser] nuzzle [src]!</span>")
 
 	//then oh fuck something unexpected happened
 	else
@@ -304,7 +304,7 @@
 	paternal_parent = Dada
 	young = TRUE
 	name = "[Mama] Jr"	//Icelandic naming convention pending
-	normal_desc = "[src] is a little baby of [maternal_parent] and [paternal_parent]!"	//original desc won't be used so the child can have moods
+	normal_desc = ""	//original desc won't be used so the child can have moods
 	update_desc()
 
 	Mama.mood_message = pick(Mama.parent_message)
@@ -377,22 +377,22 @@
 
 /obj/item/toy/plush/carpplushie
 	name = "space carp plushie"
-	desc = "An adorable stuffed toy that resembles a space carp."
+	desc = ""
 	icon_state = "carpplush"
 	item_state = "carp_plushie"
 	attack_verb = list("bitten", "eaten", "fin slapped")
-	squeak_override = list('sound/weapons/bite.ogg'=1)
+	squeak_override = list('sound/blank.ogg'=1)
 
 /obj/item/toy/plush/bubbleplush
 	name = "\improper Bubblegum plushie"
-	desc = "The friendly red demon that gives good miners gifts."
+	desc = ""
 	icon_state = "bubbleplush"
 	attack_verb = list("rent")
-	squeak_override = list('sound/magic/demon_attack1.ogg'=1)
+	squeak_override = list('sound/blank.ogg'=1)
 
 /obj/item/toy/plush/plushvar
 	name = "\improper Ratvar plushie"
-	desc = "An adorable plushie of the clockwork justiciar himself with new and improved spring arm action."
+	desc = ""
 	icon_state = "plushvar"
 	divine = TRUE
 	var/obj/item/toy/plush/narplush/clash_target
@@ -425,7 +425,7 @@
 			clash_target = null
 			P.clashing = FALSE
 			return
-		playsound(src, 'sound/magic/clockwork/ratvar_attack.ogg', 50, TRUE, frequency = 2)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, frequency = 2)
 		sleep(2.4)
 		if(QDELETED(src))
 			P.clashing = FALSE
@@ -444,7 +444,7 @@
 		if(QDELETED(P))
 			clash_target = null
 			return
-		playsound(P, 'sound/magic/clockwork/narsie_attack.ogg', 50, TRUE, frequency = 2)
+		playsound(P, 'sound/blank.ogg', 50, TRUE, frequency = 2)
 		sleep(3.3)
 		if(QDELETED(src))
 			P.clashing = FALSE
@@ -463,23 +463,23 @@
 	if(a_winnar_is == src)
 		say(pick("DIE.", "ROT."))
 		P.say(pick("Nooooo...", "Not die. To y-", "Die. Ratv-", "Sas tyen re-"))
-		playsound(src, 'sound/magic/clockwork/anima_fragment_attack.ogg', 50, TRUE, frequency = 2)
-		playsound(P, 'sound/magic/demon_dies.ogg', 50, TRUE, frequency = 2)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, frequency = 2)
+		playsound(P, 'sound/blank.ogg', 50, TRUE, frequency = 2)
 		explosion(P, 0, 0, 1)
 		qdel(P)
 		clash_target = null
 	else
 		say("NO! I will not be banished again...")
 		P.say(pick("Ha.", "Ra'sha fonn dest.", "You fool. To come here."))
-		playsound(src, 'sound/magic/clockwork/anima_fragment_death.ogg', 62, TRUE, frequency = 2)
-		playsound(P, 'sound/magic/demon_attack1.ogg', 50, TRUE, frequency = 2)
+		playsound(src, 'sound/blank.ogg', 62, TRUE, frequency = 2)
+		playsound(P, 'sound/blank.ogg', 50, TRUE, frequency = 2)
 		explosion(src, 0, 0, 1)
 		qdel(src)
 		P.clashing = FALSE
 
 /obj/item/toy/plush/narplush
 	name = "\improper Nar'Sie plushie"
-	desc = "A small stuffed doll of the elder goddess Nar'Sie. Who thought this was a good children's toy?"
+	desc = ""
 	icon_state = "narplush"
 	divine = TRUE
 	var/clashing
@@ -493,40 +493,40 @@
 
 /obj/item/toy/plush/lizardplushie
 	name = "lizard plushie"
-	desc = "An adorable stuffed toy that resembles a lizardperson."
+	desc = ""
 	icon_state = "plushie_lizard"
 	item_state = "plushie_lizard"
 	attack_verb = list("clawed", "hissed", "tail slapped")
-	squeak_override = list('sound/weapons/slash.ogg' = 1)
+	squeak_override = list('sound/blank.ogg' = 1)
 
 /obj/item/toy/plush/snakeplushie
 	name = "snake plushie"
-	desc = "An adorable stuffed toy that resembles a snake. Not to be mistaken for the real thing."
+	desc = ""
 	icon_state = "plushie_snake"
 	item_state = "plushie_snake"
 	attack_verb = list("bitten", "hissed", "tail slapped")
-	squeak_override = list('sound/weapons/bite.ogg' = 1)
+	squeak_override = list('sound/blank.ogg' = 1)
 
 /obj/item/toy/plush/nukeplushie
 	name = "operative plushie"
-	desc = "A stuffed toy that resembles a syndicate nuclear operative. The tag claims operatives to be purely fictitious."
+	desc = ""
 	icon_state = "plushie_nuke"
 	item_state = "plushie_nuke"
 	attack_verb = list("shot", "nuked", "detonated")
-	squeak_override = list('sound/effects/hit_punch.ogg' = 1)
+	squeak_override = list('sound/blank.ogg' = 1)
 
 /obj/item/toy/plush/slimeplushie
 	name = "slime plushie"
-	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
+	desc = ""
 	icon_state = "plushie_slime"
 	item_state = "plushie_slime"
 	attack_verb = list("blorbled", "slimed", "absorbed")
-	squeak_override = list('sound/effects/blobattack.ogg' = 1)
+	squeak_override = list('sound/blank.ogg' = 1)
 	gender = FEMALE	//given all the jokes and drawings, I'm not sure the xenobiologists would make a slimeboy
 
 /obj/item/toy/plush/awakenedplushie
 	name = "awakened plushie"
-	desc = "An ancient plushie that has grown enlightened to the true nature of reality."
+	desc = ""
 	icon_state = "plushie_awake"
 	item_state = "plushie_awake"
 
@@ -536,9 +536,9 @@
 
 /obj/item/toy/plush/beeplushie
 	name = "bee plushie"
-	desc = "A cute toy that resembles an even cuter bee."
+	desc = ""
 	icon_state = "plushie_h"
 	item_state = "plushie_h"
 	attack_verb = list("stung")
 	gender = FEMALE
-	squeak_override = list('sound/voice/moth/scream_moth.ogg'=1)
+	squeak_override = list('sound/blank.ogg'=1)

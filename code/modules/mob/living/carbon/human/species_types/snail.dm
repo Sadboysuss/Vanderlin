@@ -23,7 +23,7 @@
 /datum/species/snail/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(istype(chem,/datum/reagent/consumable/sodiumchloride))
 		H.adjustFireLoss(2)
-		playsound(H, 'sound/weapons/sear.ogg', 30, TRUE)
+		playsound(H, 'sound/blank.ogg', 30, TRUE)
 		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM)
 		return 1
 
@@ -46,7 +46,7 @@
 
 /obj/item/storage/backpack/snail
 	name = "snail shell"
-	desc = "Worn by snails as armor and storage compartment."
+	desc = ""
 	icon_state = "snailshell"
 	item_state = "snailshell"
 	lefthand_file = 'icons/mob/inhands/equipment/backpack_lefthand.dmi'

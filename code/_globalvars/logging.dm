@@ -40,6 +40,12 @@ GLOBAL_VAR(world_paper_log)
 GLOBAL_PROTECT(world_paper_log)
 GLOBAL_VAR(tgui_log)
 GLOBAL_PROTECT(tgui_log)
+GLOBAL_VAR(character_list_log)
+GLOBAL_PROTECT(character_list_log)
+
+GLOBAL_LIST_EMPTY(character_list)
+GLOBAL_LIST_EMPTY(character_ckey_list)
+GLOBAL_VAR(rogue_round_id)
 
 GLOBAL_LIST_EMPTY(bombers)
 GLOBAL_PROTECT(bombers)

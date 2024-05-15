@@ -1,8 +1,8 @@
 /datum/computer_file/program/card_mod
 	filename = "cardmod"
-	filedesc = "ID Card Modification"
+	filedesc = ""
 	program_icon_state = "id"
-	extended_desc = "Program for programming employee ID cards to access parts of the station."
+	extended_desc = ""
 	transfer_access = ACCESS_HEADS
 	requires_ntnet = 0
 	size = 8

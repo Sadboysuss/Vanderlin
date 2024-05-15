@@ -3,7 +3,7 @@
 	icon_state = "e_netting"
 	damage = 10
 	damage_type = STAMINA
-	hitsound = 'sound/weapons/taserhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	range = 10
 
 /obj/projectile/energy/net/Initialize()
@@ -23,7 +23,7 @@
 
 /obj/effect/nettingportal
 	name = "DRAGnet teleportation field"
-	desc = "A field of bluespace energy, locking on to teleport a target."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dragnetfield"
 	light_range = 3
@@ -59,7 +59,7 @@
 	name = "energy snare"
 	icon_state = "e_snare"
 	nodamage = TRUE
-	hitsound = 'sound/weapons/taserhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	range = 4
 
 /obj/projectile/energy/trap/on_hit(atom/target, blocked = FALSE)
@@ -79,7 +79,7 @@
 	icon_state = "e_snare"
 	nodamage = TRUE
 	paralyze = 0
-	hitsound = 'sound/weapons/taserhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	range = 10
 
 /obj/projectile/energy/trap/cyborg/on_hit(atom/target, blocked = FALSE)

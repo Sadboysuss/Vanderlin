@@ -144,7 +144,7 @@
 			update_mobility()
 			regenerate_icons()
 		else if(stat == UNCONSCIOUS && !stasis)
-			to_chat(src, "<span class='notice'>You wake up from the stasis.</span>")
+			to_chat(src, "<span class='notice'>I wake up from the stasis.</span>")
 			stat = CONSCIOUS
 			update_mobility()
 			regenerate_icons()
@@ -209,7 +209,7 @@
 		C.adjustToxLoss(rand(1,2))
 
 		if(prob(10) && C.client)
-			to_chat(C, "<span class='userdanger'>[pick("You can feel your body becoming weak!", \
+			to_chat(C, "<span class='danger'>[pick("You can feel your body becoming weak!", \
 			"You feel like you're about to die!", \
 			"You feel every part of your body screaming in agony!", \
 			"A low, rolling pain passes through your body!", \
@@ -234,7 +234,7 @@
 
 	add_nutrition((rand(7, 15) * CONFIG_GET(number/damage_multiplier)))
 
-	//Heal yourself.
+	//Heal myself.
 	adjustBruteLoss(-3)
 
 /mob/living/simple_animal/slime/proc/handle_nutrition()

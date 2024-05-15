@@ -2,7 +2,7 @@
 
 /datum/nanite_program/nervous
 	name = "Nerve Support"
-	desc = "The nanites act as a secondary nervous system, reducing the amount of time the host is stunned."
+	desc = ""
 	use_rate = 1.5
 	rogue_types = list(/datum/nanite_program/nerve_decay)
 
@@ -20,7 +20,7 @@
 
 /datum/nanite_program/triggered/adrenaline
 	name = "Adrenaline Burst"
-	desc = "The nanites cause a burst of adrenaline when triggered, allowing the user to push their body past its normal limits."
+	desc = ""
 	trigger_cost = 25
 	trigger_cooldown = 1200
 	rogue_types = list(/datum/nanite_program/toxic, /datum/nanite_program/nerve_decay)
@@ -28,13 +28,13 @@
 /datum/nanite_program/triggered/adrenaline/trigger()
 	if(!..())
 		return
-	to_chat(host_mob, "<span class='notice'>You feel a sudden surge of energy!</span>")
+	to_chat(host_mob, "<span class='notice'>I feel a sudden surge of energy!</span>")
 	host_mob.set_resting(FALSE)
 	host_mob.reagents.add_reagent(/datum/reagent/medicine/badstims, 3)
 
 /datum/nanite_program/hardening
 	name = "Dermal Hardening"
-	desc = "The nanites form a mesh under the host's skin, protecting them from melee and bullet impacts."
+	desc = ""
 	use_rate = 0.5
 	rogue_types = list(/datum/nanite_program/skin_decay)
 
@@ -56,7 +56,7 @@
 
 /datum/nanite_program/refractive
 	name = "Dermal Refractive Surface"
-	desc = "The nanites form a membrane above the host's skin, reducing the effect of laser and energy impacts."
+	desc = ""
 	use_rate = 0.50
 	rogue_types = list(/datum/nanite_program/skin_decay)
 
@@ -76,7 +76,7 @@
 
 /datum/nanite_program/coagulating
 	name = "Rapid Coagulation"
-	desc = "The nanites induce rapid coagulation when the host is wounded, dramatically reducing bleeding rate."
+	desc = ""
 	use_rate = 0.10
 	rogue_types = list(/datum/nanite_program/suffocating)
 
@@ -94,7 +94,7 @@
 
 /datum/nanite_program/conductive
 	name = "Electric Conduction"
-	desc = "The nanites act as a grounding rod for electric shocks, protecting the host. Shocks can still damage the nanites themselves."
+	desc = ""
 	use_rate = 0.20
 	program_flags = NANITE_SHOCK_IMMUNE
 	rogue_types = list(/datum/nanite_program/nerve_decay)
@@ -109,7 +109,7 @@
 
 /datum/nanite_program/mindshield
 	name = "Mental Barrier"
-	desc = "The nanites form a protective membrane around the host's brain, shielding them from abnormal influences while they're active."
+	desc = ""
 	use_rate = 0.40
 	rogue_types = list(/datum/nanite_program/brain_decay, /datum/nanite_program/brain_misfire)
 

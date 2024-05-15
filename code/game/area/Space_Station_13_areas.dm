@@ -7,7 +7,7 @@
 	icon = 'ICON FILENAME' 			(defaults to 'icons/turf/areas.dmi')
 	icon_state = "NAME OF ICON" 	(defaults to "unknown" (blank))
 	requires_power = FALSE 				(defaults to true)
-	ambientsounds = list()				(defaults to GENERIC from sound.dm. override it as "ambientsounds = list('sound/ambience/signal.ogg')" or using another define.
+	ambientsounds = list()				(defaults to GENERIC from sound.dm. override it as "ambientsounds = list('sound/blank.ogg')" or using another define.
 
 NOTE: there are two lists of areas in the end of this file: centcom and station itself. Please maintain these lists valid. --rastaf0
 
@@ -284,7 +284,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/bridge
 	name = "Bridge"
 	icon_state = "bridge"
-	ambientsounds = list('sound/ambience/signal.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 /area/bridge/meeting_room
 	name = "Heads of Staff Meeting Room"
@@ -623,7 +623,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/abandoned
 	name = "Abandoned Medbay"
 	icon_state = "medbay3"
-	ambientsounds = list('sound/ambience/signal.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 /area/medical/medbay/central
 	name = "Medbay Central"
@@ -744,7 +744,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/detectives_office
 	name = "Detective's Office"
 	icon_state = "detective"
-	ambientsounds = list('sound/ambience/ambidet1.ogg','sound/ambience/ambidet2.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 /area/security/detectives_office/private_investigators_office
 	name = "Private Investigator's Office"
@@ -1021,7 +1021,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	//Turret_protected
 
 /area/ai_monitored/turret_protected
-	ambientsounds = list('sound/ambience/ambimalf.ogg', 'sound/ambience/ambitech.ogg', 'sound/ambience/ambitech2.ogg', 'sound/ambience/ambiatmos.ogg', 'sound/ambience/ambiatmos2.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 /area/ai_monitored/turret_protected/ai_upload
 	name = "AI Upload Chamber"
@@ -1075,8 +1075,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 // Telecommunications Satellite
 
 /area/tcommsat
-	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg', 'sound/ambience/ambitech.ogg',\
-											'sound/ambience/ambitech2.ogg', 'sound/ambience/ambitech3.ogg', 'sound/ambience/ambimystery.ogg')
+	ambientsounds = list('sound/blank.ogg',\
+											'sound/blank.ogg')
 
 /area/tcommsat/computer
 	name = "Telecomms Control Room"

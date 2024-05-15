@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/rifle
 	name = "Bolt Rifle"
-	desc = "Some kind of bolt action rifle. You get the feeling you shouldn't have this."
+	desc = ""
 	icon_state = "moistnugget"
 	item_state = "moistnugget"
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
@@ -8,11 +8,11 @@
 	bolt_type = BOLT_TYPE_STANDARD
 	semi_auto = FALSE
 	internal_magazine = TRUE
-	fire_sound = 'sound/weapons/gun/rifle/shot.ogg'
+	fire_sound = 'sound/blank.ogg'
 	fire_sound_volume = 90
 	vary_fire_sound = FALSE
-	rack_sound = 'sound/weapons/gun/rifle/bolt_out.ogg'
-	bolt_drop_sound = 'sound/weapons/gun/rifle/bolt_in.ogg'
+	rack_sound = 'sound/blank.ogg'
+	bolt_drop_sound = 'sound/blank.ogg'
 	tac_reloads = FALSE
 
 obj/item/gun/ballistic/rifle/update_icon()
@@ -21,7 +21,7 @@ obj/item/gun/ballistic/rifle/update_icon()
 
 obj/item/gun/ballistic/rifle/rack(mob/user = null)
 	if (bolt_locked == FALSE)
-		to_chat(user, "<span class='notice'>You open the bolt of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I open the bolt of \the [src].</span>")
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
 		process_chamber(FALSE, FALSE, FALSE)
 		bolt_locked = TRUE
@@ -50,8 +50,8 @@ obj/item/gun/ballistic/rifle/attackby(obj/item/A, mob/user, params)
 
 /obj/item/gun/ballistic/rifle/boltaction
 	name = "\improper Mosin Nagant"
-	desc = "This piece of junk looks like something that could have been used 700 years ago. It feels slightly moist."
-	sawn_desc = "An extremely sawn-off Mosin Nagant, popularly known as an \"obrez\". There was probably a reason it wasn't manufactured this short to begin with."
+	desc = ""
+	sawn_desc = ""
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
 	icon_state = "moistnugget"
@@ -77,15 +77,15 @@ obj/item/gun/ballistic/rifle/attackby(obj/item/A, mob/user, params)
 
 /obj/item/gun/ballistic/rifle/boltaction/enchanted
 	name = "enchanted bolt action rifle"
-	desc = "Careful not to lose your head."
+	desc = ""
 	var/guns_left = 30
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/enchanted
 	can_be_sawn_off = FALSE
 
 /obj/item/gun/ballistic/rifle/boltaction/enchanted/arcane_barrage
 	name = "arcane barrage"
-	desc = "Pew Pew Pew."
-	fire_sound = 'sound/weapons/emitter.ogg'
+	desc = ""
+	fire_sound = 'sound/blank.ogg'
 	pin = /obj/item/firing_pin/magic
 	icon_state = "arcane_barrage"
 	item_state = "arcane_barrage"

@@ -14,7 +14,7 @@
 
 /obj/item/paper/crumpled/bloody/ruins/thederelict/unfinished
 	name = "unfinished paper scrap"
-	desc = "Looks like someone started shakily writing a will in space common, but were interrupted by something bloody..."
+	desc = ""
 	info = "I, Victor Belyakov, do hereby leave my _- "
 /obj/item/paper/fluff/ruins/thederelict/vaultraider
 	name = "Vault Raider Objectives"
@@ -24,7 +24,7 @@
 /// Vault controller for use on the derelict/KS13.
 /obj/machinery/computer/vaultcontroller
 	name = "vault controller"
-	desc = "It seems to be powering and controlling the vault locks."
+	desc = ""
 	icon_screen = "power"
 	icon_keyboard = "power_key"
 	light_color = LIGHT_COLOR_YELLOW
@@ -172,7 +172,7 @@
 // So drones can teach borgs and AI dronespeak. For best effect, combine with mother drone lawset.
 /obj/item/dronespeak_manual
 	name = "dronespeak manual"
-	desc = "The book's cover reads: \"Understanding Dronespeak - An exercise in futility.\""
+	desc = ""
 	icon = 'icons/obj/library.dmi'
 	icon_state = "book2"
 
@@ -180,16 +180,16 @@
 	..()
 	if(isdrone(user) || issilicon(user))
 		if(user.has_language(/datum/language/drone))
-			to_chat(user, "<span class='boldannounce'>You start skimming through [src], but you already know dronespeak.</span>")
+			to_chat(user, "<span class='boldannounce'>I start skimming through [src], but you already know dronespeak.</span>")
 		else
-			to_chat(user, "<span class='boldannounce'>You start skimming through [src], and suddenly the drone chittering makes sense.</span>")
+			to_chat(user, "<span class='boldannounce'>I start skimming through [src], and suddenly the drone chittering makes sense.</span>")
 			user.grant_language(/datum/language/drone)
 		return
 
 	if(user.has_language(/datum/language/drone))
-		to_chat(user, "<span class='boldannounce'>You start skimming through [src], but you already know dronespeak.</span>")
+		to_chat(user, "<span class='boldannounce'>I start skimming through [src], but you already know dronespeak.</span>")
 	else
-		to_chat(user, "<span class='boldannounce'>You start skimming through [src], but you can't make any sense of the contents.</span>")
+		to_chat(user, "<span class='boldannounce'>I start skimming through [src], but you can't make any sense of the contents.</span>")
 
 /obj/item/dronespeak_manual/attack(mob/living/M, mob/living/user)
 	if(!istype(M) || !istype(user))
@@ -197,19 +197,19 @@
 	if(M == user)
 		attack_self(user)
 		return
-	
+
 	playsound(loc, "punch", 25, TRUE, -1)
 	if(isdrone(M) || issilicon(M))
 		if(M.has_language(/datum/language/drone))
-			M.visible_message("<span class='danger'>[user] beats [M] over the head with [src]!</span>", "<span class='userdanger'>[user] beats you over the head with [src]!</span>", "<span class='hear'>You hear smacking.</span>")
+			M.visible_message("<span class='danger'>[user] beats [M] over the head with [src]!</span>", "<span class='danger'>[user] beats you over the head with [src]!</span>", "<span class='hear'>I hear smacking.</span>")
 		else
-			M.visible_message("<span class='notice'>[user] teaches [M] by beating [M.p_them()] over the head with [src]!</span>", "<span class='boldnotice'>As [user] hits you with [src], chitters resonate in your mind.</span>", "<span class='hear'>You hear smacking.</span>")
+			M.visible_message("<span class='notice'>[user] teaches [M] by beating [M.p_them()] over the head with [src]!</span>", "<span class='boldnotice'>As [user] hits you with [src], chitters resonate in your mind.</span>", "<span class='hear'>I hear smacking.</span>")
 			M.grant_language(/datum/language/drone)
 		return
 
 /obj/structure/fluff/oldturret
 	name = "broken turret"
-	desc = "An obsolete model of turret, long non-functional."
+	desc = ""
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turretCover"
 	density = TRUE

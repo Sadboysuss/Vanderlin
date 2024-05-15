@@ -1,6 +1,6 @@
 /obj/machinery/computer/station_alert
 	name = "station alert console"
-	desc = "Used to access the station's automated alert system."
+	desc = ""
 	icon_screen = "alert:0"
 	icon_keyboard = "atmos_key"
 	circuit = /obj/item/circuitboard/computer/stationalert
@@ -33,7 +33,7 @@
 		data["alarms"][class] = list()
 		for(var/area in alarms[class])
 			data["alarms"][class] += area
-	
+
 	return data
 
 /obj/machinery/computer/station_alert/proc/triggerAlarm(class, area/A, O, obj/source)

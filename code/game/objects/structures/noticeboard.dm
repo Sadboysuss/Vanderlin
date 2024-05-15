@@ -1,6 +1,6 @@
 /obj/structure/noticeboard
 	name = "notice board"
-	desc = "A board for pinning important notices upon."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "nboard00"
 	density = FALSE
@@ -26,14 +26,14 @@
 /obj/structure/noticeboard/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo))
 		if(!allowed(user))
-			to_chat(user, "<span class='warning'>You are not authorized to add notices!</span>")
+			to_chat(user, "<span class='warning'>I are not authorized to add notices!</span>")
 			return
 		if(notices < 5)
 			if(!user.transferItemToLoc(O, src))
 				return
 			notices++
 			icon_state = "nboard0[notices]"
-			to_chat(user, "<span class='notice'>You pin the [O] to the noticeboard.</span>")
+			to_chat(user, "<span class='notice'>I pin the [O] to the noticeboard.</span>")
 		else
 			to_chat(user, "<span class='warning'>The notice board is full!</span>")
 	else
@@ -93,40 +93,40 @@
 
 /obj/structure/noticeboard/captain
 	name = "Captain's Notice Board"
-	desc = "Important notices from the Captain."
+	desc = ""
 	req_access = list(ACCESS_CAPTAIN)
 
 /obj/structure/noticeboard/hop
 	name = "Head of Personnel's Notice Board"
-	desc = "Important notices from the Head of Personnel."
+	desc = ""
 	req_access = list(ACCESS_HOP)
 
 /obj/structure/noticeboard/ce
 	name = "Chief Engineer's Notice Board"
-	desc = "Important notices from the Chief Engineer."
+	desc = ""
 	req_access = list(ACCESS_CE)
 
 /obj/structure/noticeboard/hos
 	name = "Head of Security's Notice Board"
-	desc = "Important notices from the Head of Security."
+	desc = ""
 	req_access = list(ACCESS_HOS)
 
 /obj/structure/noticeboard/cmo
 	name = "Chief Medical Officer's Notice Board"
-	desc = "Important notices from the Chief Medical Officer."
+	desc = ""
 	req_access = list(ACCESS_CMO)
 
 /obj/structure/noticeboard/rd
 	name = "Research Director's Notice Board"
-	desc = "Important notices from the Research Director."
+	desc = ""
 	req_access = list(ACCESS_RD)
 
 /obj/structure/noticeboard/qm
 	name = "Quartermaster's Notice Board"
-	desc = "Important notices from the Quartermaster."
+	desc = ""
 	req_access = list(ACCESS_QM)
 
 /obj/structure/noticeboard/staff
 	name = "Staff Notice Board"
-	desc = "Important notices from the heads of staff."
+	desc = ""
 	req_access = list(ACCESS_HEADS)

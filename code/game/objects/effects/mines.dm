@@ -1,6 +1,6 @@
 /obj/effect/mine
 	name = "dummy mine"
-	desc = "Better stay away from that thing."
+	desc = ""
 	density = FALSE
 	anchored = TRUE
 	icon = 'icons/obj/items_and_weapons.dmi'
@@ -55,7 +55,7 @@
 
 /obj/effect/mine/kickmine/mineEffect(mob/victim)
 	if(isliving(victim) && victim.client)
-		to_chat(victim, "<span class='userdanger'>You have been kicked FOR NO REISIN!</span>")
+		to_chat(victim, "<span class='danger'>I have been kicked FOR NO REISIN!</span>")
 		qdel(victim.client)
 
 
@@ -80,7 +80,7 @@
 
 /obj/effect/mine/sound
 	name = "honkblaster 1000"
-	var/sound = 'sound/items/bikehorn.ogg'
+	var/sound = 'sound/blank.ogg'
 
 /obj/effect/mine/sound/mineEffect(mob/victim)
 	playsound(loc, sound, 100, TRUE)
@@ -88,11 +88,11 @@
 
 /obj/effect/mine/sound/bwoink
 	name = "bwoink mine"
-	sound = 'sound/effects/adminhelp.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/effect/mine/pickup
 	name = "pickup"
-	desc = "pick me up"
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "electricity2"
 	density = FALSE
@@ -113,7 +113,7 @@
 
 /obj/effect/mine/pickup/bloodbath
 	name = "Red Orb"
-	desc = "You feel angry just looking at it."
+	desc = ""
 	duration = 1200 //2min
 	color = "#FF0000"
 
@@ -143,7 +143,7 @@
 	sleep(10)
 	animate(victim.client,color = old_color, time = duration)//, easing = SINE_EASING|EASE_OUT)
 	sleep(duration)
-	to_chat(victim, "<span class='notice'>Your bloodlust seeps back into the bog of your subconscious and you regain self control.</span>")
+	to_chat(victim, "<span class='notice'>My bloodlust seeps back into the bog of my subconscious and you regain self control.</span>")
 	qdel(chainsaw)
 	victim.log_message("exited a blood frenzy", LOG_ATTACK)
 	qdel(src)
@@ -153,26 +153,26 @@
 
 /obj/effect/mine/pickup/healing
 	name = "Blue Orb"
-	desc = "You feel better just looking at it."
+	desc = ""
 	color = "#0000FF"
 
 /obj/effect/mine/pickup/healing/mineEffect(mob/living/carbon/victim)
 	if(!victim.client || !istype(victim))
 		return
-	to_chat(victim, "<span class='notice'>You feel great!</span>")
+	to_chat(victim, "<span class='notice'>I feel great!</span>")
 	victim.revive(full_heal = TRUE, admin_revive = TRUE)
 
 /obj/effect/mine/pickup/speed
 	name = "Yellow Orb"
-	desc = "You feel faster just looking at it."
+	desc = ""
 	color = "#FFFF00"
 	duration = 300
 
 /obj/effect/mine/pickup/speed/mineEffect(mob/living/carbon/victim)
 	if(!victim.client || !istype(victim))
 		return
-	to_chat(victim, "<span class='notice'>You feel fast!</span>")
+	to_chat(victim, "<span class='notice'>I feel fast!</span>")
 	victim.add_movespeed_modifier(MOVESPEED_ID_YELLOW_ORB, update=TRUE, priority=100, multiplicative_slowdown=-2, blacklisted_movetypes=(FLYING|FLOATING))
 	sleep(duration)
 	victim.remove_movespeed_modifier(MOVESPEED_ID_YELLOW_ORB)
-	to_chat(victim, "<span class='notice'>You slow down.</span>")
+	to_chat(victim, "<span class='notice'>I slow down.</span>")

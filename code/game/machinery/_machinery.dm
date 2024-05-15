@@ -86,7 +86,7 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
-	desc = "Some kind of machine."
+	desc = ""
 	verb_say = "beeps"
 	verb_yell = "blares"
 	pressure_resistance = 15
@@ -126,6 +126,13 @@ Class Procs:
 	var/ui_style // ID of custom TGUI style (optional)
 	var/ui_x // Default size of TGUI window, in pixels
 	var/ui_y
+
+	var/climb_time = 0
+	var/climb_stun = 0
+	var/climbable = FALSE
+	var/climb_sound = 'sound/foley/woodclimb.ogg'
+	var/climb_offset = 0 //offset up when climbed
+	var/mob/living/structureclimber
 
 /obj/machinery/Initialize()
 	if(!armor)
@@ -311,11 +318,11 @@ Class Procs:
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_paw(mob/living/user)
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		return attack_hand(user)
 	else
 		user.changeNext_move(CLICK_CD_MELEE)
-		user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+//		user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
 		user.visible_message("<span class='danger'>[user.name] smashes against \the [src.name] with its paws.</span>", null, null, COMBAT_MESSAGE_RANGE)
 		take_damage(4, BRUTE, "melee", 1)
 
@@ -348,7 +355,7 @@ Class Procs:
 	. = !(state_open || panel_open || is_operational() || (flags_1 & NODECONSTRUCT_1)) && I.tool_behaviour == TOOL_CROWBAR
 	if(.)
 		I.play_tool_sound(src, 50)
-		visible_message("<span class='notice'>[usr] pries open \the [src].</span>", "<span class='notice'>You pry open \the [src].</span>")
+		visible_message("<span class='notice'>[usr] pries open \the [src].</span>", "<span class='notice'>I pry open \the [src].</span>")
 		open_machine()
 
 /obj/machinery/proc/default_deconstruction_crowbar(obj/item/I, ignore_panel = 0)
@@ -402,11 +409,11 @@ Class Procs:
 		if(!panel_open)
 			panel_open = TRUE
 			icon_state = icon_state_open
-			to_chat(user, "<span class='notice'>You open the maintenance hatch of [src].</span>")
+			to_chat(user, "<span class='notice'>I open the maintenance hatch of [src].</span>")
 		else
 			panel_open = FALSE
 			icon_state = icon_state_closed
-			to_chat(user, "<span class='notice'>You close the maintenance hatch of [src].</span>")
+			to_chat(user, "<span class='notice'>I close the maintenance hatch of [src].</span>")
 		return TRUE
 	return FALSE
 
@@ -414,7 +421,7 @@ Class Procs:
 	if(panel_open && I.tool_behaviour == TOOL_WRENCH)
 		I.play_tool_sound(src, 50)
 		setDir(turn(dir,-90))
-		to_chat(user, "<span class='notice'>You rotate [src].</span>")
+		to_chat(user, "<span class='notice'>I rotate [src].</span>")
 		return 1
 	return 0
 
@@ -430,14 +437,14 @@ Class Procs:
 		if(!can_be_unfasten || can_be_unfasten == FAILED_UNFASTEN)
 			return can_be_unfasten
 		if(time)
-			to_chat(user, "<span class='notice'>You begin [anchored ? "un" : ""]securing [src]...</span>")
+			to_chat(user, "<span class='notice'>I begin [anchored ? "un" : ""]securing [src]...</span>")
 		I.play_tool_sound(src, 50)
 		var/prev_anchored = anchored
 		//as long as we're the same anchored state and we're either on a floor or are anchored, toggle our anchored state
 		if(I.use_tool(src, user, time, extra_checks = CALLBACK(src, .proc/unfasten_wrench_check, prev_anchored, user)))
-			to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure [src].</span>")
+			to_chat(user, "<span class='notice'>I [anchored ? "un" : ""]secure [src].</span>")
 			setAnchored(!anchored)
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			SEND_SIGNAL(src, COMSIG_OBJ_DEFAULT_UNFASTEN_WRENCH, anchored)
 			return SUCCESSFUL_UNFASTEN
 		return FAILED_UNFASTEN
@@ -504,21 +511,18 @@ Class Procs:
 
 /obj/machinery/examine(mob/user)
 	. = ..()
-	if(stat & BROKEN)
-		. += "<span class='notice'>It looks broken and non-functional.</span>"
 	if(!(resistance_flags & INDESTRUCTIBLE))
-		if(resistance_flags & ON_FIRE)
-			. += "<span class='warning'>It's on fire!</span>"
-		var/healthpercent = (obj_integrity/max_integrity) * 100
-		switch(healthpercent)
-			if(50 to 99)
-				. += "It looks slightly damaged."
-			if(25 to 50)
-				. += "It appears heavily damaged."
-			if(0 to 25)
-				. += "<span class='warning'>It's falling apart!</span>"
-	if(user.research_scanner && component_parts)
-		. += display_parts(user, TRUE)
+		if(max_integrity)
+			var/healthpercent = (obj_integrity/max_integrity) * 100
+			switch(healthpercent)
+				if(50 to 99)
+					. += "It looks slightly damaged."
+				if(25 to 50)
+					. += "It appears heavily damaged."
+				if(0 to 25)
+					. += "<span class='warning'>It's falling apart!</span>"
+//	if(user.research_scanner && component_parts)
+//		. += display_parts(user, TRUE)
 
 //called on machinery construction (i.e from frame to machinery) but not on initialization
 /obj/machinery/proc/on_construction()
@@ -552,3 +556,77 @@ Class Procs:
 	. = . % 9
 	AM.pixel_x = -8 + ((.%3)*8)
 	AM.pixel_y = -8 + (round( . / 3)*8)
+
+/obj/machinery/Crossed(atom/movable/AM)
+	. = ..()
+	if(isliving(AM) && !AM.throwing)
+		var/mob/living/user = AM
+		if(climb_offset)
+			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+
+/obj/machinery/Uncrossed(atom/movable/AM)
+	. = ..()
+	if(isliving(AM) && !AM.throwing)
+		var/mob/living/user = AM
+		if(climb_offset)
+			user.reset_offsets("structure_climb")
+
+/obj/machinery/MouseDrop_T(atom/movable/O, mob/user)
+	. = ..()
+	if(!climbable)
+		return
+	if(user == O && isliving(O))
+		var/mob/living/L = O
+		if(isanimal(L))
+			var/mob/living/simple_animal/A = L
+			if (!A.dextrous)
+				return
+		if(L.mobility_flags & MOBILITY_MOVE)
+			climb_structure(user)
+			return
+	if(!istype(O, /obj/item) || user.get_active_held_item() != O)
+		return
+	if(iscyborg(user))
+		return
+	if(!user.dropItemToGround(O))
+		return
+	if (O.loc != src.loc)
+		step(O, get_dir(O, src))
+
+/obj/machinery/proc/do_climb(atom/movable/A)
+	if(climbable)
+		density = FALSE
+		. = step(A,get_dir(A,src.loc))
+		density = TRUE
+
+/obj/machinery/proc/climb_structure(mob/living/user)
+	src.add_fingerprint(user)
+	var/adjusted_climb_time = climb_time
+	if(user.restrained()) //climbing takes twice as long when restrained.
+		adjusted_climb_time *= 2
+	if(isalien(user))
+		adjusted_climb_time *= 0.25 //aliens are terrifyingly fast
+	if(HAS_TRAIT(user, TRAIT_FREERUNNING)) //do you have any idea how fast I am???
+		adjusted_climb_time *= 0.8
+	adjusted_climb_time -= user.STASPD * 2
+	adjusted_climb_time = max(adjusted_climb_time, 0)
+//	if(adjusted_climb_time)
+//		user.visible_message("<span class='warning'>[user] starts climbing onto [src].</span>", \
+//									"<span class='warning'>I start climbing onto [src]...</span>")
+	structureclimber = user
+	if(do_mob(user, user, adjusted_climb_time))
+		if(src.loc) //Checking if structure has been destroyed
+			if(do_climb(user))
+				user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
+									"<span class='notice'>I climb onto [src].</span>")
+				log_combat(user, src, "climbed onto")
+//				if(climb_offset)
+//					user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+				if(climb_stun)
+					user.Stun(climb_stun)
+				if(climb_sound)
+					playsound(src, climb_sound, 100)
+				. = 1
+			else
+				to_chat(user, "<span class='warning'>I fail to climb onto [src].</span>")
+	structureclimber = null

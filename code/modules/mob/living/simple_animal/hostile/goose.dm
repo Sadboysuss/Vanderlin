@@ -2,7 +2,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goose
 	name = "goose"
-	desc = "It's loose"
+	desc = ""
 	icon_state = "goose" // sprites by cogwerks from goonstation, used with permission
 	icon_living = "goose"
 	icon_dead = "goose_dead"
@@ -47,7 +47,7 @@
 /mob/living/simple_animal/hostile/retaliate/goose/vomit
 	name = "Birdboat"
 	real_name = "Birdboat"
-	desc = "It's a sick-looking goose, probably ate too much maintenance trash. Best not to move it around too much."
+	desc = ""
 	gender = MALE
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
@@ -69,7 +69,7 @@
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/goosement)
 	// 5% chance every round to have anarchy mode deadchat control on birdboat.
 	if(prob(5))
-		desc = "[initial(desc)] It's waddling more than usual. It seems to be possessed."
+		desc = ""
 		deadchat_plays_goose()
 
 /mob/living/simple_animal/hostile/retaliate/goose/vomit/Destroy()
@@ -97,7 +97,7 @@
 	if (tasty.foodtype & GROSS)
 		visible_message("<span class='notice'>[src] hungrily gobbles up \the [tasty]!</span>")
 		tasty.forceMove(src)
-		playsound(src,'sound/items/eatfood.ogg', 70, TRUE)
+		playsound(src,'sound/blank.ogg', 70, TRUE)
 		vomitCoefficient += 3
 		vomitTimeBonus += 2
 	else
@@ -113,7 +113,7 @@
 	if (prob(50) && consumed)
 		barf_food(consumed)
 	else
-		playsound(T, 'sound/effects/splat.ogg', 50, TRUE)
+		playsound(T, 'sound/blank.ogg', 50, TRUE)
 		T.add_vomit_floor(src)
 
 /mob/living/simple_animal/hostile/retaliate/goose/vomit/proc/barf_food(atom/A, hard = FALSE)
@@ -132,7 +132,7 @@
 		return
 	currentTurf = get_turf(consumed)
 	currentTurf.add_vomit_floor(src)
-	playsound(currentTurf, 'sound/effects/splat.ogg', 50, TRUE)
+	playsound(currentTurf, 'sound/blank.ogg', 50, TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/goose/vomit/proc/vomit_prestart(duration)
 	flick("vomit_start",src)

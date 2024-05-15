@@ -8,8 +8,8 @@
 	mind_control_duration = 800
 
 /obj/item/organ/heart/gland/plasma/activate()
-	to_chat(owner, "<span class='warning'>You feel bloated.</span>")
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, owner, "<span class='userdanger'>A massive stomachache overcomes you.</span>"), 150)
+	to_chat(owner, "<span class='warning'>I feel bloated.</span>")
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, owner, "<span class='danger'>A massive stomachache overcomes you.</span>"), 150)
 	addtimer(CALLBACK(src, .proc/vomit_plasma), 200)
 
 /obj/item/organ/heart/gland/plasma/proc/vomit_plasma()

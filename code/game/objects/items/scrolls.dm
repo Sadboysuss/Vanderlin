@@ -1,12 +1,12 @@
 /obj/item/teleportation_scroll
 	name = "scroll of teleportation"
-	desc = "A scroll for moving around."
+	desc = ""
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
 	var/uses = 4
 	w_class = WEIGHT_CLASS_SMALL
 	item_state = "paper"
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	resistance_flags = FLAMMABLE
 

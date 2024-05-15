@@ -1,6 +1,6 @@
 /obj/item/implantcase
 	name = "implant case"
-	desc = "A glass case containing an implant."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "implantcase-0"
 	item_state = "implantcase"
@@ -26,7 +26,7 @@
 /obj/item/implantcase/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on the side of [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on the side of [src]!</span>")
 			return
 		var/t = stripped_input(user, "What would you like the label to be?", name, null)
 		if(user.get_active_held_item() != W)
@@ -69,15 +69,15 @@
 
 /obj/item/implantcase/tracking
 	name = "implant case - 'Tracking'"
-	desc = "A glass case containing a tracking implant."
+	desc = ""
 	imp_type = /obj/item/implant/tracking
 
 /obj/item/implantcase/weapons_auth
 	name = "implant case - 'Firearms Authentication'"
-	desc = "A glass case containing a firearms authentication implant."
+	desc = ""
 	imp_type = /obj/item/implant/weapons_auth
 
 /obj/item/implantcase/adrenaline
 	name = "implant case - 'Adrenaline'"
-	desc = "A glass case containing an adrenaline implant."
+	desc = ""
 	imp_type = /obj/item/implant/adrenalin

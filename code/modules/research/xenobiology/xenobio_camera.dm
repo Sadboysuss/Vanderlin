@@ -10,7 +10,7 @@
 	allowed_area = A.name
 	. = ..()
 
-/mob/camera/aiEye/remote/xenobio/setLoc(var/t)
+/mob/camera/aiEye/remote/xenobio/setLoc(t)
 	var/area/new_area = get_area(t)
 	if(new_area && new_area.name == allowed_area || new_area && new_area.xenobiology_compatible)
 		return ..()
@@ -19,7 +19,7 @@
 
 /obj/machinery/computer/camera_advanced/xenobio
 	name = "Slime management console"
-	desc = "A computer used for remotely handling slimes."
+	desc = ""
 	networks = list("ss13")
 	circuit = /obj/item/circuitboard/computer/xenobiology
 	var/datum/action/innate/slime_place/slime_place_action
@@ -145,7 +145,7 @@
 /obj/machinery/computer/camera_advanced/xenobio/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
 		monkeys++
-		to_chat(user, "<span class='notice'>You feed [O] to [src]. It now has [monkeys] monkey cubes stored.</span>")
+		to_chat(user, "<span class='notice'>I feed [O] to [src]. It now has [monkeys] monkey cubes stored.</span>")
 		qdel(O)
 		return
 	else if(istype(O, /obj/item/storage/bag))
@@ -157,7 +157,7 @@
 				monkeys++
 				qdel(G)
 		if(loaded)
-			to_chat(user, "<span class='notice'>You fill [src] with the monkey cubes stored in [O]. [src] now has [monkeys] monkey cubes stored.</span>")
+			to_chat(user, "<span class='notice'>I fill [src] with the monkey cubes stored in [O]. [src] now has [monkeys] monkey cubes stored.</span>")
 		return
 	else if(istype(O, /obj/item/slimepotion/slime))
 		var/replaced = FALSE
@@ -167,14 +167,14 @@
 			current_potion.forceMove(drop_location())
 			replaced = TRUE
 		current_potion = O
-		to_chat(user, "<span class='notice'>You load [O] in the console's potion slot[replaced ? ", replacing the one that was there before" : ""].</span>")
+		to_chat(user, "<span class='notice'>I load [O] in the console's potion slot[replaced ? ", replacing the one that was there before" : ""].</span>")
 		return
 	..()
 
 /obj/machinery/computer/camera_advanced/xenobio/multitool_act(mob/living/user, obj/item/multitool/I)
 	. = ..()
 	if (istype(I) && istype(I.buffer,/obj/machinery/monkey_recycler))
-		to_chat(user, "<span class='notice'>You link [src] with [I.buffer] in [I] buffer.</span>")
+		to_chat(user, "<span class='notice'>I link [src] with [I.buffer] in [I] buffer.</span>")
 		connected_recycler = I.buffer
 		connected_recycler.connected += src
 		return TRUE

@@ -1,6 +1,6 @@
 /obj/item/computer_hardware/battery
 	name = "power cell controller"
-	desc = "A charge controller for standard power cells, used in all kinds of modular computers."
+	desc = ""
 	icon_state = "cell_con"
 	critical = 1
 	malfunction_probability = 1
@@ -29,7 +29,7 @@
 		return FALSE
 
 	if(battery)
-		to_chat(user, "<span class='warning'>You try to connect \the [I] to \the [src], but its connectors are occupied.</span>")
+		to_chat(user, "<span class='warning'>I try to connect \the [I] to \the [src], but its connectors are occupied.</span>")
 		return FALSE
 
 	if(I.w_class > holder.max_hardware_size)
@@ -40,7 +40,7 @@
 		return FALSE
 
 	battery = I
-	to_chat(user, "<span class='notice'>You connect \the [I] to \the [src].</span>")
+	to_chat(user, "<span class='notice'>I connect \the [I] to \the [src].</span>")
 
 	return TRUE
 
@@ -54,7 +54,7 @@
 			user.put_in_hands(battery)
 		else
 			battery.forceMove(drop_location())
-		to_chat(user, "<span class='notice'>You detach \the [battery] from \the [src].</span>")
+		to_chat(user, "<span class='notice'>I detach \the [battery] from \the [src].</span>")
 		battery = null
 
 		if(holder)
@@ -72,7 +72,7 @@
 
 /obj/item/stock_parts/cell/computer
 	name = "standard battery"
-	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops."
+	desc = ""
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cell_mini"
 	w_class = WEIGHT_CLASS_TINY
@@ -81,26 +81,26 @@
 
 /obj/item/stock_parts/cell/computer/advanced
 	name = "advanced battery"
-	desc = "An advanced power cell, often used in most laptops. It is too large to be fitted into smaller devices."
+	desc = ""
 	icon_state = "cell"
 	w_class = WEIGHT_CLASS_SMALL
 	maxcharge = 1500
 
 /obj/item/stock_parts/cell/computer/super
 	name = "super battery"
-	desc = "An advanced power cell, often used in high-end laptops."
+	desc = ""
 	icon_state = "cell"
 	w_class = WEIGHT_CLASS_SMALL
 	maxcharge = 2000
 
 /obj/item/stock_parts/cell/computer/micro
 	name = "micro battery"
-	desc = "A small power cell, commonly seen in most portable microcomputers."
+	desc = ""
 	icon_state = "cell_micro"
 	maxcharge = 500
 
 /obj/item/stock_parts/cell/computer/nano
 	name = "nano battery"
-	desc = "A tiny power cell, commonly seen in low-end portable microcomputers."
+	desc = ""
 	icon_state = "cell_micro"
 	maxcharge = 300

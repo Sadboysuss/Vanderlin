@@ -1,6 +1,6 @@
 /obj/machinery/rnd/server
 	name = "\improper R&D Server"
-	desc = "A computer system running a deep neural network that processes arbitrary information to produce data useable in the development of new technologies. In layman's terms, it makes research points."
+	desc = ""
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "RD-server-on"
 	var/datum/techweb/stored_research
@@ -133,7 +133,7 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	desc = "Used to manage access to research and manufacturing databases."
+	desc = ""
 	icon_screen = "rdcomp"
 	icon_keyboard = "rd_key"
 	var/screen = 0
@@ -199,4 +199,4 @@
 		return
 	playsound(src, "sparks", 75, TRUE)
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You disable the security protocols.</span>")
+	to_chat(user, "<span class='notice'>I disable the security protocols.</span>")

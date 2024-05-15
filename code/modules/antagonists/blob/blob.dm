@@ -20,7 +20,7 @@
 
 /datum/antagonist/blob/greet()
 	if(!isovermind(owner.current))
-		to_chat(owner,"<span class='userdanger'>You feel bloated.</span>")
+		to_chat(owner,"<span class='danger'>I feel bloated.</span>")
 
 /datum/antagonist/blob/on_gain()
 	create_objectives()
@@ -43,7 +43,7 @@
 //Non-overminds get this on blob antag assignment
 /datum/action/innate/blobpop
 	name = "Pop"
-	desc = "Unleash the blob"
+	desc = ""
 	icon_icon = 'icons/mob/blob.dmi'
 	button_icon_state = "blob"
 

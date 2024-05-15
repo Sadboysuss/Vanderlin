@@ -1,7 +1,7 @@
 //Hydroponics tank and base code
 /obj/item/watertank
 	name = "backpack water tank"
-	desc = "A S.U.N.S.H.I.N.E. brand watertank backpack with nozzle to water plants."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "waterbackpack"
 	item_state = "waterbackpack"
@@ -44,7 +44,7 @@
 	if(noz in src)
 		//Detach the nozzle into the user's hands
 		if(!user.put_in_hands(noz))
-			to_chat(user, "<span class='warning'>You need a free hand to hold the mister!</span>")
+			to_chat(user, "<span class='warning'>I need a free hand to hold the mister!</span>")
 			return
 	else
 		//Remove from their hands and put back "into" the tank
@@ -52,7 +52,7 @@
 
 /obj/item/watertank/verb/toggle_mister_verb()
 	set name = "Toggle Mister"
-	set category = "Object"
+	set hidden = 1
 	toggle_mister(usr)
 
 /obj/item/watertank/proc/make_noz()
@@ -104,7 +104,7 @@
 // watertank object will likely lead to weird behaviour or runtimes.
 /obj/item/reagent_containers/spray/mister
 	name = "water mister"
-	desc = "A mister nozzle attached to a water tank."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "mister"
 	item_state = "mister"
@@ -137,14 +137,14 @@
 	..()
 
 /obj/item/reagent_containers/spray/mister/afterattack(obj/target, mob/user, proximity)
-	if(target.loc == loc) //Safety check so you don't fill your mister with mutagen or something and then blast yourself in the face with it
+	if(target.loc == loc) //Safety check so you don't fill your mister with mutagen or something and then blast myself in the face with it
 		return
 	..()
 
 //Janitor tank
 /obj/item/watertank/janitor
 	name = "backpack cleaner tank"
-	desc = "A janitorial cleaner backpack with nozzle to clean blood and graffiti."
+	desc = ""
 	icon_state = "waterbackpackjani"
 	item_state = "waterbackpackjani"
 	custom_price = 100
@@ -155,7 +155,7 @@
 
 /obj/item/reagent_containers/spray/mister/janitor
 	name = "janitor spray nozzle"
-	desc = "A janitorial spray nozzle attached to a watertank, designed to clean up large messes."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "misterjani"
 	item_state = "misterjani"
@@ -169,9 +169,9 @@
 /obj/item/watertank/janitor/make_noz()
 	return new /obj/item/reagent_containers/spray/mister/janitor(src)
 
-/obj/item/reagent_containers/spray/mister/janitor/attack_self(var/mob/user)
+/obj/item/reagent_containers/spray/mister/janitor/attack_self(mob/user)
 	amount_per_transfer_from_this = (amount_per_transfer_from_this == 10 ? 5 : 10)
-	to_chat(user, "<span class='notice'>You [amount_per_transfer_from_this == 10 ? "remove" : "fix"] the nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
+	to_chat(user, "<span class='notice'>I [amount_per_transfer_from_this == 10 ? "remove" : "fix"] the nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 
 //ATMOS FIRE FIGHTING BACKPACK
 
@@ -181,7 +181,7 @@
 
 /obj/item/watertank/atmos
 	name = "backpack firefighter tank"
-	desc = "A refrigerated and pressurized backpack tank with extinguisher nozzle, intended to fight fires. Swaps between extinguisher, resin launcher and a smaller scale resin foamer."
+	desc = ""
 	item_state = "waterbackpackatmos"
 	icon_state = "waterbackpackatmos"
 	volume = 200
@@ -203,7 +203,7 @@
 
 /obj/item/extinguisher/mini/nozzle
 	name = "extinguisher nozzle"
-	desc = "A heavy duty nozzle attached to a firefighter's backpack tank."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "atmos_nozzle"
 	item_state = "nozzleatmos"
@@ -266,10 +266,10 @@
 		AttemptRefill(target, user)
 	if(nozzle_mode == RESIN_LAUNCHER)
 		if(Adj)
-			return //Safety check so you don't blast yourself trying to refill your tank
+			return //Safety check so you don't blast myself trying to refill your tank
 		var/datum/reagents/R = reagents
 		if(R.total_volume < 100)
-			to_chat(user, "<span class='warning'>You need at least 100 units of water to use the resin launcher!</span>")
+			to_chat(user, "<span class='warning'>I need at least 100 units of water to use the resin launcher!</span>")
 			return
 		if(resin_cooldown)
 			to_chat(user, "<span class='warning'>Resin launcher is still recharging...</span>")
@@ -278,7 +278,7 @@
 		R.remove_any(100)
 		var/obj/effect/resin_container/A = new (get_turf(src))
 		log_game("[key_name(user)] used Resin Launcher at [AREACOORD(user)].")
-		playsound(src,'sound/items/syringeproj.ogg',40,TRUE)
+		playsound(src,'sound/blank.ogg',40,TRUE)
 		for(var/a=0, a<5, a++)
 			step_towards(A, target)
 			sleep(2)
@@ -306,7 +306,7 @@
 
 /obj/effect/resin_container
 	name = "resin container"
-	desc = "A compacted ball of expansive resin, used to repair the atmosphere in a room, or seal off breaches."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "frozen_smoke_capsule"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -316,7 +316,7 @@
 /obj/effect/resin_container/proc/Smoke()
 	var/obj/effect/particle_effect/foam/metal/resin/S = new /obj/effect/particle_effect/foam/metal/resin(get_turf(loc))
 	S.amount = 4
-	playsound(src,'sound/effects/bamf.ogg',100,TRUE)
+	playsound(src,'sound/blank.ogg',100,TRUE)
 	qdel(src)
 
 #undef EXTINGUISHER
@@ -325,7 +325,7 @@
 
 /obj/item/reagent_containers/chemtank
 	name = "backpack chemical injector"
-	desc = "A chemical autoinjector that can be carried on your back."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "waterbackpackchem"
 	item_state = "waterbackpackchem"
@@ -367,7 +367,7 @@
 		turn_on()
 
 //Todo : cache these.
-/obj/item/reagent_containers/chemtank/worn_overlays(var/isinhands = FALSE) //apply chemcolor and level
+/obj/item/reagent_containers/chemtank/worn_overlays(isinhands = FALSE) //apply chemcolor and level
 	. = list()
 	//inhands + reagent_filling
 	if(!isinhands && reagents.total_volume)
@@ -418,7 +418,7 @@
 //Operator backpack spray
 /obj/item/watertank/op
 	name = "backpack water tank"
-	desc = "A New Russian backpack spray for systematic cleansing of carbon lifeforms."
+	desc = ""
 	icon_state = "waterbackpackop"
 	item_state = "waterbackpackop"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -436,7 +436,7 @@
 	reagents.add_reagent(/datum/reagent/consumable/condensedcapsaicin,500)
 
 /obj/item/reagent_containers/spray/mister/op
-	desc = "A mister nozzle attached to several extended water tanks. It suspiciously has a compressor in the system and is labelled entirely in New Cyrillic."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "misterop"
 	item_state = "misterop"

@@ -139,30 +139,30 @@
 	if(!ert_team)
 		return
 
-	to_chat(owner, "<B><font size=3 color=red>You are the [name].</font></B>")
+	to_chat(owner, "<B><font size=3 color=red>I are the [name].</font></B>")
 
-	var/missiondesc = "Your squad is being sent on a mission to [station_name()] by Nanotrasen's Security Division."
+	var/missiondesc = ""
 	if(leader) //If Squad Leader
-		missiondesc += " Lead your squad to ensure the completion of the mission. Board the shuttle when your team is ready."
+		missiondesc += " Lead my squad to ensure the completion of the mission. Board the shuttle when my team is ready."
 	else
-		missiondesc += " Follow orders given to you by your squad leader."
+		missiondesc += " Follow orders given to you by my squad leader."
 
 		missiondesc += "Avoid civilian casualties when possible."
 
-	missiondesc += "<BR><B>Your Mission</B> : [ert_team.mission.explanation_text]"
+	missiondesc += "<BR><B>My Mission</B> : [ert_team.mission.explanation_text]"
 	to_chat(owner,missiondesc)
 
 /datum/antagonist/ert/deathsquad/greet()
 	if(!ert_team)
 		return
 
-	to_chat(owner, "<B><font size=3 color=red>You are the [name].</font></B>")
+	to_chat(owner, "<B><font size=3 color=red>I are the [name].</font></B>")
 
-	var/missiondesc = "Your squad is being sent on a mission to [station_name()] by Nanotrasen's Security Division."
+	var/missiondesc = ""
 	if(leader) //If Squad Leader
-		missiondesc += " Lead your squad to ensure the completion of the mission. Board the shuttle when your team is ready."
+		missiondesc += " Lead my squad to ensure the completion of the mission. Board the shuttle when my team is ready."
 	else
-		missiondesc += " Follow orders given to you by your squad leader."
+		missiondesc += " Follow orders given to you by my squad leader."
 
-	missiondesc += "<BR><B>Your Mission</B> : [ert_team.mission.explanation_text]"
+	missiondesc += "<BR><B>My Mission</B> : [ert_team.mission.explanation_text]"
 	to_chat(owner,missiondesc)

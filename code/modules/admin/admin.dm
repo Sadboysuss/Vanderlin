@@ -1,8 +1,10 @@
-
 ////////////////////////////////
 /proc/message_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">[msg]</span></span>"
-	to_chat(GLOB.admins, msg)
+	for(var/client/C in GLOB.admins)
+		if(check_rights_for(C, R_ADMIN))
+			to_chat(C, msg)
+
 
 /proc/relay_msg_admins(msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">RELAY:</span> <span class=\"message linkify\">[msg]</span></span>"
@@ -12,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "Admin"
+	set category = "GameMaster"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -22,7 +24,7 @@
 	log_admin("[key_name(usr)] checked the individual player panel for [key_name(M)][isobserver(usr)?"":" while in game"].")
 
 	if(!M)
-		to_chat(usr, "<span class='warning'>You seem to be selecting a mob that doesn't exist anymore.</span>")
+		to_chat(usr, "<span class='warning'>I seem to be selecting a mob that doesn't exist anymore.</span>")
 		return
 
 	var/body = "<html><head><title>Options for [M.key]</title></head>"
@@ -190,10 +192,99 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
+/datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
+	set name = "Heal Mob"
+	set desc = "Heal a mob to full health"
+	set category = "GameMaster"
+
+	if(!check_rights())
+		return
+
+	M.fully_heal(admin_revive = TRUE)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
+	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
+
+/datum/admins/proc/checkpq(mob/living/M in GLOB.mob_list)
+	set name = "Check PQ"
+	set desc = "Check a mob's PQ"
+	set category = null
+
+	if(!check_rights())
+		return
+	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
+
+	check_pq_menu(M.ckey)
+
+/datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
+	set name = "Toggle Sleeping"
+	set desc = "Toggle a mob's sleeping state"
+	set category = "GameMaster"
+
+	if(!check_rights())
+		return
+	
+	var/S = M.IsSleeping()
+	if(S)
+		M.remove_status_effect(S)
+		M.set_resting(FALSE, TRUE)
+	else
+		M.SetSleeping(999999)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] toggled [key_name_admin(M)]'s sleeping state!</span>")
+	log_admin("[key_name(usr)] toggled [key_name(M)]'s sleeping state.")
+
+/datum/admins/proc/start_vote()
+	set name = "Start Vote"
+	set desc = "Start a vote"
+	set category = "Server"
+
+	if(!check_rights(R_POLL))
+		to_chat(usr, "<span class='warning'>You do not have the rights to start a vote.</span>")
+		return
+
+	var/type = input("What kind of vote?") as null|anything in list("End Round", "Custom")
+	switch(type)
+		if("End Round")
+			type = "endround"
+		if("Custom")
+			type = "custom"
+	SSvote.initiate_vote(type, usr.key)
+
+/datum/admins/proc/adjustpq(mob/living/M in GLOB.mob_list)
+	set name = "Adjust PQ"
+	set desc = "Adjust a player's PQ"
+	set category = null
+
+	if(!check_rights())
+		return
+	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
+
+	var/ckey = lowertext(M.ckey)
+	var/admin = lowertext(usr.key)
+
+	if(ckey == admin)
+		to_chat(src, "<span class='boldwarning'>That's you!</span>")
+		return
+	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
+		to_chat(src, "<span class='boldwarning'>User does not exist.</span>")
+		return
+	var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
+	if(!check_rights(R_ADMIN,0))
+		amt2change = CLAMP(amt2change, -20, 20)
+	var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
+	if(!amt2change && !raisin)
+		return
+	adjust_playerquality(amt2change, ckey, admin, raisin)
+
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
 	set name = "Access Newscaster Network"
-	set desc = "Allows you to view, add and edit news feeds."
+	set desc = ""
 
 	if (!istype(src, /datum/admins))
 		src = usr.client.holder
@@ -465,10 +556,10 @@
 		var/result = input(usr, "Select reboot method", "World Reboot", options[1]) as null|anything in options
 		if(result)
 			SSblackbox.record_feedback("tally", "admin_verb", 1, "Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-			var/init_by = "Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]."
+			var/init_by = "Initiated by Admin."
 			switch(result)
 				if("Regular Restart")
-					SSticker.Reboot(init_by, "admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]", 10)
+					SSticker.Reboot(init_by, "admin reboot - by Admin", 10)
 				if("Hard Restart (No Delay, No Feeback Reason)")
 					to_chat(world, "World reboot - [init_by]")
 					world.Reboot()
@@ -482,11 +573,11 @@
 /datum/admins/proc/end_round()
 	set category = "Server"
 	set name = "End Round"
-	set desc = "Attempts to produce a round end report and then restart the server organically."
+	set desc = ""
 
 	if (!usr.client.holder)
 		return
-	var/confirm = alert("End the round and  restart the game world?", "End Round", "Yes", "Cancel")
+	var/confirm = alert("End the round and restart the game world?", "End Round", "Yes", "Cancel")
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
@@ -571,6 +662,24 @@
 
 	return 0
 
+/datum/admins/proc/forcemode()
+	set category = "Server"
+	set name = "Force Gamemode"
+
+	if(SSticker.current_state == GAME_STATE_PREGAME || SSticker.current_state == GAME_STATE_STARTUP)
+		if(alert("Enter Manual Gamemode Selection? Will disable random generation",,"Yes","No") == "Yes")
+			for(var/I in 1 to 10)
+				var/choice = input(usr, "Select Gamemodes", "Select Gamemodes") as anything in roguegamemodes|null
+				if(!choice || choice == "CANCEL")
+					message_admins("<font color='blue'>\
+						[usr.key] has forced the gamemode.</font>")
+					return
+				SSticker.manualmodes |= choice
+				roguegamemodes -= choice		
+	else
+		to_chat(usr, "<font color='red'>Error: Force Modes: Game has already started.</font>")
+
+	return 0
 /datum/admins/proc/toggleenter()
 	set category = "Server"
 	set desc="People can't enter"
@@ -606,9 +715,9 @@
 	var/new_nores = !CONFIG_GET(flag/norespawn)
 	CONFIG_SET(flag/norespawn, new_nores)
 	if (!new_nores)
-		to_chat(world, "<B>You may now respawn.</B>")
+		to_chat(world, "<B>I may now respawn.</B>")
 	else
-		to_chat(world, "<B>You may no longer respawn :(</B>")
+		to_chat(world, "<B>I may no longer respawn :(</B>")
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] toggled respawn to [!new_nores ? "On" : "Off"].</span>")
 	log_admin("[key_name(usr)] toggled respawn to [!new_nores ? "On" : "Off"].")
 	world.update_status()
@@ -630,7 +739,7 @@
 			log_admin("[key_name(usr)] delayed the round start.")
 		else
 			to_chat(world, "<b>The game will start in [DisplayTimeText(newtime)].</b>")
-			SEND_SOUND(world, sound('sound/ai/attention.ogg'))
+			SEND_SOUND(world, sound('sound/blank.ogg'))
 			log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(newtime)].")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delay Game Start") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -649,7 +758,7 @@
 
 /datum/admins/proc/spawn_atom(object as text)
 	set category = "Debug"
-	set desc = "(atom path) Spawn an atom"
+	set desc = ""
 	set name = "Spawn"
 
 	if(!check_rights(R_SPAWN) || !object)
@@ -678,7 +787,7 @@
 
 /datum/admins/proc/podspawn_atom(object as text)
 	set category = "Debug"
-	set desc = "(atom path) Spawn an atom via supply drop"
+	set desc = ""
 	set name = "Podspawn"
 
 	if(!check_rights(R_SPAWN))
@@ -702,7 +811,7 @@
 
 /datum/admins/proc/spawn_cargo(object as text)
 	set category = "Debug"
-	set desc = "(atom path) Spawn a cargo crate"
+	set desc = ""
 	set name = "Spawn Cargo"
 
 	if(!check_rights(R_SPAWN))
@@ -721,7 +830,7 @@
 
 /datum/admins/proc/show_traitor_panel(mob/M in GLOB.mob_list)
 	set category = "Admin"
-	set desc = "Edit mobs's memory and role"
+	set desc = ""
 	set name = "Show Traitor Panel"
 
 	if(!istype(M))
@@ -951,3 +1060,11 @@
 				"Admin login: [key_name(src)]")
 		if(string)
 			message_admins("[string]")
+
+
+/client/proc/returntolobby()
+	set category = "Debug"
+	set name = "Return to Lobby"
+
+	var/mob/living/carbon/human/H = mob
+	H.returntolobby()

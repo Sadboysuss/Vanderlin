@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 
 /obj/effect/meteor
 	name = "the concept of meteor"
-	desc = "You should probably run instead of gawking at this."
+	desc = ""
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "small"
 	density = TRUE
@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	var/dest
 	pass_flags = PASSTABLE
 	var/heavy = 0
-	var/meteorsound = 'sound/effects/meteorimpact.ogg'
+	var/meteorsound = 'sound/blank.ogg'
 	var/z_original
 	var/threat = 0 // used for determining which meteors are most interesting
 	var/lifetime = DEFAULT_METEOR_LIFETIME
@@ -143,7 +143,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	for(var/atom/A in T)
 		if(A != src)
 			if(isliving(A))
-				A.visible_message("<span class='warning'>[src] slams into [A].</span>", "<span class='userdanger'>[src] slams into you!.</span>")
+				A.visible_message("<span class='warning'>[src] slams into [A].</span>", "<span class='danger'>[src] slams into you!.</span>")
 			A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	pass_flags = PASSTABLE | PASSGRILLE
 	hits = 1
 	hitpwr = 3
-	meteorsound = 'sound/weapons/gun/smg/shot.ogg'
+	meteorsound = 'sound/blank.ogg'
 	meteordrop = list(/obj/item/stack/ore/glass)
 	threat = 1
 
@@ -245,7 +245,7 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 	icon_state = "flaming"
 	hits = 5
 	heavy = 1
-	meteorsound = 'sound/effects/bamf.ogg'
+	meteorsound = 'sound/blank.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)
 	threat = 20
 
@@ -272,10 +272,10 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 /obj/effect/meteor/meaty
 	name = "meaty ore"
 	icon_state = "meateor"
-	desc = "Just... don't think too hard about where this thing came from."
+	desc = ""
 	hits = 2
 	heavy = 1
-	meteorsound = 'sound/effects/blobattack.ogg'
+	meteorsound = 'sound/blank.ogg'
 	meteordrop = list(/obj/item/reagent_containers/food/snacks/meat/slab/human, /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant, /obj/item/organ/heart, /obj/item/organ/lungs, /obj/item/organ/tongue, /obj/item/organ/appendix/)
 	var/meteorgibs = /obj/effect/gibspawner/generic
 	threat = 2
@@ -323,11 +323,11 @@ GLOBAL_LIST_INIT(meteorsC, list(/obj/effect/meteor/dust)) //for space dust event
 /obj/effect/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
-	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
+	desc = ""
 	hits = 30
 	hitpwr = 1
 	heavy = 1
-	meteorsound = 'sound/effects/bamf.ogg'
+	meteorsound = 'sound/blank.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)
 	threat = 50
 
@@ -353,7 +353,7 @@ GLOBAL_LIST_INIT(meteorsSPOOKY, list(/obj/effect/meteor/pumpkin))
 
 /obj/effect/meteor/pumpkin
 	name = "PUMPKING"
-	desc = "THE PUMPKING'S COMING!"
+	desc = ""
 	icon = 'icons/obj/meteor_spooky.dmi'
 	icon_state = "pumpkin"
 	hits = 10
@@ -364,6 +364,6 @@ GLOBAL_LIST_INIT(meteorsSPOOKY, list(/obj/effect/meteor/pumpkin))
 
 /obj/effect/meteor/pumpkin/Initialize()
 	. = ..()
-	meteorsound = pick('sound/hallucinations/im_here1.ogg','sound/hallucinations/im_here2.ogg')
+	meteorsound = pick('sound/blank.ogg')
 //////////////////////////
 #undef DEFAULT_METEOR_LIFETIME

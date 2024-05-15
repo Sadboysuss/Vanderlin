@@ -19,7 +19,7 @@ BONUS
 /datum/symptom/headache
 
 	name = "Headache"
-	desc = "The virus causes inflammation inside the brain, causing constant headaches."
+	desc = ""
 	stealth = -1
 	resistance = 4
 	stage_speed = 2
@@ -56,5 +56,5 @@ BONUS
 		to_chat(M, "<span class='warning'>[pick("Your head hurts a lot.", "Your head pounds incessantly.")]</span>")
 		M.adjustStaminaLoss(25)
 	if(power >= 3 && A.stage >= 5)
-		to_chat(M, "<span class='userdanger'>[pick("Your head hurts!", "You feel a burning knife inside your brain!", "A wave of pain fills your head!")]</span>")
+		to_chat(M, "<span class='danger'>[pick("Your head hurts!", "You feel a burning knife inside your brain!", "A wave of pain fills your head!")]</span>")
 		M.Stun(35)

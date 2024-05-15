@@ -16,7 +16,7 @@ Nothing else in the console has ID requirements.
 */
 /obj/machinery/computer/rdconsole
 	name = "R&D Console"
-	desc = "A console used to interface with R&D tools."
+	desc = ""
 	icon_screen = "rdcomp"
 	icon_keyboard = "rd_key"
 	var/datum/techweb/stored_research					//Reference to global science techweb.
@@ -116,7 +116,7 @@ Nothing else in the console has ID requirements.
 	if(istype(D, /obj/item/research_notes))
 		var/obj/item/research_notes/R = D
 		SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = R.value))
-		playsound(src,'sound/machines/copier.ogg', 100, TRUE)
+		playsound(src,'sound/blank.ogg', 100, TRUE)
 		qdel(R)
 		return TRUE
 	//Loading a disk into it.
@@ -140,7 +140,7 @@ Nothing else in the console has ID requirements.
 		else
 			to_chat(user, "<span class='warning'>Machine cannot accept disks in that format.</span>")
 			return
-		to_chat(user, "<span class='notice'>You insert [D] into \the [src]!</span>")
+		to_chat(user, "<span class='notice'>I insert [D] into \the [src]!</span>")
 	else if(!(linked_destroy && linked_destroy.busy) && !(linked_lathe && linked_lathe.busy) && !(linked_imprinter && linked_imprinter.busy))
 		. = ..()
 
@@ -168,7 +168,7 @@ Nothing else in the console has ID requirements.
 					logname = "User: [idcard.registered_name]"
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
-				var/obj/item/I = H.wear_id
+				var/obj/item/I = H.wear_ring
 				if(istype(I))
 					var/obj/item/card/id/ID = I.GetID()
 					if(istype(ID))
@@ -197,7 +197,7 @@ Nothing else in the console has ID requirements.
 
 /obj/machinery/computer/rdconsole/emag_act(mob/user)
 	if(!(obj_flags & EMAGGED))
-		to_chat(user, "<span class='notice'>You disable the security protocols[locked? " and unlock the console":""].</span>")
+		to_chat(user, "<span class='notice'>I disable the security protocols[locked? " and unlock the console":""].</span>")
 		playsound(src, "sparks", 75, TRUE)
 		obj_flags |= EMAGGED
 		locked = FALSE
@@ -1076,7 +1076,7 @@ Nothing else in the console has ID requirements.
 /obj/machinery/computer/rdconsole/ui_interact(mob/user)
 	. = ..()
 	var/datum/browser/popup = new(user, "rndconsole", name, 900, 600)
-	popup.add_stylesheet("techwebs", 'html/browser/techwebs.css')
+//	popup.add_stylesheet("techwebs", 'html/browser/techwebs.css')
 	popup.set_content(generate_ui())
 	popup.open()
 

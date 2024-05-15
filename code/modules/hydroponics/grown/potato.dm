@@ -1,8 +1,8 @@
 // Potato
 /obj/item/seeds/potato
 	name = "pack of potato seeds"
-	desc = "Boil 'em! Mash 'em! Stick 'em in a stew!"
-	icon_state = "seed-potato"
+	desc = ""
+	icon_state = "seed"
 	species = "potato"
 	plantname = "Potato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/potato
@@ -21,7 +21,7 @@
 /obj/item/reagent_containers/food/snacks/grown/potato
 	seed = /obj/item/seeds/potato
 	name = "potato"
-	desc = "Boil 'em! Mash 'em! Stick 'em in a stew!"
+	desc = ""
 	icon_state = "potato"
 	filling_color = "#E9967A"
 	bitesize = 100
@@ -31,7 +31,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/potato/wedges
 	name = "potato wedges"
-	desc = "Slices of neatly cut potato."
+	desc = ""
 	icon_state = "potato_wedges"
 	filling_color = "#E9967A"
 	bitesize = 100
@@ -39,7 +39,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W, mob/user, params)
 	if(W.get_sharpness())
-		to_chat(user, "<span class='notice'>You cut the potato into wedges with [W].</span>")
+		to_chat(user, "<span class='notice'>I cut the potato into wedges with [W].</span>")
 		var/obj/item/reagent_containers/food/snacks/grown/potato/wedges/Wedges = new /obj/item/reagent_containers/food/snacks/grown/potato/wedges
 		remove_item_from_storage(user)
 		qdel(src)
@@ -51,8 +51,8 @@
 // Sweet Potato
 /obj/item/seeds/potato/sweet
 	name = "pack of sweet potato seeds"
-	desc = "These seeds grow into sweet potato plants."
-	icon_state = "seed-sweetpotato"
+	desc = ""
+	icon_state = "seed"
 	species = "sweetpotato"
 	plantname = "Sweet Potato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/potato/sweet
@@ -62,6 +62,6 @@
 /obj/item/reagent_containers/food/snacks/grown/potato/sweet
 	seed = /obj/item/seeds/potato/sweet
 	name = "sweet potato"
-	desc = "It's sweet."
+	desc = ""
 	icon_state = "sweetpotato"
 	distill_reagent = /datum/reagent/consumable/ethanol/sbiten

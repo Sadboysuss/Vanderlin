@@ -1,6 +1,6 @@
 /obj/item/assembly/shock_kit
 	name = "electrohelmet assembly"
-	desc = "This appears to be made from both an electropack and a helmet."
+	desc = ""
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "shock_kit"
 	var/obj/item/clothing/head/helmet/part1 = null
@@ -15,7 +15,7 @@
 
 /obj/item/assembly/shock_kit/wrench_act(mob/living/user, obj/item/I)
 	..()
-	to_chat(user, "<span class='notice'>You disassemble [src].</span>")
+	to_chat(user, "<span class='notice'>I disassemble [src].</span>")
 	if(part1)
 		part1.forceMove(drop_location())
 		part1.master = null

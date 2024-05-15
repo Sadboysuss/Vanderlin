@@ -1,7 +1,7 @@
 /obj/item/gun/energy
 	icon_state = "energy"
 	name = "energy gun"
-	desc = "A basic energy-based gun."
+	desc = ""
 	icon = 'icons/obj/guns/energy.dmi'
 
 	var/obj/item/stock_parts/cell/cell //What type of power cell this uses
@@ -208,18 +208,18 @@
 		else if(BB.nodamage || !BB.damage || BB.damage_type == STAMINA)
 			user.visible_message("<span class='danger'>[user] tries to light [user.p_their()] [A.name] with [src], but it doesn't do anything. Dumbass.</span>")
 			playsound(user, E.fire_sound, 50, TRUE)
-			playsound(user, BB.hitsound, 50, TRUE)
+			playsound(user,  pick(BB.hitsound), 50, TRUE)
 			cell.use(E.e_cost)
 			. = ""
 		else if(BB.damage_type != BURN)
 			user.visible_message("<span class='danger'>[user] tries to light [user.p_their()] [A.name] with [src], but only succeeds in utterly destroying it. Dumbass.</span>")
 			playsound(user, E.fire_sound, 50, TRUE)
-			playsound(user, BB.hitsound, 50, TRUE)
+			playsound(user,  pick(BB.hitsound), 50, TRUE)
 			cell.use(E.e_cost)
 			qdel(A)
 			. = ""
 		else
 			playsound(user, E.fire_sound, 50, TRUE)
-			playsound(user, BB.hitsound, 50, TRUE)
+			playsound(user,  pick(BB.hitsound), 50, TRUE)
 			cell.use(E.e_cost)
 			. = "<span class='danger'>[user] casually lights their [A.name] with [src]. Damn.</span>"

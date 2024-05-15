@@ -9,7 +9,7 @@
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	icon = 'icons/obj/device.dmi'
 	name = "control wand"
-	desc = "Remotely controls airlocks."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	var/mode = WAND_OPEN
 	var/region_access = 1 //See access.dm
@@ -58,7 +58,7 @@
 
 /obj/item/door_remote/omni
 	name = "omni door remote"
-	desc = "This control wand can access any door on the station."
+	desc = ""
 	icon_state = "gangtool-yellow"
 	region_access = 0
 
@@ -84,7 +84,7 @@
 
 /obj/item/door_remote/quartermaster
 	name = "supply door remote"
-	desc = "Remotely controls airlocks. This remote has additional Vault access."
+	desc = ""
 	icon_state = "gangtool-green"
 	region_access = 6
 

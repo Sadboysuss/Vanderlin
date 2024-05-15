@@ -18,7 +18,7 @@
 	max_occurrences = 10
 
 /datum/round_event/rabbitrelease/announce(fake)
-	priority_announce("Unidentified furry objects detected coming aboard [station_name()]. Beware of Adorable-ness.", "Fluffy Alert", 'sound/ai/aliens.ogg')
+	priority_announce("Unidentified furry objects detected coming aboard [station_name()]. Beware of Adorable-ness.", "Fluffy Alert", 'sound/blank.ogg')
 
 
 /datum/round_event/rabbitrelease/start()
@@ -32,7 +32,7 @@
 
 /mob/living/simple_animal/chicken/rabbit
 	name = "\improper rabbit"
-	desc = "The hippiest hop around."
+	desc = ""
 	icon = 'icons/mob/easter.dmi'
 	icon_state = "rabbit_white"
 	icon_living = "rabbit_white"
@@ -89,13 +89,13 @@
 	name = "Easter Bunny Head"
 	icon_state = "bunnyhead"
 	item_state = "bunnyhead"
-	desc = "Considerably more cute than 'Frank'."
+	desc = ""
 	slowdown = -1
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 
 /obj/item/clothing/suit/bunnysuit
 	name = "Easter Bunny Suit"
-	desc = "Hop Hop Hop!"
+	desc = ""
 	icon_state = "bunnysuit"
 	item_state = "bunnysuit"
 	slowdown = -1
@@ -134,7 +134,7 @@
 /obj/item/reagent_containers/food/snacks/egg/attack_self(mob/user)
 	..()
 	if(containsPrize)
-		to_chat(user, "<span class='notice'>You unwrap [src] and find a prize inside!</span>")
+		to_chat(user, "<span class='notice'>I unwrap [src] and find a prize inside!</span>")
 		dispensePrize(get_turf(user))
 		containsPrize = FALSE
 		qdel(src)
@@ -143,7 +143,7 @@
 /obj/item/reagent_containers/food/snacks/hotcrossbun
 	bitesize = 2
 	name = "hot-cross bun"
-	desc = "The Cross represents the Assistants that died for your sins."
+	desc = ""
 	icon_state = "hotcrossbun"
 
 /datum/crafting_recipe/food/hotcrossbun
@@ -153,12 +153,12 @@
 		/datum/reagent/consumable/sugar = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/hotcrossbun
-	category = CAT_MISCFOOD
+	category = CAT_NONE
 
 
 /obj/item/reagent_containers/food/snacks/store/cake/brioche
 	name = "brioche cake"
-	desc = "A ring of sweet, glazed buns."
+	desc = ""
 	icon_state = "briochecake"
 	slice_path = /obj/item/reagent_containers/food/snacks/cakeslice/brioche
 	slices_num = 6
@@ -166,7 +166,7 @@
 
 /obj/item/reagent_containers/food/snacks/cakeslice/brioche
 	name = "brioche cake slice"
-	desc = "Delicious sweet-bread. Who needs anything else?"
+	desc = ""
 	icon_state = "briochecake_slice"
 	filling_color = "#FFD700"
 
@@ -177,11 +177,11 @@
 		/datum/reagent/consumable/sugar = 2
 	)
 	result = /obj/item/reagent_containers/food/snacks/store/cake/brioche
-	category = CAT_MISCFOOD
+	category = CAT_NONE
 
 /obj/item/reagent_containers/food/snacks/scotchegg
 	name = "scotch egg"
-	desc = "A boiled egg wrapped in a delicious, seasoned meatball."
+	desc = ""
 	icon_state = "scotchegg"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
 	bitesize = 3
@@ -197,11 +197,11 @@
 		/obj/item/reagent_containers/food/snacks/faggot = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/scotchegg
-	category = CAT_MISCFOOD
+	category = CAT_NONE
 
 /obj/item/reagent_containers/food/snacks/soup/mammi
 	name = "Mammi"
-	desc = "A bowl of mushy bread and milk. It reminds you, not too fondly, of a bowel movement."
+	desc = ""
 	icon_state = "mammi"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/nutriment/vitamin = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -214,11 +214,11 @@
 		/datum/reagent/consumable/milk = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/soup/mammi
-	category = CAT_MISCFOOD
+	category = CAT_NONE
 
 /obj/item/reagent_containers/food/snacks/chocolatebunny
 	name = "chocolate bunny"
-	desc = "Contains less than 10% real rabbit!"
+	desc = ""
 	icon_state = "chocolatebunny"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/coco = 2)
@@ -231,4 +231,4 @@
 		/obj/item/reagent_containers/food/snacks/chocolatebar = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/chocolatebunny
-	category = CAT_MISCFOOD
+	category = CAT_NONE

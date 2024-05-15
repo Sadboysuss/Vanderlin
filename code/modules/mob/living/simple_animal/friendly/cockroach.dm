@@ -1,6 +1,6 @@
 /mob/living/simple_animal/cockroach
 	name = "cockroach"
-	desc = "This station is just crawling with bugs."
+	desc = ""
 	icon_state = "cockroach"
 	icon_dead = "cockroach"
 	health = 1
@@ -33,7 +33,7 @@
 		return
 	..()
 
-/mob/living/simple_animal/cockroach/Crossed(var/atom/movable/AM)
+/mob/living/simple_animal/cockroach/Crossed(atom/movable/AM)
 	if(ismob(AM))
 		if(isliving(AM))
 			var/mob/living/A = AM
@@ -42,9 +42,9 @@
 					if(ishuman(A))
 						var/mob/living/carbon/human/H = A
 						if(HAS_TRAIT(H, TRAIT_PACIFISM))
-							H.visible_message("<span class='notice'>[src] avoids getting crushed.</span>", "<span class='warning'>You avoid crushing [src]!</span>")
+							H.visible_message("<span class='notice'>[src] avoids getting crushed.</span>", "<span class='warning'>I avoid crushing [src]!</span>")
 							return
-					A.visible_message("<span class='notice'>[A] crushes [src].</span>", "<span class='notice'>You crushed [src].</span>")
+					A.visible_message("<span class='notice'>[A] crushes [src].</span>", "<span class='notice'>I crushed [src].</span>")
 					adjustBruteLoss(1) //kills a normal cockroach
 				else
 					visible_message("<span class='notice'>[src] avoids getting crushed.</span>")

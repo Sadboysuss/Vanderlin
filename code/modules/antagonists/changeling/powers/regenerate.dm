@@ -1,6 +1,6 @@
 /datum/action/changeling/regenerate
 	name = "Regenerate"
-	desc = "Allows us to regrow and restore missing external limbs and vital internal organs, as well as removing shrapnel and restoring blood volume. Costs 10 chemicals."
+	desc = ""
 	helptext = "Will alert nearby crew if any external limbs are regenerated. Can be used while unconscious."
 	button_icon_state = "regenerate"
 	chemical_cost = 10
@@ -9,18 +9,18 @@
 
 /datum/action/changeling/regenerate/sting_action(mob/living/user)
 	..()
-	to_chat(user, "<span class='notice'>You feel an itching, both inside and \
-		outside as your tissues knit and reknit.</span>")
+	to_chat(user, "<span class='notice'>I feel an itching, both inside and \
+		outside as my tissues knit and reknit.</span>")
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		var/list/missing = C.get_missing_limbs()
 		if(missing.len)
-			playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
+			playsound(user, 'sound/blank.ogg', 50, TRUE)
 			C.visible_message("<span class='warning'>[user]'s missing limbs \
 				reform, making a loud, grotesque sound!</span>",
-				"<span class='userdanger'>Your limbs regrow, making a \
+				"<span class='danger'>My limbs regrow, making a \
 				loud, crunchy sound and giving you great pain!</span>",
-				"<span class='hear'>You hear organic matter ripping \
+				"<span class='hear'>I hear organic matter ripping \
 				and tearing!</span>")
 			C.emote("scream")
 			C.regenerate_limbs(1)

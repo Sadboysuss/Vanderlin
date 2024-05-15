@@ -1,7 +1,7 @@
 #define STASIS_TOGGLE_COOLDOWN 50
 /obj/machinery/stasis
 	name = "Lifeform Stasis Unit"
-	desc = "A not so comfortable looking bed with some nozzles at the top and bottom. It will keep someone in stasis."
+	desc = ""
 	icon = 'icons/obj/machines/stasis.dmi'
 	icon_state = "stasis"
 	density = FALSE
@@ -29,16 +29,16 @@
 	if(last_stasis_sound != _running)
 		var/sound_freq = rand(5120, 8800)
 		if(_running)
-			playsound(src, 'sound/machines/synth_yes.ogg', 50, TRUE, frequency = sound_freq)
+			playsound(src, 'sound/blank.ogg', 50, TRUE, frequency = sound_freq)
 		else
-			playsound(src, 'sound/machines/synth_no.ogg', 50, TRUE, frequency = sound_freq)
+			playsound(src, 'sound/blank.ogg', 50, TRUE, frequency = sound_freq)
 		last_stasis_sound = _running
 
 /obj/machinery/stasis/AltClick(mob/user)
 	if(world.time >= stasis_can_toggle && user.canUseTopic(src, !issilicon(user)))
 		stasis_enabled = !stasis_enabled
 		stasis_can_toggle = world.time + STASIS_TOGGLE_COOLDOWN
-		playsound(src, 'sound/machines/click.ogg', 60, TRUE)
+		playsound(src, 'sound/blank.ogg', 60, TRUE)
 		play_power_sound()
 		update_icon()
 
@@ -92,7 +92,7 @@
 	if(target != occupant)
 		return
 	var/freq = rand(24750, 26550)
-	playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 2, frequency = freq)
+	playsound(src, 'sound/blank.ogg', 5, TRUE, 2, frequency = freq)
 	target.apply_status_effect(STATUS_EFFECT_STASIS, null, TRUE)
 	target.ExtinguishMob()
 	use_power = ACTIVE_POWER_USE

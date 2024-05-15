@@ -8,7 +8,7 @@
 	ruletype = "Midround"
 	/// If the ruleset should be restricted from ghost roles.
 	var/restrict_ghost_roles = TRUE
-	/// What mob type the ruleset is restricted to. 
+	/// What mob type the ruleset is restricted to.
 	var/required_type = /mob/living/carbon/human
 	var/list/living_players = list()
 	var/list/living_antags = list()
@@ -98,7 +98,7 @@
 	log_game("DYNAMIC: Polling [possible_volunteers.len] players to apply for the [name] ruleset.")
 
 	candidates = pollGhostCandidates("The mode is looking for volunteers to become [antag_flag] for [name]", antag_flag, SSticker.mode, antag_flag, poll_time = 300)
-	
+
 	if(!candidates || candidates.len <= 0)
 		message_admins("The ruleset [name] received no applications.")
 		log_game("DYNAMIC: The ruleset [name] received no applications.")
@@ -191,7 +191,7 @@
 	..()
 	for(var/mob/living/player in living_players)
 		if(issilicon(player)) // Your assigned role doesn't change when you are turned into a silicon.
-			living_players -= player 
+			living_players -= player
 			continue
 		if(is_centcom_level(player.z))
 			living_players -= player // We don't autotator people in CentCom
@@ -257,7 +257,7 @@
 	M.mind.special_role = antag_flag
 	M.mind.add_antag_datum(AI)
 	if(prob(ion_announce))
-		priority_announce("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert", 'sound/ai/ionstorm.ogg')
+		priority_announce("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert", 'sound/blank.ogg')
 		if(prob(removeDontImproveChance))
 			M.replace_random_law(generate_ion_law(), list(LAW_INHERENT, LAW_SUPPLIED, LAW_ION))
 		else
@@ -450,7 +450,7 @@
 	player_mind.add_antag_datum(/datum/antagonist/nightmare)
 	S.set_species(/datum/species/shadow/nightmare)
 
-	playsound(S, 'sound/magic/ethereal_exit.ogg', 50, TRUE, -1)
+	playsound(S, 'sound/blank.ogg', 50, TRUE, -1)
 	message_admins("[ADMIN_LOOKUPFLW(S)] has been made into a Nightmare by the midround ruleset.")
 	log_game("DYNAMIC: [key_name(S)] was spawned as a Nightmare by the midround ruleset.")
 	return S

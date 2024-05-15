@@ -1,4 +1,5 @@
 
+
 /datum/controller/subsystem
 	// Metadata; you should define these.
 	name = "fire coderbus" //name of the subsystem
@@ -34,6 +35,8 @@
 	var/runlevels = RUNLEVELS_DEFAULT	//points of the game at which the SS can fire
 
 	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
+
+	var/processing_flag = PROCESSING_DEFAULT
 
 //Do not override
 ///datum/controller/subsystem/New()
@@ -161,7 +164,9 @@
 	initialized = TRUE
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
+	#ifdef TESTING
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
+	#endif
 	log_world(msg)
 	return time
 
@@ -215,4 +220,3 @@
 		if ("queued_priority") //editing this breaks things.
 			return 0
 	. = ..()
-

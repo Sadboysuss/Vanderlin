@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/rod_form
 	name = "Rod Form"
-	desc = "Take on the form of an immovable rod, destroying all in your path. Purchasing this spell multiple times will also increase the rod's damage and travel range."
+	desc = ""
 	clothes_req = TRUE
 	human_req = FALSE
 	charge_max = 250
@@ -14,7 +14,7 @@
 /obj/effect/proc_holder/spell/targeted/rod_form/cast(list/targets,mob/user = usr)
 	var/area/A = get_area(user)
 	if(istype(A, /area/wizard_station))
-		to_chat(user, "<span class='warning'>You know better than to trash Wizard Federation property. Best wait until you leave to use [src].</span>")
+		to_chat(user, "<span class='warning'>I know better than to trash Wizard Federation property. Best wait until you leave to use [src].</span>")
 		return
 	for(var/mob/living/M in targets)
 		var/turf/start = get_turf(M)
@@ -49,8 +49,8 @@
 
 /obj/effect/immovablerod/wizard/penetrate(mob/living/L)
 	if(L.anti_magic_check())
-		L.visible_message("<span class='danger'>[src] hits [L], but it bounces back, then vanishes!</span>" , "<span class='userdanger'>[src] hits you... but it bounces back, then vanishes!</span>" , "<span class='danger'>You hear a weak, sad, CLANG.</span>")
+		L.visible_message("<span class='danger'>[src] hits [L], but it bounces back, then vanishes!</span>" , "<span class='danger'>[src] hits you... but it bounces back, then vanishes!</span>" , "<span class='danger'>I hear a weak, sad, CLANG.</span>")
 		qdel(src)
 		return
-	L.visible_message("<span class='danger'>[L] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class='danger'>You hear a CLANG!</span>")
+	L.visible_message("<span class='danger'>[L] is penetrated by an immovable rod!</span>" , "<span class='danger'>The rod penetrates you!</span>" , "<span class='danger'>I hear a CLANG!</span>")
 	L.adjustBruteLoss(70 + damage_bonus)

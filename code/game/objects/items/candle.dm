@@ -1,8 +1,7 @@
-#define CANDLE_LUMINOSITY	2
+#define CANDLE_LUMINOSITY	3
 /obj/item/candle
-	name = "red candle"
-	desc = "In Greek myth, Prometheus stole fire from the Gods and gave it to \
-		humankind. The jewelry he kept for himself."
+	name = "candle"
+	desc = ""
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
 	item_state = "candle1"
@@ -14,6 +13,10 @@
 	var/infinite = FALSE
 	var/start_lit = FALSE
 
+/obj/item/candle/lit
+	start_lit = TRUE
+	icon_state = "candle1_lit"
+
 /obj/item/candle/Initialize()
 	. = ..()
 	if(start_lit)
@@ -22,17 +25,27 @@
 /obj/item/candle/update_icon()
 	icon_state = "candle[(wax > 400) ? ((wax > 750) ? 1 : 2) : 3][lit ? "_lit" : ""]"
 
-/obj/item/candle/attackby(obj/item/W, mob/user, params)
-	var/msg = W.ignition_effect(src, user)
-	if(msg)
-		light(msg)
-	else
-		return ..()
+/obj/item/candle/afterattack(atom/movable/A, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+	if(lit)
+		A.fire_act()
 
-/obj/item/candle/fire_act(exposed_temperature, exposed_volume)
+/obj/item/candle/Crossed(H as mob|obj)
+	if(ishuman(H) || issilicon(H)) //i guess carp and shit shouldn't set them off
+		var/mob/living/carbon/M = H
+		if(issilicon(H) || M.m_intent == MOVE_INTENT_RUN)
+			wax = 100
+			put_out_candle()
+
+/obj/item/candle/fire_act(added, maxstacks)
 	if(!lit)
-		light() //honk
+		light()
 	return ..()
+
+/obj/item/candle/spark_act()
+	fire_act()
 
 /obj/item/candle/get_temperature()
 	return lit * heat
@@ -73,8 +86,27 @@
 	if(put_out_candle())
 		user.visible_message("<span class='notice'>[user] snuffs [src].</span>")
 
+/obj/item/candle/yellow
+	icon = 'icons/roguetown/items/lighting.dmi'
+
+/obj/item/candle/yellow/lit
+	start_lit = TRUE
+	icon_state = "candle1_lit"
+
 /obj/item/candle/infinite
 	infinite = TRUE
 	start_lit = TRUE
+
+/obj/item/candle/skull
+	icon = 'icons/roguetown/items/lighting.dmi'
+	icon_state = "skullcandle"
+	infinite = TRUE
+
+/obj/item/candle/skull/update_icon()
+	icon_state = "skullcandle[lit ? "_lit" : ""]"
+
+/obj/item/candle/skull/lit
+	start_lit = TRUE
+	icon_state = "skullcandle_lit"
 
 #undef CANDLE_LUMINOSITY

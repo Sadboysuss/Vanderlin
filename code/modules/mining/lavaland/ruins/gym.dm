@@ -1,12 +1,12 @@
 /obj/structure/punching_bag
 	name = "punching bag"
-	desc = "A punching bag. Can you get to speed level 4???"
+	desc = ""
 	icon = 'goon/icons/obj/fitness.dmi'
 	icon_state = "punchingbag"
 	anchored = TRUE
 	layer = WALL_OBJ_LAYER
-	var/list/hit_sounds = list('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg',\
-	'sound/weapons/punch1.ogg', 'sound/weapons/punch2.ogg', 'sound/weapons/punch3.ogg', 'sound/weapons/punch4.ogg')
+	var/list/hit_sounds = list('sound/blank.ogg',\
+	'sound/blank.ogg')
 
 /obj/structure/punching_bag/attack_hand(mob/user as mob)
 	. = ..()
@@ -21,7 +21,7 @@
 
 /obj/structure/weightmachine
 	name = "weight machine"
-	desc = "Just looking at this thing makes you feel tired."
+	desc = ""
 	density = TRUE
 	anchored = TRUE
 	var/icon_state_inuse
@@ -46,7 +46,7 @@
 		user.visible_message("<B>[user] is [bragmessage]!</B>")
 		AnimateMachine(user)
 
-		playsound(user, 'sound/machines/click.ogg', 60, TRUE)
+		playsound(user, 'sound/blank.ogg', 60, TRUE)
 		obj_flags &= ~IN_USE
 		user.pixel_y = 0
 		var/finishmessage = pick("You feel stronger!","You feel like you can take on the world!","You feel robust!","You feel indestructible!")
@@ -70,7 +70,7 @@
 		sleep(3)
 		animate(user, pixel_y = -4, time = 3)
 		sleep(3)
-		playsound(user, 'goon/sound/effects/spring.ogg', 60, TRUE)
+		playsound(user, 'sound/blank.ogg', 60, TRUE)
 
 /obj/structure/weightmachine/weightlifter
 	icon = 'goon/icons/obj/fitness.dmi'
@@ -88,7 +88,7 @@
 		for (var/innerReps = max(reps, 1), innerReps > 0, innerReps--)
 			sleep(3)
 			animate(user, pixel_y = (user.pixel_y == 3) ? 5 : 3, time = 3)
-		playsound(user, 'goon/sound/effects/spring.ogg', 60, TRUE)
+		playsound(user, 'sound/blank.ogg', 60, TRUE)
 	sleep(3)
 	animate(user, pixel_y = 2, time = 3)
 	sleep(3)

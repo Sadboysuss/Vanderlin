@@ -1,6 +1,6 @@
 /obj/machinery/computer/pod
 	name = "mass driver launch control"
-	desc = "A combined blastdoor and mass driver control unit."
+	desc = ""
 	var/obj/machinery/mass_driver/connected = null
 	var/title = "Mass Driver Controls"
 	var/id = 1
@@ -124,10 +124,10 @@
 
 /obj/machinery/computer/pod/old/syndicate
 	name = "\improper ProComp Executive IIc"
-	desc = "The Syndicate operate on a tight budget. Operates external airlocks."
+	desc = ""
 	title = "External Airlock Controls"
 	req_access = list(ACCESS_SYNDICATE)
 
 /obj/machinery/computer/pod/old/swf
 	name = "\improper Magix System IV"
-	desc = "An arcane artifact that holds much magic. Running E-Knock 2.2: Sorcerer's Edition."
+	desc = ""

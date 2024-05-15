@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/bat
-	name = "Space Bat"
-	desc = "A rare breed of bat which roosts in spaceships, probably not vampiric."
+	name = "bat"
+	desc = ""
 	icon_state = "bat"
 	icon_living = "bat"
 	icon_dead = "bat_dead"
@@ -12,8 +12,8 @@
 	response_disarm_simple = "flail at"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	speak_chance = 0
-	maxHealth = 15
-	health = 15
+	maxHealth = 50
+	health = 50
 	spacewalk = TRUE
 	see_in_dark = 10
 	harm_intent_damage = 6
@@ -24,7 +24,7 @@
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 1)
 	pass_flags = PASSTABLE
 	faction = list("hostile")
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/blank.ogg'
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	ventcrawler = VENTCRAWLER_ALWAYS
@@ -39,3 +39,22 @@
 	//Space bats need no air to fly in.
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
+
+/mob/living/simple_animal/hostile/retaliate/bat/Initialize()
+	. = ..()
+	verbs += list(/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up,
+	/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down) 
+
+/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up()
+	set category = "Bat Form"
+	set name = "Move Up"
+
+	if(zMove(UP, TRUE))
+		to_chat(src, "<span class='notice'>I fly upwards.</span>")
+
+/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down()
+	set category = "Bat Form"
+	set name = "Move Down"
+
+	if(zMove(DOWN, TRUE))
+		to_chat(src, "<span class='notice'>I fly down.</span>")

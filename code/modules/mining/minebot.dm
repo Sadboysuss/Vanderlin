@@ -4,7 +4,7 @@
 
 /mob/living/simple_animal/hostile/mining_drone
 	name = "nanotrasen minebot"
-	desc = "The instructions printed on the side read: This is a small robot used to support miners, can be set to search and collect loose ore, or to help fend off wildlife."
+	desc = ""
 	gender = NEUTER
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "mining_drone"
@@ -26,7 +26,7 @@
 	stop_automated_movement_when_pulled = TRUE
 	attack_verb_continuous = "drills"
 	attack_verb_simple = "drill"
-	attack_sound = 'sound/weapons/circsawhit.ogg'
+	attack_sound = 'sound/blank.ogg'
 	sentience_type = SENTIENCE_MINEBOT
 	speak_emote = list("states")
 	wanted_objects = list(/obj/item/stack/ore/diamond, /obj/item/stack/ore/gold, /obj/item/stack/ore/silver,
@@ -99,11 +99,11 @@
 
 	if(I.use_tool(src, user, 0, volume=40))
 		adjustBruteLoss(-15)
-		to_chat(user, "<span class='info'>You repair some of the armor on [src].</span>")
+		to_chat(user, "<span class='info'>I repair some of the armor on [src].</span>")
 
 /mob/living/simple_animal/hostile/mining_drone/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/mining_scanner) || istype(I, /obj/item/t_scanner/adv_mining_scanner))
-		to_chat(user, "<span class='info'>You instruct [src] to drop any collected ore.</span>")
+		to_chat(user, "<span class='info'>I instruct [src] to drop any collected ore.</span>")
 		DropOre()
 		return
 	if(I.tool_behaviour == TOOL_CROWBAR || istype(I, /obj/item/borg/upgrade/modkit))
@@ -123,7 +123,7 @@
 	. = ..()
 	if(.)
 		return
-	if(M.a_intent == INTENT_HELP)
+	if(M.used_intent.type == INTENT_HELP)
 		toggle_mode()
 		switch(mode)
 			if(MINEDRONE_COLLECT)
@@ -153,7 +153,7 @@
 	minimum_distance = 1
 	retreat_distance = null
 	icon_state = "mining_drone"
-	to_chat(src, "<span class='info'>You are set to collect mode. You can now collect loose ore.</span>")
+	to_chat(src, "<span class='info'>I are set to collect mode. You can now collect loose ore.</span>")
 
 /mob/living/simple_animal/hostile/mining_drone/proc/SetOffenseBehavior()
 	mode = MINEDRONE_ATTACK
@@ -164,7 +164,7 @@
 	retreat_distance = 2
 	minimum_distance = 1
 	icon_state = "mining_drone_offense"
-	to_chat(src, "<span class='info'>You are set to attack mode. You can now attack from range.</span>")
+	to_chat(src, "<span class='info'>I are set to attack mode. You can now attack from range.</span>")
 
 /mob/living/simple_animal/hostile/mining_drone/AttackingTarget()
 	if(istype(target, /obj/item/stack/ore) && mode == MINEDRONE_COLLECT)
@@ -186,10 +186,10 @@
 /mob/living/simple_animal/hostile/mining_drone/proc/DropOre(message = 1)
 	if(!contents.len)
 		if(message)
-			to_chat(src, "<span class='warning'>You attempt to dump your stored ore, but you have none!</span>")
+			to_chat(src, "<span class='warning'>I attempt to dump your stored ore, but you have none!</span>")
 		return
 	if(message)
-		to_chat(src, "<span class='notice'>You dump your stored ore.</span>")
+		to_chat(src, "<span class='notice'>I dump your stored ore.</span>")
 	for(var/obj/item/stack/ore/O in contents)
 		O.forceMove(drop_location())
 
@@ -213,7 +213,7 @@
 
 	user.sync_lighting_plane_alpha()
 
-	to_chat(user, "<span class='notice'>You toggle your meson vision [(user.sight & SEE_TURFS) ? "on" : "off"].</span>")
+	to_chat(user, "<span class='notice'>I toggle your meson vision [(user.sight & SEE_TURFS) ? "on" : "off"].</span>")
 
 
 /mob/living/simple_animal/hostile/mining_drone/proc/toggle_mode()
@@ -242,7 +242,7 @@
 	else
 		user.set_light(6)
 	user.light_on = !user.light_on
-	to_chat(user, "<span class='notice'>You toggle your light [user.light_on ? "on" : "off"].</span>")
+	to_chat(user, "<span class='notice'>I toggle your light [user.light_on ? "on" : "off"].</span>")
 
 /datum/action/innate/minedrone/toggle_mode
 	name = "Toggle Mode"
@@ -267,7 +267,7 @@
 
 /obj/item/mine_bot_upgrade
 	name = "minebot melee upgrade"
-	desc = "A minebot upgrade."
+	desc = ""
 	icon_state = "door_electronics"
 	icon = 'icons/obj/module.dmi'
 
@@ -302,7 +302,7 @@
 
 /obj/item/slimepotion/slime/sentience/mining
 	name = "minebot AI upgrade"
-	desc = "Can be used to grant sentience to minebots. It's incompatible with minebot armor and melee upgrades, and will override them."
+	desc = ""
 	icon_state = "door_electronics"
 	icon = 'icons/obj/module.dmi'
 	sentience_type = SENTIENCE_MINEBOT

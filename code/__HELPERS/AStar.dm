@@ -205,5 +205,7 @@ Actual Adjacent procs :
 	for(var/obj/O in T)
 		if(!O.CanAStarPass(ID, rdir, caller))
 			return TRUE
-
+	for(var/mob/living/M in T)
+		if(!M.CanPass(caller, src))
+			return TRUE
 	return FALSE

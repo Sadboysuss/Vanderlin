@@ -92,6 +92,8 @@
 */
 /turf/proc/ClickCross(target_dir, border_only, target_atom = null, atom/movable/mover = null)
 	for(var/obj/O in src)
+		if(!O.density)
+			continue
 		if((mover && O.CanPass(mover,get_step(src,target_dir))) || (!mover && !O.density))
 			continue
 		if(O == target_atom || O == mover || (O.pass_flags & LETPASSTHROW)) //check if there's a dense object present on the turf

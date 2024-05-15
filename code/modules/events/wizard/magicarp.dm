@@ -24,7 +24,7 @@
 
 /mob/living/simple_animal/hostile/carp/ranged
 	name = "magicarp"
-	desc = "50% magic, 50% carp, 100% horrible."
+	desc = ""
 	icon_state = "magicarp"
 	icon_living = "magicarp"
 	icon_dead = "magicarp_dead"
@@ -33,7 +33,7 @@
 	retreat_distance = 2
 	minimum_distance = 0 //Between shots they can and will close in to nash
 	projectiletype = /obj/projectile/magic
-	projectilesound = 'sound/weapons/emitter.ogg'
+	projectilesound = 'sound/blank.ogg'
 	maxHealth = 50
 	health = 50
 	gold_core_spawnable = NO_SPAWN
@@ -48,7 +48,7 @@
 
 /mob/living/simple_animal/hostile/carp/ranged/chaos
 	name = "chaos magicarp"
-	desc = "50% carp, 100% magic, 150% horrible."
+	desc = ""
 	color = "#00FFFF"
 	maxHealth = 75
 	health = 75

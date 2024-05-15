@@ -6,7 +6,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "navbeacon0-f"
 	name = "navigation beacon"
-	desc = "A radio beacon used for bot navigation."
+	desc = ""
 	level = 1		// underfloor
 	layer = LOW_OBJ_LAYER
 	max_integrity = 500
@@ -92,7 +92,7 @@
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		open = !open
 
-		user.visible_message("<span class='notice'>[user] [open ? "opens" : "closes"] the beacon's cover.</span>", "<span class='notice'>You [open ? "open" : "close"] the beacon's cover.</span>")
+		user.visible_message("<span class='notice'>[user] [open ? "opens" : "closes"] the beacon's cover.</span>", "<span class='notice'>I [open ? "open" : "close"] the beacon's cover.</span>")
 
 		update_icon()
 
@@ -105,7 +105,7 @@
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 			updateDialog()
 		else
-			to_chat(user, "<span class='warning'>You must open the cover first!</span>")
+			to_chat(user, "<span class='warning'>I must open the cover first!</span>")
 	else
 		return ..()
 

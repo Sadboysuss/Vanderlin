@@ -18,7 +18,7 @@
 
 /datum/disease/advance
 	name = "Unknown" // We will always let our Virologist name our disease.
-	desc = "An engineered disease which can contain a multitude of symptoms."
+	desc = ""
 	form = "Advance Disease" // Will let med-scanners know that this disease was engineered.
 	agent = "advance microbes"
 	max_stages = 5
@@ -85,7 +85,7 @@
 			S.End(src)
 	return ..()
 
-/datum/disease/advance/try_infect(var/mob/living/infectee, make_copy = TRUE)
+/datum/disease/advance/try_infect(mob/living/infectee, make_copy = TRUE)
 	//see if we are more transmittable than enough diseases to replace them
 	//diseases replaced in this way do not confer immunity
 	var/list/advance_diseases = list()
@@ -248,7 +248,7 @@
 			SetSpread(DISEASE_SPREAD_CONTACT_FLUIDS)
 		else
 			SetSpread(DISEASE_SPREAD_BLOOD)
-		
+
 		permeability_mod = max(CEILING(0.4 * properties["transmittable"], 1), 1)
 		cure_chance = 15 - CLAMP(properties["resistance"], -5, 5) // can be between 10 and 20
 		stage_prob = max(properties["stage_rate"], 2)
@@ -394,7 +394,7 @@
 */
 
 // Mix a list of advance diseases and return the mixed result.
-/proc/Advance_Mix(var/list/D_list)
+/proc/Advance_Mix(list/D_list)
 	var/list/diseases = list()
 
 	for(var/datum/disease/advance/A in D_list)

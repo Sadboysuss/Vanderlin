@@ -1,7 +1,7 @@
 /obj/item/ammo_casing/energy/ion
 	projectile_type = /obj/projectile/ion
 	select_name = "ion"
-	fire_sound = 'sound/weapons/ionrifle.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/ion/hos
 	projectile_type = /obj/projectile/ion/weak
@@ -10,13 +10,13 @@
 /obj/item/ammo_casing/energy/declone
 	projectile_type = /obj/projectile/energy/declone
 	select_name = "declone"
-	fire_sound = 'sound/weapons/pulse3.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/declone/weak
 	projectile_type = /obj/projectile/energy/declone/weak
 
 /obj/item/ammo_casing/energy/flora
-	fire_sound = 'sound/effects/stealthoff.ogg'
+	fire_sound = 'sound/blank.ogg'
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/flora/yield
@@ -31,7 +31,7 @@
 	projectile_type = /obj/projectile/temp
 	select_name = "freeze"
 	e_cost = 250
-	fire_sound = 'sound/weapons/pulse3.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/temp/hot
 	projectile_type = /obj/projectile/temp/hot
@@ -65,7 +65,7 @@
 	projectile_type = /obj/projectile/beam/instakill/red
 
 /obj/item/ammo_casing/energy/tesla_revolver
-	fire_sound = 'sound/magic/lightningbolt.ogg'
+	fire_sound = 'sound/blank.ogg'
 	e_cost = 200
 	select_name = "stun"
 	projectile_type = /obj/projectile/energy/tesla/revolver

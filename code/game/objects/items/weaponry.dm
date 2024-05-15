@@ -1,5 +1,5 @@
 /obj/item/banhammer
-	desc = "A banhammer."
+	desc = ""
 	name = "banhammer"
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "toyhammer"
@@ -7,7 +7,7 @@
 	throwforce = 0
 	force = 1
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	attack_verb = list("banned")
 	max_integrity = 200
@@ -24,16 +24,16 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 */
 /obj/item/banhammer/attack(mob/M, mob/user)
 	if(user.zone_selected == BODY_ZONE_HEAD)
-		M.visible_message("<span class='danger'>[user] is stroking the head of [M] with a banhammer.</span>", "<span class='userdanger'>[user] is stroking your head with a banhammer.</span>", "<span class='hear'>You hear a banhammer stroking a head.</span>")
+		M.visible_message("<span class='danger'>[user] is stroking the head of [M] with a banhammer.</span>", "<span class='danger'>[user] is stroking my head with a banhammer.</span>", "<span class='hear'>I hear a banhammer stroking a head.</span>")
 	else
-		M.visible_message("<span class='danger'>[M] has been banned FOR NO REISIN by [user]!</span>", "<span class='userdanger'>You have been banned FOR NO REISIN by [user]!</span>", "<span class='hear'>You hear a banhammer banning someone.</span>")
-	playsound(loc, 'sound/effects/adminhelp.ogg', 15) //keep it at 15% volume so people don't jump out of their skin too much
-	if(user.a_intent != INTENT_HELP)
+		M.visible_message("<span class='danger'>[M] has been banned FOR NO REISIN by [user]!</span>", "<span class='danger'>I have been banned FOR NO REISIN by [user]!</span>", "<span class='hear'>I hear a banhammer banning someone.</span>")
+	playsound(loc, 'sound/blank.ogg', 15) //keep it at 15% volume so people don't jump out of their skin too much
+	if(user.used_intent.type != INTENT_HELP)
 		return ..(M, user)
 
 /obj/item/sord
 	name = "\improper SORD"
-	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
+	desc = ""
 	icon_state = "sord"
 	item_state = "sord"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -42,22 +42,22 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 2
 	throwforce = 1
 	w_class = WEIGHT_CLASS_NORMAL
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = list('sound/blank.ogg')
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/sord/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is trying to impale [user.p_them()]self with [src]! It might be a suicide attempt if it weren't so shitty.</span>", \
-	"<span class='suicide'>You try to impale yourself with [src], but it's USELESS...</span>")
+	"<span class='suicide'>I try to impale myself with [src], but it's USELESS...</span>")
 	return SHAME
 
 /obj/item/claymore
 	name = "claymore"
-	desc = "What are you standing around staring at this for? Get to killing!"
+	desc = ""
 	icon_state = "claymore"
 	item_state = "claymore"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
 	force = 40
@@ -79,7 +79,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	return(BRUTELOSS)
 
 /obj/item/claymore/highlander //ALL COMMENTS MADE REGARDING THIS SWORD MUST BE MADE IN ALL CAPS
-	desc = "<b><i>THERE CAN BE ONLY ONE, AND IT WILL BE YOU!!!</i></b>\nActivate it in your hand to point to the nearest victim."
+	desc = ""
 	flags_1 = CONDUCT_1
 	item_flags = DROPDEL //If this ever happens, it's because you lost an arm
 	slot_flags = null
@@ -133,7 +133,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	if(!QDELETED(target) && iscarbon(target) && target.stat == DEAD && target.mind && target.mind.special_role == "highlander")
 		user.fully_heal(admin_revive = FALSE) //STEAL THE LIFE OF OUR FALLEN FOES
 		add_notch(user)
-		target.visible_message("<span class='warning'>[target] crumbles to dust beneath [user]'s blows!</span>", "<span class='userdanger'>As you fall, your body crumbles to dust!</span>")
+		target.visible_message("<span class='warning'>[target] crumbles to dust beneath [user]'s blows!</span>", "<span class='danger'>As you fall, my body crumbles to dust!</span>")
 		target.dust()
 
 /obj/item/claymore/highlander/attack_self(mob/living/user)
@@ -156,11 +156,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	var/new_name = name
 	switch(notches)
 		if(1)
-			to_chat(user, "<span class='notice'>Your first kill - hopefully one of many. You scratch a notch into [src]'s blade.</span>")
-			to_chat(user, "<span class='warning'>You feel your fallen foe's soul entering your blade, restoring your wounds!</span>")
+			to_chat(user, "<span class='notice'>My first kill - hopefully one of many. You scratch a notch into [src]'s blade.</span>")
+			to_chat(user, "<span class='warning'>I feel my fallen foe's soul entering my blade, restoring my wounds!</span>")
 			new_name = "notched claymore"
 		if(2)
-			to_chat(user, "<span class='notice'>Another falls before you. Another soul fuses with your own. Another notch in the blade.</span>")
+			to_chat(user, "<span class='notice'>Another falls before you. Another soul fuses with my own. Another notch in the blade.</span>")
 			new_name = "double-notched claymore"
 			add_atom_colour(rgb(255, 235, 235), ADMIN_COLOUR_PRIORITY)
 		if(3)
@@ -172,11 +172,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 			new_name = "many-notched claymore"
 			add_atom_colour(rgb(255, 195, 195), ADMIN_COLOUR_PRIORITY)
 		if(5)
-			to_chat(user, "<span class='boldannounce'>Five voices now echo in your mind, cheering the slaughter.</span>")
+			to_chat(user, "<span class='boldannounce'>Five voices now echo in my mind, cheering the slaughter.</span>")
 			new_name = "battle-tested claymore"
 			add_atom_colour(rgb(255, 175, 175), ADMIN_COLOUR_PRIORITY)
 		if(6)
-			to_chat(user, "<span class='boldannounce'>Is this what the vikings felt like? Visions of glory fill your head as you slay your sixth foe.</span>")
+			to_chat(user, "<span class='boldannounce'>Is this what the vikings felt like? Visions of glory fill my head as you slay my sixth foe.</span>")
 			new_name = "battle-scarred claymore"
 			add_atom_colour(rgb(255, 155, 155), ADMIN_COLOUR_PRIORITY)
 		if(7)
@@ -184,16 +184,16 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 			new_name = "vicious claymore"
 			add_atom_colour(rgb(255, 135, 135), ADMIN_COLOUR_PRIORITY)
 		if(8)
-			to_chat(user, "<span class='userdanger'>IT NEVER GETS OLD. THE <i>SCREAMING</i>. THE <i>BLOOD</i> AS IT <i>SPRAYS</i> ACROSS YOUR <i>FACE.</i></span>")
+			to_chat(user, "<span class='danger'>IT NEVER GETS OLD. THE <i>SCREAMING</i>. THE <i>BLOOD</i> AS IT <i>SPRAYS</i> ACROSS YOUR <i>FACE.</i></span>")
 			new_name = "bloodthirsty claymore"
 			add_atom_colour(rgb(255, 115, 115), ADMIN_COLOUR_PRIORITY)
 		if(9)
-			to_chat(user, "<span class='userdanger'>ANOTHER ONE FALLS TO YOUR BLOWS. ANOTHER WEAKLING UNFIT TO LIVE.</span>")
+			to_chat(user, "<span class='danger'>ANOTHER ONE FALLS TO YOUR BLOWS. ANOTHER WEAKLING UNFIT TO LIVE.</span>")
 			new_name = "gore-stained claymore"
 			add_atom_colour(rgb(255, 95, 95), ADMIN_COLOUR_PRIORITY)
 		if(10)
 			user.visible_message("<span class='warning'>[user]'s eyes light up with a vengeful fire!</span>", \
-			"<span class='userdanger'>YOU FEEL THE POWER OF VALHALLA FLOWING THROUGH YOU! <i>THERE CAN BE ONLY ONE!!!</i></span>")
+			"<span class='danger'>YOU FEEL THE POWER OF VALHALLA FLOWING THROUGH YOU! <i>THERE CAN BE ONLY ONE!!!</i></span>")
 			user.update_icons()
 			new_name = "GORE-DRENCHED CLAYMORE OF [pick("THE WHIMSICAL SLAUGHTER", "A THOUSAND SLAUGHTERED CATTLE", "GLORY AND VALHALLA", "ANNIHILATION", "OBLITERATION")]"
 			icon_state = "claymore_valhalla"
@@ -201,11 +201,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 			remove_atom_colour(ADMIN_COLOUR_PRIORITY)
 
 	name = new_name
-	playsound(user, 'sound/items/screwdriver2.ogg', 50, TRUE)
+	playsound(user, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/katana
 	name = "katana"
-	desc = "Woefully underpowered in D20."
+	desc = ""
 	icon_state = "katana"
 	item_state = "katana"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -215,7 +215,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 40
 	throwforce = 10
 	w_class = WEIGHT_CLASS_HUGE
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	block_chance = 50
 	sharpness = IS_SHARP
@@ -232,7 +232,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/wirerod
 	name = "wired rod"
-	desc = "A rod with some wire wrapped around the top. It'd be easy to attach something to the top bit."
+	desc = ""
 	icon_state = "wiredrod"
 	item_state = "rods"
 	flags_1 = CONDUCT_1
@@ -253,14 +253,14 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		qdel(src)
 
 		user.put_in_hands(S)
-		to_chat(user, "<span class='notice'>You fasten the glass shard to the top of the rod with the cable.</span>")
+		to_chat(user, "<span class='notice'>I fasten the glass shard to the top of the rod with the cable.</span>")
 
 	else if(istype(I, /obj/item/assembly/igniter) && !(HAS_TRAIT(I, TRAIT_NODROP)))
 		var/obj/item/melee/baton/cattleprod/P = new /obj/item/melee/baton/cattleprod
 
 		remove_item_from_storage(user)
 
-		to_chat(user, "<span class='notice'>You fasten [I] to the top of the rod with the cable.</span>")
+		to_chat(user, "<span class='notice'>I fasten [I] to the top of the rod with the cable.</span>")
 
 		qdel(I)
 		qdel(src)
@@ -272,7 +272,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/throwing_star
 	name = "throwing star"
-	desc = "An ancient weapon still used to this day, due to its ease of lodging itself into its victim's body parts."
+	desc = ""
 	icon_state = "throwingstar"
 	item_state = "eshield0"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
@@ -288,7 +288,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/throwing_star/magspear
 	name = "magnetic spear"
-	desc = "A reusable spear that is typically loaded into kinetic spearguns."
+	desc = ""
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "magspear"
 	throwforce = 25 //kills regular carps in one hit
@@ -302,29 +302,29 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	icon_state = "switchblade"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	desc = "A sharp, concealable, spring-loaded knife."
+	desc = ""
 	flags_1 = CONDUCT_1
 	force = 3
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 5
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 6
 	custom_materials = list(/datum/material/iron=12000)
-	hitsound = 'sound/weapons/genhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("stubbed", "poked")
 	resistance_flags = FIRE_PROOF
 	var/extended = 0
 
 /obj/item/switchblade/attack_self(mob/user)
 	extended = !extended
-	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	if(extended)
 		force = 20
 		w_class = WEIGHT_CLASS_NORMAL
 		throwforce = 23
 		icon_state = "switchblade_ext"
 		attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-		hitsound = 'sound/weapons/bladeslice.ogg'
+		hitsound = 'sound/blank.ogg'
 		sharpness = IS_SHARP
 	else
 		force = 3
@@ -332,7 +332,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		throwforce = 5
 		icon_state = "switchblade"
 		attack_verb = list("stubbed", "poked")
-		hitsound = 'sound/weapons/genhit.ogg'
+		hitsound = 'sound/blank.ogg'
 		sharpness = IS_BLUNT
 
 /obj/item/switchblade/suicide_act(mob/user)
@@ -341,16 +341,16 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/phone
 	name = "red phone"
-	desc = "Should anything ever go wrong..."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "red_phone"
 	force = 3
 	throwforce = 2
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 4
 	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("called", "rang")
-	hitsound = 'sound/weapons/ring.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/phone/suicide_act(mob/user)
 	if(locate(/obj/structure/chair/stool) in user.loc)
@@ -361,7 +361,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/cane
 	name = "cane"
-	desc = "A cane used by a true gentleman. Or a clown."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "cane"
 	item_state = "stick"
@@ -375,7 +375,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/staff
 	name = "wizard staff"
-	desc = "Apparently a staff used by the wizard."
+	desc = ""
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "staff"
 	lefthand_file = 'icons/mob/inhands/weapons/staves_lefthand.dmi'
@@ -385,20 +385,20 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	throw_speed = 2
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
-	armour_penetration = 100
+	armor_penetration = 100
 	attack_verb = list("bludgeoned", "whacked", "disciplined")
 	resistance_flags = FLAMMABLE
 
 /obj/item/staff/broom
 	name = "broom"
-	desc = "Used for sweeping, and flying into the night while cackling. Black cat not included."
+	desc = ""
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "broom"
 	resistance_flags = FLAMMABLE
 
 /obj/item/staff/stick
 	name = "stick"
-	desc = "A great tool to drag someone else's drinks across the bar."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "cane"
 	item_state = "stick"
@@ -412,7 +412,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/ectoplasm
 	name = "ectoplasm"
-	desc = "Spooky."
+	desc = ""
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"
@@ -427,7 +427,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/mounted_chainsaw
 	name = "mounted chainsaw"
-	desc = "A chainsaw that has replaced your arm."
+	desc = ""
 	icon_state = "chainsaw_on"
 	item_state = "mounted_chainsaw"
 	lefthand_file = 'icons/mob/inhands/weapons/chainsaw_lefthand.dmi'
@@ -440,7 +440,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	throw_speed = 0
 	sharpness = IS_SHARP
 	attack_verb = list("sawed", "torn", "cut", "chopped", "diced")
-	hitsound = 'sound/weapons/chainsawhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	tool_behaviour = TOOL_SAW
 	toolspeed = 1
 
@@ -462,7 +462,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/statuebust
 	name = "bust"
-	desc = "A priceless ancient marble bust, the kind that belongs in a museum." //or you can hit people with it
+	desc = "" //or you can hit people with it
 	icon = 'icons/obj/statue.dmi'
 	icon_state = "bust"
 	force = 15
@@ -479,13 +479,13 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/statuebust/hippocratic
 	name = "hippocrates bust"
-	desc = "A bust of the famous Greek physician Hippocrates of Kos, often referred to as the father of western medicine."
+	desc = ""
 	icon_state = "hippocratic"
 	impressiveness = 50
 
 /obj/item/tailclub
 	name = "tail club"
-	desc = "For the beating to death of lizards with their own tails."
+	desc = ""
 	icon_state = "tailclub"
 	force = 14
 	throwforce = 1 // why are you throwing a club do you even weapon
@@ -495,18 +495,18 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/chainofcommand/tailwhip
 	name = "liz o' nine tails"
-	desc = "A whip fashioned from the severed tails of lizards."
+	desc = ""
 	icon_state = "tailwhip"
 	item_flags = NONE
 
 /obj/item/melee/chainofcommand/tailwhip/kitty
 	name = "cat o' nine tails"
-	desc = "A whip fashioned from the severed tails of cats."
+	desc = ""
 	icon_state = "catwhip"
 
 /obj/item/melee/skateboard
 	name = "improvised skateboard"
-	desc = "A skateboard. It can be placed on its wheels and ridden, or used as a strong weapon."
+	desc = ""
 	icon_state = "skateboard"
 	item_state = "skateboard"
 	force = 12
@@ -522,7 +522,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/skateboard/pro
 	name = "skateboard"
-	desc = "A RaDSTORMz brand professional skateboard. It looks sturdy and well made."
+	desc = ""
 	icon_state = "skateboard2"
 	item_state = "skateboard2"
 	board_item_type = /obj/vehicle/ridden/scooter/skateboard/pro
@@ -530,7 +530,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/skateboard/hoverboard
 	name = "hoverboard"
-	desc = "A blast from the past, so retro!"
+	desc = ""
 	icon_state = "hoverboard_red"
 	item_state = "hoverboard_red"
 	board_item_type = /obj/vehicle/ridden/scooter/skateboard/hoverboard
@@ -538,14 +538,14 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/skateboard/hoverboard/admin
 	name = "\improper Board Of Directors"
-	desc = "The engineering complexity of a spaceship concentrated inside of a board. Just as expensive, too."
+	desc = ""
 	icon_state = "hoverboard_nt"
 	item_state = "hoverboard_nt"
 	board_item_type = /obj/vehicle/ridden/scooter/skateboard/hoverboard/admin
 
 /obj/item/melee/baseball_bat
 	name = "baseball bat"
-	desc = "There ain't a skull in the league that can withstand a swatter."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "baseball_bat"
 	item_state = "baseball_bat"
@@ -560,7 +560,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/baseball_bat/homerun
 	name = "home run bat"
-	desc = "This thing looks dangerous... Dangerously good at baseball, that is."
+	desc = ""
 	homerun_able = 1
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
@@ -571,10 +571,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		to_chat(user, "<span class='warning'>You're already ready to do a home run!</span>")
 		..()
 		return
-	to_chat(user, "<span class='warning'>You begin gathering strength...</span>")
-	playsound(get_turf(src), 'sound/magic/lightning_chargeup.ogg', 65, TRUE)
+	to_chat(user, "<span class='warning'>I begin gathering strength...</span>")
+	playsound(get_turf(src), 'sound/blank.ogg', 65, TRUE)
 	if(do_after(user, 90, target = src))
-		to_chat(user, "<span class='userdanger'>You gather power! Time for a home run!</span>")
+		to_chat(user, "<span class='danger'>I gather power! Time for a home run!</span>")
 		homerun_ready = 1
 	..()
 
@@ -582,10 +582,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	. = ..()
 	var/atom/throw_target = get_edge_target_turf(target, user.dir)
 	if(homerun_ready)
-		user.visible_message("<span class='userdanger'>It's a home run!</span>")
+		user.visible_message("<span class='danger'>It's a home run!</span>")
 		target.throw_at(throw_target, rand(8,10), 14, user)
 		target.ex_act(EXPLODE_HEAVY)
-		playsound(get_turf(src), 'sound/weapons/homerun.ogg', 100, TRUE)
+		playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE)
 		homerun_ready = 0
 		return
 	else if(!target.anchored)
@@ -593,7 +593,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/baseball_bat/ablative
 	name = "metal baseball bat"
-	desc = "This bat is made of highly reflective, highly armored material."
+	desc = ""
 	icon_state = "baseball_bat_metal"
 	item_state = "baseball_bat_metal"
 	force = 12
@@ -603,14 +603,14 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	var/picksound = rand(1,2)
 	var/turf = get_turf(src)
 	if(picksound == 1)
-		playsound(turf, 'sound/weapons/effects/batreflect1.ogg', 50, TRUE)
+		playsound(turf, 'sound/blank.ogg', 50, TRUE)
 	if(picksound == 2)
-		playsound(turf, 'sound/weapons/effects/batreflect2.ogg', 50, TRUE)
+		playsound(turf, 'sound/blank.ogg', 50, TRUE)
 	return 1
 
 /obj/item/melee/flyswatter
 	name = "flyswatter"
-	desc = "Useful for killing insects of all sizes."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "flyswatter"
 	item_state = "flyswatter"
@@ -619,7 +619,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	force = 1
 	throwforce = 1
 	attack_verb = list("swatted", "smacked")
-	hitsound = 'sound/effects/snap.ogg'
+	hitsound = 'sound/blank.ogg'
 	w_class = WEIGHT_CLASS_SMALL
 	//Things in this list will be instantly splatted.  Flyman weakness is handled in the flyman species weakness proc.
 	var/list/strong_against
@@ -639,7 +639,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	if(proximity_flag)
 		if(is_type_in_typecache(target, strong_against))
 			new /obj/effect/decal/cleanable/insectguts(target.drop_location())
-			to_chat(user, "<span class='warning'>You easily splat the [target].</span>")
+			to_chat(user, "<span class='warning'>I easily splat the [target].</span>")
 			if(istype(target, /mob/living/))
 				var/mob/living/bug = target
 				bug.death(1)
@@ -648,7 +648,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/circlegame
 	name = "circled hand"
-	desc = "If somebody looks at this while it's below your waist, you get to bop them."
+	desc = ""
 	icon_state = "madeyoulook"
 	force = 0
 	throwforce = 0
@@ -657,14 +657,14 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/slapper
 	name = "slapper"
-	desc = "This is how real men fight."
+	desc = ""
 	icon_state = "latexballon"
 	item_state = "nothing"
 	force = 0
 	throwforce = 0
 	item_flags = DROPDEL | ABSTRACT
 	attack_verb = list("slapped")
-	hitsound = 'sound/effects/snap.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/slapper/attack(mob/M, mob/living/carbon/human/user)
 	if(ishuman(M))
@@ -672,10 +672,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		if(L && L.dna && L.dna.species)
 			L.dna.species.stop_wagging_tail(M)
 	user.do_attack_animation(M)
-	playsound(M, 'sound/weapons/slap.ogg', 50, TRUE, -1)
+	playsound(M, 'sound/blank.ogg', 50, TRUE, -1)
 	user.visible_message("<span class='danger'>[user] slaps [M]!</span>",
-	"<span class='notice'>You slap [M]!</span>",\
-	"<span class='hear'>You hear a slap.</span>")
+	"<span class='notice'>I slap [M]!</span>",\
+	"<span class='hear'>I hear a slap.</span>")
 	return
 /obj/item/proc/can_trigger_gun(mob/living/user)
 	if(!user.can_use_guns(src))
@@ -684,7 +684,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/extendohand
 	name = "extendo-hand"
-	desc = "Futuristic tech has allowed these classic spring-boxing toys to essentially act as a fully functional hand-operated hand prosthetic."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "extendohand"
 	item_state = "extendohand"
@@ -697,7 +697,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/extendohand/acme
 	name = "\improper ACME Extendo-Hand"
-	desc = "A novelty extendo-hand produced by the ACME corporation. Originally designed to knock out roadrunners."
+	desc = ""
 
 /obj/item/extendohand/attack(atom/M, mob/living/carbon/human/user)
 	var/dist = get_dist(M, user)
@@ -708,7 +708,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/gohei
 	name = "gohei"
-	desc = "A wooden stick with white streamers at the end. Originally used by shrine maidens to purify things. Now used by the station's valued weeaboos."
+	desc = ""
 	force = 5
 	throwforce = 5
 	hitsound = "swing_hit"

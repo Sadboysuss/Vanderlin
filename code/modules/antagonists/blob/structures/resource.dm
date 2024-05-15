@@ -2,7 +2,7 @@
 	name = "resource blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_resource"
-	desc = "A thin spire of slightly swaying tendrils."
+	desc = ""
 	max_integrity = 60
 	point_return = 15
 	var/resource_delay = 0

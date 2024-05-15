@@ -26,12 +26,12 @@ To add a crossbreed:
 
 /obj/item/slimecross //The base type for crossbred extracts. Mostly here for posterity, and to set base case things.
 	name = "crossbred slime extract"
-	desc = "An extremely potent slime extract, formed through crossbreeding."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "base"
 	var/colour = "null"
 	var/effect = "null"
-	var/effect_desc = "null"
+	var/effect_desc = ""
 	force = 0
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
@@ -92,7 +92,7 @@ To add a crossbreed:
 
 /obj/item/slimecrossbeaker //To be used as a result for extract reactions that make chemicals.
 	name = "result extract"
-	desc = "You shouldn't see this."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "base"
 	var/del_on_empty = TRUE
@@ -118,19 +118,19 @@ To add a crossbreed:
 
 /obj/item/slimecrossbeaker/bloodpack //Pack of 50u blood. Deletes on empty.
 	name = "blood extract"
-	desc = "A sphere of liquid blood, somehow managing to stay together."
+	desc = ""
 	color = "#FF0000"
 	list_reagents = list(/datum/reagent/blood = 50)
 
 /obj/item/slimecrossbeaker/pax //5u synthpax.
 	name = "peace-inducing extract"
-	desc = "A small blob of synthetic pax."
+	desc = ""
 	color = "#FFCCCC"
 	list_reagents = list(/datum/reagent/pax/peaceborg = 5)
 
 /obj/item/slimecrossbeaker/omnizine //15u omnizine.
 	name = "healing extract"
-	desc = "A gelatinous extract of pure omnizine."
+	desc = ""
 	color = "#FF00FF"
 	list_reagents = list(/datum/reagent/medicine/omnizine = 15)
 
@@ -149,22 +149,22 @@ To add a crossbreed:
 	if(!iscarbon(M))
 		return
 	if(self_use_only && M != user)
-		to_chat(user, "<span class='warning'>This can only be used on yourself.</span>")
+		to_chat(user, "<span class='warning'>This can only be used on myself.</span>")
 		return
 	if(reagents.total_volume && (ignore_flags || M.can_inject(user, 1)))
 		reagents.trans_to(M, reagents.total_volume, transfered_by = user)
 		if(user != M)
 			to_chat(M, "<span class='warning'>[user] presses [src] against you!</span>")
-			to_chat(user, "<span class='notice'>You press [src] against [M], injecting [M.p_them()].</span>")
+			to_chat(user, "<span class='notice'>I press [src] against [M], injecting [M.p_them()].</span>")
 		else
-			to_chat(user, "<span class='notice'>You press [src] against yourself, and it flattens against you!</span>")
+			to_chat(user, "<span class='notice'>I press [src] against yourself, and it flattens against you!</span>")
 	else
 		to_chat(user, "<span class='warning'>There's no place to stick [src]!</span>")
 
 /obj/item/slimecrossbeaker/autoinjector/regenpack
 	ignore_flags = TRUE //It is, after all, intended to heal.
 	name = "mending solution"
-	desc = "A strange glob of sweet-smelling semifluid, which seems to stick to skin rather easily."
+	desc = ""
 	color = "#FF00FF"
 	list_reagents = list(/datum/reagent/medicine/regen_jelly = 20)
 
@@ -172,13 +172,13 @@ To add a crossbreed:
 	self_use_only = TRUE
 	ignore_flags = TRUE
 	name = "slime jelly bubble"
-	desc = "A sphere of slime jelly. It seems to stick to your skin, but avoids other surfaces."
+	desc = ""
 	color = "#00FF00"
 	list_reagents = list(/datum/reagent/toxin/slimejelly = 50)
 
 /obj/item/slimecrossbeaker/autoinjector/peaceandlove
 	name = "peaceful distillation"
-	desc = "A light pink gooey sphere. Simply touching it makes you a little dizzy."
+	desc = ""
 	color = "#DDAAAA"
 	list_reagents = list(/datum/reagent/pax/peaceborg = 10, /datum/reagent/drug/space_drugs = 15) //Peace, dudes
 
@@ -188,6 +188,6 @@ To add a crossbreed:
 
 /obj/item/slimecrossbeaker/autoinjector/slimestimulant
 	name = "invigorating gel"
-	desc = "A bubbling purple mixture, designed to heal and boost movement."
+	desc = ""
 	color = "#FF00FF"
 	list_reagents = list(/datum/reagent/medicine/regen_jelly = 30, /datum/reagent/drug/methamphetamine = 9)

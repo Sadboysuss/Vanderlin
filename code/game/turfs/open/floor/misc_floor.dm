@@ -1,7 +1,7 @@
 /turf/open/floor/goonplaque
 	name = "commemorative plaque"
 	icon_state = "plaque"
-	desc = "\"This is a plaque in honour of our comrades on the G4407 Stations. Hopefully TG4407 model can live up to your fame and fortune.\" Scratched in beneath that is a crude image of a meteor and a spaceman. The spaceman is laughing. The meteor is exploding."
+	desc = ""
 	floor_tile = /obj/item/stack/tile/plasteel
 	tiled_dirt = FALSE
 
@@ -137,27 +137,27 @@
 /turf/open/floor/bluespace
 	slowdown = -1
 	icon_state = "bluespace"
-	desc = "Through a series of micro-teleports these tiles let people move at incredible speeds."
+	desc = ""
 	floor_tile = /obj/item/stack/tile/bluespace
 
 
 /turf/open/floor/sepia
 	slowdown = 2
 	icon_state = "sepia"
-	desc = "Time seems to flow very slowly around these tiles."
+	desc = ""
 	floor_tile = /obj/item/stack/tile/sepia
 
 
 /turf/open/floor/bronze
 	name = "bronze floor"
-	desc = "Some heavy bronze tiles."
+	desc = ""
 	icon = 'icons/obj/clockwork_objects.dmi'
 	icon_state = "clockwork_floor"
 	floor_tile = /obj/item/stack/tile/bronze
 
 /turf/open/floor/white
 	name = "white floor"
-	desc = "A tile in a pure white color."
+	desc = ""
 	icon_state = "pure_white"
 
 /turf/open/floor/black
@@ -166,7 +166,7 @@
 
 /turf/open/floor/plastic
 	name = "plastic floor"
-	desc = "Cheap, lightweight flooring. Melts easily."
+	desc = ""
 	icon_state = "plastic"
 	thermal_conductivity = 0.1
 	heat_capacity = 900

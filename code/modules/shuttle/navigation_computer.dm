@@ -1,6 +1,6 @@
 /obj/machinery/computer/camera_advanced/shuttle_docker
 	name = "navigation computer"
-	desc = "Used to designate a precise transit location for a spacecraft."
+	desc = ""
 	jump_action = null
 	var/datum/action/innate/shuttledocker_rotate/rotate_action = new
 	var/datum/action/innate/shuttledocker_place/place_action = new
@@ -327,7 +327,7 @@
 	var/mob/camera/aiEye/remote/remote_eye = C.remote_control
 	var/obj/machinery/computer/camera_advanced/shuttle_docker/console = remote_eye.origin
 
-	playsound(console, 'sound/machines/terminal_prompt_deny.ogg', 25, FALSE)
+	playsound(console, 'sound/blank.ogg', 25, FALSE)
 
 	var/list/L = list()
 	for(var/V in SSshuttle.stationary)
@@ -352,7 +352,7 @@
 		else
 			L["([L.len]) [nav_beacon.name] locked"] = null
 
-	playsound(console, 'sound/machines/terminal_prompt.ogg', 25, FALSE)
+	playsound(console, 'sound/blank.ogg', 25, FALSE)
 	var/selected = input("Choose location to jump to", "Locations", null) as null|anything in sortList(L)
 	if(QDELETED(src) || QDELETED(target) || !isliving(target))
 		return
@@ -360,10 +360,10 @@
 	if(selected)
 		var/turf/T = get_turf(L[selected])
 		if(T)
-			playsound(console, 'sound/machines/terminal_prompt_confirm.ogg', 25, FALSE)
+			playsound(console, 'sound/blank.ogg', 25, FALSE)
 			remote_eye.setLoc(T)
 			to_chat(target, "<span class='notice'>Jumped to [selected].</span>")
 			C.overlay_fullscreen("flash", /obj/screen/fullscreen/flash/static)
 			C.clear_fullscreen("flash", 3)
 	else
-		playsound(console, 'sound/machines/terminal_prompt_deny.ogg', 25, FALSE)
+		playsound(console, 'sound/blank.ogg', 25, FALSE)

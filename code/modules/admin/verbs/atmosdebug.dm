@@ -2,7 +2,7 @@
 	set category = "Mapping"
 	set name = "Check Plumbing"
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Check Plumbing") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -25,7 +25,7 @@
 	set category = "Mapping"
 	set name = "Check Power"
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Check Power") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	var/list/results = list()

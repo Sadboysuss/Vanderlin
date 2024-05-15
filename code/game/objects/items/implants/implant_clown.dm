@@ -11,7 +11,7 @@
 
 /obj/item/implant/sad_trombone/trigger(emote, mob/source)
 	if(emote == "deathgasp")
-		playsound(loc, 'sound/misc/sadtrombone.ogg', 50, FALSE)
+		playsound(loc, 'sound/blank.ogg', 50, FALSE)
 
 /obj/item/implanter/sad_trombone
 	name = "implanter (sad trombone)"
@@ -19,5 +19,5 @@
 
 /obj/item/implantcase/sad_trombone
 	name = "implant case - 'Sad Trombone'"
-	desc = "A glass case containing a sad trombone implant."
+	desc = ""
 	imp_type = /obj/item/implant/sad_trombone

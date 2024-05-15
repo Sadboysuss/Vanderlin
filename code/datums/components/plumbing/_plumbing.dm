@@ -156,7 +156,7 @@
 				if(istype(A, /obj/machinery/duct))
 					var/obj/machinery/duct/duct = A
 					duct.attempt_connect()
-				else 
+				else
 					var/datum/component/plumbing/P = A.GetComponent(/datum/component/plumbing)
 					if(P)
 						direct_connect(P, D)
@@ -168,7 +168,7 @@
 	else
 		disable()
 /** We update our connects only when we settle down by taking our current and original direction to find our new connects
-* If someone wants it to fucking spin while connected to something go actually knock yourself out
+* If someone wants it to fucking spin while connected to something go actually knock myself out
 */
 /datum/component/plumbing/proc/update_dir()
 	if(!turn_connects)

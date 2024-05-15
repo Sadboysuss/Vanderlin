@@ -2,7 +2,7 @@
 
 /obj/effect/anomaly
 	name = "anomaly"
-	desc = "A mysterious anomaly, seen commonly only in the region of space that the station orbits..."
+	desc = ""
 	icon_state = "bhole3"
 	density = FALSE
 	anchored = TRUE
@@ -205,7 +205,7 @@
 			var/turf/FROM = T // the turf of origin we're travelling FROM
 			var/turf/TO = get_turf(chosen) // the turf of origin we're travelling TO
 
-			playsound(TO, 'sound/effects/phasein.ogg', 100, TRUE)
+			playsound(TO, 'sound/blank.ogg', 100, TRUE)
 			priority_announce("Massive bluespace translocation detected.", "Anomaly Alert")
 
 			var/list/flashers = list()
@@ -285,7 +285,7 @@
 /obj/effect/anomaly/bhole
 	name = "vortex anomaly"
 	icon_state = "bhole3"
-	desc = "That's a nice station you have there. It'd be a shame if something happened to it."
+	desc = ""
 
 /obj/effect/anomaly/bhole/anomalyEffect()
 	..()

@@ -45,9 +45,9 @@
 		default_rotation_direction = ROTATION_CLOCKWISE
 
 /datum/component/simple_rotation/proc/add_signals()
-	if(rotation_flags & ROTATION_ALTCLICK)
-		RegisterSignal(parent, COMSIG_CLICK_ALT, .proc/HandRot)
-		RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/ExamineMessage)
+//	if(rotation_flags & ROTATION_ALTCLICK)
+//		RegisterSignal(parent, COMSIG_CLICK_ALT, .proc/HandRot)
+//		RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/ExamineMessage)
 	if(rotation_flags & ROTATION_WRENCH)
 		RegisterSignal(parent, COMSIG_ATOM_WRENCH_ACT, .proc/WrenchRot)
 
@@ -115,6 +115,8 @@
 
 /datum/component/simple_rotation/proc/BaseRot(mob/user,rotation_type)
 	var/atom/movable/AM = parent
+	if(!AM)
+		return
 	var/rot_degree
 	switch(rotation_type)
 		if(ROTATION_CLOCKWISE)
@@ -136,11 +138,11 @@
 	return !AM.anchored
 
 /datum/component/simple_rotation/proc/default_after_rotation(mob/user, rotation_type)
-	to_chat(user,"<span class='notice'>You [rotation_type == ROTATION_FLIP ? "flip" : "rotate"] [parent].</span>")
+	to_chat(user,"<span class='notice'>I [rotation_type == ROTATION_FLIP ? "flip" : "rotate"] [parent].</span>")
 
 /atom/movable/proc/simple_rotate_clockwise()
 	set name = "Rotate Clockwise"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 	var/datum/component/simple_rotation/rotcomp = GetComponent(/datum/component/simple_rotation)
 	if(rotcomp)
@@ -148,7 +150,7 @@
 
 /atom/movable/proc/simple_rotate_counterclockwise()
 	set name = "Rotate Counter-Clockwise"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 	var/datum/component/simple_rotation/rotcomp = GetComponent(/datum/component/simple_rotation)
 	if(rotcomp)
@@ -156,7 +158,7 @@
 
 /atom/movable/proc/simple_rotate_flip()
 	set name = "Flip"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 	var/datum/component/simple_rotation/rotcomp = GetComponent(/datum/component/simple_rotation)
 	if(rotcomp)

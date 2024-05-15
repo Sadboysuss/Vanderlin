@@ -3,7 +3,7 @@
 
 /obj/item/borg/upgrade
 	name = "borg upgrade module."
-	desc = "Protected by FRM."
+	desc = ""
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade"
 	var/locked = FALSE
@@ -31,7 +31,7 @@
 
 /obj/item/borg/upgrade/rename
 	name = "cyborg reclassification board"
-	desc = "Used to rename a cyborg."
+	desc = ""
 	icon_state = "cyborg_upgrade1"
 	var/heldname = ""
 	one_use = TRUE
@@ -50,24 +50,24 @@
 
 /obj/item/borg/upgrade/restart
 	name = "cyborg emergency reboot module"
-	desc = "Used to force a reboot of a disabled-but-repaired cyborg, bringing it back online."
+	desc = ""
 	icon_state = "cyborg_upgrade1"
 	one_use = TRUE
 
 /obj/item/borg/upgrade/restart/action(mob/living/silicon/robot/R, user = usr)
 	if(R.health < 0)
-		to_chat(user, "<span class='warning'>You have to repair the cyborg before using this module!</span>")
+		to_chat(user, "<span class='warning'>I have to repair the cyborg before using this module!</span>")
 		return FALSE
 
 	if(R.mind)
 		R.mind.grab_ghost()
-		playsound(loc, 'sound/voice/liveagain.ogg', 75, TRUE)
+		playsound(loc, 'sound/blank.ogg', 75, TRUE)
 
 	R.revive(full_heal = FALSE, admin_revive = FALSE)
 
 /obj/item/borg/upgrade/disablercooler
 	name = "cyborg rapid disabler cooling module"
-	desc = "Used to cool a mounted disabler, increasing the potential current in it and thus its recharge rate."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 	module_type = list(/obj/item/robot_module/security)
@@ -96,7 +96,7 @@
 
 /obj/item/borg/upgrade/thrusters
 	name = "ion thruster upgrade"
-	desc = "An energy-operated thruster system for cyborgs."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 
 /obj/item/borg/upgrade/thrusters/action(mob/living/silicon/robot/R, user = usr)
@@ -115,7 +115,7 @@
 
 /obj/item/borg/upgrade/ddrill
 	name = "mining cyborg diamond drill"
-	desc = "A diamond drill replacement for the mining module's standard drill."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 	module_type = list(/obj/item/robot_module/miner)
@@ -147,7 +147,7 @@
 
 /obj/item/borg/upgrade/soh
 	name = "mining cyborg satchel of holding"
-	desc = "A satchel of holding replacement for mining cyborg's ore satchel module."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 	module_type = list(/obj/item/robot_module/miner)
@@ -174,7 +174,7 @@
 
 /obj/item/borg/upgrade/tboh
 	name = "janitor cyborg trash bag of holding"
-	desc = "A trash bag of holding replacement for the janiborg's standard trash bag."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 	module_type = list(/obj/item/robot_module/janitor)
@@ -201,7 +201,7 @@
 
 /obj/item/borg/upgrade/amop
 	name = "janitor cyborg advanced mop"
-	desc = "An advanced mop replacement for the janiborg's standard mop."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 	module_type = list(/obj/item/robot_module/janitor)
@@ -228,7 +228,7 @@
 
 /obj/item/borg/upgrade/syndicate
 	name = "illegal equipment module"
-	desc = "Unlocks the hidden, deadlier functions of a cyborg."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 
@@ -249,7 +249,7 @@
 
 /obj/item/borg/upgrade/lavaproof
 	name = "mining cyborg lavaproof tracks"
-	desc = "An upgrade kit to apply specialized coolant systems and insulation layers to mining cyborg tracks, enabling them to withstand exposure to molten rock."
+	desc = ""
 	icon_state = "ash_plating"
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
 	require_module = 1
@@ -267,7 +267,7 @@
 
 /obj/item/borg/upgrade/selfrepair
 	name = "self-repair module"
-	desc = "This module will repair the cyborg over time."
+	desc = ""
 	icon_state = "cyborg_upgrade5"
 	require_module = 1
 	var/repair_amount = -1
@@ -298,10 +298,10 @@
 
 /obj/item/borg/upgrade/selfrepair/ui_action_click()
 	if(on)
-		to_chat(toggle_action.owner, "<span class='notice'>You deactivate the self-repair module.</span>")
+		to_chat(toggle_action.owner, "<span class='notice'>I deactivate the self-repair module.</span>")
 		deactivate_sr()
 	else
-		to_chat(toggle_action.owner, "<span class='notice'>You activate the self-repair module.</span>")
+		to_chat(toggle_action.owner, "<span class='notice'>I activate the self-repair module.</span>")
 		activate_sr()
 
 
@@ -469,7 +469,7 @@
 
 /obj/item/borg/upgrade/ai
 	name = "B.O.R.I.S. module"
-	desc = "Bluespace Optimized Remote Intelligence Synchronization. An uplink device which takes the place of an MMI in cyborg endoskeletons, creating a robotic shell controlled by an AI."
+	desc = ""
 	icon_state = "boris"
 
 /obj/item/borg/upgrade/ai/action(mob/living/silicon/robot/R, user = usr)
@@ -493,7 +493,7 @@
 
 /obj/item/borg/upgrade/expand
 	name = "borg expander"
-	desc = "A cyborg resizer, it makes a cyborg huge."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 
 /obj/item/borg/upgrade/expand/action(mob/living/silicon/robot/R, user = usr)
@@ -513,7 +513,7 @@
 		smoke.start()
 		sleep(2)
 		for(var/i in 1 to 4)
-			playsound(R, pick('sound/items/drill_use.ogg', 'sound/items/jaws_cut.ogg', 'sound/items/jaws_pry.ogg', 'sound/items/welder.ogg', 'sound/items/ratchet.ogg'), 80, TRUE, -1)
+			playsound(R, pick('sound/blank.ogg'), 80, TRUE, -1)
 			sleep(12)
 		if(!prev_lockcharge)
 			R.SetLockdown(0)
@@ -533,7 +533,7 @@
 
 /obj/item/borg/upgrade/rped
 	name = "engineering cyborg RPED"
-	desc = "A rapid part exchange device for the engineering cyborg."
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "borgrped"
 	require_module = TRUE
@@ -561,7 +561,7 @@
 
 /obj/item/borg/upgrade/pinpointer
 	name = "medical cyborg crew pinpointer"
-	desc = "A crew pinpointer module for the medical cyborg. Permits remote access to the crew monitor."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "pinpointer_crew"
 	require_module = TRUE
@@ -603,7 +603,7 @@
 
 /obj/item/borg/upgrade/transform
 	name = "borg module picker (Standard)"
-	desc = "Allows you to to turn a cyborg into a standard cyborg."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	var/obj/item/robot_module/new_module = /obj/item/robot_module/standard
 
@@ -614,13 +614,13 @@
 
 /obj/item/borg/upgrade/transform/clown
 	name = "borg module picker (Clown)"
-	desc = "Allows you to to turn a cyborg into a clown, honk."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	new_module = /obj/item/robot_module/clown
 
 /obj/item/borg/upgrade/circuit_app
 	name = "circuit manipulation apparatus"
-	desc = "An engineering cyborg upgrade allowing for manipulation of circuit boards."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = TRUE
 	module_type = list(/obj/item/robot_module/engineering, /obj/item/robot_module/saboteur)
@@ -646,7 +646,7 @@
 
 /obj/item/borg/upgrade/beaker_app
 	name = "beaker storage apparatus"
-	desc = "A supplementary beaker storage apparatus for medical cyborgs."
+	desc = ""
 	icon_state = "cyborg_upgrade3"
 	require_module = TRUE
 	module_type = list(/obj/item/robot_module/medical)

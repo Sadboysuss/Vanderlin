@@ -6,7 +6,7 @@
 
 /datum/language
 	var/name = "an unknown language"  // Fluff name of language if any.
-	var/desc = "A language."          // Short description for 'Check Languages'.
+	var/desc = ""          // Short description for 'Check Languages'.
 	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"             // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
@@ -21,6 +21,8 @@
 	var/list/spans = list()
 	var/list/scramble_cache = list()
 	var/default_priority = 0          // the language that an atom knows with the highest "default_priority" is selected by default.
+
+
 
 	// if you are seeing someone speak popcorn language, then something is wrong.
 	var/icon = 'icons/misc/language.dmi'

@@ -394,7 +394,7 @@
 			message_admins("[key_name_admin(usr)] made everything kawaii.")
 			for(var/i in GLOB.human_list)
 				var/mob/living/carbon/human/H = i
-				SEND_SOUND(H, sound('sound/ai/animes.ogg'))
+				SEND_SOUND(H, sound('sound/blank.ogg'))
 
 				if(H.dna.species.id == "human")
 					if(H.dna.features["tail_human"] == "None" || H.dna.features["ears"] == "None")
@@ -411,9 +411,9 @@
 					if(animetype == "Yes")
 						var/seifuku = pick(typesof(/obj/item/clothing/under/costume/schoolgirl))
 						var/obj/item/clothing/under/costume/schoolgirl/I = new seifuku
-						var/olduniform = H.w_uniform
-						H.temporarilyRemoveItemFromInventory(H.w_uniform, TRUE, FALSE)
-						H.equip_to_slot_or_del(I, SLOT_W_UNIFORM)
+						var/olduniform = H.wear_pants
+						H.temporarilyRemoveItemFromInventory(H.wear_pants, TRUE, FALSE)
+						H.equip_to_slot_or_del(I, SLOT_PANTS)
 						qdel(olduniform)
 						if(droptype == "Yes")
 							ADD_TRAIT(I, TRAIT_NODROP, ADMIN_TRAIT)
@@ -453,7 +453,7 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Mass Braindamage"))
 			for(var/mob/living/carbon/human/H in GLOB.player_list)
-				to_chat(H, "<span class='boldannounce'>You suddenly feel stupid.</span>")
+				to_chat(H, "<span class='boldannounce'>I suddenly feel stupid.</span>")
 				H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60, 80)
 			message_admins("[key_name_admin(usr)] made everybody retarded")
 
@@ -465,7 +465,7 @@
 				if(is_station_level(W.z) && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
 					W.req_access = list()
 			message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
-			priority_announce("CentCom airlock control override activated. Please take this time to get acquainted with your coworkers.", null, 'sound/ai/commandreport.ogg')
+			priority_announce("CentCom airlock control override activated. Please take this time to get acquainted with your coworkers.", null, 'sound/blank.ogg')
 
 		if("ancap")
 			if(!check_rights(R_FUN))
@@ -474,9 +474,9 @@
 			SSeconomy.full_ancap = !SSeconomy.full_ancap
 			message_admins("[key_name_admin(usr)] toggled Anarcho-capitalist mode")
 			if(SSeconomy.full_ancap)
-				priority_announce("The NAP is now in full effect.", null, 'sound/ai/commandreport.ogg')
+				priority_announce("The NAP is now in full effect.", null, 'sound/blank.ogg')
 			else
-				priority_announce("The NAP has been revoked.", null, 'sound/ai/commandreport.ogg')
+				priority_announce("The NAP has been revoked.", null, 'sound/blank.ogg')
 
 
 
@@ -540,14 +540,14 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("There Can Be Only One"))
 			usr.client.only_one()
-			sound_to_playing_players('sound/misc/highlander.ogg')
+			sound_to_playing_players('sound/blank.ogg')
 
 		if("delayed_onlyone")
 			if(!check_rights(R_FUN))
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("There Can Be Only One"))
 			usr.client.only_one_delayed()
-			sound_to_playing_players('sound/misc/highlander_delayed.ogg')
+			sound_to_playing_players('sound/blank.ogg')
 
 		if("maint_access_brig")
 			if(!check_rights(R_DEBUG))
@@ -686,12 +686,12 @@
 /proc/portalAnnounce(announcement, playlightning)
 	set waitfor = 0
 	if (playlightning)
-		sound_to_playing_players('sound/magic/lightning_chargeup.ogg')
+		sound_to_playing_players('sound/blank.ogg')
 		sleep(80)
 	priority_announce(replacetext(announcement, "%STATION%", station_name()))
 	if (playlightning)
 		sleep(20)
-		sound_to_playing_players('sound/magic/lightningbolt.ogg')
+		sound_to_playing_players('sound/blank.ogg')
 
 /proc/doPortalSpawn(turf/loc, mobtype, numtospawn, portal_appearance, players, humanoutfit)
 	for (var/i in 1 to numtospawn)
@@ -707,4 +707,4 @@
 			H.equipOutfit(humanoutfit)
 	var/turf/T = get_step(loc, SOUTHWEST)
 	flick_overlay_static(portal_appearance, T, 15)
-	playsound(T, 'sound/magic/lightningbolt.ogg', rand(80, 100), TRUE)
+	playsound(T, 'sound/blank.ogg', rand(80, 100), TRUE)

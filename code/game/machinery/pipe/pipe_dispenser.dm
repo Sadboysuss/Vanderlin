@@ -2,7 +2,7 @@
 	name = "pipe dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	desc = "Dispenses countless types of pipes. Very useful if you need pipes."
+	desc = ""
 	density = TRUE
 	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_OFFLINE
 	var/wait = 0
@@ -63,7 +63,7 @@
 /obj/machinery/pipedispenser/attackby(obj/item/W, mob/user, params)
 	add_fingerprint(user)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
-		to_chat(usr, "<span class='notice'>You put [W] back into [src].</span>")
+		to_chat(usr, "<span class='notice'>I put [W] back into [src].</span>")
 		qdel(W)
 		return
 	else
@@ -90,7 +90,7 @@
 	name = "disposal pipe dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	desc = "Dispenses pipes that will ultimately be used to move trash around."
+	desc = ""
 	density = TRUE
 
 
@@ -159,7 +159,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = TRUE
-	desc = "Dispenses pipes that will move beings around."
+	desc = ""
 
 /obj/machinery/pipedispenser/disposal/transit_tube/interact(mob/user)
 

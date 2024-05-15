@@ -1,6 +1,6 @@
 /obj/item/melee/transforming/energy
 	icon = 'icons/obj/transforming_energy.dmi'
-	hitsound_on = 'sound/weapons/blade1.ogg'
+	hitsound_on = 'sound/blank.ogg'
 	heat = 3500
 	max_integrity = 200
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
@@ -58,12 +58,12 @@
 		if(C.wear_mask)
 			in_mouth = ", barely missing [C.p_their()] nose"
 	. = "<span class='warning'>[user] swings [user.p_their()] [name][in_mouth]. [user.p_they(TRUE)] light[user.p_s()] [user.p_their()] [A.name] in the process.</span>"
-	playsound(loc, hitsound, get_clamped_volume(), TRUE, -1)
+	playsound(loc,  pick(hitsound), get_clamped_volume(), TRUE, -1)
 	add_fingerprint(user)
 
 /obj/item/melee/transforming/energy/axe
 	name = "energy axe"
-	desc = "An energized battle axe."
+	desc = ""
 	icon_state = "axe0"
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
@@ -71,13 +71,13 @@
 	force_on = 150
 	throwforce = 25
 	throwforce_on = 30
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	throw_speed = 3
+	hitsound = 'sound/blank.ogg'
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
 	w_class_on = WEIGHT_CLASS_HUGE
 	flags_1 = CONDUCT_1
-	armour_penetration = 100
+	armor_penetration = 100
 	attack_verb_off = list("attacked", "chopped", "cleaved", "torn", "cut")
 	attack_verb_on = list()
 	light_color = "#40ceff"
@@ -88,7 +88,7 @@
 
 /obj/item/melee/transforming/energy/sword
 	name = "energy sword"
-	desc = "May the force be within you."
+	desc = ""
 	icon_state = "sword0"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
@@ -96,11 +96,11 @@
 	throwforce = 5
 	hitsound = "swing_hit" //it starts deactivated
 	attack_verb_off = list("tapped", "poked")
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	sharpness = IS_SHARP
 	embedding = list("embed_chance" = 75, "embedded_impact_pain_multiplier" = 10)
-	armour_penetration = 35
+	armor_penetration = 35
 	block_chance = 50
 
 /obj/item/melee/transforming/energy/sword/transform_weapon(mob/living/user, supress_message_text)
@@ -128,10 +128,10 @@
 
 /obj/item/melee/transforming/energy/sword/cyborg/saw //Used by medical Syndicate cyborgs
 	name = "energy saw"
-	desc = "For heavy duty cutting. It has a carbon-fiber blade in addition to a toggleable hard-light edge to dramatically increase sharpness."
+	desc = ""
 	force_on = 30
 	force = 18 //About as much as a spear
-	hitsound = 'sound/weapons/circsawhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "esaw_0"
 	icon_state_on = "esaw_1"
@@ -198,7 +198,7 @@
 
 /obj/item/melee/transforming/energy/sword/pirate
 	name = "energy cutlass"
-	desc = "Arrrr matey."
+	desc = ""
 	icon_state = "cutlass0"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
@@ -207,15 +207,15 @@
 
 /obj/item/melee/transforming/energy/blade
 	name = "energy blade"
-	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
+	desc = ""
 	icon_state = "blade"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 30 //Normal attacks deal esword damage
-	hitsound = 'sound/weapons/blade1.ogg'
+	hitsound = 'sound/blank.ogg'
 	active = 1
 	throwforce = 1 //Throwing or dropping the item deletes it.
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 1
 	w_class = WEIGHT_CLASS_BULKY//So you can't hide it in your pocket or some such.
 	var/datum/effect_system/spark_spread/spark_system
@@ -233,6 +233,6 @@
 
 /obj/item/melee/transforming/energy/blade/hardlight
 	name = "hardlight blade"
-	desc = "An extremely sharp blade made out of hard light. Packs quite a punch."
+	desc = ""
 	icon_state = "lightblade"
 	item_state = "lightblade"

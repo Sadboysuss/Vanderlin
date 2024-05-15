@@ -96,7 +96,7 @@
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, !ismonkey(user)))
 		return
 	if(holding)
-		to_chat(user, "<span class='notice'>You remove [holding] from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove [holding] from [src].</span>")
 		replace_tank(user, TRUE)
 
 /obj/machinery/portable_atmospherics/examine(mob/user)
@@ -135,8 +135,8 @@
 				W.play_tool_sound(src)
 				user.visible_message( \
 					"[user] disconnects [src].", \
-					"<span class='notice'>You unfasten [src] from the port.</span>", \
-					"<span class='hear'>You hear a ratchet.</span>")
+					"<span class='notice'>I unfasten [src] from the port.</span>", \
+					"<span class='hear'>I hear a ratchet.</span>")
 				update_icon()
 				return
 			else
@@ -150,8 +150,8 @@
 				W.play_tool_sound(src)
 				user.visible_message( \
 					"[user] connects [src].", \
-					"<span class='notice'>You fasten [src] to the port.</span>", \
-					"<span class='hear'>You hear a ratchet.</span>")
+					"<span class='notice'>I fasten [src] to the port.</span>", \
+					"<span class='hear'>I hear a ratchet.</span>")
 				update_icon()
 				investigate_log("was connected to [possible_port] by [key_name(user)].<br>", INVESTIGATE_ATMOS)
 	else

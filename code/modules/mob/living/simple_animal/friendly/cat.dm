@@ -1,7 +1,7 @@
 //Cat
 /mob/living/simple_animal/pet/cat
-	name = "cat"
-	desc = "Kitty!!"
+	name = "Inn cat"
+	desc = "Pest control."
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "cat2"
 	icon_living = "cat2"
@@ -30,10 +30,13 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
+	STASTR = 3
+	STAEND = 4
+	STASPD = 3
+	STACON = 3
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	gold_core_spawnable = FRIENDLY_SPAWN
-	collar_type = "cat"
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
@@ -46,25 +49,22 @@
 	if(client && stat != DEAD)
 		if (resting)
 			icon_state = "[icon_living]_rest"
-			collar_type = "[initial(collar_type)]_rest"
 		else
 			icon_state = "[icon_living]"
-			collar_type = "[initial(collar_type)]"
 	regenerate_icons()
 
-/mob/living/simple_animal/pet/cat/space
-	name = "space cat"
-	desc = "It's a cat... in space!"
-	icon_state = "spacecat"
-	icon_living = "spacecat"
-	icon_dead = "spacecat_dead"
-	unsuitable_atmos_damage = 0
-	minbodytemp = TCMB
-	maxbodytemp = T0C + 40
+/mob/living/simple_animal/pet/cat/black
+	name = "black cat"
+	desc = ""
+	icon = 'icons/roguetown/topadd/takyon/Cat.dmi'
+	icon_state = "cat"
+	icon_living = "cat"
+	icon_dead = "cat_dead"
+
 
 /mob/living/simple_animal/pet/cat/original
 	name = "Batsy"
-	desc = "The product of alien DNA and bored geneticists."
+	desc = ""
 	gender = FEMALE
 	icon_state = "original"
 	icon_living = "original"
@@ -74,7 +74,7 @@
 
 /mob/living/simple_animal/pet/cat/kitten
 	name = "kitten"
-	desc = "D'aaawwww."
+	desc = ""
 	icon_state = "kitten"
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
@@ -86,7 +86,7 @@
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/pet/cat/Runtime
 	name = "Runtime"
-	desc = "GCAT"
+	desc = ""
 	icon_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
@@ -229,10 +229,10 @@
 
 /mob/living/simple_animal/pet/cat/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	switch(M.a_intent)
-		if("help")
+	switch(M.used_intent.type)
+		if(INTENT_HELP)
 			wuv(1, M)
-		if("harm")
+		if(INTENT_HARM)
 			wuv(-1, M)
 
 /mob/living/simple_animal/pet/cat/proc/wuv(change, mob/M)
@@ -250,7 +250,7 @@
 
 /mob/living/simple_animal/pet/cat/cak //I told you I'd do it, Remie
 	name = "Keeki"
-	desc = "It's a cat made out of cake."
+	desc = ""
 	icon_state = "cak"
 	icon_living = "cak"
 	icon_dead = "cak_dead"
@@ -262,7 +262,7 @@
 	/obj/item/reagent_containers/food/snacks/meat/slab = 2)
 	response_harm_continuous = "takes a bite out of"
 	response_harm_simple = "take a bite out of"
-	attacked_sound = 'sound/items/eatfood.ogg'
+	attacked_sound = 'sound/blank.ogg'
 	deathmessage = "loses its false life and collapses!"
 	deathsound = "bodyfall"
 
@@ -272,12 +272,12 @@
 	if(!B || !B.brainmob || !B.brainmob.mind)
 		return
 	B.brainmob.mind.transfer_to(src)
-	to_chat(src, "<span class='big bold'>You are a cak!</span><b> You're a harmless cat/cake hybrid that everyone loves. People can take bites out of you if they're hungry, but you regenerate health \
+	to_chat(src, "<span class='big bold'>I are a cak!</span><b> You're a harmless cat/cake hybrid that everyone loves. People can take bites out of you if they're hungry, but you regenerate health \
 	so quickly that it generally doesn't matter. You're remarkably resilient to any damage besides this and it's hard for you to really die at all. You should go around and bring happiness and \
 	free cake to the station!</b>")
-	var/new_name = stripped_input(src, "Enter your name, or press \"Cancel\" to stick with Keeki.", "Name Change")
+	var/new_name = stripped_input(src, "Enter my name, or press \"Cancel\" to stick with Keeki.", "Name Change")
 	if(new_name)
-		to_chat(src, "<span class='notice'>Your name is now <b>\"new_name\"</b>!</span>")
+		to_chat(src, "<span class='notice'>My name is now <b>\"new_name\"</b>!</span>")
 		name = new_name
 
 /mob/living/simple_animal/pet/cat/cak/Life()
@@ -292,6 +292,6 @@
 
 /mob/living/simple_animal/pet/cat/cak/attack_hand(mob/living/L)
 	..()
-	if(L.a_intent == INTENT_HARM && L.reagents && !stat)
+	if(L.used_intent.type == INTENT_HARM && L.reagents && !stat)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment, 0.4)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.4)

@@ -8,8 +8,8 @@
 /mob/living/carbon/human/GetVoice()
 	if(istype(wear_mask, /obj/item/clothing/mask/chameleon))
 		var/obj/item/clothing/mask/chameleon/V = wear_mask
-		if(V.vchange && wear_id)
-			var/obj/item/card/id/idcard = wear_id.GetID()
+		if(V.vchange && wear_ring)
+			var/obj/item/card/id/idcard = wear_ring.GetID()
 			if(istype(idcard))
 				return idcard.registered_name
 			else
@@ -77,7 +77,7 @@
 
 /mob/living/carbon/human/get_alt_name()
 	if(name != GetVoice())
-		return " (as [get_id_name("Unknown")])"
+		return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri
 	if(stat == CONSCIOUS)
@@ -109,3 +109,55 @@
 
 					say(temp)
 				winset(client, "input", "text=[null]")
+
+/mob/living/carbon/human/send_speech(message, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language=null, message_mode)
+	. = ..()
+	if(message_mode != MODE_WHISPER)
+		send_voice(message)
+
+/*
+/mob/living/carbon/human/proc/send_voice(message, skip_thingy)
+	if(!message || !length(message))
+		return
+	var/numessage = message
+//	if(ranger)
+//		erange = ranger-7
+	if(!skip_thingy)
+		numessage = replacetext(message, " ", "")
+		numessage = sanitize_hear_message(message)
+	spawn()
+		var/freq2use = get_emote_frequency()
+		freq2use += rand(-100,100)
+		for(var/i=1, i<=min(length(numessage),20), i++)
+			var/ascii_char = text2ascii(numessage,i)
+			var/text_char
+			switch(ascii_char)
+				// A  .. Z
+				if(65 to 90)			//Uppercase Letters
+					text_char=ascii2text(ascii_char)
+				// a  .. z
+				if(97 to 122)			//Lowercase Letters
+					text_char=ascii2text(ascii_char)
+				// 0  .. 9
+//				if(48 to 57)			//Numbers
+//					text_char="bebebese"
+			if(text_char)
+				var/path = "sound/vo/female/spch/[text_char].ogg"
+				if(gender == MALE)
+					if(age == AGE_YOUNG)
+						path = "sound/vo/male/spch/teen/[text_char].ogg"
+					else
+						path = "sound/vo/male/spch/[text_char].ogg"
+				if(fexists(path))
+					playsound(get_turf(src), path, 100, FALSE, -1, frequency = freq2use)
+			sleep(1)
+*/
+
+/mob/living/carbon/human/proc/send_voice(message, skip_thingy)
+	if(!message || !length(message))
+		return
+	if(dna.species)
+		dna.species.send_voice(src)
+
+/datum/species/proc/send_voice(mob/living/carbon/human/H)
+	playsound(get_turf(H), 'sound/misc/talk.ogg', 100, FALSE, -1)

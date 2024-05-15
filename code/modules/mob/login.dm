@@ -1,5 +1,5 @@
 /**
-  * Run when a client is put in this mob or reconnets to byond and their client was on this mob
+  * Run when a client is put in this mob or reconnects to byond and their client was on this mob
   *
   * Things it does:
   * * Adds player to player_list
@@ -21,6 +21,8 @@
   * * calls [auto_deadmin_on_login](mob.html#proc/auto_deadmin_on_login)
   * * send signal COMSIG_MOB_CLIENT_LOGIN
   */
+
+
 /mob/Login()
 	GLOB.player_list |= src
 	lastKnownIP	= client.address
@@ -32,7 +34,7 @@
 
 	if(!hud_used)
 		create_mob_hud()
-	if(hud_used)
+	if(hud_used && client && client.prefs)
 		hud_used.show_hud(hud_used.hud_version)
 		hud_used.update_ui_style(ui_style2icon(client.prefs.UI_style))
 
@@ -62,10 +64,14 @@
 		var/datum/atom_hud/alternate_appearance/AA = v
 		AA.onNewMob(src)
 
+	client.genmouseobj()
+
 	update_client_colour()
 	update_mouse_pointer()
 	if(client)
 		client.change_view(CONFIG_GET(string/default_view)) // Resets the client.view in case it was changed.
+
+		client.show_popup_menus = FALSE
 
 		if(client.player_details.player_actions.len)
 			for(var/datum/action/A in client.player_details.player_actions)
@@ -76,6 +82,9 @@
 			CB.Invoke()
 		log_played_names(client.ckey,name,real_name)
 		auto_deadmin_on_login()
+
+	if(SSticker.current_state == GAME_STATE_FINISHED)
+		do_game_over()
 
 	log_message("Client [key_name(src)] has taken ownership of mob [src]([src.type])", LOG_OWNERSHIP)
 	SEND_SIGNAL(src, COMSIG_MOB_CLIENT_LOGIN, client)

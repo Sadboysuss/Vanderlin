@@ -1,8 +1,8 @@
 // Poppy
 /obj/item/seeds/poppy
 	name = "pack of poppy seeds"
-	desc = "These seeds grow into poppies."
-	icon_state = "seed-poppy"
+	desc = ""
+	icon_state = "seed"
 	species = "poppy"
 	plantname = "Poppy Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/poppy
@@ -20,7 +20,7 @@
 /obj/item/reagent_containers/food/snacks/grown/poppy
 	seed = /obj/item/seeds/poppy
 	name = "poppy"
-	desc = "Long-used as a symbol of rest, peace, and death."
+	desc = ""
 	icon_state = "poppy"
 	slot_flags = ITEM_SLOT_HEAD
 	filling_color = "#FF6347"
@@ -31,8 +31,8 @@
 // Lily
 /obj/item/seeds/poppy/lily
 	name = "pack of lily seeds"
-	desc = "These seeds grow into lilies."
-	icon_state = "seed-lily"
+	desc = ""
+	icon_state = "seed"
 	species = "lily"
 	plantname = "Lily Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/poppy/lily
@@ -41,15 +41,15 @@
 /obj/item/reagent_containers/food/snacks/grown/poppy/lily
 	seed = /obj/item/seeds/poppy/lily
 	name = "lily"
-	desc = "A beautiful orange flower."
+	desc = ""
 	icon_state = "lily"
 	filling_color = "#FFA500"
 
 	//Spacemans's Trumpet
 /obj/item/seeds/poppy/lily/trumpet
 	name = "pack of spaceman's trumpet seeds"
-	desc = "A plant sculped by extensive genetic engineering. The spaceman's trumpet is said to bear no resemblance to its wild ancestors. Inside NT AgriSci circles it is better known as NTPW-0372."
-	icon_state = "seed-trumpet"
+	desc = ""
+	icon_state = "seed"
 	species = "spacemanstrumpet"
 	plantname = "Spaceman's Trumpet Plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/trumpet
@@ -78,7 +78,7 @@
 /obj/item/reagent_containers/food/snacks/grown/trumpet
 	seed = /obj/item/seeds/poppy/lily/trumpet
 	name = "spaceman's trumpet"
-	desc = "A vivid flower that smells faintly of freshly cut grass. Touching the flower seems to stain the skin some time after contact, yet most other surfaces seem to be unaffected by this phenomenon."
+	desc = ""
 	icon_state = "spacemanstrumpet"
 	filling_color = "#FF6347"
 	bitesize_mod = 3
@@ -87,8 +87,8 @@
 // Geranium
 /obj/item/seeds/poppy/geranium
 	name = "pack of geranium seeds"
-	desc = "These seeds grow into geranium."
-	icon_state = "seed-geranium"
+	desc = ""
+	icon_state = "seed"
 	species = "geranium"
 	plantname = "Geranium Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/poppy/geranium
@@ -97,15 +97,15 @@
 /obj/item/reagent_containers/food/snacks/grown/poppy/geranium
 	seed = /obj/item/seeds/poppy/geranium
 	name = "geranium"
-	desc = "A beautiful blue flower."
+	desc = ""
 	icon_state = "geranium"
 	filling_color = "#008B8B"
 
 // Harebell
 /obj/item/seeds/harebell
 	name = "pack of harebell seeds"
-	desc = "These seeds grow into pretty little flowers."
-	icon_state = "seed-harebell"
+	desc = ""
+	icon_state = "seed"
 	species = "harebell"
 	plantname = "Harebells"
 	product = /obj/item/reagent_containers/food/snacks/grown/harebell
@@ -123,7 +123,7 @@
 /obj/item/reagent_containers/food/snacks/grown/harebell
 	seed = /obj/item/seeds/harebell
 	name = "harebell"
-	desc = "\"I'll sweeten thy sad grave: thou shalt not lack the flower that's like thy face, pale primrose, nor the azured hare-bell, like thy veins; no, nor the leaf of eglantine, whom not to slander, out-sweeten'd not thy breath.\""
+	desc = ""
 	icon_state = "harebell"
 	slot_flags = ITEM_SLOT_HEAD
 	filling_color = "#E6E6FA"
@@ -133,8 +133,8 @@
 // Sunflower
 /obj/item/seeds/sunflower
 	name = "pack of sunflower seeds"
-	desc = "These seeds grow into sunflowers."
-	icon_state = "seed-sunflower"
+	desc = ""
+	icon_state = "seed"
 	species = "sunflower"
 	plantname = "Sunflowers"
 	product = /obj/item/grown/sunflower
@@ -151,7 +151,7 @@
 /obj/item/grown/sunflower // FLOWER POWER!
 	seed = /obj/item/seeds/sunflower
 	name = "sunflower"
-	desc = "It's beautiful! A certain person might beat you to death if you trample these."
+	desc = ""
 	icon_state = "sunflower"
 	lefthand_file = 'icons/mob/inhands/weapons/plants_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/plants_righthand.dmi'
@@ -165,13 +165,13 @@
 
 /obj/item/grown/sunflower/attack(mob/M, mob/user)
 	to_chat(M, "<font color='green'>[user] smacks you with a sunflower!<font color='orange'><b>FLOWER POWER!</b></font></font>")
-	to_chat(user, "<font color='green'>Your sunflower's <font color='orange'><b>FLOWER POWER</b></font> strikes [M]!</font>")
+	to_chat(user, "<font color='green'>My sunflower's <font color='orange'><b>FLOWER POWER</b></font> strikes [M]!</font>")
 
 // Moonflower
 /obj/item/seeds/sunflower/moonflower
 	name = "pack of moonflower seeds"
-	desc = "These seeds grow into moonflowers."
-	icon_state = "seed-moonflower"
+	desc = ""
+	icon_state = "seed"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	species = "moonflower"
@@ -187,7 +187,7 @@
 /obj/item/reagent_containers/food/snacks/grown/moonflower
 	seed = /obj/item/seeds/sunflower/moonflower
 	name = "moonflower"
-	desc = "Store in a location at least 50 yards away from werewolves."
+	desc = ""
 	icon_state = "moonflower"
 	slot_flags = ITEM_SLOT_HEAD
 	filling_color = "#E6E6FA"
@@ -197,8 +197,8 @@
 // Novaflower
 /obj/item/seeds/sunflower/novaflower
 	name = "pack of novaflower seeds"
-	desc = "These seeds grow into novaflowers."
-	icon_state = "seed-novaflower"
+	desc = ""
+	icon_state = "seed"
 	species = "novaflower"
 	plantname = "Novaflowers"
 	icon_grow = "novaflower-grow"
@@ -211,7 +211,7 @@
 /obj/item/grown/novaflower
 	seed = /obj/item/seeds/sunflower/novaflower
 	name = "novaflower"
-	desc = "These beautiful flowers have a crisp smokey scent, like a summer bonfire."
+	desc = ""
 	icon_state = "novaflower"
 	lefthand_file = 'icons/mob/inhands/weapons/plants_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/plants_righthand.dmi'
@@ -233,7 +233,7 @@
 	if(!..())
 		return
 	if(isliving(M))
-		to_chat(M, "<span class='danger'>You are lit on fire from the intense heat of the [name]!</span>")
+		to_chat(M, "<span class='danger'>I are lit on fire from the intense heat of the [name]!</span>")
 		M.adjust_fire_stacks(seed.potency / 20)
 		if(M.IgniteMob())
 			message_admins("[ADMIN_LOOKUPFLW(user)] set [ADMIN_LOOKUPFLW(M)] on fire with [src] at [AREACOORD(user)]")
@@ -252,5 +252,5 @@
 /obj/item/grown/novaflower/pickup(mob/living/carbon/human/user)
 	..()
 	if(!user.gloves)
-		to_chat(user, "<span class='danger'>The [name] burns your bare hand!</span>")
+		to_chat(user, "<span class='danger'>The [name] burns my bare hand!</span>")
 		user.adjustFireLoss(rand(1, 5))

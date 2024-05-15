@@ -5,7 +5,7 @@
 
 /obj/machinery/power/emitter
 	name = "emitter"
-	desc = "A heavy-duty industrial laser, often used in containment fields and power generation."
+	desc = ""
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "emitter"
 
@@ -32,7 +32,7 @@
 	var/allow_switch_interact = TRUE
 
 	var/projectile_type = /obj/projectile/beam/emitter
-	var/projectile_sound = 'sound/weapons/emitter.ogg'
+	var/projectile_sound = 'sound/blank.ogg'
 	var/datum/effect_system/spark_spread/sparks
 
 	var/obj/item/gun/energy/gun
@@ -133,10 +133,10 @@
 		if(!locked && allow_switch_interact)
 			if(active == TRUE)
 				active = FALSE
-				to_chat(user, "<span class='notice'>You turn off [src].</span>")
+				to_chat(user, "<span class='notice'>I turn off [src].</span>")
 			else
 				active = TRUE
-				to_chat(user, "<span class='notice'>You turn on [src].</span>")
+				to_chat(user, "<span class='notice'>I turn on [src].</span>")
 				shot_number = 0
 				fire_delay = maximum_fire_delay
 
@@ -265,22 +265,22 @@
 			if(!I.tool_start_check(user, amount=0))
 				return TRUE
 			user.visible_message("<span class='notice'>[user.name] starts to weld the [name] to the floor.</span>", \
-				"<span class='notice'>You start to weld \the [src] to the floor...</span>", \
-				"<span class='hear'>You hear welding.</span>")
+				"<span class='notice'>I start to weld \the [src] to the floor...</span>", \
+				"<span class='hear'>I hear welding.</span>")
 			if(I.use_tool(src, user, 20, volume=50) && state == EMITTER_WRENCHED)
 				state = EMITTER_WELDED
-				to_chat(user, "<span class='notice'>You weld \the [src] to the floor.</span>")
+				to_chat(user, "<span class='notice'>I weld \the [src] to the floor.</span>")
 				connect_to_network()
 				update_cable_icons_on_turf(get_turf(src))
 		if(EMITTER_WELDED)
 			if(!I.tool_start_check(user, amount=0))
 				return TRUE
 			user.visible_message("<span class='notice'>[user.name] starts to cut the [name] free from the floor.</span>", \
-				"<span class='notice'>You start to cut \the [src] free from the floor...</span>", \
-				"<span class='hear'>You hear welding.</span>")
+				"<span class='notice'>I start to cut \the [src] free from the floor...</span>", \
+				"<span class='hear'>I hear welding.</span>")
 			if(I.use_tool(src, user, 20, volume=50) && state == EMITTER_WELDED)
 				state = EMITTER_WRENCHED
-				to_chat(user, "<span class='notice'>You cut \the [src] free from the floor.</span>")
+				to_chat(user, "<span class='notice'>I cut \the [src] free from the floor.</span>")
 				disconnect_from_network()
 				update_cable_icons_on_turf(get_turf(src))
 
@@ -307,7 +307,7 @@
 		if(allowed(user))
 			if(active)
 				locked = !locked
-				to_chat(user, "<span class='notice'>You [src.locked ? "lock" : "unlock"] the controls.</span>")
+				to_chat(user, "<span class='notice'>I [src.locked ? "lock" : "unlock"] the controls.</span>")
 			else
 				to_chat(user, "<span class='warning'>The controls can only be locked when \the [src] is online!</span>")
 		else
@@ -336,7 +336,7 @@
 		return
 	user.put_in_hands(gun)
 	gun = null
-	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	gun_properties = list()
 	set_projectile()
 	return TRUE
@@ -359,7 +359,7 @@
 	locked = FALSE
 	obj_flags |= EMAGGED
 	if(user)
-		user.visible_message("<span class='warning'>[user.name] emags [src].</span>", "<span class='notice'>You short out the lock.</span>")
+		user.visible_message("<span class='warning'>[user.name] emags [src].</span>", "<span class='notice'>I short out the lock.</span>")
 
 
 /obj/machinery/power/emitter/prototype
@@ -376,7 +376,7 @@
 //BUCKLE HOOKS
 
 /obj/machinery/power/emitter/prototype/unbuckle_mob(mob/living/buckled_mob,force = 0)
-	playsound(src,'sound/mecha/mechmove01.ogg', 50, TRUE)
+	playsound(src,'sound/blank.ogg', 50, TRUE)
 	manual = FALSE
 	for(var/obj/item/I in buckled_mob.held_items)
 		if(istype(I, /obj/item/turret_control))
@@ -397,7 +397,7 @@
 			return
 	M.forceMove(get_turf(src))
 	..()
-	playsound(src,'sound/mecha/mechmove01.ogg', 50, TRUE)
+	playsound(src,'sound/blank.ogg', 50, TRUE)
 	M.pixel_y = 14
 	layer = 4.1
 	if(M.client)
@@ -419,15 +419,15 @@
 
 /datum/action/innate/protoemitter/firing
 	name = "Switch to Manual Firing"
-	desc = "The emitter will only fire on your command and at your designated target"
+	desc = ""
 	button_icon_state = "mech_zoom_on"
 
 /datum/action/innate/protoemitter/firing/Activate()
 	if(PE.manual)
-		playsound(PE,'sound/mecha/mechmove01.ogg', 50, TRUE)
+		playsound(PE,'sound/blank.ogg', 50, TRUE)
 		PE.manual = FALSE
 		name = "Switch to Manual Firing"
-		desc = "The emitter will only fire on your command and at your designated target"
+		desc = ""
 		button_icon_state = "mech_zoom_on"
 		for(var/obj/item/I in U.held_items)
 			if(istype(I, /obj/item/turret_control))
@@ -435,9 +435,9 @@
 		UpdateButtonIcon()
 		return
 	else
-		playsound(PE,'sound/mecha/mechmove01.ogg', 50, TRUE)
+		playsound(PE,'sound/blank.ogg', 50, TRUE)
 		name = "Switch to Automatic Firing"
-		desc = "Emitters will switch to periodic firing at your last target"
+		desc = ""
 		button_icon_state = "mech_zoom_off"
 		PE.manual = TRUE
 		for(var/V in U.held_items)
@@ -510,7 +510,7 @@
 		E.fire_beam(user)
 		delay = world.time + 10
 	else if (E.charge < 10)
-		playsound(src,'sound/machines/buzz-sigh.ogg', 50, TRUE)
+		playsound(src,'sound/blank.ogg', 50, TRUE)
 
 
 #undef EMITTER_UNWRENCHED

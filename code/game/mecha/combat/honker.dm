@@ -1,5 +1,5 @@
 /obj/mecha/combat/honker
-	desc = "Produced by \"Tyranny of Honk, INC\", this exosuit is designed as heavy clown-support. Used to spread the fun and joy of life. HONK!"
+	desc = ""
 	name = "\improper H.O.N.K"
 	icon_state = "honker"
 	step_in = 3
@@ -138,31 +138,31 @@
 	if (href_list["play_sound"])
 		switch(href_list["play_sound"])
 			if("sadtrombone")
-				playsound(src, 'sound/misc/sadtrombone.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("bikehorn")
-				playsound(src, 'sound/items/bikehorn.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("airhorn2")
-				playsound(src, 'sound/items/airhorn2.ogg', 40) //soundfile has higher than average volume
+				playsound(src, 'sound/blank.ogg', 40) //soundfile has higher than average volume
 			if("carhorn")
-				playsound(src, 'sound/items/carhorn.ogg', 80) //soundfile has lower than average volume
+				playsound(src, 'sound/blank.ogg', 80) //soundfile has lower than average volume
 			if("party_horn")
-				playsound(src, 'sound/items/party_horn.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("reee")
-				playsound(src, 'sound/effects/reee.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("weeoo1")
-				playsound(src, 'sound/items/weeoo1.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("hiss1")
-				playsound(src, 'sound/voice/hiss1.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("armbomb")
-				playsound(src, 'sound/weapons/armbomb.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("saberon")
-				playsound(src, 'sound/weapons/saberon.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("airlock_alien_prying")
-				playsound(src, 'sound/machines/airlock_alien_prying.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("lightningbolt")
-				playsound(src, 'sound/magic/lightningbolt.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 			if("explosionfar")
-				playsound(src, 'sound/effects/explosionfar.ogg', 50)
+				playsound(src, 'sound/blank.ogg', 50)
 	return
 
 /proc/rand_hex_color()

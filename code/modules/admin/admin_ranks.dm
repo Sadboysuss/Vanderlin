@@ -86,6 +86,8 @@ GLOBAL_PROTECT(protected_ranks)
 				flag = R_SPAWN
 			if("AUTOADMIN")
 				flag = R_AUTOADMIN
+			if("WATCH")
+				flag = R_WATCH
 			if("DBRANKS")
 				flag = R_DBRANKS
 			if("@")
@@ -280,6 +282,7 @@ GLOBAL_PROTECT(protected_ranks)
 
 #ifdef TESTING
 /client/verb/changerank(newrank in GLOB.admin_ranks)
+	set hidden = 1
 	if(holder)
 		holder.rank = newrank
 	else
@@ -288,6 +291,7 @@ GLOBAL_PROTECT(protected_ranks)
 	holder.associate(src)
 
 /client/verb/changerights(newrights as num)
+	set hidden = 1
 	if(holder)
 		holder.rank.rights = newrights
 	else

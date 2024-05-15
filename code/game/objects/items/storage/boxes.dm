@@ -23,15 +23,15 @@
 
 /obj/item/storage/box
 	name = "box"
-	desc = "It's just an ordinary box."
+	desc = ""
 	icon_state = "box"
 	item_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	resistance_flags = FLAMMABLE
-	drop_sound = 'sound/items/handling/cardboardbox_drop.ogg'
-	pickup_sound =  'sound/items/handling/cardboardbox_pickup.ogg'
-	var/foldable = /obj/item/stack/sheet/cardboard
+	drop_sound = 'sound/items/matchboxdrop.ogg'
+	pickup_sound =  'sound/blank.ogg'
+	var/foldable
 	var/illustration = "writing"
 
 /obj/item/storage/box/Initialize(mapload)
@@ -61,12 +61,12 @@
 	if(!foldable)
 		return
 	if(contents.len)
-		to_chat(user, "<span class='warning'>You can't fold this box with items still inside!</span>")
+		to_chat(user, "<span class='warning'>I can't fold this box with items still inside!</span>")
 		return
 	if(!ispath(foldable))
 		return
 
-	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
+	to_chat(user, "<span class='notice'>I fold [src] flat.</span>")
 	var/obj/item/I = new foldable
 	qdel(src)
 	user.put_in_hands(I)
@@ -80,7 +80,7 @@
 
 /obj/item/storage/box/mime
 	name = "invisible box"
-	desc = "Unfortunately not large enough to trap the mime."
+	desc = ""
 	foldable = null
 	icon_state = "box"
 	item_state = null
@@ -175,7 +175,7 @@
 
 /obj/item/storage/box/gloves
 	name = "box of latex gloves"
-	desc = "Contains sterile latex gloves."
+	desc = ""
 	illustration = "latex"
 
 /obj/item/storage/box/gloves/PopulateContents()
@@ -184,7 +184,7 @@
 
 /obj/item/storage/box/masks
 	name = "box of sterile masks"
-	desc = "This box contains sterile medical masks."
+	desc = ""
 	illustration = "sterile"
 
 /obj/item/storage/box/masks/PopulateContents()
@@ -193,7 +193,7 @@
 
 /obj/item/storage/box/syringes
 	name = "box of syringes"
-	desc = "A box full of syringes."
+	desc = ""
 	illustration = "syringe"
 
 /obj/item/storage/box/syringes/PopulateContents()
@@ -212,7 +212,7 @@
 
 /obj/item/storage/box/medipens
 	name = "box of medipens"
-	desc = "A box full of epinephrine MediPens."
+	desc = ""
 	illustration = "syringe"
 
 /obj/item/storage/box/medipens/PopulateContents()
@@ -221,7 +221,7 @@
 
 /obj/item/storage/box/medipens/utility
 	name = "stimpack value kit"
-	desc = "A box with several stimpack medipens for the economical miner."
+	desc = ""
 	illustration = "syringe"
 
 /obj/item/storage/box/medipens/utility/PopulateContents()
@@ -258,7 +258,7 @@
 
 /obj/item/storage/box/medigels
 	name = "box of medical gels"
-	desc = "A box full of medical gel applicators, with unscrewable caps and precision spray heads."
+	desc = ""
 
 /obj/item/storage/box/medigels/PopulateContents()
 	for(var/i in 1 to 7)
@@ -266,7 +266,7 @@
 
 /obj/item/storage/box/injectors
 	name = "box of DNA injectors"
-	desc = "This box contains injectors, it seems."
+	desc = ""
 
 /obj/item/storage/box/injectors/PopulateContents()
 	var/static/items_inside = list(
@@ -276,7 +276,7 @@
 
 /obj/item/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"
-	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
+	desc = ""
 	icon_state = "secbox"
 	illustration = "flashbang"
 
@@ -286,7 +286,7 @@
 
 /obj/item/storage/box/flashes
 	name = "box of flashbulbs"
-	desc = "<B>WARNING: Flashes can cause serious eye damage, protective eyewear is required.</B>"
+	desc = ""
 	icon_state = "secbox"
 	illustration = "flashbang"
 
@@ -296,7 +296,7 @@
 
 /obj/item/storage/box/wall_flash
 	name = "wall-mounted flash kit"
-	desc = "This box contains everything necessary to build a wall-mounted flash. <B>WARNING: Flashes can cause serious eye damage, protective eyewear is required.</B>"
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/wall_flash/PopulateContents()
@@ -315,7 +315,7 @@
 
 /obj/item/storage/box/teargas
 	name = "box of tear gas grenades (WARNING)"
-	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness and skin irritation.</B>"
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/teargas/PopulateContents()
@@ -324,7 +324,7 @@
 
 /obj/item/storage/box/emps
 	name = "box of emp grenades"
-	desc = "A box with 5 emp grenades."
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/emps/PopulateContents()
@@ -333,7 +333,7 @@
 
 /obj/item/storage/box/trackimp
 	name = "boxed tracking implant kit"
-	desc = "Box full of scum-bag tracking utensils."
+	desc = ""
 	illustration = "implant"
 
 /obj/item/storage/box/trackimp/PopulateContents()
@@ -346,7 +346,7 @@
 
 /obj/item/storage/box/minertracker
 	name = "boxed tracking implant kit"
-	desc = "For finding those who have died on the accursed lavaworld."
+	desc = ""
 	illustration = "implant"
 
 /obj/item/storage/box/minertracker/PopulateContents()
@@ -359,7 +359,7 @@
 
 /obj/item/storage/box/chemimp
 	name = "boxed chemical implant kit"
-	desc = "Box of stuff used to implant chemicals."
+	desc = ""
 	illustration = "implant"
 
 /obj/item/storage/box/chemimp/PopulateContents()
@@ -371,7 +371,7 @@
 
 /obj/item/storage/box/exileimp
 	name = "boxed exile implant kit"
-	desc = "Box of exile implants. It has a picture of a clown being booted through the Gateway."
+	desc = ""
 	illustration = "implant"
 
 /obj/item/storage/box/exileimp/PopulateContents()
@@ -382,7 +382,7 @@
 
 /obj/item/storage/box/bodybags
 	name = "body bags"
-	desc = "The label indicates that it contains body bags."
+	desc = ""
 	illustration = "bodybags"
 
 /obj/item/storage/box/bodybags/PopulateContents()
@@ -392,7 +392,7 @@
 
 /obj/item/storage/box/rxglasses
 	name = "box of prescription glasses"
-	desc = "This box contains nerd glasses."
+	desc = ""
 	illustration = "glasses"
 
 /obj/item/storage/box/rxglasses/PopulateContents()
@@ -401,7 +401,7 @@
 
 /obj/item/storage/box/drinkingglasses
 	name = "box of drinking glasses"
-	desc = "It has a picture of drinking glasses on it."
+	desc = ""
 
 /obj/item/storage/box/drinkingglasses/PopulateContents()
 	for(var/i in 1 to 6)
@@ -409,7 +409,7 @@
 
 /obj/item/storage/box/condimentbottles
 	name = "box of condiment bottles"
-	desc = "It has a large ketchup smear on it."
+	desc = ""
 
 /obj/item/storage/box/condimentbottles/PopulateContents()
 	for(var/i in 1 to 6)
@@ -417,7 +417,7 @@
 
 /obj/item/storage/box/cups
 	name = "box of paper cups"
-	desc = "It has pictures of paper cups on the front."
+	desc = ""
 
 /obj/item/storage/box/cups/PopulateContents()
 	for(var/i in 1 to 7)
@@ -425,7 +425,7 @@
 
 /obj/item/storage/box/donkpockets
 	name = "box of donk-pockets"
-	desc = "<B>Instructions:</B> <I>Heat in microwave. Product will cool if not eaten within seven minutes.</I>"
+	desc = ""
 	icon_state = "donkpocketbox"
 	illustration=null
 
@@ -440,7 +440,7 @@
 
 /obj/item/storage/box/monkeycubes
 	name = "monkey cube box"
-	desc = "Drymate brand monkey cubes. Just add water!"
+	desc = ""
 	icon_state = "monkeycubebox"
 	illustration = null
 	var/cube_type = /obj/item/reagent_containers/food/snacks/monkeycube
@@ -456,12 +456,12 @@
 		new cube_type(src)
 
 /obj/item/storage/box/monkeycubes/syndicate
-	desc = "Waffle Co. brand monkey cubes. Just add water and a dash of subterfuge!"
+	desc = ""
 	cube_type = /obj/item/reagent_containers/food/snacks/monkeycube/syndicate
 
 /obj/item/storage/box/gorillacubes
 	name = "gorilla cube box"
-	desc = "Waffle Co. brand gorilla cubes. Do not taunt."
+	desc = ""
 	icon_state = "monkeycubebox"
 	illustration = null
 
@@ -477,7 +477,7 @@
 
 /obj/item/storage/box/ids
 	name = "box of spare IDs"
-	desc = "Has so many empty IDs."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/ids/PopulateContents()
@@ -487,7 +487,7 @@
 //Some spare PDAs in a box
 /obj/item/storage/box/PDAs
 	name = "spare PDAs"
-	desc = "A box of spare PDA microcomputers."
+	desc = ""
 	illustration = "pda"
 
 /obj/item/storage/box/PDAs/PopulateContents()
@@ -504,7 +504,7 @@
 
 /obj/item/storage/box/silver_ids
 	name = "box of spare silver IDs"
-	desc = "Shiny IDs for important people."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/silver_ids/PopulateContents()
@@ -513,7 +513,7 @@
 
 /obj/item/storage/box/prisoner
 	name = "box of prisoner IDs"
-	desc = "Take away their last shred of dignity, their name."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/prisoner/PopulateContents()
@@ -528,7 +528,7 @@
 
 /obj/item/storage/box/seccarts
 	name = "box of PDA security cartridges"
-	desc = "A box full of PDA cartridges used by Security."
+	desc = ""
 	illustration = "pda"
 
 /obj/item/storage/box/seccarts/PopulateContents()
@@ -538,7 +538,7 @@
 
 /obj/item/storage/box/firingpins
 	name = "box of standard firing pins"
-	desc = "A box full of standard firing pins, to allow newly-developed firearms to operate."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/firingpins/PopulateContents()
@@ -547,7 +547,7 @@
 
 /obj/item/storage/box/firingpins/paywall
 	name = "box of paywall firing pins"
-	desc = "A box full of paywall firing pins, to allow newly-developed firearms to operate behind a custom-set paywall."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/firingpins/paywall/PopulateContents()
@@ -556,7 +556,7 @@
 
 /obj/item/storage/box/lasertagpins
 	name = "box of laser tag firing pins"
-	desc = "A box full of laser tag firing pins, to allow newly-developed firearms to require wearing brightly coloured plastic armor before being able to be used."
+	desc = ""
 	illustration = "id"
 
 /obj/item/storage/box/lasertagpins/PopulateContents()
@@ -566,7 +566,7 @@
 
 /obj/item/storage/box/handcuffs
 	name = "box of spare handcuffs"
-	desc = "A box full of handcuffs."
+	desc = ""
 	icon_state = "secbox"
 	illustration = "handcuff"
 
@@ -576,7 +576,7 @@
 
 /obj/item/storage/box/zipties
 	name = "box of spare zipties"
-	desc = "A box full of zipties."
+	desc = ""
 	icon_state = "secbox"
 	illustration = "handcuff"
 
@@ -586,7 +586,7 @@
 
 /obj/item/storage/box/alienhandcuffs
 	name = "box of spare handcuffs"
-	desc = "A box full of handcuffs."
+	desc = ""
 	icon_state = "alienbox"
 	illustration = "handcuff"
 
@@ -596,7 +596,7 @@
 
 /obj/item/storage/box/fakesyndiesuit
 	name = "boxed space suit and helmet"
-	desc = "A sleek, sturdy box used to hold replica spacesuits."
+	desc = ""
 	icon_state = "syndiebox"
 
 /obj/item/storage/box/fakesyndiesuit/PopulateContents()
@@ -605,7 +605,7 @@
 
 /obj/item/storage/box/mousetraps
 	name = "box of Pest-B-Gon mousetraps"
-	desc = "<span class='alert'>Keep out of reach of children.</span>"
+	desc = ""
 	illustration = "mousetrap"
 
 /obj/item/storage/box/mousetraps/PopulateContents()
@@ -614,7 +614,7 @@
 
 /obj/item/storage/box/pillbottles
 	name = "box of pill bottles"
-	desc = "It has pictures of pill bottles on its front."
+	desc = ""
 	illustration = "pillbox"
 
 /obj/item/storage/box/pillbottles/PopulateContents()
@@ -623,7 +623,7 @@
 
 /obj/item/storage/box/snappops
 	name = "snap pop box"
-	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
+	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "spbox"
 
@@ -638,14 +638,13 @@
 
 /obj/item/storage/box/matches
 	name = "matchbox"
-	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
+	desc = ""
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BELT
-	drop_sound = 'sound/items/handling/matchbox_drop.ogg'
-	pickup_sound =  'sound/items/handling/matchbox_pickup.ogg'
+	foldable = FALSE
 
 /obj/item/storage/box/matches/ComponentInitialize()
 	. = ..()
@@ -658,13 +657,16 @@
 
 /obj/item/storage/box/matches/attackby(obj/item/match/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/match))
-		W.matchignite()
+		if(prob(30))
+			W.matchignite()
+		else
+			playsound(src, "sound/items/match_fail.ogg", 100, FALSE)
 
 /obj/item/storage/box/lights
 	name = "box of replacement bulbs"
 	icon = 'icons/obj/storage.dmi'
 	illustration = "light"
-	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
+	desc = ""
 	item_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -703,7 +705,7 @@
 
 /obj/item/storage/box/deputy
 	name = "box of deputy armbands"
-	desc = "To be issued to those authorized to act as deputy of security."
+	desc = ""
 
 /obj/item/storage/box/deputy/PopulateContents()
 	for(var/i in 1 to 7)
@@ -711,7 +713,7 @@
 
 /obj/item/storage/box/metalfoam
 	name = "box of metal foam grenades"
-	desc = "To be used to rapidly seal hull breaches."
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/metalfoam/PopulateContents()
@@ -720,7 +722,7 @@
 
 /obj/item/storage/box/smart_metal_foam
 	name = "box of smart metal foam grenades"
-	desc = "Used to rapidly seal hull breaches. This variety conforms to the walls of its area."
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/smart_metal_foam/PopulateContents()
@@ -729,7 +731,7 @@
 
 /obj/item/storage/box/hug
 	name = "box of hugs"
-	desc = "A special box for sensitive people."
+	desc = ""
 	icon_state = "hugbox"
 	illustration = "heart"
 	foldable = null
@@ -742,23 +744,23 @@
 	..()
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(loc, "rustle", 50, TRUE, -5)
-	user.visible_message("<span class='notice'>[user] hugs \the [src].</span>","<span class='notice'>You hug \the [src].</span>")
+	user.visible_message("<span class='notice'>[user] hugs \the [src].</span>","<span class='notice'>I hug \the [src].</span>")
 
 /////clown box & honkbot assembly
 /obj/item/storage/box/clown
 	name = "clown box"
-	desc = "A colorful cardboard box for the clown"
+	desc = ""
 	illustration = "clown"
 
 /obj/item/storage/box/clown/attackby(obj/item/I, mob/user, params)
 	if((istype(I, /obj/item/bodypart/l_arm/robot)) || (istype(I, /obj/item/bodypart/r_arm/robot)))
 		if(contents.len) //prevent accidently deleting contents
-			to_chat(user, "<span class='warning'>You need to empty [src] out first!</span>")
+			to_chat(user, "<span class='warning'>I need to empty [src] out first!</span>")
 			return
 		if(!user.temporarilyRemoveItemFromInventory(I))
 			return
 		qdel(I)
-		to_chat(user, "<span class='notice'>You add some wheels to the [src]! You've got a honkbot assembly now! Honk!</span>")
+		to_chat(user, "<span class='notice'>I add some wheels to the [src]! You've got a honkbot assembly now! Honk!</span>")
 		var/obj/item/bot_assembly/honkbot/A = new
 		qdel(src)
 		user.put_in_hands(A)
@@ -783,7 +785,7 @@
 
 /obj/item/storage/box/rubbershot
 	name = "box of rubber shots"
-	desc = "A box full of rubber shots, designed for riot shotguns."
+	desc = ""
 	icon_state = "rubbershot_box"
 	illustration = null
 
@@ -793,7 +795,7 @@
 
 /obj/item/storage/box/lethalshot
 	name = "box of lethal shotgun shots"
-	desc = "A box full of lethal shots, designed for riot shotguns."
+	desc = ""
 	icon_state = "lethalshot_box"
 	illustration = null
 
@@ -803,7 +805,7 @@
 
 /obj/item/storage/box/beanbag
 	name = "box of beanbags"
-	desc = "A box full of beanbag shells."
+	desc = ""
 	icon_state = "rubbershot_box"
 	illustration = null
 
@@ -813,7 +815,7 @@
 
 /obj/item/storage/box/actionfigure
 	name = "box of action figures"
-	desc = "The latest set of collectable action figures."
+	desc = ""
 	icon_state = "box"
 
 /obj/item/storage/box/actionfigure/PopulateContents()
@@ -829,7 +831,7 @@
 
 /obj/item/storage/box/papersack
 	name = "paper sack"
-	desc = "A sack neatly crafted out of paper."
+	desc = ""
 	icon_state = "paperbag_None"
 	item_state = "paperbag_None"
 	resistance_flags = FLAMMABLE
@@ -845,41 +847,41 @@
 	if(istype(W, /obj/item/pen))
 		//if a pen is used on the sack, dialogue to change its design appears
 		if(contents.len)
-			to_chat(user, "<span class='warning'>You can't modify [src] with items still inside!</span>")
+			to_chat(user, "<span class='warning'>I can't modify [src] with items still inside!</span>")
 			return
 		var/list/designs = list(NODESIGN, NANOTRASEN, SYNDI, HEART, SMILEY, "Cancel")
 		var/switchDesign = input("Select a Design:", "Paper Sack Design", designs[1]) in sortList(designs)
 		if(get_dist(usr, src) > 1)
-			to_chat(usr, "<span class='warning'>You have moved too far away!</span>")
+			to_chat(usr, "<span class='warning'>I have moved too far away!</span>")
 			return
 		var/choice = designs.Find(switchDesign)
 		if(design == designs[choice] || designs[choice] == "Cancel")
 			return 0
-		to_chat(usr, "<span class='notice'>You make some modifications to [src] using your pen.</span>")
+		to_chat(usr, "<span class='notice'>I make some modifications to [src] using your pen.</span>")
 		design = designs[choice]
 		icon_state = "paperbag_[design]"
 		item_state = "paperbag_[design]"
 		switch(designs[choice])
 			if(NODESIGN)
-				desc = "A sack neatly crafted out of paper."
+				desc = ""
 			if(NANOTRASEN)
-				desc = "A standard Nanotrasen paper lunch sack for loyal employees on the go."
+				desc = ""
 			if(SYNDI)
-				desc = "The design on this paper sack is a remnant of the notorious 'SyndieSnacks' program."
+				desc = ""
 			if(HEART)
-				desc = "A paper sack with a heart etched onto the side."
+				desc = ""
 			if(SMILEY)
-				desc = "A paper sack with a crude smile etched onto the side."
+				desc = ""
 		return 0
 	else if(W.get_sharpness())
 		if(!contents.len)
 			if(item_state == "paperbag_None")
-				user.show_message("<span class='notice'>You cut eyeholes into [src].</span>", MSG_VISUAL)
+				user.show_message("<span class='notice'>I cut eyeholes into [src].</span>", MSG_VISUAL)
 				new /obj/item/clothing/head/papersack(user.loc)
 				qdel(src)
 				return 0
 			else if(item_state == "paperbag_SmileyFace")
-				user.show_message("<span class='notice'>You cut eyeholes into [src] and modify the design.</span>", MSG_VISUAL)
+				user.show_message("<span class='notice'>I cut eyeholes into [src] and modify the design.</span>", MSG_VISUAL)
 				new /obj/item/clothing/head/papersack/smiley(user.loc)
 				qdel(src)
 				return 0
@@ -900,7 +902,7 @@
 	. = ..()
 	if(theme_name)
 		name = "[name] ([theme_name])"
-		desc = "A box containing supplementary ingredients for the aspiring chef. The box's theme is '[theme_name]'."
+		desc = ""
 		item_state = "syringe_kit"
 
 /obj/item/storage/box/ingredients/wildcard
@@ -1040,7 +1042,7 @@
 
 /obj/item/storage/box/rndboards
 	name = "\proper the liberator's legacy"
-	desc = "A box containing a gift for worthy golems."
+	desc = ""
 
 /obj/item/storage/box/rndboards/PopulateContents()
 	new /obj/item/circuitboard/machine/protolathe(src)
@@ -1050,7 +1052,7 @@
 
 /obj/item/storage/box/silver_sulf
 	name = "box of silver sulfadiazine patches"
-	desc = "Contains patches used to treat burns."
+	desc = ""
 
 /obj/item/storage/box/silver_sulf/PopulateContents()
 	for(var/i in 1 to 7)
@@ -1065,7 +1067,7 @@
 
 /obj/item/storage/box/holy_grenades
 	name = "box of holy hand grenades"
-	desc = "Contains several grenades used to rapidly purge heresy."
+	desc = ""
 	illustration = "flashbang"
 
 /obj/item/storage/box/holy_grenades/PopulateContents()
@@ -1074,7 +1076,7 @@
 
 /obj/item/storage/box/stockparts/basic //for ruins where it's a bad idea to give access to an autolathe/protolathe, but still want to make stock parts accessible
 	name = "box of stock parts"
-	desc = "Contains a variety of basic stock parts."
+	desc = ""
 
 /obj/item/storage/box/stockparts/basic/PopulateContents()
 	var/static/items_inside = list(
@@ -1087,7 +1089,7 @@
 
 /obj/item/storage/box/stockparts/deluxe
 	name = "box of deluxe stock parts"
-	desc = "Contains a variety of deluxe stock parts."
+	desc = ""
 	icon_state = "syndiebox"
 
 /obj/item/storage/box/stockparts/deluxe/PopulateContents()
@@ -1101,7 +1103,7 @@
 
 /obj/item/storage/box/dishdrive
 	name = "DIY Dish Drive Kit"
-	desc = "Contains everything you need to build your own Dish Drive!"
+	desc = ""
 	custom_premium_price = 200
 
 /obj/item/storage/box/dishdrive/PopulateContents()

@@ -1,7 +1,7 @@
 //computer that handle the points and teleports the prisoner
 /obj/machinery/computer/prisoner/gulag_teleporter_computer
 	name = "labor camp teleporter console"
-	desc = "Used to send criminals to the Labor Camp."
+	desc = ""
 	icon_screen = "explosive"
 	icon_keyboard = "security_key"
 	req_access = list(ACCESS_ARMORY)
@@ -66,7 +66,7 @@
 
 /obj/machinery/computer/prisoner/gulag_teleporter_computer/ui_act(action, list/params)
 	if(isliving(usr))
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 	if(..())
 		return
 	if(!allowed(usr))
@@ -132,7 +132,7 @@
 		say("[contained_id]'s ID card goal defaulting to [contained_id.goal] points.")
 	log_game("[key_name(user)] teleported [key_name(prisoner)] to the Labor Camp [COORD(beacon)] for [id_goal_not_set ? "default goal of ":""][contained_id.goal] points.")
 	teleporter.handle_prisoner(contained_id, temporary_record)
-	playsound(src, 'sound/weapons/emitter.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	prisoner.forceMove(get_turf(beacon))
 	prisoner.Paralyze(40) // small travel dizziness
 	to_chat(prisoner, "<span class='warning'>The teleportation makes you a little dizzy.</span>")

@@ -40,7 +40,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 /obj/effect/immovablerod
 	name = "immovable rod"
-	desc = "What the fuck is that?"
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "immrod"
 	throwforce = 100
@@ -109,8 +109,8 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 /obj/effect/immovablerod/Bump(atom/clong)
 	if(prob(10))
-		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
-		audible_message("<span class='danger'>You hear a CLANG!</span>")
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
+		audible_message("<span class='danger'>I hear a CLANG!</span>")
 
 	if(clong && prob(25))
 		x = clong.x
@@ -136,7 +136,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 		qdel(other)
 
 /obj/effect/immovablerod/proc/penetrate(mob/living/L)
-	L.visible_message("<span class='danger'>[L] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class='danger'>You hear a CLANG!</span>")
+	L.visible_message("<span class='danger'>[L] is penetrated by an immovable rod!</span>" , "<span class='danger'>The rod penetrates you!</span>" , "<span class='danger'>I hear a CLANG!</span>")
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		H.adjustBruteLoss(160)
@@ -147,7 +147,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	if(ishuman(user))
 		var/mob/living/carbon/human/U = user
 		if(U.job in list("Research Director"))
-			playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+			playsound(src, 'sound/blank.ogg', 100, TRUE)
 			for(var/mob/M in urange(8, src))
 				if(!M.stat)
 					shake_camera(M, 2, 3)
@@ -159,7 +159,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 				qdel(src)
 			else
 				U.client.give_award(/datum/award/achievement/misc/feat_of_strength, U) //rod-form wizards would probably make this a lot easier to get so keep it to regular rods only
-				U.visible_message("<span class='boldwarning'>[U] suplexes [src] into the ground!</span>", "<span class='warning'>You suplex [src] into the ground!</span>")
+				U.visible_message("<span class='boldwarning'>[U] suplexes [src] into the ground!</span>", "<span class='warning'>I suplex [src] into the ground!</span>")
 				new /obj/structure/festivus/anchored(drop_location())
 				new /obj/effect/anomaly/flux(drop_location())
 				qdel(src)

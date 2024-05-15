@@ -5,7 +5,7 @@ RSF
 */
 /obj/item/rsf
 	name = "\improper Rapid-Service-Fabricator"
-	desc = "A device used to rapidly deploy service items."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rcd"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -33,13 +33,13 @@ RSF
 			return
 		qdel(W)
 		matter += 10
-		playsound(src.loc, 'sound/machines/click.ogg', 10, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 10, TRUE)
 		to_chat(user, "<span class='notice'>The RSF now holds [matter]/30 fabrication-units.</span>")
 	else
 		return ..()
 
 /obj/item/rsf/attack_self(mob/user)
-	playsound(src.loc, 'sound/effects/pop.ogg', 50, FALSE)
+	playsound(src.loc, 'sound/blank.ogg', 50, FALSE)
 	switch(mode)
 		if(5)
 			mode = 1
@@ -68,14 +68,14 @@ RSF
 	if(iscyborg(user))
 		var/mob/living/silicon/robot/R = user
 		if(!R.cell || R.cell.charge < 200)
-			to_chat(user, "<span class='warning'>You do not have enough power to use [src].</span>")
+			to_chat(user, "<span class='warning'>I do not have enough power to use [src].</span>")
 			return
 	else if (matter < 1)
 		to_chat(user, "<span class='warning'>\The [src] doesn't have enough matter left.</span>")
 		return
 
 	var/turf/T = get_turf(A)
-	playsound(src.loc, 'sound/machines/click.ogg', 10, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 10, TRUE)
 	switch(mode)
 		if(1)
 			to_chat(user, "<span class='notice'>Dispensing Drinking Glass...</span>")
@@ -108,7 +108,7 @@ RSF
 
 /obj/item/cookiesynth
 	name = "Cookie Synthesizer"
-	desc = "A self-recharging device used to rapidly deploy cookies."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rcd"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -129,9 +129,9 @@ RSF
 /obj/item/cookiesynth/emag_act(mob/user)
 	obj_flags ^= EMAGGED
 	if(obj_flags & EMAGGED)
-		to_chat(user, "<span class='warning'>You short out [src]'s reagent safety checker!</span>")
+		to_chat(user, "<span class='warning'>I short out [src]'s reagent safety checker!</span>")
 	else
-		to_chat(user, "<span class='warning'>You reset [src]'s reagent safety checker!</span>")
+		to_chat(user, "<span class='warning'>I reset [src]'s reagent safety checker!</span>")
 		toxin = 0
 
 /obj/item/cookiesynth/attack_self(mob/user)
@@ -166,10 +166,10 @@ RSF
 	if(iscyborg(user))
 		var/mob/living/silicon/robot/R = user
 		if(!R.cell || R.cell.charge < 400)
-			to_chat(user, "<span class='warning'>You do not have enough power to use [src].</span>")
+			to_chat(user, "<span class='warning'>I do not have enough power to use [src].</span>")
 			return
 	var/turf/T = get_turf(A)
-	playsound(src.loc, 'sound/machines/click.ogg', 10, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 10, TRUE)
 	to_chat(user, "<span class='notice'>Fabricating Cookie...</span>")
 	var/obj/item/reagent_containers/food/snacks/cookie/S = new /obj/item/reagent_containers/food/snacks/cookie(T)
 	if(toxin)

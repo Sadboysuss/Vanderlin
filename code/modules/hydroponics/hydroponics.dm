@@ -59,7 +59,7 @@
 	return ..()
 
 /obj/machinery/hydroponics/constructable/attackby(obj/item/I, mob/user, params)
-	if (user.a_intent != INTENT_HARM)
+	if (user.used_intent.type != INTENT_HARM)
 		// handle opening the panel
 		if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
 			return
@@ -721,7 +721,7 @@
 		if(istype(reagent_source, /obj/item/reagent_containers/syringe))
 			var/obj/item/reagent_containers/syringe/syr = reagent_source
 			if(syr.mode != 1)
-				to_chat(user, "<span class='warning'>You can't get any extract out of this plant.</span>"		)
+				to_chat(user, "<span class='warning'>I can't get any extract out of this plant.</span>"		)
 				return
 
 		if(!reagent_source.reagents.total_volume)
@@ -750,14 +750,14 @@
 					syr.mode = 0
 			else if(istype(reagent_source, /obj/item/reagent_containers/spray/))
 				visi_msg="[user] sprays [target] with [reagent_source]"
-				playsound(loc, 'sound/effects/spray3.ogg', 50, TRUE, -6)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE, -6)
 				irrigate = 1
 			else if(transfer_amount) // Droppers, cans, beakers, what have you.
 				visi_msg="[user] uses [reagent_source] on [target]"
 				irrigate = 1
 			// Beakers, bottles, buckets, etc.
 			if(reagent_source.is_drainable())
-				playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
+				playsound(loc, 'sound/blank.ogg', 25, TRUE)
 
 		if(irrigate && transfer_amount > 30 && reagent_source.reagents.total_volume >= 30 && using_irrigation)
 			trays = FindConnected()
@@ -794,7 +794,7 @@
 				investigate_log("had Kudzu planted in it by [key_name(user)] at [AREACOORD(src)]","kudzu")
 			if(!user.transferItemToLoc(O, src))
 				return
-			to_chat(user, "<span class='notice'>You plant [O].</span>")
+			to_chat(user, "<span class='notice'>I plant [O].</span>")
 			dead = 0
 			myseed = O
 			name = "hydroponics tray ([myseed.plantname])"
@@ -804,7 +804,7 @@
 				else if(myseed.desc)
 					myseed.productdesc = myseed.desc
 				else
-					myseed.productdesc = "A fascinating specimen."
+					myseed.productdesc = ""
 			desc = myseed.productdesc
 			age = 1
 			plant_health = myseed.endurance
@@ -831,7 +831,7 @@
 
 	else if(istype(O, /obj/item/cultivator))
 		if(weedlevel > 0)
-			user.visible_message("<span class='notice'>[user] uproots the weeds.</span>", "<span class='notice'>You remove the weeds from [src].</span>")
+			user.visible_message("<span class='notice'>[user] uproots the weeds.</span>", "<span class='notice'>I remove the weeds from [src].</span>")
 			weedlevel = 0
 			update_icon()
 		else
@@ -852,7 +852,7 @@
 		using_irrigation = !using_irrigation
 		O.play_tool_sound(src)
 		user.visible_message("<span class='notice'>[user] [using_irrigation ? "" : "dis"]connects [src]'s irrigation hoses.</span>", \
-		"<span class='notice'>You [using_irrigation ? "" : "dis"]connect [src]'s irrigation hoses.</span>")
+		"<span class='notice'>I [using_irrigation ? "" : "dis"]connect [src]'s irrigation hoses.</span>")
 		for(var/obj/machinery/hydroponics/h in range(1,src))
 			h.update_icon()
 
@@ -861,9 +861,9 @@
 			to_chat(user, "<span class='warning'>[src] doesn't have any plants or weeds!</span>")
 			return
 		user.visible_message("<span class='notice'>[user] starts digging out [src]'s plants...</span>",
-			"<span class='notice'>You start digging out [src]'s plants...</span>")
+			"<span class='notice'>I start digging out [src]'s plants...</span>")
 		if(O.use_tool(src, user, 50, volume=50) || (!myseed && !weedlevel))
-			user.visible_message("<span class='notice'>[user] digs out the plants in [src]!</span>", "<span class='notice'>You dig out all of [src]'s plants!</span>")
+			user.visible_message("<span class='notice'>[user] digs out the plants in [src]!</span>", "<span class='notice'>I dig out all of [src]'s plants!</span>")
 			if(myseed) //Could be that they're just using it as a de-weeder
 				age = 0
 				plant_health = 0
@@ -903,7 +903,7 @@
 
 	else if(dead)
 		dead = 0
-		to_chat(user, "<span class='notice'>You remove the dead plant from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove the dead plant from [src].</span>")
 		qdel(myseed)
 		myseed = null
 		update_icon()
@@ -917,11 +917,11 @@
 	harvest = 0
 	lastproduce = age
 	if(istype(myseed, /obj/item/seeds/replicapod))
-		to_chat(user, "<span class='notice'>You harvest from the [myseed.plantname].</span>")
+		to_chat(user, "<span class='notice'>I harvest from the [myseed.plantname].</span>")
 	else if(myseed.getYield() <= 0)
-		to_chat(user, "<span class='warning'>You fail to harvest anything useful!</span>")
+		to_chat(user, "<span class='warning'>I fail to harvest anything useful!</span>")
 	else
-		to_chat(user, "<span class='notice'>You harvest [myseed.getYield()] items from the [myseed.plantname].</span>")
+		to_chat(user, "<span class='notice'>I harvest [myseed.getYield()] items from the [myseed.plantname].</span>")
 	if(!myseed.get_gene(/datum/plant_gene/trait/repeated_harvest))
 		qdel(myseed)
 		myseed = null
@@ -967,7 +967,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /obj/machinery/hydroponics/soil //Not actually hydroponics at all! Honk!
 	name = "soil"
-	desc = "A patch of dirt."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "soil"
 	circuit = null
@@ -984,7 +984,7 @@
 
 /obj/machinery/hydroponics/soil/attackby(obj/item/O, mob/user, params)
 	if(O.tool_behaviour == TOOL_SHOVEL && !istype(O, /obj/item/shovel/spade)) //Doesn't include spades because of uprooting plants
-		to_chat(user, "<span class='notice'>You clear up [src]!</span>")
+		to_chat(user, "<span class='notice'>I clear up [src]!</span>")
 		qdel(src)
 	else
 		return ..()

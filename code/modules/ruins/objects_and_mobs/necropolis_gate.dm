@@ -1,7 +1,7 @@
 //The necropolis gate is used to call forth Legion from the Necropolis.
 /obj/structure/necropolis_gate
 	name = "necropolis gate"
-	desc = "A massive stone gateway."
+	desc = ""
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "gate_full"
 	flags_1 = ON_BORDER_1
@@ -102,7 +102,7 @@
 		new /obj/effect/temp_visual/necropolis(T)
 		visible_message("<span class='boldwarning'>The door slams closed!</span>")
 		sleep(1)
-		playsound(T, 'sound/effects/stonedoor_openclose.ogg', 300, TRUE, frequency = 80000)
+		playsound(T, 'sound/blank.ogg', 300, TRUE, frequency = 80000)
 		sleep(1)
 		density = TRUE
 		sleep(1)
@@ -116,7 +116,7 @@
 			sight_blocker.pixel_y = initial(sight_blocker.pixel_y) - (32 * sight_blocker_distance)
 			sight_blocker.forceMove(sight_blocker_turf)
 		sleep(2.5)
-		playsound(T, 'sound/magic/clockwork/invoke_general.ogg', 30, TRUE, frequency = 15000)
+		playsound(T, 'sound/blank.ogg', 30, TRUE, frequency = 15000)
 		add_overlay(door_overlay)
 		open = FALSE
 	else
@@ -124,7 +124,7 @@
 		new /obj/effect/temp_visual/necropolis/open(T)
 		sleep(2)
 		visible_message("<span class='warning'>The door starts to grind open...</span>")
-		playsound(T, 'sound/effects/stonedoor_openclose.ogg', 300, TRUE, frequency = 20000)
+		playsound(T, 'sound/blank.ogg', 300, TRUE, frequency = 20000)
 		sleep(22)
 		sight_blocker.forceMove(src)
 		sleep(5)
@@ -139,7 +139,7 @@
 
 GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 /obj/structure/necropolis_gate/legion_gate
-	desc = "A tremendous, impossibly large gateway, set into a massive tower of stone."
+	desc = ""
 	sight_blocker_distance = 2
 
 /obj/structure/necropolis_gate/legion_gate/Initialize()
@@ -160,8 +160,8 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 		var/safety = alert(user, "You think this might be a bad idea...", "Knock on the door?", "Proceed", "Abort")
 		if(safety == "Abort" || !in_range(src, user) || !src || open || changing_openness || user.incapacitated())
 			return
-		user.visible_message("<span class='warning'>[user] knocks on [src]...</span>", "<span class='boldannounce'>You tentatively knock on [src]...</span>")
-		playsound(user.loc, 'sound/effects/shieldbash.ogg', 100, TRUE)
+		user.visible_message("<span class='warning'>[user] knocks on [src]...</span>", "<span class='boldannounce'>I tentatively knock on [src]...</span>")
+		playsound(user.loc, 'sound/blank.ogg', 100, TRUE)
 		sleep(50)
 	return ..()
 
@@ -172,7 +172,7 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 	if(.)
 		locked = TRUE
 		var/turf/T = get_turf(src)
-		visible_message("<span class='userdanger'>Something horrible emerges from the Necropolis!</span>")
+		visible_message("<span class='danger'>Something horrible emerges from the Necropolis!</span>")
 		if(legion_damaged)
 			message_admins("Legion took damage while the necropolis gate was closed, and has released itself!")
 			log_game("Legion took damage while the necropolis gate was closed and released itself.")
@@ -180,10 +180,10 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 			message_admins("[user ? ADMIN_LOOKUPFLW(user):"Unknown"] has released Legion!")
 			log_game("[user ? key_name(user) : "Unknown"] released Legion.")
 
-		var/sound/legion_sound = sound('sound/creatures/legion_spawn.ogg')
+		var/sound/legion_sound = sound('sound/blank.ogg')
 		for(var/mob/M in GLOB.player_list)
 			if(M.z == z)
-				to_chat(M, "<span class='userdanger'>Discordant whispers flood your mind in a thousand voices. Each one speaks your name, over and over. Something horrible has been released.</span>")
+				to_chat(M, "<span class='danger'>Discordant whispers flood your mind in a thousand voices. Each one speaks your name, over and over. Something horrible has been released.</span>")
 				M.playsound_local(T, null, 100, FALSE, 0, FALSE, pressure_affected = FALSE, S = legion_sound)
 				flash_color(M, flash_color = "#FF0000", flash_time = 50)
 		var/mutable_appearance/release_overlay = mutable_appearance('icons/effects/effects.dmi', "legiondoor")
@@ -204,7 +204,7 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 
 /obj/structure/necropolis_arch
 	name = "necropolis arch"
-	desc = "A massive arch over the necropolis gate, set into a massive tower of stone."
+	desc = ""
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "arch_full"
 	appearance_flags = 0
@@ -285,13 +285,13 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 /obj/structure/stone_tile/proc/collapse()
 	falling = TRUE
 	var/break_that_sucker = fall_on_cross == DESTROY_ON_CROSS
-	playsound(src, 'sound/effects/pressureplate.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	Shake(-1, -1, 25)
 	sleep(5)
 	if(break_that_sucker)
-		playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 	else
-		playsound(src, 'sound/mecha/mechmove04.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 	animate(src, alpha = 0, pixel_y = pixel_y - 3, time = 5)
 	fallen = TRUE
 	if(break_that_sucker)

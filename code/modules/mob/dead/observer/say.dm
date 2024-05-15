@@ -25,6 +25,19 @@
 
 	. = say_dead(message)
 
+/mob/dead/observer/rogue/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+	return
+
+/mob/dead/observer/rogue/say_dead(message)
+	return
+
+/mob/dead/observer/screye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+	return
+
+/mob/dead/observer/screye/say_dead(message)
+	return
+
+/*
 /mob/dead/observer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
 	. = ..()
 	var/atom/movable/to_follow = speaker
@@ -37,7 +50,19 @@
 		else
 			to_follow = V.source
 	var/link = FOLLOW_LINK(src, to_follow)
+// Create map text prior to modifying message for goonchat
+	if (client?.prefs.chat_on_map && (client.prefs.see_chat_non_mob || ismob(speaker)))
+		create_chat_message(speaker, message_language, raw_message, spans, message_mode)
 	// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode)
-	to_chat(src, "[link] [message]")
+	to_chat(src, "[link] [message]")*/
 
+/mob/dead/observer/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
+	. = ..()
+// Create map text prior to modifying message for goonchat
+	if(client?.prefs)
+		if (client?.prefs.chat_on_map && (client.prefs.see_chat_non_mob || ismob(speaker)))
+			create_chat_message(speaker, message_language, raw_message, spans, message_mode)
+	// Recompose the message, because it's scrambled by default
+	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode)
+	to_chat(src, "[message]")

@@ -9,7 +9,7 @@
 	cure_chance = 20
 	agent = "Avian Vengence"
 	viable_mobtypes = list(/mob/living/carbon/human)
-	desc = "Subject is possessed by the vengeful spirit of a parrot. Call the priest."
+	desc = ""
 	severity = DISEASE_SEVERITY_MEDIUM
 	infectable_biotypes = MOB_ORGANIC|MOB_UNDEAD|MOB_ROBOTIC|MOB_MINERAL
 	bypasses_immunity = TRUE //2spook
@@ -26,5 +26,5 @@
 /datum/disease/parrot_possession/cure()
 	if(parrot && parrot.loc == affected_mob)
 		parrot.forceMove(affected_mob.drop_location())
-		affected_mob.visible_message("<span class='danger'>[parrot] is violently driven out of [affected_mob]!</span>", "<span class='userdanger'>[parrot] bursts out of your chest!</span>")
+		affected_mob.visible_message("<span class='danger'>[parrot] is violently driven out of [affected_mob]!</span>", "<span class='danger'>[parrot] bursts out of your chest!</span>")
 	..()

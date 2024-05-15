@@ -1,6 +1,6 @@
 /obj/machinery/cell_charger
 	name = "cell charger"
-	desc = "It charges power cells."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "ccharger"
 	use_power = IDLE_POWER_USE
@@ -17,7 +17,7 @@
 
 	if(!charging)
 		return
-	
+
 	. += image(charging.icon, charging.icon_state)
 	. += "ccharger-on"
 	if(!(stat & (BROKEN|NOPOWER)))
@@ -54,7 +54,7 @@
 				return
 
 			charging = W
-			user.visible_message("<span class='notice'>[user] inserts a cell into [src].</span>", "<span class='notice'>You insert a cell into [src].</span>")
+			user.visible_message("<span class='notice'>[user] inserts a cell into [src].</span>", "<span class='notice'>I insert a cell into [src].</span>")
 			update_icon()
 	else
 		if(!charging && default_deconstruction_screwdriver(user, icon_state, icon_state, W))
@@ -89,7 +89,7 @@
 	user.put_in_hands(charging)
 	charging.add_fingerprint(user)
 
-	user.visible_message("<span class='notice'>[user] removes [charging] from [src].</span>", "<span class='notice'>You remove [charging] from [src].</span>")
+	user.visible_message("<span class='notice'>[user] removes [charging] from [src].</span>", "<span class='notice'>I remove [charging] from [src].</span>")
 
 	removecell()
 
@@ -98,7 +98,7 @@
 		return
 
 	charging.forceMove(loc)
-	to_chat(user, "<span class='notice'>You telekinetically remove [charging] from [src].</span>")
+	to_chat(user, "<span class='notice'>I telekinetically remove [charging] from [src].</span>")
 
 	removecell()
 

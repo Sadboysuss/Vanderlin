@@ -18,7 +18,7 @@ Bonus
 /datum/symptom/choking
 
 	name = "Choking"
-	desc = "The virus causes inflammation of the host's air conduits, leading to intermittent choking."
+	desc = ""
 	stealth = -3
 	resistance = -2
 	stage_speed = -2
@@ -52,13 +52,13 @@ Bonus
 			if(!suppress_warning)
 				to_chat(M, "<span class='warning'>[pick("Your windpipe feels like a straw.", "Your breathing becomes tremendously difficult.")]</span>")
 			else
-				to_chat(M, "<span class='warning'>You feel very [pick("dizzy","woozy","faint")].</span>") //fake bloodloss messages
+				to_chat(M, "<span class='warning'>I feel very [pick("dizzy","woozy","faint")].</span>") //fake bloodloss messages
 			Choke_stage_3_4(M, A)
-			M.emote("gasp")
+			M.emote("breathgasp")
 		else
-			to_chat(M, "<span class='userdanger'>[pick("You're choking!", "You can't breathe!")]</span>")
+			to_chat(M, "<span class='danger'>[pick("You're choking!", "You can't breathe!")]</span>")
 			Choke(M, A)
-			M.emote("gasp")
+			M.emote("breathgasp")
 
 /datum/symptom/choking/proc/Choke_stage_3_4(mob/living/M, datum/disease/advance/A)
 	M.adjustOxyLoss(rand(6,13))
@@ -88,7 +88,7 @@ Bonus
 /datum/symptom/asphyxiation
 
 	name = "Acute respiratory distress syndrome"
-	desc = "The virus causes shrinking of the host's lungs, causing severe asphyxiation. May also lead to heart attacks."
+	desc = ""
 	stealth = -2
 	resistance = -0
 	stage_speed = -1
@@ -119,11 +119,11 @@ Bonus
 		if(3, 4)
 			to_chat(M, "<span class='warning'><b>[pick("Your windpipe feels thin.", "Your lungs feel small.")]</span>")
 			Asphyxiate_stage_3_4(M, A)
-			M.emote("gasp")
+			M.emote("breathgasp")
 		if(5)
-			to_chat(M, "<span class='userdanger'>[pick("Your lungs hurt!", "It hurts to breathe!")]</span>")
+			to_chat(M, "<span class='danger'>[pick("Your lungs hurt!", "It hurts to breathe!")]</span>")
 			Asphyxiate(M, A)
-			M.emote("gasp")
+			M.emote("breathgasp")
 			if(M.getOxyLoss() >= 120)
 				M.visible_message("<span class='warning'>[M] stops breathing, as if their lungs have totally collapsed!</span>")
 				Asphyxiate_death(M, A)

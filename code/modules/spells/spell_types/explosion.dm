@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/explosion
 	name = "Explosion"
-	desc = "This spell explodes an area."
+	desc = ""
 
 	var/ex_severe = 1
 	var/ex_heavy = 2

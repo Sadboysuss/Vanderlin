@@ -2,7 +2,7 @@
 	name = "repulsion bolt"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "chronofield"
-	hitsound = 'sound/weapons/wave.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 0
 	damage_type = BRUTE
 	nodamage = TRUE
@@ -37,7 +37,7 @@
 	name = "attraction bolt"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "chronofield"
-	hitsound = 'sound/weapons/wave.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 0
 	damage_type = BRUTE
 	nodamage = TRUE
@@ -71,7 +71,7 @@
 	name = "gravitational blast"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "chronofield"
-	hitsound = 'sound/weapons/wave.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 0
 	damage_type = BRUTE
 	nodamage = TRUE

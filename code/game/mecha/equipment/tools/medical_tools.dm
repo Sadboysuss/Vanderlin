@@ -30,7 +30,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/medical/sleeper
 	name = "mounted sleeper"
-	desc = "Equipment for medical exosuits. A mounted sleeper that stabilizes patients and can inject reagents in the exosuit's reserves."
+	desc = ""
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper"
 	energy_drain = 20
@@ -55,7 +55,7 @@
 		return
 	if(!patient_insertion_check(target))
 		return
-	occupant_message("<span class='notice'>You start putting [target] into [src]...</span>")
+	occupant_message("<span class='notice'>I start putting [target] into [src]...</span>")
 	chassis.visible_message("<span class='warning'>[chassis] starts putting [target] into \the [src].</span>")
 	if(do_after_cooldown(target))
 		if(!patient_insertion_check(target))
@@ -245,7 +245,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/medical/syringe_gun
 	name = "exosuit syringe gun"
-	desc = "Equipment for medical exosuits. A chem synthesizer with syringe gun. Reagents inside are held in stasis, so no reactions will occur."
+	desc = ""
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "syringegun"
 	var/list/syringes
@@ -310,7 +310,7 @@
 	syringes -= mechsyringe
 	mechsyringe.icon = 'icons/obj/chemical.dmi'
 	mechsyringe.icon_state = "syringeproj"
-	playsound(chassis, 'sound/items/syringeproj.ogg', 50, TRUE)
+	playsound(chassis, 'sound/blank.ogg', 50, TRUE)
 	log_message("Launched [mechsyringe] from [src], targeting [target].", LOG_MECHA)
 	var/mob/originaloccupant = chassis.occupant
 	spawn(0)
@@ -521,7 +521,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/medical/mechmedbeam
 	name = "exosuit medical beamgun"
-	desc = "Equipment for medical exosuits. Generates a focused beam of medical nanites."
+	desc = ""
 	icon_state = "mecha_medigun"
 	energy_drain = 10
 	range = MECHA_MELEE|MECHA_RANGED

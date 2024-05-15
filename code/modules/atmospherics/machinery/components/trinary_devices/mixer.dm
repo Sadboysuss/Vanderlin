@@ -3,7 +3,7 @@
 	density = FALSE
 
 	name = "gas mixer"
-	desc = "Very useful for mixing gasses."
+	desc = ""
 
 	can_unwrench = TRUE
 
@@ -183,7 +183,7 @@
 /obj/machinery/atmospherics/components/trinary/mixer/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational())
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
 // mapping

@@ -12,7 +12,7 @@
  */
 /obj/structure/filingcabinet
 	name = "filing cabinet"
-	desc = "A large cabinet with drawers."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "filingcabinet"
 	density = TRUE
@@ -24,7 +24,7 @@
 
 /obj/structure/filingcabinet/chestdrawer/wheeled
 	name = "rolling chest drawer"
-	desc = "A small cabinet with drawers. This one has wheels!"
+	desc = ""
 	anchored = FALSE
 
 /obj/structure/filingcabinet/filingcabinet	//not changing the path to avoid unnecessary map issues, but please don't name stuff like this in the future -Pete
@@ -49,18 +49,18 @@
 	if(istype(P, /obj/item/paper) || istype(P, /obj/item/folder) || istype(P, /obj/item/photo) || istype(P, /obj/item/documents))
 		if(!user.transferItemToLoc(P, src))
 			return
-		to_chat(user, "<span class='notice'>You put [P] in [src].</span>")
+		to_chat(user, "<span class='notice'>I put [P] in [src].</span>")
 		icon_state = "[initial(icon_state)]-open"
 		sleep(5)
 		icon_state = initial(icon_state)
 		updateUsrDialog()
 	else if(P.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, "<span class='notice'>You begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
+		to_chat(user, "<span class='notice'>I begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
 		if(P.use_tool(src, user, 20, volume=50))
-			to_chat(user, "<span class='notice'>You successfully [anchored ? "unwrench" : "wrench"] [src].</span>")
+			to_chat(user, "<span class='notice'>I successfully [anchored ? "unwrench" : "wrench"] [src].</span>")
 			anchored = !anchored
-	else if(user.a_intent != INTENT_HARM)
-		to_chat(user, "<span class='warning'>You can't put [P] in [src]!</span>")
+	else if(user.used_intent.type != INTENT_HARM)
+		to_chat(user, "<span class='warning'>I can't put [P] in [src]!</span>")
 	else
 		return ..()
 
@@ -92,9 +92,9 @@
 			I.forceMove(loc)
 			if(prob(25))
 				step_rand(I)
-			to_chat(user, "<span class='notice'>You pull \a [I] out of [src] at random.</span>")
+			to_chat(user, "<span class='notice'>I pull \a [I] out of [src] at random.</span>")
 			return
-	to_chat(user, "<span class='notice'>You find nothing in [src].</span>")
+	to_chat(user, "<span class='notice'>I find nothing in [src].</span>")
 
 /obj/structure/filingcabinet/Topic(href, href_list)
 	if(!usr.canUseTopic(src, BE_CLOSE, ismonkey(usr)))

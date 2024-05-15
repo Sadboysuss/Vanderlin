@@ -14,7 +14,7 @@
 // The monitor itself.
 /obj/machinery/computer/message_monitor
 	name = "message monitor console"
-	desc = "Used to monitor the crew's PDA messages, as well as request console messages."
+	desc = ""
 	icon_screen = "comm_logs"
 	circuit = /obj/item/circuitboard/computer/message_monitor
 	//Server linked to.

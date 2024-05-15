@@ -1,5 +1,5 @@
 /obj/mecha/combat/durand
-	desc = "An aging combat exosuit utilized by the Nanotrasen corporation. Originally developed to combat hostile alien lifeforms."
+	desc = ""
 	name = "\improper Durand"
 	icon_state = "durand"
 	step_in = 4
@@ -45,7 +45,7 @@
 		shield.forceMove(loc)
 		shield.dir = dir
 
-/obj/mecha/combat/durand/forceMove(var/turf/T)
+/obj/mecha/combat/durand/forceMove(turf/T)
 	. = ..()
 	shield.forceMove(T)
 
@@ -72,7 +72,7 @@
 
 /**Checks if defense mode is enabled, and if the attacker is standing in an area covered by the shield.
 Expects a turf. Returns true if the attack should be blocked, false if not.*/
-/obj/mecha/combat/durand/proc/defense_check(var/turf/aloc)
+/obj/mecha/combat/durand/proc/defense_check(turf/aloc)
 	if (!defense_mode || !shield || shield.switching)
 		return FALSE
 	. = FALSE
@@ -176,13 +176,13 @@ the shield is disabled by means other than the action button (like running out o
 	if(chassis.defense_mode)
 		invisibility = 0
 		flick("shield_raise", src)
-		playsound(src, 'sound/mecha/mech_shield_raise.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		set_light(l_range = MINIMUM_USEFUL_LIGHT_RANGE	, l_power = 5, l_color = "#00FFFF")
 		sleep(3)
 		icon_state = "shield"
 	else
 		flick("shield_drop", src)
-		playsound(src, 'sound/mecha/mech_shield_drop.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		sleep(5)
 		set_light(0)
 		icon_state = "shield_null"
@@ -203,7 +203,7 @@ the shield is disabled by means other than the action button (like running out o
 	obj_integrity = 10000
 
 /obj/durand_shield/play_attack_sound()
-	playsound(src, 'sound/mecha/mech_shield_deflect.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 /obj/durand_shield/bullet_act()
 	play_attack_sound()

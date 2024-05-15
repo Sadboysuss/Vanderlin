@@ -70,11 +70,11 @@
 			if(S.ignore_clothes || get_location_accessible(M, selected_zone))
 				var/datum/surgery/procedure = new S.type(M, selected_zone, affecting)
 				user.visible_message("<span class='notice'>[user] drapes [I] over [M]'s [parse_zone(selected_zone)] to prepare for surgery.</span>", \
-					"<span class='notice'>You drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [procedure.name].</span>")
+					"<span class='notice'>I drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [procedure.name].</span>")
 
 				log_combat(user, M, "operated on", null, "(OPERATION TYPE: [procedure.name]) (TARGET AREA: [selected_zone])")
 			else
-				to_chat(user, "<span class='warning'>You need to expose [M]'s [parse_zone(selected_zone)] first!</span>")
+				to_chat(user, "<span class='warning'>I need to expose [M]'s [parse_zone(selected_zone)] first!</span>")
 
 	else if(!current_surgery.step_in_progress)
 		attempt_cancel_surgery(current_surgery, I, M, user)
@@ -86,7 +86,7 @@
 	if(S.status == 1)
 		M.surgeries -= S
 		user.visible_message("<span class='notice'>[user] removes [I] from [M]'s [parse_zone(selected_zone)].</span>", \
-			"<span class='notice'>You remove [I] from [M]'s [parse_zone(selected_zone)].</span>")
+			"<span class='notice'>I remove [I] from [M]'s [parse_zone(selected_zone)].</span>")
 		qdel(S)
 	else if(S.can_cancel)
 		var/required_tool_type = TOOL_CAUTERY
@@ -100,10 +100,10 @@
 				H.bleed_rate = max( (H.bleed_rate - 3), 0)
 			M.surgeries -= S
 			user.visible_message("<span class='notice'>[user] closes [M]'s [parse_zone(selected_zone)] with [close_tool] and removes [I].</span>", \
-				"<span class='notice'>You close [M]'s [parse_zone(selected_zone)] with [close_tool] and remove [I].</span>")
+				"<span class='notice'>I close [M]'s [parse_zone(selected_zone)] with [close_tool] and remove [I].</span>")
 			qdel(S)
 		else
-			to_chat(user, "<span class='warning'>You need to hold a [is_robotic ? "screwdriver" : "cautery"] in your inactive hand to stop [M]'s surgery!</span>")
+			to_chat(user, "<span class='warning'>I need to hold a [is_robotic ? "screwdriver" : "cautery"] in your inactive hand to stop [M]'s surgery!</span>")
 
 /proc/get_location_modifier(mob/M)
 	var/turf/T = get_turf(M)
@@ -118,64 +118,103 @@
 	else
 		return 0.5
 
-
-/proc/get_location_accessible(mob/M, location)
+/proc/get_location_accessible(mob/M, location, grabs, skipundies = FALSE)
 	var/covered_locations = 0	//based on body_parts_covered
-	var/face_covered = 0	//based on flags_inv
-	var/eyesmouth_covered = 0	//based on flags_cover
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		for(var/obj/item/clothing/I in list(C.back, C.wear_mask, C.head))
-			covered_locations |= I.body_parts_covered
-			face_covered |= I.flags_inv
-			eyesmouth_covered |= I.flags_cover
+			if(zone2covered(location, I.body_parts_covered))
+				return TRUE
 		if(ishuman(C))
 			var/mob/living/carbon/human/H = C
-			for(var/obj/item/I in list(H.wear_suit, H.w_uniform, H.shoes, H.belt, H.gloves, H.glasses, H.ears))
-				covered_locations |= I.body_parts_covered
-				face_covered |= I.flags_inv
-				eyesmouth_covered |= I.flags_cover
+#ifdef MATURESERVER
+			if(!skipundies)
+				if(H.underwear != "Nude")
+					covered_locations |= GROIN
+#endif
+			var/list/body_parts = list(H.head, H.mouth, H.wear_mask, H.wear_wrists, H.wear_shirt, H.wear_neck, H.cloak, H.wear_armor, H.wear_pants, H.backr, H.backl, H.gloves, H.shoes, H.belt, H.wear_ring)
+			for(var/obj/item/I in body_parts)
+				if(zone2covered(location, I.body_parts_covered))
+					return FALSE
+			if(grabs)
+				switch(grabs)
+					if("other")
+						for(var/obj/item/grabbing/G in H.grabbedby) //other person hand covering it
+							if(G.grabbee == H)
+								continue
+							if(G.sublimb_grabbed == BODY_ZONE_PRECISE_GROIN)
+								covered_locations |= GROIN
+							if(G.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+								covered_locations |= MOUTH
+					if("ours")
+						for(var/obj/item/grabbing/G in H.grabbedby) //other person hand covering it
+							if(G.grabbee == H)
+								if(G.sublimb_grabbed == BODY_ZONE_PRECISE_GROIN)
+									covered_locations |= GROIN
+								if(G.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+									covered_locations |= MOUTH
+			if(zone2covered(location, covered_locations))
+				return FALSE
+	return TRUE
 
+/proc/zone2covered(location, covered_locations)
 	switch(location)
 		if(BODY_ZONE_HEAD)
 			if(covered_locations & HEAD)
-				return 0
-		if(BODY_ZONE_PRECISE_EYES)
-			if(covered_locations & HEAD || face_covered & HIDEEYES || eyesmouth_covered & GLASSESCOVERSEYES)
-				return 0
+				return 1
+		if(BODY_ZONE_PRECISE_EARS)
+			if(covered_locations & EARS)
+				return 1
+		if(BODY_ZONE_PRECISE_HAIR)
+			if(covered_locations & HAIR)
+				return 1
+		if(BODY_ZONE_PRECISE_NOSE)
+			if(covered_locations & NOSE)
+				return 1
+		if(BODY_ZONE_PRECISE_NECK)
+			if(covered_locations & NECK)
+				return 1
+		if(BODY_ZONE_PRECISE_L_EYE)
+			if(covered_locations & LEFT_EYE)
+				return 1
+		if(BODY_ZONE_PRECISE_R_EYE)
+			if(covered_locations & RIGHT_EYE)
+				return 1
 		if(BODY_ZONE_PRECISE_MOUTH)
-			if(covered_locations & HEAD || face_covered & HIDEFACE || eyesmouth_covered & MASKCOVERSMOUTH || eyesmouth_covered & HEADCOVERSMOUTH)
-				return 0
+			if(covered_locations & MOUTH)
+				return 1
 		if(BODY_ZONE_CHEST)
 			if(covered_locations & CHEST)
-				return 0
+				return 1
+		if(BODY_ZONE_PRECISE_STOMACH)
+			if(covered_locations & VITALS)
+				return 1
 		if(BODY_ZONE_PRECISE_GROIN)
 			if(covered_locations & GROIN)
-				return 0
+				return 1
 		if(BODY_ZONE_L_ARM)
 			if(covered_locations & ARM_LEFT)
-				return 0
+				return 1
 		if(BODY_ZONE_R_ARM)
 			if(covered_locations & ARM_RIGHT)
-				return 0
+				return 1
 		if(BODY_ZONE_L_LEG)
 			if(covered_locations & LEG_LEFT)
-				return 0
+				return 1
 		if(BODY_ZONE_R_LEG)
 			if(covered_locations & LEG_RIGHT)
-				return 0
+				return 1
 		if(BODY_ZONE_PRECISE_L_HAND)
 			if(covered_locations & HAND_LEFT)
-				return 0
+				return 1
 		if(BODY_ZONE_PRECISE_R_HAND)
 			if(covered_locations & HAND_RIGHT)
-				return 0
+				return 1
 		if(BODY_ZONE_PRECISE_L_FOOT)
 			if(covered_locations & FOOT_LEFT)
-				return 0
+				return 1
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			if(covered_locations & FOOT_RIGHT)
-				return 0
+				return 1
 
-	return 1
-
+	return 0

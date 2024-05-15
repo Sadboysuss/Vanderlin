@@ -1,15 +1,15 @@
 /obj/item/key
 	name = "key"
-	desc = "A small grey key."
+	desc = ""
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "key"
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/key/security
-	desc = "A keyring with a small steel key, and a rubber stun baton accessory."
+	desc = ""
 	icon_state = "keysec"
 
 /obj/item/key/janitor
-	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
+	desc = ""
 	icon_state = "keyjanitor"
 

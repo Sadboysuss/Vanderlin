@@ -1,6 +1,6 @@
 /obj/item/melee/baton/cattleprod/teleprod
 	name = "teleprod"
-	desc = "A prod with a bluespace crystal on the end. The crystal doesn't look too fun to touch."
+	desc = ""
 	w_class = WEIGHT_CLASS_NORMAL
 	icon_state = "teleprod"
 	item_state = "teleprod"
@@ -10,7 +10,7 @@
 	..()
 	if(status && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		user.visible_message("<span class='danger'>[user] accidentally hits [user.p_them()]self with [src]!</span>", \
-							"<span class='userdanger'>You accidentally hit yourself with [src]!</span>")
+							"<span class='danger'>I accidentally hit myself with [src]!</span>")
 		if(do_teleport(user, get_turf(user), 50, channel = TELEPORT_CHANNEL_BLUESPACE))//honk honk
 			SEND_SIGNAL(user, COMSIG_LIVING_MINOR_SHOCK)
 			user.Paralyze(stunforce*3)
@@ -37,8 +37,8 @@
 			qdel(src)
 			BSC.use(1)
 			user.put_in_hands(S)
-			to_chat(user, "<span class='notice'>You place the bluespace crystal firmly into the igniter.</span>")
+			to_chat(user, "<span class='notice'>I place the bluespace crystal firmly into the igniter.</span>")
 		else
-			user.visible_message("<span class='warning'>You can't put the crystal onto the stunprod while it has a power cell installed!</span>")
+			user.visible_message("<span class='warning'>I can't put the crystal onto the stunprod while it has a power cell installed!</span>")
 	else
 		return ..()

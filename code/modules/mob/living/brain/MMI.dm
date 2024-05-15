@@ -1,6 +1,6 @@
 /obj/item/mmi
 	name = "\improper Man-Machine Interface"
-	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity, that nevertheless has become standard-issue on Nanotrasen stations."
+	desc = ""
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_off"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -43,14 +43,14 @@
 			to_chat(user, "<span class='warning'>There's already a brain in the MMI!</span>")
 			return
 		if(!newbrain.brainmob)
-			to_chat(user, "<span class='warning'>You aren't sure where this brain came from, but you're pretty sure it's a useless brain!</span>")
+			to_chat(user, "<span class='warning'>I aren't sure where this brain came from, but you're pretty sure it's a useless brain!</span>")
 			return
 
 		if(!user.transferItemToLoc(O, src))
 			return
 		var/mob/living/brain/B = newbrain.brainmob
 		if(!B.key)
-			B.notify_ghost_cloning("Someone has put your brain in a MMI!", source = src)
+			B.notify_ghost_cloning("Someone has put my brain in a MMI!", source = src)
 		user.visible_message("<span class='notice'>[user] sticks \a [newbrain] into [src].</span>", "<span class='notice'>[src]'s indicator light turn on as you insert [newbrain].</span>")
 
 		brainmob = newbrain.brainmob
@@ -89,12 +89,12 @@
 /obj/item/mmi/attack_self(mob/user)
 	if(!brain)
 		radio.on = !radio.on
-		to_chat(user, "<span class='notice'>You toggle [src]'s radio system [radio.on==1 ? "on" : "off"].</span>")
+		to_chat(user, "<span class='notice'>I toggle [src]'s radio system [radio.on==1 ? "on" : "off"].</span>")
 	else
 		eject_brain(user)
 		update_icon()
 		name = initial(name)
-		to_chat(user, "<span class='notice'>You unlock and upend [src], spilling the brain onto the floor.</span>")
+		to_chat(user, "<span class='notice'>I unlock and upend [src], spilling the brain onto the floor.</span>")
 
 /obj/item/mmi/proc/eject_brain(mob/user)
 	brainmob.container = null //Reset brainmob mmi var.
@@ -145,7 +145,7 @@
 
 /obj/item/mmi/verb/Toggle_Listening()
 	set name = "Toggle Listening"
-	set desc = "Toggle listening channel on or off."
+	set desc = ""
 	set category = "MMI"
 	set src = usr.loc
 	set popup_menu = FALSE
@@ -153,7 +153,7 @@
 	if(brainmob.stat)
 		to_chat(brainmob, "<span class='warning'>Can't do that while incapacitated or dead!</span>")
 	if(!radio.on)
-		to_chat(brainmob, "<span class='warning'>Your radio is disabled!</span>")
+		to_chat(brainmob, "<span class='warning'>My radio is disabled!</span>")
 		return
 
 	radio.listening = !radio.listening
@@ -216,7 +216,7 @@
 
 /obj/item/mmi/syndie
 	name = "\improper Syndicate Man-Machine Interface"
-	desc = "Syndicate's own brand of MMI. It enforces laws designed to help Syndicate agents achieve their goals upon cyborgs and AIs created with it."
+	desc = ""
 	overrides_aicore_laws = TRUE
 
 /obj/item/mmi/syndie/Initialize()

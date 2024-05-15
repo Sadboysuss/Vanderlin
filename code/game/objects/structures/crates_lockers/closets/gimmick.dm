@@ -1,28 +1,28 @@
 /obj/structure/closet/cabinet
 	name = "cabinet"
-	desc = "Old will forever be in fashion."
+	desc = ""
 	icon_state = "cabinet"
 	resistance_flags = FLAMMABLE
-	open_sound = 'sound/machines/wooden_closet_open.ogg'
-	close_sound = 'sound/machines/wooden_closet_close.ogg'
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
 	open_sound_volume = 25
 	close_sound_volume = 50
 	max_integrity = 70
 
 /obj/structure/closet/acloset
 	name = "strange closet"
-	desc = "It looks alien!"
+	desc = ""
 	icon_state = "alien"
 
 
 /obj/structure/closet/gimmick
 	name = "administrative supply closet"
-	desc = "It's a storage unit for things that have no right being here."
+	desc = ""
 	icon_state = "syndicate"
 
 /obj/structure/closet/gimmick/russian
 	name = "\improper Russian surplus closet"
-	desc = "It's a storage unit for Russian standard-issue surplus."
+	desc = ""
 
 /obj/structure/closet/gimmick/russian/PopulateContents()
 	..()
@@ -33,7 +33,7 @@
 
 /obj/structure/closet/gimmick/tacticool
 	name = "tacticool gear closet"
-	desc = "It's a storage unit for Tacticool gear."
+	desc = ""
 
 /obj/structure/closet/gimmick/tacticool/PopulateContents()
 	..()
@@ -55,7 +55,7 @@
 
 /obj/structure/closet/thunderdome
 	name = "\improper Thunderdome closet"
-	desc = "Everything you need!"
+	desc = ""
 	anchored = TRUE
 
 /obj/structure/closet/thunderdome/tdred
@@ -97,7 +97,7 @@
 		new /obj/item/clothing/head/helmet/thunderdome(src)
 
 /obj/structure/closet/malf/suits
-	desc = "It's a storage unit for operational gear."
+	desc = ""
 	icon_state = "syndicate"
 
 /obj/structure/closet/malf/suits/PopulateContents()

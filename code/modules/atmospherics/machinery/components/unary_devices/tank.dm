@@ -4,7 +4,7 @@
 	icon_state = "generic"
 
 	name = "pressure tank"
-	desc = "A large vessel containing pressurized gas."
+	desc = ""
 
 	max_integrity = 800
 	density = TRUE

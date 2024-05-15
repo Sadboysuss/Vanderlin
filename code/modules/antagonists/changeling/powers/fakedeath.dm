@@ -1,6 +1,6 @@
 /datum/action/changeling/fakedeath
 	name = "Reviving Stasis"
-	desc = "We fall into a stasis, allowing us to regenerate and trick our enemies. Costs 15 chemicals."
+	desc = ""
 	button_icon_state = "fake_death"
 	chemical_cost = 15
 	dna_cost = 0
@@ -16,7 +16,7 @@
 		INVOKE_ASYNC(src, .proc/revive, user)
 		revive_ready = FALSE
 		name = "Reviving Stasis"
-		desc = "We fall into a stasis, allowing us to regenerate and trick our enemies."
+		desc = ""
 		button_icon_state = "fake_death"
 		UpdateButtonIcon()
 		chemical_cost = 15
@@ -37,12 +37,12 @@
 	var/list/missing = user.get_missing_limbs()
 	missing -= BODY_ZONE_HEAD // headless changelings are funny
 	if(missing.len)
-		playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		user.visible_message("<span class='warning'>[user]'s missing limbs \
 			reform, making a loud, grotesque sound!</span>",
-			"<span class='userdanger'>Your limbs regrow, making a \
+			"<span class='danger'>My limbs regrow, making a \
 			loud, crunchy sound and giving you great pain!</span>",
-			"<span class='hear'>You hear organic matter ripping \
+			"<span class='hear'>I hear organic matter ripping \
 			and tearing!</span>")
 		user.emote("scream")
 		user.regenerate_limbs(0, list(BODY_ZONE_HEAD))
@@ -54,7 +54,7 @@
 		if(C && C.purchasedpowers)
 			to_chat(user, "<span class='notice'>We are ready to revive.</span>")
 			name = "Revive"
-			desc = "We arise once more."
+			desc = ""
 			button_icon_state = "revive"
 			UpdateButtonIcon()
 			chemical_cost = 0

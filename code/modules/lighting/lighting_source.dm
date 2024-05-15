@@ -9,6 +9,8 @@
 	var/turf/pixel_turf      // The turf the top_atom appears to over.
 	var/light_power    // Intensity of the emitter light.
 	var/light_range      // The range of the emitted light.
+	var/light_depth		//multiz
+	var/light_height
 	var/light_color    // The colour of the light, string, decomposed by parse_light_color()
 
 	// Variables for keeping track of the colour.
@@ -73,7 +75,7 @@
 
 
 // This proc will cause the light source to update the top atom, and add itself to the update queue.
-/datum/light_source/proc/update(var/atom/new_top_atom)
+/datum/light_source/proc/update(atom/new_top_atom)
 	// This top atom is different.
 	if (new_top_atom && new_top_atom != top_atom)
 		if(top_atom != source_atom && top_atom.light_sources) // Remove ourselves from the light sources of that top atom.
@@ -154,7 +156,7 @@
 
 	effect_str = null
 
-/datum/light_source/proc/recalc_corner(var/datum/lighting_corner/C)
+/datum/light_source/proc/recalc_corner(datum/lighting_corner/C)
 	LAZYINITLIST(effect_str)
 	if (effect_str[C]) // Already have one.
 		REMOVE_CORNER(C)
@@ -177,6 +179,14 @@
 
 	if (source_atom.light_range != light_range)
 		light_range = source_atom.light_range
+		update = TRUE
+
+	if (source_atom.light_depth != light_depth)
+		light_depth = source_atom.light_depth
+		update = TRUE
+
+	if (source_atom.light_height != light_height)
+		light_height = source_atom.light_height
 		update = TRUE
 
 	if (!top_atom)
@@ -237,12 +247,43 @@
 				C = thing
 				corners[C] = 0
 			turfs += T
+			var/turf/open/transparent/O = T
+			if(istype(O) && light_depth >= 1)
+				var/turf/open/B = get_step_multiz(T, DOWN)
+				if(isopenturf(B))
+					for(thing in B.get_corners(source_turf))
+						C = thing
+						corners[C] = 0
+					turfs += B
+					if(light_depth > 1)
+						if(istype(B, /turf/open/transparent))
+							B = get_step_multiz(B, DOWN)
+							if(isopenturf(B))
+								for(thing in B.get_corners(source_turf))
+									C = thing
+									corners[C] = 0
+								turfs += B
+						if(light_depth > 2)
+							if(istype(B, /turf/open/transparent))
+								B = get_step_multiz(B, DOWN)
+								if(isopenturf(B))
+									for(thing in B.get_corners(source_turf))
+										C = thing
+										corners[C] = 0
+									turfs += B
+			if(light_height >= 1)
+				var/turf/open/B = get_step_multiz(T, UP)
+				if(istype(B, /turf/open/transparent))
+					for(thing in B.get_corners(source_turf))
+						C = thing
+						corners[C] = 0
+					turfs += B
 		source_turf.luminosity = oldlum
 
 	LAZYINITLIST(affecting_turfs)
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
 	affecting_turfs += L
-	for (thing in L)
+	for(thing in L)
 		T = thing
 		LAZYADD(T.affecting_lights, src)
 

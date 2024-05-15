@@ -6,11 +6,13 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	move_resist = INFINITY
 	obj_flags = 0
+	anchored = TRUE
+	density = FALSE
 
 /obj/effect/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	return
 
-/obj/effect/fire_act(exposed_temperature, exposed_volume)
+/obj/effect/fire_act(added, maxstacks)
 	return
 
 /obj/effect/acid_act()

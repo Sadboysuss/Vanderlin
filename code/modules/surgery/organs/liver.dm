@@ -7,7 +7,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LIVER
-	desc = "Pairing suggestion: chianti and fava beans."
+	desc = ""
 
 	maxHealth = STANDARD_ORGAN_THRESHOLD
 	healing_factor = STANDARD_ORGAN_HEALING
@@ -16,7 +16,7 @@
 	var/alcohol_tolerance = ALCOHOL_RATE//affects how much damage the liver takes from alcohol
 	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE//maximum amount of toxins the liver can just shrug off
 	var/toxLethality = LIVER_DEFAULT_TOX_LETHALITY//affects how much damage toxins do to the liver
-	var/filterToxins = TRUE //whether to filter toxins
+	var/filterToxins = FALSE //whether to filter toxins
 
 #define HAS_SILENT_TOXIN 0 //don't provide a feedback message if this is the only toxin present
 #define HAS_NO_TOXIN 1
@@ -44,7 +44,7 @@
 			C.reagents.metabolize(C, can_overdose=TRUE)
 
 			if(provide_pain_message && damage > 10 && prob(damage/3))//the higher the damage the higher the probability
-				to_chat(C, "<span class='warning'>You feel a dull pain in your abdomen.</span>")
+				to_chat(C, "<span class='warning'>I feel a dull pain in my abdomen.</span>")
 
 		else	//for when our liver's failing
 			C.liver_failure()
@@ -64,25 +64,25 @@
 /obj/item/organ/liver/fly
 	name = "insectoid liver"
 	icon_state = "liver-x" //xenomorph liver? It's just a black liver so it fits.
-	desc = "A mutant liver designed to handle the unique diet of a flyperson."
+	desc = ""
 	alcohol_tolerance = 0.007 //flies eat vomit, so a lower alcohol tolerance is perfect!
 
 /obj/item/organ/liver/plasmaman
 	name = "reagent processing crystal"
 	icon_state = "liver-p"
-	desc = "A large crystal that is somehow capable of metabolizing chemicals, these are found in plasmamen."
+	desc = ""
 
 /obj/item/organ/liver/alien
 	name = "alien liver" // doesnt matter for actual aliens because they dont take toxin damage
 	icon_state = "liver-x" // Same sprite as fly-person liver.
-	desc = "A liver that used to belong to a killer alien, who knows what it used to eat."
+	desc = ""
 	toxLethality = LIVER_DEFAULT_TOX_LETHALITY * 2.5 // rejects its owner early after too much punishment
 	toxTolerance = 15 // complete toxin immunity like xenos have would be too powerful
 
 /obj/item/organ/liver/cybernetic
 	name = "cybernetic liver"
 	icon_state = "liver-c"
-	desc = "An electronic device designed to mimic the functions of a human liver. Handles toxins slightly better than an organic liver."
+	desc = ""
 	organ_flags = ORGAN_SYNTHETIC
 	maxHealth = 1.1 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 3.3
@@ -91,7 +91,7 @@
 /obj/item/organ/liver/cybernetic/upgraded
 	name = "upgraded cybernetic liver"
 	icon_state = "liver-c-u"
-	desc = "An upgraded version of the cybernetic liver, designed to improve further upon organic livers. It is resistant to alcohol poisoning and is very robust at filtering toxins."
+	desc = ""
 	alcohol_tolerance = 0.001
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 15 //can shrug off up to 15u of toxins

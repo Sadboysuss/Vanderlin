@@ -101,7 +101,7 @@
 
 /turf/open/floor/holofloor/carpet
 	name = "carpet"
-	desc = "Electrically inviting."
+	desc = ""
 	icon = 'icons/turf/floors/carpet.dmi'
 	icon_state = "carpet"
 	floor_tile = /obj/item/stack/tile/carpet
@@ -126,7 +126,7 @@
 /turf/open/floor/holofloor/snow
 	gender = PLURAL
 	name = "snow"
-	desc = "Looks cold."
+	desc = ""
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 	slowdown = 2

@@ -15,7 +15,7 @@ BONUS
 */
 /datum/symptom/viraladaptation
 	name = "Viral self-adaptation"
-	desc = "The virus mimics the function of normal body cells, becoming harder to spot and to eradicate, but reducing its speed."
+	desc = ""
 	stealth = 3
 	resistance = 5
 	stage_speed = -3

@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(vote)
 				C << browse(null, "window=vote;can_close=0")
 			reset()
 		else
-			var/datum/browser/client_popup
+			var/datum/browser/noclose/client_popup
 			for(var/client/C in voting)
 				client_popup = new(C, "vote", "Voting Panel")
 				client_popup.set_window_options("can_close=0")
@@ -108,12 +108,18 @@ SUBSYSTEM_DEF(vote)
 				text = "\n<b>Vote Tied Between:</b>"
 				for(var/option in winners)
 					text += "\n\t[option]"
+				if(mode == "endround")
+					winners = list("End Round")
 			. = pick(winners)
 			text += "\n<b>Vote Result: [.]</b>"
 		else
 			text += "\n<b>Did not vote:</b> [GLOB.clients.len-voted.len]"
 	else
-		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
+		if(mode == "endround")
+			. = "End Round"
+			text += "\n<b>Vote Result: [.]</b>"
+		else
+			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	log_vote(text)
 	remove_action_buttons()
 	to_chat(world, "\n<font color='purple'>[text]</font>")
@@ -137,6 +143,18 @@ SUBSYSTEM_DEF(vote)
 			if("map")
 				SSmapping.changemap(global.config.maplist[.])
 				SSmapping.map_voted = TRUE
+			if("endround")
+				if(. == "Continue Playing")
+					log_game("LOG VOTE: CONTINUE PLAYING AT [REALTIMEOFDAY]")
+					addomen("roundstart")
+					GLOB.round_timer = GLOB.round_timer + (32 MINUTES)
+				else
+					log_game("LOG VOTE: ELSE  [REALTIMEOFDAY]")
+					var/datum/game_mode/chaosmode/C = SSticker.mode
+					if(istype(C))
+						log_game("LOG VOTE: ROUNDVOTEEND [REALTIMEOFDAY]")
+						to_chat(world, "\n<font color='purple'>15 minutes remain.</font>")
+						C.roundvoteend = TRUE
 	if(restart)
 		var/active_admins = 0
 		for(var/client/C in GLOB.admins)
@@ -146,25 +164,41 @@ SUBSYSTEM_DEF(vote)
 		if(!active_admins)
 			SSticker.Reboot("Restart vote successful.", "restart vote")
 		else
-			to_chat(world, "<span style='boldannounce'>Notice:Restart vote will not restart the server automatically because there are active admins on.</span>")
+			to_chat(world, "<span style='boldannounce'>Notice:Restart vote will not restart the server automatically because there are active gamemasters on.</span>")
 			message_admins("A restart vote has passed, but there are active admins on with +server, so it has been canceled. If you wish, you may restart the server.")
 
 	return .
 
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
 	if(mode)
-		if(CONFIG_GET(flag/no_dead_vote) && usr.stat == DEAD && !usr.client.holder)
-			return 0
+//		if(CONFIG_GET(flag/no_dead_vote) && usr.stat == DEAD && !usr.client.holder)
+//			return 0
 		if(!(usr.ckey in voted))
 			if(vote && 1<=vote && vote<=choices.len)
 				voted += usr.ckey
-				choices[choices[vote]]++	//check this
+				var/vote_power = 1
+				if(usr.client.holder)
+					vote_power += 5
+				if(ishuman(usr))
+					var/mob/living/carbon/H = usr
+					if(H.stat != DEAD)
+						vote_power += 3
+					if(H.job)
+						var/list/list_of_powerful = list("King", "Queen", "Priest", "Steward", "Hand")
+						if(H.job in list_of_powerful)
+							vote_power += 5
+						else
+							if(H.mind)
+								for(var/datum/antagonist/D in H.mind.antag_datums)
+									if(D.increase_votepwr)
+										vote_power += 3
+				choices[choices[vote]] += vote_power //check this
 				return vote
 	return 0
 
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key)
 	if(!mode)
-		if(started_time)
+		if(started_time && initiator_key)
 			var/next_allowed_time = (started_time + CONFIG_GET(number/vote_delay))
 			if(mode)
 				to_chat(usr, "<span class='warning'>There is already a vote in progress! please wait for it to finish.</span>")
@@ -200,6 +234,9 @@ SUBSYSTEM_DEF(vote)
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
+			if("endround")
+				initiator_key = pick("Zlod", "Sun King", "Gaia", "Aeon", "Gemini", "Aries")
+				choices.Add("Continue Playing","End Round")
 			else
 				return 0
 		mode = vote_type
@@ -210,16 +247,16 @@ SUBSYSTEM_DEF(vote)
 			text += "\n[question]"
 		log_vote(text)
 		var/vp = CONFIG_GET(number/vote_period)
-		to_chat(world, "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font>")
+		to_chat(world, "\n<font color='purple'><b>[text]</b>\nClick <a href='?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		time_remaining = round(vp/10)
-		for(var/c in GLOB.clients)
-			var/client/C = c
-			var/datum/action/vote/V = new
-			if(question)
-				V.name = "Vote: [question]"
-			C.player_details.player_actions += V
-			V.Grant(C.mob)
-			generated_actions += V
+//		for(var/c in GLOB.clients)
+//			var/client/C = c
+//			var/datum/action/vote/V = new
+//			if(question)
+//				V.name = "Vote: [question]"
+//			C.player_details.player_actions += V
+//			V.Grant(C.mob)
+//			generated_actions += V
 		return 1
 	return 0
 
@@ -244,7 +281,7 @@ SUBSYSTEM_DEF(vote)
 			var/votes = choices[choices[i]]
 			if(!votes)
 				votes = 0
-			. += "<li><a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([votes] votes)</li>"
+			. += "<li><a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([votes] votepwr)</li>"
 		. += "</ul><hr>"
 		if(admin)
 			. += "(<a href='?src=[REF(src)];vote=cancel'>Cancel Vote</a>) "
@@ -295,7 +332,7 @@ SUBSYSTEM_DEF(vote)
 	if(usr.client.holder)
 		if(check_rights_for(usr.client, R_ADMIN))
 			trialmin = 1
-	
+
 	switch(href_list["vote"])
 		if("close")
 			voting -= usr.client
@@ -340,8 +377,8 @@ SUBSYSTEM_DEF(vote)
 /mob/verb/vote()
 	set category = "OOC"
 	set name = "Vote"
-
-	var/datum/browser/popup = new(src, "vote", "Voting Panel")
+	set hidden = 1
+	var/datum/browser/noclose/popup = new(src, "vote", "Voting Panel")
 	popup.set_window_options("can_close=0")
 	popup.set_content(SSvote.interface(client))
 	popup.open(FALSE)

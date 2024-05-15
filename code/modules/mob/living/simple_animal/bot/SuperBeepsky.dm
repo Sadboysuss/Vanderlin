@@ -1,6 +1,6 @@
 /mob/living/simple_animal/bot/secbot/grievous //This bot is powerful. If you managed to get 4 eswords somehow, you deserve this horror. Emag him for best results.
 	name = "General Beepsky"
-	desc = "Is that a secbot with four eswords in its arms...?"
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "grievous"
 	health = 150
@@ -13,7 +13,7 @@
 
 /mob/living/simple_animal/bot/secbot/grievous/toy //A toy version of general beepsky!
 	name = "Genewul Bweepskee"
-	desc = "An adorable looking secbot with four toy swords taped to its arms"
+	desc = ""
 	health = 50
 	maxHealth = 50
 	baton_type = /obj/item/toy/sword
@@ -21,14 +21,14 @@
 
 /mob/living/simple_animal/bot/secbot/grievous/bullet_act(obj/projectile/P)
 	visible_message("<span class='warning'>[src] deflects [P] with its energy swords!</span>")
-	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return BULLET_ACT_BLOCK
 
 /mob/living/simple_animal/bot/secbot/grievous/Crossed(atom/movable/AM)
 	..()
 	if(ismob(AM) && AM == target)
 		visible_message("<span class='warning'>[src] flails his swords and cuts [AM]!</span>")
-		playsound(src,'sound/effects/beepskyspinsabre.ogg',100,TRUE,-1)
+		playsound(src,'sound/blank.ogg',100,TRUE,-1)
 		stun_attack(AM)
 
 /mob/living/simple_animal/bot/secbot/grievous/Initialize()
@@ -44,12 +44,12 @@
 		return
 	if(prob(block_chance))
 		visible_message("<span class='warning'>[src] deflects [user]'s attack with his energy swords!</span>")
-		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 		return TRUE
 
 /mob/living/simple_animal/bot/secbot/grievous/stun_attack(mob/living/carbon/C) //Criminals don't deserve to live
 	weapon.attack(C, src)
-	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	if(C.stat == DEAD)
 		addtimer(CALLBACK(src, /atom/.proc/update_icon), 2)
 		back_to_idle()
@@ -67,7 +67,7 @@
 				mode = BOT_START_PATROL	// switch to patrol mode
 		if(BOT_HUNT)		// hunting for perp
 			update_icon()
-			playsound(src,'sound/effects/beepskyspinsabre.ogg',100,TRUE,-1)
+			playsound(src,'sound/blank.ogg',100,TRUE,-1)
 			// general beepsky doesn't give up so easily, jedi scum
 			if(frustration >= 20)
 				walk_to(src,0)
@@ -116,8 +116,8 @@
 			target = C
 			oldtarget_name = C.name
 			speak("Level [threatlevel] infraction alert!")
-			playsound(src, pick('sound/voice/beepsky/criminal.ogg', 'sound/voice/beepsky/justice.ogg', 'sound/voice/beepsky/freeze.ogg'), 50, FALSE)
-			playsound(src,'sound/weapons/saberon.ogg',50,TRUE,-1)
+			playsound(src, pick('sound/blank.ogg'), 50, FALSE)
+			playsound(src,'sound/blank.ogg',50,TRUE,-1)
 			visible_message("<span class='warning'>[src] ignites his energy swords!</span>")
 			icon_state = "grievous-c"
 			visible_message("<b>[src]</b> points at [C.name]!")

@@ -26,13 +26,13 @@
 //spooky foods (you can't actually make these when it's not halloween)
 /obj/item/reagent_containers/food/snacks/sugarcookie/spookyskull
 	name = "skull cookie"
-	desc = "Spooky! It's got delicious calcium flavouring!"
+	desc = ""
 	icon = 'icons/obj/halloween_items.dmi'
 	icon_state = "skeletoncookie"
 
 /obj/item/reagent_containers/food/snacks/sugarcookie/spookycoffin
 	name = "coffin cookie"
-	desc = "Spooky! It's got delicious coffee flavouring!"
+	desc = ""
 	icon = 'icons/obj/halloween_items.dmi'
 	icon_state = "coffincookie"
 
@@ -40,7 +40,7 @@
 
 /obj/item/storage/spooky
 	name = "trick-o-treat bag"
-	desc = "A pumpkin-shaped bag that holds all sorts of goodies!"
+	desc = ""
 	icon = 'icons/obj/halloween_items.dmi'
 	icon_state = "treatbag"
 
@@ -58,5 +58,5 @@
 
 /obj/item/card/emag/halloween
 	name = "hack-o'-lantern"
-	desc = "It's a pumpkin with a cryptographic sequencer sticking out."
+	desc = ""
 	icon_state = "hack_o_lantern"

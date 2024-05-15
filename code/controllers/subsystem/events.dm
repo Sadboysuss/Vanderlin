@@ -3,25 +3,26 @@ SUBSYSTEM_DEF(events)
 	init_order = INIT_ORDER_EVENTS
 	runlevels = RUNLEVEL_GAME
 
+
 	var/list/control = list()	//list of all datum/round_event_control. Used for selecting events based on weight and occurrences.
 	var/list/running = list()	//list of all existing /datum/round_event
 	var/list/currentrun = list()
 
 	var/scheduled = 0			//The next world.time that a naturally occuring random event can be selected.
 	var/frequency_lower = 1800	//3 minutes lower bound.
-	var/frequency_upper = 6000	//10 minutes upper bound. Basically an event will happen every 3 to 10 minutes.
+	var/frequency_upper = 3000	//10 minutes upper bound. Basically an event will happen every 3 to 10 minutes.
 
 	var/list/holidays			//List of all holidays occuring today or null if no holidays
 	var/wizardmode = FALSE
 
 /datum/controller/subsystem/events/Initialize(time, zlevel)
-	for(var/type in typesof(/datum/round_event_control))
+	for(var/type in typesof(/datum/round_event_control/rogue))
 		var/datum/round_event_control/E = new type()
 		if(!E.typepath)
 			continue				//don't want this one! leave it for the garbage collector
 		control += E				//add it to the list of all events (controls)
 	reschedule()
-	getHoliday()
+//	getHoliday()
 	return ..()
 
 

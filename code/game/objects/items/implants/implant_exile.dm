@@ -3,7 +3,7 @@
 
 /obj/item/implant/exile
 	name = "exile implant"
-	desc = "Prevents you from returning from away missions."
+	desc = ""
 	activated = 0
 
 /obj/item/implant/exile/get_data()
@@ -18,5 +18,5 @@
 
 /obj/item/implantcase/exile
 	name = "implant case - 'Exile'"
-	desc = "A glass case containing an exile implant."
+	desc = ""
 	imp_type = /obj/item/implant/exile

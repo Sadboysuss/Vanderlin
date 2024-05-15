@@ -1,7 +1,7 @@
 // Plant analyzer
 /obj/item/plant_analyzer
 	name = "plant analyzer"
-	desc = "A scanner used to evaluate a plant's various areas of growth."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
@@ -16,7 +16,7 @@
 // *************************************
 
 /obj/item/reagent_containers/spray/weedspray // -- Skie
-	desc = "It's a toxic mixture, in spray form, to kill small weeds."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	name = "weed spray"
 	icon_state = "weedspray"
@@ -31,7 +31,7 @@
 	return (TOXLOSS)
 
 /obj/item/reagent_containers/spray/pestspray // -- Skie
-	desc = "It's some pest eliminator spray! <I>Do not inhale!</I>"
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	name = "pest spray"
 	icon_state = "pestspray"
@@ -47,7 +47,7 @@
 
 /obj/item/cultivator
 	name = "cultivator"
-	desc = "It's used for removing weeds or scratching your back."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "cultivator"
 	item_state = "cultivator"
@@ -59,7 +59,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	custom_materials = list(/datum/material/iron=50)
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/cultivator/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is scratching [user.p_their()] back as hard as [user.p_they()] can with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -79,13 +79,13 @@
 	if(istype(H) && has_gravity(loc) && HAS_TRAIT(H, TRAIT_CLUMSY) && !H.resting)
 		H.confused = max(H.confused, 10)
 		H.Stun(20)
-		playsound(src, 'sound/weapons/punch4.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		H.visible_message("<span class='warning'>[H] steps on [src] causing the handle to hit [H.p_them()] right in the face!</span>", \
-						  "<span class='userdanger'>You step on [src] causing the handle to hit you right in the face!</span>")
+						  "<span class='danger'>I step on [src] causing the handle to hit you right in the face!</span>")
 
 /obj/item/hatchet
 	name = "hatchet"
-	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "hatchet"
 	item_state = "hatchet"
@@ -95,11 +95,11 @@
 	force = 12
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 15
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 4
 	custom_materials = list(/datum/material/iron = 15000)
 	attack_verb = list("chopped", "torn", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	sharpness = IS_SHARP
 
 /obj/item/hatchet/Initialize()
@@ -108,11 +108,11 @@
 
 /obj/item/hatchet/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is chopping at [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(src, 'sound/weapons/bladeslice.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
 /obj/item/hatchet/wooden
-	desc = "A crude axe blade upon a short wooden handle."
+	desc = ""
 	icon_state = "woodhatchet"
 	custom_materials = null
 	flags_1 = NONE
@@ -122,17 +122,17 @@
 	lefthand_file = 'icons/mob/inhands/weapons/polearms_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/polearms_righthand.dmi'
 	name = "scythe"
-	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
+	desc = ""
 	force = 13
 	throwforce = 5
 	throw_speed = 2
 	throw_range = 3
 	w_class = WEIGHT_CLASS_BULKY
 	flags_1 = CONDUCT_1
-	armour_penetration = 20
+	armor_penetration = 20
 	slot_flags = ITEM_SLOT_BACK
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	var/swiping = FALSE
 
 /obj/item/scythe/Initialize()
@@ -183,17 +183,17 @@
 
 /obj/item/reagent_containers/glass/bottle/nutrient/ez
 	name = "bottle of E-Z-Nutrient"
-	desc = "Contains a fertilizer that causes mild mutations with each harvest."
+	desc = ""
 	list_reagents = list(/datum/reagent/plantnutriment/eznutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/l4z
 	name = "bottle of Left 4 Zed"
-	desc = "Contains a fertilizer that limits plant yields to no more than one and causes significant mutations in plants."
+	desc = ""
 	list_reagents = list(/datum/reagent/plantnutriment/left4zednutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/rh
 	name = "bottle of Robust Harvest"
-	desc = "Contains a fertilizer that increases the yield of a plant by 30% while causing no mutations."
+	desc = ""
 	list_reagents = list(/datum/reagent/plantnutriment/robustharvestnutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/empty
@@ -206,10 +206,10 @@
 
 /obj/item/reagent_containers/glass/bottle/killer/weedkiller
 	name = "bottle of weed killer"
-	desc = "Contains a herbicide."
+	desc = ""
 	list_reagents = list(/datum/reagent/toxin/plantbgone/weedkiller = 50)
 
 /obj/item/reagent_containers/glass/bottle/killer/pestkiller
 	name = "bottle of pest spray"
-	desc = "Contains a pesticide."
+	desc = ""
 	list_reagents = list(/datum/reagent/toxin/pestkiller = 50)

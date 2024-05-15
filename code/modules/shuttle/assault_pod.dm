@@ -13,7 +13,7 @@
 /obj/docking_port/mobile/assault_pod/initiate_docking(obj/docking_port/stationary/S1)
 	. = ..()
 	if(!istype(S1, /obj/docking_port/stationary/transit))
-		playsound(get_turf(src.loc), 'sound/effects/explosion1.ogg',50,TRUE)
+		playsound(get_turf(src.loc), 'sound/blank.ogg',50,TRUE)
 
 
 
@@ -24,7 +24,7 @@
 	item_state = "radio"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	desc = "Used to select a landing zone for assault pods."
+	desc = ""
 	var/shuttle_id = "steel_rain"
 	var/dwidth = 3
 	var/dheight = 0

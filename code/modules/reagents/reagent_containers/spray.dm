@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/spray
 	name = "spray bottle"
-	desc = "A spray bottle, with an unscrewable top."
+	desc = ""
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "sprayer_large"
 	item_state = "cleaner"
@@ -38,7 +38,7 @@
 			return
 
 		var/trans = A.reagents.trans_to(src, 50, transfered_by = user) //transfer 50u , using the spray's transfer amount would take too long to refill
-		to_chat(user, "<span class='notice'>You fill \the [src] with [trans] units of the contents of \the [A].</span>")
+		to_chat(user, "<span class='notice'>I fill \the [src] with [trans] units of the contents of \the [A].</span>")
 		return
 
 	if(reagents.total_volume < amount_per_transfer_from_this)
@@ -47,7 +47,7 @@
 
 	spray(A, user)
 
-	playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE, -6)
 	user.changeNext_move(CLICK_CD_RANGE*2)
 	user.newtonian_move(get_dir(A, user))
 
@@ -121,25 +121,25 @@
 	else
 		amount_per_transfer_from_this = initial(amount_per_transfer_from_this)
 		current_range = spray_range
-	to_chat(user, "<span class='notice'>You switch the nozzle setting to [stream_mode ? "\"stream\"":"\"spray\""]. You'll now use [amount_per_transfer_from_this] units per use.</span>")
+	to_chat(user, "<span class='notice'>I switch the nozzle setting to [stream_mode ? "\"stream\"":"\"spray\""]. You'll now use [amount_per_transfer_from_this] units per use.</span>")
 
 /obj/item/reagent_containers/spray/attackby(obj/item/I, mob/user, params)
 	var/hotness = I.get_temperature()
 	if(hotness && reagents)
 		reagents.expose_temperature(hotness)
-		to_chat(user, "<span class='notice'>You heat [name] with [I]!</span>")
+		to_chat(user, "<span class='notice'>I heat [name] with [I]!</span>")
 	return ..()
 
 /obj/item/reagent_containers/spray/verb/empty()
 	set name = "Empty Spray Bottle"
-	set category = "Object"
+	set hidden = 1
 	set src in usr
 	if(usr.incapacitated())
 		return
 	if (alert(usr, "Are you sure you want to empty that?", "Empty Bottle:", "Yes", "No") != "Yes")
 		return
 	if(isturf(usr.loc) && src.loc == usr)
-		to_chat(usr, "<span class='notice'>You empty \the [src] onto the floor.</span>")
+		to_chat(usr, "<span class='notice'>I empty \the [src] onto the floor.</span>")
 		reagents.reaction(usr.loc)
 		src.reagents.clear_reagents()
 
@@ -161,7 +161,7 @@
 //space cleaner
 /obj/item/reagent_containers/spray/cleaner
 	name = "space cleaner"
-	desc = "BLAM!-brand non-foaming space cleaner!"
+	desc = ""
 	icon_state = "cleaner"
 	volume = 100
 	list_reagents = list(/datum/reagent/space_cleaner = 100)
@@ -186,14 +186,14 @@
 /obj/item/reagent_containers/spray/spraytan
 	name = "spray tan"
 	volume = 50
-	desc = "Gyaro brand spray tan. Do not spray near eyes or other orifices."
+	desc = ""
 	list_reagents = list(/datum/reagent/spraytan = 50)
 
 
 //pepperspray
 /obj/item/reagent_containers/spray/pepper
 	name = "pepperspray"
-	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
@@ -220,7 +220,7 @@
 //water flower
 /obj/item/reagent_containers/spray/waterflower
 	name = "water flower"
-	desc = "A seemingly innocent sunflower...with a twist."
+	desc = ""
 	icon = 'icons/obj/hydroponics/harvest.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
@@ -234,7 +234,7 @@
 ///Subtype used for the lavaland clown ruin.
 /obj/item/reagent_containers/spray/waterflower/superlube
 	name = "clown flower"
-	desc = "A delightly devilish flower... you got a feeling where this is going."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "clownflower"
 	volume = 30
@@ -252,7 +252,7 @@
 
 /obj/item/reagent_containers/spray/waterflower/cyborg/hacked
 	name = "nova flower"
-	desc = "This doesn't look safe at all..."
+	desc = ""
 	list_reagents = list(/datum/reagent/clf3 = 3)
 	volume = 3
 	generate_type = /datum/reagent/clf3
@@ -274,7 +274,7 @@
 	generate_reagents()
 
 /obj/item/reagent_containers/spray/waterflower/cyborg/empty()
-	to_chat(usr, "<span class='warning'>You can not empty this!</span>")
+	to_chat(usr, "<span class='warning'>I can not empty this!</span>")
 	return
 
 /obj/item/reagent_containers/spray/waterflower/cyborg/proc/generate_reagents()
@@ -283,7 +283,7 @@
 //chemsprayer
 /obj/item/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
-	desc = "A utility used to spray large amounts of reagents in a given area."
+	desc = ""
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
@@ -299,7 +299,7 @@
 	volume = 600
 
 /obj/item/reagent_containers/spray/chemsprayer/afterattack(atom/A as mob|obj, mob/user)
-	// Make it so the bioterror spray doesn't spray yourself when you click your inventory items
+	// Make it so the bioterror spray doesn't spray myself when you click your inventory items
 	if (A.loc == user)
 		return
 	. = ..()
@@ -322,7 +322,7 @@
 
 /obj/item/reagent_containers/spray/chemsprayer/janitor
 	name = "janitor chem sprayer"
-	desc = "A utility used to spray large amounts of cleaning reagents in a given area. It regenerates space cleaner by itself but it's unable to be fueled by normal means."
+	desc = ""
 	icon_state = "chemsprayer_janitor"
 	item_state = "chemsprayer_janitor"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
@@ -353,7 +353,7 @@
 // Plant-B-Gone
 /obj/item/reagent_containers/spray/plantbgone // -- Skie
 	name = "Plant-B-Gone"
-	desc = "Kills those pesky weeds!"
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
@@ -364,7 +364,7 @@
 
 /obj/item/reagent_containers/spray/syndicate
 	name = "suspicious spray bottle"
-	desc = "A spray bottle, with a high performance plastic nozzle. The color scheme makes you feel slightly uneasy."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "sprayer_sus_8"
 	item_state = "sprayer_sus"
@@ -408,6 +408,6 @@
 
 /obj/item/reagent_containers/spray/rhigoxane
 	name = "medical spray (rhigoxane)"
-	desc = "A medical spray bottle.This one contains rhigoxane, it is used to treat burns and cool down temperature if applied with spray."
+	desc = ""
 	icon_state = "sprayer_large"
 	list_reagents = list(/datum/reagent/medicine/rhigoxane = 100)

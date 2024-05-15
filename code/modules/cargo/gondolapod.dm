@@ -1,7 +1,7 @@
 /mob/living/simple_animal/pet/gondola/gondolapod
 	name = "gondola"
 	real_name = "gondola"
-	desc = "The silent walker. This one seems to be part of a delivery agency."
+	desc = ""
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "bops"
@@ -41,7 +41,7 @@
 /mob/living/simple_animal/pet/gondola/gondolapod/verb/deliver()
 	set name = "Release Contents"
 	set category = "Gondola"
-	set desc = "Release any contents stored within your vast belly."
+	set desc = ""
 	linked_pod.open(src, forced = TRUE)
 
 /mob/living/simple_animal/pet/gondola/gondolapod/examine(mob/user)
@@ -54,12 +54,12 @@
 /mob/living/simple_animal/pet/gondola/gondolapod/verb/check()
 	set name = "Count Contents"
 	set category = "Gondola"
-	set desc = "Take a deep look inside youself, and count up what's inside"
+	set desc = ""
 	var/total = contents.len
 	if (total)
-		to_chat(src, "<span class='notice'>You detect [total] object\s within your incredibly vast belly.</span>")
+		to_chat(src, "<span class='notice'>I detect [total] object\s within your incredibly vast belly.</span>")
 	else
-		to_chat(src, "<span class='notice'>A closer look inside yourself reveals... nothing.</span>")
+		to_chat(src, "<span class='notice'>A closer look inside myself reveals... nothing.</span>")
 
 /mob/living/simple_animal/pet/gondola/gondolapod/proc/setOpened()
 	opened = TRUE

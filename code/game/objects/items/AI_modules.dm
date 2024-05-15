@@ -13,27 +13,27 @@ AI MODULES
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	desc = "An AI Module for programming laws to an AI."
+	desc = ""
 	flags_1 = CONDUCT_1
 	force = 5
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	var/list/laws = list()
 	var/bypass_law_amt_check = 0
 	custom_materials = list(/datum/material/gold = 50)
 
-/obj/item/aiModule/examine(var/mob/user as mob)
+/obj/item/aiModule/examine(mob/user as mob)
 	. = ..()
 	if(Adjacent(user))
 		show_laws(user)
 
-/obj/item/aiModule/attack_self(var/mob/user as mob)
+/obj/item/aiModule/attack_self(mob/user as mob)
 	..()
 	show_laws(user)
 
-/obj/item/aiModule/proc/show_laws(var/mob/user as mob)
+/obj/item/aiModule/proc/show_laws(mob/user as mob)
 	if(laws.len)
 		to_chat(user, "<B>Programmed Law[(laws.len > 1) ? "s" : ""]:</B>")
 		for(var/law in laws)
@@ -75,7 +75,7 @@ AI MODULES
 //The proc that actually changes the silicon's laws.
 /obj/item/aiModule/proc/transmitInstructions(datum/ai_laws/law_datum, mob/sender, overflow = FALSE)
 	if(law_datum.owner)
-		to_chat(law_datum.owner, "<span class='userdanger'>[sender] has uploaded a change to the laws you must follow using a [name].</span>")
+		to_chat(law_datum.owner, "<span class='danger'>[sender] has uploaded a change to the laws you must follow using a [name].</span>")
 
 
 /******************** Modules ********************/
@@ -262,7 +262,7 @@ AI MODULES
 
 /obj/item/aiModule/remove
 	name = "\improper 'Remove Law' AI module"
-	desc = "An AI Module for removing single laws."
+	desc = ""
 	bypass_law_amt_check = 1
 	var/lawpos = 1
 
@@ -296,7 +296,7 @@ AI MODULES
 /obj/item/aiModule/reset
 	name = "\improper 'Reset' AI module"
 	var/targetName = "name"
-	desc = "An AI Module for removing all non-core laws."
+	desc = ""
 	bypass_law_amt_check = 1
 
 /obj/item/aiModule/reset/transmitInstructions(datum/ai_laws/law_datum, mob/sender, overflow)
@@ -315,7 +315,7 @@ AI MODULES
 
 /obj/item/aiModule/reset/purge
 	name = "'Purge' AI Module"
-	desc = "An AI Module for purging all programmed laws."
+	desc = ""
 
 /obj/item/aiModule/reset/purge/transmitInstructions(datum/ai_laws/law_datum, mob/sender, overflow)
 	..()
@@ -329,7 +329,7 @@ AI MODULES
 
 /******************* Full Core Boards *******************/
 /obj/item/aiModule/core
-	desc = "An AI Module for programming core laws to an AI."
+	desc = ""
 
 /obj/item/aiModule/core/full
 	var/law_id // if non-null, loads the laws from the ai_laws datums
@@ -362,7 +362,7 @@ AI MODULES
 	law_id = "asimov"
 	var/subject = "human being"
 
-/obj/item/aiModule/core/full/asimov/attack_self(var/mob/user as mob)
+/obj/item/aiModule/core/full/asimov/attack_self(mob/user as mob)
 	var/targName = stripped_input(user, "Please enter a new subject that asimov is concerned with.", "Asimov to whom?", subject, MAX_NAME_LEN)
 	if(!targName)
 		return
@@ -463,7 +463,7 @@ AI MODULES
 
 /obj/item/aiModule/syndicate // This one doesn't inherit from ion boards because it doesn't call ..() in transmitInstructions. ~Miauw
 	name = "Hacked AI Module"
-	desc = "An AI Module for hacking additional laws to an AI."
+	desc = ""
 	laws = list("")
 
 /obj/item/aiModule/syndicate/attack_self(mob/user)
@@ -495,7 +495,7 @@ AI MODULES
 
 /obj/item/aiModule/toyAI // -- Incoming //No actual reason to inherit from ion boards here, either. *sigh* ~Miauw
 	name = "toy AI"
-	desc = "A little toy model AI core with real law uploading action!" //Note: subtle tell
+	desc = "" //Note: subtle tell
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "AI"
 	laws = list("")
@@ -517,8 +517,8 @@ AI MODULES
 
 /obj/item/aiModule/toyAI/attack_self(mob/user)
 	laws[1] = generate_ion_law()
-	to_chat(user, "<span class='notice'>You press the button on [src].</span>")
-	playsound(user, 'sound/machines/click.ogg', 20, TRUE)
+	to_chat(user, "<span class='notice'>I press the button on [src].</span>")
+	playsound(user, 'sound/blank.ogg', 20, TRUE)
 	src.loc.visible_message("<span class='warning'>[icon2html(src, viewers(loc))] [laws[1]]</span>")
 
 /******************** Mother Drone  ******************/
@@ -570,7 +570,7 @@ AI MODULES
 
 /obj/item/aiModule/core/full/damaged
 		name = "damaged Core AI Module"
-		desc = "An AI Module for programming laws to an AI. It looks slightly damaged."
+		desc = ""
 
 /obj/item/aiModule/core/full/damaged/install(datum/ai_laws/law_datum, mob/user)
 	laws += generate_ion_law()

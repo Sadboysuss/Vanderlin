@@ -1,6 +1,6 @@
 /obj/machinery/computer/security
 	name = "security camera console"
-	desc = "Used to access the various cameras on the station."
+	desc = ""
 	icon_screen = "cameras"
 	icon_keyboard = "security_key"
 	circuit = /obj/item/circuitboard/computer/security
@@ -83,7 +83,7 @@
 		if(!(user in watchers))
 			user.unset_machine() // no usable camera on the network, we disconnect the user from the computer.
 			return
-	playsound(src, 'sound/machines/terminal_prompt.ogg', 25, FALSE)
+	playsound(src, 'sound/blank.ogg', 25, FALSE)
 	use_camera_console(user)
 
 /obj/machinery/computer/security/proc/use_camera_console(mob/user)
@@ -93,14 +93,14 @@
 		return
 	if(!t)
 		user.unset_machine()
-		playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
+		playsound(src, 'sound/blank.ogg', 25, FALSE)
 		return
 
 	var/obj/machinery/camera/C = camera_list[t]
 
 	if(t == "Cancel")
 		user.unset_machine()
-		playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
+		playsound(src, 'sound/blank.ogg', 25, FALSE)
 		return
 	if(C)
 		var/camera_fail = 0
@@ -117,7 +117,7 @@
 			user.unset_machine()
 			return 0
 
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 25, FALSE)
+		playsound(src, 'sound/blank.ogg', 25, FALSE)
 		if(isAI(user))
 			var/mob/living/silicon/ai/A = user
 			A.eyeobj.setLoc(get_turf(C))
@@ -160,7 +160,7 @@
 
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
-	desc = "An old TV hooked into the station's camera network."
+	desc = ""
 	icon_state = "television"
 	icon_keyboard = null
 	icon_screen = "detective_tv"
@@ -168,7 +168,7 @@
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera console"
-	desc = "Used to access the various cameras on the outpost."
+	desc = ""
 	icon_screen = "mining"
 	icon_keyboard = "mining_key"
 	network = list("mine", "auxbase")
@@ -176,25 +176,25 @@
 
 /obj/machinery/computer/security/research
 	name = "research camera console"
-	desc = "Used to access the various cameras in science."
+	desc = ""
 	network = list("rd")
 	circuit = /obj/item/circuitboard/computer/research
 
 /obj/machinery/computer/security/hos
 	name = "\improper Head of Security's camera console"
-	desc = "A custom security console with added access to the labor camp network."
+	desc = ""
 	network = list("ss13", "labor")
 	circuit = null
 
 /obj/machinery/computer/security/labor
 	name = "labor camp monitoring"
-	desc = "Used to access the various cameras on the labor camp."
+	desc = ""
 	network = list("labor")
 	circuit = null
 
 /obj/machinery/computer/security/qm
 	name = "\improper Quartermaster's camera console"
-	desc = "A console with access to the mining, auxillary base and vault camera networks."
+	desc = ""
 	network = list("mine", "auxbase", "vault")
 	circuit = null
 
@@ -202,7 +202,7 @@
 
 /obj/machinery/computer/security/telescreen
 	name = "\improper Telescreen"
-	desc = "Used for watching an empty arena."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "telescreen"
 	layer = SIGN_LAYER
@@ -218,7 +218,7 @@
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
-	desc = "Damn, they better have the /tg/ channel on these things."
+	desc = ""
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment_blank"
 	network = list("thunder")
@@ -250,65 +250,65 @@
 
 /obj/machinery/computer/security/telescreen/rd
 	name = "\improper Research Director's telescreen"
-	desc = "Used for watching the AI and the RD's goons from the safety of his office."
+	desc = ""
 	network = list("rd", "aicore", "aiupload", "minisat", "xeno", "test")
 
 /obj/machinery/computer/security/telescreen/research
 	name = "research telescreen"
-	desc = "A telescreen with access to the research division's camera network."
+	desc = ""
 	network = list("rd")
 
 /obj/machinery/computer/security/telescreen/ce
 	name = "\improper Chief Engineer's telescreen"
-	desc = "Used for watching the engine, telecommunications and the minisat."
+	desc = ""
 	network = list("engine", "singularity", "tcomms", "minisat")
 
 /obj/machinery/computer/security/telescreen/cmo
 	name = "\improper Chief Medical Officer's telescreen"
-	desc = "A telescreen with access to the medbay's camera network."
+	desc = ""
 	network = list("medbay")
 
 /obj/machinery/computer/security/telescreen/vault
 	name = "vault monitor"
-	desc = "A telescreen that connects to the vault's camera network."
+	desc = ""
 	network = list("vault")
 
 /obj/machinery/computer/security/telescreen/toxins
 	name = "bomb test site monitor"
-	desc = "A telescreen that connects to the bomb test site's camera."
+	desc = ""
 	network = list("toxins")
 
 /obj/machinery/computer/security/telescreen/engine
 	name = "engine monitor"
-	desc = "A telescreen that connects to the engine's camera network."
+	desc = ""
 	network = list("engine")
 
 /obj/machinery/computer/security/telescreen/turbine
 	name = "turbine monitor"
-	desc = "A telescreen that connects to the turbine's camera."
+	desc = ""
 	network = list("turbine")
 
 /obj/machinery/computer/security/telescreen/interrogation
 	name = "interrogation room monitor"
-	desc = "A telescreen that connects to the interrogation room's camera."
+	desc = ""
 	network = list("interrogation")
 
 /obj/machinery/computer/security/telescreen/prison
 	name = "prison monitor"
-	desc = "A telescreen that connects to the permabrig's camera network."
+	desc = ""
 	network = list("prison")
 
 /obj/machinery/computer/security/telescreen/auxbase
 	name = "auxillary base monitor"
-	desc = "A telescreen that connects to the auxillary base's camera."
+	desc = ""
 	network = list("auxbase")
 
 /obj/machinery/computer/security/telescreen/minisat
 	name = "minisat monitor"
-	desc = "A telescreen that connects to the minisat's camera network."
+	desc = ""
 	network = list("minisat")
 
 /obj/machinery/computer/security/telescreen/aiupload
 	name = "\improper AI upload monitor"
-	desc = "A telescreen that connects to the AI upload's camera network."
+	desc = ""
 	network = list("aiupload")

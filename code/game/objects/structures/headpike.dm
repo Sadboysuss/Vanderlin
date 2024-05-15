@@ -1,6 +1,6 @@
 /obj/structure/headpike
 	name = "spooky head on a spear"
-	desc = "When you really want to send a message."
+	desc = ""
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "headpike"
 	density = FALSE
@@ -40,7 +40,7 @@
 	. = ..()
 	if(.)
 		return
-	to_chat(user, "<span class='notice'>You take down [src].</span>")
+	to_chat(user, "<span class='notice'>I take down [src].</span>")
 	victim.forceMove(drop_location())
 	victim = null
 	spear.forceMove(drop_location())

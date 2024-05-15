@@ -14,17 +14,20 @@
 /datum/hud/proc/create_parallax(mob/viewmob)
 	var/mob/screenmob = viewmob || mymob
 	var/client/C = screenmob.client
+//	return //disabled parallax
 	if (!apply_parallax_pref(viewmob)) //don't want shit computers to crash when specing someone with insane parallax, so use the viewer's pref
 		return
 
 	if(!length(C.parallax_layers_cached))
 		C.parallax_layers_cached = list()
-		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_1(null, C.view)
-		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_2(null, C.view)
-		C.parallax_layers_cached += new /obj/screen/parallax_layer/planet(null, C.view)
-		if(SSparallax.random_layer)
-			C.parallax_layers_cached += new SSparallax.random_layer
-		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_3(null, C.view)
+//		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_1(null, C.view)
+//		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_2(null, C.view)
+//		C.parallax_layers_cached += new /obj/screen/parallax_layer/planet(null, C.view)
+//		if(SSparallax.random_layer)
+//			C.parallax_layers_cached += new SSparallax.random_layer
+//		C.parallax_layers_cached += new /obj/screen/parallax_layer/layer_3(null, C.view)
+		C.parallax_layers_cached += new /obj/screen/parallax_layer/rogue(null, C.view)
+		C.parallax_layers_cached += new /obj/screen/parallax_layer/rogue/fog(null, C.view)
 
 	C.parallax_layers = C.parallax_layers_cached.Copy()
 
@@ -103,6 +106,8 @@
 		var/animate_time = 0
 		for(var/thing in C.parallax_layers)
 			var/obj/screen/parallax_layer/L = thing
+			if(L.speed == 0)
+				continue
 			L.icon_state = initial(L.icon_state)
 			L.update_o(C.view)
 			var/T = PARALLAX_LOOP_TIME / L.speed
@@ -126,7 +131,8 @@
 	if(!skip_windups)
 		for(var/thing in C.parallax_layers)
 			var/obj/screen/parallax_layer/L = thing
-
+			if(!L.speed)
+				continue
 			var/T = PARALLAX_LOOP_TIME / L.speed
 			if (isnull(shortesttimer))
 				shortesttimer = T
@@ -136,7 +142,7 @@
 			animate(L, transform = matrix(), time = T, easing = QUAD_EASING | (new_parallax_movedir ? EASE_IN : EASE_OUT), flags = ANIMATION_END_NOW)
 			if (new_parallax_movedir)
 				L.transform = newtransform
-				animate(transform = matrix(), time = T) //queue up another animate so lag doesn't create a shutter
+				animate(transform = matrix(), time = T) //queue up another animate so lag doesn't _ a shutter
 
 	C.parallax_movedir = new_parallax_movedir
 	if (C.parallax_animate_timer)
@@ -157,6 +163,8 @@
 			continue
 
 		var/newstate = initial(L.icon_state)
+		if(!L.speed)
+			continue
 		var/T = PARALLAX_LOOP_TIME / L.speed
 
 		if (newstate in icon_states(L.icon))
@@ -170,7 +178,7 @@
 /datum/hud/proc/update_parallax()
 	var/client/C = mymob.client
 	var/turf/posobj = get_turf(C.eye)
-	if(!posobj) 
+	if(!posobj)
 		return
 	var/area/areaobj = posobj.loc
 
@@ -329,3 +337,17 @@
 
 /obj/screen/parallax_layer/planet/update_o()
 	return //Shit wont move
+
+/obj/screen/parallax_layer/rogue
+	icon_state = "random_layer2"
+	blend_mode = BLEND_OVERLAY
+	absolute = TRUE //Status of seperation
+	speed = 1
+	layer = 1
+
+/obj/screen/parallax_layer/rogue/fog
+	icon_state = "random_layer1"
+	blend_mode = BLEND_OVERLAY
+	absolute = FALSE //Status of seperation
+	speed = 3
+	layer = 2

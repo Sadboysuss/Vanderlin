@@ -41,13 +41,13 @@
 
 /mob/living/carbon/human/set_drugginess(amount)
 	..()
-	if(!amount)
-		remove_language(/datum/language/beachbum)
+//	if(!amount)
+//		remove_language(/datum/language/beachbum)
 
 /mob/living/carbon/human/adjust_drugginess(amount)
 	..()
-	if(!dna.check_mutation(STONER))
-		if(druggy)
-			grant_language(/datum/language/beachbum)
-		else
-			remove_language(/datum/language/beachbum)
+//	if(!dna.check_mutation(STONER))
+//		if(druggy)
+//			grant_language(/datum/language/beachbum)
+//		else
+//			remove_language(/datum/language/beachbum)

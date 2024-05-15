@@ -1,8 +1,8 @@
 // Eggplant
 /obj/item/seeds/eggplant
 	name = "pack of eggplant seeds"
-	desc = "These seeds grow to produce berries that look nothing like eggs."
-	icon_state = "seed-eggplant"
+	desc = ""
+	icon_state = "seed"
 	species = "eggplant"
 	plantname = "Eggplants"
 	product = /obj/item/reagent_containers/food/snacks/grown/eggplant
@@ -18,7 +18,7 @@
 /obj/item/reagent_containers/food/snacks/grown/eggplant
 	seed = /obj/item/seeds/eggplant
 	name = "eggplant"
-	desc = "Maybe there's a chicken inside?"
+	desc = ""
 	icon_state = "eggplant"
 	filling_color = "#800080"
 	bitesize_mod = 2
@@ -28,8 +28,8 @@
 // Egg-Plant
 /obj/item/seeds/eggplant/eggy
 	name = "pack of egg-plant seeds"
-	desc = "These seeds grow to produce berries that look a lot like eggs."
-	icon_state = "seed-eggy"
+	desc = ""
+	icon_state = "seed"
 	species = "eggy"
 	plantname = "Egg-Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/shell/eggy
@@ -41,7 +41,7 @@
 /obj/item/reagent_containers/food/snacks/grown/shell/eggy
 	seed = /obj/item/seeds/eggplant/eggy
 	name = "egg-plant"
-	desc = "There MUST be a chicken inside."
+	desc = ""
 	icon_state = "eggyplant"
 	trash = /obj/item/reagent_containers/food/snacks/egg
 	filling_color = "#F8F8FF"

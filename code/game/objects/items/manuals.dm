@@ -162,7 +162,7 @@
 				- metal rod (kebab)
 
 				<h2>Table Craft:</h2>
-				Put ingredients on table, then click and drag the table onto yourself to see what recipes you can prepare.
+				Put ingredients on table, then click and drag the table onto myself to see what recipes you can prepare.
 
 				<h2>Microwave:</h2>
 				Use it to cook or boil food ingredients (meats, doughs, egg, spaghetti, donkpocket, etc...).
@@ -262,7 +262,7 @@
 					myframe.style.display = "inline";
     			}
 			</script>
-			<p id='loading'>You start skimming through the manual...</p>
+			<p id='loading'>I start skimming through the manual...</p>
 			<iframe width='100%' height='97%' onload="pageloaded(this)" src="[wikiurl]/[page_link]?printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 			</body>
 
@@ -300,7 +300,7 @@
 
 /obj/item/book/manual/wiki/security_space_law
 	name = "Space Law"
-	desc = "A set of Nanotrasen guidelines for keeping law and order on their space stations."
+	desc = ""
 	icon_state = "bookSpaceLaw"
 	author = "Nanotrasen"
 	title = "Space Law"
@@ -375,7 +375,7 @@
 
 /obj/item/book/manual/wiki/cooking_to_serve_man
 	name = "To Serve Man"
-	desc = "It's a cookbook!"
+	desc = ""
 	icon_state ="cooked_book"
 	author = "the Kanamitan Empire"
 	title = "To Serve Man"
@@ -426,7 +426,7 @@
 /obj/item/book/manual/wiki/toxins/suicide_act(mob/user)
 	var/mob/living/carbon/human/H = user
 	user.visible_message("<span class='suicide'>[user] starts dancing to the Rhumba Beat! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
+	playsound(loc, 'sound/blank.ogg', 10, TRUE, -3)
 	if (!QDELETED(H))
 		H.emote("spin")
 		sleep(20)

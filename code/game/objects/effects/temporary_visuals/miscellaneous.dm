@@ -1,11 +1,17 @@
 //unsorted miscellaneous temporary visuals
 /obj/effect/temp_visual/dir_setting/bloodsplatter
 	icon = 'icons/effects/blood.dmi'
-	duration = 5
+	duration = 10
 	randomdir = FALSE
 	layer = BELOW_MOB_LAYER
+	plane = GAME_PLANE_FOV_HIDDEN
 	var/splatter_type = "splatter"
 
+/obj/effect/temp_visual/dir_setting/bloodsplatter/Initialize(mapload, set_dir)
+	icon_state = "[splatter_type][rand(1, 6)]"
+	. = ..()
+	animate(src, alpha = 0, time = duration)
+/*
 /obj/effect/temp_visual/dir_setting/bloodsplatter/Initialize(mapload, set_dir)
 	if(set_dir in GLOB.diagonals)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
@@ -39,7 +45,7 @@
 			target_pixel_y = -16
 			layer = ABOVE_MOB_LAYER
 	animate(src, pixel_x = target_pixel_x, pixel_y = target_pixel_y, alpha = 0, time = duration)
-
+*/
 /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter
 	splatter_type = "xsplatter"
 
@@ -143,7 +149,7 @@
 
 /obj/effect/temp_visual/bsa_splash
 	name = "\improper Bluespace energy wave"
-	desc = "A massive, rippling wave of bluepace energy, all rapidly exhausting itself the moment it leaves the concentrated beam of light."
+	desc = ""
 	icon = 'icons/effects/beam_splash.dmi'
 	icon_state = "beam_splash_l"
 	layer = ABOVE_ALL_MOB_LAYER
@@ -195,7 +201,7 @@
 	icon_state = "phaseout"
 
 /obj/effect/temp_visual/decoy
-	desc = "It's a decoy!"
+	desc = ""
 	duration = 15
 
 /obj/effect/temp_visual/decoy/Initialize(mapload, atom/mimiced_atom)

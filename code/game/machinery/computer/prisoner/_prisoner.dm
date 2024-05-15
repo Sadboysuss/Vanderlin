@@ -5,7 +5,7 @@
 	if(contained_id)
 		contained_id.forceMove(get_turf(src))
 	return ..()
-	
+
 
 /obj/machinery/computer/prisoner/examine(mob/user)
 	. = ..()
@@ -27,8 +27,8 @@
 			return
 		contained_id = P
 		user.visible_message("<span class='notice'>[user] inserts an ID card into the console.</span>", \
-							"<span class='notice'>You insert the ID card into the console.</span>")
-		playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+							"<span class='notice'>I insert the ID card into the console.</span>")
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		updateUsrDialog()
 
 /obj/machinery/computer/prisoner/proc/id_eject(mob/user)
@@ -41,8 +41,8 @@
 			user.put_in_hands(contained_id)
 		contained_id = null
 		user.visible_message("<span class='notice'>[user] gets an ID card from the console.</span>", \
-							"<span class='notice'>You get the ID card from the console.</span>")
-		playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+							"<span class='notice'>I get the ID card from the console.</span>")
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		updateUsrDialog()
 
 /obj/machinery/computer/prisoner/attackby(obj/item/I, mob/user)

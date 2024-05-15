@@ -12,7 +12,7 @@
 
 /obj/item/holo/esword
 	name = "holographic energy sword"
-	desc = "May the force be with you. Sorta."
+	desc = ""
 	icon = 'icons/obj/transforming_energy.dmi'
 	icon_state = "sword0"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -23,7 +23,7 @@
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
 	hitsound = "swing_hit"
-	armour_penetration = 50
+	armor_penetration = 50
 	var/active = 0
 	var/saber_color
 
@@ -53,15 +53,15 @@
 		force = 30
 		icon_state = "sword[saber_color]"
 		w_class = WEIGHT_CLASS_BULKY
-		hitsound = 'sound/weapons/blade1.ogg'
-		playsound(user, 'sound/weapons/saberon.ogg', 20, TRUE)
+		hitsound = 'sound/blank.ogg'
+		playsound(user, 'sound/blank.ogg', 20, TRUE)
 		to_chat(user, "<span class='notice'>[src] is now active.</span>")
 	else
 		force = 3
 		icon_state = "sword0"
 		w_class = WEIGHT_CLASS_SMALL
 		hitsound = "swing_hit"
-		playsound(user, 'sound/weapons/saberoff.ogg', 20, TRUE)
+		playsound(user, 'sound/blank.ogg', 20, TRUE)
 		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")
 	return
 
@@ -72,20 +72,20 @@
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "basketball"
 	item_state = "basketball"
-	desc = "Here's your chance, do your dance at the Space Jam."
+	desc = ""
 	w_class = WEIGHT_CLASS_BULKY //Stops people from hiding it in their bags/pockets
 
 /obj/item/toy/beach_ball/holoball/dodgeball
 	name = "dodgeball"
 	icon_state = "dodgeball"
 	item_state = "dodgeball"
-	desc = "Used for playing the most violent and degrading of childhood games."
+	desc = ""
 
 /obj/item/toy/beach_ball/holoball/dodgeball/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	..()
 	if((ishuman(hit_atom)))
 		var/mob/living/carbon/M = hit_atom
-		playsound(src, 'sound/items/dodgeball.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		M.apply_damage(10, STAMINA)
 		if(prob(5))
 			M.Paralyze(60)
@@ -97,7 +97,7 @@
 
 /obj/structure/holohoop
 	name = "basketball hoop"
-	desc = "Boom, shakalaka!"
+	desc = ""
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "hoop"
 	anchored = TRUE
@@ -112,10 +112,10 @@
 	. = ..()
 	if(.)
 		return
-	if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
+	if(user.pulling && user.used_intent.type == INTENT_GRAB && isliving(user.pulling))
 		var/mob/living/L = user.pulling
 		if(user.grab_state < GRAB_AGGRESSIVE)
-			to_chat(user, "<span class='warning'>You need a better grip to do that!</span>")
+			to_chat(user, "<span class='warning'>I need a better grip to do that!</span>")
 			return
 		L.forceMove(loc)
 		L.Paralyze(100)
@@ -144,7 +144,7 @@
 
 /obj/machinery/readybutton
 	name = "ready declaration device"
-	desc = "This device is used to declare ready. If all devices in an area are ready, the event will begin!"
+	desc = ""
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
 	var/ready = 0
@@ -161,7 +161,7 @@
 	return
 
 /obj/machinery/readybutton/attack_paw(mob/user as mob)
-	to_chat(user, "<span class='warning'>You are too primitive to use this device!</span>")
+	to_chat(user, "<span class='warning'>I are too primitive to use this device!</span>")
 	return
 
 /obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob, params)
@@ -212,7 +212,7 @@
 			qdel(W)
 
 	for(var/mob/M in currentarea)
-		to_chat(M, "<span class='userdanger'>FIGHT!</span>")
+		to_chat(M, "<span class='danger'>FIGHT!</span>")
 
 /obj/machinery/conveyor/holodeck
 

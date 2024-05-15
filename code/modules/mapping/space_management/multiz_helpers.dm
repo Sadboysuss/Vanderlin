@@ -7,6 +7,28 @@
 		return get_step(SSmapping.get_turf_below(get_turf(ref)), dir)
 	return get_step(ref, dir)
 
+/proc/is_in_zweb(my_z, compare_z)
+	if(!my_z || !compare_z)
+		return
+	if(my_z == compare_z)
+		return TRUE
+	if(my_z > compare_z)
+		for(var/i in my_z to compare_z)
+			if(!i || i<0)
+				return FALSE
+			if(i == compare_z)
+				return TRUE
+			if(!SSmapping.level_trait(i, ZTRAIT_DOWN))
+				return FALSE
+	if(my_z < compare_z)
+		for(var/i in my_z to compare_z)
+			if(!i || i<0)
+				return FALSE
+			if(i == compare_z)
+				return TRUE
+			if(!SSmapping.level_trait(i, ZTRAIT_UP))
+				return FALSE
+
 /proc/get_dir_multiz(turf/us, turf/them)
 	us = get_turf(us)
 	them = get_turf(them)

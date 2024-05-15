@@ -1,7 +1,7 @@
 //A fragile mob that becomes temporarily invincible and large to attack
 /mob/living/simple_animal/hostile/asteroid/fugu
 	name = "wumborian fugu"
-	desc = "The wumborian fugu rapidly increases its body mass in order to ward off its prey. Great care should be taken to avoid it while it's in this state as it is nearly invincible, but it cannot maintain its form forever."
+	desc = ""
 	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
 	icon_state = "Fugu0"
 	icon_living = "Fugu0"
@@ -25,7 +25,7 @@
 	melee_damage_upper = 0
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "is avoided by the"
 	aggro_vision_range = 9
 	mob_size = MOB_SIZE_SMALL
@@ -66,7 +66,7 @@
 
 /datum/action/innate/fugu/expand
 	name = "Inflate"
-	desc = "Temporarily increases your size, and makes you significantly more dangerous and tough! Do not bully the fugu!"
+	desc = ""
 	button_icon_state = "expand"
 
 /datum/action/innate/fugu/expand/Activate()
@@ -75,7 +75,7 @@
 		to_chat(F, "<span class='warning'>YOU'RE ALREADY WUMBO!</span>")
 		return
 	if(F.inflate_cooldown)
-		to_chat(F, "<span class='warning'>You need time to gather your strength!</span>")
+		to_chat(F, "<span class='warning'>I need time to gather your strength!</span>")
 		return
 	if(F.buffed)
 		to_chat(F, "<span class='warning'>Something is interfering with your growth!</span>")
@@ -119,7 +119,7 @@
 
 /obj/item/fugu_gland
 	name = "wumborian fugu gland"
-	desc = "The key to the wumborian fugu's ability to increase its mass arbitrarily, this disgusting remnant can apply the same effect to other creatures, giving them great strength."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fugu_gland"
 	item_flags = NOBLUDGEON
@@ -141,5 +141,5 @@
 		A.melee_damage_upper = max((A.melee_damage_upper * 2), 10)
 		A.transform *= 2
 		A.environment_smash |= ENVIRONMENT_SMASH_STRUCTURES | ENVIRONMENT_SMASH_RWALLS
-		to_chat(user, "<span class='info'>You increase the size of [A], giving it a surge of strength!</span>")
+		to_chat(user, "<span class='info'>I increase the size of [A], giving it a surge of strength!</span>")
 		qdel(src)

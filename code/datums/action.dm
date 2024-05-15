@@ -18,6 +18,7 @@
 
 	var/icon_icon = 'icons/mob/actions.dmi' //This is the file for the ACTION icon
 	var/button_icon_state = "default" //And this is the state for the action icon
+	var/overlay_state = null
 	var/mob/owner
 
 /datum/action/New(Target)
@@ -66,8 +67,8 @@
 		M.actions += src
 		if(M.client)
 			M.client.screen += button
-			button.locked = M.client.prefs.buttons_locked || button.id ? M.client.prefs.action_buttons_screen_locs["[name]_[button.id]"] : FALSE //even if it's not defaultly locked we should remember we locked it before
-			button.moved = button.id ? M.client.prefs.action_buttons_screen_locs["[name]_[button.id]"] : FALSE
+//			button.locked = TRUE
+//			button.moved = button.id ? M.client.prefs.action_buttons_screen_locs["[name]_[button.id]"] : FALSE
 		M.update_action_buttons()
 	else
 		Remove(owner)
@@ -131,6 +132,8 @@
 				if(button.icon_state != background_icon_state)
 					button.icon_state = background_icon_state
 
+
+
 			ApplyIcon(button, force)
 
 		if(!IsAvailable())
@@ -143,6 +146,8 @@
 	if(icon_icon && button_icon_state && ((current_button.button_icon_state != button_icon_state) || force))
 		current_button.cut_overlays(TRUE)
 		current_button.add_overlay(mutable_appearance(icon_icon, button_icon_state))
+		if(overlay_state)
+			current_button.add_overlay(mutable_appearance(icon_icon, overlay_state))
 		current_button.button_icon_state = button_icon_state
 
 
@@ -267,7 +272,7 @@
 
 /datum/action/item_action/toggle_headphones
 	name = "Toggle Headphones"
-	desc = "UNTZ UNTZ UNTZ"
+	desc = ""
 
 /datum/action/item_action/toggle_headphones/Trigger()
 	var/obj/item/clothing/ears/headphones/H = target
@@ -276,7 +281,7 @@
 
 /datum/action/item_action/toggle_unfriendly_fire
 	name = "Toggle Friendly Fire \[ON\]"
-	desc = "Toggles if the club's blasts cause friendly fire."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "vortex_ff_on"
 
@@ -297,7 +302,7 @@
 
 /datum/action/item_action/synthswitch
 	name = "Change Synthesizer Instrument"
-	desc = "Change the type of instrument your synthesizer is playing as."
+	desc = ""
 
 /datum/action/item_action/synthswitch/Trigger()
 	if(istype(target, /obj/item/instrument/piano_synth))
@@ -307,7 +312,7 @@
 
 /datum/action/item_action/vortex_recall
 	name = "Vortex Recall"
-	desc = "Recall yourself, and anyone nearby, to an attuned hierophant beacon at any time.<br>If the beacon is still attached, will detach it."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "vortex_recall"
 
@@ -424,7 +429,7 @@
 
 /datum/action/item_action/instrument
 	name = "Use Instrument"
-	desc = "Use the instrument specified"
+	desc = ""
 
 /datum/action/item_action/instrument/Trigger()
 	if(istype(target, /obj/item/instrument))
@@ -454,7 +459,7 @@
 
 /datum/action/item_action/cult_dagger
 	name = "Draw Blood Rune"
-	desc = "Use the ritual dagger to create a powerful blood rune"
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_cult.dmi'
 	button_icon_state = "draw"
 	buttontooltipstyle = "cult"
@@ -480,14 +485,14 @@
 		I.attack_self(owner)
 	else
 		if (owner.get_num_arms() <= 0)
-			to_chat(owner, "<span class='warning'>You dont have any usable hands!</span>")
+			to_chat(owner, "<span class='warning'>I dont have any usable hands!</span>")
 		else
-			to_chat(owner, "<span class='warning'>Your hands are full!</span>")
+			to_chat(owner, "<span class='warning'>My hands are full!</span>")
 
 ///MGS BOX!
 /datum/action/item_action/agent_box
 	name = "Deploy Box"
-	desc = "Find inner peace, here, in the box."
+	desc = ""
 	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUN|AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_agent"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
@@ -504,18 +509,18 @@
 		return FALSE
 	if(istype(owner.loc, /obj/structure/closet/cardboard/agent))
 		var/obj/structure/closet/cardboard/agent/box = owner.loc
-		owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
+		owner.playsound_local(box, 'sound/blank.ogg', 50, TRUE)
 		box.open()
 		return
 	//Box closing from here on out.
 	if(!isturf(owner.loc)) //Don't let the player use this to escape mechs/welded closets.
-		to_chat(owner, "<span class='warning'>You need more space to activate this implant!</span>")
+		to_chat(owner, "<span class='warning'>I need more space to activate this implant!</span>")
 		return
 	if(cooldown < world.time - 100)
 		var/box = new boxtype(owner.drop_location())
 		owner.forceMove(box)
 		cooldown = world.time
-		owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
+		owner.playsound_local(box, 'sound/blank.ogg', 50, TRUE)
 
 //Preset for spells
 /datum/action/spell_action
@@ -641,20 +646,20 @@
 //Stickmemes
 /datum/action/item_action/stickmen
 	name = "Summon Stick Minions"
-	desc = "Allows you to summon faithful stickmen allies to aide you in battle."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_minor_antag.dmi'
 	button_icon_state = "art_summon"
 
 //surf_ss13
 /datum/action/item_action/bhop
 	name = "Activate Jump Boots"
-	desc = "Activates the jump boot's internal propulsion system, allowing the user to dash over 4-wide gaps."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "jetboot"
 
 /datum/action/language_menu
 	name = "Language Menu"
-	desc = "Open the language menu to review your languages, their keys, and select your default language."
+	desc = ""
 	button_icon_state = "language_menu"
 	check_flags = NONE
 
@@ -668,20 +673,20 @@
 
 /datum/action/item_action/wheelys
 	name = "Toggle Wheely-Heel's Wheels"
-	desc = "Pops out or in your wheely-heel's wheels."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "wheelys"
 
 /datum/action/item_action/kindleKicks
 	name = "Activate Kindle Kicks"
-	desc = "Kick you feet together, activating the lights in your Kindle Kicks."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "kindleKicks"
 
 //Small sprites
 /datum/action/small_sprite
 	name = "Toggle Giant Sprite"
-	desc = "Others will always see you as giant"
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_xeno.dmi'
 	button_icon_state = "smallqueen"
 	background_icon_state = "bg_alien"
@@ -730,7 +735,7 @@
 
 /datum/action/item_action/storage_gather_mode
 	name = "Switch gathering mode"
-	desc = "Switches the gathering mode of a storage object."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "storage_gather_switch"
 

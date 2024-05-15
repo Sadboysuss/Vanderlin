@@ -1,6 +1,6 @@
 /obj/item/hand_labeler
 	name = "hand labeler"
-	desc = "A combined label printer and applicator in a portable device, designed to be easy to operate and use."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
 	item_state = "flight"
@@ -52,37 +52,37 @@
 		to_chat(user, "<span class='warning'>Label too big!</span>")
 		return
 	if(ismob(A))
-		to_chat(user, "<span class='warning'>You can't label creatures!</span>") // use a collar
+		to_chat(user, "<span class='warning'>I can't label creatures!</span>") // use a collar
 		return
 
 	user.visible_message("<span class='notice'>[user] labels [A] as [label].</span>", \
-						 "<span class='notice'>You label [A] as [label].</span>")
+						 "<span class='notice'>I label [A] as [label].</span>")
 	A.name = "[A.name] ([label])"
 	labels_left--
 
 
 /obj/item/hand_labeler/attack_self(mob/user)
 	if(!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You don't have the dexterity to use [src]!</span>")
+		to_chat(user, "<span class='warning'>I don't have the dexterity to use [src]!</span>")
 		return
 	mode = !mode
 	icon_state = "labeler[mode]"
 	if(mode)
-		to_chat(user, "<span class='notice'>You turn on [src].</span>")
+		to_chat(user, "<span class='notice'>I turn on [src].</span>")
 		//Now let them chose the text.
 		var/str = copytext(reject_bad_text(input(user,"Label text?","Set label","")),1,MAX_NAME_LEN)
 		if(!str || !length(str))
 			to_chat(user, "<span class='warning'>Invalid text!</span>")
 			return
 		label = str
-		to_chat(user, "<span class='notice'>You set the text to '[str]'.</span>")
+		to_chat(user, "<span class='notice'>I set the text to '[str]'.</span>")
 	else
-		to_chat(user, "<span class='notice'>You turn off [src].</span>")
+		to_chat(user, "<span class='notice'>I turn off [src].</span>")
 
 /obj/item/hand_labeler/attackby(obj/item/I, mob/user, params)
 	..()
 	if(istype(I, /obj/item/hand_labeler_refill))
-		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert [I] into [src].</span>")
 		qdel(I)
 		labels_left = initial(labels_left)	//Yes, it's capped at its initial value
 
@@ -113,7 +113,7 @@
 /obj/item/hand_labeler_refill
 	name = "hand labeler paper roll"
 	icon = 'icons/obj/bureaucracy.dmi'
-	desc = "A roll of paper. Use it on a hand labeler to refill it."
+	desc = ""
 	icon_state = "labeler_refill"
 	item_state = "electropack"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'

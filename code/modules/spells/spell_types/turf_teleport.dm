@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/turf_teleport
 	name = "Turf Teleport"
-	desc = "This spell teleports the target to the turf in range."
+	desc = ""
 	nonabstract_req = TRUE
 
 	var/inner_tele_radius = 1
@@ -8,8 +8,8 @@
 
 	var/include_space = FALSE //whether it includes space tiles in possible teleport locations
 	var/include_dense = FALSE //whether it includes dense tiles in possible teleport locations
-	var/sound1 = 'sound/weapons/zapbang.ogg'
-	var/sound2 = 'sound/weapons/zapbang.ogg'
+	var/sound1 = 'sound/blank.ogg'
+	var/sound2 = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/turf_teleport/cast(list/targets,mob/user = usr)
 	playsound(get_turf(user), sound1, 50,TRUE)

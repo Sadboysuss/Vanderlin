@@ -7,7 +7,7 @@
 
 /obj/machinery/atmospherics/miner
 	name = "gas miner"
-	desc = "Gasses mined from the gas giant below (above?) flow out through this massive vent."
+	desc = ""
 	icon = 'icons/obj/atmospherics/components/miners.dmi'
 	icon_state = "miner"
 	density = FALSE

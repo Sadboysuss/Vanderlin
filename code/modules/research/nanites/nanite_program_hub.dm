@@ -1,6 +1,6 @@
 /obj/machinery/nanite_program_hub
 	name = "nanite program hub"
-	desc = "Compiles nanite programs from the techweb servers and downloads them into disks."
+	desc = ""
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "nanite_program_hub"
 	use_power = IDLE_POWER_USE
@@ -33,8 +33,8 @@
 		if(disk)
 			eject(user)
 		if(user.transferItemToLoc(N, src))
-			to_chat(user, "<span class='notice'>You insert [N] into [src].</span>")
-			playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+			to_chat(user, "<span class='notice'>I insert [N] into [src].</span>")
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 			disk = N
 	else
 		..()
@@ -103,7 +103,7 @@
 				qdel(disk.program)
 			disk.program = new downloaded.program_type
 			disk.name = "[initial(disk.name)] \[[disk.program.name]\]"
-			playsound(src, 'sound/machines/terminal_prompt.ogg', 25, FALSE)
+			playsound(src, 'sound/blank.ogg', 25, FALSE)
 			. = TRUE
 		if("set_category")
 			var/new_category = params["category"]

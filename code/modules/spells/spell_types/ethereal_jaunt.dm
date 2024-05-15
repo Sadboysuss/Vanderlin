@@ -1,24 +1,25 @@
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt
 	name = "Ethereal Jaunt"
-	desc = "This spell turns your form ethereal, temporarily making you invisible and able to pass through walls."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 300
-	clothes_req = TRUE
-	invocation = "none"
-	invocation_type = "none"
+	clothes_req = FALSE
+	invocation = "VANISHIKA"
+	invocation_type = "shout"
 	range = -1
-	cooldown_min = 100 //50 deciseconds reduction per rank
+	cooldown_min = 550 //50 deciseconds reduction per rank
 	include_user = TRUE
 	nonabstract_req = TRUE
-	var/jaunt_duration = 50 //in deciseconds
+	var/jaunt_duration = 20 //in deciseconds
 	var/jaunt_in_time = 5
 	var/jaunt_in_type = /obj/effect/temp_visual/wizard
 	var/jaunt_out_type = /obj/effect/temp_visual/wizard/out
 	action_icon_state = "jaunt"
+	associated_skill = /datum/skill/magic/arcane
 
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/cast(list/targets,mob/user = usr) //magnets, so mostly hardcoded
-	playsound(get_turf(user), 'sound/magic/ethereal_enter.ogg', 50, TRUE, -1)
+	playsound(get_turf(user), 'sound/swap.ogg', 50, TRUE, -1)
 	for(var/mob/living/target in targets)
 		INVOKE_ASYNC(src, .proc/do_jaunt, target)
 
@@ -42,7 +43,7 @@
 	jaunt_steam(mobloc)
 	target.mobility_flags &= ~MOBILITY_MOVE
 	holder.reappearing = 1
-	playsound(get_turf(target), 'sound/magic/ethereal_exit.ogg', 50, TRUE, -1)
+	playsound(get_turf(target), 'sound/swap.ogg', 50, TRUE, -1)
 	sleep(25 - jaunt_in_time)
 	new jaunt_in_type(mobloc, holder.dir)
 	target.setDir(holder.dir)
@@ -80,7 +81,7 @@
 		AM.forceMove(get_turf(src))
 	return ..()
 
-/obj/effect/dummy/phased_mob/spell_jaunt/relaymove(var/mob/user, direction)
+/obj/effect/dummy/phased_mob/spell_jaunt/relaymove(mob/user, direction)
 	if ((movedelay > world.time) || reappearing || !direction)
 		return
 	var/turf/newLoc = get_step(src,direction)

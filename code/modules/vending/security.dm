@@ -1,6 +1,6 @@
 /obj/machinery/vending/security
 	name = "\improper SecTech"
-	desc = "A security equipment vendor."
+	desc = ""
 	product_ads = "Crack capitalist skulls!;Beat some heads in!;Don't forget - harm is good!;Your weapons are right here.;Handcuffs!;Freeze, scumbag!;Don't tase me bro!;Tase them, bro.;Why not have a donut?"
 	icon_state = "sec"
 	icon_deny = "sec-deny"

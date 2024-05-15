@@ -3,7 +3,7 @@
 /mob/living/simple_animal/hostile/morph
 	name = "morph"
 	real_name = "morph"
-	desc = "A revolting, pulsating pile of flesh."
+	desc = ""
 	speak_emote = list("gurgles")
 	emote_hear = list("gurgles")
 	icon = 'icons/mob/animal.dmi'
@@ -30,7 +30,7 @@
 	wander = FALSE
 	attack_verb_continuous = "glomps"
 	attack_verb_simple = "glomp"
-	attack_sound = 'sound/effects/blobattack.ogg'
+	attack_sound = 'sound/blank.ogg'
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2)
 
 	var/morphed = FALSE
@@ -44,12 +44,12 @@
 	/mob/living/simple_animal/hostile/morph,
 	/obj/effect))
 
-	var/playstyle_string = "<span class='big bold'>You are a morph,</span></b> an abomination of science created primarily with changeling cells. \
+	var/playstyle_string = "<span class='big bold'>I are a morph,</span></b> an abomination of science created primarily with changeling cells. \
 							You may take the form of anything nearby by shift-clicking it. This process will alert any nearby \
 							observers, and can only be performed once every five seconds. While morphed, you move faster, but do \
 							less damage. In addition, anyone within three tiles will note an uncanny wrongness if examining you. \
-							You can attack any item or dead creature to consume it - creatures will restore your health. \
-							Finally, you can restore yourself to your original form while morphed by shift-clicking yourself.</b>"
+							You can attack any item or dead creature to consume it - creatures will restore my health. \
+							Finally, you can restore myself to my original form while morphed by shift-clicking myself.</b>"
 
 /mob/living/simple_animal/hostile/morph/examine(mob/user)
 	if(morphed)
@@ -78,7 +78,7 @@
 
 /mob/living/simple_animal/hostile/morph/proc/eat(atom/movable/A)
 	if(morphed && !eat_while_disguised)
-		to_chat(src, "<span class='warning'>You can not eat anything while you are disguised!</span>")
+		to_chat(src, "<span class='warning'>I can not eat anything while you are disguised!</span>")
 		return FALSE
 	if(A && A.loc != src)
 		visible_message("<span class='warning'>[src] swallows [A] whole!</span>")
@@ -94,18 +94,18 @@
 		if(istype(A) && allowed(A))
 			assume(A)
 	else
-		to_chat(src, "<span class='warning'>Your chameleon skin is still repairing itself!</span>")
+		to_chat(src, "<span class='warning'>My chameleon skin is still repairing itself!</span>")
 		..()
 
 /mob/living/simple_animal/hostile/morph/proc/assume(atom/movable/target)
 	if(morphed)
-		to_chat(src, "<span class='warning'>You must restore to your original form first!</span>")
+		to_chat(src, "<span class='warning'>I must restore to my original form first!</span>")
 		return
 	morphed = TRUE
 	form = target
 
 	visible_message("<span class='warning'>[src] suddenly twists and changes shape, becoming a copy of [target]!</span>", \
-					"<span class='notice'>You twist your body and assume the form of [target].</span>")
+					"<span class='notice'>I twist my body and assume the form of [target].</span>")
 	appearance = target.appearance
 	copy_overlays(target)
 	alpha = max(alpha, 150)	//fucking chameleons
@@ -125,7 +125,7 @@
 
 /mob/living/simple_animal/hostile/morph/proc/restore()
 	if(!morphed)
-		to_chat(src, "<span class='warning'>You're already in your normal form!</span>")
+		to_chat(src, "<span class='warning'>You're already in my normal form!</span>")
 		return
 	morphed = FALSE
 	form = null
@@ -135,7 +135,7 @@
 	maptext = null
 
 	visible_message("<span class='warning'>[src] suddenly collapses in on itself, dissolving into a pile of green flesh!</span>", \
-					"<span class='notice'>You reform to your normal body.</span>")
+					"<span class='notice'>I reform to my normal body.</span>")
 	name = initial(name)
 	icon = initial(icon)
 	icon_state = initial(icon_state)
@@ -153,7 +153,7 @@
 /mob/living/simple_animal/hostile/morph/death(gibbed)
 	if(morphed)
 		visible_message("<span class='warning'>[src] twists and dissolves into a pile of green flesh!</span>", \
-						"<span class='userdanger'>Your skin ruptures! Your flesh breaks apart! No disguise can ward off de--</span>")
+						"<span class='danger'>My skin ruptures! Your flesh breaks apart! No disguise can ward off de--</span>")
 		restore()
 	barf_contents()
 	..()
@@ -175,7 +175,7 @@
 /mob/living/simple_animal/hostile/morph/LoseAggro()
 	vision_range = initial(vision_range)
 
-/mob/living/simple_animal/hostile/morph/AIShouldSleep(var/list/possible_targets)
+/mob/living/simple_animal/hostile/morph/AIShouldSleep(list/possible_targets)
 	. = ..()
 	if(.)
 		var/list/things = list()
@@ -192,7 +192,7 @@
 
 /mob/living/simple_animal/hostile/morph/AttackingTarget()
 	if(morphed && !melee_damage_disguised)
-		to_chat(src, "<span class='warning'>You can not attack while disguised!</span>")
+		to_chat(src, "<span class='warning'>I can not attack while disguised!</span>")
 		return
 	if(isliving(target)) //Eat Corpses to regen health
 		var/mob/living/L = target
@@ -238,7 +238,7 @@
 	player_mind.special_role = "Morph"
 	player_mind.add_antag_datum(/datum/antagonist/morph)
 	to_chat(S, S.playstyle_string)
-	SEND_SOUND(S, sound('sound/magic/mutate.ogg'))
+	SEND_SOUND(S, sound('sound/blank.ogg'))
 	message_admins("[ADMIN_LOOKUPFLW(S)] has been made into a morph by an event.")
 	log_game("[key_name(S)] was spawned as a morph by an event.")
 	spawned_mobs += S

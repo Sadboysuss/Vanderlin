@@ -32,15 +32,18 @@
 		"emergency" = "emergency_box")
 
 /proc/load_map_config(filename = "data/next_map.json", default_to_box, delete_after, error_if_missing = TRUE)
+	testing("loading map config [filename]")
 	var/datum/map_config/config = new
 	if (default_to_box)
 		return config
 	if (!config.LoadConfig(filename, error_if_missing))
 		qdel(config)
-		config = new /datum/map_config  // Fall back to Box
+		if(default_to_box)
+			config = new /datum/map_config  // Fall back to Box
 	if (delete_after)
 		fdel(filename)
-	return config
+	if(config)
+		return config
 
 #define CHECK_EXISTS(X) if(!istext(json[X])) { log_world("[##X] missing from json!"); return; }
 /datum/map_config/proc/LoadConfig(filename, error_if_missing)

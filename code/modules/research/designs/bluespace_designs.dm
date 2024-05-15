@@ -5,7 +5,7 @@
 
 /datum/design/beacon
 	name = "Tracking Beacon"
-	desc = "A bluespace tracking beacon."
+	desc = ""
 	id = "beacon"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150, /datum/material/glass = 100)
@@ -15,7 +15,7 @@
 
 /datum/design/bag_holding
 	name = "Bag of Holding"
-	desc = "A backpack that opens into a localized pocket of bluespace."
+	desc = ""
 	id = "bag_holding"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/gold = 3000, /datum/material/diamond = 1500, /datum/material/uranium = 250, /datum/material/bluespace = 2000)
@@ -26,7 +26,7 @@
 
 /datum/design/bluespace_crystal
 	name = "Artificial Bluespace Crystal"
-	desc = "A small blue crystal with mystical properties."
+	desc = ""
 	id = "bluespace_crystal"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/diamond = 1500, /datum/material/plasma = 1500)
@@ -36,17 +36,17 @@
 
 /datum/design/telesci_gps
 	name = "GPS Device"
-	desc = "Little thingie that can track its position at all times."
+	desc = ""
 	id = "telesci_gps"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 500, /datum/material/glass = 1000)
 	build_path = /obj/item/gps
 	category = list("Bluespace Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_CARGO
-	
+
 /datum/design/desynchronizer
 	name = "Desynchronizer"
-	desc = "A device that can desynchronize the user from spacetime."
+	desc = ""
 	id = "desynchronizer"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 1000, /datum/material/glass = 500, /datum/material/silver = 1500, /datum/material/bluespace = 1000)
@@ -56,17 +56,17 @@
 
 /datum/design/miningsatchel_holding
 	name = "Mining Satchel of Holding"
-	desc = "A mining satchel that can hold an infinite amount of ores."
+	desc = ""
 	id = "minerbag_holding"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/gold = 250, /datum/material/uranium = 500) //quite cheap, for more convenience
 	build_path = /obj/item/storage/bag/ore/holding
 	category = list("Bluespace Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_CARGO
-	
+
 /datum/design/swapper
 	name = "Quantum Spin Inverter"
-	desc = "An experimental device that is able to swap the locations of two entities by switching their particles' spin values. Must be linked to another device to function."
+	desc = ""
 	id = "swapper"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 500, /datum/material/glass = 1000, /datum/material/bluespace = 2000, /datum/material/gold = 1500, /datum/material/silver = 1000)

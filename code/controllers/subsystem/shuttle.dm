@@ -4,7 +4,11 @@ SUBSYSTEM_DEF(shuttle)
 	name = "Shuttle"
 	wait = 10
 	init_order = INIT_ORDER_SHUTTLE
+#ifndef MATURESERVER
+	flags = SS_NO_FIRE
+#else
 	flags = SS_KEEP_TIMING|SS_NO_TICK_CHECK
+#endif
 	runlevels = RUNLEVEL_SETUP | RUNLEVEL_GAME
 
 	var/list/mobile = list()
@@ -38,6 +42,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/discoveredPlants = list()	//Typepaths for unusual plants we've already sent CentCom, associated with their potencies
 
 	var/list/supply_packs = list()
+	var/list/supply_cats = list()
 	var/list/shoppinglist = list()
 	var/list/requestlist = list()
 	var/list/orderhistory = list()
@@ -64,11 +69,13 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/Initialize(timeofday)
 	ordernum = rand(1, 9000)
 
-	for(var/pack in subtypesof(/datum/supply_pack))
+	for(var/pack in subtypesof(/datum/supply_pack/rogue))
 		var/datum/supply_pack/P = new pack()
 		if(!P.contains)
 			continue
 		supply_packs[P.type] = P
+		if(!(P.group in supply_cats))
+			supply_cats += P.group
 
 	initial_load()
 
@@ -187,37 +194,38 @@ SUBSYSTEM_DEF(shuttle)
 		emergency = backup_shuttle
 	var/srd = CONFIG_GET(number/shuttle_refuel_delay)
 	if(world.time - SSticker.round_start_time < srd)
-		to_chat(user, "<span class='alert'>The emergency shuttle is refueling. Please wait [DisplayTimeText(srd - (world.time - SSticker.round_start_time))] before trying again.</span>")
+//		to_chat(user, "<span class='warning'>There is no response.</span>")
 		return
 
 	switch(emergency.mode)
 		if(SHUTTLE_RECALL)
-			to_chat(user, "<span class='alert'>The emergency shuttle may not be called while returning to CentCom.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle may not be called while returning to CentCom.</span>")
 			return
 		if(SHUTTLE_CALL)
-			to_chat(user, "<span class='alert'>The emergency shuttle is already on its way.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle is already on its way.</span>")
 			return
 		if(SHUTTLE_DOCKED)
-			to_chat(user, "<span class='alert'>The emergency shuttle is already here.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle is already here.</span>")
 			return
 		if(SHUTTLE_IGNITING)
-			to_chat(user, "<span class='alert'>The emergency shuttle is firing its engines to leave.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle is firing its engines to leave.</span>")
 			return
 		if(SHUTTLE_ESCAPE)
-			to_chat(user, "<span class='alert'>The emergency shuttle is moving away to a safe distance.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle is moving away to a safe distance.</span>")
 			return
 		if(SHUTTLE_STRANDED)
-			to_chat(user, "<span class='alert'>The emergency shuttle has been disabled by CentCom.</span>")
+//			to_chat(user, "<span class='alert'>The emergency shuttle has been disabled by CentCom.</span>")
 			return
 
 	call_reason = trim(html_encode(call_reason))
 
-	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH && seclevel2num(get_security_level()) > SEC_LEVEL_GREEN)
-		to_chat(user, "<span class='alert'>You must provide a reason.</span>")
-		return
+//	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH && seclevel2num(get_security_level()) > SEC_LEVEL_GREEN)
+//		to_chat(user, "<span class='alert'>I must provide a reason.</span>")
+//		return
 
 	var/area/signal_origin = get_area(user)
-	var/emergency_reason = "\nNature of emergency:\n\n[call_reason]"
+//	var/emergency_reason = "\nNature of emergency:\n\n[call_reason]"
+	var/emergency_reason = "yea"
 	var/security_num = seclevel2num(get_security_level())
 	switch(security_num)
 		if(SEC_LEVEL_RED,SEC_LEVEL_DELTA)
@@ -233,10 +241,10 @@ SUBSYSTEM_DEF(shuttle)
 	var/datum/signal/status_signal = new(list("command" = "update")) // Start processing shuttle-mode displays to display the timer
 	frequency.post_signal(src, status_signal)
 
-	var/area/A = get_area(user)
+//	var/area/A = get_area(user)
 
 	log_game("[key_name(user)] has called the shuttle.")
-	deadchat_broadcast(" has called the shuttle at <span class='name'>[A.name]</span>.", "<span class='name'>[user.real_name]</span>", user)
+//	deadchat_broadcast(" has called for the boat at <span class='name'>[A.name]</span>.", "<span class='name'>[user.real_name]</span>", user)
 	if(call_reason)
 		SSblackbox.record_feedback("text", "shuttle_reason", 1, "[call_reason]")
 		log_game("Shuttle call reason: [call_reason]")
@@ -366,13 +374,13 @@ SUBSYSTEM_DEF(shuttle)
 		emergency.sound_played = FALSE
 		priority_announce("Hostile environment detected. \
 			Departure has been postponed indefinitely pending \
-			conflict resolution.", null, 'sound/misc/notice1.ogg', "Priority")
+			conflict resolution.", null, 'sound/blank.ogg', "Priority")
 	if(!emergencyNoEscape && (emergency.mode == SHUTTLE_STRANDED))
 		emergency.mode = SHUTTLE_DOCKED
 		emergency.setTimer(emergencyDockTime)
 		priority_announce("Hostile environment resolved. \
 			You have 3 minutes to board the Emergency Shuttle.",
-			null, 'sound/ai/shuttledock.ogg', "Priority")
+			null, 'sound/blank.ogg', "Priority")
 
 //try to move/request to dockHome if possible, otherwise dockAway. Mainly used for admin buttons
 /datum/controller/subsystem/shuttle/proc/toggleShuttle(shuttleId, dockHome, dockAway, timed)
@@ -393,6 +401,7 @@ SUBSYSTEM_DEF(shuttle)
 
 
 /datum/controller/subsystem/shuttle/proc/moveShuttle(shuttleId, dockId, timed)
+	testing("MOVESHUTTLE")
 	var/obj/docking_port/mobile/M = getShuttle(shuttleId)
 	var/obj/docking_port/stationary/D = getDock(dockId)
 
@@ -820,8 +829,8 @@ SUBSYSTEM_DEF(shuttle)
 		L["id"] = M.id
 		L["timer"] = M.timer
 		L["timeleft"] = M.getTimerStr()
-		if (timeleft > 1 HOURS)
-			L["timeleft"] = "Infinity"
+//		if (timeleft > 1 HOURS)
+//			L["timeleft"] = "Infinity"
 		L["can_fast_travel"] = M.timer && timeleft >= 50
 		L["can_fly"] = TRUE
 		if(istype(M, /obj/docking_port/mobile/emergency))
@@ -905,3 +914,11 @@ SUBSYSTEM_DEF(shuttle)
 					message_admins("[key_name_admin(usr)] loaded [mdp] with the shuttle manipulator.")
 					log_admin("[key_name(usr)] loaded [mdp] with the shuttle manipulator.</span>")
 					SSblackbox.record_feedback("text", "shuttle_manipulator", 1, "[mdp.name]")
+
+/datum/controller/subsystem/shuttle/proc/autoEnd() //CIT CHANGE - allows shift to end without being a proper shuttle call?
+	if(EMERGENCY_IDLE_OR_RECALLED)
+		SSshuttle.emergency.request(silent = TRUE)
+		priority_announce("The last boat is leaving.", null, 'sound/misc/notice.ogg')
+//		log_game("Round end vote passed. Shuttle has been auto-called.")
+//		message_admins("Round end vote passed. Shuttle has been auto-called.")
+	emergencyNoRecall = TRUE

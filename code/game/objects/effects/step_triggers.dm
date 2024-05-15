@@ -176,7 +176,7 @@
 /* Simple sound player, Mapper friendly! */
 
 /obj/effect/step_trigger/sound_effect
-	var/sound //eg. path to the sound, inside '' eg: 'growl.ogg'
+	var/sound //eg. path to the sound, inside 'sound/blank.ogg'
 	var/volume = 100
 	var/freq_vary = 1 //Should the frequency of the sound vary?
 	var/extra_range = 0 // eg World.view = 7, extra_range = 1, 7+1 = 8, 8 turfs radius

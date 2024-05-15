@@ -11,12 +11,12 @@
  * Pens
  */
 /obj/item/pen
-	desc = "It's a normal black ink pen."
+	desc = ""
 	name = "pen"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_HEAD
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
@@ -33,22 +33,22 @@
 	return(BRUTELOSS)
 
 /obj/item/pen/blue
-	desc = "It's a normal blue ink pen."
+	desc = ""
 	icon_state = "pen_blue"
 	colour = "blue"
 
 /obj/item/pen/red
-	desc = "It's a normal red ink pen."
+	desc = ""
 	icon_state = "pen_red"
 	colour = "red"
 
 /obj/item/pen/invisible
-	desc = "It's an invisible pen marker."
+	desc = ""
 	icon_state = "pen"
 	colour = "white"
 
 /obj/item/pen/fourcolor
-	desc = "It's a fancy four-color ink pen, set to black."
+	desc = ""
 	name = "four-color pen"
 	colour = "black"
 
@@ -63,17 +63,17 @@
 		else
 			colour = "black"
 	to_chat(user, "<span class='notice'>\The [src] will now write in [colour].</span>")
-	desc = "It's a fancy four-color ink pen, set to [colour]."
+	desc = ""
 
 /obj/item/pen/fountain
 	name = "fountain pen"
-	desc = "It's a common fountain pen, with a faux wood body."
+	desc = ""
 	icon_state = "pen-fountain"
 	font = FOUNTAIN_PEN_FONT
 
 /obj/item/pen/fountain/captain
 	name = "captain's fountain pen"
-	desc = "It's an expensive Oak fountain pen. The nib is quite sharp."
+	desc = ""
 	icon_state = "pen-fountain-o"
 	force = 5
 	throwforce = 5
@@ -96,14 +96,15 @@
 /obj/item/pen/fountain/captain/reskin_obj(mob/M)
 	..()
 	if(current_skin)
-		desc = "It's an expensive [current_skin] fountain pen. The nib is quite sharp."
+		desc = ""
 
 /obj/item/pen/attack_self(mob/living/carbon/user)
-	var/deg = input(user, "What angle would you like to rotate the pen head to? (1-360)", "Rotate Pen Head") as null|num
-	if(deg && (deg > 0 && deg <= 360))
-		degrees = deg
-		to_chat(user, "<span class='notice'>You rotate the top of the pen to [degrees] degrees.</span>")
-		SEND_SIGNAL(src, COMSIG_PEN_ROTATED, deg, user)
+//	var/deg = input(user, "What angle would you like to rotate the pen head to? (1-360)", "Rotate Pen Head") as null|num
+//	if(deg && (deg > 0 && deg <= 360))
+//		degrees = deg
+//		to_chat(user, "<span class='notice'>I rotate the top of the pen to [degrees] degrees.</span>")
+//		SEND_SIGNAL(src, COMSIG_PEN_ROTATED, deg, user)
+	return
 
 /obj/item/pen/attack(mob/living/M, mob/user,stealth)
 	if(!istype(M))
@@ -111,9 +112,9 @@
 
 	if(!force)
 		if(M.can_inject(user, 1))
-			to_chat(user, "<span class='warning'>You stab [M] with the pen.</span>")
+			to_chat(user, "<span class='warning'>I stab [M] with the pen.</span>")
 			if(!stealth)
-				to_chat(M, "<span class='danger'>You feel a tiny prick!</span>")
+				to_chat(M, "<span class='danger'>I feel a tiny prick!</span>")
 			. = 1
 
 		log_combat(user, M, "stabbed", src)
@@ -134,7 +135,7 @@
 			if(QDELETED(O) || !user.canUseTopic(O, BE_CLOSE))
 				return
 			if(oldname == input)
-				to_chat(user, "<span class='notice'>You changed \the [O.name] to... well... \the [O.name].</span>")
+				to_chat(user, "<span class='notice'>I changed \the [O.name] to... well... \the [O.name].</span>")
 			else
 				O.name = input
 				to_chat(user, "<span class='notice'>\The [oldname] has been successfully been renamed to \the [input].</span>")
@@ -145,7 +146,7 @@
 			if(QDELETED(O) || !user.canUseTopic(O, BE_CLOSE))
 				return
 			O.desc = input
-			to_chat(user, "<span class='notice'>You have successfully changed \the [O.name]'s description.</span>")
+			to_chat(user, "<span class='notice'>I have successfully changed \the [O.name]'s description.</span>")
 
 /*
  * Sleepypens
@@ -179,7 +180,7 @@
 
 /obj/item/pen/edagger/Initialize()
 	. = ..()
-	AddComponent(/datum/component/butchering, 60, 100, 0, 'sound/weapons/blade1.ogg')
+	AddComponent(/datum/component/butchering, 60, 100, 0, 'sound/blank.ogg')
 
 /obj/item/pen/edagger/get_sharpness()
 	return on * sharpness
@@ -202,7 +203,7 @@
 		hitsound = initial(hitsound)
 		embedding = embedding.setRating(embed_chance = EMBED_CHANCE)
 		throwforce = initial(throwforce)
-		playsound(user, 'sound/weapons/saberoff.ogg', 5, TRUE)
+		playsound(user, 'sound/blank.ogg', 5, TRUE)
 		to_chat(user, "<span class='warning'>[src] can now be concealed.</span>")
 	else
 		on = TRUE
@@ -210,10 +211,10 @@
 		throw_speed = 4
 		w_class = WEIGHT_CLASS_NORMAL
 		name = "energy dagger"
-		hitsound = 'sound/weapons/blade1.ogg'
+		hitsound = 'sound/blank.ogg'
 		embedding = embedding.setRating(embed_chance = 100) //rule of cool
 		throwforce = 35
-		playsound(user, 'sound/weapons/saberon.ogg', 5, TRUE)
+		playsound(user, 'sound/blank.ogg', 5, TRUE)
 		to_chat(user, "<span class='warning'>[src] is now active.</span>")
 	update_icon()
 

@@ -18,34 +18,34 @@
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor vest"
-	desc = "A slim Type I armored vest that provides decent protection against most types of damage."
+	desc = ""
 	icon_state = "armoralt"
 	item_state = "armoralt"
 	blood_overlay_type = "armor"
 	dog_fashion = /datum/dog_fashion/back
 
 /obj/item/clothing/suit/armor/vest/alt
-	desc = "A Type I armored vest that provides decent protection against most types of damage."
+	desc = ""
 	icon_state = "armor"
 	item_state = "armor"
 
 /obj/item/clothing/suit/armor/vest/old
 	name = "degrading armor vest"
-	desc = "Older generation Type 1 armored vest. Due to degradation over time the vest is far less maneuverable to move in."
+	desc = ""
 	icon_state = "armor"
 	item_state = "armor"
 	slowdown = 1
 
 /obj/item/clothing/suit/armor/vest/blueshirt
 	name = "large armor vest"
-	desc = "A large, yet comfortable piece of armor, protecting you from some threats."
+	desc = ""
 	icon_state = "blueshift"
 	item_state = "blueshift"
 	custom_premium_price = 600
 
 /obj/item/clothing/suit/armor/hos
 	name = "armored greatcoat"
-	desc = "A greatcoat enhanced with a special alloy for some extra protection and style for those with a commanding presence."
+	desc = ""
 	icon_state = "hos"
 	item_state = "greatcoat"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
@@ -56,7 +56,7 @@
 
 /obj/item/clothing/suit/armor/hos/trenchcoat
 	name = "armored trenchcoat"
-	desc = "A trenchcoat enhanced with a special lightweight kevlar. The epitome of tactical plainclothes."
+	desc = ""
 	icon_state = "hostrench"
 	item_state = "hostrench"
 	flags_inv = 0
@@ -64,7 +64,7 @@
 
 /obj/item/clothing/suit/armor/vest/warden
 	name = "warden's jacket"
-	desc = "A navy-blue armored jacket with blue shoulder designations and '/Warden/' stitched into one of the chest pockets."
+	desc = ""
 	icon_state = "warden_alt"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -76,12 +76,12 @@
 
 /obj/item/clothing/suit/armor/vest/warden/alt
 	name = "warden's armored jacket"
-	desc = "A red jacket with silver rank pips and body armor strapped on top."
+	desc = ""
 	icon_state = "warden_jacket"
 
 /obj/item/clothing/suit/armor/vest/leather
 	name = "security overcoat"
-	desc = "Lightly armored leather overcoat meant as casual wear for high-ranking officers. Bears the crest of Nanotrasen Security."
+	desc = ""
 	icon_state = "leathercoat-sec"
 	item_state = "hostrench"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
@@ -91,7 +91,7 @@
 
 /obj/item/clothing/suit/armor/vest/capcarapace
 	name = "captain's carapace"
-	desc = "A fireproof armored chestpiece reinforced with ceramic plates and plasteel pauldrons to provide additional protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest, although it does chafe your nipples."
+	desc = ""
 	icon_state = "capcarapace"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN
@@ -101,18 +101,18 @@
 
 /obj/item/clothing/suit/armor/vest/capcarapace/syndicate
 	name = "syndicate captain's vest"
-	desc = "A sinister looking vest of advanced armor worn over a black and red fireproof jacket. The gold collar and shoulders denote that this belongs to a high ranking syndicate officer."
+	desc = ""
 	icon_state = "syndievest"
 
 /obj/item/clothing/suit/armor/vest/capcarapace/alt
 	name = "captain's parade jacket"
-	desc = "For when an armoured vest isn't fashionable enough."
+	desc = ""
 	icon_state = "capformal"
 	item_state = "capspacesuit"
 
 /obj/item/clothing/suit/armor/riot
 	name = "riot suit"
-	desc = "A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Helps the wearer resist shoving in close quarters."
+	desc = ""
 	icon_state = "riot"
 	item_state = "swat_suit"
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
@@ -125,7 +125,7 @@
 
 /obj/item/clothing/suit/armor/bone
 	name = "bone armor"
-	desc = "A tribal armor plate, crafted from animal bone."
+	desc = ""
 	icon_state = "bonearmor"
 	item_state = "bonearmor"
 	blood_overlay_type = "armor"
@@ -134,7 +134,7 @@
 
 /obj/item/clothing/suit/armor/bulletproof
 	name = "bulletproof armor"
-	desc = "A Type III heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
+	desc = ""
 	icon_state = "bulletproof"
 	item_state = "armor"
 	blood_overlay_type = "armor"
@@ -144,7 +144,7 @@
 
 /obj/item/clothing/suit/armor/laserproof
 	name = "reflector vest"
-	desc = "A vest that excels in protecting the wearer against energy projectiles, as well as occasionally reflecting them."
+	desc = ""
 	icon_state = "armor_reflec"
 	item_state = "armor_reflec"
 	blood_overlay_type = "armor"
@@ -163,7 +163,7 @@
 
 /obj/item/clothing/suit/armor/vest/det_suit
 	name = "detective's armor vest"
-	desc = "An armored vest with a detective's badge on it."
+	desc = ""
 	icon_state = "detective-armor"
 	resistance_flags = FLAMMABLE
 	dog_fashion = null
@@ -176,7 +176,7 @@
 
 /obj/item/clothing/suit/armor/centcom
 	name = "\improper CentCom armor"
-	desc = "A suit that protects against some damage."
+	desc = ""
 	icon_state = "centcom"
 	item_state = "centcom"
 	w_class = WEIGHT_CLASS_BULKY
@@ -192,7 +192,7 @@
 
 /obj/item/clothing/suit/armor/heavy
 	name = "heavy armor"
-	desc = "A heavily armored suit that protects against moderate damage."
+	desc = ""
 	icon_state = "heavy"
 	item_state = "swat_suit"
 	w_class = WEIGHT_CLASS_BULKY
@@ -213,20 +213,20 @@
 
 /obj/item/clothing/suit/armor/tdome/red
 	name = "thunderdome suit"
-	desc = "Reddish armor."
+	desc = ""
 	icon_state = "tdred"
 	item_state = "tdred"
 
 /obj/item/clothing/suit/armor/tdome/green
 	name = "thunderdome suit"
-	desc = "Pukish armor."	//classy.
+	desc = ""	//classy.
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 
 
 /obj/item/clothing/suit/armor/riot/knight
 	name = "plate armour"
-	desc = "A classic suit of plate armour, highly effective at stopping melee attacks."
+	desc = ""
 	icon_state = "knight_green"
 	item_state = "knight_green"
 
@@ -244,7 +244,7 @@
 
 /obj/item/clothing/suit/armor/riot/knight/greyscale
 	name = "knight armour"
-	desc = "A classic suit of armour, able to be made from many different materials."
+	desc = ""
 	icon_state = "knight_greyscale"
 	item_state = "knight_greyscale"
 	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR//Can change color and add prefix
@@ -252,7 +252,7 @@
 
 /obj/item/clothing/suit/armor/vest/durathread
 	name = "durathread vest"
-	desc = "A vest made of durathread with strips of leather acting as trauma plates."
+	desc = ""
 	icon_state = "durathread"
 	item_state = "durathread"
 	strip_delay = 60
@@ -263,14 +263,14 @@
 
 /obj/item/clothing/suit/armor/vest/russian
 	name = "russian vest"
-	desc = "A bulletproof vest with forest camo. Good thing there's plenty of forests to hide in around here, right?"
+	desc = ""
 	icon_state = "rus_armor"
 	item_state = "rus_armor"
 	armor = list("melee" = 25, "bullet" = 30, "laser" = 0, "energy" = 10, "bomb" = 10, "bio" = 0, "rad" = 20, "fire" = 20, "acid" = 50)
 
 /obj/item/clothing/suit/armor/vest/russian_coat
 	name = "russian battle coat"
-	desc = "Used in extremly cold fronts, made out of real bears."
+	desc = ""
 	icon_state = "rus_coat"
 	item_state = "rus_coat"
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS

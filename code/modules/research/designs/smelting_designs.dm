@@ -63,7 +63,7 @@
 
 /datum/design/alienalloy
 	name = "Alien Alloy"
-	desc = "A sheet of reverse-engineered alien alloy."
+	desc = ""
 	id = "alienalloy"
 	build_type = PROTOLATHE | SMELTER
 	materials = list(/datum/material/iron = 4000, /datum/material/plasma = 4000)

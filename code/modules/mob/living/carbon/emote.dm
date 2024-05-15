@@ -1,9 +1,20 @@
 /datum/emote/living/carbon
 	mob_type_allowed_typecache = list(/mob/living/carbon)
 
+/datum/emote/living/carbon/deathgurgle
+	key = "deathgurgle"
+	key_third_person = ""
+	emote_type = EMOTE_AUDIBLE
+	only_forced_audio = TRUE
+	vary = TRUE
+	message = "gasps out their last breath."
+	message_simple =  "falls limp."
+	stat_allowed = UNCONSCIOUS
+	mob_type_ignore_stat_typecache = list(/mob/living/carbon/human)
+
 /datum/emote/living/carbon/airguitar
 	key = "airguitar"
-	message = "is strumming the air and headbanging like a safari chimp."
+	message = "strums an invisible lute."
 	restraint_check = TRUE
 
 /datum/emote/living/carbon/blink
@@ -29,10 +40,7 @@
 		if(!user.get_bodypart(BODY_ZONE_L_ARM) || !user.get_bodypart(BODY_ZONE_R_ARM))
 			return
 		else
-			return pick('sound/misc/clap1.ogg',
-							'sound/misc/clap2.ogg',
-							'sound/misc/clap3.ogg',
-							'sound/misc/clap4.ogg')
+			return "clap"
 
 /datum/emote/living/carbon/gnarl
 	key = "gnarl"
@@ -40,10 +48,10 @@
 	message = "gnarls and shows its teeth..."
 	mob_type_allowed_typecache = list(/mob/living/carbon/monkey)
 
-/datum/emote/living/carbon/moan
+/datum/emote/living/moan
 	key = "moan"
 	key_third_person = "moans"
-	message = "moans!"
+	message = "moans."
 	message_mime = "appears to moan!"
 	emote_type = EMOTE_AUDIBLE
 

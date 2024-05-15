@@ -12,7 +12,7 @@ GLOBAL_LIST_EMPTY(possible_gifts)
 
 /obj/item/a_gift
 	name = "gift"
-	desc = "PRESENTS!!!! eek!"
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "giftdeliverypackage3"
 	item_state = "gift"
@@ -98,7 +98,7 @@ GLOBAL_LIST_EMPTY(possible_gifts)
 
 /obj/item/a_gift/anything
 	name = "christmas gift"
-	desc = "It could be anything!"
+	desc = ""
 
 /obj/item/a_gift/anything/get_gift_type()
 	if(!GLOB.possible_gifts.len)

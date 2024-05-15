@@ -161,15 +161,15 @@ new /datum/disease_ability/symptom/powerful/youth
 	cost = 0
 	required_total_points = 0
 	start_with = TRUE
-	short_desc = "Force the host you are following to cough, spreading your infection to those nearby."
-	long_desc = "Force the host you are following to cough with extra force, spreading your infection to those within two meters of your host even if your transmissibility is low.<br>Cooldown: 10 seconds"
+	short_desc = ""
+	long_desc = ""
 
 
 /datum/action/cooldown/disease_cough
 	name = "Cough"
 	icon_icon = 'icons/mob/actions/actions_minor_antag.dmi'
 	button_icon_state = "cough"
-	desc = "Force the host you are following to cough with extra force, spreading your infection to those within two meters of your host even if your transmissibility is low.<br>Cooldown: 10 seconds"
+	desc = ""
 	cooldown_time = 100
 
 /datum/action/cooldown/disease_cough/Trigger()
@@ -180,9 +180,9 @@ new /datum/disease_ability/symptom/powerful/youth
 	if(!L)
 		return FALSE
 	if(L.stat != CONSCIOUS)
-		to_chat(D, "<span class='warning'>Your host must be conscious to cough.</span>")
+		to_chat(D, "<span class='warning'>My host must be conscious to cough.</span>")
 		return FALSE
-	to_chat(D, "<span class='notice'>You force [L.real_name] to cough.</span>")
+	to_chat(D, "<span class='notice'>I force [L.real_name] to cough.</span>")
 	L.emote("cough")
 	if(L.CanSpreadAirborneDisease()) //don't spread germs if they covered their mouth
 		var/datum/disease/advance/sentient_disease/SD = D.hosts[L]
@@ -196,14 +196,14 @@ new /datum/disease_ability/symptom/powerful/youth
 	actions = list(/datum/action/cooldown/disease_sneeze)
 	cost = 2
 	required_total_points = 3
-	short_desc = "Force the host you are following to sneeze, spreading your infection to those in front of them."
-	long_desc = "Force the host you are following to sneeze with extra force, spreading your infection to any victims in a 4 meter cone in front of your host.<br>Cooldown: 20 seconds"
+	short_desc = ""
+	long_desc = ""
 
 /datum/action/cooldown/disease_sneeze
 	name = "Sneeze"
 	icon_icon = 'icons/mob/actions/actions_minor_antag.dmi'
 	button_icon_state = "sneeze"
-	desc = "Force the host you are following to sneeze with extra force, spreading your infection to any victims in a 4 meter cone in front of your host even if your transmissibility is low.<br>Cooldown: 20 seconds"
+	desc = ""
 	cooldown_time = 200
 
 /datum/action/cooldown/disease_sneeze/Trigger()
@@ -214,9 +214,9 @@ new /datum/disease_ability/symptom/powerful/youth
 	if(!L)
 		return FALSE
 	if(L.stat != CONSCIOUS)
-		to_chat(D, "<span class='warning'>Your host must be conscious to sneeze.</span>")
+		to_chat(D, "<span class='warning'>My host must be conscious to sneeze.</span>")
 		return FALSE
-	to_chat(D, "<span class='notice'>You force [L.real_name] to sneeze.</span>")
+	to_chat(D, "<span class='notice'>I force [L.real_name] to sneeze.</span>")
 	L.emote("sneeze")
 	if(L.CanSpreadAirborneDisease()) //don't spread germs if they covered their mouth
 		var/datum/disease/advance/sentient_disease/SD = D.hosts[L]
@@ -234,14 +234,14 @@ new /datum/disease_ability/symptom/powerful/youth
 	actions = list(/datum/action/cooldown/disease_infect)
 	cost = 2
 	required_total_points = 3
-	short_desc = "Cause all objects your host is touching to become infectious for a limited time, spreading your infection to anyone who touches them."
-	long_desc = "Cause the host you are following to excrete an infective substance from their pores, causing all objects touching their skin to transmit your infection to anyone who touches them for the next 30 seconds. This includes the floor, if they are not wearing shoes, and any items they are holding, if they are not wearing gloves.<br>Cooldown: 40 seconds"
+	short_desc = ""
+	long_desc = ""
 
 /datum/action/cooldown/disease_infect
 	name = "Secrete Infection"
 	icon_icon = 'icons/mob/actions/actions_minor_antag.dmi'
 	button_icon_state = "infect"
-	desc = "Cause the host you are following to excrete an infective substance from their pores, causing all objects touching their skin to transmit your infection to anyone who touches them for the next 30 seconds.<br>Cooldown: 40 seconds"
+	desc = ""
 	cooldown_time = 400
 
 /datum/action/cooldown/disease_infect/Trigger()
@@ -301,14 +301,14 @@ new /datum/disease_ability/symptom/powerful/youth
 /datum/disease_ability/symptom/mild/cough
 	name = "Involuntary Coughing"
 	symptoms = list(/datum/symptom/cough)
-	short_desc = "Cause victims to cough intermittently."
-	long_desc = "Cause victims to cough intermittently, spreading your infection."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/mild/sneeze
 	name = "Involuntary Sneezing"
 	symptoms = list(/datum/symptom/sneeze)
-	short_desc = "Cause victims to sneeze intermittently."
-	long_desc = "Cause victims to sneeze intermittently, spreading your infection and also increasing transmissibility and resistance, at the cost of stealth."
+	short_desc = ""
+	long_desc = ""
 
 /******MEDIUM******/
 
@@ -317,38 +317,38 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/medium/beard
 	symptoms = list(/datum/symptom/beard)
-	short_desc = "Cause all victims to grow a luscious beard."
-	long_desc = "Cause all victims to grow a luscious beard. Ineffective against Santa Claus."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/hallucigen
 	symptoms = list(/datum/symptom/hallucigen)
-	short_desc = "Cause victims to hallucinate."
-	long_desc = "Cause victims to hallucinate. Decreases stats, especially resistance."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/choking
 	symptoms = list(/datum/symptom/choking)
-	short_desc = "Cause victims to choke."
-	long_desc = "Cause victims to choke, threatening asphyxiation. Decreases stats, especially transmissibility."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/confusion
 	symptoms = list(/datum/symptom/confusion)
-	short_desc = "Cause victims to become confused."
-	long_desc = "Cause victims to become confused intermittently."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/vomit
 	symptoms = list(/datum/symptom/vomit)
-	short_desc = "Cause victims to vomit."
-	long_desc = "Cause victims to vomit. Slightly increases transmissibility. Vomiting also also causes the victims to lose nutrition and removes some toxin damage."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/voice_change
 	symptoms = list(/datum/symptom/voice_change)
-	short_desc = "Change the voice of victims."
-	long_desc = "Change the voice of victims, causing confusion in communications."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/visionloss
 	symptoms = list(/datum/symptom/visionloss)
-	short_desc = "Damage the eyes of victims, eventually causing blindness."
-	long_desc = "Damage the eyes of victims, eventually causing blindness. Decreases all stats."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/deafness
 	symptoms = list(/datum/symptom/deafness)
@@ -370,8 +370,8 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/medium/viraladaptation
 	symptoms = list(/datum/symptom/viraladaptation)
-	short_desc = "Cause your infection to become more resistant to detection and eradication."
-	long_desc = "Cause your infection to mimic the function of normal body cells, becoming much harder to spot and to eradicate, but reducing its speed."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/viralevolution
 	symptoms = list(/datum/symptom/viralevolution)
@@ -384,18 +384,18 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/medium/itching
 	symptoms = list(/datum/symptom/itching)
-	short_desc = "Cause victims to itch."
-	long_desc = "Cause victims to itch, increasing all stats except stealth."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/heal/weight_loss
 	symptoms = list(/datum/symptom/weight_loss)
-	short_desc = "Cause victims to lose weight."
-	long_desc = "Cause victims to lose weight, and make it almost impossible for them to gain nutrition from food. Reduced nutrition allows your infection to spread more easily from hosts, especially by sneezing."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/heal/sensory_restoration
 	symptoms = list(/datum/symptom/sensory_restoration)
-	short_desc = "Regenerate eye and ear damage of victims."
-	long_desc = "Regenerate eye and ear damage of victims."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/medium/heal/mind_restoration
 	symptoms = list(/datum/symptom/mind_restoration)
@@ -420,8 +420,8 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/powerful/youth
 	symptoms = list(/datum/symptom/youth)
-	short_desc = "Cause victims to become eternally young."
-	long_desc = "Cause victims to become eternally young. Provides boosts to all stats except transmissibility."
+	short_desc = ""
+	long_desc = ""
 
 /****HEALING SUBTYPE****/
 
@@ -436,8 +436,8 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/powerful/heal/metabolism
 	symptoms = list(/datum/symptom/heal/metabolism)
-	short_desc = "Increase the metabolism of victims, causing them to process chemicals and grow hungry faster."
-	long_desc = "Increase the metabolism of victims, causing them to process chemicals twice as fast and grow hungry more quickly."
+	short_desc = ""
+	long_desc = ""
 
 /datum/disease_ability/symptom/powerful/heal/dark
 	symptoms = list(/datum/symptom/heal/darkness)
@@ -453,5 +453,5 @@ new /datum/disease_ability/symptom/powerful/youth
 
 /datum/disease_ability/symptom/powerful/heal/coma
 	symptoms = list(/datum/symptom/heal/coma)
-	short_desc = "Cause victims to fall into a healing coma when hurt."
-	long_desc = "Cause victims to fall into a healing coma when hurt."
+	short_desc = ""
+	long_desc = ""

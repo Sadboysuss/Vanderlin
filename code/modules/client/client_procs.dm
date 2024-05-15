@@ -10,6 +10,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	))
 
+GLOBAL_LIST_EMPTY(respawntimes)
+GLOBAL_LIST_EMPTY(respawncounts)
+
 #define LIMITER_SIZE	5
 #define CURRENT_SECOND	1
 #define SECOND_COUNT	2
@@ -31,6 +34,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		- If so, is there any protection against somebody spam-clicking a link?
 	If you have any  questions about this stuff feel free to ask. ~Carn
 	*/
+
+/client
+	var/commendedsomeone
 
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
@@ -62,7 +68,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 				msg += " Administrators have been informed."
 				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
 				message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-			to_chat(src, "<span class='danger'>[msg]</span>")
+//			to_chat(src, "<span class='danger'>[msg]</span>")
 			return
 
 	var/stl = CONFIG_GET(number/second_topic_limit)
@@ -75,7 +81,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			topiclimiter[SECOND_COUNT] = 0
 		topiclimiter[SECOND_COUNT] += 1
 		if (topiclimiter[SECOND_COUNT] > stl)
-			to_chat(src, "<span class='danger'>Your previous action was ignored because you've done too many in a second</span>")
+//			to_chat(src, "<span class='danger'>My previous action was ignored because you've done too many in a second</span>")
 			return
 
 	//Logs all hrefs, except chat pings
@@ -84,7 +90,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	//byond bug ID:2256651
 	if (asset_cache_job && asset_cache_job in completed_asset_jobs)
-		to_chat(src, "<span class='danger'>An error has been detected in how your client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
+		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
 		src << browse("...", "window=asset_cache_browser")
 
 	// Keypress passthrough
@@ -102,6 +108,37 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// Admin PM
 	if(href_list["priv_msg"])
 		cmd_admin_pm(href_list["priv_msg"],null)
+		return
+
+	if(href_list["playerlistrogue"])
+		if(SSticker.current_state != GAME_STATE_FINISHED)
+			return
+		view_rogue_manifest()
+		return
+
+	if(href_list["commendsomeone"])
+		if(SSticker.current_state != GAME_STATE_FINISHED)
+			return
+		if(commendedsomeone)
+			return
+		var/list/selections = GLOB.character_ckey_list.Copy()
+		if(!selections.len)
+			return
+		var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
+		if(!selection)
+			return
+		if(commendedsomeone)
+			return
+		var/theykey = selections[selection]
+		if(theykey == ckey)
+			to_chat(src,"You can't commend yourself.")
+			return
+		if(theykey)
+			commendedsomeone = TRUE
+			add_commend(theykey, ckey)
+			to_chat(src,"[selection] commended.")
+			log_game("COMMEND: [ckey] commends [theykey].")
+			log_admin("COMMEND: [ckey] commends [theykey].")
 		return
 
 	switch(href_list["_src_"])
@@ -142,8 +179,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
  * Handles checking for duplicate messages and people sending messages too fast
  *
  * The first checks are if you're sending too fast, this is defined as sending
- * SPAM_TRIGGER_AUTOMUTE messages in 
- * 5 seconds, this will start supressing your messages,
+ * SPAM_TRIGGER_AUTOMUTE messages in
+ * 5 seconds, this will start supressing my messages,
  * if you send 2* that limit, you also get muted
  *
  * The second checks for the same duplicate message too many times and mutes
@@ -165,7 +202,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(cache >= SPAM_TRIGGER_AUTOMUTE * 2)
 		total_message_count = 0
 		total_count_reset = 0
-		cmd_admin_mute(src, mute_type, 1)	
+		cmd_admin_mute(src, mute_type, 1)
 		return 1
 
 	//Otherwise just supress the message
@@ -176,24 +213,24 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(CONFIG_GET(flag/automute_on) && !holder && last_message == message)
 		src.last_message_count++
 		if(src.last_message_count >= SPAM_TRIGGER_AUTOMUTE)
-			to_chat(src, "<span class='danger'>You have exceeded the spam filter limit for identical messages. An auto-mute was applied.</span>")
+			to_chat(src, "<span class='danger'>I have exceeded the spam filter limit for identical messages. An auto-mute was applied.</span>")
 			cmd_admin_mute(src, mute_type, 1)
 			return 1
 		if(src.last_message_count >= SPAM_TRIGGER_WARNING)
-			to_chat(src, "<span class='danger'>You are nearing the spam filter limit for identical messages.</span>")
+			to_chat(src, "<span class='danger'>I are nearing the spam filter limit for identical messages.</span>")
 			return 0
 	else
 		last_message = message
 		src.last_message_count = 0
 		return 0
-
+/*
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
 	if(filelength > UPLOAD_LIMIT)
 		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0
 	return 1
-
+*/
 
 	///////////
 	//CONNECT//
@@ -204,7 +241,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 
 /client/New(TopicData)
 	var/tdata = TopicData //save this for later use
-	chatOutput = new /datum/chatOutput(src)
+//	chatOutput = new /datum/chatOutput(src)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
 	if(connection != "seeker" && connection != "web")//Invalid connection type.
@@ -217,6 +254,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
 	holder = GLOB.admin_datums[ckey]
+
 	if(holder)
 		GLOB.admins |= src
 		holder.owner = src
@@ -247,6 +285,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	else
 		prefs = new /datum/preferences(src)
 		GLOB.preferences_datums[ckey] = prefs
+	if(!holder)
+		prefs.chat_toggles &= ~CHAT_GHOSTEARS
+		prefs.chat_toggles &= ~CHAT_GHOSTWHISPER
+		prefs.save_preferences()
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.clientfps
@@ -263,6 +305,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			if(!I || I == src)
 				continue
 			var/client/C = I
+			if(holder && C.holder)
+				if(check_rights_for(C, R_ADMIN))
+					to_chat(C, "Admin Login: [key]")
 			if(C.key && (C.key != key) )
 				var/matches
 				if( (C.address == address) )
@@ -280,7 +325,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 						message_admins("<span class='danger'><B>Notice: </B></span><span class='notice'>[key_name_admin(src)] has the same [matches] as [key_name_admin(C)] (no longer logged in). </span>")
 						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(C)] (no longer logged in).")
 
+	var/reconnecting = FALSE
 	if(GLOB.player_details[ckey])
+		reconnecting = TRUE
 		player_details = GLOB.player_details[ckey]
 		player_details.byond_version = full_version
 	else
@@ -304,7 +351,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 
 		if (num2text(byond_build) in GLOB.blacklisted_builds)
 			log_access("Failed login: [key] - blacklisted byond version")
-			to_chat(src, "<span class='userdanger'>Your version of byond is blacklisted.</span>")
+			to_chat(src, "<span class='danger'>My version of byond is blacklisted.</span>")
 			to_chat(src, "<span class='danger'>Byond build [byond_build] ([byond_version].[byond_build]) has been blacklisted for the following reason: [GLOB.blacklisted_builds[num2text(byond_build)]].</span>")
 			to_chat(src, "<span class='danger'>Please download a new version of byond. If [byond_build] is the latest, you can go to <a href=\"https://secure.byond.com/download/build\">BYOND's website</a> to download other versions.</span>")
 			if(connecting_admin)
@@ -317,7 +364,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		set_macros()
 		update_movement_keys()
 
-	chatOutput.start() // Starts the chat
+//	chatOutput.start() // Starts the chat
 
 	if(alert_mob_dupe_login)
 		spawn()
@@ -331,7 +378,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/ceb = CONFIG_GET(number/client_error_build)
 	var/cwv = CONFIG_GET(number/client_warn_version)
 	if (byond_version < cev || byond_build < ceb)		//Out of date client.
-		to_chat(src, "<span class='danger'><b>Your version of BYOND is too old:</b></span>")
+		to_chat(src, "<span class='danger'><b>My version of BYOND is too old:</b></span>")
 		to_chat(src, CONFIG_GET(string/client_error_message))
 		to_chat(src, "Your version: [byond_version].[byond_build]")
 		to_chat(src, "Required version: [cev].[ceb] or later")
@@ -343,14 +390,14 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			return 0
 	else if (byond_version < cwv)	//We have words for this client.
 		if(CONFIG_GET(flag/client_warn_popup))
-			var/msg = "<b>Your version of byond may be getting out of date:</b><br>"
+			var/msg = "<b>My version of byond may be getting out of date:</b><br>"
 			msg += CONFIG_GET(string/client_warn_message) + "<br><br>"
 			msg += "Your version: [byond_version]<br>"
 			msg += "Required version to remove this message: [cwv] or later<br>"
 			msg += "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.<br>"
 			src << browse(msg, "window=warning_popup")
 		else
-			to_chat(src, "<span class='danger'><b>Your version of byond may be getting out of date:</b></span>")
+			to_chat(src, "<span class='danger'><b>My version of byond may be getting out of date:</b></span>")
 			to_chat(src, CONFIG_GET(string/client_warn_message))
 			to_chat(src, "Your version: [byond_version]")
 			to_chat(src, "Required version to remove this message: [cwv] or later")
@@ -374,6 +421,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		add_admin_verbs()
 		to_chat(src, get_message_output("memo"))
 		adminGreet()
+	if (mob && reconnecting)
+		var/area/joined_area = get_area(mob.loc)
+		if(joined_area)
+			joined_area.reconnect_game(mob)
 
 	add_verbs_from_config()
 	var/cached_player_age = set_client_age_from_db(tdata) //we have to cache this because other shit may change it and we need it's current value now down below.
@@ -397,17 +448,27 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	check_ip_intel()
 	validate_key_in_db()
 
-	send_resources()
+//	send_resources()
+
 
 	generate_clickcatcher()
 	apply_clickcatcher()
 
 	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
+		//to_chat(src, "<span class='info'>I have unread updates in the changelog.</span>")
 		if(CONFIG_GET(flag/aggressive_changelog))
 			changelog()
 		else
 			winset(src, "infowindow.changelog", "font-style=bold")
+
+	if(prefs.toggles & TOGGLE_FULLSCREEN)
+		toggle_fullscreeny(TRUE)
+	else
+		toggle_fullscreeny(FALSE)
+
+	if(prefs.anonymize)
+		if(get_playerquality(ckey) > -5)
+			GLOB.anonymize |= ckey
 
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
@@ -416,9 +477,20 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
+
+
+
+	add_patreon_verbs()
+
+
 	to_chat(src, get_message_output("message", ckey))
-	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+
+
+
+//	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+//		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+
+	update_ambience_pref()
 
 
 	//This is down here because of the browse() calls in tooltip/New()
@@ -453,14 +525,20 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 //////////////
 
 /client/Del()
-	if(credits)
-		QDEL_LIST(credits)
 	log_access("Logout: [key_name(src)]")
+
 	if(holder)
+		for(var/I in GLOB.clients)
+			if(!I || I == src)
+				continue
+			var/client/C = I
+			if(C.holder)
+				if(check_rights_for(C, R_ADMIN))
+					to_chat(C, "Admin Logout: [ckey]")
 		adminGreet(1)
 		holder.owner = null
 		GLOB.admins -= src
-		if (!GLOB.admins.len && SSticker.IsRoundInProgress()) //Only report this stuff if we are currently playing.
+/*		if (!GLOB.admins.len && SSticker.IsRoundInProgress()) //Only report this stuff if we are currently playing.
 			var/cheesy_message = pick(
 				"I have no admins online!",\
 				"I'm all alone :(",\
@@ -476,10 +554,11 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				"Forever alone :("\
 			)
 
-			send2irc("Server", "[cheesy_message] (No admins online)")
+//			send2irc("Server", "[cheesy_message] (No admins online)")
+*/
+	if(player_details)
+		player_details.achievements.save()
 
-	player_details.achievements.save()
-	
 	GLOB.ahelp_tickets.ClientLogout(src)
 	GLOB.directory -= ckey
 	GLOB.clients -= src
@@ -492,6 +571,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 
 /client/Destroy()
 	. = ..() //Even though we're going to be hard deleted there are still some things that want to know the destroy is happening
+	QDEL_NULL(droning_sound)
+	last_droning_sound = null
 	return QDEL_HINT_HARDDEL_NOW
 
 /client/proc/set_client_age_from_db(connectiontopic)
@@ -597,8 +678,15 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		player_age = -1
 	. = player_age
 
+/client/proc/toggle_fullscreeny(new_value)
+	if(new_value)
+		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
+	else
+		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+	winset(src, "mainwindow", "is-maximized=true")
+
 /client/proc/findJoinDate()
-	var/list/http = world.Export("http://byond.com/members/[ckey]?format=text")
+	var/list/http = world.Export("http://www.byond.com/members/[ckey]?format=text")
 	if(!http)
 		log_world("Failed to connect to byond member page to age check [ckey]")
 		return
@@ -635,6 +723,14 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				qdel(query_update_byond_key)
 			else
 				CRASH("Key check regex failed for [ckey]")
+
+/client/proc/update_ambience_pref()
+	if(prefs.toggles & SOUND_AMBIENCE)
+		if(SSambience.ambience_listening_clients[src] > world.time)
+			return // If already properly set we don't want to reset the timer.
+		SSambience.ambience_listening_clients[src] = world.time + 10 SECONDS //Just wait 10 seconds before the next one aight mate? cheers.
+	else
+		SSambience.remove_ambience_client(src)
 
 /client/proc/check_randomizer(topic)
 	. = FALSE
@@ -676,8 +772,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if (oldcid != computer_id && computer_id != lastcid) //IT CHANGED!!!
 			cidcheck -= ckey //so they can try again after removing the cid randomizer.
 
-			to_chat(src, "<span class='userdanger'>Connection Error:</span>")
-			to_chat(src, "<span class='danger'>Invalid ComputerID(spoofed). Please remove the ComputerID spoofer from your byond installation and try again.</span>")
+			to_chat(src, "<span class='danger'>Connection Error:</span>")
+			to_chat(src, "<span class='danger'>Invalid ComputerID(spoofed). Please remove the ComputerID spoofer from my byond installation and try again.</span>")
 
 			if (!cidcheck_failedckeys[ckey])
 				message_admins("<span class='adminnotice'>[key_name(src)] has been detected as using a cid randomizer. Connection rejected.</span>")
@@ -717,7 +813,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/url = winget(src, null, "url")
 	//special javascript to make them reconnect under a new window.
 	src << browse({"<a id='link' href="byond://[url]?token=[token]">byond://[url]?token=[token]</a><script type="text/javascript">document.getElementById("link").click();window.location="byond://winset?command=.quit"</script>"}, "border=0;titlebar=0;size=1x1;window=redirect")
-	to_chat(src, {"<a href="byond://[url]?token=[token]">You will be automatically taken to the game, if not, click here to be taken manually</a>"})
+	to_chat(src, {"<a href="byond://[url]?token=[token]">I will be automatically taken to the game, if not, click here to be taken manually</a>"})
 
 /client/proc/note_randomizer_user()
 	add_system_note("CID-Error", "Detected as using a cid randomizer.")
@@ -787,7 +883,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 					add_system_note("aimbot", "Is using the middle click aimbot exploit")
 				log_game("[key_name(src)] Has hit the per-minute click limit of [mcl] clicks in a given game minute")
 				message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute click limit of [mcl] clicks in a given game minute")
-			to_chat(src, "<span class='danger'>[msg]</span>")
+//			to_chat(src, "<span class='danger'>[msg]</span>")
 			return
 
 	var/scl = CONFIG_GET(number/second_click_limit)
@@ -800,17 +896,17 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			clicklimiter[SECOND_COUNT] = 0
 		clicklimiter[SECOND_COUNT] += 1+(!!ab)
 		if (clicklimiter[SECOND_COUNT] > scl)
-			to_chat(src, "<span class='danger'>Your previous click was ignored because you've done too many in a second</span>")
+//			to_chat(src, "<span class='danger'>My previous click was ignored because you've done too many in a second</span>")
 			return
 
 	if (prefs.hotkeys)
 		// If hotkey mode is enabled, then clicking the map will automatically
 		// unfocus the text bar. This removes the red color from the text bar
 		// so that the visual focus indicator matches reality.
-		winset(src, null, "input.background-color=[COLOR_INPUT_DISABLED]")
+		winset(src, null, "command=disableInput input.background-color=[COLOR_INPUT_DISABLED] input.text-color = #ad9eb4")
 
 	else
-		winset(src, null, "input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
+		winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_ENABLED] input.text-color = #EEEEEE")
 
 	..()
 
@@ -849,13 +945,12 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	spawn (10) //removing this spawn causes all clients to not get verbs.
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
 		getFilesSlow(src, SSassets.preload, register_asset = FALSE)
-		#if (PRELOAD_RSC == 0)
-		for (var/name in GLOB.vox_sounds)
-			var/file = GLOB.vox_sounds[name]
-			Export("##action=load_rsc", file)
-			stoplag()
-		#endif
-
+//		#if (PRELOAD_RSC == 0)
+//		for (var/name in GLOB.vox_sounds)
+//			var/file = GLOB.vox_sounds[name]
+//			Export("##action=load_rsc", file)
+//			stoplag()
+//		#endif
 
 //Hook, override it to run code when dir changes
 //Like for /atoms, but clients are their own snowflake FUCK
@@ -933,22 +1028,49 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/pos = 0
 	for(var/D in GLOB.cardinals)
 		pos++
-		var/obj/screen/O = LAZYACCESS(char_render_holders, "[D]")
-		if(!O)
-			O = new
-			LAZYSET(char_render_holders, "[D]", O)
-			screen |= O
+		var/obj/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
+		if(O)
+			screen -= O
+			char_render_holders -= O
+			qdel(O)
+		O = new
+		LAZYSET(char_render_holders, "[D]", O)
+		screen += O
 		O.appearance = MA
 		O.dir = D
-		O.screen_loc = "character_preview_map:0,[pos]"
+		switch(pos)
+			if(1)
+				O.screen_loc = "character_preview_map:1:2,2:-18"
+			if(2)
+				O.screen_loc = "character_preview_map:0:2,2:-18"
+			if(3)
+				O.screen_loc = "character_preview_map:1:2,0:10"
+			if(4)
+				O.screen_loc = "character_preview_map:0:2,0:10"
 
 /client/proc/clear_character_previews()
-	for(var/index in char_render_holders)
-		var/obj/screen/S = char_render_holders[index]
+	for(var/obj/screen/S in char_render_holders)
+//		var/obj/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
-	char_render_holders = null
+	char_render_holders = list()
 
+/client/proc/fullscreen()
+	winset(src, "mainwindow", "statusbar=false")
+
+/client/New()
+	..()
+	fullscreen()
 
 /client/proc/give_award(achievement_type, mob/user)
 	return	player_details.achievements.unlock(achievement_type, mob/user)
+
+/client/proc/ghostize(can_reenter_corpse = 1, mob/current)
+	if(current)
+		if(mob)
+			if(mob != current)
+				return
+	if(mob)
+		if(isliving(mob)) //no ghost can call this
+			mob.ghostize(can_reenter_corpse)
+		testing("[mob] [mob.type] YEA CLIE")

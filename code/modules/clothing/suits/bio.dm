@@ -2,7 +2,7 @@
 /obj/item/clothing/head/bio_hood
 	name = "bio hood"
 	icon_state = "bio"
-	desc = "A hood that protects the head and face from biological contaminants."
+	desc = ""
 	permeability_coefficient = 0.01
 	clothing_flags = THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | SNUG_FIT
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 80, "fire" = 30, "acid" = 100)
@@ -12,7 +12,7 @@
 
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
-	desc = "A suit that protects against biological contamination."
+	desc = ""
 	icon_state = "bio"
 	item_state = "bio_suit"
 	w_class = WEIGHT_CLASS_BULKY
@@ -48,7 +48,7 @@
 /obj/item/clothing/head/bio_hood/security
 	armor = list("melee" = 25, "bullet" = 15, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 100, "rad" = 80, "fire" = 30, "acid" = 100)
 	icon_state = "bio_security"
-	
+
 /obj/item/clothing/suit/bio_suit/security
 	armor = list("melee" = 25, "bullet" = 15, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 100, "rad" = 80, "fire" = 30, "acid" = 100)
 	icon_state = "bio_security"
@@ -89,7 +89,7 @@
 //Plague Dr mask can be found in clothing/masks/gasmask.dm
 /obj/item/clothing/suit/bio_suit/plaguedoctorsuit
 	name = "plague doctor suit"
-	desc = "It protected doctors from the Black Death, back then. You bet your arse it's gonna help you against viruses."
+	desc = ""
 	icon_state = "plaguedoctor"
 	item_state = "bio_suit"
 	strip_delay = 40

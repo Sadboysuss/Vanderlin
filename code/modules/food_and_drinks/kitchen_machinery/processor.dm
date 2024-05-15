@@ -1,7 +1,7 @@
 
 /obj/machinery/processor
 	name = "food processor"
-	desc = "An industrial grinder used to process meat and other foods. Keep hands clear of intake area while operating."
+	desc = ""
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "processor1"
 	layer = BELOW_OBJ_LAYER
@@ -69,17 +69,17 @@
 					loaded++
 
 		if(loaded)
-			to_chat(user, "<span class='notice'>You insert [loaded] items into [src].</span>")
+			to_chat(user, "<span class='notice'>I insert [loaded] items into [src].</span>")
 		return
 
 	var/datum/food_processor_process/P = select_recipe(O)
 	if(P)
 		user.visible_message("<span class='notice'>[user] put [O] into [src].</span>", \
-			"<span class='notice'>You put [O] into [src].</span>")
+			"<span class='notice'>I put [O] into [src].</span>")
 		user.transferItemToLoc(O, src, TRUE)
 		return 1
 	else
-		if(user.a_intent != INTENT_HARM)
+		if(user.used_intent.type != INTENT_HARM)
 			to_chat(user, "<span class='warning'>That probably won't blend!</span>")
 			return 1
 		else
@@ -89,9 +89,9 @@
 	if(processing)
 		to_chat(user, "<span class='warning'>[src] is in the process of processing!</span>")
 		return TRUE
-	if(user.a_intent == INTENT_GRAB && ismob(user.pulling) && select_recipe(user.pulling))
+	if(user.used_intent.type == INTENT_GRAB && ismob(user.pulling) && select_recipe(user.pulling))
 		if(user.grab_state < GRAB_AGGRESSIVE)
-			to_chat(user, "<span class='warning'>You need a better grip to do that!</span>")
+			to_chat(user, "<span class='warning'>I need a better grip to do that!</span>")
 			return
 		var/mob/living/pushed_mob = user.pulling
 		visible_message("<span class='warning'>[user] stuffs [pushed_mob] into [src]!</span>")
@@ -103,9 +103,9 @@
 		return TRUE
 	processing = TRUE
 	user.visible_message("<span class='notice'>[user] turns on [src].</span>", \
-		"<span class='notice'>You turn on [src].</span>", \
-		"<span class='hear'>You hear a food processor.</span>")
-	playsound(src.loc, 'sound/machines/blender.ogg', 50, TRUE)
+		"<span class='notice'>I turn on [src].</span>", \
+		"<span class='hear'>I hear a food processor.</span>")
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	use_power(500)
 	var/total_time = 0
 	for(var/O in src.contents)
@@ -128,7 +128,7 @@
 	visible_message("<span class='notice'>\The [src] finishes processing.</span>")
 
 /obj/machinery/processor/verb/eject()
-	set category = "Object"
+	set hidden = 1
 	set name = "Eject Contents"
 	set src in oview(1)
 	if(usr.stat || usr.restrained())
@@ -152,7 +152,7 @@
 
 /obj/machinery/processor/slime
 	name = "slime processor"
-	desc = "An industrial grinder with a sticker saying appropriated for science department. Keep hands clear of intake area while operating."
+	desc = ""
 
 /obj/machinery/processor/slime/Initialize()
 	. = ..()

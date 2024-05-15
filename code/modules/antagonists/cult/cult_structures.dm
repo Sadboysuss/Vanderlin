@@ -4,7 +4,7 @@
 	icon = 'icons/obj/cult.dmi'
 	light_power = 2
 	var/cooldowntime = 0
-	break_sound = 'sound/hallucinations/veryfar_noise.ogg'
+	break_sound = 'sound/blank.ogg'
 	debris = list(/obj/item/stack/sheet/runed_metal = 1)
 
 /obj/structure/destructible/cult/proc/conceal() //for spells that hide cult presence
@@ -48,16 +48,16 @@
 			obj_integrity = min(max_integrity, obj_integrity + 5)
 			Beam(M, icon_state="sendbeam", time=4)
 			M.visible_message("<span class='danger'>[M] repairs \the <b>[src]</b>.</span>", \
-				"<span class='cult'>You repair <b>[src]</b>, leaving [p_they()] at <b>[round(obj_integrity * 100 / max_integrity)]%</b> stability.</span>")
+				"<span class='cult'>I repair <b>[src]</b>, leaving [p_they()] at <b>[round(obj_integrity * 100 / max_integrity)]%</b> stability.</span>")
 		else
-			to_chat(M, "<span class='cult'>You cannot repair [src], as [p_theyre()] undamaged!</span>")
+			to_chat(M, "<span class='cult'>I cannot repair [src], as [p_theyre()] undamaged!</span>")
 	else
 		..()
 
 /obj/structure/destructible/cult/attackby(obj/I, mob/user, params)
 	if(istype(I, /obj/item/melee/cultblade/dagger) && iscultist(user))
 		anchored = !anchored
-		to_chat(user, "<span class='notice'>You [anchored ? "":"un"]secure \the [src] [anchored ? "to":"from"] the floor.</span>")
+		to_chat(user, "<span class='notice'>I [anchored ? "":"un"]secure \the [src] [anchored ? "to":"from"] the floor.</span>")
 		if(!anchored)
 			icon_state = "[initial(icon_state)]_off"
 		else
@@ -67,7 +67,7 @@
 
 /obj/structure/destructible/cult/talisman
 	name = "altar"
-	desc = "A bloodstained altar dedicated to Nar'Sie."
+	desc = ""
 	icon_state = "talismanaltar"
 	break_message = "<span class='warning'>The altar shatters, leaving only the wailing of the damned!</span>"
 
@@ -79,7 +79,7 @@
 		to_chat(user, "<span class='warning'>You're pretty sure you know exactly what this is used for and you can't seem to touch it.</span>")
 		return
 	if(!anchored)
-		to_chat(user, "<span class='cultitalic'>You need to anchor [src] to the floor with your dagger first.</span>")
+		to_chat(user, "<span class='cultitalic'>I need to anchor [src] to the floor with your dagger first.</span>")
 		return
 	if(cooldowntime > world.time)
 		to_chat(user, "<span class='cult italic'>The magic in [src] is weak, it will be ready to use again in [DisplayTimeText(cooldowntime - world.time)].</span>")
@@ -97,11 +97,11 @@
 		cooldowntime = world.time + 2400
 		for(var/N in pickedtype)
 			new N(get_turf(src))
-			to_chat(user, "<span class='cultitalic'>You kneel before the altar and your faith is rewarded with the [choice]!</span>")
+			to_chat(user, "<span class='cultitalic'>I kneel before the altar and your faith is rewarded with the [choice]!</span>")
 
 /obj/structure/destructible/cult/forge
 	name = "daemon forge"
-	desc = "A forge used in crafting the unholy weapons used by the armies of Nar'Sie."
+	desc = ""
 	icon_state = "forge"
 	light_range = 2
 	light_color = LIGHT_COLOR_LAVA
@@ -115,7 +115,7 @@
 		to_chat(user, "<span class='warning'>The heat radiating from [src] pushes you back.</span>")
 		return
 	if(!anchored)
-		to_chat(user, "<span class='cultitalic'>You need to anchor [src] to the floor with your dagger first.</span>")
+		to_chat(user, "<span class='cultitalic'>I need to anchor [src] to the floor with your dagger first.</span>")
 		return
 	if(cooldowntime > world.time)
 		to_chat(user, "<span class='cult italic'>The magic in [src] is weak, it will be ready to use again in [DisplayTimeText(cooldowntime - world.time)].</span>")
@@ -137,17 +137,17 @@
 		cooldowntime = world.time + 2400
 		for(var/N in pickedtype)
 			new N(get_turf(src))
-			to_chat(user, "<span class='cultitalic'>You work the forge as dark knowledge guides your hands, creating the [choice]!</span>")
+			to_chat(user, "<span class='cultitalic'>I work the forge as dark knowledge guides your hands, creating the [choice]!</span>")
 
 
 
 /obj/structure/destructible/cult/pylon
 	name = "pylon"
-	desc = "A floating crystal that slowly heals those faithful to Nar'Sie."
+	desc = ""
 	icon_state = "pylon"
 	light_range = 1.5
 	light_color = LIGHT_COLOR_RED
-	break_sound = 'sound/effects/glassbr2.ogg'
+	break_sound = 'sound/blank.ogg'
 	break_message = "<span class='warning'>The blood-red crystal falls to the floor and shatters!</span>"
 	var/heal_delay = 25
 	var/last_heal = 0
@@ -219,7 +219,7 @@
 
 /obj/structure/destructible/cult/tome
 	name = "archives"
-	desc = "A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl."
+	desc = ""
 	icon_state = "tomealtar"
 	light_range = 1.5
 	light_color = LIGHT_COLOR_FIRE
@@ -233,7 +233,7 @@
 		to_chat(user, "<span class='warning'>These books won't open and it hurts to even try and read the covers.</span>")
 		return
 	if(!anchored)
-		to_chat(user, "<span class='cultitalic'>You need to anchor [src] to the floor with your dagger first.</span>")
+		to_chat(user, "<span class='cultitalic'>I need to anchor [src] to the floor with your dagger first.</span>")
 		return
 	if(cooldowntime > world.time)
 		to_chat(user, "<span class='cult italic'>The magic in [src] is weak, it will be ready to use again in [DisplayTimeText(cooldowntime - world.time)].</span>")
@@ -252,11 +252,11 @@
 		cooldowntime = world.time + 2400
 		for(var/N in pickedtype)
 			new N(get_turf(src))
-			to_chat(user, "<span class='cultitalic'>You summon the [choice] from the archives!</span>")
+			to_chat(user, "<span class='cultitalic'>I summon the [choice] from the archives!</span>")
 
 /obj/effect/gateway
 	name = "gateway"
-	desc = "You're pretty sure that abyss is staring back."
+	desc = ""
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
 	density = TRUE

@@ -16,7 +16,7 @@
 
 /obj/machinery/computer/slot_machine
 	name = "slot machine"
-	desc = "Gambling for the antisocial."
+	desc = ""
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "slots1"
 	density = TRUE
@@ -93,7 +93,7 @@
 			else
 				if(!user.temporarilyRemoveItemFromInventory(C))
 					return
-				to_chat(user, "<span class='notice'>You insert [C] into [src]'s slot!</span>")
+				to_chat(user, "<span class='notice'>I insert [C] into [src]'s slot!</span>")
 				balance += C.value
 				qdel(C)
 		else
@@ -103,7 +103,7 @@
 			var/obj/item/holochip/H = I
 			if(!user.temporarilyRemoveItemFromInventory(H))
 				return
-			to_chat(user, "<span class='notice'>You insert [H.credits] holocredits into [src]'s!</span>")
+			to_chat(user, "<span class='notice'>I insert [H.credits] holocredits into [src]'s!</span>")
 			balance += H.credits
 			qdel(H)
 		else
@@ -232,7 +232,7 @@
 	if(stat & BROKEN)
 		to_chat(user, "<span class='warning'>The slot machine is broken!</span>")
 	if(working)
-		to_chat(user, "<span class='warning'>You need to wait until the machine stops spinning before you can play again!</span>")
+		to_chat(user, "<span class='warning'>I need to wait until the machine stops spinning before you can play again!</span>")
 		return 0
 	if(balance < SPIN_PRICE)
 		to_chat(user, "<span class='warning'>Insufficient money to play!</span>")
@@ -278,7 +278,7 @@
 		give_money(SMALL_PRIZE)
 
 	else if(linelength == 3)
-		to_chat(user, "<span class='notice'>You win three free games!</span>")
+		to_chat(user, "<span class='notice'>I win three free games!</span>")
 		balance += SPIN_PRICE * 4
 		money = max(money - SPIN_PRICE * 4, money)
 

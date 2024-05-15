@@ -5,7 +5,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "orebox"
 	name = "ore box"
-	desc = "A heavy wooden box, which can be filled with a lot of ores."
+	desc = ""
 	density = TRUE
 	pressure_resistance = 5*ONE_ATMOSPHERE
 
@@ -14,7 +14,7 @@
 		user.transferItemToLoc(W, src)
 	else if(SEND_SIGNAL(W, COMSIG_CONTAINS_STORAGE))
 		SEND_SIGNAL(W, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/stack/ore, src)
-		to_chat(user, "<span class='notice'>You empty the ore in [W] into \the [src].</span>")
+		to_chat(user, "<span class='notice'>I empty the ore in [W] into \the [src].</span>")
 	else
 		return ..()
 
@@ -25,8 +25,8 @@
 /obj/structure/ore_box/crowbar_act(mob/living/user, obj/item/I)
 	if(I.use_tool(src, user, 50, volume=50))
 		user.visible_message("<span class='notice'>[user] pries \the [src] apart.</span>",
-			"<span class='notice'>You pry apart \the [src].</span>",
-			"<span class='hear'>You hear splitting wood.</span>")
+			"<span class='notice'>I pry apart \the [src].</span>",
+			"<span class='hear'>I hear splitting wood.</span>")
 		deconstruct(TRUE, user)
 	return TRUE
 
@@ -79,7 +79,7 @@
 	add_fingerprint(usr)
 	if(href_list["removeall"])
 		dump_box_contents()
-		to_chat(usr, "<span class='notice'>You open the release hatch on the box..</span>")
+		to_chat(usr, "<span class='notice'>I open the release hatch on the box..</span>")
 	updateUsrDialog()
 
 /obj/structure/ore_box/deconstruct(disassembled = TRUE, mob/user)

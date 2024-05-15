@@ -47,7 +47,7 @@
 
 /obj/machinery/power/apc
 	name = "area power controller"
-	desc = "A control terminal for the area's electrical systems."
+	desc = ""
 
 	icon_state = "apc0"
 	use_power = NO_POWER_USE
@@ -426,29 +426,29 @@
 				to_chat(user, "<span class='warning'>Disconnect the wires first!</span>")
 				return
 			W.play_tool_sound(src)
-			to_chat(user, "<span class='notice'>You attempt to remove the power control board...</span>" )
+			to_chat(user, "<span class='notice'>I attempt to remove the power control board...</span>" )
 			if(W.use_tool(src, user, 50))
 				if (has_electronics == APC_ELECTRONICS_INSTALLED)
 					has_electronics = APC_ELECTRONICS_MISSING
 					if (stat & BROKEN)
 						user.visible_message("<span class='notice'>[user.name] has broken the power control board inside [src.name]!</span>",\
-							"<span class='notice'>You break the charred power control board and remove the remains.</span>",
-							"<span class='hear'>You hear a crack.</span>")
+							"<span class='notice'>I break the charred power control board and remove the remains.</span>",
+							"<span class='hear'>I hear a crack.</span>")
 						return
 					else if (obj_flags & EMAGGED)
 						obj_flags &= ~EMAGGED
 						user.visible_message("<span class='notice'>[user.name] has discarded an emagged power control board from [src.name]!</span>",\
-							"<span class='notice'>You discard the emagged power control board.</span>")
+							"<span class='notice'>I discard the emagged power control board.</span>")
 						return
 					else if (malfhack)
 						user.visible_message("<span class='notice'>[user.name] has discarded a strangely programmed power control board from [src.name]!</span>",\
-							"<span class='notice'>You discard the strangely programmed board.</span>")
+							"<span class='notice'>I discard the strangely programmed board.</span>")
 						malfai = null
 						malfhack = 0
 						return
 					else
 						user.visible_message("<span class='notice'>[user.name] has removed the power control board from [src.name]!</span>",\
-							"<span class='notice'>You remove the power control board.</span>")
+							"<span class='notice'>I remove the power control board.</span>")
 						new /obj/item/electronics/apc(loc)
 						return
 		else if (opened!=APC_COVER_REMOVED)
@@ -474,7 +474,7 @@
 	. = TRUE
 	if(opened)
 		if(cell)
-			user.visible_message("<span class='notice'>[user] removes \the [cell] from [src]!</span>", "<span class='notice'>You remove \the [cell].</span>")
+			user.visible_message("<span class='notice'>[user] removes \the [cell] from [src]!</span>", "<span class='notice'>I remove \the [cell].</span>")
 			var/turf/T = get_turf(user)
 			cell.forceMove(T)
 			cell.update_icon()
@@ -488,12 +488,12 @@
 					has_electronics = APC_ELECTRONICS_SECURED
 					stat &= ~MAINT
 					W.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You screw the circuit electronics into place.</span>")
+					to_chat(user, "<span class='notice'>I screw the circuit electronics into place.</span>")
 				if (APC_ELECTRONICS_SECURED)
 					has_electronics = APC_ELECTRONICS_INSTALLED
 					stat |= MAINT
 					W.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You unfasten the electronics.</span>")
+					to_chat(user, "<span class='notice'>I unfasten the electronics.</span>")
 				else
 					to_chat(user, "<span class='warning'>There is nothing to secure!</span>")
 					return
@@ -519,17 +519,17 @@
 		if(!W.tool_start_check(user, amount=3))
 			return
 		user.visible_message("<span class='notice'>[user.name] welds [src].</span>", \
-							"<span class='notice'>You start welding the APC frame...</span>", \
-							"<span class='hear'>You hear welding.</span>")
+							"<span class='notice'>I start welding the APC frame...</span>", \
+							"<span class='hear'>I hear welding.</span>")
 		if(W.use_tool(src, user, 50, volume=50, amount=3))
 			if ((stat & BROKEN) || opened==APC_COVER_REMOVED)
 				new /obj/item/stack/sheet/metal(loc)
 				user.visible_message("<span class='notice'>[user.name] has cut [src] apart with [W].</span>",\
-					"<span class='notice'>You disassembled the broken APC frame.</span>")
+					"<span class='notice'>I disassembled the broken APC frame.</span>")
 			else
 				new /obj/item/wallframe/apc(loc)
 				user.visible_message("<span class='notice'>[user.name] has cut [src] from the wall with [W].</span>",\
-					"<span class='notice'>You cut the APC frame from the wall.</span>")
+					"<span class='notice'>I cut the APC frame from the wall.</span>")
 			qdel(src)
 			return TRUE
 
@@ -544,13 +544,13 @@
 			return
 		else
 			if (stat & MAINT)
-				to_chat(user, "<span class='warning'>There is no connector for your power cell!</span>")
+				to_chat(user, "<span class='warning'>There is no connector for my power cell!</span>")
 				return
 			if(!user.transferItemToLoc(W, src))
 				return
 			cell = W
 			user.visible_message("<span class='notice'>[user.name] has inserted the power cell to [src.name]!</span>",\
-				"<span class='notice'>You insert the power cell.</span>")
+				"<span class='notice'>I insert the power cell.</span>")
 			chargecount = 0
 			update_icon()
 	else if (W.GetID())
@@ -561,7 +561,7 @@
 			CRASH("attackby on APC when it's not on a turf")
 			return
 		if (host_turf.intact)
-			to_chat(user, "<span class='warning'>You must remove the floor plating in front of the APC first!</span>")
+			to_chat(user, "<span class='warning'>I must remove the floor plating in front of the APC first!</span>")
 			return
 		else if (terminal)
 			to_chat(user, "<span class='warning'>This APC is already wired!</span>")
@@ -572,11 +572,11 @@
 
 		var/obj/item/stack/cable_coil/C = W
 		if(C.get_amount() < 10)
-			to_chat(user, "<span class='warning'>You need ten lengths of cable for APC!</span>")
+			to_chat(user, "<span class='warning'>I need ten lengths of cable for APC!</span>")
 			return
 		user.visible_message("<span class='notice'>[user.name] adds cables to the APC frame.</span>", \
-							"<span class='notice'>You start adding cables to the APC frame...</span>")
-		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+							"<span class='notice'>I start adding cables to the APC frame...</span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		if(do_after(user, 20, target = src))
 			if (C.get_amount() < 10 || !C)
 				return
@@ -587,7 +587,7 @@
 					do_sparks(5, TRUE, src)
 					return
 				C.use(10)
-				to_chat(user, "<span class='notice'>You add cables to the APC frame.</span>")
+				to_chat(user, "<span class='notice'>I add cables to the APC frame.</span>")
 				make_terminal()
 				terminal.connect_to_network()
 	else if (istype(W, /obj/item/electronics/apc) && opened)
@@ -595,17 +595,17 @@
 			to_chat(user, "<span class='warning'>There is already a board inside the [src]!</span>")
 			return
 		else if (stat & BROKEN)
-			to_chat(user, "<span class='warning'>You cannot put the board inside, the frame is damaged!</span>")
+			to_chat(user, "<span class='warning'>I cannot put the board inside, the frame is damaged!</span>")
 			return
 
 		user.visible_message("<span class='notice'>[user.name] inserts the power control board into [src].</span>", \
-							"<span class='notice'>You start to insert the power control board into the frame...</span>")
-		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+							"<span class='notice'>I start to insert the power control board into the frame...</span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		if(do_after(user, 10, target = src))
 			if(!has_electronics)
 				has_electronics = APC_ELECTRONICS_INSTALLED
 				locked = FALSE
-				to_chat(user, "<span class='notice'>You place the power control board inside the frame.</span>")
+				to_chat(user, "<span class='notice'>I place the power control board inside the frame.</span>")
 				qdel(W)
 	else if(istype(W, /obj/item/electroadaptive_pseudocircuit) && opened)
 		var/obj/item/electroadaptive_pseudocircuit/P = W
@@ -616,7 +616,7 @@
 			if(!P.adapt_circuit(user, 50))
 				return
 			user.visible_message("<span class='notice'>[user] fabricates a circuit and places it into [src].</span>", \
-			"<span class='notice'>You adapt a power control board and click it into place in [src]'s guts.</span>")
+			"<span class='notice'>I adapt a power control board and click it into place in [src]'s guts.</span>")
 			has_electronics = APC_ELECTRONICS_INSTALLED
 			locked = FALSE
 		else if(!cell)
@@ -630,31 +630,31 @@
 			cell = C
 			chargecount = 0
 			user.visible_message("<span class='notice'>[user] fabricates a weak power cell and places it into [src].</span>", \
-			"<span class='warning'>Your [P.name] whirrs with strain as you create a weak power cell and place it into [src]!</span>")
+			"<span class='warning'>My [P.name] whirrs with strain as you create a weak power cell and place it into [src]!</span>")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>[src] has both electronics and a cell.</span>")
 			return
 	else if (istype(W, /obj/item/wallframe/apc) && opened)
 		if (!(stat & BROKEN || opened==APC_COVER_REMOVED || obj_integrity < max_integrity)) // There is nothing to repair
-			to_chat(user, "<span class='warning'>You found no reason for repairing this APC!</span>")
+			to_chat(user, "<span class='warning'>I found no reason for repairing this APC!</span>")
 			return
 		if (!(stat & BROKEN) && opened==APC_COVER_REMOVED) // Cover is the only thing broken, we do not need to remove elctronicks to replace cover
 			user.visible_message("<span class='notice'>[user.name] replaces missing APC's cover.</span>", \
-							"<span class='notice'>You begin to replace APC's cover...</span>")
+							"<span class='notice'>I begin to replace APC's cover...</span>")
 			if(do_after(user, 20, target = src)) // replacing cover is quicker than replacing whole frame
-				to_chat(user, "<span class='notice'>You replace missing APC's cover.</span>")
+				to_chat(user, "<span class='notice'>I replace missing APC's cover.</span>")
 				qdel(W)
 				opened = APC_COVER_OPENED
 				update_icon()
 			return
 		if (has_electronics)
-			to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside!</span>")
+			to_chat(user, "<span class='warning'>I cannot repair this APC until you remove the electronics still inside!</span>")
 			return
 		user.visible_message("<span class='notice'>[user.name] replaces the damaged APC frame with a new one.</span>", \
-							"<span class='notice'>You begin to replace the damaged APC frame...</span>")
+							"<span class='notice'>I begin to replace the damaged APC frame...</span>")
 		if(do_after(user, 50, target = src))
-			to_chat(user, "<span class='notice'>You replace the damaged APC frame with a new one.</span>")
+			to_chat(user, "<span class='notice'>I replace the damaged APC frame with a new one.</span>")
 			qdel(W)
 			stat &= ~BROKEN
 			obj_integrity = max_integrity
@@ -692,7 +692,7 @@
 					to_chat(user, "<span class='warning'>[src]'s frame is too damaged to support a circuit.</span>")
 					return
 				user.visible_message("<span class='notice'>[user] fabricates a circuit and places it into [src].</span>", \
-				"<span class='notice'>You adapt a power control board and click it into place in [src]'s guts.</span>")
+				"<span class='notice'>I adapt a power control board and click it into place in [src]'s guts.</span>")
 				has_electronics = TRUE
 				locked = TRUE
 				return TRUE
@@ -705,7 +705,7 @@
 				cell = C
 				chargecount = 0
 				user.visible_message("<span class='notice'>[user] fabricates a weak power cell and places it into [src].</span>", \
-				"<span class='warning'>Your [the_rcd.name] whirrs with strain as you create a weak power cell and place it into [src]!</span>")
+				"<span class='warning'>My [the_rcd.name] whirrs with strain as you create a weak power cell and place it into [src]!</span>")
 				update_icon()
 				return TRUE
 			else
@@ -724,15 +724,15 @@
 	if(obj_flags & EMAGGED)
 		to_chat(user, "<span class='warning'>The interface is broken!</span>")
 	else if(opened)
-		to_chat(user, "<span class='warning'>You must close the cover to swipe an ID card!</span>")
+		to_chat(user, "<span class='warning'>I must close the cover to swipe an ID card!</span>")
 	else if(panel_open)
-		to_chat(user, "<span class='warning'>You must close the panel!</span>")
+		to_chat(user, "<span class='warning'>I must close the panel!</span>")
 	else if(stat & (BROKEN|MAINT))
 		to_chat(user, "<span class='warning'>Nothing happens!</span>")
 	else
 		if(allowed(usr) && !wires.is_cut(WIRE_IDSCAN) && !malfhack)
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the APC interface.</span>")
+			to_chat(user, "<span class='notice'>I [ locked ? "lock" : "unlock"] the APC interface.</span>")
 			update_icon()
 			updateUsrDialog()
 		else
@@ -768,9 +768,9 @@
 /obj/machinery/power/apc/emag_act(mob/user)
 	if(!(obj_flags & EMAGGED) && !malfhack)
 		if(opened)
-			to_chat(user, "<span class='warning'>You must close the cover to swipe an ID card!</span>")
+			to_chat(user, "<span class='warning'>I must close the cover to swipe an ID card!</span>")
 		else if(panel_open)
-			to_chat(user, "<span class='warning'>You must close the panel first!</span>")
+			to_chat(user, "<span class='warning'>I must close the panel first!</span>")
 		else if(stat & (BROKEN|MAINT))
 			to_chat(user, "<span class='warning'>Nothing happens!</span>")
 		else
@@ -778,7 +778,7 @@
 			playsound(src, "sparks", 75, TRUE)
 			obj_flags |= EMAGGED
 			locked = FALSE
-			to_chat(user, "<span class='notice'>You emag the APC interface.</span>")
+			to_chat(user, "<span class='notice'>I emag the APC interface.</span>")
 			update_icon()
 
 
@@ -790,7 +790,7 @@
 		return
 	if(opened && (!issilicon(user)))
 		if(cell)
-			user.visible_message("<span class='notice'>[user] removes \the [cell] from [src]!</span>", "<span class='notice'>You remove \the [cell].</span>")
+			user.visible_message("<span class='notice'>[user] removes \the [cell] from [src]!</span>", "<span class='notice'>I remove \the [cell].</span>")
 			user.put_in_hands(cell)
 			cell.update_icon()
 			src.cell = null
@@ -999,7 +999,7 @@
 	if(get_malf_status(malf) != 1)
 		return
 	if(malf.malfhacking)
-		to_chat(malf, "<span class='warning'>You are already hacking an APC!</span>")
+		to_chat(malf, "<span class='warning'>I are already hacking an APC!</span>")
 		return
 	to_chat(malf, "<span class='notice'>Beginning override of APC systems. This takes some time, and you cannot perform other actions during the process.</span>")
 	malf.malfhack = src
@@ -1013,10 +1013,10 @@
 	if(!istype(malf))
 		return
 	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
-		to_chat(malf, "<span class='warning'>You must evacuate your current APC first!</span>")
+		to_chat(malf, "<span class='warning'>I must evacuate my current APC first!</span>")
 		return
 	if(!malf.can_shunt)
-		to_chat(malf, "<span class='warning'>You cannot shunt!</span>")
+		to_chat(malf, "<span class='warning'>I cannot shunt!</span>")
 		return
 	if(!is_station_level(z))
 		return
@@ -1079,11 +1079,11 @@
 		return
 	transfer_in_progress = TRUE
 	user.visible_message("<span class='notice'>[user] slots [card] into [src]...</span>", "<span class='notice'>Transfer process initiated. Sending request for AI approval...</span>")
-	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
-	SEND_SOUND(occupier, sound('sound/misc/notice2.ogg')) //To alert the AI that someone's trying to card them if they're tabbed out
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
+	SEND_SOUND(occupier, sound('sound/misc/thiefobj.ogg')) //To alert the AI that someone's trying to card them if they're tabbed out
 	if(alert(occupier, "[user] is attempting to transfer you to \a [card.name]. Do you consent to this?", "APC Transfer", "Yes - Transfer Me", "No - Keep Me Here") == "No - Keep Me Here")
 		to_chat(user, "<span class='danger'>AI denied transfer request. Process terminated.</span>")
-		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		transfer_in_progress = FALSE
 		return
 	if(user.loc != T)
@@ -1440,4 +1440,4 @@
 	name = "power control module"
 	icon_state = "power_mod"
 	custom_price = 5
-	desc = "Heavy-duty switching circuits for power control."
+	desc = ""

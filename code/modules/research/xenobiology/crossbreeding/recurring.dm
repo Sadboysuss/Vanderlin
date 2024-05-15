@@ -5,7 +5,7 @@ Recurring extracts:
 */
 /obj/item/slimecross/recurring
 	name = "recurring extract"
-	desc = "A tiny, glowing core, wrapped in several layers of goo."
+	desc = ""
 	effect = "recurring"
 	icon_state = "recurring"
 	var/extract_type
@@ -34,7 +34,7 @@ Recurring extracts:
 		cooldown = max_cooldown
 	else if(extract.Uses <= 0)
 		extract.visible_message("<span class='warning'>The light inside [extract] flickers and dies out.</span>")
-		extract.desc = "A tiny, inert core, bleeding dark, cerulean-colored goo."
+		extract.desc = ""
 		extract.icon_state = "prismatic"
 		qdel(src)
 

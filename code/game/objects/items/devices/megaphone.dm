@@ -1,6 +1,6 @@
 /obj/item/megaphone
 	name = "megaphone"
-	desc = "A device used to project your voice. Loudly."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "megaphone"
 	item_state = "megaphone"
@@ -33,16 +33,16 @@
 		if(spamcheck > world.time)
 			to_chat(user, "<span class='warning'>\The [src] needs to recharge!</span>")
 		else
-			playsound(loc, 'sound/items/megaphone.ogg', 100, FALSE, TRUE)
+			playsound(loc, 'sound/blank.ogg', 100, FALSE, TRUE)
 			spamcheck = world.time + 50
 			speech_args[SPEECH_SPANS] |= voicespan
 
 /obj/item/megaphone/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
-	to_chat(user, "<span class='warning'>You overload \the [src]'s voice synthesizer.</span>")
+	to_chat(user, "<span class='warning'>I overload \the [src]'s voice synthesizer.</span>")
 	obj_flags |= EMAGGED
-	voicespan = list(SPAN_REALLYBIG, "userdanger")
+	voicespan = list(SPAN_REALLYBIG, "danger")
 
 /obj/item/megaphone/sec
 	name = "security megaphone"
@@ -61,7 +61,7 @@
 
 /obj/item/megaphone/clown
 	name = "clown's megaphone"
-	desc = "Something that should not exist."
+	desc = ""
 	icon_state = "megaphone-clown"
 	item_state = "megaphone-clown"
 	voicespan = list(SPAN_CLOWN)

@@ -1,6 +1,6 @@
 /obj/item/storage/lockbox
 	name = "lockbox"
-	desc = "A locked box."
+	desc = ""
 	icon_state = "lockbox+l"
 	item_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -32,12 +32,12 @@
 			locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
 			if(locked)
 				icon_state = icon_locked
-				to_chat(user, "<span class='danger'>You lock the [src.name]!</span>")
+				to_chat(user, "<span class='danger'>I lock the [src.name]!</span>")
 				SEND_SIGNAL(src, COMSIG_TRY_STORAGE_HIDE_ALL)
 				return
 			else
 				icon_state = icon_closed
-				to_chat(user, "<span class='danger'>You unlock the [src.name]!</span>")
+				to_chat(user, "<span class='danger'>I unlock the [src.name]!</span>")
 				return
 		else
 			to_chat(user, "<span class='danger'>Access Denied.</span>")
@@ -78,7 +78,7 @@
 
 /obj/item/storage/lockbox/clusterbang
 	name = "lockbox of clusterbangs"
-	desc = "You have a bad feeling about opening this."
+	desc = ""
 	req_access = list(ACCESS_SECURITY)
 
 /obj/item/storage/lockbox/clusterbang/PopulateContents()
@@ -86,7 +86,7 @@
 
 /obj/item/storage/lockbox/medal
 	name = "medal box"
-	desc = "A locked box used to store medals of honor."
+	desc = ""
 	icon_state = "medalbox+l"
 	item_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -154,7 +154,7 @@
 
 /obj/item/storage/lockbox/medal/sec
 	name = "security medal box"
-	desc = "A locked box used to store medals to be given to members of the security department."
+	desc = ""
 	req_access = list(ACCESS_HOS)
 
 /obj/item/storage/lockbox/medal/sec/PopulateContents()
@@ -163,7 +163,7 @@
 
 /obj/item/storage/lockbox/medal/cargo
 	name = "cargo award box"
-	desc = "A locked box used to store awards to be given to members of the cargo department."
+	desc = ""
 	req_access = list(ACCESS_QM)
 
 /obj/item/storage/lockbox/medal/cargo/PopulateContents()
@@ -171,7 +171,7 @@
 
 /obj/item/storage/lockbox/medal/service
 	name = "service award box"
-	desc = "A locked box used to store awards to be given to members of the service department."
+	desc = ""
 	req_access = list(ACCESS_HOP)
 
 /obj/item/storage/lockbox/medal/service/PopulateContents()
@@ -179,7 +179,7 @@
 
 /obj/item/storage/lockbox/medal/sci
 	name = "science medal box"
-	desc = "A locked box used to store medals to be given to members of the science department."
+	desc = ""
 	req_access = list(ACCESS_RD)
 
 /obj/item/storage/lockbox/medal/sci/PopulateContents()

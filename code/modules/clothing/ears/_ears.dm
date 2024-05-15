@@ -4,12 +4,12 @@
 	name = "ears"
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
-	slot_flags = ITEM_SLOT_EARS
+	slot_flags = ITEM_SLOT_HEAD
 	resistance_flags = NONE
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
-	desc = "Protects your hearing from loud noises, and quiet ones as well."
+	desc = ""
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
 	strip_delay = 15
@@ -20,15 +20,15 @@
 /obj/item/clothing/ears/earmuffs/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/earhealing)
-	AddComponent(/datum/component/wearertargeting/earprotection, list(SLOT_EARS))
+	AddComponent(/datum/component/wearertargeting/earprotection, list(SLOT_HEAD))
 
 /obj/item/clothing/ears/headphones
 	name = "headphones"
-	desc = "Unce unce unce unce. Boop!"
+	desc = ""
 	icon = 'icons/obj/clothing/accessories.dmi'
 	icon_state = "headphones"
 	item_state = "headphones"
-	slot_flags = ITEM_SLOT_EARS | ITEM_SLOT_HEAD | ITEM_SLOT_NECK		//Fluff item, put it whereever you want!
+	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HEAD | ITEM_SLOT_NECK		//Fluff item, put it whereever you want!
 	actions_types = list(/datum/action/item_action/toggle_headphones)
 	var/headphones_on = FALSE
 	custom_price = 20
@@ -49,4 +49,4 @@
 		H.update_inv_ears()
 		H.update_inv_neck()
 		H.update_inv_head()
-	to_chat(owner, "<span class='notice'>You turn the music [headphones_on? "on. Untz Untz Untz!" : "off."]</span>")
+	to_chat(owner, "<span class='notice'>I turn the music [headphones_on? "on. Untz Untz Untz!" : "off."]</span>")

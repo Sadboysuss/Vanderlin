@@ -34,23 +34,23 @@
 
 	if(!IS_IN_STASIS(src))
 
-		if(stat != DEAD)
-			//Mutations and radiation
-			handle_mutations_and_radiation()
-
-		if(stat != DEAD)
-			//Breathing, if applicable
-			handle_breathing(times_fired)
+		//Mutations and radiation
+		handle_mutations_and_radiation()
+		//Breathing, if applicable
+		handle_breathing(times_fired)
+		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+			handle_wounds()
+			handle_blood()
+			handle_embedded_objects()
+			heal_wounds(1)
 
 		handle_diseases()// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
 
 		if (QDELETED(src)) // diseases can qdel the mob via transformations
 			return
 
-		if(stat != DEAD)
-			//Random events (vomiting etc)
-			handle_random_events()
-
+		//Random events (vomiting etc)
+		handle_random_events()
 		//Handle temperature/pressure differences between body and environment
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment)
@@ -58,17 +58,43 @@
 
 		handle_gravity()
 
-		if(stat != DEAD)
-			handle_traits() // eye, ear, brain damages
-			handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
+		handle_traits() // eye, ear, brain damages
+		handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
 
+	update_sneak_invis()
 	handle_fire()
 
+	if(sexcon)
+		sexcon.handle_sex()
 	if(machine)
 		machine.check_eye(src)
 
+	handle_typing_indicator()
+
+	if(istype(loc, /turf/open/water))
+		handle_inwater()
+
 	if(stat != DEAD)
 		return 1
+
+/mob/living
+	var/last_deadlife
+
+/mob/living/proc/DeadLife()
+	set invisibility = 0
+	if (notransform)
+		return
+	if(!loc)
+		return
+	if(!IS_IN_STASIS(src))
+		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+			handle_blood()
+			handle_embedded_objects()
+	update_sneak_invis()
+	handle_fire()
+	handle_typing_indicator()
+	if(istype(loc, /turf/open/water))
+		handle_inwater()
 
 /mob/living/proc/handle_breathing(times_fired)
 	return
@@ -81,7 +107,22 @@
 	return
 
 /mob/living/proc/handle_random_events()
-	return
+	//random painstun
+	if(!stat && !HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		if(world.time > mob_timers["painstun"] + 600)
+			if(getBruteLoss() + getFireLoss() >= (STAEND * 10))
+				var/probby = 53 - (STAEND * 2)
+				if(!(mobility_flags & MOBILITY_STAND))
+					probby = probby - 20
+				if(prob(probby))
+					mob_timers["painstun"] = world.time
+					Immobilize(10)
+					emote("painscream")
+					visible_message("<span class='warning'>[src] freezes in pain!</span>",
+								"<span class='warning'>I'm frozen in pain!</span>")
+					sleep(10)
+					Stun(110)
+					Knockdown(110)
 
 /mob/living/proc/handle_environment(datum/gas_mixture/environment)
 	return
@@ -90,23 +131,30 @@
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
 		fire_stacks = min(0, fire_stacks + 1)//So we dry ourselves back to default, nonflammable.
 	if(!on_fire)
+//		testing("handlefyre0 [src]")
 		return TRUE //the mob is no longer on fire, no need to do the rest.
+//	testing("handlefyre1 [src]")
 	if(fire_stacks > 0)
-		adjust_fire_stacks(-0.1) //the fire is slowly consumed
+		adjust_fire_stacks(-0.05) //the fire is slowly consumed
 	else
 		ExtinguishMob()
 		return TRUE //mob was put out, on_fire = FALSE via ExtinguishMob(), no need to update everything down the chain.
-	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
-	if(!G.gases[/datum/gas/oxygen] || G.gases[/datum/gas/oxygen][MOLES] < 1)
-		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
-		return TRUE
+//	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
+//	if(!G.gases[/datum/gas/oxygen] || G.gases[/datum/gas/oxygen][MOLES] < 1)
+//		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
+//		return TRUE
+	update_fire()
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(700, 50, 1)
 
 //this updates all special effects: knockdown, druggy, stuttering, etc..
 /mob/living/proc/handle_status_effects()
 	if(confused)
-		confused = max(0, confused - 1)
+		confused = max(confused - 1, 0)
+	if(slowdown)
+		slowdown = max(slowdown - 1, 0)
+	if(slowdown <= 0)
+		remove_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS)
 
 /mob/living/proc/handle_traits()
 	//Eyes

@@ -1,6 +1,6 @@
 /obj/item/ammo_casing/syringegun
 	name = "syringe gun spring"
-	desc = "A high-power spring that throws syringes."
+	desc = ""
 	projectile_type = /obj/projectile/bullet/dart/syringe
 	firing_effect_type = null
 
@@ -24,7 +24,7 @@
 
 /obj/item/ammo_casing/chemgun
 	name = "dart synthesiser"
-	desc = "A high-power spring, linked to an energy-based dart synthesiser."
+	desc = ""
 	projectile_type = /obj/projectile/bullet/dart
 	firing_effect_type = null
 
@@ -42,7 +42,7 @@
 
 /obj/item/ammo_casing/dnainjector
 	name = "rigged syringe gun spring"
-	desc = "A high-power spring that throws DNA injectors."
+	desc = ""
 	projectile_type = /obj/projectile/bullet/dnainjector
 	firing_effect_type = null
 

@@ -1,6 +1,6 @@
 /obj/item/reagent_containers
 	name = "Container"
-	desc = "..."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	w_class = WEIGHT_CLASS_TINY
@@ -14,6 +14,13 @@
 	var/spillable = FALSE
 	var/list/fill_icon_thresholds = null
 	var/fill_icon_state = null // Optional custom name for reagent fill icon_state prefix
+	var/drinksounds = list('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg')
+	var/fillsounds
+	var/poursounds
+
+/obj/item/reagent_containers/weather_trigger(W)
+	if(W==/datum/weather/rain)
+		START_PROCESSING(SSweather,src)
 
 /obj/item/reagent_containers/Initialize(mapload, vol)
 	. = ..()
@@ -30,7 +37,7 @@
 /obj/item/reagent_containers/proc/add_initial_reagents()
 	if(list_reagents)
 		reagents.add_reagent_list(list_reagents)
-
+/*
 /obj/item/reagent_containers/attack_self(mob/user)
 	if(possible_transfer_amounts.len)
 		var/i=0
@@ -42,13 +49,12 @@
 				else
 					amount_per_transfer_from_this = possible_transfer_amounts[1]
 				to_chat(user, "<span class='notice'>[src]'s transfer amount is now [amount_per_transfer_from_this] units.</span>")
-				return
+				return*/
 
 /obj/item/reagent_containers/attack(mob/M, mob/user, def_zone)
-	if(user.a_intent == INTENT_HARM)
-		return ..()
+	return ..()
 
-/obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user)
+/obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user, silent = FALSE)
 	if(!iscarbon(eater))
 		return 0
 	var/mob/living/carbon/C = eater
@@ -57,9 +63,15 @@
 		covered = "headgear"
 	else if(C.is_mouth_covered(mask_only = 1))
 		covered = "mask"
+	if(C != user)
+		if(C.mobility_flags & MOBILITY_STAND)
+			if(get_dir(eater, user) != eater.dir)
+				to_chat(user, "<span class='warning'>I must stand in front of [C.p_them()].</span>")
+				return 0
 	if(covered)
-		var/who = (isnull(user) || eater == user) ? "your" : "[eater.p_their()]"
-		to_chat(user, "<span class='warning'>You have to remove [who] [covered] first!</span>")
+		if(!silent)
+			var/who = (isnull(user) || eater == user) ? "your" : "[eater.p_their()]"
+			to_chat(user, "<span class='warning'>I have to remove [who] [covered] first!</span>")
 		return 0
 	return 1
 
@@ -70,8 +82,8 @@
 	if(!QDELETED(src))
 		..()
 
-/obj/item/reagent_containers/fire_act(exposed_temperature, exposed_volume)
-	reagents.expose_temperature(exposed_temperature)
+/obj/item/reagent_containers/fire_act(added, maxstacks)
+	reagents.expose_temperature(added)
 	..()
 
 /obj/item/reagent_containers/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -93,7 +105,7 @@
 		var/mob/M = target
 		var/R
 		target.visible_message("<span class='danger'>[M] has been splashed with something!</span>", \
-						"<span class='userdanger'>[M] has been splashed with something!</span>")
+						"<span class='danger'>[M] has been splashed with something!</span>")
 		for(var/datum/reagent/A in reagents.reagent_list)
 			R += "[A.type]  ([num2text(A.volume)]),"
 

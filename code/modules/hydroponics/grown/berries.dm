@@ -1,10 +1,10 @@
 // Berries
 /obj/item/seeds/berry
 	name = "pack of berry seeds"
-	desc = "These seeds grow into berry bushes."
-	icon_state = "seed-berry"
+	desc = ""
+	icon_state = "seed"
 	species = "berry"
-	plantname = "Berry Bush"
+	plantname = "berry bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/berries
 	lifespan = 20
 	maturation = 5
@@ -20,7 +20,7 @@
 /obj/item/reagent_containers/food/snacks/grown/berries
 	seed = /obj/item/seeds/berry
 	name = "bunch of berries"
-	desc = "Nutritious!"
+	desc = ""
 	icon_state = "berrypile"
 	gender = PLURAL
 	filling_color = "#FF00FF"
@@ -28,13 +28,12 @@
 	foodtype = FRUIT
 	juice_results = list(/datum/reagent/consumable/berryjuice = 0)
 	tastes = list("berry" = 1)
-	distill_reagent = /datum/reagent/consumable/ethanol/gin
 
 // Poison Berries
 /obj/item/seeds/berry/poison
 	name = "pack of poison-berry seeds"
-	desc = "These seeds grow into poison-berry bushes."
-	icon_state = "seed-poisonberry"
+	desc = ""
+	icon_state = "seed"
 	species = "poisonberry"
 	plantname = "Poison-Berry Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/berries/poison
@@ -45,7 +44,7 @@
 /obj/item/reagent_containers/food/snacks/grown/berries/poison
 	seed = /obj/item/seeds/berry/poison
 	name = "bunch of poison-berries"
-	desc = "Taste so good, you might die!"
+	desc = ""
 	icon_state = "poisonberrypile"
 	filling_color = "#C71585"
 	foodtype = FRUIT | TOXIC
@@ -57,8 +56,8 @@
 // Death Berries
 /obj/item/seeds/berry/death
 	name = "pack of death-berry seeds"
-	desc = "These seeds grow into death berries."
-	icon_state = "seed-deathberry"
+	desc = ""
+	icon_state = "seed"
 	species = "deathberry"
 	plantname = "Death Berry Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/berries/death
@@ -71,7 +70,7 @@
 /obj/item/reagent_containers/food/snacks/grown/berries/death
 	seed = /obj/item/seeds/berry/death
 	name = "bunch of death-berries"
-	desc = "Taste so good, you will die!"
+	desc = ""
 	icon_state = "deathberrypile"
 	filling_color = "#708090"
 	foodtype = FRUIT | TOXIC
@@ -82,8 +81,8 @@
 // Glow Berries
 /obj/item/seeds/berry/glow
 	name = "pack of glow-berry seeds"
-	desc = "These seeds grow into glow-berry bushes."
-	icon_state = "seed-glowberry"
+	desc = ""
+	icon_state = "seed"
 	species = "glowberry"
 	plantname = "Glow-Berry Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/berries/glow
@@ -97,7 +96,7 @@
 /obj/item/reagent_containers/food/snacks/grown/berries/glow
 	seed = /obj/item/seeds/berry/glow
 	name = "bunch of glow-berries"
-	desc = "Nutritious!"
+	desc = ""
 	icon_state = "glowberrypile"
 	filling_color = "#7CFC00"
 	foodtype = FRUIT
@@ -108,8 +107,8 @@
 // Cherries
 /obj/item/seeds/cherry
 	name = "pack of cherry pits"
-	desc = "Careful not to crack a tooth on one... That'd be the pits."
-	icon_state = "seed-cherry"
+	desc = ""
+	icon_state = "seed"
 	species = "cherry"
 	plantname = "Cherry Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/cherries
@@ -129,7 +128,7 @@
 /obj/item/reagent_containers/food/snacks/grown/cherries
 	seed = /obj/item/seeds/cherry
 	name = "cherries"
-	desc = "Great for toppings!"
+	desc = ""
 	icon_state = "cherry"
 	gender = PLURAL
 	filling_color = "#FF0000"
@@ -142,8 +141,8 @@
 // Blue Cherries
 /obj/item/seeds/cherry/blue
 	name = "pack of blue cherry pits"
-	desc = "The blue kind of cherries."
-	icon_state = "seed-bluecherry"
+	desc = ""
+	icon_state = "seed"
 	species = "bluecherry"
 	plantname = "Blue Cherry Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/bluecherries
@@ -154,7 +153,7 @@
 /obj/item/reagent_containers/food/snacks/grown/bluecherries
 	seed = /obj/item/seeds/cherry/blue
 	name = "blue cherries"
-	desc = "They're cherries that are blue."
+	desc = ""
 	icon_state = "bluecherry"
 	filling_color = "#6495ED"
 	bitesize_mod = 2
@@ -166,8 +165,8 @@
 //Cherry Bulbs
 /obj/item/seeds/cherry/bulb
 	name = "pack of cherry bulb pits"
-	desc = "The glowy kind of cherries."
-	icon_state = "seed-cherrybulb"
+	desc = ""
+	icon_state = "seed"
 	species = "cherrybulb"
 	plantname = "Cherry Bulb Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/cherrybulbs
@@ -179,7 +178,7 @@
 /obj/item/reagent_containers/food/snacks/grown/cherrybulbs
 	seed = /obj/item/seeds/cherry/bulb
 	name = "cherry bulbs"
-	desc = "They're like little Space Christmas lights!"
+	desc = ""
 	icon_state = "cherry_bulb"
 	filling_color = "#FF0000"
 	bitesize_mod = 2
@@ -191,8 +190,8 @@
 // Grapes
 /obj/item/seeds/grape
 	name = "pack of grape seeds"
-	desc = "These seeds grow into grape vines."
-	icon_state = "seed-grapes"
+	desc = ""
+	icon_state = "seed"
 	species = "grape"
 	plantname = "Grape Vine"
 	product = /obj/item/reagent_containers/food/snacks/grown/grapes
@@ -212,7 +211,7 @@
 /obj/item/reagent_containers/food/snacks/grown/grapes
 	seed = /obj/item/seeds/grape
 	name = "bunch of grapes"
-	desc = "Nutritious!"
+	desc = ""
 	icon_state = "grapes"
 	dried_type = /obj/item/reagent_containers/food/snacks/no_raisin/healthy
 	filling_color = "#FF1493"
@@ -225,8 +224,8 @@
 // Green Grapes
 /obj/item/seeds/grape/green
 	name = "pack of green grape seeds"
-	desc = "These seeds grow into green-grape vines."
-	icon_state = "seed-greengrapes"
+	desc = ""
+	icon_state = "seed"
 	species = "greengrape"
 	plantname = "Green-Grape Vine"
 	product = /obj/item/reagent_containers/food/snacks/grown/grapes/green

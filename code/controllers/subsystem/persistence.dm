@@ -150,18 +150,18 @@ SUBSYSTEM_DEF(persistence)
 	SaveRandomizedRecipes()
 
 /datum/controller/subsystem/persistence/proc/GetPhotoAlbums()
-	var/album_path = file("data/photo_albums.json")
+	var/album_path = file("data/old/photo_albums.json")
 	if(fexists(album_path))
 		return json_decode(file2text(album_path))
 
 /datum/controller/subsystem/persistence/proc/GetPhotoFrames()
-	var/frame_path = file("data/photo_frames.json")
+	var/frame_path = file("data/old/photo_frames.json")
 	if(fexists(frame_path))
 		return json_decode(file2text(frame_path))
 
 /datum/controller/subsystem/persistence/proc/LoadPhotoPersistence()
-	var/album_path = file("data/photo_albums.json")
-	var/frame_path = file("data/photo_frames.json")
+	var/album_path = file("data/old/photo_albums.json")
+	var/frame_path = file("data/old/photo_frames.json")
 	if(fexists(album_path))
 		var/list/json = json_decode(file2text(album_path))
 		if(json.len)
@@ -183,8 +183,8 @@ SUBSYSTEM_DEF(persistence)
 					PF.load_from_id(json[PF.persistence_id])
 
 /datum/controller/subsystem/persistence/proc/SavePhotoPersistence()
-	var/album_path = file("data/photo_albums.json")
-	var/frame_path = file("data/photo_frames.json")
+	var/album_path = file("data/old/photo_albums.json")
+	var/frame_path = file("data/old/photo_frames.json")
 
 	var/list/frame_json = list()
 	var/list/album_json = list()
@@ -286,7 +286,7 @@ SUBSYSTEM_DEF(persistence)
 
 
 /datum/controller/subsystem/persistence/proc/LoadRandomizedRecipes()
-	var/json_file = file("data/RandomizedChemRecipes.json")
+	var/json_file = file("data/old/RandomizedChemRecipes.json")
 	var/json
 	if(fexists(json_file))
 		json = json_decode(file2text(json_file))
@@ -301,12 +301,12 @@ SUBSYSTEM_DEF(persistence)
 					loaded = TRUE
 		if(!loaded) //We do not have information for whatever reason, just generate new one
 			R.GenerateRecipe()
-		
+
 		if(!R.HasConflicts()) //Might want to try again if conflicts happened in the future.
 			add_chemical_reaction(R)
 
 /datum/controller/subsystem/persistence/proc/SaveRandomizedRecipes()
-	var/json_file = file("data/RandomizedChemRecipes.json")
+	var/json_file = file("data/old/RandomizedChemRecipes.json")
 	var/list/file_data = list()
 
 	//asert globchems done
@@ -323,6 +323,6 @@ SUBSYSTEM_DEF(persistence)
 			recipe_data["results"] = R.results
 			recipe_data["required_container"] = "[R.required_container]"
 			file_data["[R.id]"] = recipe_data
-	
+
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))

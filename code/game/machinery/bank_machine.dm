@@ -1,6 +1,6 @@
 /obj/machinery/computer/bank_machine
 	name = "bank machine"
-	desc = "A machine used to deposit and withdraw station funds."
+	desc = ""
 	icon = 'goon/icons/obj/goon_terminals.dmi'
 	idle_power_usage = 100
 	var/siphoning = FALSE
@@ -33,7 +33,7 @@
 		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
 		if(D)
 			D.adjust_money(value)
-			to_chat(user, "<span class='notice'>You deposit [I]. The Cargo Budget is now $[D.account_balance].</span>")
+			to_chat(user, "<span class='notice'>I deposit [I]. The Cargo Budget is now $[D.account_balance].</span>")
 		qdel(I)
 		return
 	return ..()
@@ -51,7 +51,7 @@
 			end_syphon()
 			return
 
-		playsound(src, 'sound/items/poster_being_created.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 		syphoning_credits += 200
 		D.adjust_money(-200)
 		if(next_warning < world.time && prob(15))

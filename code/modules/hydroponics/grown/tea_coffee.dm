@@ -1,8 +1,8 @@
 // Tea
 /obj/item/seeds/tea
 	name = "pack of tea aspera seeds"
-	desc = "These seeds grow into tea plants."
-	icon_state = "seed-teaaspera"
+	desc = ""
+	icon_state = "seed"
 	species = "teaaspera"
 	plantname = "Tea Aspera Plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/tea
@@ -18,7 +18,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tea
 	seed = /obj/item/seeds/tea
 	name = "Tea Aspera tips"
-	desc = "These aromatic tips of the tea plant can be dried to make tea."
+	desc = ""
 	icon_state = "tea_aspera_leaves"
 	filling_color = "#008000"
 	grind_results = list(/datum/reagent/toxin/teapowder = 0)
@@ -28,7 +28,7 @@
 // Tea Astra
 /obj/item/seeds/tea/astra
 	name = "pack of tea astra seeds"
-	icon_state = "seed-teaastra"
+	icon_state = "seed"
 	species = "teaastra"
 	plantname = "Tea Astra Plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/tea/astra
@@ -47,8 +47,8 @@
 // Coffee
 /obj/item/seeds/coffee
 	name = "pack of coffee arabica seeds"
-	desc = "These seeds grow into coffee arabica bushes."
-	icon_state = "seed-coffeea"
+	desc = ""
+	icon_state = "seed"
 	species = "coffeea"
 	plantname = "Coffee Arabica Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/coffee
@@ -66,7 +66,7 @@
 /obj/item/reagent_containers/food/snacks/grown/coffee
 	seed = /obj/item/seeds/coffee
 	name = "coffee arabica beans"
-	desc = "Dry them out to make coffee."
+	desc = ""
 	icon_state = "coffee_arabica"
 	filling_color = "#DC143C"
 	bitesize_mod = 2
@@ -77,8 +77,8 @@
 // Coffee Robusta
 /obj/item/seeds/coffee/robusta
 	name = "pack of coffee robusta seeds"
-	desc = "These seeds grow into coffee robusta bushes."
-	icon_state = "seed-coffeer"
+	desc = ""
+	icon_state = "seed"
 	species = "coffeer"
 	plantname = "Coffee Robusta Bush"
 	product = /obj/item/reagent_containers/food/snacks/grown/coffee/robusta
@@ -89,6 +89,6 @@
 /obj/item/reagent_containers/food/snacks/grown/coffee/robusta
 	seed = /obj/item/seeds/coffee/robusta
 	name = "coffee robusta beans"
-	desc = "Increases robustness by 37 percent!"
+	desc = ""
 	icon_state = "coffee_robusta"
 	grind_results = list(/datum/reagent/toxin/coffeepowder = 0, /datum/reagent/medicine/morphine = 0)

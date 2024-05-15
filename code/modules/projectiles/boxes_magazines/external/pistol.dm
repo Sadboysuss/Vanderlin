@@ -1,6 +1,6 @@
 /obj/item/ammo_box/magazine/m10mm
 	name = "pistol magazine (10mm)"
-	desc = "A gun magazine."
+	desc = ""
 	icon_state = "9x19p"
 	ammo_type = /obj/item/ammo_casing/c10mm
 	caliber = "10mm"
@@ -10,7 +10,7 @@
 /obj/item/ammo_box/magazine/m10mm/fire
 	name = "pistol magazine (10mm incendiary)"
 	icon_state = "9x19pI"
-	desc = "A gun magazine. Loaded with rounds which ignite the target."
+	desc = ""
 	ammo_type = /obj/item/ammo_casing/c10mm/fire
 
 /obj/item/ammo_box/magazine/m10mm/hp

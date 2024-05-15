@@ -4,20 +4,20 @@
 
 /obj/item/clothing/under/rank/centcom/officer
 	name = "\improper CentCom officer's jumpsuit"
-	desc = "It's a jumpsuit worn by CentCom Officers."
+	desc = ""
 	icon_state = "officer"
 	item_state = "g_suit"
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/centcom/commander
 	name = "\improper CentCom officer's jumpsuit"
-	desc = "It's a jumpsuit worn by CentCom's highest-tier Commanders."
+	desc = ""
 	icon_state = "centcom"
 	item_state = "dg_suit"
 
 /obj/item/clothing/under/rank/centcom/intern
 	name = "\improper CentCom intern's jumpsuit"
-	desc = "It's a jumpsuit worn by those interning for CentCom. The top is styled after a polo shirt for easy identification."
+	desc = ""
 	icon_state = "intern"
 	item_state = "g_suit"
 	can_adjust = FALSE

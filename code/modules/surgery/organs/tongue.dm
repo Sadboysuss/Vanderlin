@@ -1,6 +1,6 @@
 /obj/item/organ/tongue
 	name = "tongue"
-	desc = "A fleshy muscle mostly used for lying."
+	desc = ""
 	icon_state = "tonguenormal"
 	zone = BODY_ZONE_PRECISE_MOUTH
 	slot = ORGAN_SLOT_TONGUE
@@ -11,13 +11,11 @@
 	var/modifies_speech = FALSE
 	var/static/list/languages_possible_base = typecacheof(list(
 		/datum/language/common,
-		/datum/language/draconic,
-		/datum/language/codespeak,
-		/datum/language/monkey,
-		/datum/language/narsie,
-		/datum/language/beachbum,
-		/datum/language/aphasia,
-		/datum/language/piratespeak,
+		/datum/language/dwarvish,
+		/datum/language/elvish,
+		/datum/language/celestial,
+		/datum/language/hellspeak,
+		/datum/language/beast
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
@@ -46,7 +44,7 @@
 
 /obj/item/organ/tongue/lizard
 	name = "forked tongue"
-	desc = "A thin and long muscle typically found in reptilian races, apparently moonlights as a nose."
+	desc = ""
 	icon_state = "tonguelizard"
 	say_mod = "hisses"
 	taste_sensitivity = 10 // combined nose + tongue, extra sensitive
@@ -63,7 +61,7 @@
 
 /obj/item/organ/tongue/fly
 	name = "proboscis"
-	desc = "A freakish looking meat tube that apparently can take in liquids."
+	desc = ""
 	icon_state = "tonguefly"
 	say_mod = "buzzes"
 	taste_sensitivity = 25 // you eat vomit, this is a mercy
@@ -80,7 +78,7 @@
 
 /obj/item/organ/tongue/abductor
 	name = "superlingual matrix"
-	desc = "A mysterious structure that allows for instant communication between users. Pretty impressive until you need to eat something."
+	desc = ""
 	icon_state = "tongueayylmao"
 	say_mod = "gibbers"
 	taste_sensitivity = 101 // ayys cannot taste anything.
@@ -96,11 +94,11 @@
 		return
 
 	if(T.mothership == mothership)
-		to_chat(H, "<span class='notice'>[src] is already attuned to the same channel as your own.</span>")
+		to_chat(H, "<span class='notice'>[src] is already attuned to the same channel as my own.</span>")
 
-	H.visible_message("<span class='notice'>[H] holds [src] in their hands, and concentrates for a moment.</span>", "<span class='notice'>You attempt to modify the attunation of [src].</span>")
+	H.visible_message("<span class='notice'>[H] holds [src] in their hands, and concentrates for a moment.</span>", "<span class='notice'>I attempt to modify the attunation of [src].</span>")
 	if(do_after(H, delay=15, target=src))
-		to_chat(H, "<span class='notice'>You attune [src] to your own channel.</span>")
+		to_chat(H, "<span class='notice'>I attune [src] to my own channel.</span>")
 		mothership = T.mothership
 
 /obj/item/organ/tongue/abductor/examine(mob/M)
@@ -132,7 +130,7 @@
 
 /obj/item/organ/tongue/zombie
 	name = "rotting tongue"
-	desc = "Between the decay and the fact that it's just lying there you doubt a tongue has ever seemed less sexy."
+	desc = ""
 	icon_state = "tonguezombie"
 	say_mod = "moans"
 	modifies_speech = TRUE
@@ -156,7 +154,7 @@
 
 /obj/item/organ/tongue/alien
 	name = "alien tongue"
-	desc = "According to leading xenobiologists the evolutionary benefit of having a second mouth in your mouth is \"that it looks badass\"."
+	desc = ""
 	icon_state = "tonguexeno"
 	say_mod = "hisses"
 	taste_sensitivity = 10 // LIZARDS ARE ALIENS CONFIRMED
@@ -176,7 +174,7 @@
 
 /obj/item/organ/tongue/bone
 	name = "bone \"tongue\""
-	desc = "Apparently skeletons alter the sounds they produce through oscillation of their teeth, hence their characteristic rattling."
+	desc = ""
 	icon_state = "tonguebone"
 	say_mod = "rattles"
 	attack_verb = list("bitten", "chattered", "chomped", "enamelled", "boned")
@@ -201,13 +199,13 @@
 
 /obj/item/organ/tongue/bone/plasmaman
 	name = "plasma bone \"tongue\""
-	desc = "Like animated skeletons, Plasmamen vibrate their teeth in order to produce speech."
+	desc = ""
 	icon_state = "tongueplasma"
 	modifies_speech = FALSE
 
 /obj/item/organ/tongue/robot
 	name = "robotic voicebox"
-	desc = "A voice synthesizer that can interface with organic lifeforms."
+	desc = ""
 	status = ORGAN_ROBOTIC
 	icon_state = "tonguerobot"
 	say_mod = "states"

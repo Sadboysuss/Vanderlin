@@ -39,7 +39,7 @@
 
 /obj/structure/closet/secure_closet/freezer/kitchen/maintenance
 	name = "maintenance refrigerator"
-	desc = "This refrigerator looks quite dusty, is there anything edible still inside?"
+	desc = ""
 	req_access = list()
 
 /obj/structure/closet/secure_closet/freezer/kitchen/maintenance/PopulateContents()
@@ -94,7 +94,7 @@
 
 /obj/structure/closet/secure_closet/freezer/money
 	name = "freezer"
-	desc = "This contains cold hard cash."
+	desc = ""
 	req_access = list(ACCESS_VAULT)
 
 /obj/structure/closet/secure_closet/freezer/money/PopulateContents()
@@ -108,7 +108,7 @@
 
 /obj/structure/closet/secure_closet/freezer/cream_pie
 	name = "cream pie closet"
-	desc = "Contains pies filled with cream and/or custard, you sickos."
+	desc = ""
 	req_access = list(ACCESS_THEATRE)
 
 /obj/structure/closet/secure_closet/freezer/cream_pie/PopulateContents()

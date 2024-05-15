@@ -9,7 +9,7 @@
 	// A list will be created in initialization that figures out the baseturf's baseturf etc.
 	// In the case of a list it is sorted from bottom layer to top.
 	// This shouldn't be modified directly, use the helper procs.
-	var/list/baseturfs = /turf/baseturf_bottom
+	var/list/baseturfs = /turf/open/transparent/openspace
 
 	var/temperature = T20C
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -27,11 +27,30 @@
 	var/requires_activation	//add to air processing after initialize?
 	var/changing_turf = FALSE
 
-	var/bullet_bounce_sound = 'sound/weapons/gun/general/mag_bullet_remove.ogg' //sound played when a shell casing is ejected ontop of the turf.
+	var/bullet_bounce_sound = 'sound/blank.ogg' //sound played when a shell casing is ejected ontop of the turf.
 	var/bullet_sizzle = FALSE //used by ammo_casing/bounce_away() to determine if the shell casing should make a sizzle sound when it's ejected over the turf
 							//IE if the turf is supposed to be water, set TRUE.
 
 	var/tiled_dirt = FALSE // use smooth tiled dirt decal
+
+	var/turf_integrity	//defaults to max_integrity
+	var/max_integrity = 500
+	var/integrity_failure = 0 //0 if we have no special broken behavior, otherwise is a percentage of at what point the obj breaks. 0.5 being 50%
+	///Damage under this value will be completely ignored
+	var/damage_deflection = 5
+
+	var/blade_dulling = DULLING_FLOOR
+	var/attacked_sound
+
+	var/break_sound = null //The sound played when a turf breaks
+	var/debris = null
+	var/break_message = null
+
+	var/neighborlay
+	var/neighborlay_list = list()
+	var/neighborlay_override
+
+	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
@@ -40,6 +59,10 @@
 	. = ..()
 
 /turf/Initialize(mapload)
+#ifdef TESTSERVER
+	if(!icon_state)
+		icon_state = "cantfind"
+#endif
 	if(flags_1 & INITIALIZED_1)
 		stack_trace("Warning: [src]([type]) initialized multiple times!")
 	flags_1 |= INITIALIZED_1
@@ -68,6 +91,9 @@
 	if (light_power && light_range)
 		update_light()
 
+	if(turf_integrity == null)
+		turf_integrity = max_integrity
+
 	var/turf/T = SSmapping.get_turf_above(src)
 	if(T)
 		T.multiz_turf_new(src, DOWN)
@@ -81,6 +107,8 @@
 		has_opaque_atom = TRUE
 
 	ComponentInitialize()
+
+	queue_smooth_neighbors(src)
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -98,6 +126,9 @@
 	T = SSmapping.get_turf_below(src)
 	if(T)
 		T.multiz_turf_del(src, UP)
+	STOP_PROCESSING(SSweather,src)
+	if(pollutants)
+		pollutants = null
 	if(force)
 		..()
 		//this will completely wipe turf state
@@ -113,6 +144,82 @@
 	flags_1 &= ~INITIALIZED_1
 	requires_activation = FALSE
 	..()
+
+#define SEE_SKY_YES 1
+#define SEE_SKY_NO 2
+
+/turf
+	var/can_see_sky //1, 2
+	var/primary_area
+
+/turf/proc/can_see_sky()
+	if(can_see_sky)
+		if(can_see_sky == SEE_SKY_YES)
+			return TRUE
+		else
+			return FALSE
+	if(isclosedturf(src))
+		can_see_sky = SEE_SKY_NO
+		return can_see_sky()
+	var/turf/CT = src
+	var/area/A = get_area(src)
+	for(var/i in 1 to 6)
+		CT = get_step_multiz(CT, UP)
+		if(!CT)
+			if(!A.outdoors)
+				can_see_sky = SEE_SKY_NO
+			else
+				can_see_sky = SEE_SKY_YES
+			return can_see_sky()
+		A = get_area(CT)
+		if(!istype(CT, /turf/open/transparent/openspace))
+			can_see_sky = SEE_SKY_NO
+			return can_see_sky()
+
+/turf/proc/update_see_sky()
+	can_see_sky = null
+	var/can = can_see_sky()
+	var/area/A = get_area(src)
+	if(istype(A,/area/shuttle))
+		return
+	if(can)
+		if(!A.outdoors)
+			var/area2new = /area/rogue/outdoors
+			if(A.converted_type)
+				area2new = A.converted_type
+			var/area/nuarea
+			if(primary_area)
+				nuarea = type2area(primary_area)
+				if(!nuarea.outdoors)
+					nuarea = null
+			if(!nuarea)
+				nuarea = type2area(area2new)
+				primary_area = A.type
+			if(nuarea)
+				A.contents -= src
+				nuarea.contents += src
+				change_area(A, nuarea)
+	else
+		if(A.outdoors)
+			var/area2new = /area/rogue/indoors/shelter
+			if(A.converted_type)
+				area2new = A.converted_type
+			var/area/nuarea
+			if(primary_area)
+				nuarea = type2area(primary_area)
+				if(nuarea.outdoors)
+					nuarea = null
+			if(!nuarea)
+				nuarea = type2area(area2new)
+				primary_area = A.type
+			if(!nuarea)
+				var/area/NA = new area2new()
+				nuarea = NA
+				primary_area = NA.type
+			if(nuarea)
+				A.contents -= src
+				nuarea.contents += src
+				change_area(A, nuarea)
 
 /turf/attack_hand(mob/user)
 	. = ..()
@@ -153,7 +260,7 @@
 		prev_turf.visible_message("<span class='danger'>[mov_name] falls through [prev_turf]!</span>")
 	if(flags & FALL_INTERCEPTED)
 		return
-	if(zFall(A, ++levels, src))
+	if(zFall(A, ++levels))
 		return FALSE
 	A.visible_message("<span class='danger'>[A] crashes into [src]!</span>")
 	A.onZImpact(src, levels)
@@ -284,6 +391,7 @@
 			O.make_unfrozen()
 	if(!AM.zfalling)
 		zFall(AM)
+	trigger_weather(AM)
 
 /turf/proc/is_plasteel_floor()
 	return FALSE
@@ -371,7 +479,7 @@
 	if(.)
 		return
 	if(length(src_object.contents()))
-		to_chat(usr, "<span class='notice'>You start dumping out the contents...</span>")
+		to_chat(usr, "<span class='notice'>I start dumping out the contents...</span>")
 		if(!do_after(usr,20,target=src_object.parent))
 			return FALSE
 
@@ -388,7 +496,7 @@
 //////////////////////////////
 
 //Distance associates with all directions movement
-/turf/proc/Distance(var/turf/T)
+/turf/proc/Distance(turf/T)
 	return get_dist(src,T)
 
 //  This Distance proc assumes that only cardinal movement is
@@ -468,7 +576,7 @@
 	underlay_appearance.dir = adjacency_dir
 	return TRUE
 
-/turf/proc/add_blueprints(var/atom/movable/AM)
+/turf/proc/add_blueprints(atom/movable/AM)
 	var/image/I = new
 	I.appearance = AM.appearance
 	I.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM
@@ -512,7 +620,7 @@
 	if(!forced)
 		return
 	if(has_gravity(src))
-		playsound(src, "bodyfall", 50, TRUE)
+		playsound(src, "bodyfall", 100, TRUE)
 	faller.drop_all_held_items()
 
 /turf/proc/photograph(limit=20)
@@ -564,7 +672,3 @@
 /turf/proc/Melt()
 	return ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 
-/turf/bullet_act(obj/projectile/P)
-	. = ..()
-	if(. != BULLET_ACT_FORCE_PIERCE)
-		. =  BULLET_ACT_TURF

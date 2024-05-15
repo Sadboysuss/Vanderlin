@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/carp/eyeball
 	name = "eyeball"
-	desc = "An odd looking creature, it won't stop staring..."
+	desc = ""
 	icon_state = "eyeball"
 	icon_living = "eyeball"
 	icon_gib = ""
@@ -22,7 +22,7 @@
 	melee_damage_upper = 25
 	attack_verb_continuous = "blinks at"
 	attack_verb_simple = "blink at"
-	attack_sound = 'sound/weapons/pierce.ogg'
+	attack_sound = 'sound/blank.ogg'
 	movement_type = FLYING
 
 	faction = list("spooky")

@@ -1,6 +1,6 @@
 /obj/machinery/door/window
 	name = "interior door"
-	desc = "A strong door."
+	desc = ""
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
 	layer = ABOVE_WINDOW_LAYER
@@ -20,7 +20,6 @@
 	var/shards = 2
 	var/rods = 2
 	var/cable = 1
-	var/list/debris = list()
 
 /obj/machinery/door/window/Initialize(mapload, set_dir)
 	. = ..()
@@ -30,12 +29,6 @@
 	if(req_access && req_access.len)
 		icon_state = "[icon_state]"
 		base_state = icon_state
-	for(var/i in 1 to shards)
-		debris += new /obj/item/shard(src)
-	if(rods)
-		debris += new /obj/item/stack/rods(src, rods)
-	if(cable)
-		debris += new /obj/item/stack/cable_coil(src, cable)
 
 /obj/machinery/door/window/ComponentInitialize()
 	. = ..()
@@ -43,7 +36,6 @@
 
 /obj/machinery/door/window/Destroy()
 	density = FALSE
-	QDEL_LIST(debris)
 	if(obj_integrity == 0)
 		playsound(src, "shatter", 70, TRUE)
 	electronics = null
@@ -145,7 +137,7 @@
 	if(!operating) //in case of emag
 		operating = TRUE
 	do_animate("opening")
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	icon_state ="[base_state]open"
 	sleep(10)
 	density = FALSE
@@ -167,7 +159,7 @@
 			return 0
 	operating = TRUE
 	do_animate("closing")
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	icon_state = base_state
 
 	density = TRUE
@@ -181,9 +173,9 @@
 /obj/machinery/door/window/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
-			playsound(src, 'sound/effects/glasshit.ogg', 90, TRUE)
+			playsound(src, 'sound/blank.ogg', 90, TRUE)
 		if(BURN)
-			playsound(src, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/machinery/door/window/deconstruct(disassembled = TRUE)
@@ -222,17 +214,17 @@
 	if(!(flags_1&NODECONSTRUCT_1))
 		if(I.tool_behaviour == TOOL_SCREWDRIVER)
 			if(density || operating)
-				to_chat(user, "<span class='warning'>You need to open the door to access the maintenance panel!</span>")
+				to_chat(user, "<span class='warning'>I need to open the door to access the maintenance panel!</span>")
 				return
 			I.play_tool_sound(src)
 			panel_open = !panel_open
-			to_chat(user, "<span class='notice'>You [panel_open ? "open":"close"] the maintenance panel of the [name].</span>")
+			to_chat(user, "<span class='notice'>I [panel_open ? "open":"close"] the maintenance panel of the [name].</span>")
 			return
 
 		if(I.tool_behaviour == TOOL_CROWBAR)
 			if(panel_open && !density && !operating)
 				user.visible_message("<span class='notice'>[user] removes the electronics from the [name].</span>", \
-									 "<span class='notice'>You start to remove electronics from the [name]...</span>")
+									 "<span class='notice'>I start to remove electronics from the [name]...</span>")
 				if(I.use_tool(src, user, 40, volume=50))
 					if(panel_open && !density && !operating && loc)
 						var/obj/structure/windoor_assembly/WA = new /obj/structure/windoor_assembly(loc)
@@ -255,11 +247,11 @@
 						WA.created_name = name
 
 						if(obj_flags & EMAGGED)
-							to_chat(user, "<span class='warning'>You discard the damaged electronics.</span>")
+							to_chat(user, "<span class='warning'>I discard the damaged electronics.</span>")
 							qdel(src)
 							return
 
-						to_chat(user, "<span class='notice'>You remove the airlock electronics.</span>")
+						to_chat(user, "<span class='notice'>I remove the airlock electronics.</span>")
 
 						var/obj/item/electronics/airlock/ae
 						if(!electronics)
@@ -344,7 +336,7 @@
 
 /obj/machinery/door/window/brigdoor/security/cell
 	name = "cell door"
-	desc = "For keeping in criminal scum."
+	desc = ""
 	req_access = list(ACCESS_BRIG)
 
 /obj/machinery/door/window/brigdoor/security/holding

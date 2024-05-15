@@ -1,8 +1,8 @@
 /datum/computer_file/program/aidiag
 	filename = "aidiag"
-	filedesc = "AI Integrity Restorer"
+	filedesc = ""
 	program_icon_state = "generic"
-	extended_desc = "This program is capable of reconstructing damaged AI systems. Requires direct AI connection via intellicard slot."
+	extended_desc = ""
 	size = 12
 	requires_ntnet = 0
 	usage_flags = PROGRAM_CONSOLE

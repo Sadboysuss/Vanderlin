@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/mushroom
 	name = "walking mushroom"
-	desc = "It's a massive mushroom... with legs?"
+	desc = ""
 	icon_state = "mushroom_color"
 	icon_living = "mushroom_color"
 	icon_dead = "mushroom_dead"
@@ -22,7 +22,7 @@
 	attack_same = 2
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/blank.ogg'
 	faction = list("mushroom")
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	stat_attack = DEAD
@@ -171,7 +171,7 @@
 
 /mob/living/simple_animal/hostile/mushroom/attack_hand(mob/living/carbon/human/M)
 	..()
-	if(M.a_intent == INTENT_HARM)
+	if(M.used_intent.type == INTENT_HARM)
 		Bruise()
 
 /mob/living/simple_animal/hostile/mushroom/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)

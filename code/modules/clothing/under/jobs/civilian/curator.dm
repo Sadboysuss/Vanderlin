@@ -1,6 +1,6 @@
 /obj/item/clothing/under/rank/civilian/curator
 	name = "sensible suit"
-	desc = "It's very... sensible."
+	desc = ""
 	icon = 'icons/obj/clothing/under/suits.dmi'
 	icon_state = "red_suit"
 	item_state = "red_suit"
@@ -9,7 +9,7 @@
 
 /obj/item/clothing/under/rank/civilian/curator/skirt
 	name = "sensible suitskirt"
-	desc = "It's very... sensible."
+	desc = ""
 	icon = 'icons/obj/clothing/under/suits.dmi'
 	icon_state = "red_suit_skirt"
 	item_state = "red_suit"
@@ -20,7 +20,7 @@
 
 /obj/item/clothing/under/rank/civilian/curator/treasure_hunter
 	name = "treasure hunter uniform"
-	desc = "A rugged uniform suitable for treasure hunting."
+	desc = ""
 	icon = 'icons/obj/clothing/under/civilian.dmi'
 	icon_state = "curator"
 	item_state = "curator"
@@ -28,7 +28,7 @@
 
 /obj/item/clothing/under/rank/civilian/curator/nasa
 	name = "\improper NASA jumpsuit"
-	desc = "It has a NASA logo on it and is made of space-proofed materials."
+	desc = ""
 	icon = 'icons/obj/clothing/under/color.dmi'
 	icon_state = "black"
 	item_state = "bl_suit"

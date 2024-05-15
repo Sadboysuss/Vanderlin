@@ -1,8 +1,8 @@
 // Pumpkin
 /obj/item/seeds/pumpkin
 	name = "pack of pumpkin seeds"
-	desc = "These seeds grow into pumpkin vines."
-	icon_state = "seed-pumpkin"
+	desc = ""
+	icon_state = "seed"
 	species = "pumpkin"
 	plantname = "Pumpkin Vines"
 	product = /obj/item/reagent_containers/food/snacks/grown/pumpkin
@@ -19,7 +19,7 @@
 /obj/item/reagent_containers/food/snacks/grown/pumpkin
 	seed = /obj/item/seeds/pumpkin
 	name = "pumpkin"
-	desc = "It's large and scary."
+	desc = ""
 	icon_state = "pumpkin"
 	filling_color = "#FFA500"
 	bitesize_mod = 2
@@ -29,7 +29,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/pumpkin/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(W.get_sharpness())
-		user.show_message("<span class='notice'>You carve a face into [src]!</span>", MSG_VISUAL)
+		user.show_message("<span class='notice'>I carve a face into [src]!</span>", MSG_VISUAL)
 		new /obj/item/clothing/head/hardhat/pumpkinhead(user.loc)
 		qdel(src)
 		return
@@ -39,8 +39,8 @@
 // Blumpkin
 /obj/item/seeds/pumpkin/blumpkin
 	name = "pack of blumpkin seeds"
-	desc = "These seeds grow into blumpkin vines."
-	icon_state = "seed-blumpkin"
+	desc = ""
+	icon_state = "seed"
 	species = "blumpkin"
 	plantname = "Blumpkin Vines"
 	product = /obj/item/reagent_containers/food/snacks/grown/blumpkin
@@ -51,7 +51,7 @@
 /obj/item/reagent_containers/food/snacks/grown/blumpkin
 	seed = /obj/item/seeds/pumpkin/blumpkin
 	name = "blumpkin"
-	desc = "The pumpkin's toxic sibling."
+	desc = ""
 	icon_state = "blumpkin"
 	filling_color = "#87CEFA"
 	bitesize_mod = 2

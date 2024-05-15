@@ -32,7 +32,7 @@
 /obj/item/circuitboard/computer/card/minor/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		target_dept = (target_dept == dept_list.len) ? 1 : (target_dept + 1)
-		to_chat(user, "<span class='notice'>You set the board to \"[dept_list[target_dept]]\".</span>")
+		to_chat(user, "<span class='notice'>I set the board to \"[dept_list[target_dept]]\".</span>")
 	else
 		return ..()
 
@@ -452,7 +452,7 @@
 	if(!(obj_flags & EMAGGED))
 		contraband = TRUE
 		obj_flags |= EMAGGED
-		to_chat(user, "<span class='notice'>You adjust [src]'s routing and receiver spectrum, unlocking special supplies and contraband.</span>")
+		to_chat(user, "<span class='notice'>I adjust [src]'s routing and receiver spectrum, unlocking special supplies and contraband.</span>")
 
 /obj/item/circuitboard/computer/cargo/express
 	name = "Express Supply Console (Computer Board)"
@@ -463,11 +463,11 @@
 	if (!(obj_flags & EMAGGED))
 		to_chat(user, "<span class='alert'>Routing protocols are already set to: \"factory defaults\".</span>")
 	else
-		to_chat(user, "<span class='notice'>You reset the routing protocols to: \"factory defaults\".</span>")
+		to_chat(user, "<span class='notice'>I reset the routing protocols to: \"factory defaults\".</span>")
 		obj_flags &= ~EMAGGED
 
 /obj/item/circuitboard/computer/cargo/express/emag_act(mob/living/user)
-		to_chat(user, "<span class='notice'>You change the routing protocols, allowing the Drop Pod to land anywhere on the station.</span>")
+		to_chat(user, "<span class='notice'>I change the routing protocols, allowing the Drop Pod to land anywhere on the station.</span>")
 		obj_flags |= EMAGGED
 
 /obj/item/circuitboard/computer/cargo/request

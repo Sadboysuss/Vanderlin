@@ -33,7 +33,7 @@
 	if(subzones)
 		// Include subzones - groin for chest, eyes and mouth for head
 		if(zone == BODY_ZONE_HEAD)
-			returnorg = getorganszone(BODY_ZONE_PRECISE_EYES) + getorganszone(BODY_ZONE_PRECISE_MOUTH)
+			returnorg = getorganszone(BODY_ZONE_PRECISE_R_EYE) + getorganszone(BODY_ZONE_PRECISE_MOUTH)
 		if(zone == BODY_ZONE_CHEST)
 			returnorg = getorganszone(BODY_ZONE_PRECISE_GROIN)
 

@@ -29,6 +29,7 @@
 
 */
 
+
 /datum/mind
 	var/key
 	var/name				//replaces mob/var/original_name
@@ -72,6 +73,14 @@
 	///Assoc list of skills - exp
 	var/list/skill_experience = list()
 
+	var/list/special_items = list()
+
+	var/list/areas_entered = list()
+
+	var/list/known_people = list() //contains person, their job, and their voice color
+
+	var/list/notes = list() //RTD add notes button
+
 /datum/mind/New(key)
 	src.key = key
 	soulOwner = src
@@ -82,6 +91,120 @@
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
 	return ..()
+
+/proc/get_minds(role)
+	. = list()
+	for(var/datum/mind/M in SSticker.minds)
+		var/is_role = TRUE
+		if(role)
+			is_role = FALSE
+			if(M.special_role == role)
+				is_role = TRUE
+			else
+				if(M.assigned_role == role)
+					is_role = TRUE
+		if(is_role)
+			. += M
+
+/datum/mind/proc/i_know_person(person) //we are added to their lists, they are added to ours
+	if(!person)
+		return
+	if(person == src)
+		return
+	var/datum/mind/M = person
+	if(ishuman(M.current))
+		var/mob/living/carbon/human/H = M.current
+		if(!known_people[H.real_name])
+			known_people[H.real_name] = list()
+		known_people[H.real_name]["VCOLOR"] = H.voice_color
+		var/used_title
+		if(H.job)
+			var/datum/job/J = SSjob.GetJob(H.job)
+			used_title = J.title
+			if(H.gender == FEMALE && J.f_title)
+				used_title = J.f_title
+		if(!used_title)
+			used_title = "unknown"
+		known_people[H.real_name]["FJOB"] = used_title
+		known_people[H.real_name]["FGENDER"] = H.gender
+		known_people[H.real_name]["FAGE"] = H.age
+
+/datum/mind/proc/person_knows_me(person) //we are added to their lists, they are added to ours
+	if(!person)
+		return
+	if(person == src)
+		return
+	var/datum/mind/M = person
+	if(M.known_people)
+		if(ishuman(current))
+			var/mob/living/carbon/human/H = current
+			if(!M.known_people[H.real_name])
+				M.known_people[H.real_name] = list()
+			M.known_people[H.real_name]["VCOLOR"] = H.voice_color
+			var/used_title
+			if(H.job)
+				var/datum/job/J = SSjob.GetJob(H.job)
+				used_title = J.title
+				if(H.gender == FEMALE && J.f_title)
+					used_title = J.f_title
+			if(!used_title)
+				used_title = "unknown"
+			M.known_people[H.real_name]["FJOB"] = used_title
+			M.known_people[H.real_name]["FGENDER"] = H.gender
+			M.known_people[H.real_name]["FAGE"] = H.age
+
+/datum/mind/proc/do_i_know(datum/mind/person, name)
+	if(!person && !name)
+		return
+	if(person)
+		var/mob/living/carbon/human/H = person.current
+		if(!istype(H))
+			return
+		for(var/P in known_people)
+			if(H.real_name == P)
+				return TRUE
+	if(name)
+		for(var/P in known_people)
+			if(name == P)
+				return TRUE
+
+/datum/mind/proc/become_unknown_to(person) //we are removed from mind
+	if(!person)
+		return
+	if(person == src)
+		return
+	var/datum/mind/M = person
+	var/mob/living/carbon/human/H = current
+	if(M.known_people && istype(H))
+		if(M.known_people[H.real_name])
+			M.known_people[H.real_name] = null
+
+
+/datum/mind/proc/unknow_all_people()
+	known_people = list()
+
+
+/datum/mind/proc/display_known_people(mob/user)
+	if(!user)
+		return
+	if(!known_people.len)
+		return
+	var/contents = "<center>People that [name] knows:</center><BR>"
+	for(var/P in known_people)
+		var/fcolor = known_people[P]["VCOLOR"]
+		if(!fcolor)
+			continue
+		var/fjob = known_people[P]["FJOB"]
+		var/fgender = known_people[P]["FGENDER"]
+		var/fage = known_people[P]["FAGE"]
+		if(fcolor && fjob)
+			contents += "<B><font color=#[fcolor];text-shadow:0 0 10px #8d5958, 0 0 20px #8d5958, 0 0 30px #8d5958, 0 0 40px #8d5958, 0 0 50px #e60073, 0 0 60px #8d5958, 0 0 70px #8d5958;>[P]</font></B><BR>[fjob], [capitalize(fgender)], [fage]"
+			contents += "<BR>"
+
+	var/datum/browser/popup = new(user, "PEOPLEIKNOW", "", 260, 400)
+	popup.set_content(contents)
+	popup.open()
+
 
 /datum/mind/proc/get_language_holder()
 	if(!language_holder)
@@ -102,7 +225,9 @@
 
 	if(key)
 		if(new_character.key != key)					//if we're transferring into a body with a key associated which is not ours
-			new_character.ghostize(1)						//we'll need to ghostize so that key isn't mobless.
+			if(new_character.key)
+				testing("ghostizz")
+				new_character.ghostize(1)						//we'll need to ghostize so that key isn't mobless.
 	else
 		key = new_character.key
 
@@ -115,8 +240,7 @@
 		current.transfer_observers_to(new_character)	//transfer anyone observing the old character to the new one
 	current = new_character								//associate ourself with our new body
 	new_character.mind = src							//and associate our new body with ourself
-	for(var/a in antag_datums)	//Makes sure all antag datums effects are applied in the new body
-		var/datum/antagonist/A = a
+	for(var/datum/antagonist/A in antag_datums)	//Makes sure all antag datums effects are applied in the new body
 		A.on_body_transfer(old_current, current)
 	if(iscarbon(new_character))
 		var/mob/living/carbon/C = new_character
@@ -126,6 +250,7 @@
 	transfer_martial_arts(new_character)
 	RegisterSignal(new_character, COMSIG_MOB_DEATH, .proc/set_death_time)
 	if(active || force_key_move)
+		testing("dotransfer to [new_character]")
 		new_character.key = key		//now transfer the key to link the client to our new body
 
 
@@ -154,9 +279,56 @@
 	if(silent)
 		return
 	if(known_skills[S] >= old_level)
+		if(known_skills[S] > old_level)
+			to_chat(current, "<span class='nicegreen'>My [S.name] grows!</span>")
+	else
+		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
+
+/datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)
+	var/datum/skill/S = GetSkillRef(skill)
+	var/amt2gain = 0
+	for(var/i in 1 to amt)
+		switch(skill_experience[S])
+			if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
+				amt2gain = SKILL_EXP_LEGENDARY-skill_experience[S]
+			if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
+				amt2gain = SKILL_EXP_MASTER-skill_experience[S]
+			if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
+				amt2gain = SKILL_EXP_EXPERT-skill_experience[S]
+			if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
+				amt2gain = SKILL_EXP_JOURNEYMAN-skill_experience[S]
+			if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
+				amt2gain = SKILL_EXP_APPRENTICE-skill_experience[S]
+			if(0 to SKILL_EXP_NOVICE)
+				amt2gain = SKILL_EXP_NOVICE-skill_experience[S] + 1
+		if(!skill_experience[S])
+			amt2gain = SKILL_EXP_NOVICE+1
+		skill_experience[S] = max(0, skill_experience[S] + amt2gain) //Prevent going below 0
+	var/old_level = known_skills[S]
+	switch(skill_experience[S])
+		if(SKILL_EXP_LEGENDARY to INFINITY)
+			known_skills[S] = SKILL_LEVEL_LEGENDARY
+		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
+			known_skills[S] = SKILL_LEVEL_MASTER
+		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
+			known_skills[S] = SKILL_LEVEL_EXPERT
+		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
+			known_skills[S] = SKILL_LEVEL_JOURNEYMAN
+		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
+			known_skills[S] = SKILL_LEVEL_APPRENTICE
+		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
+			known_skills[S] = SKILL_LEVEL_NOVICE
+		if(0 to SKILL_EXP_NOVICE)
+			known_skills[S] = SKILL_LEVEL_NONE
+	if(isnull(old_level) || known_skills[S] == old_level)
+		return //same level or we just started earning xp towards the first level.
+	if(silent)
+		return
+	if(known_skills[S] >= old_level)
 		to_chat(current, "<span class='nicegreen'>I feel like I've become more proficient at [S.name]!</span>")
 	else
 		to_chat(current, "<span class='warning'>I feel like I've become worse at [S.name]!</span>")
+
 
 ///Gets the skill's singleton and returns the result of its get_skill_speed_modifier
 /datum/mind/proc/get_skill_speed_modifier(skill)
@@ -167,19 +339,26 @@
 	var/datum/skill/S = GetSkillRef(skill)
 	return known_skills[S] || SKILL_LEVEL_NONE
 
+/datum/mind/proc/get_skill_parry_modifier(skill)
+	var/datum/skill/combat/S = GetSkillRef(skill)
+	return S.get_skill_parry_modifier(known_skills[S] || SKILL_LEVEL_NONE)
+
+/datum/mind/proc/get_skill_dodge_drain(skill)
+	var/datum/skill/combat/S = GetSkillRef(skill)
+	return S.get_skill_dodge_drain(known_skills[S] || SKILL_LEVEL_NONE)
+
 /datum/mind/proc/print_levels(user)
 	var/list/shown_skills = list()
 	for(var/i in known_skills)
 		if(known_skills[i]) //Do we actually have a level in this?
 			shown_skills += i
 	if(!length(shown_skills))
-		to_chat(user, "<span class='notice'>You don't seem to have any particularly outstanding skills.</span>")
+		to_chat(user, "<span class='warning'>I don't have any skills.</span>")
 		return
 	var/msg = ""
-	msg += "<span class='info'>*---------*\n<EM>Your skills</EM></span>\n<span class='notice'>"
+	msg += "<span class='info'>*---------*\n</span>"
 	for(var/i in shown_skills)
-		var/datum/skill/S = i
-		msg += "[i] - [SSskills.level_names[known_skills[S]]]\n"
+		msg += "[i] - [SSskills.level_names[known_skills[i]]]\n"
 	msg += "</span>"
 	to_chat(user, msg)
 
@@ -247,8 +426,10 @@
 		var/datum/antagonist/A = a
 		if(check_subtypes && istype(A, datum_type))
 			return A
-		else if(A.type == datum_type)
-			return A
+		else
+			if(istype(A))
+				if(A.type == datum_type)
+					return A
 
 /*
 	Removes antag type's references from a mind.
@@ -328,7 +509,7 @@
 				inowhaveapen = new /obj/item/pen(traitor_mob.back)
 			else
 				inowhaveapen = new /obj/item/pen(traitor_mob.loc)
-				traitor_mob.put_in_hands(inowhaveapen) // I hope you don't have arms and your traitor pen gets stolen for all this trouble you've caused.
+				traitor_mob.put_in_hands(inowhaveapen) // I hope you don't have arms and my traitor pen gets stolen for all this trouble you've caused.
 			P = inowhaveapen
 
 	var/obj/item/uplink_loc
@@ -366,11 +547,11 @@
 		U.setup_unlock_code()
 		if(!silent)
 			if(uplink_loc == R)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [R.name]. Simply dial the frequency [format_frequency(U.unlock_code)] to unlock its hidden features.</span>")
+				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as my [R.name]. Simply dial the frequency [format_frequency(U.unlock_code)] to unlock its hidden features.</span>")
 			else if(uplink_loc == PDA)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [PDA.name]. Simply enter the code \"[U.unlock_code]\" into the ringtone select to unlock its hidden features.</span>")
+				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as my [PDA.name]. Simply enter the code \"[U.unlock_code]\" into the ringtone select to unlock its hidden features.</span>")
 			else if(uplink_loc == P)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [P.name]. Simply twist the top of the pen [english_list(U.unlock_code)] from its starting position to unlock its hidden features.</span>")
+				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as my [P.name]. Simply twist the top of the pen [english_list(U.unlock_code)] from its starting position to unlock its hidden features.</span>")
 
 		if(uplink_owner)
 			uplink_owner.antag_memory += U.unlock_note + "<br>"
@@ -403,7 +584,7 @@
 
 	if(creator.mind.special_role)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
-		to_chat(current, "<span class='userdanger'>Despite your creators current allegiances, your true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless your creator's body is destroyed.</span>")
+		to_chat(current, "<span class='danger'>Despite my creators current allegiances, my true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless my creator's body is destroyed.</span>")
 
 /datum/mind/proc/show_memory(mob/recipient, window=1)
 	if(!recipient)
@@ -422,12 +603,12 @@
 		var/obj_count = 1
 		for(var/datum/objective/objective in all_objectives)
 			output += "<br><B>Objective #[obj_count++]</B>: [objective.explanation_text]"
-			var/list/datum/mind/other_owners = objective.get_owners() - src
-			if(other_owners.len)
-				output += "<ul>"
-				for(var/datum/mind/M in other_owners)
-					output += "<li>Conspirator: [M.name]</li>"
-				output += "</ul>"
+//			var/list/datum/mind/other_owners = objective.get_owners() - src
+//			if(other_owners.len)
+//				output += "<ul>"
+//				for(var/datum/mind/M in other_owners)
+//					output += "<li>Conspirator: [M.name]</li>"
+//				output += "</ul>"
 
 	if(window)
 		recipient << browse(output,"window=memory")
@@ -605,7 +786,7 @@
 	else if (href_list["obj_announce"])
 		announce_objectives()
 
-	//Something in here might have changed your mob
+	//Something in here might have changed my mob
 	if(self_antagging && (!usr || !usr.client) && current.client)
 		usr = current
 	traitor_panel()
@@ -619,9 +800,10 @@
 
 /datum/mind/proc/announce_objectives()
 	var/obj_count = 1
-	to_chat(current, "<span class='notice'>Your current objectives:</span>")
+	to_chat(current, "<span class='notice'>My current objectives:</span>")
 	for(var/objective in get_all_objectives())
 		var/datum/objective/O = objective
+		O.update_explanation_text()
 		to_chat(current, "<B>Objective #[obj_count]</B>: [O.explanation_text]")
 		obj_count++
 
@@ -662,8 +844,8 @@
 	if(!has_antag_datum(/datum/antagonist/cult,TRUE))
 		SSticker.mode.add_cultist(src,FALSE,equip=TRUE)
 		special_role = ROLE_CULTIST
-		to_chat(current, "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar'Sie, The Geometer of Blood. You now see how flimsy your world is, you see that it should be open to the knowledge of Nar'Sie.</b></i></font>")
-		to_chat(current, "<font color=\"purple\"><b><i>Assist your new brethren in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>")
+		to_chat(current, "<font color=\"purple\"><b><i>I catch a glimpse of the Realm of Nar'Sie, The Geometer of Blood. You now see how flimsy my world is, you see that it should be open to the knowledge of Nar'Sie.</b></i></font>")
+		to_chat(current, "<font color=\"purple\"><b><i>Assist my new brethren in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>")
 
 /datum/mind/proc/make_Rev()
 	var/datum/antagonist/rev/head/head = new()
@@ -673,6 +855,8 @@
 	special_role = ROLE_REV_HEAD
 
 /datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/S)
+	if(!S)
+		return
 	spell_list += S
 	S.action.Grant(current)
 

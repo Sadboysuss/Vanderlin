@@ -1,16 +1,19 @@
 /obj/effect/proc_holder/spell/targeted/forcewall
 	name = "Forcewall"
-	desc = "Create a magical barrier that only you can pass through."
+	desc = ""
 	school = "transmutation"
 	charge_max = 100
+	releasedrain = 30
+	chargedrain = 1
 	clothes_req = FALSE
-	invocation = "TARCOL MINTI ZHERI"
+	invocation = "SHIELDA MAGIKA"
 	invocation_type = "shout"
-	sound = 'sound/magic/forcewall.ogg'
+	sound = 'sound/magic/timestop.ogg'
 	action_icon_state = "shield"
 	range = -1
 	include_user = TRUE
-	cooldown_min = 50 //12 deciseconds reduction per rank
+	cooldown_min = 900 //12 deciseconds reduction per rank
+	associated_skill = /datum/skill/magic/arcane
 	var/wall_type = /obj/effect/forcefield/wizard
 
 /obj/effect/proc_holder/spell/targeted/forcewall/cast(list/targets,mob/user = usr)

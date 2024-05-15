@@ -1,6 +1,6 @@
 /obj/item/implant/uplink
 	name = "uplink implant"
-	desc = "Sneeki breeki."
+	desc = ""
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "radio"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'

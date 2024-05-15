@@ -11,28 +11,28 @@
 
 /obj/structure/sign/basic
 	name = "blank sign"
-	desc = "How can signs be real if our eyes aren't real? Use a pen to change the decal."
+	desc = ""
 	icon_state = "backing"
 
 /obj/structure/sign/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src.loc, 'sound/weapons/slash.ogg', 80, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 80, TRUE)
 			else
-				playsound(loc, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
-			playsound(loc, 'sound/items/welder.ogg', 80, TRUE)
+			playsound(loc, 'sound/blank.ogg', 80, TRUE)
 
 /obj/structure/sign/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH && buildable_sign)
 		user.visible_message("<span class='notice'>[user] starts removing [src]...</span>", \
-							 "<span class='notice'>You start unfastening [src].</span>")
+							 "<span class='notice'>I start unfastening [src].</span>")
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 40))
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			user.visible_message("<span class='notice'>[user] unfastens [src].</span>", \
-								 "<span class='notice'>You unfasten [src].</span>")
+								 "<span class='notice'>I unfasten [src].</span>")
 			var/obj/item/sign_backing/SB = new (get_turf(user))
 			SB.icon_state = icon_state
 			SB.sign_path = type
@@ -108,7 +108,7 @@
 
 /obj/item/sign_backing
 	name = "sign backing"
-	desc = "A sign with adhesive backing. Use a pen to change the decal once installed."
+	desc = ""
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "backing"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -121,8 +121,8 @@
 	if(isturf(target) && proximity)
 		var/turf/T = target
 		user.visible_message("<span class='notice'>[user] fastens [src] to [T].</span>", \
-							 "<span class='notice'>You attach the sign to [T].</span>")
-		playsound(T, 'sound/items/deconstruct.ogg', 50, TRUE)
+							 "<span class='notice'>I attach the sign to [T].</span>")
+		playsound(T, 'sound/blank.ogg', 50, TRUE)
 		var/obj/structure/sign/S = new sign_path(T)
 		S.setDir(dir)
 		qdel(src)
@@ -139,10 +139,10 @@
 
 /obj/structure/sign/nanotrasen
 	name = "\improper Nanotrasen Logo"
-	desc = "A sign with the Nanotrasen Logo on it. Glory to Nanotrasen!"
+	desc = ""
 	icon_state = "nanotrasen"
 
 /obj/structure/sign/logo
 	name = "nanotrasen logo"
-	desc = "The Nanotrasen corporate logo."
+	desc = ""
 	icon_state = "nanotrasen_sign1"

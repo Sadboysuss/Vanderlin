@@ -40,7 +40,7 @@
 
 /obj/item/wallframe/airalarm
 	name = "air alarm frame"
-	desc = "Used for building Air Alarms."
+	desc = ""
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_bitem"
 	result_path = /obj/machinery/airalarm
@@ -59,7 +59,7 @@
 
 /obj/machinery/airalarm
 	name = "air alarm"
-	desc = "A machine that monitors atmosphere levels. Goes off if the area is dangerous."
+	desc = ""
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	use_power = IDLE_POWER_USE
@@ -159,7 +159,7 @@
 
 /obj/machinery/airalarm/all_access
 	name = "all-access air alarm"
-	desc = "This particular atmos control unit appears to have no access restrictions."
+	desc = ""
 	locked = FALSE
 	req_access = null
 	req_one_access = null
@@ -710,7 +710,7 @@
 		if(2)
 			if(W.tool_behaviour == TOOL_WIRECUTTER && panel_open && wires.is_all_cut())
 				W.play_tool_sound(src)
-				to_chat(user, "<span class='notice'>You cut the final wires.</span>")
+				to_chat(user, "<span class='notice'>I cut the final wires.</span>")
 				new /obj/item/stack/cable_coil(loc, 5)
 				buildstage = 1
 				update_icon()
@@ -730,13 +730,13 @@
 		if(1)
 			if(W.tool_behaviour == TOOL_CROWBAR)
 				user.visible_message("<span class='notice'>[user.name] removes the electronics from [src.name].</span>", \
-									"<span class='notice'>You start prying out the circuit...</span>")
+									"<span class='notice'>I start prying out the circuit...</span>")
 				W.play_tool_sound(src)
 				if (W.use_tool(src, user, 20))
 					if (buildstage == 1)
-						to_chat(user, "<span class='notice'>You remove the air alarm electronics.</span>")
+						to_chat(user, "<span class='notice'>I remove the air alarm electronics.</span>")
 						new /obj/item/electronics/airalarm( src.loc )
-						playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+						playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 						buildstage = 0
 						update_icon()
 				return
@@ -744,14 +744,14 @@
 			if(istype(W, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/cable = W
 				if(cable.get_amount() < 5)
-					to_chat(user, "<span class='warning'>You need five lengths of cable to wire the air alarm!</span>")
+					to_chat(user, "<span class='warning'>I need five lengths of cable to wire the air alarm!</span>")
 					return
 				user.visible_message("<span class='notice'>[user.name] wires the air alarm.</span>", \
-									"<span class='notice'>You start wiring the air alarm...</span>")
+									"<span class='notice'>I start wiring the air alarm...</span>")
 				if (do_after(user, 20, target = src))
 					if (cable.get_amount() >= 5 && buildstage == 1)
 						cable.use(5)
-						to_chat(user, "<span class='notice'>You wire the air alarm.</span>")
+						to_chat(user, "<span class='notice'>I wire the air alarm.</span>")
 						wires.repair()
 						aidisabled = 0
 						locked = FALSE
@@ -764,7 +764,7 @@
 		if(0)
 			if(istype(W, /obj/item/electronics/airalarm))
 				if(user.temporarilyRemoveItemFromInventory(W))
-					to_chat(user, "<span class='notice'>You insert the circuit.</span>")
+					to_chat(user, "<span class='notice'>I insert the circuit.</span>")
 					buildstage = 1
 					update_icon()
 					qdel(W)
@@ -775,13 +775,13 @@
 				if(!P.adapt_circuit(user, 25))
 					return
 				user.visible_message("<span class='notice'>[user] fabricates a circuit and places it into [src].</span>", \
-				"<span class='notice'>You adapt an air alarm circuit and slot it into the assembly.</span>")
+				"<span class='notice'>I adapt an air alarm circuit and slot it into the assembly.</span>")
 				buildstage = 1
 				update_icon()
 				return
 
 			if(W.tool_behaviour == TOOL_WRENCH)
-				to_chat(user, "<span class='notice'>You detach \the [src] from the wall.</span>")
+				to_chat(user, "<span class='notice'>I detach \the [src] from the wall.</span>")
 				W.play_tool_sound(src)
 				new /obj/item/wallframe/airalarm( user.loc )
 				qdel(src)
@@ -798,7 +798,7 @@
 	switch(passed_mode)
 		if(RCD_UPGRADE_SIMPLE_CIRCUITS)
 			user.visible_message("<span class='notice'>[user] fabricates a circuit and places it into [src].</span>", \
-			"<span class='notice'>You adapt an air alarm circuit and slot it into the assembly.</span>")
+			"<span class='notice'>I adapt an air alarm circuit and slot it into the assembly.</span>")
 			buildstage = 1
 			update_icon()
 			return TRUE
@@ -817,7 +817,7 @@
 	else
 		if(src.allowed(usr) && !wires.is_cut(WIRE_IDSCAN))
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the air alarm interface.</span>")
+			to_chat(user, "<span class='notice'>I [ locked ? "lock" : "unlock"] the air alarm interface.</span>")
 			updateUsrDialog()
 		else
 			to_chat(user, "<span class='danger'>Access denied.</span>")
@@ -827,7 +827,7 @@
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
-	visible_message("<span class='warning'>Sparks fly out of [src]!</span>", "<span class='notice'>You emag [src], disabling its safeties.</span>")
+	visible_message("<span class='warning'>Sparks fly out of [src]!</span>", "<span class='notice'>I emag [src], disabling its safeties.</span>")
 	playsound(src, "sparks", 50, TRUE)
 
 /obj/machinery/airalarm/deconstruct(disassembled = TRUE)

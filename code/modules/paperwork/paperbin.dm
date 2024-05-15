@@ -1,6 +1,6 @@
 /obj/item/paper_bin
 	name = "paper bin"
-	desc = "Contains all the paper you'll never need."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
@@ -34,7 +34,7 @@
 		papers = null
 	. = ..()
 
-/obj/item/paper_bin/fire_act(exposed_temperature, exposed_volume)
+/obj/item/paper_bin/fire_act(added, maxstacks)
 	if(total_paper)
 		total_paper = 0
 		update_icon()
@@ -70,7 +70,7 @@
 		P.add_fingerprint(user)
 		P.forceMove(user.loc)
 		user.put_in_hands(P)
-		to_chat(user, "<span class='notice'>You take [P] out of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I take [P] out of \the [src].</span>")
 		bin_pen = null
 		update_icon()
 	else if(total_paper >= 1)
@@ -92,7 +92,7 @@
 		P.add_fingerprint(user)
 		P.forceMove(user.loc)
 		user.put_in_hands(P)
-		to_chat(user, "<span class='notice'>You take [P] out of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I take [P] out of \the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 	add_fingerprint(user)
@@ -103,7 +103,7 @@
 		var/obj/item/paper/P = I
 		if(!user.transferItemToLoc(P, src))
 			return
-		to_chat(user, "<span class='notice'>You put [P] in [src].</span>")
+		to_chat(user, "<span class='notice'>I put [P] in [src].</span>")
 		papers.Add(P)
 		total_paper++
 		update_icon()
@@ -111,7 +111,7 @@
 		var/obj/item/pen/P = I
 		if(!user.transferItemToLoc(P, src))
 			return
-		to_chat(user, "<span class='notice'>You put [P] in [src].</span>")
+		to_chat(user, "<span class='notice'>I put [P] in [src].</span>")
 		bin_pen = P
 		update_icon()
 	else
@@ -136,13 +136,13 @@
 
 /obj/item/paper_bin/construction
 	name = "construction paper bin"
-	desc = "Contains all the paper you'll never need, IN COLOR!"
+	desc = ""
 	icon_state = "paper_binc"
 	papertype = /obj/item/paper/construction
 
 /obj/item/paper_bin/bundlenatural
 	name = "natural paper bundle"
-	desc = "A bundle of paper created using traditional methods."
+	desc = ""
 	icon_state = "paper_bundle"
 	papertype = /obj/item/paper/natural
 	resistance_flags = FLAMMABLE
@@ -152,12 +152,12 @@
 	if(total_paper < 1)
 		qdel(src)
 
-/obj/item/paper_bin/bundlenatural/fire_act(exposed_temperature, exposed_volume)
+/obj/item/paper_bin/bundlenatural/fire_act(added, maxstacks)
 	qdel(src)
 
 /obj/item/paper_bin/bundlenatural/attackby(obj/item/W, mob/user)
 	if(W.get_sharpness())
-		to_chat(user, "<span class='notice'>You snip \the [src], spilling paper everywhere.</span>")
+		to_chat(user, "<span class='notice'>I snip \the [src], spilling paper everywhere.</span>")
 		var/turf/T = get_turf(src.loc)
 		while(total_paper > 0)
 			total_paper--
@@ -175,6 +175,6 @@
 
 /obj/item/paper_bin/carbon
 	name = "carbon paper bin"
-	desc = "Contains all the paper you'll ever need, in duplicate!"
+	desc = ""
 	icon_state = "paper_bin_carbon"
 	papertype = /obj/item/paper/carbon

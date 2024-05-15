@@ -1,13 +1,22 @@
 //Defines for atom layers and planes
 //KEEP THESE IN A NICE ACSCENDING ORDER, PLEASE
 
+#define FIELD_OF_VISION_BLOCKER_PLANE -199
+#define FIELD_OF_VISION_BLOCKER_RENDER_TARGET "*fovblock"
+
 #define CLICKCATCHER_PLANE -99
 
 #define PLANE_SPACE -95
 #define PLANE_SPACE_PARALLAX -90
 
-#define FLOOR_PLANE -2
-#define GAME_PLANE -1
+#define OPENSPACE_LAYER 17 //Openspace layer over all
+#define OPENSPACE_PLANE -6 //Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -5
+
+#define FLOOR_PLANE -4
+#define GAME_PLANE -3
+#define GAME_PLANE_FOV_HIDDEN -2
+#define GAME_PLANE_UPPER -1
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 
 #define SPACE_LAYER 1.8
@@ -74,18 +83,28 @@
 #define LOW_LANDMARK_LAYER 9
 #define MID_LANDMARK_LAYER 9.1
 #define HIGH_LANDMARK_LAYER 9.2
-#define AREA_LAYER 10
+//#define AREA_LAYER 10
 #define MASSIVE_OBJ_LAYER 11
 #define POINT_LAYER 12
 
+#define CHAT_LAYER 12.1
+
+#define WARN_LAYER 12.2
+
+#define AREA_PLANE	12
+#define AREA_LAYER	12
+
+#define GRAIN_LAYER 13
+
+#define WEATHER_PLANE 13
+
+#define INDOOR_PLANE 14
+
 #define LIGHTING_PLANE 15
-#define LIGHTING_LAYER 15
+#define LIGHTING_LAYER 15 //15
 
 #define ABOVE_LIGHTING_PLANE 16
 #define ABOVE_LIGHTING_LAYER 16
-
-#define FLOOR_OPENSPACE_PLANE 17
-#define OPENSPACE_LAYER 17
 
 #define BYOND_LIGHTING_PLANE 18
 #define BYOND_LIGHTING_LAYER 18
@@ -95,6 +114,7 @@
 
 //HUD layer defines
 
+
 #define FULLSCREEN_PLANE 20
 #define FLASH_LAYER 20
 #define FULLSCREEN_LAYER 20.1
@@ -102,6 +122,7 @@
 #define BLIND_LAYER 20.3
 #define CRIT_LAYER 20.4
 #define CURSE_LAYER 20.5
+#define BACKHUD_LAYER 20.6
 
 #define HUD_PLANE 21
 #define HUD_LAYER 21
@@ -110,3 +131,5 @@
 
 #define SPLASHSCREEN_LAYER 23
 #define SPLASHSCREEN_PLANE 23
+
+#define FOV_EFFECTS_LAYER 10000

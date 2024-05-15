@@ -1,6 +1,6 @@
 /obj/machinery/vending/engivend
 	name = "\improper Engi-Vend"
-	desc = "Spare tool vending. What? Did you expect some witty description?"
+	desc = ""
 	icon_state = "engivend"
 	icon_deny = "engivend-deny"
 	req_access = list(ACCESS_ENGINE_EQUIP)

@@ -1,6 +1,6 @@
 /obj/item/implant/explosive
 	name = "microbomb implant"
-	desc = "And boom goes the weasel."
+	desc = ""
 	icon_state = "explosive"
 	actions_types = list(/datum/action/item_action/explosive_implant)
 	// Explosive implant action is always available.
@@ -39,7 +39,7 @@
 	heavy = round(heavy)
 	medium = round(medium)
 	weak = round(weak)
-	to_chat(imp_in, "<span class='notice'>You activate your [name].</span>")
+	to_chat(imp_in, "<span class='notice'>I activate your [name].</span>")
 	active = TRUE
 	var/turf/boomturf = get_turf(imp_in)
 	message_admins("[ADMIN_LOOKUPFLW(imp_in)] has activated their [name] at [ADMIN_VERBOSEJMP(boomturf)], with cause of [cause].")
@@ -67,16 +67,16 @@
 
 /obj/item/implant/explosive/proc/timed_explosion()
 	imp_in.visible_message("<span class='warning'>[imp_in] starts beeping ominously!</span>")
-	playsound(loc, 'sound/items/timer.ogg', 30, FALSE)
+	playsound(loc, 'sound/blank.ogg', 30, FALSE)
 	sleep(delay*0.25)
 	if(imp_in && !imp_in.stat)
 		imp_in.visible_message("<span class='warning'>[imp_in] doubles over in pain!</span>")
 		imp_in.Paralyze(140)
-	playsound(loc, 'sound/items/timer.ogg', 30, FALSE)
+	playsound(loc, 'sound/blank.ogg', 30, FALSE)
 	sleep(delay*0.25)
-	playsound(loc, 'sound/items/timer.ogg', 30, FALSE)
+	playsound(loc, 'sound/blank.ogg', 30, FALSE)
 	sleep(delay*0.25)
-	playsound(loc, 'sound/items/timer.ogg', 30, FALSE)
+	playsound(loc, 'sound/blank.ogg', 30, FALSE)
 	sleep(delay*0.25)
 	explosion(src,heavy,medium,weak,weak, flame_range = weak)
 	if(imp_in)
@@ -85,7 +85,7 @@
 
 /obj/item/implant/explosive/macro
 	name = "macrobomb implant"
-	desc = "And boom goes the weasel. And everything else nearby."
+	desc = ""
 	icon_state = "explosive"
 	weak = 16
 	medium = 8
@@ -116,7 +116,7 @@
 
 /obj/item/implantcase/explosive
 	name = "implant case - 'Explosive'"
-	desc = "A glass case containing an explosive implant."
+	desc = ""
 	imp_type = /obj/item/implant/explosive
 
 /obj/item/implanter/explosive_macro

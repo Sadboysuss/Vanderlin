@@ -1,7 +1,7 @@
 //Baseline portable generator. Has all the default handling. Not intended to be used on it's own (since it generates unlimited power).
 /obj/machinery/power/port_gen
 	name = "portable generator"
-	desc = "A portable generator for emergency backup power."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0_0"
 	density = TRUE
@@ -181,7 +181,7 @@
 		if(amount < 1)
 			to_chat(user, "<span class='notice'>The [src.name] is full!</span>")
 			return
-		to_chat(user, "<span class='notice'>You add [amount] sheets to the [src.name].</span>")
+		to_chat(user, "<span class='notice'>I add [amount] sheets to the [src.name].</span>")
 		sheets += amount
 		addstack.use(amount)
 		return
@@ -190,21 +190,21 @@
 			if(!anchored && !isinspace())
 				anchored = TRUE
 				connect_to_network()
-				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
+				to_chat(user, "<span class='notice'>I secure the generator to the floor.</span>")
 			else if(anchored)
 				anchored = FALSE
 				disconnect_from_network()
-				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
+				to_chat(user, "<span class='notice'>I unsecure the generator from the floor.</span>")
 
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			return
 		else if(O.tool_behaviour == TOOL_SCREWDRIVER)
 			panel_open = !panel_open
 			O.play_tool_sound(src)
 			if(panel_open)
-				to_chat(user, "<span class='notice'>You open the access panel.</span>")
+				to_chat(user, "<span class='notice'>I open the access panel.</span>")
 			else
-				to_chat(user, "<span class='notice'>You close the access panel.</span>")
+				to_chat(user, "<span class='notice'>I close the access panel.</span>")
 			return
 		else if(default_deconstruction_crowbar(O))
 			return

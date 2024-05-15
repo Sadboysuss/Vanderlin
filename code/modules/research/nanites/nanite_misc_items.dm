@@ -1,6 +1,6 @@
 /obj/item/nanite_injector
 	name = "nanite injector (FOR TESTING)"
-	desc = "Injects nanites into the user."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/device.dmi'
 	icon_state = "nanite_remote"

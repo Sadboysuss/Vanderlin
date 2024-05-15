@@ -1,6 +1,6 @@
 /obj/projectile/bullet/reusable/foam_dart
 	name = "foam dart"
-	desc = "I hope you're wearing eye protection."
+	desc = ""
 	damage = 0 // It's a damn toy.
 	damage_type = OXY
 	nodamage = TRUE

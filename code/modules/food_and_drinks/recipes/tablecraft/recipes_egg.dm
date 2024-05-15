@@ -11,7 +11,7 @@
 		/obj/item/reagent_containers/food/snacks/egg = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/friedegg
-	subcategory = CAT_EGG
+	subcategory = CAT_NONE
 
 /datum/crafting_recipe/food/omelette
 	name = "Omelette"
@@ -20,7 +20,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge = 2
 	)
 	result = /obj/item/reagent_containers/food/snacks/omelette
-	subcategory = CAT_EGG
+	subcategory = CAT_NONE
 
 /datum/crafting_recipe/food/chocolateegg
 	name = "Chocolate egg"
@@ -29,7 +29,7 @@
 		/obj/item/reagent_containers/food/snacks/chocolatebar = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/chocolateegg
-	subcategory = CAT_EGG
+	subcategory = CAT_NONE
 
 /datum/crafting_recipe/food/eggsbenedict
 	name = "Eggs benedict"
@@ -39,7 +39,7 @@
 		/obj/item/reagent_containers/food/snacks/breadslice/plain = 1,
 	)
 	result = /obj/item/reagent_containers/food/snacks/benedict
-	subcategory = CAT_EGG
+	subcategory = CAT_NONE
 
 /datum/crafting_recipe/food/eggbowl
 	name = "Egg bowl"
@@ -50,4 +50,4 @@
 		/obj/item/reagent_containers/food/snacks/grown/corn = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/salad/eggbowl
-	subcategory = CAT_EGG
+	subcategory = CAT_NONE

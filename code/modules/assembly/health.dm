@@ -1,6 +1,6 @@
 /obj/item/assembly/health
 	name = "health sensor"
-	desc = "Used for scanning and monitoring health."
+	desc = ""
 	icon_state = "health"
 	custom_materials = list(/datum/material/iron=800, /datum/material/glass=200)
 	attachable = TRUE
@@ -33,10 +33,10 @@
 /obj/item/assembly/health/AltClick(mob/living/user)
 	if(alarm_health == HEALTH_THRESHOLD_CRIT)
 		alarm_health = HEALTH_THRESHOLD_DEAD
-		to_chat(user, "<span class='notice'>You toggle [src] to \"detect death\" mode.</span>")
+		to_chat(user, "<span class='notice'>I toggle [src] to \"detect death\" mode.</span>")
 	else
 		alarm_health = HEALTH_THRESHOLD_CRIT
-		to_chat(user, "<span class='notice'>You toggle [src] to \"detect critical state\" mode.</span>")
+		to_chat(user, "<span class='notice'>I toggle [src] to \"detect critical state\" mode.</span>")
 
 /obj/item/assembly/health/process()
 	if(!scanning || !secured)
@@ -54,7 +54,7 @@
 		if(health_scan <= alarm_health)
 			pulse()
 			audible_message("[icon2html(src, hearers(src))] *beep* *beep* *beep*")
-			playsound(src, 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+			playsound(src, 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 			toggle_scan()
 		return
 	return
@@ -71,5 +71,5 @@
 
 /obj/item/assembly/health/attack_self(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>You toggle [src] [src.scanning ? "off" : "on"].</span>")
+	to_chat(user, "<span class='notice'>I toggle [src] [src.scanning ? "off" : "on"].</span>")
 	toggle_scan()

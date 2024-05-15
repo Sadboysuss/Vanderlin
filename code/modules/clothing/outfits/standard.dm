@@ -18,7 +18,7 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.access = get_all_accesses()
 	W.access += get_centcom_access("Special Ops Officer")
 	W.assignment = "Special Ops Officer"
@@ -136,7 +136,7 @@
 		R.set_frequency(FREQ_SYNDICATE)
 		R.freqlock = TRUE
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	if(W)
 		W.registered_name = H.real_name
 		W.update_label()
@@ -160,7 +160,7 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.access = get_all_accesses()
 	W.assignment = "Tunnel Clown!"
 	W.registered_name = H.real_name
@@ -202,7 +202,7 @@
 	belt = /obj/item/pda/heads
 
 /datum/outfit/assassin/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	var/obj/item/clothing/under/U = H.w_uniform
+	var/obj/item/clothing/under/U = H.wear_pants
 	U.attach_accessory(new /obj/item/clothing/accessory/waistcoat(H))
 
 	if(visualsOnly)
@@ -224,7 +224,7 @@
 	pda.ownjob = "Reaper"
 	pda.update_label()
 
-	var/obj/item/card/id/syndicate/W = H.wear_id
+	var/obj/item/card/id/syndicate/W = H.wear_ring
 	W.access = get_all_accesses()
 	W.assignment = "Reaper"
 	W.registered_name = H.real_name
@@ -251,7 +251,7 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.access = get_all_accesses()
 	W.access += get_centcom_access("CentCom Commander")
 	W.assignment = "CentCom Commander"
@@ -326,7 +326,7 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.access = get_all_accesses()
 	W.access += get_centcom_access("Admiral")
 	W.assignment = "Admiral"
@@ -349,7 +349,7 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.assignment = "Assistant"
 	W.registered_name = H.real_name
 	W.update_label()
@@ -399,7 +399,7 @@
 	L.implant(H, null, 1)
 
 
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.access = get_all_accesses()//They get full station access.
 	W.access += get_centcom_access("Death Commando")//Let's add their alloted CentCom access.
 	W.assignment = "Death Commando"

@@ -1,6 +1,6 @@
 /obj/item/ammo_casing
 	name = "bullet casing"
-	desc = "A bullet casing."
+	desc = ""
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "s-casing"
 	flags_1 = CONDUCT_1
@@ -44,7 +44,7 @@
 /obj/item/ammo_casing/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][BB ? "-live" : ""]"
-	desc = "[initial(desc)][BB ? "" : " This one is spent."]"
+	desc = ""
 
 //proc to magically refill a casing with a new projectile
 /obj/item/ammo_casing/proc/newshot() //For energy weapons, syringe gun, shotgun shells and wands (!).
@@ -66,9 +66,9 @@
 					continue
 			if (boolets > 0)
 				box.update_icon()
-				to_chat(user, "<span class='notice'>You collect [boolets] shell\s. [box] now contains [box.stored_ammo.len] shell\s.</span>")
+				to_chat(user, "<span class='notice'>I collect [boolets] shell\s. [box] now contains [box.stored_ammo.len] shell\s.</span>")
 			else
-				to_chat(user, "<span class='warning'>You fail to collect anything!</span>")
+				to_chat(user, "<span class='warning'>I fail to collect anything!</span>")
 	else
 		return ..()
 
@@ -83,6 +83,6 @@
 	SpinAnimation(10, 1)
 	var/turf/T = get_turf(src)
 	if(still_warm && T && T.bullet_sizzle)
-		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/items/welder.ogg', 20, 1), bounce_delay) //If the turf is made of water and the shell casing is still hot, make a sizzling sound when it's ejected.
+		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/blank.ogg', 20, 1), bounce_delay) //If the turf is made of water and the shell casing is still hot, make a sizzling sound when it's ejected.
 	else if(T && T.bullet_bounce_sound)
 		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, T.bullet_bounce_sound, 20, 1), bounce_delay) //Soft / non-solid turfs that shouldn't make a sound when a shell casing is ejected over them.

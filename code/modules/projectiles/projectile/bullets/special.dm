@@ -5,7 +5,7 @@
 	damage = 0
 	movement_type = FLYING | UNSTOPPABLE
 	nodamage = TRUE
-	hitsound = 'sound/items/bikehorn.ogg'
+	hitsound = 'sound/blank.ogg'
 	icon = 'icons/obj/hydroponics/harvest.dmi'
 	icon_state = "banana"
 	range = 200

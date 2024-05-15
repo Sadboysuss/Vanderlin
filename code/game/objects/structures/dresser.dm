@@ -1,6 +1,6 @@
 /obj/structure/dresser
 	name = "dresser"
-	desc = "A nicely-crafted wooden dresser. It's filled with lots of undies."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "dresser"
 	density = TRUE
@@ -8,9 +8,9 @@
 
 /obj/structure/dresser/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, "<span class='notice'>You begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
+		to_chat(user, "<span class='notice'>I begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
 		if(I.use_tool(src, user, 20, volume=50))
-			to_chat(user, "<span class='notice'>You successfully [anchored ? "unwrench" : "wrench"] [src].</span>")
+			to_chat(user, "<span class='notice'>I successfully [anchored ? "unwrench" : "wrench"] [src].</span>")
 			setAnchored(!anchored)
 	else
 		return ..()
@@ -29,7 +29,7 @@
 		var/mob/living/carbon/human/H = user
 
 		if(H.dna && H.dna.species && (NO_UNDERWEAR in H.dna.species.species_traits))
-			to_chat(user, "<span class='warning'>You are not capable of wearing underwear.</span>")
+			to_chat(user, "<span class='warning'>I are not capable of wearing underwear.</span>")
 			return
 
 		var/choice = input(user, "Underwear, Undershirt, or Socks?", "Changing") as null|anything in list("Underwear","Underwear Color","Undershirt","Socks")

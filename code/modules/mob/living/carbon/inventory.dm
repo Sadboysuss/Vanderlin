@@ -72,8 +72,16 @@
 			put_in_hands(I)
 			update_inv_hands()
 		if(SLOT_IN_BACKPACK)
-			if(!back || !SEND_SIGNAL(back, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
-				not_handled = TRUE
+			not_handled = TRUE
+			if(backr)
+				testing("insert4")
+				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+					not_handled = FALSE
+			if(backl && not_handled)
+				testing("insert5")
+				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+					not_handled = FALSE
+
 		else
 			not_handled = TRUE
 
@@ -82,6 +90,10 @@
 	//in a slot (handled further down inheritance chain, probably living/carbon/human/equip_to_slot
 	if(!not_handled)
 		I.equipped(src, slot)
+
+	if(hud_used)
+		hud_used.throw_icon?.update_icon()
+		hud_used.give_intent?.update_icon()
 
 	return not_handled
 

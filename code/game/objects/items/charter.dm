@@ -34,16 +34,16 @@
 		to_chat(user, "<span class='warning'>The crew has already settled into the shift. It probably wouldn't be good to rename the [name_type] right now.</span>")
 		return
 	if(response_timer_id)
-		to_chat(user, "<span class='warning'>You're still waiting for approval from your employers about your proposed name change, it'd be best to wait for now.</span>")
+		to_chat(user, "<span class='warning'>You're still waiting for approval from my employers about my proposed name change, it'd be best to wait for now.</span>")
 		return
 
 	var/new_name = stripped_input(user, message="What do you want to name \
 		[station_name()]? Keep in mind particularly terrible names may be \
-		rejected by your employers, while names using the standard format, \
+		rejected by my employers, while names using the standard format, \
 		will automatically be accepted.", max_length=MAX_CHARTER_LEN)
 
 	if(response_timer_id)
-		to_chat(user, "<span class='warning'>You're still waiting for approval from your employers about your proposed name change, it'd be best to wait for now.</span>")
+		to_chat(user, "<span class='warning'>You're still waiting for approval from my employers about my proposed name change, it'd be best to wait for now.</span>")
 		return
 
 	if(!new_name)
@@ -52,11 +52,11 @@
 		[new_name]")
 
 	if(standard_station_regex.Find(new_name))
-		to_chat(user, "<span class='notice'>Your name has been automatically approved.</span>")
+		to_chat(user, "<span class='notice'>My name has been automatically approved.</span>")
 		rename_station(new_name, user.name, user.real_name, key_name(user))
 		return
 
-	to_chat(user, "<span class='notice'>Your name has been sent to your employers for approval.</span>")
+	to_chat(user, "<span class='notice'>My name has been sent to my employers for approval.</span>")
 	// Autoapproves after a certain time
 	response_timer_id = addtimer(CALLBACK(src, .proc/rename_station, new_name, user.name, user.real_name, key_name(user)), approval_time, TIMER_STOPPABLE)
 	to_chat(GLOB.admins, "<span class='adminnotice'><b><font color=orange>CUSTOM STATION RENAME:</font></b>[ADMIN_LOOKUPFLW(user)] proposes to rename the [name_type] to [new_name] (will autoapprove in [DisplayTimeText(approval_time)]). [ADMIN_SMITE(user)] (<A HREF='?_src_=holder;[HrefToken(TRUE)];reject_custom_name=[REF(src)]'>REJECT</A>) [ADMIN_CENTCOM_REPLY(user)]</span>")
@@ -79,7 +79,7 @@
 
 /obj/item/station_charter/proc/rename_station(designation, uname, ureal_name, ukey)
 	set_station_name(designation)
-	minor_announce("[ureal_name] has designated your station as [station_name()]", "Captain's Charter", 0)
+	minor_announce("[ureal_name] has designated my station as [station_name()]", "Captain's Charter", 0)
 	log_game("[ukey] has renamed the station as [station_name()].")
 
 	name = "station charter for [station_name()]"
@@ -102,7 +102,7 @@
 	item_state = "banner"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/banners_righthand.dmi'
-	desc = "A cunning device used to claim ownership of planets."
+	desc = ""
 	w_class = 5
 	force = 15
 
@@ -111,7 +111,7 @@
 	minor_announce("[ureal_name] has designated the planet as [station_name()]", "Captain's Banner", 0)
 	log_game("[ukey] has renamed the planet as [station_name()].")
 	name = "banner of [station_name()]"
-	desc = "The banner bears the official coat of arms of Nanotrasen, signifying that [station_name()] has been claimed by Captain [uname] in the name of the company."
+	desc = ""
 	SSblackbox.record_feedback("text", "station_renames", 1, "[station_name()]")
 	if(!unlimited_uses)
 		used = TRUE

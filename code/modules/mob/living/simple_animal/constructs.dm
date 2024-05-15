@@ -18,7 +18,7 @@
 	a_intent = INTENT_HARM
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	see_in_dark = 7
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
@@ -37,7 +37,7 @@
 	deathmessage = "collapses in a shattered heap."
 	hud_type = /datum/hud/constructs
 	var/list/construct_spells = list()
-	var/playstyle_string = "<span class='big bold'>You are a generic construct!</span><b> Your job is to not exist, and you should probably adminhelp this.</b>"
+	var/playstyle_string = "<span class='big bold'>I are a generic construct!</span><b> Your job is to not exist, and you should probably adminhelp this.</b>"
 	var/master = null
 	var/seeking = FALSE
 	var/can_repair_constructs = FALSE
@@ -93,15 +93,15 @@
 			if(src != M)
 				Beam(M,icon_state="sendbeam",time=4)
 				M.visible_message("<span class='danger'>[M] repairs some of \the <b>[src]'s</b> dents.</span>", \
-						   "<span class='cult'>You repair some of <b>[src]'s</b> dents, leaving <b>[src]</b> at <b>[health]/[maxHealth]</b> health.</span>")
+						   "<span class='cult'>I repair some of <b>[src]'s</b> dents, leaving <b>[src]</b> at <b>[health]/[maxHealth]</b> health.</span>")
 			else
 				M.visible_message("<span class='danger'>[M] repairs some of [p_their()] own dents.</span>", \
-						   "<span class='cult'>You repair some of your own dents, leaving you at <b>[M.health]/[M.maxHealth]</b> health.</span>")
+						   "<span class='cult'>I repair some of your own dents, leaving you at <b>[M.health]/[M.maxHealth]</b> health.</span>")
 		else
 			if(src != M)
-				to_chat(M, "<span class='cult'>You cannot repair <b>[src]'s</b> dents, as [p_they()] [p_have()] none!</span>")
+				to_chat(M, "<span class='cult'>I cannot repair <b>[src]'s</b> dents, as [p_they()] [p_have()] none!</span>")
 			else
-				to_chat(M, "<span class='cult'>You cannot repair your own dents, as you have none!</span>")
+				to_chat(M, "<span class='cult'>I cannot repair your own dents, as you have none!</span>")
 	else if(src != M)
 		return ..()
 
@@ -120,7 +120,7 @@
 /mob/living/simple_animal/hostile/construct/armored
 	name = "Juggernaut"
 	real_name = "Juggernaut"
-	desc = "A massive, armored construct built to spearhead attacks and soak up enemy fire."
+	desc = ""
 	icon_state = "behemoth"
 	icon_living = "behemoth"
 	maxHealth = 150
@@ -135,14 +135,14 @@
 	attack_verb_simple = "smash your armored gauntlet into"
 	speed = 2.5
 	environment_smash = ENVIRONMENT_SMASH_WALLS
-	attack_sound = 'sound/weapons/punch3.ogg'
+	attack_sound = 'sound/blank.ogg'
 	status_flags = 0
 	mob_size = MOB_SIZE_LARGE
 	force_threshold = 10
 	construct_spells = list(/obj/effect/proc_holder/spell/targeted/forcewall/cult,
 							/obj/effect/proc_holder/spell/targeted/projectile/dumbfire/juggernaut)
 	runetype = /datum/action/innate/cult/create_rune/wall
-	playstyle_string = "<b>You are a Juggernaut. Though slow, your shell can withstand heavy punishment, \
+	playstyle_string = "<b>I are a Juggernaut. Though slow, your shell can withstand heavy punishment, \
 						create shield walls, rip apart enemies and walls alike, and even deflect energy weapons.</b>"
 
 /mob/living/simple_animal/hostile/construct/armored/hostile //actually hostile, will move around, hit things
@@ -155,7 +155,7 @@
 		if(prob(reflectchance))
 			apply_damage(P.damage * 0.5, P.damage_type)
 			visible_message("<span class='danger'>The [P.name] is reflected by [src]'s armored shell!</span>", \
-							"<span class='userdanger'>The [P.name] is reflected by your armored shell!</span>")
+							"<span class='danger'>The [P.name] is reflected by your armored shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -191,7 +191,7 @@
 /mob/living/simple_animal/hostile/construct/wraith
 	name = "Wraith"
 	real_name = "Wraith"
-	desc = "A wicked, clawed shell constructed to assassinate enemies and sow chaos behind enemy lines."
+	desc = ""
 	icon_state = "floating"
 	icon_living = "floating"
 	maxHealth = 65
@@ -201,10 +201,10 @@
 	retreat_distance = 2 //AI wraiths will move in and out of combat
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift)
 	runetype = /datum/action/innate/cult/create_rune/tele
-	playstyle_string = "<b>You are a Wraith. Though relatively fragile, you are fast, deadly, can phase through walls, and your attacks will lower the cooldown on phasing.</b>"
+	playstyle_string = "<b>I are a Wraith. Though relatively fragile, you are fast, deadly, can phase through walls, and your attacks will lower the cooldown on phasing.</b>"
 
 	var/attack_refund = 10 //1 second per attack
 	var/crit_refund = 50 //5 seconds when putting a target into critical
@@ -246,7 +246,7 @@
 /mob/living/simple_animal/hostile/construct/builder
 	name = "Artificer"
 	real_name = "Artificer"
-	desc = "A bulbous construct dedicated to building and maintaining the Cult of Nar'Sie's armies."
+	desc = ""
 	icon_state = "artificer"
 	icon_living = "artificer"
 	maxHealth = 50
@@ -262,16 +262,16 @@
 	attack_verb_continuous = "rams"
 	attack_verb_simple = "ram"
 	environment_smash = ENVIRONMENT_SMASH_WALLS
-	attack_sound = 'sound/weapons/punch2.ogg'
+	attack_sound = 'sound/blank.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/floor,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
 							/obj/effect/proc_holder/spell/targeted/projectile/magic_missile/lesser)
 	runetype = /datum/action/innate/cult/create_rune/revive
-	playstyle_string = "<b>You are an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, \
+	playstyle_string = "<b>I are an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, \
 
-						use magic missile, repair allied constructs, shades, and yourself (by clicking on them), \
+						use magic missile, repair allied constructs, shades, and myself (by clicking on them), \
 						<i>and, most important of all,</i> create new constructs by producing soulstones to capture souls, \
 						and shells to place those soulstones into.</b>"
 	can_repair_constructs = TRUE
@@ -293,7 +293,7 @@
 	if(Found(the_target) || ..()) //If we Found it or Can_Attack it normally, we Can_Attack it as long as it wasn't invisible
 		return 1 //as a note this shouldn't be added to base hostile mobs because it'll mess up retaliate hostile mobs
 
-/mob/living/simple_animal/hostile/construct/builder/MoveToTarget(var/list/possible_targets)
+/mob/living/simple_animal/hostile/construct/builder/MoveToTarget(list/possible_targets)
 	..()
 	if(isliving(target))
 		var/mob/living/L = target
@@ -321,7 +321,7 @@
 
 /////////////////////////////Angelic Artificer/////////////////////////
 /mob/living/simple_animal/hostile/construct/builder/angelic
-	desc = "A bulbous construct dedicated to building and maintaining holy armies."
+	desc = ""
 	icon_state = "artificer_angelic"
 	icon_living = "artificer_angelic"
 	holy = TRUE
@@ -341,7 +341,7 @@
 /mob/living/simple_animal/hostile/construct/harvester
 	name = "Harvester"
 	real_name = "Harvester"
-	desc = "A long, thin construct built to herald Nar'Sie's rise. It'll be all over soon."
+	desc = ""
 	icon_state = "chosen"
 	icon_living = "chosen"
 	maxHealth = 40
@@ -351,10 +351,10 @@
 	melee_damage_upper = 20
 	attack_verb_continuous = "butchers"
 	attack_verb_simple = "butcher"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/area_conversion,
 							/obj/effect/proc_holder/spell/targeted/forcewall/cult)
-	playstyle_string = "<B>You are a Harvester. You are incapable of directly killing humans, but your attacks will remove their limbs: \
+	playstyle_string = "<B>I are a Harvester. You are incapable of directly killing humans, but your attacks will remove their limbs: \
 						Bring those who still cling to this world of illusion back to the Geometer so they may know Truth. Your form and any you are pulling can pass through runed walls effortlessly.</B>"
 	can_repair_constructs = TRUE
 
@@ -407,7 +407,7 @@
 
 /datum/action/innate/seek_master
 	name = "Seek your Master"
-	desc = "You and your master share a soul-link that informs you of their location"
+	desc = ""
 	background_icon_state = "bg_demon"
 	buttontooltipstyle = "cult"
 	button_icon_state = "cult_mark"
@@ -415,7 +415,7 @@
 	var/mob/living/simple_animal/hostile/construct/the_construct
 
 
-/datum/action/innate/seek_master/Grant(var/mob/living/C)
+/datum/action/innate/seek_master/Grant(mob/living/C)
 	the_construct = C
 	..()
 
@@ -429,30 +429,30 @@
 		the_construct.master = C.cult_team.blood_target
 
 	if(!the_construct.master)
-		to_chat(the_construct, "<span class='cult italic'>You have no master to seek!</span>")
+		to_chat(the_construct, "<span class='cult italic'>I have no master to seek!</span>")
 		the_construct.seeking = FALSE
 		return
 	if(tracking)
 		tracking = FALSE
 		the_construct.seeking = FALSE
-		to_chat(the_construct, "<span class='cult italic'>You are no longer tracking your master.</span>")
+		to_chat(the_construct, "<span class='cult italic'>I are no longer tracking your master.</span>")
 		return
 	else
 		tracking = TRUE
 		the_construct.seeking = TRUE
-		to_chat(the_construct, "<span class='cult italic'>You are now tracking your master.</span>")
+		to_chat(the_construct, "<span class='cult italic'>I are now tracking your master.</span>")
 
 
 /datum/action/innate/seek_prey
 	name = "Seek the Harvest"
-	desc = "None can hide from Nar'Sie, activate to track a survivor attempting to flee the red harvest!"
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_cult.dmi'
 	background_icon_state = "bg_demon"
 	buttontooltipstyle = "cult"
 	button_icon_state = "cult_mark"
 	var/mob/living/simple_animal/hostile/construct/harvester/the_construct
 
-/datum/action/innate/seek_prey/Grant(var/mob/living/C)
+/datum/action/innate/seek_prey/Grant(mob/living/C)
 	the_construct = C
 	..()
 
@@ -460,20 +460,20 @@
 	if(GLOB.cult_narsie == null)
 		return
 	if(the_construct.seeking)
-		desc = "None can hide from Nar'Sie, activate to track a survivor attempting to flee the red harvest!"
+		desc = ""
 		button_icon_state = "cult_mark"
 		the_construct.seeking = FALSE
-		to_chat(the_construct, "<span class='cult italic'>You are now tracking Nar'Sie, return to reap the harvest!</span>")
+		to_chat(the_construct, "<span class='cult italic'>I are now tracking Nar'Sie, return to reap the harvest!</span>")
 		return
 	else
 		if(LAZYLEN(GLOB.cult_narsie.souls_needed))
 			the_construct.master = pick(GLOB.cult_narsie.souls_needed)
 			var/mob/living/real_target = the_construct.master //We can typecast this way because Narsie only allows /mob/living into the souls list
-			to_chat(the_construct, "<span class='cult italic'>You are now tracking your prey, [real_target.real_name] - harvest [real_target.p_them()]!</span>")
+			to_chat(the_construct, "<span class='cult italic'>I are now tracking your prey, [real_target.real_name] - harvest [real_target.p_them()]!</span>")
 		else
 			to_chat(the_construct, "<span class='cult italic'>Nar'Sie has completed her harvest!</span>")
 			return
-		desc = "Activate to track Nar'Sie!"
+		desc = ""
 		button_icon_state = "sintouch"
 		the_construct.seeking = TRUE
 

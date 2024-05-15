@@ -72,23 +72,23 @@
 					Cl = H.wear_neck
 					passed = prob((Cl.permeability_coefficient*100) - 1)
 			if(BODY_ZONE_CHEST)
-				if(isobj(H.wear_suit))
-					Cl = H.wear_suit
+				if(isobj(H.wear_armor))
+					Cl = H.wear_armor
 					passed = prob((Cl.permeability_coefficient*100) - 1)
-				if(passed && isobj(SLOT_W_UNIFORM))
-					Cl = SLOT_W_UNIFORM
+				if(passed && isobj(SLOT_PANTS))
+					Cl = SLOT_PANTS
 					passed = prob((Cl.permeability_coefficient*100) - 1)
 			if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-				if(isobj(H.wear_suit) && H.wear_suit.body_parts_covered&HANDS)
-					Cl = H.wear_suit
+				if(isobj(H.wear_armor) && H.wear_armor.body_parts_covered&HANDS)
+					Cl = H.wear_armor
 					passed = prob((Cl.permeability_coefficient*100) - 1)
 
 				if(passed && isobj(H.gloves))
 					Cl = H.gloves
 					passed = prob((Cl.permeability_coefficient*100) - 1)
 			if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-				if(isobj(H.wear_suit) && H.wear_suit.body_parts_covered&FEET)
-					Cl = H.wear_suit
+				if(isobj(H.wear_armor) && H.wear_armor.body_parts_covered&FEET)
+					Cl = H.wear_armor
 					passed = prob((Cl.permeability_coefficient*100) - 1)
 
 				if(passed && isobj(H.shoes))

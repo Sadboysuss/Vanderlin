@@ -2,7 +2,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 
 /obj/item/mmi/posibrain
 	name = "positronic brain"
-	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
+	desc = ""
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "posibrain"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -14,12 +14,12 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 	braintype = "Android"
 	var/autoping = TRUE //if it pings on creation immediately
-	var/begin_activation_message = "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>"
+	var/begin_activation_message = "<span class='notice'>I carefully locate the manual activation switch and start the positronic brain's boot process.</span>"
 	var/success_message = "<span class='notice'>The positronic brain pings, and its lights start flashing. Success!</span>"
 	var/fail_message = "<span class='notice'>The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?</span>"
 	var/new_role = "Positronic Brain"
 	var/welcome_message = "<span class='warning'>ALL PAST LIVES ARE FORGOTTEN.</span>\n\
-	<b>You are a positronic brain, brought into existence aboard Space Station 13.\n\
+	<b>I are a positronic brain, brought into existence aboard Space Station 13.\n\
 	As a synthetic intelligence, you answer to all crewmembers and the AI.\n\
 	Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
 	var/new_mob_message = "<span class='notice'>The positronic brain chimes quietly.</span>"
@@ -36,7 +36,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 
 /obj/item/mmi/posibrain/proc/ping_ghosts(msg, newlymade)
 	if(newlymade || GLOB.posibrain_notify_cooldown <= world.time)
-		notify_ghosts("[name] [msg] in [get_area(src)]!", ghost_sound = !newlymade ? 'sound/effects/ghost2.ogg':null, notify_volume = 75, enter_link = "<a href=?src=[REF(src)];activate=1>(Click to enter)</a>", source = src, action = NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_POSIBRAIN, notify_suiciders = FALSE)
+		notify_ghosts("[name] [msg] in [get_area(src)]!", ghost_sound = !newlymade ? 'sound/blank.ogg':null, notify_volume = 75, enter_link = "<a href=?src=[REF(src)];activate=1>(Click to enter)</a>", source = src, action = NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_POSIBRAIN, notify_suiciders = FALSE)
 		if(!newlymade)
 			GLOB.posibrain_notify_cooldown = world.time + askDelay
 
@@ -64,7 +64,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 		return
 	if(brainmob.client)
 		visible_message(success_message)
-		playsound(src, 'sound/machines/ping.ogg', 15, TRUE)
+		playsound(src, 'sound/blank.ogg', 15, TRUE)
 	else
 		visible_message(fail_message)
 

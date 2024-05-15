@@ -1,6 +1,6 @@
 /obj/item/storage/toolbox
 	name = "toolbox"
-	desc = "Danger. Very robust."
+	desc = ""
 	icon_state = "toolbox_default"
 	item_state = "toolbox_default"
 	lefthand_file = 'icons/mob/inhands/equipment/toolbox_lefthand.dmi'
@@ -13,9 +13,9 @@
 	w_class = WEIGHT_CLASS_BULKY
 	custom_materials = list(/datum/material/iron = 500)
 	attack_verb = list("robusted")
-	hitsound = 'sound/weapons/smash.ogg'
-	drop_sound = 'sound/items/handling/toolbox_drop.ogg'
-	pickup_sound =  'sound/items/handling/toolbox_pickup.ogg'
+	hitsound = 'sound/blank.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 	material_flags = MATERIAL_COLOR
 	var/latches = "single_latch"
 	var/has_latches = TRUE
@@ -87,7 +87,7 @@
 
 /obj/item/storage/toolbox/mechanical/old/heirloom
 	name = "toolbox" //this will be named "X family toolbox"
-	desc = "It's seen better days."
+	desc = ""
 	force = 5
 	w_class = WEIGHT_CLASS_NORMAL
 
@@ -96,7 +96,7 @@
 
 /obj/item/storage/toolbox/mechanical/old/clean
 	name = "toolbox"
-	desc = "A old, blue toolbox, it looks robust."
+	desc = ""
 	icon_state = "oldtoolboxclean"
 	item_state = "toolbox_blue"
 	has_latches = FALSE
@@ -186,7 +186,7 @@
 
 /obj/item/storage/toolbox/artistic
 	name = "artistic toolbox"
-	desc = "A toolbox painted bright green. Why anyone would store art supplies in a toolbox is beyond you, but it has plenty of extra space."
+	desc = ""
 	icon_state = "green"
 	item_state = "artistic_toolbox"
 	w_class = WEIGHT_CLASS_GIGANTIC //Holds more than a regular toolbox!
@@ -212,11 +212,11 @@
 
 /obj/item/storage/toolbox/ammo
 	name = "ammo box"
-	desc = "It contains a few clips."
+	desc = ""
 	icon_state = "ammobox"
 	item_state = "ammobox"
-	drop_sound = 'sound/items/handling/ammobox_drop.ogg'
-	pickup_sound =  'sound/items/handling/ammobox_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 /obj/item/storage/toolbox/ammo/PopulateContents()
 	new /obj/item/ammo_box/a762(src)
@@ -259,8 +259,8 @@
 				B.toolbox_color = "s"
 		user.put_in_hands(B)
 		B.update_icon()
-		to_chat(user, "<span class='notice'>You add the tiles into the empty [name]. They protrude from the top.</span>")
+		to_chat(user, "<span class='notice'>I add the tiles into the empty [name]. They protrude from the top.</span>")
 		qdel(src)
 	else
-		to_chat(user, "<span class='warning'>You need 10 floor tiles to start building a floorbot!</span>")
+		to_chat(user, "<span class='warning'>I need 10 floor tiles to start building a floorbot!</span>")
 		return

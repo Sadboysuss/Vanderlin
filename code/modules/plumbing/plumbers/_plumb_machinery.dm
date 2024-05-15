@@ -38,9 +38,9 @@
 	return TRUE
 
 /obj/machinery/plumbing/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
-	to_chat(user, "<span class='notice'>You start furiously plunging [name].")
+	to_chat(user, "<span class='notice'>I start furiously plunging [name].")
 	if(do_after(user, 30, target = src))
-		to_chat(user, "<span class='notice'>You finish plunging the [name].")
+		to_chat(user, "<span class='notice'>I finish plunging the [name].")
 		reagents.reaction(get_turf(src), TOUCH) //splash on the floor
 		reagents.clear_reagents()
 
@@ -49,16 +49,16 @@
 	if(anchored)
 		to_chat(user, "<span class='warning'>The [name] needs to be unbolted to do that!</span")
 	if(I.tool_start_check(user, amount=0))
-		to_chat(user, "<span class='notice'>You start slicing the [name] apart.</span")
+		to_chat(user, "<span class='notice'>I start slicing the [name] apart.</span")
 		if(I.use_tool(src, user, rcd_delay * 2, volume=50))
 			deconstruct(TRUE)
-			to_chat(user, "<span class='notice'>You slice the [name] apart.</span")
+			to_chat(user, "<span class='notice'>I slice the [name] apart.</span")
 			return TRUE
 
 ///We can empty beakers in here and everything
 /obj/machinery/plumbing/input
 	name = "input gate"
-	desc = "Can be manually filled with reagents from containers."
+	desc = ""
 	icon_state = "pipe_input"
 	reagent_flags = TRANSPARENT | REFILLABLE
 	rcd_cost = 5
@@ -71,7 +71,7 @@
 ///We can fill beakers in here and everything. we dont inheret from input because it has nothing that we need
 /obj/machinery/plumbing/output
 	name = "output gate"
-	desc = "A manual output for plumbing systems, for taking reagents directly into containers."
+	desc = ""
 	icon_state = "pipe_output"
 	reagent_flags = TRANSPARENT | DRAINABLE
 	rcd_cost = 5
@@ -83,7 +83,7 @@
 
 /obj/machinery/plumbing/tank
 	name = "chemical tank"
-	desc = "A massive chemical holding tank."
+	desc = ""
 	icon_state = "tank"
 	buffer = 400
 	rcd_cost = 25

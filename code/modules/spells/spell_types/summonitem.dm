@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/summonitem
 	name = "Instant Summons"
-	desc = "This spell can be used to recall a previously marked item to your hand from anywhere in the universe."
+	desc = ""
 	school = "transmutation"
 	charge_max = 100
 	clothes_req = FALSE
@@ -36,17 +36,17 @@
 
 			if(!marked_item)
 				if(hand_items)
-					message = "<span class='warning'>You aren't holding anything that can be marked for recall!</span>"
+					message = "<span class='warning'>I aren't holding anything that can be marked for recall!</span>"
 				else
-					message = "<span class='warning'>You must hold the desired item in your hands to mark it for recall!</span>"
+					message = "<span class='warning'>I must hold the desired item in your hands to mark it for recall!</span>"
 
 		else if(marked_item && marked_item in hand_items) //unlinking item to the spell
-			message = "<span class='notice'>You remove the mark on [marked_item] to use elsewhere.</span>"
+			message = "<span class='notice'>I remove the mark on [marked_item] to use elsewhere.</span>"
 			name = "Instant Summons"
 			marked_item = 		null
 
 		else if(marked_item && QDELETED(marked_item)) //the item was destroyed at some point
-			message = "<span class='warning'>You sense your marked item has been destroyed!</span>"
+			message = "<span class='warning'>I sense your marked item has been destroyed!</span>"
 			name = "Instant Summons"
 			marked_item = 		null
 
@@ -108,10 +108,10 @@
 			if(!L.put_in_hands(item_to_retrieve))
 				item_to_retrieve.forceMove(L.drop_location())
 				item_to_retrieve.loc.visible_message("<span class='warning'>The [item_to_retrieve.name] suddenly appears!</span>")
-				playsound(get_turf(L), 'sound/magic/summonitems_generic.ogg', 50, TRUE)
+				playsound(get_turf(L), 'sound/blank.ogg', 50, TRUE)
 			else
 				item_to_retrieve.loc.visible_message("<span class='warning'>The [item_to_retrieve.name] suddenly appears in [L]'s hand!</span>")
-				playsound(get_turf(L), 'sound/magic/summonitems_generic.ogg', 50, TRUE)
+				playsound(get_turf(L), 'sound/blank.ogg', 50, TRUE)
 
 
 		if(message)

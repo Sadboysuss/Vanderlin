@@ -1,13 +1,13 @@
 /obj/item/grenade
 	name = "grenade"
-	desc = "It has an adjustable timer."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "grenade"
 	item_state = "flashbang"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -20,7 +20,7 @@
 
 /obj/item/grenade/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] primes [src], then eats it! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(src, 'sound/items/eatfood.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	preprime(user, det_time)
 	user.transferItemToLoc(src, user, TRUE)//>eat a grenade set to 5 seconds >rush captain
 	sleep(det_time)//so you dont die instantly
@@ -40,7 +40,7 @@
 			preprime(user, 5, FALSE)
 			return FALSE
 	else if(!clumsy && (clumsy_check == GRENADE_NONCLUMSY_FUMBLE))
-		to_chat(user, "<span class='warning'>You pull the pin on [src]. Attached to it is a pink ribbon that says, \"<span class='clown'>HONK</span>\"</span>")
+		to_chat(user, "<span class='warning'>I pull the pin on [src]. Attached to it is a pink ribbon that says, \"<span class='clown'>HONK</span>\"</span>")
 		preprime(user, 5, FALSE)
 		return FALSE
 	return TRUE
@@ -69,8 +69,8 @@
 	if(user)
 		add_fingerprint(user)
 		if(msg)
-			to_chat(user, "<span class='warning'>You prime [src]! [capitalize(DisplayTimeText(det_time))]!</span>")
-	playsound(src, 'sound/weapons/armbomb.ogg', volume, TRUE)
+			to_chat(user, "<span class='warning'>I prime [src]! [capitalize(DisplayTimeText(det_time))]!</span>")
+	playsound(src, 'sound/blank.ogg', volume, TRUE)
 	active = TRUE
 	icon_state = initial(icon_state) + "_active"
 	addtimer(CALLBACK(src, .proc/prime), isnull(delayoverride)? det_time : delayoverride)
@@ -88,13 +88,13 @@
 			var/newtime = text2num(stripped_input(user, "Please enter a new detonation time", name))
 			if (newtime != null && user.canUseTopic(src, BE_CLOSE))
 				if(change_det_time(newtime))
-					to_chat(user, "<span class='notice'>You modify the time delay. It's set for [DisplayTimeText(det_time)].</span>")
+					to_chat(user, "<span class='notice'>I modify the time delay. It's set for [DisplayTimeText(det_time)].</span>")
 					if (round(newtime * 10) != det_time)
 						to_chat(user, "<span class='warning'>The new value is out of bounds. The lowest possible time is 3 seconds and highest is 5 seconds. Instant detonations are also possible.</span>")
 			return
 		else if(W.tool_behaviour == TOOL_SCREWDRIVER)
 			if(change_det_time())
-				to_chat(user, "<span class='notice'>You modify the time delay. It's set for [DisplayTimeText(det_time)].</span>")
+				to_chat(user, "<span class='notice'>I modify the time delay. It's set for [DisplayTimeText(det_time)].</span>")
 	else
 		return ..()
 

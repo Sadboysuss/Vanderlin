@@ -1,8 +1,8 @@
 /datum/computer_file/program/ntnetdownload
 	filename = "ntndownloader"
-	filedesc = "Software Download Tool"
+	filedesc = ""
 	program_icon_state = "generic"
-	extended_desc = "This program allows downloads of software from official NT repositories"
+	extended_desc = ""
 	unsendable = 1
 	undeletable = 1
 	size = 4

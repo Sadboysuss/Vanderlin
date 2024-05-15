@@ -23,12 +23,12 @@ Difficulty: Very Hard
 
 /mob/living/simple_animal/hostile/megafauna/colossus
 	name = "colossus"
-	desc = "A monstrous creature protected by heavy shielding."
+	desc = ""
 	health = 2500
 	maxHealth = 2500
 	attack_verb_continuous = "judges"
 	attack_verb_simple = "judge"
-	attack_sound = 'sound/magic/clockwork/ratvar_attack.ogg'
+	attack_sound = 'sound/blank.ogg'
 	icon_state = "eva"
 	icon_living = "eva"
 	icon_dead = ""
@@ -36,7 +36,7 @@ Difficulty: Very Hard
 	friendly_verb_simple = "stare down"
 	icon = 'icons/mob/lavaland/96x96megafauna.dmi'
 	speak_emote = list("roars")
-	armour_penetration = 40
+	armor_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	speed = 10
@@ -51,7 +51,7 @@ Difficulty: Very Hard
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/colossus/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/colossus)
 	deathmessage = "disintegrates, leaving a glowing core in its wake."
-	deathsound = 'sound/magic/demon_dies.ogg'
+	deathsound = 'sound/blank.ogg'
 	attack_action_types = list(/datum/action/innate/megafauna_attack/spiral_attack,
 							   /datum/action/innate/megafauna_attack/aoe_attack,
 							   /datum/action/innate/megafauna_attack/shotgun,
@@ -62,28 +62,28 @@ Difficulty: Very Hard
 	name = "Spiral Shots"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	chosen_message = "<span class='colossus'>You are now firing in a spiral.</span>"
+	chosen_message = "<span class='colossus'>I are now firing in a spiral.</span>"
 	chosen_attack_num = 1
 
 /datum/action/innate/megafauna_attack/aoe_attack
 	name = "All Directions"
 	icon_icon = 'icons/effects/effects.dmi'
 	button_icon_state = "at_shield2"
-	chosen_message = "<span class='colossus'>You are now firing in all directions.</span>"
+	chosen_message = "<span class='colossus'>I are now firing in all directions.</span>"
 	chosen_attack_num = 2
 
 /datum/action/innate/megafauna_attack/shotgun
 	name = "Shotgun Fire"
 	icon_icon = 'icons/obj/guns/projectile.dmi'
 	button_icon_state = "shotgun"
-	chosen_message = "<span class='colossus'>You are now firing shotgun shots where you aim.</span>"
+	chosen_message = "<span class='colossus'>I are now firing shotgun shots where you aim.</span>"
 	chosen_attack_num = 3
 
 /datum/action/innate/megafauna_attack/alternating_cardinals
 	name = "Alternating Shots"
 	icon_icon = 'icons/obj/guns/projectile.dmi'
 	button_icon_state = "pistol"
-	chosen_message = "<span class='colossus'>You are now firing in alternating cardinal directions.</span>"
+	chosen_message = "<span class='colossus'>I are now firing in alternating cardinal directions.</span>"
 	chosen_attack_num = 4
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
@@ -104,7 +104,7 @@ Difficulty: Very Hard
 
 	if(enrage(target))
 		if(move_to_delay == initial(move_to_delay))
-			visible_message("<span class='colossus'>\"<b>You can't dodge.</b>\"</span>")
+			visible_message("<span class='colossus'>\"<b>I can't dodge.</b>\"</span>")
 		ranged_cooldown = world.time + 30
 		telegraph()
 		dir_shots(GLOB.alldirs)
@@ -167,7 +167,7 @@ Difficulty: Very Hard
 		if(counter < 1)
 			counter = 16
 		shoot_projectile(start_turf, counter * 22.5)
-		playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
+		playsound(get_turf(src), 'sound/blank.ogg', 20, TRUE)
 		SLEEP_CHECK_DEATH(1)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/shoot_projectile(turf/marker, set_angle)
@@ -184,7 +184,7 @@ Difficulty: Very Hard
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/random_shots()
 	ranged_cooldown = world.time + 30
 	var/turf/U = get_turf(src)
-	playsound(U, 'sound/magic/clockwork/invoke_general.ogg', 300, TRUE, 5)
+	playsound(U, 'sound/blank.ogg', 300, TRUE, 5)
 	for(var/T in RANGE_TURFS(12, U) - U)
 		if(prob(5))
 			shoot_projectile(T)
@@ -192,7 +192,7 @@ Difficulty: Very Hard
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/blast(set_angle)
 	ranged_cooldown = world.time + 20
 	var/turf/target_turf = get_turf(target)
-	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, TRUE, 2)
+	playsound(src, 'sound/blank.ogg', 200, TRUE, 2)
 	newtonian_move(get_dir(target_turf, src))
 	var/angle_to_target = Get_Angle(src, target_turf)
 	if(isnum(set_angle))
@@ -204,7 +204,7 @@ Difficulty: Very Hard
 /mob/living/simple_animal/hostile/megafauna/colossus/proc/dir_shots(list/dirs)
 	if(!islist(dirs))
 		dirs = GLOB.alldirs.Copy()
-	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, TRUE, 2)
+	playsound(src, 'sound/blank.ogg', 200, TRUE, 2)
 	for(var/d in dirs)
 		var/turf/E = get_step(src, d)
 		shoot_projectile(E)
@@ -214,7 +214,7 @@ Difficulty: Very Hard
 		if(M.client)
 			flash_color(M.client, "#C80000", 1)
 			shake_camera(M, 4, 3)
-	playsound(src, 'sound/magic/clockwork/narsie_attack.ogg', 200, TRUE)
+	playsound(src, 'sound/blank.ogg', 200, TRUE)
 
 
 /mob/living/simple_animal/hostile/megafauna/colossus/devour(mob/living/L)
@@ -223,7 +223,7 @@ Difficulty: Very Hard
 
 /obj/effect/temp_visual/at_shield
 	name = "anti-toolbox field"
-	desc = "A shimmering forcefield protecting the colossus."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "at_shield2"
 	layer = FLY_LAYER
@@ -250,7 +250,7 @@ Difficulty: Very Hard
 	name ="death bolt"
 	icon_state= "chronobolt"
 	damage = 25
-	armour_penetration = 100
+	armor_penetration = 100
 	speed = 2
 	eyeblur = 0
 	damage_type = BRUTE
@@ -267,7 +267,7 @@ Difficulty: Very Hard
 
 /obj/machinery/smartfridge/black_box
 	name = "black box"
-	desc = "A completely indestructible chunk of crystal, rumoured to predate the start of this universe. It looks like you could store things inside it."
+	desc = ""
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "blackbox"
 	light_range = 8
@@ -381,8 +381,8 @@ Difficulty: Very Hard
 
 /obj/machinery/anomalous_crystal
 	name = "anomalous crystal"
-	desc = "A strange chunk of crystal, being in the presence of it fills you with equal parts excitement and dread."
-	var/observer_desc = "Anomalous crystals have descriptions that only observers can see. But this one hasn't been changed from the default."
+	desc = ""
+	var/observer_desc = ""
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "anomaly_crystal"
 	light_range = 8
@@ -398,7 +398,7 @@ Difficulty: Very Hard
 	var/last_use_timer = 0
 	var/cooldown_add = 30
 	var/list/affected_targets = list()
-	var/activation_sound = 'sound/effects/break_stone.ogg'
+	var/activation_sound = 'sound/blank.ogg'
 
 /obj/machinery/anomalous_crystal/Initialize(mapload)
 	. = ..()
@@ -456,9 +456,9 @@ Difficulty: Very Hard
 	ActivationReaction(null, ACTIVATE_BOMB)
 
 /obj/machinery/anomalous_crystal/honk //Strips and equips you as a clown. I apologize for nothing
-	observer_desc = "This crystal strips and equips its targets as clowns."
+	observer_desc = ""
 	possible_methods = list(ACTIVATE_MOB_BUMP, ACTIVATE_SPEECH)
-	activation_sound = 'sound/items/bikehorn.ogg'
+	activation_sound = 'sound/blank.ogg'
 
 /obj/machinery/anomalous_crystal/honk/ActivationReaction(mob/user)
 	if(..() && ishuman(user) && !(user in affected_targets))
@@ -471,7 +471,7 @@ Difficulty: Very Hard
 		affected_targets.Add(H)
 
 /obj/machinery/anomalous_crystal/theme_warp //Warps the area you're in to look like a new one
-	observer_desc = "This crystal warps the area around it to a theme."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
 	cooldown_add = 200
 	var/terrain_theme = "winter"
@@ -485,7 +485,7 @@ Difficulty: Very Hard
 /obj/machinery/anomalous_crystal/theme_warp/Initialize()
 	. = ..()
 	terrain_theme = pick("lavaland","winter","jungle","ayy lmao")
-	observer_desc = "This crystal changes the area around it to match the theme of \"[terrain_theme]\"."
+	observer_desc = ""
 
 	switch(terrain_theme)
 		if("lavaland")//Depressurizes the place... and free cult metal, I guess.
@@ -541,7 +541,7 @@ Difficulty: Very Hard
 			affected_targets += A
 
 /obj/machinery/anomalous_crystal/emitter //Generates a projectile when interacted with
-	observer_desc = "This crystal generates a projectile when activated."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
 	cooldown_add = 50
 	var/obj/projectile/generated_projectile = /obj/projectile/beam/emitter
@@ -550,8 +550,8 @@ Difficulty: Very Hard
 	. = ..()
 	generated_projectile = pick(/obj/projectile/colossus)
 
-	var/proj_name = initial(generated_projectile.name)
-	observer_desc = "This crystal generates \a [proj_name] when activated."
+//	var/proj_name = initial(generated_projectile.name)
+//	observer_desc = ""
 
 /obj/machinery/anomalous_crystal/emitter/ActivationReaction(mob/user, method)
 	if(..())
@@ -573,9 +573,9 @@ Difficulty: Very Hard
 		P.fire()
 
 /obj/machinery/anomalous_crystal/dark_reprise //Revives anyone nearby, but turns them into shadowpeople and renders them uncloneable, so the crystal is your only hope of getting up again if you go down.
-	observer_desc = "When activated, this crystal revives anyone nearby, but turns them into Shadowpeople and makes them unclonable, making the crystal their only hope of getting up again."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
-	activation_sound = 'sound/hallucinations/growl1.ogg'
+	activation_sound = 'sound/blank.ogg'
 
 /obj/machinery/anomalous_crystal/dark_reprise/ActivationReaction(mob/user, method)
 	if(..())
@@ -594,9 +594,9 @@ Difficulty: Very Hard
 					H.grab_ghost(force = TRUE)
 
 /obj/machinery/anomalous_crystal/helpers //Lets ghost spawn as helpful creatures that can only heal people slightly. Incredibly fragile and they can't converse with humans
-	observer_desc = "This crystal allows ghosts to turn into a fragile creature that can heal people."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
-	activation_sound = 'sound/effects/ghost2.ogg'
+	activation_sound = 'sound/blank.ogg'
 	var/ready_to_deploy = FALSE
 
 /obj/machinery/anomalous_crystal/helpers/Destroy()
@@ -607,7 +607,7 @@ Difficulty: Very Hard
 	if(..() && !ready_to_deploy)
 		GLOB.poi_list |= src
 		ready_to_deploy = TRUE
-		notify_ghosts("An anomalous crystal has been activated in [get_area(src)]! This crystal can always be used by ghosts hereafter.", enter_link = "<a href=?src=[REF(src)];ghostjoin=1>(Click to enter)</a>", ghost_sound = 'sound/effects/ghost2.ogg', source = src, action = NOTIFY_ATTACK, header = "Anomalous crystal activated")
+		notify_ghosts("An anomalous crystal has been activated in [get_area(src)]! This crystal can always be used by ghosts hereafter.", enter_link = "<a href=?src=[REF(src)];ghostjoin=1>(Click to enter)</a>", ghost_sound = 'sound/blank.ogg', source = src, action = NOTIFY_ATTACK, header = "Anomalous crystal activated")
 
 /obj/machinery/anomalous_crystal/helpers/attack_ghost(mob/dead/observer/user)
 	. = ..()
@@ -628,7 +628,7 @@ Difficulty: Very Hard
 
 /mob/living/simple_animal/hostile/lightgeist
 	name = "lightgeist"
-	desc = "This small floating creature is a completely unknown form of life... being near it fills you with a sense of tranquility."
+	desc = ""
 	icon_state = "lightgeist"
 	icon_living = "lightgeist"
 	icon_dead = "butterfly_dead"
@@ -684,17 +684,17 @@ Difficulty: Very Hard
 			L.heal_overall_damage(heal_power, heal_power)
 			new /obj/effect/temp_visual/heal(get_turf(target), "#80F5FF")
 
-/mob/living/simple_animal/hostile/lightgeist/ghostize()
+/mob/living/simple_animal/hostile/lightgeist/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE)
 	. = ..()
 	if(.)
 		death()
 
 
 /obj/machinery/anomalous_crystal/refresher //Deletes and recreates a copy of the item, "refreshing" it.
-	observer_desc = "This crystal \"refreshes\" items that it affects, rendering them as new."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
 	cooldown_add = 50
-	activation_sound = 'sound/magic/timeparadox2.ogg'
+	activation_sound = 'sound/blank.ogg'
 	var/static/list/banned_items_typecache = typecacheof(list(/obj/item/storage, /obj/item/implant, /obj/item/implanter, /obj/item/disk/nuclear, /obj/projectile, /obj/item/spellbook))
 
 /obj/machinery/anomalous_crystal/refresher/ActivationReaction(mob/user, method)
@@ -713,7 +713,7 @@ Difficulty: Very Hard
 			qdel(CHOSEN)
 
 /obj/machinery/anomalous_crystal/possessor //Allows you to bodyjack small animals, then exit them at your leisure, but you can only do this once per activation. Because they blow up. Also, if the bodyjacked animal dies, SO DO YOU.
-	observer_desc = "When activated, this crystal allows you to take over small animals, and then exit them at the possessors leisure. Exiting the animal kills it, and if you die while possessing the animal, you die as well."
+	observer_desc = ""
 	activation_method = ACTIVATE_TOUCH
 
 /obj/machinery/anomalous_crystal/possessor/ActivationReaction(mob/user, method)
@@ -732,7 +732,7 @@ Difficulty: Very Hard
 
 /obj/structure/closet/stasis
 	name = "quantum entanglement stasis warp field"
-	desc = "You can hardly comprehend this thing... which is why you can't see it."
+	desc = ""
 	icon_state = null //This shouldn't even be visible, so if it DOES show up, at least nobody will notice
 	density = TRUE
 	anchored = TRUE
@@ -763,7 +763,7 @@ Difficulty: Very Hard
 		holder_animal.mind.AddSpell(P)
 		holder_animal.verbs -= /mob/living/verb/pulled
 
-/obj/structure/closet/stasis/dump_contents(var/kill = 1)
+/obj/structure/closet/stasis/dump_contents(kill = 1)
 	STOP_PROCESSING(SSobj, src)
 	for(var/mob/living/L in src)
 		REMOVE_TRAIT(L, TRAIT_MUTE, STASIS_MUTE)
@@ -784,7 +784,7 @@ Difficulty: Very Hard
 
 /obj/effect/proc_holder/spell/targeted/exit_possession
 	name = "Exit Possession"
-	desc = "Exits the body you are possessing."
+	desc = ""
 	charge_max = 60
 	clothes_req = 0
 	invocation_type = "none"

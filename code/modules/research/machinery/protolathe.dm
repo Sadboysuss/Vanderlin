@@ -1,6 +1,6 @@
 /obj/machinery/rnd/production/protolathe
 	name = "protolathe"
-	desc = "Converts raw materials into useful objects."
+	desc = ""
 	icon_state = "protolathe"
 	circuit = /obj/item/circuitboard/machine/protolathe
 	categories = list(

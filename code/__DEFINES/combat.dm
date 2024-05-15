@@ -41,7 +41,7 @@
 
 //Health Defines
 #define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT -30
+#define HEALTH_THRESHOLD_FULLCRIT 0
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -49,7 +49,9 @@
 //Actual combat defines
 
 //click cooldowns, in tenths of a second, used for various combat actions
-#define CLICK_CD_MELEE 8
+#define CLICK_CD_EXHAUSTED 60
+#define CLICK_CD_MELEE 12
+#define CLICK_CD_FAST 8
 #define CLICK_CD_RANGE 4
 #define CLICK_CD_RAPID 2
 #define CLICK_CD_CLICK_ABILITY 6
@@ -72,9 +74,9 @@
 #define BASE_GRAB_RESIST_CHANCE 	30
 
 //slowdown when in softcrit. Note that crawling slowdown will also apply at the same time!
-#define SOFTCRIT_ADD_SLOWDOWN 2
+#define SOFTCRIT_ADD_SLOWDOWN 1
 //slowdown when crawling
-#define CRAWLING_ADD_SLOWDOWN 4
+#define CRAWLING_ADD_SLOWDOWN 7
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -96,10 +98,115 @@
 #define ATTACK_EFFECT_BOOP		"boop" //Honk
 
 //intent defines
-#define INTENT_HELP   "help"
-#define INTENT_GRAB   "grab"
-#define INTENT_DISARM "disarm"
-#define INTENT_HARM   "harm"
+#define INTENT_HELP			 /datum/intent/unarmed/help
+#define INTENT_GRAB			 /datum/intent/unarmed/grab
+#define INTENT_DISARM		 /datum/intent/unarmed/shove
+#define INTENT_HARM			 /datum/intent/unarmed/punch
+
+//mmb intents
+#define INTENT_KICK		/datum/intent/kick
+#define INTENT_STEAL	/datum/intent/steal
+#define INTENT_BITE		/datum/intent/bite
+#define INTENT_JUMP		/datum/intent/jump
+#define INTENT_GIVE		/datum/intent/give
+#define INTENT_SPELL	/datum/intent/spell
+
+//hurrrddurrrr
+#define QINTENT_BITE		 1
+#define QINTENT_JUMP		 2
+#define QINTENT_KICK		 3
+#define QINTENT_STEAL		 4
+#define QINTENT_GIVE		 5
+#define QINTENT_SPELL		 6
+
+
+//used for all items that aren't weapons but have a blunt force
+#define INTENT_GENERIC	 /datum/intent/hit
+#define RANGED_FIRE		/datum/intent/shoot
+
+//Weapon intents
+#define SWORD_CUT		 /datum/intent/sword/cut
+#define SWORD_THRUST	 /datum/intent/sword/thrust
+#define SWORD_CHOP		 /datum/intent/sword/chop		//2h swords only
+#define SWORD_STRIKE	 /datum/intent/sword/strike		//mordhau grip
+
+#define ELFSWORD_CUT		/datum/intent/sword/cut/elf
+#define ELFSWORD_THRUST		/datum/intent/sword/thrust/elf
+
+#define AXE_CUT				/datum/intent/axe/cut
+#define AXE_CHOP			/datum/intent/axe/chop
+
+#define SPEAR_THRUST		/datum/intent/spear/thrust
+#define SPEAR_BASH			/datum/intent/spear/bash
+#define SPEAR_CUT			/datum/intent/spear/cut
+
+#define MESSER_CHOP			/datum/intent/sword/chop/messer
+
+#define OHAXE_STRIKE		/datum/intent/axe/cut/dwarf
+#define OHAXE_THRUST		/datum/intent/axe/thrust/dwarf
+#define OHAXE_SMASH			/datum/intent/axe/smash/dwarf
+#define OHAXE_CHOP			/datum/intent/axe/chop/dwarf
+
+#define BIGSWORD_CHOP		/datum/intent/sword/chop/bigsword
+#define BIGSWORD_CUT		/datum/intent/sword/cut/bigsword
+
+#define MACE_SMASH			/datum/intent/mace/smash
+#define MACE_STRIKE			/datum/intent/mace/strike
+
+#define DAGGER_CUT			/datum/intent/dagger/cut
+#define DAGGER_THRUST		/datum/intent/dagger/thrust
+#define ICEPICK_STAB		/datum/intent/dagger/icepick
+
+#define MAUL_SMASH			/datum/intent/maul/smash
+#define MAUL_STRIKE			/datum/intent/maul/strike
+
+#define INTENT_FEED			/datum/intent/food
+
+#define DUMP_INTENT			/datum/intent/pforkdump
+#define TILL_INTENT			/datum/intent/till
+
+#define ROD_CAST			/datum/intent/cast
+#define ROD_REEL			/datum/intent/reel
+
+
+
+//Intent blade class for dismember class
+#define BCLASS_BLUNT		"blunt"
+#define BCLASS_SMASH		"smashing"
+#define BCLASS_CUT			"slashing"
+#define BCLASS_CHOP			"chopping"
+#define BCLASS_STAB			"stabbing"
+#define BCLASS_PICK			"piercing"
+#define BCLASS_TWIST		"twist"
+#define BCLASS_PUNCH		"punch"
+#define BCLASS_BITE			"bite"
+
+//Material class (what material is striking)
+#define MCLASS_GENERIC		1
+#define MCLASS_WOOD			2
+#define MCLASS_STONE		3
+#define MCLASS_METAL		4
+
+//lengths.
+#define WLENGTH_SHORT		1		//can only attack legs from the ground. must grab if standing to attack
+#define WLENGTH_NORMAL		2		//can only attack legs from ground. dont need to grab. maces, short swords, kicks
+#define WLENGTH_LONG		3		//can attack chest and down from the ground. dont need to grab. swords 2h axes
+#define WLENGTH_GREAT		4		//can attack any bodypart from ground. think spears
+
+//attacktype
+#define DULLING_CUT 1
+#define DULLING_BASH 2
+#define DULLING_BASHCHOP 3
+#define DULLING_PICK 4 //rockwalls
+#define DULLING_FLOOR 5 //floors, only attacked by overhead smash and chop intents like from 2hammers
+//see get_complex_damage(
+
+//item intents
+
+#define INTENT_SPLASH	 /datum/intent/splash
+#define INTENT_POUR		 /datum/intent/pour
+
+
 //NOTE: INTENT_HOTKEY_* defines are not actual intents!
 //they are here to support hotkeys
 #define INTENT_HOTKEY_LEFT  "left"
@@ -134,7 +241,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define EMBEDDED_IMPACT_PAIN_MULTIPLIER			4	//Coefficient of multiplication for the damage the item does when it first embeds (this*item.w_class)
 #define EMBED_THROWSPEED_THRESHOLD				4	//The minimum value of an item's throw_speed for it to embed (Unless it has embedded_ignore_throwspeed_threshold set to 1)
 #define EMBEDDED_UNSAFE_REMOVAL_PAIN_MULTIPLIER 8	//Coefficient of multiplication for the damage the item does when removed without a surgery (this*item.w_class)
-#define EMBEDDED_UNSAFE_REMOVAL_TIME			30	//A Time in ticks, total removal time = (this*item.w_class)
+#define EMBEDDED_UNSAFE_REMOVAL_TIME			0	//A Time in ticks, total removal time = (this*item.w_class)
 
 //Gun weapon weight
 #define WEAPON_LIGHT 1
@@ -210,8 +317,16 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BODY_ZONE_R_ARM		"r_arm"
 #define BODY_ZONE_L_LEG		"l_leg"
 #define BODY_ZONE_R_LEG		"r_leg"
+#define BODY_ZONE_R_INHAND	"r_inhand"
+#define BODY_ZONE_L_INHAND	"l_inhand"
 
-#define BODY_ZONE_PRECISE_EYES		"eyes"
+#define BODY_ZONE_PRECISE_STOMACH	"stomach"
+#define BODY_ZONE_PRECISE_R_EYE		"r_eye"
+#define BODY_ZONE_PRECISE_L_EYE		"l_eye"
+#define BODY_ZONE_PRECISE_EARS		"ears"
+#define BODY_ZONE_PRECISE_NOSE		"nose"
+#define BODY_ZONE_PRECISE_NECK		"neck"
+#define BODY_ZONE_PRECISE_HAIR		"hair"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
 #define BODY_ZONE_PRECISE_GROIN		"groin"
 #define BODY_ZONE_PRECISE_L_HAND	"l_hand"
@@ -227,3 +342,4 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BULLET_ACT_BLOCK			"BLOCK"		//It's a blocked hit, whatever that means in the context of the thing it's hitting.
 #define BULLET_ACT_FORCE_PIERCE		"PIERCE"	//It pierces through the object regardless of the bullet being piercing by default.
 #define BULLET_ACT_TURF				"TURF"		//It hit us but it should hit something on the same turf too. Usually used for turfs.
+#define BULLET_ACT_MISS				"MISS"

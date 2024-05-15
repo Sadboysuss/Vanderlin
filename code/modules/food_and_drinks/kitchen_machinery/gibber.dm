@@ -1,6 +1,6 @@
 /obj/machinery/gibber
 	name = "gibber"
-	desc = "The name isn't descriptive enough?"
+	desc = ""
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
 	density = TRUE
@@ -74,7 +74,7 @@
 		to_chat(user, "<span class='warning'>[src] cannot be used unless bolted to the ground!</span>")
 		return
 
-	if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
+	if(user.pulling && user.used_intent.type == INTENT_GRAB && isliving(user.pulling))
 		var/mob/living/L = user.pulling
 		if(!iscarbon(L))
 			to_chat(user, "<span class='warning'>This item is not suitable for the gibber!</span>")
@@ -121,10 +121,11 @@
 
 
 /obj/machinery/gibber/verb/eject()
-	set category = "Object"
+	set hidden = 1
 	set name = "empty gibber"
 	set src in oview(1)
-
+	if(!usr.client.holder)
+		return
 	if(usr.incapacitated())
 		return
 	src.go_out()
@@ -139,11 +140,11 @@
 	if(src.operating)
 		return
 	if(!src.occupant)
-		audible_message("<span class='hear'>You hear a loud metallic grinding sound.</span>")
+		audible_message("<span class='hear'>I hear a loud metallic grinding sound.</span>")
 		return
 	use_power(1000)
-	audible_message("<span class='hear'>You hear a loud squelchy grinding sound.</span>")
-	playsound(src.loc, 'sound/machines/juicer.ogg', 50, TRUE)
+	audible_message("<span class='hear'>I hear a loud squelchy grinding sound.</span>")
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	operating = TRUE
 	update_icon()
 
@@ -203,7 +204,7 @@
 	addtimer(CALLBACK(src, .proc/make_meat, skin, allmeat, meat_produced, gibtype, diseases), gibtime)
 
 /obj/machinery/gibber/proc/make_meat(obj/item/stack/sheet/animalhide/skin, list/obj/item/reagent_containers/food/snacks/meat/slab/allmeat, meat_produced, gibtype, list/datum/disease/diseases)
-	playsound(src.loc, 'sound/effects/splat.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	operating = FALSE
 	var/turf/T = get_turf(src)
 	var/list/turf/nearby_turfs = RANGE_TURFS(3,T) - T

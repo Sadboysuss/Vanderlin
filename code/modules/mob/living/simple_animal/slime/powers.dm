@@ -22,7 +22,7 @@
 
 /mob/living/simple_animal/slime/verb/Feed()
 	set category = "Slime"
-	set desc = "This will let you feed on any valid creature in the surrounding area. This should also be used to halt the feeding process."
+	set desc = ""
 
 	if(stat)
 		return 0
@@ -106,7 +106,7 @@
 	if(M.buckle_mob(src, force=TRUE))
 		layer = M.layer+0.01 //appear above the target mob
 		M.visible_message("<span class='danger'>[name] has latched onto [M]!</span>", \
-						"<span class='userdanger'>[name] has latched onto [M]!</span>")
+						"<span class='danger'>[name] has latched onto [M]!</span>")
 	else
 		to_chat(src, "<span class='warning'><i>I have failed to latch onto the subject!</i></span>")
 
@@ -125,7 +125,7 @@
 
 /mob/living/simple_animal/slime/verb/Evolve()
 	set category = "Slime"
-	set desc = "This will let you evolve from baby to adult slime."
+	set desc = ""
 
 	if(stat)
 		to_chat(src, "<i>I must be conscious to do this...</i>")
@@ -158,7 +158,7 @@
 
 /mob/living/simple_animal/slime/verb/Reproduce()
 	set category = "Slime"
-	set desc = "This will make you split into four Slimes."
+	set desc = ""
 
 	if(stat)
 		to_chat(src, "<i>I must be conscious to do this...</i>")

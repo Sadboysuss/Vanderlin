@@ -107,7 +107,7 @@ SUBSYSTEM_DEF(pai)
 	dat += "<p class=\"top\">Please configure your pAI personality's options. Remember, what you enter here could determine whether or not the user requesting a personality chooses you!</p>"
 	dat += "<table>"
 	dat += "<tr class=\"d0\"><td>Name:</td><td>[candidate.name]</td></tr>"
-	dat += "<tr class=\"d1\"><td><a href='byond://?src=[REF(src)];option=name;new=1;candidate=[REF(candidate)]'>\[Edit\]</a></td><td>What you plan to call yourself. Suggestions: Any character name you would choose for a station character OR an AI.</td></tr>"
+	dat += "<tr class=\"d1\"><td><a href='byond://?src=[REF(src)];option=name;new=1;candidate=[REF(candidate)]'>\[Edit\]</a></td><td>What you plan to call myself. Suggestions: Any character name you would choose for a station character OR an AI.</td></tr>"
 
 	dat += "<tr class=\"d0\"><td>Description:</td><td>[candidate.description]</td></tr>"
 	dat += "<tr class=\"d1\"><td><a href='byond://?src=[REF(src)];option=desc;new=1;candidate=[REF(candidate)]'>\[Edit\]</a></td><td>What sort of pAI you typically play; your mannerisms, your quirks, etc. This can be as sparse or as detailed as you like.</td></tr>"
@@ -130,7 +130,7 @@ SUBSYSTEM_DEF(pai)
 /datum/controller/subsystem/pai/proc/spam_again()
 	ghost_spam = FALSE
 
-/datum/controller/subsystem/pai/proc/check_ready(var/datum/paiCandidate/C)
+/datum/controller/subsystem/pai/proc/check_ready(datum/paiCandidate/C)
 	if(!C.ready)
 		return FALSE
 	for(var/mob/dead/observer/O in GLOB.player_list)
@@ -146,7 +146,7 @@ SUBSYSTEM_DEF(pai)
 				continue
 			if(!(ROLE_PAI in G.client.prefs.be_special))
 				continue
-			to_chat(G, "<span class='ghostalert'>[user] is requesting a pAI personality! Use the pAI button to submit yourself as one.</span>")
+			to_chat(G, "<span class='ghostalert'>[user] is requesting a pAI personality! Use the pAI button to submit myself as one.</span>")
 		addtimer(CALLBACK(src, .proc/spam_again), spam_delay)
 	var/list/available = list()
 	for(var/datum/paiCandidate/c in SSpai.candidates)

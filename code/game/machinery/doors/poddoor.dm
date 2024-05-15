@@ -1,6 +1,6 @@
 /obj/machinery/door/poddoor
 	name = "blast door"
-	desc = "A heavy duty blast door that opens mechanically."
+	desc = ""
 	icon = 'icons/obj/doors/blastdoor.dmi'
 	icon_state = "closed"
 	var/id = 1
@@ -26,7 +26,7 @@
 
 /obj/machinery/door/poddoor/ert
 	name = "hardened blast door"
-	desc = "A heavy duty blast door that only opens for dire emergencies."
+	desc = ""
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 //special poddoors that open when emergency shuttle docks at centcom
@@ -77,10 +77,10 @@
 	switch(animation)
 		if("opening")
 			flick("opening", src)
-			playsound(src, 'sound/machines/blastdoor.ogg', 30, TRUE)
+			playsound(src, 'sound/blank.ogg', 30, TRUE)
 		if("closing")
 			flick("closing", src)
-			playsound(src, 'sound/machines/blastdoor.ogg', 30, TRUE)
+			playsound(src, 'sound/blank.ogg', 30, TRUE)
 
 /obj/machinery/door/poddoor/update_icon_state()
 	if(density)

@@ -7,7 +7,7 @@
 
 /obj/item/assembly
 	name = "assembly"
-	desc = "A small electronic device that should never exist."
+	desc = ""
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = ""
 	flags_1 = CONDUCT_1
@@ -94,7 +94,7 @@
 		if((!A.secured) && (!secured))
 			holder = new/obj/item/assembly_holder(get_turf(src))
 			holder.assemble(src,A,user)
-			to_chat(user, "<span class='notice'>You attach and secure \the [A] to \the [src]!</span>")
+			to_chat(user, "<span class='notice'>I attach and secure \the [A] to \the [src]!</span>")
 		else
 			to_chat(user, "<span class='warning'>Both devices must be in attachable mode to be attached together.</span>")
 		return

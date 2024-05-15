@@ -23,6 +23,12 @@
 	var/sound //Sound to play when emote is called
 	var/vary = FALSE	//used for the honk borg emote
 	var/only_forced_audio = FALSE //can only code call this event instead of the player.
+	var/nomsg = FALSE
+	var/soundping = TRUE
+	var/ignore_silent = FALSE
+	var/snd_vol = 100
+	var/snd_range = -1
+	var/mute_time = 30//time after where someone can't do another emote
 
 /datum/emote/New()
 	if (ispath(mob_type_allowed_typecache))
@@ -38,45 +44,140 @@
 	mob_type_blacklist_typecache = typecacheof(mob_type_blacklist_typecache)
 	mob_type_ignore_stat_typecache = typecacheof(mob_type_ignore_stat_typecache)
 
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE)
+/datum/emote/proc/adjacentaction(mob/user, mob/target)
+	return
+
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targetted = FALSE)
 	. = TRUE
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
+	if(only_forced_audio && intentional)
+		return FALSE
+	if(targetted)
+		var/list/mobsadjacent = list()
+		var/mob/chosenmob
+		for(var/mob/living/M in range(user, 2))
+			if(M != user)
+				mobsadjacent += M
+		if(mobsadjacent.len)
+			chosenmob = input("[key] who?") in mobsadjacent
+		if(chosenmob)
+			if(user.Adjacent(chosenmob))
+				params = chosenmob.name
+				adjacentaction(user, chosenmob)
 	var/msg = select_message_type(user, intentional)
 	if(params && message_param)
 		msg = select_param(user, params)
 
 	msg = replace_pronoun(user, msg)
 
+	if(!msg && nomsg == FALSE)
+		return
+
+	if(!nomsg)
+		user.log_message(msg, LOG_EMOTE)
+		msg = "<b>[user]</b> " + msg
+
+	var/freq = get_rand_frequency() //bespoke vary system so deep voice/high voiced humans
+
 	if(isliving(user))
 		var/mob/living/L = user
 		for(var/obj/item/implant/I in L.implants)
 			I.trigger(key, L)
-
-	if(!msg)
-		return
-
-	user.log_message(msg, LOG_EMOTE)
-	msg = "<b>[user]</b> " + msg
+		freq = L.get_emote_frequency()
 
 	var/tmp_sound = get_sound(user)
 	if(tmp_sound && (!only_forced_audio || !intentional))
-		playsound(user, tmp_sound, 50, vary)
+		playsound(user, tmp_sound, snd_vol, FALSE, snd_range, frequency = freq, soundping = soundping)
+	if(!nomsg)
+		for(var/mob/M in GLOB.dead_mob_list)
+			if(!M.client || isnewplayer(M))
+				continue
+			var/T = get_turf(user)
+			if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
+				M.show_message(msg)
+		if(emote_type == EMOTE_AUDIBLE)
+			user.audible_message(msg)
+		else
+			user.visible_message(msg)
 
-	for(var/mob/M in GLOB.dead_mob_list)
-		if(!M.client || isnewplayer(M))
-			continue
-		var/T = get_turf(user)
-		if(M.stat == DEAD && M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
-			M.show_message(msg)
+/mob/living/proc/get_emote_frequency()
+	return get_rand_frequency()
 
-	if(emote_type == EMOTE_AUDIBLE)
-		user.audible_message(msg)
+/mob/living/carbon/human/get_emote_frequency()
+	var/cont = 44100
+	if(gender == MALE)
+		if(STASTR > 10)
+			for(var/i in 1 to STASTR)
+				cont -= 200
+		if(STASTR < 10)
+			for(var/i in 1 to STASTR)
+				cont += 100
 	else
-		user.visible_message(msg)
+		if(STASTR > 10)
+			for(var/i in 1 to STASTR)
+				cont -= 200
+		if(STASTR < 5)
+			for(var/i in 1 to STASTR)
+				cont += 100
+	return cont
+
+
+/datum/emote/proc/get_env(mob/living/user)
+	return
+
+/datum/emote/living/get_env(mob/living/user)
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.head)
+			var/obj/item/clothing/I = H.head
+			if(I.emote_environment)
+				return I.emote_environment
 
 /datum/emote/proc/get_sound(mob/living/user)
-	return sound //by default just return this var.
+	if(sound)
+		return sound
+
+/datum/emote/living/get_sound(mob/living/user)
+	if(sound)
+		return sound
+	else
+		if(ishuman(user))
+			var/mob/living/carbon/human/H = user
+			var/used_sound
+			var/possible_sounds
+			var/modifier
+			if(H.age == AGE_YOUNG)
+				modifier = "young"
+			if(H.age == AGE_OLD)
+				modifier = "old"
+			if(!ignore_silent)
+				if(H.silent)
+					modifier = "silenced"
+				if(!H.canspeak())
+					modifier = "silenced"
+			if(user.gender == FEMALE && H.dna.species.soundpack_f)
+				possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
+			else if(H.dna.species.soundpack_m)
+				possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
+			if(possible_sounds)
+				if(islist(possible_sounds))
+					var/list/PS = possible_sounds
+					if(PS.len > 1)
+						used_sound = pick_n_take(possible_sounds)
+						if(used_sound == H.last_sound)
+							used_sound = pick(possible_sounds)
+					else
+						used_sound = pick(possible_sounds)
+				else //direct file
+					used_sound = possible_sounds
+				H.last_sound = used_sound
+				return used_sound
+		else
+			return user.get_sound(key)
+
+/mob/living/proc/get_sound(input)
+	return
 
 /datum/emote/proc/replace_pronoun(mob/user, message)
 	if(findtext(message, "their"))
@@ -111,6 +212,7 @@
 
 /datum/emote/proc/can_run_emote(mob/user, status_check = TRUE, intentional = FALSE)
 	. = TRUE
+	message = initial(message)
 	if(!is_type_in_typecache(user, mob_type_allowed_typecache))
 		return FALSE
 	if(is_type_in_typecache(user, mob_type_blacklist_typecache))
@@ -119,13 +221,13 @@
 		if(user.stat > stat_allowed)
 			if(!intentional)
 				return FALSE
-			switch(user.stat)
+/*			switch(user.stat)
 				if(SOFT_CRIT)
-					to_chat(user, "<span class='warning'>You cannot [key] while in a critical condition!</span>")
+					to_chat(user, "<span class='warning'>I cannot [key] while dying!</span>")
 				if(UNCONSCIOUS)
-					to_chat(user, "<span class='warning'>You cannot [key] while unconscious!</span>")
+					to_chat(user, "<span class='warning'>I cannot [key] while unconscious!</span>")
 				if(DEAD)
-					to_chat(user, "<span class='warning'>You cannot [key] while dead!</span>")
+					to_chat(user, "<span class='warning'>I cannot [key] while dead!</span>")*/
 			return FALSE
 		if(restraint_check)
 			if(isliving(user))
@@ -133,12 +235,12 @@
 				if(L.IsParalyzed() || L.IsStun())
 					if(!intentional)
 						return FALSE
-					to_chat(user, "<span class='warning'>You cannot [key] while stunned!</span>")
+//					to_chat(user, "<span class='warning'>I cannot [key] while stunned!</span>")
 					return FALSE
 		if(restraint_check && user.restrained())
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='warning'>You cannot [key] while restrained!</span>")
+//			to_chat(user, "<span class='warning'>I cannot [key] while restrained!</span>")
 			return FALSE
 
 	if(isliving(user))

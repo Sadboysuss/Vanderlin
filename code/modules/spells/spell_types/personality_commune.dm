@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/personality_commune
 	name = "Personality Commune"
-	desc = "Sends thoughts to your alternate consciousness."
+	desc = ""
 	charge_max = 0
 	clothes_req = FALSE
 	range = -1
@@ -23,7 +23,7 @@
 	if(!msg)
 		charge_counter = charge_max
 		return
-	to_chat(user, "<span class='boldnotice'>You concentrate and send thoughts to your other self:</span> <span class='notice'>[msg]</span>")
+	to_chat(user, "<span class='boldnotice'>I concentrate and send thoughts to your other self:</span> <span class='notice'>[msg]</span>")
 	to_chat(trauma.owner, "<span class='boldnotice'>[flufftext]</span> <span class='notice'>[msg]</span>")
 	log_directed_talk(user, trauma.owner, msg, LOG_SAY ,"[name]")
 	for(var/ded in GLOB.dead_mob_list)

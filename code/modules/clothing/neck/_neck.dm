@@ -5,19 +5,20 @@
 	slot_flags = ITEM_SLOT_NECK
 	strip_delay = 40
 	equip_delay_other = 40
+	bloody_icon_state = "bodyblood"
 
 /obj/item/clothing/neck/worn_overlays(isinhands = FALSE)
 	. = list()
-	if(!isinhands)
-		if(body_parts_covered & HEAD)
-			if(damaged_clothes)
-				. += mutable_appearance('icons/effects/item_damage.dmi', "damagedmask")
-			if(HAS_BLOOD_DNA(src))
-				. += mutable_appearance('icons/effects/blood.dmi', "maskblood")
+//	if(!isinhands)
+//		if(body_parts_covered & HEAD)
+//			if(damaged_clothes)
+//				. += mutable_appearance('icons/effects/item_damage.dmi', "damagedmask")
+//			if(HAS_BLOOD_DNA(src))
+//				. += mutable_appearance('icons/effects/blood.dmi', "maskblood")
 
 /obj/item/clothing/neck/tie
 	name = "tie"
-	desc = "A neosilk clip-on tie."
+	desc = ""
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "bluetie"
 	item_state = ""	//no inhands
@@ -38,17 +39,17 @@
 
 /obj/item/clothing/neck/tie/horrible
 	name = "horrible tie"
-	desc = "A neosilk clip-on tie. This one is disgusting."
+	desc = ""
 	icon_state = "horribletie"
 
 /obj/item/clothing/neck/tie/detective
 	name = "loose tie"
-	desc = "A loosely tied necktie, a perfect accessory for the over-worked detective."
+	desc = ""
 	icon_state = "detective"
 
 /obj/item/clothing/neck/stethoscope
 	name = "stethoscope"
-	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
+	desc = ""
 	icon_state = "stethoscope"
 
 /obj/item/clothing/neck/stethoscope/suicide_act(mob/living/carbon/user)
@@ -57,7 +58,7 @@
 
 /obj/item/clothing/neck/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user))
-		if(user.a_intent == INTENT_HELP)
+		if(user.used_intent.type == INTENT_HELP)
 			var/body_part = parse_zone(user.zone_selected)
 
 			var/heart_strength = "<span class='danger'>no</span>"
@@ -80,7 +81,7 @@
 				heart_strength = "<span class='boldannounce'>a faint, fluttery</span>"
 
 			var/diagnosis = (body_part == BODY_ZONE_CHEST ? "You hear [heart_strength] pulse and [lung_strength] respiration." : "You faintly hear [heart_strength] pulse.")
-			user.visible_message("<span class='notice'>[user] places [src] against [M]'s [body_part] and listens attentively.</span>", "<span class='notice'>You place [src] against [M]'s [body_part]. [diagnosis]</span>")
+			user.visible_message("<span class='notice'>[user] places [src] against [M]'s [body_part] and listens attentively.</span>", "<span class='notice'>I place [src] against [M]'s [body_part]. [diagnosis]</span>")
 			return
 	return ..(M,user)
 
@@ -91,7 +92,7 @@
 /obj/item/clothing/neck/scarf //Default white color, same functionality as beanies.
 	name = "white scarf"
 	icon_state = "scarf"
-	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	desc = ""
 	dog_fashion = /datum/dog_fashion/head
 	custom_price = 10
 
@@ -171,7 +172,7 @@
 
 /obj/item/clothing/neck/petcollar
 	name = "pet collar"
-	desc = "It's for pets."
+	desc = ""
 	icon_state = "petcollar"
 	var/tagname = null
 
@@ -190,7 +191,7 @@
 
 /obj/item/clothing/neck/necklace/dope
 	name = "gold necklace"
-	desc = "Damn, it feels good to be a gangster."
+	desc = ""
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "bling"
 
@@ -211,7 +212,7 @@
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(C.get_item_by_slot(SLOT_NECK) == src)
-			to_chat(user, "<span class='warning'>You can't untie [src] while wearing it!</span>")
+			to_chat(user, "<span class='warning'>I can't untie [src] while wearing it!</span>")
 			return
 		if(user.is_holding(src))
 			var/obj/item/clothing/mask/bandana/newBand = new sourceBandanaType(user)
@@ -219,6 +220,6 @@
 			var/oldName = src.name
 			qdel(src)
 			user.put_in_hand(newBand, currentHandIndex)
-			user.visible_message("<span class='notice'>You untie [oldName] back into a [newBand.name].</span>", "<span class='notice'>[user] unties [oldName] back into a [newBand.name].</span>")
+			user.visible_message("<span class='notice'>I untie [oldName] back into a [newBand.name].</span>", "<span class='notice'>[user] unties [oldName] back into a [newBand.name].</span>")
 		else
-			to_chat(user, "<span class='warning'>You must be holding [src] in order to untie it!</span>")
+			to_chat(user, "<span class='warning'>I must be holding [src] in order to untie it!</span>")

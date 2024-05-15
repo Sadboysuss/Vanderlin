@@ -1,6 +1,6 @@
 /datum/symptom/nano_boost
 	name = "Nano-symbiosis"
-	desc = "The virus reacts to nanites in the host's bloodstream by enhancing their replication cycle."
+	desc = ""
 	stealth = 0
 	resistance = 2
 	stage_speed = 2
@@ -29,10 +29,10 @@
 	if(reverse_boost && SEND_SIGNAL(M, COMSIG_HAS_NANITES))
 		if(prob(A.stage_prob))
 			A.stage = min(A.stage + 1,A.max_stages)
-			
+
 /datum/symptom/nano_destroy
 	name = "Silicolysis"
-	desc = "The virus reacts to nanites in the host's bloodstream by attacking and consuming them."
+	desc = ""
 	stealth = 0
 	resistance = 4
 	stage_speed = -1

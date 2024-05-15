@@ -1,6 +1,6 @@
 /mob/living/simple_animal/sloth
 	name = "sloth"
-	desc = "An adorable, sleepy creature."
+	desc = ""
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "sloth"
 	icon_living = "sloth"
@@ -24,7 +24,7 @@
 	health = 50
 	maxHealth = 50
 	speed = 10
-	glide_size = 2
+//	glide_size = 2
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
@@ -32,14 +32,14 @@
 //Cargo Sloth
 /mob/living/simple_animal/sloth/paperwork
 	name = "Paperwork"
-	desc = "Cargo's pet sloth. About as useful as the rest of the techs."
+	desc = ""
 	gold_core_spawnable = NO_SPAWN
 
 //Cargo Sloth 2
 
 /mob/living/simple_animal/sloth/citrus
 	name = "Citrus"
-	desc = "Cargo's pet sloth. She's dressed in a horrible sweater."
+	desc = ""
 	icon_state = "cool_sloth"
 	icon_living = "cool_sloth"
 	icon_dead = "cool_sloth_dead"

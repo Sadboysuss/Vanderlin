@@ -3,7 +3,7 @@
 
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
-	desc = "An IV drip with an advanced infusion pump that can both drain blood into and inject liquids from attached containers. Blood packs are processed at an accelerated rate. Alt-Click to change the transfer rate."
+	desc = ""
 	icon = 'icons/obj/iv_drip.dmi'
 	icon_state = "iv_drip"
 	anchored = FALSE
@@ -86,7 +86,7 @@
 
 	if(Adjacent(target) && usr.Adjacent(target))
 		if(beaker)
-			usr.visible_message("<span class='warning'>[usr] attaches [src] to [target].</span>", "<span class='notice'>You attach [src] to [target].</span>")
+			usr.visible_message("<span class='warning'>[usr] attaches [src] to [target].</span>", "<span class='notice'>I attach [src] to [target].</span>")
 			log_combat(usr, target, "attached", src, "containing: [beaker.name] - ([beaker.reagents.log_list()])")
 			add_fingerprint(usr)
 			attached = target
@@ -104,7 +104,7 @@
 		if(!user.transferItemToLoc(W, src))
 			return
 		beaker = W
-		to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
+		to_chat(user, "<span class='notice'>I attach [W] to [src].</span>")
 		user.log_message("attached a [W] to [src] at [AREACOORD(src)] containing ([beaker.reagents.log_list()])", LOG_ATTACK)
 		add_fingerprint(user)
 		update_icon()
@@ -122,7 +122,7 @@
 		return PROCESS_KILL
 
 	if(!(get_dist(src, attached) <= 1 && isturf(attached.loc)))
-		to_chat(attached, "<span class='userdanger'>The IV drip needle is ripped out of you!</span>")
+		to_chat(attached, "<span class='danger'>The IV drip needle is ripped out of you!</span>")
 		attached.apply_damage(3, BRUTE, pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
 		attached = null
 		update_icon()
@@ -154,7 +154,7 @@
 			// If the human is losing too much blood, beep.
 			if(attached.blood_volume < BLOOD_VOLUME_SAFE && prob(5))
 				visible_message("<span class='hear'>[src] beeps loudly.</span>")
-				playsound(loc, 'sound/machines/twobeep_high.ogg', 50, TRUE)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE)
 			attached.transfer_blood_to(beaker, amount)
 			update_icon()
 
@@ -179,18 +179,18 @@
 		return
 	if(dripfeed)
 		dripfeed = FALSE
-		to_chat(usr, "<span class='notice'>You loosen the valve to speed up the [src].</span>")
+		to_chat(usr, "<span class='notice'>I loosen the valve to speed up the [src].</span>")
 	else
 		dripfeed = TRUE
-		to_chat(usr, "<span class='notice'>You tighten the valve to slowly drip-feed the contents of [src].</span>")
+		to_chat(usr, "<span class='notice'>I tighten the valve to slowly drip-feed the contents of [src].</span>")
 
 /obj/machinery/iv_drip/verb/eject_beaker()
-	set category = "Object"
+	set hidden = 1
 	set name = "Remove IV Container"
 	set src in view(1)
 
 	if(!isliving(usr))
-		to_chat(usr, "<span class='warning'>You can't do that!</span>")
+		to_chat(usr, "<span class='warning'>I can't do that!</span>")
 		return
 
 	if(usr.incapacitated())
@@ -201,12 +201,12 @@
 		update_icon()
 
 /obj/machinery/iv_drip/verb/toggle_mode()
-	set category = "Object"
+	set hidden = 1
 	set name = "Toggle Mode"
 	set src in view(1)
 
 	if(!isliving(usr))
-		to_chat(usr, "<span class='warning'>You can't do that!</span>")
+		to_chat(usr, "<span class='warning'>I can't do that!</span>")
 		return
 
 	if(usr.incapacitated())
@@ -235,7 +235,7 @@
 
 /obj/machinery/iv_drip/saline
 	name = "saline drip"
-	desc = "An all-you-can-drip saline canister designed to supply a hospital without running out, with a scary looking pump rigged to inject saline into containers, but filling people directly might be a bad idea."
+	desc = ""
 	icon_state = "saline"
 	density = TRUE
 

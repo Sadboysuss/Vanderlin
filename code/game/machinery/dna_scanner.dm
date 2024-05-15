@@ -1,6 +1,6 @@
 /obj/machinery/dna_scannernew
 	name = "\improper DNA scanner"
-	desc = "It scans DNA structures."
+	desc = ""
 	icon = 'icons/obj/machines/cloning.dmi'
 	icon_state = "scanner"
 	density = TRUE
@@ -71,15 +71,15 @@
 		return
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+		"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open || !locked)
 			return
 		locked = FALSE
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/dna_scannernew/proc/locate_computer(type_)

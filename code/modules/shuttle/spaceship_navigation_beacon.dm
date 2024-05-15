@@ -6,7 +6,7 @@
 
 /obj/machinery/spaceship_navigation_beacon
 	name = "Bluespace Navigation Gigabeacon"
-	desc = "A device that creates a bluespace anchor that allow ships jump near to it."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "core"
 	use_power = IDLE_POWER_USE
@@ -41,10 +41,10 @@ obj/machinery/spaceship_navigation_beacon/emp_act()
 		var/new_name = "Beacon_[input("Enter the custom name for this beacon", "It be Beacon ..your input..") as text|null]"
 		if(new_name && Adjacent(user))
 			name = new_name
-			to_chat(user, "<span class='notice'>You change beacon name to [name].</span>")
+			to_chat(user, "<span class='notice'>I change beacon name to [name].</span>")
 	else
 		locked =!locked
-		to_chat(user, "<span class='notice'>You [locked ? "" : "un"]lock [src].</span>")
+		to_chat(user, "<span class='notice'>I [locked ? "" : "un"]lock [src].</span>")
 	return TRUE
 
 /obj/machinery/spaceship_navigation_beacon/examine()

@@ -1,6 +1,6 @@
 /obj/item/twohanded/singularityhammer
 	name = "singularity hammer"
-	desc = "The pinnacle of close combat technology, the hammer harnesses the power of a miniaturized singularity to deal crushing blows."
+	desc = ""
 	icon_state = "mjollnir0"
 	lefthand_file = 'icons/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/hammers_righthand.dmi'
@@ -67,13 +67,13 @@
 			if(istype(A, /mob/living/))
 				var/mob/living/Z = A
 				Z.take_bodypart_damage(20,0)
-			playsound(user, 'sound/weapons/marauder.ogg', 50, TRUE)
+			playsound(user, 'sound/blank.ogg', 50, TRUE)
 			var/turf/target = get_turf(A)
 			vortex(target,user)
 
 /obj/item/twohanded/mjollnir
 	name = "Mjolnir"
-	desc = "A weapon worthy of a god, able to strike with the force of a lightning bolt. It crackles with barely contained energy."
+	desc = ""
 	icon_state = "mjollnir0"
 	lefthand_file = 'icons/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/hammers_righthand.dmi'
@@ -92,8 +92,8 @@
 	s.set_up(5, 1, target.loc)
 	s.start()
 	target.visible_message("<span class='danger'>[target.name] was shocked by [src]!</span>", \
-		"<span class='userdanger'>You feel a powerful shock course through your body sending you flying!</span>", \
-		"<span class='hear'>You hear a heavy electrical crack!</span>")
+		"<span class='danger'>I feel a powerful shock course through your body sending you flying!</span>", \
+		"<span class='hear'>I hear a heavy electrical crack!</span>")
 	var/atom/throw_target = get_edge_target_turf(target, get_dir(src, get_step_away(target, src)))
 	target.throw_at(throw_target, 200, 4)
 	return

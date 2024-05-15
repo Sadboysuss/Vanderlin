@@ -2,7 +2,7 @@
 
 /mob/living/simple_animal/hostile/statue
 	name = "statue" // matches the name of the statue with the flesh-to-stone spell
-	desc = "An incredibly lifelike marble carving. Its eyes seem to follow you.." // same as an ordinary statue with the added "eye following you" description
+	desc = "" //description
 	icon = 'icons/obj/statue.dmi'
 	icon_state = "human_male"
 	icon_living = "human_male"
@@ -27,7 +27,7 @@
 	melee_damage_upper = 83
 	attack_verb_continuous = "claws"
 	attack_verb_simple = "claw"
-	attack_sound = 'sound/hallucinations/growl1.ogg'
+	attack_sound = 'sound/blank.ogg'
 
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -78,7 +78,7 @@
 /mob/living/simple_animal/hostile/statue/Move(turf/NewLoc)
 	if(can_be_seen(NewLoc))
 		if(client)
-			to_chat(src, "<span class='warning'>You cannot move, there are eyes on you!</span>")
+			to_chat(src, "<span class='warning'>I cannot move, there are eyes on you!</span>")
 		return 0
 	return ..()
 
@@ -96,7 +96,7 @@
 /mob/living/simple_animal/hostile/statue/AttackingTarget()
 	if(can_be_seen(get_turf(loc)))
 		if(client)
-			to_chat(src, "<span class='warning'>You cannot attack, there are eyes on you!</span>")
+			to_chat(src, "<span class='warning'>I cannot attack, there are eyes on you!</span>")
 		return FALSE
 	else
 		return ..()
@@ -168,7 +168,7 @@
 // Flicker lights
 /obj/effect/proc_holder/spell/aoe_turf/flicker_lights
 	name = "Flicker Lights"
-	desc = "You will trigger a large amount of lights around you to flicker."
+	desc = ""
 
 	charge_max = 300
 	clothes_req = 0
@@ -183,9 +183,9 @@
 //Blind AOE
 /obj/effect/proc_holder/spell/aoe_turf/blindness
 	name = "Blindness"
-	desc = "Your prey will be momentarily blind for you to advance on them."
+	desc = ""
 
-	message = "<span class='notice'>You glare your eyes.</span>"
+	message = "<span class='notice'>I glare your eyes.</span>"
 	charge_max = 600
 	clothes_req = 0
 	range = 10
@@ -200,12 +200,12 @@
 //Toggle Night Vision
 /obj/effect/proc_holder/spell/targeted/night_vision
 	name = "Toggle Nightvision \[ON\]"
-	desc = "Toggle your nightvision mode."
+	desc = ""
 
 	charge_max = 10
 	clothes_req = 0
 
-	message = "<span class='notice'>You toggle your night vision!</span>"
+	message = "<span class='notice'>I toggle your night vision!</span>"
 	range = -1
 	include_user = 1
 

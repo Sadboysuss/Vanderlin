@@ -2,7 +2,7 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/centerstation)
 
 /obj/machinery/gateway
 	name = "gateway"
-	desc = "A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations."
+	desc = ""
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "off"
 	density = TRUE
@@ -204,7 +204,7 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/centerstation)
 
 /obj/machinery/gateway/centeraway/proc/check_exile_implant(mob/living/L)
 	for(var/obj/item/implant/exile/E in L.implants)//Checking that there is an exile implant
-		to_chat(L, "\black The station gate has detected your exile implant and is blocking your entry.")
+		to_chat(L, "\black The station gate has detected my exile implant and is blocking my entry.")
 		return TRUE
 	return FALSE
 
@@ -237,7 +237,7 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/centerstation)
 
 
 /obj/machinery/gateway/centeraway/admin
-	desc = "A mysterious gateway built by unknown hands, this one seems more compact."
+	desc = ""
 
 /obj/machinery/gateway/centeraway/admin/Initialize()
 	. = ..()
@@ -249,5 +249,5 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/centerstation)
 
 
 /obj/item/paper/fluff/gateway
-	info = "Congratulations,<br><br>Your station has been selected to carry out the Gateway Project.<br><br>The equipment will be shipped to you at the start of the next quarter.<br> You are to prepare a secure location to house the equipment as outlined in the attached documents.<br><br>--Nanotrasen Bluespace Research"
+	info = "Congratulations,<br><br>My station has been selected to carry out the Gateway Project.<br><br>The equipment will be shipped to you at the start of the next quarter.<br> You are to prepare a secure location to house the equipment as outlined in the attached documents.<br><br>--Nanotrasen Bluespace Research"
 	name = "Confidential Correspondence, Pg 1"

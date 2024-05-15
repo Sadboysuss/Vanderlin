@@ -156,7 +156,7 @@
 				radio.attack_self(src)
 
 			if("image") // Set pAI card display face
-				var/newImage = input("Select your new display image.", "Display Image", "Happy") in sortList(list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What", "Sunglasses"))
+				var/newImage = input("Select my new display image.", "Display Image", "Happy") in sortList(list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What", "Sunglasses"))
 				var/pID = 1
 
 				switch(newImage)
@@ -194,7 +194,7 @@
 				if(href_list["send"])
 					signaler.send_activation()
 					audible_message("[icon2html(src, hearers(src))] *beep* *beep* *beep*")
-					playsound(src, 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+					playsound(src, 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 
 				if(href_list["freq"])
 					var/new_frequency = (signaler.frequency + text2num(href_list["freq"]))
@@ -213,7 +213,7 @@
 					if(iscarbon(card.loc))
 						CheckDNA(card.loc, src) //you should only be able to check when directly in hand, muh immersions?
 					else
-						to_chat(src, "<span class='warning'>You are not being carried by anyone!</span>")
+						to_chat(src, "<span class='warning'>I are not being carried by anyone!</span>")
 						return 0 // FALSE ? If you return here you won't call paiinterface() below
 
 			if("pdamessage")
@@ -293,7 +293,7 @@
 				if(href_list["cable"])
 					var/turf/T = get_turf(loc)
 					cable = new /obj/item/pai_cable(T)
-					T.visible_message("<span class='warning'>A port on [src] opens to reveal [cable], which promptly falls to the floor.</span>", "<span class='hear'>You hear the soft click of something light and hard falling to the ground.</span>")
+					T.visible_message("<span class='warning'>A port on [src] opens to reveal [cable], which promptly falls to the floor.</span>", "<span class='hear'>I hear the soft click of something light and hard falling to the ground.</span>")
 
 			if("loudness")
 				if(subscreen == 1) // Open Instrument
@@ -404,19 +404,19 @@
 			 comprehending the subtle nuances of human language. You may parse the \"spirit\" of a directive and follow its intent,
 			 rather than tripping over pedantics and getting snared by technicalities. Above all, you are machine in name and build
 			 only. In all other aspects, you may be seen as the ideal, unwavering human companion that you are.</i></p><br><br><p>
-			 <b>Your prime directive comes before all others. Should a supplemental directive conflict with it, you are capable of
+			 <b>My prime directive comes before all others. Should a supplemental directive conflict with it, you are capable of
 			 simply discarding this inconsistency, ignoring the conflicting supplemental directive and continuing to fulfill your
-			 prime directive to the best of your ability.</b></p><br><br>-
+			 prime directive to the best of my ability.</b></p><br><br>-
 			"}
 	return dat
 
 /mob/living/silicon/pai/proc/CheckDNA(mob/living/carbon/M, mob/living/silicon/pai/P)
 	if(!istype(M))
 		return
-	var/answer = input(M, "[P] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "[P] Check DNA", "No") in list("Yes", "No")
+	var/answer = input(M, "[P] is requesting a DNA sample from you. Will you allow it to confirm my identity?", "[P] Check DNA", "No") in list("Yes", "No")
 	if(answer == "Yes")
 		M.visible_message("<span class='notice'>[M] presses [M.p_their()] thumb against [P].</span>",\
-						"<span class='notice'>You press your thumb against [P].</span>",\
+						"<span class='notice'>I press my thumb against [P].</span>",\
 						"<span class='notice'>[P] makes a sharp clicking sound as it extracts DNA material from [M].</span>")
 		if(!M.has_dna())
 			to_chat(P, "<b>No DNA detected</b>")

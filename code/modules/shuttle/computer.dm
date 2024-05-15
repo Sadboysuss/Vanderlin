@@ -1,6 +1,6 @@
 /obj/machinery/computer/shuttle
 	name = "shuttle console"
-	desc = "A shuttle control computer."
+	desc = ""
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
@@ -74,7 +74,7 @@
 		return
 	req_access = list()
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You fried the consoles ID checking system.</span>")
+	to_chat(user, "<span class='notice'>I fried the consoles ID checking system.</span>")
 
 /obj/machinery/computer/shuttle/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
 	if(port && (shuttleId == initial(shuttleId) || override))

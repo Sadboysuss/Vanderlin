@@ -1,9 +1,9 @@
 /obj/item/soapstone
 	name = "soapstone"
-	desc = "Leave informative messages for the crew, including the crew of future shifts!\nEven if out of uses, it can still be used to remove messages.\n(Not suitable for engraving on shuttles, off station or on cats. Side effects may include prompt beatings, psychotic clown incursions, and/or orbital bombardment.)"
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "soapstone"
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_TINY
 	var/tool_speed = 50
@@ -35,31 +35,31 @@
 		return
 
 	if(existing_message)
-		user.visible_message("<span class='notice'>[user] starts erasing [existing_message].</span>", "<span class='notice'>You start erasing [existing_message].</span>", "<span class='hear'>You hear a chipping sound.</span>")
-		playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
+		user.visible_message("<span class='notice'>[user] starts erasing [existing_message].</span>", "<span class='notice'>I start erasing [existing_message].</span>", "<span class='hear'>I hear a chipping sound.</span>")
+		playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 		if(do_after(user, tool_speed, target = existing_message))
-			user.visible_message("<span class='notice'>[user] erases [existing_message].</span>", "<span class='notice'>You erase [existing_message][existing_message.creator_key == user.ckey ? ", refunding a use" : ""].</span>")
+			user.visible_message("<span class='notice'>[user] erases [existing_message].</span>", "<span class='notice'>I erase [existing_message][existing_message.creator_key == user.ckey ? ", refunding a use" : ""].</span>")
 			existing_message.persists = FALSE
 			qdel(existing_message)
-			playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
+			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 			if(existing_message.creator_key == user.ckey)
 				refund_use()
 		return
 
 	var/message = stripped_input(user, "What would you like to engrave?", "Leave a message")
 	if(!message)
-		to_chat(user, "<span class='notice'>You decide not to engrave anything.</span>")
+		to_chat(user, "<span class='notice'>I decide not to engrave anything.</span>")
 		return
 
 	if(!target.Adjacent(user) && locate(/obj/structure/chisel_message) in T)
 		to_chat(user, "<span class='warning'>Someone wrote here before you chose! Find another spot.</span>")
 		return
-	playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
-	user.visible_message("<span class='notice'>[user] starts engraving a message into [T]...</span>", "<span class='notice'>You start engraving a message into [T]...</span>", "<span class='hear'>You hear a chipping sound.</span>")
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+	user.visible_message("<span class='notice'>[user] starts engraving a message into [T]...</span>", "<span class='notice'>I start engraving a message into [T]...</span>", "<span class='hear'>I hear a chipping sound.</span>")
 	if(can_use() && do_after(user, tool_speed, target = T) && can_use()) //This looks messy but it's actually really clever!
 		if(!locate(/obj/structure/chisel_message) in T)
-			user.visible_message("<span class='notice'>[user] leaves a message for future spacemen!</span>", "<span class='notice'>You engrave a message into [T]!</span>", "<span class='hear'>You hear a chipping sound.</span>")
-			playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
+			user.visible_message("<span class='notice'>[user] leaves a message for future spacemen!</span>", "<span class='notice'>I engrave a message into [T]!</span>", "<span class='hear'>I hear a chipping sound.</span>")
+			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 			var/obj/structure/chisel_message/M = new(T)
 			M.register(user, message)
 			remove_use()
@@ -109,7 +109,7 @@
 
 /obj/structure/chisel_message
 	name = "engraved message"
-	desc = "A message from a past traveler."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "soapstone_message"
 	layer = LATTICE_LAYER

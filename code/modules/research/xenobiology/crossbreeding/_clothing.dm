@@ -7,7 +7,7 @@ Slimecrossing Armor
 //Rebreather mask - Chilling Blue
 /obj/item/clothing/mask/nobreath
 	name = "rebreather mask"
-	desc = "A transparent mask, resembling a conventional breath mask, but made of bluish slime. Seems to lack any air supply tube, though."
+	desc = ""
 	icon_state = "slime"
 	item_state = "slime"
 	body_parts_covered = NONE
@@ -32,7 +32,7 @@ Slimecrossing Armor
 
 /obj/item/clothing/glasses/prism_glasses
 	name = "prism glasses"
-	desc = "The lenses seem to glow slightly, and reflect light into dazzling colors."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "prismglasses"
 	actions_types = list(/datum/action/item_action/change_prism_colour, /datum/action/item_action/place_light_prism)
@@ -44,7 +44,7 @@ Slimecrossing Armor
 
 /obj/structure/light_prism
 	name = "light prism"
-	desc = "A shining crystal of semi-solid light. Looks fragile."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "lightprism"
 	density = FALSE
@@ -58,7 +58,7 @@ Slimecrossing Armor
 	set_light(5)
 
 /obj/structure/light_prism/attack_hand(mob/user)
-	to_chat(user, "<span class='notice'>You dispel [src].</span>")
+	to_chat(user, "<span class='notice'>I dispel [src].</span>")
 	qdel(src)
 
 /datum/action/item_action/change_prism_colour
@@ -91,12 +91,12 @@ Slimecrossing Armor
 		if(!glasses.glasses_color)
 			to_chat(owner, "<span class='warning'>The lens is oddly opaque...</span>")
 			return
-		to_chat(owner, "<span class='notice'>You channel nearby light into a glowing, ethereal prism.</span>")
+		to_chat(owner, "<span class='notice'>I channel nearby light into a glowing, ethereal prism.</span>")
 		new /obj/structure/light_prism(get_turf(owner), glasses.glasses_color)
 
 /obj/item/clothing/head/peaceflower
 	name = "heroine bud"
-	desc = "An extremely addictive flower, full of peace magic."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "peaceflower"
 	item_state = "peaceflower"
@@ -122,13 +122,13 @@ Slimecrossing Armor
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(src == C.head)
-			to_chat(user, "<span class='warning'>You feel at peace. <b style='color:pink'>Why would you want anything else?</b></span>")
+			to_chat(user, "<span class='warning'>I feel at peace. <b style='color:pink'>Why would you want anything else?</b></span>")
 			return
 	return ..()
 
 /obj/item/clothing/suit/armor/heavy/adamantine
 	name = "adamantine armor"
-	desc = "A full suit of adamantine plate armor. Impressively resistant to damage, but weighs about as much as you do."
+	desc = ""
 	icon_state = "adamsuit"
 	item_state = "adamsuit"
 	flags_inv = NONE

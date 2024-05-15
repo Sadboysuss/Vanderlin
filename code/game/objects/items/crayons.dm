@@ -18,7 +18,7 @@
 
 /obj/item/toy/crayon
 	name = "crayon"
-	desc = "A colourful crayon. Looks tasty. Mmmm..."
+	desc = ""
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
 
@@ -339,11 +339,11 @@
 		clicky = CLAMP(text2num(click_params["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
 
 	if(!instant)
-		to_chat(user, "<span class='notice'>You start drawing a [temp] on the	[target.name]...</span>")
+		to_chat(user, "<span class='notice'>I start drawing a [temp] on the	[target.name]...</span>")
 
 	if(pre_noise)
-		audible_message("<span class='notice'>You hear spraying.</span>")
-		playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+		audible_message("<span class='notice'>I hear spraying.</span>")
+		playsound(user.loc, 'sound/blank.ogg', 5, TRUE, 5)
 
 	var/wait_time = 50
 	if(paint_mode == PAINT_LARGE_HORIZONTAL)
@@ -385,17 +385,17 @@
 			C.AddComponent(/datum/component/art, BAD_ART)
 
 	if(!instant)
-		to_chat(user, "<span class='notice'>You finish drawing \the [temp].</span>")
+		to_chat(user, "<span class='notice'>I finish drawing \the [temp].</span>")
 	else
-		to_chat(user, "<span class='notice'>You spray a [temp] on \the [target.name]</span>")
+		to_chat(user, "<span class='notice'>I spray a [temp] on \the [target.name]</span>")
 
 	if(length(text_buffer) > 1)
 		text_buffer = copytext(text_buffer,2)
 		SStgui.update_uis(src)
 
 	if(post_noise)
-		audible_message("<span class='hear'>You hear spraying.</span>")
-		playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
+		audible_message("<span class='hear'>I hear spraying.</span>")
+		playsound(user.loc, 'sound/blank.ogg', 5, TRUE, 5)
 
 	var/fraction = min(1, . / reagents.maximum_volume)
 	if(affected_turfs.len)
@@ -415,9 +415,9 @@
 			else if(C.is_mouth_covered(mask_only = 1))
 				covered = "mask"
 			if(covered)
-				to_chat(C, "<span class='warning'>You have to remove your [covered] first!</span>")
+				to_chat(C, "<span class='warning'>I have to remove your [covered] first!</span>")
 				return
-		to_chat(user, "<span class='notice'>You take a bite of the [src.name]. Delicious!</span>")
+		to_chat(user, "<span class='notice'>I take a bite of the [src.name]. Delicious!</span>")
 		var/eaten = use_charges(user, 5, FALSE)
 		if(check_empty(user)) //Prevents divsion by zero
 			return
@@ -486,7 +486,7 @@
 
 /obj/item/toy/crayon/mime
 	icon_state = "crayonmime"
-	desc = "A very sad-looking crayon."
+	desc = ""
 	paint_color = "#FFFFFF"
 	crayon_color = "mime"
 	reagent_contents = list(/datum/reagent/consumable/nutriment = 0.5, /datum/reagent/colorful_reagent/powder/invisible = 1.5)
@@ -512,7 +512,7 @@
 
 /obj/item/storage/crayons
 	name = "box of crayons"
-	desc = "A box of crayons for all your rune drawing needs."
+	desc = ""
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = WEIGHT_CLASS_SMALL
@@ -567,7 +567,7 @@
 	item_state = "spraycan"
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
-	desc = "A metallic container containing tasty paint."
+	desc = ""
 
 	instant = TRUE
 	edible = FALSE
@@ -595,7 +595,7 @@
 		user.visible_message("<span class='suicide'>[user] shakes up [src] with a rattle and lifts it to [user.p_their()] mouth, spraying paint across [user.p_their()] teeth!</span>")
 		user.say("WITNESS ME!!", forced="spraycan suicide")
 		if(pre_noise || post_noise)
-			playsound(src, 'sound/effects/spray.ogg', 5, TRUE, 5)
+			playsound(src, 'sound/blank.ogg', 5, TRUE, 5)
 		if(can_change_colour)
 			paint_color = "#C0C0C0"
 		update_icon()
@@ -641,11 +641,11 @@
 
 	if(iscarbon(target))
 		if(pre_noise || post_noise)
-			playsound(user.loc, 'sound/effects/spray.ogg', 25, TRUE, 5)
+			playsound(user.loc, 'sound/blank.ogg', 25, TRUE, 5)
 
 		var/mob/living/carbon/C = target
 		user.visible_message("<span class='danger'>[user] sprays [src] into the face of [target]!</span>")
-		to_chat(target, "<span class='userdanger'>[user] sprays [src] into your face!</span>")
+		to_chat(target, "<span class='danger'>[user] sprays [src] into your face!</span>")
 
 		if(C.client)
 			C.blur_eyes(3)
@@ -685,8 +685,8 @@
 		reagents.trans_to(target, ., volume_multiplier, transfered_by = user)
 
 		if(pre_noise || post_noise)
-			playsound(user.loc, 'sound/effects/spray.ogg', 5, TRUE, 5)
-		user.visible_message("<span class='notice'>[user] coats [target] with spray paint!</span>", "<span class='notice'>You coat [target] with spray paint.</span>")
+			playsound(user.loc, 'sound/blank.ogg', 5, TRUE, 5)
+		user.visible_message("<span class='notice'>[user] coats [target] with spray paint!</span>", "<span class='notice'>I coat [target] with spray paint.</span>")
 		return
 
 	. = ..()
@@ -701,7 +701,7 @@
 
 /obj/item/toy/crayon/spraycan/borg
 	name = "cyborg spraycan"
-	desc = "A metallic container containing shiny synthesised paint."
+	desc = ""
 	charges = -1
 
 /obj/item/toy/crayon/spraycan/borg/afterattack(atom/target,mob/user,proximity, params)
@@ -725,7 +725,7 @@
 
 /obj/item/toy/crayon/spraycan/hellcan
 	name = "hellcan"
-	desc = "This spraycan doesn't seem to be filled with paint..."
+	desc = ""
 	icon_state = "deathcan2_cap"
 	icon_capped = "deathcan2_cap"
 	icon_uncapped = "deathcan2"
@@ -739,7 +739,7 @@
 
 /obj/item/toy/crayon/spraycan/lubecan
 	name = "slippery spraycan"
-	desc = "You can barely keep hold of this thing."
+	desc = ""
 	icon_state = "clowncan2_cap"
 	icon_capped = "clowncan2_cap"
 	icon_uncapped = "clowncan2"
@@ -753,7 +753,7 @@
 
 /obj/item/toy/crayon/spraycan/mimecan
 	name = "silent spraycan"
-	desc = "Art is best seen, not heard."
+	desc = ""
 	icon_state = "mimecan_cap"
 	icon_capped = "mimecan_cap"
 	icon_uncapped = "mimecan"
@@ -769,7 +769,7 @@
 /obj/item/toy/crayon/spraycan/infinite
 	name = "infinite spraycan"
 	charges = -1
-	desc = "Now with 30% more bluespace technology."
+	desc = ""
 
 #undef RANDOM_GRAFFITI
 #undef RANDOM_LETTER

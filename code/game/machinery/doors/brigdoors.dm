@@ -22,7 +22,7 @@
 	name = "door timer"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
-	desc = "A remote control for a door."
+	desc = ""
 	req_access = list(ACCESS_SECURITY)
 	density = FALSE
 	var/id = null // id of linked machinery/lockers
@@ -38,7 +38,7 @@
 	maptext_width = 32
 	maptext_y = -1
 	ui_x = 300
-	ui_y = 138 
+	ui_y = 138
 
 /obj/machinery/door_timer/Initialize()
 	. = ..()

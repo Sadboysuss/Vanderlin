@@ -3,7 +3,7 @@
 
 /obj/structure/disposalconstruct
 	name = "disposal pipe segment"
-	desc = "A huge pipe segment used for constructing disposal systems."
+	desc = ""
 	icon = 'icons/obj/atmospherics/pipes/disposal.dmi'
 	icon_state = "conpipe"
 	anchored = FALSE
@@ -61,7 +61,7 @@
 
 // hide called by levelupdate if turf intact status changes
 // change visibility status and force update of icon
-/obj/structure/disposalconstruct/hide(var/intact)
+/obj/structure/disposalconstruct/hide(intact)
 	invisibility = (intact && level==1) ? INVISIBILITY_MAXIMUM: 0	// hide if floor is intact
 	update_icon()
 
@@ -102,7 +102,7 @@
 
 /obj/structure/disposalconstruct/proc/can_be_rotated(mob/user,rotation_type)
 	if(anchored)
-		to_chat(user, "<span class='warning'>You must unfasten the pipe before rotating it!</span>")
+		to_chat(user, "<span class='warning'>I must unfasten the pipe before rotating it!</span>")
 		return FALSE
 	return TRUE
 
@@ -114,17 +114,17 @@
 	if(anchored)
 		anchored = FALSE
 		density = FALSE
-		to_chat(user, "<span class='notice'>You detach the [pipename] from the underfloor.</span>")
+		to_chat(user, "<span class='notice'>I detach the [pipename] from the underfloor.</span>")
 	else
 		var/ispipe = is_pipe() // Indicates if we should change the level of this pipe
 
 		var/turf/T = get_turf(src)
 		if(T.intact && isfloorturf(T))
-			to_chat(user, "<span class='warning'>You can only attach the [pipename] if the floor plating is removed!</span>")
+			to_chat(user, "<span class='warning'>I can only attach the [pipename] if the floor plating is removed!</span>")
 			return TRUE
 
 		if(!ispipe && iswallturf(T))
-			to_chat(user, "<span class='warning'>You can't build [pipename]s on walls, only disposal pipes!</span>")
+			to_chat(user, "<span class='warning'>I can't build [pipename]s on walls, only disposal pipes!</span>")
 			return TRUE
 
 		if(ispipe)
@@ -150,7 +150,7 @@
 
 		anchored = TRUE
 		density = initial(pipe_type.density)
-		to_chat(user, "<span class='notice'>You attach the [pipename] to the underfloor.</span>")
+		to_chat(user, "<span class='notice'>I attach the [pipename] to the underfloor.</span>")
 	I.play_tool_sound(src, 100)
 	update_icon()
 	return TRUE
@@ -161,14 +161,14 @@
 		if(!I.tool_start_check(user, amount=0))
 			return TRUE
 
-		to_chat(user, "<span class='notice'>You start welding the [pipename] in place...</span>")
+		to_chat(user, "<span class='notice'>I start welding the [pipename] in place...</span>")
 		if(I.use_tool(src, user, 8, volume=50))
 			to_chat(user, "<span class='notice'>The [pipename] has been welded in place.</span>")
 			var/obj/O = new pipe_type(loc, src)
 			transfer_fingerprints_to(O)
 
 	else
-		to_chat(user, "<span class='warning'>You need to attach it to the plating first!</span>")
+		to_chat(user, "<span class='warning'>I need to attach it to the plating first!</span>")
 	return TRUE
 
 /obj/structure/disposalconstruct/proc/is_pipe()

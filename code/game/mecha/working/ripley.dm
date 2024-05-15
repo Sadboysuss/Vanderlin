@@ -1,5 +1,5 @@
 /obj/mecha/working/ripley
-	desc = "Autonomous Power Loader Unit MK-I. Designed primarily around heavy lifting, the Ripley can be outfitted with utility equipment to fill a number of roles."
+	desc = ""
 	name = "\improper APLU MK-I \"Ripley\""
 	icon_state = "ripley"
 	silicon_icon_state = "ripley-empty"
@@ -73,7 +73,7 @@
 
 
 /obj/mecha/working/ripley/mkii
-	desc = "Autonomous Power Loader Unit MK-II. This prototype Ripley is refitted with a pressurized cabin, trading its prior speed for atmospheric protection"
+	desc = ""
 	name = "\improper APLU MK-II \"Ripley\""
 	icon_state = "ripleymkii"
 	fast_pressure_step_in = 2 //step_in while in low pressure conditions
@@ -87,7 +87,7 @@
 	opacity = TRUE
 
 /obj/mecha/working/ripley/firefighter
-	desc = "Autonomous Power Loader Unit MK-III. This model is refitted with a pressurized cabin and additional thermal protection."
+	desc = ""
 	name = "\improper APLU MK-III \"Firefighter\""
 	icon_state = "firefighter"
 	max_temperature = 65000
@@ -107,7 +107,7 @@
 
 
 /obj/mecha/working/ripley/deathripley
-	desc = "OH SHIT IT'S THE DEATHSQUAD WE'RE ALL GONNA DIE"
+	desc = ""
 	name = "\improper DEATH-RIPLEY"
 	icon_state = "deathripley"
 	fast_pressure_step_in = 2 //step_in while in low pressure conditions
@@ -127,7 +127,7 @@
 	ME.attach(src)
 
 /obj/mecha/working/ripley/deathripley/real
-	desc = "OH SHIT IT'S THE DEATHSQUAD WE'RE ALL GONNA DIE. FOR REAL"
+	desc = ""
 
 /obj/mecha/working/ripley/deathripley/real/Initialize()
 	. = ..()
@@ -139,7 +139,7 @@
 	ME.attach(src)
 
 /obj/mecha/working/ripley/mining
-	desc = "An old, dusty mining Ripley."
+	desc = ""
 	name = "\improper APLU \"Miner\""
 	obj_integrity = 75 //Low starting health
 
@@ -181,7 +181,7 @@
 	if(href_list["drop_from_cargo"])
 		var/obj/O = locate(href_list["drop_from_cargo"]) in cargo
 		if(O)
-			occupant_message("<span class='notice'>You unload [O].</span>")
+			occupant_message("<span class='notice'>I unload [O].</span>")
 			O.forceMove(drop_location())
 			cargo -= O
 			log_message("Unloaded [O]. Cargo compartment capacity: [cargo_capacity - src.cargo.len]", LOG_MECHA)
@@ -220,13 +220,13 @@
 			drill.equip_cooldown = initial(drill.equip_cooldown)
 
 /obj/mecha/working/ripley/relay_container_resist(mob/living/user, obj/O)
-	to_chat(user, "<span class='notice'>You lean on the back of [O] and start pushing so it falls out of [src].</span>")
+	to_chat(user, "<span class='notice'>I lean on the back of [O] and start pushing so it falls out of [src].</span>")
 	if(do_after(user, 300, target = O))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || O.loc != src )
 			return
-		to_chat(user, "<span class='notice'>You successfully pushed [O] out of [src]!</span>")
+		to_chat(user, "<span class='notice'>I successfully pushed [O] out of [src]!</span>")
 		O.forceMove(drop_location())
 		cargo -= O
 	else
 		if(user.loc == src) //so we don't get the message if we resisted multiple times and succeeded.
-			to_chat(user, "<span class='warning'>You fail to push [O] out of [src]!</span>")
+			to_chat(user, "<span class='warning'>I fail to push [O] out of [src]!</span>")

@@ -32,7 +32,7 @@
 	req_access = list()
 	req_one_access = list()
 	playsound(src, "sparks", 100, TRUE)
-	to_chat(user, "<span class='warning'>You short out the access controller.</span>")
+	to_chat(user, "<span class='warning'>I short out the access controller.</span>")
 
 /obj/machinery/doorButtons/proc/removeMe()
 
@@ -41,7 +41,7 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "access_button_standby"
 	name = "access button"
-	desc = "A button used for the explicit purpose of opening an airlock."
+	desc = ""
 	var/idDoor
 	var/obj/machinery/door/airlock/door
 	var/obj/machinery/doorButtons/airlock_controller/controller
@@ -101,7 +101,7 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "access_control_standby"
 	name = "access console"
-	desc = "A small console that can cycle opening between two airlocks."
+	desc = ""
 	var/obj/machinery/door/airlock/interiorAirlock
 	var/obj/machinery/door/airlock/exteriorAirlock
 	var/idInterior

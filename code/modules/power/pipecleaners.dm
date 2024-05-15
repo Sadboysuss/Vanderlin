@@ -38,7 +38,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/pipe_cleaner
 	name = "pipe cleaner"
-	desc = "A bendable piece of wire covered in fuzz. Fun for arts and crafts!"
+	desc = ""
 	icon = 'icons/obj/power_cond/pipe_cleaner.dmi'
 	icon_state = "0-1"
 	layer = WIRE_LAYER //Above hidden pipes, GAS_PIPE_HIDDEN_LAYER
@@ -144,7 +144,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	add_fingerprint(user)
 
 /obj/structure/pipe_cleaner/proc/cut_pipe_cleaner(mob/user)
-	user.visible_message("<span class='notice'>[user] pulls up the pipe cleaner.</span>", "<span class='notice'>You pull up the pipe cleaner.</span>")
+	user.visible_message("<span class='notice'>[user] pulls up the pipe cleaner.</span>", "<span class='notice'>I pull up the pipe cleaner.</span>")
 	stored.add_fingerprint(user)
 	investigate_log("was pulled up by [key_name(usr)] in [AREACOORD(src)]", INVESTIGATE_WIRES)
 	deconstruct()
@@ -178,7 +178,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/pipe_cleaner_coil
 	name = "pipe cleaner coil"
-	desc = "A coil of pipe cleaners. Good for arts and crafts, not to build with."
+	desc = ""
 	custom_price = 15
 	gender = NEUTER //That's a pipe_cleaner coil sounds better than that's some pipe_cleaner coils
 	icon = 'icons/obj/power.dmi'
@@ -201,7 +201,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	singular_name = "pipe cleaner piece"
 	full_w_class = WEIGHT_CLASS_SMALL
 	grind_results = list("copper" = 2) //2 copper per pipe_cleaner in the coil
-	usesound = 'sound/items/deconstruct.ogg'
+	usesound = 'sound/blank.ogg'
 
 /obj/item/stack/pipe_cleaner_coil/cyborg
 	is_cyborg = 1
@@ -276,7 +276,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(!isturf(T) || !T.can_have_cabling())
-		to_chat(user, "<span class='warning'>You can only lay pipe cleaners on a solid floor!</span>")
+		to_chat(user, "<span class='warning'>I can only lay pipe cleaners on a solid floor!</span>")
 		return
 
 	if(get_amount() < 1) // Out of pipe_cleaner
@@ -284,7 +284,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_dist(T,user) > 1) // Too far
-		to_chat(user, "<span class='warning'>You can't lay pipe cleaner at a place that far away!</span>")
+		to_chat(user, "<span class='warning'>I can't lay pipe cleaner at a place that far away!</span>")
 		return
 
 	var/dirn
@@ -326,7 +326,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_dist(C, user) > 1)		// make sure it's close enough
-		to_chat(user, "<span class='warning'>You can't lay pipe cleaner at a place that far away!</span>")
+		to_chat(user, "<span class='warning'>I can't lay pipe cleaner at a place that far away!</span>")
 		return
 
 
@@ -342,7 +342,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if((C.d1 == dirn || C.d2 == dirn) && !forceddir)
 		if(!U.can_have_cabling())						//checking if it's a plating or catwalk
 			if (showerror)
-				to_chat(user, "<span class='warning'>You can only lay pipe cleaners on catwalks and plating!</span>")
+				to_chat(user, "<span class='warning'>I can only lay pipe cleaners on catwalks and plating!</span>")
 			return
 		else
 			// pipe_cleaner is pointing at us, we're standing on an open tile

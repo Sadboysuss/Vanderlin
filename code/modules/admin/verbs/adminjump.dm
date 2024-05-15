@@ -1,9 +1,9 @@
 /client/proc/jumptoarea(area/A in GLOB.sortedAreas)
 	set name = "Jump to Area"
-	set desc = "Area to jump to"
-	set category = "Admin"
+	set desc = ""
+	set category = "GameMaster"
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+//		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	if(!A)
@@ -28,7 +28,7 @@
 	set name = "Jump to Turf"
 	set category = "Admin"
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+//		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	log_admin("[key_name(usr)] jumped to [AREACOORD(T)]")
@@ -38,11 +38,11 @@
 	return
 
 /client/proc/jumptomob(mob/M in GLOB.mob_list)
-	set category = "Admin"
+	set category = "GameMaster"
 	set name = "Jump to Mob"
 
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	log_admin("[key_name(usr)] jumped to [key_name(M)]")
@@ -61,7 +61,7 @@
 	set name = "Jump to Coordinate"
 
 	if (!holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	if(src.mob)
@@ -72,11 +72,11 @@
 	message_admins("[key_name_admin(usr)] jumped to coordinates [tx], [ty], [tz]")
 
 /client/proc/jumptokey()
-	set category = "Admin"
+	set category = "GameMaster"
 	set name = "Jump to Key"
 
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/list/keys = list()
@@ -97,9 +97,9 @@
 /client/proc/Getmob(mob/M in GLOB.mob_list - GLOB.dummy_mob_list)
 	set category = "Admin"
 	set name = "Get Mob"
-	set desc = "Mob to teleport"
+	set desc = ""
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/atom/loc = get_turf(usr)
@@ -113,10 +113,10 @@
 /client/proc/Getkey()
 	set category = "Admin"
 	set name = "Get Key"
-	set desc = "Key to teleport"
+	set desc = ""
 
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/list/keys = list()
@@ -142,7 +142,7 @@
 	set category = "Admin"
 	set name = "Send Mob"
 	if(!src.holder)
-		to_chat(src, "Only administrators may use this command.")
+		//to_chat(src, "Only administrators may use this command.")
 		return
 	var/area/A = input(usr, "Pick an area.", "Pick an area") in GLOB.sortedAreas|null
 	if(A && istype(A))

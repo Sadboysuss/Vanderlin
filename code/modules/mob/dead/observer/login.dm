@@ -1,8 +1,9 @@
 /mob/dead/observer/Login()
 	..()
 
-	ghost_accs = client.prefs.ghost_accs
-	ghost_others = client.prefs.ghost_others
+	if(client && client.prefs)
+		ghost_accs = client.prefs.ghost_accs
+		ghost_others = client.prefs.ghost_others
 	var/preferred_form = null
 
 	if(IsAdminGhost(src))

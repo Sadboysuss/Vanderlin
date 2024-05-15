@@ -1,7 +1,7 @@
 //Please use mob or src (not usr) in these procs. This way they can be called in the same fashion as procs.
 /client/verb/wiki(query as text)
 	set name = "wiki"
-	set desc = "Type what you want to know about.  This will open the wiki in your web browser. Type nothing to go to the main page."
+	set desc = ""
 	set hidden = 1
 	var/wikiurl = CONFIG_GET(string/wikiurl)
 	if(wikiurl)
@@ -16,7 +16,7 @@
 
 /client/verb/forum()
 	set name = "forum"
-	set desc = "Visit the forum."
+	set desc = ""
 	set hidden = 1
 	var/forumurl = CONFIG_GET(string/forumurl)
 	if(forumurl)
@@ -29,7 +29,7 @@
 
 /client/verb/rules()
 	set name = "rules"
-	set desc = "Show Server Rules."
+	set desc = ""
 	set hidden = 1
 	var/rulesurl = CONFIG_GET(string/rulesurl)
 	if(rulesurl)
@@ -42,7 +42,7 @@
 
 /client/verb/github()
 	set name = "github"
-	set desc = "Visit Github"
+	set desc = ""
 	set hidden = 1
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
@@ -55,7 +55,7 @@
 
 /client/verb/reportissue()
 	set name = "report-issue"
-	set desc = "Report an issue"
+	set desc = ""
 	set hidden = 1
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
@@ -78,10 +78,116 @@
 /client/verb/changelog()
 	set name = "Changelog"
 	set category = "OOC"
-	var/datum/asset/changelog = get_asset_datum(/datum/asset/simple/changelog)
-	changelog.send(src)
+	set hidden = 1
+//	var/datum/asset/changelog = get_asset_datum(/datum/asset/simple/changelog)
+//	changelog.send(src)
 	src << browse('html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash
 		prefs.save_preferences()
 		winset(src, "infowindow.changelog", "font-style=;")
+
+/client/verb/hotkeys_help()
+	set name = "zHelp-Controls"
+	set category = "Options"
+
+	mob.hotkey_help()
+
+
+/mob/proc/hotkey_help()
+	var/hotkey_mode = {"<font color='purple'>
+Hotkey-Mode: (hotkey-mode must be on)
+\tTAB = toggle hotkey-mode
+\tw = north
+\ta = west
+\ts = south
+\td = east
+\tq = left hand
+\te = right hand
+\tr = throw
+\tf = fixed eye (strafing mode)
+\tSHIFT + f = look up
+\tz = drop
+\tx = cancel / resist grab
+\tc = parry/dodge
+\tv = stand up / lay down
+\t1 thru 4 = change intent (current hand)
+\tmouse wheel = change aim height
+\tg = give
+\t<B></B>h = bite
+\tj = jump
+\tk = kick
+\tl = steal
+\tt = say something
+\tALT = sprint
+\tCTRL + ALT = sneak
+\tLMB = Use intent/Interact (Hold to channel)
+\tRMB = Special Interaction
+\tMMB = give/kick/jump/steal/spell
+\tMMB (no intent) = Special Interaction
+\tSHIFT + LMB = Examine something
+\tSHIFT + RMB = Focus
+\tCTRL + LMB = TileAtomList
+\tCTRL + RMB = Point at something
+</font>"}
+
+	to_chat(src, hotkey_mode)
+
+/client/verb/set_fixed()
+	set name = "IconSize"
+	set category = "Options"
+
+	if(winget(src, "mapwindow.map", "icon-size") == "64")
+		to_chat(src, "Stretch-to-fit... OK")
+		winset(src, "mapwindow.map", "icon-size=0")
+	else
+		to_chat(src, "64x... OK")
+		winset(src, "mapwindow.map", "icon-size=64")
+
+/client/verb/set_stretch()
+	set name = "IconScaling"
+	set category = "Options"
+	if(prefs)
+		if(prefs.crt == TRUE)
+			to_chat(src, "CRT mode is on.")
+			winset(src, "mapwindow.map", "zoom-mode=blur")
+			return
+	if(winget(src, "mapwindow.map", "zoom-mode") == "normal")
+		to_chat(src, "Pixel-perfect... OK")
+		winset(src, "mapwindow.map", "zoom-mode=distort")
+	else
+		to_chat(src, "Anti-aliased... OK")
+		winset(src, "mapwindow.map", "zoom-mode=normal")
+
+/client/verb/crtmode()
+	set category = "Options"
+	set name = "ToggleCRT"
+	if(!prefs)
+		return
+	if(prefs.crt == TRUE)
+		winset(src, "mapwindow.map", "zoom-mode=normal")
+		prefs.crt = FALSE
+		prefs.save_preferences()
+		to_chat(src, "CRT... OFF")
+		for(var/obj/screen/scannies/S in screen)
+			S.alpha = 0
+	else
+		winset(src, "mapwindow.map", "zoom-mode=blur")
+		prefs.crt = TRUE
+		prefs.save_preferences()
+		to_chat(src, "CRT... ON")
+		for(var/obj/screen/scannies/S in screen)
+			S.alpha = 70
+
+/*
+/client/verb/set_blur()
+	set name = "AAOn"
+	set category = "Options"
+
+	winset(src, "mapwindow.map", "zoom-mode=blur")
+
+/client/verb/set_normal()
+	set name = "AAOff"
+	set category = "Options"
+
+	winset(src, "mapwindow.map", "zoom-mode=normal")*/

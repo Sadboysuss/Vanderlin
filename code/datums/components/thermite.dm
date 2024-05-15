@@ -63,12 +63,12 @@
 /datum/component/thermite/proc/thermite_melt(mob/user)
 	var/turf/master = parent
 	master.cut_overlay(overlay)
-	playsound(master, 'sound/items/welder.ogg', 100, TRUE)
+	playsound(master, 'sound/blank.ogg', 100, TRUE)
 	var/obj/effect/overlay/thermite/fakefire = new(master)
 	addtimer(CALLBACK(src, .proc/burn_parent, fakefire, user), min(amount * 0.35 SECONDS, 20 SECONDS))
 	UnregisterFromParent()
 
-/datum/component/thermite/proc/burn_parent(var/datum/fakefire, mob/user)
+/datum/component/thermite/proc/burn_parent(datum/fakefire, mob/user)
 	var/turf/master = parent
 	if(!QDELETED(fakefire))
 		qdel(fakefire)
@@ -83,8 +83,8 @@
 	//Thermite is just some loose powder, you could probably clean it with your hands. << todo?
 	qdel(src)
 
-/datum/component/thermite/proc/flame_react(datum/source, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 1922) // This is roughly the real life requirement to ignite thermite
+/datum/component/thermite/proc/flame_react(datum/source, added, maxstacks)
+	if(added > 1922) // This is roughly the real life requirement to ignite thermite
 		thermite_melt()
 
 /datum/component/thermite/proc/attackby_react(datum/source, obj/item/thing, mob/user, params)

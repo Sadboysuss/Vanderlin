@@ -116,7 +116,7 @@ They *could* go in their appropriate files, but this is supposed to be modular
 
 /obj/machinery/proc/AI_notify_hack()
 	var/turf/location = get_turf(src)
-	var/alertstr = "<span class='userdanger'>Network Alert: Hacking attempt detected[location?" in [location]":". Unable to pinpoint location"]</span>."
+	var/alertstr = "<span class='danger'>Network Alert: Hacking attempt detected[location?" in [location]":". Unable to pinpoint location"]</span>."
 	for(var/mob/living/silicon/ai/AI in GLOB.player_list)
 		to_chat(AI, alertstr)
 
@@ -260,5 +260,5 @@ They *could* go in their appropriate files, but this is supposed to be modular
 		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, loc)
 		playsound(src, "sparks", 50, TRUE)
-		visible_message("<span class='danger'>[H] electrocutes [src] with [H.p_their()] touch!</span>", "<span class='userdanger'>[H] electrocutes you with [H.p_their()] touch!</span>")
+		visible_message("<span class='danger'>[H] electrocutes [src] with [H.p_their()] touch!</span>", "<span class='danger'>[H] electrocutes you with [H.p_their()] touch!</span>")
 		electrocute_act(25, H)

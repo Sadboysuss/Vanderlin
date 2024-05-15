@@ -1,6 +1,6 @@
 /obj/item/melee/powerfist
 	name = "power-fist"
-	desc = "A metal gauntlet with a piston-powered ram ontop for that extra 'ompfh' in your punch."
+	desc = ""
 	icon_state = "powerfist"
 	item_state = "powerfist"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -45,7 +45,7 @@
 			if(3)
 				fisto_setting = 1
 		W.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You tweak \the [src]'s piston valve to [fisto_setting].</span>")
+		to_chat(user, "<span class='notice'>I tweak \the [src]'s piston valve to [fisto_setting].</span>")
 	else if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		if(tank)
 			updateTank(tank, 1, user)
@@ -55,7 +55,7 @@
 		if(!tank)
 			to_chat(user, "<span class='notice'>\The [src] currently has no tank attached to it.</span>")
 			return
-		to_chat(user, "<span class='notice'>You detach \the [thetank] from \the [src].</span>")
+		to_chat(user, "<span class='notice'>I detach \the [thetank] from \the [src].</span>")
 		tank.forceMove(get_turf(user))
 		user.put_in_hands(tank)
 		tank = null
@@ -65,7 +65,7 @@
 			return
 		if(!user.transferItemToLoc(thetank, src))
 			return
-		to_chat(user, "<span class='notice'>You hook \the [thetank] up to \the [src].</span>")
+		to_chat(user, "<span class='notice'>I hook \the [thetank] up to \the [src].</span>")
 		tank = thetank
 
 
@@ -82,23 +82,23 @@
     if(!gasused)
         to_chat(user, "<span class='warning'>\The [src]'s tank is empty!</span>")
         target.apply_damage((force / 5), BRUTE)
-        playsound(loc, 'sound/weapons/punch1.ogg', 50, TRUE)
+        playsound(loc, 'sound/blank.ogg', 50, TRUE)
         target.visible_message("<span class='danger'>[user]'s powerfist lets out a dull thunk as [user.p_they()] punch[user.p_es()] [target.name]!</span>", \
-            "<span class='userdanger'>[user]'s punches you!</span>")
+            "<span class='danger'>[user]'s punches you!</span>")
         return
     if(gasused.total_moles() < gasperfist * fisto_setting)
         to_chat(user, "<span class='warning'>\The [src]'s piston-ram lets out a weak hiss, it needs more gas!</span>")
-        playsound(loc, 'sound/weapons/punch4.ogg', 50, TRUE)
+        playsound(loc, 'sound/blank.ogg', 50, TRUE)
         target.apply_damage((force / 2), BRUTE)
         target.visible_message("<span class='danger'>[user]'s powerfist lets out a weak hiss as [user.p_they()] punch[user.p_es()] [target.name]!</span>", \
-            "<span class='userdanger'>[user]'s punch strikes with force!</span>")
+            "<span class='danger'>[user]'s punch strikes with force!</span>")
         return
     target.apply_damage(force * fisto_setting, BRUTE)
     target.visible_message("<span class='danger'>[user]'s powerfist lets out a loud hiss as [user.p_they()] punch[user.p_es()] [target.name]!</span>", \
-        "<span class='userdanger'>You cry out in pain as [user]'s punch flings you backwards!</span>")
+        "<span class='danger'>I cry out in pain as [user]'s punch flings you backwards!</span>")
     new /obj/effect/temp_visual/kinetic_blast(target.loc)
-    playsound(loc, 'sound/weapons/resonator_blast.ogg', 50, TRUE)
-    playsound(loc, 'sound/weapons/genhit2.ogg', 50, TRUE)
+    playsound(loc, 'sound/blank.ogg', 50, TRUE)
+    playsound(loc, 'sound/blank.ogg', 50, TRUE)
 
     var/atom/throw_target = get_edge_target_turf(target, get_dir(src, get_step_away(target, src)))
 

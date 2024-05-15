@@ -278,7 +278,7 @@
 //DEBUG FIELD ITEM
 /obj/item/multitool/field_debug
 	name = "strange multitool"
-	desc = "Seems to project a colored field!"
+	desc = ""
 	var/list/field_params = list("field_shape" = FIELD_SHAPE_RADIUS_SQUARE, "current_range" = 5, "set_fieldturf_color" = "#aaffff", "set_edgeturf_color" = "#ffaaff")
 	var/field_type = /datum/proximity_monitor/advanced/debug
 	var/operating = FALSE
@@ -302,7 +302,7 @@
 
 /obj/item/multitool/field_debug/attack_self(mob/user)
 	operating = !operating
-	to_chat(user, "<span class='notice'>You turn [src] [operating? "on":"off"].</span>")
+	to_chat(user, "<span class='notice'>I turn [src] [operating? "on":"off"].</span>")
 	UnregisterSignal(listeningTo, COMSIG_MOVABLE_MOVED)
 	listeningTo = null
 	if(!istype(current) && operating)

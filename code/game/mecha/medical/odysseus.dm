@@ -1,5 +1,5 @@
 /obj/mecha/medical/odysseus
-	desc = "These exosuits are developed and produced by Vey-Med. (&copy; All rights reserved)."
+	desc = ""
 	name = "\improper Odysseus"
 	icon_state = "odysseus"
 	step_in = 2

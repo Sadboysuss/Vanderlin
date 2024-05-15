@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(silo_access_logs)
 
 /obj/machinery/ore_silo
 	name = "ore silo"
-	desc = "An all-in-one bluespace storage and transmission system for the station's mineral distribution needs."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "silo"
 	density = TRUE
@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY(silo_access_logs)
 /obj/machinery/ore_silo/proc/remote_attackby(obj/machinery/M, mob/user, obj/item/stack/I)
 	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
 	// stolen from /datum/component/material_container/proc/OnAttackBy
-	if(user.a_intent != INTENT_HELP)
+	if(user.used_intent.type != INTENT_HELP)
 		return
 	if(I.item_flags & ABSTRACT)
 		return
@@ -167,7 +167,7 @@ GLOBAL_LIST_EMPTY(silo_access_logs)
 /obj/machinery/ore_silo/multitool_act(mob/living/user, obj/item/multitool/I)
 	. = ..()
 	if (istype(I))
-		to_chat(user, "<span class='notice'>You log [src] in the multitool's buffer.</span>")
+		to_chat(user, "<span class='notice'>I log [src] in the multitool's buffer.</span>")
 		I.buffer = src
 		return TRUE
 

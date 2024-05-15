@@ -1,8 +1,8 @@
 /datum/blobstrain/reagent/replicating_foam
 	name = "Replicating Foam"
 	description = "will do medium brute damage and occasionally expand again when expanding."
-	shortdesc = "will do medium brute damage."
-	effectdesc = "will also expand when attacked with burn damage, but takes more brute damage."
+	shortdesc = ""
+	effectdesc = ""
 	color = "#7B5A57"
 	complementary_color = "#57787B"
 	analyzerdescdamage = "Does medium brute damage."

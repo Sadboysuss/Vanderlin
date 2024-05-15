@@ -1,6 +1,6 @@
 /obj/item/documents
 	name = "secret documents"
-	desc = "\"Top Secret\" documents."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_generic"
 	item_state = "paper"
@@ -13,27 +13,27 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 /obj/item/documents/nanotrasen
-	desc = "\"Top Secret\" Nanotrasen documents, filled with complex diagrams and lists of names, dates and coordinates."
+	desc = ""
 	icon_state = "docs_verified"
 
 /obj/item/documents/syndicate
-	desc = "\"Top Secret\" documents detailing sensitive Syndicate operational intelligence."
+	desc = ""
 
 /obj/item/documents/syndicate/red
 	name = "red secret documents"
-	desc = "\"Top Secret\" documents detailing sensitive Syndicate operational intelligence. These documents are verified with a red wax seal."
+	desc = ""
 	icon_state = "docs_red"
 
 /obj/item/documents/syndicate/blue
 	name = "blue secret documents"
-	desc = "\"Top Secret\" documents detailing sensitive Syndicate operational intelligence. These documents are verified with a blue wax seal."
+	desc = ""
 	icon_state = "docs_blue"
 
 /obj/item/documents/syndicate/mining
-	desc = "\"Top Secret\" documents detailing Syndicate plasma mining operations."
+	desc = ""
 
 /obj/item/documents/photocopy
-	desc = "A copy of some top-secret documents. Nobody will notice they aren't the originals... right?"
+	desc = ""
 	var/forgedseal = 0
 	var/copy_type = null
 
@@ -48,11 +48,11 @@
 /obj/item/documents/photocopy/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/toy/crayon/red) || istype(O, /obj/item/toy/crayon/blue))
 		if (forgedseal)
-			to_chat(user, "<span class='warning'>You have already forged a seal on [src]!</span>")
+			to_chat(user, "<span class='warning'>I have already forged a seal on [src]!</span>")
 		else
 			var/obj/item/toy/crayon/C = O
 			name = "[C.crayon_color] secret documents"
 			icon_state = "docs_[C.crayon_color]"
 			forgedseal = C.crayon_color
-			to_chat(user, "<span class='notice'>You forge the official seal with a [C.crayon_color] crayon. No one will notice... right?</span>")
+			to_chat(user, "<span class='notice'>I forge the official seal with a [C.crayon_color] crayon. No one will notice... right?</span>")
 			update_icon()

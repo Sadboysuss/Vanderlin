@@ -8,7 +8,7 @@ The console is located at computer/gulag_teleporter.dm
 //Gulag teleporter
 /obj/machinery/gulag_teleporter
 	name = "labor camp teleporter"
-	desc = "A bluespace teleporter used for teleporting prisoners to the labor camp."
+	desc = ""
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
 	state_open = FALSE
@@ -99,15 +99,15 @@ The console is located at computer/gulag_teleporter.dm
 		return
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+		"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open || !locked)
 			return
 		locked = FALSE
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/gulag_teleporter/proc/locate_reclaimer()
@@ -170,7 +170,7 @@ The console is located at computer/gulag_teleporter.dm
 /*  beacon that receives the teleported prisoner */
 /obj/structure/gulag_beacon
 	name = "labor camp bluespace beacon"
-	desc = "A receiving beacon for bluespace teleportations."
+	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "light_on-w"
 	resistance_flags = INDESTRUCTIBLE

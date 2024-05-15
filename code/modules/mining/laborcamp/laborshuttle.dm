@@ -1,6 +1,6 @@
 /obj/machinery/computer/shuttle/labor
 	name = "labor shuttle console"
-	desc = "Used to call and send the labor camp shuttle."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/labor_shuttle
 	shuttleId = "laborcamp"
 	possible_destinations = "laborcamp_home;laborcamp_away"
@@ -9,7 +9,7 @@
 
 /obj/machinery/computer/shuttle/labor/one_way
 	name = "prisoner shuttle console"
-	desc = "A one-way shuttle console, used to summon the shuttle to the labor camp."
+	desc = ""
 	possible_destinations = "laborcamp_away"
 	circuit = /obj/item/circuitboard/computer/labor_shuttle/one_way
 	req_access = list( )

@@ -7,7 +7,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/drill
 	name = "exosuit drill"
-	desc = "Equipment for engineering and combat exosuits. This is the drill that'll pierce the heavens!"
+	desc = ""
 	icon_state = "mecha_drill"
 	equip_cooldown = 15
 	energy_drain = 10
@@ -32,8 +32,8 @@
 		if(target_obj.resistance_flags & UNACIDABLE)
 			return
 	target.visible_message("<span class='warning'>[chassis] starts to drill [target].</span>", \
-					"<span class='userdanger'>[chassis] starts to drill [target]...</span>", \
-					 "<span class='hear'>You hear drilling.</span>")
+					"<span class='danger'>[chassis] starts to drill [target]...</span>", \
+					 "<span class='hear'>I hear drilling.</span>")
 
 	if(do_after_cooldown(target))
 		set_ready_state(FALSE)
@@ -46,11 +46,11 @@
 		while(do_after_mecha(target, drill_delay))
 			if(isliving(target))
 				drill_mob(target, chassis.occupant)
-				playsound(src,'sound/weapons/drill.ogg',40,TRUE)
+				playsound(src,'sound/blank.ogg',40,TRUE)
 			else if(isobj(target))
 				var/obj/O = target
 				O.take_damage(15, BRUTE, 0, FALSE, get_dir(chassis, target))
-				playsound(src,'sound/weapons/drill.ogg',40,TRUE)
+				playsound(src,'sound/blank.ogg',40,TRUE)
 			else
 				set_ready_state(TRUE)
 				return
@@ -110,8 +110,8 @@
 
 /obj/item/mecha_parts/mecha_equipment/drill/proc/drill_mob(mob/living/target, mob/user)
 	target.visible_message("<span class='danger'>[chassis] is drilling [target] with [src]!</span>", \
-						"<span class='userdanger'>[chassis] is drilling you with [src]!</span>")
-	log_combat(user, target, "drilled", "[name]", "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+						"<span class='danger'>[chassis] is drilling you with [src]!</span>")
+	log_combat(user, target, "drilled", "[name]", "(INTENT: [uppertext(user.used_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	if(target.stat == DEAD && target.getBruteLoss() >= 200)
 		log_combat(user, target, "gibbed", name)
 		if(LAZYLEN(target.butcher_results) || LAZYLEN(target.guaranteed_butcher_results))
@@ -137,7 +137,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/drill/diamonddrill
 	name = "diamond-tipped exosuit drill"
-	desc = "Equipment for engineering and combat exosuits. This is an upgraded version of the drill that'll pierce the heavens!"
+	desc = ""
 	icon_state = "mecha_diamond_drill"
 	equip_cooldown = 10
 	drill_delay = 4
@@ -148,7 +148,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/mining_scanner
 	name = "exosuit mining scanner"
-	desc = "Equipment for engineering and combat exosuits. It will automatically check surrounding rock for useful minerals."
+	desc = ""
 	icon_state = "mecha_analyzer"
 	selectable = 0
 	equip_cooldown = 15

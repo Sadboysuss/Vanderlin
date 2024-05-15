@@ -1,6 +1,6 @@
 /obj/item/clothing/under/shorts
 	name = "athletic shorts"
-	desc = "95% Polyester, 5% Spandex!"
+	desc = ""
 	gender = PLURAL
 	body_parts_covered = GROIN
 	fitted = NO_FEMALE_UNIFORM

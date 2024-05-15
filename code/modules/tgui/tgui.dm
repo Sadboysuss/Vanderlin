@@ -82,9 +82,10 @@
 	if(master_ui)
 		master_ui.children += src
 	src.state = state
-
-	var/datum/asset/assets = get_asset_datum(/datum/asset/group/tgui)
-	assets.send(user)
+	if(user.client)
+		if(user.client.holder)
+			var/datum/asset/assets = get_asset_datum(/datum/asset/group/tgui)
+			assets.send(user)
 
  /**
   * public
@@ -225,7 +226,7 @@
 		// Intentional \ref usage; tgui datums can't/shouldn't be tagged so this is an effective unwrap
 		"ref" = "\ref[src]"
 	)
-	
+
 	if(!isnull(data))
 		json_data["data"] = data
 	if(!isnull(static_data))

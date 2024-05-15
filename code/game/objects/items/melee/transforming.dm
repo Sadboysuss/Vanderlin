@@ -5,7 +5,7 @@
 	var/faction_bonus_force = 0 //Bonus force dealt against certain factions
 	var/throwforce_on = 20
 	var/icon_state_on = "axe1"
-	var/hitsound_on = 'sound/weapons/blade1.ogg'
+	var/hitsound_on = 'sound/blank.ogg'
 	var/list/attack_verb_on = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/list/attack_verb_off = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	w_class = WEIGHT_CLASS_SMALL
@@ -70,11 +70,11 @@
 	return
 
 /obj/item/melee/transforming/proc/transform_messages(mob/living/user, supress_message_text)
-	playsound(user, active ? 'sound/weapons/saberon.ogg' : 'sound/weapons/saberoff.ogg', 35, TRUE)  //changed it from 50% volume to 35% because deafness
+	playsound(user, 'sound/blank.ogg', 35, TRUE)  //changed it from 50% volume to 35% because deafness
 	if(!supress_message_text)
 		to_chat(user, "<span class='notice'>[src] [active ? "is now active":"can now be concealed"].</span>")
 
 /obj/item/melee/transforming/proc/clumsy_transform_effect(mob/living/user)
 	if(clumsy_check && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
-		to_chat(user, "<span class='warning'>You accidentally cut yourself with [src], like a doofus!</span>")
+		to_chat(user, "<span class='warning'>I accidentally cut myself with [src], like a doofus!</span>")
 		user.take_bodypart_damage(5,5)

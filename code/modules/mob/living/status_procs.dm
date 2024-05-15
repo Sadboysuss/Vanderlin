@@ -3,6 +3,19 @@
 // eye damage, eye_blind, eye_blurry, druggy, TRAIT_BLIND trait, and TRAIT_NEARSIGHT trait.
 
 
+///Set the slowdown of a mob
+/mob/living/Slowdown(amount)
+	var/oldslow = slowdown
+	if(amount > 0)
+		if(!(status_flags & CANSTUN) || HAS_TRAIT(src, TRAIT_STUNIMMUNE))
+			amount = 0
+	slowdown = max(slowdown,amount,0)
+	if(oldslow <= 0 && slowdown > 0)
+		add_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS, update=TRUE, priority=100, multiplicative_slowdown=2, movetypes=GROUND)
+	if(slowdown <= 0)
+		remove_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS)
+
+
 ////////////////////////////// STUN ////////////////////////////////////
 
 /mob/living/proc/IsStun() //If we're stunned
@@ -113,7 +126,9 @@
 
 ///////////////////////////////// IMMOBILIZED ////////////////////////////////////
 /mob/living/proc/IsImmobilized() //If we're immobilized
-	return has_status_effect(STATUS_EFFECT_IMMOBILIZED)
+	if(has_status_effect(STATUS_EFFECT_IMMOBILIZED))
+		doing = 0
+		return has_status_effect(STATUS_EFFECT_IMMOBILIZED)
 
 /mob/living/proc/AmountImmobilized() //How many deciseconds remain in our Immobilized status effect
 	var/datum/status_effect/incapacitating/immobilized/I = IsImmobilized()
@@ -217,7 +232,30 @@
 			P = apply_status_effect(STATUS_EFFECT_PARALYZED, amount, updating)
 		return P
 
-//Blanket
+
+///////////////////////////////// OFF-BALANCED //////////////////////////////////
+/mob/living/proc/IsOffBalanced() //If we're knocked down
+	return has_status_effect(STATUS_EFFECT_OFFBALANCED)
+
+/mob/living/proc/AmountOffBalanced() //How many deciseconds remain in our knockdown
+	var/datum/status_effect/incapacitating/off_balanced/O = IsOffBalanced()
+	if(O)
+		return O.duration - world.time
+	return 0
+
+/mob/living/proc/OffBalance(amount, updating = TRUE) //Can't go below remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_OFFBALANCED, amount, updating))
+		return
+	var/datum/status_effect/incapacitating/off_balanced/O = IsOffBalanced()
+	if(O)
+		O.duration = max(world.time + amount, O.duration)
+	else if(amount > 0)
+		O = apply_status_effect(STATUS_EFFECT_OFFBALANCED, amount, updating)
+	return O
+
+
+
+///////////////Blanket
 /mob/living/proc/AllImmobility(amount, updating)
 	Paralyze(amount, FALSE)
 	Knockdown(amount, FALSE)
@@ -290,7 +328,10 @@
 
 /////////////////////////////////// SLEEPING ////////////////////////////////////
 
-/mob/living/proc/IsSleeping() //If we're asleep
+/mob/proc/IsSleeping()
+	return FALSE
+
+/mob/living/IsSleeping() //If we're asleep
 	return has_status_effect(STATUS_EFFECT_SLEEPING)
 
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
@@ -439,7 +480,7 @@
 		update_body()
 	else
 		ADD_TRAIT(src, TRAIT_HUSK, source)
-	
+
 /mob/living/proc/cure_fakedeath(source)
 	REMOVE_TRAIT(src, TRAIT_FAKEDEATH, source)
 	REMOVE_TRAIT(src, TRAIT_DEATHCOMA, source)

@@ -2,6 +2,7 @@
 	name = "bullet"
 	icon_state = "bullet"
 	damage = 60
+	pass_flags = PASSTABLE | PASSGRILLE
 	damage_type = BRUTE
 	nodamage = FALSE
 	flag = "bullet"

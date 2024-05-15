@@ -70,7 +70,7 @@ var opts = {
 	
 	'defaultMusicVolume': 25,
 
-	'messageCombining': true,
+	'messageCombining': false,
 
 };
 var replaceRegexes = {};
@@ -471,7 +471,7 @@ function toHex(n) {
 
 function swap() { //Swap to darkmode
 	if (opts.darkmode){
-		document.getElementById("sheetofstyles").href = "browserOutput_white.css";
+		document.getElementById("sheetofstyles").href = "browserOutput.css";
 		opts.darkmode = false;
 		runByond('?_src_=chat&proc=swaptolightmode');
 	} else {
@@ -753,7 +753,7 @@ $(function() {
 			opts.pingDisabled = true;
 			$('#ping').hide();
 		}
-		internalOutput('<span class="internal boldnshit">Loaded ping display of: '+(opts.pingDisabled ? 'hidden' : 'visible')+'</span>', 'internal');
+		//internalOutput('<span class="internal boldnshit">Loaded ping display of: '+(opts.pingDisabled ? 'hidden' : 'visible')+'</span>', 'internal');
 	}
 	if (savedConfig.shighlightTerms) {
 		var savedTerms = $.parseJSON(savedConfig.shighlightTerms);
@@ -765,13 +765,13 @@ $(function() {
 		}
 		if (actualTerms) {
 			actualTerms = actualTerms.substring(0, actualTerms.length - 2);
-			internalOutput('<span class="internal boldnshit">Loaded highlight strings of: ' + actualTerms+'</span>', 'internal');
+			//internalOutput('<span class="internal boldnshit">Loaded highlight strings of: ' + actualTerms+'</span>', 'internal');
 			opts.highlightTerms = savedTerms;
 		}
 	}
 	if (savedConfig.shighlightColor) {
 		opts.highlightColor = savedConfig.shighlightColor;
-		internalOutput('<span class="internal boldnshit">Loaded highlight color of: '+savedConfig.shighlightColor+'</span>', 'internal');
+		//internalOutput('<span class="internal boldnshit">Loaded highlight color of: '+savedConfig.shighlightColor+'</span>', 'internal');
 	}
 	if (savedConfig.smusicVolume) {
 		var newVolume = clamp(savedConfig.smusicVolume, 0, 100);
@@ -779,7 +779,7 @@ $(function() {
 		$('#musicVolume').val(newVolume);
 		opts.updatedVolume = newVolume;
 		sendVolumeUpdate();
-		internalOutput('<span class="internal boldnshit">Loaded music volume of: '+savedConfig.smusicVolume+'</span>', 'internal');
+		//internalOutput('<span class="internal boldnshit">Loaded music volume of: '+savedConfig.smusicVolume+'</span>', 'internal');
 	}
 	else{
 		$('#adminMusic').prop('volume', opts.defaultMusicVolume / 100);

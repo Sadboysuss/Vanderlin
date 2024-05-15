@@ -1,15 +1,15 @@
 //This proc allows download of past server logs saved within the data/logs/ folder.
 /client/proc/getserverlogs()
 	set name = "Get Server Logs"
-	set desc = "View/retrieve logfiles."
-	set category = "Admin"
+	set desc = ""
+	set category = "GameMaster"
 
 	browseserverlogs()
 
 /client/proc/getcurrentlogs()
 	set name = "Get Current Logs"
-	set desc = "View/retrieve logfiles for the current round."
-	set category = "Admin"
+	set desc = ""
+	set category = "GameMaster"
 
 	browseserverlogs("[GLOB.log_directory]/")
 

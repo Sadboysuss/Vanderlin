@@ -2,7 +2,7 @@
 
 /obj/machinery/flasher
 	name = "mounted flash"
-	desc = "A wall-mounted flashbulb device."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "mflash1"
 	max_integrity = 250
@@ -19,7 +19,7 @@
 
 /obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
 	name = "portable flasher"
-	desc = "A portable flashing device. Wrench to activate and deactivate. Cannot detect slow movements."
+	desc = ""
 	icon_state = "pflash1-p"
 	strength = 80
 	anchored = FALSE
@@ -61,9 +61,9 @@
 	add_fingerprint(user)
 	if (W.tool_behaviour == TOOL_WIRECUTTER)
 		if (bulb)
-			user.visible_message("<span class='notice'>[user] begins to disconnect [src]'s flashbulb.</span>", "<span class='notice'>You begin to disconnect [src]'s flashbulb...</span>")
+			user.visible_message("<span class='notice'>[user] begins to disconnect [src]'s flashbulb.</span>", "<span class='notice'>I begin to disconnect [src]'s flashbulb...</span>")
 			if(W.use_tool(src, user, 30, volume=50) && bulb)
-				user.visible_message("<span class='notice'>[user] has disconnected [src]'s flashbulb!</span>", "<span class='notice'>You disconnect [src]'s flashbulb.</span>")
+				user.visible_message("<span class='notice'>[user] has disconnected [src]'s flashbulb!</span>", "<span class='notice'>I disconnect [src]'s flashbulb.</span>")
 				bulb.forceMove(loc)
 				bulb = null
 				power_change()
@@ -72,7 +72,7 @@
 		if (!bulb)
 			if(!user.transferItemToLoc(W, src))
 				return
-			user.visible_message("<span class='notice'>[user] installs [W] into [src].</span>", "<span class='notice'>You install [W] into [src].</span>")
+			user.visible_message("<span class='notice'>[user] installs [W] into [src].</span>", "<span class='notice'>I install [W] into [src].</span>")
 			bulb = W
 			power_change()
 		else
@@ -80,9 +80,9 @@
 
 	else if (W.tool_behaviour == TOOL_WRENCH)
 		if(!bulb)
-			to_chat(user, "<span class='notice'>You start unsecuring the flasher frame...</span>")
+			to_chat(user, "<span class='notice'>I start unsecuring the flasher frame...</span>")
 			if(W.use_tool(src, user, 40, volume=50))
-				to_chat(user, "<span class='notice'>You unsecure the flasher frame.</span>")
+				to_chat(user, "<span class='notice'>I unsecure the flasher frame.</span>")
 				deconstruct(TRUE)
 		else
 			to_chat(user, "<span class='warning'>Remove a flashbulb from [src] first!</span>")
@@ -105,7 +105,7 @@
 		power_change()
 		return
 
-	playsound(src.loc, 'sound/weapons/flash.ogg', 100, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 	flick("[base_state]_flash", src)
 	flash_lighting_fx(FLASH_LIGHT_RANGE, light_power, light_color)
 	last_flash = world.time
@@ -149,7 +149,7 @@
 			var/obj/item/wallframe/flasher/F = new(get_turf(src))
 			transfer_fingerprints_to(F)
 			F.id = id
-			playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(loc, 'sound/blank.ogg', 50, TRUE)
 		else
 			new /obj/item/stack/sheet/metal (loc, 2)
 	qdel(src)
@@ -189,7 +189,7 @@
 
 /obj/item/wallframe/flasher
 	name = "mounted flash frame"
-	desc = "Used for building wall-mounted flashers."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "mflash_frame"
 	result_path = /obj/machinery/flasher
@@ -199,7 +199,7 @@
 	. = ..()
 	. += "<span class='notice'>Its channel ID is '[id]'.</span>"
 
-/obj/item/wallframe/flasher/after_attach(var/obj/O)
+/obj/item/wallframe/flasher/after_attach(obj/O)
 	..()
 	var/obj/machinery/flasher/F = O
 	F.id = id

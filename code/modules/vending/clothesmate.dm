@@ -1,7 +1,7 @@
 //DON'T FORGET TO CHANGE THE REFILL SIZE IF YOU CHANGE THE MACHINE'S CONTENTS!
 /obj/machinery/vending/clothing
 	name = "ClothesMate" //renamed to make the slogan rhyme
-	desc = "A vending machine for clothing."
+	desc = ""
 	icon_state = "clothes"
 	icon_deny = "clothes-deny"
 	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this swag!;Why leave style up to fate? Use the ClothesMate!"

@@ -2,8 +2,10 @@
 /client/verb/linkdiscord()
 	set category = "Special Verbs"
 	set name = "Link Discord Account"
-	set desc = "Link your discord account to your BYOND account."
-
+	set desc = ""
+	set hidden = 1
+	if(!usr.client.holder)
+		return
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, "<span class='warning'>This feature requires the SQL backend to be running.</span>")

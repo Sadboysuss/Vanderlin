@@ -3,10 +3,12 @@
 // ********************************************************
 
 /obj/item/seeds
+	name = "seeds"
 	icon = 'icons/obj/hydroponics/seeds.dmi'
 	icon_state = "seed"				// Unknown plant seed - these shouldn't exist in-game.
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
+	possible_item_intents = list(/datum/intent/use)
 	var/plantname = "Plants"		// Name of plant when planted.
 	var/obj/item/product						// A type path. The thing that is created when the plant is harvested.
 	var/productdesc
@@ -16,6 +18,14 @@
 	var/icon_grow					// Used to override grow icon (default is "[species]-grow"). You can use one grow icon for multiple closely related plants with it.
 	var/icon_dead					// Used to override dead icon (default is "[species]-dead"). You can use one dead icon for multiple closely related plants with it.
 	var/icon_harvest				// Used to override harvest icon (default is "[species]-harvest"). If null, plant will use [icon_grow][growthstages].
+
+	var/watersucc = 1
+	var/foodsucc = 1
+	var/growthrate = 1 //0.5, 1.3, etc its multilpeid
+	var/maxphp = 100
+	var/obscura = FALSE
+	var/delonharvest = TRUE
+	var/timesharvested = 0
 
 	var/lifespan = 25				// How long before the plant begins to take damage from age.
 	var/endurance = 15				// Amount of health the plant has.
@@ -33,11 +43,46 @@
 	// Stronger reagents must always come first to avoid being displaced by weaker ones.
 	// Total amount of any reagent in plant is calculated by formula: 1 + round(potency * multiplier)
 
-	var/weed_rate = 1 //If the chance below passes, then this many weeds sprout during growth
+
+
+	var/weed_rate = 20 //If the chance below passes, then this many weeds sprout during growth
 	var/weed_chance = 5 //Percentage chance per tray update to grow weeds
+
+/obj/item/seeds/Crossed(mob/living/L)
+	. = ..()
+	if(istype(L) && prob(50))
+		qdel(src)
+
+
+/obj/item/seeds/attack_turf(turf/T, mob/living/user)
+	if(istype(T, /turf/open/floor/rogue/dirt))
+		var/turf/open/floor/rogue/dirt/D = T
+		if(D.planted_crop)
+			to_chat(user, "<span class='warning'>Someone is already living here.</span>")
+			return
+		if(D.holie)
+			to_chat(user, "<span class='warning'>The seed needs a home to grow in, remove the hole.</span>")
+			return
+		D.planted_crop = new(D)
+		playsound(loc,'sound/items/seed.ogg', 100, TRUE)
+		visible_message("<span class='notice'>[user] plants some seeds.</span>")
+		D.planted_crop.name = src.plantname
+		D.planted_crop.myseed = src
+		D.planted_crop.php = maxphp
+		D.planted_crop.mphp = maxphp
+		if(!D.can_see_sky())
+			D.planted_crop.seesky = FALSE
+		if(D.muddy)
+			D.planted_crop.water = 100
+		src.forceMove(D.planted_crop)
+		D.planted_crop.update_seed_icon()
+		return
+	..()
+
 
 /obj/item/seeds/Initialize(mapload, nogenes = 0)
 	. = ..()
+	name = "seeds"
 	pixel_x = rand(-8, 8)
 	pixel_y = rand(-8, 8)
 
@@ -72,7 +117,7 @@
 
 /obj/item/seeds/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Use a pen on it to rename it or change its description.</span>"
+//	. += "<span class='notice'>Use a pen on it to rename it or change its description.</span>"
 
 /obj/item/seeds/proc/Copy()
 	var/obj/item/seeds/S = new type(null, 1)
@@ -185,7 +230,7 @@
 	return result
 
 
-/obj/item/seeds/proc/prepare_result(var/obj/item/T)
+/obj/item/seeds/proc/prepare_result(obj/item/T)
 	if(!T.reagents)
 		CRASH("[T] has no reagents.")
 
@@ -350,7 +395,7 @@
 
 		return
 
-	if(istype(O, /obj/item/pen))
+/*	if(istype(O, /obj/item/pen))
 		var/choice = input("What would you like to change?") in list("Plant Name", "Seed Description", "Product Description", "Cancel")
 		if(!user.canUseTopic(src, BE_CLOSE))
 			return
@@ -396,7 +441,7 @@
 					productdesc = newproductdesc
 			else
 				return
-
+*/
 	..() // Fallthrough to item/attackby() so that bags can pick seeds up
 
 // Checks plants for broken tray icons. Use Advanced Proc Call to activate.

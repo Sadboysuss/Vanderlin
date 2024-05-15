@@ -37,7 +37,7 @@
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
-				to_chat(M, "<i>You hear a voice in your head... <b>[msg]</i></b>")
+				to_chat(M, "<i>I hear a voice in your head... <b>[msg]</i></b>")
 
 	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
 	msg = "<span class='adminnotice'><b> SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] :</b> [msg]</span>"
@@ -77,7 +77,7 @@
 
 	log_directed_talk(mob, H, input, LOG_ADMIN, "reply")
 	message_admins("[key_name_admin(src)] replied to [key_name_admin(H)]'s [sender] message with: \"[input]\"")
-	to_chat(H, "<span class='hear'>You hear something crackle in your ears for a moment before a voice speaks. \"Please stand by for a message from [sender == "Syndicate" ? "your benefactor" : "Central Command"]. Message as follows[sender == "Syndicate" ? ", agent." : ":"] <b>[input].</b> Message ends.\"</span>")
+	to_chat(H, "<span class='hear'>I hear something crackle in your ears for a moment before a voice speaks. \"Please stand by for a message from [sender == "Syndicate" ? "your benefactor" : "Central Command"]. Message as follows[sender == "Syndicate" ? ", agent." : ":"] <b>[input].</b> Message ends.\"</span>")
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Headset Message") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -337,7 +337,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/respawn_character()
 	set category = "Special Verbs"
 	set name = "Respawn Character"
-	set desc = "Respawn a person that has been gibbed/dusted/killed. They must be a ghost for this to work and preferably should not have a body to go back into."
+	set desc = ""
 	if(!check_rights(R_ADMIN))
 		return
 
@@ -435,7 +435,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		new_character.mind_initialize()
 	if(!new_character.mind.assigned_role)
-		new_character.mind.assigned_role = "Assistant"//If they somehow got a null assigned role.
+		new_character.mind.assigned_role = "Adventurer"//If they somehow got a null assigned role.
 
 	new_character.key = G_found.key
 
@@ -560,7 +560,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/announce_command_report = TRUE
 	switch(confirm)
 		if("Yes")
-			priority_announce(input, null, 'sound/ai/commandreport.ogg')
+			priority_announce(input, null, 'sound/blank.ogg')
 			announce_command_report = FALSE
 		if("Cancel")
 			return
@@ -598,7 +598,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Admin"
 	set name = "Manage Job Slots"
 
-	if(!check_rights(R_ADMIN))
+	if(!check_rights(R_DEBUG))
 		return
 	holder.manage_free_slots()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Manage Job Slots") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -713,7 +713,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/toggle_view_range()
 	set category = "Special Verbs"
 	set name = "Change View Range"
-	set desc = "switches between 1x and custom views"
+	set desc = ""
 
 	if(view == CONFIG_GET(string/default_view))
 		change_view(input("Select view range:", "FUCK YE", 7) in list(1,2,3,4,5,6,7,8,9,10,11,12,13,14,128))
@@ -767,7 +767,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/everyone_random()
 	set category = "Fun"
 	set name = "Make Everyone Random"
-	set desc = "Make everyone have a random appearance. You can only use this before rounds!"
+	set desc = ""
 
 	if(SSticker.HasRoundStarted())
 		to_chat(usr, "Nope you can't do this, the game's already started. This only works before rounds!")
@@ -800,7 +800,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/toggle_random_events()
 	set category = "Server"
 	set name = "Toggle random events on/off"
-	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
+	set desc = ""
 	var/new_are = !CONFIG_GET(flag/allow_random_events)
 	CONFIG_SET(flag/allow_random_events, new_are)
 	if(new_are)
@@ -815,7 +815,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/admin_change_sec_level()
 	set category = "Special Verbs"
 	set name = "Set Security Level"
-	set desc = "Changes the security level. Announcement only, i.e. setting to Delta won't activate nuke"
+	set desc = ""
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -850,7 +850,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/toggle_combo_hud()
 	set category = "Admin"
 	set name = "Toggle Combo HUD"
-	set desc = "Toggles the Admin Combo HUD (antag, sci, med, eng)"
+	set desc = ""
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -885,7 +885,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/run_weather()
 	set category = "Fun"
 	set name = "Run Weather"
-	set desc = "Triggers a weather on the z-level you choose."
+	set desc = ""
 
 	if(!holder)
 		return
@@ -929,7 +929,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/mass_zombie_cure()
 	set category = "Fun"
 	set name = "Mass Zombie Cure"
-	set desc = "Removes the zombie infection from all humans, returning them to normal."
+	set desc = ""
 	if(!check_rights(R_ADMIN))
 		return
 
@@ -947,7 +947,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/polymorph_all()
 	set category = "Fun"
 	set name = "Polymorph All"
-	set desc = "Applies the effects of the bolt of change to every single mob."
+	set desc = ""
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -970,7 +970,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			continue
 
 		M.audible_message("<span class='hear'>...wabbajack...wabbajack...</span>")
-		playsound(M.loc, 'sound/magic/staff_change.ogg', 50, TRUE, -1)
+		playsound(M.loc, 'sound/blank.ogg', 50, TRUE, -1)
 
 		wabbajack(M)
 
@@ -1055,7 +1055,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(ishuman(target))
 				var/mob/living/carbon/human/H = target
 				H.electrocution_animation(40)
-			to_chat(target, "<span class='userdanger'>The gods have punished you for your sins!</span>")
+			to_chat(target, "<span class='danger'>The gods have punished you for your sins!</span>")
 		if(ADMIN_PUNISHMENT_BRAINDAMAGE)
 			target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 199, 199)
 		if(ADMIN_PUNISHMENT_GIB)

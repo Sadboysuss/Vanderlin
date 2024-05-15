@@ -1,7 +1,7 @@
 
 /obj/effect/abstract/proximity_checker/advanced
 	name = "field"
-	desc = "Why can you see energy fields?!"
+	desc = ""
 	icon = null
 	icon_state = null
 	alpha = 0
@@ -17,11 +17,11 @@
 
 /obj/effect/abstract/proximity_checker/advanced/center
 	name = "field anchor"
-	desc = "No."
+	desc = ""
 
 /obj/effect/abstract/proximity_checker/advanced/field_turf
 	name = "energy field"
-	desc = "Get off my turf!"
+	desc = ""
 
 /obj/effect/abstract/proximity_checker/advanced/field_turf/CanPass(atom/movable/AM, turf/target)
 	if(parent)
@@ -45,7 +45,7 @@
 
 /obj/effect/abstract/proximity_checker/advanced/field_edge
 	name = "energy field edge"
-	desc = "Edgy description here."
+	desc = ""
 
 /obj/effect/abstract/proximity_checker/advanced/field_edge/CanPass(atom/movable/AM, turf/target)
 	if(parent)

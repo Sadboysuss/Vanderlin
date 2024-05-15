@@ -19,17 +19,17 @@
 /mob/living/simple_animal/hostile/guardian/gravitokinetic/AttackingTarget()
 	. = ..()
 	if(isliving(target) && target != src)
-		to_chat(src, "<span class='danger'><B>Your punch has applied heavy gravity to [target]!</span></B>")
+		to_chat(src, "<span class='danger'><B>My punch has applied heavy gravity to [target]!</span></B>")
 		add_gravity(target, 2)
-		to_chat(target, "<span class='userdanger'>Everything feels really heavy!</span>")
+		to_chat(target, "<span class='danger'>Everything feels really heavy!</span>")
 
 /mob/living/simple_animal/hostile/guardian/gravitokinetic/AltClickOn(atom/A)
 	if(isopenturf(A) && is_deployed() && stat != DEAD && in_range(src, A) && !incapacitated())
 		var/turf/T = A
 		if(isspaceturf(T))
-			to_chat(src, "<span class='warning'>You cannot add gravity to space!</span>")
+			to_chat(src, "<span class='warning'>I cannot add gravity to space!</span>")
 			return
-		visible_message("<span class='danger'>[src] slams their fist into the [T]!</span>", "<span class='notice'>You modify the gravity of the [T].</span>")
+		visible_message("<span class='danger'>[src] slams their fist into the [T]!</span>", "<span class='notice'>I modify the gravity of the [T].</span>")
 		do_attack_animation(T)
 		add_gravity(T, 4)
 		return
@@ -37,7 +37,7 @@
 
 /mob/living/simple_animal/hostile/guardian/gravitokinetic/Recall(forced)
 	. = ..()
-	to_chat(src, "<span class='danger'><B>You have released your gravitokinetic powers!</span></B>")
+	to_chat(src, "<span class='danger'><B>I have released my gravitokinetic powers!</span></B>")
 	for(var/datum/component/C in gravito_targets)
 		remove_gravity(C)
 
@@ -51,7 +51,7 @@
     var/datum/component/C = A.AddComponent(/datum/component/forced_gravity,new_gravity)
     RegisterSignal(A, COMSIG_MOVABLE_MOVED, .proc/__distance_check)
     gravito_targets.Add(C)
-    playsound(src, 'sound/effects/gravhit.ogg', 100, TRUE)
+    playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 /mob/living/simple_animal/hostile/guardian/gravitokinetic/proc/remove_gravity(datum/component/C)
 	UnregisterSignal(C.parent, COMSIG_MOVABLE_MOVED)

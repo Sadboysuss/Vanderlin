@@ -4,7 +4,7 @@
 /obj/item/clothing/shoes/sneakers/black
 	name = "black shoes"
 	icon_state = "black"
-	desc = "A pair of black shoes."
+	desc = ""
 	custom_price = 20
 
 	cold_protection = FEET
@@ -14,7 +14,7 @@
 
 /obj/item/clothing/shoes/sneakers/brown
 	name = "brown shoes"
-	desc = "A pair of brown shoes."
+	desc = ""
 	icon_state = "brown"
 
 /obj/item/clothing/shoes/sneakers/blue
@@ -35,7 +35,7 @@
 
 /obj/item/clothing/shoes/sneakers/red
 	name = "red shoes"
-	desc = "Stylish red shoes."
+	desc = ""
 	icon_state = "red"
 
 /obj/item/clothing/shoes/sneakers/white
@@ -45,7 +45,7 @@
 
 /obj/item/clothing/shoes/sneakers/rainbow
 	name = "rainbow shoes"
-	desc = "Very gay shoes."
+	desc = ""
 	icon_state = "rain_bow"
 
 /obj/item/clothing/shoes/sneakers/orange
@@ -74,7 +74,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/C = user
 		if(C.shoes == src && chained == 1)
-			to_chat(user, "<span class='warning'>You need help taking these off!</span>")
+			to_chat(user, "<span class='warning'>I need help taking these off!</span>")
 			return FALSE
 	return ..()
 
@@ -83,7 +83,7 @@
 	if(ishuman(m))
 		var/mob/living/carbon/human/c = m
 		if(c.shoes == src && chained == 1)
-			to_chat(c, "<span class='warning'>You need help taking these off!</span>")
+			to_chat(c, "<span class='warning'>I need help taking these off!</span>")
 			return
 	return ..()
 

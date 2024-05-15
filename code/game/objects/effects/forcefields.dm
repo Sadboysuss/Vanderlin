@@ -1,5 +1,5 @@
 /obj/effect/forcefield
-	desc = "A space wizard's magic wall."
+	desc = ""
 	name = "FORCEWALL"
 	icon_state = "m_shield"
 	anchored = TRUE
@@ -17,7 +17,7 @@
 	return
 
 /obj/effect/forcefield/cult
-	desc = "An unholy shield that blocks all attacks."
+	desc = ""
 	name = "glowing wall"
 	icon = 'icons/effects/cult_effects.dmi'
 	icon_state = "cultshield"
@@ -29,10 +29,10 @@
 /obj/effect/forcefield/mime
 	icon_state = "nothing"
 	name = "invisible wall"
-	desc = "You have a bad feeling about this."
+	desc = ""
 	alpha = 0
 
 /obj/effect/forcefield/mime/advanced
 	name = "invisible blockade"
-	desc = "You're gonna be here awhile."
+	desc = ""
 	timeleft = 600

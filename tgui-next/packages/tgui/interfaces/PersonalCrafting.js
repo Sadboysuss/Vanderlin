@@ -118,21 +118,22 @@ export const PersonalCrafting = props => {
     <Fragment>
       {busyBox}
       <Section
-        title="Personal Crafting"
-        buttons={(
-          <Fragment>
-            <Button
-              icon={display_compact ? "check-square-o" : "square-o"}
-              content="Compact"
-              selected={display_compact}
-              onClick={() => act(ref, 'toggle_compact')} />
-            <Button
-              icon={display_craftable_only ? "check-square-o" : "square-o"}
-              content="Craftable Only"
-              selected={display_craftable_only}
-              onClick={() => act(ref, 'toggle_recipes')} />
-          </Fragment>
-        )}>
+        title="Crafting"
+//        buttons={(
+//          <Fragment>
+//            <Button
+//              icon={display_compact ? "check-square-o" : "square-o"}
+//              content="Compact"
+//              selected={display_compact}
+//              onClick={() => act(ref, 'toggle_compact')} />
+//            <Button
+//              icon={display_craftable_only ? "check-square-o" : "square-o"}
+//              content="Craftable Only"
+//              selected={display_craftable_only}
+//              onClick={() => act(ref, 'toggle_recipes')} />
+//          </Fragment>
+//        )}>
+			>
         <Tabs>
           {craftingRecipes.map(recipe => (
             <Tabs.Tab

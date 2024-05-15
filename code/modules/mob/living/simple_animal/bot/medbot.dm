@@ -5,7 +5,7 @@
 
 /mob/living/simple_animal/bot/medbot
 	name = "\improper Medibot"
-	desc = "A little medical robot. He looks somewhat underwhelmed."
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "medibot0"
 	density = FALSE
@@ -45,13 +45,13 @@
 
 /mob/living/simple_animal/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
-	desc = "International Medibot of mystery."
+	desc = ""
 	skin = "bezerk"
 	heal_amount = 10
 
 /mob/living/simple_animal/bot/medbot/derelict
 	name = "\improper Old Medibot"
-	desc = "Looks like it hasn't been modified since the late 2080s."
+	desc = ""
 	skin = "bezerk"
 	heal_threshold = 0
 	declare_crit = 0
@@ -187,7 +187,7 @@
 	if(emagged == 2)
 		declare_crit = 0
 		if(user)
-			to_chat(user, "<span class='notice'>You short out [src]'s reagent synthesis circuits.</span>")
+			to_chat(user, "<span class='notice'>I short out [src]'s reagent synthesis circuits.</span>")
 		audible_message("<span class='danger'>[src] buzzes oddly!</span>")
 		flick("medibot_spark", src)
 		playsound(src, "sparks", 75, TRUE)
@@ -204,7 +204,7 @@
 	if(assess_patient(H))
 		last_found = world.time
 		if((last_newpatient_speak + 300) < world.time) //Don't spam these messages!
-			var/list/messagevoice = list("Hey, [H.name]! Hold on, I'm coming." = 'sound/voice/medbot/coming.ogg',"Wait [H.name]! I want to help!" = 'sound/voice/medbot/help.ogg',"[H.name], you appear to be injured!" = 'sound/voice/medbot/injured.ogg')
+			var/list/messagevoice = list("Hey, [H.name]! Hold on, I")
 			var/message = pick(messagevoice)
 			speak(message)
 			playsound(src, messagevoice[message], 50, FALSE)
@@ -232,7 +232,7 @@
 
 	if(QDELETED(patient))
 		if(!shut_up && prob(1))
-			var/list/messagevoice = list("Radar, put a mask on!" = 'sound/voice/medbot/radar.ogg',"There's always a catch, and I'm the best there is." = 'sound/voice/medbot/catch.ogg',"I knew it, I should've been a plastic surgeon." = 'sound/voice/medbot/surgeon.ogg',"What kind of medbay is this? Everyone's dropping like flies." = 'sound/voice/medbot/flies.ogg',"Delicious!" = 'sound/voice/medbot/delicious.ogg')
+			var/list/messagevoice = list("Radar, put a mask on!" = 'sound/blank.ogg')
 			var/message = pick(messagevoice)
 			speak(message)
 			playsound(src, messagevoice[message], 50)
@@ -306,8 +306,8 @@
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if (H.wear_suit && H.head && istype(H.wear_suit, /obj/item/clothing) && istype(H.head, /obj/item/clothing))
-			var/obj/item/clothing/CS = H.wear_suit
+		if (H.wear_armor && H.head && istype(H.wear_armor, /obj/item/clothing) && istype(H.head, /obj/item/clothing))
+			var/obj/item/clothing/CS = H.wear_armor
 			var/obj/item/clothing/CH = H.head
 			if (CS.clothing_flags & CH.clothing_flags & THICKMATERIAL)
 				return FALSE // Skip over them if they have no exposed flesh.
@@ -354,7 +354,7 @@
 		return
 
 	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
-		var/list/messagevoice = list("No! Stay with me!" = 'sound/voice/medbot/no.ogg',"Live, damnit! LIVE!" = 'sound/voice/medbot/live.ogg',"I...I've never lost a patient before. Not today, I mean." = 'sound/voice/medbot/lost.ogg')
+		var/list/messagevoice = list("No! Stay with me!" = 'sound/blank.ogg')
 		var/message = pick(messagevoice)
 		speak(message)
 		playsound(src, messagevoice[message], 50)
@@ -381,7 +381,7 @@
 		if(!treatment_method && emagged != 2) //If they don't need any of that they're probably cured!
 			if(C.maxHealth - C.health < heal_threshold)
 				to_chat(src, "<span class='notice'>[C] is healthy! Your programming prevents you from injecting anyone without at least [heal_threshold] damage of any one type ([heal_threshold + 5] for oxygen damage.)</span>")
-			var/list/messagevoice = list("All patched up!" = 'sound/voice/medbot/patchedup.ogg',"An apple a day keeps me away." = 'sound/voice/medbot/apple.ogg',"Feel better soon!" = 'sound/voice/medbot/feelbetter.ogg')
+			var/list/messagevoice = list("All patched up!" = 'sound/blank.ogg')
 			var/message = pick(messagevoice)
 			speak(message)
 			playsound(src, messagevoice[message], 50)
@@ -389,7 +389,7 @@
 			tending = FALSE
 		else if(patient)
 			C.visible_message("<span class='danger'>[src] is trying to tend the wounds of [patient]!</span>", \
-				"<span class='userdanger'>[src] is trying to tend your wounds!</span>")
+				"<span class='danger'>[src] is trying to tend your wounds!</span>")
 
 			if(do_mob(src, patient, 20)) //Slightly faster than default tend wounds, but does less HPS
 				if((get_dist(src, patient) <= 1) && (on) && assess_patient(patient))
@@ -433,7 +433,7 @@
 		drop_part(robot_arm, Tsec)
 
 	if(emagged && prob(25))
-		playsound(src, 'sound/voice/medbot/insult.ogg', 50)
+		playsound(src, 'sound/blank.ogg', 50)
 
 	do_sparks(3, TRUE, src)
 	..()

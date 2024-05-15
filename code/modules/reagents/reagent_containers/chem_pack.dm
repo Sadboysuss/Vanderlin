@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/chem_pack
 	name = "intravenous medicine bag"
-	desc = "A plastic pressure bag, or 'chem pack', for IV administration of drugs. It is fitted with a thermosealing strip."
+	desc = ""
 	icon = 'icons/obj/bloodpack.dmi'
 	icon_state = "chempack"
 	volume = 100
@@ -14,7 +14,7 @@
 /obj/item/reagent_containers/chem_pack/AltClick(mob/living/user)
 	if(user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY) && !sealed)
 		if(iscarbon(user) && (HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50)))
-			to_chat(user, "<span class='warning'>Uh... whoops! You accidentally spill the content of the bag onto yourself.</span>")
+			to_chat(user, "<span class='warning'>Uh... whoops! You accidentally spill the content of the bag onto myself.</span>")
 			SplashReagents(user)
 			return
 
@@ -23,7 +23,7 @@
 		reagents.flags = reagent_flags
 		spillable = FALSE
 		sealed = TRUE
-		to_chat(user, "<span class='notice'>You seal the bag.</span>")
+		to_chat(user, "<span class='notice'>I seal the bag.</span>")
 
 /obj/item/reagent_containers/chem_pack/examine()
 	. = ..()

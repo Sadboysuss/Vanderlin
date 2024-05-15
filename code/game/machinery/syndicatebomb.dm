@@ -5,7 +5,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	name = "syndicate bomb"
 	icon_state = "syndicate-bomb"
-	desc = "A large and menacing device. Can be bolted down with a wrench."
+	desc = ""
 
 	anchored = FALSE
 	density = FALSE
@@ -24,7 +24,7 @@
 	var/open_panel = FALSE 	//are the wires exposed?
 	var/active = FALSE		//is the bomb counting down?
 	var/obj/item/bombcore/payload = /obj/item/bombcore
-	var/beepsound = 'sound/items/timer.ogg'
+	var/beepsound = 'sound/blank.ogg'
 	var/delayedbig = FALSE	//delay wire pulsed?
 	var/delayedlittle  = FALSE	//activation wire pulsed?
 	var/obj/effect/countdown/syndicatebomb/countdown
@@ -44,7 +44,7 @@
 
 /obj/machinery/syndicatebomb/obj_destruction()
 	if(!try_detonate())
-		..()
+		return ..()
 
 /obj/machinery/syndicatebomb/process()
 	if(!active)
@@ -114,14 +114,14 @@
 			if(!isturf(loc) || isspaceturf(loc))
 				to_chat(user, "<span class='notice'>The bomb must be placed on solid ground to attach it.</span>")
 			else
-				to_chat(user, "<span class='notice'>You firmly wrench the bomb to the floor.</span>")
+				to_chat(user, "<span class='notice'>I firmly wrench the bomb to the floor.</span>")
 				I.play_tool_sound(src)
 				setAnchored(TRUE)
 				if(active)
 					to_chat(user, "<span class='notice'>The bolts lock in place.</span>")
 		else
 			if(!active)
-				to_chat(user, "<span class='notice'>You wrench the bomb from the floor.</span>")
+				to_chat(user, "<span class='notice'>I wrench the bomb from the floor.</span>")
 				I.play_tool_sound(src)
 				setAnchored(FALSE)
 			else
@@ -130,7 +130,7 @@
 	else if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		open_panel = !open_panel
 		update_icon()
-		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
+		to_chat(user, "<span class='notice'>I [open_panel ? "open" : "close"] the wire panel.</span>")
 
 	else if(is_wire_tool(I) && open_panel)
 		wires.interact(user)
@@ -138,7 +138,7 @@
 	else if(I.tool_behaviour == TOOL_CROWBAR)
 		if(open_panel && wires.is_all_cut())
 			if(payload)
-				to_chat(user, "<span class='notice'>You carefully pry out [payload].</span>")
+				to_chat(user, "<span class='notice'>I carefully pry out [payload].</span>")
 				payload.forceMove(drop_location())
 				payload = null
 			else
@@ -152,7 +152,7 @@
 			if(!user.transferItemToLoc(I, src))
 				return
 			payload = I
-			to_chat(user, "<span class='notice'>You place [payload] into [src].</span>")
+			to_chat(user, "<span class='notice'>I place [payload] into [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>[payload] is already loaded into [src]! You'll have to remove it first.</span>")
 	else if(I.tool_behaviour == TOOL_WELDER)
@@ -162,9 +162,9 @@
 		if(!I.tool_start_check(user, amount=5))  //uses up 5 fuel
 			return
 
-		to_chat(user, "<span class='notice'>You start to cut [src] apart...</span>")
+		to_chat(user, "<span class='notice'>I start to cut [src] apart...</span>")
 		if(I.use_tool(src, user, 20, volume=50, amount=5)) //uses up 5 fuel
-			to_chat(user, "<span class='notice'>You cut [src] apart.</span>")
+			to_chat(user, "<span class='notice'>I cut [src] apart.</span>")
 			new /obj/item/stack/sheet/plasteel( loc, 5)
 			qdel(src)
 	else
@@ -187,15 +187,15 @@
 	countdown.start()
 	next_beep = world.time + 10
 	detonation_timer = world.time + (timer_set * 10)
-	playsound(loc, 'sound/machines/click.ogg', 30, TRUE)
+	playsound(loc, 'sound/blank.ogg', 30, TRUE)
 	notify_ghosts("\A [src] has been activated at [get_area(src)]!", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Bomb Planted")
 
 /obj/machinery/syndicatebomb/proc/settings(mob/user)
 	var/new_timer = input(user, "Please set the timer.", "Timer", "[timer_set]") as num|null
-	
+
 	if (isnull(new_timer))
 		return
-	
+
 	if(in_range(src, user) && isliving(user)) //No running off and setting bombs from across the station
 		timer_set = CLAMP(new_timer, minimum_timer, maximum_timer)
 		loc.visible_message("<span class='notice'>[icon2html(src, viewers(src))] timer set for [timer_set] seconds.</span>")
@@ -215,25 +215,25 @@
 /obj/machinery/syndicatebomb/training
 	name = "training bomb"
 	icon_state = "training-bomb"
-	desc = "A salvaged syndicate device gutted of its explosives to be used as a training aid for aspiring bomb defusers."
+	desc = ""
 	payload = /obj/item/bombcore/training
 
 /obj/machinery/syndicatebomb/badmin
 	name = "generic summoning badmin bomb"
-	desc = "Oh god what is in this thing?"
+	desc = ""
 	payload = /obj/item/bombcore/badmin/summon
 
 /obj/machinery/syndicatebomb/badmin/clown
 	name = "clown bomb"
 	icon_state = "clown-bomb"
-	desc = "HONK."
+	desc = ""
 	payload = /obj/item/bombcore/badmin/summon/clown
-	beepsound = 'sound/items/bikehorn.ogg'
+	beepsound = 'sound/blank.ogg'
 
 /obj/machinery/syndicatebomb/empty
 	name = "bomb"
 	icon_state = "base-bomb"
-	desc = "An ominous looking device designed to detonate an explosive payload. Can be bolted down using a wrench."
+	desc = ""
 	payload = null
 	open_panel = TRUE
 	timer_set = 120
@@ -244,7 +244,7 @@
 
 /obj/machinery/syndicatebomb/self_destruct
 	name = "self destruct device"
-	desc = "Do not taunt. Warranty invalid if exposed to high temperature. Not suitable for agents under 3 years of age."
+	desc = ""
 	payload = /obj/item/bombcore/large
 	can_unanchor = FALSE
 
@@ -252,7 +252,7 @@
 
 /obj/item/bombcore
 	name = "bomb payload"
-	desc = "A powerful secondary explosive of syndicate design and unknown composition, it should be stable under normal conditions..."
+	desc = ""
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "bombcore"
 	item_state = "eshield0"
@@ -290,7 +290,7 @@
 
 /obj/item/bombcore/training
 	name = "dummy payload"
-	desc = "A Nanotrasen replica of a syndicate payload. It's not intended to explode but to announce that it WOULD have exploded, then rewire itself to allow for more training."
+	desc = ""
 	var/defusals = 0
 	var/attempts = 0
 
@@ -328,7 +328,7 @@
 
 /obj/item/bombcore/badmin
 	name = "badmin payload"
-	desc = "If you're seeing this someone has either made a mistake or gotten dangerously savvy with var editing!"
+	desc = ""
 
 /obj/item/bombcore/badmin/defuse() //because we wouldn't want them being harvested by players
 	var/obj/machinery/syndicatebomb/B = loc
@@ -350,7 +350,7 @@
 	amt_summon 	= 50
 
 /obj/item/bombcore/badmin/summon/clown/defuse()
-	playsound(src, 'sound/misc/sadtrombone.ogg', 50)
+	playsound(src, 'sound/blank.ogg', 50)
 	..()
 
 /obj/item/bombcore/large
@@ -370,7 +370,7 @@
 
 /obj/item/bombcore/chemical
 	name = "chemical payload"
-	desc = "An explosive payload designed to spread chemicals, dangerous or otherwise, across a large area. Properties of the core may vary with grenade casing type, and must be loaded before use."
+	desc = ""
 	icon_state = "chemcore"
 	var/list/beakers = list()
 	var/max_beakers = 1 // Read on about grenade casing properties below
@@ -417,14 +417,14 @@
 				reactants += S.reagents
 
 	if(!chem_splash(get_turf(src), spread_range, reactants, temp_boost))
-		playsound(loc, 'sound/items/screwdriver2.ogg', 50, TRUE)
+		playsound(loc, 'sound/blank.ogg', 50, TRUE)
 		return // The Explosion didn't do anything. No need to log, or disappear.
 
 	if(adminlog)
 		message_admins(adminlog)
 		log_game(adminlog)
 
-	playsound(loc, 'sound/effects/bamf.ogg', 75, TRUE, 5)
+	playsound(loc, 'sound/blank.ogg', 75, TRUE, 5)
 
 	if(loc && istype(loc, /obj/machinery/syndicatebomb/))
 		qdel(loc)
@@ -442,7 +442,7 @@
 			if(!user.transferItemToLoc(I, src))
 				return
 			beakers += I
-			to_chat(user, "<span class='notice'>You load [src] with [I].</span>")
+			to_chat(user, "<span class='notice'>I load [src] with [I].</span>")
 		else
 			to_chat(user, "<span class='warning'>[I] won't fit! \The [src] can only hold up to [max_beakers] containers.</span>")
 			return
@@ -495,7 +495,7 @@
 
 /obj/item/syndicatedetonator
 	name = "big red button"
-	desc = "Your standard issue bomb synchronizing button. Five second safety delay to prevent 'accidents'."
+	desc = ""
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "bigred"
 	item_state = "electronic"
@@ -513,7 +513,7 @@
 				B.detonation_timer = world.time + BUTTON_DELAY
 				detonated++
 			existent++
-		playsound(user, 'sound/machines/click.ogg', 20, TRUE)
+		playsound(user, 'sound/blank.ogg', 20, TRUE)
 		to_chat(user, "<span class='notice'>[existent] found, [detonated] triggered.</span>")
 		if(detonated)
 			detonated--

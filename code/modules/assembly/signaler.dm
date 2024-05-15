@@ -1,6 +1,6 @@
 /obj/item/assembly/signaler
 	name = "remote signaling device"
-	desc = "Used to remotely activate devices. Allows for syncing when using a secure signaler on another."
+	desc = ""
 	icon_state = "signaller"
 	item_state = "signaler"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
@@ -21,7 +21,7 @@
 
 /obj/item/assembly/signaler/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] eats \the [src]! If it is signaled, [user.p_they()] will die!</span>")
-	playsound(src, 'sound/items/eatfood.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	moveToNullspace()
 	suicider = user.mind
 	suicide_mob = REF(user)
@@ -39,7 +39,7 @@
 	user.death(0)
 	user.set_suicide(TRUE)
 	user.suicide_log()
-	playsound(user, 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+	playsound(user, 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 	qdel(src)
 
 /obj/item/assembly/signaler/Initialize()
@@ -160,7 +160,7 @@ Code:
 	for(var/CHM in get_hearers_in_view(hearing_range, src))
 		if(ismob(CHM))
 			var/mob/LM = CHM
-			LM.playsound_local(get_turf(src), 'sound/machines/triple_beep.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
+			LM.playsound_local(get_turf(src), 'sound/blank.ogg', ASSEMBLY_BEEP_VOLUME, TRUE)
 	return TRUE
 
 
@@ -196,7 +196,7 @@ Code:
 // Embedded signaller used in anomalies.
 /obj/item/assembly/signaler/anomaly
 	name = "anomaly core"
-	desc = "The neutralized core of an anomaly. It'd probably be valuable for research."
+	desc = ""
 	icon_state = "anomaly core"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'

@@ -15,7 +15,7 @@
  */
 /obj/item/clothing/head/welding
 	name = "welding helmet"
-	desc = "A head-mounted face cover designed to protect the wearer completely from space-arc eye."
+	desc = ""
 	icon_state = "welding"
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	item_state = "welding"
@@ -39,15 +39,15 @@
  */
 /obj/item/clothing/head/hardhat/cakehat
 	name = "cakehat"
-	desc = "You put the cake on your head. Brilliant."
+	desc = ""
 	icon_state = "hardhat0_cakehat"
 	item_state = "hardhat0_cakehat"
 	hat_type = "cakehat"
 	lefthand_file = 'icons/mob/inhands/clothing_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/clothing_righthand.dmi'
-	hitsound = 'sound/weapons/tap.ogg'
-	var/hitsound_on = 'sound/weapons/sear.ogg' //so we can differentiate between cakehat and energyhat
-	var/hitsound_off = 'sound/weapons/tap.ogg'
+	hitsound = 'sound/blank.ogg'
+	var/hitsound_on = 'sound/blank.ogg' //so we can differentiate between cakehat and energyhat
+	var/hitsound_off = 'sound/blank.ogg'
 	var/force_on = 15
 	var/throwforce_on = 15
 	var/damtype_on = BURN
@@ -90,26 +90,26 @@
 
 /obj/item/clothing/head/hardhat/cakehat/energycake
 	name = "energy cake"
-	desc = "You put the energy sword on your cake. Brilliant."
+	desc = ""
 	icon_state = "hardhat0_energycake"
 	item_state = "hardhat0_energycake"
 	hat_type = "energycake"
-	hitsound = 'sound/weapons/tap.ogg'
-	hitsound_on = 'sound/weapons/blade1.ogg'
-	hitsound_off = 'sound/weapons/tap.ogg'
+	hitsound = 'sound/blank.ogg'
+	hitsound_on = 'sound/blank.ogg'
+	hitsound_off = 'sound/blank.ogg'
 	damtype_on = BRUTE
 	force_on = 18 //same as epen (but much more obvious)
 	brightness_on = 3 //ditto
 	heat = 0
 
 /obj/item/clothing/head/hardhat/cakehat/energycake/turn_on(mob/living/user)
-	playsound(user, 'sound/weapons/saberon.ogg', 5, TRUE)
-	to_chat(user, "<span class='warning'>You turn on \the [src].</span>")
+	playsound(user, 'sound/blank.ogg', 5, TRUE)
+	to_chat(user, "<span class='warning'>I turn on \the [src].</span>")
 	..()
 
 /obj/item/clothing/head/hardhat/cakehat/energycake/turn_off(mob/living/user)
-	playsound(user, 'sound/weapons/saberoff.ogg', 5, TRUE)
-	to_chat(user, "<span class='warning'>You turn off \the [src].</span>")
+	playsound(user, 'sound/blank.ogg', 5, TRUE)
+	to_chat(user, "<span class='warning'>I turn off \the [src].</span>")
 	..()
 
 /*
@@ -117,7 +117,7 @@
  */
 /obj/item/clothing/head/ushanka
 	name = "ushanka"
-	desc = "Perfect for winter in Siberia, da?"
+	desc = ""
 	icon_state = "ushankadown"
 	item_state = "ushankadown"
 	flags_inv = HIDEEARS|HIDEHAIR
@@ -132,19 +132,19 @@
 		src.icon_state = "ushankaup"
 		src.item_state = "ushankaup"
 		earflaps = 0
-		to_chat(user, "<span class='notice'>You raise the ear flaps on the ushanka.</span>")
+		to_chat(user, "<span class='notice'>I raise the ear flaps on the ushanka.</span>")
 	else
 		src.icon_state = "ushankadown"
 		src.item_state = "ushankadown"
 		earflaps = 1
-		to_chat(user, "<span class='notice'>You lower the ear flaps on the ushanka.</span>")
+		to_chat(user, "<span class='notice'>I lower the ear flaps on the ushanka.</span>")
 
 /*
  * Pumpkin head
  */
 /obj/item/clothing/head/hardhat/pumpkinhead
 	name = "carved pumpkin"
-	desc = "A jack o' lantern! Believed to ward off evil spirits."
+	desc = ""
 	icon_state = "hardhat0_pumpkin"
 	item_state = "hardhat0_pumpkin"
 	hat_type = "pumpkin"
@@ -159,7 +159,7 @@
  */
 /obj/item/clothing/head/kitty
 	name = "kitty ears"
-	desc = "A pair of kitty ears. Meow!"
+	desc = ""
 	icon_state = "kitty"
 	color = "#999999"
 	dynamic_hair_suffix = ""
@@ -177,12 +177,12 @@
 		add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
 
 /obj/item/clothing/head/kitty/genuine
-	desc = "A pair of kitty ears. A tag on the inside says \"Hand made from real cats.\""
+	desc = ""
 
 
 /obj/item/clothing/head/hardhat/reindeer
 	name = "novelty reindeer hat"
-	desc = "Some fake antlers and a very fake red nose."
+	desc = ""
 	icon_state = "hardhat0_reindeer"
 	item_state = "hardhat0_reindeer"
 	hat_type = "reindeer"
@@ -195,7 +195,7 @@
 
 /obj/item/clothing/head/cardborg
 	name = "cardborg helmet"
-	desc = "A helmet made out of a box."
+	desc = ""
 	icon_state = "cardborg_h"
 	item_state = "cardborg_h"
 	clothing_flags = SNUG_FIT
@@ -208,8 +208,8 @@
 	..()
 	if(ishuman(user) && slot == SLOT_HEAD)
 		var/mob/living/carbon/human/H = user
-		if(istype(H.wear_suit, /obj/item/clothing/suit/cardborg))
-			var/obj/item/clothing/suit/cardborg/CB = H.wear_suit
+		if(istype(H.wear_armor, /obj/item/clothing/suit/cardborg))
+			var/obj/item/clothing/suit/cardborg/CB = H.wear_armor
 			CB.disguise(user, src)
 
 /obj/item/clothing/head/cardborg/dropped(mob/living/user)
@@ -220,7 +220,7 @@
 
 /obj/item/clothing/head/wig
 	name = "wig"
-	desc = "A bunch of hair without a head attached."
+	desc = ""
 	icon = 'icons/mob/human_face.dmi'	  // default icon for all hairs
 	icon_state = "hair_vlong"
 	item_state = "pwig"
@@ -259,7 +259,7 @@
 		return
 	if(new_style && new_style != hairstyle)
 		hairstyle = new_style
-		user.visible_message("<span class='notice'>[user] changes \the [src]'s hairstyle to [new_style].</span>", "<span class='notice'>You change \the [src]'s hairstyle to [new_style].</span>")
+		user.visible_message("<span class='notice'>[user] changes \the [src]'s hairstyle to [new_style].</span>", "<span class='notice'>I change \the [src]'s hairstyle to [new_style].</span>")
 	if(adjustablecolor)
 		color = input(usr,"","Choose Color",color) as color|null
 	update_icon()
@@ -271,7 +271,7 @@
 
 /obj/item/clothing/head/wig/natural
 	name = "natural wig"
-	desc = "A bunch of hair without a head attached. This one changes color to match the hair of the wearer. Nothing natural about that."
+	desc = ""
 	color = "#FFF"
 	adjustablecolor = FALSE
 	custom_price = 25
@@ -289,7 +289,7 @@
 
 /obj/item/clothing/head/bronze
 	name = "bronze hat"
-	desc = "A crude helmet made out of bronze plates. It offers very little in the way of protection."
+	desc = ""
 	icon = 'icons/obj/clothing/clockwork_garb.dmi'
 	icon_state = "clockwork_helmet_old"
 	clothing_flags = SNUG_FIT
@@ -298,7 +298,7 @@
 
 /obj/item/clothing/head/foilhat
 	name = "tinfoil hat"
-	desc = "Thought control rays, psychotronic scanning. Don't mind that, I'm protected cause I made this hat."
+	desc = ""
 	icon_state = "foilhat"
 	item_state = "foilhat"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = -5,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = -5, "fire" = 0, "acid" = 0)
@@ -324,7 +324,7 @@
 	paranoia.clonable = FALSE
 
 	user.gain_trauma(paranoia, TRAUMA_RESILIENCE_MAGIC)
-	to_chat(user, "<span class='warning'>As you don the foiled hat, an entire world of conspiracy theories and seemingly insane ideas suddenly rush into your mind. What you once thought unbelievable suddenly seems.. undeniable. Everything is connected and nothing happens just by accident. You know too much and now they're out to get you. </span>")
+	to_chat(user, "<span class='warning'>As you don the foiled hat, an entire world of conspiracy theories and seemingly insane ideas suddenly rush into my mind. What you once thought unbelievable suddenly seems.. undeniable. Everything is connected and nothing happens just by accident. You know too much and now they're out to get you. </span>")
 
 
 /obj/item/clothing/head/foilhat/MouseDrop(atom/over_object)
@@ -332,7 +332,7 @@
 	if(!warped && iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(src == C.head)
-			to_chat(C, "<span class='userdanger'>Why would you want to take this off? Do you want them to get into your mind?!</span>")
+			to_chat(C, "<span class='danger'>Why would you want to take this off? Do you want them to get into my mind?!</span>")
 			return
 	return ..()
 
@@ -343,7 +343,7 @@
 
 /obj/item/clothing/head/foilhat/proc/warp_up()
 	name = "scorched tinfoil hat"
-	desc = "A badly warped up hat. Quite unprobable this will still work against any of fictional and contemporary dangers it used to."
+	desc = ""
 	warped = TRUE
 	clothing_flags &= ~ANTI_TINFOIL_MANEUVER
 	if(!isliving(loc) || !paranoia)
@@ -353,13 +353,13 @@
 		return
 	QDEL_NULL(paranoia)
 	if(!target.IsUnconscious())
-		to_chat(target, "<span class='warning'>Your zealous conspirationism rapidly dissipates as the donned hat warps up into a ruined mess. All those theories starting to sound like nothing but a ridicolous fanfare.</span>")
+		to_chat(target, "<span class='warning'>My zealous conspirationism rapidly dissipates as the donned hat warps up into a ruined mess. All those theories starting to sound like nothing but a ridicolous fanfare.</span>")
 
 /obj/item/clothing/head/foilhat/attack_hand(mob/user)
 	if(!warped && iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(src == C.head)
-			to_chat(user, "<span class='userdanger'>Why would you want to take this off? Do you want them to get into your mind?!</span>")
+			to_chat(user, "<span class='danger'>Why would you want to take this off? Do you want them to get into my mind?!</span>")
 			return
 	return ..()
 

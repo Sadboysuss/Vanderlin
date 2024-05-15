@@ -5,6 +5,9 @@
 	layer = POINT_LAYER
 	duration = 25
 
+/obj/effect/temp_visual/point/still
+	icon_state = "arrow_still"
+
 /obj/effect/temp_visual/point/Initialize(mapload, set_invis = 0)
 	. = ..()
 	var/atom/old_loc = loc
@@ -25,7 +28,7 @@
 
 /obj/effect/decal/fakelattice
 	name = "lattice"
-	desc = "A lightweight support lattice."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/lattice.dmi'
 	icon_state = "lattice"
 	density = TRUE

@@ -31,7 +31,7 @@
 /obj/machinery/modular_computer/console/preset/engineering
 	console_department = "Engineering"
 	name = "engineering console"
-	desc = "A stationary computer. This one comes preloaded with engineering programs."
+	desc = ""
 
 /obj/machinery/modular_computer/console/preset/engineering/install_programs()
 	var/obj/item/computer_hardware/hard_drive/hard_drive = cpu.all_components[MC_HDD]
@@ -43,7 +43,7 @@
 /obj/machinery/modular_computer/console/preset/research
 	console_department = "Research"
 	name = "research director's console"
-	desc = "A stationary computer. This one comes preloaded with research programs."
+	desc = ""
 	_has_ai = TRUE
 
 /obj/machinery/modular_computer/console/preset/research/install_programs()
@@ -58,7 +58,7 @@
 /obj/machinery/modular_computer/console/preset/command
 	console_department = "Command"
 	name = "command console"
-	desc = "A stationary computer. This one comes preloaded with command programs."
+	desc = ""
 	_has_id_slot = TRUE
 	_has_printer = TRUE
 
@@ -71,7 +71,7 @@
 /obj/machinery/modular_computer/console/preset/civilian
 	console_department = "Civilian"
 	name = "civilian console"
-	desc = "A stationary computer. This one comes preloaded with generic programs."
+	desc = ""
 
 /obj/machinery/modular_computer/console/preset/civilian/install_programs()
 	var/obj/item/computer_hardware/hard_drive/hard_drive = cpu.all_components[MC_HDD]

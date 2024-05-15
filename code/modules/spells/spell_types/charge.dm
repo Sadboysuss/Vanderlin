@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/charge
 	name = "Charge"
-	desc = "This spell can be used to recharge a variety of things in your hands, from magical artifacts to electrical components. A creative wizard can even use it to grant magical power to a fellow magic user."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 600
@@ -26,9 +26,9 @@
 				if(M.mind)
 					for(var/obj/effect/proc_holder/spell/S in M.mind.spell_list)
 						S.charge_counter = S.charge_max
-				to_chat(M, "<span class='notice'>You feel raw magic flowing through you. It feels good!</span>")
+				to_chat(M, "<span class='notice'>I feel raw magic flowing through you. It feels good!</span>")
 			else
-				to_chat(M, "<span class='notice'>You feel very strange for a moment, but then it passes.</span>")
+				to_chat(M, "<span class='notice'>I feel very strange for a moment, but then it passes.</span>")
 				burnt_out = TRUE
 			charged_item = M
 			break
@@ -95,9 +95,9 @@
 						charged_item = item
 						break
 		if(!charged_item)
-			to_chat(L, "<span class='notice'>You feel magical power surging through your hands, but the feeling rapidly fades...</span>")
+			to_chat(L, "<span class='notice'>I feel magical power surging through your hands, but the feeling rapidly fades...</span>")
 		else if(burnt_out)
 			to_chat(L, "<span class='warning'>[charged_item] doesn't seem to be reacting to the spell!</span>")
 		else
-			playsound(get_turf(L), 'sound/magic/charge.ogg', 50, TRUE)
+			playsound(get_turf(L), 'sound/blank.ogg', 50, TRUE)
 			to_chat(L, "<span class='notice'>[charged_item] suddenly feels very warm!</span>")

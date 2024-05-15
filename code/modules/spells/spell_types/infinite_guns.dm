@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/infinite_guns
 	name = "Lesser Summon Guns"
-	desc = "Why reload when you have infinite guns? Summons an unending stream of bolt action rifles that deal little damage, but will knock targets down. Requires both hands free to use. Learning this spell makes you unable to learn Arcane Barrage."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1
@@ -22,6 +22,6 @@
 
 /obj/effect/proc_holder/spell/targeted/infinite_guns/arcane_barrage
 	name = "Arcane Barrage"
-	desc = "Fire a torrent of arcane energy at your foes with this (powerful) spell. Deals much more damage than Lesser Summon Guns, but won't knock targets down. Requires both hands free to use. Learning this spell makes you unable to learn Lesser Summon Gun."
+	desc = ""
 	action_icon_state = "arcane_barrage"
 	summon_path = /obj/item/gun/ballistic/rifle/boltaction/enchanted/arcane_barrage

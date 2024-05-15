@@ -1,6 +1,6 @@
 /obj/item/paperplane
 	name = "paper plane"
-	desc = "Paper, folded in the shape of a plane."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paperplane"
 	throw_range = 7
@@ -14,7 +14,7 @@
 	var/obj/item/paper/internalPaper
 
 /obj/item/paperplane/syndicate
-	desc = "Paper, masterfully folded in the shape of a plane."
+	desc = ""
 	throwforce = 20 //same as throwing stars, but no chance of embedding.
 	hit_probability = 100 //guaranteed to cause eye damage when it hits a mob.
 
@@ -67,7 +67,7 @@
 			add_overlay("paperplane_[S]")
 
 /obj/item/paperplane/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You unfold [src].</span>")
+	to_chat(user, "<span class='notice'>I unfold [src].</span>")
 	var/obj/item/paper/internal_paper_tmp = internalPaper
 	internal_paper_tmp.forceMove(loc)
 	internalPaper = null
@@ -77,7 +77,7 @@
 /obj/item/paperplane/attackby(obj/item/P, mob/living/carbon/human/user, params)
 	..()
 	if(istype(P, /obj/item/pen) || istype(P, /obj/item/toy/crayon))
-		to_chat(user, "<span class='warning'>You should unfold [src] before changing it!</span>")
+		to_chat(user, "<span class='warning'>I should unfold [src] before changing it!</span>")
 		return
 
 	else if(istype(P, /obj/item/stamp)) 	//we don't randomize stamps on a paperplane
@@ -87,7 +87,7 @@
 	else if(P.get_temperature())
 		if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(10))
 			user.visible_message("<span class='warning'>[user] accidentally ignites [user.p_them()]self!</span>", \
-				"<span class='userdanger'>You miss [src] and accidentally light yourself on fire!</span>")
+				"<span class='danger'>I miss [src] and accidentally light myself on fire!</span>")
 			user.dropItemToGround(P)
 			user.adjust_fire_stacks(1)
 			user.IgniteMob()
@@ -96,7 +96,7 @@
 		if(!(in_range(user, src))) //to prevent issues as a result of telepathically lighting a paper
 			return
 		user.dropItemToGround(src)
-		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>You light [src] on fire!</span>")
+		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>I light [src] on fire!</span>")
 		fire_act()
 
 	add_fingerprint(user)
@@ -125,10 +125,10 @@
 		eyes?.applyOrganDamage(rand(6,8))
 		H.Paralyze(40)
 		H.emote("scream")
-
+/*
 /obj/item/paper/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Alt-click [src] to fold it into a paper plane.</span>"
+//	. += "<span class='notice'>Alt-click [src] to fold it into a paper plane.</span>"
 
 /obj/item/paper/AltClick(mob/living/carbon/user, obj/item/I)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
@@ -138,7 +138,7 @@
 		if(!Carbon.iscopy && !Carbon.copied)
 			to_chat(user, "<span class='notice'>Take off the carbon copy first.</span>")
 			return
-	to_chat(user, "<span class='notice'>You fold [src] into the shape of a plane!</span>")
+	to_chat(user, "<span class='notice'>I fold [src] into the shape of a plane!</span>")
 	user.temporarilyRemoveItemFromInventory(src)
 	var/obj/item/paperplane/plane_type = /obj/item/paperplane
 	//Origami Master
@@ -147,4 +147,4 @@
 		plane_type = /obj/item/paperplane/syndicate
 
 	I = new plane_type(user, src)
-	user.put_in_hands(I)
+	user.put_in_hands(I)*/

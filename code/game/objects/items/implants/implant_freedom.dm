@@ -1,6 +1,6 @@
 /obj/item/implant/freedom
 	name = "freedom implant"
-	desc = "Use this to escape from those evil Red Shirts."
+	desc = ""
 	icon_state = "freedom"
 	implant_color = "r"
 	uses = 4
@@ -9,7 +9,7 @@
 /obj/item/implant/freedom/activate()
 	. = ..()
 	uses--
-	to_chat(imp_in, "<span class='hear'>You feel a faint click.</span>")
+	to_chat(imp_in, "<span class='hear'>I feel a faint click.</span>")
 	if(iscarbon(imp_in))
 		var/mob/living/carbon/C_imp_in = imp_in
 		C_imp_in.uncuff()
@@ -40,5 +40,5 @@ No Implant Specifics"}
 
 /obj/item/implantcase/freedom
 	name = "implant case - 'Freedom'"
-	desc = "A glass case containing a freedom implant."
+	desc = ""
 	imp_type = /obj/item/implant/freedom

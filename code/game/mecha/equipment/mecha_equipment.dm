@@ -17,7 +17,6 @@
 	var/detachable = TRUE // Set to FALSE for built-in equipment that cannot be removed
 	var/selectable = 1	// Set to 0 for passive equipment such as mining scanner or armor plates
 	var/harmful = FALSE //Controls if equipment can be used to attack by a pacifist.
-	var/destroy_sound = 'sound/mecha/critdestr.ogg'
 
 /obj/item/mecha_parts/mecha_equipment/proc/update_chassis_page()
 	if(chassis)
@@ -52,9 +51,9 @@
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return FALSE
 		attach(M)
-		user.visible_message("<span class='notice'>[user] attaches [src] to [M].</span>", "<span class='notice'>You attach [src] to [M].</span>")
+		user.visible_message("<span class='notice'>[user] attaches [src] to [M].</span>", "<span class='notice'>I attach [src] to [M].</span>")
 		return TRUE
-	to_chat(user, "<span class='warning'>You are unable to attach [src] to [M]!</span>")
+	to_chat(user, "<span class='warning'>I are unable to attach [src] to [M]!</span>")
 	return FALSE
 
 /obj/item/mecha_parts/mecha_equipment/proc/get_equip_info()

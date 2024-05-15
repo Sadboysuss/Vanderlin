@@ -84,7 +84,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 
 	//Actually play it
 	content()
-	
+
 	//Cleanup
 	sleep(cleanup_time)
 
@@ -118,7 +118,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_nuke",screen)
 	sleep(35)
 	flick("station_explode_fade_red",screen)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "summary_nukewin"
 
@@ -128,7 +128,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 /datum/cinematic/nuke_miss/content()
 	flick("intro_nuke",screen)
 	sleep(35)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	flick("station_intact_fade_red",screen)
 	screen.icon_state = "summary_nukefail"
@@ -141,7 +141,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_nuke",screen)
 	sleep(35)
 	flick("station_explode_fade_red", screen)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "summary_selfdes"
 
@@ -151,7 +151,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 /datum/cinematic/nuke_selfdestruct_miss/content()
 	flick("intro_nuke",screen)
 	sleep(35)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "station_intact"
 
@@ -162,7 +162,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_malf",screen)
 	sleep(76)
 	flick("station_explode_fade_red",screen)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "summary_malf"
 
@@ -173,12 +173,12 @@ GLOBAL_LIST_EMPTY(cinematics)
 	screen.icon_state = null
 	flick("intro_cult",screen)
 	sleep(25)
-	cinematic_sound(sound('sound/magic/enter_blood.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	sleep(28)
-	cinematic_sound(sound('sound/machines/terminal_off.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	sleep(20)
 	flick("station_corrupted",screen)
-	cinematic_sound(sound('sound/effects/ghost.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	sleep(70)
 	special()
 
@@ -189,7 +189,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_nuke",screen)
 	sleep(35)
 	flick("station_explode_fade_red",screen)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "summary_cult"
 
@@ -200,7 +200,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_nuke",screen)
 	sleep(35)
 	flick("station_explode_fade_red",screen)
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 	screen.icon_state = "summary_totala"
 
@@ -211,7 +211,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 /datum/cinematic/fake/content()
 	flick("intro_nuke",screen)
 	sleep(35)
-	cinematic_sound(sound('sound/items/bikehorn.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	flick("summary_selfdes",screen) //???
 	special()
 
@@ -223,7 +223,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	flick("intro_nuke",screen)
 	sleep(35)
 	flick("station_intact",screen)
-	cinematic_sound(sound('sound/ambience/signal.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	sleep(100)
 
 /datum/cinematic/nuke_far
@@ -231,7 +231,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 	cleanup_time = 0
 
 /datum/cinematic/nuke_far/content()
-	cinematic_sound(sound('sound/effects/explosion_distant.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	special()
 
 /datum/cinematic/clownop
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(cinematics)
 /datum/cinematic/clownop/content()
 	flick("intro_nuke",screen)
 	sleep(35)
-	cinematic_sound(sound('sound/items/airhorn.ogg'))
+	cinematic_sound(sound('sound/blank.ogg'))
 	flick("summary_selfdes",screen) //???
 	special()
 

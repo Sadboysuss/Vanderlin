@@ -1,7 +1,6 @@
-/datum/keybinding/robot
+/*/datum/keybinding/robot
 	category = CATEGORY_ROBOT
 	weight = WEIGHT_ROBOT
-
 
 /datum/keybinding/robot/moduleone
 	hotkey_keys = list("1")
@@ -54,7 +53,7 @@
 	var/mob/living/silicon/robot/R = user.mob
 	R.a_intent_change(INTENT_HOTKEY_LEFT)
 	return TRUE
-	
+
 /datum/keybinding/robot/unequip_module
 	hotkey_keys = list("Q")
 	name = "unequip_module"
@@ -67,3 +66,4 @@
 	var/mob/living/silicon/robot/R = user.mob
 	R.uneq_active()
 	return TRUE
+*/

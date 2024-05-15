@@ -209,7 +209,7 @@
 		SSblackbox.record_feedback("tally", "changeling_power_purchase", 1, "Readapt")
 		return 1
 	else
-		to_chat(owner.current, "<span class='warning'>You lack the power to readapt your evolutions!</span>")
+		to_chat(owner.current, "<span class='warning'>I lack the power to readapt your evolutions!</span>")
 		return 0
 
 //Called in life()
@@ -288,7 +288,7 @@
 	prof.undershirt = H.undershirt
 	prof.socks = H.socks
 
-	var/list/slots = list("head", "wear_mask", "back", "wear_suit", "w_uniform", "shoes", "belt", "gloves", "glasses", "ears", "wear_id", "s_store")
+	var/list/slots = list("head", "wear_mask", "back", "wear_armor", "wear_pants", "shoes", "belt", "gloves", "glasses", "ears", "wear_ring", "s_store")
 	for(var/slot in slots)
 		if(slot in H.vars)
 			var/obj/item/clothing/I = H.vars[slot]
@@ -358,7 +358,7 @@
 		RegisterSignal(C, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), .proc/stingAtom)
 	var/mob/living/M = mob_override || owner.current
 	add_antag_hud(antag_hud_type, antag_hud_name, M)
-	handle_clown_mutation(M, "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself.")
+	handle_clown_mutation(M, "You have evolved beyond your clownish nature, allowing you to wield weapons without harming myself.")
 
 /datum/antagonist/changeling/remove_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
@@ -369,15 +369,15 @@
 
 /datum/antagonist/changeling/greet()
 	if (you_are_greet)
-		to_chat(owner.current, "<span class='boldannounce'>You are [changelingID], a changeling! You have absorbed and taken the form of a human.</span>")
+		to_chat(owner.current, "<span class='boldannounce'>I are [changelingID], a changeling! You have absorbed and taken the form of a human.</span>")
 	to_chat(owner.current, "<span class='boldannounce'>Use say \"[MODE_TOKEN_CHANGELING] message\" to communicate with your fellow changelings.</span>")
-	to_chat(owner.current, "<b>You must complete the following tasks:</b>")
-	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/ling_aler.ogg', 100, FALSE, pressure_affected = FALSE)
+	to_chat(owner.current, "<b>I must complete the following tasks:</b>")
+	owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)
 
 	owner.announce_objectives()
 
 /datum/antagonist/changeling/farewell()
-	to_chat(owner.current, "<span class='userdanger'>You grow weak and lose your powers! You are no longer a changeling and are stuck in your current form!</span>")
+	to_chat(owner.current, "<span class='danger'>I grow weak and lose your powers! You are no longer a changeling and are stuck in your current form!</span>")
 
 /datum/antagonist/changeling/proc/forge_team_objectives()
 	if(GLOB.changeling_team_objective_type)

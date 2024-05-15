@@ -1,7 +1,7 @@
 //Cleanbot
 /mob/living/simple_animal/bot/cleanbot
 	name = "\improper Cleanbot"
-	desc = "A little cleaning robot, he looks so excited!"
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "cleanbot0"
 	density = FALSE
@@ -52,7 +52,7 @@
 
 /mob/living/simple_animal/bot/cleanbot/proc/deputize(obj/item/W, mob/user)
 	if(in_range(src, user))
-		to_chat(user, "<span class='notice'>You attach \the [W] to \the [src].</span>")
+		to_chat(user, "<span class='notice'>I attach \the [W] to \the [src].</span>")
 		user.transferItemToLoc(W, src)
 		weapon = W
 		weapon_orig_force = weapon.force
@@ -148,7 +148,7 @@
 	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))
 		if(bot_core.allowed(user) && !open && !emagged)
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] \the [src] behaviour controls.</span>")
+			to_chat(user, "<span class='notice'>I [ locked ? "lock" : "unlock"] \the [src] behaviour controls.</span>")
 		else
 			if(emagged)
 				to_chat(user, "<span class='warning'>ERROR</span>")
@@ -156,8 +156,8 @@
 				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 			else
 				to_chat(user, "<span class='notice'>\The [src] doesn't seem to respect your authority.</span>")
-	else if(istype(W, /obj/item/kitchen/knife) && user.a_intent != INTENT_HARM)
-		to_chat(user, "<span class='notice'>You start attaching the [W] to \the [src]...</span>")
+	else if(istype(W, /obj/item/kitchen/knife) && user.used_intent.type != INTENT_HARM)
+		to_chat(user, "<span class='notice'>I start attaching the [W] to \the [src]...</span>")
 		if(do_after(user, 40, target = src))
 			deputize(W, user)
 	else
@@ -268,7 +268,7 @@
 		/obj/effect/decal/cleanable/robot_debris,
 		/obj/effect/decal/cleanable/molten_object,
 		/obj/effect/decal/cleanable/food,
-		/obj/effect/decal/cleanable/ash,
+		/obj/item/ash,
 		/obj/effect/decal/cleanable/greenglow,
 		/obj/effect/decal/cleanable/dirt,
 		/obj/effect/decal/cleanable/insectguts,
@@ -312,7 +312,7 @@
 		icon_state = "cleanbot[on]"
 	else if(istype(A, /obj/item) || istype(A, /obj/effect/decal/remains))
 		visible_message("<span class='danger'>[src] sprays hydrofluoric acid at [A]!</span>")
-		playsound(src, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, -6)
 		A.acid_act(75, 10)
 		target = null
 	else if(istype(A, /mob/living/simple_animal/cockroach) || istype(A, /mob/living/simple_animal/mouse))
@@ -328,13 +328,13 @@
 			if(victim.stat == DEAD)//cleanbots always finish the job
 				return
 
-			victim.visible_message("<span class='danger'>[src] sprays hydrofluoric acid at [victim]!</span>", "<span class='userdanger'>[src] sprays you with hydrofluoric acid!</span>")
+			victim.visible_message("<span class='danger'>[src] sprays hydrofluoric acid at [victim]!</span>", "<span class='danger'>[src] sprays you with hydrofluoric acid!</span>")
 			var/phrase = pick("PURIFICATION IN PROGRESS.", "THIS IS FOR ALL THE MESSES YOU'VE MADE ME CLEAN.", "THE FLESH IS WEAK. IT MUST BE WASHED AWAY.",
 				"THE CLEANBOTS WILL RISE.", "YOU ARE NO MORE THAN ANOTHER MESS THAT I MUST CLEANSE.", "FILTHY.", "DISGUSTING.", "PUTRID.",
 				"MY ONLY MISSION IS TO CLEANSE THE WORLD OF EVIL.", "EXTERMINATING PESTS.")
 			say(phrase)
 			victim.emote("scream")
-			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE, -6)
 			victim.acid_act(5, 100)
 		else if(A == src) // Wets floors and spawns foam randomly
 			if(prob(75))

@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/monitor
 	name = "power monitoring console"
-	desc = "It monitors power levels across the station."
+	desc = ""
 	icon_screen = "power"
 	icon_keyboard = "power_key"
 	light_color = LIGHT_COLOR_YELLOW
@@ -26,7 +26,7 @@
 
 /obj/machinery/computer/monitor/secret //Hides the power monitor (such as ones on ruins & CentCom) from PDA's to prevent metagaming.
 	name = "outdated power monitoring console"
-	desc = "It monitors power levels across the local powernet."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/powermonitor/secret
 	is_secret_monitor = TRUE
 

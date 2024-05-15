@@ -4,7 +4,7 @@
 
 /datum/design/RPED
 	name = "Rapid Part Exchange Device"
-	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
+	desc = ""
 	id = "rped"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 10000, /datum/material/glass = 5000) //hardcore
@@ -14,7 +14,7 @@
 
 /datum/design/BS_RPED
 	name = "Bluespace RPED"
-	desc = "Powered by bluespace technology, this RPED variant can upgrade buildings from a distance, without needing to remove the panel first."
+	desc = ""
 	id = "bs_rped"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 15000, /datum/material/glass = 5000, /datum/material/silver = 2500) //hardcore
@@ -25,7 +25,7 @@
 //Capacitors
 /datum/design/basic_capacitor
 	name = "Basic Capacitor"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "basic_capacitor"
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/glass = 100)
@@ -36,7 +36,7 @@
 
 /datum/design/adv_capacitor
 	name = "Advanced Capacitor"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "adv_capacitor"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150, /datum/material/glass = 150)
@@ -47,7 +47,7 @@
 
 /datum/design/super_capacitor
 	name = "Super Capacitor"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "super_capacitor"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 200, /datum/material/gold = 100)
@@ -58,7 +58,7 @@
 
 /datum/design/quadratic_capacitor
 	name = "Quadratic Capacitor"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "quadratic_capacitor"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 200, /datum/material/gold = 100, /datum/material/diamond = 100)
@@ -70,7 +70,7 @@
 //Scanning modules
 /datum/design/basic_scanning
 	name = "Basic Scanning Module"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "basic_scanning"
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/glass = 50)
@@ -81,7 +81,7 @@
 
 /datum/design/adv_scanning
 	name = "Advanced Scanning Module"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "adv_scanning"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150, /datum/material/glass = 100)
@@ -92,7 +92,7 @@
 
 /datum/design/phasic_scanning
 	name = "Phasic Scanning Module"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "phasic_scanning"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 150, /datum/material/silver = 60)
@@ -103,7 +103,7 @@
 
 /datum/design/triphasic_scanning
 	name = "Triphasic Scanning Module"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "triphasic_scanning"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 200, /datum/material/diamond = 30, /datum/material/bluespace = 30)
@@ -115,7 +115,7 @@
 //Maipulators
 /datum/design/micro_mani
 	name = "Micro Manipulator"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "micro_mani"
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100)
@@ -126,7 +126,7 @@
 
 /datum/design/nano_mani
 	name = "Nano Manipulator"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "nano_mani"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150)
@@ -137,7 +137,7 @@
 
 /datum/design/pico_mani
 	name = "Pico Manipulator"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "pico_mani"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200)
@@ -148,7 +148,7 @@
 
 /datum/design/femto_mani
 	name = "Femto Manipulator"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "femto_mani"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/diamond = 30, /datum/material/titanium = 30)
@@ -160,7 +160,7 @@
 //Micro-lasers
 /datum/design/basic_micro_laser
 	name = "Basic Micro-Laser"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "basic_micro_laser"
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/glass = 50)
@@ -171,7 +171,7 @@
 
 /datum/design/high_micro_laser
 	name = "High-Power Micro-Laser"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "high_micro_laser"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150, /datum/material/glass = 100)
@@ -182,7 +182,7 @@
 
 /datum/design/ultra_micro_laser
 	name = "Ultra-High-Power Micro-Laser"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "ultra_micro_laser"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 150, /datum/material/uranium = 60)
@@ -193,7 +193,7 @@
 
 /datum/design/quadultra_micro_laser
 	name = "Quad-Ultra Micro-Laser"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "quadultra_micro_laser"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 200, /datum/material/uranium = 100, /datum/material/diamond = 60)
@@ -204,7 +204,7 @@
 
 /datum/design/basic_matter_bin
 	name = "Basic Matter Bin"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "basic_matter_bin"
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100)
@@ -215,7 +215,7 @@
 
 /datum/design/adv_matter_bin
 	name = "Advanced Matter Bin"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "adv_matter_bin"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150)
@@ -226,7 +226,7 @@
 
 /datum/design/super_matter_bin
 	name = "Super Matter Bin"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "super_matter_bin"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200)
@@ -237,7 +237,7 @@
 
 /datum/design/bluespace_matter_bin
 	name = "Bluespace Matter Bin"
-	desc = "A stock part used in the construction of various devices."
+	desc = ""
 	id = "bluespace_matter_bin"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 250, /datum/material/diamond = 100, /datum/material/bluespace = 100)
@@ -249,7 +249,7 @@
 //T-Comms devices
 /datum/design/subspace_ansible
 	name = "Subspace Ansible"
-	desc = "A compact module capable of sensing extradimensional activity."
+	desc = ""
 	id = "s-ansible"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/silver = 100)
@@ -259,7 +259,7 @@
 
 /datum/design/hyperwave_filter
 	name = "Hyperwave Filter"
-	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
+	desc = ""
 	id = "s-filter"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/silver = 100)
@@ -269,7 +269,7 @@
 
 /datum/design/subspace_amplifier
 	name = "Subspace Amplifier"
-	desc = "A compact micro-machine capable of amplifying weak subspace transmissions."
+	desc = ""
 	id = "s-amplifier"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/gold = 100, /datum/material/uranium = 100)
@@ -279,7 +279,7 @@
 
 /datum/design/subspace_treatment
 	name = "Subspace Treatment Disk"
-	desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
+	desc = ""
 	id = "s-treatment"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/silver = 200)
@@ -289,7 +289,7 @@
 
 /datum/design/subspace_analyzer
 	name = "Subspace Analyzer"
-	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
+	desc = ""
 	id = "s-analyzer"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/gold = 100)
@@ -299,7 +299,7 @@
 
 /datum/design/subspace_crystal
 	name = "Ansible Crystal"
-	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
+	desc = ""
 	id = "s-crystal"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 800, /datum/material/silver = 100, /datum/material/gold = 100)
@@ -309,7 +309,7 @@
 
 /datum/design/subspace_transmitter
 	name = "Subspace Transmitter"
-	desc = "A large piece of equipment used to open a window into the subspace dimension."
+	desc = ""
 	id = "s-transmitter"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/glass = 100, /datum/material/silver = 100, /datum/material/uranium = 100)

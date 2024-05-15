@@ -8,7 +8,7 @@
  */
 
 /turf/open/floor/wood
-	desc = "Stylish dark wood."
+	desc = ""
 	icon_state = "wood"
 	floor_tile = /obj/item/stack/tile/wood
 	broken_states = list("wood-broken", "wood-broken2", "wood-broken3", "wood-broken4", "wood-broken5", "wood-broken6", "wood-broken7")
@@ -49,16 +49,16 @@
 		broken = 0
 		burnt = 0
 		if(user && !silent)
-			to_chat(user, "<span class='notice'>You remove the broken planks.</span>")
+			to_chat(user, "<span class='notice'>I remove the broken planks.</span>")
 	else
 		if(make_tile)
 			if(user && !silent)
-				to_chat(user, "<span class='notice'>You unscrew the planks.</span>")
+				to_chat(user, "<span class='notice'>I unscrew the planks.</span>")
 			if(floor_tile)
 				new floor_tile(src)
 		else
 			if(user && !silent)
-				to_chat(user, "<span class='notice'>You forcefully pry off the planks, destroying them in the process.</span>")
+				to_chat(user, "<span class='notice'>I forcefully pry off the planks, destroying them in the process.</span>")
 	return make_plating()
 
 /turf/open/floor/wood/cold
@@ -69,7 +69,8 @@
 
 /turf/open/floor/grass
 	name = "grass patch"
-	desc = "You can't tell if this is real grass or just cheap plastic imitation."
+	desc = ""
+	icon = 'icons/turf/grass.dmi'
 	icon_state = "grass"
 	floor_tile = /obj/item/stack/tile/grass
 	broken_states = list("sand")
@@ -90,15 +91,15 @@
 /turf/open/floor/grass/attackby(obj/item/C, mob/user, params)
 	if((C.tool_behaviour == TOOL_SHOVEL) && params)
 		new ore_type(src, 2)
-		user.visible_message("<span class='notice'>[user] digs up [src].</span>", "<span class='notice'>You [turfverb] [src].</span>")
-		playsound(src, 'sound/effects/shovel_dig.ogg', 50, TRUE)
+		user.visible_message("<span class='notice'>[user] digs up [src].</span>", "<span class='notice'>I [turfverb] [src].</span>")
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		make_plating()
 	if(..())
 		return
 
 /turf/open/floor/grass/fairy //like grass but fae-er
 	name = "fairygrass patch"
-	desc = "Something about this grass makes you want to frolic. Or get high."
+	desc = ""
 	icon_state = "fairygrass"
 	floor_tile = /obj/item/stack/tile/fairygrass
 	light_range = 2
@@ -109,7 +110,7 @@
 	gender = PLURAL
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
-	desc = "Looks cold."
+	desc = ""
 	icon_state = "snow"
 	ore_type = /obj/item/stack/sheet/mineral/snow
 	planetary_atmos = TRUE
@@ -150,7 +151,7 @@
 
 /turf/open/floor/grass/fakebasalt //Heart is not a real planeteer power
 	name = "aesthetic volcanic flooring"
-	desc = "Safely recreated turf for your hellplanet-scaping."
+	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "basalt"
 	floor_tile = /obj/item/stack/tile/basalt
@@ -171,7 +172,7 @@
 
 /turf/open/floor/carpet
 	name = "carpet"
-	desc = "Soft velvet carpeting. Feels good between your toes."
+	desc = ""
 	icon = 'icons/turf/floors/carpet.dmi'
 	icon_state = "carpet"
 	floor_tile = /obj/item/stack/tile/carpet
@@ -181,14 +182,14 @@
 	flags_1 = NONE
 	bullet_bounce_sound = null
 	footstep = FOOTSTEP_CARPET
-	barefootstep = FOOTSTEP_CARPET_BAREFOOT
-	clawfootstep = FOOTSTEP_CARPET_BAREFOOT
+	barefootstep = FOOTSTEP_SOFT_BAREFOOT
+	clawfootstep = FOOTSTEP_SOFT_BAREFOOT
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	tiled_dirt = FALSE
 
 /turf/open/floor/carpet/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>There's a <b>small crack</b> on the edge of it.</span>"
+//	. += "<span class='notice'>There's a <b>small crack</b> on the edge of it.</span>"
 
 /turf/open/floor/carpet/Initialize()
 	. = ..()
@@ -234,6 +235,14 @@
 	icon = 'icons/turf/floors/carpet_purple.dmi'
 	floor_tile = /obj/item/stack/tile/carpet/purple
 	canSmoothWith = list(/turf/open/floor/carpet/purple, /turf/open/floor/carpet/purple/airless)
+
+/turf/open/floor/carpet/inn
+	icon = 'icons/turf/floors/inn.dmi'
+
+/turf/open/floor/carpet/stellar
+	icon = 'icons/turf/floors/carpet_stellar.dmi'
+	floor_tile = /obj/item/stack/tile/carpet/purple
+	canSmoothWith = list(/turf/open/floor/carpet/stellar, /turf/open/floor/carpet/purple/airless)
 
 /turf/open/floor/carpet/red
 	icon = 'icons/turf/floors/carpet_red.dmi'
@@ -303,7 +312,7 @@
 
 
 /turf/open/floor/fakepit
-	desc = "A clever illusion designed to look like a bottomless pit."
+	desc = ""
 	smooth = SMOOTH_TRUE | SMOOTH_BORDER | SMOOTH_MORE
 	canSmoothWith = list(/turf/open/floor/fakepit)
 	icon = 'icons/turf/floors/Chasms.dmi'

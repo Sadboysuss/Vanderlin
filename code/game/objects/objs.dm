@@ -14,6 +14,8 @@
 	var/integrity_failure = 0 //0 if we have no special broken behavior, otherwise is a percentage of at what point the obj breaks. 0.5 being 50%
 	///Damage under this value will be completely ignored
 	var/damage_deflection = 0
+	var/obj_broken = FALSE
+	var/obj_destroyed = FALSE
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
 
@@ -32,6 +34,19 @@
 	var/renamedByPlayer = FALSE //set when a player uses a pen on a renamable object
 
 	var/drag_slowdown // Amont of multiplicative slowdown applied if pulled. >1 makes you slower, <1 makes you faster.
+
+	var/blade_dulling = DULLING_BASHCHOP
+
+	var/debris = null
+	var/static_debris = null
+	var/break_sound = null
+	var/break_message = null
+	var/destroy_sound = 'sound/foley/breaksound.ogg'
+	var/destroy_message = null
+
+	var/animate_dmg = TRUE
+
+	vis_flags = VIS_INHERIT_PLANE
 
 /obj/vv_edit_var(vname, vval)
 	switch(vname)
@@ -291,8 +306,8 @@
 
 /obj/examine(mob/user)
 	. = ..()
-	if(obj_flags & UNIQUE_RENAME)
-		. += "<span class='notice'>Use a pen on it to rename it or change its description.</span>"
+//	if(obj_flags & UNIQUE_RENAME)
+//		. += "<span class='notice'>Use a pen on it to rename it or change its description.</span>"
 	if(unique_reskin && !current_skin)
 		. += "<span class='notice'>Alt-click it to reskin it.</span>"
 

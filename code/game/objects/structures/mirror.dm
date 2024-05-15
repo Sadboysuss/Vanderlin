@@ -1,13 +1,20 @@
 //wip wip wup
 /obj/structure/mirror
 	name = "mirror"
-	desc = "Mirror mirror on the wall, who's the most robust of them all?"
-	icon = 'icons/obj/watercloset.dmi'
+	desc = ""
+	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "mirror"
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 200
-	integrity_failure = 0.5
+	integrity_failure = 0.9
+	break_sound = "glassbreak"
+	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	pixel_y = 32
+
+/obj/structure/mirror/fancy
+	icon_state = "fancymirror"
+	pixel_y = 32
 
 /obj/structure/mirror/Initialize(mapload)
 	. = ..()
@@ -21,6 +28,73 @@
 	if(broken || !Adjacent(user))
 		return
 
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.mob_timers["mirrortime"])
+			if(world.time < H.mob_timers["mirrortime"] + 6 MINUTES)
+				var/list/options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
+				var/chosen = input(user, "Change what?", "ROGUETOWN")  as null|anything in options
+				var/should_update
+				switch(chosen)
+					if("hairstyle")
+						var/list/spec_hair = H.dna.species.get_spec_hair_list(H.gender)
+						var/list/hairlist = list()
+						for(var/datum/sprite_accessory/X in spec_hair)
+							hairlist += X.name
+						var/new_hairstyle
+						new_hairstyle = input(user, "Choose your character's hairstyle:", "Barber")  as null|anything in hairlist
+						if(new_hairstyle)
+							H.hairstyle = new_hairstyle
+							should_update = TRUE
+					if("facial hairstyle")
+						var/list/spec_hair = H.dna.species.get_spec_facial_list(H.gender)
+						var/list/hairlist = list()
+						for(var/datum/sprite_accessory/X in spec_hair)
+							hairlist += X.name
+						var/new_hairstyle
+						new_hairstyle = input(user, "Choose your character's beard:", "Barber")  as null|anything in hairlist
+						if(new_hairstyle)
+							H.facial_hairstyle = new_hairstyle
+							should_update = TRUE
+					if("hair color")
+						var/new_hair
+						var/list/hairs
+						if(H.age == AGE_OLD && OLDGREY in H.dna.species.species_traits)
+							hairs = H.dna.species.get_oldhc_list()
+							new_hair = input(user, "Choose your character's hair color:", "") as null|anything in hairs
+						else
+							hairs = H.dna.species.get_hairc_list()
+							new_hair = input(user, "Choose your character's hair color:", "") as null|anything in hairs
+						if(new_hair)
+							H.hair_color = hairs[new_hair]
+							H.facial_hair_color = H.hair_color
+							should_update = TRUE
+					if("skin")
+						var/listy = H.dna.species.get_skin_list()
+						var/new_s_tone = input(user, "Choose your character's skin tone:", "Sun")  as null|anything in listy
+						if(new_s_tone)
+							H.skin_tone = listy[new_s_tone]
+							should_update = TRUE
+					if("detail")
+						var/list/spec_detail = H.dna.species.get_spec_detail_list(H.gender)
+						var/list/detaillist = list()
+						for(var/datum/sprite_accessory/X in spec_detail)
+							detaillist += X.name
+						var/new_detail
+						new_detail = input(user, "Choose your character's detail:", "Make me unique")  as null|anything in detaillist //don't ask
+						if(new_detail)
+							H.detail = new_detail
+							should_update = TRUE
+					if("eye color")
+						var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference","#"+H.eye_color) as color|null
+						if(new_eyes)
+							H.eye_color = sanitize_hexcolor(new_eyes)
+							should_update = TRUE
+				if(should_update)
+					H.update_body()
+					H.update_hair()
+					H.update_body_parts()
+/*
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 
@@ -44,7 +118,7 @@
 		if(new_style)
 			H.hairstyle = new_style
 
-		H.update_hair()
+		H.update_hair()*/
 
 /obj/structure/mirror/examine_status(mob/user)
 	if(broken)
@@ -53,22 +127,21 @@
 
 /obj/structure/mirror/obj_break(damage_flag, mapload)
 	if(!broken && !(flags_1 & NODECONSTRUCT_1))
-		icon_state = "mirror_broke"
+		icon_state = "[icon_state]1"
 		if(!mapload)
-			playsound(src, "shatter", 70, TRUE)
-		if(desc == initial(desc))
-			desc = "Oh no, seven years of bad luck!"
+			new /obj/item/shard (get_turf(src))
 		broken = TRUE
+	..()
 
 /obj/structure/mirror/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(!disassembled)
-			new /obj/item/shard( src.loc )
-	qdel(src)
+//	if(!(flags_1 & NODECONSTRUCT_1))
+//		if(!disassembled)
+//			new /obj/item/shard( src.loc )
+	..()
 
 /obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
 	..()
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return FALSE
 
 	if(!broken)
@@ -77,26 +150,19 @@
 	if(!I.tool_start_check(user, amount=0))
 		return TRUE
 
-	to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
+	to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
 	if(I.use_tool(src, user, 10, volume=50))
-		to_chat(user, "<span class='notice'>You repair [src].</span>")
+		to_chat(user, "<span class='notice'>I repair [src].</span>")
 		broken = 0
 		icon_state = initial(icon_state)
 		desc = initial(desc)
 
 	return TRUE
 
-/obj/structure/mirror/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
-	switch(damage_type)
-		if(BRUTE)
-			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, TRUE)
-		if(BURN)
-			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, TRUE)
-
 
 /obj/structure/mirror/magic
 	name = "magic mirror"
-	desc = "Turn and face the strange... face."
+	desc = ""
 	icon_state = "magic_mirror"
 	var/list/choosable_races = list()
 
@@ -231,7 +297,7 @@
 						H.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
 				H.update_hair()
 
-		if(BODY_ZONE_PRECISE_EYES)
+		if(BODY_ZONE_PRECISE_R_EYE)
 			var/new_eye_color = input(H, "Choose your eye color", "Eye Color","#"+H.eye_color) as color|null
 			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 				return

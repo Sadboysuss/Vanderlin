@@ -1,6 +1,6 @@
 /obj/item/assembly/mousetrap
 	name = "mousetrap"
-	desc = "A handy little spring-loaded trap for catching pesty rodents."
+	desc = ""
 	icon_state = "mousetrap"
 	item_state = "mousetrap"
 	custom_materials = list(/datum/material/iron=100)
@@ -19,10 +19,10 @@
 			if(ishuman(usr))
 				var/mob/living/carbon/human/user = usr
 				if((HAS_TRAIT(user, TRAIT_DUMB) || HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
-					to_chat(user, "<span class='warning'>Your hand slips, setting off the trigger!</span>")
+					to_chat(user, "<span class='warning'>My hand slips, setting off the trigger!</span>")
 					pulse(FALSE)
 		update_icon()
-		playsound(src, 'sound/weapons/handcuffs.ogg', 30, TRUE, -3)
+		playsound(src, 'sound/blank.ogg', 30, TRUE, -3)
 
 /obj/item/assembly/mousetrap/update_icon()
 	if(armed)
@@ -39,7 +39,7 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(HAS_TRAIT(H, TRAIT_PIERCEIMMUNE))
-			playsound(src, 'sound/effects/snap.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			armed = FALSE
 			update_icon()
 			pulse(FALSE)
@@ -60,7 +60,7 @@
 		var/mob/living/simple_animal/mouse/M = target
 		visible_message("<span class='boldannounce'>SPLAT!</span>")
 		M.splat()
-	playsound(src, 'sound/effects/snap.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	armed = FALSE
 	update_icon()
 	pulse(FALSE)
@@ -68,7 +68,7 @@
 
 /obj/item/assembly/mousetrap/attack_self(mob/living/carbon/human/user)
 	if(!armed)
-		to_chat(user, "<span class='notice'>You arm [src].</span>")
+		to_chat(user, "<span class='notice'>I arm [src].</span>")
 	else
 		if((HAS_TRAIT(user, TRAIT_DUMB) || HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
 			var/which_hand = BODY_ZONE_PRECISE_L_HAND
@@ -76,12 +76,12 @@
 				which_hand = BODY_ZONE_PRECISE_R_HAND
 			triggered(user, which_hand)
 			user.visible_message("<span class='warning'>[user] accidentally sets off [src], breaking their fingers.</span>", \
-								 "<span class='warning'>You accidentally trigger [src]!</span>")
+								 "<span class='warning'>I accidentally trigger [src]!</span>")
 			return
-		to_chat(user, "<span class='notice'>You disarm [src].</span>")
+		to_chat(user, "<span class='notice'>I disarm [src].</span>")
 	armed = !armed
 	update_icon()
-	playsound(src, 'sound/weapons/handcuffs.ogg', 30, TRUE, -3)
+	playsound(src, 'sound/blank.ogg', 30, TRUE, -3)
 
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
@@ -93,7 +93,7 @@
 				which_hand = BODY_ZONE_PRECISE_R_HAND
 			triggered(user, which_hand)
 			user.visible_message("<span class='warning'>[user] accidentally sets off [src], breaking their fingers.</span>", \
-								 "<span class='warning'>You accidentally trigger [src]!</span>")
+								 "<span class='warning'>I accidentally trigger [src]!</span>")
 			return
 	return ..()
 
@@ -108,7 +108,7 @@
 					if(H.m_intent == MOVE_INTENT_RUN)
 						triggered(H)
 						H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
-										  "<span class='warning'>You accidentally step on [src]</span>")
+										  "<span class='warning'>I accidentally step on [src]</span>")
 				else if(ismouse(MM))
 					triggered(MM)
 		else if(AM.density) // For mousetrap grenades, set off by anything heavy
@@ -120,7 +120,7 @@
 	if(armed)
 		if(finder)
 			finder.visible_message("<span class='warning'>[finder] accidentally sets off [src], breaking their fingers.</span>", \
-							   "<span class='warning'>You accidentally trigger [src]!</span>")
+							   "<span class='warning'>I accidentally trigger [src]!</span>")
 			triggered(finder, (finder.active_hand_index % 2 == 0) ? BODY_ZONE_PRECISE_R_HAND : BODY_ZONE_PRECISE_L_HAND)
 			return TRUE	//end the search!
 		else

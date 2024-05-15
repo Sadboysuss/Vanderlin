@@ -126,16 +126,16 @@
 	H.equipOutfit(outfit_type)
 
 /datum/antagonist/wizard/greet()
-	to_chat(owner, "<span class='boldannounce'>You are the Space Wizard!</span>")
+	to_chat(owner, "<span class='boldannounce'>I are the Space Wizard!</span>")
 	to_chat(owner, "<B>The Space Wizards Federation has given you the following tasks:</B>")
 	owner.announce_objectives()
-	to_chat(owner, "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.")
+	to_chat(owner, "You will find a list of available spells in my spell book. Choose my magic arsenal carefully.")
 	to_chat(owner, "The spellbook is bound to you, and others cannot use it.")
-	to_chat(owner, "In your pockets you will find a teleport scroll. Use it as needed.")
-	to_chat(owner,"<B>Remember:</B> do not forget to prepare your spells.")
+	to_chat(owner, "In my pockets you will find a teleport scroll. Use it as needed.")
+	to_chat(owner,"<B>Remember:</B> do not forget to prepare my spells.")
 
 /datum/antagonist/wizard/farewell()
-	to_chat(owner, "<span class='userdanger'>You have been brainwashed! You are no longer a wizard!</span>")
+	to_chat(owner, "<span class='danger'>I have been brainwashed! You are no longer a wizard!</span>")
 
 /datum/antagonist/wizard/proc/rename_wizard()
 	set waitfor = FALSE
@@ -144,7 +144,7 @@
 	var/wizard_name_second = pick(GLOB.wizard_second)
 	var/randomname = "[wizard_name_first] [wizard_name_second]"
 	var/mob/living/wiz_mob = owner.current
-	var/newname = copytext(sanitize_name(input(wiz_mob, "You are the [name]. Would you like to change your name to something else?", "Name change", randomname) as null|text),1,MAX_NAME_LEN)
+	var/newname = copytext(sanitize_name(input(wiz_mob, "You are the [name]. Would you like to change my name to something else?", "Name change", randomname) as null|text),1,MAX_NAME_LEN)
 
 	if (!newname)
 		newname = randomname
@@ -178,7 +178,7 @@
 	wiz_age = APPRENTICE_AGE_MIN
 
 /datum/antagonist/wizard/apprentice/greet()
-	to_chat(owner, "<B>You are [master.current.real_name]'s apprentice! You are bound by magic contract to follow [master.p_their()] orders and help [master.p_them()] in accomplishing [master.p_their()] goals.")
+	to_chat(owner, "<B>I are [master.current.real_name]'s apprentice! You are bound by magic contract to follow [master.p_their()] orders and help [master.p_them()] in accomplishing [master.p_their()] goals.")
 	owner.announce_objectives()
 
 /datum/antagonist/wizard/apprentice/register()
@@ -198,20 +198,20 @@
 		if(APPRENTICE_DESTRUCTION)
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile(null))
 			owner.AddSpell(new /obj/effect/proc_holder/spell/aimed/fireball(null))
-			to_chat(owner, "<B>Your service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned powerful, destructive spells. You are able to cast magic missile and fireball.")
+			to_chat(owner, "<B>My service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned powerful, destructive spells. You are able to cast magic missile and fireball.")
 		if(APPRENTICE_BLUESPACE)
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/area_teleport/teleport(null))
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(null))
-			to_chat(owner, "<B>Your service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned reality-bending mobility spells. You are able to cast teleport and ethereal jaunt.")
+			to_chat(owner, "<B>My service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned reality-bending mobility spells. You are able to cast teleport and ethereal jaunt.")
 		if(APPRENTICE_HEALING)
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/charge(null))
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/forcewall(null))
 			H.put_in_hands(new /obj/item/gun/magic/staff/healing(H))
-			to_chat(owner, "<B>Your service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned life-saving survival spells. You are able to cast charge and forcewall.")
+			to_chat(owner, "<B>My service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned life-saving survival spells. You are able to cast charge and forcewall.")
 		if(APPRENTICE_ROBELESS)
 			owner.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock(null))
 			owner.AddSpell(new /obj/effect/proc_holder/spell/targeted/mind_transfer(null))
-			to_chat(owner, "<B>Your service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned stealthy, robeless spells. You are able to cast knock and mindswap.")
+			to_chat(owner, "<B>My service has not gone unrewarded, however. Studying under [master.current.real_name], you have learned stealthy, robeless spells. You are able to cast knock and mindswap.")
 
 /datum/antagonist/wizard/apprentice/create_objectives()
 	var/datum/objective/protect/new_objective = new /datum/objective/protect
@@ -227,7 +227,7 @@
 	move_to_lair = FALSE
 
 /datum/antagonist/wizard/apprentice/imposter/greet()
-	to_chat(owner, "<B>You are an imposter! Trick and confuse the crew to misdirect malice from your handsome original!</B>")
+	to_chat(owner, "<B>I are an imposter! Trick and confuse the crew to misdirect malice from my handsome original!</B>")
 	owner.announce_objectives()
 
 /datum/antagonist/wizard/apprentice/imposter/equip_wizard()
@@ -236,13 +236,13 @@
 	if(!istype(master_mob) || !istype(H))
 		return
 	if(master_mob.ears)
-		H.equip_to_slot_or_del(new master_mob.ears.type, SLOT_EARS)
-	if(master_mob.w_uniform)
-		H.equip_to_slot_or_del(new master_mob.w_uniform.type, SLOT_W_UNIFORM)
+		H.equip_to_slot_or_del(new master_mob.ears.type, SLOT_HEAD)
+	if(master_mob.wear_pants)
+		H.equip_to_slot_or_del(new master_mob.wear_pants.type, SLOT_PANTS)
 	if(master_mob.shoes)
 		H.equip_to_slot_or_del(new master_mob.shoes.type, SLOT_SHOES)
-	if(master_mob.wear_suit)
-		H.equip_to_slot_or_del(new master_mob.wear_suit.type, SLOT_WEAR_SUIT)
+	if(master_mob.wear_armor)
+		H.equip_to_slot_or_del(new master_mob.wear_armor.type, SLOT_ARMOR)
 	if(master_mob.head)
 		H.equip_to_slot_or_del(new master_mob.head.type, SLOT_HEAD)
 	if(master_mob.back)

@@ -5,7 +5,7 @@
 //Botanist
 /obj/item/clothing/suit/apron
 	name = "apron"
-	desc = "A basic blue apron."
+	desc = ""
 	icon_state = "apron"
 	item_state = "apron"
 	blood_overlay_type = "armor"
@@ -15,7 +15,7 @@
 //Captain
 /obj/item/clothing/suit/captunic
 	name = "captain's parade tunic"
-	desc = "Worn by a Captain to show their class."
+	desc = ""
 	icon_state = "captunic"
 	item_state = "bio_suit"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
@@ -25,7 +25,7 @@
 //Chef
 /obj/item/clothing/suit/toggle/chef
 	name = "chef's apron"
-	desc = "An apron-jacket used by a high class chef."
+	desc = ""
 	icon_state = "chef"
 	item_state = "chef"
 	gas_transfer_coefficient = 0.9
@@ -37,7 +37,7 @@
 //Cook
 /obj/item/clothing/suit/apron/chef
 	name = "cook's apron"
-	desc = "A basic, dull, white chef's apron."
+	desc = ""
 	icon_state = "apronchef"
 	item_state = "apronchef"
 	blood_overlay_type = "armor"
@@ -47,7 +47,7 @@
 //Detective
 /obj/item/clothing/suit/det_suit
 	name = "trenchcoat"
-	desc = "An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business."
+	desc = ""
 	icon_state = "detective"
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
@@ -62,20 +62,20 @@
 
 /obj/item/clothing/suit/det_suit/grey
 	name = "noir trenchcoat"
-	desc = "A hard-boiled private investigator's grey trenchcoat."
+	desc = ""
 	icon_state = "greydet"
 	item_state = "greydet"
 
 /obj/item/clothing/suit/det_suit/noir
 	name = "noir suit coat"
-	desc = "A dapper private investigator's grey suit coat."
+	desc = ""
 	icon_state = "detsuit"
 	item_state = "detsuit"
 
 //Engineering
 /obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
-	desc = "A high-visibility vest used in work zones."
+	desc = ""
 	icon_state = "hazard"
 	item_state = "hazard"
 	blood_overlay_type = "armor"
@@ -85,7 +85,7 @@
 //Lawyer
 /obj/item/clothing/suit/toggle/lawyer
 	name = "blue suit jacket"
-	desc = "A snappy dress jacket."
+	desc = ""
 	icon_state = "suitjacket_blue"
 	item_state = "suitjacket_blue"
 	blood_overlay_type = "coat"
@@ -94,13 +94,13 @@
 
 /obj/item/clothing/suit/toggle/lawyer/purple
 	name = "purple suit jacket"
-	desc = "A foppish dress jacket."
+	desc = ""
 	icon_state = "suitjacket_purp"
 	item_state = "suitjacket_purp"
 
 /obj/item/clothing/suit/toggle/lawyer/black
 	name = "black suit jacket"
-	desc = "A professional suit jacket."
+	desc = ""
 	icon_state = "suitjacket_black"
 	item_state = "ro_suit"
 
@@ -108,7 +108,7 @@
 //Mime
 /obj/item/clothing/suit/suspenders
 	name = "suspenders"
-	desc = "They suspend the illusion of the mime's play."
+	desc = ""
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "suspenders"
 	blood_overlay_type = "armor" //it's the less thing that I can put here
@@ -116,21 +116,21 @@
 //Security
 /obj/item/clothing/suit/security/officer
 	name = "security officer's jacket"
-	desc = "This jacket is for those special occasions when a security officer isn't required to wear their armor."
+	desc = ""
 	icon_state = "officerbluejacket"
 	item_state = "officerbluejacket"
 	body_parts_covered = CHEST|ARMS
 
 /obj/item/clothing/suit/security/warden
 	name = "warden's jacket"
-	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
+	desc = ""
 	icon_state = "wardenbluejacket"
 	item_state = "wardenbluejacket"
 	body_parts_covered = CHEST|ARMS
 
 /obj/item/clothing/suit/security/hos
 	name = "head of security's jacket"
-	desc = "This piece of clothing was specifically designed for asserting superior authority."
+	desc = ""
 	icon_state = "hosbluejacket"
 	item_state = "hosbluejacket"
 	body_parts_covered = CHEST|ARMS
@@ -138,14 +138,14 @@
 //Surgeon
 /obj/item/clothing/suit/apron/surgical
 	name = "surgical apron"
-	desc = "A sterile blue surgical apron."
+	desc = ""
 	icon_state = "surgical"
 	allowed = list(/obj/item/scalpel, /obj/item/surgical_drapes, /obj/item/cautery, /obj/item/hemostat, /obj/item/retractor)
 
 //Curator
 /obj/item/clothing/suit/curator
 	name = "treasure hunter's coat"
-	desc = "Both fashionable and lightly armoured, this jacket is favoured by treasure hunters the galaxy over."
+	desc = ""
 	icon_state = "curator"
 	item_state = "curator"
 	blood_overlay_type = "coat"
@@ -160,15 +160,15 @@
 
 /obj/item/clothing/suit/hooded/techpriest
 	name = "techpriest robes"
-	desc = "For those who REALLY love their toasters."
+	desc = ""
 	icon_state = "techpriest"
 	item_state = "techpriest"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	hoodtype = /obj/item/clothing/head/hooded/techpriest
-	
+
 /obj/item/clothing/head/hooded/techpriest
 	name = "techpriest's hood"
-	desc = "A hood for those who REALLY love their toasters."
+	desc = ""
 	icon_state = "techpriesthood"
 	item_state = "techpriesthood"
 	body_parts_covered = HEAD

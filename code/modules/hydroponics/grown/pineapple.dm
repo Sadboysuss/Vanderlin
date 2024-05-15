@@ -1,8 +1,8 @@
 // Pineapple!
 /obj/item/seeds/pineapple
 	name = "pack of pineapple seeds"
-	desc = "Oooooooooooooh!"
-	icon_state = "seed-pineapple"
+	desc = ""
+	icon_state = "seed"
 	species = "pineapple"
 	plantname = "Pineapple Plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/pineapple
@@ -17,11 +17,11 @@
 /obj/item/reagent_containers/food/snacks/grown/pineapple
 	seed = /obj/item/seeds/pineapple
 	name = "pineapples"
-	desc = "Blorble."
+	desc = ""
 	icon_state = "pineapple"
 	force = 4
 	throwforce = 8
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("stung", "pined")
 	throw_speed = 1
 	throw_range = 5

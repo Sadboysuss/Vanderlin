@@ -4,7 +4,7 @@
 
 /mob/dead/new_player/proc/handle_player_polling()
 	if(!SSdbcore.IsConnected())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/datum/DBQuery/query_poll_get = SSdbcore.NewQuery("SELECT id, question FROM [format_table_name("poll_question")] WHERE Now() BETWEEN starttime AND endtime [(client.holder ? "" : "AND adminonly = false")]")
 	if(!query_poll_get.warn_execute())
@@ -27,7 +27,7 @@
 	if(!pollid)
 		return
 	if (!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/datum/DBQuery/query_poll_get_details = SSdbcore.NewQuery("SELECT starttime, endtime, question, polltype, multiplechoiceoptions FROM [format_table_name("poll_question")] WHERE id = [pollid]")
 	if(!query_poll_get_details.warn_execute())
@@ -203,7 +203,7 @@
 				options += PO
 			qdel(query_multi_options)
 			var/output = "<div align='center'><B>Player poll</B><hr>"
-			output += "<b>Question: [pollquestion]</b><br>You can select up to [multiplechoiceoptions] options. If you select more, the first [multiplechoiceoptions] will be saved.<br>"
+			output += "<b>Question: [pollquestion]</b><br>I can select up to [multiplechoiceoptions] options. If you select more, the first [multiplechoiceoptions] will be saved.<br>"
 			output += "<font size='2'>Poll runs from <b>[pollstarttime]</b> until <b>[pollendtime]</b></font><p>"
 			if(!votedfor.len)
 				output += "<form name='cardcomp' action='?src=[REF(src)]' method='get'>"
@@ -351,7 +351,7 @@
 	if (text)
 		table = "poll_textreply"
 	if (!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/datum/DBQuery/query_hasvoted = SSdbcore.NewQuery("SELECT id FROM `[format_table_name(table)]` WHERE pollid = [pollid] AND ckey = '[ckey]'")
 	if(!query_hasvoted.warn_execute())
@@ -379,7 +379,7 @@
 		//we gots ourselfs a dirty cheater on our hands!
 		log_game("[key_name(usr)] attempted to rig the vote by voting as [key]")
 		message_admins("[key_name_admin(usr)] attempted to rig the vote by voting as [key]")
-		to_chat(usr, "<span class='danger'>You don't seem to be [key].</span>")
+		to_chat(usr, "<span class='danger'>I don't seem to be [key].</span>")
 		to_chat(src, "<span class='danger'>Something went horribly wrong processing your vote. Please contact an administrator, they should have gotten a message about this</span>")
 		return 0
 	return 1

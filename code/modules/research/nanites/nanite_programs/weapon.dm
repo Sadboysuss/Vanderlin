@@ -3,7 +3,7 @@
 
 /datum/nanite_program/flesh_eating
 	name = "Cellular Breakdown"
-	desc = "The nanites destroy cellular structures in the host's body, causing brute damage."
+	desc = ""
 	use_rate = 1.5
 	rogue_types = list(/datum/nanite_program/necrotic)
 
@@ -14,25 +14,25 @@
 	else
 		host_mob.adjustBruteLoss(1, TRUE)
 	if(prob(3))
-		to_chat(host_mob, "<span class='warning'>You feel a stab of pain from somewhere inside you.</span>")
+		to_chat(host_mob, "<span class='warning'>I feel a stab of pain from somewhere inside you.</span>")
 
 /datum/nanite_program/poison
 	name = "Poisoning"
-	desc = "The nanites deliver poisonous chemicals to the host's internal organs, causing toxin damage and vomiting."
+	desc = ""
 	use_rate = 1.5
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/poison/active_effect()
 	host_mob.adjustToxLoss(1)
 	if(prob(2))
-		to_chat(host_mob, "<span class='warning'>You feel nauseous.</span>")
+		to_chat(host_mob, "<span class='warning'>I feel nauseous.</span>")
 		if(iscarbon(host_mob))
 			var/mob/living/carbon/C = host_mob
 			C.vomit(20)
 
 /datum/nanite_program/memory_leak
 	name = "Memory Leak"
-	desc = "This program invades the memory space used by other programs, causing frequent corruptions and errors."
+	desc = ""
 	use_rate = 0
 	rogue_types = list(/datum/nanite_program/toxic)
 
@@ -45,7 +45,7 @@
 
 /datum/nanite_program/aggressive_replication
 	name = "Aggressive Replication"
-	desc = "Nanites will consume organic matter to improve their replication rate, damaging the host. The efficiency increases with the volume of nanites, requiring 200 to break even."
+	desc = ""
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/necrotic)
 
@@ -66,16 +66,16 @@
 
 /datum/nanite_program/meltdown/enable_passive_effect()
 	. = ..()
-	to_chat(host_mob, "<span class='userdanger'>Your blood is burning!</span>")
+	to_chat(host_mob, "<span class='danger'>My blood is burning!</span>")
 	nanites.safety_threshold = 0
 
 /datum/nanite_program/meltdown/disable_passive_effect()
 	. = ..()
-	to_chat(host_mob, "<span class='warning'>Your blood cools down, and the pain gradually fades.</span>")
+	to_chat(host_mob, "<span class='warning'>My blood cools down, and the pain gradually fades.</span>")
 
 /datum/nanite_program/triggered/explosive
 	name = "Chain Detonation"
-	desc = "Detonates all the nanites inside the host in a chain reaction when triggered."
+	desc = ""
 	trigger_cost = 25 //plus every idle nanite left afterwards
 	trigger_cooldown = 100 //Just to avoid double-triggering
 	rogue_types = list(/datum/nanite_program/toxic)
@@ -84,7 +84,7 @@
 	if(!..())
 		return
 	host_mob.visible_message("<span class='warning'>[host_mob] starts emitting a high-pitched buzzing, and [host_mob.p_their()] skin begins to glow...</span>",\
-							"<span class='userdanger'>You start emitting a high-pitched buzzing, and your skin begins to glow...</span>")
+							"<span class='danger'>I start emitting a high-pitched buzzing, and my skin begins to glow...</span>")
 	addtimer(CALLBACK(src, .proc/boom), CLAMP((nanites.nanite_volume * 0.35), 25, 150))
 
 /datum/nanite_program/triggered/explosive/proc/boom()
@@ -99,7 +99,7 @@
 
 /datum/nanite_program/triggered/heart_stop
 	name = "Heart-Stopper"
-	desc = "Stops the host's heart when triggered; restarts it if triggered again."
+	desc = ""
 	trigger_cost = 12
 	trigger_cooldown = 10
 	rogue_types = list(/datum/nanite_program/nerve_decay)
@@ -118,7 +118,7 @@
 
 /datum/nanite_program/triggered/emp
 	name = "Electromagnetic Resonance"
-	desc = "The nanites cause an elctromagnetic pulse around the host when triggered. Will corrupt other nanite programs!"
+	desc = ""
 	trigger_cost = 10
 	program_flags = NANITE_EMP_IMMUNE
 	rogue_types = list(/datum/nanite_program/toxic)
@@ -134,7 +134,7 @@
 
 /datum/nanite_program/pyro
 	name = "Sub-Dermal Combustion"
-	desc = "The nanites cause buildup of flammable fluids under the host's skin, then ignites them."
+	desc = ""
 	use_rate = 4
 	rogue_types = list(/datum/nanite_program/skin_decay, /datum/nanite_program/cryo)
 
@@ -149,7 +149,7 @@
 
 /datum/nanite_program/cryo
 	name = "Cryogenic Treatment"
-	desc = "The nanites rapidly sink heat through the host's skin, lowering their temperature."
+	desc = ""
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/skin_decay, /datum/nanite_program/pyro)
 
@@ -163,7 +163,7 @@
 
 /datum/nanite_program/triggered/comm/mind_control
 	name = "Mind Control"
-	desc = "The nanites imprint an absolute directive onto the host's brain for one minute when triggered."
+	desc = ""
 	trigger_cost = 30
 	trigger_cooldown = 1800
 	rogue_types = list(/datum/nanite_program/brain_decay, /datum/nanite_program/brain_misfire)
@@ -209,7 +209,7 @@
 	if(host_mob.mind && host_mob.mind.has_antag_datum(/datum/antagonist/brainwashed))
 		host_mob.mind.remove_antag_datum(/datum/antagonist/brainwashed)
 	log_game("[key_name(host_mob)] is no longer brainwashed by nanites.")
-	
+
 /datum/nanite_program/triggered/comm/mind_control/disable_passive_effect()
 	. = ..()
 	end_brainwashing()

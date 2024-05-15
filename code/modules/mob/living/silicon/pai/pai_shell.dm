@@ -1,11 +1,11 @@
 
 /mob/living/silicon/pai/proc/fold_out(force = FALSE)
 	if(emitterhealth < 0)
-		to_chat(src, "<span class='warning'>Your holochassis emitters are still too unstable! Please wait for automatic repair.</span>")
+		to_chat(src, "<span class='warning'>My holochassis emitters are still too unstable! Please wait for automatic repair.</span>")
 		return FALSE
 
 	if(!canholo && !force)
-		to_chat(src, "<span class='warning'>Your master or another force has disabled your holochassis emitters!</span>")
+		to_chat(src, "<span class='warning'>My master or another force has disabled my holochassis emitters!</span>")
 		return FALSE
 
 	if(holoform)
@@ -68,14 +68,14 @@
 
 /mob/living/silicon/pai/proc/choose_chassis()
 	if(!isturf(loc) && loc != card)
-		to_chat(src, "<span class='boldwarning'>You can not change your holochassis composite while not on the ground or in your card!</span>")
+		to_chat(src, "<span class='boldwarning'>I can not change my holochassis composite while not on the ground or in my card!</span>")
 		return FALSE
-	var/choice = input(src, "What would you like to use for your holochassis composite?") as null|anything in sortList(possible_chassis)
+	var/choice = input(src, "What would you like to use for my holochassis composite?") as null|anything in sortList(possible_chassis)
 	if(!choice)
 		return FALSE
 	chassis = choice
 	update_resting()
-	to_chat(src, "<span class='boldnotice'>You switch your holochassis projection composite to [chassis].</span>")
+	to_chat(src, "<span class='boldnotice'>I switch my holochassis projection composite to [chassis].</span>")
 
 /mob/living/silicon/pai/update_resting()
 	. = ..()
@@ -92,10 +92,10 @@
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_range)
 		set_light(brightness_power)
-		to_chat(src, "<span class='notice'>You enable your integrated light.</span>")
+		to_chat(src, "<span class='notice'>I enable my integrated light.</span>")
 	else
 		set_light(0)
-		to_chat(src, "<span class='notice'>You disable your integrated light.</span>")
+		to_chat(src, "<span class='notice'>I disable my integrated light.</span>")
 
 /mob/living/silicon/pai/mob_pickup(mob/living/L)
 	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src, chassis, item_head_icon, item_lh_icon, item_rh_icon)

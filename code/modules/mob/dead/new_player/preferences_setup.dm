@@ -5,14 +5,16 @@
 		random_species()
 	else if(randomise[RANDOM_NAME])
 		real_name = pref_species.random_name(gender,1)
+	if(!pref_species)
+		random_species()
 	if(gender_override && !(randomise[RANDOM_GENDER] || randomise[RANDOM_GENDER_ANTAG] && antag_override))
 		gender = gender_override
 	else
-		gender = pick(MALE,FEMALE,PLURAL)
+		gender = pick(MALE,FEMALE)
 	if(randomise[RANDOM_AGE] || randomise[RANDOM_AGE_ANTAG] && antag_override)
-		age = rand(AGE_MIN,AGE_MAX)
+		age = AGE_ADULT
 	if(randomise[RANDOM_UNDERWEAR])
-		underwear = random_underwear(gender)
+		underwear = pref_species.random_underwear(gender)
 	if(randomise[RANDOM_UNDERWEAR_COLOR])
 		underwear_color = random_short_color()
 	if(randomise[RANDOM_UNDERSHIRT])
@@ -24,21 +26,54 @@
 	if(randomise[RANDOM_JUMPSUIT_STYLE])
 		jumpsuit_style = pick(GLOB.jumpsuitlist)
 	if(randomise[RANDOM_HAIRSTYLE])
-		hairstyle = random_hairstyle(gender)
+		hairstyle = pref_species.random_hairstyle(gender)
 	if(randomise[RANDOM_FACIAL_HAIRSTYLE])
-		facial_hairstyle = random_facial_hairstyle(gender)
+		facial_hairstyle = pref_species.random_facial_hairstyle(gender)
 	if(randomise[RANDOM_HAIR_COLOR])
-		hair_color = random_short_color()
+		var/list/hairs
+		if(age == AGE_OLD && OLDGREY in pref_species.species_traits)
+			hairs = pref_species.get_oldhc_list()
+		else
+			hairs = pref_species.get_hairc_list()
+		hair_color = hairs[pick(hairs)]
+		facial_hair_color = hair_color
 	if(randomise[RANDOM_FACIAL_HAIR_COLOR])
-		facial_hair_color = random_short_color()
+		var/list/hairs
+		if(age == AGE_OLD && OLDGREY in pref_species.species_traits)
+			hairs = pref_species.get_oldhc_list()
+		else
+			hairs = pref_species.get_hairc_list()
+		hair_color = hairs[pick(hairs)]
+		facial_hair_color = hair_color
 	if(randomise[RANDOM_SKIN_TONE])
-		skin_tone = random_skin_tone()
+		var/list/skins = pref_species.get_skin_list()
+		skin_tone = skins[pick(skins)]
 	if(randomise[RANDOM_EYE_COLOR])
 		eye_color = random_eye_color()
-	if(!pref_species)
-		var/rando_race = pick(GLOB.roundstart_races)
-		pref_species = new rando_race()
 	features = random_features()
+	if(pref_species.default_features["ears"])
+		features["ears"] = pref_species.default_features["ears"]
+	for(var/X in GLOB.horns_list.Copy())
+		var/datum/sprite_accessory/S = GLOB.horns_list[X]
+		if(!(pref_species in S.specuse))
+			continue
+		if(S.gender == NEUTER)
+			features["horns"] = X
+			break
+		if(gender == S.gender)
+			features["horns"] = X
+			break
+	for(var/X in GLOB.tails_list_human.Copy())
+		var/datum/sprite_accessory/S = GLOB.tails_list_human[X]
+		if(!(pref_species in S.specuse))
+			continue
+		if(S.gender == NEUTER)
+			features["tail_human"] = X
+			break
+		if(gender == S.gender)
+			features["tail_human"] = X
+			break
+	accessory = "Nothing"
 
 /datum/preferences/proc/random_species()
 	var/random_species_type = GLOB.species_list[pick(GLOB.roundstart_races)]
@@ -47,6 +82,12 @@
 		real_name = pref_species.random_name(gender,1)
 
 /datum/preferences/proc/update_preview_icon()
+	set waitfor = 0
+	if(!parent)
+		return
+	if(parent.is_new_player())
+		return
+//	last_preview_update = world.time
 	// Determine what job is marked as 'High' priority, and dress them up as such.
 	var/datum/job/previewJob
 	var/highest_pref = 0
@@ -69,9 +110,23 @@
 	copy_to(mannequin, 1, TRUE, TRUE)
 
 	if(previewJob)
+		testing("previewjob")
 		mannequin.job = previewJob.title
 		previewJob.equip(mannequin, TRUE, preference_source = parent)
 
 	COMPILE_OVERLAYS(mannequin)
 	parent.show_character_previews(new /mutable_appearance(mannequin))
 	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
+
+
+/datum/preferences/proc/spec_check(mob/user)
+	if(!(pref_species.name in GLOB.roundstart_races))
+		return FALSE
+	if(user)
+		if(pref_species.patreon_req > user.patreonlevel())
+			return FALSE
+	return TRUE
+
+/mob/proc/patreonlevel()
+	if(client)
+		return client.patreonlevel()

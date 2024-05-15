@@ -42,8 +42,8 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock(null))
 	var/list/no_drops = list()
 	no_drops += H.get_item_by_slot(SLOT_SHOES)
-	no_drops += H.get_item_by_slot(SLOT_W_UNIFORM)
-	no_drops += H.get_item_by_slot(SLOT_WEAR_SUIT)
+	no_drops += H.get_item_by_slot(SLOT_PANTS)
+	no_drops += H.get_item_by_slot(SLOT_ARMOR)
 	no_drops += H.get_item_by_slot(SLOT_HEAD)
 	no_drops += H.get_item_by_slot(SLOT_GLASSES)
 	for(var/i in no_drops)
@@ -79,7 +79,7 @@
 /datum/outfit/spacepol/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.assignment = "Police Officer"
 	W.registered_name = H.real_name
 	W.update_label()
@@ -110,7 +110,7 @@
 /datum/outfit/bountyarmor/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.assignment = "Bounty Hunter"
 	W.registered_name = H.real_name
 	W.update_label()
@@ -135,7 +135,7 @@
 /datum/outfit/bountygrapple/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.assignment = "Bounty Hunter"
 	W.registered_name = H.real_name
 	W.update_label()
@@ -164,7 +164,7 @@
 	H.set_species(synthetic_appearance)
 	synthetic_appearance.assume_disguise(synthetic_appearance, H)
 	H.update_hair()
-	var/obj/item/card/id/W = H.wear_id
+	var/obj/item/card/id/W = H.wear_ring
 	W.assignment = "Bounty Hunter"
 	W.registered_name = H.real_name
 	W.update_label()

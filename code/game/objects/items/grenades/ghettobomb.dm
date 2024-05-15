@@ -2,14 +2,14 @@
 
 /obj/item/grenade/iedcasing
 	name = "improvised firebomb"
-	desc = "A weak, improvised incendiary device."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "improvised_grenade"
 	item_state = "flashbang"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -46,7 +46,7 @@
 /obj/item/grenade/iedcasing/attack_self(mob/user) //
 	if(!active)
 		if(clown_check(user))
-			to_chat(user, "<span class='warning'>You light the [name]!</span>")
+			to_chat(user, "<span class='warning'>I light the [name]!</span>")
 			cut_overlay("improvised_grenade_filled")
 			preprime(user, null, FALSE)
 

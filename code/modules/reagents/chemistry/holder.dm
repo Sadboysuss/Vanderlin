@@ -103,6 +103,8 @@
 	var/total_transfered = 0
 	var/current_list_element = 1
 
+	testing("removeany called")
+
 	current_list_element = rand(1, cached_reagents.len)
 
 	while(total_transfered != amount)
@@ -191,6 +193,8 @@
 			return
 		R = target.reagents
 		target_atom = target
+
+	testing("trans to [target_atom]")
 
 	amount = min(min(amount, src.total_volume), R.maximum_volume-R.total_volume)
 	var/trans_data = null
@@ -282,6 +286,8 @@
 	if(amount < 0)
 		return
 
+	testing("transidto")
+
 	var/datum/reagents/R = target.reagents
 	if(src.get_reagent_amount(reagent)<amount)
 		amount = src.get_reagent_amount(reagent)
@@ -370,7 +376,7 @@
 	update_total()
 
 /datum/reagents/proc/remove_addiction(datum/reagent/R)
-	to_chat(my_atom, "<span class='notice'>You feel like you've gotten over your need for [R.name].</span>")
+	to_chat(my_atom, "<span class='notice'>I feel like you've gotten over your need for [R.name].</span>")
 	SEND_SIGNAL(my_atom, COMSIG_CLEAR_MOOD_EVENT, "[R.type]_overdose")
 	addiction_list.Remove(R)
 	qdel(R)
@@ -504,8 +510,9 @@
 					if(selected_reaction.mix_sound)
 						playsound(get_turf(cached_my_atom), selected_reaction.mix_sound, 80, TRUE)
 
-					for(var/mob/M in seen)
-						to_chat(M, "<span class='notice'>[iconhtml] [selected_reaction.mix_message]</span>")
+					if(selected_reaction.mix_message)
+						for(var/mob/M in seen)
+							to_chat(M, "<span class='notice'>[iconhtml] [selected_reaction.mix_message]</span>")
 
 				if(istype(cached_my_atom, /obj/item/slime_extract))
 					var/obj/item/slime_extract/ME2 = my_atom
@@ -514,7 +521,7 @@
 						for(var/mob/M in seen)
 							to_chat(M, "<span class='notice'>[iconhtml] \The [my_atom]'s power is consumed in the reaction.</span>")
 							ME2.name = "used slime extract"
-							ME2.desc = "This extract has been used up."
+							ME2.desc = ""
 
 			my_atom?.on_reagent_change(REACT_REAGENTS)
 			selected_reaction.on_reaction(src, multiplier)
@@ -568,6 +575,7 @@
 		var/datum/reagent/R = reagent
 		del_reagent(R.type)
 	if(my_atom)
+		testing("[src]  clear reagents [my_atom]")
 		my_atom.on_reagent_change(CLEAR_REAGENTS)
 	return 0
 
@@ -713,7 +721,6 @@
 		add_reagent(r_id, amt, data)
 
 /datum/reagents/proc/remove_reagent(reagent, amount, safety)//Added a safety check for the trans_id_to
-
 	if(isnull(amount))
 		amount = 0
 		CRASH("null amount passed to reagent code")
@@ -876,17 +883,17 @@
 				var/percent = tastes[taste_desc]/total_taste * 100
 				if(percent < minimum_percent)
 					continue
-				var/intensity_desc = "a hint of"
+				var/intensity_desc = ""
 				if(percent > minimum_percent * 2 || percent == 100)
 					intensity_desc = ""
 				else if(percent > minimum_percent * 3)
-					intensity_desc = "the strong flavor of"
+					intensity_desc = ""
 				if(intensity_desc != "")
 					out += "[intensity_desc] [taste_desc]"
 				else
 					out += "[taste_desc]"
 
-	return english_list(out, "something indescribable")
+	return english_list(out, "something")
 
 /datum/reagents/proc/expose_temperature(temperature, coeff=0.02)
 	if(istype(my_atom,/obj/item/reagent_containers))

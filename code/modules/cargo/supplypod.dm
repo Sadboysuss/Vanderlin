@@ -2,7 +2,7 @@
 //------------------------------------SUPPLY POD-------------------------------------//
 /obj/structure/closet/supplypod
 	name = "supply pod" //Names and descriptions are normally created with the setStyle() proc during initialization, but we have these default values here as a failsafe
-	desc = "A Nanotrasen supply drop pod."
+	desc = ""
 	icon = 'icons/obj/supplypods.dmi'
 	icon_state = "supplypod"
 	pixel_x = -16 //2x2 sprite
@@ -35,7 +35,7 @@
 	var/reversing = FALSE //If true, the pod will not send any items. Instead, after opening, it will close again (picking up items/mobs) and fly back to centcom
 	var/fallDuration = 4
 	var/fallingSoundLength = 11
-	var/fallingSound = 'sound/weapons/mortar_long_whistle.ogg'//Admin sound to play before the pod lands
+	var/fallingSound = 'sound/blank.ogg'//Admin sound to play before the pod lands
 	var/landingSound //Admin sound to play when the pod lands
 	var/openingSound //Admin sound to play when the pod opens
 	var/leavingSound //Admin sound to play when the pod leaves
@@ -53,7 +53,7 @@
 
 /obj/structure/closet/supplypod/extractionpod
 	name = "Syndicate Extraction Pod"
-	desc = "A specalised, blood-red styled pod for extracting high-value targets out of active mission areas."
+	desc = ""
 	specialised = TRUE
 	style = STYLE_SYNDICATE
 	bluespace = TRUE
@@ -99,13 +99,13 @@
 		name = POD_STYLES[chosenStyle][POD_NAME]
 		desc = POD_STYLES[chosenStyle][POD_DESC]
 	update_icon()
-
+/*
 /obj/structure/closet/supplypod/tool_interact(obj/item/W, mob/user)
 	if(bluespace) //We dont want to worry about interacting with bluespace pods, as they are due to delete themselves soon anyways.
 		return FALSE
 	else
 		..()
-
+*/
 /obj/structure/closet/supplypod/ex_act() //Explosions dont do SHIT TO US! This is because supplypods create explosions when they land.
 	return
 
@@ -266,7 +266,7 @@
 	pixel_x = -16
 	pixel_y = -5
 	pixel_z = 200
-	desc = "Get out of the way!"
+	desc = ""
 	layer = FLY_LAYER//that wasnt flying, that was falling with style!
 	icon_state = ""
 
@@ -285,7 +285,7 @@
 //------------------------------------TEMPORARY_VISUAL-------------------------------------//
 /obj/effect/DPtarget //This is the object that forceMoves the supplypod to it's location
 	name = "Landing Zone Indicator"
-	desc = "A holographic projection designating the landing zone of something. It's probably best to stand back."
+	desc = ""
 	icon = 'icons/mob/actions/actions_items.dmi'
 	icon_state = "sniper_zoom"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
@@ -317,7 +317,7 @@
 		icon_state = ""
 	if (pod.fallDuration == initial(pod.fallDuration) && pod.landingDelay + pod.fallDuration < pod.fallingSoundLength)
 		pod.fallingSoundLength = 3 //The default falling sound is a little long, so if the landing time is shorter than the default falling sound, use a special, shorter default falling sound
-		pod.fallingSound =  'sound/weapons/mortar_whistle.ogg'
+		pod.fallingSound =  'sound/blank.ogg'
 	var/soundStartTime = pod.landingDelay - pod.fallingSoundLength + pod.fallDuration
 	if (soundStartTime < 0)
 		soundStartTime = 1
@@ -355,7 +355,7 @@
 //------------------------------------UPGRADES-------------------------------------//
 /obj/item/disk/cargo/bluespace_pod //Disk that can be inserted into the Express Console to allow for Advanced Bluespace Pods
 	name = "Bluespace Drop Pod Upgrade"
-	desc = "This disk provides a firmware update to the Express Supply Console, granting the use of Nanotrasen's Bluespace Drop Pods to the supply department."
+	desc = ""
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cargodisk"
 	item_state = "card-id"

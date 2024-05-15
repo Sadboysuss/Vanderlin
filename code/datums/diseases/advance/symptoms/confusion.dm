@@ -18,7 +18,7 @@ Bonus
 /datum/symptom/confusion
 
 	name = "Confusion"
-	desc = "The virus interferes with the proper function of the neural system, leading to bouts of confusion and erratic movement."
+	desc = ""
 	stealth = 1
 	resistance = -1
 	stage_speed = -3
@@ -52,7 +52,7 @@ Bonus
 			if(prob(base_message_chance) && !suppress_warning)
 				to_chat(M, "<span class='warning'>[pick("Your head hurts.", "Your mind blanks for a moment.")]</span>")
 		else
-			to_chat(M, "<span class='userdanger'>You can't think straight!</span>")
+			to_chat(M, "<span class='danger'>I can't think straight!</span>")
 			if(M.confused < 100)
 				M.confused += (16 * power)
 			if(brain_damage)

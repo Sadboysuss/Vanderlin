@@ -16,9 +16,6 @@
 	var/info_text = "You are a <span class='danger'>Vampire</span>. You will slowly but constantly lose blood if outside of a coffin. If inside a coffin, you will slowly heal. You may gain more blood by grabbing a live victim and using your drain ability."
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/batform //attached to the datum itself to avoid cloning memes, and other duplicates
 
-
-
-
 /datum/species/vampire/check_roundstart_eligible()
 	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
 		return TRUE
@@ -49,14 +46,14 @@
 		return
 	C.blood_volume -= 0.25
 	if(C.blood_volume <= BLOOD_VOLUME_SURVIVE)
-		to_chat(C, "<span class='danger'>You ran out of blood!</span>")
+		to_chat(C, "<span class='danger'>I ran out of blood!</span>")
 		var/obj/shapeshift_holder/H = locate() in C
 		if(H)
 			H.shape.dust() //make sure we're killing the bat if you are out of blood, if you don't it creates weird situations where the bat is alive but the caster is dusted.
 		C.dust()
 	var/area/A = get_area(C)
 	if(istype(A, /area/chapel))
-		to_chat(C, "<span class='warning'>You don't belong here!</span>")
+		to_chat(C, "<span class='warning'>I don't belong here!</span>")
 		C.adjustFireLoss(20)
 		C.adjust_fire_stacks(6)
 		C.IgniteMob()
@@ -76,7 +73,7 @@
 
 /datum/action/item_action/organ_action/vampire
 	name = "Drain Victim"
-	desc = "Leech blood from any carbon victim you are passively grabbing."
+	desc = ""
 
 /datum/action/item_action/organ_action/vampire/Trigger()
 	. = ..()
@@ -84,7 +81,7 @@
 		var/mob/living/carbon/H = owner
 		var/obj/item/organ/tongue/vampire/V = target
 		if(V.drain_cooldown >= world.time)
-			to_chat(H, "<span class='warning'>You just drained blood, wait a few seconds!</span>")
+			to_chat(H, "<span class='warning'>I just drained blood, wait a few seconds!</span>")
 			return
 		if(H.pulling && iscarbon(H.pulling))
 			var/mob/living/carbon/victim = H.pulling
@@ -92,7 +89,7 @@
 				to_chat(H, "<span class='warning'>You're already full!</span>")
 				return
 			if(victim.stat == DEAD)
-				to_chat(H, "<span class='warning'>You need a living victim!</span>")
+				to_chat(H, "<span class='warning'>I need a living victim!</span>")
 				return
 			if(!victim.blood_volume || (victim.dna && ((NOBLOOD in victim.dna.species.species_traits) || victim.dna.species.exotic_blood)))
 				to_chat(H, "<span class='warning'>[victim] doesn't have blood!</span>")
@@ -104,26 +101,27 @@
 				return
 			if(victim?.reagents?.has_reagent(/datum/reagent/consumable/garlic))
 				to_chat(victim, "<span class='warning'>[H] tries to bite you, but recoils in disgust!</span>")
-				to_chat(H, "<span class='warning'>[victim] reeks of garlic! you can't bring yourself to drain such tainted blood.</span>")
+				to_chat(H, "<span class='warning'>[victim] reeks of garlic! you can't bring myself to drain such tainted blood.</span>")
 				return
 			if(!do_after(H, 30, target = victim))
 				return
 			var/blood_volume_difference = BLOOD_VOLUME_MAXIMUM - H.blood_volume //How much capacity we have left to absorb blood
 			var/drained_blood = min(victim.blood_volume, VAMP_DRAIN_AMOUNT, blood_volume_difference)
 			to_chat(victim, "<span class='danger'>[H] is draining your blood!</span>")
-			to_chat(H, "<span class='notice'>You drain some blood!</span>")
-			playsound(H, 'sound/items/drink.ogg', 30, TRUE, -2)
+			to_chat(H, "<span class='notice'>I drain some blood!</span>")
+			playsound(H, 'sound/blank.ogg', 30, TRUE, -2)
 			victim.blood_volume = CLAMP(victim.blood_volume - drained_blood, 0, BLOOD_VOLUME_MAXIMUM)
 			H.blood_volume = CLAMP(H.blood_volume + drained_blood, 0, BLOOD_VOLUME_MAXIMUM)
 			if(!victim.blood_volume)
-				to_chat(H, "<span class='notice'>You finish off [victim]'s blood supply.</span>")
+				to_chat(H, "<span class='notice'>I finish off [victim]'s blood supply.</span>")
 
 #undef VAMP_DRAIN_AMOUNT
 
 
 /mob/living/carbon/Stat()
 	..()
-	if(statpanel("Status"))	
+	return
+	if(statpanel("Status")) //RTCHANGE
 		var/obj/item/organ/heart/vampire/darkheart = getorgan(/obj/item/organ/heart/vampire)
 		if(darkheart)
 			stat(null, "<span class='notice'>Current blood level: [blood_volume]/[BLOOD_VOLUME_MAXIMUM].</span>")
@@ -137,8 +135,19 @@
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/bat
 	name = "Bat Form"
-	desc = "Take on the shape a space bat."
-	invocation = "Squeak!"
+	desc = ""
+	invocation = ""
 	charge_max = 50
 	cooldown_min = 50
+	die_with_shapeshifted_form =  FALSE
 	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/bat
+
+/obj/effect/proc_holder/spell/targeted/shapeshift/gaseousform
+	name = "Mist Form"
+	desc = ""
+	invocation = ""
+	charge_max = 50
+	cooldown_min = 50
+	die_with_shapeshifted_form =  FALSE
+	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/gaseousform
+

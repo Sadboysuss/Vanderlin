@@ -1,6 +1,6 @@
 /datum/action/changeling/resonant_shriek
 	name = "Resonant Shriek"
-	desc = "Our lungs and vocal cords shift, allowing us to briefly emit a noise that deafens and confuses the weak-minded. Costs 20 chemicals."
+	desc = ""
 	helptext = "Emits a high-frequency sound that confuses and deafens humans, blows out nearby lights and overloads cyborg sensors."
 	button_icon_state = "resonant_shriek"
 	chemical_cost = 20
@@ -18,10 +18,10 @@
 				C.confused += 25
 				C.Jitter(50)
 			else
-				SEND_SOUND(C, sound('sound/effects/screech.ogg'))
+				SEND_SOUND(C, sound('sound/blank.ogg'))
 
 		if(issilicon(M))
-			SEND_SOUND(M, sound('sound/weapons/flash.ogg'))
+			SEND_SOUND(M, sound('sound/blank.ogg'))
 			M.Paralyze(rand(100,200))
 
 	for(var/obj/machinery/light/L in range(4, user))
@@ -31,7 +31,7 @@
 
 /datum/action/changeling/dissonant_shriek
 	name = "Dissonant Shriek"
-	desc = "We shift our vocal cords to release a high-frequency sound that overloads nearby electronics. Costs 20 chemicals."
+	desc = ""
 	button_icon_state = "dissonant_shriek"
 	chemical_cost = 20
 	dna_cost = 1

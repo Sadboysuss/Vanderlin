@@ -1,10 +1,10 @@
 /datum/language/monkey
 	name = "Chimpanzee"
-	desc = "Ook ook ook."
+	desc = ""
 	speech_verb = "chimpers"
 	ask_verb = "chimpers"
 	exclaim_verb = "screeches"
-	key = "1"
+	key = "7"
 	space_chance = 100
 	syllables = list("oop", "aak", "chee", "eek")
 	default_priority = 80

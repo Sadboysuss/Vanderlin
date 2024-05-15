@@ -36,7 +36,7 @@
 
 /obj/item/stack/grind_requirements()
 	if(is_cyborg)
-		to_chat(usr, "<span class='warning'>[src] is electronically synthesized in your chassis and can't be ground up!</span>")
+		to_chat(usr, "<span class='warning'>[src] is electronically synthesized in my chassis and can't be ground up!</span>")
 		return
 	return TRUE
 
@@ -124,10 +124,10 @@
 		. = (amount)
 
 /obj/item/stack/attack_self(mob/user)
-	interact(user)
+//	interact(user)
 
 /obj/item/stack/interact(mob/user, sublist)
-	ui_interact(user, sublist)
+//	ui_interact(user, sublist)
 
 /obj/item/stack/ui_interact(mob/user, recipes_sublist)
 	. = ..()
@@ -206,7 +206,7 @@
 		if(!building_checks(R, multiplier))
 			return
 		if (R.time)
-			usr.visible_message("<span class='notice'>[usr] starts building \a [R.title].</span>", "<span class='notice'>You start building \a [R.title]...</span>")
+			usr.visible_message("<span class='notice'>[usr] starts building \a [R.title].</span>", "<span class='notice'>I start building \a [R.title]...</span>")
 			if (!do_after(usr, R.time, target = usr))
 				return
 			if(!building_checks(R, multiplier))
@@ -225,7 +225,7 @@
 		if(O)
 			O.setDir(usr.dir)
 		use(R.req_amount * multiplier)
-	
+
 		if(R.applies_mats && custom_materials && custom_materials.len)
 			var/list/used_materials = list()
 			for(var/i in custom_materials)
@@ -261,9 +261,9 @@
 /obj/item/stack/proc/building_checks(datum/stack_recipe/R, multiplier)
 	if (get_amount() < R.req_amount*multiplier)
 		if (R.req_amount*multiplier>1)
-			to_chat(usr, "<span class='warning'>You haven't got enough [src] to build \the [R.req_amount*multiplier] [R.title]\s!</span>")
+			to_chat(usr, "<span class='warning'>I haven't got enough [src] to build \the [R.req_amount*multiplier] [R.title]\s!</span>")
 		else
-			to_chat(usr, "<span class='warning'>You haven't got enough [src] to build \the [R.title]!</span>")
+			to_chat(usr, "<span class='warning'>I haven't got enough [src] to build \the [R.title]!</span>")
 		return FALSE
 	var/turf/T = get_turf(usr)
 
@@ -323,11 +323,11 @@
 	if(get_amount() < amount)
 		if(singular_name)
 			if(amount > 1)
-				to_chat(user, "<span class='warning'>You need at least [amount] [singular_name]\s to do this!</span>")
+				to_chat(user, "<span class='warning'>I need at least [amount] [singular_name]\s to do this!</span>")
 			else
-				to_chat(user, "<span class='warning'>You need at least [amount] [singular_name] to do this!</span>")
+				to_chat(user, "<span class='warning'>I need at least [amount] [singular_name] to do this!</span>")
 		else
-			to_chat(user, "<span class='warning'>You need at least [amount] to do this!</span>")
+			to_chat(user, "<span class='warning'>I need at least [amount] to do this!</span>")
 
 		return FALSE
 
@@ -407,7 +407,7 @@
 			return
 		else
 			change_stack(user, stackmaterial)
-			to_chat(user, "<span class='notice'>You take [stackmaterial] sheets out of the stack.</span>")
+			to_chat(user, "<span class='notice'>I take [stackmaterial] sheets out of the stack.</span>")
 
 /obj/item/stack/proc/change_stack(mob/user, amount)
 	if(!use(amount, TRUE, FALSE))
@@ -426,7 +426,7 @@
 	if(istype(W, merge_type))
 		var/obj/item/stack/S = W
 		if(merge(S))
-			to_chat(user, "<span class='notice'>Your [S.name] stack now contains [S.get_amount()] [S.singular_name]\s.</span>")
+			to_chat(user, "<span class='notice'>My [S.name] stack now contains [S.get_amount()] [S.singular_name]\s.</span>")
 	else
 		. = ..()
 

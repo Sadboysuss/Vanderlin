@@ -17,7 +17,7 @@ Bonus
 
 /datum/symptom/fever
 	name = "Fever"
-	desc = "The virus causes a febrile response from the host, raising its body temperature."
+	desc = ""
 	stealth = 0
 	resistance = 3
 	stage_speed = 3
@@ -47,7 +47,7 @@ Bonus
 	if(!unsafe || A.stage < 4)
 		to_chat(M, "<span class='warning'>[pick("You feel hot.", "You feel like you're burning.")]</span>")
 	else
-		to_chat(M, "<span class='userdanger'>[pick("You feel too hot.", "You feel like your blood is boiling.")]</span>")
+		to_chat(M, "<span class='danger'>[pick("You feel too hot.", "You feel like your blood is boiling.")]</span>")
 	if(M.bodytemperature < BODYTEMP_HEAT_DAMAGE_LIMIT || unsafe)
 		Heat(M, A)
 

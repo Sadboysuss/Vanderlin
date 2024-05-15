@@ -18,9 +18,9 @@ In all, this is a lot like the monkey code. /N
 		to_chat(M, "No attacking people at spawn, you jackass.")
 		return
 
-	switch(M.a_intent)
+	switch(M.used_intent.type)
 
-		if ("help")
+		if (INTENT_HELP)
 			set_resting(FALSE)
 			AdjustStun(-60)
 			AdjustKnockdown(-60)
@@ -30,16 +30,16 @@ In all, this is a lot like the monkey code. /N
 			AdjustSleeping(-100)
 			visible_message("<span class='notice'>[M.name] nuzzles [src] trying to wake [p_them()] up!</span>")
 
-		if ("grab")
+		if (INTENT_GRAB)
 			grabbedby(M)
 
 		else
 			if(health > 0)
 				M.do_attack_animation(src, ATTACK_EFFECT_BITE)
-				playsound(loc, 'sound/weapons/bite.ogg', 50, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 				visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
-								"<span class='userdanger'>[M.name] bites you!</span>", "<span class='hear'>You hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
-				to_chat(M, "<span class='danger'>You bite [src]!</span>")
+								"<span class='danger'>[M.name] bites you!</span>", "<span class='hear'>I hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
+				to_chat(M, "<span class='danger'>I bite [src]!</span>")
 				adjustBruteLoss(1)
 				log_combat(M, src, "attacked")
 				updatehealth()
@@ -55,15 +55,15 @@ In all, this is a lot like the monkey code. /N
 	if(..())	//to allow surgery to return properly.
 		return 0
 
-	switch(M.a_intent)
-		if("help")
+	switch(M.used_intent.type)
+		if(INTENT_HELP)
 			help_shake_act(M)
-		if("grab")
+		if(INTENT_GRAB)
 			grabbedby(M)
-		if ("harm")
+		if (INTENT_HARM)
 			M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
 			return 1
-		if("disarm")
+		if(INTENT_DISARM)
 			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			return 1
 	return 0

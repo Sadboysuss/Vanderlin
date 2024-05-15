@@ -69,13 +69,13 @@
 /obj/effect/mob_spawn/human/clown/corpse
 	roundstart = FALSE
 	instant = TRUE
-	skin_tone = "caucasian1"
+	skin_tone = "fcccb3"
 	hairstyle = "Bald"
 	facial_hairstyle = "Shaved"
 
 /obj/effect/mob_spawn/human/corpse/pirate
 	name = "Pirate"
-	skin_tone = "caucasian1" //all pirates are white because it's easier that way
+	skin_tone = "fcccb3" //all pirates are white because it's easier that way
 	outfit = /datum/outfit/piratecorpse
 	hairstyle = "Bald"
 	facial_hairstyle = "Shaved"

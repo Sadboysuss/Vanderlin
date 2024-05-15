@@ -1,7 +1,7 @@
 //Pinpointers are used to track atoms from a distance as long as they're on the same z-level. The captain and nuke ops have ones that track the nuclear authentication disk.
 /obj/item/pinpointer
 	name = "pinpointer"
-	desc = "A handheld tracking device that locks onto certain signals."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "pinpointer"
 	flags_1 = CONDUCT_1
@@ -10,13 +10,13 @@
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron = 500, /datum/material/glass = 250)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/active = FALSE
 	var/atom/movable/target //The thing we're searching for
-	var/minimum_range = 0 //at what range the pinpointer declares you to be at your destination
+	var/minimum_range = 0 //at what range the pinpointer declares you to be at my destination
 	var/ignore_suit_sensor_level = FALSE // Do we find people even if their suit sensors are turned off
 	var/alert = FALSE // TRUE to display things more seriously
 	var/process_scan = TRUE // some pinpointers change target every time they scan, which means we can't have it change very process but instead when it turns on.
@@ -36,11 +36,11 @@
 	if(!process_scan) //since it's not scanning on process, it scans here.
 		scan_for_target()
 	toggle_on()
-	user.visible_message("<span class='notice'>[user] [active ? "" : "de"]activates [user.p_their()] pinpointer.</span>", "<span class='notice'>You [active ? "" : "de"]activate your pinpointer.</span>")
+	user.visible_message("<span class='notice'>[user] [active ? "" : "de"]activates [user.p_their()] pinpointer.</span>", "<span class='notice'>I [active ? "" : "de"]activate my pinpointer.</span>")
 
 /obj/item/pinpointer/proc/toggle_on()
 	active = !active
-	playsound(src, 'sound/items/screwdriver2.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(active)
 		START_PROCESSING(SSfastprocess, src)
 	else
@@ -84,7 +84,7 @@
 
 /obj/item/pinpointer/crew // A replacement for the old crew monitoring consoles
 	name = "crew pinpointer"
-	desc = "A handheld tracking device that points to crew suit sensors."
+	desc = ""
 	icon_state = "pinpointer_crew"
 	custom_price = 150
 	var/has_owner = FALSE
@@ -92,8 +92,8 @@
 
 /obj/item/pinpointer/crew/proc/trackable(mob/living/carbon/human/H)
 	var/turf/here = get_turf(src)
-	if((H.z == 0 || H.z == here.z) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
+	if((H.z == 0 || H.z == here.z) && istype(H.wear_pants, /obj/item/clothing/under))
+		var/obj/item/clothing/under/U = H.wear_pants
 
 		// Suit sensors must be on maximum.
 		if(!U.has_sensor || (U.sensor_mode < SENSOR_COORDS && !ignore_suit_sensor_level))
@@ -107,7 +107,7 @@
 /obj/item/pinpointer/crew/attack_self(mob/living/user)
 	if(active)
 		toggle_on()
-		user.visible_message("<span class='notice'>[user] deactivates [user.p_their()] pinpointer.</span>", "<span class='notice'>You deactivate your pinpointer.</span>")
+		user.visible_message("<span class='notice'>[user] deactivates [user.p_their()] pinpointer.</span>", "<span class='notice'>I deactivate my pinpointer.</span>")
 		return
 
 	if (has_owner && !pinpointer_owner)
@@ -126,8 +126,8 @@
 			continue
 
 		var/crewmember_name = "Unknown"
-		if(H.wear_id)
-			var/obj/item/card/id/I = H.wear_id.GetID()
+		if(H.wear_ring)
+			var/obj/item/card/id/I = H.wear_ring.GetID()
 			if(I && I.registered_name)
 				crewmember_name = I.registered_name
 
@@ -138,7 +138,7 @@
 		name_counts[crewmember_name] = 1
 
 	if(!names.len)
-		user.visible_message("<span class='notice'>[user]'s pinpointer fails to detect a signal.</span>", "<span class='notice'>Your pinpointer fails to detect a signal.</span>")
+		user.visible_message("<span class='notice'>[user]'s pinpointer fails to detect a signal.</span>", "<span class='notice'>My pinpointer fails to detect a signal.</span>")
 		return
 
 	var/A = input(user, "Person to track", "Pinpoint") in sortList(names)
@@ -147,7 +147,7 @@
 
 	target = names[A]
 	toggle_on()
-	user.visible_message("<span class='notice'>[user] activates [user.p_their()] pinpointer.</span>", "<span class='notice'>You activate your pinpointer.</span>")
+	user.visible_message("<span class='notice'>[user] activates [user.p_their()] pinpointer.</span>", "<span class='notice'>I activate my pinpointer.</span>")
 
 /obj/item/pinpointer/crew/scan_for_target()
 	if(target)
@@ -161,7 +161,7 @@
 
 /obj/item/pinpointer/pair
 	name = "pair pinpointer"
-	desc = "A handheld tracking device that locks onto its other half of the matching pair."
+	desc = ""
 	var/other_pair
 
 /obj/item/pinpointer/pair/Destroy()
@@ -192,7 +192,7 @@
 
 /obj/item/pinpointer/shuttle
 	name = "fugitive pinpointer"
-	desc = "A handheld tracking device that locates the bounty hunter shuttle for quick escapes."
+	desc = ""
 	icon_state = "pinpointer_hunter"
 	icon_suffix = "_hunter"
 	var/obj/shuttleport

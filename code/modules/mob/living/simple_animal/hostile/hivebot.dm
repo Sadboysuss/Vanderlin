@@ -4,7 +4,7 @@
 
 /mob/living/simple_animal/hostile/hivebot
 	name = "hivebot"
-	desc = "A small robot."
+	desc = ""
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "basic"
 	icon_living = "basic"
@@ -18,13 +18,13 @@
 	melee_damage_upper = 3
 	attack_verb_continuous = "claws"
 	attack_verb_simple = "claw"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
-	projectilesound = 'sound/weapons/gun/pistol/shot.ogg'
+	attack_sound = 'sound/blank.ogg'
+	projectilesound = 'sound/blank.ogg'
 	projectiletype = /obj/projectile/hivebotbullet
 	faction = list("hivebot")
 	check_friendly_fire = 1
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
+	base_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 	minbodytemp = 0
 	verb_say = "states"
 	verb_ask = "queries"
@@ -59,7 +59,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/update_icons()
 	QDEL_NULL(alert_light)
-	if(a_intent != INTENT_HELP)
+	if(used_intent.type != INTENT_HELP)
 		icon_state = "[initial(icon_state)]_attack"
 		alert_light = mob_light(COLOR_RED_LIGHT, 6, 0.4)
 	else
@@ -67,7 +67,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/range
 	name = "hivebot"
-	desc = "A smallish robot, this one is armed!"
+	desc = ""
 	icon_state = "ranged"
 	icon_living = "ranged"
 	icon_dead = "ranged"
@@ -89,7 +89,7 @@
 	icon_state = "strong"
 	icon_living = "strong"
 	icon_dead = "strong"
-	desc = "A robot, this one is armed and looks tough!"
+	desc = ""
 	health = 80
 	maxHealth = 80
 	ranged = 1

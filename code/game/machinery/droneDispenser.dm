@@ -4,7 +4,7 @@
 
 /obj/machinery/droneDispenser //Most customizable machine 2015
 	name = "drone shell dispenser"
-	desc = "A hefty machine that, when supplied with metal and glass, will periodically create a drone shell. Does not need to be manually operated."
+	desc = ""
 
 	icon = 'icons/obj/machines/droneDispenser.dmi'
 	icon_state = "on"
@@ -36,17 +36,14 @@
 	// ceasing production. Set to 0 for infinite.
 	var/maximum_idle = 3
 
-	var/work_sound = 'sound/items/rped.ogg'
-	var/create_sound = 'sound/items/deconstruct.ogg'
-	var/recharge_sound = 'sound/machines/ping.ogg'
+	var/work_sound = 'sound/blank.ogg'
+	var/create_sound = 'sound/blank.ogg'
+	var/recharge_sound = 'sound/blank.ogg'
 
 	var/begin_create_message = "whirs to life!"
 	var/end_create_message = "dispenses a drone shell."
 	var/recharge_message = "pings."
 	var/recharging_text = "It is whirring and clicking. It seems to be recharging."
-
-	var/break_message = "lets out a tinny alarm before falling dark."
-	var/break_sound = 'sound/machines/warning-buzzer.ogg'
 
 /obj/machinery/droneDispenser/Initialize()
 	. = ..()
@@ -60,7 +57,7 @@
 
 /obj/machinery/droneDispenser/syndrone //Please forgive me
 	name = "syndrone shell dispenser"
-	desc = "A suspicious machine that will create Syndicate exterminator drones when supplied with metal and glass. Disgusting."
+	desc = ""
 	dispense_type = /obj/effect/mob_spawn/drone/syndrone
 	//If we're gonna be a jackass, go the full mile - 10 second recharge timer
 	cooldownTime = 100
@@ -69,14 +66,14 @@
 
 /obj/machinery/droneDispenser/syndrone/badass //Please forgive me
 	name = "badass syndrone shell dispenser"
-	desc = "A suspicious machine that will create Syndicate exterminator drones when supplied with metal and glass. Disgusting. This one seems ominous."
+	desc = ""
 	dispense_type = /obj/effect/mob_spawn/drone/syndrone/badass
 	end_create_message = "dispenses an ominous suspicious drone shell."
 
 // I don't need your forgiveness, this is awesome.
 /obj/machinery/droneDispenser/snowflake
 	name = "snowflake drone shell dispenser"
-	desc = "A hefty machine that, when supplied with metal and glass, will periodically create a snowflake drone shell. Does not need to be manually operated."
+	desc = ""
 	dispense_type = /obj/effect/mob_spawn/drone/snowflake
 	end_create_message = "dispenses a snowflake drone shell."
 	// Those holoprojectors aren't cheap
@@ -88,7 +85,7 @@
 // If the derelict gets lonely, make more friends.
 /obj/machinery/droneDispenser/derelict
 	name = "derelict drone shell dispenser"
-	desc = "A rusty machine that, when supplied with metal and glass, will periodically create a derelict drone shell. Does not need to be manually operated."
+	desc = ""
 	dispense_type = /obj/effect/mob_spawn/drone/derelict
 	end_create_message = "dispenses a derelict drone shell."
 	metal_cost = 10000
@@ -100,7 +97,7 @@
 // This one requires no materials and creates basic hivebots
 /obj/machinery/droneDispenser/hivebot
 	name = "hivebot fabricator"
-	desc = "A large, bulky machine that whirs with activity, steam hissing from vents in its sides."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "hivebot_fab"
 	icon_off = "hivebot_fab"
@@ -119,7 +116,7 @@
 
 /obj/machinery/droneDispenser/swarmer
 	name = "swarmer fabricator"
-	desc = "An alien machine of unknown origin. It whirs and hums with green-blue light, the air above it shimmering."
+	desc = ""
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "toffcenter"
 	icon_off = "toffcenter"
@@ -134,9 +131,9 @@
 	begin_create_message = "hums softly as an interface appears above it, scrolling by at unreadable speed."
 	end_create_message = "materializes a strange shell, which drops to the ground."
 	recharging_text = "Its lights are slowly increasing in brightness."
-	work_sound = 'sound/effects/empulse.ogg'
-	create_sound = 'sound/effects/phasein.ogg'
-	break_sound = 'sound/effects/empulse.ogg'
+	work_sound = 'sound/blank.ogg'
+	create_sound = 'sound/blank.ogg'
+	break_sound = 'sound/blank.ogg'
 	break_message = "slowly falls dark, lights stuttering."
 
 /obj/machinery/droneDispenser/examine(mob/user)
@@ -217,7 +214,7 @@
 		var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
 		materials.retrieve_all()
 		I.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You retrieve the materials from [src].</span>")
+		to_chat(user, "<span class='notice'>I retrieve the materials from [src].</span>")
 
 	else if(I.tool_behaviour == TOOL_WELDER)
 		if(!(stat & BROKEN))
@@ -229,14 +226,14 @@
 
 		user.visible_message(
 			"<span class='notice'>[user] begins patching up [src] with [I].</span>",
-			"<span class='notice'>You begin restoring the damage to [src]...</span>")
+			"<span class='notice'>I begin restoring the damage to [src]...</span>")
 
 		if(!I.use_tool(src, user, 40, volume=50, amount=1))
 			return
 
 		user.visible_message(
 			"<span class='notice'>[user] fixes [src]!</span>",
-			"<span class='notice'>You restore [src] to operation.</span>")
+			"<span class='notice'>I restore [src] to operation.</span>")
 
 		stat &= ~BROKEN
 		obj_integrity = max_integrity

@@ -2,8 +2,8 @@
 /datum/blobstrain/reagent/networked_fibers
 	name = "Networked Fibers"
 	description = "will do high brute and burn damage and will generate resources quicker, but can only expand manually."
-	shortdesc = "will do high brute and burn damage."
-	effectdesc = "will move your core when manually expanding near it."
+	shortdesc = ""
+	effectdesc = ""
 	analyzerdescdamage = "Does high brute and burn damage."
 	analyzerdesceffect = "Is highly mobile and generates resources rapidly."
 	color = "#4F4441"

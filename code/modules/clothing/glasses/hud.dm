@@ -1,11 +1,11 @@
 /obj/item/clothing/glasses/hud
 	name = "HUD"
-	desc = "A heads-up display that provides important info in (almost) real time."
+	desc = ""
 	flags_1 = null //doesn't protect eyes because it's a monocle, duh
 	var/hud_type = null
 	///Used for topic calls. Just because you have a HUD display doesn't mean you should be able to interact with stuff.
 	var/hud_trait = null
-	
+
 
 /obj/item/clothing/glasses/hud/equipped(mob/living/carbon/human/user, slot)
 	..()
@@ -32,18 +32,18 @@
 	if(obj_flags & EMAGGED || . & EMP_PROTECT_SELF)
 		return
 	obj_flags |= EMAGGED
-	desc = "[desc] The display is flickering slightly."
+	desc = ""
 
 /obj/item/clothing/glasses/hud/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
 	to_chat(user, "<span class='warning'>PZZTTPFFFT</span>")
-	desc = "[desc] The display is flickering slightly."
+	desc = ""
 
 /obj/item/clothing/glasses/hud/health
 	name = "health scanner HUD"
-	desc = "A heads-up display that scans the humanoids in view and provides accurate data about their health status."
+	desc = ""
 	icon_state = "healthhud"
 	hud_type = DATA_HUD_MEDICAL_ADVANCED
 	hud_trait = TRAIT_MEDICAL_HUD
@@ -51,7 +51,7 @@
 
 /obj/item/clothing/glasses/hud/health/night
 	name = "night vision health scanner HUD"
-	desc = "An advanced medical head-up display that allows doctors to find patients in complete darkness."
+	desc = ""
 	icon_state = "healthhudnight"
 	item_state = "glasses"
 	darkness_view = 8
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/glasses/hud/health/sunglasses
 	name = "medical HUDSunglasses"
-	desc = "Sunglasses with a medical HUD."
+	desc = ""
 	icon_state = "sunhudmed"
 	darkness_view = 1
 	flash_protect = FLASH_PROTECTION_FLASH
@@ -70,14 +70,14 @@
 
 /obj/item/clothing/glasses/hud/diagnostic
 	name = "diagnostic HUD"
-	desc = "A heads-up display capable of analyzing the integrity and status of robotics and exosuits."
+	desc = ""
 	icon_state = "diagnostichud"
 	hud_type = DATA_HUD_DIAGNOSTIC_BASIC
 	glass_colour_type = /datum/client_colour/glass_colour/lightorange
 
 /obj/item/clothing/glasses/hud/diagnostic/night
 	name = "night vision diagnostic HUD"
-	desc = "A robotics diagnostic HUD fitted with a light amplifier."
+	desc = ""
 	icon_state = "diagnostichudnight"
 	item_state = "glasses"
 	darkness_view = 8
@@ -87,7 +87,7 @@
 
 /obj/item/clothing/glasses/hud/diagnostic/sunglasses
 	name = "diagnostic sunglasses"
-	desc = "Sunglasses with a diagnostic HUD."
+	desc = ""
 	icon_state = "sunhuddiag"
 	item_state = "glasses"
 	flash_protect = FLASH_PROTECTION_FLASH
@@ -95,7 +95,7 @@
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"
-	desc = "A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records."
+	desc = ""
 	icon_state = "securityhud"
 	hud_type = DATA_HUD_SECURITY_ADVANCED
 	hud_trait = TRAIT_SECURITY_HUD
@@ -103,7 +103,7 @@
 
 /obj/item/clothing/glasses/hud/security/chameleon
 	name = "chameleon security HUD"
-	desc = "A stolen security HUD integrated with Syndicate chameleon technology. Provides flash protection."
+	desc = ""
 	flash_protect = FLASH_PROTECTION_FLASH
 
 	// Yes this code is the same as normal chameleon glasses, but we don't
@@ -127,12 +127,12 @@
 
 /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch
 	name = "eyepatch HUD"
-	desc = "A heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
+	desc = ""
 	icon_state = "hudpatch"
 
 /obj/item/clothing/glasses/hud/security/sunglasses
 	name = "security HUDSunglasses"
-	desc = "Sunglasses with a security HUD."
+	desc = ""
 	icon_state = "sunhudsec"
 	darkness_view = 1
 	flash_protect = FLASH_PROTECTION_FLASH
@@ -141,7 +141,7 @@
 
 /obj/item/clothing/glasses/hud/security/night
 	name = "night vision security HUD"
-	desc = "An advanced heads-up display that provides ID data and vision in complete darkness."
+	desc = ""
 	icon_state = "securityhudnight"
 	darkness_view = 8
 	flash_protect = FLASH_PROTECTION_SENSITIVE
@@ -150,19 +150,19 @@
 
 /obj/item/clothing/glasses/hud/security/sunglasses/gars
 	name = "\improper HUD gar glasses"
-	desc = "GAR glasses with a HUD."
+	desc = ""
 	icon_state = "gars"
 	item_state = "garb"
 	force = 10
 	throwforce = 10
 	throw_speed = 4
 	attack_verb = list("sliced")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	sharpness = IS_SHARP
 
 /obj/item/clothing/glasses/hud/security/sunglasses/gars/supergars
 	name = "giga HUD gar glasses"
-	desc = "GIGA GAR glasses with a HUD."
+	desc = ""
 	icon_state = "supergars"
 	item_state = "garb"
 	force = 12
@@ -170,7 +170,7 @@
 
 /obj/item/clothing/glasses/hud/toggle
 	name = "Toggle HUD"
-	desc = "A hud with multiple functions."
+	desc = ""
 	actions_types = list(/datum/action/item_action/switch_hud)
 
 /obj/item/clothing/glasses/hud/toggle/attack_self(mob/user)
@@ -197,7 +197,7 @@
 
 /obj/item/clothing/glasses/hud/toggle/thermal
 	name = "thermal HUD scanner"
-	desc = "Thermal imaging HUD in the shape of glasses."
+	desc = ""
 	icon_state = "thermal"
 	hud_type = DATA_HUD_SECURITY_ADVANCED
 	vision_flags = SEE_MOBS

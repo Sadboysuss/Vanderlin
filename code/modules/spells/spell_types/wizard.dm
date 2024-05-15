@@ -1,30 +1,39 @@
 /obj/effect/proc_holder/spell/targeted/projectile/magic_missile
 	name = "Magic Missile"
-	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
+	desc = ""
 
 	school = "evocation"
-	charge_max = 200
-	clothes_req = TRUE
-	invocation = "FORTI GY AMA"
+	releasedrain = 30
+	chargedrain = 1
+	chargetime = 15
+	charge_max = 300
+	clothes_req = FALSE
+	invocation = "MAGIKA MISLA"
 	invocation_type = "shout"
 	range = 7
-	cooldown_min = 60 //35 deciseconds reduction per rank
-	max_targets = 0
+	cooldown_min = 500 //35 deciseconds reduction per rank
+	max_targets = 1
 	proj_type = /obj/projectile/magic/spell/magic_missile
 	action_icon_state = "magicm"
-	sound = 'sound/magic/magic_missile.ogg'
+	sound = 'sound/magic/timestop.ogg'
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	movement_interrupt = FALSE
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/arcane
 
 /obj/projectile/magic/spell/magic_missile
 	name = "magic missile"
 	icon_state = "magicm"
-	range = 20
-	speed = 5
+	range = 12
+	speed = 1
 	trigger_range = 0
 	linger = TRUE
 	nodamage = FALSE
-	paralyze = 60
-	hitsound = 'sound/magic/mm_hit.ogg'
-
+	hitscan = TRUE
+	hitsound = 'sound/magic/antimagic.ogg'
+	damage = 35
+	damage_type = BURN
 	trail = TRUE
 	trail_lifespan = 5
 	trail_icon_state = "magicmd"
@@ -39,7 +48,7 @@
 
 /obj/effect/proc_holder/spell/targeted/genetic/mutate
 	name = "Mutate"
-	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 400
@@ -54,12 +63,12 @@
 	cooldown_min = 300 //25 deciseconds reduction per rank
 
 	action_icon_state = "mutate"
-	sound = 'sound/magic/mutate.ogg'
+	sound = 'sound/blank.ogg'
 
 
 /obj/effect/proc_holder/spell/targeted/smoke
 	name = "Smoke"
-	desc = "This spell spawns a cloud of choking smoke at your location."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 120
@@ -78,7 +87,7 @@
 
 /obj/effect/proc_holder/spell/targeted/smoke/lesser //Chaplain smoke book
 	name = "Smoke"
-	desc = "This spell spawns a small cloud of choking smoke at your location."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 360
@@ -95,7 +104,7 @@
 
 /obj/effect/proc_holder/spell/targeted/emplosion/disable_tech
 	name = "Disable Tech"
-	desc = "This spell disables all weapons, cameras and most other technology in range."
+	desc = ""
 	charge_max = 400
 	clothes_req = TRUE
 	invocation = "NEC CANTIO"
@@ -106,11 +115,11 @@
 
 	emp_heavy = 6
 	emp_light = 10
-	sound = 'sound/magic/disable_tech.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/turf_teleport/blink
 	name = "Blink"
-	desc = "This spell randomly teleports you a short distance."
+	desc = ""
 
 	school = "abjuration"
 	charge_max = 20
@@ -129,8 +138,8 @@
 	outer_tele_radius = 6
 
 	action_icon_state = "blink"
-	sound1 = 'sound/magic/blink.ogg'
-	sound2 = 'sound/magic/blink.ogg'
+	sound1 = 'sound/blank.ogg'
+	sound2 = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/turf_teleport/blink/cult
 	name = "quickstep"
@@ -140,7 +149,7 @@
 
 /obj/effect/proc_holder/spell/targeted/area_teleport/teleport
 	name = "Teleport"
-	desc = "This spell teleports you to an area of your selection."
+	desc = ""
 
 	school = "abjuration"
 	charge_max = 600
@@ -154,8 +163,8 @@
 
 	smoke_spread = 1
 	smoke_amt = 2
-	sound1 = 'sound/magic/teleport_diss.ogg'
-	sound2 = 'sound/magic/teleport_app.ogg'
+	sound1 = 'sound/blank.ogg'
+	sound2 = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/area_teleport/teleport/santa
 	name = "Santa Teleport"
@@ -166,7 +175,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/timestop
 	name = "Stop Time"
-	desc = "This spell stops time for everyone except for you, allowing you to move freely while your enemies and even projectiles are frozen."
+	desc = ""
 	charge_max = 500
 	clothes_req = TRUE
 	invocation = "TOKI YO TOMARE"
@@ -182,7 +191,7 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/carp
 	name = "Summon Carp"
-	desc = "This spell conjures a simple carp."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 1200
@@ -192,12 +201,12 @@
 	range = 1
 
 	summon_type = list(/mob/living/simple_animal/hostile/carp)
-	cast_sound = 'sound/magic/summon_karp.ogg'
+	cast_sound = 'sound/blank.ogg'
 
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/construct
 	name = "Artificer"
-	desc = "This spell conjures a construct which may be controlled by Shades."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 600
@@ -209,12 +218,12 @@
 	summon_type = list(/obj/structure/constructshell)
 
 	action_icon_state = "artificer"
-	cast_sound = 'sound/magic/summonitems_generic.ogg'
+	cast_sound = 'sound/blank.ogg'
 
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/creature
 	name = "Summon Creature Swarm"
-	desc = "This spell tears the fabric of reality, allowing horrific daemons to spill forth."
+	desc = ""
 
 	school = "conjuration"
 	charge_max = 1200
@@ -225,18 +234,18 @@
 	range = 3
 
 	summon_type = list(/mob/living/simple_animal/hostile/netherworld)
-	cast_sound = 'sound/magic/summonitems_generic.ogg'
+	cast_sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/trigger/blind
 	name = "Blind"
-	desc = "This spell temporarily blinds a single target."
+	desc = ""
 
 	school = "transmutation"
 	charge_max = 300
 	clothes_req = FALSE
 	invocation = "STI KALY"
 	invocation_type = "whisper"
-	message = "<span class='notice'>Your eyes cry out in pain!</span>"
+	message = "<span class='notice'>My eyes cry out in pain!</span>"
 	cooldown_min = 50 //12 deciseconds reduction per rank
 
 	starting_spells = list("/obj/effect/proc_holder/spell/targeted/inflict_handler/blind","/obj/effect/proc_holder/spell/targeted/genetic/blind")
@@ -254,33 +263,34 @@
 /obj/effect/proc_holder/spell/targeted/inflict_handler/blind
 	amt_eye_blind = 10
 	amt_eye_blurry = 20
-	sound = 'sound/magic/blind.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/genetic/blind
 	mutations = list(BLINDMUT)
 	duration = 300
 	charge_max = 400 // needs to be higher than the duration or it'll be permanent
-	sound = 'sound/magic/blind.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/aoe_turf/repulse
 	name = "Repulse"
-	desc = "This spell throws everything around the user away."
-	charge_max = 400
-	clothes_req = TRUE
-	invocation = "GITTAH WEIGH"
+	desc = ""
+	charge_max = 200
+	clothes_req = FALSE
+	invocation = "FROS RO DAH"
 	invocation_type = "shout"
-	range = 5
-	cooldown_min = 150
+	range = 3
+	cooldown_min = 900
 	selection_type = "view"
 	sound = 'sound/magic/repulse.ogg'
-	var/maxthrow = 5
+	associated_skill = /datum/skill/magic/arcane
+	var/maxthrow = 3
 	var/sparkle_path = /obj/effect/temp_visual/gravpush
 	var/anti_magic_check = TRUE
 	var/repulse_force = MOVE_FORCE_EXTREMELY_STRONG
 
 	action_icon_state = "repulse"
 
-/obj/effect/proc_holder/spell/aoe_turf/repulse/cast(list/targets,mob/user = usr, stun_amt = 40)
+/obj/effect/proc_holder/spell/aoe_turf/repulse/cast(list/targets,mob/user = usr, stun_amt = 5)
 	var/list/thrownatoms = list()
 	var/atom/throwtarget
 	var/distfromcaster
@@ -304,21 +314,21 @@
 		if(distfromcaster == 0)
 			if(isliving(AM))
 				var/mob/living/M = AM
-				M.Paralyze(100)
+				M.Paralyze(10)
 				M.adjustBruteLoss(5)
-				to_chat(M, "<span class='userdanger'>You're slammed into the floor by [user]!</span>")
+				to_chat(M, "<span class='danger'>You're slammed into the floor by [user]!</span>")
 		else
 			new sparkle_path(get_turf(AM), get_dir(user, AM)) //created sparkles will disappear on their own
 			if(isliving(AM))
 				var/mob/living/M = AM
 				M.Paralyze(stun_amt)
-				to_chat(M, "<span class='userdanger'>You're thrown back by [user]!</span>")
+				to_chat(M, "<span class='danger'>You're thrown back by [user]!</span>")
 			AM.safe_throw_at(throwtarget, ((CLAMP((maxthrow - (CLAMP(distfromcaster - 2, 0, distfromcaster))), 3, maxthrow))), 1,user, force = repulse_force)//So stuff gets tossed around at the same time.
 
 /obj/effect/proc_holder/spell/aoe_turf/repulse/xeno //i fixed conflicts only to find out that this is in the WIZARD file instead of the xeno file?!
 	name = "Tail Sweep"
-	desc = "Throw back attackers with a sweep of your tail."
-	sound = 'sound/magic/tail_swing.ogg'
+	desc = ""
+	sound = 'sound/blank.ogg'
 	charge_max = 150
 	clothes_req = FALSE
 	antimagic_allowed = TRUE
@@ -334,13 +344,13 @@
 /obj/effect/proc_holder/spell/aoe_turf/repulse/xeno/cast(list/targets,mob/user = usr)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		playsound(C.loc, 'sound/voice/hiss5.ogg', 80, TRUE, TRUE)
+		playsound(C.loc, 'sound/blank.ogg', 80, TRUE, TRUE)
 		C.spin(6,1)
 	..(targets, user, 60)
 
 /obj/effect/proc_holder/spell/targeted/sacred_flame
 	name = "Sacred Flame"
-	desc = "Makes everyone around you more flammable, and lights yourself on fire."
+	desc = ""
 	charge_max = 60
 	clothes_req = FALSE
 	invocation = "FI'RAN DADISKO"
@@ -350,7 +360,7 @@
 	include_user = TRUE
 	selection_type = "view"
 	action_icon_state = "sacredflame"
-	sound = 'sound/magic/fireball.ogg'
+	sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/sacred_flame/cast(list/targets, mob/user = usr)
 	for(var/mob/living/L in targets)
@@ -364,7 +374,7 @@
 
 /obj/effect/proc_holder/spell/targeted/conjure_item/spellpacket
 	name = "Thrown Lightning"
-	desc = "Forged from eldrich energies, a packet of pure power, known as a spell packet will appear in your hand, that when thrown will stun the target."
+	desc = ""
 	clothes_req = TRUE
 	item_type = /obj/item/spellpacket/lightningbolt
 	charge_max = 10
@@ -377,7 +387,7 @@
 
 /obj/item/spellpacket/lightningbolt
 	name = "\improper Lightning bolt Spell Packet"
-	desc = "Some birdseed wrapped in cloth that crackles with electricity."
+	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "snappop"
 	w_class = WEIGHT_CLASS_TINY

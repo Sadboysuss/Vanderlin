@@ -1,6 +1,6 @@
 /obj/machinery/fat_sucker
 	name = "lipid extractor"
-	desc = "Safely and efficiently extracts excess fat from a subject."
+	desc = ""
 	icon = 'icons/obj/machines/fat_sucker.dmi'
 	icon_state = "fat"
 
@@ -48,22 +48,22 @@
 
 /obj/machinery/fat_sucker/close_machine(mob/user)
 	if(panel_open)
-		to_chat(user, "<span class='warning'>You need to close the maintenance hatch first!</span>")
+		to_chat(user, "<span class='warning'>I need to close the maintenance hatch first!</span>")
 		return
 	..()
-	playsound(src, 'sound/machines/click.ogg', 50)
+	playsound(src, 'sound/blank.ogg', 50)
 	if(occupant)
 		if(!iscarbon(occupant))
 			occupant.forceMove(drop_location())
 			occupant = null
 			return
-		to_chat(occupant, "<span class='notice'>You enter [src].</span>")
+		to_chat(occupant, "<span class='notice'>I enter [src].</span>")
 		addtimer(CALLBACK(src, .proc/start_extracting), 20, TIMER_OVERRIDE|TIMER_UNIQUE)
 		update_icon()
 
 /obj/machinery/fat_sucker/open_machine(mob/user)
 	make_meat()
-	playsound(src, 'sound/machines/click.ogg', 50)
+	playsound(src, 'sound/blank.ogg', 50)
 	if(processing)
 		stop()
 	..()
@@ -73,15 +73,15 @@
 		to_chat(user, "<span class='notice'>The emergency release is not responding! You start pushing against the hull!</span>")
 		user.changeNext_move(CLICK_CD_BREAKOUT)
 		user.last_special = world.time + CLICK_CD_BREAKOUT
-		user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-			"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-			"<span class='hear'>You hear a metallic creaking from [src].</span>")
+		user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+			"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+			"<span class='hear'>I hear a metallic creaking from [src].</span>")
 		if(do_after(user, breakout_time, target = src))
 			if(!user || user.stat != CONSCIOUS || user.loc != src || state_open)
 				return
 			free_exit = TRUE
 			user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-				"<span class='notice'>You successfully break out of [src]!</span>")
+				"<span class='notice'>I successfully break out of [src]!</span>")
 			open_machine()
 		return
 	open_machine()
@@ -98,10 +98,10 @@
 	if(!user.canUseTopic(src, BE_CLOSE))
 		return
 	if(user == occupant)
-		to_chat(user, "<span class='warning'>You can't reach the controls from inside!</span>")
+		to_chat(user, "<span class='warning'>I can't reach the controls from inside!</span>")
 		return
 	if(!(obj_flags & EMAGGED) && !allowed(user))
-		to_chat(user, "<span class='warning'>You lack the required access.</span>")
+		to_chat(user, "<span class='warning'>I lack the required access.</span>")
 		return
 	free_exit = !free_exit
 	to_chat(user, "<span class='notice'>Safety hatch [free_exit ? "unlocked" : "locked"].</span>")
@@ -138,7 +138,7 @@
 	var/mob/living/carbon/C = occupant
 	if(C.nutrition <= stop_at)
 		open_machine()
-		playsound(src, 'sound/machines/microwave/microwave-end.ogg', 100, FALSE)
+		playsound(src, 'sound/blank.ogg', 100, FALSE)
 		return
 	C.adjust_nutrition(-bite_size)
 	nutrients += bite_size
@@ -146,7 +146,7 @@
 	if(next_fact <= 0)
 		next_fact = initial(next_fact)
 		say(pick(fat_facts))
-		playsound(loc, 'sound/machines/chime.ogg', 30, FALSE)
+		playsound(loc, 'sound/blank.ogg', 30, FALSE)
 	else
 		next_fact--
 	use_power(500)
@@ -163,7 +163,7 @@
 			set_light(2, 1, "#ff0000")
 		else
 			say("Subject not fat enough.")
-			playsound(src, 'sound/machines/buzz-sigh.ogg', 40, FALSE)
+			playsound(src, 'sound/blank.ogg', 40, FALSE)
 			overlays += "[icon_state]_red" //throw a red light icon over it, to show that it wont work
 
 /obj/machinery/fat_sucker/proc/stop()
@@ -209,5 +209,5 @@
 		return
 	start_at = 100
 	stop_at = 0
-	to_chat(user, "<span class='notice'>You remove the access restrictions and lower the automatic ejection threshold!</span>")
+	to_chat(user, "<span class='notice'>I remove the access restrictions and lower the automatic ejection threshold!</span>")
 	obj_flags |= EMAGGED

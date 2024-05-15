@@ -1,6 +1,6 @@
 /obj/item/target
 	name = "shooting target"
-	desc = "A shooting target."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
 	density = FALSE
@@ -29,7 +29,7 @@
 	..()
 	if(I.use_tool(src, user, 0, volume=40))
 		removeOverlays()
-		to_chat(user, "<span class='notice'>You slice off [src]'s uneven chunks of aluminium and scorch marks.</span>")
+		to_chat(user, "<span class='notice'>I slice off [src]'s uneven chunks of aluminium and scorch marks.</span>")
 	return TRUE
 
 /obj/item/target/attack_hand(mob/user)
@@ -41,12 +41,12 @@
 
 /obj/item/target/syndicate
 	icon_state = "target_s"
-	desc = "A shooting target that looks like syndicate scum."
+	desc = ""
 	hp = 2600
 
 /obj/item/target/alien
 	icon_state = "target_q"
-	desc = "A shooting target that looks like a xenomorphic alien."
+	desc = ""
 	hp = 2350
 
 /obj/item/target/alien/anchored
@@ -54,7 +54,7 @@
 
 /obj/item/target/clown
 	icon_state = "target_c"
-	desc = "A shooting target that looks like a useless clown."
+	desc = ""
 	hp = 2000
 
 #define DECALTYPE_SCORCH 1
@@ -62,7 +62,7 @@
 
 /obj/item/target/clown/bullet_act(obj/projectile/P)
 	. = ..()
-	playsound(src.loc, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/target/bullet_act(obj/projectile/P)
 	if(istype(P, /obj/projectile/bullet/reusable)) // If it's a foam dart, don't bother with any of this other shit

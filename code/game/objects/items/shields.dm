@@ -10,7 +10,7 @@
 
 /obj/item/shield/riot
 	name = "riot shield"
-	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
+	desc = ""
 	icon_state = "riot"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
@@ -42,7 +42,7 @@
 	if(istype(W, /obj/item/melee/baton))
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
-			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, TRUE)
+			playsound(user.loc, 'sound/blank.ogg', 50, TRUE)
 			cooldown = world.time
 	else if(istype(W, /obj/item/stack/sheet/mineral/titanium))
 		if (obj_integrity >= max_integrity)
@@ -51,7 +51,7 @@
 			var/obj/item/stack/sheet/mineral/titanium/T = W
 			T.use(1)
 			obj_integrity = max_integrity
-			to_chat(user, "<span class='notice'>You repair [src] with [T].</span>")
+			to_chat(user, "<span class='notice'>I repair [src] with [T].</span>")
 	else
 		return ..()
 
@@ -67,7 +67,7 @@
 			. += "<span class='warning'>It's falling apart!</span>"
 
 /obj/item/shield/riot/proc/shatter(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/glassbr3.ogg', 100)
+	playsound(owner, 'sound/blank.ogg', 100)
 	new /obj/item/shard((get_turf(src)))
 
 /obj/item/shield/riot/on_shield_block(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
@@ -82,7 +82,7 @@
 
 /obj/item/shield/riot/roman
 	name = "\improper Roman shield"
-	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>."
+	desc = ""
 	icon_state = "roman_shield"
 	item_state = "roman_shield"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
@@ -92,18 +92,18 @@
 	max_integrity = 65
 
 /obj/item/shield/riot/roman/fake
-	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>. It appears to be a bit flimsy."
+	desc = ""
 	block_chance = 0
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	max_integrity = 30
 
 /obj/item/shield/riot/roman/shatter(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/grillehit.ogg', 100)
+	playsound(owner, 'sound/blank.ogg', 100)
 	new /obj/item/stack/sheet/metal(get_turf(src))
 
 /obj/item/shield/riot/buckler
 	name = "wooden buckler"
-	desc = "A medieval wooden buckler."
+	desc = ""
 	icon_state = "buckler"
 	item_state = "buckler"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
@@ -116,12 +116,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/shield/riot/buckler/shatter(mob/living/carbon/human/owner)
-	playsound(owner, 'sound/effects/bang.ogg', 50)
+	playsound(owner, 'sound/blank.ogg', 50)
 	new /obj/item/stack/sheet/mineral/wood(get_turf(src))
 
 /obj/item/shield/riot/flash
 	name = "strobe shield"
-	desc = "A shield with a built in, high intensity light capable of blinding and disorienting suspects. Takes regular handheld flashes as bulbs."
+	desc = ""
 	icon_state = "flashshield"
 	item_state = "flashshield"
 	var/obj/item/assembly/flash/handheld/embedded_flash
@@ -152,11 +152,11 @@
 			to_chat(user, "<span class='warning'>No sense replacing it with a broken bulb!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>You begin to replace the bulb...</span>")
+			to_chat(user, "<span class='notice'>I begin to replace the bulb...</span>")
 			if(do_after(user, 20, target = user))
 				if(flash.burnt_out || !flash || QDELETED(flash))
 					return
-				playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 				qdel(embedded_flash)
 				embedded_flash = flash
 				flash.forceMove(src)
@@ -184,7 +184,7 @@
 
 /obj/item/shield/energy
 	name = "energy combat shield"
-	desc = "A shield that reflects almost all energy projectiles, but is useless against physical attacks. It can be retracted, expanded, and stored anywhere."
+	desc = ""
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
 	w_class = WEIGHT_CLASS_TINY
@@ -192,7 +192,7 @@
 	throw_range = 5
 	force = 3
 	throwforce = 3
-	throw_speed = 3
+	throw_speed = 1
 	var/base_icon_state = "eshield" // [base_icon_state]1 for expanded, [base_icon_state]0 for contracted
 	var/on_force = 10
 	var/on_throwforce = 8
@@ -212,7 +212,7 @@
 
 /obj/item/shield/energy/attack_self(mob/living/carbon/human/user)
 	if(clumsy_check && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
-		to_chat(user, "<span class='userdanger'>You beat yourself in the head with [src]!</span>")
+		to_chat(user, "<span class='danger'>I beat myself in the head with [src]!</span>")
 		user.take_bodypart_damage(5)
 	active = !active
 	icon_state = "[base_icon_state][active]"
@@ -222,20 +222,20 @@
 		throwforce = on_throwforce
 		throw_speed = on_throw_speed
 		w_class = WEIGHT_CLASS_BULKY
-		playsound(user, 'sound/weapons/saberon.ogg', 35, TRUE)
+		playsound(user, 'sound/blank.ogg', 35, TRUE)
 		to_chat(user, "<span class='notice'>[src] is now active.</span>")
 	else
 		force = initial(force)
 		throwforce = initial(throwforce)
 		throw_speed = initial(throw_speed)
 		w_class = WEIGHT_CLASS_TINY
-		playsound(user, 'sound/weapons/saberoff.ogg', 35, TRUE)
+		playsound(user, 'sound/blank.ogg', 35, TRUE)
 		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")
 	add_fingerprint(user)
 
 /obj/item/shield/riot/tele
 	name = "telescopic shield"
-	desc = "An advanced riot shield made of lightweight materials that collapses for easy storage."
+	desc = ""
 	icon_state = "teleriot0"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
@@ -243,7 +243,7 @@
 	slot_flags = null
 	force = 3
 	throwforce = 3
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	var/active = 0
@@ -256,7 +256,7 @@
 /obj/item/shield/riot/tele/attack_self(mob/living/user)
 	active = !active
 	icon_state = "teleriot[active]"
-	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 
 	if(active)
 		force = 8
@@ -264,11 +264,11 @@
 		throw_speed = 2
 		w_class = WEIGHT_CLASS_BULKY
 		slot_flags = ITEM_SLOT_BACK
-		to_chat(user, "<span class='notice'>You extend \the [src].</span>")
+		to_chat(user, "<span class='notice'>I extend \the [src].</span>")
 	else
 		force = 3
 		throwforce = 3
-		throw_speed = 3
+		throw_speed = 1
 		w_class = WEIGHT_CLASS_NORMAL
 		slot_flags = null
 		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")

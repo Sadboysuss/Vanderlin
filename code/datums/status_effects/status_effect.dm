@@ -12,11 +12,13 @@
 	var/examine_text //If defined, this text will appear when the mob is examined - to use he, she etc. use "SUBJECTPRONOUN" and replace it in the examines themselves
 	var/alert_type = /obj/screen/alert/status_effect //the alert thrown by the status effect, contains name and description
 	var/obj/screen/alert/status_effect/linked_alert = null //the alert itself, if it exists
+	var/list/effectedstats = list()
 
 /datum/status_effect/New(list/arguments)
 	on_creation(arglist(arguments))
 
 /datum/status_effect/proc/on_creation(mob/living/new_owner, ...)
+	testing("oncreation")
 	if(new_owner)
 		owner = new_owner
 	if(owner)
@@ -54,10 +56,19 @@
 		qdel(src)
 
 /datum/status_effect/proc/on_apply() //Called whenever the buff is applied; returning FALSE will cause it to autoremove itself.
+	for(var/S in effectedstats)
+		owner.change_stat(S, effectedstats[S])
 	return TRUE
+
 /datum/status_effect/proc/tick() //Called every tick.
+
 /datum/status_effect/proc/on_remove() //Called whenever the buff expires or is removed; do note that at the point this is called, it is out of the owner's status_effects but owner is not yet null
+	for(var/S in effectedstats)
+		owner.change_stat(S, -(effectedstats[S]))
+
 /datum/status_effect/proc/be_replaced() //Called instead of on_remove when a status effect is replaced by itself or when a status effect with on_remove_on_mob_delete = FALSE has its mob deleted
+	for(var/S in effectedstats)
+		owner.change_stat(S, -(effectedstats[S]))
 	owner.clear_alert(id)
 	LAZYREMOVE(owner.status_effects, src)
 	owner = null
@@ -82,8 +93,24 @@
 
 /obj/screen/alert/status_effect
 	name = "Curse of Mundanity"
-	desc = "You don't feel any different..."
+	desc = ""
 	var/datum/status_effect/attached_effect
+
+/obj/screen/alert/status_effect/examine_ui(mob/user)
+	var/list/inspec = list("----------------------")
+	inspec += "<br><span class='notice'><b>[name]</b></span>"
+	if(desc)
+		inspec += "<br>[desc]"
+
+	for(var/S in attached_effect?.effectedstats)
+		if(attached_effect.effectedstats[S] > 0)
+			inspec += "<br><span class='purple'>[S]</span> \Roman [attached_effect.effectedstats[S]]"
+		if(attached_effect.effectedstats[S] < 0)
+			var/newnum = attached_effect.effectedstats[S] * -1
+			inspec += "<br><span class='danger'>[S]</span> \Roman [newnum]"
+
+	inspec += "<br>----------------------"
+	to_chat(user, "[inspec.Join()]")
 
 //////////////////
 // HELPER PROCS //
@@ -143,7 +170,7 @@
 	var/stacks = 0 //how many stacks are accumulated, also is # of stacks that target will have when first applied
 	var/delay_before_decay //deciseconds until ticks start occuring, which removes stacks (first stack will be removed at this time plus tick_interval)
 	tick_interval = 10 //deciseconds between decays once decay starts
-	var/stack_decay = 1 //how many stacks are lost per tick (decay trigger) 
+	var/stack_decay = 1 //how many stacks are lost per tick (decay trigger)
 	var/stack_threshold //special effects trigger when stacks reach this amount
 	var/max_stacks //stacks cannot exceed this amount
 	var/consumed_on_threshold = TRUE //if status should be removed once threshold is crossed
@@ -151,7 +178,7 @@
 	var/overlay_file
 	var/underlay_file
 	var/overlay_state // states in .dmi must be given a name followed by a number which corresponds to a number of stacks. put the state name without the number in these state vars
-	var/underlay_state // the number is concatonated onto the string based on the number of stacks to get the correct state name 
+	var/underlay_state // the number is concatonated onto the string based on the number of stacks to get the correct state name
 	var/mutable_appearance/status_overlay
 	var/mutable_appearance/status_underlay
 
@@ -205,13 +232,13 @@
 		owner.add_overlay(status_overlay)
 		owner.underlays += status_underlay
 	else
-		fadeout_effect() 
+		fadeout_effect()
 		qdel(src) //deletes status if stacks fall under one
 
 /datum/status_effect/stacking/on_creation(mob/living/new_owner, stacks_to_apply)
 	..()
 	src.add_stacks(stacks_to_apply)
-	
+
 /datum/status_effect/stacking/on_apply()
 	if(!can_have_status())
 		return FALSE

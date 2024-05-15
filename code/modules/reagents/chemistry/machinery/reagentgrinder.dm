@@ -2,7 +2,7 @@
 
 /obj/machinery/reagentgrinder
 	name = "\improper All-In-One Grinder"
-	desc = "From BlenderTech. Will It Blend? Let's test it out!"
+	desc = ""
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "juicer1"
 	layer = BELOW_OBJ_LAYER
@@ -128,7 +128,7 @@
 		if(!user.transferItemToLoc(B, src))
 			return
 		replace_beaker(user, B)
-		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
+		to_chat(user, "<span class='notice'>I add [B] to [src].</span>")
 		update_icon()
 		return TRUE //no afterattack
 
@@ -143,23 +143,23 @@
 			for(var/i in inserted)
 				holdingitems[i] = TRUE
 			if(!I.contents.len)
-				to_chat(user, "<span class='notice'>You empty [I] into [src].</span>")
+				to_chat(user, "<span class='notice'>I empty [I] into [src].</span>")
 			else
-				to_chat(user, "<span class='notice'>You fill [src] to the brim.</span>")
+				to_chat(user, "<span class='notice'>I fill [src] to the brim.</span>")
 		return TRUE
 
 	if(!I.grind_results && !I.juice_results)
-		if(user.a_intent == INTENT_HARM)
+		if(user.used_intent.type == INTENT_HARM)
 			return ..()
 		else
-			to_chat(user, "<span class='warning'>You cannot grind [I] into reagents!</span>")
+			to_chat(user, "<span class='warning'>I cannot grind [I] into reagents!</span>")
 			return TRUE
 
 	if(!I.grind_requirements(src)) //Error messages should be in the objects' definitions
 		return
 
 	if(user.transferItemToLoc(I, src))
-		to_chat(user, "<span class='notice'>You add [I] to [src].</span>")
+		to_chat(user, "<span class='notice'>I add [I] to [src].</span>")
 		holdingitems[I] = TRUE
 		return FALSE
 
@@ -239,9 +239,9 @@
 	operating = TRUE
 	if(!silent)
 		if(!juicing)
-			playsound(src, 'sound/machines/blender.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 		else
-			playsound(src, 'sound/machines/juicer.ogg', 20, TRUE)
+			playsound(src, 'sound/blank.ogg', 20, TRUE)
 	addtimer(CALLBACK(src, .proc/stop_operating), time / speed)
 
 /obj/machinery/reagentgrinder/proc/stop_operating()

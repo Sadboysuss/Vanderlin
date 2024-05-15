@@ -4,7 +4,7 @@
 	name = "stacking machine console"
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
-	desc = "Controls a stacking machine... in theory."
+	desc = ""
 	density = FALSE
 	circuit = /obj/item/circuitboard/machine/stacking_unit_console
 	var/obj/machinery/mineral/stacking_machine/machine
@@ -42,7 +42,7 @@
 		return
 	var/obj/item/multitool/M = I
 	M.buffer = src
-	to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
+	to_chat(user, "<span class='notice'>I store linkage information in [I]'s buffer.</span>")
 	return TRUE
 
 /obj/machinery/mineral/stacking_unit_console/Topic(href, href_list)
@@ -69,7 +69,7 @@
 	name = "stacking machine"
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "stacker"
-	desc = "A machine that automatically stacks acquired materials. Controlled by a nearby console."
+	desc = ""
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/stacking_machine
 	input_dir = EAST
@@ -101,7 +101,7 @@
 		if(istype(M.buffer, /obj/machinery/mineral/stacking_unit_console))
 			CONSOLE = M.buffer
 			CONSOLE.machine = src
-			to_chat(user, "<span class='notice'>You link [src] to the console in [M]'s buffer.</span>")
+			to_chat(user, "<span class='notice'>I link [src] to the console in [M]'s buffer.</span>")
 			return TRUE
 
 /obj/machinery/mineral/stacking_machine/proc/process_sheet(obj/item/stack/sheet/inp)

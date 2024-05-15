@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(doppler_arrays)
 
 /obj/machinery/doppler_array
 	name = "tachyon-doppler array"
-	desc = "A highly precise directional sensor array which measures the release of quants from decaying tachyons. The doppler shifting of the mirror-image formed by these quants can reveal the size, location and temporal affects of energetic disturbances within a large radius ahead of the array.\n"
+	desc = ""
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "tdoppler"
 	density = TRUE
@@ -59,18 +59,18 @@ GLOBAL_LIST_EMPTY(doppler_arrays)
 		if(!anchored && !isinspace())
 			anchored = TRUE
 			power_change()
-			to_chat(user, "<span class='notice'>You fasten [src].</span>")
+			to_chat(user, "<span class='notice'>I fasten [src].</span>")
 		else if(anchored)
 			anchored = FALSE
 			power_change()
-			to_chat(user, "<span class='notice'>You unfasten [src].</span>")
+			to_chat(user, "<span class='notice'>I unfasten [src].</span>")
 		I.play_tool_sound(src)
 		return
 	return ..()
 
 /obj/machinery/doppler_array/proc/rot_message(mob/user)
-	to_chat(user, "<span class='notice'>You adjust [src]'s dish to face to the [dir2text(dir)].</span>")
-	playsound(src, 'sound/items/screwdriver2.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I adjust [src]'s dish to face to the [dir2text(dir)].</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/machinery/doppler_array/proc/sense_explosion(turf/epicenter,devastation_range,heavy_impact_range,light_impact_range,
 												  took,orig_dev_range,orig_heavy_range,orig_light_range)
@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(doppler_arrays)
 
 /obj/machinery/doppler_array/research
 	name = "tachyon-doppler research array"
-	desc = "A specialized tachyon-doppler bomb detection array that uses the results of the highest yield of explosions for research."
+	desc = ""
 	var/datum/techweb/linked_techweb
 
 /obj/machinery/doppler_array/research/sense_explosion(turf/epicenter, dev, heavy, light, time, orig_dev, orig_heavy, orig_light)	//probably needs a way to ignore admin explosives later on

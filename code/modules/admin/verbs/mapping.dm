@@ -58,7 +58,7 @@ GLOBAL_PROTECT(admin_verbs_debug_mapping)
 	name = "map fix marker"
 	icon = 'icons/mob/screen_gen.dmi'
 	icon_state = "mapfixmarker"
-	desc = "I am a mappers mistake."
+	desc = ""
 
 /obj/effect/debugging/marker
 	icon = 'icons/turf/areas.dmi'
@@ -165,7 +165,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 /client/proc/cmd_show_at_list()
 	set category = "Mapping"
 	set name = "Show roundstart AT list"
-	set desc = "Displays a list of active turfs coordinates at roundstart"
+	set desc = ""
 
 	var/dat = {"<b>Coordinate list of Active Turfs at Roundstart</b>
 	 <br>Real-time Active Turfs list you can see in Air Subsystem at active_turfs var<br>"}
@@ -182,7 +182,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 /client/proc/cmd_show_at_markers()
 	set category = "Mapping"
 	set name = "Show roundstart AT markers"
-	set desc = "Places a marker on all active-at-roundstart turfs"
+	set desc = ""
 
 	var/count = 0
 	for(var/obj/effect/abstract/marker/at/AT in GLOB.all_abstract_markers)

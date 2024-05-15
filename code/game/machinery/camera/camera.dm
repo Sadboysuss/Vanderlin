@@ -4,7 +4,7 @@
 
 /obj/machinery/camera
 	name = "security camera"
-	desc = "It's used to monitor rooms."
+	desc = ""
 	icon = 'icons/obj/machines/camera.dmi'
 	icon_state = "camera" //mapping icon to represent upgrade states. if you want a different base icon, update default_camera_icon as well as this.
 	use_power = ACTIVE_POWER_USE
@@ -44,7 +44,7 @@
 
 /obj/machinery/camera/preset/toxins //Bomb test site in space
 	name = "Hardened Bomb-Test Camera"
-	desc = "A specially-reinforced camera with a long lasting battery, used to monitor the bomb testing site. An external light is attached to the top."
+	desc = ""
 	c_tag = "Bomb Testing Site"
 	network = list("rd","toxins")
 	use_power = NO_POWER_USE //Test site is an unpowered area
@@ -190,7 +190,7 @@
 	if(..())
 		return TRUE
 	panel_open = !panel_open
-	to_chat(user, "<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
+	to_chat(user, "<span class='notice'>I screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 	I.play_tool_sound(src)
 	update_icon()
 	return TRUE
@@ -211,7 +211,7 @@
 	var/obj/item/choice = input(user, "Select a part to remove:", src) as null|obj in sortNames(droppable_parts)
 	if(!choice || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
-	to_chat(user, "<span class='notice'>You remove [choice] from [src].</span>")
+	to_chat(user, "<span class='notice'>I remove [choice] from [src].</span>")
 	if(choice == assembly.xray_module)
 		assembly.drop_upgrade(assembly.xray_module)
 		removeXRay()
@@ -240,7 +240,7 @@
 		return
 
 	setViewRange((view_range == initial(view_range)) ? short_range : initial(view_range))
-	to_chat(user, "<span class='notice'>You [(view_range == initial(view_range)) ? "restore" : "mess up"] the camera's focus.</span>")
+	to_chat(user, "<span class='notice'>I [(view_range == initial(view_range)) ? "restore" : "mess up"] the camera's focus.</span>")
 	return TRUE
 
 /obj/machinery/camera/welder_act(mob/living/user, obj/item/I)
@@ -251,10 +251,10 @@
 	if(!I.tool_start_check(user, amount=0))
 		return TRUE
 
-	to_chat(user, "<span class='notice'>You start to weld [src]...</span>")
+	to_chat(user, "<span class='notice'>I start to weld [src]...</span>")
 	if(I.use_tool(src, user, 100, volume=50))
 		user.visible_message("<span class='warning'>[user] unwelds [src], leaving it as just a frame bolted to the wall.</span>",
-			"<span class='warning'>You unweld [src], leaving it as just a frame bolted to the wall</span>")
+			"<span class='warning'>I unweld [src], leaving it as just a frame bolted to the wall</span>")
 		deconstruct(TRUE)
 
 	return TRUE
@@ -267,7 +267,7 @@
 				if(!user.temporarilyRemoveItemFromInventory(I))
 					return
 				upgradeXRay(FALSE, TRUE)
-				to_chat(user, "<span class='notice'>You attach [I] into [assembly]'s inner circuits.</span>")
+				to_chat(user, "<span class='notice'>I attach [I] into [assembly]'s inner circuits.</span>")
 				qdel(I)
 			else
 				to_chat(user, "<span class='warning'>[src] already has that upgrade!</span>")
@@ -277,7 +277,7 @@
 			if(!isEmpProof(TRUE)) //don't reveal it was already upgraded if was done via MALF AI Upgrade Camera Network ability
 				if(I.use_tool(src, user, 0, amount=1))
 					upgradeEmpProof(FALSE, TRUE)
-					to_chat(user, "<span class='notice'>You attach [I] into [assembly]'s inner circuits.</span>")
+					to_chat(user, "<span class='notice'>I attach [I] into [assembly]'s inner circuits.</span>")
 			else
 				to_chat(user, "<span class='warning'>[src] already has that upgrade!</span>")
 			return
@@ -287,7 +287,7 @@
 				if(!user.temporarilyRemoveItemFromInventory(I))
 					return
 				upgradeMotion()
-				to_chat(user, "<span class='notice'>You attach [I] into [assembly]'s inner circuits.</span>")
+				to_chat(user, "<span class='notice'>I attach [I] into [assembly]'s inner circuits.</span>")
 				qdel(I)
 			else
 				to_chat(user, "<span class='warning'>[src] already has that upgrade!</span>")
@@ -309,7 +309,7 @@
 			P = I
 			itemname = P.name
 			info = P.notehtml
-		to_chat(U, "<span class='notice'>You hold \the [itemname] up to the camera...</span>")
+		to_chat(U, "<span class='notice'>I hold \the [itemname] up to the camera...</span>")
 		U.changeNext_move(CLICK_CD_MELEE)
 		for(var/mob/O in GLOB.player_list)
 			if(isAI(O))
@@ -414,7 +414,7 @@
 		else
 			visible_message("<span class='danger'>\The [src] [change_msg]!</span>")
 
-		playsound(src, 'sound/items/wirecutter.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 	update_icon() //update Initialize() if you remove this.
 
 	// now disconnect anyone using the camera
@@ -463,14 +463,14 @@
 
 //Return a working camera that can see a given mob
 //or null if none
-/proc/seen_by_camera(var/mob/M)
+/proc/seen_by_camera(mob/M)
 	for(var/obj/machinery/camera/C in oview(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C
 			break
 	return null
 
-/proc/near_range_camera(var/mob/M)
+/proc/near_range_camera(mob/M)
 	for(var/obj/machinery/camera/C in range(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C

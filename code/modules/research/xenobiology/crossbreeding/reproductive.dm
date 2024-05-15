@@ -5,10 +5,10 @@ Reproductive extracts:
 */
 /obj/item/slimecross/reproductive
 	name = "reproductive extract"
-	desc = "It pulses with a strange hunger."
+	desc = ""
 	icon_state = "reproductive"
 	effect = "reproductive"
-	effect_desc = "When fed monkey cubes it produces more extracts. Bio bag compatible as well."
+	effect_desc = ""
 	var/extract_type = /obj/item/slime_extract/
 	var/cubes_eaten = 0
 	var/last_produce = 0
@@ -32,7 +32,7 @@ Reproductive extracts:
 	if(cubes_eaten >= 3)
 		var/cores = rand(1,4)
 		visible_message("<span class='notice'>[src] briefly swells to a massive size, and expels [cores] extract[cores > 1 ? "s":""]!</span>")
-		playsound(src, 'sound/effects/splat.ogg', 40, TRUE)
+		playsound(src, 'sound/blank.ogg', 40, TRUE)
 		last_produce = world.time
 		for(var/i = 0, i < cores, i++)
 			new extract_type(get_turf(loc))
@@ -41,8 +41,8 @@ Reproductive extracts:
 /obj/item/slimecross/reproductive/proc/eat_cube(obj/item/reagent_containers/food/snacks/monkeycube, mob/user)
 		qdel(monkeycube)
 		cubes_eaten++
-		to_chat(user, "<span class='notice'>You feed [monkeycube] to [src], and it pulses gently.</span>")
-		playsound(src, 'sound/items/eatfood.ogg', 20, TRUE)
+		to_chat(user, "<span class='notice'>I feed [monkeycube] to [src], and it pulses gently.</span>")
+		playsound(src, 'sound/blank.ogg', 20, TRUE)
 
 /obj/item/slimecross/reproductive/grey
 	extract_type = /obj/item/slime_extract/grey

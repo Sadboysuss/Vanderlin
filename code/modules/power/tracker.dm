@@ -5,7 +5,7 @@
 
 /obj/machinery/power/tracker
 	name = "solar tracker"
-	desc = "A solar directional tracker."
+	desc = ""
 	icon = 'goon/icons/obj/power.dmi'
 	icon_state = "tracker"
 	density = TRUE
@@ -60,18 +60,18 @@
 		control.currentdir = angle
 
 /obj/machinery/power/tracker/crowbar_act(mob/user, obj/item/I)
-	playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-	user.visible_message("<span class='notice'>[user] begins to take the glass off [src].</span>", "<span class='notice'>You begin to take the glass off [src]...</span>")
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	user.visible_message("<span class='notice'>[user] begins to take the glass off [src].</span>", "<span class='notice'>I begin to take the glass off [src]...</span>")
 	if(I.use_tool(src, user, 50))
-		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-		user.visible_message("<span class='notice'>[user] takes the glass off [src].</span>", "<span class='notice'>You take the glass off [src].</span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+		user.visible_message("<span class='notice'>[user] takes the glass off [src].</span>", "<span class='notice'>I take the glass off [src].</span>")
 		deconstruct(TRUE)
 	return TRUE
 
 /obj/machinery/power/tracker/obj_break(damage_flag)
 	. = ..()
 	if(.)
-		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 		unset_control()
 
 /obj/machinery/power/solar/deconstruct(disassembled = TRUE)

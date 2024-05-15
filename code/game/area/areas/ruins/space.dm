@@ -63,7 +63,7 @@
 
 /area/ruin/space/has_grav/powered/aesthetic
 	name = "Aesthetic"
-	ambientsounds = list('sound/ambience/ambivapor1.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 
 //Ruin of Hotel
@@ -286,7 +286,7 @@
 /area/ruin/space/has_grav/ancientstation/deltaai
 	name = "Delta Station AI Core"
 	icon_state = "ai"
-	ambientsounds = list('sound/ambience/ambimalf.ogg', 'sound/ambience/ambitech.ogg', 'sound/ambience/ambitech2.ogg', 'sound/ambience/ambiatmos.ogg', 'sound/ambience/ambiatmos2.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 /area/ruin/space/has_grav/ancientstation/mining
 	name = "Beta Station Mining Equipment"
@@ -394,7 +394,7 @@
 /area/ruin/space/abandoned_tele
 	name = "Abandoned Teleporter"
 	icon_state = "teleporter"
-	ambientsounds = list('sound/ambience/ambimalf.ogg', 'sound/ambience/signal.ogg')
+	ambientsounds = list('sound/blank.ogg')
 
 //OLD AI SAT
 

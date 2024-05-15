@@ -5,7 +5,7 @@
 //Its eyes will turn red to signal an imminent attack!
 /mob/living/simple_animal/hostile/jungle/leaper
 	name = "leaper"
-	desc = "Commonly referred to as 'leapers', the Geron Toad is a massive beast that spits out highly pressurized bubbles containing a unique toxin, knocking down its prey and then crushing it with its girth."
+	desc = ""
 	icon = 'icons/mob/jungle/leaper.dmi'
 	icon_state = "leaper"
 	icon_living = "leaper"
@@ -15,7 +15,7 @@
 	health = 300
 	ranged = TRUE
 	projectiletype = /obj/projectile/leaper
-	projectilesound = 'sound/weapons/pierce.ogg'
+	projectilesound = 'sound/blank.ogg'
 	ranged_cooldown_time = 30
 	pixel_x = -16
 	layer = LARGE_MOB_LAYER
@@ -34,7 +34,7 @@
 	paralyze = 50
 	damage = 0
 	range = 7
-	hitsound = 'sound/effects/snap.ogg'
+	hitsound = 'sound/blank.ogg'
 	nondirectional_sprite = TRUE
 	impact_effect_type = /obj/effect/temp_visual/leaper_projectile_impact
 
@@ -66,13 +66,13 @@
 
 /obj/effect/decal/cleanable/leaper_sludge
 	name = "leaper sludge"
-	desc = "A small pool of sludge, containing trace amounts of leaper venom."
+	desc = ""
 	icon = 'icons/effects/tomatodecal.dmi'
 	icon_state = "tomato_floor1"
 
 /obj/structure/leaper_bubble
 	name = "leaper bubble"
-	desc = "A floating bubble containing leaper venom. The contents are under a surprising amount of pressure."
+	desc = ""
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "leaper"
 	max_integrity = 10
@@ -85,14 +85,14 @@
 
 /obj/structure/leaper_bubble/Destroy()
 	new /obj/effect/temp_visual/leaper_projectile_impact(get_turf(src))
-	playsound(src,'sound/effects/snap.ogg',50, TRUE, -1)
+	playsound(src,'sound/blank.ogg',50, TRUE, -1)
 	return ..()
 
 /obj/structure/leaper_bubble/Crossed(atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(!istype(L, /mob/living/simple_animal/hostile/jungle/leaper))
-			playsound(src,'sound/effects/snap.ogg',50, TRUE, -1)
+			playsound(src,'sound/blank.ogg',50, TRUE, -1)
 			L.Paralyze(50)
 			if(iscarbon(L))
 				var/mob/living/carbon/C = L
@@ -118,7 +118,7 @@
 
 /obj/effect/temp_visual/leaper_crush
 	name = "grim tidings"
-	desc = "Incoming leaper!"
+	desc = ""
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "lily_pad"
 	layer = BELOW_MOB_LAYER
@@ -211,7 +211,7 @@
 	notransform = FALSE
 	pass_flags &= ~PASSMOB
 	hopping = FALSE
-	playsound(src.loc, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 	if(target && AIStatus == AI_ON && projectile_ready && !ckey)
 		face_atom(target)
 		addtimer(CALLBACK(src, .proc/OpenFire, target), 5)
@@ -231,7 +231,7 @@
 	hopping = FALSE
 	density = TRUE
 	notransform = FALSE
-	playsound(src, 'sound/effects/meteorimpact.ogg', 200, TRUE)
+	playsound(src, 'sound/blank.ogg', 200, TRUE)
 	for(var/mob/living/L in orange(1, src))
 		L.adjustBruteLoss(35)
 		if(!QDELETED(L)) // Some mobs are deleted on death

@@ -4,8 +4,10 @@
 	damage = 0
 	damage_type = OXY
 	nodamage = TRUE
-	armour_penetration = 100
+	armor_penetration = 100
+	pass_flags = PASSTABLE | PASSGRILLE
 	flag = "magic"
+	var/explode_sound = list('sound/misc/explode/incendiary (1).ogg','sound/misc/explode/incendiary (2).ogg')
 
 /obj/projectile/magic/death
 	name = "bolt of death"
@@ -25,9 +27,9 @@
 					return BULLET_ACT_BLOCK
 				if(L.revive(full_heal = TRUE, admin_revive = TRUE))
 					L.grab_ghost(force = TRUE) // even suicides
-					to_chat(L, "<span class='notice'>You rise with a start, you're undead!!!</span>")
+					to_chat(L, "<span class='notice'>I rise with a start, you're undead!!!</span>")
 				else if(L.stat != DEAD)
-					to_chat(L, "<span class='notice'>You feel great!</span>")
+					to_chat(L, "<span class='notice'>I feel great!</span>")
 			else
 				L.death(0)
 		else
@@ -53,9 +55,9 @@
 				return BULLET_ACT_BLOCK
 			if(target.revive(full_heal = TRUE, admin_revive = TRUE))
 				target.grab_ghost(force = TRUE) // even suicides
-				to_chat(target, "<span class='notice'>You rise with a start, you're alive!!!</span>")
+				to_chat(target, "<span class='notice'>I rise with a start, you're alive!!!</span>")
 			else if(target.stat != DEAD)
-				to_chat(target, "<span class='notice'>You feel great!</span>")
+				to_chat(target, "<span class='notice'>I feel great!</span>")
 
 /obj/projectile/magic/teleport
 	name = "bolt of teleportation"
@@ -134,7 +136,7 @@
 	T.ChangeTurf(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 	D.Open()
 
-/obj/projectile/magic/door/proc/OpenDoor(var/obj/machinery/door/D)
+/obj/projectile/magic/door/proc/OpenDoor(obj/machinery/door/D)
 	if(istype(D, /obj/machinery/door/airlock))
 		var/obj/machinery/door/airlock/A = D
 		A.locked = FALSE
@@ -288,7 +290,7 @@
 
 	M.wabbajack_act(new_mob)
 
-	to_chat(new_mob, "<span class='warning'>Your form morphs into that of a [randomize].</span>")
+	to_chat(new_mob, "<span class='warning'>My form morphs into that of a [randomize].</span>")
 
 	var/poly_msg = get_policy(POLICY_POLYMORPH)
 	if(poly_msg)
@@ -310,7 +312,7 @@
 	target.animate_atom_living(firer)
 	..()
 
-/atom/proc/animate_atom_living(var/mob/living/owner = null)
+/atom/proc/animate_atom_living(mob/living/owner = null)
 	if((isitem(src) || isstructure(src)) && !is_type_in_list(src, GLOB.protected_objects))
 		if(istype(src, /obj/structure/statue/petrified))
 			var/obj/structure/statue/petrified/P = src
@@ -328,7 +330,7 @@
 				if(L.mind)
 					L.mind.transfer_to(S)
 					if(owner)
-						to_chat(S, "<span class='userdanger'>You are an animate statue. You cannot move when monitored, but are nearly invincible and deadly when unobserved! Do not harm [owner], your creator.</span>")
+						to_chat(S, "<span class='danger'>I are an animate statue. You cannot move when monitored, but are nearly invincible and deadly when unobserved! Do not harm [owner], my creator.</span>")
 				P.forceMove(S)
 				return
 		else
@@ -368,9 +370,9 @@
 	damage = 20
 	damage_type = BURN
 	nodamage = FALSE
-	armour_penetration = 0
+	armor_penetration = 0
 	flag = "magic"
-	hitsound = 'sound/weapons/barragespellhit.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/projectile/magic/arcane_barrage/on_hit(target)
 	if(ismob(target))
@@ -509,17 +511,22 @@
 
 /obj/projectile/magic/fetch
 	name = "bolt of fetching"
-	icon_state = "fetch"
+	icon_state = "cursehand0"
+	range = 15
 
 /obj/projectile/magic/fetch/on_hit(target)
 	. = ..()
+	var/atom/throw_target = get_step(firer, get_dir(firer, target))
 	if(isliving(target))
 		var/mob/living/L = target
 		if(L.anti_magic_check() || !firer)
 			L.visible_message("<span class='warning'>[src] vanishes on contact with [target]!</span>")
 			return BULLET_ACT_BLOCK
-		var/atom/throw_target = get_edge_target_turf(L, get_dir(L, firer))
 		L.throw_at(throw_target, 200, 4)
+	else
+		if(isitem(target))
+			var/obj/item/I = target
+			I.throw_at(throw_target, 200, 4)
 
 /obj/projectile/magic/sapping
 	name = "bolt of sapping"
@@ -545,11 +552,11 @@
 		if(L.anti_magic_check() || !L.mind || !L.mind.hasSoul)
 			L.visible_message("<span class='warning'>[src] vanishes on contact with [target]!</span>")
 			return BULLET_ACT_BLOCK
-		to_chat(L, "<span class='danger'>Your body feels drained and there is a burning pain in your chest.</span>")
+		to_chat(L, "<span class='danger'>My body feels drained and there is a burning pain in my chest.</span>")
 		L.maxHealth -= 20
 		L.health = min(L.health, L.maxHealth)
 		if(L.maxHealth <= 0)
-			to_chat(L, "<span class='userdanger'>Your weakened soul is completely consumed by the [src]!</span>")
+			to_chat(L, "<span class='danger'>My weakened soul is completely consumed by the [src]!</span>")
 			L.mind.hasSoul = FALSE
 		for(var/obj/effect/proc_holder/spell/spell in L.mind.spell_list)
 			spell.charge_counter = spell.charge_max
@@ -571,11 +578,11 @@
 			if(istype(x, /datum/brain_trauma/special/imaginary_friend/trapped_owner))
 				M.visible_message("<span class='warning'>[src] vanishes on contact with [target]!</span>")
 				return BULLET_ACT_BLOCK
-		to_chat(M, "<span class='warning'>Your mind has been opened to possession!</span>")
+		to_chat(M, "<span class='warning'>My mind has been opened to possession!</span>")
 		possession_test(M)
 		return BULLET_ACT_HIT
 
-/obj/projectile/magic/wipe/proc/possession_test(var/mob/living/carbon/M)
+/obj/projectile/magic/wipe/proc/possession_test(mob/living/carbon/M)
 	var/datum/brain_trauma/special/imaginary_friend/trapped_owner/trauma = M.gain_trauma(/datum/brain_trauma/special/imaginary_friend/trapped_owner)
 	var/poll_message = "Do you want to play as [M.real_name]?"
 	if(M.mind && M.mind.assigned_role)
@@ -591,7 +598,7 @@
 		return
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
-		to_chat(M, "<span class='boldnotice'>You have been noticed by a ghost and it has possessed you!</span>")
+		to_chat(M, "<span class='boldnotice'>I have been noticed by a ghost and it has possessed you!</span>")
 		var/oldkey = M.key
 		M.ghostize(0)
 		M.key = C.key
@@ -600,12 +607,12 @@
 		trauma.friend.Show()
 		trauma.friend_initialized = TRUE
 	else
-		to_chat(M, "<span class='notice'>Your mind has managed to go unnoticed in the spirit world.</span>")
+		to_chat(M, "<span class='notice'>My mind has managed to go unnoticed in the spirit world.</span>")
 		qdel(trauma)
 
 /obj/projectile/magic/aoe
 	name = "Area Bolt"
-	desc = "What the fuck does this do?!"
+	desc = ""
 	damage = 0
 	var/proxdet = TRUE
 
@@ -616,7 +623,6 @@
 				return Bump(L)
 	..()
 
-
 /obj/projectile/magic/aoe/lightning
 	name = "lightning bolt"
 	icon_state = "tesla_projectile"	//Better sprites are REALLY needed and appreciated!~
@@ -625,6 +631,8 @@
 	nodamage = FALSE
 	speed = 0.3
 	flag = "magic"
+	light_color = "#ffffff"
+	light_range = 2
 
 	var/tesla_power = 20000
 	var/tesla_range = 15
@@ -658,6 +666,8 @@
 	damage = 10
 	damage_type = BRUTE
 	nodamage = FALSE
+	light_color = "#f8af07"
+	light_range = 2
 
 	//explosion values
 	var/exp_heavy = 0
@@ -672,9 +682,14 @@
 		if(M.anti_magic_check())
 			visible_message("<span class='warning'>[src] vanishes into smoke on contact with [target]!</span>")
 			return BULLET_ACT_BLOCK
-		M.take_overall_damage(0,10) //between this 10 burn, the 10 brute, the explosion brute, and the onfire burn, your at about 65 damage if you stop drop and roll immediately
-	var/turf/T = get_turf(target)
-	explosion(T, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire)
+		M.adjust_fire_stacks(6)
+//		M.take_overall_damage(0,10) //between this 10 burn, the 10 brute, the explosion brute, and the onfire burn, my at about 65 damage if you stop drop and roll immediately
+	var/turf/T
+	if(isturf(target))
+		T = target
+	else
+		T = get_turf(target)
+	explosion(T, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, soundin = explode_sound)
 
 /obj/projectile/magic/aoe/fireball/infernal
 	name = "infernal fireball"
@@ -701,6 +716,6 @@
 	damage = 0
 	damage_type = BURN
 	nodamage = FALSE
-	armour_penetration = 100
+	armor_penetration = 100
 	temperature = 50
 	flag = "magic"

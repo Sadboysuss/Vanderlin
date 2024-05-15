@@ -1,6 +1,6 @@
 /datum/skill/mining
 	name = "Mining"
-	desc = "A dwarf's biggest skill, after drinking."
+	desc = ""
 
 /datum/skill/mining/get_skill_speed_modifier(level)
 	switch(level)

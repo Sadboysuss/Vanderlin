@@ -24,7 +24,7 @@
 
 /obj/effect/mob_spawn/human/fugitive/spacepol
 	name = "police pod"
-	desc = "A small sleeper typically used to put people to sleep for briefing on the mission."
+	desc = ""
 	mob_name = "a spacepol officer"
 	flavour_text = "Justice has arrived. I am a member of the Spacepol!"
 	back_story = "space cop"
@@ -36,7 +36,7 @@
 	name = "russian pod"
 	flavour_text = "Ay blyat. I am a space-russian smuggler! We were mid-flight when our cargo was beamed off our ship!"
 	back_story = "russian"
-	desc = "A small sleeper typically used to make long distance travel a bit more bearable."
+	desc = ""
 	mob_name = "russian"
 	outfit = /datum/outfit/russiancorpse/hunter
 	icon = 'icons/obj/machines/sleeper.dmi'
@@ -46,7 +46,7 @@
 	name = "bounty hunter pod"
 	flavour_text = "We got a new bounty on some fugitives, dead or alive."
 	back_story = "bounty hunters"
-	desc = "A small sleeper typically used to make long distance travel a bit more bearable."
+	desc = ""
 	mob_name = "bounty hunter"
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper"

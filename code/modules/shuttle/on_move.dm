@@ -31,7 +31,7 @@ All ShuttleMove procs go here
 				if(M.pulledby)
 					M.pulledby.stop_pulling()
 				M.stop_pulling()
-				M.visible_message("<span class='warning'>[shuttle] slams into [M]!</span>")
+				M.visible_message("<span class='warning'>[M] is [pick("unmade","unsewn","strewn")] by the teleportation!</span>")
 				SSblackbox.record_feedback("tally", "shuttle_gib", 1, M.type)
 				M.gib()
 
@@ -315,9 +315,9 @@ All ShuttleMove procs go here
 
 	. = ..()
 
-	var/knockdown = movement_force["KNOCKDOWN"]
-	if(knockdown)
-		Paralyze(knockdown)
+//	var/knockdown = movement_force["KNOCKDOWN"]
+//	if(knockdown)
+//		Paralyze(knockdown)
 
 
 /mob/living/simple_animal/hostile/megafauna/onShuttleMove(turf/newT, turf/oldT, list/movement_force, move_dir, obj/docking_port/stationary/old_dock, obj/docking_port/mobile/moving_dock)

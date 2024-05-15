@@ -1,6 +1,6 @@
 /obj/machinery/launchpad
 	name = "bluespace launchpad"
-	desc = "A bluespace pad able to thrust matter through bluespace, teleporting it to or from nearby locations."
+	desc = ""
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "lpad-idle"
 	use_power = TRUE
@@ -63,7 +63,7 @@
 					return
 				var/obj/item/multitool/M = I
 				M.buffer = src
-				to_chat(user, "<span class='notice'>You save the data in the [I.name]'s buffer.</span>")
+				to_chat(user, "<span class='notice'>I save the data in the [I.name]'s buffer.</span>")
 				return 1
 
 		if(default_deconstruction_crowbar(I))
@@ -123,7 +123,7 @@
 		indicator_icon = "launchpad_pull"
 	update_indicator()
 
-	playsound(get_turf(src), 'sound/weapons/flash.ogg', 25, TRUE)
+	playsound(get_turf(src), 'sound/blank.ogg', 25, TRUE)
 	teleporting = TRUE
 
 
@@ -149,7 +149,7 @@
 		source = dest
 		dest = target
 
-	playsound(get_turf(src), 'sound/weapons/emitter2.ogg', 25, TRUE)
+	playsound(get_turf(src), 'sound/blank.ogg', 25, TRUE)
 	var/first = TRUE
 	for(var/atom/movable/ROI in source)
 		if(ROI == src)
@@ -202,7 +202,7 @@
 //Starts in the briefcase. Don't spawn this directly, or it will runtime when closing.
 /obj/machinery/launchpad/briefcase
 	name = "briefcase launchpad"
-	desc = "A portable bluespace pad able to thrust matter through bluespace, teleporting it to or from nearby locations. Controlled via remote."
+	desc = ""
 	icon_state = "blpad-idle"
 	icon_teleport = "blpad-beam"
 	anchored = FALSE
@@ -238,7 +238,7 @@
 			return
 		if(!usr.canUseTopic(src, BE_CLOSE, ismonkey(usr)))
 			return
-		usr.visible_message("<span class='notice'>[usr] starts closing [src]...</span>", "<span class='notice'>You start closing [src]...</span>")
+		usr.visible_message("<span class='notice'>[usr] starts closing [src]...</span>", "<span class='notice'>I start closing [src]...</span>")
 		if(do_after(usr, 30, target = usr))
 			usr.put_in_hands(briefcase)
 			moveToNullspace() //hides it from suitcase contents
@@ -251,7 +251,7 @@
 		if(L.pad == src) //do not attempt to link when already linked
 			return ..()
 		L.pad = src
-		to_chat(user, "<span class='notice'>You link [src] to [L].</span>")
+		to_chat(user, "<span class='notice'>I link [src] to [L].</span>")
 	else
 		return ..()
 
@@ -290,13 +290,13 @@
 		if(L.pad == src.pad) //do not attempt to link when already linked
 			return ..()
 		L.pad = src.pad
-		to_chat(user, "<span class='notice'>You link [pad] to [L].</span>")
+		to_chat(user, "<span class='notice'>I link [pad] to [L].</span>")
 	else
 		return ..()
 
 /obj/item/launchpad_remote
 	name = "folder"
-	desc = "A folder."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "folder"
 	w_class = WEIGHT_CLASS_SMALL

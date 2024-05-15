@@ -1,7 +1,7 @@
 // This is eventually for wjohn to add more color standardization stuff like I keep asking him >:(
 
-#define COLOR_INPUT_DISABLED "#F0F0F0"
-#define COLOR_INPUT_ENABLED "#D3B5B5"
+#define COLOR_INPUT_DISABLED "#000000"
+#define COLOR_INPUT_ENABLED "#231d1d"
 
 #define COLOR_DARKMODE_BACKGROUND "#202020"
 #define COLOR_DARKMODE_DARKBACKGROUND "#171717"
@@ -58,3 +58,46 @@
 #define COLOR_ASSEMBLY_LBLUE   "#5D99BE"
 #define COLOR_ASSEMBLY_BLUE    "#38559E"
 #define COLOR_ASSEMBLY_PURPLE  "#6F6192"
+
+
+//roguetown
+#define CLOTHING_RED			"#a32121"
+#define CLOTHING_PURPLE			"#8747b1"
+#define CLOTHING_BLACK			"#414143"
+#define CLOTHING_BROWN			"#685542"
+#define CLOTHING_GREEN			"#428138"
+#define CLOTHING_BLUE			"#537bc6"
+#define CLOTHING_YELLOW			"#b5b004"
+#define CLOTHING_TEAL			"#249589"
+#define CLOTHING_WHITE			"#ffffff"
+#define CLOTHING_ORANGE			"#bd6606"
+#define CLOTHING_MAJENTA		"#962e5c"
+
+#define CLOTHING_WET			"#bbbbbb"
+
+#define CLOTHING_COLOR_NAMES	list("Red","Purple","Black","Brown","Green","Blue","Yellow","Teal","White","Orange","Majenta")
+
+/proc/clothing_color2hex(input)
+	switch(input)
+		if("Red")
+			return CLOTHING_RED
+		if("Purple")
+			return CLOTHING_PURPLE
+		if("Black")
+			return CLOTHING_BLACK
+		if("Brown")
+			return CLOTHING_BROWN
+		if("Green")
+			return CLOTHING_GREEN
+		if("Blue")
+			return CLOTHING_BLUE
+		if("Yellow")
+			return CLOTHING_YELLOW
+		if("Teal")
+			return CLOTHING_TEAL
+		if("White")
+			return CLOTHING_WHITE
+		if("Orange")
+			return CLOTHING_ORANGE
+		if("Majenta")
+			return CLOTHING_MAJENTA

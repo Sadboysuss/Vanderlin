@@ -1,6 +1,6 @@
 /obj/item/wirecutters
 	name = "wirecutters"
-	desc = "This cuts wires."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "cutters_map"
 	item_state = "cutters"
@@ -14,10 +14,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	custom_materials = list(/datum/material/iron=80)
 	attack_verb = list("pinched", "nipped")
-	hitsound = 'sound/items/wirecutter.ogg'
-	usesound = 'sound/items/wirecutter.ogg'
-	drop_sound = 'sound/items/handling/wirecutter_drop.ogg'
-	pickup_sound =  'sound/items/handling/wirecutter_pickup.ogg'
+	hitsound = 'sound/blank.ogg'
+	usesound = 'sound/blank.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 	tool_behaviour = TOOL_WIRECUTTER
 	toolspeed = 1
@@ -56,9 +56,9 @@
 		qdel(C.handcuffed)
 		return
 	else if(istype(C) && C.has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
-		to_chat(C, "<span class='notice'>You attempt to remove the durathread strand from around your neck.</span>")
+		to_chat(C, "<span class='notice'>I attempt to remove the durathread strand from around your neck.</span>")
 		if(do_after(user, 15, null, C))
-			to_chat(C, "<span class='notice'>You succesfuly remove the durathread strand.</span>")
+			to_chat(C, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
 			C.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 	else
 		..()
@@ -70,7 +70,7 @@
 
 /obj/item/wirecutters/abductor
 	name = "alien wirecutters"
-	desc = "Extremely sharp wirecutters, made out of a silvery-green metal."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cutters"
 	toolspeed = 0.1
@@ -78,7 +78,7 @@
 
 /obj/item/wirecutters/cyborg
 	name = "powered wirecutters"
-	desc = "Cuts wires with the power of ELECTRICITY. Faster than normal wirecutters."
+	desc = ""
 	icon = 'icons/obj/items_cyborg.dmi'
 	icon_state = "wirecutters_cyborg"
 	toolspeed = 0.5

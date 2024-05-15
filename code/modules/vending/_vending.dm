@@ -42,7 +42,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
   */
 /obj/machinery/vending
 	name = "\improper Vendomat"
-	desc = "A generic vending machine."
+	desc = ""
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "generic"
 	layer = BELOW_OBJ_LAYER
@@ -374,7 +374,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			add_overlay("[initial(icon_state)]-panel")
 		updateUsrDialog()
 	else
-		to_chat(user, "<span class='warning'>You must first secure [src].</span>")
+		to_chat(user, "<span class='warning'>I must first secure [src].</span>")
 	return TRUE
 
 /obj/machinery/vending/attackby(obj/item/I, mob/user, params)
@@ -384,7 +384,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 	if(refill_canister && istype(I, refill_canister))
 		if (!panel_open)
-			to_chat(user, "<span class='warning'>You should probably unscrew the service panel first!</span>")
+			to_chat(user, "<span class='warning'>I should probably unscrew the service panel first!</span>")
 		else if (stat & (BROKEN|NOPOWER))
 			to_chat(user, "<span class='notice'>[src] does not respond.</span>")
 		else
@@ -396,7 +396,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 				// instantiate canister if needed
 				var/transferred = restock(canister)
 				if(transferred)
-					to_chat(user, "<span class='notice'>You loaded [transferred] items in [src].</span>")
+					to_chat(user, "<span class='notice'>I loaded [transferred] items in [src].</span>")
 				else
 					to_chat(user, "<span class='warning'>There's nothing to restock!</span>")
 			return
@@ -421,7 +421,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			if(denied_items)
 				to_chat(user, "<span class='warning'>[src] refuses some items!</span>")
 			if(loaded)
-				to_chat(user, "<span class='notice'>You insert [loaded] dishes into [src]'s compartment.</span>")
+				to_chat(user, "<span class='notice'>I insert [loaded] dishes into [src]'s compartment.</span>")
 				updateUsrDialog()
 
 	else
@@ -435,7 +435,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		vending_machine_input[format_text(I.name)]++
 	else
 		vending_machine_input[format_text(I.name)] = 1
-	to_chat(user, "<span class='notice'>You insert [I] into [src]'s input compartment.</span>")
+	to_chat(user, "<span class='notice'>I insert [I] into [src]'s input compartment.</span>")
 	loaded_items++
 
 /**
@@ -494,7 +494,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You short out the product lock on [src].</span>")
+	to_chat(user, "<span class='notice'>I short out the product lock on [src].</span>")
 
 /obj/machinery/vending/_try_interact(mob/user)
 	if(seconds_electrified && !(stat & NOPOWER))
@@ -573,7 +573,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		dat += "<b>Balance: $[account.account_balance]</b>"
 
 	var/datum/browser/popup = new(user, "vending", (name))
-	popup.add_stylesheet(get_asset_datum(/datum/asset/spritesheet/vending))
+//	popup.add_stylesheet(get_asset_datum(/datum/asset/spritesheet/vending))
 	popup.set_content(dat.Join(""))
 	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.open()
@@ -703,7 +703,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		use_power(5)
 		if(icon_vend) //Show the vending animation if needed
 			flick(icon_vend,src)
-		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, extrarange = -3)
 		new R.product_path(get_turf(src))
 		R.amount--
 		SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[R.product_path]"))
@@ -953,7 +953,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			dat += "<b>Balance: $[account.account_balance]</b>"
 
 	var/datum/browser/popup = new(user, "vending", (name))
-	popup.add_stylesheet(get_asset_datum(/datum/asset/spritesheet/vending))
+//	popup.add_stylesheet(get_asset_datum(/datum/asset/spritesheet/vending))
 	popup.set_content(dat.Join(""))
 	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.open()
@@ -1010,7 +1010,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/item/price_tagger
 	name = "price tagger"
-	desc = "This tool is used to set a price for items used in custom vendors."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "pricetagger"
 	custom_premium_price = 25
@@ -1028,4 +1028,4 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(isitem(target))
 		var/obj/item/I = target
 		I.custom_price = price
-		to_chat(user, "<span class='notice'>You set the price of [I] to $[price].</span>")
+		to_chat(user, "<span class='notice'>I set the price of [I] to $[price].</span>")

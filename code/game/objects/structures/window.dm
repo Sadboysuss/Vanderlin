@@ -1,6 +1,6 @@
 /obj/structure/window
 	name = "window"
-	desc = "A window."
+	desc = ""
 	icon_state = "window"
 	density = TRUE
 	layer = ABOVE_OBJ_LAYER //Just above doors
@@ -26,7 +26,7 @@
 	var/mutable_appearance/crack_overlay
 	var/real_explosion_block	//ignore this, just use explosion_block
 	var/breaksound = "shatter"
-	var/hitsound = 'sound/effects/Glasshit.ogg'
+	var/hitsound = 'sound/blank.ogg'
 
 
 /obj/structure/window/examine(mob/user)
@@ -76,7 +76,7 @@
 /obj/structure/window/rcd_act(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
 		if(RCD_DECONSTRUCT)
-			to_chat(user, "<span class='notice'>You deconstruct the window.</span>")
+			to_chat(user, "<span class='notice'>I deconstruct the window.</span>")
 			qdel(src)
 			return TRUE
 	return FALSE
@@ -125,7 +125,7 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
 	add_fingerprint(user)
-	playsound(src, 'sound/effects/Glassknock.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/structure/window/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
 	if(!can_be_reached(user))
@@ -140,9 +140,9 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.visible_message("<span class='notice'>[user] knocks on [src].</span>", \
-		"<span class='notice'>You knock on [src].</span>")
+		"<span class='notice'>I knock on [src].</span>")
 	add_fingerprint(user)
-	playsound(src, 'sound/effects/Glassknock.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/structure/window/attack_paw(mob/user)
 	return attack_hand(user)
@@ -158,41 +158,41 @@
 
 	add_fingerprint(user)
 
-	if(I.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HELP)
+	if(I.tool_behaviour == TOOL_WELDER && user.used_intent.type == INTENT_HELP)
 		if(obj_integrity < max_integrity)
 			if(!I.tool_start_check(user, amount=0))
 				return
 
-			to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
+			to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
 			if(I.use_tool(src, user, 40, volume=50))
 				obj_integrity = max_integrity
 				update_nearby_icons()
-				to_chat(user, "<span class='notice'>You repair [src].</span>")
+				to_chat(user, "<span class='notice'>I repair [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>[src] is already in good condition!</span>")
 		return
 
 	if(!(flags_1&NODECONSTRUCT_1) && !(reinf && state >= RWINDOW_FRAME_BOLTED))
 		if(I.tool_behaviour == TOOL_SCREWDRIVER)
-			to_chat(user, "<span class='notice'>You begin to [anchored ? "unscrew the window from":"screw the window to"] the floor...</span>")
+			to_chat(user, "<span class='notice'>I begin to [anchored ? "unscrew the window from":"screw the window to"] the floor...</span>")
 			if(I.use_tool(src, user, decon_speed, volume = 75, extra_checks = CALLBACK(src, .proc/check_anchored, anchored)))
 				setAnchored(!anchored)
-				to_chat(user, "<span class='notice'>You [anchored ? "fasten the window to":"unfasten the window from"] the floor.</span>")
+				to_chat(user, "<span class='notice'>I [anchored ? "fasten the window to":"unfasten the window from"] the floor.</span>")
 			return
 		else if(I.tool_behaviour == TOOL_WRENCH && !anchored)
-			to_chat(user, "<span class='notice'>You begin to disassemble [src]...</span>")
+			to_chat(user, "<span class='notice'>I begin to disassemble [src]...</span>")
 			if(I.use_tool(src, user, decon_speed, volume = 75, extra_checks = CALLBACK(src, .proc/check_state_and_anchored, state, anchored)))
 				var/obj/item/stack/sheet/G = new glass_type(user.loc, glass_amount)
 				G.add_fingerprint(user)
-				playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
-				to_chat(user, "<span class='notice'>You successfully disassemble [src].</span>")
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
+				to_chat(user, "<span class='notice'>I successfully disassemble [src].</span>")
 				qdel(src)
 			return
 		else if(I.tool_behaviour == TOOL_CROWBAR && reinf && (state == WINDOW_OUT_OF_FRAME) && anchored)
-			to_chat(user, "<span class='notice'>You begin to lever the window into the frame...</span>")
+			to_chat(user, "<span class='notice'>I begin to lever the window into the frame...</span>")
 			if(I.use_tool(src, user, 100, volume = 75, extra_checks = CALLBACK(src, .proc/check_state_and_anchored, state, anchored)))
 				state = RWINDOW_SECURE
-				to_chat(user, "<span class='notice'>You pry the window into the frame.</span>")
+				to_chat(user, "<span class='notice'>I pry the window into the frame.</span>")
 			return
 
 	return ..()
@@ -237,9 +237,9 @@
 			if(damage_amount)
 				playsound(src, hitsound, 75, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src, 'sound/items/Welder.ogg', 100, TRUE)
+			playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/structure/window/deconstruct(disassembled = TRUE)
@@ -355,7 +355,7 @@
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
-	desc = "A window that is reinforced with metal rods."
+	desc = ""
 	icon_state = "rwindow"
 	reinf = TRUE
 	heat_resistance = 1600
@@ -372,9 +372,9 @@
 /obj/structure/window/reinforced/attackby(obj/item/I, mob/living/user, params)
 	switch(state)
 		if(RWINDOW_SECURE)
-			if(I.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HARM)
+			if(I.tool_behaviour == TOOL_WELDER && user.used_intent.type == INTENT_HARM)
 				user.visible_message("<span class='notice'>[user] holds \the [I] to the security screws on \the [src]...</span>",
-										"<span class='notice'>You begin heating the security screws on \the [src]...</span>")
+										"<span class='notice'>I begin heating the security screws on \the [src]...</span>")
 				if(I.use_tool(src, user, 150, volume = 100))
 					to_chat(user, "<span class='notice'>The security bolts are glowing white hot and look ready to be removed.</span>")
 					state = RWINDOW_BOLTS_HEATED
@@ -383,7 +383,7 @@
 		if(RWINDOW_BOLTS_HEATED)
 			if(I.tool_behaviour == TOOL_SCREWDRIVER)
 				user.visible_message("<span class='notice'>[user] digs into the heated security screws and starts removing them...</span>",
-										"<span class='notice'>You dig into the heated screws hard and they start turning...</span>")
+										"<span class='notice'>I dig into the heated screws hard and they start turning...</span>")
 				if(I.use_tool(src, user, 50, volume = 50))
 					state = RWINDOW_BOLTS_OUT
 					to_chat(user, "<span class='notice'>The screws come out, and a gap forms around the edge of the pane.</span>")
@@ -391,7 +391,7 @@
 		if(RWINDOW_BOLTS_OUT)
 			if(I.tool_behaviour == TOOL_CROWBAR)
 				user.visible_message("<span class='notice'>[user] wedges \the [I] into the gap in the frame and starts prying...</span>",
-										"<span class='notice'>You wedge \the [I] into the gap in the frame and start prying...</span>")
+										"<span class='notice'>I wedge \the [I] into the gap in the frame and start prying...</span>")
 				if(I.use_tool(src, user, 40, volume = 50))
 					state = RWINDOW_POPPED
 					to_chat(user, "<span class='notice'>The panel pops out of the frame, exposing some thin metal bars that looks like they can be cut.</span>")
@@ -399,7 +399,7 @@
 		if(RWINDOW_POPPED)
 			if(I.tool_behaviour == TOOL_WIRECUTTER)
 				user.visible_message("<span class='notice'>[user] starts cutting the exposed bars on \the [src]...</span>",
-										"<span class='notice'>You start cutting the exposed bars on \the [src]</span>")
+										"<span class='notice'>I start cutting the exposed bars on \the [src]</span>")
 				if(I.use_tool(src, user, 20, volume = 50))
 					state = RWINDOW_BARS_CUT
 					to_chat(user, "<span class='notice'>The panels falls out of the way exposing the frame bolts.</span>")
@@ -407,9 +407,9 @@
 		if(RWINDOW_BARS_CUT)
 			if(I.tool_behaviour == TOOL_WRENCH)
 				user.visible_message("<span class='notice'>[user] starts unfastening \the [src] from the frame...</span>",
-					"<span class='notice'>You start unfastening the bolts from the frame...</span>")
+					"<span class='notice'>I start unfastening the bolts from the frame...</span>")
 				if(I.use_tool(src, user, 40, volume = 50))
-					to_chat(user, "<span class='notice'>You unscrew the bolts from the frame and the window pops loose.</span>")
+					to_chat(user, "<span class='notice'>I unscrew the bolts from the frame and the window pops loose.</span>")
 					state = WINDOW_OUT_OF_FRAME
 					setAnchored(FALSE)
 				return
@@ -449,7 +449,7 @@
 
 /obj/structure/window/plasma
 	name = "plasma window"
-	desc = "A window made out of a plasma-silicate alloy. It looks insanely tough to break and burn through."
+	desc = ""
 	icon_state = "plasmawindow"
 	reinf = FALSE
 	heat_resistance = 25000
@@ -482,7 +482,7 @@
 
 /obj/structure/window/plasma/reinforced
 	name = "reinforced plasma window"
-	desc = "A window made out of a plasma-silicate alloy and a rod matrix. It looks hopelessly tough to break and is most likely nigh fireproof."
+	desc = ""
 	icon_state = "plasmarwindow"
 	reinf = TRUE
 	heat_resistance = 50000
@@ -497,9 +497,9 @@
 /obj/structure/window/plasma/reinforced/attackby(obj/item/I, mob/living/user, params)
 	switch(state)
 		if(RWINDOW_SECURE)
-			if(I.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HARM)
+			if(I.tool_behaviour == TOOL_WELDER && user.used_intent.type == INTENT_HARM)
 				user.visible_message("<span class='notice'>[user] holds \the [I] to the security screws on \the [src]...</span>",
-										"<span class='notice'>You begin heating the security screws on \the [src]...</span>")
+										"<span class='notice'>I begin heating the security screws on \the [src]...</span>")
 				if(I.use_tool(src, user, 180, volume = 100))
 					to_chat(user, "<span class='notice'>The security screws are glowing white hot and look ready to be removed.</span>")
 					state = RWINDOW_BOLTS_HEATED
@@ -508,7 +508,7 @@
 		if(RWINDOW_BOLTS_HEATED)
 			if(I.tool_behaviour == TOOL_SCREWDRIVER)
 				user.visible_message("<span class='notice'>[user] digs into the heated security screws and starts removing them...</span>",
-										"<span class='notice'>You dig into the heated screws hard and they start turning...</span>")
+										"<span class='notice'>I dig into the heated screws hard and they start turning...</span>")
 				if(I.use_tool(src, user, 80, volume = 50))
 					state = RWINDOW_BOLTS_OUT
 					to_chat(user, "<span class='notice'>The screws come out, and a gap forms around the edge of the pane.</span>")
@@ -516,7 +516,7 @@
 		if(RWINDOW_BOLTS_OUT)
 			if(I.tool_behaviour == TOOL_CROWBAR)
 				user.visible_message("<span class='notice'>[user] wedges \the [I] into the gap in the frame and starts prying...</span>",
-										"<span class='notice'>You wedge \the [I] into the gap in the frame and start prying...</span>")
+										"<span class='notice'>I wedge \the [I] into the gap in the frame and start prying...</span>")
 				if(I.use_tool(src, user, 50, volume = 50))
 					state = RWINDOW_POPPED
 					to_chat(user, "<span class='notice'>The panel pops out of the frame, exposing some thin metal bars that looks like they can be cut.</span>")
@@ -524,7 +524,7 @@
 		if(RWINDOW_POPPED)
 			if(I.tool_behaviour == TOOL_WIRECUTTER)
 				user.visible_message("<span class='notice'>[user] starts cutting the exposed bars on \the [src]...</span>",
-										"<span class='notice'>You start cutting the exposed bars on \the [src]</span>")
+										"<span class='notice'>I start cutting the exposed bars on \the [src]</span>")
 				if(I.use_tool(src, user, 30, volume = 50))
 					state = RWINDOW_BARS_CUT
 					to_chat(user, "<span class='notice'>The panels falls out of the way exposing the frame bolts.</span>")
@@ -532,9 +532,9 @@
 		if(RWINDOW_BARS_CUT)
 			if(I.tool_behaviour == TOOL_WRENCH)
 				user.visible_message("<span class='notice'>[user] starts unfastening \the [src] from the frame...</span>",
-					"<span class='notice'>You start unfastening the bolts from the frame...</span>")
+					"<span class='notice'>I start unfastening the bolts from the frame...</span>")
 				if(I.use_tool(src, user, 50, volume = 50))
-					to_chat(user, "<span class='notice'>You unfasten the bolts from the frame and the window pops loose.</span>")
+					to_chat(user, "<span class='notice'>I unfasten the bolts from the frame and the window pops loose.</span>")
 					state = WINDOW_OUT_OF_FRAME
 					setAnchored(FALSE)
 				return
@@ -658,7 +658,7 @@
 
 /obj/structure/window/shuttle
 	name = "shuttle window"
-	desc = "A reinforced, air-locked pod window."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/shuttle_window.dmi'
 	icon_state = "shuttle_window"
 	dir = FULLTILE_WINDOW_DIR
@@ -687,7 +687,7 @@
 
 /obj/structure/window/plasma/reinforced/plastitanium
 	name = "plastitanium window"
-	desc = "A durable looking window made of an alloy of of plasma and titanium."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/plastitanium_window.dmi'
 	icon_state = "plastitanium_window"
 	dir = FULLTILE_WINDOW_DIR
@@ -712,7 +712,7 @@
 
 /obj/structure/window/paperframe
 	name = "paper frame"
-	desc = "A fragile separator made of thin wood and paper."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/paperframes.dmi'
 	icon_state = "frame"
 	dir = FULLTILE_WINDOW_DIR
@@ -729,8 +729,8 @@
 	CanAtmosPass = ATMOS_PASS_YES
 	resistance_flags = FLAMMABLE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	breaksound = 'sound/items/poster_ripped.ogg'
-	hitsound = 'sound/weapons/slashmiss.ogg'
+	breaksound = 'sound/blank.ogg'
+	hitsound = 'sound/blank.ogg'
 	var/static/mutable_appearance/torn = mutable_appearance('icons/obj/smooth_structures/paperframes.dmi',icon_state = "torn", layer = ABOVE_OBJ_LAYER - 0.1)
 	var/static/mutable_appearance/paper = mutable_appearance('icons/obj/smooth_structures/paperframes.dmi',icon_state = "paper", layer = ABOVE_OBJ_LAYER - 0.1)
 
@@ -753,7 +753,7 @@
 	if(.)
 		return
 	add_fingerprint(user)
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.visible_message("<span class='notice'>[user] knocks on [src].</span>")
 		playsound(src, "pageturn", 50, TRUE)
@@ -780,7 +780,7 @@
 	if(W.get_temperature())
 		fire_act(W.get_temperature())
 		return
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 	if(istype(W, /obj/item/paper) && obj_integrity < max_integrity)
 		user.visible_message("<span class='notice'>[user] starts to patch the holes in \the [src].</span>")
@@ -796,7 +796,7 @@
 
 /obj/structure/window/bronze
 	name = "brass window"
-	desc = "A paper-thin pane of translucent yet reinforced brass. Nevermind, this is just weak bronze!"
+	desc = ""
 	icon = 'icons/obj/smooth_structures/clockwork_window.dmi'
 	icon_state = "clockwork_window_single"
 	glass_type = /obj/item/stack/tile/bronze

@@ -1,6 +1,6 @@
 /* How it works:
  The shuttle arrives at CentCom dock and calls sell(), which recursively loops through all the shuttle contents that are unanchored.
- 
+
  Each object in the loop is checked for applies_to() of various export datums, except the invalid ones.
 */
 
@@ -25,36 +25,66 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 	var/list/total_amount = list()		//export instance => total count of sold objects of its type, only exists if any were sold
 	var/list/total_value = list()		//export instance => total value of sold objects
 
+/atom/movable
+	var/sellprice = 0 //sanitize this somewhere so it cant be decimals
+	var/static_price = FALSE
+
+/atom/movable/proc/randomize_price()
+	if(sellprice)
+		if(!static_price)
+			var/na = max(round(sellprice * 0.13, 1), 1)
+			sellprice = max(rand(sellprice-na, sellprice+na), 1)
+	return sellprice
+
+/atom/movable/proc/get_real_price()
+	if(sellprice == initial(sellprice))
+		randomize_price()
+	return sellprice
+
+/atom/movable/proc/pre_sell()
+	return
+
+/atom/movable/proc/on_sold()
+	return
+
 // external_report works as "transaction" object, pass same one in if you're doing more than one export in single go
-/proc/export_item_and_contents(atom/movable/AM, allowed_categories = EXPORT_CARGO, apply_elastic = TRUE, delete_unsold = TRUE, dry_run=FALSE, datum/export_report/external_report)
+/proc/export_item_and_contents(atom/movable/AM, allowed_categories = EXPORT_CARGO, apply_elastic = TRUE, delete_unsold = FALSE, dry_run=FALSE, datum/export_report/external_report)
 	if(!GLOB.exports_list.len)
 		setupExports()
 
 	var/list/contents = AM.GetAllContents()
-	
+
 	var/datum/export_report/report = external_report
 	if(!report) //If we don't have any longer transaction going on
 		report = new
 
+	var/newbudget = 0
 	// We go backwards, so it'll be innermost objects sold first
 	for(var/i in reverseRange(contents))
 		var/atom/movable/thing = i
 		var/sold = FALSE
 		if(QDELETED(thing))
 			continue
-		for(var/datum/export/E in GLOB.exports_list)
-			if(!E)
-				continue
-			if(E.applies_to(thing, allowed_categories, apply_elastic))
-				sold = E.sell_object(thing, report, dry_run, allowed_categories , apply_elastic)
-				report.exported_atoms += " [thing.name]"
-				break
+//		for(var/datum/export/E in GLOB.exports_list)
+//			if(!E)
+//				continue
+//			if(E.applies_to(thing, allowed_categories, apply_elastic))
+//				sold = E.sell_object(thing, report, dry_run, allowed_categories , apply_elastic)
+//				report.exported_atoms += " [thing.name]"
+//				break
+		if(thing.get_real_price() > 0)
+			newbudget += thing.sellprice
+			report.total_value[thing] += thing.sellprice
+			report.total_amount[thing] += 1
+			report.exported_atoms += " [thing.name]"
+			sold = TRUE
+			break
 		if(!dry_run && (sold || delete_unsold))
 			if(ismob(thing))
 				thing.investigate_log("deleted through cargo export",INVESTIGATE_CARGO)
 			qdel(thing)
 
-	return report
+	return newbudget
 
 /datum/export
 	var/unit_name = ""				// Unit name. Only used in "Received [total_amount] [name]s [message]." message
@@ -127,9 +157,9 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 
 	if(amount <=0 || the_cost <=0)
 		return FALSE
-	
+
 	report.total_value[src] += the_cost
-	
+
 	if(istype(O, /datum/export/material))
 		report.total_amount[src] += amount*MINERAL_MATERIAL_AMOUNT
 	else
@@ -150,7 +180,7 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 
 	var/total_value = ex.total_value[src]
 	var/total_amount = ex.total_amount[src]
-	
+
 	var/msg = "[total_value] credits: Received [total_amount] "
 	if(total_value > 0)
 		msg = "+" + msg

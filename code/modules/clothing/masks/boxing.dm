@@ -1,6 +1,6 @@
 /obj/item/clothing/mask/balaclava
 	name = "balaclava"
-	desc = "LOADSAMONEY"
+	desc = ""
 	icon_state = "balaclava"
 	item_state = "balaclava"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
@@ -13,7 +13,7 @@
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
-	desc = "Worn by robust fighters, flying high to defeat their foes!"
+	desc = ""
 	icon_state = "luchag"
 	item_state = "luchag"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
@@ -46,19 +46,19 @@
 
 /obj/item/clothing/mask/luchador/tecnicos
 	name = "Tecnicos Mask"
-	desc = "Worn by robust fighters who uphold justice and fight honorably."
+	desc = ""
 	icon_state = "luchador"
 	item_state = "luchador"
 
 /obj/item/clothing/mask/luchador/rudos
 	name = "Rudos Mask"
-	desc = "Worn by robust fighters who are willing to do anything to win."
+	desc = ""
 	icon_state = "luchar"
 	item_state = "luchar"
 
 /obj/item/clothing/mask/russian_balaclava
 	name = "russian balaclava"
-	desc = "Protects your face from snow."
+	desc = ""
 	icon_state = "rus_balaclava"
 	item_state = "rus_balaclava"
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR

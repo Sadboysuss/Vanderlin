@@ -1,7 +1,7 @@
 //Boxes of ammo
 /obj/item/ammo_box
 	name = "ammo box (null_reference_exception)"
-	desc = "A box of ammo."
+	desc = ""
 	icon = 'icons/obj/ammo.dmi'
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -11,7 +11,7 @@
 	custom_materials = list(/datum/material/iron = 30000)
 	throwforce = 2
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	///list containing the actual ammo within the magazine
 	var/list/stored_ammo = list()
@@ -106,8 +106,8 @@
 
 	if(num_loaded)
 		if(!silent)
-			to_chat(user, "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>")
-			playsound(src, 'sound/weapons/gun/general/mag_bullet_insert.ogg', 60, TRUE)
+			to_chat(user, "<span class='notice'>I load [num_loaded] shell\s into \the [src]!</span>")
+			playsound(src, 'sound/blank.ogg', 60, TRUE)
 		A.update_icon()
 		update_icon()
 	return num_loaded
@@ -118,8 +118,8 @@
 		A.forceMove(drop_location())
 		if(!user.is_holding(src) || !user.put_in_hands(A))	//incase they're using TK
 			A.bounce_away(FALSE, NONE)
-		playsound(src, 'sound/weapons/gun/general/mag_bullet_insert.ogg', 60, TRUE)
-		to_chat(user, "<span class='notice'>You remove a round from [src]!</span>")
+		playsound(src, 'sound/blank.ogg', 60, TRUE)
+		to_chat(user, "<span class='notice'>I remove a round from [src]!</span>")
 		update_icon()
 
 /obj/item/ammo_box/update_icon()
@@ -129,7 +129,7 @@
 			icon_state = "[initial(icon_state)]-[shells_left]"
 		if(AMMO_BOX_FULL_EMPTY)
 			icon_state = "[initial(icon_state)]-[shells_left ? "[max_ammo]" : "0"]"
-	desc = "[initial(desc)] There [(shells_left == 1) ? "is" : "are"] [shells_left] shell\s left!"
+	desc = ""
 	for (var/material in bullet_cost)
 		var/material_amount = bullet_cost[material]
 		material_amount = (material_amount*stored_ammo.len) + base_cost[material]

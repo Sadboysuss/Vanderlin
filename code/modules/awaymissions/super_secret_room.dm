@@ -1,6 +1,6 @@
 /obj/structure/speaking_tile
 	name = "strange tile"
-	desc = "A weird tile that beckons you towards it. Maybe it can help you get out of this mess..."
+	desc = ""
 	verb_say = "intones"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "speaking_tile"
@@ -72,7 +72,7 @@
 			SpeakPeace(list("Anyway, here.", "I can't give you anything that would impact the progression of the round.","But you've earned this at least."))
 			var/obj/item/reagent_containers/food/drinks/trophy/silver_cup/the_ride = new(get_turf(user))
 			the_ride.name = "Overextending The Joke: Second Place"
-			the_ride.desc = "There's a point where this needed to stop, and we've clearly passed it."
+			the_ride.desc = ""
 		if(252)
 			SpeakPeace(list("You know what this means right?", "Of course it's not over!", "The question becomes now is it more impressive to solider on to an unknown finish, or to have to common sense to stop here?"))
 		if(666)
@@ -83,7 +83,7 @@
 			user.client.give_award(/datum/award/achievement/misc/time_waste, user)
 			var/obj/item/reagent_containers/food/drinks/trophy/gold_cup/never_ends = new(get_turf(user))
 			never_ends.name = "Overextending The Joke: First Place"
-			never_ends.desc = "And so we are left alone with our regrets."
+			never_ends.desc = ""
 		else
 			y += 2
 	speaking = FALSE
@@ -118,7 +118,7 @@
 
 /obj/item/rupee
 	name = "weird crystal"
-	desc = "Your excitement boils away as you realize it's just colored glass. Why would someone hoard these things?"
+	desc = ""
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "rupee"
 	w_class = WEIGHT_CLASS_SMALL
@@ -139,7 +139,7 @@
 	..()
 
 /obj/item/rupee/equipped(mob/user, slot)
-	playsound(get_turf(loc), 'sound/misc/server-ready.ogg', 50, TRUE, -1)
+	playsound(get_turf(loc), 'sound/blank.ogg', 50, TRUE, -1)
 	..()
 
 /obj/effect/landmark/error

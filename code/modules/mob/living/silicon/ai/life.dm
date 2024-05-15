@@ -7,7 +7,7 @@
 	if (stat == DEAD)
 		return
 	else //I'm not removing that shitton of tabs, unneeded as they are. -- Urist
-		//Being dead doesn't mean your temperature never changes
+		//Being dead doesn't mean my temperature never changes
 
 		update_gravity(mob_has_gravity())
 
@@ -29,7 +29,7 @@
 		if(aiRestorePowerRoutine)
 			// Lost power
 			if (!battery)
-				to_chat(src, "<span class='warning'>Your backup battery's output drops below usable levels. It takes only a moment longer for your systems to fail, corrupted and unusable.</span>")
+				to_chat(src, "<span class='warning'>My backup battery's output drops below usable levels. It takes only a moment longer for my systems to fail, corrupted and unusable.</span>")
 				adjustOxyLoss(200)
 			else
 				battery --

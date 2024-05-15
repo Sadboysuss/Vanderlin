@@ -31,8 +31,10 @@
 	..()
 	if(buildmode_name == "Undocumented")
 		buildmode_name = copytext("[type]", 20)	// / d a t u m / m a p g e n e r a t o r / = 20 characters.
-	initialiseModules()
 
+#ifndef FASTLOAD
+	initialiseModules()
+#endif
 //Defines the region the map represents, sets map
 //Returns the map
 /datum/mapGenerator/proc/defineRegion(turf/Start, turf/End, replace = 0)
@@ -153,10 +155,10 @@
 		return
 
 	var/endInput = input(usr,"End turf of Map (X;Y;Z)", "Map Gen Settings", "[world.maxx];[world.maxy];[mob ? mob.z : 1]") as text|null
-	
+
 	if (isnull(endInput))
 		return
-	
+
 	//maxx maxy and current z so that if you fuck up, you only fuck up one entire z level instead of the entire universe
 	if(!startInput || !endInput)
 		to_chat(src, "Missing Input")

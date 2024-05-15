@@ -1,6 +1,6 @@
 /turf/closed/wall/r_wall
 	name = "reinforced wall"
-	desc = "A huge chunk of reinforced metal used to separate rooms."
+	desc = ""
 	icon = 'icons/turf/walls/reinforced_wall.dmi'
 	icon_state = "r_wall"
 	opacity = 1
@@ -42,9 +42,9 @@
 		return
 	if(M.environment_smash & ENVIRONMENT_SMASH_RWALLS)
 		dismantle_wall(1)
-		playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 	else
-		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		to_chat(M, "<span class='warning'>This wall is far too strong for you to destroy.</span>")
 
 /turf/closed/wall/r_wall/try_decon(obj/item/W, mob/user, turf/T)
@@ -55,42 +55,42 @@
 				W.play_tool_sound(src, 100)
 				d_state = SUPPORT_LINES
 				update_icon()
-				to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
+				to_chat(user, "<span class='notice'>I cut the outer grille.</span>")
 				return 1
 
 		if(SUPPORT_LINES)
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)
-				to_chat(user, "<span class='notice'>You begin unsecuring the support lines...</span>")
+				to_chat(user, "<span class='notice'>I begin unsecuring the support lines...</span>")
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_LINES)
 						return 1
 					d_state = COVER
 					update_icon()
-					to_chat(user, "<span class='notice'>You unsecure the support lines.</span>")
+					to_chat(user, "<span class='notice'>I unsecure the support lines.</span>")
 				return 1
 
 			else if(W.tool_behaviour == TOOL_WIRECUTTER)
 				W.play_tool_sound(src, 100)
 				d_state = INTACT
 				update_icon()
-				to_chat(user, "<span class='notice'>You repair the outer grille.</span>")
+				to_chat(user, "<span class='notice'>I repair the outer grille.</span>")
 				return 1
 
 		if(COVER)
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				to_chat(user, "<span class='notice'>You begin slicing through the metal cover...</span>")
+				to_chat(user, "<span class='notice'>I begin slicing through the metal cover...</span>")
 				if(W.use_tool(src, user, 60, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return 1
 					d_state = CUT_COVER
 					update_icon()
-					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
+					to_chat(user, "<span class='notice'>I press firmly on the cover, dislodging it.</span>")
 				return 1
 
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)
-				to_chat(user, "<span class='notice'>You begin securing the support lines...</span>")
+				to_chat(user, "<span class='notice'>I begin securing the support lines...</span>")
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return 1
@@ -101,19 +101,19 @@
 
 		if(CUT_COVER)
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				to_chat(user, "<span class='notice'>You struggle to pry off the cover...</span>")
+				to_chat(user, "<span class='notice'>I struggle to pry off the cover...</span>")
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return 1
 					d_state = ANCHOR_BOLTS
 					update_icon()
-					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
+					to_chat(user, "<span class='notice'>I pry off the cover.</span>")
 				return 1
 
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				to_chat(user, "<span class='notice'>You begin welding the metal cover back to the frame...</span>")
+				to_chat(user, "<span class='notice'>I begin welding the metal cover back to the frame...</span>")
 				if(W.use_tool(src, user, 60, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return TRUE
@@ -124,17 +124,17 @@
 
 		if(ANCHOR_BOLTS)
 			if(W.tool_behaviour == TOOL_WRENCH)
-				to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame...</span>")
+				to_chat(user, "<span class='notice'>I start loosening the anchoring bolts which secure the support rods to their frame...</span>")
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return 1
 					d_state = SUPPORT_RODS
 					update_icon()
-					to_chat(user, "<span class='notice'>You remove the bolts anchoring the support rods.</span>")
+					to_chat(user, "<span class='notice'>I remove the bolts anchoring the support rods.</span>")
 				return 1
 
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				to_chat(user, "<span class='notice'>You start to pry the cover back into place...</span>")
+				to_chat(user, "<span class='notice'>I start to pry the cover back into place...</span>")
 				if(W.use_tool(src, user, 20, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return 1
@@ -147,46 +147,46 @@
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				to_chat(user, "<span class='notice'>You begin slicing through the support rods...</span>")
+				to_chat(user, "<span class='notice'>I begin slicing through the support rods...</span>")
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return 1
 					d_state = SHEATH
 					update_icon()
-					to_chat(user, "<span class='notice'>You slice through the support rods.</span>")
+					to_chat(user, "<span class='notice'>I slice through the support rods.</span>")
 				return 1
 
 			if(W.tool_behaviour == TOOL_WRENCH)
-				to_chat(user, "<span class='notice'>You start tightening the bolts which secure the support rods to their frame...</span>")
+				to_chat(user, "<span class='notice'>I start tightening the bolts which secure the support rods to their frame...</span>")
 				W.play_tool_sound(src, 100)
 				if(W.use_tool(src, user, 40))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return 1
 					d_state = ANCHOR_BOLTS
 					update_icon()
-					to_chat(user, "<span class='notice'>You tighten the bolts anchoring the support rods.</span>")
+					to_chat(user, "<span class='notice'>I tighten the bolts anchoring the support rods.</span>")
 				return 1
 
 		if(SHEATH)
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath...</span>")
+				to_chat(user, "<span class='notice'>I struggle to pry off the outer sheath...</span>")
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SHEATH)
 						return 1
-					to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
+					to_chat(user, "<span class='notice'>I pry off the outer sheath.</span>")
 					dismantle_wall()
 				return 1
 
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				to_chat(user, "<span class='notice'>You begin welding the support rods back together...</span>")
+				to_chat(user, "<span class='notice'>I begin welding the support rods back together...</span>")
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SHEATH)
 						return TRUE
 					d_state = SUPPORT_RODS
 					update_icon()
-					to_chat(user, "<span class='notice'>You weld the support rods back together.</span>")
+					to_chat(user, "<span class='notice'>I weld the support rods back together.</span>")
 				return 1
 	return 0
 
@@ -222,7 +222,7 @@
 
 /turf/closed/wall/r_wall/syndicate
 	name = "hull"
-	desc = "The armored hull of an ominous looking ship."
+	desc = ""
 	icon = 'icons/turf/walls/plastitanium_wall.dmi'
 	icon_state = "map-shuttle"
 	explosion_block = 20

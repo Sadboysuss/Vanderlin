@@ -4,7 +4,7 @@
 
 /obj/machinery/shower
 	name = "shower"
-	desc = "The HS-451. Installed in the 2550s by the Nanotrasen Hygiene Division."
+	desc = ""
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
 	density = FALSE
@@ -50,7 +50,7 @@
 
 /obj/machinery/shower/wrench_act(mob/living/user, obj/item/I)
 	..()
-	to_chat(user, "<span class='notice'>You begin to adjust the temperature valve with \the [I]...</span>")
+	to_chat(user, "<span class='notice'>I begin to adjust the temperature valve with \the [I]...</span>")
 	if(I.use_tool(src, user, 50))
 		switch(current_temperature)
 			if(SHOWER_NORMAL)
@@ -59,7 +59,7 @@
 				current_temperature = SHOWER_BOILING
 			if(SHOWER_BOILING)
 				current_temperature = SHOWER_NORMAL
-		user.visible_message("<span class='notice'>[user] adjusts the shower with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I] to [current_temperature] temperature.</span>")
+		user.visible_message("<span class='notice'>[user] adjusts the shower with \the [I].</span>", "<span class='notice'>I adjust the shower with \the [I] to [current_temperature] temperature.</span>")
 		user.log_message("has wrenched a shower at [AREACOORD(src)] to [current_temperature].", LOG_ATTACK)
 		add_hiddenprint(user)
 	handle_mist()
@@ -98,37 +98,41 @@
 	if(on)
 		wash_atom(AM)
 
-/obj/machinery/shower/proc/wash_atom(atom/A)
-	SEND_SIGNAL(A, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
-	reagents.reaction(A, TOUCH, reaction_volume)
+/proc/wash_atom(atom/A, clean = CLEAN_WEAK)
+	SEND_SIGNAL(A, COMSIG_COMPONENT_CLEAN_ACT, clean)
+//eagents.reaction(A, TOUCH, reaction_volume)
 
 	if(isobj(A))
-		wash_obj(A)
+		wash_obj(A,clean)
+		var/obj/O = A
+		O.wash_act(clean)
 	else if(isturf(A))
-		wash_turf(A)
+		wash_turf(A,clean)
 	else if(isliving(A))
-		wash_mob(A)
-		check_heat(A)
+		wash_mob(A,clean)
+//		check_heat(A)
 
-	contamination_cleanse(A)
+//	contamination_cleanse(A)
 
-/obj/machinery/shower/proc/wash_obj(obj/O)
-	. = SEND_SIGNAL(O, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
-	O.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
+/obj/proc/wash_act(clean = CLEAN_WEAK)
+	return
+
+/proc/wash_obj(obj/O, clean = CLEAN_WEAK)
+	. = SEND_SIGNAL(O, COMSIG_COMPONENT_CLEAN_ACT, clean)
+//	O.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 
 
-/obj/machinery/shower/proc/wash_turf(turf/tile)
-	SEND_SIGNAL(tile, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
-	tile.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
+/proc/wash_turf(turf/tile, clean = CLEAN_WEAK)
+	SEND_SIGNAL(tile, COMSIG_COMPONENT_CLEAN_ACT, clean)
+//	tile.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 	for(var/obj/effect/E in tile)
 		if(is_cleanable(E))
 			qdel(E)
 
 
-/obj/machinery/shower/proc/wash_mob(mob/living/L)
-	SEND_SIGNAL(L, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
-	L.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
-	SEND_SIGNAL(L, COMSIG_ADD_MOOD_EVENT, "shower", /datum/mood_event/nice_shower)
+/proc/wash_mob(mob/living/L, clean = CLEAN_WEAK)
+	SEND_SIGNAL(L, COMSIG_COMPONENT_CLEAN_ACT, clean)
+//	L.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 	if(iscarbon(L))
 		var/mob/living/carbon/M = L
 		. = TRUE
@@ -141,22 +145,22 @@
 
 		var/list/obscured = M.check_obscured_slots()
 
-		if(M.head && wash_obj(M.head))
+		if(M.head && wash_obj(M.head,clean))
 			M.update_inv_head()
 
-		if(M.glasses && !(SLOT_GLASSES in obscured) && wash_obj(M.glasses))
+		if(M.glasses && !(SLOT_GLASSES in obscured) && wash_obj(M.glasses,clean))
 			M.update_inv_glasses()
 
-		if(M.wear_mask && !(SLOT_WEAR_MASK in obscured) && wash_obj(M.wear_mask))
+		if(M.wear_mask && !(SLOT_WEAR_MASK in obscured) && wash_obj(M.wear_mask,clean))
 			M.update_inv_wear_mask()
 
-		if(M.ears && !(HIDEEARS in obscured) && wash_obj(M.ears))
+		if(M.ears && !(HIDEEARS in obscured) && wash_obj(M.ears,clean))
 			M.update_inv_ears()
 
-		if(M.wear_neck && !(SLOT_NECK in obscured) && wash_obj(M.wear_neck))
+		if(M.wear_neck && !(SLOT_NECK in obscured) && wash_obj(M.wear_neck,clean))
 			M.update_inv_neck()
 
-		if(M.shoes && !(HIDESHOES in obscured) && wash_obj(M.shoes))
+		if(M.shoes && !(HIDESHOES in obscured) && wash_obj(M.shoes,clean))
 			M.update_inv_shoes()
 
 		var/washgloves = FALSE
@@ -166,10 +170,12 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.wear_suit && wash_obj(H.wear_suit))
-				H.update_inv_wear_suit()
-			else if(H.w_uniform && wash_obj(H.w_uniform))
-				H.update_inv_w_uniform()
+			if(H.wear_armor && wash_obj(H.wear_armor,clean))
+				H.update_inv_armor()
+			else if(H.wear_shirt && wash_obj(H.wear_shirt,clean))
+				H.update_inv_shirt()
+			else if(H.wear_pants && wash_obj(H.wear_pants,clean))
+				H.update_inv_pants()
 
 			if(washgloves)
 				SEND_SIGNAL(H, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD)
@@ -178,7 +184,7 @@
 				H.lip_style = null
 				H.update_body()
 
-			if(H.belt && wash_obj(H.belt))
+			if(H.belt && wash_obj(H.belt,clean))
 				H.update_inv_belt()
 		else
 			SEND_SIGNAL(M, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD)

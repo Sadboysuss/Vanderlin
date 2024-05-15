@@ -18,7 +18,7 @@ Bonus
 /datum/symptom/flesh_eating
 
 	name = "Necrotizing Fasciitis"
-	desc = "The virus aggressively attacks body cells, necrotizing tissues and organs."
+	desc = ""
 	stealth = -3
 	resistance = -4
 	stage_speed = 0
@@ -50,7 +50,7 @@ Bonus
 			if(prob(base_message_chance))
 				to_chat(M, "<span class='warning'>[pick("You feel a sudden pain across your body.", "Drops of blood appear suddenly on your skin.")]</span>")
 		if(4,5)
-			to_chat(M, "<span class='userdanger'>[pick("You cringe as a violent pain takes over your body.", "It feels like your body is eating itself inside out.", "IT HURTS.")]</span>")
+			to_chat(M, "<span class='danger'>[pick("You cringe as a violent pain takes over your body.", "It feels like your body is eating itself inside out.", "IT HURTS.")]</span>")
 			Flesheat(M, A)
 
 /datum/symptom/flesh_eating/proc/Flesheat(mob/living/M, datum/disease/advance/A)
@@ -84,7 +84,7 @@ Bonus
 /datum/symptom/flesh_death
 
 	name = "Autophagocytosis Necrosis"
-	desc = "The virus rapidly consumes infected cells, leading to heavy and widespread damage."
+	desc = ""
 	stealth = -2
 	resistance = -2
 	stage_speed = 1
@@ -117,7 +117,7 @@ Bonus
 				to_chat(M, "<span class='warning'>[pick("You feel your body break apart.", "Your skin rubs off like dust.")]</span>")
 		if(4,5)
 			if(prob(base_message_chance / 2)) //reduce spam
-				to_chat(M, "<span class='userdanger'>[pick("You feel your muscles weakening.", "Some of your skin detaches itself.", "You feel sandy.")]</span>")
+				to_chat(M, "<span class='danger'>[pick("You feel your muscles weakening.", "Some of your skin detaches itself.", "You feel sandy.")]</span>")
 			Flesh_death(M, A)
 
 /datum/symptom/flesh_death/proc/Flesh_death(mob/living/M, datum/disease/advance/A)

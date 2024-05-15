@@ -1,7 +1,7 @@
 /obj/item/seeds/rainbow_bunch
 	name = "pack of rainbow bunch seeds"
-	desc = "A pack of seeds that'll grow into a beautiful bush of various colored flowers."
-	icon_state = "seed-rainbowbunch"
+	desc = ""
+	icon_state = "seed"
 	species = "rainbowbunch"
 	plantname = "Rainbow Flowers"
 	icon_harvest = "rainbowbunch-harvest"
@@ -21,7 +21,7 @@
 /obj/item/reagent_containers/food/snacks/grown/rainbow_flower
 	seed = /obj/item/seeds/rainbow_bunch
 	name = "rainbow flower"
-	desc = "A beautiful flower capable of being used for most dyeing processes."
+	desc = ""
 	icon_state = "rainbow_flower"
 	slot_flags = ITEM_SLOT_HEAD
 	force = 0

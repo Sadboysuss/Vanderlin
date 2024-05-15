@@ -19,7 +19,7 @@ BONUS
 /datum/symptom/cough
 
 	name = "Cough"
-	desc = "The virus irritates the throat of the host, causing occasional coughing. Each cough will try to infect bystanders who are within 1 tile of the host with the virus."
+	desc = ""
 	stealth = -1
 	resistance = 3
 	stage_speed = 1
@@ -69,7 +69,7 @@ BONUS
 				if(I && I.w_class == WEIGHT_CLASS_TINY)
 					M.dropItemToGround(I)
 			if(power >= 2 && prob(30))
-				to_chat(M, "<span notice='userdanger'>[pick("You have a coughing fit!", "You can't stop coughing!")]</span>")
+				to_chat(M, "<span notice='danger'>[pick("You have a coughing fit!", "You can't stop coughing!")]</span>")
 				M.Immobilize(20)
 				addtimer(CALLBACK(M, /mob/.proc/emote, "cough"), 6)
 				addtimer(CALLBACK(M, /mob/.proc/emote, "cough"), 12)

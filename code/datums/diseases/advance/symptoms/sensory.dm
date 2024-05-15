@@ -1,6 +1,6 @@
 /datum/symptom/mind_restoration
 	name = "Mind Restoration"
-	desc = "The virus strengthens the bonds between neurons, reducing the duration of any ailments of the mind."
+	desc = ""
 	stealth = -1
 	resistance = -2
 	stage_speed = 1
@@ -25,7 +25,7 @@
 	if(A.properties["transmittable"] >= 8) //purge alcohol
 		purge_alcohol = TRUE
 
-/datum/symptom/mind_restoration/Activate(var/datum/disease/advance/A)
+/datum/symptom/mind_restoration/Activate(datum/disease/advance/A)
 	if(!..())
 		return
 	var/mob/living/M = A.affected_mob
@@ -64,7 +64,7 @@
 
 /datum/symptom/sensory_restoration
 	name = "Sensory Restoration"
-	desc = "The virus stimulates the production and replacement of sensory tissues, causing the host to regenerate eyes and ears when damaged."
+	desc = ""
 	stealth = 0
 	resistance = 1
 	stage_speed = -2
@@ -87,13 +87,13 @@
 
 			if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
 				if(prob(20))
-					to_chat(M, "<span class='notice'>Your vision slowly returns...</span>")
+					to_chat(M, "<span class='notice'>My vision slowly returns...</span>")
 					M.cure_blind(EYE_DAMAGE)
 					M.cure_nearsighted(EYE_DAMAGE)
 					M.blur_eyes(35)
 
 				else if(HAS_TRAIT_FROM(M, TRAIT_NEARSIGHT, EYE_DAMAGE))
-					to_chat(M, "<span class='notice'>You can finally focus your eyes on distant objects.</span>")
+					to_chat(M, "<span class='notice'>I can finally focus my eyes on distant objects.</span>")
 					M.cure_nearsighted(EYE_DAMAGE)
 					M.blur_eyes(10)
 
@@ -104,4 +104,4 @@
 					eyes.applyOrganDamage(-1)
 		else
 			if(prob(base_message_chance))
-				to_chat(M, "<span class='notice'>[pick("Your eyes feel great.","You feel like your eyes can focus more clearly.", "You don't feel the need to blink.","Your ears feel great.","Your healing feels more acute.")]</span>")
+				to_chat(M, "<span class='notice'>[pick("Your eyes feel great.","You feel like my eyes can focus more clearly.", "You don't feel the need to blink.","Your ears feel great.","Your healing feels more acute.")]</span>")

@@ -1,12 +1,13 @@
 /obj/item/ammo_casing/caseless
-	desc = "A caseless bullet casing."
+	desc = ""
 	firing_effect_type = null
 	heavy_metal = FALSE
 
 /obj/item/ammo_casing/caseless/fire_casing(atom/target, mob/living/user, params, distro, quiet, zone_override, spread, atom/fired_from)
 	if (..()) //successfully firing
-		moveToNullspace()
-		QDEL_NULL(src)
+//		moveToNullspace()
+		testing("qdelling caseless bolt")
+		qdel(src)
 		return TRUE
 	else
 		return FALSE

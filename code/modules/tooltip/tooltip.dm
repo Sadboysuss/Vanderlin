@@ -42,8 +42,8 @@ Notes:
 /datum/tooltip/New(client/C)
 	if (C)
 		owner = C
-		var/datum/asset/stuff = get_asset_datum(/datum/asset/simple/jquery)
-		stuff.send(owner)
+//		var/datum/asset/stuff = get_asset_datum(/datum/asset/simple/jquery)
+//		stuff.send(owner)
 		owner << browse(file2text('code/modules/tooltip/tooltip.html'), "window=[control]")
 
 	..()
@@ -106,12 +106,13 @@ Notes:
 //Theme is a CSS class in tooltip.html, by default this wrapper chooses a CSS class based on the user's UI_style (Midnight, Plasmafire, Retro, etc)
 //Includes sanity.checks
 /proc/openToolTip(mob/user = null, atom/movable/tip_src = null, params = null,title = "",content = "",theme = "")
+	return
 	if(istype(user))
 		if(user.client && user.client.tooltips)
 			if(!theme && user.client.prefs && user.client.prefs.UI_style)
-				theme = lowertext(user.client.prefs.UI_style)
+				theme = "rogue"
 			if(!theme)
-				theme = "default"
+				theme = "rogue"
 			user.client.tooltips.show(tip_src, params,title,content,theme)
 
 

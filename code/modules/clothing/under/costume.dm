@@ -4,7 +4,7 @@
 
 /obj/item/clothing/under/costume/roman
 	name = "\improper Roman armor"
-	desc = "Ancient Roman armor. Made of metallic and leather straps."
+	desc = ""
 	icon_state = "roman"
 	item_state = "armor"
 	can_adjust = FALSE
@@ -13,26 +13,26 @@
 
 /obj/item/clothing/under/costume/jabroni
 	name = "jabroni outfit"
-	desc = "The leather club is two sectors down."
+	desc = ""
 	icon_state = "darkholme"
 	item_state = "darkholme"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/owl
 	name = "owl uniform"
-	desc = "A soft brown jumpsuit made of synthetic feathers and strong conviction."
+	desc = ""
 	icon_state = "owl"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/griffin
 	name = "griffon uniform"
-	desc = "A soft brown jumpsuit with a white feather collar made of synthetic feathers and a lust for mayhem."
+	desc = ""
 	icon_state = "griffin"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/schoolgirl
 	name = "blue schoolgirl uniform"
-	desc = "It's just like one of my Japanese animes!"
+	desc = ""
 	icon_state = "schoolgirl"
 	item_state = "schoolgirl"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -56,28 +56,28 @@
 
 /obj/item/clothing/under/costume/pirate
 	name = "pirate outfit"
-	desc = "Yarr."
+	desc = ""
 	icon_state = "pirate"
 	item_state = "pirate"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/soviet
 	name = "soviet uniform"
-	desc = "For the Motherland!"
+	desc = ""
 	icon_state = "soviet"
 	item_state = "soviet"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/redcoat
 	name = "redcoat uniform"
-	desc = "Looks old."
+	desc = ""
 	icon_state = "redcoat"
 	item_state = "redcoat"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/kilt
 	name = "kilt"
-	desc = "Includes shoes and plaid."
+	desc = ""
 	icon_state = "kilt"
 	item_state = "kilt"
 	body_parts_covered = CHEST|GROIN|LEGS|FEET
@@ -85,7 +85,7 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/kilt/highlander
-	desc = "You're the only one worthy of this kilt."
+	desc = ""
 
 /obj/item/clothing/under/costume/kilt/highlander/Initialize()
 	. = ..()
@@ -93,7 +93,7 @@
 
 /obj/item/clothing/under/costume/gladiator
 	name = "gladiator uniform"
-	desc = "Are you not entertained? Is that not why you are here?"
+	desc = ""
 	icon_state = "gladiator"
 	item_state = "gladiator"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -102,12 +102,12 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/under/costume/gladiator/ash_walker
-	desc = "This gladiator uniform appears to be covered in ash and fairly dated."
+	desc = ""
 	has_sensor = NO_SENSORS
 
 /obj/item/clothing/under/costume/maid
 	name = "maid costume"
-	desc = "Maid in China."
+	desc = ""
 	icon_state = "maid"
 	item_state = "maid"
 	body_parts_covered = CHEST|GROIN
@@ -121,26 +121,26 @@
 
 /obj/item/clothing/under/costume/geisha
 	name = "geisha suit"
-	desc = "Cute space ninja senpai not included."
+	desc = ""
 	icon_state = "geisha"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/villain
 	name = "villain suit"
-	desc = "A change of wardrobe is necessary if you ever want to catch a real superhero."
+	desc = ""
 	icon_state = "villain"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/sailor
 	name = "sailor suit"
-	desc = "Skipper's in the wardroom drinkin gin'."
+	desc = ""
 	icon_state = "sailor"
 	item_state = "b_suit"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/singer
-	desc = "Just looking at this makes you want to sing."
+	desc = ""
 	body_parts_covered = CHEST|GROIN|ARMS
 	alternate_worn_layer = ABOVE_SHOES_LAYER
 	can_adjust = FALSE
@@ -159,7 +159,7 @@
 
 /obj/item/clothing/under/costume/mummy
 	name = "mummy wrapping"
-	desc = "Return the slab or suffer my stale references."
+	desc = ""
 	icon_state = "mummy"
 	item_state = "mummy"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
@@ -169,7 +169,7 @@
 
 /obj/item/clothing/under/costume/scarecrow
 	name = "scarecrow clothes"
-	desc = "Perfect camouflage for hiding in botany."
+	desc = ""
 	icon_state = "scarecrow"
 	item_state = "scarecrow"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
@@ -179,7 +179,7 @@
 
 /obj/item/clothing/under/costume/draculass
 	name = "draculass coat"
-	desc = "A dress inspired by the ancient \"Victorian\" era."
+	desc = ""
 	icon_state = "draculass"
 	item_state = "draculass"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -188,14 +188,14 @@
 
 /obj/item/clothing/under/costume/drfreeze
 	name = "doctor freeze's jumpsuit"
-	desc = "A modified scientist jumpsuit to look extra cool."
+	desc = ""
 	icon_state = "drfreeze"
 	item_state = "drfreeze"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/lobster
 	name = "foam lobster suit"
-	desc = "Who beheaded the college mascot?"
+	desc = ""
 	icon_state = "lobster"
 	item_state = "lobster"
 	fitted = NO_FEMALE_UNIFORM
@@ -203,14 +203,14 @@
 
 /obj/item/clothing/under/costume/gondola
 	name = "gondola hide suit"
-	desc = "Now you're cooking."
+	desc = ""
 	icon_state = "gondola"
 	item_state = "lb_suit"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/skeleton
 	name = "skeleton jumpsuit"
-	desc = "A black jumpsuit with a white bone pattern printed on it. Spooky!"
+	desc = ""
 	icon_state = "skeleton"
 	item_state = "skeleton"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
@@ -220,7 +220,7 @@
 
 /obj/item/clothing/under/costume/mech_suit
 	name = "red mech pilot's suit"
-	desc = "A red mech pilot's suit. Might make your butt look big."
+	desc = ""
 	icon_state = "red_mech_suit"
 	item_state = "red_mech_suit"
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
@@ -231,19 +231,19 @@
 
 /obj/item/clothing/under/costume/mech_suit/white
 	name = "white mech pilot's suit"
-	desc = "A white mech pilot's suit. Very fetching."
+	desc = ""
 	icon_state = "white_mech_suit"
 	item_state = "white_mech_suit"
 
 /obj/item/clothing/under/costume/mech_suit/blue
 	name = "blue mech pilot's suit"
-	desc = "A blue mech pilot's suit. For the more reluctant mech pilots."
+	desc = ""
 	icon_state = "blue_mech_suit"
 	item_state = "blue_mech_suit"
 
 /obj/item/clothing/under/costume/russian_officer
 	name = "\improper Russian officer's uniform"
-	desc = "The latest in fashionable russian outfits."
+	desc = ""
 	icon = 'icons/obj/clothing/under/security.dmi'
 	icon_state = "hostanclothes"
 	item_state = "hostanclothes"

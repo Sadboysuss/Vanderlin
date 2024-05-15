@@ -2,7 +2,7 @@
 
 /datum/nanite_program/regenerative
 	name = "Accelerated Regeneration"
-	desc = "The nanites boost the host's natural regeneration, increasing their healing speed. Does not consume nanites if the host is unharmed."
+	desc = ""
 	use_rate = 0.5
 	rogue_types = list(/datum/nanite_program/necrotic)
 
@@ -31,7 +31,7 @@
 
 /datum/nanite_program/temperature
 	name = "Temperature Adjustment"
-	desc = "The nanites adjust the host's internal temperature to an ideal level."
+	desc = ""
 	use_rate = 3.5
 	rogue_types = list(/datum/nanite_program/skin_decay)
 
@@ -48,7 +48,7 @@
 
 /datum/nanite_program/purging
 	name = "Blood Purification"
-	desc = "The nanites purge toxins and chemicals from the host's bloodstream."
+	desc = ""
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/suffocating, /datum/nanite_program/necrotic)
 
@@ -65,7 +65,7 @@
 
 /datum/nanite_program/brain_heal
 	name = "Neural Regeneration"
-	desc = "The nanites fix neural connections in the host's brain, reversing brain damage and minor traumas."
+	desc = ""
 	use_rate = 1.5
 	rogue_types = list(/datum/nanite_program/brain_decay)
 
@@ -87,7 +87,7 @@
 
 /datum/nanite_program/blood_restoring
 	name = "Blood Regeneration"
-	desc = "The nanites stimulate and boost blood cell production in the host."
+	desc = ""
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/suffocating)
 
@@ -107,7 +107,7 @@
 
 /datum/nanite_program/repairing
 	name = "Mechanical Repair"
-	desc = "The nanites fix damage in the host's mechanical limbs."
+	desc = ""
 	use_rate = 0.5
 	rogue_types = list(/datum/nanite_program/necrotic)
 
@@ -187,7 +187,7 @@
 
 /datum/nanite_program/brain_heal_advanced
 	name = "Neural Reimaging"
-	desc = "The nanites are able to backup and restore the host's neural connections, potentially replacing entire chunks of missing or damaged brain matter."
+	desc = ""
 	use_rate = 3
 	rogue_types = list(/datum/nanite_program/brain_decay, /datum/nanite_program/brain_misfire)
 
@@ -209,7 +209,7 @@
 
 /datum/nanite_program/triggered/defib
 	name = "Defibrillation"
-	desc = "The nanites shock the host's heart when triggered, bringing them back to life if the body can sustain it."
+	desc = ""
 	trigger_cost = 25
 	trigger_cooldown = 120
 	rogue_types = list(/datum/nanite_program/triggered/shocking)
@@ -242,17 +242,17 @@
 
 /datum/nanite_program/triggered/defib/proc/zap()
 	var/mob/living/carbon/C = host_mob
-	playsound(C, 'sound/machines/defib_charge.ogg', 50, FALSE)
+	playsound(C, 'sound/blank.ogg', 50, FALSE)
 	sleep(30)
-	playsound(C, 'sound/machines/defib_zap.ogg', 50, FALSE)
+	playsound(C, 'sound/blank.ogg', 50, FALSE)
 	if(check_revivable())
-		playsound(C, 'sound/machines/defib_success.ogg', 50, FALSE)
+		playsound(C, 'sound/blank.ogg', 50, FALSE)
 		C.set_heartattack(FALSE)
 		C.revive(full_heal = FALSE, admin_revive = FALSE)
-		C.emote("gasp")
+		C.emote("breathgasp")
 		C.Jitter(100)
 		SEND_SIGNAL(C, COMSIG_LIVING_MINOR_SHOCK)
 		log_game("[C] has been successfully defibrillated by nanites.")
 	else
-		playsound(C, 'sound/machines/defib_failed.ogg', 50, FALSE)
+		playsound(C, 'sound/blank.ogg', 50, FALSE)
 

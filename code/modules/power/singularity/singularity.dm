@@ -2,7 +2,7 @@
 
 /obj/singularity
 	name = "gravitational singularity"
-	desc = "A gravitational singularity."
+	desc = ""
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 	anchored = TRUE
@@ -86,7 +86,7 @@
 /obj/singularity/attack_tk(mob/user)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.visible_message("<span class='danger'>[C]'s head begins to collapse in on itself!</span>", "<span class='userdanger'>Your head feels like it's collapsing in on itself! This was really not a good idea!</span>", "<span class='hear'>You hear something crack and explode in gore.</span>")
+		C.visible_message("<span class='danger'>[C]'s head begins to collapse in on itself!</span>", "<span class='danger'>My head feels like it's collapsing in on itself! This was really not a good idea!</span>", "<span class='hear'>I hear something crack and explode in gore.</span>")
 		var/turf/T = get_turf(C)
 		for(var/i in 1 to 3)
 			C.apply_damage(30, BRUTE, BODY_ZONE_HEAD)
@@ -291,7 +291,7 @@
 	var/gain = A.singularity_act(current_size, src)
 	src.energy += gain
 	if(istype(A, /obj/machinery/power/supermatter_crystal) && !consumedSupermatter)
-		desc = "[initial(desc)] It glows fiercely with inner fire."
+		desc = ""
 		name = "supermatter-charged [initial(name)]"
 		consumedSupermatter = 1
 		set_light(10)
@@ -411,7 +411,7 @@
 /obj/singularity/proc/combust_mobs()
 	for(var/mob/living/carbon/C in urange(20, src, 1))
 		C.visible_message("<span class='warning'>[C]'s skin bursts into flame!</span>", \
-						  "<span class='userdanger'>You feel an inner fire as your skin bursts into flames!</span>")
+						  "<span class='danger'>I feel an inner fire as my skin bursts into flames!</span>")
 		C.adjust_fire_stacks(5)
 		C.IgniteMob()
 	return
@@ -428,12 +428,12 @@
 				if(istype(H.glasses, /obj/item/clothing/glasses/meson))
 					var/obj/item/clothing/glasses/meson/MS = H.glasses
 					if(MS.vision_flags == SEE_TURFS)
-						to_chat(H, "<span class='notice'>You look directly into the [src.name], good thing you had your protective eyewear on!</span>")
+						to_chat(H, "<span class='notice'>I look directly into the [src.name], good thing you had my protective eyewear on!</span>")
 						return
 
 		M.apply_effect(60, EFFECT_STUN)
 		M.visible_message("<span class='danger'>[M] stares blankly at the [src.name]!</span>", \
-						"<span class='userdanger'>You look directly into the [src.name] and feel weak.</span>")
+						"<span class='danger'>I look directly into the [src.name] and feel weak.</span>")
 	return
 
 

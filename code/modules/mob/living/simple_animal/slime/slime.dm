@@ -293,7 +293,7 @@
 		if(buckled)
 			Feedstop(silent = TRUE)
 			visible_message("<span class='danger'>[M] pulls [src] off!</span>", \
-				"<span class='danger'>You pull [src] off!</span>")
+				"<span class='danger'>I pull [src] off!</span>")
 			return
 		attacked += 5
 		if(nutrition >= 100) //steal some nutrition. negval handled in life()
@@ -329,13 +329,13 @@
 		if(buckled == M)
 			if(prob(60))
 				M.visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off!</span>", \
-					"<span class='danger'>You attempt to wrestle \the [name] off!</span>")
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
+					"<span class='danger'>I attempt to wrestle \the [name] off!</span>")
+				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 
 			else
 				M.visible_message("<span class='warning'>[M] manages to wrestle \the [name] off!</span>", \
-					"<span class='notice'>You manage to wrestle \the [name] off!</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+					"<span class='notice'>I manage to wrestle \the [name] off!</span>")
+				playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 
 				discipline_slime(M)
 
@@ -343,17 +343,17 @@
 			if(prob(30))
 				buckled.visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off of [buckled]!</span>", \
 					"<span class='warning'>[M] attempts to wrestle \the [name] off of you!</span>")
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 
 			else
 				buckled.visible_message("<span class='warning'>[M] manages to wrestle \the [name] off of [buckled]!</span>", \
 					"<span class='notice'>[M] manage to wrestle \the [name] off of you!</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 
 				discipline_slime(M)
 	else
 		if(stat == DEAD && surgeries.len)
-			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
+			if(M.used_intent.type == INTENT_HELP || M.used_intent.type == INTENT_DISARM)
 				for(var/datum/surgery/S in surgeries)
 					if(S.next_step(M,M.a_intent))
 						return 1
@@ -368,7 +368,7 @@
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
 	if(stat == DEAD && surgeries.len)
-		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
+		if(user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
 				if(S.next_step(user,user.a_intent))
 					return 1
@@ -377,7 +377,7 @@
 			++Friends[user]
 		else
 			Friends[user] = 1
-		to_chat(user, "<span class='notice'>You feed the slime the plasma. It chirps happily.</span>")
+		to_chat(user, "<span class='notice'>I feed the slime the plasma. It chirps happily.</span>")
 		var/obj/item/stack/sheet/mineral/plasma/S = W
 		S.use(1)
 		return
@@ -410,8 +410,8 @@
 				applied++
 				hasFound = TRUE
 			if(applied >= SLIME_EXTRACT_CROSSING_REQUIRED)
-				to_chat(user, "<span class='notice'>You feed the slime as many of the extracts from the bag as you can, and it mutates!</span>")
-				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
+				to_chat(user, "<span class='notice'>I feed the slime as many of the extracts from the bag as you can, and it mutates!</span>")
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 				spawn_corecross()
 				hasOutput = TRUE
 				break
@@ -419,15 +419,15 @@
 			if(!hasFound)
 				to_chat(user, "<span class='warning'>There are no extracts in the bag that this slime will accept!</span>")
 			else
-				to_chat(user, "<span class='notice'>You feed the slime some extracts from the bag.</span>")
-				playsound(src, 'sound/effects/attackblob.ogg', 50, TRUE)
+				to_chat(user, "<span class='notice'>I feed the slime some extracts from the bag.</span>")
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		return
 	..()
 
 /mob/living/simple_animal/slime/proc/spawn_corecross()
 	var/static/list/crossbreeds = subtypesof(/obj/item/slimecross)
 	visible_message("<span class='danger'>[src] shudders, its mutated core consuming the rest of its body!</span>")
-	playsound(src, 'sound/magic/smoke.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	var/crosspath
 	for(var/X in crossbreeds)
 		var/obj/item/slimecross/S = X

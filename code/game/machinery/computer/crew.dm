@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/crew
 	name = "crew monitoring console"
-	desc = "Used to monitor active health sensors built into most of the crew's uniforms."
+	desc = ""
 	icon_screen = "crew"
 	icon_keyboard = "med_key"
 	use_power = IDLE_POWER_USE
@@ -126,8 +126,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 			nanite_sensors = TRUE
 		// Check if their z-level is correct and if they are wearing a uniform.
 		// Accept H.z==0 as well in case the mob is inside an object.
-		if ((H.z == 0 || H.z == z) && (istype(H.w_uniform, /obj/item/clothing/under) || nanite_sensors))
-			U = H.w_uniform
+		if ((H.z == 0 || H.z == z) && (istype(H.wear_pants, /obj/item/clothing/under) || nanite_sensors))
+			U = H.wear_pants
 
 			// Are the suit sensors on?
 			if (nanite_sensors || ((U.has_sensor > 0) && U.sensor_mode))
@@ -137,7 +137,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 				if (H.z == 0 && (!pos || pos.z != z))
 					continue
 
-				I = H.wear_id ? H.wear_id.GetID() : null
+				I = H.wear_ring ? H.wear_ring.GetID() : null
 
 				if (I)
 					name = I.registered_name

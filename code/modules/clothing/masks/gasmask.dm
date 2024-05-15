@@ -1,6 +1,6 @@
 /obj/item/clothing/mask/gas
 	name = "gas mask"
-	desc = "A face-covering mask that can be connected to an air supply. While good for concealing your identity, it isn't good for blocking gas flow." //More accurate
+	desc = "" //More accurate
 	icon_state = "gas_alt"
 	clothing_flags = BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR
@@ -13,7 +13,7 @@
 
 /obj/item/clothing/mask/gas/atmos
 	name = "atmospheric gas mask"
-	desc = "Improved gas mask utilized by atmospheric technicians. Still not very good at blocking gas flow, but it's flameproof!"
+	desc = ""
 	icon_state = "gas_atmos"
 	item_state = "gas_atmos"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 10, "fire" = 20, "acid" = 10)
@@ -24,7 +24,7 @@
 
 /obj/item/clothing/mask/gas/atmos/captain
 	name = "captain's gas mask"
-	desc = "Nanotrasen cut corners and repainted a spare atmospheric gas mask, but don't tell anyone."
+	desc = ""
 	icon_state = "gas_cap"
 	item_state = "gas_cap"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -33,7 +33,7 @@
 
 /obj/item/clothing/mask/gas/welding
 	name = "welding mask"
-	desc = "A gas mask with built-in welding goggles and a face shield. Looks like a skull - clearly designed by a nerd."
+	desc = ""
 	icon_state = "weldingmask"
 	flash_protect = FLASH_PROTECTION_WELDER
 	custom_materials = list(/datum/material/iron=4000, /datum/material/glass=2000)
@@ -60,20 +60,20 @@
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
-	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
+	desc = ""
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 2,"energy" = 2, "bomb" = 0, "bio" = 75, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "syndicate mask"
-	desc = "A close-fitting tactical mask that can be connected to an air supply."
+	desc = ""
 	icon_state = "syndicate"
 	strip_delay = 60
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
-	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	desc = ""
 	clothing_flags = MASKINTERNALS
 	icon_state = "clown"
 	item_state = "clown_hat"
@@ -103,12 +103,12 @@
 		for(var/X in actions)
 			var/datum/action/A = X
 			A.UpdateButtonIcon()
-		to_chat(user, "<span class='notice'>Your Clown Mask has now morphed into [choice], all praise the Honkmother!</span>")
+		to_chat(user, "<span class='notice'>My Clown Mask has now morphed into [choice], all praise the Honkmother!</span>")
 		return 1
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
-	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
+	desc = ""
 	clothing_flags = MASKINTERNALS
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
@@ -117,7 +117,7 @@
 
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
-	desc = "The traditional mime's mask. It has an eerie facial posture."
+	desc = ""
 	clothing_flags = MASKINTERNALS
 	icon_state = "mime"
 	item_state = "mime"
@@ -145,12 +145,12 @@
 		for(var/X in actions)
 			var/datum/action/A = X
 			A.UpdateButtonIcon()
-		to_chat(user, "<span class='notice'>Your Mime Mask has now morphed into [choice]!</span>")
+		to_chat(user, "<span class='notice'>My Mime Mask has now morphed into [choice]!</span>")
 		return 1
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
-	desc = "A mask used when acting as a monkey."
+	desc = ""
 	clothing_flags = MASKINTERNALS
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
@@ -159,7 +159,7 @@
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
-	desc = "A traditional female mime's mask."
+	desc = ""
 	clothing_flags = MASKINTERNALS
 	icon_state = "sexymime"
 	item_state = "sexymime"
@@ -173,13 +173,13 @@
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
-	desc = "Beep boop."
+	desc = ""
 	icon_state = "death"
 	resistance_flags = FLAMMABLE
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
-	desc = "Twoooo!"
+	desc = ""
 	icon_state = "owl"
 	clothing_flags = MASKINTERNALS
 	flags_cover = MASKCOVERSEYES
@@ -187,16 +187,15 @@
 
 /obj/item/clothing/mask/gas/carp
 	name = "carp mask"
-	desc = "Gnash gnash."
+	desc = ""
 	icon_state = "carp_mask"
 
 /obj/item/clothing/mask/gas/tiki_mask
 	name = "tiki mask"
-	desc = "A creepy wooden mask. Surprisingly expressive for a poorly carved bit of wood."
+	desc = ""
 	icon_state = "tiki_eyebrow"
 	item_state = "tiki_eyebrow"
 	resistance_flags = FLAMMABLE
-	max_integrity = 100
 	actions_types = list(/datum/action/item_action/adjust)
 	dog_fashion = null
 
@@ -226,7 +225,7 @@
 
 /obj/item/clothing/mask/gas/hunter
 	name = "bounty hunting mask"
-	desc = "A custom tactical mask with decals added."
+	desc = ""
 	icon_state = "hunter"
 	item_state = "hunter"
 	resistance_flags = FIRE_PROOF | ACID_PROOF

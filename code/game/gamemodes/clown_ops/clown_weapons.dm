@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/spray/waterflower/lube
 	name = "water flower"
-	desc = "A seemingly innocent sunflower...with a twist. A <i>slippery</i> twist."
+	desc = ""
 	icon = 'icons/obj/hydroponics/harvest.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
@@ -14,7 +14,7 @@
 //Clown shoes with combat stats and noslip. Of course they still squeak.
 /obj/item/clothing/shoes/clown_shoes/combat
 	name = "combat clown shoes"
-	desc = "advanced clown shoes that protect the wearer and render them nearly immune to slipping on their own peels. They also squeak at 100% capacity."
+	desc = ""
 	clothing_flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN
 	armor = list("melee" = 25, "bullet" = 25, "laser" = 25, "energy" = 25, "bomb" = 50, "bio" = 10, "rad" = 0, "fire" = 70, "acid" = 50)
@@ -26,7 +26,7 @@
 //The super annoying version
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/combat
 	name = "mk-honk combat shoes"
-	desc = "The culmination of years of clown combat research, these shoes leave a trail of chaos in their wake. They will slowly recharge themselves over time, or can be manually charged with bananium."
+	desc = ""
 	slowdown = SHOES_SLOWDOWN
 	armor = list("melee" = 25, "bullet" = 25, "laser" = 25, "energy" = 25, "bomb" = 50, "bio" = 10, "rad" = 0, "fire" = 70, "acid" = 50)
 	strip_delay = 70
@@ -56,7 +56,7 @@
 
 /obj/item/melee/transforming/energy/sword/bananium
 	name = "bananium sword"
-	desc = "An elegant weapon, for a more civilized age."
+	desc = ""
 	force = 0
 	throwforce = 0
 	force_on = 0
@@ -91,8 +91,8 @@
 /obj/item/melee/transforming/energy/sword/bananium/attackby(obj/item/I, mob/living/user, params)
 	if((world.time > next_trombone_allowed) && istype(I, /obj/item/melee/transforming/energy/sword/bananium))
 		next_trombone_allowed = world.time + 50
-		to_chat(user, "<span class='warning'>You slap the two swords together. Sadly, they do not seem to fit!</span>")
-		playsound(src, 'sound/misc/sadtrombone.ogg', 50)
+		to_chat(user, "<span class='warning'>I slap the two swords together. Sadly, they do not seem to fit!</span>")
+		playsound(src, 'sound/blank.ogg', 50)
 		return TRUE
 	return ..()
 
@@ -116,7 +116,7 @@
 
 /obj/item/shield/energy/bananium
 	name = "bananium energy shield"
-	desc = "A shield that stops most melee attacks, protects user from almost all energy projectiles, and can be thrown to slip opponents."
+	desc = ""
 	throw_speed = 1
 	clumsy_check = 0
 	base_icon_state = "bananaeshield"
@@ -169,7 +169,7 @@
 	list_reagents = list(/datum/reagent/consumable/nutriment/vitamin = 1)
 
 /obj/item/grown/bananapeel/bombanana
-	desc = "A peel from a banana. Why is it beeping?"
+	desc = ""
 	seed = null
 	var/det_time = 50
 	var/obj/item/grenade/syndieminibomb/bomb
@@ -194,7 +194,7 @@
 
 /obj/item/grown/bananapeel/bombanana/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is deliberately slipping on the [src.name]! It looks like \he's trying to commit suicide.</span>")
-	playsound(loc, 'sound/misc/slip.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	bomb.preprime(user, 0, FALSE)
 	return (BRUTELOSS)
 
@@ -202,7 +202,7 @@
 
 /obj/item/grenade/chem_grenade/teargas/moustache
 	name = "tear-stache grenade"
-	desc = "A handsomely-attired teargas grenade."
+	desc = ""
 	icon_state = "moustacheg"
 	clumsy_check = GRENADE_NONCLUMSY_FUMBLE
 
@@ -230,7 +230,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/launcher/banana_mortar/bombanana
 	name = "bombanana mortar"
-	desc = "Equipment for clown exosuits. Launches exploding banana peels."
+	desc = ""
 	icon_state = "mecha_bananamrtr"
 	projectile = /obj/item/grown/bananapeel/bombanana
 	projectiles = 8
@@ -244,10 +244,10 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/launcher/flashbang/tearstache
 	name = "\improper HONKeR-6 grenade launcher"
-	desc = "A weapon for combat exosuits. Launches primed tear-stache grenades."
+	desc = ""
 	icon_state = "mecha_grenadelnchr"
 	projectile = /obj/item/grenade/chem_grenade/teargas/moustache
-	fire_sound = 'sound/weapons/gun/general/grenade_launch.ogg'
+	fire_sound = 'sound/blank.ogg'
 	projectiles = 6
 	missile_speed = 1.5
 	projectile_energy_cost = 800
@@ -261,7 +261,7 @@
 	return FALSE
 
 /obj/mecha/combat/honker/dark
-	desc = "Produced by \"Tyranny of Honk, INC\", this exosuit is designed as heavy clown-support. This one has been painted black for maximum fun. HONK!"
+	desc = ""
 	name = "\improper Dark H.O.N.K"
 	icon_state = "darkhonker"
 	max_integrity = 300

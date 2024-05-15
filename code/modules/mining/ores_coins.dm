@@ -18,7 +18,7 @@
 	var/refined_type = null //What this ore defaults to being refined into
 	var/mine_experience = 5 //How much experience do you get for mining this ore?
 	novariants = TRUE // Ore stacks handle their icon updates themselves to keep the illusion that there's more going
-	mats_per_stack = MINERAL_MATERIAL_AMOUNT
+	mats_per_stack = 1
 	var/list/stack_overlays
 
 /obj/item/stack/ore/update_icon()
@@ -52,7 +52,7 @@
 
 	return TRUE
 
-/obj/item/stack/ore/fire_act(exposed_temperature, exposed_volume)
+/obj/item/stack/ore/fire_act(added, maxstacks)
 	. = ..()
 	if(isnull(refined_type))
 		return
@@ -112,12 +112,12 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		return
 	var/mob/living/carbon/human/C = hit_atom
 	if(C.is_eyes_covered())
-		C.visible_message("<span class='danger'>[C]'s eye protection blocks the sand!</span>", "<span class='warning'>Your eye protection blocks the sand!</span>")
+		C.visible_message("<span class='danger'>[C]'s eye protection blocks the sand!</span>", "<span class='warning'>My eye protection blocks the sand!</span>")
 		return
 	C.adjust_blurriness(6)
-	C.adjustStaminaLoss(15)//the pain from your eyes burning does stamina damage
+	C.adjustStaminaLoss(15)//the pain from my eyes burning does stamina damage
 	C.confused += 5
-	to_chat(C, "<span class='userdanger'>\The [src] gets into your eyes! The pain, it burns!</span>")
+	to_chat(C, "<span class='danger'>\The [src] gets into my eyes! The pain, it burns!</span>")
 	qdel(src)
 
 /obj/item/stack/ore/glass/ex_act(severity, target)
@@ -143,7 +143,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	mine_experience = 5
 
 /obj/item/stack/ore/plasma/welder_act(mob/living/user, obj/item/I)
-	to_chat(user, "<span class='warning'>You can't hit a high enough temperature to smelt [src] properly!</span>")
+	to_chat(user, "<span class='warning'>I can't hit a high enough temperature to smelt [src] properly!</span>")
 	return TRUE
 
 
@@ -166,6 +166,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	mine_experience = 5
 	custom_materials = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/gold
+	sellprice = 25
 
 /obj/item/stack/ore/diamond
 	name = "diamond ore"
@@ -199,14 +200,14 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 
 /obj/item/stack/ore/slag
 	name = "slag"
-	desc = "Completely useless."
+	desc = ""
 	icon_state = "slag"
 	item_state = "slag"
 	singular_name = "slag chunk"
 
 /obj/item/twohanded/required/gibtonite
 	name = "gibtonite ore"
-	desc = "Extremely explosive if struck with mining equipment, Gibtonite is often used by miners to speed up their work by using it as a mining charge. This material is illegal to possess by unauthorized personnel under space law."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "Gibtonite ore"
 	item_state = "Gibtonite ore"
@@ -225,7 +226,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 
 /obj/item/twohanded/required/gibtonite/attackby(obj/item/I, mob/user, params)
 	if(!wires && istype(I, /obj/item/assembly/igniter))
-		user.visible_message("<span class='notice'>[user] attaches [I] to [src].</span>", "<span class='notice'>You attach [I] to [src].</span>")
+		user.visible_message("<span class='notice'>[user] attaches [I] to [src].</span>", "<span class='notice'>I attach [I] to [src].</span>")
 		wires = new /datum/wires/explosive/gibtonite(src)
 		attacher = key_name(user)
 		qdel(I)
@@ -245,7 +246,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 			primed = FALSE
 			if(det_timer)
 				deltimer(det_timer)
-			user.visible_message("<span class='notice'>The chain reaction was stopped! ...The ore's quality looks diminished.</span>", "<span class='notice'>You stopped the chain reaction. ...The ore's quality looks diminished.</span>")
+			user.visible_message("<span class='notice'>The chain reaction was stopped! ...The ore's quality looks diminished.</span>", "<span class='notice'>I stopped the chain reaction. ...The ore's quality looks diminished.</span>")
 			icon_state = "Gibtonite ore"
 			quality = GIBTONITE_QUALITY_LOW
 			return
@@ -267,7 +268,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 /obj/item/twohanded/required/gibtonite/proc/GibtoniteReaction(mob/user, triggered_by = 0)
 	if(!primed)
 		primed = TRUE
-		playsound(src,'sound/effects/hit_on_shattered_glass.ogg',50,TRUE)
+		playsound(src,'sound/blank.ogg',50,TRUE)
 		icon_state = "Gibtonite active"
 		var/notify_admins = FALSE
 		if(z != 5)//Only annoy the admins ingame if we're triggered off the mining zlevel
@@ -283,7 +284,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 			log_game(bomb_message)
 			GLOB.bombers += bomb_message
 		else
-			user.visible_message("<span class='warning'>[user] strikes \the [src], causing a chain reaction!</span>", "<span class='danger'>You strike \the [src], causing a chain reaction.</span>")
+			user.visible_message("<span class='warning'>[user] strikes \the [src], causing a chain reaction!</span>", "<span class='danger'>I strike \the [src], causing a chain reaction.</span>")
 			log_bomber(user, "has primed a", src, "for detonation", notify_admins)
 		det_timer = addtimer(CALLBACK(src, .proc/detonate, notify_admins), det_time, TIMER_STOPPABLE)
 
@@ -338,7 +339,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	pixel_x = rand(0,16)-8
 	pixel_y = rand(0,8)-8
 
-/obj/item/coin/set_custom_materials(var/list/materials, multiplier = 1)
+/obj/item/coin/set_custom_materials(list/materials, multiplier = 1)
 	. = ..()
 	value = 0
 	for(var/i in custom_materials)
@@ -381,9 +382,9 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		if (CC.use(1))
 			add_overlay("coin_string_overlay")
 			string_attached = 1
-			to_chat(user, "<span class='notice'>You attach a string to the coin.</span>")
+			to_chat(user, "<span class='notice'>I attach a string to the coin.</span>")
 		else
-			to_chat(user, "<span class='warning'>You need one length of cable to attach a string to the coin!</span>")
+			to_chat(user, "<span class='warning'>I need one length of cable to attach a string to the coin!</span>")
 			return
 	else
 		..()
@@ -396,7 +397,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	new /obj/item/stack/cable_coil(drop_location(), 1)
 	overlays = list()
 	string_attached = null
-	to_chat(user, "<span class='notice'>You detach the string from the coin.</span>")
+	to_chat(user, "<span class='notice'>I detach the string from the coin.</span>")
 	return TRUE
 
 /obj/item/coin/attack_self(mob/user)
@@ -408,13 +409,13 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		flick("coin_[coinflip]_flip", src)
 		coinflip = pick(sideslist)
 		icon_state = "coin_[coinflip]"
-		playsound(user.loc, 'sound/items/coinflip.ogg', 50, TRUE)
+		playsound(user.loc, 'sound/blank.ogg', 50, TRUE)
 		var/oldloc = loc
 		sleep(15)
 		if(loc == oldloc && user && !user.incapacitated())
 			user.visible_message("<span class='notice'>[user] has flipped [src]. It lands on [coinflip].</span>", \
- 							 "<span class='notice'>You flip [src]. It lands on [coinflip].</span>", \
-							 "<span class='hear'>You hear the clattering of loose change.</span>")
+ 							 "<span class='notice'>I flip [src]. It lands on [coinflip].</span>", \
+							 "<span class='hear'>I hear the clattering of loose change.</span>")
 	return TRUE//did the coin flip? useful for suicide_act
 
 /obj/item/coin/gold
@@ -451,12 +452,12 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	custom_materials = list(/datum/material/runite = 400)
 
 /obj/item/coin/twoheaded
-	desc = "Hey, this coin's the same on both sides!"
+	desc = ""
 	sideslist = list("heads")
 
 /obj/item/coin/antagtoken
 	name = "antag token"
-	desc = "A novelty coin that helps the heart know what hard evidence cannot prove."
+	desc = ""
 	icon_state = "coin_valid"
 	custom_materials = list(/datum/material/plastic = 400)
 	sideslist = list("valid", "salad")

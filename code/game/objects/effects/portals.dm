@@ -13,7 +13,7 @@
 
 /obj/effect/portal
 	name = "portal"
-	desc = "Looks unstable. Best to test it with the clown."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "portal"
 	anchored = TRUE
@@ -189,7 +189,7 @@
 
 /obj/effect/portal/permanent
 	name = "permanent portal"
-	desc = "An unwavering portal that will never fade."
+	desc = ""
 	var/id // var edit or set id in map editor
 	hardlinked = FALSE // dont qdel my portal nerd
 
@@ -221,7 +221,7 @@
 
 /obj/effect/portal/permanent/one_way // doesn't have a return portal
 	name = "one-way portal"
-	desc = "You get the feeling that this might not be the safest thing you've ever done."
+	desc = ""
 	var/list/possible_exits = list()
 	var/keep // if this is a portal that should be kept
 

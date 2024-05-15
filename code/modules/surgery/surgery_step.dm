@@ -42,7 +42,7 @@
 			if(get_location_accessible(target, target_zone) || surgery.ignore_clothes)
 				initiate(user, target, target_zone, tool, surgery, try_to_fail)
 			else
-				to_chat(user, "<span class='warning'>You need to expose [target]'s [parse_zone(target_zone)] to perform surgery on it!</span>")
+				to_chat(user, "<span class='warning'>I need to expose [target]'s [parse_zone(target_zone)] to perform surgery on it!</span>")
 			return TRUE	//returns TRUE so we don't stab the guy in the dick or wherever.
 
 	if(repeatable)
@@ -106,17 +106,17 @@
 	return advance
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You begin to perform surgery on [target]...</span>",
+	display_results(user, target, "<span class='notice'>I begin to perform surgery on [target]...</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>")
 
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You succeed.</span>",
+	display_results(user, target, "<span class='notice'>I succeed.</span>",
 		"<span class='notice'>[user] succeeds!</span>",
 		"<span class='notice'>[user] finishes.</span>")
 	return TRUE
 
-/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, var/fail_prob = 0)
+/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob = 0)
 	var/screwedmessage = ""
 	switch(fail_prob)
 		if(0 to 24)
@@ -126,7 +126,7 @@
 		if(75 to 99)
 			screwedmessage = " This is practically impossible in these conditions..."
 
-	display_results(user, target, "<span class='warning'>You screw up![screwedmessage]</span>",
+	display_results(user, target, "<span class='warning'>I screw up![screwedmessage]</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"<span class='notice'>[user] finishes.</span>", TRUE) //By default the patient will notice if the wrong thing has been cut
 	return FALSE

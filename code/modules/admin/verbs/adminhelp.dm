@@ -199,7 +199,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		var/admin_number_present = send2irc_adminless_only(initiator_ckey, "Ticket #[id]: [name]")
 		log_admin_private("Ticket #[id]: [key_name(initiator)]: [name] - heard by [admin_number_present] non-AFK admins who have +BAN.")
 		if(admin_number_present <= 0)
-			to_chat(C, "<span class='notice'>No active admins are online, your adminhelp was sent to the admin irc.</span>")
+			to_chat(C, "<span class='notice'>No active admins are online, my adminhelp was sent to the admin irc.</span>")
 			heard_by_no_admins = TRUE
 
 	GLOB.ahelp_tickets.active_tickets += src
@@ -263,7 +263,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	//send this msg to all admins
 	for(var/client/X in GLOB.admins)
 		if(X.prefs.toggles & SOUND_ADMINHELP)
-			SEND_SOUND(X, sound('sound/effects/adminhelp.ogg'))
+			SEND_SOUND(X, sound('sound/blank.ogg'))
 		window_flash(X, ignorepref = TRUE)
 		to_chat(X, admin_msg)
 
@@ -336,7 +336,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	addtimer(CALLBACK(initiator, /client/proc/giveadminhelpverb), 50)
 
 	AddInteraction("<font color='green'>Resolved by [key_name].</font>")
-	to_chat(initiator, "<span class='adminhelp'>Your ticket has been resolved by an admin. The Adminhelp verb will be returned to you shortly.</span>")
+	to_chat(initiator, "<span class='adminhelp'>My ticket has been resolved by an admin. The Adminhelp verb will be returned to you shortly.</span>")
 	if(!silent)
 		SSblackbox.record_feedback("tally", "ahelp_stats", 1, "resolved")
 		var/msg = "Ticket [TicketHref("#[id]")] resolved by [key_name]"
@@ -351,10 +351,10 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	if(initiator)
 		initiator.giveadminhelpverb()
 
-		SEND_SOUND(initiator, sound('sound/effects/adminhelp.ogg'))
+		SEND_SOUND(initiator, sound('sound/blank.ogg'))
 
 		to_chat(initiator, "<font color='red' size='4'><b>- AdminHelp Rejected! -</b></font>")
-		to_chat(initiator, "<font color='red'><b>Your admin help was rejected.</b> The adminhelp verb has been returned to you so that you may try again.</font>")
+		to_chat(initiator, "<font color='red'><b>My admin help was rejected.</b> The adminhelp verb has been returned to you so that you may try again.</font>")
 		to_chat(initiator, "Please try to be calm, clear, and descriptive in admin helps, do not assume the admin has seen any related events, and clearly state the names of anybody you are reporting.")
 
 	SSblackbox.record_feedback("tally", "ahelp_stats", 1, "rejected")
@@ -370,7 +370,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		return
 
 	var/msg = "<font color='red' size='4'><b>- AdminHelp marked as IC issue! -</b></font><br>"
-	msg += "<font color='red'>Your issue has been determined by an administrator to be an in character issue and does NOT require administrator intervention at this time. For further resolution you should pursue options that are in character.</font>"
+	msg += "<font color='red'>My issue has been determined by an administrator to be an in character issue and does NOT require administrator intervention at this time. For further resolution you should pursue options that are in character.</font>"
 
 	if(initiator)
 		to_chat(initiator, msg)
@@ -477,13 +477,15 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 // Used for methods where input via arg doesn't work
 /client/proc/get_adminhelp()
-	var/msg = input(src, "Please describe your problem concisely and an admin will help as soon as they're able.", "Adminhelp contents") as text|null
+	var/msg = input(src, "Please describe my problem concisely and an admin will help as soon as they're able.", "Adminhelp contents") as text|null
 	adminhelp(msg)
 
 /client/verb/adminhelp(msg as text)
 	set category = "Admin"
 	set name = "Adminhelp"
-
+	set hidden = 1
+	if(!holder)
+		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return

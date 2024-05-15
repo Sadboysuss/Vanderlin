@@ -43,28 +43,66 @@ GLOBAL_LIST_INIT(freqtospan, list(
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
 	//Basic span
-	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "game say"]'>"
+	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "say"]'>"
 	//Start name span.
 	var/spanpart2 = "<span class='name'>"
 	//Radio freq/name display
 	var/freqpart = radio_freq ? "\[[get_radio_name(radio_freq)]\] " : ""
 	//Speaker name
-	var/namepart = "[speaker.GetVoice()][speaker.get_alt_name()]"
-	if(face_name && ishuman(speaker))
+	var/namepart = "[speaker.GetVoice()]"
+	if(speaker.get_alt_name())
+		namepart = "[speaker.get_alt_name()]"
+	var/colorpart = "<span style='text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
-		namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
+		if(face_name)
+			namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
+		if(H.voice_color)
+			colorpart = "<span style='color:#[H.voice_color];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+	if(speaker.voicecolor_override)
+		colorpart = "<span style='color:#[speaker.voicecolor_override];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
 	//End name span.
-	var/endspanpart = "</span>"
+	var/endspanpart = "</span></span>"
 
 	//Message
 	var/messagepart = " <span class='message'>[lang_treat(speaker, message_language, raw_message, spans, message_mode)]</span></span>"
+
+	var/arrowpart = ""
+
+	if(istype(src,/mob/living))
+		var/turf/speakturf = get_turf(speaker)
+		var/turf/sourceturf = get_turf(src)
+		if(istype(speakturf) && istype(sourceturf) && !(speakturf in get_hear(7, sourceturf)))
+			switch(get_dir(src,speaker))
+				if(NORTH)
+					arrowpart = " ⇑"
+				if(SOUTH)
+					arrowpart = " ⇓"
+				if(EAST)
+					arrowpart = " ⇒"
+				if(WEST)
+					arrowpart = " ⇐"
+				if(NORTHWEST)
+					arrowpart = " ⇖"
+				if(NORTHEAST)
+					arrowpart = " ⇗"
+				if(SOUTHWEST)
+					arrowpart = " ⇙"
+				if(SOUTHEAST)
+					arrowpart = " ⇘"
+			if(istype(speaker, /mob/living))
+				var/mob/living/L = speaker
+				namepart = "Unknown [(L.gender == FEMALE) ? "Woman" : "Man"]"
+			else
+				namepart = "Unknown"
+			spanpart1 = "<span class='smallyell'>"
 
 	var/languageicon = ""
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	if(istype(D) && D.display_icon(src))
 		languageicon = "[D.get_icon()] "
 
-	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)][namepart][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]"
+	return "[spanpart1][spanpart2][colorpart][freqpart][languageicon][compose_track_href(speaker, namepart)][namepart][compose_job(speaker, message_language, raw_message, radio_freq)][arrowpart][endspanpart][messagepart]"
 
 /atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	return ""
@@ -91,23 +129,34 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		spans |= SPAN_YELL
 
 	var/spanned = attach_spans(input, spans)
+	if(isliving(src))
+		var/mob/living/L = src
+		if(L.cmode)
+			return "— \"[spanned]\""
 	return "[say_mod(input, message_mode)], \"[spanned]\""
 
-/atom/movable/proc/lang_treat(atom/movable/speaker, datum/language/language, raw_message, list/spans, message_mode)
-	if(has_language(language))
+/atom/movable/proc/quoteless_say_quote(input, list/spans = list(speech_span), message_mode)
+	var/pos = findtext(input, "*")
+	return pos? copytext(input, pos + 1) : input
+
+/atom/movable/proc/check_language_hear(language)
+	return FALSE
+
+/atom/movable/proc/lang_treat(atom/movable/speaker, datum/language/language, raw_message, list/spans, message_mode, no_quote = FALSE)
+	if(has_language(language) || check_language_hear(language))
 		var/atom/movable/AM = speaker.GetSource()
 		if(AM) //Basically means "if the speaker is virtual"
-			return AM.say_quote(raw_message, spans, message_mode)
+			return no_quote ? AM.quoteless_say_quote(raw_message, spans, message_mode) : AM.say_quote(raw_message, spans, message_mode)
 		else
-			return speaker.say_quote(raw_message, spans, message_mode)
+			return no_quote ? speaker.quoteless_say_quote(raw_message, spans, message_mode) : speaker.say_quote(raw_message, spans, message_mode)
 	else if(language)
 		var/atom/movable/AM = speaker.GetSource()
 		var/datum/language/D = GLOB.language_datum_instances[language]
 		raw_message = D.scramble(raw_message)
 		if(AM)
-			return AM.say_quote(raw_message, spans, message_mode)
+			return no_quote ? AM.quoteless_say_quote(raw_message, spans, message_mode) : AM.say_quote(raw_message, spans, message_mode)
 		else
-			return speaker.say_quote(raw_message, spans, message_mode)
+			return no_quote ? speaker.quoteless_say_quote(raw_message, spans, message_mode) : speaker.say_quote(raw_message, spans, message_mode)
 	else
 		return "makes a strange sound."
 
@@ -118,6 +167,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return "radio"
 
 /proc/get_radio_name(freq)
+	return freq
 	var/returntext = GLOB.reverseradiochannels["[freq]"]
 	if(returntext)
 		return returntext
@@ -137,7 +187,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/ending = copytext(text, length(text))
 	if (ending == "?")
 		return "1"
-	else if (ending == "!")
+	if (ending == "!")
 		return "2"
 	return "0"
 

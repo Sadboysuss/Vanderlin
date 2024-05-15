@@ -1,7 +1,7 @@
 /obj/item/seeds/nettle
 	name = "pack of nettle seeds"
-	desc = "These seeds grow into nettles."
-	icon_state = "seed-nettle"
+	desc = ""
+	icon_state = "seed"
 	species = "nettle"
 	plantname = "Nettles"
 	product = /obj/item/reagent_containers/food/snacks/grown/nettle
@@ -15,8 +15,8 @@
 
 /obj/item/seeds/nettle/death
 	name = "pack of death-nettle seeds"
-	desc = "These seeds grow into death-nettles."
-	icon_state = "seed-deathnettle"
+	desc = ""
+	icon_state = "seed"
 	species = "deathnettle"
 	plantname = "Death Nettles"
 	product = /obj/item/reagent_containers/food/snacks/grown/nettle/death
@@ -31,14 +31,14 @@
 /obj/item/reagent_containers/food/snacks/grown/nettle // "snack"
 	seed = /obj/item/seeds/nettle
 	name = "nettle"
-	desc = "It's probably <B>not</B> wise to touch it with bare hands..."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "nettle"
 	lefthand_file = 'icons/mob/inhands/weapons/plants_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/plants_righthand.dmi'
 	damtype = "fire"
 	force = 15
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	throwforce = 5
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
@@ -63,7 +63,7 @@
 	if(affecting)
 		if(affecting.receive_damage(0, force))
 			C.update_damage_overlays()
-	to_chat(C, "<span class='userdanger'>The nettle burns your bare hand!</span>")
+	to_chat(C, "<span class='danger'>The nettle burns your bare hand!</span>")
 	return TRUE
 
 /obj/item/reagent_containers/food/snacks/grown/nettle/afterattack(atom/A as mob|obj, mob/user,proximity)
@@ -86,7 +86,7 @@
 /obj/item/reagent_containers/food/snacks/grown/nettle/death
 	seed = /obj/item/seeds/nettle/death
 	name = "deathnettle"
-	desc = "The <span class='danger'>glowing</span> nettle incites <span class='boldannounce'>rage</span> in you just from looking at it!"
+	desc = ""
 	icon_state = "deathnettle"
 	force = 30
 	throwforce = 15
@@ -99,13 +99,13 @@
 	if(..())
 		if(prob(50))
 			user.Paralyze(100)
-			to_chat(user, "<span class='userdanger'>You are stunned by the Deathnettle as you try picking it up!</span>")
+			to_chat(user, "<span class='danger'>I are stunned by the Deathnettle as you try picking it up!</span>")
 
 /obj/item/reagent_containers/food/snacks/grown/nettle/death/attack(mob/living/carbon/M, mob/user)
 	if(!..())
 		return
 	if(isliving(M))
-		to_chat(M, "<span class='danger'>You are stunned by the powerful acid of the Deathnettle!</span>")
+		to_chat(M, "<span class='danger'>I are stunned by the powerful acid of the Deathnettle!</span>")
 		log_combat(user, M, "attacked", src)
 
 		M.adjust_blurriness(force/7)

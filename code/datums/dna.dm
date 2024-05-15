@@ -102,13 +102,13 @@
 		if(!GLOB.hairstyles_list.len)
 			init_sprite_accessory_subtypes(/datum/sprite_accessory/hair,GLOB.hairstyles_list, GLOB.hairstyles_male_list, GLOB.hairstyles_female_list)
 		L[DNA_HAIRSTYLE_BLOCK] = construct_block(GLOB.hairstyles_list.Find(H.hairstyle), GLOB.hairstyles_list.len)
-		L[DNA_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.hair_color)
+		L[DNA_HAIR_COLOR_BLOCK] = H.hair_color
 		if(!GLOB.facial_hairstyles_list.len)
 			init_sprite_accessory_subtypes(/datum/sprite_accessory/facial_hair, GLOB.facial_hairstyles_list, GLOB.facial_hairstyles_male_list, GLOB.facial_hairstyles_female_list)
 		L[DNA_FACIAL_HAIRSTYLE_BLOCK] = construct_block(GLOB.facial_hairstyles_list.Find(H.facial_hairstyle), GLOB.facial_hairstyles_list.len)
 		L[DNA_FACIAL_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.facial_hair_color)
-		L[DNA_SKIN_TONE_BLOCK] = construct_block(GLOB.skin_tones.Find(H.skin_tone), GLOB.skin_tones.len)
-		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.eye_color)
+		L[DNA_SKIN_TONE_BLOCK] = H.skin_tone
+		L[DNA_EYE_COLOR_BLOCK] = H.eye_color
 
 	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
 		if(L[i])
@@ -180,7 +180,7 @@
 		if(DNA_FACIAL_HAIR_COLOR_BLOCK)
 			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.facial_hair_color))
 		if(DNA_SKIN_TONE_BLOCK)
-			setblock(uni_identity, blocknumber, construct_block(GLOB.skin_tones.Find(H.skin_tone), GLOB.skin_tones.len))
+			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.skin_tone))
 		if(DNA_EYE_COLOR_BLOCK)
 			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.eye_color))
 		if(DNA_GENDER_BLOCK)
@@ -230,17 +230,17 @@
 		if(alert)
 			switch(stability)
 				if(70 to 90)
-					message = "<span class='warning'>You shiver.</span>"
+					message = "<span class='warning'>I shiver.</span>"
 				if(60 to 69)
-					message = "<span class='warning'>You feel cold.</span>"
+					message = "<span class='warning'>I feel cold.</span>"
 				if(40 to 59)
-					message = "<span class='warning'>You feel sick.</span>"
+					message = "<span class='warning'>I feel sick.</span>"
 				if(20 to 39)
-					message = "<span class='warning'>It feels like your skin is moving.</span>"
+					message = "<span class='warning'>It feels like my skin is moving.</span>"
 				if(1 to 19)
-					message = "<span class='warning'>You can feel your cells burning.</span>"
+					message = "<span class='warning'>I can feel my cells burning.</span>"
 				if(-INFINITY to 0)
-					message = "<span class='boldwarning'>You can feel your DNA exploding, we need to do something fast!</span>"
+					message = "<span class='boldwarning'>I can feel my DNA exploding, we need to do something fast!</span>"
 		if(stability <= 0)
 			holder.apply_status_effect(STATUS_EFFECT_DNA_MELT)
 		if(message)
@@ -380,13 +380,13 @@
 
 /mob/living/carbon/human/updateappearance(icon_update=1, mutcolor_update=0, mutations_overlay_update=0)
 	..()
-	var/structure = dna.uni_identity
-	hair_color = sanitize_hexcolor(getblock(structure, DNA_HAIR_COLOR_BLOCK))
-	facial_hair_color = sanitize_hexcolor(getblock(structure, DNA_FACIAL_HAIR_COLOR_BLOCK))
-	skin_tone = GLOB.skin_tones[deconstruct_block(getblock(structure, DNA_SKIN_TONE_BLOCK), GLOB.skin_tones.len)]
-	eye_color = sanitize_hexcolor(getblock(structure, DNA_EYE_COLOR_BLOCK))
-	facial_hairstyle = GLOB.facial_hairstyles_list[deconstruct_block(getblock(structure, DNA_FACIAL_HAIRSTYLE_BLOCK), GLOB.facial_hairstyles_list.len)]
-	hairstyle = GLOB.hairstyles_list[deconstruct_block(getblock(structure, DNA_HAIRSTYLE_BLOCK), GLOB.hairstyles_list.len)]
+//	var/structure = dna.uni_identity
+//	hair_color = getblock(structure, DNA_HAIR_COLOR_BLOCK)
+//	facial_hair_color = getblock(structure, DNA_FACIAL_HAIR_COLOR_BLOCK)
+//	skin_tone = getblock(structure, DNA_SKIN_TONE_BLOCK)
+//	eye_color = getblock(structure, DNA_EYE_COLOR_BLOCK)
+//	facial_hairstyle = GLOB.facial_hairstyles_list[deconstruct_block(getblock(structure, DNA_FACIAL_HAIRSTYLE_BLOCK), GLOB.facial_hairstyles_list.len)]
+//	hairstyle = GLOB.hairstyles_list[deconstruct_block(getblock(structure, DNA_HAIRSTYLE_BLOCK), GLOB.hairstyles_list.len)]
 	if(icon_update)
 		update_body()
 		update_hair()
@@ -510,7 +510,7 @@
 			var/datum/mutation/human/HM = dna.get_mutation(mutation)
 			if(HM)
 				HM.scrambled = TRUE
-				if(HM.quality & resilient) 
+				if(HM.quality & resilient)
 					HM.mutadone_proof = TRUE
 		return TRUE
 
@@ -604,7 +604,7 @@
 				if(elligible_organs.len)
 					var/obj/item/organ/O = pick(elligible_organs)
 					O.Remove(src)
-					visible_message("<span class='danger'>[src] vomits up their [O.name]!</span>", "<span class='danger'>You vomit up your [O.name]") //no "vomit up your the heart"
+					visible_message("<span class='danger'>[src] vomits up their [O.name]!</span>", "<span class='danger'>I vomit up my [O.name]") //no "vomit up my the heart"
 					O.forceMove(drop_location())
 					if(prob(20))
 						O.animate_atom_living()
@@ -631,7 +631,7 @@
 				else
 					set_species(/datum/species/dullahan)
 			if(4)
-				visible_message("<span class='warning'>[src]'s skin melts off!</span>", "<span class='boldwarning'>Your skin melts off!</span>")
+				visible_message("<span class='warning'>[src]'s skin melts off!</span>", "<span class='boldwarning'>My skin melts off!</span>")
 				spawn_gibs()
 				set_species(/datum/species/skeleton)
 				if(prob(90))
@@ -650,5 +650,5 @@
 			return
 		eyes.Remove(src)
 		qdel(eyes)
-		visible_message("<span class='notice'>[src] looks up and their eyes melt away!</span>", "<span class>='userdanger'>I understand now.</span>")
+		visible_message("<span class='notice'>[src] looks up and their eyes melt away!</span>", "<span class>='danger'>I understand now.</span>")
 		addtimer(CALLBACK(src, .proc/adjustOrganLoss, ORGAN_SLOT_BRAIN, 200), 20)

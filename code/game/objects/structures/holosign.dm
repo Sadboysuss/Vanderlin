@@ -37,19 +37,19 @@
 /obj/structure/holosign/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
-			playsound(loc, 'sound/weapons/egloves.ogg', 80, TRUE)
+			playsound(loc, 'sound/blank.ogg', 80, TRUE)
 		if(BURN)
-			playsound(loc, 'sound/weapons/egloves.ogg', 80, TRUE)
+			playsound(loc, 'sound/blank.ogg', 80, TRUE)
 
 /obj/structure/holosign/wetsign
 	name = "wet floor sign"
-	desc = "The words flicker as if they mean nothing."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "holosign"
 
 /obj/structure/holosign/barrier
 	name = "holobarrier"
-	desc = "A short holographic barrier which can only be passed by walking."
+	desc = ""
 	icon_state = "holosign_sec"
 	pass_flags = LETPASSTHROW
 	density = TRUE
@@ -62,7 +62,7 @@
 	if(mover.pass_flags & (PASSGLASS|PASSTABLE|PASSGRILLE))
 		return TRUE
 	if(iscarbon(mover))
-		var/mob/living/carbon/C = mover		
+		var/mob/living/carbon/C = mover
 		if(C.stat)	// Lets not prevent dragging unconscious/dead people.
 			return TRUE
 		if(allow_walk && C.m_intent == MOVE_INTENT_WALK)
@@ -70,7 +70,7 @@
 
 /obj/structure/holosign/barrier/wetsign
 	name = "wet floor holobarrier"
-	desc = "When it says walk it means walk."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "holosign"
 
@@ -90,7 +90,7 @@
 
 /obj/structure/holosign/barrier/atmos
 	name = "holofirelock"
-	desc = "A holographic barrier resembling a firelock. Though it does not prevent solid objects from passing through, gas is kept out."
+	desc = ""
 	icon_state = "holo_firelock"
 	density = FALSE
 	anchored = TRUE
@@ -105,7 +105,7 @@
 
 /obj/structure/holosign/barrier/cyborg
 	name = "Energy Field"
-	desc = "A fragile energy field that blocks movement. Excels at blocking lethal projectiles."
+	desc = ""
 	density = TRUE
 	max_integrity = 10
 	allow_walk = FALSE
@@ -120,7 +120,7 @@
 
 /obj/structure/holosign/barrier/medical
 	name = "\improper PENLITE holobarrier"
-	desc = "A holobarrier that uses biometrics to detect human viruses. Denies passing to personnel with easily-detected, malicious viruses. Good for quarantines."
+	desc = ""
 	icon_state = "holo_medical"
 	alpha = 125 //lazy :)
 	var/force_allaccess = FALSE
@@ -139,7 +139,7 @@
 		var/threat = sickboi.check_virus()
 		if(get_disease_severity_value(threat) > get_disease_severity_value(DISEASE_SEVERITY_MINOR))
 			if(buzzcd < world.time)
-				playsound(get_turf(src),'sound/machines/buzz-sigh.ogg',65,TRUE,4)
+				playsound(get_turf(src),'sound/blank.ogg',65,TRUE,4)
 				buzzcd = (world.time + 60)
 			icon_state = "holo_medical-deny"
 			return FALSE
@@ -148,15 +148,15 @@
 	return TRUE
 
 /obj/structure/holosign/barrier/medical/attack_hand(mob/living/user)
-	if(CanPass(user) && user.a_intent == INTENT_HELP)
+	if(CanPass(user) && user.used_intent.type == INTENT_HELP)
 		force_allaccess = !force_allaccess
-		to_chat(user, "<span class='warning'>You [force_allaccess ? "deactivate" : "activate"] the biometric scanners.</span>") //warning spans because you can make the station sick!
+		to_chat(user, "<span class='warning'>I [force_allaccess ? "deactivate" : "activate"] the biometric scanners.</span>") //warning spans because you can make the station sick!
 	else
 		return ..()
 
 /obj/structure/holosign/barrier/cyborg/hacked
 	name = "Charged Energy Field"
-	desc = "A powerful energy field that blocks movement. Energy arcs off it."
+	desc = ""
 	max_integrity = 20
 	var/shockcd = 0
 

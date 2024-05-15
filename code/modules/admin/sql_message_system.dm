@@ -1,6 +1,6 @@
 /proc/create_message(type, target_key, admin_ckey, text, timestamp, server, secret, logged = 1, browse, expiry, note_severity)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		////to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	if(!type)
 		return
@@ -96,7 +96,7 @@
 
 /proc/delete_message(message_id, logged = 1, browse)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		////to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	message_id = text2num(message_id)
 	if(!message_id)
@@ -132,7 +132,7 @@
 
 /proc/edit_message(message_id, browse)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	message_id = text2num(message_id)
 	if(!message_id)
@@ -171,7 +171,7 @@
 
 /proc/edit_message_expiry(message_id, browse)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	message_id = text2num(message_id)
 	if(!message_id)
@@ -229,7 +229,7 @@
 
 /proc/edit_message_severity(message_id)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	message_id = text2num(message_id)
 	if(!message_id)
@@ -268,7 +268,7 @@
 
 /proc/toggle_message_secrecy(message_id)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	message_id = text2num(message_id)
 	if(!message_id)
@@ -300,7 +300,7 @@
 
 /proc/browse_messages(type, target_ckey, index, linkless = FALSE, filter, agegate = FALSE)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/list/output = list()
 	var/ruler = "<hr style='background:#000000; border:0; height:3px'>"
@@ -503,14 +503,14 @@
 		output += "<center><a href='?_src_=holder;[HrefToken()];addmessageempty=1'>Add message</a><a href='?_src_=holder;[HrefToken()];addwatchempty=1'>Add watchlist entry</a><a href='?_src_=holder;[HrefToken()];addnoteempty=1'>Add note</a></center>"
 		output += ruler
 	var/datum/browser/browser = new(usr, "Note panel", "Manage player notes", 1000, 500)
-	var/datum/asset/notes_assets = get_asset_datum(/datum/asset/simple/notes)
-	notes_assets.send(usr.client)
+//	var/datum/asset/notes_assets = get_asset_datum(/datum/asset/simple/notes)
+//	notes_assets.send(usr.client)
 	browser.set_content(jointext(output, ""))
 	browser.open()
 
 /proc/get_message_output(type, target_ckey)
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	if(!type)
 		return

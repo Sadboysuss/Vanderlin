@@ -29,7 +29,7 @@
 			Copy.name = "Copy - [C.name]"
 			Copy.fields = C.fields
 			Copy.updateinfolinks()
-		to_chat(user, "<span class='notice'>You tear off the carbon-copy!</span>")
+		to_chat(user, "<span class='notice'>I tear off the carbon-copy!</span>")
 		C.copied = TRUE
 		Copy.iscopy = TRUE
 		Copy.update_icon_state()

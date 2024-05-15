@@ -99,7 +99,7 @@
 
 /area/shuttle/transit
 	name = "Hyperspace"
-	desc = "Weeeeee"
+	desc = ""
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /area/shuttle/custom
@@ -140,11 +140,33 @@
 /area/shuttle/supply
 	name = "Supply Shuttle"
 	noteleport = TRUE
+	ambientsounds = AMB_BEACH
+	ambientnight = AMB_BEACH
+	droning_sound = 'sound/music/area/towngen.ogg'
+	ambientrain = RAIN_OUT
+	outdoors = TRUE
+
+/area/shuttle/supply/sell
+	name = "Supply Shuttle"
+
+/area/shuttle/supply/buy
+	name = "Supply Shuttle"
 
 /area/shuttle/escape
 	name = "Emergency Shuttle"
 	blob_allowed = TRUE
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
+
+/area/shuttle/escape/afterShuttleMove(new_parallax_dir)
+	. = ..()
+	var/TZ = 0
+	for(var/turf/T in src)
+		TZ = T.z
+		break
+	if(TZ == 10)
+		set_dynamic_lighting(DYNAMIC_LIGHTING_DISABLED)
+	else
+		set_dynamic_lighting(initial(dynamic_lighting))
 
 /area/shuttle/escape/backup
 	name = "Backup Emergency Shuttle"

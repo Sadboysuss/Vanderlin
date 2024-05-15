@@ -20,7 +20,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 
 /obj/machinery/gravity_generator
 	name = "gravitational generator"
-	desc = "A device which produces a graviton field when set up."
+	desc = ""
 	icon = 'icons/obj/machines/gravity_generator.dmi'
 	density = TRUE
 	move_resist = INFINITY
@@ -188,7 +188,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	switch(broken_state)
 		if(GRAV_NEEDS_SCREWDRIVER)
 			if(I.tool_behaviour == TOOL_SCREWDRIVER)
-				to_chat(user, "<span class='notice'>You secure the screws of the framework.</span>")
+				to_chat(user, "<span class='notice'>I secure the screws of the framework.</span>")
 				I.play_tool_sound(src)
 				broken_state++
 				update_icon()
@@ -196,7 +196,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 		if(GRAV_NEEDS_WELDING)
 			if(I.tool_behaviour == TOOL_WELDER)
 				if(I.use_tool(src, user, 0, volume=50, amount=1))
-					to_chat(user, "<span class='notice'>You mend the damaged framework.</span>")
+					to_chat(user, "<span class='notice'>I mend the damaged framework.</span>")
 					broken_state++
 					update_icon()
 				return
@@ -205,16 +205,16 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 				var/obj/item/stack/sheet/plasteel/PS = I
 				if(PS.get_amount() >= 10)
 					PS.use(10)
-					to_chat(user, "<span class='notice'>You add the plating to the framework.</span>")
-					playsound(src.loc, 'sound/machines/click.ogg', 75, TRUE)
+					to_chat(user, "<span class='notice'>I add the plating to the framework.</span>")
+					playsound(src.loc, 'sound/blank.ogg', 75, TRUE)
 					broken_state++
 					update_icon()
 				else
-					to_chat(user, "<span class='warning'>You need 10 sheets of plasteel!</span>")
+					to_chat(user, "<span class='warning'>I need 10 sheets of plasteel!</span>")
 				return
 		if(GRAV_NEEDS_WRENCH)
 			if(I.tool_behaviour == TOOL_WRENCH)
-				to_chat(user, "<span class='notice'>You secure the plating to the framework.</span>")
+				to_chat(user, "<span class='notice'>I secure the plating to the framework.</span>")
 				I.play_tool_sound(src)
 				set_fix()
 				return
@@ -326,7 +326,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 				charge_count -= 2
 
 			if(charge_count % 4 == 0 && prob(75)) // Let them know it is charging/discharging.
-				playsound(src.loc, 'sound/effects/empulse.ogg', 100, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 			updateDialog()
 			if(prob(25)) // To help stop "Your clothes feel warm." spam.
@@ -359,7 +359,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 // Shake everyone on the z level to let them know that gravity was enagaged/disenagaged.
 /obj/machinery/gravity_generator/main/proc/shake_everyone()
 	var/turf/T = get_turf(src)
-	var/sound/alert_sound = sound('sound/effects/alert.ogg')
+	var/sound/alert_sound = sound('sound/blank.ogg')
 	for(var/i in GLOB.mob_list)
 		var/mob/M = i
 		if(M.z != z && !(SSmapping.level_trait(z, ZTRAITS_STATION) && SSmapping.level_trait(M.z, ZTRAITS_STATION)))
@@ -406,7 +406,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	name = "paper- 'Generate your own gravity!'"
 	info = {"<h1>Gravity Generator Instructions For Dummies</h1>
 	<p>Surprisingly, gravity isn't that hard to make! All you have to do is inject deadly radioactive minerals into a ball of
-	energy and you have yourself gravity! You can turn the machine on or off when required but you must remember that the generator
+	energy and you have myself gravity! You can turn the machine on or off when required but you must remember that the generator
 	will EMIT RADIATION when charging or discharging, you can tell it is charging or discharging by the noise it makes, so please WEAR PROTECTIVE CLOTHING.</p>
 	<br>
 	<h3>It blew up!</h3>

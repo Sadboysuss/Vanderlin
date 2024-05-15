@@ -35,7 +35,7 @@
 /datum/plant_gene/core/proc/apply_stat(obj/item/seeds/S)
 	return
 
-/datum/plant_gene/core/New(var/i = null)
+/datum/plant_gene/core/New(i = null)
 	..()
 	if(!isnull(i))
 		value = i
@@ -274,7 +274,7 @@
 				C.update_icon()
 				batteries_recharged = 1
 		if(batteries_recharged)
-			to_chat(target, "<span class='notice'>Your batteries are recharged!</span>")
+			to_chat(target, "<span class='notice'>My batteries are recharged!</span>")
 
 
 
@@ -355,7 +355,7 @@
 /datum/plant_gene/trait/teleport/on_slip(obj/item/reagent_containers/food/snacks/grown/G, mob/living/carbon/C)
 	var/teleport_radius = max(round(G.seed.potency / 10), 1)
 	var/turf/T = get_turf(C)
-	to_chat(C, "<span class='warning'>You slip through spacetime!</span>")
+	to_chat(C, "<span class='warning'>I slip through spacetime!</span>")
 	do_teleport(C, T, teleport_radius, channel = TELEPORT_CHANNEL_BLUESPACE)
 	if(prob(50))
 		do_teleport(G, T, teleport_radius, channel = TELEPORT_CHANNEL_BLUESPACE)
@@ -390,7 +390,7 @@
 	if(istype(I, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = I
 		if(C.use(5))
-			to_chat(user, "<span class='notice'>You add some cable to [G] and slide it inside the battery encasing.</span>")
+			to_chat(user, "<span class='notice'>I add some cable to [G] and slide it inside the battery encasing.</span>")
 			var/obj/item/stock_parts/cell/potato/pocell = new /obj/item/stock_parts/cell/potato(user.loc)
 			pocell.icon_state = G.icon_state
 			pocell.maxcharge = G.seed.potency * 20
@@ -401,14 +401,14 @@
 				pocell.maxcharge *= CG.rate*100
 			pocell.charge = pocell.maxcharge
 			pocell.name = "[G.name] battery"
-			pocell.desc = "A rechargeable plant-based power cell. This one has a rating of [DisplayEnergy(pocell.maxcharge)], and you should not swallow it."
+			pocell.desc = ""
 
 			if(G.reagents.has_reagent(/datum/reagent/toxin/plasma, 2))
 				pocell.rigged = TRUE
 
 			qdel(G)
 		else
-			to_chat(user, "<span class='warning'>You need five lengths of cable to make a [G] battery!</span>")
+			to_chat(user, "<span class='warning'>I need five lengths of cable to make a [G] battery!</span>")
 
 
 /datum/plant_gene/trait/stinging
@@ -425,7 +425,7 @@
 			var/fraction = min(injecting_amount/G.reagents.total_volume, 1)
 			G.reagents.reaction(L, INJECT, fraction)
 			G.reagents.trans_to(L, injecting_amount)
-			to_chat(target, "<span class='danger'>You are pricked by [G]!</span>")
+			to_chat(target, "<span class='danger'>I are pricked by [G]!</span>")
 
 /datum/plant_gene/trait/smoke
 	name = "Gaseous Decomposition"

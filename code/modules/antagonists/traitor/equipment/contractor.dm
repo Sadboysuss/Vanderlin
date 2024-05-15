@@ -18,7 +18,7 @@
 	var/datum/objective/generic_objective = new
 
 	generic_objective.name = "Follow Contractor's Orders"
-	generic_objective.explanation_text = "Follow your orders. Assist agents in this mission area."
+	generic_objective.explanation_text = "Follow my orders. Assist agents in this mission area."
 
 	generic_objective.completed = TRUE
 
@@ -57,7 +57,7 @@
 	)
 
 	// We don't want the sum of all the payouts to be under this amount
-	var/lowest_TC_threshold = 30 
+	var/lowest_TC_threshold = 30
 
 	var/total = 0
 	var/lowest_paying_sum = 0
@@ -75,7 +75,7 @@
 	for (var/i = 1; i <= to_generate.len; i++)
 		var/datum/syndicate_contract/contract_to_add = new(owner, assigned_targets, to_generate[i])
 		var/contract_payout_total = contract_to_add.contract.payout + contract_to_add.contract.payout_bonus
-		
+
 		assigned_targets.Add(contract_to_add.contract.target)
 
 		if (!lowest_paying_contract || (contract_payout_total < lowest_paying_sum))
@@ -102,12 +102,12 @@
 
 /datum/contractor_item/contract_reroll
 	name = "Contract Reroll"
-	desc = "Request a reroll of your current contract list. Will generate a new target, payment, and dropoff for the contracts you currently have available."
+	desc = ""
 	item_icon = "fa-dice"
 	limited = 2
 	cost = 0
 
-/datum/contractor_item/contract_reroll/handle_purchase(var/datum/contractor_hub/hub)
+/datum/contractor_item/contract_reroll/handle_purchase(datum/contractor_hub/hub)
 	. = ..()
 
 	if (.)
@@ -118,7 +118,7 @@
 				if (contract_check.contract.target)
 					new_target_list.Add(contract_check.contract.target)
 				continue
-		
+
 		/// Reroll contracts without duplicates
 		for(var/datum/syndicate_contract/rerolling_contract in hub.assigned_contracts)
 			if (rerolling_contract.status != CONTRACT_STATUS_ACTIVE && rerolling_contract.status != CONTRACT_STATUS_INACTIVE)
@@ -132,7 +132,7 @@
 
 /datum/contractor_item/contractor_pinpointer
 	name = "Contractor Pinpointer"
-	desc = "A pinpointer that finds targets even without active suit sensors. Due to taking advantage of an exploit within the system, it can't pinpoint to the same accuracy as the traditional models. Becomes permanently locked to the user that first activates it."
+	desc = ""
 	item = /obj/item/pinpointer/crew/contractor
 	item_icon = "fa-search-location"
 	limited = 2
@@ -140,7 +140,7 @@
 
 /datum/contractor_item/fulton_extraction_kit
 	name = "Fulton Extraction Kit"
-	desc = "For getting your target across the station to those difficult dropoffs. Place the beacon somewhere secure, and link the pack. Activating the pack on your target in space will send them over to the beacon - make sure they're not just going to run away though!"
+	desc = ""
 	item = /obj/item/storage/box/contractor/fulton_extraction
 	item_icon = "fa-parachute-box"
 	limited = 1
@@ -148,13 +148,13 @@
 
 /datum/contractor_item/contractor_partner
 	name = "Reinforcements"
-	desc = "Upon purchase we'll contact available units in the area. Should there be an agent free, we'll send them down to assist you immediately. If no units are free, we give a full refund."
+	desc = ""
 	item_icon = "fa-user-friends"
 	limited = 1
 	cost = 2
 	var/datum/mind/partner_mind = null
 
-/datum/contractor_item/contractor_partner/handle_purchase(var/datum/contractor_hub/hub, mob/living/user)
+/datum/contractor_item/contractor_partner/handle_purchase(datum/contractor_hub/hub, mob/living/user)
 	. = ..()
 
 	if (.)
@@ -175,7 +175,7 @@
 
 /datum/outfit/contractor_partner
 	name = "Contractor Support Unit"
-	
+
 	uniform = /obj/item/clothing/under/chameleon
 	suit = /obj/item/clothing/suit/chameleon
 	back = /obj/item/storage/backpack
@@ -186,7 +186,7 @@
 	id = /obj/item/card/id/syndicate
 	r_hand = /obj/item/storage/toolbox/syndicate
 
-	backpack_contents = list(/obj/item/storage/box/survival, /obj/item/implanter/uplink, /obj/item/clothing/mask/chameleon, 
+	backpack_contents = list(/obj/item/storage/box/survival, /obj/item/implanter/uplink, /obj/item/clothing/mask/chameleon,
 							/obj/item/storage/fancy/cigarettes/cigpack_syndicate, /obj/item/lighter)
 
 /datum/outfit/contractor_partner/post_equip(mob/living/carbon/human/H, visualsOnly)
@@ -221,31 +221,31 @@
 	partner_mind = partner.mind
 	partner_mind.make_Contractor_Support()
 
-	to_chat(partner_mind.current, "\n<span class='alertwarning'>[user.real_name] is your superior. Follow any, and all orders given by them. You're here to support their mission only.</span>")
-	to_chat(partner_mind.current, "<span class='alertwarning'>Should they perish, or be otherwise unavailable, you're to assist other active agents in this mission area to the best of your ability.</span>\n\n")
+	to_chat(partner_mind.current, "\n<span class='alertwarning'>[user.real_name] is my superior. Follow any, and all orders given by them. You're here to support their mission only.</span>")
+	to_chat(partner_mind.current, "<span class='alertwarning'>Should they perish, or be otherwise unavailable, you're to assist other active agents in this mission area to the best of my ability.</span>\n\n")
 
 	new /obj/effect/DPtarget(free_location, arrival_pod)
 
 /datum/contractor_item/blackout
 	name = "Blackout"
-	desc = "Request Syndicate Command to distrupt the station's powernet. Disables power across the station for a short duration."
+	desc = ""
 	item_icon = "fa-bolt"
 	limited = 2
 	cost = 3
 
-/datum/contractor_item/blackout/handle_purchase(var/datum/contractor_hub/hub)
+/datum/contractor_item/blackout/handle_purchase(datum/contractor_hub/hub)
 	. = ..()
 
 	if (.)
 		power_fail(35, 50)
-		priority_announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", 'sound/ai/poweroff.ogg')
+		priority_announce("Abnormal activity detected in [station_name()]")
 
 // Subtract cost, and spawn if it's an item.
-/datum/contractor_item/proc/handle_purchase(var/datum/contractor_hub/hub, mob/living/user)
-	
+/datum/contractor_item/proc/handle_purchase(datum/contractor_hub/hub, mob/living/user)
+
 	if (hub.contract_rep >= cost)
 		hub.contract_rep -= cost
-	else 
+	else
 		return FALSE
 
 	if (limited >= 1)
@@ -255,22 +255,22 @@
 
 	hub.purchased_items.Add(src)
 
-	user.playsound_local(user, 'sound/machines/uplinkpurchase.ogg', 100)
+	user.playsound_local(user, 'sound/blank.ogg', 100)
 
 	if (item && ispath(item))
 		var/atom/item_to_create = new item(get_turf(user))
-		
+
 		if(user.put_in_hands(item_to_create))
-			to_chat(user, "<span class='notice'>Your purchase materializes into your hands!</span>")
+			to_chat(user, "<span class='notice'>My purchase materializes into my hands!</span>")
 		else
-			to_chat(user, "<span class='notice'>Your purchase materializes onto the floor.</span>")
+			to_chat(user, "<span class='notice'>My purchase materializes onto the floor.</span>")
 
 		return item_to_create
 	return TRUE
 
 /obj/item/pinpointer/crew/contractor
 	name = "contractor pinpointer"
-	desc = "A handheld tracking device that locks onto certain signals. Ignores suit sensors, but is much less accurate."
+	desc = ""
 	icon_state = "pinpointer_syndicate"
 	minimum_range = 25
 	has_owner = TRUE

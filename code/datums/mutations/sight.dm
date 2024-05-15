@@ -1,9 +1,9 @@
 //Nearsightedness restricts your vision by several tiles.
 /datum/mutation/human/nearsight
 	name = "Near Sightness"
-	desc = "The holder of this mutation has poor eyesight."
+	desc = ""
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>You can't see very well.</span>"
+	text_gain_indication = "<span class='danger'>I can't see very well.</span>"
 
 /datum/mutation/human/nearsight/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -19,9 +19,9 @@
 ///Blind makes you blind. Who knew?
 /datum/mutation/human/blind
 	name = "Blindness"
-	desc = "Renders the subject completely blind."
+	desc = ""
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>You can't seem to see anything.</span>"
+	text_gain_indication = "<span class='danger'>I can't seem to see anything.</span>"
 
 /datum/mutation/human/blind/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -36,10 +36,10 @@
 ///Thermal Vision lets you see mobs through walls
 /datum/mutation/human/thermal
 	name = "Thermal Vision"
-	desc = "The user of this genome can visually percieve the unique human thermal signature."
+	desc = ""
 	quality = POSITIVE
 	difficulty = 18
-	text_gain_indication = "<span class='notice'>You can see the heat rising off of your skin...</span>"
+	text_gain_indication = "<span class='notice'>I can see the heat rising off of your skin...</span>"
 	time_coeff = 2
 	instability = 25
 	var/visionflag = TRAIT_THERMAL_VISION
@@ -60,7 +60,7 @@
 ///X-ray Vision lets you see through walls.
 /datum/mutation/human/thermal/x_ray
 	name = "X Ray Vision"
-	desc = "A strange genome that allows the user to see between the spaces of walls." //actual x-ray would mean you'd constantly be blasting rads, wich might be fun for later //hmb
+	desc = "" //actual x-ray would mean you'd constantly be blasting rads, wich might be fun for later //hmb
 	text_gain_indication = "<span class='notice'>The walls suddenly disappear!</span>"
 	instability = 35
 	locked = TRUE
@@ -69,11 +69,11 @@
 ///Laser Eyes lets you shoot lasers from your eyes!
 /datum/mutation/human/laser_eyes
 	name = "Laser Eyes"
-	desc = "Reflects concentrated light back from the eyes."
+	desc = ""
 	quality = POSITIVE
 	locked = TRUE
 	difficulty = 16
-	text_gain_indication = "<span class='notice'>You feel pressure building up behind your eyes.</span>"
+	text_gain_indication = "<span class='notice'>I feel pressure building up behind your eyes.</span>"
 	layer_used = FRONT_MUTATIONS_LAYER
 	limb_req = BODY_ZONE_HEAD
 
@@ -99,9 +99,9 @@
 
 ///Triggers on COMSIG_MOB_ATTACK_RANGED. Does the projectile shooting.
 /datum/mutation/human/laser_eyes/proc/on_ranged_attack(mob/living/carbon/human/source, atom/target, mouseparams)
-	if(source.a_intent != INTENT_HARM)
+	if(source.used_intent.type != INTENT_HARM)
 		return
-	to_chat(source, "<span class='warning'>You shoot with your laser eyes!</span>")
+	to_chat(source, "<span class='warning'>I shoot with your laser eyes!</span>")
 	source.changeNext_move(CLICK_CD_RANGE)
 	source.newtonian_move(get_dir(target, source))
 	var/obj/projectile/beam/laser_eyes/LE = new(source.loc)
@@ -109,7 +109,7 @@
 	LE.def_zone = ran_zone(source.zone_selected)
 	LE.preparePixelProjectile(target, source, mouseparams)
 	LE.fire()
-	playsound(source, 'sound/weapons/taser2.ogg', 75, TRUE)
+	playsound(source, 'sound/blank.ogg', 75, TRUE)
 
 ///Projectile type used by laser eyes
 /obj/projectile/beam/laser_eyes

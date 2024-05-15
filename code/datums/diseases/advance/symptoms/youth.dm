@@ -39,7 +39,7 @@ BONUS
 			if(1)
 				if(H.age > 41)
 					H.age = 41
-					to_chat(H, "<span class='notice'>You haven't had this much energy in years!</span>")
+					to_chat(H, "<span class='notice'>I haven't had this much energy in years!</span>")
 			if(2)
 				if(H.age > 36)
 					H.age = 36
@@ -47,12 +47,12 @@ BONUS
 			if(3)
 				if(H.age > 31)
 					H.age = 31
-					to_chat(H, "<span class='notice'>You begin to feel more lithe.</span>")
+					to_chat(H, "<span class='notice'>I begin to feel more lithe.</span>")
 			if(4)
 				if(H.age > 26)
 					H.age = 26
-					to_chat(H, "<span class='notice'>You feel reinvigorated.</span>")
+					to_chat(H, "<span class='notice'>I feel reinvigorated.</span>")
 			if(5)
 				if(H.age > 21)
 					H.age = 21
-					to_chat(H, "<span class='notice'>You feel like you can take on the world!</span>")
+					to_chat(H, "<span class='notice'>I feel like you can take on the world!</span>")

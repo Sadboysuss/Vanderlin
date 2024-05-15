@@ -2,72 +2,72 @@
 
 /obj/structure/sign/departments/examroom
 	name = "\improper EXAM ROOM"
-	desc = "A guidance sign which reads 'EXAM ROOM'."
+	desc = ""
 	icon_state = "examroom"
 
 /obj/structure/sign/departments/science			//These 3 have multiple types, just var-edit the icon_state to whatever one you want on the map
 	name = "\improper SCIENCE"
-	desc = "A sign labelling an area where research and science is performed."
+	desc = ""
 	icon_state = "science1"
 
 /obj/structure/sign/departments/chemistry
 	name = "\improper CHEMISTRY"
-	desc = "A sign labelling an area containing chemical equipment."
+	desc = ""
 	icon_state = "chemistry1"
 
 /obj/structure/sign/departments/botany
 	name = "\improper HYDROPONICS"
-	desc = "A sign labelling an area as a place where plants are grown."
+	desc = ""
 	icon_state = "hydro1"
 
 /obj/structure/sign/departments/xenobio
 	name = "\improper XENOBIOLOGY"
-	desc = "A sign labelling an area as a place where xenobiological entities are researched."
+	desc = ""
 	icon_state = "xenobio"
 
 /obj/structure/sign/departments/evac
 	name = "\improper EVACUATION"
-	desc = "A sign labelling an area where evacuation procedures take place."
+	desc = ""
 	icon_state = "evac"
 
 /obj/structure/sign/departments/drop
 	name = "\improper DROP PODS"
-	desc = "A sign labelling an area where drop pod loading procedures take place."
+	desc = ""
 	icon_state = "drop"
 
 /obj/structure/sign/departments/custodian
 	name = "\improper CUSTODIAN"
-	desc = "A sign labelling an area where the custodian works."
+	desc = ""
 	icon_state = "custodian"
 
 /obj/structure/sign/departments/engineering
 	name = "\improper ENGINEERING"
-	desc = "A sign labelling an area where engineers work."
+	desc = ""
 	icon_state = "engine"
 
 /obj/structure/sign/departments/cargo
 	name = "\improper CARGO"
-	desc = "A sign labelling an area where cargo ships dock."
+	desc = ""
 	icon_state = "cargo"
 
 /obj/structure/sign/departments/security
 	name = "\improper SECURITY"
-	desc = "A sign labelling an area where the law is law."
+	desc = ""
 	icon_state = "security"
 
 /obj/structure/sign/departments/holy
 	name = "\improper HOLY"
-	desc = "A sign labelling a religious area."
+	desc = ""
 	icon_state = "holy"
 
 /obj/structure/sign/departments/restroom
 	name = "\improper RESTROOM"
-	desc = "A sign labelling a restroom."
+	desc = ""
 	icon_state = "restroom"
 
 /obj/structure/sign/departments/medbay
 	name = "\improper MEDBAY"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
+	desc = ""
 	icon_state = "bluecross"
 
 /obj/structure/sign/departments/medbay/alt
@@ -75,7 +75,7 @@
 
 /obj/structure/sign/departments/mait
 	name = "\improper MAINTENANCE TUNNEL"
-	desc = "A sign labelling an area where the departments of the station are linked together."
+	desc = ""
 	icon_state = "mait1"
 
 /obj/structure/sign/departments/mait/alt
@@ -83,5 +83,5 @@
 
 /obj/structure/sign/departments/nanites
 	name = "\improper NANITE LAB"
-	desc = "A sign labelling an area where testing and development of nanites is performed."
+	desc = ""
 	icon_state = "nanites"

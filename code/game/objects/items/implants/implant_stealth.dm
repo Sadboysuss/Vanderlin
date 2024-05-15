@@ -1,6 +1,6 @@
 /obj/item/implant/stealth
 	name = "S3 implant"
-	desc = "Allows you to be hidden in plain sight."
+	desc = ""
 	actions_types = list(/datum/action/item_action/agent_box)
 
 /obj/item/implanter/stealth
@@ -11,7 +11,7 @@
 
 /obj/structure/closet/cardboard/agent
 	name = "inconspicious box"
-	desc = "It's so normal that you didn't notice it before."
+	desc = ""
 	icon_state = "agentbox"
 	max_integrity = 1 // "This dumb box shouldn't take more than one hit to make it vanish."
 	move_speed_multiplier = 0.5

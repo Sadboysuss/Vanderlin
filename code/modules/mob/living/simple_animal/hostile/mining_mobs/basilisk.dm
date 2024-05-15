@@ -1,7 +1,7 @@
 //A beast that fire freezing blasts.
 /mob/living/simple_animal/hostile/asteroid/basilisk
 	name = "basilisk"
-	desc = "A territorial beast, covered in a thick shell that absorbs energy. Its stare causes victims to freeze from the inside."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "Basilisk"
 	icon_living = "Basilisk"
@@ -11,7 +11,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	move_to_delay = 20
 	projectiletype = /obj/projectile/temp/basilisk
-	projectilesound = 'sound/weapons/pierce.ogg'
+	projectilesound = 'sound/blank.ogg'
 	ranged = 1
 	ranged_message = "stares"
 	ranged_cooldown_time = 30
@@ -28,7 +28,7 @@
 	attack_verb_simple = "bite into"
 	a_intent = INTENT_HARM
 	speak_emote = list("chitters")
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	aggro_vision_range = 9
 	turns_per_move = 5
 	gold_core_spawnable = HOSTILE_SPAWN
@@ -61,7 +61,7 @@
 //Watcher
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher
 	name = "watcher"
-	desc = "A levitating, eye-like creature held aloft by winglike formations of sinew. A sharp spine of crystal protrudes from its body."
+	desc = ""
 	icon = 'icons/mob/lavaland/watcher.dmi'
 	icon_state = "watcher"
 	icon_living = "watcher"
@@ -75,7 +75,7 @@
 	attack_verb_simple = "impale"
 	a_intent = INTENT_HARM
 	speak_emote = list("telepathically cries")
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	stat_attack = UNCONSCIOUS
 	movement_type = FLYING
 	robust_searching = 1
@@ -94,7 +94,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/magmawing
 	name = "magmawing watcher"
-	desc = "When raised very close to lava, some watchers adapt to the extreme heat and use lava as both a weapon and wings."
+	desc = ""
 	icon_state = "watcher_magmawing"
 	icon_living = "watcher_magmawing"
 	icon_aggro = "watcher_magmawing"
@@ -110,7 +110,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing
 	name = "icewing watcher"
-	desc = "Very rarely, some watchers will eke out an existence far from heat sources. In the absence of warmth, they become icy and fragile but fire much stronger freezing blasts."
+	desc = ""
 	icon_state = "watcher_icewing"
 	icon_living = "watcher_icewing"
 	icon_aggro = "watcher_icewing"

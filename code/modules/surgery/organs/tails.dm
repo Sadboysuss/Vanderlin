@@ -2,7 +2,7 @@
 
 /obj/item/organ/tail
 	name = "tail"
-	desc = "A severed tail. What did you cut this off of?"
+	desc = ""
 	icon_state = "severedtail"
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_TAIL
@@ -15,7 +15,7 @@
 
 /obj/item/organ/tail/cat
 	name = "cat tail"
-	desc = "A severed cat tail. Who's wagging now?"
+	desc = ""
 	tail_type = "Cat"
 
 /obj/item/organ/tail/cat/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
@@ -36,7 +36,7 @@
 
 /obj/item/organ/tail/lizard
 	name = "lizard tail"
-	desc = "A severed lizard tail. Somewhere, no doubt, a lizard hater is very pleased with themselves."
+	desc = ""
 	color = "#116611"
 	tail_type = "Smooth"
 	var/spines = "None"

@@ -25,7 +25,7 @@
 
 /obj/item/computer_hardware/recharger/APC
 	name = "area power connector"
-	desc = "A device that wirelessly recharges connected device from nearby APC."
+	desc = ""
 	icon_state = "charger_APC"
 	w_class = WEIGHT_CLASS_SMALL // Can't be installed into tablets/PDAs
 
@@ -48,7 +48,7 @@
 
 /obj/item/computer_hardware/recharger/wired
 	name = "wired power connector"
-	desc = "A power connector that recharges connected device from nearby power wire. Incompatible with portable computers."
+	desc = ""
 	icon_state = "charger_wire"
 	w_class = WEIGHT_CLASS_NORMAL
 
@@ -82,7 +82,7 @@
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/computer_hardware/recharger/lambda
 	name = "lambda coil"
-	desc = "A very complex device that draws power from its own bluespace dimension."
+	desc = ""
 	icon_state = "charger_lambda"
 	w_class = WEIGHT_CLASS_TINY
 	charge_rate = 100000

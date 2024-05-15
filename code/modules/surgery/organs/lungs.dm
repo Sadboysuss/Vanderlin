@@ -11,9 +11,9 @@
 	healing_factor = STANDARD_ORGAN_HEALING
 	decay_factor = STANDARD_ORGAN_DECAY
 
-	high_threshold_passed = "<span class='warning'>You feel some sort of constriction around your chest as your breathing becomes shallow and rapid.</span>"
-	now_fixed = "<span class='warning'>Your lungs seem to once again be able to hold air.</span>"
-	high_threshold_cleared = "<span class='info'>The constriction around your chest loosens as your breathing calms down.</span>"
+	high_threshold_passed = "<span class='warning'>I feel some sort of constriction around my chest as my breathing becomes shallow and rapid.</span>"
+	now_fixed = "<span class='warning'>My lungs seem to once again be able to hold air.</span>"
+	high_threshold_cleared = "<span class='info'>The constriction around my chest loosens as my breathing calms down.</span>"
 
 	//Breath damage
 
@@ -269,12 +269,12 @@
 	// Nitryl
 		var/nitryl_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitryl][MOLES])
 		if (prob(nitryl_pp))
-			to_chat(H, "<span class='alert'>Your mouth feels like it's burning!</span>")
+			to_chat(H, "<span class='alert'>My mouth feels like it's burning!</span>")
 		if (nitryl_pp >40)
-			H.emote("gasp")
+			H.emote("breathgasp")
 			H.adjustFireLoss(10)
 			if (prob(nitryl_pp/2))
-				to_chat(H, "<span class='alert'>Your throat closes up!</span>")
+				to_chat(H, "<span class='alert'>My throat closes up!</span>")
 				H.silent = max(H.silent, 3)
 		else
 			H.adjustFireLoss(nitryl_pp/4)
@@ -312,7 +312,7 @@
 				if(5 to 15)
 					//At somewhat higher pp, warning becomes more obvious
 					if(prob(15))
-						to_chat(owner, "<span class='warning'>You smell something horribly decayed inside this room.</span>")
+						to_chat(owner, "<span class='warning'>I smell something horribly decayed inside this room.</span>")
 						SEND_SIGNAL(owner, COMSIG_ADD_MOOD_EVENT, "smell", /datum/mood_event/disgust/bad_smell)
 				if(15 to 30)
 					//Small chance to vomit. By now, people have internals on anyway
@@ -350,7 +350,7 @@
 		return FALSE
 
 	if(prob(20))
-		H.emote("gasp")
+		H.emote("breathgasp")
 	if(breath_pp > 0)
 		var/ratio = safe_breath_min/breath_pp
 		H.adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS)) // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!
@@ -374,7 +374,7 @@
 			H.apply_damage_type(cold_level_1_damage*cold_modifier, cold_damage_type)
 		if(breath_temperature < cold_level_1_threshold)
 			if(prob(20))
-				to_chat(H, "<span class='warning'>You feel [cold_message] in your [name]!</span>")
+				to_chat(H, "<span class='warning'>I feel [cold_message] in my [name]!</span>")
 
 	if(!HAS_TRAIT(H, TRAIT_RESISTHEAT)) // HEAT DAMAGE
 		var/heat_modifier = H.dna.species.heatmod
@@ -386,14 +386,14 @@
 			H.apply_damage_type(heat_level_3_damage*heat_modifier, heat_damage_type)
 		if(breath_temperature > heat_level_1_threshold)
 			if(prob(20))
-				to_chat(H, "<span class='warning'>You feel [hot_message] in your [name]!</span>")
+				to_chat(H, "<span class='warning'>I feel [hot_message] in my [name]!</span>")
 
 /obj/item/organ/lungs/on_life()
 	..()
 	if((!failed) && ((organ_flags & ORGAN_FAILING)))
 		if(owner.stat == CONSCIOUS)
 			owner.visible_message("<span class='danger'>[owner] grabs [owner.p_their()] throat, struggling for breath!</span>", \
-								"<span class='userdanger'>You suddenly feel like you can't breathe!</span>")
+								"<span class='danger'>I suddenly feel like you can't breathe!</span>")
 		failed = TRUE
 	else if(!(organ_flags & ORGAN_FAILING))
 		failed = FALSE
@@ -406,7 +406,7 @@
 
 /obj/item/organ/lungs/plasmaman
 	name = "plasma filter"
-	desc = "A spongy rib-shaped mass for filtering plasma from the air."
+	desc = ""
 	icon_state = "lungs-plasma"
 
 	safe_oxygen_min = 0 //We don't breath this
@@ -415,7 +415,7 @@
 
 /obj/item/organ/lungs/slime
 	name = "vacuole"
-	desc = "A large organelle designed to store oxygen and other important gasses."
+	desc = ""
 
 	safe_toxins_max = 0 //We breathe this to gain POWER.
 
@@ -427,7 +427,7 @@
 
 /obj/item/organ/lungs/cybernetic
 	name = "cybernetic lungs"
-	desc = "A cybernetic version of the lungs found in traditional humanoid entities. Allows for greater intakes of oxygen than organic lungs, requiring slightly less pressure."
+	desc = ""
 	icon_state = "lungs-c"
 	organ_flags = ORGAN_SYNTHETIC
 	maxHealth = 1.1 * STANDARD_ORGAN_THRESHOLD
@@ -442,7 +442,7 @@
 
 /obj/item/organ/lungs/cybernetic/upgraded
 	name = "upgraded cybernetic lungs"
-	desc = "A more advanced version of the stock cybernetic lungs. Features the ability to filter out lower levels of toxins and carbon dioxide."
+	desc = ""
 	icon_state = "lungs-c-u"
 	safe_toxins_max = 20
 	safe_co2_max = 20

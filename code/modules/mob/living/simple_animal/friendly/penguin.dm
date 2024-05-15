@@ -28,7 +28,7 @@
 /mob/living/simple_animal/pet/penguin/emperor
 	name = "Emperor penguin"
 	real_name = "penguin"
-	desc = "Emperor of all they survey."
+	desc = ""
 	icon_state = "penguin"
 	icon_living = "penguin"
 	icon_dead = "penguin_dead"
@@ -37,7 +37,7 @@
 
 /mob/living/simple_animal/pet/penguin/emperor/shamebrero
 	name = "Shamebrero penguin"
-	desc = "Shameful of all he surveys."
+	desc = ""
 	icon_state = "penguin_shamebrero"
 	icon_living = "penguin_shamebrero"
 	gold_core_spawnable = NO_SPAWN
@@ -47,7 +47,7 @@
 	speak = list("gah", "noot noot", "noot!", "noot", "squeee!", "noo!")
 	name = "Penguin chick"
 	real_name = "penguin"
-	desc = "Can't fly and barely waddles, yet the prince of all chicks."
+	desc = ""
 	icon_state = "penguin_baby"
 	icon_living = "penguin_baby"
 	icon_dead = "penguin_baby_dead"

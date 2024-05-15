@@ -1,6 +1,6 @@
 /obj/machinery/harvester
 	name = "organ harvester"
-	desc = "An advanced machine used for harvesting organs and limbs from the deceased."
+	desc = ""
 	density = TRUE
 	icon = 'icons/obj/machines/harvester.dmi'
 	icon_state = "harvester"
@@ -67,15 +67,15 @@
 			var/obj/item/I = A
 			if(!(HAS_TRAIT(I, TRAIT_NODROP)))
 				say("Subject may not have abiotic items on.")
-				playsound(src, 'sound/machines/buzz-sigh.ogg', 30, TRUE)
+				playsound(src, 'sound/blank.ogg', 30, TRUE)
 				return
 	if(!(C.mob_biotypes & MOB_ORGANIC))
 		say("Subject is not organic.")
-		playsound(src, 'sound/machines/buzz-sigh.ogg', 30, TRUE)
+		playsound(src, 'sound/blank.ogg', 30, TRUE)
 		return
 	if(!allow_living && !(C.stat == DEAD || HAS_TRAIT(C, TRAIT_FAKEDEATH)))     //I mean, the machines scanners arent advanced enough to tell you're alive
 		say("Subject is still alive.")
-		playsound(src, 'sound/machines/buzz-sigh.ogg', 30, TRUE)
+		playsound(src, 'sound/blank.ogg', 30, TRUE)
 		return
 	return TRUE
 
@@ -94,7 +94,7 @@
 	update_icon()
 	if(!harvesting || state_open || !powered(EQUIP) || !occupant || !iscarbon(occupant))
 		return
-	playsound(src, 'sound/machines/juicer.ogg', 20, TRUE)
+	playsound(src, 'sound/blank.ogg', 20, TRUE)
 	var/mob/living/carbon/C = occupant
 	if(!LAZYLEN(operation_order)) //The list is empty, so we're done here
 		end_harvesting()
@@ -128,7 +128,7 @@
 	harvesting = FALSE
 	open_machine()
 	say("Subject has been successfully harvested.")
-	playsound(src, 'sound/machines/microwave/microwave-end.ogg', 100, FALSE)
+	playsound(src, 'sound/blank.ogg', 100, FALSE)
 
 /obj/machinery/harvester/screwdriver_act(mob/living/user, obj/item/I)
 	. = TRUE
@@ -154,7 +154,7 @@
 	. = !(state_open || panel_open || (flags_1 & NODECONSTRUCT_1)) && I.tool_behaviour == TOOL_CROWBAR //We removed is_operational() here
 	if(.)
 		I.play_tool_sound(src, 50)
-		visible_message("<span class='notice'>[usr] pries open \the [src].</span>", "<span class='notice'>You pry open [src].</span>")
+		visible_message("<span class='notice'>[usr] pries open \the [src].</span>", "<span class='notice'>I pry open [src].</span>")
 		open_machine()
 
 /obj/machinery/harvester/emag_act(mob/user)
@@ -162,12 +162,12 @@
 		return
 	obj_flags |= EMAGGED
 	allow_living = TRUE
-	to_chat(user, "<span class='warning'>You overload [src]'s lifesign scanners.</span>")
+	to_chat(user, "<span class='warning'>I overload [src]'s lifesign scanners.</span>")
 
 /obj/machinery/harvester/container_resist(mob/living/user)
 	if(!harvesting)
 		visible_message("<span class='notice'>[occupant] emerges from [src]!</span>",
-			"<span class='notice'>You climb out of [src]!</span>")
+			"<span class='notice'>I climb out of [src]!</span>")
 		open_machine()
 	else
 		to_chat(user,"<span class='warning'>[src] is active and can't be opened!</span>") //rip

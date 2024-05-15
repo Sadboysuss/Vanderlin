@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/medical1
 	name = "medicine closet"
-	desc = "Filled to the brim with medical junk."
+	desc = ""
 	icon_state = "med"
 	req_access = list(ACCESS_MEDICAL)
 
@@ -20,7 +20,7 @@
 
 /obj/structure/closet/secure_closet/medical2
 	name = "anesthetic closet"
-	desc = "Used to knock people out."
+	desc = ""
 	req_access = list(ACCESS_SURGERY)
 
 /obj/structure/closet/secure_closet/medical2/PopulateContents()
@@ -86,7 +86,7 @@
 
 /obj/structure/closet/secure_closet/chemical
 	name = "chemical closet"
-	desc = "Store dangerous chemicals in here."
+	desc = ""
 	req_access = list(ACCESS_CHEMISTRY)
 	icon_door = "chemical"
 

@@ -37,6 +37,9 @@
 /mob/proc/update_inv_belt()
 	return
 
+/mob/proc/update_inv_wrists()
+	return
+
 /mob/proc/update_inv_head()
 	return
 
@@ -47,6 +50,9 @@
 	return
 
 /mob/proc/update_fire()
+	return
+
+/mob/proc/update_warning()
 	return
 
 /mob/proc/update_inv_gloves()
@@ -68,4 +74,19 @@
 	return
 
 /mob/proc/update_inv_ears()
+	return
+
+/mob/proc/update_inv_pants()
+	return
+
+/mob/proc/update_inv_shirt()
+	return
+
+/mob/proc/update_inv_armor()
+	return
+
+/mob/proc/update_inv_cloak()
+	return
+
+/mob/proc/update_inv_mouth()
 	return

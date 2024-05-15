@@ -1,6 +1,6 @@
 /obj/item/assembly/igniter
 	name = "igniter"
-	desc = "A small electronic device able to ignite combustible substances."
+	desc = ""
 	icon_state = "igniter"
 	custom_materials = list(/datum/material/iron=500, /datum/material/glass=50)
 	var/datum/effect_system/spark_spread/sparks

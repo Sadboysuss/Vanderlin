@@ -6,6 +6,15 @@
 
 //These are synced with the Database, if you change the values of the defines
 //then you MUST update the database!
+#define ROLE_VILLAIN			"Maniac"
+#define ROLE_WEREWOLF			"Werewolf"
+#define ROLE_VAMPIRE			"Vampire"
+#define ROLE_NBEAST				"Vampire Lord"
+#define ROLE_BANDIT				"Bandit"
+#define ROLE_DELF				"Dark Elf"
+#define ROLE_PREBEL				"Peasant Rebel"
+#define ROLE_ASPIRANT			"Aspirant"
+
 #define ROLE_SYNDICATE			"Syndicate"
 #define ROLE_TRAITOR			"Traitor"
 #define ROLE_OPERATIVE			"Operative"
@@ -61,7 +70,16 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_SENTIENCE
 ))
 
+GLOBAL_LIST_INIT(special_roles_rogue, list(
+//	ROLE_VILLAIN = /datum/antagonist/villain,
+	ROLE_PREBEL = /datum/antagonist/prebel,
+	ROLE_BANDIT = /datum/antagonist/bandit,
+	ROLE_ASPIRANT = /datum/antagonist/aspirant,
+//	ROLE_WEREWOLF = /datum/antagonist/werewolf,
+	ROLE_NBEAST = /datum/antagonist/vampirelord
+))
+
 //Job defines for what happens when you fail to qualify for any job during job selection
 #define BEOVERFLOW 	1
-#define BERANDOMJOB 	2
-#define RETURNTOLOBBY 	3
+#define BERANDOMJOB "Be Random Role"
+#define RETURNTOLOBBY 	"Return to Lobby"

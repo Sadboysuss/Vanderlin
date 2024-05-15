@@ -7,7 +7,7 @@ Slimecrossing Weapons
 //Boneblade - Burning Green
 /obj/item/melee/arm_blade/slime
 	name = "slimy boneblade"
-	desc = "What remains of the bones in your arm. Incredibly sharp, and painful for both you and your opponents."
+	desc = ""
 	force = 15
 	force_string = "painful"
 
@@ -19,7 +19,7 @@ Slimecrossing Weapons
 //Rainbow knife - Burning Rainbow
 /obj/item/kitchen/knife/rainbowknife
 	name = "rainbow knife"
-	desc = "A strange, transparent knife which constantly shifts color. It hums slightly when moved."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "rainbowknife"
 	item_state = "rainbowknife"
@@ -32,26 +32,26 @@ Slimecrossing Weapons
 		damtype = pick(BRUTE, BURN, TOX, OXY, CLONE)
 	switch(damtype)
 		if(BRUTE)
-			hitsound = 'sound/weapons/bladeslice.ogg'
+			hitsound = 'sound/blank.ogg'
 			attack_verb = list("slashed","sliced","cut")
 		if(BURN)
-			hitsound = 'sound/weapons/sear.ogg'
+			hitsound = 'sound/blank.ogg'
 			attack_verb = list("burned","singed","heated")
 		if(TOX)
-			hitsound = 'sound/weapons/pierce.ogg'
+			hitsound = 'sound/blank.ogg'
 			attack_verb = list("poisoned","dosed","toxified")
 		if(OXY)
-			hitsound = 'sound/effects/space_wind.ogg'
+			hitsound = 'sound/blank.ogg'
 			attack_verb = list("suffocated","winded","vacuumed")
 		if(CLONE)
-			hitsound = 'sound/items/geiger/ext1.ogg'
+			hitsound = 'sound/blank.ogg'
 			attack_verb = list("irradiated","mutated","maligned")
 	return ..()
 
 //Adamantine shield - Chilling Adamantine
 /obj/item/twohanded/required/adamantineshield
 	name = "adamantine shield"
-	desc = "A gigantic shield made of solid adamantium."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "adamshield"
 	item_state = "adamshield"
@@ -68,7 +68,7 @@ Slimecrossing Weapons
 //Bloodchiller - Chilling Green
 /obj/item/gun/magic/bloodchill
 	name = "blood chiller"
-	desc = "A horrifying weapon made of your own bone and blood vessels. It shoots slowing globules of your own blood. Ech."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "bloodgun"
 	item_state = "bloodgun"
@@ -81,7 +81,7 @@ Slimecrossing Weapons
 	max_charges = 1 //Recharging costs blood.
 	recharge_rate = 1
 	ammo_type = /obj/item/ammo_casing/magic/bloodchill
-	fire_sound = 'sound/effects/attackblob.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/gun/magic/bloodchill/Initialize()
 	. = ..()
@@ -109,7 +109,7 @@ Slimecrossing Weapons
 	damage = 0
 	damage_type = OXY
 	nodamage = TRUE
-	hitsound = 'sound/effects/splat.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/projectile/magic/bloodchill/on_hit(mob/living/target)
 	. = ..()

@@ -17,7 +17,7 @@
 	leap_icon.icon_state = "leap_[leap_on_click ? "on":"off"]"
 	update_icons()
 	if(message)
-		to_chat(src, "<span class='noticealien'>You will now [leap_on_click ? "leap at":"slash at"] enemies!</span>")
+		to_chat(src, "<span class='noticealien'>I will now [leap_on_click ? "leap at":"slash at"] enemies!</span>")
 	else
 		return
 
@@ -35,7 +35,7 @@
 		return
 
 	if(pounce_cooldown > world.time)
-		to_chat(src, "<span class='alertalien'>You are too fatigued to pounce right now!</span>")
+		to_chat(src, "<span class='alertalien'>I are too fatigued to pounce right now!</span>")
 		return
 
 	if(!has_gravity() || !A.has_gravity())
@@ -69,7 +69,7 @@
 				if(H.check_shields(src, 0, "the [name]", attack_type = LEAP_ATTACK))
 					blocked = TRUE
 			if(!blocked)
-				L.visible_message("<span class='danger'>[src] pounces on [L]!</span>", "<span class='userdanger'>[src] pounces on you!</span>")
+				L.visible_message("<span class='danger'>[src] pounces on [L]!</span>", "<span class='danger'>[src] pounces on you!</span>")
 				L.Paralyze(100)
 				sleep(2)//Runtime prevention (infinite bump() calls on hulks)
 				step_towards(src,L)

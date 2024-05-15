@@ -1,7 +1,7 @@
 ///A single machine that produces a single chem. Can be placed in unison with others through plumbing to create chemical factories
 /obj/machinery/plumbing/synthesizer
 	name = "chemical synthesizer"
-	desc = "Produces a single chemical at a given volume. Must be plumbed. Most effective when working in unison with other chemical synthesizers, heaters and filters."
+	desc = ""
 
 	icon_state = "synthesizer"
 	icon = 'icons/obj/plumbing/plumbers.dmi'

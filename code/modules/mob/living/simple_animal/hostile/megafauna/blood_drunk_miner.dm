@@ -22,7 +22,7 @@ Difficulty: Medium
 
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner
 	name = "blood-drunk miner"
-	desc = "A miner destined to wander forever, engaged in an endless hunt."
+	desc = ""
 	health = 900
 	maxHealth = 900
 	icon_state = "miner"
@@ -35,7 +35,7 @@ Difficulty: Medium
 	speed = 3
 	move_to_delay = 3
 	projectiletype = /obj/projectile/kinetic/miner
-	projectilesound = 'sound/weapons/kenetic_accel.ogg'
+	projectilesound = 'sound/blank.ogg'
 	ranged = TRUE
 	ranged_cooldown_time = 16
 	pixel_x = -16
@@ -69,21 +69,21 @@ Difficulty: Medium
 	name = "Dash To Target"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	chosen_message = "<span class='colossus'>You are now dashing to your target.</span>"
+	chosen_message = "<span class='colossus'>I are now dashing to your target.</span>"
 	chosen_attack_num = 1
 
 /datum/action/innate/megafauna_attack/kinetic_accelerator
 	name = "Fire Kinetic Accelerator"
 	icon_icon = 'icons/obj/guns/energy.dmi'
 	button_icon_state = "kineticgun"
-	chosen_message = "<span class='colossus'>You are now shooting your kinetic accelerator.</span>"
+	chosen_message = "<span class='colossus'>I are now shooting your kinetic accelerator.</span>"
 	chosen_attack_num = 2
 
 /datum/action/innate/megafauna_attack/transform_weapon
 	name = "Transform Weapon"
 	icon_icon = 'icons/obj/lavaland/artefacts.dmi'
 	button_icon_state = "cleaving_saw"
-	chosen_message = "<span class='colossus'>You are now transforming your weapon.</span>"
+	chosen_message = "<span class='colossus'>I are now transforming your weapon.</span>"
 	chosen_attack_num = 3
 
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/OpenFire()
@@ -154,7 +154,7 @@ Difficulty: Medium
 		var/mob/living/L = target
 		if(L.stat == DEAD)
 			visible_message("<span class='danger'>[src] butchers [L]!</span>",
-			"<span class='userdanger'>You butcher [L], restoring your health!</span>")
+			"<span class='danger'>I butcher [L], restoring your health!</span>")
 			if(!is_station_level(z) || client) //NPC monsters won't heal while on station
 				if(guidance)
 					adjustHealth(-L.maxHealth)
@@ -231,14 +231,14 @@ Difficulty: Medium
 	new /obj/effect/temp_visual/small_smoke/halfsecond(step_forward_turf)
 	var/obj/effect/temp_visual/decoy/fading/halfsecond/D = new (own_turf, src)
 	forceMove(step_back_turf)
-	playsound(own_turf, 'sound/weapons/punchmiss.ogg', 40, TRUE, -1)
+	playsound(own_turf, 'sound/blank.ogg', 40, TRUE, -1)
 	dashing = TRUE
 	alpha = 0
 	animate(src, alpha = 255, time = 5)
 	SLEEP_CHECK_DEATH(2)
 	D.forceMove(step_forward_turf)
 	forceMove(target_turf)
-	playsound(target_turf, 'sound/weapons/punchmiss.ogg', 40, TRUE, -1)
+	playsound(target_turf, 'sound/blank.ogg', 40, TRUE, -1)
 	SLEEP_CHECK_DEATH(1)
 	dashing = FALSE
 	return TRUE

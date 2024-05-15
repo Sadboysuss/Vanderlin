@@ -1,6 +1,6 @@
 /obj/item/flamethrower
 	name = "flamethrower"
-	desc = "You are a firestarter!"
+	desc = ""
 	icon = 'icons/obj/flamethrower.dmi'
 	icon_state = "flamethrowerbase"
 	item_state = "flamethrower_0"
@@ -9,8 +9,8 @@
 	flags_1 = CONDUCT_1
 	force = 3
 	throwforce = 10
-	var/acti_sound = 'sound/items/welderactivate.ogg'
-	var/deac_sound = 'sound/items/welderdeactivate.ogg'
+	var/acti_sound = 'sound/blank.ogg'
+	var/deac_sound = 'sound/blank.ogg'
 	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
@@ -120,7 +120,7 @@
 			if(user.transferItemToLoc(W,src))
 				ptank.forceMove(get_turf(src))
 				ptank = W
-				to_chat(user, "<span class='notice'>You swap the plasma tank in [src]!</span>")
+				to_chat(user, "<span class='notice'>I swap the plasma tank in [src]!</span>")
 			return
 		if(!user.transferItemToLoc(W, src))
 			return
@@ -144,7 +144,7 @@
 	if(ptank && isliving(user) && user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		user.put_in_hands(ptank)
 		ptank = null
-		to_chat(user, "<span class='notice'>You remove the plasma tank from [src]!</span>")
+		to_chat(user, "<span class='notice'>I remove the plasma tank from [src]!</span>")
 		update_icon()
 
 /obj/item/flamethrower/examine(mob/user)
@@ -159,7 +159,7 @@
 	if(!status)
 		to_chat(user, "<span class='notice'>Secure the igniter first!</span>")
 		return
-	to_chat(user, "<span class='notice'>You [lit ? "extinguish" : "ignite"] [src]!</span>")
+	to_chat(user, "<span class='notice'>I [lit ? "extinguish" : "ignite"] [src]!</span>")
 	lit = !lit
 	if(lit)
 		set_light(1)

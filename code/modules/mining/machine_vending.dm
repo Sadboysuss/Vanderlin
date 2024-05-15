@@ -2,7 +2,7 @@
 
 /obj/machinery/mineral/equipment_vendor
 	name = "mining equipment vendor"
-	desc = "An equipment vendor for miners, points collected at an ore redemption machine can be spent here."
+	desc = ""
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "mining"
 	density = TRUE
@@ -192,7 +192,7 @@
 
 /obj/item/mining_voucher
 	name = "mining voucher"
-	desc = "A token to redeem a piece of equipment. Use it on a mining equipment vendor."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "mining_voucher"
 	w_class = WEIGHT_CLASS_TINY
@@ -201,7 +201,7 @@
 
 /obj/item/card/mining_point_card
 	name = "mining points card"
-	desc = "A small card preloaded with mining points. Swipe your ID card over it to transfer the points, then discard."
+	desc = ""
 	icon_state = "data_1"
 	var/points = 500
 
@@ -210,7 +210,7 @@
 		if(points)
 			var/obj/item/card/id/C = I
 			C.mining_points += points
-			to_chat(user, "<span class='info'>You transfer [points] points to [C].</span>")
+			to_chat(user, "<span class='info'>I transfer [points] points to [C].</span>")
 			points = 0
 		else
 			to_chat(user, "<span class='alert'>There's no points left on [src].</span>")
@@ -223,7 +223,7 @@
 ///Conscript kit
 /obj/item/card/mining_access_card
 	name = "mining access card"
-	desc = "A small card, that when used on any ID, will add mining access."
+	desc = ""
 	icon_state = "data_1"
 
 /obj/item/card/mining_access_card/afterattack(atom/movable/AM, mob/user, proximity)
@@ -235,12 +235,12 @@
 		I.access |= ACCESS_MECH_MINING
 		I.access |= ACCESS_MINERAL_STOREROOM
 		I.access |= ACCESS_CARGO
-		to_chat(user, "<span class='notice'>You upgrade [I] with mining access.</span>")
+		to_chat(user, "<span class='notice'>I upgrade [I] with mining access.</span>")
 		qdel(src)
 
 /obj/item/storage/backpack/duffelbag/mining_conscript
 	name = "mining conscription kit"
-	desc = "A kit containing everything a crewmember needs to support a shaft miner in the field."
+	desc = ""
 
 /obj/item/storage/backpack/duffelbag/mining_conscript/PopulateContents()
 	new /obj/item/clothing/glasses/meson(src)

@@ -10,11 +10,11 @@
 
 /obj/projectile/bullet/a84mm
 	name ="\improper HEDP rocket"
-	desc = "USE A WEEL GUN"
+	desc = ""
 	icon_state= "84mm-hedp"
 	damage = 80
 	var/anti_armour_damage = 200
-	armour_penetration = 100
+	armor_penetration = 100
 	dismemberment = 100
 
 /obj/projectile/bullet/a84mm/on_hit(atom/target, blocked = FALSE)
@@ -31,7 +31,7 @@
 
 /obj/projectile/bullet/a84mm_he
 	name ="\improper HE missile"
-	desc = "Boom."
+	desc = ""
 	icon_state = "missile"
 	damage = 30
 	ricochets_max = 0 //it's a MISSILE
@@ -46,7 +46,7 @@
 
 /obj/projectile/bullet/a84mm_br
 	name ="\improper HE missile"
-	desc = "Boom."
+	desc = ""
 	icon_state = "missile"
 	damage = 30
 	ricochets_max = 0 //it's a MISSILE
@@ -59,7 +59,7 @@
 
 /obj/item/broken_missile
 	name = "\improper broken missile"
-	desc = "A missile that did not detonate. The tail has snapped and it is in no way fit to be used again."
+	desc = ""
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "missile_broken"
 	w_class = WEIGHT_CLASS_TINY

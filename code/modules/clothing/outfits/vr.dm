@@ -9,7 +9,7 @@
 	H.dna.species.before_equip_job(null, H)
 
 /datum/outfit/vr/post_equip(mob/living/carbon/human/H)
-	var/obj/item/card/id/id = H.wear_id
+	var/obj/item/card/id/id = H.wear_ring
 	if (istype(id))
 		id.access |= get_all_accesses()
 

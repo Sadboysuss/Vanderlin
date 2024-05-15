@@ -8,7 +8,7 @@
 
 /obj/item/clothing/glasses/meson/engine
 	name = "engineering scanner goggles"
-	desc = "Goggles used by engineers. The Meson Scanner mode lets you see basic structural and terrain layouts through walls, the T-ray Scanner mode lets you see underfloor objects such as cables and pipes, and the Radiation Scanner mode lets you see objects contaminated by radiation."
+	desc = ""
 	icon_state = "trayson-meson"
 	item_state = "trayson-meson"
 	actions_types = list(/datum/action/item_action/toggle_mode)
@@ -132,7 +132,7 @@
 	name = "optical t-ray scanner"
 	icon_state = "trayson-t-ray"
 	item_state = "trayson-t-ray"
-	desc = "Used by engineering staff to see underfloor objects such as cables and pipes."
+	desc = ""
 	range = 2
 
 	modes = list(MODE_NONE = MODE_TRAY, MODE_TRAY = MODE_NONE)
@@ -141,7 +141,7 @@
 	name = "shuttle region scanner"
 	icon_state = "trayson-shuttle"
 	item_state = "trayson-shuttle"
-	desc = "Used to see the boundaries of shuttle regions."
+	desc = ""
 
 	modes = list(MODE_NONE = MODE_SHUTTLE, MODE_SHUTTLE = MODE_NONE)
 

@@ -1,6 +1,6 @@
 /datum/surgery
 	var/name = "surgery"
-	var/desc = "surgery description"
+	var/desc = ""
 	var/status = 1
 	var/list/steps = list()										//Steps in a surgery
 	var/step_in_progress = FALSE								//Actively performing a Surgery
@@ -16,7 +16,7 @@
 	var/speed_modifier = 0										//Step speed modifier
 	var/requires_real_bodypart = FALSE							//Some surgeries don't work on limbs that don't really exist
 	var/lying_required = TRUE									//Does the vicitm needs to be lying down.
-	var/self_operable = FALSE									//Can the surgery be performed on yourself.
+	var/self_operable = FALSE									//Can the surgery be performed on myself.
 	var/requires_tech = FALSE									//handles techweb-oriented surgeries, previously restricted to the /advanced subtype (You still need to add designs)
 	var/replaced_by												//type; doesn't show up if this type exists. Set to /datum/surgery if you want to hide a "base" surgery (useful for typing parents IE healing.dm just make sure to null it out again)
 
@@ -127,14 +127,14 @@
 
 /obj/item/disk/surgery
 	name = "Surgery Procedure Disk"
-	desc = "A disk that contains advanced surgery procedures, must be loaded into an Operating Console."
+	desc = ""
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron=300, /datum/material/glass=100)
 	var/list/surgeries
 
 /obj/item/disk/surgery/debug
 	name = "Debug Surgery Disk"
-	desc = "A disk that contains all existing surgery procedures."
+	desc = ""
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron=300, /datum/material/glass=100)
 

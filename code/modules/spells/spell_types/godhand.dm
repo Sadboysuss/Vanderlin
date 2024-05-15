@@ -1,6 +1,6 @@
 /obj/item/melee/touch_attack
 	name = "\improper outstretched hand"
-	desc = "High Five?"
+	desc = ""
 	var/catchphrase = "High Five!"
 	var/on_use_sound = null
 	var/obj/effect/proc_holder/spell/targeted/touch/attached_spell
@@ -25,7 +25,7 @@
 	if(!iscarbon(user)) //Look ma, no hands
 		return
 	if(!(user.mobility_flags & MOBILITY_USE))
-		to_chat(user, "<span class='warning'>You can't reach out!</span>")
+		to_chat(user, "<span class='warning'>I can't reach out!</span>")
 		return
 	..()
 
@@ -46,17 +46,17 @@
 
 /obj/item/melee/touch_attack/disintegrate
 	name = "\improper smiting touch"
-	desc = "This hand of mine glows with an awesome power!"
+	desc = ""
 	catchphrase = "EI NATH!!"
-	on_use_sound = 'sound/magic/disintegrate.ogg'
+	on_use_sound = 'sound/blank.ogg'
 	icon_state = "disintegrate"
 	item_state = "disintegrate"
 
 /obj/item/melee/touch_attack/disintegrate/afterattack(atom/target, mob/living/carbon/user, proximity)
-	if(!proximity || target == user || !ismob(target) || !iscarbon(user) || !(user.mobility_flags & MOBILITY_USE)) //exploding after touching yourself would be bad
+	if(!proximity || target == user || !ismob(target) || !iscarbon(user) || !(user.mobility_flags & MOBILITY_USE)) //exploding after touching myself would be bad
 		return
 	if(!user.can_speak_vocal())
-		to_chat(user, "<span class='warning'>You can't get the words out!</span>")
+		to_chat(user, "<span class='warning'>I can't get the words out!</span>")
 		return
 	var/mob/M = target
 	do_sparks(4, FALSE, M.loc)
@@ -67,13 +67,13 @@
 	if(A)
 		if(isitem(A))
 			target.visible_message("<span class='warning'>[target]'s [A] glows brightly as it wards off the spell!</span>")
-		user.visible_message("<span class='warning'>The feedback blows [user]'s arm off!</span>","<span class='userdanger'>The spell bounces from [M]'s skin back into your arm!</span>")
+		user.visible_message("<span class='warning'>The feedback blows [user]'s arm off!</span>","<span class='danger'>The spell bounces from [M]'s skin back into your arm!</span>")
 		user.flash_act()
 		var/obj/item/bodypart/part = user.get_holding_bodypart_of_item(src)
 		if(part)
 			part.dismember()
 		return ..()
-	var/obj/item/clothing/suit/hooded/bloated_human/suit = M.get_item_by_slot(SLOT_WEAR_SUIT)
+	var/obj/item/clothing/suit/hooded/bloated_human/suit = M.get_item_by_slot(SLOT_ARMOR)
 	if(istype(suit))
 		M.visible_message("<span class='danger'>[M]'s [suit] explodes off of them into a puddle of gore!</span>")
 		M.dropItemToGround(suit)
@@ -85,25 +85,25 @@
 
 /obj/item/melee/touch_attack/fleshtostone
 	name = "\improper petrifying touch"
-	desc = "That's the bottom line, because flesh to stone said so!"
+	desc = ""
 	catchphrase = "STAUN EI!!"
-	on_use_sound = 'sound/magic/fleshtostone.ogg'
+	on_use_sound = 'sound/blank.ogg'
 	icon_state = "fleshtostone"
 	item_state = "fleshtostone"
 
 /obj/item/melee/touch_attack/fleshtostone/afterattack(atom/target, mob/living/carbon/user, proximity)
-	if(!proximity || target == user || !isliving(target) || !iscarbon(user)) //getting hard after touching yourself would also be bad
+	if(!proximity || target == user || !isliving(target) || !iscarbon(user)) //getting hard after touching myself would also be bad
 		return
 	if(!(user.mobility_flags & MOBILITY_USE))
-		to_chat(user, "<span class='warning'>You can't reach out!</span>")
+		to_chat(user, "<span class='warning'>I can't reach out!</span>")
 		return
 	if(!user.can_speak_vocal())
-		to_chat(user, "<span class='warning'>You can't get the words out!</span>")
+		to_chat(user, "<span class='warning'>I can't get the words out!</span>")
 		return
 	var/mob/living/M = target
 	if(M.anti_magic_check())
 		to_chat(user, "<span class='warning'>The spell can't seem to affect [M]!</span>")
-		to_chat(M, "<span class='warning'>You feel your flesh turn to stone for a moment, then revert back!</span>")
+		to_chat(M, "<span class='warning'>I feel your flesh turn to stone for a moment, then revert back!</span>")
 		..()
 		return
 	M.Stun(40)

@@ -32,8 +32,11 @@ SUBSYSTEM_DEF(title)
 		file_path = "[global.config.directory]/title_screens/images/[pick(title_screens)]"
 
 	if(!file_path)
+#ifndef ROGUEWORLD
 		file_path = "icons/default_title.dmi"
-
+#else
+		file_path = "icons/rogueworld_title.dmi"
+#endif
 	ASSERT(fexists(file_path))
 
 	icon = new(fcopy_rsc(file_path))
@@ -56,11 +59,11 @@ SUBSYSTEM_DEF(title)
 		var/F = file("data/previous_title.dat")
 		WRITE_FILE(F, file_path)
 
-	for(var/thing in GLOB.clients)
-		if(!thing)
-			continue
-		var/obj/screen/splash/S = new(thing, FALSE)
-		S.Fade(FALSE,FALSE)
+//	for(var/thing in GLOB.clients)
+//		if(!thing)
+//			continue
+//		var/obj/screen/splash/S = new(thing, FALSE)
+//		S.Fade(FALSE,FALSE)
 
 /datum/controller/subsystem/title/Recover()
 	icon = SStitle.icon

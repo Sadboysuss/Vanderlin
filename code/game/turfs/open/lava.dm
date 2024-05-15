@@ -3,19 +3,31 @@
 /turf/open/lava
 	name = "lava"
 	icon_state = "lava"
+	icon = 'icons/turf/roguefloor.dmi'
 	gender = PLURAL //"That's some lava."
 	baseturfs = /turf/open/lava //lava all the way down
 	slowdown = 2
 
-	light_range = 2
+	light_range = 4
 	light_power = 0.75
 	light_color = LIGHT_COLOR_LAVA
-	bullet_bounce_sound = 'sound/items/welder2.ogg'
+	bullet_bounce_sound = 'sound/blank.ogg'
 
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
 	heavyfootstep = FOOTSTEP_LAVA
+	smooth = SMOOTH_TRUE
+	canSmoothWith = list(/turf/closed, /turf/open/floor/rogue/volcanic, /turf/open/floor/rogue/dirt, /turf/open/floor/rogue/dirt/road,/turf/open/floor/rogue/naturalstone)
+	neighborlay_override = "lavedge"
+
+/turf/open/lava/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)
+
+/turf/open/lava/cardinal_smooth(adjacencies)
+	roguesmooth(adjacencies)
+
 
 /turf/open/lava/ex_act(severity, target)
 	contents_explosion(severity, target)
@@ -37,19 +49,25 @@
 	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/lava/Entered(atom/movable/AM)
-	if(burn_stuff(AM))
-		START_PROCESSING(SSobj, src)
+	if(!AM.throwing)
+		if(burn_stuff(AM))
+			START_PROCESSING(SSobj, src)
+		if(ishuman(AM))
+			playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
+//			addomen("lava")
 
 /turf/open/lava/Exited(atom/movable/Obj, atom/newloc)
 	. = ..()
-	if(isliving(Obj))
-		var/mob/living/L = Obj
-		if(!islava(newloc) && !L.on_fire)
-			L.update_fire()
+	if(!Obj.throwing)
+		if(isliving(Obj))
+			var/mob/living/L = Obj
+			if(!islava(newloc) && !L.on_fire)
+				L.update_fire()
 
 /turf/open/lava/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(burn_stuff(AM))
 		START_PROCESSING(SSobj, src)
+		playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
 
 /turf/open/lava/process()
 	if(!burn_stuff())
@@ -64,7 +82,7 @@
 /turf/open/lava/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_FLOORWALL)
-			to_chat(user, "<span class='notice'>You build a floor.</span>")
+			to_chat(user, "<span class='notice'>I build a floor.</span>")
 			PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 			return TRUE
 	return FALSE
@@ -122,7 +140,7 @@
 				O.resistance_flags &= ~FIRE_PROOF
 			if(O.armor.fire > 50) //obj with 100% fire armor still get slowly burned away.
 				O.armor = O.armor.setRating(fire = 50)
-			O.fire_act(10000, 1000)
+			qdel(O)
 
 		else if (isliving(thing))
 			. = 1
@@ -146,20 +164,24 @@
 
 			if(iscarbon(L))
 				var/mob/living/carbon/C = L
-				var/obj/item/clothing/S = C.get_item_by_slot(SLOT_WEAR_SUIT)
+				var/obj/item/clothing/S = C.get_item_by_slot(SLOT_ARMOR)
 				var/obj/item/clothing/H = C.get_item_by_slot(SLOT_HEAD)
 
 				if(S && H && S.clothing_flags & LAVAPROTECT && H.clothing_flags & LAVAPROTECT)
 					return
 
+				if(C.health <= 0)
+					C.dust(drop_items = TRUE)
+
 			if("lava" in L.weather_immunities)
 				continue
 
-			L.adjustFireLoss(20)
+//			L.adjustFireLoss(50)
 			if(L) //mobs turning into object corpses could get deleted here.
-				L.adjust_fire_stacks(20)
+				L.adjust_fire_stacks(100)
 				L.IgniteMob()
-
+				if(L.health <= 0)
+					L.dust(drop_items = TRUE)
 /turf/open/lava/smooth
 	name = "lava"
 	baseturfs = /turf/open/lava/smooth
@@ -175,3 +197,72 @@
 
 /turf/open/lava/smooth/airless
 	initial_gas_mix = AIRLESS_ATMOS
+
+/turf/open/lava/acid
+	name = "acid"
+	icon_state = "acid"
+	light_range = 4
+	light_power = 1
+	light_color = "#56ff0d"
+
+/turf/open/lava/acid/burn_stuff(AM)
+	. = 0
+
+	if(is_safe())
+		return FALSE
+
+	var/thing_to_check = src
+	if (AM)
+		thing_to_check = list(AM)
+	for(var/thing in thing_to_check)
+		if(isobj(thing))
+			var/obj/O = thing
+			if((O.resistance_flags & (ACID_PROOF|INDESTRUCTIBLE)) || O.throwing)
+				continue
+			. = 1
+			qdel(O)
+
+		else if (isliving(thing))
+			. = 1
+			var/mob/living/L = thing
+			if(L.movement_type & FLYING)
+				continue	//YOU'RE FLYING OVER IT
+			var/buckle_check = L.buckling
+			if(!buckle_check)
+				buckle_check = L.buckled
+			if(isobj(buckle_check))
+				var/obj/O = buckle_check
+				if(O.resistance_flags & ACID_PROOF)
+					continue
+			else if(isliving(buckle_check))
+				var/mob/living/live = buckle_check
+				if("lava" in live.weather_immunities)
+					continue
+
+			if(iscarbon(L))
+				var/mob/living/carbon/C = L
+//				var/obj/item/clothing/S = C.get_item_by_slot(SLOT_ARMOR)
+//				var/obj/item/clothing/H = C.get_item_by_slot(SLOT_HEAD)
+
+//				if(S && H && S.clothing_flags & LAVAPROTECT && H.clothing_flags & LAVAPROTECT)
+//					return
+				//make this acid
+				var/shouldupdate = FALSE
+				for(var/obj/item/bodypart/B in C.bodyparts)
+					if(!B.skeletonized && B.is_organic_limb())
+						B.skeletonize()
+						shouldupdate = TRUE
+				if(shouldupdate)
+					if(ishuman(C))
+						var/mob/living/carbon/human/H = C
+						H.underwear = "Nude"
+					C.unequip_everything()
+					C.update_body()
+//				C.dust(drop_items = TRUE)
+				continue
+
+//			if("lava" in L.weather_immunities)
+//				continue
+
+			L.dust(drop_items = TRUE)
+

@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/aoe_turf/conjure
 	name = "Conjure"
-	desc = "This spell conjures objs of the specified types in range."
+	desc = ""
 
 	var/list/summon_type = list() //determines what exactly will be summoned
 	//should be text, like list("/mob/living/simple_animal/bot/ed209")
@@ -13,7 +13,7 @@
 	var/list/newVars = list() //vars of the summoned objects will be replaced with those where they meet
 	//should have format of list("emagged" = 1,"name" = "Wizard's Justicebot"), for example
 
-	var/cast_sound = 'sound/items/welder.ogg'
+	var/cast_sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/cast(list/targets,mob/user = usr)
 	playsound(get_turf(user), cast_sound, 50,TRUE)
@@ -49,15 +49,15 @@
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/summonEdSwarm //test purposes - Also a lot of fun
 	name = "Dispense Wizard Justice"
-	desc = "This spell dispenses wizard justice."
+	desc = ""
 	summon_type = list(/mob/living/simple_animal/bot/secbot/ed209)
 	summon_amt = 10
 	range = 3
-	newVars = list("emagged" = 2, "remote_disabled" = 1,"shoot_sound" = 'sound/weapons/laser.ogg',"projectile" = /obj/projectile/beam/laser, "declare_arrests" = 0,"name" = "Wizard's Justicebot")
+	newVars = list("emagged" = 2, "remote_disabled" = 1,"shoot_sound" = 'sound/blank.ogg',"projectile" = /obj/projectile/beam/laser, "declare_arrests" = 0,"name" = "Wizard's Justicebot")
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/linkWorlds
 	name = "Link Worlds"
-	desc = "A whole new dimension for you to play with! They won't be happy about it, though."
+	desc = ""
 	invocation = "WTF"
 	clothes_req = FALSE
 	charge_max = 600
@@ -65,11 +65,11 @@
 	summon_type = list(/obj/structure/spawner/nether)
 	summon_amt = 1
 	range = 1
-	cast_sound = 'sound/weapons/marauder.ogg'
+	cast_sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/targeted/conjure_item
 	name = "Summon weapon"
-	desc = "A generic spell that should not exist.  This summons an instance of a specific type of item, or if one already exists, un-summons it.  Summons into hand if possible."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1

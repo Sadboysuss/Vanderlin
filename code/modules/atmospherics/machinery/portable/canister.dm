@@ -2,7 +2,7 @@
 
 /obj/machinery/portable_atmospherics/canister
 	name = "canister"
-	desc = "A canister for the storage of gas."
+	desc = ""
 	icon_state = "yellow"
 	density = TRUE
 	ui_x = 420
@@ -58,98 +58,98 @@
 /obj/machinery/portable_atmospherics/canister/interact(mob/user)
 	if(!allowed(user))
 		to_chat(user, "<span class='alert'>Error - Unauthorized User.</span>")
-		playsound(src, 'sound/misc/compiler-failure.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		return
 	..()
 
 /obj/machinery/portable_atmospherics/canister/nitrogen
 	name = "n2 canister"
-	desc = "Nitrogen gas. Reportedly useful for something."
+	desc = ""
 	icon_state = "red"
 	gas_type = /datum/gas/nitrogen
 
 /obj/machinery/portable_atmospherics/canister/oxygen
 	name = "o2 canister"
-	desc = "Oxygen. Necessary for human life."
+	desc = ""
 	icon_state = "blue"
 	gas_type = /datum/gas/oxygen
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name = "co2 canister"
-	desc = "Carbon dioxide. What the fuck is carbon dioxide?"
+	desc = ""
 	icon_state = "black"
 	gas_type = /datum/gas/carbon_dioxide
 
 /obj/machinery/portable_atmospherics/canister/toxins
 	name = "plasma canister"
-	desc = "Plasma gas. The reason YOU are here. Highly toxic."
+	desc = ""
 	icon_state = "orange"
 	gas_type = /datum/gas/plasma
 
 /obj/machinery/portable_atmospherics/canister/bz
 	name = "\improper BZ canister"
-	desc = "BZ, a powerful hallucinogenic nerve agent."
+	desc = ""
 	icon_state = "purple"
 	gas_type = /datum/gas/bz
 
 /obj/machinery/portable_atmospherics/canister/nitrous_oxide
 	name = "n2o canister"
-	desc = "Nitrous oxide gas. Known to cause drowsiness."
+	desc = ""
 	icon_state = "redws"
 	gas_type = /datum/gas/nitrous_oxide
 
 /obj/machinery/portable_atmospherics/canister/air
 	name = "air canister"
-	desc = "Pre-mixed air."
+	desc = ""
 	icon_state = "grey"
 
 /obj/machinery/portable_atmospherics/canister/tritium
 	name = "tritium canister"
-	desc = "Tritium. Inhalation might cause irradiation."
+	desc = ""
 	icon_state = "green"
 	gas_type = /datum/gas/tritium
 
 /obj/machinery/portable_atmospherics/canister/nob
 	name = "hyper-noblium canister"
-	desc = "Hyper-Noblium. More noble than all other gases."
+	desc = ""
 	icon_state = "freon"
 	gas_type = /datum/gas/hypernoblium
 
 /obj/machinery/portable_atmospherics/canister/nitryl
 	name = "nitryl canister"
-	desc = "Nitryl gas. Feels great 'til the acid eats your lungs."
+	desc = ""
 	icon_state = "brown"
 	gas_type = /datum/gas/nitryl
 
 /obj/machinery/portable_atmospherics/canister/stimulum
 	name = "stimulum canister"
-	desc = "Stimulum. High energy gas, high energy people."
+	desc = ""
 	icon_state = "darkpurple"
 	gas_type = /datum/gas/stimulum
 
 /obj/machinery/portable_atmospherics/canister/pluoxium
 	name = "pluoxium canister"
-	desc = "Pluoxium. Like oxygen, but more bang for your buck."
+	desc = ""
 	icon_state = "darkblue"
 	gas_type = /datum/gas/pluoxium
 
 /obj/machinery/portable_atmospherics/canister/water_vapor
 	name = "water vapor canister"
-	desc = "Water Vapor. We get it, you vape."
+	desc = ""
 	icon_state = "water_vapor"
 	gas_type = /datum/gas/water_vapor
 	filled = 1
 
 /obj/machinery/portable_atmospherics/canister/miasma
 	name = "miasma canister"
-	desc = "Miasma. Makes you wish your nose were blocked."
+	desc = ""
 	icon_state = "miasma"
 	gas_type = /datum/gas/miasma
 	filled = 1
 
 /obj/machinery/portable_atmospherics/canister/fusion_test
 	name = "fusion test canister"
-	desc = "Don't be a badmin."
+	desc = ""
 
 /obj/machinery/portable_atmospherics/canister/fusion_test/create_gas()
 	air_contents.add_gases(/datum/gas/carbon_dioxide, /datum/gas/plasma, /datum/gas/tritium)
@@ -176,7 +176,7 @@
 
 /obj/machinery/portable_atmospherics/canister/proto/default
 	name = "prototype canister"
-	desc = "The best way to fix an atmospheric emergency... or the best way to introduce one."
+	desc = ""
 	icon_state = "proto"
 	volume = 5000
 	max_integrity = 300
@@ -188,7 +188,7 @@
 
 /obj/machinery/portable_atmospherics/canister/proto/default/oxygen
 	name = "prototype canister"
-	desc = "A prototype canister for a prototype bike, what could go wrong?"
+	desc = ""
 	icon_state = "proto"
 	gas_type = /datum/gas/oxygen
 	filled = 1
@@ -297,17 +297,17 @@
 
 /obj/machinery/portable_atmospherics/canister/welder_act(mob/living/user, obj/item/I)
 	..()
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return FALSE
 
 	if(stat & BROKEN)
 		if(!I.tool_start_check(user, amount=0))
 			return TRUE
-		to_chat(user, "<span class='notice'>You begin cutting [src] apart...</span>")
+		to_chat(user, "<span class='notice'>I begin cutting [src] apart...</span>")
 		if(I.use_tool(src, user, 30, volume=50))
 			deconstruct(TRUE)
 	else
-		to_chat(user, "<span class='warning'>You cannot slice [src] apart when it isn't broken!</span>")
+		to_chat(user, "<span class='warning'>I cannot slice [src] apart when it isn't broken!</span>")
 
 	return TRUE
 
@@ -316,6 +316,7 @@
 	if(!.)
 		return
 	canister_break()
+	..()
 
 /obj/machinery/portable_atmospherics/canister/proc/canister_break()
 	disconnect()
@@ -326,7 +327,7 @@
 
 	obj_break()
 	density = FALSE
-	playsound(src.loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
+	playsound(src.loc, 'sound/blank.ogg', 10, TRUE, -3)
 	investigate_log("was destroyed.", INVESTIGATE_ATMOS)
 
 	if(holding)

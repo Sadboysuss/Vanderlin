@@ -5,7 +5,7 @@
 
 /obj/machinery/power/emitter/energycannon/magical
 	name = "wabbajack statue"
-	desc = "Who am I? What is my purpose in life? What do I mean by who am I?"
+	desc = ""
 	projectile_type = /obj/projectile/magic/change
 	icon = 'icons/obj/machines/magic_emitter.dmi'
 	icon_state = "wabbajack_statue"
@@ -18,7 +18,7 @@
 /obj/machinery/power/emitter/energycannon/magical/Initialize()
 	. = ..()
 	if(prob(50))
-		desc = "Oh no, not again."
+		desc = ""
 	update_icon()
 
 /obj/machinery/power/emitter/energycannon/magical/update_icon()
@@ -52,7 +52,7 @@
 
 /obj/structure/table/abductor/wabbajack
 	name = "wabbajack altar"
-	desc = "Whether you're sleeping or waking, it's going to be quite chaotic."
+	desc = ""
 	max_integrity = 1000
 	verb_say = "chants"
 	var/obj/machinery/power/emitter/energycannon/magical/our_statue
@@ -121,21 +121,21 @@
 
 /obj/structure/table/abductor/wabbajack/proc/sleeper_dreams(mob/living/sleeper)
 	if(sleeper in sleepers)
-		to_chat(sleeper, "<span class='revennotice'>While you slumber, you have the strangest dream, like you can see yourself from the outside.</span>")
+		to_chat(sleeper, "<span class='revennotice'>While you slumber, you have the strangest dream, like you can see myself from the outside.</span>")
 		sleeper.ghostize(TRUE)
 
 /obj/structure/table/abductor/wabbajack/left
-	desc = "You sleep so it may wake."
+	desc = ""
 
 /obj/structure/table/abductor/wabbajack/right
-	desc = "It wakes so you may sleep."
+	desc = ""
 
 // Bar staff, GODMODE mobs(as long as they stay in the shuttle) that just want to make sure people have drinks
 // and a good time.
 
 /mob/living/simple_animal/drone/snowflake/bardrone
 	name = "Bardrone"
-	desc = "A barkeeping drone, a robot built to tend bars."
+	desc = ""
 	hacked = TRUE
 	laws = "1. Serve drinks.\n\
 		2. Talk to patrons.\n\
@@ -152,7 +152,7 @@
 /mob/living/simple_animal/hostile/alien/maid/barmaid
 	gold_core_spawnable = NO_SPAWN
 	name = "Barmaid"
-	desc = "A barmaid, a maiden found in a bar."
+	desc = ""
 	pass_flags = PASSTABLE
 	unique_name = FALSE
 	AIStatus = AI_OFF
@@ -215,7 +215,7 @@
 
 /obj/effect/forcefield/luxury_shuttle
 	name = "luxury shuttle ticket booth"
-	desc = "A forceful money collector."
+	desc = ""
 	timeleft = 0
 	var/threshold = 500
 	var/static/list/approved_passengers = list()
@@ -343,12 +343,12 @@
 
 /mob/living/simple_animal/hostile/bear/fightpit
 	name = "fight pit bear"
-	desc = "This bear's trained through ancient Russian secrets to fear the walls of its glass prison."
+	desc = ""
 	environment_smash = ENVIRONMENT_SMASH_NONE
 
 /obj/effect/decal/hammerandsickle
 	name = "hammer and sickle"
-	desc = "Communism powerful force."
+	desc = ""
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "communist"
 	layer = ABOVE_OPEN_TURF_LAYER

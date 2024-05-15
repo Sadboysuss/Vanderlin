@@ -4,9 +4,9 @@ Prismatic extracts:
 */
 /obj/item/slimecross/prismatic
 	name = "prismatic extract"
-	desc = "It's constantly wet with a semi-transparent, colored goo."
+	desc = ""
 	effect = "prismatic"
-	effect_desc = "When used it paints whatever it hits."
+	effect_desc = ""
 	icon_state = "prismatic"
 	var/paintcolor = "#FFFFFF"
 
@@ -16,11 +16,11 @@ Prismatic extracts:
 	if(!istype(target) || isspaceturf(target))
 		return
 	target.add_atom_colour(paintcolor, WASHABLE_COLOUR_PRIORITY)
-	playsound(target, 'sound/effects/slosh.ogg', 20, TRUE)
+	playsound(target, 'sound/blank.ogg', 20, TRUE)
 
 /obj/item/slimecross/prismatic/grey/
 	colour = "grey"
-	desc = "It's constantly wet with a pungent-smelling, clear chemical."
+	desc = ""
 
 /obj/item/slimecross/prismatic/grey/afterattack(turf/target, mob/user, proximity)
 	. = ..()
@@ -28,7 +28,7 @@ Prismatic extracts:
 		return
 	if(istype(target) && target.color != initial(target.color))
 		target.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
-		playsound(target, 'sound/effects/slosh.ogg', 20, TRUE)
+		playsound(target, 'sound/blank.ogg', 20, TRUE)
 
 /obj/item/slimecross/prismatic/orange
 	paintcolor = "#FFA500"

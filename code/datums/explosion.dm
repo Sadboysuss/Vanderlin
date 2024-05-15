@@ -4,8 +4,8 @@ GLOBAL_LIST_EMPTY(explosions)
 //Against my better judgement, I will return the explosion datum
 //If I see any GC errors for it I will find you
 //and I will gib you
-/proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = TRUE, ignorecap = FALSE, flame_range = 0, silent = FALSE, smoke = FALSE)
-	return new /datum/explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, ignorecap, flame_range, silent, smoke)
+/proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = TRUE, ignorecap = FALSE, flame_range = 0, silent = FALSE, smoke = FALSE, soundin)
+	return new /datum/explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, ignorecap, flame_range, silent, smoke, soundin)
 
 //This datum creates 3 async tasks
 //1 GatherSpiralTurfsProc runs spiral_range_turfs(tick_checked = TRUE) to populate the affected_turfs list
@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(explosions)
 		EX_PREPROCESS_EXIT_CHECK\
 	}
 
-/datum/explosion/New(atom/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, ignorecap, flame_range, silent, smoke)
+/datum/explosion/New(atom/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, ignorecap, flame_range, silent, smoke, soundin = 'sound/misc/explode/explosion.ogg')
 	set waitfor = FALSE
 
 	var/id = ++id_counter
@@ -102,17 +102,21 @@ GLOBAL_LIST_EMPTY(explosions)
 
 	var/far_dist = 0
 	far_dist += heavy_impact_range * 5
-	far_dist += devastation_range * 20
+	far_dist += devastation_range * 209
 
 	if(!silent)
 		var/frequency = get_rand_frequency()
-		var/sound/explosion_sound = sound(get_sfx("explosion"))
-		var/sound/far_explosion_sound = sound('sound/effects/explosionfar.ogg')
+		if(islist(soundin))
+			var/list/shitty = soundin
+			soundin = pick(shitty)
+		var/sound/explosion_sound = sound(soundin)
+		var/sound/far_explosion_sound = sound(pick('sound/misc/explode/explosionfar (1).ogg','sound/misc/explode/explosionfar (2).ogg','sound/misc/explode/explosionfar (3).ogg'))
 
 		for(var/mob/M in GLOB.player_list)
 			// Double check for client
 			var/turf/M_turf = get_turf(M)
-			if(M_turf && M_turf.z == z0)
+			var/turf/E_turf = get_turf(epicenter)
+			if(is_in_zweb(M_turf.z,E_turf.z))
 				var/dist = get_dist(M_turf, epicenter)
 				var/baseshakeamount
 				if(orig_max_distance - dist > 0)
@@ -124,8 +128,9 @@ GLOBAL_LIST_EMPTY(explosions)
 						shake_camera(M, 25, CLAMP(baseshakeamount, 0, 10))
 				// You hear a far explosion if you're outside the blast radius. Small bombs shouldn't be heard all over the station.
 				else if(dist <= far_dist)
-					var/far_volume = CLAMP(far_dist, 30, 50) // Volume is based on explosion size and dist
+					var/far_volume = CLAMP(far_dist, 50, 100) // Volume is based on explosion size and dist
 					far_volume += (dist <= far_dist * 0.5 ? 50 : 0) // add 50 volume if the mob is pretty close to the explosion
+					far_volume = CLAMP(far_volume, 50, 100)
 					M.playsound_local(epicenter, null, far_volume, 1, frequency, falloff = 5, S = far_explosion_sound)
 					if(baseshakeamount > 0)
 						shake_camera(M, 10, CLAMP(baseshakeamount*0.25, 0, 2.5))
@@ -136,14 +141,13 @@ GLOBAL_LIST_EMPTY(explosions)
 	SSlighting.postpone(postponeCycles)
 	SSmachines.postpone(postponeCycles)
 
-	if(heavy_impact_range > 1)
-		var/datum/effect_system/explosion/E
-		if(smoke)
-			E = new /datum/effect_system/explosion/smoke
-		else
-			E = new
-		E.set_up(epicenter)
-		E.start()
+	var/datum/effect_system/explosion/E
+	if(smoke)
+		E = new /datum/effect_system/explosion/smoke
+	else
+		E = new
+	E.set_up(epicenter)
+	E.start()
 
 	EX_PREPROCESS_CHECK_TICK
 
@@ -205,7 +209,7 @@ GLOBAL_LIST_EMPTY(explosions)
 				if(!QDELETED(A))
 					A.ex_act(dist)
 
-		if(flame_dist && prob(40) && !isspaceturf(T) && !T.density)
+		if(flame_dist && !isspaceturf(T))
 			new /obj/effect/hotspot(T) //Mostly for ambience!
 
 		if(dist > EXPLODE_NONE)

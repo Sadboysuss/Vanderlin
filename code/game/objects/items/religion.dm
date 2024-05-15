@@ -1,6 +1,6 @@
 /obj/item/banner
 	name = "banner"
-	desc = "A banner with Nanotrasen's logo on it."
+	desc = ""
 	icon = 'icons/obj/banner.dmi'
 	icon_state = "banner"
 	item_state = "banner"
@@ -18,16 +18,16 @@
 /obj/item/banner/examine(mob/user)
 	. = ..()
 	if(inspiration_available)
-		. += "<span class='notice'>Activate it in your hand to inspire nearby allies of this banner's allegiance!</span>"
+		. += "<span class='notice'>Activate it in my hand to inspire nearby allies of this banner's allegiance!</span>"
 
 /obj/item/banner/attack_self(mob/living/carbon/human/user)
 	if(!inspiration_available)
 		return
 	if(morale_time > world.time)
-		to_chat(user, "<span class='warning'>You aren't feeling inspired enough to flourish [src] again yet.</span>")
+		to_chat(user, "<span class='warning'>I aren't feeling inspired enough to flourish [src] again yet.</span>")
 		return
 	user.visible_message("<span class='big notice'>[user] flourishes [src]!</span>", \
-	"<span class='notice'>You raise [src] skywards, inspiring your allies!</span>")
+	"<span class='notice'>I raise [src] skywards, inspiring my allies!</span>")
 	playsound(src, "rustle", 100, FALSE)
 	if(warcry)
 		user.say("[warcry]", forced="banner")
@@ -54,7 +54,7 @@
 	for(var/V in inspired)
 		var/mob/living/carbon/human/H = V
 		if(H != user)
-			to_chat(H, "<span class='notice'>Your confidence surges as [user] flourishes [user.p_their()] [name]!</span>")
+			to_chat(H, "<span class='notice'>My confidence surges as [user] flourishes [user.p_their()] [name]!</span>")
 		inspiration(H)
 		special_inspiration(H)
 
@@ -69,14 +69,14 @@
 	H.AdjustImmobilized(-40)
 	H.AdjustParalyzed(-40)
 	H.AdjustUnconscious(-40)
-	playsound(H, 'sound/magic/staff_healing.ogg', 25, FALSE)
+	playsound(H, 'sound/blank.ogg', 25, FALSE)
 
 /obj/item/banner/proc/special_inspiration(mob/living/carbon/human/H) //Any banner-specific inspiration effects go here
 	return
 
 /obj/item/banner/security
 	name = "securistan banner"
-	desc = "The banner of Securistan, ruling the station with an iron fist."
+	desc = ""
 	icon_state = "banner_security"
 	item_state = "banner_security"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
@@ -93,11 +93,11 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/security/officer = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/medical
 	name = "meditopia banner"
-	desc = "The banner of Meditopia, generous benefactors that cure wounds and shelter the weak."
+	desc = ""
 	icon_state = "banner_medical"
 	item_state = "banner_medical"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
@@ -117,7 +117,7 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/medical = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/medical/special_inspiration(mob/living/carbon/human/H)
 	H.adjustToxLoss(-15)
@@ -126,7 +126,7 @@
 
 /obj/item/banner/science
 	name = "sciencia banner"
-	desc = "The banner of Sciencia, bold and daring thaumaturges and researchers that take the path less traveled."
+	desc = ""
 	icon_state = "banner_science"
 	item_state = "banner_science"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
@@ -146,11 +146,11 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/rnd/scientist = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/cargo
 	name = "cargonia banner"
-	desc = "The banner of the eternal Cargonia, with the mystical power of conjuring any object into existence."
+	desc = ""
 	icon_state = "banner_cargo"
 	item_state = "banner_cargo"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
@@ -167,11 +167,11 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/cargo/tech = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/engineering
 	name = "engitopia banner"
-	desc = "The banner of Engitopia, wielders of limitless power."
+	desc = ""
 	icon_state = "banner_engineering"
 	item_state = "banner_engineering"
 	lefthand_file = 'icons/mob/inhands/equipment/banners_lefthand.dmi'
@@ -191,11 +191,11 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/engineering/engineer = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/command
 	name = "command banner"
-	desc = "The banner of Command, a staunch and ancient line of bueraucratic kings and queens."
+	desc = ""
 	//No icon state here since the default one is the NT banner
 	job_loyalties = list("Captain", "Head of Personnel", "Chief Engineer", "Head of Security", "Research Director", "Chief Medical Officer")
 	warcry = "Hail Nanotrasen!"
@@ -212,44 +212,44 @@
 	time = 40
 	reqs = list(/obj/item/stack/rods = 2,
 				/obj/item/clothing/under/rank/captain/parade = 1)
-	category = CAT_MISC
+	category = CAT_NONE
 
 /obj/item/banner/red
 	name = "red banner"
 	icon_state = "banner-red"
 	item_state = "banner-red"
-	desc = "A banner with the logo of the red deity."
+	desc = ""
 
 /obj/item/banner/blue
 	name = "blue banner"
 	icon_state = "banner-blue"
 	item_state = "banner-blue"
-	desc = "A banner with the logo of the blue deity."
+	desc = ""
 
 /obj/item/storage/backpack/bannerpack
 	name = "nanotrasen banner backpack"
-	desc = "It's a backpack with lots of extra room.  A banner with Nanotrasen's logo is attached, that can't be removed."
+	desc = ""
 	icon_state = "bannerpack"
 
 /obj/item/storage/backpack/bannerpack/Initialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 27 //6 more then normal, for the tradeoff of declaring yourself an antag at all times.
+	STR.max_combined_w_class = 27 //6 more then normal, for the tradeoff of declaring myself an antag at all times.
 
 /obj/item/storage/backpack/bannerpack/red
 	name = "red banner backpack"
-	desc = "It's a backpack with lots of extra room.  A red banner is attached, that can't be removed."
+	desc = ""
 	icon_state = "bannerpack-red"
 
 /obj/item/storage/backpack/bannerpack/blue
 	name = "blue banner backpack"
-	desc = "It's a backpack with lots of extra room.  A blue banner is attached, that can't be removed."
+	desc = ""
 	icon_state = "bannerpack-blue"
 
 //this is all part of one item set
 /obj/item/clothing/suit/armor/plate/crusader
 	name = "Crusader's Armour"
-	desc = "Armour that's comprised of metal and cloth."
+	desc = ""
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_BULKY
 	slowdown = 2.0 //gotta pretend we're balanced.
@@ -264,7 +264,7 @@
 
 /obj/item/clothing/head/helmet/plate/crusader
 	name = "Crusader's Hood"
-	desc = "A brownish hood."
+	desc = ""
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
 	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE
@@ -279,7 +279,7 @@
 //Prophet helmet
 /obj/item/clothing/head/helmet/plate/crusader/prophet
 	name = "Prophet's Hat"
-	desc = "A religious-looking hat."
+	desc = ""
 	mob_overlay_icon = 'icons/mob/large-worn-icons/64x64/head.dmi'
 	flags_1 = 0
 	armor = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 50, "bomb" = 70, "bio" = 50, "rad" = 50, "fire" = 60, "acid" = 60) //religion protects you from disease and radiation, honk.
@@ -295,7 +295,7 @@
 //Structure conversion staff
 /obj/item/godstaff
 	name = "godstaff"
-	desc = "It's a stick..?"
+	desc = ""
 	icon_state = "godstaff-red"
 	lefthand_file = 'icons/mob/inhands/weapons/staves_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/staves_righthand.dmi'
@@ -324,7 +324,7 @@
 /obj/item/clothing/gloves/plate
 	name = "Plate Gauntlets"
 	icon_state = "crusader"
-	desc = "They're like gloves, but made of metal."
+	desc = ""
 	siemens_coefficient = 0
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
@@ -339,7 +339,7 @@
 
 /obj/item/clothing/shoes/plate
 	name = "Plate Boots"
-	desc = "Metal boots, they look heavy."
+	desc = ""
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 40, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 60) //does this even do anything on boots?
@@ -359,7 +359,7 @@
 
 /obj/item/storage/box/itemset/crusader
 	name = "Crusader's Armour Set" //i can't into ck2 references
-	desc = "This armour is said to be based on the armor of kings on another world thousands of years ago, who tended to assassinate, conspire, and plot against everyone who tried to do the same to them.  Some things never change."
+	desc = ""
 
 
 /obj/item/storage/box/itemset/crusader/blue/PopulateContents()
@@ -377,12 +377,12 @@
 
 
 /obj/item/claymore/weak
-	desc = "This one is rusted."
+	desc = ""
 	force = 30
-	armour_penetration = 15
+	armor_penetration = 15
 
 /obj/item/claymore/weak/ceremonial
-	desc = "A rusted claymore, once at the heart of a powerful scottish clan struck down and oppressed by tyrants, it has been passed down the ages as a symbol of defiance."
+	desc = ""
 	force = 15
 	block_chance = 30
-	armour_penetration = 5
+	armor_penetration = 5

@@ -1,45 +1,45 @@
 ///Subtype for any kind of ballistic gun
 ///This has a shitload of vars on it, and I'm sorry for that, but it does make making new subtypes really easy
 /obj/item/gun/ballistic
-	desc = "Now comes in flavors like GUN. Uses 10mm ammo, for some reason."
+	desc = ""
 	name = "projectile gun"
 	icon_state = "pistol"
 	w_class = WEIGHT_CLASS_NORMAL
 
 	///sound when inserting magazine
-	var/load_sound = 'sound/weapons/gun/general/magazine_insert_full.ogg'
+	var/load_sound = 'sound/blank.ogg'
 	///sound when inserting an empty magazine
-	var/load_empty_sound = 'sound/weapons/gun/general/magazine_insert_empty.ogg'
+	var/load_empty_sound = 'sound/blank.ogg'
 	///volume of loading sound
 	var/load_sound_volume = 40
 	///whether loading sound should vary
 	var/load_sound_vary = TRUE
 	///sound of racking
-	var/rack_sound = 'sound/weapons/gun/general/bolt_rack.ogg'
+	var/rack_sound = 'sound/blank.ogg'
 	///volume of racking
 	var/rack_sound_volume = 60
 	///whether racking sound should vary
 	var/rack_sound_vary = TRUE
 	///sound of when the bolt is locked back manually
-	var/lock_back_sound = 'sound/weapons/gun/general/slide_lock_1.ogg'
+	var/lock_back_sound = 'sound/blank.ogg'
 	///volume of lock back
 	var/lock_back_sound_volume = 60
 	///whether lock back varies
 	var/lock_back_sound_vary = TRUE
 	///Sound of ejecting a magazine
-	var/eject_sound = 'sound/weapons/gun/general/magazine_remove_full.ogg'
+	var/eject_sound = 'sound/blank.ogg'
 	///sound of ejecting an empty magazine
-	var/eject_empty_sound = 'sound/weapons/gun/general/magazine_remove_empty.ogg'
+	var/eject_empty_sound = 'sound/blank.ogg'
 	///volume of ejecting a magazine
 	var/eject_sound_volume = 40
 	///whether eject sound should vary
 	var/eject_sound_vary = TRUE
 	///sound of dropping the bolt or releasing a slide
-	var/bolt_drop_sound = 'sound/weapons/gun/general/bolt_drop.ogg'
+	var/bolt_drop_sound = 'sound/blank.ogg'
 	///volume of bolt drop/slide release
 	var/bolt_drop_sound_volume = 60
 	///empty alarm sound (if enabled)
-	var/empty_alarm_sound = 'sound/weapons/gun/general/empty_alarm.ogg'
+	var/empty_alarm_sound = 'sound/blank.ogg'
 	///empty alarm volume sound
 	var/empty_alarm_volume = 70
 	///whether empty alarm sound varies
@@ -85,6 +85,7 @@
 	var/tac_reloads = TRUE //Snowflake mechanic no more.
 	///Whether the gun can be sawn off by sawing tools
 	var/can_be_sawn_off  = FALSE
+	var/verbage = "load"
 
 /obj/item/gun/ballistic/Initialize()
 	. = ..()
@@ -171,7 +172,7 @@
 			return
 		bolt_locked = FALSE
 	if (user)
-		to_chat(user, "<span class='notice'>You rack the [bolt_wording] of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I rack the [bolt_wording] of \the [src].</span>")
 	process_chamber(!chambered, FALSE)
 	if (bolt_type == BOLT_TYPE_LOCKING && !chambered)
 		bolt_locked = TRUE
@@ -184,7 +185,7 @@
 /obj/item/gun/ballistic/proc/drop_bolt(mob/user = null)
 	playsound(src, bolt_drop_sound, bolt_drop_sound_volume, FALSE)
 	if (user)
-		to_chat(user, "<span class='notice'>You drop the [bolt_wording] of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I drop the [bolt_wording] of \the [src].</span>")
 	chamber_round()
 	bolt_locked = FALSE
 	update_icon()
@@ -197,14 +198,14 @@
 	if(user.transferItemToLoc(AM, src))
 		magazine = AM
 		if (display_message)
-			to_chat(user, "<span class='notice'>You load a new [magazine_wording] into \the [src].</span>")
+			to_chat(user, "<span class='notice'>I load a new [magazine_wording] into \the [src].</span>")
 		playsound(src, load_empty_sound, load_sound_volume, load_sound_vary)
 		if (bolt_type == BOLT_TYPE_OPEN && !bolt_locked)
 			chamber_round(TRUE)
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>You cannot seem to get \the [src] out of your hands!</span>")
+		to_chat(user, "<span class='warning'>I cannot seem to get \the [src] out of your hands!</span>")
 		return FALSE
 
 ///Handles all the logic of magazine ejection, if tac_load is set that magazine will be tacloaded in the place of the old eject
@@ -219,16 +220,16 @@
 	var/obj/item/ammo_box/magazine/old_mag = magazine
 	if (tac_load)
 		if (insert_magazine(user, tac_load, FALSE))
-			to_chat(user, "<span class='notice'>You perform a tactical reload on \the [src].</span>")
+			to_chat(user, "<span class='notice'>I perform a tactical reload on \the [src].</span>")
 		else
-			to_chat(user, "<span class='warning'>You dropped the old [magazine_wording], but the new one doesn't fit. How embarassing.</span>")
+			to_chat(user, "<span class='warning'>I dropped the old [magazine_wording], but the new one doesn't fit. How embarassing.</span>")
 			magazine = null
 	else
 		magazine = null
 	user.put_in_hands(old_mag)
 	old_mag.update_icon()
 	if (display_message)
-		to_chat(user, "<span class='notice'>You pull the [magazine_wording] out of \the [src].</span>")
+		to_chat(user, "<span class='notice'>I pull the [magazine_wording] out of \the [src].</span>")
 	update_icon()
 
 /obj/item/gun/ballistic/can_shoot()
@@ -255,7 +256,7 @@
 				chambered = null
 			var/num_loaded = magazine.attackby(A, user, params, TRUE)
 			if (num_loaded)
-				to_chat(user, "<span class='notice'>You load [num_loaded] [cartridge_wording]\s into \the [src].</span>")
+				to_chat(user, "<span class='notice'>I [verbage] [num_loaded] [cartridge_wording]\s on \the [src].</span>")
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
 				if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 					chamber_round()
@@ -265,16 +266,16 @@
 	if(istype(A, /obj/item/suppressor))
 		var/obj/item/suppressor/S = A
 		if(!can_suppress)
-			to_chat(user, "<span class='warning'>You can't seem to figure out how to fit [S] on [src]!</span>")
+			to_chat(user, "<span class='warning'>I can't seem to figure out how to fit [S] on [src]!</span>")
 			return
 		if(!user.is_holding(src))
-			to_chat(user, "<span class='warning'>You need be holding [src] to fit [S] to it!</span>")
+			to_chat(user, "<span class='warning'>I need be holding [src] to fit [S] to it!</span>")
 			return
 		if(suppressed)
 			to_chat(user, "<span class='warning'>[src] already has a suppressor!</span>")
 			return
 		if(user.transferItemToLoc(A, src))
-			to_chat(user, "<span class='notice'>You screw \the [S] onto \the [src].</span>")
+			to_chat(user, "<span class='notice'>I screw \the [S] onto \the [src].</span>")
 			install_suppressor(A)
 			return
 	if (can_be_sawn_off)
@@ -302,7 +303,7 @@
 			var/obj/item/suppressor/S = suppressed
 			if(!user.is_holding(src))
 				return ..()
-			to_chat(user, "<span class='notice'>You unscrew \the [suppressed] from \the [src].</span>")
+			to_chat(user, "<span class='notice'>I unscrew \the [suppressed] from \the [src].</span>")
 			user.put_in_hands(suppressed)
 			w_class -= S.w_class
 			suppressed = null
@@ -355,7 +356,7 @@
 			if(T && is_station_level(T.z))
 				SSblackbox.record_feedback("tally", "station_mess_created", 1, CB.name)
 		if (num_unloaded)
-			to_chat(user, "<span class='notice'>You unload [num_unloaded] [cartridge_wording]\s from [src].</span>")
+			to_chat(user, "<span class='notice'>I remove [(num_unloaded == 1) ? "the" : "[num_unloaded]"] [cartridge_wording]\s from [src].</span>")
 			playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 			update_icon()
 		else
@@ -373,14 +374,14 @@
 
 /obj/item/gun/ballistic/examine(mob/user)
 	. = ..()
-	var/count_chambered = !(bolt_type == BOLT_TYPE_NO_BOLT || bolt_type == BOLT_TYPE_OPEN)
-	. += "It has [get_ammo(count_chambered)] round\s remaining."
-	if (!chambered)
-		. += "It does not seem to have a round chambered."
-	if (bolt_locked)
-		. += "The [bolt_wording] is locked back and needs to be released before firing."
-	if (suppressed)
-		. += "It has a suppressor attached that can be removed with <b>alt+click</b>."
+//	var/count_chambered = !(bolt_type == BOLT_TYPE_NO_BOLT || bolt_type == BOLT_TYPE_OPEN)
+//	. += "It has [get_ammo(count_chambered)] round\s remaining."
+//	if (!chambered)
+//		. += "It does not seem to have a round chambered."
+//	if (bolt_locked)
+//		. += "The [bolt_wording] is locked back and needs to be released before firing."
+//	if (suppressed)
+//		. += "It has a suppressor attached that can be removed with <b>alt+click</b>."
 
 ///Gets the number of bullets in the gun
 /obj/item/gun/ballistic/proc/get_ammo(countchambered = TRUE)
@@ -441,10 +442,10 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 		to_chat(user, "<span class='warning'>\The [src] is already shortened!</span>")
 		return
 	if(bayonet)
-		to_chat(user, "<span class='warning'>You cannot saw-off \the [src] with \the [bayonet] attached!</span>")
+		to_chat(user, "<span class='warning'>I cannot saw-off \the [src] with \the [bayonet] attached!</span>")
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("<span class='notice'>[user] begins to shorten \the [src].</span>", "<span class='notice'>You begin to shorten \the [src]...</span>")
+	user.visible_message("<span class='notice'>[user] begins to shorten \the [src].</span>", "<span class='notice'>I begin to shorten \the [src]...</span>")
 
 	//if there's any live ammo inside the gun, makes it go off
 	if(blow_up(user))
@@ -454,7 +455,7 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 	if(do_after(user, 30, target = src))
 		if(sawn_off)
 			return
-		user.visible_message("<span class='notice'>[user] shortens \the [src]!</span>", "<span class='notice'>You shorten \the [src].</span>")
+		user.visible_message("<span class='notice'>[user] shortens \the [src]!</span>", "<span class='notice'>I shorten \the [src].</span>")
 		name = "sawn-off [src.name]"
 		desc = sawn_desc
 		w_class = WEIGHT_CLASS_NORMAL
@@ -477,7 +478,7 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 
 /obj/item/suppressor
 	name = "suppressor"
-	desc = "A syndicate small-arms suppressor for maximum espionage."
+	desc = ""
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "suppressor"
 	w_class = WEIGHT_CLASS_TINY
@@ -485,4 +486,4 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 
 /obj/item/suppressor/specialoffer
 	name = "cheap suppressor"
-	desc = "A foreign knock-off suppressor, it feels flimsy, cheap, and brittle. Still fits most weapons."
+	desc = ""

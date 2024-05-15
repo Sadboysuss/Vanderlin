@@ -11,7 +11,7 @@
 
 /obj/structure/table_frame
 	name = "table frame"
-	desc = "Four metal legs with four framing rods for a table. You could easily pass through this."
+	desc = ""
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table_frame"
 	density = FALSE
@@ -23,10 +23,10 @@
 
 /obj/structure/table_frame/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, "<span class='notice'>You start disassembling [src]...</span>")
+		to_chat(user, "<span class='notice'>I start disassembling [src]...</span>")
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 30))
-			playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 			deconstruct(TRUE)
 		return
 
@@ -34,16 +34,16 @@
 	if (istype(I, /obj/item/stack))
 		if(material?.tableVariant)
 			if(material.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one [material.name] sheet to do this!</span>")
+				to_chat(user, "<span class='warning'>I need one [material.name] sheet to do this!</span>")
 				return
-			to_chat(user, "<span class='notice'>You start adding [material] to [src]...</span>")
+			to_chat(user, "<span class='notice'>I start adding [material] to [src]...</span>")
 			if(do_after(user, 20, target = src) && material.use(1))
 				make_new_table(material.tableVariant)
 		else
 			if(material.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one metal sheet to do this!</span>")
+				to_chat(user, "<span class='warning'>I need one metal sheet to do this!</span>")
 				return
-			to_chat(user, "<span class='notice'>You start adding [material] to [src]...</span>")
+			to_chat(user, "<span class='notice'>I start adding [material] to [src]...</span>")
 			if(do_after(user, 20, target = src) && material.use(1))
 				var/list/material_list = list()
 				if(material.material_type)
@@ -75,7 +75,7 @@
 
 /obj/structure/table_frame/wood
 	name = "wooden table frame"
-	desc = "Four wooden legs with four framing wooden rods for a wooden table. You could easily pass through this."
+	desc = ""
 	icon_state = "wood_frame"
 	framestack = /obj/item/stack/sheet/mineral/wood
 	framestackamount = 2
@@ -92,9 +92,9 @@
 
 		if (toConstruct)
 			if(material.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one [material.name] sheet to do this!</span>")
+				to_chat(user, "<span class='warning'>I need one [material.name] sheet to do this!</span>")
 				return
-			to_chat(user, "<span class='notice'>You start adding [material] to [src]...</span>")
+			to_chat(user, "<span class='notice'>I start adding [material] to [src]...</span>")
 			if(do_after(user, 20, target = src) && material.use(1))
 				make_new_table(toConstruct)
 	else

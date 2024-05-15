@@ -7,7 +7,7 @@
 
 /obj/item/camera_bug
 	name = "camera bug"
-	desc = "For illicit snooping through the camera network."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state	= "camera_bug"
 	w_class		= WEIGHT_CLASS_TINY
@@ -296,11 +296,11 @@
 				break
 	src.updateSelfDialog()
 
-/obj/item/camera_bug/proc/same_z_level(var/obj/machinery/camera/C)
+/obj/item/camera_bug/proc/same_z_level(obj/machinery/camera/C)
 	var/turf/T_cam = get_turf(C)
 	var/turf/T_bug = get_turf(loc)
 	if(!T_bug || T_cam.z != T_bug.z)
-		to_chat(usr, "<span class='warning'>You can't get a signal!</span>")
+		to_chat(usr, "<span class='warning'>I can't get a signal!</span>")
 		return FALSE
 	return TRUE
 

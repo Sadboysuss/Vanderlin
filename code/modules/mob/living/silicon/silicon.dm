@@ -9,10 +9,10 @@
 	see_in_dark = 8
 	bubble_icon = "machine"
 	weather_immunities = list("ash")
-	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
+	base_intents = list(INTENT_HELP, INTENT_HARM)
 	mob_biotypes = MOB_ROBOTIC
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
-	deathsound = 'sound/voice/borg_deathsound.ogg'
+	deathsound = 'sound/blank.ogg'
 	speech_span = SPAN_ROBOT
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1 | HEAR_1
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS

@@ -1,6 +1,6 @@
 /obj/item/nanite_hijacker
 	name = "nanite remote control" //fake name
-	desc = "A device that can load nanite programming disks, edit them at will, and imprint them to nanites remotely."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/device.dmi'
 	icon_state = "nanite_remote"
@@ -26,7 +26,7 @@
 		if(disk)
 			eject()
 		if(user.transferItemToLoc(N, src))
-			to_chat(user, "<span class='notice'>You insert [N] into [src].</span>")
+			to_chat(user, "<span class='notice'>I insert [N] into [src].</span>")
 			disk = N
 			program = N.program
 	else
@@ -47,11 +47,11 @@
 		var/success = SEND_SIGNAL(target, COMSIG_NANITE_ADD_PROGRAM, program.copy())
 		switch(success)
 			if(NONE)
-				to_chat(user, "<span class='notice'>You don't detect any nanites in [target].</span>")
+				to_chat(user, "<span class='notice'>I don't detect any nanites in [target].</span>")
 			if(COMPONENT_PROGRAM_INSTALLED)
-				to_chat(user, "<span class='notice'>You insert the currently loaded program into [target]'s nanites.</span>")
+				to_chat(user, "<span class='notice'>I insert the currently loaded program into [target]'s nanites.</span>")
 			if(COMPONENT_PROGRAM_NOT_INSTALLED)
-				to_chat(user, "<span class='warning'>You try to insert the currently loaded program into [target]'s nanites, but the installation fails.</span>")
+				to_chat(user, "<span class='warning'>I try to insert the currently loaded program into [target]'s nanites, but the installation fails.</span>")
 
 //Same UI as the nanite programmer, as it pretty much does the same
 /obj/item/nanite_hijacker/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.hands_state)

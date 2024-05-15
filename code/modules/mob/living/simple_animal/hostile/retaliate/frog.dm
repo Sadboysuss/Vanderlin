@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/frog
 	name = "frog"
-	desc = "It seems a little sad."
+	desc = ""
 	icon_state = "frog"
 	icon_living = "frog"
 	icon_dead = "frog_dead"
@@ -24,18 +24,18 @@
 	density = FALSE
 	ventcrawler = VENTCRAWLER_ALWAYS
 	faction = list("hostile")
-	attack_sound = 'sound/effects/reee.ogg'
+	attack_sound = 'sound/blank.ogg'
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/nugget = 1)
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
 	gold_core_spawnable = HOSTILE_SPAWN
-	var/stepped_sound = 'sound/effects/huuu.ogg'
+	var/stepped_sound = 'sound/blank.ogg'
 
 /mob/living/simple_animal/hostile/retaliate/frog/Initialize()
 	. = ..()
 	if(prob(1))
 		name = "rare frog"
-		desc = "It seems a little smug."
+		desc = ""
 		icon_state = "rare_frog"
 		icon_living = "rare_frog"
 		icon_dead = "rare_frog_dead"

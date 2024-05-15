@@ -2,7 +2,7 @@
 
 /obj/structure/tank_dispenser
 	name = "tank dispenser"
-	desc = "A simple yet bulky storage device for gas tanks. Holds up to 10 oxygen tanks and 10 plasma tanks."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dispenser"
 	density = TRUE
@@ -53,7 +53,7 @@
 	else if(I.tool_behaviour == TOOL_WRENCH)
 		default_unfasten_wrench(user, I, time = 20)
 		return
-	else if(user.a_intent != INTENT_HARM)
+	else if(user.used_intent.type != INTENT_HARM)
 		to_chat(user, "<span class='notice'>[I] does not fit into [src].</span>")
 		return
 	else
@@ -64,7 +64,7 @@
 
 	if(!user.transferItemToLoc(I, src))
 		return
-	to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+	to_chat(user, "<span class='notice'>I put [I] in [src].</span>")
 	update_icon()
 
 /obj/structure/tank_dispenser/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \

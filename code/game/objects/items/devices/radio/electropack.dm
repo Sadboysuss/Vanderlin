@@ -1,6 +1,6 @@
 /obj/item/electropack
 	name = "electropack"
-	desc = "Dance my monkeys! DANCE!!!"
+	desc = ""
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "electropack0"
 	item_state = "electropack"
@@ -32,7 +32,7 @@
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(src == C.back)
-			to_chat(user, "<span class='warning'>You need help taking this off!</span>")
+			to_chat(user, "<span class='warning'>I need help taking this off!</span>")
 			return
 	return ..()
 
@@ -108,7 +108,7 @@
 		var/mob/living/L = loc
 		step(L, pick(GLOB.cardinals))
 
-		to_chat(L, "<span class='danger'>You feel a sharp shock!</span>")
+		to_chat(L, "<span class='danger'>I feel a sharp shock!</span>")
 		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(3, 1, L)
 		s.start()

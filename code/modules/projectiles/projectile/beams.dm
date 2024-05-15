@@ -5,8 +5,8 @@
 	damage = 20
 	light_range = 2
 	damage_type = BURN
-	hitsound = 'sound/weapons/sear.ogg'
-	hitsound_wall = 'sound/weapons/effects/searwall.ogg'
+	hitsound = 'sound/blank.ogg'
+	hitsound_wall = 'sound/blank.ogg'
 	flag = "laser"
 	eyeblur = 2
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/red_laser
@@ -40,7 +40,7 @@
 	damage = 15
 
 /obj/projectile/beam/weak/penetrator
-	armour_penetration = 50
+	armor_penetration = 50
 
 /obj/projectile/beam/practice
 	name = "practice laser"
@@ -73,7 +73,7 @@
 	damage = 30
 	damage_type = STAMINA
 	flag = "energy"
-	hitsound = 'sound/weapons/tap.ogg'
+	hitsound = 'sound/blank.ogg'
 	eyeblur = 0
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/blue_laser
 	light_color = LIGHT_COLOR_BLUE
@@ -135,8 +135,8 @@
 	. = ..()
 	if(ishuman(target))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit))
-			if(M.wear_suit.type in suit_types)
+		if(istype(M.wear_armor))
+			if(M.wear_armor.type in suit_types)
 				M.adjustStaminaLoss(34)
 
 /obj/projectile/beam/lasertag/redtag
@@ -190,7 +190,7 @@
 /obj/projectile/beam/shrink
 	name = "shrink ray"
 	icon_state = "blue_laser"
-	hitsound = 'sound/weapons/shrink_hit.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 0
 	damage_type = STAMINA
 	flag = "energy"

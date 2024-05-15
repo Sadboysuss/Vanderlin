@@ -47,6 +47,10 @@
 /proc/sanitize_filename(t)
 	return sanitize_simple(t, list("\n"="", "\t"="", "/"="", "\\"="", "?"="", "%"="", "*"="", ":"="", "|"="", "\""="", "<"="", ">"=""))
 
+/proc/sanitize_hear_message(t)
+	return sanitize_simple(t, list(","="", "."="", "\n"="", "\t"="", "/"="", "\\"="", "?"="", "%"="", "*"="", ":"="", "|"="", "\""="", "<"="", ">"=""))
+
+
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(t,list/repl_chars = null)
 	if(CHAT_FILTER_CHECK(t))
@@ -130,7 +134,8 @@
 			// a  .. z
 			if(97 to 122)			//Lowercase Letters
 				if(last_char_group<2)
-					t_out += ascii2text(ascii_char-32)	//Force uppercase first character
+//					t_out += ascii2text(ascii_char-32)	//Force uppercase first character
+					t_out += ascii2text(ascii_char)
 				else
 					t_out += ascii2text(ascii_char)
 				number_of_alphanumeric++

@@ -9,7 +9,7 @@
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	throwforce = 5
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
 	var/can_use = 1
@@ -33,7 +33,7 @@
 	if (isturf(user.loc) || istype(user.loc, /obj/structure) || active_dummy)
 		toggle(user)
 	else
-		to_chat(user, "<span class='warning'>You can't use [src] while inside something!</span>")
+		to_chat(user, "<span class='warning'>I can't use [src] while inside something!</span>")
 
 /obj/item/chameleon/afterattack(atom/target, mob/user , proximity)
 	. = ..()
@@ -56,11 +56,11 @@
 	if(iseffect(target))
 		if(!(istype(target, /obj/effect/decal))) //be a footprint
 			return
-	playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, TRUE, -6)
+	playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -6)
 	to_chat(user, "<span class='notice'>Scanned [target].</span>")
 	var/obj/temp = new/obj()
 	temp.appearance = target.appearance
-	temp.layer = initial(target.layer) // scanning things in your inventory
+	temp.layer = initial(target.layer) // scanning things in my inventory
 	temp.plane = initial(target.plane)
 	saved_appearance = temp.appearance
 
@@ -74,23 +74,23 @@
 		return
 	if(active_dummy)
 		eject_all()
-		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, TRUE, -6)
+		playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -6)
 		qdel(active_dummy)
 		active_dummy = null
-		to_chat(user, "<span class='notice'>You deactivate \the [src].</span>")
+		to_chat(user, "<span class='notice'>I deactivate \the [src].</span>")
 		new /obj/effect/temp_visual/emp/pulse(get_turf(src))
 	else
-		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, TRUE, -6)
+		playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -6)
 		var/obj/effect/dummy/chameleon/C = new/obj/effect/dummy/chameleon(user.drop_location())
 		C.activate(user, saved_appearance, src)
-		to_chat(user, "<span class='notice'>You activate \the [src].</span>")
+		to_chat(user, "<span class='notice'>I activate \the [src].</span>")
 		new /obj/effect/temp_visual/emp/pulse(get_turf(src))
 	user.cancel_camera()
 
 /obj/item/chameleon/proc/disrupt(delete_dummy = 1)
 	if(active_dummy)
 		for(var/mob/M in active_dummy)
-			to_chat(M, "<span class='danger'>Your chameleon projector deactivates.</span>")
+			to_chat(M, "<span class='danger'>My chameleon projector deactivates.</span>")
 		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread
 		spark_system.set_up(5, 0, src)
 		spark_system.attach(src)

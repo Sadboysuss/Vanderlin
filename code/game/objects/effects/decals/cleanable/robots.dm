@@ -2,7 +2,7 @@
 
 /obj/effect/decal/cleanable/robot_debris
 	name = "robot debris"
-	desc = "It's a useless heap of junk... <i>or is it?</i>"
+	desc = ""
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "gib1"
 	layer = LOW_OBJ_LAYER
@@ -44,7 +44,7 @@
 
 /obj/effect/decal/cleanable/oil
 	name = "motor oil"
-	desc = "It's black and greasy. Looks like Beepsky made another mess."
+	desc = ""
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "floor1"
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
@@ -59,14 +59,14 @@
 /obj/effect/decal/cleanable/oil/attackby(obj/item/I, mob/living/user)
 	var/attacked_by_hot_thing = I.get_temperature()
 	if(attacked_by_hot_thing)
-		visible_message("<span class='warning'>[user] tries to ignite [src] with [I]!</span>", "<span class='warning'>You try to ignite [src] with [I].</span>")
+		visible_message("<span class='warning'>[user] tries to ignite [src] with [I]!</span>", "<span class='warning'>I try to ignite [src] with [I].</span>")
 		log_combat(user, src, (attacked_by_hot_thing < 480) ? "tried to ignite" : "ignited", I)
 		fire_act(attacked_by_hot_thing)
 		return
 	return ..()
 
-/obj/effect/decal/cleanable/oil/fire_act(exposed_temperature, exposed_volume)
-	if(exposed_temperature < 480)
+/obj/effect/decal/cleanable/oil/fire_act(added, maxstacks)
+	if(added < 480)
 		return
 	visible_message("<span class='danger'>[src] catches fire!</span>")
 	var/turf/T = get_turf(src)

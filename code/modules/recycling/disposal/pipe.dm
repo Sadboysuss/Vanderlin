@@ -2,7 +2,7 @@
 
 /obj/structure/disposalpipe
 	name = "disposal pipe"
-	desc = "An underfloor disposal pipe."
+	desc = ""
 	icon = 'icons/obj/atmospherics/pipes/disposal.dmi'
 	anchored = TRUE
 	density = FALSE
@@ -88,7 +88,7 @@
 
 // hide called by levelupdate if turf intact status changes
 // change visibility status and force update of icon
-/obj/structure/disposalpipe/hide(var/intact)
+/obj/structure/disposalpipe/hide(intact)
 	invisibility = intact ? INVISIBILITY_MAXIMUM: 0	// hide if floor is intact
 
 // expel the held objects into a turf
@@ -115,7 +115,7 @@
 	else if(floorturf)
 		target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
 
-	playsound(src, 'sound/machines/hiss.ogg', 50, FALSE, FALSE)
+	playsound(src, 'sound/blank.ogg', 50, FALSE, FALSE)
 	for(var/A in H)
 		var/atom/movable/AM = A
 		AM.forceMove(get_turf(src))
@@ -142,10 +142,10 @@
 	if(!I.tool_start_check(user, amount=0))
 		return TRUE
 
-	to_chat(user, "<span class='notice'>You start slicing [src]...</span>")
+	to_chat(user, "<span class='notice'>I start slicing [src]...</span>")
 	if(I.use_tool(src, user, 30, volume=50))
 		deconstruct()
-		to_chat(user, "<span class='notice'>You slice [src].</span>")
+		to_chat(user, "<span class='notice'>I slice [src].</span>")
 	return TRUE
 
 //checks if something is blocking the deconstruction (e.g. trunk with a bin still linked to it)
@@ -257,7 +257,7 @@
 
 /obj/structure/disposalpipe/trunk/can_be_deconstructed(mob/user)
 	if(linked)
-		to_chat(user, "<span class='warning'>You need to deconstruct disposal machinery above this pipe!</span>")
+		to_chat(user, "<span class='warning'>I need to deconstruct disposal machinery above this pipe!</span>")
 		return FALSE
 	return TRUE
 
@@ -287,7 +287,7 @@
 
 // a broken pipe
 /obj/structure/disposalpipe/broken
-	desc = "A broken piece of disposal pipe."
+	desc = ""
 	icon_state = "pipe-b"
 	initialize_dirs = DISP_DIR_NONE
 	// broken pipes always have dpdir=0 so they're not found as 'real' pipes

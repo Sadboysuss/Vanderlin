@@ -13,12 +13,23 @@
 	var/body_elements
 	var/head_content = ""
 	var/content = ""
+	var/no_close_movement = FALSE
 
+/datum/browser/noclose
+	no_close_movement = TRUE
 
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, atom/nref = null)
-
+	if(!nuser)
+		return
 	user = nuser
 	window_id = nwindow_id
+	if(!no_close_movement)
+		if(ismob(nuser))
+			if(user.client)
+				user.client.open_popups |= window_id
+		else
+			var/client/C = user
+			C.open_popups |= window_id
 	if (ntitle)
 		title = format_text(ntitle)
 	if (nwidth)
@@ -36,7 +47,7 @@
 	window_options = nwindow_options
 
 /datum/browser/proc/set_title_image(ntitle_image)
-	//title_image = ntitle_image
+	title_image = ntitle_image
 
 /datum/browser/proc/add_stylesheet(name, file)
 	if (istype(name, /datum/asset/spritesheet))
@@ -102,7 +113,7 @@
 /datum/browser/proc/open(use_onclose = TRUE)
 	if(isnull(window_id))	//null check because this can potentially nuke goonchat
 		WARNING("Browser [title] tried to open with a null ID")
-		to_chat(user, "<span class='userdanger'>The [title] browser you tried to open failed a sanity check! Please report this on github!</span>")
+		to_chat(user, "<span class='danger'>The [title] browser you tried to open failed a sanity check! Please report this on github!</span>")
 		return
 	var/window_size = ""
 	if (width && height)
@@ -159,7 +170,7 @@
 	close()
 
 //designed as a drop in replacement for alert(); functions the same. (outside of needing User specified)
-/proc/tgalert(var/mob/User, Message, Title, Button1="Ok", Button2, Button3, StealFocus = 1, Timeout = 6000)
+/proc/tgalert(mob/User, Message, Title, Button1="Ok", Button2, Button3, StealFocus = 1, Timeout = 6000)
 	if (!User)
 		User = usr
 	switch(askuser(User, Message, Title, Button1, Button2, Button3, StealFocus, Timeout))
@@ -171,7 +182,7 @@
 			return Button3
 
 //Same shit, but it returns the button number, could at some point support unlimited button amounts.
-/proc/askuser(var/mob/User,Message, Title, Button1="Ok", Button2, Button3, StealFocus = 1, Timeout = 6000)
+/proc/askuser(mob/User,Message, Title, Button1="Ok", Button2, Button3, StealFocus = 1, Timeout = 6000)
 	if (!istype(User))
 		if (istype(User, /client/))
 			var/client/C = User

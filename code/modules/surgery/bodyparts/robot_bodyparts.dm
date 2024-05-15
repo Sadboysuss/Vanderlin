@@ -12,7 +12,7 @@
 
 /obj/item/bodypart/l_arm/robot
 	name = "cyborg left arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	desc = ""
 	attack_verb = list("slapped", "punched")
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
@@ -33,7 +33,7 @@
 
 /obj/item/bodypart/r_arm/robot
 	name = "cyborg right arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	desc = ""
 	attack_verb = list("slapped", "punched")
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
@@ -54,7 +54,7 @@
 
 /obj/item/bodypart/l_leg/robot
 	name = "cyborg left leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	desc = ""
 	attack_verb = list("kicked", "stomped")
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
@@ -75,7 +75,7 @@
 
 /obj/item/bodypart/r_leg/robot
 	name = "cyborg right leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
+	desc = ""
 	attack_verb = list("kicked", "stomped")
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
@@ -96,7 +96,7 @@
 
 /obj/item/bodypart/chest/robot
 	name = "cyborg torso"
-	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
+	desc = ""
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
 	flags_1 = CONDUCT_1
@@ -130,23 +130,23 @@
 /obj/item/bodypart/chest/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/stock_parts/cell))
 		if(cell)
-			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
+			to_chat(user, "<span class='warning'>I have already inserted a cell!</span>")
 			return
 		else
 			if(!user.transferItemToLoc(W, src))
 				return
 			cell = W
-			to_chat(user, "<span class='notice'>You insert the cell.</span>")
+			to_chat(user, "<span class='notice'>I insert the cell.</span>")
 	else if(istype(W, /obj/item/stack/cable_coil))
 		if(wired)
-			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
+			to_chat(user, "<span class='warning'>I have already inserted wire!</span>")
 			return
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
 			wired = TRUE
-			to_chat(user, "<span class='notice'>You insert the wire.</span>")
+			to_chat(user, "<span class='notice'>I insert the wire.</span>")
 		else
-			to_chat(user, "<span class='warning'>You need one length of coil to wire it!</span>")
+			to_chat(user, "<span class='warning'>I need one length of coil to wire it!</span>")
 	else
 		return ..()
 
@@ -156,7 +156,7 @@
 		return
 	. = TRUE
 	I.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You cut the wires out of [src].</span>")
+	to_chat(user, "<span class='notice'>I cut the wires out of [src].</span>")
 	new /obj/item/stack/cable_coil(drop_location(), 1)
 	wired = FALSE
 
@@ -176,12 +176,12 @@
 	. = ..()
 	if(cell)
 		. += {"It has a [cell] inserted.\n
-		<span class='info'>You can use a <b>screwdriver</b> to remove [cell].</span>"}
+		<span class='info'>I can use a <b>screwdriver</b> to remove [cell].</span>"}
 	else
 		. += "<span class='info'>It has an empty port for a <b>power cell</b>.</span>"
 	if(wired)
 		. += "Its all wired up[cell ? " and ready for usage" : ""].\n"+\
-		"<span class='info'>You can use <b>wirecutters</b> to remove the wiring.</span>"
+		"<span class='info'>I can use <b>wirecutters</b> to remove the wiring.</span>"
 	else
 		. += "<span class='info'>It has a couple spots that still need to be <b>wired</b>.</span>"
 
@@ -197,7 +197,7 @@
 
 /obj/item/bodypart/head/robot
 	name = "cyborg head"
-	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
+	desc = ""
 	item_state = "buildpipe"
 	icon = 'icons/mob/augmentation/augments.dmi'
 	flags_1 = CONDUCT_1
@@ -243,16 +243,16 @@
 			<span class='info'>It has an empty eye socket for another <b>flash</b>.</span>"}
 		else
 			. += "It has two eye sockets occupied by flashes."
-		. += "<span class='notice'>You can remove the seated flash[single_flash ? "":"es"] with a <b>crowbar</b>.</span>"
+		. += "<span class='notice'>I can remove the seated flash[single_flash ? "":"es"] with a <b>crowbar</b>.</span>"
 
 /obj/item/bodypart/head/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/assembly/flash/handheld))
 		var/obj/item/assembly/flash/handheld/F = W
 		if(flash1 && flash2)
-			to_chat(user, "<span class='warning'>You have already inserted the eyes!</span>")
+			to_chat(user, "<span class='warning'>I have already inserted the eyes!</span>")
 			return
 		else if(F.burnt_out)
-			to_chat(user, "<span class='warning'>You can't use a broken flash!</span>")
+			to_chat(user, "<span class='warning'>I can't use a broken flash!</span>")
 			return
 		else
 			if(!user.transferItemToLoc(F, src))
@@ -261,7 +261,7 @@
 				flash2 = F
 			else
 				flash1 = F
-			to_chat(user, "<span class='notice'>You insert the flash into the eye socket.</span>")
+			to_chat(user, "<span class='notice'>I insert the flash into the eye socket.</span>")
 			return
 	return ..()
 
@@ -269,7 +269,7 @@
 	..()
 	if(flash1 || flash2)
 		I.play_tool_sound(src)
-		to_chat(user, "<span class='notice'>You remove the flash from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove the flash from [src].</span>")
 		if(flash1)
 			flash1.forceMove(drop_location())
 			flash1 = null
@@ -295,7 +295,7 @@
 
 /obj/item/bodypart/l_arm/robot/surplus
 	name = "surplus prosthetic left arm"
-	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
+	desc = ""
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_reduction = 0
 	burn_reduction = 0
@@ -303,7 +303,7 @@
 
 /obj/item/bodypart/r_arm/robot/surplus
 	name = "surplus prosthetic right arm"
-	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
+	desc = ""
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_reduction = 0
 	burn_reduction = 0
@@ -311,7 +311,7 @@
 
 /obj/item/bodypart/l_leg/robot/surplus
 	name = "surplus prosthetic left leg"
-	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
+	desc = ""
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_reduction = 0
 	burn_reduction = 0
@@ -319,7 +319,7 @@
 
 /obj/item/bodypart/r_leg/robot/surplus
 	name = "surplus prosthetic right leg"
-	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
+	desc = ""
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_reduction = 0
 	burn_reduction = 0

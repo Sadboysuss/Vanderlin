@@ -2,7 +2,7 @@
 /client/proc/set_server_fps()
 	set category = "Debug"
 	set name = "Set Server FPS"
-	set desc = "Sets game speed in frames-per-second. Can potentially break the game"
+	set desc = ""
 
 	if(!check_rights(R_DEBUG))
 		return

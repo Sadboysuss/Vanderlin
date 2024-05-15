@@ -3,7 +3,7 @@
 
 /obj/machinery/computer/pandemic
 	name = "PanD.E.M.I.C 2200"
-	desc = "Used to work with viruses."
+	desc = ""
 	density = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
@@ -131,7 +131,7 @@
 /obj/machinery/computer/pandemic/proc/reset_replicator_cooldown()
 	wait = FALSE
 	update_icon()
-	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
+	playsound(src, 'sound/blank.ogg', 30, TRUE)
 
 /obj/machinery/computer/pandemic/update_icon()
 	if(stat & BROKEN)
@@ -218,7 +218,7 @@
 			var/list/data = list("viruses" = list(A))
 			var/obj/item/reagent_containers/glass/bottle/B = new(drop_location())
 			B.name = "[A.name] culture bottle"
-			B.desc = "A small bottle. Contains [A.agent] culture in synthblood medium."
+			B.desc = ""
 			B.reagents.add_reagent(/datum/reagent/blood, 20, data)
 			wait = TRUE
 			update_icon()
@@ -264,7 +264,7 @@
 			return
 
 		beaker = I
-		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert [I] into [src].</span>")
 		update_icon()
 	else
 		return ..()

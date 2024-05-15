@@ -11,17 +11,17 @@
 #define BEE_POLLINATE_POTENCY_CHANCE	50
 
 /mob/living/simple_animal/hostile/poison/bees
-	name = "bee"
-	desc = "Buzzy buzzy bee, stingy sti- Ouch!"
-	icon_state = ""
-	icon_living = ""
+	name = "bee swarm"
+	desc = ""
+	icon_state = "bee_base"
+	icon_living = "bee_base"
 	icon = 'icons/mob/bees.dmi'
 	gender = FEMALE
 	speak_emote = list("buzzes")
 	emote_hear = list("buzzes")
-	turns_per_move = 0
-	melee_damage_lower = 1
-	melee_damage_upper = 1
+	turns_per_move = 1
+	melee_damage_lower = 2
+	melee_damage_upper = 5
 	attack_verb_continuous = "stings"
 	attack_verb_simple = "sting"
 	response_help_continuous = "shoos"
@@ -30,11 +30,16 @@
 	response_disarm_simple = "swat away"
 	response_harm_continuous = "squashes"
 	response_harm_simple = "squash"
-	maxHealth = 10
-	health = 10
+	base_intents = list(/datum/intent/simple/sting)
+	maxHealth = 30
+	health = 30
+	STACON = 2
+	STASTR = 2
+	STASPD = 13
 	spacewalk = TRUE
-	faction = list("hostile")
-	move_to_delay = 0
+	faction = list("bugs")
+	attack_sound = list('sound/vo/mobs/bee/bee_swarm.ogg')
+	move_to_delay = 2
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
@@ -150,14 +155,6 @@
 			target = null
 			wanted_objects -= beehometypecache //so we don't attack beeboxes when not going home
 		return //no don't attack the goddamm box
-	else
-		. = ..()
-		if(. && beegent && isliving(target))
-			var/mob/living/L = target
-			if(L.reagents)
-				beegent.reaction_mob(L, INJECT)
-				L.reagents.add_reagent(beegent.type, rand(1,5))
-
 
 /mob/living/simple_animal/hostile/poison/bees/proc/assign_reagent(datum/reagent/R)
 	if(istype(R))
@@ -166,7 +163,6 @@
 		real_name = name
 		poison_type = null
 		generate_bee_visuals()
-
 
 /mob/living/simple_animal/hostile/poison/bees/proc/pollinate(obj/machinery/hydroponics/Hydro)
 	if(!istype(Hydro) || !Hydro.myseed || Hydro.dead || Hydro.recent_bee_visit)
@@ -225,7 +221,7 @@
 
 /mob/living/simple_animal/hostile/poison/bees/queen
 	name = "queen bee"
-	desc = "She's the queen of bees, BZZ BZZ!"
+	desc = ""
 	icon_base = "queen"
 	isqueen = TRUE
 
@@ -259,7 +255,7 @@
 
 /obj/item/queen_bee
 	name = "queen bee"
-	desc = "She's the queen of bees, BZZ BZZ!"
+	desc = ""
 	icon_state = "queen_item"
 	item_state = ""
 	icon = 'icons/mob/bees.dmi'
@@ -277,18 +273,18 @@
 				if(queen && queen.beegent)
 					qb.queen.assign_reagent(queen.beegent) //Bees use the global singleton instances of reagents, so we don't need to worry about one bee being deleted and her copies losing their reagents.
 				user.put_in_active_hand(qb)
-				user.visible_message("<span class='notice'>[user] injects [src] with royal bee jelly, causing it to split into two bees, MORE BEES!</span>","<span class='warning'>You inject [src] with royal bee jelly, causing it to split into two bees, MORE BEES!</span>")
+				user.visible_message("<span class='notice'>[user] injects [src] with royal bee jelly, causing it to split into two bees, MORE BEES!</span>","<span class='warning'>I inject [src] with royal bee jelly, causing it to split into two bees, MORE BEES!</span>")
 			else
-				to_chat(user, "<span class='warning'>You don't have enough royal bee jelly to split a bee in two!</span>")
+				to_chat(user, "<span class='warning'>I don't have enough royal bee jelly to split a bee in two!</span>")
 		else
 			var/datum/reagent/R = GLOB.chemical_reagents_list[S.reagents.get_master_reagent_id()]
 			if(R && S.reagents.has_reagent(R.type, 5))
 				S.reagents.remove_reagent(R.type,5)
 				queen.assign_reagent(R)
-				user.visible_message("<span class='warning'>[user] injects [src]'s genome with [R.name], mutating its DNA!</span>","<span class='warning'>You inject [src]'s genome with [R.name], mutating its DNA!</span>")
+				user.visible_message("<span class='warning'>[user] injects [src]'s genome with [R.name], mutating its DNA!</span>","<span class='warning'>I inject [src]'s genome with [R.name], mutating its DNA!</span>")
 				name = queen.name
 			else
-				to_chat(user, "<span class='warning'>You don't have enough units of that chemical to modify the bee's DNA!</span>")
+				to_chat(user, "<span class='warning'>I don't have enough units of that chemical to modify the bee's DNA!</span>")
 	..()
 
 
@@ -311,8 +307,21 @@
 		..()
 
 /mob/living/simple_animal/hostile/poison/bees/short
-	desc = "These bees seem unstable and won't survive for long."
+	desc = ""
 
 /mob/living/simple_animal/hostile/poison/bees/short/Initialize(mapload, timetolive=50 SECONDS)
 	. = ..()
 	addtimer(CALLBACK(src, .proc/death), timetolive)
+
+/mob/living/simple_animal/hostile/poison/bees/get_sound(input)
+	switch(input)
+		if("aggro")
+			return pick('sound/vo/mobs/bee/bee_swarm.ogg')
+		if("pain")
+			return pick('sound/vo/mobs/bee/bee_swarm.ogg')
+		if("death")
+			return pick('sound/vo/mobs/bee/bee.ogg')
+		if("idle")
+			return pick('sound/vo/mobs/bee/bee_swarm.ogg')
+		if("cidle")
+			return pick('sound/vo/mobs/bee/bee_swarm.ogg')

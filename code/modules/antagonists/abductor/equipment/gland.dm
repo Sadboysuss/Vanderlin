@@ -1,6 +1,6 @@
 /obj/item/organ/heart/gland
 	name = "fleshy mass"
-	desc = "A nausea-inducing hunk of twisting flesh and metal."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "gland"
 	status = ORGAN_ROBOTIC
@@ -54,7 +54,7 @@
 	if(!ownerCheck() || !mind_control_uses || active_mind_control)
 		return FALSE
 	mind_control_uses--
-	to_chat(owner, "<span class='userdanger'>You suddenly feel an irresistible compulsion to follow an order...</span>")
+	to_chat(owner, "<span class='danger'>I suddenly feel an irresistible compulsion to follow an order...</span>")
 	to_chat(owner, "<span class='mind_control'>[command]</span>")
 	active_mind_control = TRUE
 	message_admins("[key_name(user)] sent an abductor mind control message to [key_name(owner)]: [command]")
@@ -67,7 +67,7 @@
 /obj/item/organ/heart/gland/proc/clear_mind_control()
 	if(!ownerCheck() || !active_mind_control)
 		return FALSE
-	to_chat(owner, "<span class='userdanger'>You feel the compulsion fade, and you <i>completely forget</i> about your previous orders.</span>")
+	to_chat(owner, "<span class='danger'>I feel the compulsion fade, and you <i>completely forget</i> about your previous orders.</span>")
 	owner.clear_alert("mind_control")
 	active_mind_control = FALSE
 	return TRUE

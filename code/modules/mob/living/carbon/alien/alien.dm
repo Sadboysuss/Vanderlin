@@ -12,7 +12,7 @@
 	bubble_icon = "alien"
 	type_of_meat = /obj/item/reagent_containers/food/snacks/meat/slab/xeno
 
-	var/obj/item/card/id/wear_id = null // Fix for station bounced radios -- Skie
+	var/obj/item/card/id/wear_ring = null // Fix for station bounced radios -- Skie
 	var/has_fine_manipulation = 0
 	var/move_delay_add = 0 // movement delay to add
 
@@ -132,7 +132,7 @@ Des: Removes all infected images from the alien.
 	return initial(pixel_y)
 
 /mob/living/carbon/alien/proc/alien_evolve(mob/living/carbon/alien/new_xeno)
-	to_chat(src, "<span class='noticealien'>You begin to evolve!</span>")
+	to_chat(src, "<span class='noticealien'>I begin to evolve!</span>")
 	visible_message("<span class='alertalien'>[src] begins to twist and contort!</span>")
 	new_xeno.setDir(dir)
 	if(!alien_name_regex.Find(name))

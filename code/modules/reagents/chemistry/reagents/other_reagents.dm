@@ -7,7 +7,7 @@
 	taste_mult = 1.3
 	glass_icon_state = "glass_red"
 	glass_name = "glass of tomato juice"
-	glass_desc = "Are you sure this is tomato juice?"
+	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
@@ -81,6 +81,9 @@
 	if(data["blood_DNA"])
 		B.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
 
+/datum/reagent/blood/green
+	color = "#05af01"
+
 /datum/reagent/liquidgibs
 	name = "Liquid gibs"
 	color = "#CC4633"
@@ -126,35 +129,100 @@
 	var/cooling_temperature = 2
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
-	glass_desc = "The father of all refreshments."
+	glass_desc = ""
 	shot_glass_icon_state = "shotglassclear"
+	var/hydration = 12
+	alpha = 100
+
+/datum/chemical_reaction/grosswaterify
+	name = "grosswater"
+	id = /datum/reagent/water/gross
+	results = list(/datum/reagent/water/gross = 2)
+	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
+
+
+/datum/reagent/water/on_mob_life(mob/living/carbon/M)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
+			H.adjust_hydration(hydration)
+		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
+	..()
+
+/datum/reagent/water/gross
+	taste_description = "lead"
+
+/datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
+	M.adjustToxLoss(1)
+	M.add_nausea(50)
+	..()
 
 /*
  *	Water reaction to turf
  */
 
+/turf/open
+	var/water_level = 0
+	var/last_water_update
+	var/max_water = 500
+
+/turf/open/proc/add_water(amt)
+	if(!amt)
+		return
+	var/shouldupdate = FALSE
+	if(water_level <= 0)
+		if(amt > 0)
+			shouldupdate = TRUE
+	var/newwater = water_level + amt
+	if(newwater >= max_water)
+		water_level = max_water
+	else
+		water_level = newwater
+	water_level = round(water_level)
+	if(water_level > 0)
+		START_PROCESSING(SSwaterlevel, src)
+	if(shouldupdate)
+		update_water()
+
+	if(amt > 101)
+		for(var/obj/effect/decal/cleanable/blood/target in src)
+			qdel(target)
+
+	return TRUE
+
+/turf/open/proc/update_water()
+	return TRUE
+
 /datum/reagent/water/reaction_turf(turf/open/T, reac_volume)
 	if(!istype(T))
 		return
-	var/CT = cooling_temperature
+//	var/CT = cooling_temperature
 
 	if(reac_volume >= 5)
-		T.MakeSlippery(TURF_WET_WATER, 10 SECONDS, min(reac_volume*1.5 SECONDS, 60 SECONDS))
+//		T.MakeSlippery(TURF_WET_WATER, reac_volume*1.5 SECONDS, reac_volume*1.5 SECONDS)
+		T.add_water(reac_volume * 3) //nuproc
 
-	for(var/mob/living/simple_animal/slime/M in T)
-		M.apply_water()
+//	for(var/mob/living/simple_animal/slime/M in T)
+//		M.apply_water()
+
+//	if(reac_volume >= 100)
+//		for(var/obj/effect/decal/cleanable/blood/target in T)
+//			qdel(target)
+//		for(var/obj/effect/decal/cleanable/trail_holder/target in T)
+//			qdel(target)
 
 	var/obj/effect/hotspot/hotspot = (locate(/obj/effect/hotspot) in T)
 	if(hotspot && !isspaceturf(T))
-		if(T.air)
-			var/datum/gas_mixture/G = T.air
-			G.temperature = max(min(G.temperature-(CT*1000),G.temperature/CT),TCMB)
-			G.react(src)
-			qdel(hotspot)
+//		if(T.air)
+//			var/datum/gas_mixture/G = T.air
+//			G.temperature = max(min(G.temperature-(CT*1000),G.temperature/CT),TCMB)
+//			G.react(src)
+		new /obj/effect/temp_visual/small_smoke(T)
+		qdel(hotspot)
 	//fixed
-	var/obj/effect/acid/A = (locate(/obj/effect/acid) in T)
-	if(A)
-		A.acid_level = max(A.acid_level - reac_volume*50, 0)
+//	var/obj/effect/acid/A = (locate(/obj/effect/acid) in T)
+//	if(A)
+//		A.acid_level = max(A.acid_level - reac_volume*50, 0)
 
 /*
  *	Water reaction to an object
@@ -168,15 +236,17 @@
 		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		cube.Expand()
 
-	// Dehydrated carp
-	else if(istype(O, /obj/item/toy/plush/carpplushie/dehy_carp))
-		var/obj/item/toy/plush/carpplushie/dehy_carp/dehy = O
-		dehy.Swell() // Makes a carp
+	else if(istype(O, /obj/item/roguebin))
+		var/obj/item/roguebin/RB = O
+		if(!RB.kover)
+			if(RB.reagents)
+				RB.reagents.add_reagent(src.type, reac_volume)
 
-	else if(istype(O, /obj/item/stack/sheet/hairlesshide))
-		var/obj/item/stack/sheet/hairlesshide/HH = O
-		new /obj/item/stack/sheet/wetleather(get_turf(HH), HH.amount)
-		qdel(HH)
+	else if(istype(O, /obj/item/reagent_containers))
+		var/obj/item/reagent_containers/RB = O
+		if(RB.reagents)
+			RB.reagents.add_reagent(src.type, reac_volume)
+
 
 /*
  *	Water reaction to a mob
@@ -187,7 +257,9 @@
 		return
 	if(method == TOUCH)
 		M.adjust_fire_stacks(-(reac_volume / 10))
-		M.ExtinguishMob()
+		M.SoakMob(FULL_BODY)
+//		for(var/obj/effect/decal/cleanable/blood/target in M)
+//			qdel(target)
 	..()
 
 /datum/reagent/water/holywater
@@ -196,7 +268,7 @@
 	color = "#E0E8EF" // rgb: 224, 232, 239
 	glass_icon_state  = "glass_clear"
 	glass_name = "glass of holy water"
-	glass_desc = "A glass of holy water."
+	glass_desc = ""
 	self_consuming = TRUE //divine intervention won't be limited by the lack of a liver
 
 /datum/reagent/water/holywater/on_mob_metabolize(mob/living/L)
@@ -209,17 +281,21 @@
 
 /datum/reagent/water/holywater/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(iscultist(M))
-		to_chat(M, "<span class='userdanger'>A vile holiness begins to spread its shining tendrils through your mind, purging the Geometer of Blood's influence!</span>")
+		to_chat(M, "<span class='danger'>A vile holiness begins to spread its shining tendrils through my mind, purging the Geometer of Blood's influence!</span>")
 	..()
 
 /datum/reagent/water/holywater/on_mob_life(mob/living/carbon/M)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
+			H.adjust_hydration(hydration)
 	if(!data)
 		data = 1
 	data++
 	M.jitteriness = min(M.jitteriness+4,10)
 	if(iscultist(M))
 		for(var/datum/action/innate/cult/blood_magic/BM in M.actions)
-			to_chat(M, "<span class='cultlarge'>Your blood rites falter as holy water scours your body!</span>")
+			to_chat(M, "<span class='cultlarge'>My blood rites falter as holy water scours my body!</span>")
 			for(var/datum/action/innate/cult/blood_spell/BS in BM.spells)
 				qdel(BS)
 	if(data >= 25)		// 10 units, 45 seconds @ metabolism 0.4 units & tick rate 1.8 sec
@@ -230,10 +306,10 @@
 		if(iscultist(M) && prob(20))
 			M.say(pick("Av'te Nar'Sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","R'ge Na'sie","Diabo us Vo'iscum","Eld' Mon Nobis"), forced = "holy water")
 			if(prob(10))
-				M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
+				M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>I have a seizure!</span>")
 				M.Unconscious(120)
-				to_chat(M, "<span class='cultlarge'>[pick("Your blood is your bond - you are nothing without it", "Do not forget your place", \
-				"All that power, and you still fail?", "If you cannot scour this poison, I shall scour your meager life!")].</span>")
+				to_chat(M, "<span class='cultlarge'>[pick("Your blood is my bond - you are nothing without it", "Do not forget my place", \
+				"All that power, and you still fail?", "If you cannot scour this poison, I shall scour my meager life!")].</span>")
 	if(data >= 60)	// 30 units, 135 seconds
 		if(iscultist(M))
 			SSticker.mode.remove_cultist(M.mind, FALSE, TRUE)
@@ -260,7 +336,7 @@
 	var/cooling_temperature = 2
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of oxygenated water"
-	glass_desc = "The father of all refreshments. Surely it tastes great, right?"
+	glass_desc = ""
 	shot_glass_icon_state = "shotglassclear"
 
 /*
@@ -283,7 +359,7 @@
 		M.adjustFireLoss(2, 0) // burns
 	..()
 
-/datum/reagent/fuel/unholywater		//if you somehow managed to extract this from someone, dont splash it on yourself and have a smoke
+/datum/reagent/fuel/unholywater		//if you somehow managed to extract this from someone, dont splash it on myself and have a smoke
 	name = "Unholy Water"
 	description = "Something that shouldn't exist on this plane of existence."
 	taste_description = "suffering"
@@ -438,12 +514,12 @@
 			N.dna.features["mcolor"] = "f80"
 		N.regenerate_icons()
 		if(prob(7))
-			if(N.w_uniform)
+			if(N.wear_pants)
 				M.visible_message(pick("<b>[M]</b>'s collar pops up without warning.</span>", "<b>[M]</b> flexes [M.p_their()] arms."))
 			else
 				M.visible_message("<b>[M]</b> flexes [M.p_their()] arms.")
 	if(prob(10))
-		M.say(pick("Shit was SO cash.", "You are everything bad in the world.", "What sports do you play, other than 'jack off to naked drawn Japanese people?'", "Don???t be a stranger. Just hit me with your best shot.", "My name is John and I hate every single one of you."), forced = /datum/reagent/spraytan)
+		M.say(pick("Shit was SO cash.", "You are everything bad in the world.", "What sports do you play, other than 'jack off to naked drawn Japanese people?'", "Don???t be a stranger. Just hit me with my best shot.", "My name is John and I hate every single one of you."), forced = /datum/reagent/spraytan)
 	..()
 	return
 
@@ -543,7 +619,7 @@
 
 /datum/reagent/mutationtoxin/jelly/on_mob_life(mob/living/carbon/human/H)
 	if(isjellyperson(H))
-		to_chat(H, "<span class='warning'>Your jelly shifts and morphs, turning you into another subspecies!</span>")
+		to_chat(H, "<span class='warning'>My jelly shifts and morphs, turning you into another subspecies!</span>")
 		var/species_type = pick(subtypesof(/datum/species/jelly))
 		H.set_species(species_type)
 		H.reagents.del_reagent(type)
@@ -629,7 +705,7 @@
 	..()
 	if (!istype(H))
 		return
-	to_chat(H, "<span class='warning'><b>You grit your teeth in pain as your body rapidly mutates!</b></span>")
+	to_chat(H, "<span class='warning'><b>I grit my teeth in pain as my body rapidly mutates!</b></span>")
 	H.visible_message("<b>[H]</b> suddenly transforms!")
 	randomize_human(H)
 
@@ -792,7 +868,7 @@
 
 /datum/reagent/sodium
 	name = "Sodium"
-	description = "A soft silver metal that can easily be cut with a knife. It's not salt just yet, so refrain from putting in on your chips."
+	description = "A soft silver metal that can easily be cut with a knife. It's not salt just yet, so refrain from putting in on my chips."
 	reagent_state = SOLID
 	color = "#808080" // rgb: 128, 128, 128
 	taste_description = "salty metal"
@@ -912,19 +988,19 @@
 
 /datum/reagent/bluespace/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == TOUCH || method == VAPOR)
-		do_teleport(M, get_turf(M), (reac_volume / 5), asoundin = 'sound/effects/phasein.ogg', channel = TELEPORT_CHANNEL_BLUESPACE) //4 tiles per crystal
+		do_teleport(M, get_turf(M), (reac_volume / 5), asoundin = 'sound/blank.ogg', channel = TELEPORT_CHANNEL_BLUESPACE) //4 tiles per crystal
 	..()
 
 /datum/reagent/bluespace/on_mob_life(mob/living/carbon/M)
 	if(current_cycle > 10 && prob(15))
-		to_chat(M, "<span class='warning'>You feel unstable...</span>")
+		to_chat(M, "<span class='warning'>I feel unstable...</span>")
 		M.Jitter(2)
 		current_cycle = 1
 		addtimer(CALLBACK(M, /mob/living/proc/bluespace_shuffle), 30)
 	..()
 
 /mob/living/proc/bluespace_shuffle()
-	do_teleport(src, get_turf(src), 5, asoundin = 'sound/effects/phasein.ogg', channel = TELEPORT_CHANNEL_BLUESPACE)
+	do_teleport(src, get_turf(src), 5, asoundin = 'sound/blank.ogg', channel = TELEPORT_CHANNEL_BLUESPACE)
 
 /datum/reagent/aluminium
 	name = "Aluminium"
@@ -947,7 +1023,7 @@
 	taste_description = "gross metal"
 	glass_icon_state = "dr_gibb_glass"
 	glass_name = "glass of welder fuel"
-	glass_desc = "Unless you're an industrial tool, this is probably not safe for consumption."
+	glass_desc = ""
 
 /datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
 	if(method == TOUCH || method == VAPOR)
@@ -1005,11 +1081,11 @@
 				if(H.head)
 					if(SEND_SIGNAL(H.head, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
 						H.update_inv_head()
-				if(H.wear_suit)
-					if(SEND_SIGNAL(H.wear_suit, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
-						H.update_inv_wear_suit()
-				else if(H.w_uniform)
-					if(SEND_SIGNAL(H.w_uniform, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
+				if(H.wear_armor)
+					if(SEND_SIGNAL(H.wear_armor, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
+						H.update_inv_armor()
+				else if(H.wear_pants)
+					if(SEND_SIGNAL(H.wear_pants, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
 						H.update_inv_w_uniform()
 				if(H.shoes)
 					if(SEND_SIGNAL(H.shoes, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRENGTH_BLOOD))
@@ -1144,7 +1220,7 @@
 /datum/reagent/carbondioxide
 	name = "Carbon Dioxide"
 	reagent_state = GAS
-	description = "A gas commonly produced by burning carbon fuels. You're constantly producing this in your lungs."
+	description = "A gas commonly produced by burning carbon fuels. You're constantly producing this in my lungs."
 	color = "#B0B0B0" // rgb : 192, 192, 192
 	taste_description = "something unknowable"
 
@@ -1297,7 +1373,7 @@
 	name = "Black Powder"
 	colorname = "black"
 	color = "#1C1C1C" // not quite black
-	random_color_list = list("#8D8D8D")	//more grey than black, not enough to hide your true colors
+	random_color_list = list("#8D8D8D")	//more grey than black, not enough to hide my true colors
 
 /datum/reagent/colorful_reagent/powder/white
 	name = "White Powder"
@@ -1486,7 +1562,7 @@
 			if(prob(10))
 				to_chat(M, "You feel like royalty.")
 			if(prob(5))
-				M.say(pick("Peasants..","This carpet is worth more than your contracts!","I could fire you at any time..."), forced = "royal carpet")
+				M.say(pick("Peasants..","This carpet is worth more than my contracts!","I could fire you at any time..."), forced = "royal carpet")
 		if("Quartermaster")
 			if(prob(15))
 				to_chat(M, "You feel like an impostor...")
@@ -1942,7 +2018,7 @@
 	name = "Organic Slurry"
 	description = "A mixture of various colors of fluid. Induces vomiting."
 	glass_name = "glass of ...yuck!"
-	glass_desc = "It smells like a carcass, and doesn't look much better."
+	glass_desc = ""
 	color = "#545000"
 	taste_description = "insides"
 	taste_mult = 4
@@ -1959,10 +2035,10 @@
 /datum/reagent/yuck/on_mob_life(mob/living/carbon/C)
 	if(!yuck_cycle)
 		if(prob(8))
-			var/dread = pick("Something is moving in your stomach...", \
-				"A wet growl echoes from your stomach...", \
-				"For a moment you feel like your surroundings are moving, but it's your stomach...")
-			to_chat(C, "<span class='userdanger'>[dread]</span>")
+			var/dread = pick("Something is moving in my stomach...", \
+				"A wet growl echoes from my stomach...", \
+				"For a moment you feel like my surroundings are moving, but it's my stomach...")
+			to_chat(C, "<span class='danger'>[dread]</span>")
 			yuck_cycle = current_cycle
 	else
 		var/yuck_cycles = current_cycle - yuck_cycle

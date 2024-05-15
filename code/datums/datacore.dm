@@ -107,13 +107,58 @@
 			crimes |= crime
 			return
 
+GLOBAL_LIST_EMPTY(fake_ckeys)
+
+/client
+	var/fake_key
+
+/proc/get_fake_key(ckey)
+	if(!ckey)
+		return
+	var/client/CL
+	for (var/client/C in GLOB.clients)
+		if(C.ckey == ckey)
+			CL = C
+	if(CL)
+		if(CL.fake_key)
+			return CL.fake_key
+	for(var/X in GLOB.fake_ckeys)
+		if(GLOB.fake_ckeys[X] == ckey)
+			if(CL)
+				CL.fake_key = X
+			return X
+	var/foundname
+	while(!foundname)
+		var/looker = "[capitalize(pick(GLOB.first_names))] [pick(GLOB.ooctitle)]"
+		var/found
+		for(var/X in GLOB.fake_ckeys)
+			if(X == looker)
+				found = TRUE
+		if(!found)
+			foundname = looker
+	if(foundname)
+		if(CL)
+			CL.fake_key = foundname
+		GLOB.fake_ckeys[foundname] = ckey
+		return foundname
+
 /datum/datacore/proc/manifest()
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/N = i
 		if(N.new_character)
 			log_manifest(N.ckey,N.new_character.mind,N.new_character)
 		if(ishuman(N.new_character))
-			manifest_inject(N.new_character, N.client)
+//			manifest_inject(N.new_character, N.client)
+			var/fakekey = N.ckey
+			if(N.ckey in GLOB.anonymize)
+				fakekey = get_fake_key(N.ckey)
+			if(N.new_character.real_name)
+				GLOB.character_list[N.new_character.mobid] = "[fakekey] was [N.new_character.real_name] ([N.new_character.mind.assigned_role])<BR>"
+				GLOB.character_ckey_list[N.new_character.real_name] = N.ckey
+			else
+				log_game("GAME SETUP: MANIFEST BIG ERROR")
+			log_character("[N.ckey] ([fakekey]) - [N.new_character.real_name] - [N.new_character.mind.assigned_role]")
+//		add_roundplayed(N.ckey)
 		CHECK_TICK
 
 /datum/datacore/proc/manifest_modify(name, assignment)
@@ -249,8 +294,8 @@
 		var/datum/picture/ps = new
 		pf.picture_name = "[H]"
 		ps.picture_name = "[H]"
-		pf.picture_desc = "This is [H]."
-		ps.picture_desc = "This is [H]."
+		pf.picture_desc = ""
+		ps.picture_desc = ""
 		pf.picture_image = icon(image, dir = SOUTH)
 		ps.picture_image = icon(image, dir = WEST)
 		var/obj/item/photo/photo_front = new(null, pf)

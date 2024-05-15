@@ -67,7 +67,7 @@
 
 /obj/machinery/computer/shuttle/mining
 	name = "mining shuttle console"
-	desc = "Used to call and send the mining shuttle."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/mining_shuttle
 	shuttleId = "mining"
 	possible_destinations = "mining_home;mining_away;landing_zone_dock;mining_public"
@@ -77,14 +77,14 @@
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/machinery/computer/shuttle/mining/attack_hand(mob/user)
 	if(is_station_level(user.z) && user.mind && is_head_revolutionary(user) && !(user.mind in dumb_rev_heads))
-		to_chat(user, "<span class='warning'>You get a feeling that leaving the station might be a REALLY dumb idea...</span>")
+		to_chat(user, "<span class='warning'>I get a feeling that leaving the station might be a REALLY dumb idea...</span>")
 		dumb_rev_heads += user.mind
 		return
 	. = ..()
 
 /obj/machinery/computer/shuttle/mining/common
 	name = "lavaland shuttle console"
-	desc = "Used to call and send the lavaland shuttle."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/mining_shuttle/common
 	shuttleId = "mining_common"
 	possible_destinations = "whiteship_home;lavaland_common_away;landing_zone_dock;mining_public"
@@ -93,6 +93,6 @@
 /**********************Mining car (Crate like thing, not the rail car)**************************/
 
 /obj/structure/closet/crate/miningcar
-	desc = "A mining car. This one doesn't work on rails, but has to be dragged."
+	desc = ""
 	name = "Mining car (not for rails)"
 	icon_state = "miningcar"

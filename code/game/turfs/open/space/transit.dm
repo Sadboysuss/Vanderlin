@@ -1,5 +1,5 @@
 /turf/open/space/transit
-	name = "\proper hyperspace"
+	name = "\proper phlogiston"
 	icon_state = "black"
 	dir = SOUTH
 	baseturfs = /turf/open/space/transit
@@ -8,8 +8,8 @@
 
 /turf/open/space/transit/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	. = ..()
-	underlay_appearance.icon_state = "speedspace_ns_[get_transit_state(asking_turf)]"
-	underlay_appearance.transform = turn(matrix(), get_transit_angle(asking_turf))
+//	underlay_appearance.icon_state = "speedspace_ns_[get_transit_state(asking_turf)]"
+//	underlay_appearance.transform = turn(matrix(), get_transit_angle(asking_turf))
 
 /turf/open/space/transit/south
 	dir = SOUTH
@@ -28,8 +28,11 @@
 
 /turf/open/space/transit/Entered(atom/movable/AM, atom/OldLoc)
 	..()
-	if(!locate(/obj/structure/lattice) in src)
-		throw_atom(AM)
+	if(isliving(AM))
+		var/mob/living/L = AM
+		L.gib()
+//	if(!locate(/obj/structure/lattice) in src)
+//		throw_atom(AM)
 
 /turf/open/space/transit/proc/throw_atom(atom/movable/AM)
 	set waitfor = FALSE
@@ -45,7 +48,9 @@
 		var/datum/space_level/D = A
 		if (D.linkage == CROSSLINKED)
 			possible_transtitons += D.z_value
-	var/_z = pick(possible_transtitons)
+	var/_z
+	if(possible_transtitons.len)
+		_z = pick(possible_transtitons)
 
 	//now select coordinates for a border turf
 	var/_x
@@ -74,16 +79,16 @@
 
 /turf/open/space/transit/Initialize()
 	. = ..()
-	update_icon()
-	for(var/atom/movable/AM in src)
-		throw_atom(AM)
+//	update_icon()
+//	for(var/atom/movable/AM in src)
+//		throw_atom(AM)
 
 /turf/open/space/transit/update_icon()
 	. = ..()
-	transform = turn(matrix(), get_transit_angle(src))
+//	transform = turn(matrix(), get_transit_angle(src))
 
-/turf/open/space/transit/update_icon_state()
-	icon_state = "speedspace_ns_[get_transit_state(src)]"
+//turf/open/space/transit/update_icon_state()
+//	icon_state = "speedspace_ns_[get_transit_state(src)]"
 
 /proc/get_transit_state(turf/T)
 	var/p = 9

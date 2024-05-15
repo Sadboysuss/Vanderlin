@@ -53,7 +53,7 @@
 
 /obj/item/valentine
 	name = "valentine"
-	desc = "A Valentine's card! Wonder what it says..."
+	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "sc_Ace of Hearts_syndicate" // shut up
 	var/message = "A generic message of love or whatever."
@@ -68,7 +68,7 @@
 	..()
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/toy/crayon))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on [src]!</span>")
 			return
 		var/recipient = stripped_input(user, "Who is receiving this valentine?", "To:", null , 20)
 		var/sender = stripped_input(user, "Who is sending this valentine?", "From:", null , 20)
@@ -96,7 +96,7 @@
 	name = "candy heart"
 	icon = 'icons/obj/holiday_misc.dmi'
 	icon_state = "candyheart"
-	desc = "A heart-shaped candy that reads: "
+	desc = ""
 	list_reagents = list(/datum/reagent/consumable/sugar = 2)
 	junkiness = 5
 

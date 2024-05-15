@@ -18,7 +18,7 @@
 
 /obj/item/cartridge
 	name = "generic cartridge"
-	desc = "A data cartridge for portable microcomputers."
+	desc = ""
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "cart"
 	item_state = "electronic"
@@ -94,7 +94,7 @@
 
 /obj/item/cartridge/janitor
 	name = "\improper CustodiPRO cartridge"
-	desc = "The ultimate in clean-room design."
+	desc = ""
 	icon_state = "cart-j"
 	access = CART_JANITOR | CART_DRONEPHONE
 	bot_access_flags = CLEAN_BOT
@@ -112,17 +112,17 @@
 
 /obj/item/cartridge/roboticist
 	name = "\improper B.O.O.P. Remote Control cartridge"
-	desc = "Packed with heavy duty quad-bot interlink!"
+	desc = ""
 	bot_access_flags = FLOOR_BOT | CLEAN_BOT | MED_BOT | FIRE_BOT
 	access = CART_DRONEPHONE
 
 /obj/item/cartridge/signal
 	name = "generic signaler cartridge"
-	desc = "A data cartridge with an integrated radio signaler module."
+	desc = ""
 
 /obj/item/cartridge/signal/toxins
 	name = "\improper Signal Ace 2 cartridge"
-	desc = "Complete with integrated radio signaler!"
+	desc = ""
 	icon_state = "cart-tox"
 	access = CART_REAGENT_SCANNER | CART_ATMOS
 
@@ -134,7 +134,7 @@
 
 /obj/item/cartridge/quartermaster
 	name = "space parts & space vendors cartridge"
-	desc = "Perfect for the Quartermaster on the go!"
+	desc = ""
 	icon_state = "cart-q"
 	access = CART_QUARTERMASTER
 	bot_access_flags = MULE_BOT
@@ -181,7 +181,7 @@
 
 /obj/item/cartridge/captain
 	name = "\improper Value-PAK cartridge"
-	desc = "Now with 350% more value!" //Give the Captain...EVERYTHING! (Except Mime, Clown, and Syndie)
+	desc = "" //Give the Captain...EVERYTHING! (Except Mime, Clown, and Syndie)
 	icon_state = "cart-c"
 	access = ~(CART_CLOWN | CART_MIME | CART_REMOTE_DOOR)
 	bot_access_flags = SEC_BOT | MULE_BOT | FLOOR_BOT | CLEAN_BOT | MED_BOT | FIRE_BOT

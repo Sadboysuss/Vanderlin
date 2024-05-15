@@ -14,8 +14,7 @@
 /datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
 	if(toxpwr)
 		M.adjustToxLoss(toxpwr*REM, 0)
-		. = TRUE
-	..()
+	return ..()
 
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
@@ -113,7 +112,7 @@
 		C.adjustOxyLoss(5, 0)
 		C.losebreath += 2
 		if(prob(20))
-			C.emote("gasp")
+			C.emote("breathgasp")
 	..()
 
 /datum/reagent/toxin/slimejelly
@@ -126,7 +125,7 @@
 
 /datum/reagent/toxin/slimejelly/on_mob_life(mob/living/carbon/M)
 	if(prob(10))
-		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
+		to_chat(M, "<span class='danger'>My insides are burning!</span>")
 		M.adjustToxLoss(rand(20,60)*REM, 0)
 		. = 1
 	else if(prob(40))
@@ -322,7 +321,7 @@
 	taste_description = "piss water"
 	glass_icon_state = "beerglass"
 	glass_name = "glass of beer"
-	glass_desc = "A freezing pint of beer."
+	glass_desc = ""
 
 /datum/reagent/toxin/fakebeer/on_mob_life(mob/living/carbon/M)
 	switch(current_cycle)
@@ -400,7 +399,7 @@
 	if(prob(50))
 		switch(pick(1, 2, 3, 4))
 			if(1)
-				to_chat(M, "<span class='danger'>You can barely see!</span>")
+				to_chat(M, "<span class='danger'>I can barely see!</span>")
 				M.blur_eyes(3)
 			if(2)
 				M.emote("cough")
@@ -408,7 +407,7 @@
 				M.emote("sneeze")
 			if(4)
 				if(prob(75))
-					to_chat(M, "<span class='danger'>You scratch at an itch.</span>")
+					to_chat(M, "<span class='danger'>I scratch at an itch.</span>")
 					M.adjustBruteLoss(2*REM, 0)
 					. = 1
 	..()
@@ -446,13 +445,14 @@
 
 /datum/reagent/toxin/venom/on_mob_life(mob/living/carbon/M)
 	toxpwr = 0.2*volume
-	M.adjustBruteLoss((0.3*volume)*REM, 0)
+//	M.adjustBruteLoss((0.3*volume)*REM, 0)
 	. = 1
-	if(prob(15))
-		M.reagents.add_reagent(/datum/reagent/toxin/histamine, pick(5,10))
-		M.reagents.remove_reagent(/datum/reagent/toxin/venom, 1.1)
-	else
-		..()
+//	if(prob(15))
+//		M.reagents.add_reagent(/datum/reagent/toxin/histamine, pick(5,10))
+//		M.reagents.remove_reagent(/datum/reagent/toxin/venom, 1.1)
+//	else
+//		..()
+	..()
 
 /datum/reagent/toxin/fentanyl
 	name = "Fentanyl"
@@ -477,17 +477,26 @@
 	name = "Cyanide"
 	description = "An infamous poison known for its use in assassination. Causes small amounts of toxin damage with a small chance of oxygen damage or a stun."
 	reagent_state = LIQUID
-	color = "#00B4FF"
-	metabolization_rate = 0.125 * REAGENTS_METABOLISM
-	toxpwr = 1.25
+	color = "#FFFFFF"
+	metabolization_rate = 0.1
+	toxpwr = 0
 
 /datum/reagent/toxin/cyanide/on_mob_life(mob/living/carbon/M)
-	if(prob(5))
-		M.losebreath += 1
-	if(prob(8))
-		to_chat(M, "<span class='danger'>You feel horrendously weak!</span>")
-		M.Stun(40, 0)
-		M.adjustToxLoss(2*REM, 0)
+	testing("toxin OML")
+	M.add_nausea(20)
+	M.adjustToxLoss(3, 0)
+	return ..()
+
+/datum/reagent/toxin/killersice
+	name = "killersice"
+	description = "killersice"
+	reagent_state = LIQUID
+	color = "#FFFFFF"
+	metabolization_rate = 0.01
+	toxpwr = 0
+
+/datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M)
+	M.adjustToxLoss(10, 0)
 	return ..()
 
 /datum/reagent/toxin/bad_food
@@ -514,15 +523,15 @@
 
 /datum/reagent/toxin/itching_powder/on_mob_life(mob/living/carbon/M)
 	if(prob(15))
-		to_chat(M, "<span class='danger'>You scratch at your head.</span>")
+		to_chat(M, "<span class='danger'>I scratch at my head.</span>")
 		M.adjustBruteLoss(0.2*REM, 0)
 		. = 1
 	if(prob(15))
-		to_chat(M, "<span class='danger'>You scratch at your leg.</span>")
+		to_chat(M, "<span class='danger'>I scratch at my leg.</span>")
 		M.adjustBruteLoss(0.2*REM, 0)
 		. = 1
 	if(prob(15))
-		to_chat(M, "<span class='danger'>You scratch at your arm.</span>")
+		to_chat(M, "<span class='danger'>I scratch at my arm.</span>")
 		M.adjustBruteLoss(0.2*REM, 0)
 		. = 1
 	if(prob(3))
@@ -555,7 +564,7 @@
 				if(!C.undergoing_cardiac_arrest() && C.can_heartattack())
 					C.set_heartattack(TRUE)
 					if(C.stat == CONSCIOUS)
-						C.visible_message("<span class='userdanger'>[C] clutches at [C.p_their()] chest as if [C.p_their()] heart stopped!</span>")
+						C.visible_message("<span class='danger'>[C] clutches at [C.p_their()] chest as if [C.p_their()] heart stopped!</span>")
 				else
 					C.losebreath += 10
 					C.adjustOxyLoss(rand(5,25), 0)
@@ -677,7 +686,7 @@
 	if(current_cycle >=33 && prob(15))
 		C.spew_organ()
 		C.vomit(0, TRUE, TRUE, 4)
-		to_chat(C, "<span class='userdanger'>You feel something lumpy come up as you vomit.</span>")
+		to_chat(C, "<span class='danger'>I feel something lumpy come up as you vomit.</span>")
 
 /datum/reagent/toxin/curare
 	name = "Curare"
@@ -712,7 +721,7 @@
 	return ..() || .
 
 
-/datum/reagent/toxin/rotatium //Rotatium. Fucks up your rotation and is hilarious
+/datum/reagent/toxin/rotatium //Rotatium. Fucks up my rotation and is hilarious
 	name = "Rotatium"
 	description = "A constantly swirling, oddly colourful fluid. Causes the consumer's sense of direction and hand-eye coordination to become wild."
 	silent_toxin = TRUE
@@ -869,7 +878,7 @@
 			if(2)
 				M.emote("me", 1, pick("oofs silently.", "looks like their bones hurt.", "grimaces, as though their bones hurt."))
 			if(3)
-				to_chat(M, "<span class='warning'>Your bones hurt!</span>")
+				to_chat(M, "<span class='warning'>My bones hurt!</span>")
 	return ..()
 
 /datum/reagent/toxin/bonehurtingjuice/overdose_process(mob/living/carbon/M)
@@ -878,7 +887,7 @@
 		var/obj/item/bodypart/bp = M.get_bodypart(selected_part)
 		if(bp)
 			playsound(M, get_sfx("desceration"), 50, TRUE, -1)
-			M.visible_message("<span class='warning'>[M]'s bones hurt too much!!</span>", "<span class='danger'>Your bones hurt too much!!</span>")
+			M.visible_message("<span class='warning'>[M]'s bones hurt too much!!</span>", "<span class='danger'>My bones hurt too much!!</span>")
 			M.say("OOF!!", forced = /datum/reagent/toxin/bonehurtingjuice)
 			bp.receive_damage(0, 0, 200)
 		else //SUCH A LUST FOR REVENGE!!!
@@ -899,7 +908,7 @@
 	M.adjustOrganLoss(ORGAN_SLOT_HEART, 3)
 	M.confused = M.dizziness //add a tertiary effect here if this is isn't an effective poison.
 	if(current_cycle >= 12 && prob(8))
-		var/tox_message = pick("You feel your heart spasm in your chest.", "You feel faint.","You feel you need to catch your breath.","You feel a prickle of pain in your chest.")
+		var/tox_message = pick("You feel my heart spasm in my chest.", "You feel faint.","You feel you need to catch my breath.","You feel a prickle of pain in my chest.")
 		to_chat(M, "<span class='notice'>[tox_message]</span>")
 	. = 1
 	..()

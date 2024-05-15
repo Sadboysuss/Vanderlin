@@ -1,6 +1,6 @@
 /obj/item/screwdriver
 	name = "screwdriver"
-	desc = "You can be totally screwy with this."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "screwdriver_map"
 	item_state = "screwdriver"
@@ -15,13 +15,13 @@
 	throw_range = 5
 	custom_materials = list(/datum/material/iron=75)
 	attack_verb = list("stabbed")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	usesound = list('sound/items/screwdriver.ogg', 'sound/items/screwdriver2.ogg')
+	hitsound = 'sound/blank.ogg'
+	usesound = list('sound/blank.ogg')
 	tool_behaviour = TOOL_SCREWDRIVER
 	toolspeed = 1
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 30)
-	drop_sound = 'sound/items/handling/screwdriver_drop.ogg'
-	pickup_sound =  'sound/items/handling/screwdriver_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 	var/random_color = TRUE //if the screwdriver uses random coloring
 	var/static/list/screwdriver_colors = list(
 		"blue" = rgb(24, 97, 213),
@@ -75,10 +75,10 @@
 /obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M))
 		return ..()
-	if(user.zone_selected != BODY_ZONE_PRECISE_EYES && user.zone_selected != BODY_ZONE_HEAD)
+	if(user.zone_selected != BODY_ZONE_PRECISE_R_EYE && user.zone_selected != BODY_ZONE_HEAD)
 		return ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, "<span class='warning'>You don't want to harm [M]!</span>")
+		to_chat(user, "<span class='warning'>I don't want to harm [M]!</span>")
 		return
 	if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		M = user
@@ -86,11 +86,11 @@
 
 /obj/item/screwdriver/abductor
 	name = "alien screwdriver"
-	desc = "An ultrasonic screwdriver."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "screwdriver_a"
 	item_state = "screwdriver_nuke"
-	usesound = 'sound/items/pshoom.ogg'
+	usesound = 'sound/blank.ogg'
 	toolspeed = 0.1
 	random_color = FALSE
 
@@ -99,7 +99,7 @@
 
 /obj/item/screwdriver/power
 	name = "hand drill"
-	desc = "A simple powered hand drill."
+	desc = ""
 	icon_state = "drill_screw"
 	item_state = "drill"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -111,8 +111,8 @@
 	throw_speed = 2
 	throw_range = 3//it's heavier than a screw driver/wrench, so it does more damage, but can't be thrown as far
 	attack_verb = list("drilled", "screwed", "jabbed","whacked")
-	hitsound = 'sound/items/drill_hit.ogg'
-	usesound = 'sound/items/drill_use.ogg'
+	hitsound = 'sound/blank.ogg'
+	usesound = 'sound/blank.ogg'
 	toolspeed = 0.7
 	random_color = FALSE
 
@@ -125,26 +125,26 @@
 		user.visible_message("<span class='suicide'>[user] is putting [src] to [user.p_their()] temple. It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	else
 		user.visible_message("<span class='suicide'>[user] is pressing [src] against [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/items/drill_use.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	return(BRUTELOSS)
 
 /obj/item/screwdriver/power/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/items/change_drill.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	if(tool_behaviour == TOOL_SCREWDRIVER)
 		tool_behaviour = TOOL_WRENCH
-		to_chat(user, "<span class='notice'>You attach the bolt bit to [src].</span>")
+		to_chat(user, "<span class='notice'>I attach the bolt bit to [src].</span>")
 		icon_state = "drill_bolt"
 	else
 		tool_behaviour = TOOL_SCREWDRIVER
-		to_chat(user, "<span class='notice'>You attach the screw bit to [src].</span>")
+		to_chat(user, "<span class='notice'>I attach the screw bit to [src].</span>")
 		icon_state = "drill_screw"
 
 /obj/item/screwdriver/cyborg
 	name = "automated screwdriver"
-	desc = "A powerful automated screwdriver, designed to be both precise and quick."
+	desc = ""
 	icon = 'icons/obj/items_cyborg.dmi'
 	icon_state = "screwdriver_cyborg"
-	hitsound = 'sound/items/drill_hit.ogg'
-	usesound = 'sound/items/drill_use.ogg'
+	hitsound = 'sound/blank.ogg'
+	usesound = 'sound/blank.ogg'
 	toolspeed = 0.5
 	random_color = FALSE

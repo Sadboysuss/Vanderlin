@@ -12,7 +12,7 @@ GENE SCANNER
 */
 /obj/item/t_scanner
 	name = "\improper T-ray scanner"
-	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
+	desc = ""
 	custom_price = 10
 	icon = 'icons/obj/device.dmi'
 	icon_state = "t-ray0"
@@ -78,13 +78,13 @@ GENE SCANNER
 	item_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
+	desc = ""
 	flags_1 = CONDUCT_1
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
 	throwforce = 3
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=200)
 	var/mode = 1
@@ -97,10 +97,10 @@ GENE SCANNER
 
 /obj/item/healthanalyzer/attack_self(mob/user)
 	if(!scanmode)
-		to_chat(user, "<span class='notice'>You switch the health analyzer to scan chemical contents.</span>")
+		to_chat(user, "<span class='notice'>I switch the health analyzer to scan chemical contents.</span>")
 		scanmode = 1
 	else
-		to_chat(user, "<span class='notice'>You switch the health analyzer to check physical health.</span>")
+		to_chat(user, "<span class='notice'>I switch the health analyzer to check physical health.</span>")
 		scanmode = 0
 
 /obj/item/healthanalyzer/attack(mob/living/M, mob/living/carbon/human/user)
@@ -110,7 +110,7 @@ GENE SCANNER
 
 	if ((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(50))
 		user.visible_message("<span class='warning'>[user] analyzes the floor's vitals!</span>", \
-							"<span class='notice'>You stupidly try to analyze the floor's vitals!</span>")
+							"<span class='notice'>I stupidly try to analyze the floor's vitals!</span>")
 		to_chat(user, "<span class='info'>Analyzing results for The floor:\n\tOverall status: <b>Healthy</b></span>")
 		to_chat(user, "<span class='info'>Key: <font color='blue'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FF8000'>Burn</font>/<font color='red'>Brute</font></span>")
 		to_chat(user, "<span class='info'>\tDamage specifics: <font color='blue'>0</font>-<font color='green'>0</font>-<font color='#FF8000'>0</font>-<font color='red'>0</font></span>")
@@ -118,7 +118,7 @@ GENE SCANNER
 		return
 
 	user.visible_message("<span class='notice'>[user] analyzes [M]'s vitals.</span>", \
-						"<span class='notice'>You analyze [M]'s vitals.</span>")
+						"<span class='notice'>I analyze [M]'s vitals.</span>")
 
 	if(scanmode == 0)
 		healthscan(user, M, mode, advanced)
@@ -428,7 +428,7 @@ GENE SCANNER
 
 /obj/item/healthanalyzer/verb/toggle_mode()
 	set name = "Switch Verbosity"
-	set category = "Object"
+	set hidden = 1
 
 	if(usr.incapacitated())
 		return
@@ -443,11 +443,11 @@ GENE SCANNER
 /obj/item/healthanalyzer/advanced
 	name = "advanced health analyzer"
 	icon_state = "health_adv"
-	desc = "A hand-held body scanner able to distinguish vital signs of the subject with high accuracy."
+	desc = ""
 	advanced = TRUE
 
 /obj/item/analyzer
-	desc = "A hand-held environmental scanner which reports current gas levels. Alt-Click to use the built in barometer function."
+	desc = ""
 	name = "analyzer"
 	custom_price = 10
 	icon = 'icons/obj/device.dmi'
@@ -460,7 +460,7 @@ GENE SCANNER
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	tool_behaviour = TOOL_ANALYZER
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=20)
@@ -548,7 +548,7 @@ GENE SCANNER
 		if(!T)
 			return
 
-		playsound(src, 'sound/effects/pop.ogg', 100)
+		playsound(src, 'sound/blank.ogg', 100)
 		var/area/user_area = T.loc
 		var/datum/weather/ongoing_weather = null
 
@@ -556,7 +556,7 @@ GENE SCANNER
 			to_chat(user, "<span class='warning'>[src]'s barometer function won't work indoors!</span>")
 			return
 
-		for(var/V in SSweather.processing)
+		for(var/V in SSweather.curweathers)
 			var/datum/weather/W = V
 			if(W.barometer_predictable && (T.z in W.impacted_z_levels) && W.area_type == user_area.type && !(W.stage == END_STAGE))
 				ongoing_weather = W
@@ -584,7 +584,7 @@ GENE SCANNER
 	if(isliving(loc))
 		var/mob/living/L = loc
 		to_chat(L, "<span class='notice'>[src]'s barometer function is ready!</span>")
-	playsound(src, 'sound/machines/click.ogg', 100)
+	playsound(src, 'sound/blank.ogg', 100)
 	cooldown = FALSE
 
 /obj/item/analyzer/proc/butchertime(amount)
@@ -605,7 +605,7 @@ GENE SCANNER
 
 	var/icon = target
 	if(!silent && isliving(user))
-		user.visible_message("<span class='notice'>[user] has used the analyzer on [icon2html(icon, viewers(user))] [target].</span>", "<span class='notice'>You use the analyzer on [icon2html(icon, user)] [target].</span>")
+		user.visible_message("<span class='notice'>[user] has used the analyzer on [icon2html(icon, viewers(user))] [target].</span>", "<span class='notice'>I use the analyzer on [icon2html(icon, user)] [target].</span>")
 	to_chat(user, "<span class='boldnotice'>Results of analysis of [icon2html(icon, user)] [target].</span>")
 
 	var/list/airs = islist(mixture) ? mixture : list(mixture)
@@ -647,7 +647,7 @@ GENE SCANNER
 
 /obj/item/slime_scanner
 	name = "slime scanner"
-	desc = "A device that analyzes a slime's internal composition and measures its stats."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
@@ -656,7 +656,7 @@ GENE SCANNER
 	w_class = WEIGHT_CLASS_SMALL
 	flags_1 = CONDUCT_1
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=20)
 
@@ -709,19 +709,19 @@ GENE SCANNER
 	item_state = "nanite_remote"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "A hand-held body scanner able to detect nanites and their programming."
+	desc = ""
 	flags_1 = CONDUCT_1
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
 	throwforce = 3
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=200)
 
 /obj/item/nanite_scanner/attack(mob/living/M, mob/living/carbon/human/user)
 	user.visible_message("<span class='notice'>[user] analyzes [M]'s nanites.</span>", \
-						"<span class='notice'>You analyze [M]'s nanites.</span>")
+						"<span class='notice'>I analyze [M]'s nanites.</span>")
 
 	add_fingerprint(user)
 
@@ -736,13 +736,13 @@ GENE SCANNER
 	item_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "A hand-held scanner for analyzing someones gene sequence on the fly. Hold near a DNA console to update the internal database."
+	desc = ""
 	flags_1 = CONDUCT_1
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
 	throwforce = 3
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=200)
 	var/list/discovered = list() //hit a dna console to update the scanners database
@@ -754,7 +754,7 @@ GENE SCANNER
 	add_fingerprint(user)
 	if (!HAS_TRAIT(M, TRAIT_RADIMMUNE) && !HAS_TRAIT(M, TRAIT_BADDNA)) //no scanning if its a husk or DNA-less Species
 		user.visible_message("<span class='notice'>[user] analyzes [M]'s genetic sequence.</span>", \
-							"<span class='notice'>You analyze [M]'s genetic sequence.</span>")
+							"<span class='notice'>I analyze [M]'s genetic sequence.</span>")
 		gene_scan(M, user)
 
 	else
@@ -837,7 +837,7 @@ GENE SCANNER
 	item_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "An wand for scanning someone else for a medical analysis. Insert into a kiosk is make the scanned patient the target of a health scan."
+	desc = ""
 	force = 0
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
@@ -848,22 +848,22 @@ GENE SCANNER
 
 	if((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(25))
 		user.visible_message("<span class='warning'>[user] targets himself for scanning.</span>", \
-		to_chat(user, "<span class='info'>You try scanning [M], before realizing you're holding the scanner backwards. Whoops.</span>"))
+		to_chat(user, "<span class='info'>I try scanning [M], before realizing you're holding the scanner backwards. Whoops.</span>"))
 		selected_target = user
 		return
 
 	if(!ishuman(M))
-		to_chat(user, "<span class='info'>You can only scan human-like, non-robotic beings.</span>")
+		to_chat(user, "<span class='info'>I can only scan human-like, non-robotic beings.</span>")
 		selected_target = null
 		return
 
 	user.visible_message("<span class='notice'>[user] targets [M] for scanning.</span>", \
-						"<span class='notice'>You target [M] vitals.</span>")
+						"<span class='notice'>I target [M] vitals.</span>")
 	selected_target = M
 	return
 
 /obj/item/scanner_wand/attack_self(mob/user)
-	to_chat(user, "<span class='info'>You clear the scanner's target.</span>")
+	to_chat(user, "<span class='info'>I clear the scanner's target.</span>")
 	selected_target = null
 
 /obj/item/scanner_wand/proc/return_patient()

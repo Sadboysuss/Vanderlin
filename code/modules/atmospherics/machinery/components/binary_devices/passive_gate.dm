@@ -10,7 +10,7 @@ Passive gate is similar to the regular pump except:
 	icon_state = "passgate_map-2"
 
 	name = "passive gate"
-	desc = "A one-way air valve that does not require power."
+	desc = ""
 
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE
@@ -162,7 +162,7 @@ Passive gate is similar to the regular pump except:
 /obj/machinery/atmospherics/components/binary/passive_gate/can_unwrench(mob/user)
 	. = ..()
 	if(. && on)
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
 

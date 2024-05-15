@@ -7,29 +7,37 @@
 	var/smooth_icon = 'icons/turf/smoothrocks.dmi'
 	smooth = SMOOTH_MORE|SMOOTH_BORDER
 	canSmoothWith = null
-	baseturfs = /turf/open/floor/plating/asteroid/airless
-	initial_gas_mix = AIRLESS_ATMOS
+	baseturfs = list(/turf/open/floor/rogue/naturalstone)
 	opacity = 1
 	density = TRUE
-	layer = EDGED_TURF_LAYER
+//	layer = EDGED_TURF_LAYER
 	temperature = TCMB
 	var/environment_type = "asteroid"
 	var/turf/open/floor/plating/turf_type = /turf/open/floor/plating/asteroid/airless
-	var/obj/item/stack/ore/mineralType = null
+	var/obj/item/mineralType = null
+	var/obj/item/natural/rock/rockType = null
 	var/mineralAmt = 3
 	var/spread = 0 //will the seam spread?
 	var/spreadChance = 0 //the percentual chance of an ore spreading to the neighbouring tiles
 	var/last_act = 0
 	var/scan_state = "" //Holder for the image we display when we're pinged by a mining scanner
 	var/defer_change = 0
+	blade_dulling = DULLING_PICK
+	max_integrity = 1000
+	break_sound = 'sound/combat/hits/onstone/stonedeath.ogg'
+	attacked_sound = list('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg')
+	neighborlay = "dirtedge"
 
 /turf/closed/mineral/Initialize()
 	if (!canSmoothWith)
 		canSmoothWith = list(/turf/closed/mineral, /turf/closed/indestructible)
-	var/matrix/M = new
-	M.Translate(-4, -4)
-	transform = M
+//	var/matrix/M = new
+//	M.Translate(-4, -4)
+//	transform = M
 	icon = smooth_icon
+	. = ..()
+
+/turf/closed/mineral/LateInitialize()
 	. = ..()
 	if (mineralType && mineralAmt && spread && spreadChance)
 		for(var/dir in GLOB.cardinals)
@@ -37,6 +45,9 @@
 				var/turf/T = get_step(src, dir)
 				if(istype(T, /turf/closed/mineral/random))
 					Spread(T)
+	var/turf/open/transparent/openspace/target = get_step_multiz(src, UP)
+	if(istype(target))
+		target.ChangeTurf(/turf/open/floor/rogue/naturalstone)
 
 /turf/closed/mineral/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	if(turf_type)
@@ -48,38 +59,41 @@
 
 /turf/closed/mineral/attackby(obj/item/I, mob/user, params)
 	if (!user.IsAdvancedToolUser())
-		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(usr, "<span class='warning'>I don't have the dexterity to do this!</span>")
 		return
+	var/olddam = turf_integrity
+	..()
+	if(turf_integrity && turf_integrity > 10)
+		if(turf_integrity < olddam)
+			if(prob(50))
+				if(user.Adjacent(src))
+					var/obj/item/natural/stone/S = new(src)
+					S.forceMove(get_turf(user))
 
-	if(I.tool_behaviour == TOOL_MINING)
-		var/turf/T = user.loc
-		if (!isturf(T))
-			return
-
-		if(last_act + (40 * I.toolspeed) > world.time)//prevents message spam
-			return
-		last_act = world.time
-		to_chat(user, "<span class='notice'>You start picking...</span>")
-
-		if(I.use_tool(src, user, 40, volume=50))
-			if(ismineralturf(src))
-				to_chat(user, "<span class='notice'>You finish cutting into the rock.</span>")
-				gets_drilled(user)
-				SSblackbox.record_feedback("tally", "pick_used_mining", 1, I.type)
-	else
-		return attack_hand(user)
+/turf/closed/mineral/turf_destruction(damage_flag)
+	gets_drilled(give_exp = FALSE)
+	queue_smooth_neighbors(src)
+	..()
 
 /turf/closed/mineral/proc/gets_drilled(user, give_exp = TRUE)
+	new /obj/item/natural/stone(src)
+	if(prob(30))
+		new /obj/item/natural/stone(src)
 	if (mineralType && (mineralAmt > 0))
-		new mineralType(src, mineralAmt)
+		if(prob(33)) //chance to spawn ore directly
+			new mineralType(src)
+		if(rockType) //always spawn at least 1 rock
+			new rockType(src)
+			if(prob(23))
+				new rockType(src)
 		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, mineralType)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(give_exp)
-			if (mineralType && (mineralAmt > 0))
-				H.mind.adjust_experience(/datum/skill/mining, initial(mineralType.mine_experience) * mineralAmt)
-			else
-				H.mind.adjust_experience(/datum/skill/mining, 4)
+//	if(ishuman(user))
+//		var/mob/living/carbon/human/H = user
+//		if(give_exp)
+//			if (mineralType && (mineralAmt > 0))
+//				H.mind.adjust_experience(/datum/skill/mining, initial(mineralType.mine_experience) * mineralAmt)
+//			else
+//				H.mind.adjust_experience(/datum/skill/mining, 4)
 
 	for(var/obj/effect/temp_visual/mining_overlay/M in src)
 		qdel(M)
@@ -88,7 +102,7 @@
 		flags = CHANGETURF_DEFER_CHANGE
 	ScrapeAway(null, flags)
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
-	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE) //beautiful destruction
+//	playsound(src, 'sound/blank.ogg', 100, TRUE) //beautiful destruction
 
 /turf/closed/mineral/attack_animal(mob/living/simple_animal/user)
 	if((user.environment_smash & ENVIRONMENT_SMASH_WALLS) || (user.environment_smash & ENVIRONMENT_SMASH_RWALLS))
@@ -96,18 +110,18 @@
 	..()
 
 /turf/closed/mineral/attack_alien(mob/living/carbon/alien/M)
-	to_chat(M, "<span class='notice'>You start digging into the rock...</span>")
-	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE)
+	to_chat(M, "<span class='notice'>I start digging into the rock...</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(do_after(M, 40, target = src))
-		to_chat(M, "<span class='notice'>You tunnel into the rock.</span>")
+		to_chat(M, "<span class='notice'>I tunnel into the rock.</span>")
 		gets_drilled(M)
-
+/*
 /turf/closed/mineral/Bumped(atom/movable/AM)
 	..()
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
-		var/obj/item/I = H.is_holding_tool_quality(TOOL_MINING)
-		if(I)
+		var/obj/item/I = H.get_active_held_item()
+		if(I && H.a_intent.blade_class == BCLASS_PICK)
 			attackby(I, H)
 		return
 	else if(iscyborg(AM))
@@ -117,7 +131,7 @@
 			return
 	else
 		return
-
+*/
 /turf/closed/mineral/acid_melt()
 	ScrapeAway()
 
@@ -450,7 +464,7 @@
 
 /turf/closed/mineral/gibtonite/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/mining_scanner) || istype(I, /obj/item/t_scanner/adv_mining_scanner) && stage == 1)
-		user.visible_message("<span class='notice'>[user] holds [I] to [src]...</span>", "<span class='notice'>You use [I] to locate where to cut off the chain reaction and attempt to stop it...</span>")
+		user.visible_message("<span class='notice'>[user] holds [I] to [src]...</span>", "<span class='notice'>I use [I] to locate where to cut off the chain reaction and attempt to stop it...</span>")
 		defuse()
 	..()
 
@@ -459,7 +473,7 @@
 		activated_overlay = mutable_appearance('icons/turf/smoothrocks.dmi', "rock_Gibtonite_active", ON_EDGED_TURF_LAYER)
 		add_overlay(activated_overlay)
 		name = "gibtonite deposit"
-		desc = "An active gibtonite reserve. Run!"
+		desc = ""
 		stage = GIBTONITE_ACTIVE
 		visible_message("<span class='danger'>There was gibtonite inside! It's going to explode!</span>")
 
@@ -491,7 +505,7 @@
 		cut_overlay(activated_overlay)
 		activated_overlay.icon_state = "rock_Gibtonite_inactive"
 		add_overlay(activated_overlay)
-		desc = "An inactive gibtonite reserve. The ore can be extracted."
+		desc = ""
 		stage = GIBTONITE_STABLE
 		if(det_time < 0)
 			det_time = 0
@@ -499,7 +513,7 @@
 
 /turf/closed/mineral/gibtonite/gets_drilled(mob/user, triggered_by_explosion = 0)
 	if(stage == GIBTONITE_UNSTRUCK && mineralAmt >= 1) //Gibtonite deposit is activated
-		playsound(src,'sound/effects/hit_on_shattered_glass.ogg',50,TRUE)
+		playsound(src,'sound/blank.ogg',50,TRUE)
 		explosive_reaction(user, triggered_by_explosion)
 		return
 	if(stage == GIBTONITE_ACTIVE && mineralAmt >= 1) //Gibtonite deposit goes kaboom
@@ -532,7 +546,7 @@
 
 /turf/closed/mineral/strong
 	name = "Very strong rock"
-	desc = "Seems to be stronger than the other rocks in the area. Only a master of mining techniques could destroy this."
+	desc = ""
 	environment_type = "basalt"
 	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
 	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
@@ -558,7 +572,7 @@
 		flags = CHANGETURF_DEFER_CHANGE
 	ScrapeAway(flags=flags)
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
-	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE) //beautiful destruction
+	playsound(src, 'sound/blank.ogg', 50, TRUE) //beautiful destruction
 
 /turf/closed/mineral/strong/proc/drop_ores()
 	if(prob(10))
@@ -571,3 +585,101 @@
 
 /turf/closed/mineral/strong/ex_act(severity, target)
 	return
+
+
+
+/turf/closed/mineral/random/rogue
+//	layer = ABOVE_MOB_LAYER
+	name = "rock"
+	desc = "seems barren"
+	icon = 'icons/turf/roguewall.dmi'
+	icon_state = "minrandbad"
+	smooth = SMOOTH_TRUE | SMOOTH_MORE
+	smooth_icon = 'icons/turf/walls/cwall.dmi'
+	wallclimb = TRUE
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+	canSmoothWith = list(/turf/closed/mineral/random/rogue, /turf/closed/mineral/rogue)
+	turf_type = /turf/open/floor/rogue/naturalstone
+	above_floor = /turf/open/floor/rogue/naturalstone
+	baseturfs = list(/turf/open/floor/rogue/naturalstone)
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 15)
+	mineralChance = 30
+	max_integrity = 400
+
+/turf/closed/mineral/random/rogue/med
+	icon_state = "minrandmed"
+	mineralChance = 50
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 25, /turf/closed/mineral/rogue/iron = 25, /turf/closed/mineral/rogue/coal = 25)
+
+/turf/closed/mineral/random/rogue/high
+	icon_state = "minrandhigh"
+	mineralChance = 50
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 25 , /turf/closed/mineral/rogue/iron = 25,)
+
+
+//begin actual mineral turfs
+/turf/closed/mineral/rogue
+//	layer = ABOVE_MOB_LAYER
+	name = "rock"
+	desc = "seems barren"
+	icon = 'icons/turf/roguewall.dmi'
+	icon_state = "rockyash"
+	smooth = SMOOTH_TRUE | SMOOTH_MORE
+	smooth_icon = 'icons/turf/walls/cwall.dmi'
+	wallclimb = TRUE
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+	canSmoothWith = list(/turf/closed/mineral/random/rogue, /turf/closed/mineral/rogue)
+	turf_type = /turf/open/floor/rogue/naturalstone
+	baseturfs = /turf/open/floor/rogue/naturalstone
+	mineralAmt = 1
+	max_integrity = 500
+	above_floor = /turf/open/floor/rogue/naturalstone
+	mineralType = null
+	rockType = null
+	spreadChance = 0
+	spread = 0
+
+/turf/closed/mineral/rogue/gold
+	desc = "seems rich in gold"
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/gold
+	rockType = /obj/item/natural/rock/gold
+	spreadChance = 2
+	spread = 3
+
+/turf/closed/mineral/rogue/salt
+	desc = "seems rich in salt"
+	icon_state = "mingold"
+	mineralType = /obj/item/reagent_containers/powder/flour/salt
+	rockType = /obj/item/natural/rock/salt
+	spreadChance = 12
+	spread = 3
+
+/turf/closed/mineral/rogue/iron
+	desc = "seems rich in iron"
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/iron
+	rockType = /obj/item/natural/rock/iron
+	spreadChance = 5
+	spread = 3
+
+/turf/closed/mineral/rogue/coal
+	desc = "seems rich in coal"
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/coal
+	rockType = /obj/item/natural/rock/coal
+	spreadChance = 3
+	spread = 4
+
+/turf/closed/mineral/rogue/bedrock
+	name = "rock"
+	desc = "seems too hard"
+	icon_state = "rockyashbed"
+//	smooth_icon = 'icons/turf/walls/hardrock.dmi'
+	max_integrity = 900
+	above_floor = /turf/closed/mineral/rogue/bedrock
+
+/turf/closed/mineral/rogue/bedrock/attackby(obj/item/I, mob/user, params)
+	..()
+	to_chat(user, "<span class='warning'>TOO HARD!</span>")
+	turf_integrity = max_integrity

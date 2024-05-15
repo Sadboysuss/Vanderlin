@@ -12,7 +12,7 @@
 
 /obj/item/soap
 	name = "soap"
-	desc = "A cheap bar of soap. Doesn't smell."
+	desc = ""
 	gender = PLURAL
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "soap"
@@ -21,7 +21,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	item_flags = NOBLUDGEON
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	grind_results = list(/datum/reagent/lye = 10)
 	var/cleanspeed = 35 //slower than mop
@@ -52,24 +52,24 @@
 	. += "<span class='notice'>[msg]</span>"
 
 /obj/item/soap/nanotrasen
-	desc = "A heavy duty bar of Nanotrasen brand soap. Smells of plasma."
+	desc = ""
 	grind_results = list(/datum/reagent/toxin/plasma = 10, /datum/reagent/lye = 10)
 	icon_state = "soapnt"
 	cleanspeed = 28 //janitor gets this
 	uses = 300
 
 /obj/item/soap/homemade
-	desc = "A homemade bar of soap. Smells of... well...."
+	desc = ""
 	icon_state = "soapgibs"
 	cleanspeed = 30 // faster to reward chemists for going to the effort
 
 /obj/item/soap/deluxe
-	desc = "A deluxe Waffle Co. brand bar of soap. Smells of high-class luxury."
+	desc = ""
 	icon_state = "soapdeluxe"
 	cleanspeed = 20 //captain gets one of these
 
 /obj/item/soap/syndie
-	desc = "An untrustworthy bar of soap made of strong chemical agents that dissolve blood faster."
+	desc = ""
 	icon_state = "soapsyndie"
 	cleanspeed = 5 //faster than mop so it is useful for traitors who want to clean crime scenes
 
@@ -92,32 +92,32 @@
 	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	if(user.client && ((target in user.client.screen) && !user.is_holding(target)))
-		to_chat(user, "<span class='warning'>You need to take that [target.name] off before cleaning it!</span>")
+		to_chat(user, "<span class='warning'>I need to take that [target.name] off before cleaning it!</span>")
 	else if(istype(target, /obj/effect/decal/cleanable))
-		user.visible_message("<span class='notice'>[user] begins to scrub \the [target.name] out with [src].</span>", "<span class='warning'>You begin to scrub \the [target.name] out with [src]...</span>")
+		user.visible_message("<span class='notice'>[user] begins to scrub \the [target.name] out with [src].</span>", "<span class='warning'>I begin to scrub \the [target.name] out with [src]...</span>")
 		if(do_after(user, src.cleanspeed, target = target))
-			to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
+			to_chat(user, "<span class='notice'>I scrub \the [target.name] out.</span>")
 			qdel(target)
 			decreaseUses(user)
 
 	else if(ishuman(target) && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 		var/mob/living/carbon/human/H = user
-		user.visible_message("<span class='warning'>\the [user] washes \the [target]'s mouth out with [src.name]!</span>", "<span class='notice'>You wash \the [target]'s mouth out with [src.name]!</span>") //washes mouth out with soap sounds better than 'the soap' here			if(user.zone_selected == "mouth")
+		user.visible_message("<span class='warning'>\the [user] washes \the [target]'s mouth out with [src.name]!</span>", "<span class='notice'>I wash \the [target]'s mouth out with [src.name]!</span>") //washes mouth out with soap sounds better than 'the soap' here			if(user.zone_selected == "mouth")
 		H.lip_style = null //removes lipstick
 		H.update_body()
 		decreaseUses(user)
 		return
 	else if(istype(target, /obj/structure/window))
-		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>You begin to clean \the [target.name] with [src]...</span>")
+		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>I begin to clean \the [target.name] with [src]...</span>")
 		if(do_after(user, src.cleanspeed, target = target))
-			to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
+			to_chat(user, "<span class='notice'>I clean \the [target.name].</span>")
 			target.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 			target.set_opacity(initial(target.opacity))
 			decreaseUses(user)
 	else
-		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>You begin to clean \the [target.name] with [src]...</span>")
+		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>I begin to clean \the [target.name] with [src]...</span>")
 		if(do_after(user, src.cleanspeed, target = target))
-			to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
+			to_chat(user, "<span class='notice'>I clean \the [target.name].</span>")
 			for(var/obj/effect/decal/cleanable/C in target)
 				qdel(C)
 			target.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
@@ -132,7 +132,7 @@
 
 /obj/item/bikehorn
 	name = "bike horn"
-	desc = "A horn off of a bicycle."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "bike_horn"
 	item_state = "bike_horn"
@@ -142,13 +142,13 @@
 	hitsound = null //To prevent tap.ogg playing, as the item lacks of force
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_BELT
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	attack_verb = list("HONKED")
 
 /obj/item/bikehorn/Initialize()
 	. = ..()
-	AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg'=1), 50)
+	AddComponent(/datum/component/squeak, list('sound/blank.ogg'=1), 50)
 
 /obj/item/bikehorn/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(user != M && ishuman(user))
@@ -159,23 +159,23 @@
 
 /obj/item/bikehorn/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] solemnly points [src] at [user.p_their()] temple! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return (BRUTELOSS)
 
 //air horn
 /obj/item/bikehorn/airhorn
 	name = "air horn"
-	desc = "Damn son, where'd you find this?"
+	desc = ""
 	icon_state = "air_horn"
 
 /obj/item/bikehorn/airhorn/Initialize()
 	. = ..()
-	AddComponent(/datum/component/squeak, list('sound/items/airhorn2.ogg'=1), 50)
+	AddComponent(/datum/component/squeak, list('sound/blank.ogg'=1), 50)
 
 //golden bikehorn
 /obj/item/bikehorn/golden
 	name = "golden bike horn"
-	desc = "Golden? Clearly, it's made with bananium! Honk!"
+	desc = ""
 	icon_state = "gold_horn"
 	item_state = "gold_horn"
 	var/flip_cooldown = 0
@@ -203,6 +203,6 @@
 //canned laughter
 /obj/item/reagent_containers/food/drinks/soda_cans/canned_laughter
 	name = "Canned Laughter"
-	desc = "Just looking at this makes you want to giggle."
+	desc = ""
 	icon_state = "laughter"
 	list_reagents = list(/datum/reagent/consumable/laughter = 50)

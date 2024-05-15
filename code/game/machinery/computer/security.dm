@@ -1,6 +1,6 @@
 /obj/machinery/computer/secure_data//TODO:SANITY
 	name = "security records console"
-	desc = "Used to view and edit personnel's security records."
+	desc = ""
 	icon_screen = "security"
 	icon_keyboard = "security_key"
 	req_one_access = list(ACCESS_SECURITY, ACCESS_FORENSICS_LOCKERS)
@@ -26,7 +26,7 @@
 
 /obj/machinery/computer/secure_data/laptop
 	name = "security laptop"
-	desc = "A cheap Nanotrasen security laptop, it functions as a security records console. It's bolted to the table."
+	desc = ""
 	icon_state = "laptop"
 	icon_screen = "seclaptop"
 	icon_keyboard = "laptop_key"
@@ -36,7 +36,7 @@
 /obj/machinery/computer/secure_data/ui_interact(mob/user)
 	. = ..()
 	if(isliving(user))
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 	if(src.z > 6)
 		to_chat(user, "<span class='boldannounce'>Unable to establish a connection</span>: \black You're too far away from the station!")
 		return
@@ -320,7 +320,7 @@ What a mess.*/
 				screen = null
 				active1 = null
 				active2 = null
-				playsound(src, 'sound/machines/terminal_off.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 			if("Log In")
 				var/mob/M = usr
@@ -346,7 +346,7 @@ What a mess.*/
 					screen = 1
 				else
 					to_chat(usr, "<span class='danger'>Unauthorized Access.</span>")
-				playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 //RECORD FUNCTIONS
 			if("Record Maintenance")
@@ -376,7 +376,7 @@ What a mess.*/
 							else
 								var/diff = p.fine - p.paid
 								GLOB.data_core.payCitation(active2.fields["id"], text2num(href_list["cdataid"]), pay)
-								to_chat(usr, "<span class='notice'>You have paid [pay] credit\s towards your fine.</span>")
+								to_chat(usr, "<span class='notice'>I have paid [pay] credit\s towards your fine.</span>")
 								if (pay == diff || pay > diff || pay >= diff)
 									investigate_log("Citation Paid off: <strong>[p.crimeName]</strong> Fine: [p.fine] | Paid off by [key_name(usr)]", INVESTIGATE_RECORDS)
 									to_chat(usr, "<span class='notice'>The fine has been paid in full.</span>")
@@ -389,7 +389,7 @@ What a mess.*/
 				if(!( printing ))
 					printing = 1
 					GLOB.data_core.securityPrintCount++
-					playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
+					playsound(loc, 'sound/blank.ogg', 100, TRUE)
 					sleep(30)
 					var/obj/item/paper/P = new /obj/item/paper( loc )
 					P.info = "<CENTER><B>Security Record - (SR-[GLOB.data_core.securityPrintCount])</B></CENTER><BR>"
@@ -471,7 +471,7 @@ What a mess.*/
 
 						var/info = stripped_multiline_input(usr, "Please input a description for the poster:", "Print Wanted Poster", default_description, null)
 						if(info)
-							playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
+							playsound(loc, 'sound/blank.ogg', 100, TRUE)
 							printing = 1
 							sleep(30)
 							if((istype(active1, /datum/data/record) && GLOB.data_core.general.Find(active1)))//make sure the record still exists.
@@ -488,7 +488,7 @@ What a mess.*/
 
 						var/info = stripped_multiline_input(usr, "Please input a description for the poster:", "Print Missing Persons Poster", default_description, null)
 						if(info)
-							playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
+							playsound(loc, 'sound/blank.ogg', 100, TRUE)
 							printing = 1
 							sleep(30)
 							if((istype(active1, /datum/data/record) && GLOB.data_core.general.Find(active1)))//make sure the record still exists.
@@ -864,7 +864,7 @@ What a mess.*/
 	printing = TRUE
 	sleep(20)
 	var/obj/item/photo/P = new/obj/item/photo(drop_location())
-	var/datum/picture/toEmbed = new(name = person_name, desc = "The photo on file for [person_name].", image = temp)
+	var/datum/picture/toEmbed = new(name = person_name, desc = "", image = temp)
 	P.set_picture(toEmbed, TRUE, TRUE)
 	P.pixel_x = rand(-10, 10)
 	P.pixel_y = rand(-10, 10)

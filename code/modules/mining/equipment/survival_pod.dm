@@ -11,7 +11,7 @@
 //Survival Capsule
 /obj/item/survivalcapsule
 	name = "bluespace shelter capsule"
-	desc = "An emergency shelter stored within a pocket of bluespace."
+	desc = ""
 	icon_state = "capsule"
 	icon = 'icons/obj/mining.dmi'
 	w_class = WEIGHT_CLASS_TINY
@@ -58,7 +58,7 @@
 			used = FALSE
 			return
 
-		playsound(src, 'sound/effects/phasein.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 		var/turf/T = deploy_location
 		if(!is_mining_level(T.z)) //only report capsules away from the mining/lavaland level
@@ -72,12 +72,12 @@
 
 /obj/item/survivalcapsule/luxury
 	name = "luxury bluespace shelter capsule"
-	desc = "An exorbitantly expensive luxury suite stored within a pocket of bluespace."
+	desc = ""
 	template_id = "shelter_beta"
 
 /obj/item/survivalcapsule/luxuryelite
 	name = "luxury elite bar capsule"
-	desc = "A luxury bar in a capsule. Bartender required and not included."
+	desc = ""
 	template_id = "shelter_charlie"
 
 //Pod objects
@@ -174,7 +174,7 @@
 		return TRUE
 
 	user.visible_message("<span class='warning'>[user] disassembles [src].</span>",
-		"<span class='notice'>You start to disassemble [src]...</span>", "<span class='hear'>You hear clanking and banging noises.</span>")
+		"<span class='notice'>I start to disassemble [src]...</span>", "<span class='hear'>I hear clanking and banging noises.</span>")
 	if(I.use_tool(src, user, 20, volume=50))
 		new /obj/item/gps(loc)
 		qdel(src)
@@ -194,7 +194,7 @@
 //Survival Storage Unit
 /obj/machinery/smartfridge/survival_pod
 	name = "survival pod storage"
-	desc = "A heated storage unit."
+	desc = ""
 	icon_state = "donkvendor"
 	icon = 'icons/obj/lavaland/donkvendor.dmi'
 	light_range = 5
@@ -227,7 +227,7 @@
 
 /obj/machinery/smartfridge/survival_pod/empty
 	name = "dusty survival pod storage"
-	desc = "A heated storage unit. This one's seen better days."
+	desc = ""
 	empty = TRUE
 
 //Fans
@@ -235,7 +235,7 @@
 	icon = 'icons/obj/lavaland/survival_pod.dmi'
 	icon_state = "fans"
 	name = "environmental regulation system"
-	desc = "A large machine releasing a constant gust of air."
+	desc = ""
 	anchored = TRUE
 	density = TRUE
 	var/buildstacktype = /obj/item/stack/sheet/metal
@@ -254,14 +254,14 @@
 		return TRUE
 
 	user.visible_message("<span class='warning'>[user] disassembles [src].</span>",
-		"<span class='notice'>You start to disassemble [src]...</span>", "<span class='hear'>You hear clanking and banging noises.</span>")
+		"<span class='notice'>I start to disassemble [src]...</span>", "<span class='hear'>I hear clanking and banging noises.</span>")
 	if(I.use_tool(src, user, 20, volume=50))
 		deconstruct()
 	return TRUE
 
 /obj/structure/fans/tiny
 	name = "tiny fan"
-	desc = "A tiny fan, releasing a thin gust of air."
+	desc = ""
 	layer = ABOVE_NORMAL_TURF_LAYER
 	density = FALSE
 	icon_state = "fan_tiny"
@@ -280,13 +280,13 @@
 //Signs
 /obj/structure/sign/mining
 	name = "nanotrasen mining corps sign"
-	desc = "A sign of relief for weary miners, and a warning for would-be competitors to Nanotrasen's mining claims."
+	desc = ""
 	icon = 'icons/turf/walls/survival_pod_walls.dmi'
 	icon_state = "ntpod"
 
 /obj/structure/sign/mining/survival
 	name = "shelter sign"
-	desc = "A high visibility sign designating a safe shelter."
+	desc = ""
 	icon = 'icons/turf/walls/survival_pod_walls.dmi'
 	icon_state = "survival"
 

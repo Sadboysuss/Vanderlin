@@ -243,8 +243,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	var/balloon_clusters = 2
 
 /obj/effect/mapping_helpers/ianbirthday/LateInitialize()
-	if(locate(/datum/holiday/ianbirthday) in SSevents.holidays)
-		birthday()
+//	if(locate(/datum/holiday/ianbirthday) in SSevents.holidays)
+//		birthday()
 	qdel(src)
 
 /obj/effect/mapping_helpers/ianbirthday/proc/birthday()
@@ -266,7 +266,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	var/turf/food_turf = get_turf(pick(table))
 	new /obj/item/kitchen/knife(food_turf)
 	var/obj/item/reagent_containers/food/snacks/store/cake/birthday/iancake = new(food_turf)
-	iancake.desc = "Happy birthday, Ian!"
+	iancake.desc = ""
 	//some balloons! this picks an open turf and pops a few balloons in and around that turf, yay.
 	for(var/i in 1 to balloon_clusters)
 		var/turf/clusterspot = pick_n_take(openturfs)

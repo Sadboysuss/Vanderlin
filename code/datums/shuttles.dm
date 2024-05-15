@@ -455,6 +455,18 @@
 	suffix = "donut"
 	name = "supply shuttle (Donut)"
 
+/datum/map_template/shuttle/cargo/rogue
+	suffix = "rogue"
+	name = "supply boat"
+
+
+/datum/map_template/shuttle/emergency/rogue
+	suffix = "rogue"
+	name = "Rogue Emergency Shuttle"
+	description = "."
+	admin_notes = "."
+	credit_cost = 0
+
 /datum/map_template/shuttle/emergency/delta
 	suffix = "delta"
 	name = "Delta Station Emergency Shuttle"
@@ -487,6 +499,10 @@
 /datum/map_template/shuttle/arrival/box
 	suffix = "box"
 	name = "arrival shuttle (Box)"
+
+/datum/map_template/shuttle/arrival/rogue
+	suffix = "rogue"
+	name = "arrival boat"
 
 /datum/map_template/shuttle/cargo/box
 	suffix = "box"

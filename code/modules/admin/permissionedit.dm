@@ -1,7 +1,7 @@
 /client/proc/edit_admin_permissions()
 	set category = "Admin"
 	set name = "Permissions Panel"
-	set desc = "Edit admin permissions"
+	set desc = ""
 	if(!check_rights(R_PERMISSIONS))
 		return
 	usr.client.holder.edit_admin_permissions()
@@ -130,8 +130,8 @@
 	if(IsAdminAdvancedProcCall())
 		to_chat(usr, "<span class='admin prefix'>Admin Edit blocked: Advanced ProcCall detected.</span>")
 		return
-	var/datum/asset/permissions_assets = get_asset_datum(/datum/asset/simple/permissions)
-	permissions_assets.send(src)
+//	var/datum/asset/permissions_assets = get_asset_datum(/datum/asset/simple/permissions)
+//	permissions_assets.send(src)
 	var/admin_key = href_list["key"]
 	var/admin_ckey = ckey(admin_key)
 	var/datum/admins/D = GLOB.admin_datums[admin_ckey]
@@ -270,7 +270,7 @@
 	D.deactivate() //after logs so the deadmined admin can see the message.
 
 /datum/admins/proc/auto_deadmin()
-	to_chat(owner, "<span class='interface'>You are now a normal player.</span>")
+	to_chat(owner, "<span class='interface'>I are now a normal player.</span>")
 	var/old_owner = owner
 	deactivate()
 	message_admins("[old_owner] deadmined via auto-deadmin config.")
@@ -425,7 +425,7 @@
 		return
 	for(var/datum/admin_rank/R in GLOB.admin_ranks)
 		if(R.name == admin_rank && (!(R.rights & usr.client.holder.rank.can_edit_rights) == R.rights))
-			to_chat(usr, "<span class='admin prefix'>You don't have edit rights to all the rights this rank has, rank deletion not permitted.</span>")
+			to_chat(usr, "<span class='admin prefix'>I don't have edit rights to all the rights this rank has, rank deletion not permitted.</span>")
 			return
 	if(!CONFIG_GET(flag/admin_legacy_system) && CONFIG_GET(flag/protect_legacy_ranks) && (admin_rank in GLOB.protected_ranks))
 		to_chat(usr, "<span class='admin prefix'>Deletion of protected ranks is not permitted, it must be removed from admin_ranks.txt.</span>")

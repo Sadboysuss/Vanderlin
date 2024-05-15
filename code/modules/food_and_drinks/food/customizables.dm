@@ -41,7 +41,7 @@
 		if(I.w_class > WEIGHT_CLASS_SMALL)
 			to_chat(user, "<span class='warning'>The ingredient is too big for [src]!</span>")
 		else if((ingredients.len >= ingMax) || (reagents.total_volume >= volume))
-			to_chat(user, "<span class='warning'>You can't add more ingredients to [src]!</span>")
+			to_chat(user, "<span class='warning'>I can't add more ingredients to [src]!</span>")
 		else if(istype(I, /obj/item/reagent_containers/food/snacks/pizzaslice/custom) || istype(I, /obj/item/reagent_containers/food/snacks/cakeslice/custom))
 			to_chat(user, "<span class='warning'>Adding [I.name] to [src] would make a mess.</span>")
 		else
@@ -54,7 +54,7 @@
 			S.reagents.trans_to(src,min(S.reagents.total_volume, 15), transfered_by = user) //limit of 15, we don't want our custom food to be completely filled by just one ingredient with large reagent volume.
 			foodtype |= S.foodtype
 			update_snack_overlays(S)
-			to_chat(user, "<span class='notice'>You add the [I.name] to the [name].</span>")
+			to_chat(user, "<span class='notice'>I add the [I.name] to the [name].</span>")
 			update_name(S)
 	else
 		. = ..()
@@ -88,23 +88,24 @@
 		attackby(I, user)
 	qdel(BASE)
 
-/obj/item/reagent_containers/food/snacks/customizable/proc/mix_filling_color(obj/item/reagent_containers/food/snacks/S)
-	if(ingredients.len == 1)
-		filling_color = S.filling_color
-	else
-		var/list/rgbcolor = list(0,0,0,0)
-		var/customcolor = GetColors(filling_color)
-		var/ingcolor =  GetColors(S.filling_color)
-		rgbcolor[1] = (customcolor[1]+ingcolor[1])/2
-		rgbcolor[2] = (customcolor[2]+ingcolor[2])/2
-		rgbcolor[3] = (customcolor[3]+ingcolor[3])/2
-		rgbcolor[4] = (customcolor[4]+ingcolor[4])/2
-		filling_color = rgb(rgbcolor[1], rgbcolor[2], rgbcolor[3], rgbcolor[4])
+
+/obj/item/reagent_containers/food/snacks/proc/mix_filling_color(obj/item/reagent_containers/food/snacks/S)
+	var/list/rgbcolor = list(0,0,0,0)
+	var/customcolor = GetColors(filling_color)
+	var/ingcolor =  GetColors(S.filling_color)
+	rgbcolor[1] = (customcolor[1]+ingcolor[1])/2
+	rgbcolor[2] = (customcolor[2]+ingcolor[2])/2
+	rgbcolor[3] = (customcolor[3]+ingcolor[3])/2
+	rgbcolor[4] = (customcolor[4]+ingcolor[4])/2
+	filling_color = rgb(rgbcolor[1], rgbcolor[2], rgbcolor[3], rgbcolor[4])
 
 /obj/item/reagent_containers/food/snacks/customizable/update_snack_overlays(obj/item/reagent_containers/food/snacks/S)
 	var/mutable_appearance/filling = mutable_appearance(icon, "[initial(icon_state)]_filling")
 	if(S.filling_color == "#FFFFFF")
-		filling.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
+		if(S.color)
+			filling.color = S.color
+		else
+			filling.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
 	else
 		filling.color = S.filling_color
 
@@ -134,12 +135,6 @@
 	add_overlay(filling)
 
 
-/obj/item/reagent_containers/food/snacks/customizable/initialize_slice(obj/item/reagent_containers/food/snacks/slice, reagents_per_slice)
-	..()
-	slice.filling_color = filling_color
-	slice.update_snack_overlays(src)
-
-
 /obj/item/reagent_containers/food/snacks/customizable/Destroy()
 	for(. in ingredients)
 		qdel(.)
@@ -155,7 +150,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/burger
 	name = "burger"
-	desc = "A timeless classic."
+	desc = ""
 	ingredients_placement = INGREDIENTS_STACKPLUSTOP
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "custburg"
@@ -184,7 +179,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/kebab
 	name = "kebab"
-	desc = "Delicious food on a stick."
+	desc = ""
 	ingredients_placement = INGREDIENTS_LINE
 	trash = /obj/item/stack/rods
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
@@ -193,7 +188,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/pasta
 	name = "spaghetti"
-	desc = "Noodles. With stuff. Delicious."
+	desc = ""
 	ingredients_placement = INGREDIENTS_SCATTER
 	ingMax = 6
 	icon = 'icons/obj/food/pizzaspaghetti.dmi'
@@ -211,7 +206,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/pizza
 	name = "pizza"
-	desc = "A personalized pan pizza meant for only one person."
+	desc = ""
 	ingredients_placement = INGREDIENTS_SCATTER
 	ingMax = 8
 	slice_path = /obj/item/reagent_containers/food/snacks/pizzaslice/custom
@@ -223,7 +218,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/salad
 	name = "salad"
-	desc = "Very tasty."
+	desc = ""
 	trash = /obj/item/reagent_containers/glass/bowl
 	ingMax = 6
 	icon = 'icons/obj/food/soupsalad.dmi'
@@ -232,7 +227,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/sandwich
 	name = "toast"
-	desc = "A timeless classic."
+	desc = ""
 	ingredients_placement = INGREDIENTS_STACK
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "breadslice"
@@ -248,7 +243,7 @@
 		var/obj/item/reagent_containers/food/snacks/breadslice/BS = I
 		if(finished)
 			return
-		to_chat(user, "<span class='notice'>You finish the [src.name].</span>")
+		to_chat(user, "<span class='notice'>I finish the [src.name].</span>")
 		finished = 1
 		name = "[customname] sandwich"
 		BS.reagents.trans_to(src, BS.reagents.total_volume, transfered_by = user)
@@ -269,7 +264,7 @@
 
 /obj/item/reagent_containers/food/snacks/customizable/soup
 	name = "soup"
-	desc = "A bowl with liquid and... stuff in it."
+	desc = ""
 	trash = /obj/item/reagent_containers/glass/bowl
 	ingMax = 8
 	icon = 'icons/obj/food/soupsalad.dmi'
@@ -287,7 +282,7 @@
 
 /obj/item/reagent_containers/glass/bowl
 	name = "bowl"
-	desc = "A simple bowl, used for soups and salads."
+	desc = ""
 	icon = 'icons/obj/food/soupsalad.dmi'
 	icon_state = "bowl"
 	reagent_flags = OPENCONTAINER
@@ -300,7 +295,7 @@
 		if(I.w_class > WEIGHT_CLASS_SMALL)
 			to_chat(user, "<span class='warning'>The ingredient is too big for [src]!</span>")
 		else if(contents.len >= 20)
-			to_chat(user, "<span class='warning'>You can't add more ingredients to [src]!</span>")
+			to_chat(user, "<span class='warning'>I can't add more ingredients to [src]!</span>")
 		else
 			if(reagents.has_reagent(/datum/reagent/water, 10)) //are we starting a soup or a salad?
 				var/obj/item/reagent_containers/food/snacks/customizable/A = new/obj/item/reagent_containers/food/snacks/customizable/soup(get_turf(src))

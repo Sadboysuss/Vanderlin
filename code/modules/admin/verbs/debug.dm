@@ -90,7 +90,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/makepAI(turf/T in GLOB.mob_list)
 	set category = "Fun"
 	set name = "Make pAI"
-	set desc = "Specify a location to spawn a pAI device, then specify a key to play that pAI"
+	set desc = ""
 
 	var/list/available = list()
 	for(var/mob/C in GLOB.mob_list)
@@ -193,7 +193,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/worn = H.wear_id
+		var/obj/item/worn = H.wear_ring
 		var/obj/item/card/id/id = null
 		if(worn)
 			id = worn.GetID()
@@ -218,7 +218,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 					id.forceMove(W)
 					W.update_icon()
 			else
-				H.equip_to_slot(id,SLOT_WEAR_ID)
+				H.equip_to_slot(id,SLOT_RING)
 
 	else
 		alert("Invalid mob")
@@ -229,7 +229,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/cmd_assume_direct_control(mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Assume direct control"
-	set desc = "Direct intervention"
+	set desc = ""
 
 	if(M.ckey)
 		if(alert("This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.",,"Yes","No") != "Yes")
@@ -495,9 +495,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 /client/proc/robust_dress_shop()
 
-	var/list/baseoutfits = list("Naked","Custom","As Job...", "As Plasmaman...")
+	var/list/baseoutfits = list("Naked","Custom","As Job...", "As Plasmaman...", "As Rougetown Job...")
 	var/list/outfits = list()
-	var/list/paths = subtypesof(/datum/outfit) - typesof(/datum/outfit/job) - typesof(/datum/outfit/plasmaman)
+	var/list/paths = subtypesof(/datum/outfit) - typesof(/datum/outfit/job) - typesof(/datum/outfit/plasmaman) - typesof(/datum/outfit/job/roguetown)
 
 	for(var/path in paths)
 		var/datum/outfit/O = path //not much to initalize here but whatever
@@ -546,13 +546,27 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(isnull(dresscode))
 			return
 
+	if (dresscode == "As Rougetown Job...")
+		var/list/roguejob_paths = subtypesof(/datum/outfit/job/roguetown)
+		var/list/roguejob_outfits = list()
+		for(var/path in roguejob_paths)
+			var/datum/outfit/O = path
+			if(initial(O.can_be_admin_equipped))
+				roguejob_outfits[initial(O.name)] = path
+
+		dresscode = input("Select job equipment", "Robust quick dress shop") as null|anything in sortList(roguejob_outfits)
+		dresscode = roguejob_outfits[dresscode]
+		if(isnull(dresscode))
+			return
+
+
 	return dresscode
 
 /client/proc/startSinglo()
 
 	set category = "Debug"
 	set name = "Start Singularity"
-	set desc = "Sets up the singularity and all machines to get power flowing through the station"
+	set desc = ""
 
 	if(alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Yes","No") != "Yes")
 		return
@@ -609,7 +623,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/cmd_debug_mob_lists()
 	set category = "Debug"
 	set name = "Debug Mob Lists"
-	set desc = "For when you just gotta know"
+	set desc = ""
 
 	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs","Clients","Joined Clients"))
 		if("Players")
@@ -630,7 +644,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/cmd_display_del_log()
 	set category = "Debug"
 	set name = "Display del() Log"
-	set desc = "Display del's log of everything that's passed through it."
+	set desc = ""
 
 	var/list/dellog = list("<B>List of things that have gone through qdel this round</B><BR><BR><ol>")
 	sortTim(SSgarbage.items, cmp=/proc/cmp_qdel_item_time, associative = TRUE)
@@ -659,21 +673,21 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/cmd_display_overlay_log()
 	set category = "Debug"
 	set name = "Display overlay Log"
-	set desc = "Display SSoverlays log of everything that's passed through it."
+	set desc = ""
 
 	render_stats(SSoverlays.stats, src)
 
 /client/proc/cmd_display_init_log()
 	set category = "Debug"
 	set name = "Display Initialize() Log"
-	set desc = "Displays a list of things that didn't handle Initialize() properly"
+	set desc = ""
 
 	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
 
 /client/proc/debug_huds(i as num)
 	set category = "Debug"
 	set name = "Debug HUDs"
-	set desc = "Debug the data or antag HUDs"
+	set desc = ""
 
 	if(!holder)
 		return
@@ -682,7 +696,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/jump_to_ruin()
 	set category = "Debug"
 	set name = "Jump to Ruin"
-	set desc = "Displays a list of all placed ruins to teleport to."
+	set desc = ""
 	if(!holder)
 		return
 	var/list/names = list()
@@ -714,7 +728,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/place_ruin()
 	set category = "Debug"
 	set name = "Spawn Ruin"
-	set desc = "Attempt to randomly place a specific ruin."
+	set desc = ""
 	if (!holder)
 		return
 
@@ -758,7 +772,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/clear_dynamic_transit()
 	set category = "Debug"
 	set name = "Clear Dynamic Turf Reservations"
-	set desc = "Deallocates all reserved space, restoring it to round start conditions."
+	set desc = ""
 	if(!holder)
 		return
 	var/answer = alert("WARNING: THIS WILL WIPE ALL RESERVED SPACE TO A CLEAN SLATE! ANY MOVING SHUTTLES, ELEVATORS, OR IN-PROGRESS PHOTOGRAPHY WILL BE DELETED!", "Really wipe dynamic turfs?", "YES", "NO")
@@ -772,7 +786,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/toggle_medal_disable()
 	set category = "Debug"
 	set name = "Toggle Medal Disable"
-	set desc = "Toggles the safety lock on trying to contact the medal hub."
+	set desc = ""
 
 	if(!check_rights(R_DEBUG))
 		return
@@ -786,7 +800,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/view_runtimes()
 	set category = "Debug"
 	set name = "View Runtimes"
-	set desc = "Open the runtime Viewer"
+	set desc = ""
 
 	if(!holder)
 		return
@@ -796,7 +810,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/pump_random_event()
 	set category = "Debug"
 	set name = "Pump Random Event"
-	set desc = "Schedules the event subsystem to fire a new random event immediately. Some events may fire without notification."
+	set desc = ""
 	if(!holder)
 		return
 
@@ -809,9 +823,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/start_line_profiling()
 	set category = "Profile"
 	set name = "Start Line Profiling"
-	set desc = "Starts tracking line by line profiling for code lines that support it"
-
-	PROFILE_START
+	set desc = ""
 
 	message_admins("<span class='adminnotice'>[key_name_admin(src)] started line by line profiling.</span>")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Start Line Profiling")
@@ -820,9 +832,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/stop_line_profiling()
 	set category = "Profile"
 	set name = "Stops Line Profiling"
-	set desc = "Stops tracking line by line profiling for code lines that support it"
-
-	PROFILE_STOP
+	set desc = ""
 
 	message_admins("<span class='adminnotice'>[key_name_admin(src)] stopped line by line profiling.</span>")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop Line Profiling")
@@ -831,7 +841,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/show_line_profiling()
 	set category = "Profile"
 	set name = "Show Line Profiling"
-	set desc = "Shows tracked profiling info from code lines that support it"
+	set desc = ""
 
 	var/sortlist = list(
 		"Avg time"		=	/proc/cmp_profile_avg_time_dsc,
@@ -847,7 +857,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/reload_configuration()
 	set category = "Debug"
 	set name = "Reload Configuration"
-	set desc = "Force config reload to world default"
+	set desc = ""
 	if(!check_rights(R_DEBUG))
 		return
 	if(alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", "No", "Yes") == "Yes")

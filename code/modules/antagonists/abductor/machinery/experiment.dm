@@ -1,6 +1,6 @@
 /obj/machinery/abductor/experiment
 	name = "experimentation machine"
-	desc = "A large man-sized tube sporting a complex array of surgical machinery."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "experiment-open"
 	density = FALSE
@@ -50,14 +50,14 @@
 /obj/machinery/abductor/experiment/container_resist(mob/living/user)
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+		"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open)
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/abductor/experiment/proc/dissection_icon(mob/living/carbon/human/H)
@@ -183,11 +183,11 @@
 		sleep(5)
 		switch(text2num(type))
 			if(1)
-				to_chat(H, "<span class='warning'>You feel violated.</span>")
+				to_chat(H, "<span class='warning'>I feel violated.</span>")
 			if(2)
-				to_chat(H, "<span class='warning'>You feel yourself being sliced apart and put back together.</span>")
+				to_chat(H, "<span class='warning'>I feel myself being sliced apart and put back together.</span>")
 			if(3)
-				to_chat(H, "<span class='warning'>You feel intensely watched.</span>")
+				to_chat(H, "<span class='warning'>I feel intensely watched.</span>")
 		sleep(5)
 		user_abductor.team.abductees += H.mind
 		H.mind.add_antag_datum(/datum/antagonist/abductee)
@@ -198,12 +198,12 @@
 		if(point_reward > 0)
 			open_machine()
 			SendBack(H)
-			playsound(src.loc, 'sound/machines/ding.ogg', 50, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 			points += point_reward
 			credits += point_reward
 			return "<span class='good'>Experiment successful! [point_reward] new data-points collected.</span>"
 		else
-			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 			return "<span class='bad'>Experiment failed! No replacement organ detected.</span>"
 	else
 		say("Brain activity nonexistent - disposing sample...")

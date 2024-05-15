@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/spaceman
 	name = "Spaceman"
-	desc = "What in the actual hell..?"
+	desc = ""
 	icon_state = "old"
 	icon_living = "old"
 	icon_dead = "old_dead"
@@ -21,7 +21,7 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "hits"
 	attack_verb_simple = "hit"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	del_on_death = 0
@@ -29,7 +29,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/nanotrasenpeace //this should be in a different file
 	name = "Nanotrasen Private Security Officer"
-	desc = "An officer part of Nanotrasen's private security force."
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "nanotrasen"
 	icon_living = "nanotrasen"
@@ -47,7 +47,7 @@
 	melee_damage_upper = 15
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	faction = list("nanotrasenprivate")
 	a_intent = INTENT_HARM
 	loot = list(/obj/effect/mob_spawn/human/corpse/nanotrasensoldier)
@@ -70,6 +70,6 @@
 	retreat_distance = 3
 	minimum_distance = 5
 	casingtype = /obj/item/ammo_casing/c46x30mm
-	projectilesound = 'sound/weapons/gun/smg/shot.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/wt550,
 				/obj/effect/mob_spawn/human/corpse/nanotrasensoldier)

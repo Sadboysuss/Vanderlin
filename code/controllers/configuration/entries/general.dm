@@ -175,6 +175,8 @@
 
 /datum/config_entry/flag/usewhitelist
 
+/datum/config_entry/flag/useblacklist
+
 /datum/config_entry/flag/use_age_restriction_for_jobs	//Do jobs use account age restrictions? --requires database
 
 /datum/config_entry/flag/use_account_age_for_jobs	//Uses the time they made the account for the job restriction stuff. New player joining alerts should be unaffected.
@@ -199,16 +201,16 @@
 /datum/config_entry/string/banappeals
 
 /datum/config_entry/string/wikiurl
-	config_entry_value = "http://www.tgstation13.org/wiki"
+	config_entry_value = ""
 
 /datum/config_entry/string/forumurl
-	config_entry_value = "http://tgstation13.org/phpBB/index.php"
+	config_entry_value = ""
 
 /datum/config_entry/string/rulesurl
-	config_entry_value = "http://www.tgstation13.org/wiki/Rules"
+	config_entry_value = ""
 
 /datum/config_entry/string/githuburl
-	config_entry_value = "https://www.github.com/tgstation/-tg-station"
+	config_entry_value = ""
 
 /datum/config_entry/string/roundstatsurl
 
@@ -304,7 +306,7 @@
 	config_entry_value = "Be warned that the server is currently serving a high number of users, consider using alternative game servers."
 
 /datum/config_entry/string/hard_popcap_message
-	config_entry_value = "The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers."
+	config_entry_value = "The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living to decline, observe, or find alternative servers."
 
 /datum/config_entry/string/extreme_popcap_message
 	config_entry_value = "The server is currently serving a high number of users, find alternative servers."

@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(sandstone_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/sandstone
 	name = "sandstone brick"
-	desc = "This appears to be a combination of both sand and stone."
+	desc = ""
 	singular_name = "sandstone brick"
 	icon_state = "sheet-sandstone"
 	item_state = "sheet-sandstone"
@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(sandbag_recipes, list ( \
 
 /obj/item/emptysandbag
 	name = "empty sandbag"
-	desc = "A bag to be filled with sand."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "sandbag"
 	w_class = WEIGHT_CLASS_TINY
@@ -79,7 +79,7 @@ GLOBAL_LIST_INIT(sandbag_recipes, list ( \
 /obj/item/emptysandbag/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/stack/ore/glass))
 		var/obj/item/stack/ore/glass/G = W
-		to_chat(user, "<span class='notice'>You fill the sandbag.</span>")
+		to_chat(user, "<span class='notice'>I fill the sandbag.</span>")
 		var/obj/item/stack/sheet/mineral/sandbags/I = new /obj/item/stack/sheet/mineral/sandbags(drop_location())
 		qdel(src)
 		if (Adjacent(user) && !issilicon(user))
@@ -183,8 +183,8 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 	else
 		return ..()
 
-/obj/item/stack/sheet/mineral/plasma/fire_act(exposed_temperature, exposed_volume)
-	atmos_spawn_air("plasma=[amount*10];TEMP=[exposed_temperature]")
+/obj/item/stack/sheet/mineral/plasma/fire_act(added, maxstacks)
+	atmos_spawn_air("plasma=[amount*10];TEMP=[added]")
 	qdel(src)
 
 /*
@@ -247,7 +247,7 @@ GLOBAL_LIST_INIT(silver_recipes, list ( \
 	. = ..()
 	. += GLOB.silver_recipes
 
-/* 
+/*
  * Clown
  */
 /obj/item/stack/sheet/mineral/bananium
@@ -272,8 +272,8 @@ GLOBAL_LIST_INIT(bananium_recipes, list ( \
 	. = ..()
 	. += GLOB.bananium_recipes
 
-/* 
- * Titanium 
+/*
+ * Titanium
  */
 /obj/item/stack/sheet/mineral/titanium
 	name = "titanium"
@@ -333,7 +333,7 @@ GLOBAL_LIST_INIT(plastitanium_recipes, list ( \
 /*
  * Snow
  */
- 
+
 /obj/item/stack/sheet/mineral/snow
 	name = "snow"
 	icon_state = "sheet-snow"
@@ -384,7 +384,7 @@ GLOBAL_LIST_INIT(adamantine_recipes, list(
 
 /obj/item/stack/sheet/mineral/runite
 	name = "runite"
-	desc = "Rare material found in distant lands."
+	desc = ""
 	singular_name = "runite bar"
 	icon_state = "sheet-runite"
 	item_state = "sheet-runite"
@@ -436,7 +436,7 @@ GLOBAL_LIST_INIT(abductor_recipes, list ( \
 
 /obj/item/stack/sheet/mineral/coal
 	name = "coal"
-	desc = "Someone's gotten on the naughty list."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "slag"
 	singular_name = "coal lump"
@@ -453,8 +453,8 @@ GLOBAL_LIST_INIT(abductor_recipes, list ( \
 	else
 		return ..()
 
-/obj/item/stack/sheet/mineral/coal/fire_act(exposed_temperature, exposed_volume)
-	atmos_spawn_air("co2=[amount*10];TEMP=[exposed_temperature]")
+/obj/item/stack/sheet/mineral/coal/fire_act(added, maxstacks)
+	atmos_spawn_air("co2=[amount*10];TEMP=[added]")
 	qdel(src)
 
 /obj/item/stack/sheet/mineral/coal/five

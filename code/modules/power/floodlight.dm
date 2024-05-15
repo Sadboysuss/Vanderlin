@@ -1,7 +1,7 @@
 
 /obj/structure/floodlight_frame
 	name = "floodlight frame"
-	desc = "A bare metal frame looking vaguely like a floodlight. Requires wrenching down."
+	desc = ""
 	max_integrity = 100
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "floodlight_c1"
@@ -10,27 +10,27 @@
 
 /obj/structure/floodlight_frame/attackby(obj/item/O, mob/user, params)
 	if(O.tool_behaviour == TOOL_WRENCH && (state == FLOODLIGHT_NEEDS_WRENCHING))
-		to_chat(user, "<span class='notice'>You secure [src].</span>")
+		to_chat(user, "<span class='notice'>I secure [src].</span>")
 		anchored = TRUE
 		state = FLOODLIGHT_NEEDS_WIRES
-		desc = "A bare metal frame looking vaguely like a floodlight. Requires wiring."
+		desc = ""
 	else if(istype(O, /obj/item/stack/cable_coil) && (state == FLOODLIGHT_NEEDS_WIRES))
 		var/obj/item/stack/S = O
 		if(S.use(5))
-			to_chat(user, "<span class='notice'>You wire [src].</span>")
+			to_chat(user, "<span class='notice'>I wire [src].</span>")
 			name = "wired [name]"
-			desc = "A bare metal frame looking vaguely like a floodlight. Requires securing with a screwdriver."
+			desc = ""
 			icon_state = "floodlight_c2"
 			state = FLOODLIGHT_NEEDS_SECURING
 	else if(istype(O, /obj/item/light/tube) && (state == FLOODLIGHT_NEEDS_LIGHTS))
 		if(user.transferItemToLoc(O))
-			to_chat(user, "<span class='notice'>You put lights in [src].</span>")
+			to_chat(user, "<span class='notice'>I put lights in [src].</span>")
 			new /obj/machinery/power/floodlight(src.loc)
 			qdel(src)
 	else if(O.tool_behaviour == TOOL_SCREWDRIVER && (state == FLOODLIGHT_NEEDS_SECURING))
-		to_chat(user, "<span class='notice'>You fasten the wiring and electronics in [src].</span>")
+		to_chat(user, "<span class='notice'>I fasten the wiring and electronics in [src].</span>")
 		name = "secured [name]"
-		desc = "A bare metal frame that looks like a floodlight. Requires light tubes."
+		desc = ""
 		icon_state = "floodlight_c3"
 		state = FLOODLIGHT_NEEDS_LIGHTS
 	else
@@ -38,7 +38,7 @@
 
 /obj/machinery/power/floodlight
 	name = "floodlight"
-	desc = "A pole with powerful mounted lights on it. Due to its high power draw, it must be powered by a direct connection to a wire node."
+	desc = ""
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "floodlight"
 	density = TRUE
@@ -80,7 +80,7 @@
 		if(4)
 			setting_text = "high power"
 	if(user)
-		to_chat(user, "<span class='notice'>You set [src] to [setting_text].</span>")
+		to_chat(user, "<span class='notice'>I set [src] to [setting_text].</span>")
 
 /obj/machinery/power/floodlight/attackby(obj/item/O, mob/user, params)
 	if(O.tool_behaviour == TOOL_WRENCH)
@@ -109,11 +109,11 @@
 	. = ..()
 	if(!.)
 		return
-	playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
+	playsound(loc, 'sound/blank.ogg', 100, TRUE)
 	var/obj/structure/floodlight_frame/F = new(loc)
 	F.state = FLOODLIGHT_NEEDS_LIGHTS
 	new /obj/item/light/tube/broken(loc)
 	qdel(src)
 
 /obj/machinery/power/floodlight/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
-	playsound(src, 'sound/effects/glasshit.ogg', 75, TRUE)
+	playsound(src, 'sound/blank.ogg', 75, TRUE)

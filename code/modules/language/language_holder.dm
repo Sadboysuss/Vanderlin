@@ -139,3 +139,6 @@
 /datum/language_holder/universal/New()
 	..()
 	grant_all_languages(omnitongue=TRUE)
+
+/datum/language_holder/hellspeak
+	languages = list(/datum/language/hellspeak)

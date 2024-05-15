@@ -1,7 +1,7 @@
 //Programs that interact with other programs or nanites directly, or have other special purposes.
 /datum/nanite_program/viral
 	name = "Viral Replica"
-	desc = "The nanites constantly send encrypted signals attempting to forcefully copy their own programming into other nanite clusters, also overriding or disabling their cloud sync."
+	desc = ""
 	use_rate = 0.5
 	rogue_types = list(/datum/nanite_program/toxic)
 	extra_settings = list(NES_PROGRAM_OVERWRITE,NES_CLOUD_OVERWRITE)
@@ -68,7 +68,7 @@
 
 /datum/nanite_program/monitoring
 	name = "Monitoring"
-	desc = "The nanites monitor the host's vitals and location, sending them to the suit sensor network."
+	desc = ""
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/monitoring/enable_passive_effect()
@@ -83,7 +83,7 @@
 
 /datum/nanite_program/triggered/self_scan
 	name = "Host Scan"
-	desc = "The nanites display a detailed readout of a body scan to the host."
+	desc = ""
 	unique = FALSE
 	trigger_cost = 3
 	trigger_cooldown = 50
@@ -122,7 +122,7 @@
 
 /datum/nanite_program/stealth
 	name = "Stealth"
-	desc = "The nanites mask their activity from superficial scans, becoming undetectable by HUDs and non-specialized scanners."
+	desc = ""
 	rogue_types = list(/datum/nanite_program/toxic)
 	use_rate = 0.2
 
@@ -151,7 +151,7 @@
 
 /datum/nanite_program/relay
 	name = "Relay"
-	desc = "The nanites receive and relay long-range nanite signals."
+	desc = ""
 	rogue_types = list(/datum/nanite_program/toxic)
 
 	extra_settings = list(NES_RELAY_CHANNEL)
@@ -199,7 +199,7 @@
 
 /datum/nanite_program/metabolic_synthesis
 	name = "Metabolic Synthesis"
-	desc = "The nanites use the metabolic cycle of the host to speed up their replication rate, using their extra nutrition as fuel."
+	desc = ""
 	use_rate = -0.5 //generates nanites
 	rogue_types = list(/datum/nanite_program/toxic)
 
@@ -216,7 +216,7 @@
 
 /datum/nanite_program/research
 	name = "Distributed Computing"
-	desc = "The nanites aid the research servers by performing a portion of its calculations, increasing research point generation."
+	desc = ""
 	use_rate = 0.2
 	rogue_types = list(/datum/nanite_program/toxic)
 
@@ -227,10 +227,10 @@
 	if(!host_mob.client) //less brainpower
 		points *= 0.25
 	SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = points))
-	
+
 /datum/nanite_program/researchplus
 	name = "Neural Network"
-	desc = "The nanites link the host's brains together forming a neural research network, that becomes more efficient with the amount of total hosts."
+	desc = ""
 	use_rate = 0.3
 	rogue_types = list(/datum/nanite_program/brain_decay)
 
@@ -251,7 +251,7 @@
 		SSnanites.neural_network_count--
 	else
 		SSnanites.neural_network_count -= 0.25
-	
+
 /datum/nanite_program/researchplus/active_effect()
 	if(!iscarbon(host_mob))
 		return
@@ -263,7 +263,7 @@
 
 /datum/nanite_program/triggered/access
 	name = "Subdermal ID"
-	desc = "The nanites store the host's ID access rights in a subdermal magnetic strip. Updates when triggered, copying the host's current access."
+	desc = ""
 	rogue_types = list(/datum/nanite_program/skin_decay)
 	var/access = list()
 
@@ -279,7 +279,7 @@
 		new_access += current_item.GetAccess()
 	if(ishuman(host_mob))
 		var/mob/living/carbon/human/H = host_mob
-		current_item = H.wear_id
+		current_item = H.wear_ring
 		if(current_item)
 			new_access += current_item.GetAccess()
 	else if(isanimal(host_mob))
@@ -319,7 +319,7 @@
 
 /datum/nanite_program/triggered/nanite_sting
 	name = "Nanite Sting"
-	desc = "When triggered, projects a nearly invisible spike of nanites that attempts to infect a nearby non-host with a copy of the host's nanites cluster."
+	desc = ""
 	trigger_cost = 5
 	trigger_cooldown = 100
 	rogue_types = list(/datum/nanite_program/glitch, /datum/nanite_program/toxic)
@@ -341,7 +341,7 @@
 		infectee.AddComponent(/datum/component/nanites, 5)
 		SEND_SIGNAL(infectee, COMSIG_NANITE_SYNC, nanites)
 		infectee.investigate_log("was infected by a nanite cluster by [key_name(host_mob)] at [AREACOORD(infectee)].", INVESTIGATE_NANITES)
-		to_chat(infectee, "<span class='warning'>You feel a tiny prick.</span>")
+		to_chat(infectee, "<span class='warning'>I feel a tiny prick.</span>")
 
 /datum/nanite_program/mitosis
 	name = "Mitosis"
@@ -362,7 +362,7 @@
 
 /datum/nanite_program/dermal_button
 	name = "Dermal Button"
-	desc = "Displays a button on the host's skin, which can be used to send a signal to the nanites."
+	desc = ""
 	extra_settings = list(NES_SENT_CODE,NES_BUTTON_NAME,NES_ICON,NES_COLOR)
 	unique = FALSE
 	var/datum/action/innate/nanite_button/button
@@ -428,7 +428,7 @@
 /datum/nanite_program/dermal_button/proc/press()
 	if(activated)
 		host_mob.visible_message("<span class='notice'>[host_mob] presses a button on [host_mob.p_their()] forearm.</span>",
-								"<span class='notice'>You press the nanite button on your forearm.</span>", null, 2)
+								"<span class='notice'>I press the nanite button on your forearm.</span>", null, 2)
 		SEND_SIGNAL(host_mob, COMSIG_NANITE_SIGNAL, sent_code, "a [name] program")
 
 /datum/action/innate/nanite_button

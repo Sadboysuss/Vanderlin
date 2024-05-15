@@ -2,14 +2,14 @@
 //Clusterbang
 ////////////////////
 /obj/item/grenade/clusterbuster
-	desc = "Use of this weapon may constitute a war crime in your area, consult your local captain."
+	desc = ""
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
 	var/base_state = "clusterbang"
 	var/payload = /obj/item/grenade/flashbang/cluster
 	var/payload_spawner = /obj/effect/payload_spawner
-	var/prime_sound = 'sound/weapons/armbomb.ogg'
+	var/prime_sound = 'sound/blank.ogg'
 	var/min_spawned = 4
 	var/max_spawned = 8
 	var/segment_chance = 35
@@ -35,7 +35,7 @@
 //Clusterbang segment
 //////////////////////
 /obj/item/grenade/clusterbuster/segment
-	desc = "A smaller segment of a clusterbang. Better run."
+	desc = ""
 	name = "clusterbang segment"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang_segment"
@@ -185,7 +185,7 @@
 	icon_state = "slimebang"
 	base_state = "slimebang"
 	payload_spawner = /obj/effect/payload_spawner/random_slime
-	prime_sound = 'sound/effects/bubbles.ogg'
+	prime_sound = 'sound/blank.ogg'
 
 /obj/item/grenade/clusterbuster/slime/volatile
 	payload_spawner = /obj/effect/payload_spawner/random_slime/volatile

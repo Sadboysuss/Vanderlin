@@ -35,15 +35,19 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 /obj/docking_port/mobile/supply
 	name = "supply shuttle"
 	id = "supply"
-	callTime = 600
-
-	dir = WEST
-	port_direction = EAST
+#ifdef TESTSERVER
+	callTime = 60
+#else
+	callTime = 300
+#endif
+	dir = NORTH
+	port_direction = SOUTH
 	width = 12
 	dwidth = 5
 	height = 7
 	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0)
-
+	var/budget = 0
+	var/list/salese = list()
 
 	//Export categories for this run, this is set by console sending the shuttle.
 	var/export_categories = EXPORT_CARGO
@@ -51,7 +55,9 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 /obj/docking_port/mobile/supply/register()
 	. = ..()
 	SSshuttle.supply = src
-
+#ifdef MATURESERVER
+	SSshuttle.moveShuttle("supply", "supply_home", TRUE)
+#endif
 /obj/docking_port/mobile/supply/canMove()
 	if(is_station_level(z))
 		return check_blacklist(shuttle_areas)
@@ -73,129 +79,185 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 	return ..()
 
 /obj/docking_port/mobile/supply/initiate_docking()
-	if(getDockedId() == "supply_away") // Buy when we leave home.
-		buy()
 	. = ..() // Fly/enter transit.
 	if(. != DOCKING_SUCCESS)
 		return
-	if(getDockedId() == "supply_away") // Sell when we get home
+	if(getDockedId() == "supply_away")
+		testing("docked away")
 		sell()
+		buy()
+		addtimer(CALLBACK(SSshuttle, /datum/controller/subsystem/shuttle/.proc/moveShuttle, "supply", "supply_home", TRUE), 100)
 
 /obj/docking_port/mobile/supply/proc/buy()
-	var/list/obj/miscboxes = list() //miscboxes are combo boxes that contain all small_item orders grouped
-	var/list/misc_order_num = list() //list of strings of order numbers, so that the manifest can show all orders in a box
-	var/list/misc_contents = list() //list of lists of items that each box will contain
-	if(!SSshuttle.shoppinglist.len)
-		return
+	var/list/obj/cat_boxes = list()
 
 	var/list/empty_turfs = list()
-	for(var/place in shuttle_areas)
-		var/area/shuttle/shuttle_area = place
+	var/list/general_turfs = list()
+	for(var/area/shuttle/supply/buy/shuttle_area in shuttle_areas)
 		for(var/turf/open/floor/T in shuttle_area)
+			general_turfs += T
 			if(is_blocked_turf(T))
 				continue
 			empty_turfs += T
 
-	var/value = 0
-	var/purchases = 0
-	for(var/datum/supply_order/SO in SSshuttle.shoppinglist)
-		if(!empty_turfs.len)
-			break
-		var/price = SO.pack.cost
-		var/datum/bank_account/D
-		if(SO.paying_account) //Someone paid out of pocket
-			D = SO.paying_account
-			price *= 1.1 //TODO make this customizable by the quartermaster
-		else
-			D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-		if(D)
-			if(!D.adjust_money(-price))
-				if(SO.paying_account)
-					D.bank_card_talk("Cargo order #[SO.id] rejected due to lack of funds. Credits required: [price]")
+	var/list/orderse = list()
+
+	if(SSshuttle.shoppinglist.len)
+		for(var/datum/supply_order/SO in SSshuttle.shoppinglist)
+			if(budget <= -30)
 				continue
+			budget -= SO.pack.cost
+			var/turf/used_turf
+			if(!empty_turfs.len)
+				used_turf = pick(general_turfs)
+			else
+				used_turf = pick_n_take(empty_turfs)
+			var/obj/structure/closet/crate/B = cat_boxes[SO.pack.group]
+			if(!B)
+				B = new SO.pack.crate_type(used_turf)
+				cat_boxes[SO.pack.group] = B
+			SO.generateCombo(B, SO.orderer, SO.pack.contains)
+			orderse += "[SO.pack.name]"
+			SSshuttle.shoppinglist -= SO
+			qdel(SO)
 
-		if(SO.paying_account)
-			D.bank_card_talk("Cargo order #[SO.id] has shipped. [price] credits have been charged to your bank account.")
-			var/datum/bank_account/department/cargo = SSeconomy.get_dep_account(ACCOUNT_CAR)
-			cargo.adjust_money(price - SO.pack.cost) //Cargo gets the handling fee
-		value += SO.pack.cost
-		SSshuttle.shoppinglist -= SO
-		SSshuttle.orderhistory += SO
+	var/turf/used_turf
+	if(!empty_turfs.len)
+		used_turf = pick(general_turfs)
+	else
+		used_turf = pick_n_take(empty_turfs)
 
-		if(SO.pack.small_item) //small_item means it gets piled in the miscbox
-			if(SO.paying_account)
-				if(!miscboxes.len || !miscboxes[D.account_holder]) //if there's no miscbox for this person
-					miscboxes[D.account_holder] = new /obj/structure/closet/crate/secure/owned(pick_n_take(empty_turfs), SO.paying_account)
-					miscboxes[D.account_holder].name = "small items crate - purchased by [D.account_holder]"
-					misc_contents[D.account_holder] = list()
-				for (var/item in SO.pack.contains)
-					misc_contents[D.account_holder] += item
-				misc_order_num[D.account_holder] = "[misc_order_num[D.account_holder]]#[SO.id]  "
-			else //No private payment, so we just stuff it all into a generic crate
-				if(!miscboxes.len || !miscboxes["Cargo"])
-					miscboxes["Cargo"] = new /obj/structure/closet/crate/secure(pick_n_take(empty_turfs))
-					miscboxes["Cargo"].name = "small items crate"
-					misc_contents["Cargo"] = list()
-					miscboxes["Cargo"].req_access = list()
-				for (var/item in SO.pack.contains)
-					misc_contents["Cargo"] += item
-					//new item(miscboxes["Cargo"])
-				if(SO.pack.access)
-					miscboxes["Cargo"].req_access += SO.pack.access
-				misc_order_num["Cargo"] = "[misc_order_num["Cargo"]]#[SO.id]  "
+	var/moneybox = new /obj/structure/closet/crate/chest/merchant(used_turf)
+
+	if(budget > 0)
+		var/spawnedcoins = round(budget / 10)
+		if(spawnedcoins >= 1)
+			for(var/i in 1 to spawnedcoins)
+				budget -= 10
+				new /obj/item/roguecoin/gold(moneybox)
+		spawnedcoins = round(budget / 5)
+		if(spawnedcoins >= 1)
+			for(var/i in 1 to spawnedcoins)
+				budget -= 5
+				new /obj/item/roguecoin/silver(moneybox)
+		if(budget >= 1)
+			for(var/i in 1 to budget)
+				new /obj/item/roguecoin/copper(moneybox)
+		budget = 0
+	if(orderse.len || salese.len || budget < 0)
+		generateManifest(orderse,moneybox)
+	salese = list()
+
+
+/obj/docking_port/mobile/supply/proc/generateManifest(list/orders,loc) //generates-the-manifests.
+	var/obj/item/paper/scroll/P = new(loc)
+
+	P.name = "shipping manifest - [station_time_timestamp()]"
+	P.info += "<h2>Shipping Manifest - [station_time_timestamp()]</h2>"
+	P.info += "<hr/>"
+
+	if(orders.len)
+		P.info += "Trades: <br/>"
+		P.info += "<ul>"
+		for(var/A in orders)
+			P.info += "<li>[A]</li>"
+		P.info += "</ul>"
+
+	P.info += "<br/>"
+
+	if(salese.len)
+		P.info += "Liquidation: <br/>"
+		P.info += "<ul>"
+		for(var/A in salese)
+			P.info += "<li>[A]</li>"
+		P.info += "</ul>"
+
+	P.info += "<br/>"
+
+	if(budget < 0)
+		if(budget > -30)
+			P.info += "<font color=#6600cc>You have a negative balance ([budget]) with our guild. Pay your dues or be fined further.</font>"
 		else
-			SO.generate(pick_n_take(empty_turfs))
+			budget -= 30
+			P.info += "<font color=#6600cc>Your negative balance ([budget]) has strained our relationship. We have taken our share of this sale and will not be sending orders until we are settled.</font>"
 
-		SSblackbox.record_feedback("nested tally", "cargo_imports", 1, list("[SO.pack.cost]", "[SO.pack.name]"))
-		investigate_log("Order #[SO.id] ([SO.pack.name], placed by [key_name(SO.orderer_ckey)]), paid by [D.account_holder] has shipped.", INVESTIGATE_CARGO)
-		if(SO.pack.dangerous)
-			message_admins("\A [SO.pack.name] ordered by [ADMIN_LOOKUPFLW(SO.orderer_ckey)], paid by [D.account_holder] has shipped.")
-		purchases++
 
-	for(var/I in miscboxes)
-		var/datum/supply_order/SO = new/datum/supply_order()
-		SO.id = misc_order_num[I]
-		SO.generateCombo(miscboxes[I], I, misc_contents[I])
-		qdel(SO)
+	return P
 
-	var/datum/bank_account/cargo_budget = SSeconomy.get_dep_account(ACCOUNT_CAR)
-	investigate_log("[purchases] orders in this shipment, worth [value] credits. [cargo_budget.account_balance] credits left.", INVESTIGATE_CARGO)
+
+/obj/docking_port/mobile/supply/proc/remake_ledger()
+	var/list/general_turfs = list()
+	for(var/area/shuttle/supply/buy/shuttle_area in shuttle_areas)
+		for(var/turf/open/floor/T in shuttle_area)
+			general_turfs += T
+			new /obj/item/book/rogue/ledger(pick(general_turfs))
 
 /obj/docking_port/mobile/supply/proc/sell()
-	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-	var/presale_points = D.account_balance
-
-	if(!GLOB.exports_list.len) // No exports list? Generate it!
-		setupExports()
-
 	var/msg = ""
-	var/matched_bounty = FALSE
 
 	var/datum/export_report/ex = new
 
-	for(var/place in shuttle_areas)
-		var/area/shuttle/shuttle_area = place
-		for(var/atom/movable/AM in shuttle_area)
+	var/newbudget = 0
+
+	for(var/area/shuttle/supply/sell/place in shuttle_areas)
+		for(var/atom/movable/AM in place)
 			if(iscameramob(AM))
 				continue
-			if(bounty_ship_item_and_contents(AM, dry_run = FALSE))
-				matched_bounty = TRUE
+			if(QDELETED(AM))
+				continue
+			var/list/contents = AM.GetAllContents()
+			for(var/i in reverseRange(contents))
+				var/atom/movable/thing = i
+				if(QDELETED(thing))
+					continue
+				thing.pre_sell()
+			AM.pre_sell()
+
+	for(var/area/shuttle/supply/sell/place in shuttle_areas)
+		for(var/atom/movable/AM in place)
+			if(iscameramob(AM))
+				continue
+			if(QDELETED(AM))
+				continue
+//			if(bounty_ship_item_and_contents(AM, dry_run = FALSE))
+//				matched_bounty = TRUE
 			if(!AM.anchored || istype(AM, /obj/mecha))
-				export_item_and_contents(AM, export_categories , dry_run = FALSE, external_report = ex)
+				if(istype(AM, /obj/item/paper/scroll/cargo))
+					var/obj/item/paper/scroll/cargo/C = AM
+					if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff"))
+						for(var/datum/supply_order/SO in C.orders)
+							SSshuttle.shoppinglist += SO
+							C.orders -= SO
+						qdel(C)
+						continue
+				var/list/contents = AM.GetAllContents()
+				for(var/i in reverseRange(contents))
+					var/atom/movable/thing = i
+					if(QDELETED(thing))
+						continue
+					if(istype(thing, /obj/item/paper/scroll/cargo))
+						var/obj/item/paper/scroll/cargo/C = AM
+						if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff"))
+							for(var/datum/supply_order/SO in C.orders)
+								SSshuttle.shoppinglist += SO
+								C.orders -= SO
+							qdel(C)
+							continue
+					if(thing.get_real_price() > 0)
+						newbudget += thing.get_real_price()
+						ex.total_value[thing] += thing.get_real_price()
+						ex.total_amount[thing] += 1
+						ex.exported_atoms += " [thing.name]"
+						salese += "[thing.name] ([thing.get_real_price()])"
+						thing.on_sold()
+						qdel(thing)
 
-	if(ex.exported_atoms)
-		ex.exported_atoms += "." //ugh
+	budget += newbudget
 
-	if(matched_bounty)
-		msg += "Bounty items received. An update has been sent to all bounty consoles. "
-
-	for(var/datum/export/E in ex.total_amount)
-		var/export_text = E.total_printout(ex)
-		if(!export_text)
-			continue
-
-		msg += export_text + "\n"
-		D.adjust_money(ex.total_value[E])
-
-	SSshuttle.centcom_message = msg
-	investigate_log("Shuttle contents sold for [D.account_balance - presale_points] credits. Contents: [ex.exported_atoms ? ex.exported_atoms.Join(",") + "." : "none."] Message: [SSshuttle.centcom_message || "none."]", INVESTIGATE_CARGO)
+	if(budget < 0)
+		if(budget > -30)
+			msg += "You have a negative balance ([budget]) with our guild. Pay your dues or be fined further."
+		else
+			budget -= 30
+			msg += "Your negative balance ([budget]) has strained our relationship. We have taken our share of this sale and will not be sending orders until we are settled."
+	return msg

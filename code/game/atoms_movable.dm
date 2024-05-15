@@ -7,7 +7,7 @@
 	var/move_force = MOVE_FORCE_DEFAULT
 	var/pull_force = PULL_FORCE_DEFAULT
 	var/datum/thrownthing/throwing = null
-	var/throw_speed = 2 //How many tiles to move per ds when being thrown. Float values are fully supported
+	var/throw_speed = 1 //How many tiles to move per ds when being thrown. Float values are fully supported
 	var/throw_range = 7
 	var/mob/pulledby = null
 	var/initial_language_holder = /datum/language_holder
@@ -25,19 +25,22 @@
 	var/inertia_move_delay = 5
 	var/pass_flags = 0
 	var/moving_diagonally = 0 //0: not doing a diagonal move. 1 and 2: doing the first/second step of the diagonal move
+	var/lastcardinal = 0
+	var/lastcardpress = 0
 	var/atom/movable/moving_from_pull		//attempt to resume grab after moving instead of before.
 	var/list/client_mobs_in_contents // This contains all the client mobs within this container
 	var/list/acted_explosions	//for explosion dodging
-	glide_size = 8
+	glide_size = 6
 	appearance_flags = TILE_BOUND|PIXEL_SCALE
 	var/datum/forced_movement/force_moving = null	//handled soley by forced_movement.dm
 	var/movement_type = GROUND		//Incase you have multiple types, you automatically use the most useful one. IE: Skating on ice, flippers on water, flying over chasm/space, etc.
 	var/atom/movable/pulling
+	var/nodirchange = FALSE
 	var/grab_state = 0
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting
 	var/can_be_z_moved = TRUE
-
+	var/jumping = FALSE
 	var/zfalling = FALSE
 
 /atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
@@ -62,13 +65,15 @@
 		if(isobj(A) || ismob(A))
 			if(A.layer > highest.layer)
 				highest = A
-	INVOKE_ASYNC(src, .proc/SpinAnimation, 5, 2)
+//	INVOKE_ASYNC(src, .proc/SpinAnimation, 5, 2)
 	throw_impact(highest)
 	return TRUE
 
 //For physical constraints to travelling up/down.
-/atom/movable/proc/can_zTravel(turf/destination, direction)
+/atom/movable/proc/can_zTravel(turf/destination, direction, override_source)
 	var/turf/T = get_turf(src)
+	if(override_source)
+		T = override_source
 	if(!T)
 		return FALSE
 	if(!direction)
@@ -78,10 +83,11 @@
 	if(direction != UP && direction != DOWN)
 		return FALSE
 	if(!destination)
-		destination = get_step_multiz(src, direction)
+		destination = get_step_multiz(T, direction)
 		if(!destination)
 			return FALSE
-	return T.zPassOut(src, direction, destination) && destination.zPassIn(src, direction, T)
+	if(T.zPassOut(src, direction, destination) && destination.zPassIn(src, direction, T))
+		return TRUE
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	var/static/list/banned_edits = list("step_x", "step_y", "step_size", "bounds")
@@ -119,7 +125,8 @@
 			return FALSE
 	return ..()
 
-/atom/movable/proc/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
+/atom/movable/proc/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE, obj/item/item_override)
+	testing("startpulling target: [AM]")
 	if(QDELETED(AM))
 		return FALSE
 	if(!(AM.can_be_pulled(src, state, force)))
@@ -131,53 +138,60 @@
 			stop_pulling()
 			return FALSE
 		// Are we trying to pull something we are already pulling? Then enter grab cycle and end.
-		if(AM == pulling)
-			setGrabState(state)
-			if(istype(AM,/mob/living))
-				var/mob/living/AMob = AM
-				AMob.grabbedby(src)
-			return TRUE
-		stop_pulling()
+//		if(AM == pulling)
+//			setGrabState(state)
+//			if(istype(AM,/mob/living))
+//				var/mob/living/AMob = AM
+//				AMob.grabbedby(src)
+//			return TRUE
+//		stop_pulling()
 	if(AM.pulledby)
 		log_combat(AM, AM.pulledby, "pulled from", src)
 		AM.pulledby.stop_pulling() //an object can't be pulled by two mobs at once.
-	pulling = AM
-	AM.pulledby = src
+	if(AM != src)
+		pulling = AM
+		AM.pulledby = src
 	setGrabState(state)
 	if(ismob(AM))
 		var/mob/M = AM
 		log_combat(src, M, "grabbed", addition="passive grab")
+		if(M.doing)
+			M.doing = FALSE
 		if(!supress_message)
-			M.visible_message("<span class='warning'>[src] grabs [M] passively.</span>", \
-				"<span class='danger'>[src] grabs you passively.</span>")
+			M.visible_message("<span class='warning'>[src] grabs [M].</span>", \
+				"<span class='danger'>[src] grabs you.</span>")
 	return TRUE
 
-/atom/movable/proc/stop_pulling()
+/atom/movable/proc/stop_pulling(forced = TRUE)
+	testing("stoppull1")
 	if(pulling)
-		pulling.pulledby = null
-		var/mob/living/ex_pulled = pulling
-		pulling = null
-		setGrabState(0)
-		if(isliving(ex_pulled))
-			var/mob/living/L = ex_pulled
-			L.update_mobility()// mob gets up if it was lyng down in a chokehold
+		testing("stoppull2")
+		if(pulling != src)
+			pulling.pulledby = null
+			var/mob/living/ex_pulled = pulling
+			pulling = null
+			if(isliving(ex_pulled))
+				var/mob/living/L = ex_pulled
+				L.update_mobility()// mob gets up if it was lyng down in a chokehold
+	setGrabState(0)
 
 /atom/movable/proc/Move_Pulled(atom/A)
 	if(!pulling)
-		return
+		return FALSE
 	if(pulling.anchored || pulling.move_resist > move_force || !pulling.Adjacent(src))
 		stop_pulling()
-		return
+		return FALSE
 	if(isliving(pulling))
 		var/mob/living/L = pulling
 		if(L.buckled && L.buckled.buckle_prevents_pull) //if they're buckled to something that disallows pulling, prevent it
 			stop_pulling()
-			return
+			return FALSE
 	if(A == loc && pulling.density)
-		return
-	if(!Process_Spacemove(get_dir(pulling.loc, A)))
-		return
-	step(pulling, get_dir(pulling.loc, A))
+		return FALSE
+	var/move_dir = get_dir(pulling.loc, A)
+	if(!Process_Spacemove(move_dir))
+		return FALSE
+	pulling.Move(get_step(pulling.loc, move_dir), move_dir, glide_size)
 	return TRUE
 
 /mob/living/Move_Pulled(atom/A)
@@ -206,18 +220,25 @@
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1)		//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
 
+/atom/movable/proc/set_glide_size(target = 0)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, target)
+	glide_size = target
+
+	for(var/atom/movable/AM in buckled_mobs)
+		AM.set_glide_size(target)
 ////////////////////////////////////////
 // Here's where we rewrite how byond handles movement except slightly different
 // To be removed on step_ conversion
 // All this work to prevent a second bump
-/atom/movable/Move(atom/newloc, direct=0)
+/atom/movable/Move(atom/newloc, direct=0, glide_size_override = 0)
 	. = FALSE
 	if(!newloc || newloc == loc)
 		return
 
 	if(!direct)
 		direct = get_dir(src, newloc)
-	setDir(direct)
+	if(!nodirchange && !throwing)
+		setDir(direct)
 
 	if(!loc.Exit(src, newloc))
 		return
@@ -234,9 +255,11 @@
 	var/area/newarea = get_area(newloc)
 	loc = newloc
 	. = TRUE
-	oldloc.Exited(src, newloc)
-	if(oldarea != newarea)
-		oldarea.Exited(src, newloc)
+	if(oldloc)
+		oldloc.Exited(src, newloc)
+	if(oldarea)
+		if(oldarea != newarea)
+			oldarea.Exited(src, newloc)
 
 	for(var/i in oldloc)
 		if(i == src) // Multi tile objects
@@ -253,10 +276,10 @@
 			continue
 		var/atom/movable/thing = i
 		thing.Crossed(src)
-//
+
 ////////////////////////////////////////
 
-/atom/movable/Move(atom/newloc, direct)
+/atom/movable/Move(atom/newloc, direct, glide_size_override = 0)
 	var/atom/movable/pullee = pulling
 	var/turf/T = loc
 	if(!moving_from_pull)
@@ -264,63 +287,76 @@
 	if(!loc || !newloc)
 		return FALSE
 	var/atom/oldloc = loc
+	var/direction_to_move = direct
+
+//Early override for some cases like diagonal movement
+	if(glide_size_override)
+		testing("GSO 1 [glide_size_override]")
+		set_glide_size(glide_size_override)
 
 	if(loc != newloc)
 		if (!(direct & (direct - 1))) //Cardinal move
+			lastcardinal = direct
 			. = ..()
 		else //Diagonal move, split it into cardinal moves
-			moving_diagonally = FIRST_DIAG_STEP
-			var/first_step_dir
-			// The `&& moving_diagonally` checks are so that a forceMove taking
-			// place due to a Crossed, Bumped, etc. call will interrupt
-			// the second half of the diagonal movement, or the second attempt
-			// at a first half if step() fails because we hit something.
 			if (direct & NORTH)
 				if (direct & EAST)
-					if (step(src, NORTH) && moving_diagonally)
-						first_step_dir = NORTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, EAST)
-					else if (moving_diagonally && step(src, EAST))
-						first_step_dir = EAST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, NORTH)
+					if(lastcardinal == NORTH)
+						direction_to_move = EAST
+						if(!step(src, EAST))
+							direction_to_move = NORTH
+							. = step(src, NORTH)
+					else if(lastcardinal == EAST)
+						direction_to_move = NORTH
+						if(!step(src, NORTH))
+							direction_to_move = EAST
+							. = step(src, EAST)
+					else
+						direction_to_move = pick(NORTH,EAST)
+						. = step(src, direction_to_move)
 				else if (direct & WEST)
-					if (step(src, NORTH) && moving_diagonally)
-						first_step_dir = NORTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, WEST)
-					else if (moving_diagonally && step(src, WEST))
-						first_step_dir = WEST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, NORTH)
+					if(lastcardinal == NORTH)
+						direction_to_move = WEST
+						if(!step(src, WEST))
+							direction_to_move = NORTH
+							. = step(src, NORTH)
+					else if(lastcardinal == WEST)
+						direction_to_move = NORTH
+						if(!step(src, NORTH))
+							direction_to_move = WEST
+							. = step(src, WEST)
+					else
+						direction_to_move = pick(NORTH,WEST)
+						. = step(src, direction_to_move)
 			else if (direct & SOUTH)
 				if (direct & EAST)
-					if (step(src, SOUTH) && moving_diagonally)
-						first_step_dir = SOUTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, EAST)
-					else if (moving_diagonally && step(src, EAST))
-						first_step_dir = EAST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, SOUTH)
+					if(lastcardinal == SOUTH)
+						direction_to_move = EAST
+						if(!step(src, EAST))
+							direction_to_move = SOUTH
+							. = step(src, SOUTH)
+					else if(lastcardinal == EAST)
+						direction_to_move = SOUTH
+						if(!step(src, SOUTH))
+							direction_to_move = EAST
+							. = step(src, EAST)
+					else
+						direction_to_move = pick(SOUTH,EAST)
+						. = step(src, direction_to_move)
 				else if (direct & WEST)
-					if (step(src, SOUTH) && moving_diagonally)
-						first_step_dir = SOUTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, WEST)
-					else if (moving_diagonally && step(src, WEST))
-						first_step_dir = WEST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, SOUTH)
-			if(moving_diagonally == SECOND_DIAG_STEP)
-				if(!.)
-					setDir(first_step_dir)
-				else if (!inertia_moving)
-					inertia_next_move = world.time + inertia_move_delay
-					newtonian_move(direct)
-			moving_diagonally = 0
-			return
+					if(lastcardinal == SOUTH)
+						direction_to_move = WEST
+						if(!step(src, WEST))
+							direction_to_move = SOUTH
+							. = step(src, SOUTH)
+					else if(lastcardinal == WEST)
+						direction_to_move = SOUTH
+						if(!step(src, SOUTH))
+							direction_to_move = WEST
+							. = step(src, WEST)
+					else
+						direction_to_move = pick(SOUTH,WEST)
+						. = step(src, direction_to_move)
 
 	if(!loc || (loc == oldloc && oldloc != newloc))
 		last_move = 0
@@ -336,13 +372,20 @@
 			//puller and pullee more than one tile away or in diagonal position
 			if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
 				pulling.moving_from_pull = src
-				pulling.Move(T, get_dir(pulling, T)) //the pullee tries to reach our previous position
+				pulling.Move(T, get_dir(pulling, T), glide_size) //the pullee tries to reach our previous position
 				pulling.moving_from_pull = null
 			check_pulling()
 
+	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
+	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
+	if(glide_size_override)
+		testing("GSO 2 [glide_size_override]")
+		set_glide_size(glide_size_override)
+
 	last_move = direct
-	setDir(direct)
-	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc,direct)) //movement failed due to buckled mob(s)
+	if(!nodirchange && !throwing)
+		setDir(direction_to_move)
+	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc,direct, glide_size_override)) //movement failed due to buckled mob(s)
 		return FALSE
 
 //Called after a successful Move(). By this point, we've already moved
@@ -418,7 +461,7 @@
 	if(destination)
 		. = doMove(destination)
 	else
-		CRASH("No valid destination passed into forceMove")
+		CRASH("[src] No valid destination passed into forceMove")
 
 /atom/movable/proc/moveToNullspace()
 	return doMove(null)
@@ -527,12 +570,12 @@
 		step(src, AM.dir)
 	..()
 
-/atom/movable/proc/safe_throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG)
+/atom/movable/proc/safe_throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG)
 	if((force < (move_resist * MOVE_FORCE_THROW_RATIO)) || (move_resist == INFINITY))
 		return
 	return throw_at(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
-/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG) //If this returns FALSE then callback will not be called.
+/atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, extra = FALSE) //If this returns FALSE then callback will not be called.
 	. = FALSE
 	if (!target || speed <= 0)
 		return
@@ -580,6 +623,7 @@
 	TT.diagonals_first = diagonals_first
 	TT.force = force
 	TT.callback = callback
+	TT.extra = extra
 	if(!QDELETED(thrower))
 		TT.target_zone = thrower.zone_selected
 
@@ -609,6 +653,13 @@
 		pulledby.stop_pulling()
 
 	throwing = TT
+	var/turf/curloc = get_turf(src)
+	if(TT.target_turf && curloc)
+		if(TT.target_turf.z > curloc.z)
+			var/turf/above = get_step_multiz(curloc, UP)
+			if(istype(above, /turf/open/transparent/openspace))
+				forceMove(above)
+	spin = FALSE
 	if(spin)
 		SpinAnimation(5, 1)
 
@@ -618,16 +669,16 @@
 		SSthrowing.currentrun[src] = TT
 	TT.tick()
 
-/atom/movable/proc/handle_buckled_mob_movement(newloc,direct)
+/atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
 	for(var/m in buckled_mobs)
 		var/mob/living/buckled_mob = m
-		if(!buckled_mob.Move(newloc, direct))
+		if(!buckled_mob.Move(newloc, direct, glide_size_override))
 			forceMove(buckled_mob.loc)
 			last_move = buckled_mob.last_move
 			inertia_dir = last_move
 			buckled_mob.inertia_dir = last_move
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 /atom/movable/proc/force_pushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
 	return FALSE
@@ -635,12 +686,12 @@
 /atom/movable/proc/force_push(atom/movable/AM, force = move_force, direction, silent = FALSE)
 	. = AM.force_pushed(src, force, direction)
 	if(!silent && .)
-		visible_message("<span class='warning'>[src] forcefully pushes against [AM]!</span>", "<span class='warning'>You forcefully push against [AM]!</span>")
+		visible_message("<span class='warning'>[src] forcefully pushes against [AM]!</span>", "<span class='warning'>I forcefully push against [AM]!</span>")
 
 /atom/movable/proc/move_crush(atom/movable/AM, force = move_force, direction, silent = FALSE)
 	. = AM.move_crushed(src, force, direction)
 	if(!silent && .)
-		visible_message("<span class='danger'>[src] crushes past [AM]!</span>", "<span class='danger'>You crush [AM]!</span>")
+		visible_message("<span class='danger'>[src] crushes past [AM]!</span>", "<span class='danger'>I crush [AM]!</span>")
 
 /atom/movable/proc/move_crushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
 	return FALSE
@@ -681,10 +732,23 @@
 /atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
 	return
 
+/atom
+	var/no_bump_effect = TRUE
+
+/mob
+	no_bump_effect = FALSE
 
 /atom/movable/proc/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && (visual_effect_icon || used_item))
 		do_item_attack_animation(A, visual_effect_icon, used_item)
+
+	if(!no_bump_effect)
+		return
+
+	if(ismob(A))
+		var/mob/M = A
+		if(M.stat == DEAD)
+			return
 
 	if(A == src)
 		return //don't do an animation if attacking self
@@ -702,44 +766,68 @@
 	else if(direction & WEST)
 		pixel_x_diff = -8
 
-	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = 2)
-	animate(src, pixel_x = pixel_x - pixel_x_diff, pixel_y = pixel_y - pixel_y_diff, time = 2)
+	animate(A, pixel_x = A.pixel_x + pixel_x_diff, pixel_y = A.pixel_y + pixel_y_diff, time = 2)
+	animate(A, pixel_x = A.pixel_x - pixel_x_diff, pixel_y = A.pixel_y - pixel_y_diff, time = 2)
 
 /atom/movable/proc/do_item_attack_animation(atom/A, visual_effect_icon, obj/item/used_item)
-	var/image/I
-	if(visual_effect_icon)
-		I = image('icons/effects/effects.dmi', A, visual_effect_icon, A.layer + 0.1)
-	else if(used_item)
-		I = image(icon = used_item, loc = A, layer = A.layer + 0.1)
-		I.plane = GAME_PLANE
+//	var/noanim = FALSE
+	if(used_item)
+		if(used_item.no_effect)
+			return
+	if(!visual_effect_icon)
+		return
+/*
+	I = image(icon = 'icons/effects/effects.dmi', loc = src, icon_state = visual_effect_icon, layer = src.layer + 0.1)
+	if(A == src)
+		return
+	else
+		I.dir = get_dir(src, A)
+	if(I.dir & NORTH)
+		I.pixel_y = 32
+	else if(I.dir & SOUTH)
+		I.pixel_y = -32
 
-		// Scale the icon.
-		I.transform *= 0.75
-		// The icon should not rotate.
-		I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	if(I.dir & EAST)
+		I.pixel_x = 32
+	else if(I.dir & WEST)
+		I.pixel_x = -32
+	noanim = TRUE
 
-		// Set the direction of the icon animation.
-		var/direction = get_dir(src, A)
-		if(direction & NORTH)
-			I.pixel_y = -16
-		else if(direction & SOUTH)
-			I.pixel_y = 16
-
-		if(direction & EAST)
-			I.pixel_x = -16
-		else if(direction & WEST)
-			I.pixel_x = 16
-
-		if(!direction) // Attacked self?!
-			I.pixel_z = 16
 
 	if(!I)
 		return
 
+	I.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	flick_overlay(I, GLOB.clients, 5) // 5 ticks/half a second
 
-	// And animate the attack!
-	animate(I, alpha = 175, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
+	if(!noanim)
+		// And animate the attack!
+		animate(I, alpha = 175, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
+	*/
+	if(A == src)
+		return
+	var/obj/effect/temp_visual/dir_setting/attack_effect/atk = new(get_turf(src), get_dir(src, A))
+	atk.icon_state = visual_effect_icon
+	atk.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	if(atk.dir & NORTH)
+		atk.pixel_y = 32
+	else if(atk.dir & SOUTH)
+		atk.pixel_y = -32
+	if(atk.dir & EAST)
+		atk.pixel_x = 32
+	else if(atk.dir & WEST)
+		atk.pixel_x = -32
+
+/obj/effect/temp_visual/dir_setting/attack_effect
+	icon = 'icons/effects/effects.dmi'
+	duration = 3
+
+/atom/movable/proc/do_warning()
+	var/image/I
+	I = image('icons/effects/effects.dmi', src, "mobwarning", src.layer + 0.1)
+	I.pixel_y = 16
+	flick_overlay(I, GLOB.clients, 5)
+
 
 /atom/movable/vv_get_dropdown()
 	. = ..()
@@ -860,9 +948,7 @@
 	return
 
 /atom/movable/proc/can_be_pulled(user, grab_state, force)
-	if(src == user || !isturf(loc))
-		return FALSE
-	if(anchored || throwing)
+	if(throwing)
 		return FALSE
 	if(force < (move_resist * MOVE_FORCE_PULL_RATIO))
 		return FALSE

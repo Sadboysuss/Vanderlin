@@ -5,12 +5,12 @@
 
 /datum/brain_trauma
 	var/name = "Brain Trauma"
-	var/desc = "A trauma caused by brain damage, which causes issues to the patient."
-	var/scan_desc = "generic brain trauma" //description when detected by a health scanner
+	var/desc = ""
+	var/scan_desc = "" //description when detected by a health scanner
 	var/mob/living/carbon/owner //the poor bastard
 	var/obj/item/organ/brain/brain //the poor bastard's brain
-	var/gain_text = "<span class='notice'>You feel traumatized.</span>"
-	var/lose_text = "<span class='notice'>You no longer feel traumatized.</span>"
+	var/gain_text = "<span class='notice'>I feel traumatized.</span>"
+	var/lose_text = "<span class='notice'>I no longer feel traumatized.</span>"
 	var/can_gain = TRUE
 	var/random_gain = TRUE //can this be gained through random traumas?
 	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?

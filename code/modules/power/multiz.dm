@@ -1,6 +1,6 @@
 /obj/machinery/power/deck_relay //This bridges powernets
 	name = "Multi-deck power adapter"
-	desc = "A huge bundle of double insulated cabling which seems to run up into the ceiling."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cablerelay-off"
 	var/obj/machinery/power/deck_relay/below ///The relay that's below us (for bridging powernets)
@@ -53,7 +53,7 @@
 	if(below)
 		below.merge(src)
 
-/obj/machinery/power/deck_relay/proc/merge(var/obj/machinery/power/deck_relay/DR)
+/obj/machinery/power/deck_relay/proc/merge(obj/machinery/power/deck_relay/DR)
 	if(!DR)
 		return
 	var/turf/merge_from = get_turf(DR)

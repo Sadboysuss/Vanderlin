@@ -1,6 +1,6 @@
 /obj/screen/alert/status_effect/rainbow_protection
 	name = "Rainbow Protection"
-	desc = "You are defended from harm, but so are those you might seek to injure!"
+	desc = ""
 	icon_state = "slime_rainbowshield"
 
 /datum/status_effect/rainbow_protection
@@ -13,7 +13,7 @@
 	owner.status_flags |= GODMODE
 	ADD_TRAIT(owner, TRAIT_PACIFISM, /datum/status_effect/rainbow_protection)
 	owner.visible_message("<span class='warning'>[owner] shines with a brilliant rainbow light.</span>",
-		"<span class='notice'>You feel protected by an unknown force!</span>")
+		"<span class='notice'>I feel protected by an unknown force!</span>")
 	originalcolor = owner.color
 	return ..()
 
@@ -26,11 +26,11 @@
 	owner.color = originalcolor
 	REMOVE_TRAIT(owner, TRAIT_PACIFISM, /datum/status_effect/rainbow_protection)
 	owner.visible_message("<span class='notice'>[owner] stops glowing, the rainbow light fading away.</span>",
-		"<span class='warning'>You no longer feel protected...</span>")
+		"<span class='warning'>I no longer feel protected...</span>")
 
 /obj/screen/alert/status_effect/slimeskin
 	name = "Adamantine Slimeskin"
-	desc = "You are covered in a thick, non-neutonian gel."
+	desc = ""
 	icon_state = "slime_stoneskin"
 
 /datum/status_effect/slimeskin
@@ -46,7 +46,7 @@
 		var/mob/living/carbon/human/H = owner
 		H.physiology.damage_resistance += 10
 	owner.visible_message("<span class='warning'>[owner] is suddenly covered in a strange, blue-ish gel!</span>",
-		"<span class='notice'>You are covered in a thick, rubbery gel.</span>")
+		"<span class='notice'>I are covered in a thick, rubbery gel.</span>")
 	return ..()
 
 /datum/status_effect/slimeskin/on_remove()
@@ -55,7 +55,7 @@
 		var/mob/living/carbon/human/H = owner
 		H.physiology.damage_resistance -= 10
 	owner.visible_message("<span class='warning'>[owner]'s gel coating liquefies and dissolves away.</span>",
-		"<span class='notice'>Your gel second-skin dissolves!</span>")
+		"<span class='notice'>My gel second-skin dissolves!</span>")
 
 /datum/status_effect/slimerecall
 	id = "slime_recall"
@@ -67,7 +67,7 @@
 
 /datum/status_effect/slimerecall/on_apply()
 	RegisterSignal(owner, COMSIG_LIVING_RESIST, .proc/resistField)
-	to_chat(owner, "<span class='danger'>You feel a sudden tug from an unknown force, and feel a pull to bluespace!</span>")
+	to_chat(owner, "<span class='danger'>I feel a sudden tug from an unknown force, and feel a pull to bluespace!</span>")
 	to_chat(owner, "<span class='notice'>Resist if you wish avoid the force!</span>")
 	bluespace = icon('icons/effects/effects.dmi',"chronofield")
 	owner.add_overlay(bluespace)
@@ -88,7 +88,7 @@
 	owner.forceMove(target.loc)
 
 /obj/screen/alert/status_effect/freon/stasis
-	desc = "You're frozen inside of a protective ice cube! While inside, you can't do anything, but are immune to harm! Resist to get out."
+	desc = ""
 
 /datum/status_effect/frozenstasis
 	id = "slime_frozen"
@@ -158,7 +158,7 @@
 
 /obj/screen/alert/status_effect/clone_decay
 	name = "Clone Decay"
-	desc = "You are simply a construct, and cannot maintain this form forever. You will be returned to your original body if you should fall."
+	desc = ""
 	icon_state = "slime_clonedecay"
 
 /datum/status_effect/slime_clone_decay
@@ -176,7 +176,7 @@
 
 /obj/screen/alert/status_effect/bloodchill
 	name = "Bloodchilled"
-	desc = "You feel a shiver down your spine after getting hit with a glob of cold blood. You'll move slower and get frostbite for a while!"
+	desc = ""
 	icon_state = "bloodchill"
 
 /datum/status_effect/bloodchill
@@ -215,7 +215,7 @@
 
 /obj/screen/alert/status_effect/bonechill
 	name = "Bonechilled"
-	desc = "You feel a shiver down your spine after hearing the haunting noise of bone rattling. You'll move slower and get frostbite for a while!"
+	desc = ""
 	icon_state = "bloodchill"
 
 /datum/status_effect/rebreathing
@@ -346,7 +346,7 @@ datum/status_effect/rebreathing/tick()
 			huggables += L
 	if(length(huggables))
 		var/mob/living/carbon/hugged = pick(huggables)
-		owner.visible_message("<span class='notice'>[owner] hugs [hugged]!</span>", "<span class='notice'>You hug [hugged]!</span>")
+		owner.visible_message("<span class='notice'>[owner] hugs [hugged]!</span>", "<span class='notice'>I hug [hugged]!</span>")
 
 /datum/status_effect/tarcookie
 	id = "tarcookie"
@@ -555,7 +555,7 @@ datum/status_effect/stabilized/blue/on_remove()
 
 /obj/item/hothands
 	name = "burning fingertips"
-	desc = "You shouldn't see this."
+	desc = ""
 
 /obj/item/hothands/get_temperature()
 	return 290 //Below what's required to ignite plasma.
@@ -576,7 +576,7 @@ datum/status_effect/stabilized/blue/on_remove()
 	var/obj/item/reagent_containers/food/snacks/F = I
 	if(istype(F))
 		if(F.cooked_type)
-			to_chat(owner, "<span class='warning'>[linked_extract] flares up brightly, and your hands alone are enough cook [F]!</span>")
+			to_chat(owner, "<span class='warning'>[linked_extract] flares up brightly, and my hands alone are enough cook [F]!</span>")
 			var/obj/item/result = F.microwave_act()
 			if(istype(result))
 				owner.put_in_hands(result)
@@ -603,18 +603,18 @@ datum/status_effect/stabilized/blue/on_remove()
 		O.acid_level = 0
 	// Monkey cube
 	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
-		to_chat(owner, "<span class='warning'>[linked_extract] kept your hands wet! It makes [O] expand!</span>")
+		to_chat(owner, "<span class='warning'>[linked_extract] kept my hands wet! It makes [O] expand!</span>")
 		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		cube.Expand()
 
 	// Dehydrated carp
 	else if(istype(O, /obj/item/toy/plush/carpplushie/dehy_carp))
-		to_chat(owner, "<span class='warning'>[linked_extract] kept your hands wet! It makes [O] expand!</span>")
+		to_chat(owner, "<span class='warning'>[linked_extract] kept my hands wet! It makes [O] expand!</span>")
 		var/obj/item/toy/plush/carpplushie/dehy_carp/dehy = O
 		dehy.Swell() // Makes a carp
 
 	else if(istype(O, /obj/item/stack/sheet/hairlesshide))
-		to_chat(owner, "<span class='warning'>[linked_extract] kept your hands wet! It wets [O]!</span>")
+		to_chat(owner, "<span class='warning'>[linked_extract] kept my hands wet! It wets [O]!</span>")
 		var/obj/item/stack/sheet/hairlesshide/HH = O
 		new /obj/item/stack/sheet/wetleather(get_turf(HH), HH.amount)
 		qdel(HH)
@@ -638,7 +638,7 @@ datum/status_effect/stabilized/blue/on_remove()
 //Bluespace has an icon because it's kinda active.
 /obj/screen/alert/status_effect/bluespaceslime
 	name = "Stabilized Bluespace Extract"
-	desc = "You shouldn't see this, since we set it to change automatically!"
+	desc = ""
 	icon_state = "slime_bluespace_on"
 
 /datum/status_effect/bluespacestabilization
@@ -654,11 +654,11 @@ datum/status_effect/stabilized/blue/on_remove()
 
 /datum/status_effect/stabilized/bluespace/tick()
 	if(owner.has_status_effect(/datum/status_effect/bluespacestabilization))
-		linked_alert.desc = "The stabilized bluespace extract is still aligning you with the bluespace axis."
+		linked_alert.desc = ""
 		linked_alert.icon_state = "slime_bluespace_off"
 		return ..()
 	else
-		linked_alert.desc = "The stabilized bluespace extract will try to redirect you from harm!"
+		linked_alert.desc = ""
 		linked_alert.icon_state = "slime_bluespace_on"
 
 	if(healthcheck && (healthcheck - owner.health) > 5)
@@ -714,13 +714,13 @@ datum/status_effect/stabilized/blue/on_remove()
 	if(owner.stat == DEAD)
 		if(clone && clone.stat != DEAD)
 			owner.visible_message("<span class='warning'>[owner] blazes with brilliant light, [linked_extract] whisking [owner.p_their()] soul away.</span>",
-				"<span class='notice'>You feel a warm glow from [linked_extract], and you open your eyes... elsewhere.</span>")
+				"<span class='notice'>I feel a warm glow from [linked_extract], and you open my eyes... elsewhere.</span>")
 			if(owner.mind)
 				owner.mind.transfer_to(clone)
 			clone = null
 			qdel(linked_extract)
 		if(!clone || clone.stat == DEAD)
-			to_chat(owner, "<span class='notice'>[linked_extract] desperately tries to move your soul to a living body, but can't find one!</span>")
+			to_chat(owner, "<span class='notice'>[linked_extract] desperately tries to move my soul to a living body, but can't find one!</span>")
 			qdel(linked_extract)
 	..()
 
@@ -764,7 +764,7 @@ datum/status_effect/stabilized/blue/on_remove()
 	var/originalname
 
 /datum/status_effect/stabilized/green/on_apply()
-	to_chat(owner, "<span class='warning'>You feel different...</span>")
+	to_chat(owner, "<span class='warning'>I feel different...</span>")
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		originalDNA = new H.dna.type
@@ -781,7 +781,7 @@ datum/status_effect/stabilized/blue/on_remove()
 	return ..()
 
 /datum/status_effect/stabilized/green/on_remove()
-	to_chat(owner, "<span class='notice'>You feel more like yourself.</span>")
+	to_chat(owner, "<span class='notice'>I feel more like myself.</span>")
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		originalDNA.transfer_identity(H)
@@ -837,7 +837,7 @@ datum/status_effect/stabilized/blue/on_remove()
 
 	if(HasFaction && owner.has_status_effect(/datum/status_effect/brokenpeace))
 		owner.faction -= faction_name
-		to_chat(owner, "<span class='userdanger'>The peace has been broken! Hostile creatures will now react to you!</span>")
+		to_chat(owner, "<span class='danger'>The peace has been broken! Hostile creatures will now react to you!</span>")
 	if(!HasFaction && !owner.has_status_effect(/datum/status_effect/brokenpeace))
 		to_chat(owner, "<span class='notice'>[linked_extract] pulses, generating a fragile aura of peace.</span>")
 		owner.faction |= faction_name
@@ -873,8 +873,8 @@ datum/status_effect/stabilized/blue/on_remove()
 		if(M.stat == DEAD)
 			return
 		if(!messagedelivered)
-			to_chat(owner,"<span class='notice'>You feel your hands melt around [M]'s neck and start to drain [M.p_them()] of life.</span>")
-			to_chat(owner.pulling, "<span class='userdanger'>[owner]'s hands melt around your neck, and you can feel your life starting to drain away!</span>")
+			to_chat(owner,"<span class='notice'>I feel my hands melt around [M]'s neck and start to drain [M.p_them()] of life.</span>")
+			to_chat(owner.pulling, "<span class='danger'>[owner]'s hands melt around my neck, and you can feel my life starting to drain away!</span>")
 			messagedelivered = TRUE
 		examine_text = "<span class='warning'>SUBJECTPRONOUN is draining health from [owner.pulling]!</span>"
 		var/list/healing_types = list()

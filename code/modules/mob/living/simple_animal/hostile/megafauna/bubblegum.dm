@@ -29,12 +29,12 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum
 	name = "bubblegum"
-	desc = "In what passes for a hierarchy among slaughter demons, this one is king."
+	desc = ""
 	health = 2500
 	maxHealth = 2500
 	attack_verb_continuous = "rends"
 	attack_verb_simple = "rend"
-	attack_sound = 'sound/magic/demon_attack1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	icon_state = "bubblegum"
 	icon_living = "bubblegum"
 	icon_dead = ""
@@ -42,7 +42,7 @@ Difficulty: Hard
 	friendly_verb_simple = "stare down"
 	icon = 'icons/mob/lavaland/96x96megafauna.dmi'
 	speak_emote = list("gurgles")
-	armour_penetration = 40
+	armor_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	speed = 5
@@ -67,7 +67,7 @@ Difficulty: Hard
 	score_achievement_type = /datum/award/score/bubblegum_score
 
 	deathmessage = "sinks into a pool of blood, fleeing the battle. You've won, for now... "
-	deathsound = 'sound/magic/enter_blood.ogg'
+	deathsound = 'sound/blank.ogg'
 	attack_action_types = list(/datum/action/innate/megafauna_attack/triple_charge,
 							   /datum/action/innate/megafauna_attack/hallucination_charge,
 							   /datum/action/innate/megafauna_attack/hallucination_surround,
@@ -78,28 +78,28 @@ Difficulty: Hard
 	name = "Triple Charge"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	chosen_message = "<span class='colossus'>You are now triple charging at the target you click on.</span>"
+	chosen_message = "<span class='colossus'>I are now triple charging at the target you click on.</span>"
 	chosen_attack_num = 1
 
 /datum/action/innate/megafauna_attack/hallucination_charge
 	name = "Hallucination Charge"
 	icon_icon = 'icons/effects/bubblegum.dmi'
 	button_icon_state = "smack ya one"
-	chosen_message = "<span class='colossus'>You are now charging with hallucinations at the target you click on.</span>"
+	chosen_message = "<span class='colossus'>I are now charging with hallucinations at the target you click on.</span>"
 	chosen_attack_num = 2
 
 /datum/action/innate/megafauna_attack/hallucination_surround
 	name = "Surround Target"
 	icon_icon = 'icons/turf/walls/wall.dmi'
 	button_icon_state = "wall"
-	chosen_message = "<span class='colossus'>You are now surrounding the target you click on with hallucinations.</span>"
+	chosen_message = "<span class='colossus'>I are now surrounding the target you click on with hallucinations.</span>"
 	chosen_attack_num = 3
 
 /datum/action/innate/megafauna_attack/blood_warp
 	name = "Blood Warp"
 	icon_icon = 'icons/effects/blood.dmi'
 	button_icon_state = "floor1"
-	chosen_message = "<span class='colossus'>You are now warping to blood around your clicked position.</span>"
+	chosen_message = "<span class='colossus'>I are now warping to blood around your clicked position.</span>"
 	chosen_attack_num = 4
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/OpenFire()
@@ -241,10 +241,10 @@ Difficulty: Hard
 	SLEEP_CHECK_DEATH(4)
 	for(var/mob/living/L in T)
 		if(!faction_check_mob(L))
-			to_chat(L, "<span class='userdanger'>[src] rends you!</span>")
+			to_chat(L, "<span class='danger'>[src] rends you!</span>")
 			playsound(T, attack_sound, 100, TRUE, -1)
 			var/limb_to_hit = L.get_bodypart(pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
-			L.apply_damage(10, BRUTE, limb_to_hit, L.run_armor_check(limb_to_hit, "melee", null, null, armour_penetration))
+			L.apply_damage(10, BRUTE, limb_to_hit, L.run_armor_check(limb_to_hit, "melee", null, null, armor_penetration))
 	SLEEP_CHECK_DEATH(3)
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/proc/bloodgrab(turf/T, handedness)
@@ -258,11 +258,11 @@ Difficulty: Hard
 	for(var/mob/living/L in T)
 		if(!faction_check_mob(L))
 			if(L.stat != CONSCIOUS)
-				to_chat(L, "<span class='userdanger'>[src] drags you through the blood!</span>")
-				playsound(T, 'sound/magic/enter_blood.ogg', 100, TRUE, -1)
+				to_chat(L, "<span class='danger'>[src] drags you through the blood!</span>")
+				playsound(T, 'sound/blank.ogg', 100, TRUE, -1)
 				var/turf/targetturf = get_step(src, dir)
 				L.forceMove(targetturf)
-				playsound(targetturf, 'sound/magic/exit_blood.ogg', 100, TRUE, -1)
+				playsound(targetturf, 'sound/blank.ogg', 100, TRUE, -1)
 				addtimer(CALLBACK(src, .proc/devour, L), 2)
 	SLEEP_CHECK_DEATH(1)
 
@@ -296,9 +296,9 @@ Difficulty: Hard
 		found_bloodpool = pick(pools)
 	if(found_bloodpool)
 		visible_message("<span class='danger'>[src] sinks into the blood...</span>")
-		playsound(get_turf(src), 'sound/magic/enter_blood.ogg', 100, TRUE, -1)
+		playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -1)
 		forceMove(get_turf(found_bloodpool))
-		playsound(get_turf(src), 'sound/magic/exit_blood.ogg', 100, TRUE, -1)
+		playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -1)
 		visible_message("<span class='danger'>And springs back out!</span>")
 		blood_enrage()
 		return TRUE
@@ -333,12 +333,12 @@ Difficulty: Hard
 	var/datum/callback/cb = CALLBACK(src, .proc/blood_enrage_end)
 	addtimer(cb, enrage_time)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/blood_enrage_end(var/newcolor = rgb(149, 10, 10))
+/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/blood_enrage_end(newcolor = rgb(149, 10, 10))
 	update_approach()
 	change_move_delay()
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, newcolor)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/change_move_delay(var/newmove = initial(move_to_delay))
+/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/change_move_delay(newmove = initial(move_to_delay))
 	move_to_delay = newmove
 	set_varspeed(move_to_delay)
 	handle_automated_action() // need to recheck movement otherwise move_to_delay won't update until the next checking aka will be wrong speed for a bit
@@ -392,7 +392,7 @@ Difficulty: Hard
 
 /obj/effect/decal/cleanable/blood/gibs/bubblegum
 	name = "thick blood"
-	desc = "Thick, splattered blood."
+	desc = ""
 	random_icon_states = list("gib3", "gib5", "gib6")
 	bloodiness = 20
 
@@ -416,8 +416,8 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/bullet_act(obj/projectile/P)
 	if(BUBBLEGUM_IS_ENRAGED)
-		visible_message("<span class='danger'>[src] deflects the projectile; [p_they()] can't be hit with ranged weapons while enraged!</span>", "<span class='userdanger'>You deflect the projectile!</span>")
-		playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 300, TRUE)
+		visible_message("<span class='danger'>[src] deflects the projectile; [p_they()] can't be hit with ranged weapons while enraged!</span>", "<span class='danger'>I deflect the projectile!</span>")
+		playsound(src, pick('sound/blank.ogg'), 300, TRUE)
 		return BULLET_ACT_BLOCK
 	return ..()
 
@@ -454,7 +454,7 @@ Difficulty: Hard
 		new /obj/effect/decal/cleanable/blood/bubblegum(src.loc)
 	if(charging)
 		DestroySurroundings()
-	playsound(src, 'sound/effects/meteorimpact.ogg', 200, TRUE, 2, TRUE)
+	playsound(src, 'sound/blank.ogg', 200, TRUE, 2, TRUE)
 	return ..()
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/Bump(atom/A)
@@ -464,10 +464,10 @@ Difficulty: Hard
 		DestroySurroundings()
 		if(isliving(A))
 			var/mob/living/L = A
-			L.visible_message("<span class='danger'>[src] slams into [L]!</span>", "<span class='userdanger'>[src] tramples you into the ground!</span>")
+			L.visible_message("<span class='danger'>[src] slams into [L]!</span>", "<span class='danger'>[src] tramples you into the ground!</span>")
 			src.forceMove(get_turf(L))
 			L.apply_damage(istype(src, /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination) ? 15 : 30, BRUTE)
-			playsound(get_turf(L), 'sound/effects/meteorimpact.ogg', 100, TRUE)
+			playsound(get_turf(L), 'sound/blank.ogg', 100, TRUE)
 			shake_camera(L, 4, 3)
 			shake_camera(src, 2, 3)
 	..()
@@ -501,7 +501,7 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination
 	name = "bubblegum's hallucination"
-	desc = "Is that really just a hallucination?"
+	desc = ""
 	health = 1
 	maxHealth = 1
 	alpha = 127.5
@@ -511,7 +511,7 @@ Difficulty: Hard
 	crusher_achievement_type = null
 	score_achievement_type = null
 	deathmessage = "Explodes into a pool of blood!"
-	deathsound = 'sound/effects/splat.ogg'
+	deathsound = 'sound/blank.ogg'
 	true_spawn = FALSE
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/Initialize()

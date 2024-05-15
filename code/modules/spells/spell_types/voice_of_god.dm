@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/voice_of_god
 	name = "Voice of God"
-	desc = "Speak with an incredibly compelling voice, forcing listeners to obey your commands."
+	desc = ""
 	charge_max = 1200 //variable
 	cooldown_min = 0
 	level_max = 1
@@ -12,11 +12,11 @@
 	var/cooldown_mod = 1
 	var/power_mod = 1
 	var/list/spans = list("colossus","yell")
-	var/speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
+	var/speech_sound = 'sound/blank.ogg'
 
 /obj/effect/proc_holder/spell/voice_of_god/can_cast(mob/user = usr)
 	if(!user.can_speak())
-		to_chat(user, "<span class='warning'>You are unable to speak!</span>")
+		to_chat(user, "<span class='warning'>I are unable to speak!</span>")
 		return FALSE
 	return TRUE
 
@@ -38,8 +38,8 @@
 
 /obj/effect/proc_holder/spell/voice_of_god/clown
 	name = "Voice of Clown"
-	desc = "Speak with an incredibly funny voice, startling people into obeying you for a brief moment."
+	desc = ""
 	power_mod = 0.1
 	cooldown_mod = 0.5
 	spans = list("clown")
-	speech_sound = 'sound/spookoween/scary_horn2.ogg'
+	speech_sound = 'sound/blank.ogg'

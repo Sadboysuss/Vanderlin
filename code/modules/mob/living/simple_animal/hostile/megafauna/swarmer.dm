@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 /mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon
 	name = "swarmer beacon"
-	desc = "That name is a bit of a mouthful, but stop paying attention to your mouth they're eating everything!"
+	desc = ""
 	icon = 'icons/mob/swarmer.dmi'
 	icon_state = "swarmer_console"
 	health = 750
@@ -240,7 +240,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	icon_state = "swarmer_ranged"
 	icon_living = "swarmer_ranged"
 	projectiletype = /obj/projectile/beam/laser
-	projectilesound = 'sound/weapons/laser.ogg'
+	projectilesound = 'sound/blank.ogg'
 	check_friendly_fire = TRUE //you're supposed to protect the resource swarmers, you poop
 	retreat_distance = 3
 	minimum_distance = 3
@@ -283,6 +283,6 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 //Used so they can survive lavaland better
 /obj/structure/lattice/catwalk/swarmer_catwalk
 	name = "swarmer catwalk"
-	desc = "A catwalk-like mesh, produced by swarmers to allow them to navigate hostile terrain."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/swarmer_catwalk.dmi'
 	icon_state = "swarmer_catwalk"

@@ -1,5 +1,5 @@
 /obj/structure/grille
-	desc = "A flimsy framework of metal rods."
+	desc = ""
 	name = "grille"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "grille"
@@ -41,10 +41,10 @@
 
 /obj/structure/grille/examine(mob/user)
 	. = ..()
-	if(anchored)
-		. += "<span class='notice'>It's secured in place with <b>screws</b>. The rods look like they could be <b>cut</b> through.</span>"
-	if(!anchored)
-		. += "<span class='notice'>The anchoring screws are <i>unscrewed</i>. The rods look like they could be <b>cut</b> through.</span>"
+//	if(anchored)
+//		. += "<span class='notice'>It's secured in place with <b>screws</b>. The rods look like they could be <b>cut</b> through.</span>"
+//	if(!anchored)
+//		. += "<span class='notice'>The anchoring screws are <i>unscrewed</i>. The rods look like they could be <b>cut</b> through.</span>"
 
 /obj/structure/grille/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
@@ -60,13 +60,13 @@
 /obj/structure/grille/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
-			to_chat(user, "<span class='notice'>You deconstruct the grille.</span>")
+			to_chat(user, "<span class='notice'>I deconstruct the grille.</span>")
 			qdel(src)
 			return TRUE
 		if(RCD_WINDOWGRILLE)
 			if(locate(/obj/structure/window) in loc)
 				return FALSE
-			to_chat(user, "<span class='notice'>You construct the window.</span>")
+			to_chat(user, "<span class='notice'>I construct the window.</span>")
 			var/obj/structure/window/WD = new the_rcd.window_type(drop_location())
 			WD.setAnchored(TRUE)
 			return TRUE
@@ -142,13 +142,13 @@
 			W.play_tool_sound(src, 100)
 			setAnchored(!anchored)
 			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] [src].</span>", \
-								 "<span class='notice'>You [anchored ? "fasten [src] to" : "unfasten [src] from"] the floor.</span>")
+								 "<span class='notice'>I [anchored ? "fasten [src] to" : "unfasten [src] from"] the floor.</span>")
 			return
 	else if(istype(W, /obj/item/stack/rods) && broken)
 		var/obj/item/stack/rods/R = W
 		if(!shock(user, 90))
 			user.visible_message("<span class='notice'>[user] rebuilds the broken grille.</span>", \
-								 "<span class='notice'>You rebuild the broken grille.</span>")
+								 "<span class='notice'>I rebuild the broken grille.</span>")
 			new grille_type(src.loc)
 			R.use(1)
 			qdel(src)
@@ -159,7 +159,7 @@
 		if (!broken)
 			var/obj/item/stack/ST = W
 			if (ST.get_amount() < 2)
-				to_chat(user, "<span class='warning'>You need at least two sheets of glass for that!</span>")
+				to_chat(user, "<span class='warning'>I need at least two sheets of glass for that!</span>")
 				return
 			var/dir_to_set = SOUTHWEST
 			if(!anchored)
@@ -168,7 +168,7 @@
 			for(var/obj/structure/window/WINDOW in loc)
 				to_chat(user, "<span class='warning'>There is already a window there!</span>")
 				return
-			to_chat(user, "<span class='notice'>You start placing the window...</span>")
+			to_chat(user, "<span class='notice'>I start placing the window...</span>")
 			if(do_after(user,20, target = src))
 				if(!src.loc || !anchored) //Grille broken or unanchored while waiting
 					return
@@ -192,7 +192,7 @@
 				WD.setAnchored(FALSE)
 				WD.state = 0
 				ST.use(2)
-				to_chat(user, "<span class='notice'>You place [WD] on [src].</span>")
+				to_chat(user, "<span class='notice'>I place [WD] on [src].</span>")
 			return
 //window placing end
 
@@ -203,28 +203,28 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src, 'sound/effects/grillehit.ogg', 80, TRUE)
+				playsound(src, 'sound/blank.ogg', 80, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src, 'sound/items/welder.ogg', 80, TRUE)
+			playsound(src, 'sound/blank.ogg', 80, TRUE)
 
 
 /obj/structure/grille/deconstruct(disassembled = TRUE)
 	if(!loc) //if already qdel'd somehow, we do nothing
 		return
-	if(!(flags_1&NODECONSTRUCT_1))
-		var/obj/R = new rods_type(drop_location(), rods_amount)
-		transfer_fingerprints_to(R)
-		qdel(src)
+//	if(!(flags_1&NODECONSTRUCT_1))
+//		var/obj/R = new rods_type(drop_location(), rods_amount)
+//		transfer_fingerprints_to(R)
+//		qdel(src)
 	..()
 
 /obj/structure/grille/obj_break()
-	if(!broken && !(flags_1 & NODECONSTRUCT_1))
-		new broken_type(src.loc)
-		var/obj/R = new rods_type(drop_location(), rods_broken)
-		transfer_fingerprints_to(R)
-		qdel(src)
+//	if(!broken && !(flags_1 & NODECONSTRUCT_1))
+//		new broken_type(src.loc)
+//		var/obj/R = new rods_type(drop_location(), rods_broken)
+//		transfer_fingerprints_to(R)
+	..()
 
 
 // shock user with probability prb (if all connections & power are working)
@@ -263,7 +263,7 @@
 				var/turf/T = get_turf(src)
 				var/obj/structure/cable/C = T.get_cable_node()
 				if(C)
-					playsound(src, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
+					playsound(src, 'sound/blank.ogg', 100, TRUE, extrarange = 5)
 					tesla_zap(src, 3, C.newavail() * 0.01, TESLA_MOB_DAMAGE | TESLA_OBJ_DAMAGE | TESLA_MOB_STUN | TESLA_ALLOW_DUPLICATES) //Zap for 1/100 of the amount of power. At a million watts in the grid, it will be as powerful as a tesla revolver shot.
 					C.add_delayedload(C.newavail() * 0.0375) // you can gain up to 3.5 via the 4x upgrades power is halved by the pole so thats 2x then 1X then .5X for 3.5x the 3 bounces shock.
 	return ..()

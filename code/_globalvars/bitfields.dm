@@ -36,7 +36,6 @@ GLOBAL_LIST_INIT(bitfields, list(
 	"datum_flags" = list(
 		"DF_USE_TAG" = DF_USE_TAG,
 		"DF_VAR_EDITED" = DF_VAR_EDITED,
-		"DF_ISPROCESSING" = DF_ISPROCESSING,
 		),
 	"item_flags" = list(
 		"BEING_REMOVED" = BEING_REMOVED,
@@ -65,6 +64,7 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"SOUNDS" = R_SOUND,
 		"SPAWN" = R_SPAWN,
 		"AUTOLOGIN" = R_AUTOADMIN,
+		"WATCH" = R_WATCH,
 		"DBRANKS" = R_DBRANKS
 		),
 	"interaction_flags_atom" = list(
@@ -178,12 +178,12 @@ GLOBAL_LIST_INIT(bitfields, list(
 	"rad_flags" = list(
 		"RAD_PROTECT_CONTENTS" = RAD_PROTECT_CONTENTS,
 		"RAD_NO_CONTAMINATE" = RAD_NO_CONTAMINATE,
-	),
+		),
 	"disease_flags" = list (
 		"CURABLE" = CURABLE,
 		"CAN_CARRY"	= CAN_CARRY,
 		"CAN_RESIST" = CAN_RESIST
-	),
+		),
 	"mob_biotypes" = list (
 		"MOB_ORGANIC" = MOB_ORGANIC,
 		"MOB_MINERAL" = MOB_MINERAL,
@@ -195,5 +195,11 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"MOB_EPIC" = MOB_EPIC,
 		"MOB_REPTILE" = MOB_REPTILE,
 		"MOB_SPIRIT" = MOB_SPIRIT
-	)
+		),
+	"fovangle" = list (
+		"FOV_DEFAULT" = FOV_DEFAULT,
+		"FOV_RIGHT" = FOV_RIGHT,
+		"FOV_LEFT" = FOV_LEFT,
+		"FOV_BEHIND" = FOV_BEHIND
+		)
 	))

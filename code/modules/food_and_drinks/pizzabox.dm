@@ -1,6 +1,6 @@
 /obj/item/bombcore/miniature/pizza
 	name = "pizza bomb"
-	desc = "Special delivery!"
+	desc = ""
 	icon_state = "pizzabomb_inactive"
 	item_state = "eshield0"
 	lefthand_file = 'icons/mob/inhands/equipment/shields_lefthand.dmi'
@@ -8,7 +8,7 @@
 
 /obj/item/pizzabox
 	name = "pizza box"
-	desc = "A box suited for pizzas."
+	desc = ""
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "pizzabox"
 	item_state = "pizzabox"
@@ -43,19 +43,19 @@
 	desc = initial(desc)
 	if(open)
 		if(pizza)
-			desc = "[desc] It appears to have \a [pizza] inside. Use your other hand to take it out."
+			desc = ""
 		if(bomb)
-			desc = "[desc] Wait, what?! It has \a [bomb] inside!"
+			desc = ""
 			if(bomb_defused)
-				desc = "[desc] The bomb seems inert. Use your other hand to activate it."
+				desc = ""
 			if(bomb_active)
-				desc = "[desc] It looks like it's about to go off!"
+				desc = ""
 	else
 		var/obj/item/pizzabox/box = boxes.len ? boxes[boxes.len] : src
 		if(boxes.len)
-			desc = "A pile of boxes suited for pizzas. There appear to be [boxes.len + 1] boxes in the pile."
+			desc = ""
 		if(box.boxtag != "")
-			desc = "[desc] The [boxes.len ? "top box" : "box"]'s tag reads: [box.boxtag]"
+			desc = ""
 
 	// Icon/Overlays
 	cut_overlays()
@@ -113,35 +113,35 @@
 	if(open)
 		if(pizza)
 			user.put_in_hands(pizza)
-			to_chat(user, "<span class='notice'>You take [pizza] out of [src].</span>")
+			to_chat(user, "<span class='notice'>I take [pizza] out of [src].</span>")
 			pizza = null
 			update_icon()
 		else if(bomb)
 			if(wires.is_all_cut() && bomb_defused)
 				user.put_in_hands(bomb)
-				to_chat(user, "<span class='notice'>You carefully remove the [bomb] from [src].</span>")
+				to_chat(user, "<span class='notice'>I carefully remove the [bomb] from [src].</span>")
 				bomb = null
 				update_icon()
 				return
 			else
 				bomb_timer = input(user, "Set the [bomb] timer from [BOMB_TIMER_MIN] to [BOMB_TIMER_MAX].", bomb, bomb_timer) as num|null
-				
+
 				if (isnull(bomb_timer))
 					return
-				
+
 				bomb_timer = CLAMP(CEILING(bomb_timer / 2, 1), BOMB_TIMER_MIN, BOMB_TIMER_MAX)
 				bomb_defused = FALSE
 
 				log_bomber(user, "has trapped a", src, "with [bomb] set to [bomb_timer * 2] seconds")
 				bomb.adminlog = "The [bomb.name] in [src.name] that [key_name(user)] activated has detonated!"
 
-				to_chat(user, "<span class='warning'>You trap [src] with [bomb].</span>")
+				to_chat(user, "<span class='warning'>I trap [src] with [bomb].</span>")
 				update_icon()
 	else if(boxes.len)
 		var/obj/item/pizzabox/topbox = boxes[boxes.len]
 		boxes -= topbox
 		user.put_in_hands(topbox)
-		to_chat(user, "<span class='notice'>You remove the topmost [name] from the stack.</span>")
+		to_chat(user, "<span class='notice'>I remove the topmost [name] from the stack.</span>")
 		topbox.update_icon()
 		update_icon()
 		user.regenerate_icons()
@@ -157,13 +157,13 @@
 				return
 			boxes += add
 			newbox.boxes.Cut()
-			to_chat(user, "<span class='notice'>You put [newbox] on top of [src]!</span>")
+			to_chat(user, "<span class='notice'>I put [newbox] on top of [src]!</span>")
 			newbox.update_icon()
 			update_icon()
 			user.regenerate_icons()
 			if(boxes.len >= 5)
 				if(prob(10 * boxes.len))
-					to_chat(user, "<span class='danger'>You can't keep holding the stack!</span>")
+					to_chat(user, "<span class='danger'>I can't keep holding the stack!</span>")
 					disperse_pizzas()
 				else
 					to_chat(user, "<span class='warning'>The stack is getting a little high...</span>")
@@ -178,7 +178,7 @@
 			if(!user.transferItemToLoc(I, src))
 				return
 			pizza = I
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, "<span class='notice'>I put [I] in [src].</span>")
 			update_icon()
 			return
 	else if(istype(I, /obj/item/bombcore/miniature/pizza))
@@ -187,7 +187,7 @@
 				return
 			wires = new /datum/wires/explosive/pizza(src)
 			bomb = I
-			to_chat(user, "<span class='notice'>You put [I] in [src]. Sneeki breeki...</span>")
+			to_chat(user, "<span class='notice'>I put [I] in [src]. Sneeki breeki...</span>")
 			update_icon()
 			return
 		else if(bomb)
@@ -195,13 +195,13 @@
 	else if(istype(I, /obj/item/pen))
 		if(!open)
 			if(!user.is_literate())
-				to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
+				to_chat(user, "<span class='notice'>I scribble illegibly on [src]!</span>")
 				return
 			var/obj/item/pizzabox/box = boxes.len ? boxes[boxes.len] : src
 			box.boxtag += stripped_input(user, "Write on [box]'s tag:", box, "", 30)
 			if(!user.canUseTopic(src, BE_CLOSE))
 				return
-			to_chat(user, "<span class='notice'>You write with [I] on [src].</span>")
+			to_chat(user, "<span class='notice'>I write with [I] on [src].</span>")
 			update_icon()
 			return
 	else if(is_wire_tool(I))
@@ -213,7 +213,7 @@
 
 /obj/item/pizzabox/process()
 	if(bomb_active && !bomb_defused && (bomb_timer > 0))
-		playsound(loc, 'sound/items/timer.ogg', 50, FALSE)
+		playsound(loc, 'sound/blank.ogg', 50, FALSE)
 		bomb_timer--
 	if(bomb_active && !bomb_defused && (bomb_timer <= 0))
 		if(bomb in src)

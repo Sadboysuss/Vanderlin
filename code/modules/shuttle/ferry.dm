@@ -1,6 +1,6 @@
 /obj/machinery/computer/shuttle/ferry
 	name = "transport ferry console"
-	desc = "A console that controls the transport ferry."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/ferry
 	shuttleId = "ferry"
 	possible_destinations = "ferry_home;ferry_away"
@@ -36,5 +36,5 @@
 		if(last_request && (last_request + cooldown > world.time))
 			return
 		last_request = world.time
-		to_chat(usr, "<span class='notice'>Your request has been received by CentCom.</span>")
+		to_chat(usr, "<span class='notice'>My request has been received by CentCom.</span>")
 		to_chat(GLOB.admins, "<b>FERRY: <font color='#3d5bc3'>[ADMIN_LOOKUPFLW(usr)] (<A HREF='?_src_=holder;[HrefToken()];secrets=moveferry'>Move Ferry</a>)</b> is requesting to move the transport ferry to CentCom.</font>")

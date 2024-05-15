@@ -1,6 +1,6 @@
 /obj/machinery/plantgenes
 	name = "plant DNA manipulator"
-	desc = "An advanced device designed to manipulate plant genetic makeup."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "dnamod"
 	density = TRUE
@@ -82,7 +82,7 @@
 			return
 		eject_seed()
 		insert_seed(I)
-		to_chat(user, "<span class='notice'>You add [I] to the machine.</span>")
+		to_chat(user, "<span class='notice'>I add [I] to the machine.</span>")
 		interact(user)
 	else if(istype(I, /obj/item/disk/plantgene))
 		if (operation)
@@ -92,7 +92,7 @@
 			return
 		eject_disk()
 		disk = I
-		to_chat(user, "<span class='notice'>You add [I] to the machine.</span>")
+		to_chat(user, "<span class='notice'>I add [I] to the machine.</span>")
 		interact(user)
 	else
 		..()
@@ -260,7 +260,7 @@
 				return
 			eject_seed()
 			insert_seed(I)
-			to_chat(usr, "<span class='notice'>You add [I] to the machine.</span>")
+			to_chat(usr, "<span class='notice'>I add [I] to the machine.</span>")
 		else
 			eject_seed()
 	else if(href_list["eject_disk"] && !operation)
@@ -270,7 +270,7 @@
 				return
 			eject_disk()
 			disk = I
-			to_chat(usr, "<span class='notice'>You add [I] to the machine.</span>")
+			to_chat(usr, "<span class='notice'>I add [I] to the machine.</span>")
 		else
 			eject_disk()
 	else if(href_list["op"] == "insert" && disk && disk.gene && seed)
@@ -410,7 +410,7 @@
 	if(copytext(seed.name, 1, 13) == "experimental")
 		return // Already modded name and icon
 	seed.name = "experimental " + seed.name
-	seed.icon_state = "seed-x"
+	seed.icon_state = "seed"
 
 // Gene modder for seed vault ship, built with high tech alien parts.
 /obj/machinery/plantgenes/seedvault
@@ -422,7 +422,7 @@
 
 /obj/item/disk/plantgene
 	name = "plant data disk"
-	desc = "A disk for storing plant genetic data."
+	desc = ""
 	icon_state = "datadisk_hydro"
 	custom_materials = list(/datum/material/iron=30, /datum/material/glass=10)
 	var/datum/plant_gene/gene
@@ -443,7 +443,7 @@
 
 /obj/item/disk/plantgene/attack_self(mob/user)
 	read_only = !read_only
-	to_chat(user, "<span class='notice'>You flip the write-protect tab to [src.read_only ? "protected" : "unprotected"].</span>")
+	to_chat(user, "<span class='notice'>I flip the write-protect tab to [src.read_only ? "protected" : "unprotected"].</span>")
 
 /obj/item/disk/plantgene/examine(mob/user)
 	. = ..()

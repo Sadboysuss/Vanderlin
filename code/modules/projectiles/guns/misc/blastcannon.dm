@@ -1,12 +1,12 @@
 /obj/item/gun/blastcannon
 	name = "pipe gun"
-	desc = "A pipe welded onto a gun stock, with a mechanical trigger. The pipe has an opening near the top, and there seems to be a spring loaded wheel in the hole."
+	desc = ""
 	icon_state = "empty_blastcannon"
 	var/icon_state_loaded = "loaded_blastcannon"
 	item_state = "blastcannon_empty"
 	w_class = WEIGHT_CLASS_NORMAL
 	force = 10
-	fire_sound = 'sound/weapons/blastcannon.ogg'
+	fire_sound = 'sound/blank.ogg'
 	item_flags = NONE
 	clumsy_check = FALSE
 	randomspread = FALSE
@@ -48,7 +48,7 @@
 	if(bomb)
 		icon_state = icon_state_loaded
 		name = "blast cannon"
-		desc = "A makeshift device used to concentrate a bomb's blast energy to a narrow wave."
+		desc = ""
 	else
 		icon_state = initial(icon_state)
 		name = initial(name)
@@ -98,7 +98,7 @@
 	var/heavy = power * 0.25
 	var/medium = power * 0.5
 	var/light = power
-	user.visible_message("<span class='danger'>[user] opens [bomb] on [user.p_their()] [name] and fires a blast wave at [target]!</span>","<span class='danger'>You open [bomb] on your [name] and fire a blast wave at [target]!</span>")
+	user.visible_message("<span class='danger'>[user] opens [bomb] on [user.p_their()] [name] and fires a blast wave at [target]!</span>","<span class='danger'>I open [bomb] on your [name] and fire a blast wave at [target]!</span>")
 	playsound(user, "explosion", 100, TRUE)
 	var/turf/starting = get_turf(user)
 	var/turf/targturf = get_turf(target)

@@ -24,14 +24,14 @@
 
 /obj/item/organ/adamantine_resonator
 	name = "adamantine resonator"
-	desc = "Fragments of adamantine exist in all golems, stemming from their origins as purely magical constructs. These are used to \"hear\" messages from their leaders."
+	desc = ""
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_ADAMANTINE_RESONATOR
 	icon_state = "adamantine_resonator"
 
 /obj/item/organ/vocal_cords/adamantine
 	name = "adamantine vocal cords"
-	desc = "When adamantine resonates, it causes all nearby pieces of adamantine to resonate as well. Adamantine golems use this to broadcast messages to nearby golems."
+	desc = ""
 	actions_types = list(/datum/action/item_action/organ_action/use/adamantine_vocal_cords)
 	icon_state = "adamantine_cords"
 
@@ -57,7 +57,7 @@
 //Colossus drop, forces the listeners to obey certain commands
 /obj/item/organ/vocal_cords/colossus
 	name = "divine vocal cords"
-	desc = "They carry the voice of an ancient god."
+	desc = ""
 	icon_state = "voice_of_god"
 	actions_types = list(/datum/action/item_action/organ_action/colossus)
 	var/next_command = 0
@@ -89,7 +89,7 @@
 	. = ..()
 	if(!IsAvailable())
 		if(world.time < cords.next_command)
-			to_chat(owner, "<span class='notice'>You must wait [DisplayTimeText(cords.next_command - world.time)] before Speaking again.</span>")
+			to_chat(owner, "<span class='notice'>I must wait [DisplayTimeText(cords.next_command - world.time)] before Speaking again.</span>")
 		return
 	var/command = input(owner, "Speak with the Voice of God", "Command")
 	if(QDELETED(src) || QDELETED(owner))
@@ -100,17 +100,17 @@
 
 /obj/item/organ/vocal_cords/colossus/can_speak_with()
 	if(world.time < next_command)
-		to_chat(owner, "<span class='notice'>You must wait [DisplayTimeText(next_command - world.time)] before Speaking again.</span>")
+		to_chat(owner, "<span class='notice'>I must wait [DisplayTimeText(next_command - world.time)] before Speaking again.</span>")
 		return FALSE
 	if(!owner)
 		return FALSE
 	if(!owner.can_speak())
-		to_chat(owner, "<span class='warning'>You are unable to speak!</span>")
+		to_chat(owner, "<span class='warning'>I are unable to speak!</span>")
 		return FALSE
 	return TRUE
 
 /obj/item/organ/vocal_cords/colossus/handle_speech(message)
-	playsound(get_turf(owner), 'sound/magic/clockwork/invoke_general.ogg', 300, TRUE, 5)
+	playsound(get_turf(owner), 'sound/blank.ogg', 300, TRUE, 5)
 	return //voice of god speaks for us
 
 /obj/item/organ/vocal_cords/colossus/speak_with(message)
@@ -221,10 +221,10 @@
 	var/static/regex/cold_words = regex("cold|cool down|chill|freeze")
 	var/static/regex/repulse_words = regex("shoo|go away|leave me alone|begone|flee|fus ro dah|get away|repulse")
 	var/static/regex/attract_words = regex("come here|come to me|get over here|attract")
-	var/static/regex/whoareyou_words = regex("who are you|say your name|state your name|identify")
+	var/static/regex/whoareyou_words = regex("who are you|say my name|state my name|identify")
 	var/static/regex/saymyname_words = regex("say my name|who am i|whoami")
 	var/static/regex/knockknock_words = regex("knock knock")
-	var/static/regex/statelaws_words = regex("state laws|state your laws")
+	var/static/regex/statelaws_words = regex("state laws|state my laws")
 	var/static/regex/move_words = regex("move|walk")
 	var/static/regex/left_words = regex("left|west|port")
 	var/static/regex/right_words = regex("right|east|starboard")
@@ -366,7 +366,7 @@
 				text = devilinfo.truename
 			else
 				text = L.real_name
-			addtimer(CALLBACK(L, /atom/movable/proc/say, text), 5 * i)
+			addtimer(CALLBACK(L, /atom/movable/, text), 5 * i)
 			i++
 
 	//SAY MY NAME
@@ -374,7 +374,7 @@
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
-			addtimer(CALLBACK(L, /atom/movable/proc/say, user.name), 5 * i)
+			addtimer(CALLBACK(L, /atom/movable/, user.name), 5 * i)
 			i++
 
 	//KNOCK KNOCK
@@ -382,7 +382,7 @@
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
-			addtimer(CALLBACK(L, /atom/movable/proc/say, "Who's there?"), 5 * i)
+			addtimer(CALLBACK(L, /atom/movable/, "Who's there?"), 5 * i)
 			i++
 
 	//STATE LAWS
@@ -474,7 +474,7 @@
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
-			addtimer(CALLBACK(L, /atom/movable/proc/say, pick_list_replacements(BRAIN_DAMAGE_FILE, "brain_damage")), 5 * i)
+			addtimer(CALLBACK(L, /atom/movable/, pick_list_replacements(BRAIN_DAMAGE_FILE, "brain_damage")), 5 * i)
 			i++
 
 	//GET UP
@@ -516,7 +516,7 @@
 		for(var/V in listeners)
 			var/mob/living/L = V
 			if(prob(25))
-				addtimer(CALLBACK(L, /atom/movable/proc/say, "HOW HIGH?!!"), 5 * i)
+				addtimer(CALLBACK(L, /atom/movable/, "HOW HIGH?!!"), 5 * i)
 			addtimer(CALLBACK(L, /mob/living/.proc/emote, "jump"), 5 * i)
 			i++
 
@@ -547,7 +547,7 @@
 	//HONK
 	else if((findtext(message, honk_words)))
 		cooldown = COOLDOWN_MEME
-		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, get_turf(user), 'sound/items/bikehorn.ogg', 300, 1), 25)
+		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, get_turf(user), 'sound/blank.ogg', 300, 1), 25)
 		if(user.mind && user.mind.assigned_role == "Clown")
 			for(var/mob/living/carbon/C in listeners)
 				C.slip(140 * power_multiplier)

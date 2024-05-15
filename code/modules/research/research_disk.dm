@@ -1,7 +1,7 @@
 
 /obj/item/disk/tech_disk
 	name = "technology disk"
-	desc = "A disk for storing technology data for further research."
+	desc = ""
 	icon_state = "datadisk0"
 	custom_materials = list(/datum/material/iron=300, /datum/material/glass=100)
 	var/datum/techweb/stored_research
@@ -14,7 +14,7 @@
 
 /obj/item/disk/tech_disk/debug
 	name = "\improper CentCom technology disk"
-	desc = "A debug item for research"
+	desc = ""
 	custom_materials = null
 
 /obj/item/disk/tech_disk/debug/Initialize()
@@ -23,7 +23,7 @@
 
 /obj/item/research_notes
 	name = "research notes"
-	desc = "Valuable scientific data. Use it in a research console to scan it."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"

@@ -29,12 +29,12 @@
 		QDEL_NULL(D)
 
 /datum/antagonist/monkey/greet()
-	to_chat(owner, "<b>You are a monkey now!</b>")
+	to_chat(owner, "<b>I are a monkey now!</b>")
 	to_chat(owner, "<b>Bite humans to infect them, follow the orders of the monkey leaders, and help fellow monkeys!</b>")
 	to_chat(owner, "<b>Ensure at least one infected monkey escapes on the Emergency Shuttle!</b>")
 	to_chat(owner, "<b><i>As an intelligent monkey, you know how to use technology and how to ventcrawl while wearing things.</i></b>")
-	to_chat(owner, "<b>You can use :k to talk to fellow monkeys!</b>")
-	SEND_SOUND(owner.current, sound('sound/ambience/antag/monkey.ogg'))
+	to_chat(owner, "<b>I can use :k to talk to fellow monkeys!</b>")
+	SEND_SOUND(owner.current, sound('sound/blank.ogg'))
 
 /datum/antagonist/monkey/on_removal()
 	owner.special_role = null
@@ -115,14 +115,14 @@
 	. = ..()
 
 /datum/antagonist/monkey/leader/greet()
-	to_chat(owner, "<B><span class='notice'>You are the Jungle Fever patient zero!!</B></span>")
-	to_chat(owner, "<b>You have been planted onto this station by the Animal Rights Consortium.</b>")
+	to_chat(owner, "<B><span class='notice'>I are the Jungle Fever patient zero!!</B></span>")
+	to_chat(owner, "<b>I have been planted onto this station by the Animal Rights Consortium.</b>")
 	to_chat(owner, "<b>Soon the disease will transform you into an ape. Afterwards, you will be able spread the infection to others with a bite.</b>")
-	to_chat(owner, "<b>While your infection strain is undetectable by scanners, any other infectees will show up on medical equipment.</b>")
-	to_chat(owner, "<b>Your mission will be deemed a success if any of the live infected monkeys reach CentCom.</b>")
-	to_chat(owner, "<b>As an initial infectee, you will be considered a 'leader' by your fellow monkeys.</b>")
-	to_chat(owner, "<b>You can use :k to talk to fellow monkeys!</b>")
-	SEND_SOUND(owner.current, sound('sound/ambience/antag/monkey.ogg'))
+	to_chat(owner, "<b>While my infection strain is undetectable by scanners, any other infectees will show up on medical equipment.</b>")
+	to_chat(owner, "<b>My mission will be deemed a success if any of the live infected monkeys reach CentCom.</b>")
+	to_chat(owner, "<b>As an initial infectee, you will be considered a 'leader' by my fellow monkeys.</b>")
+	to_chat(owner, "<b>I can use :k to talk to fellow monkeys!</b>")
+	SEND_SOUND(owner.current, sound('sound/blank.ogg'))
 
 /datum/objective/monkey
 	explanation_text = "Ensure that infected monkeys escape on the emergency shuttle!"

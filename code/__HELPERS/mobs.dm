@@ -60,7 +60,7 @@
 	if(!GLOB.horns_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/horns, GLOB.horns_list)
 	if(!GLOB.ears_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/ears, GLOB.horns_list)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/ears, GLOB.ears_list)
 	if(!GLOB.frills_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/frills, GLOB.frills_list)
 	if(!GLOB.spines_list.len)
@@ -134,23 +134,84 @@
 		if(!findname(.))
 			break
 
-/proc/random_skin_tone()
-	return pick(GLOB.skin_tones)
 
 GLOBAL_LIST_INIT(skin_tones, sortList(list(
-	"albino",
-	"caucasian1",
-	"caucasian2",
-	"caucasian3",
-	"latino",
-	"mediterranean",
-	"asian1",
-	"asian2",
-	"arab",
-	"indian",
-	"african1",
-	"african2"
+	"skin1" = "ffe0d1",
+	"skin2" = "fcccb3",
+	"skin3" = "e8b59b"
 	)))
+
+/proc/random_skin_tone()
+	return GLOB.skin_tones[pick(GLOB.skin_tones)]
+
+GLOBAL_LIST_INIT(haircolor, sortList(list(
+	"black" = "#0a0707",
+	"brown" = "#362e25",
+	"blonde" = "#dfc999",
+	"red" = "#a34332"
+	)))
+
+
+/proc/random_haircolor()
+	return GLOB.haircolor[pick(GLOB.haircolor)]
+
+GLOBAL_LIST_INIT(oldhc, sortList(list(
+	"decay" = "6a6a6a",
+	"elderly" = "9e9e9e",
+	"ancient" = "c9c9c9",
+	"mythic" = "f4f4f4"
+	)))
+
+/proc/skintone2hex(skin_tone)
+	. = 0
+	switch(skin_tone)
+		if("caucasian1")
+			. = "ffe0d1"
+		if("caucasian2")
+			. = "fcccb3"
+		if("caucasian3")
+			. = "e8b59b"
+		if("latino")
+			. = "d9ae96"
+		if("mediterranean")
+			. = "c79b8b"
+		if("asian1")
+			. = "ffdeb3"
+		if("asian2")
+			. = "e3ba84"
+		if("arab")
+			. = "c4915e"
+		if("indian")
+			. = "b87840"
+		if("african1")
+			. = "754523"
+		if("african2")
+			. = "471c18"
+		if("albino")
+			. = "fff4e6"
+		if("orange")
+			. = "ffc905"
+		if("skin1")
+			. = "ffe0d1"
+		if("skin2")
+			. = "fcccb3"
+		if("skin3")
+			. = "e8b59b"
+
+/proc/haircolor2hex(haircolor)
+	. = 0
+	switch(haircolor)
+		if("cave black")
+			. = "#0a0707"
+		if("mud brown")
+			. = "#362e25"
+		if("pale blonde")
+			. = "#dfc999"
+		if("dusk red")
+			. = "#a34332"
+		if("decay grey")
+			. = "#6a6a6a"
+
 
 GLOBAL_LIST_EMPTY(species_list)
 
@@ -180,6 +241,11 @@ GLOBAL_LIST_EMPTY(species_list)
 /proc/do_mob(mob/user , mob/target, time = 30, uninterruptible = 0, progress = 1, datum/callback/extra_checks = null)
 	if(!user || !target)
 		return 0
+
+	if(user.doing)
+		return 0
+	user.doing = 1
+
 	var/user_loc = user.loc
 
 	var/drifting = 0
@@ -203,6 +269,11 @@ GLOBAL_LIST_EMPTY(species_list)
 		if(QDELETED(user) || QDELETED(target))
 			. = 0
 			break
+
+		if(!user.doing)
+			. = 0
+			break
+
 		if(uninterruptible)
 			continue
 
@@ -213,6 +284,7 @@ GLOBAL_LIST_EMPTY(species_list)
 		if((!drifting && user.loc != user_loc) || target.loc != target_loc || user.get_active_held_item() != holding || user.incapacitated() || (extra_checks && !extra_checks.Invoke()))
 			. = 0
 			break
+	user.doing = 0
 	if (progress)
 		qdel(progbar)
 
@@ -231,9 +303,17 @@ GLOBAL_LIST_EMPTY(species_list)
 		checked_health["health"] = health
 	return ..()
 
-/proc/do_after(mob/user, var/delay, needhand = 1, atom/target = null, progress = 1, datum/callback/extra_checks = null)
+/mob
+	var/doing = 0
+
+/proc/do_after(mob/user, delay, needhand = 1, atom/target = null, progress = 1, datum/callback/extra_checks = null)
 	if(!user)
 		return 0
+
+	if(user.doing)
+		return 0
+	user.doing = 1
+
 	var/atom/Tloc = null
 	if(target && !isturf(target))
 		Tloc = target.loc
@@ -254,7 +334,7 @@ GLOBAL_LIST_EMPTY(species_list)
 
 	var/datum/progressbar/progbar
 	if (progress)
-		progbar = new(user, delay, target)
+		progbar = new(user, delay, user)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time
@@ -269,6 +349,10 @@ GLOBAL_LIST_EMPTY(species_list)
 			Uloc = user.loc
 
 		if(QDELETED(user) || user.stat || (!drifting && user.loc != Uloc) || (extra_checks && !extra_checks.Invoke()))
+			. = 0
+			break
+
+		if(!user.doing)
 			. = 0
 			break
 
@@ -293,6 +377,85 @@ GLOBAL_LIST_EMPTY(species_list)
 			if(user.get_active_held_item() != holding)
 				. = 0
 				break
+	user.doing = 0
+	if (progress)
+		qdel(progbar)
+
+/proc/move_after(mob/user, delay, needhand = 1, atom/target = null, progress = 1, datum/callback/extra_checks = null) //do_after copypasta but you can move
+	if(!user)
+		return 0
+
+	if(user.doing)
+		return 0
+	user.doing = 1
+
+	var/atom/Tloc = null
+	if(target && !isturf(target))
+		Tloc = target.loc
+
+	var/atom/Uloc = user.loc
+
+	var/drifting = 0
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = 1
+
+	var/holding = user.get_active_held_item()
+
+	var/holdingnull = 1 //User's hand started out empty, check for an empty hand
+	if(holding)
+		holdingnull = 0 //Users hand started holding something, check to see if it's still holding that
+
+	delay *= user.do_after_coefficent()
+
+	var/datum/progressbar/progbar
+	if (progress)
+		progbar = new(user, delay, user)
+
+	var/endtime = world.time + delay
+	var/starttime = world.time
+	. = 1
+	while (world.time < endtime)
+		stoplag(1)
+		if (progress)
+			progbar.update(world.time - starttime)
+
+		if(drifting && !user.inertia_dir)
+			drifting = 0
+			Uloc = user.loc
+
+		Uloc = user.loc
+		Tloc = target.loc
+
+		if(QDELETED(user) || user.stat || !Tloc?.Adjacent(Uloc) || (extra_checks && !extra_checks.Invoke()))
+			. = 0
+			break
+
+		if(!user.doing)
+			. = 0
+			break
+
+		if(isliving(user))
+			var/mob/living/L = user
+			if(L.IsStun() || L.IsParalyzed())
+				. = 0
+				break
+
+		if(!QDELETED(Tloc) && (QDELETED(target) || Tloc != target.loc))
+			if((Uloc != Tloc || Tloc != user) && !drifting)
+				. = 0
+				break
+
+		if(needhand)
+			//This might seem like an odd check, but you can still need a hand even when it's empty
+			//i.e the hand is used to pull some item/tool out of the construction
+			if(!holdingnull)
+				if(!holding)
+					. = 0
+					break
+			if(user.get_active_held_item() != holding)
+				. = 0
+				break
+	user.doing = 0
 	if (progress)
 		qdel(progbar)
 
@@ -303,6 +466,11 @@ GLOBAL_LIST_EMPTY(species_list)
 /proc/do_after_mob(mob/user, list/targets, time = 30, uninterruptible = 0, progress = 1, datum/callback/extra_checks, required_mobility_flags = MOBILITY_STAND)
 	if(!user || !targets)
 		return 0
+
+	if(user.doing)
+		return 0
+	user.doing = 1
+
 	if(!islist(targets))
 		targets = list(targets)
 	var/user_loc = user.loc
@@ -334,6 +502,10 @@ GLOBAL_LIST_EMPTY(species_list)
 			if(QDELETED(user) || !targets)
 				. = 0
 				break
+			if(!user.doing)
+				. = 0
+				break
+
 			if(uninterruptible)
 				continue
 
@@ -349,6 +521,7 @@ GLOBAL_LIST_EMPTY(species_list)
 				if((!drifting && user_loc != user.loc) || QDELETED(target) || originalloc[target] != target.loc || user.get_active_held_item() != holding || user.incapacitated() || (extra_checks && !extra_checks.Invoke()))
 					. = 0
 					break mainloop
+	user.doing = 0
 	if(progbar)
 		qdel(progbar)
 
@@ -442,15 +615,17 @@ GLOBAL_LIST_EMPTY(species_list)
 			var/rendered_message = message
 
 			if(follow_target)
-				var/F
-				if(turf_target)
-					F = FOLLOW_OR_TURF_LINK(M, follow_target, turf_target)
-				else
-					F = FOLLOW_LINK(M, follow_target)
-				rendered_message = "[F] [message]"
+//				var/F
+//				if(turf_target)
+//					F = FOLLOW_OR_TURF_LINK(M, follow_target, turf_target)
+//				else
+//					F = FOLLOW_LINK(M, follow_target)
+//				rendered_message = "[F] [message]"
+				rendered_message = "[message]"
 			else if(turf_target)
-				var/turf_link = TURF_LINK(M, turf_target)
-				rendered_message = "[turf_link] [message]"
+//				var/turf_link = TURF_LINK(M, turf_target)
+//				rendered_message = "[turf_link] [message]"
+				rendered_message = "[message]"
 
 			to_chat(M, rendered_message)
 		else

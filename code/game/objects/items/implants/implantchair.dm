@@ -1,6 +1,6 @@
 /obj/machinery/implantchair
 	name = "mindshield implanter"
-	desc = "Used to implant occupants with mindshield implants."
+	desc = ""
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
 	density = TRUE
@@ -82,7 +82,7 @@
 			ready = FALSE
 			addtimer(CALLBACK(src,"set_ready"),injection_cooldown)
 	else
-		playsound(get_turf(src), 'sound/machines/buzz-sigh.ogg', 25, TRUE)
+		playsound(get_turf(src), 'sound/blank.ogg', 25, TRUE)
 	update_icon()
 
 /obj/machinery/implantchair/proc/implant_action(mob/living/M)
@@ -124,14 +124,14 @@
 /obj/machinery/implantchair/container_resist(mob/living/user)
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the door of [src]!</span>", \
-		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the door of [src]!</span>", \
+		"<span class='notice'>I lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open)
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/implantchair/relaymove(mob/user)
@@ -156,7 +156,7 @@
 
 /obj/machinery/implantchair/genepurge
 	name = "Genetic purifier"
-	desc = "Used to purge a human genome of foreign influences."
+	desc = ""
 	special = TRUE
 	special_name = "Purge genome"
 	injection_cooldown = 0
@@ -173,7 +173,7 @@
 
 /obj/machinery/implantchair/brainwash
 	name = "Neural Imprinter"
-	desc = "Used to <s>indoctrinate</s> rehabilitate hardened recidivists."
+	desc = ""
 	special_name = "Imprint"
 	injection_cooldown = 3000
 	auto_inject = FALSE

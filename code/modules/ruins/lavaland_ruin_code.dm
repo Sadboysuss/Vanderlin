@@ -28,7 +28,7 @@
 
 /obj/item/disk/design_disk/golem_shell
 	name = "Golem Creation Disk"
-	desc = "A gift from the Liberator."
+	desc = ""
 	icon_state = "datadisk1"
 	max_blueprints = 1
 
@@ -39,7 +39,7 @@
 
 /datum/design/golem_shell
 	name = "Golem Shell Construction"
-	desc = "Allows for the construction of a Golem Shell."
+	desc = ""
 	id = "golem"
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron = 40000)
@@ -50,7 +50,7 @@
 	name = "incomplete free golem shell"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
-	desc = "The incomplete body of a golem. Add ten sheets of any mineral to finish."
+	desc = ""
 	var/shell_type = /obj/effect/mob_spawn/human/golem
 	var/has_owner = FALSE //if the resulting golem obeys someone
 	w_class = WEIGHT_CLASS_BULKY
@@ -93,13 +93,13 @@
 		var/species = golem_shell_species_types[O.merge_type]
 		if(species)
 			if(O.use(10))
-				to_chat(user, "<span class='notice'>You finish up the golem shell with ten sheets of [O].</span>")
+				to_chat(user, "<span class='notice'>I finish up the golem shell with ten sheets of [O].</span>")
 				new shell_type(get_turf(src), species, user)
 				qdel(src)
 			else
-				to_chat(user, "<span class='warning'>You need at least ten sheets to finish a golem!</span>")
+				to_chat(user, "<span class='warning'>I need at least ten sheets to finish a golem!</span>")
 		else
-			to_chat(user, "<span class='warning'>You can't build a golem out of this kind of material!</span>")
+			to_chat(user, "<span class='warning'>I can't build a golem out of this kind of material!</span>")
 
 //made with xenobiology, the golem obeys its creator
 /obj/item/golem_shell/servant
@@ -115,7 +115,7 @@
 	random = TRUE
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper_s"
-	flavour_text = "<span class='big bold'>You are a syndicate agent,</span><b> employed in a top secret research facility developing biological weapons. Unfortunately, your hated enemy, Nanotrasen, has begun mining in this sector. <b>Continue your research as best you can, and try to keep a low profile. The base is rigged with explosives, <font size=6>DO NOT</font> abandon it or let it fall into enemy hands!</b>"
+	flavour_text = "<span class='big bold'>I are a syndicate agent,</span><b> employed in a top secret research facility developing biological weapons. Unfortunately, your hated enemy, Nanotrasen, has begun mining in this sector. <b>Continue your research as best you can, and try to keep a low profile. The base is rigged with explosives, <font size=6>DO NOT</font> abandon it or let it fall into enemy hands!</b>"
 	outfit = /datum/outfit/lavaland_syndicate
 	assignedrole = "Lavaland Syndicate"
 
@@ -140,11 +140,11 @@
 
 /obj/effect/mob_spawn/human/lavaland_syndicate/comms
 	name = "Syndicate Comms Agent"
-	flavour_text = "<span class='big bold'>You are a syndicate agent,</span><b> employed in a top secret research facility developing biological weapons. Unfortunately, your hated enemy, Nanotrasen, has begun mining in this sector. <b>Monitor enemy activity as best you can, and try to keep a low profile. <font size=6>DO NOT</font> abandon the base.</b> Use the communication equipment to provide support to any field agents, and sow disinformation to throw Nanotrasen off your trail. Do not let the base fall into enemy hands!</b>"
+	flavour_text = "<span class='big bold'>I are a syndicate agent,</span><b> employed in a top secret research facility developing biological weapons. Unfortunately, your hated enemy, Nanotrasen, has begun mining in this sector. <b>Monitor enemy activity as best you can, and try to keep a low profile. <font size=6>DO NOT</font> abandon the base.</b> Use the communication equipment to provide support to any field agents, and sow disinformation to throw Nanotrasen off your trail. Do not let the base fall into enemy hands!</b>"
 	outfit = /datum/outfit/lavaland_syndicate/comms
 
 /obj/effect/mob_spawn/human/lavaland_syndicate/comms/space
-	flavour_text = "<span class='big bold'>You are a syndicate agent,</span><b> assigned to a small listening post station situated near your hated enemy's top secret research facility: Space Station 13. <b>Monitor enemy activity as best you can, and try to keep a low profile. <font size=6>DO NOT</font> abandon the base.</b> Use the communication equipment to provide support to any field agents, and sow disinformation to throw Nanotrasen off your trail. Do not let the base fall into enemy hands!</b>"
+	flavour_text = "<span class='big bold'>I are a syndicate agent,</span><b> assigned to a small listening post station situated near your hated enemy's top secret research facility: Space Station 13. <b>Monitor enemy activity as best you can, and try to keep a low profile. <font size=6>DO NOT</font> abandon the base.</b> Use the communication equipment to provide support to any field agents, and sow disinformation to throw Nanotrasen off your trail. Do not let the base fall into enemy hands!</b>"
 
 /obj/effect/mob_spawn/human/lavaland_syndicate/comms/space/Initialize()
 	. = ..()

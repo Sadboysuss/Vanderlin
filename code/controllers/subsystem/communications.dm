@@ -17,14 +17,25 @@ SUBSYSTEM_DEF(communications)
 		. = TRUE
 
 /datum/controller/subsystem/communications/proc/make_announcement(mob/living/user, is_silicon, input)
-	if(!can_announce(user, is_silicon))
-		return FALSE
 	if(is_silicon)
-		minor_announce(html_decode(input),"[user.name] Announces:")
-		silicon_message_cooldown = world.time + COMMUNICATION_COOLDOWN_AI
+		if(user.job)
+			var/datum/job/J = SSjob.GetJob(user.job)
+			var/used_title = J.title
+			if(user.gender == FEMALE && J.f_title)
+				used_title = J.f_title
+			priority_announce(html_decode(user.treat_message(input)), "The [used_title] Decrees", 'sound/misc/alert.ogg', "Captain")
+			silicon_message_cooldown = world.time + 5 SECONDS
 	else
-		priority_announce(html_decode(user.treat_message(input)), null, 'sound/misc/announce.ogg', "Captain")
-		nonsilicon_message_cooldown = world.time + COMMUNICATION_COOLDOWN
+		if(user.job)
+			var/datum/job/J = SSjob.GetJob(user.job)
+			var/used_title = J.title
+			if(user.gender == FEMALE && J.f_title)
+				used_title = J.f_title
+			priority_announce(html_decode(user.treat_message(input)), "The [used_title] Speaks", 'sound/misc/bell.ogg', "Captain")
+			nonsilicon_message_cooldown = world.time + 5 SECONDS
+		else
+			priority_announce(html_decode(user.treat_message(input)), "Someone Speaks", 'sound/misc/bell.ogg', "Captain")
+			nonsilicon_message_cooldown = world.time + 5 SECONDS
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
 

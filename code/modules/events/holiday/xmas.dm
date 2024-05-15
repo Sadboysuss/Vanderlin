@@ -2,12 +2,12 @@
 	name = "xmas cracker"
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "cracker"
-	desc = "Directions for use: Requires two people, one to pull each end."
+	desc = ""
 	var/cracked = 0
 
 /obj/item/toy/xmas_cracker/attack(mob/target, mob/user)
 	if( !cracked && ishuman(target) && (target.stat == CONSCIOUS) && !target.get_active_held_item() )
-		target.visible_message("<span class='notice'>[user] and [target] pop \an [src]! *pop*</span>", "<span class='notice'>You pull \an [src] with [target]! *pop*</span>", "<span class='hear'>You hear a pop.</span>")
+		target.visible_message("<span class='notice'>[user] and [target] pop \an [src]! *pop*</span>", "<span class='notice'>I pull \an [src] with [target]! *pop*</span>", "<span class='hear'>I hear a pop.</span>")
 		var/obj/item/paper/Joke = new /obj/item/paper(user.loc)
 		Joke.name = "[pick("awful","terrible","unfunny")] joke"
 		Joke.info = pick("What did one snowman say to the other?\n\n<i>'Is it me or can you smell carrots?'</i>",
@@ -18,7 +18,7 @@
 			"Where do you find chili beans?\n\n<i>The north pole.</i>",
 			"What do you get from eating tree decorations?\n\n<i>Tinsilitis!</i>",
 			"What do snowmen wear on their heads?\n\n<i>Ice caps!</i>",
-			"Why is Christmas just like life on ss13?\n\n<i>You do all the work and the fat guy gets all the credit.</i>",
+			"Why is Christmas just like life on ss13?\n\n<i>I do all the work and the fat guy gets all the credit.</i>",
 			"Why doesn't Santa have any children?\n\n<i>Because he only comes down the chimney.</i>")
 		new /obj/item/clothing/head/festive(target.loc)
 		user.update_icons()
@@ -28,14 +28,14 @@
 		other_half.cracked = 1
 		other_half.icon_state = "cracker2"
 		target.put_in_active_hand(other_half)
-		playsound(user, 'sound/effects/snap.ogg', 50, TRUE)
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		return 1
 	return ..()
 
 /obj/item/clothing/head/festive
 	name = "festive paper hat"
 	icon_state = "xmashat"
-	desc = "A crappy paper hat that you are REQUIRED to wear."
+	desc = ""
 	flags_inv = 0
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 

@@ -3,7 +3,7 @@
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
 	light_range = 2
-	desc = "A thick wall of writhing tendrils."
+	desc = ""
 	density = FALSE //this being false causes two bugs, being able to attack blob tiles behind other blobs and being unable to move on blob tiles in no gravity, but turning it to 1 causes the blob mobs to be unable to path through blobs, which is probably worse.
 	opacity = 0
 	anchored = TRUE
@@ -44,13 +44,13 @@
 	if(overmind)
 		overmind.blobs_legit -= src  //if it was in the legit blobs list, it isn't now
 	GLOB.blobs -= src //it's no longer in the all blobs list either
-	playsound(src.loc, 'sound/effects/splat.ogg', 50, TRUE) //Expand() is no longer broken, no check necessary.
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE) //Expand() is no longer broken, no check necessary.
 	return ..()
 
 /obj/structure/blob/blob_act()
 	return
 
-/obj/structure/blob/Adjacent(var/atom/neighbour)
+/obj/structure/blob/Adjacent(atom/neighbour)
 	. = ..()
 	if(.)
 		var/result = 0
@@ -167,7 +167,7 @@
 
 	if(isspaceturf(T) && !(locate(/obj/structure/lattice) in T) && prob(80))
 		make_blob = FALSE
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, TRUE) //Let's give some feedback that we DID try to spawn in space, since players are used to it
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE) //Let's give some feedback that we DID try to spawn in space, since players are used to it
 
 	ConsumeTile() //hit the tile we're in, making sure there are no border objects blocking us
 	if(!T.CanPass(src, T)) //is the target turf impassable
@@ -227,7 +227,7 @@
 	if(I.tool_behaviour == TOOL_ANALYZER)
 		user.changeNext_move(CLICK_CD_MELEE)
 		to_chat(user, "<b>The analyzer beeps once, then reports:</b><br>")
-		SEND_SOUND(user, sound('sound/machines/ping.ogg'))
+		SEND_SOUND(user, sound('sound/blank.ogg'))
 		if(overmind)
 			to_chat(user, "<b>Progress to Critical Mass:</b> <span class='notice'>[overmind.blobs_legit.len]/[overmind.blobwincount].</span>")
 			to_chat(user, chemeffectreport(user).Join("\n"))
@@ -263,11 +263,11 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src.loc, 'sound/effects/attackblob.ogg', 50, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/blob/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
 	switch(damage_type)
@@ -294,7 +294,7 @@
 /obj/structure/blob/obj_destruction(damage_flag)
 	if(overmind)
 		overmind.blobstrain.death_reaction(src, damage_flag)
-	..()
+	. = ..()
 
 /obj/structure/blob/proc/change_to(type, controller)
 	if(!ispath(type))
@@ -311,7 +311,7 @@
 	. = ..()
 	var/datum/atom_hud/hud_to_check = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	if(user.research_scanner || hud_to_check.hudusers[user])
-		. += "<b>Your HUD displays an extensive report...</b><br>"
+		. += "<b>My HUD displays an extensive report...</b><br>"
 		if(overmind)
 			. += overmind.blobstrain.examine(user)
 		else
@@ -350,15 +350,15 @@
 	if(obj_integrity <= 15)
 		icon_state = "blob_damaged"
 		name = "fragile blob"
-		desc = "A thin lattice of slightly twitching tendrils."
+		desc = ""
 		brute_resist = 0.5
 	else if (overmind)
 		icon_state = "blob"
 		name = "blob"
-		desc = "A thick wall of writhing tendrils."
+		desc = ""
 		brute_resist = 0.25
 	else
 		icon_state = "blob"
 		name = "dead blob"
-		desc = "A thick wall of lifeless tendrils."
+		desc = ""
 		brute_resist = 0.25

@@ -1,52 +1,30 @@
 /datum/component/personal_crafting/Initialize()
 	if(!ismob(parent))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(parent, COMSIG_MOB_CLIENT_LOGIN, .proc/create_mob_button)
-
+	var/mob/living/L = parent
+	L.craftingthing = src
+//	RegisterSignal(parent, COMSIG_MOB_CLIENT_LOGIN, .proc/create_mob_button)
+/*
 /datum/component/personal_crafting/proc/create_mob_button(mob/user, client/CL)
 	var/datum/hud/H = user.hud_used
 	var/obj/screen/craft/C = new()
 	C.icon = H.ui_style
 	H.static_inventory += C
 	CL.screen += C
-	RegisterSignal(C, COMSIG_CLICK, .proc/component_ui_interact)
-
+	RegisterSignal(C, COMSIG_CLICK, .proc/roguecraft)
+*/
 /datum/component/personal_crafting
 	var/busy
 	var/viewing_category = 1 //typical powergamer starting on the Weapons tab
 	var/viewing_subcategory = 1
 	var/list/categories = list(
-				CAT_WEAPONRY = list(
-					CAT_WEAPON,
-					CAT_AMMO,
-				),
-				CAT_ROBOT = CAT_NONE,
-				CAT_MISC = CAT_NONE,
-				CAT_PRIMAL = CAT_NONE,
-				CAT_FOOD = list(
-					CAT_BREAD,
-					CAT_BURGER,
-					CAT_CAKE,
-					CAT_EGG,
-					CAT_ICE,
-					CAT_MEAT,
-					CAT_MISCFOOD,
-					CAT_PASTRY,
-					CAT_PIE,
-					CAT_PIZZA,
-					CAT_SALAD,
-					CAT_SANDWICH,
-					CAT_SOUP,
-					CAT_SPAGHETTI,
-				),
-				CAT_DRINK = CAT_NONE,
-				CAT_CLOTHING = CAT_NONE,
+				CAT_NONE = CAT_NONE,
 			)
 
 	var/cur_category = CAT_NONE
 	var/cur_subcategory = CAT_NONE
 	var/datum/action/innate/crafting/button
-	var/display_craftable_only = FALSE
+	var/display_craftable_only = TRUE
 	var/display_compact = TRUE
 
 
@@ -71,11 +49,15 @@
 			var/needed_amount = R.reqs[A]
 			for(var/B in contents)
 				if(ispath(B, A))
+					if(!R.subtype_reqs && B in subtypesof(A))
+						continue
 					if (R.blacklist.Find(B))
+						testing("foundinblacklist")
 						continue
 					if(contents[B] >= R.reqs[A])
 						continue main_loop
 					else
+						testing("removecontent")
 						needed_amount -= contents[B]
 						if(needed_amount <= 0)
 							continue main_loop
@@ -105,11 +87,16 @@
 	for(var/slot in list(SLOT_R_STORE, SLOT_L_STORE))
 		. += user.get_item_by_slot(slot)
 
+/obj/item/proc/can_craft_with()
+	return TRUE
+
 /datum/component/personal_crafting/proc/get_surroundings(mob/user)
 	. = list()
 	.["tool_behaviour"] = list()
 	.["other"] = list()
 	for(var/obj/item/I in get_environment(user))
+		if(!I.can_craft_with())
+			continue
 		if(I.flags_1 & HOLOGRAM_1)
 			continue
 		if(istype(I, /obj/item/stack))
@@ -157,27 +144,152 @@
 			return FALSE
 	return TRUE
 
+/atom/proc/OnCrafted(dirin)
+	return
+
+/obj/item/OnCrafted(dirin)
+	. = ..()
+
+/turf/open/OnCrafted(dirin)
+	. = ..()
+	START_PROCESSING(SSweather,src)
+	var/turf/belo = get_step_multiz(src, DOWN)
+	for(var/x in 1 to 5)
+		if(belo)
+			START_PROCESSING(SSweather,belo)
+			belo = get_step_multiz(belo, DOWN)
+		else
+			break
+
+/datum/crafting_recipe/proc/TurfCheck(mob/user, turf/T)
+	return TRUE
+
+
 /datum/component/personal_crafting/proc/construct_item(mob/user, datum/crafting_recipe/R)
+	if(user.doing)
+		return
 	var/list/contents = get_surroundings(user)
-	var/send_feedback = 1
+//	var/send_feedback = 1
+	var/turf/T = get_step(user, user.dir)
+	if(isopenturf(T) && R.wallcraft)
+		to_chat(user, "<span class='warning'>Need to craft this on a wall.</span>")
+		return
+	if(!isopenturf(T) || R.ontile)
+		T = get_turf(user.loc)
+	if(!R.TurfCheck(user, T))
+		to_chat(user, "<span class='warning'>I can't craft here.</span>")
+		return
+	if(istype(T, /turf/open/water))
+		to_chat(user, "<span class='warning'>I can't craft here.</span>")
+		return
+	if(isturf(R.result))
+		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
+			to_chat(user, "<span class='warning'>I can't craft here.</span>")
+			return
+	if(ispath(R.result, /obj/structure) || ispath(R.result, /obj/machinery))
+		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
+			to_chat(user, "<span class='warning'>I can't craft here.</span>")
+			return
+		for(var/obj/structure/S in T)
+			if(R.buildsame && istype(S, R.result))
+				if(user.dir == S.dir)
+					to_chat(user, "<span class='warning'>Something in the way.</span>")
+					return
+				continue
+			if(R.structurecraft && istype(S, R.structurecraft))
+				testing("isstructurecraft")
+				continue
+			if(S.density)
+				to_chat(user, "<span class='warning'>Something in the way.</span>")
+				return
+		for(var/obj/machinery/M in T)
+			if(M.density)
+				to_chat(user, "<span class='warning'>Something in the way.</span>")
+				return
+	if(R.req_table)
+		if(!(locate(/obj/structure/table) in T))
+			to_chat(user, "<span class='warning'>I need to make this on a table.</span>")
+			return
+	if(R.structurecraft)
+		if(!(locate(R.structurecraft) in T))
+			to_chat(user, "<span class='warning'>I'm missing something.</span>")
+			return
 	if(check_contents(R, contents))
 		if(check_tools(user, R, contents))
-			if(do_after(user, R.time, target = user))
-				contents = get_surroundings(user)
-				if(!check_contents(R, contents))
-					return ", missing component."
-				if(!check_tools(user, R, contents))
-					return ", missing tool."
-				var/list/parts = del_reqs(R, user)
-				var/atom/movable/I = new R.result (get_turf(user.loc))
-				I.CheckParts(parts, R)
-				if(isitem(I))
-					user.put_in_hands(I)
-				if(send_feedback)
-					SSblackbox.record_feedback("tally", "object_crafted", 1, I.type)
+			if(R.craftsound)
+				playsound(T, R.craftsound, 100, TRUE)
+//			var/time2use = round(R.time / 3)
+			var/time2use = 10
+			for(var/i = 1 to 100)
+				if(do_after(user, time2use, target = user))
+					contents = get_surroundings(user)
+					if(!check_contents(R, contents))
+						return ", missing component."
+					if(!check_tools(user, R, contents))
+						return ", missing tool."
+
+					var/prob2craft = 25
+					var/prob2fail = 1
+					if(R.craftdiff)
+						prob2craft -= (25*R.craftdiff)
+					if(R.skillcraft)
+						if(user.mind)
+							prob2craft += (user.mind.get_skill_level(R.skillcraft) * 25)
+					else
+						prob2craft = 100
+					if(isliving(user))
+						var/mob/living/L = user
+						if(L.STALUC > 10)
+							prob2fail = 0
+						if(L.STALUC < 10)
+							prob2fail += (10-L.STALUC)
+						if(L.STAINT > 10)
+							prob2craft += ((10-L.STAINT)*-1)*2
+					prob2craft = CLAMP(prob2craft, 0, 99)
+					if(prob(prob2fail))
+						to_chat(user, "<span class='danger'>MISTAKE! I've failed to craft [R.name]!</span>")
+						continue
+					if(!prob(prob2craft))
+						if(user.client?.prefs.showrolls)
+							to_chat(user, "<span class='danger'>I've failed to craft [R.name]... [prob2craft]%</span>")
+						continue
+							to_chat(user, "<span class='danger'>I've failed to craft [R.name].</span>")
+						continue
+					var/list/parts = del_reqs(R, user)
+					if(islist(R.result))
+						var/list/L = R.result
+						for(var/IT in L)
+							var/atom/movable/I = new IT(T)
+							I.CheckParts(parts, R)
+							I.OnCrafted(user.dir)
+					else
+						if(ispath(R.result, /turf))
+							var/turf/X = T.PlaceOnTop(R.result)
+							if(X)
+								X.OnCrafted(user.dir)
+						else
+							var/atom/movable/I = new R.result (T)
+							I.CheckParts(parts, R)
+							I.OnCrafted(user.dir)
+					user.visible_message("<span class='notice'>[user] [R.verbage] \a [R.name]!</span>", \
+										"<span class='notice'>I [R.verbage] \a [R.name]!</span>")
+					if(user.mind && R.skillcraft)
+						if(isliving(user))
+							var/mob/living/L = user
+							var/amt2raise = L.STAINT
+							if(R.craftdiff > 0) //difficult recipe
+								amt2raise += (R.craftdiff * 6)
+							if(amt2raise > 0)
+								user.mind.adjust_experience(R.skillcraft, amt2raise, FALSE)
+					return
+//				if(isitem(I))
+//					user.put_in_hands(I)
+//				if(send_feedback)
+//					SSblackbox.record_feedback("tally", "object_crafted", 1, I.type)
 				return 0
 			return "."
-		return ", missing tool."
+		to_chat(usr, "<span class='warning'>I'm missing a tool.</span>")
+		return
 	return ", missing component."
 
 
@@ -320,6 +432,7 @@
 		ui.open()
 
 
+
 /datum/component/personal_crafting/ui_data(mob/user)
 	var/list/data = list()
 	data["busy"] = busy
@@ -382,15 +495,15 @@
 			ui_interact(usr)
 			var/fail_msg = construct_item(usr, TR)
 			if(!fail_msg)
-				to_chat(usr, "<span class='notice'>[TR.name] constructed.</span>")
+				to_chat(usr, "<span class='notice'>[TR.name] crafted.</span>")
 			else
-				to_chat(usr, "<span class='warning'>Construction failed[fail_msg]</span>")
+				to_chat(usr, "<span class='warning'>craft failed: [fail_msg]</span>")
 			busy = FALSE
 		if("toggle_recipes")
-			display_craftable_only = !display_craftable_only
+			display_craftable_only = TRUE
 			. = TRUE
 		if("toggle_compact")
-			display_compact = !display_compact
+			display_compact = TRUE
 			. = TRUE
 		if("set_category")
 			if(!isnull(params["category"]))
@@ -441,3 +554,71 @@
 	if(!learned_recipes)
 		learned_recipes = list()
 	learned_recipes |= R
+
+// new crafting button interaction
+
+/datum/component/personal_crafting/proc/roguecraft(location, control, params, mob/user)
+	if(user.doing)
+		return
+	var/area/A = get_area(user)
+	if(!A.can_craft_here())
+		to_chat(user, "<span class='warning'>I can't craft here.</span>")
+		return
+//	if(user != parent)
+//		testing("c2")
+//		return
+	var/list/data = list()
+	var/list/catty = list()
+	var/list/surroundings = get_surroundings(user)
+	for(var/rec in GLOB.crafting_recipes)
+		var/datum/crafting_recipe/R = rec
+		if(!R.always_availible && !(R.type in user?.mind?.learned_recipes)) //User doesn't actually know how to make this.
+			continue
+
+//		if((R.category != cur_category) || (R.subcategory != cur_subcategory))
+//			continue
+
+		if(check_contents(R, surroundings))
+			if(R.name)
+				data += R
+				if(R.skillcraft)
+					var/datum/skill/S = new R.skillcraft()
+					catty |= S.name
+				else
+					catty |= "Other"
+	if(!data.len)
+		to_chat(user, "<span class='warning'>There is nothing I can craft.</span>")
+		return
+	if(!catty.len)
+		return
+
+	// Craft Last Again
+	var/list/modifiers = params2list(params)
+	if(modifiers["right"])
+		var/mob/living/H = user
+		var/r = H.last_crafted
+		construct_item(user, r)
+		return
+
+	var/t
+	if(catty.len > 1)
+		t=input(user, "CHOOSE SKILL") as null|anything in catty
+	else
+		t=pick(catty)
+	if(t)
+		var/list/realdata = list()
+		for(var/datum/crafting_recipe/X in data)
+			if(X.skillcraft)
+				var/datum/skill/S = new X.skillcraft()
+				if(t == S.name)
+					realdata += X
+			else
+				if(t == "Other")
+					realdata += X
+		if(realdata.len)
+			var/r = input(user, "What should I craft?") as null|anything in realdata
+
+			if(r)
+				var/mob/living/H = user
+				H.last_crafted = r
+				construct_item(user, r)

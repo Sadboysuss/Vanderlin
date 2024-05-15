@@ -1,7 +1,7 @@
 /turf/open/space
 	icon = 'icons/turf/space.dmi'
 	icon_state = "0"
-	name = "\proper space"
+	name = "\proper phlogiston"
 	intact = 0
 
 	temperature = TCMB
@@ -24,21 +24,22 @@
 	return
 
 /turf/open/space/Initialize()
+	..()
 	icon_state = SPACE_ICON_STATE
-	air = space_gas
+//	air = space_gas
 	vis_contents.Cut() //removes inherited overlays
 	visibilityChanged()
 
-	if(flags_1 & INITIALIZED_1)
-		stack_trace("Warning: [src]([type]) initialized multiple times!")
-	flags_1 |= INITIALIZED_1
+//	if(flags_1 & INITIALIZED_1)
+//		stack_trace("Warning: [src]([type]) initialized multiple times!")
+//	flags_1 |= INITIALIZED_1
 
 	var/area/A = loc
 	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
 		add_overlay(/obj/effect/fullbright)
 
-	if(requires_activation)
-		SSair.add_to_active(src)
+//	if(requires_activation)
+//		SSair.add_to_active(src)
 
 	if (light_power && light_range)
 		update_light()
@@ -103,18 +104,18 @@
 			return
 		if(L)
 			if(R.use(1))
-				to_chat(user, "<span class='notice'>You construct a catwalk.</span>")
-				playsound(src, 'sound/weapons/genhit.ogg', 50, TRUE)
+				to_chat(user, "<span class='notice'>I construct a catwalk.</span>")
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 				new/obj/structure/lattice/catwalk(src)
 			else
-				to_chat(user, "<span class='warning'>You need two rods to build a catwalk!</span>")
+				to_chat(user, "<span class='warning'>I need two rods to build a catwalk!</span>")
 			return
 		if(R.use(1))
-			to_chat(user, "<span class='notice'>You construct a lattice.</span>")
-			playsound(src, 'sound/weapons/genhit.ogg', 50, TRUE)
+			to_chat(user, "<span class='notice'>I construct a lattice.</span>")
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			ReplaceWithLattice()
 		else
-			to_chat(user, "<span class='warning'>You need one rod to build a lattice.</span>")
+			to_chat(user, "<span class='warning'>I need one rod to build a lattice.</span>")
 		return
 	if(istype(C, /obj/item/stack/tile/plasteel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
@@ -122,11 +123,11 @@
 			var/obj/item/stack/tile/plasteel/S = C
 			if(S.use(1))
 				qdel(L)
-				playsound(src, 'sound/weapons/genhit.ogg', 50, TRUE)
-				to_chat(user, "<span class='notice'>You build a floor.</span>")
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
+				to_chat(user, "<span class='notice'>I build a floor.</span>")
 				PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 			else
-				to_chat(user, "<span class='warning'>You need one floor tile to build a floor!</span>")
+				to_chat(user, "<span class='warning'>I need one floor tile to build a floor!</span>")
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support! Place metal rods first.</span>")
 
@@ -210,7 +211,7 @@
 /turf/open/space/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_FLOORWALL)
-			to_chat(user, "<span class='notice'>You build a floor.</span>")
+			to_chat(user, "<span class='notice'>I build a floor.</span>")
 			PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 			return TRUE
 	return FALSE

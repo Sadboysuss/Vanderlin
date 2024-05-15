@@ -22,13 +22,13 @@
 	maxHealth = 700
 	icon_state = "mega_legion"
 	icon_living = "mega_legion"
-	desc = "One of many."
+	desc = ""
 	icon = 'icons/mob/lavaland/96x96megafauna.dmi'
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
-	attack_sound = 'sound/magic/demon_attack1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	speak_emote = list("echoes")
-	armour_penetration = 50
+	armor_penetration = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	speed = 5
@@ -60,21 +60,21 @@
 	name = "Create Legion Skull"
 	icon_icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	button_icon_state = "legion_head"
-	chosen_message = "<span class='colossus'>You are now creating legion skulls.</span>"
+	chosen_message = "<span class='colossus'>I are now creating legion skulls.</span>"
 	chosen_attack_num = 1
 
 /datum/action/innate/megafauna_attack/charge_target
 	name = "Charge Target"
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	chosen_message = "<span class='colossus'>You are now charging at your target.</span>"
+	chosen_message = "<span class='colossus'>I are now charging at your target.</span>"
 	chosen_attack_num = 2
 
 /datum/action/innate/megafauna_attack/create_turrets
 	name = "Create Sentinels"
 	icon_icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	button_icon_state = "legion_turret"
-	chosen_message = "<span class='colossus'>You are now creating legion sentinels.</span>"
+	chosen_message = "<span class='colossus'>I are now creating legion sentinels.</span>"
 	chosen_attack_num = 3
 
 /mob/living/simple_animal/hostile/megafauna/legion/OpenFire(the_target)
@@ -127,8 +127,8 @@
 
 ///This is the proc that actually does the throwing. Charge only adds a timer for this.
 /mob/living/simple_animal/hostile/megafauna/legion/proc/throw_thyself()
-	playsound(src, 'sound/weapons/sonic_jackhammer.ogg', 50, TRUE)
-	throw_at(target, 7, 1.1, src, FALSE, FALSE, CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/effects/meteorimpact.ogg', 50 * size, TRUE, 2), INFINITY)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
+	throw_at(target, 7, 1.1, src, FALSE, FALSE, CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/blank.ogg', 50 * size, TRUE, 2), INFINITY)
 
 ///Deals some extra damage on throw impact.
 /mob/living/simple_animal/hostile/megafauna/legion/throw_impact(mob/living/hit_atom, datum/thrownthing/throwingdatum)
@@ -142,7 +142,7 @@
 
 ///Attack proc. Creates up to three legion turrets on suitable turfs nearby.
 /mob/living/simple_animal/hostile/megafauna/legion/proc/create_legion_turrets(minimum = 2, maximum = size * 2)
-	playsound(src, 'sound/magic/RATTLEMEBONES.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	var/list/possiblelocations = list()
 	for(var/turf/T in oview(src, 4)) //Only place the turrets on open turfs
 		if(is_blocked_turf(T))
@@ -233,7 +233,7 @@
 	return TRUE
 
 ///Sets the variables for new legion skulls. Usually called after splitting.
-/mob/living/simple_animal/hostile/megafauna/legion/proc/setVarsAfterSplit(var/mob/living/simple_animal/hostile/megafauna/legion/L)
+/mob/living/simple_animal/hostile/megafauna/legion/proc/setVarsAfterSplit(mob/living/simple_animal/hostile/megafauna/legion/L)
 	maxHealth = L.maxHealth
 	updatehealth()
 	size = L.size
@@ -247,7 +247,7 @@
 
 /obj/item/staff/storm
 	name = "staff of storms"
-	desc = "An ancient staff retrieved from the remains of Legion. The wind stirs as you move it."
+	desc = ""
 	icon_state = "staffofstorms"
 	item_state = "staffofstorms"
 	icon = 'icons/obj/guns/magic.dmi'
@@ -255,7 +255,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	force = 25
 	damtype = BURN
-	hitsound = 'sound/weapons/sear.ogg'
+	hitsound = 'sound/blank.ogg'
 	var/storm_type = /datum/weather/ash_storm
 	var/storm_cooldown = 0
 	var/static/list/excluded_areas = list()
@@ -271,7 +271,7 @@
 		to_chat(user, "<span class='warning'>Something is preventing you from using the staff here.</span>")
 		return
 	var/datum/weather/A
-	for(var/V in SSweather.processing)
+	for(var/V in SSweather.curweathers)
 		var/datum/weather/W = V
 		if((user_turf.z in W.impacted_z_levels) && W.area_type == user_area.type)
 			A = W
@@ -283,8 +283,8 @@
 				to_chat(user, "<span class='warning'>The storm is already ending! It would be a waste to use the staff now.</span>")
 				return
 			user.visible_message("<span class='warning'>[user] holds [src] skywards as an orange beam travels into the sky!</span>", \
-			"<span class='notice'>You hold [src] skyward, dispelling the storm!</span>")
-			playsound(user, 'sound/magic/staff_change.ogg', 200, FALSE)
+			"<span class='notice'>I hold [src] skyward, dispelling the storm!</span>")
+			playsound(user, 'sound/blank.ogg', 200, FALSE)
 			A.wind_down()
 			log_game("[user] ([key_name(user)]) has dispelled a storm at [AREACOORD(user_turf)]")
 			return
@@ -299,15 +299,15 @@
 		A.end_duration = 100
 
 	user.visible_message("<span class='warning'>[user] holds [src] skywards as red lightning crackles into the sky!</span>", \
-	"<span class='notice'>You hold [src] skyward, calling down a terrible storm!</span>")
-	playsound(user, 'sound/magic/staff_change.ogg', 200, FALSE)
+	"<span class='notice'>I hold [src] skyward, calling down a terrible storm!</span>")
+	playsound(user, 'sound/blank.ogg', 200, FALSE)
 	A.telegraph()
 	storm_cooldown = world.time + 200
 
 ///A basic turret that shoots at nearby mobs. Intended to be used for the legion megafauna.
 /obj/structure/legionturret
 	name = "\improper Legion sentinel"
-	desc = "The eye pierces your soul."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_turret"
 	light_power = 0.5
@@ -352,7 +352,7 @@
 	var/angle = Get_Angle(T1, T)
 	var/datum/point/vector/V = new(T1.x, T1.y, T1.z, 0, 0, angle)
 	generate_tracer_between_points(V, V.return_vector_after_increments(6), /obj/effect/projectile/tracer/legion/tracer, 0, shot_delay, 0, 0, 0, null)
-	playsound(src, 'sound/machines/airlockopen.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	addtimer(CALLBACK(src, .proc/fire_beam, angle), shot_delay)
 
 ///Called shot_delay after the turret shot the tracer. Shoots a projectile into the same direction.
@@ -360,13 +360,13 @@
 	var/obj/projectile/ouchie = new projectile_type(loc)
 	ouchie.firer = src
 	ouchie.fire(angle)
-	playsound(src, 'sound/effects/bin_close.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	QDEL_IN(src, 5)
 
 ///Used for the legion turret.
 /obj/projectile/beam/legion
 	name = "blood pulse"
-	hitsound = 'sound/magic/magic_missile.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 19
 	range = 6
 	eyeblur = 0

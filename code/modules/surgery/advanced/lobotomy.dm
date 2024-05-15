@@ -1,6 +1,6 @@
 /datum/surgery/advanced/lobotomy
 	name = "Lobotomy"
-	desc = "An invasive surgical procedure which guarantees removal of almost all brain traumas, but might cause another permanent trauma in return."
+	desc = ""
 	steps = list(
 	/datum/surgery_step/incise,
 	/datum/surgery_step/retract_skin,
@@ -33,12 +33,12 @@
 	return TRUE
 
 /datum/surgery_step/lobotomize/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You begin to perform a lobotomy on [target]'s brain...</span>",
+	display_results(user, target, "<span class='notice'>I begin to perform a lobotomy on [target]'s brain...</span>",
 		"<span class='notice'>[user] begins to perform a lobotomy on [target]'s brain.</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target]'s brain.</span>")
 
 /datum/surgery_step/lobotomize/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You succeed in lobotomizing [target].</span>",
+	display_results(user, target, "<span class='notice'>I succeed in lobotomizing [target].</span>",
 			"<span class='notice'>[user] successfully lobotomizes [target]!</span>",
 			"<span class='notice'>[user] completes the surgery on [target]'s brain.</span>")
 	target.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
@@ -56,7 +56,7 @@
 /datum/surgery_step/lobotomize/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/organ/brain/B = target.getorganslot(ORGAN_SLOT_BRAIN)
 	if(B)
-		display_results(user, target, "<span class='warning'>You remove the wrong part, causing more damage!</span>",
+		display_results(user, target, "<span class='warning'>I remove the wrong part, causing more damage!</span>",
 			"<span class='notice'>[user] successfully lobotomizes [target]!</span>",
 			"<span class='notice'>[user] completes the surgery on [target]'s brain.</span>")
 		B.applyOrganDamage(80)
@@ -68,5 +68,5 @@
 			if(3)
 				target.gain_trauma_type(BRAIN_TRAUMA_SPECIAL, TRAUMA_RESILIENCE_MAGIC)
 	else
-		user.visible_message("<span class='warning'>[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore.</span>", "<span class='warning'>You suddenly notice that the brain you were working on is not there anymore.</span>")
+		user.visible_message("<span class='warning'>[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore.</span>", "<span class='warning'>I suddenly notice that the brain you were working on is not there anymore.</span>")
 	return FALSE

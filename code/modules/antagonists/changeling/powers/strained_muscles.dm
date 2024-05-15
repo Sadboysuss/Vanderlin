@@ -3,7 +3,7 @@
 
 /datum/action/changeling/strained_muscles
 	name = "Strained Muscles"
-	desc = "We evolve the ability to reduce the acid buildup in our muscles, allowing us to move much faster."
+	desc = ""
 	helptext = "The strain will make us tired, and we will rapidly become fatigued. Standard weight restrictions, like hardsuits, still apply. Cannot be used in lesser form."
 	button_icon_state = "strained_muscles"
 	chemical_cost = 0
@@ -23,7 +23,7 @@
 		if(stacks >= 10)
 			to_chat(user, "<span class='danger'>We collapse in exhaustion.</span>")
 			user.Paralyze(60)
-			user.emote("gasp")
+			user.emote("breathgasp")
 
 	INVOKE_ASYNC(src, .proc/muscle_loop, user)
 

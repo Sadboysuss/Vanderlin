@@ -2,7 +2,7 @@
 //these are NOT "mob quirks" like GOTTAGOFAST, but exist as a medium to apply them and other different effects
 /datum/quirk
 	var/name = "Test Quirk"
-	var/desc = "This is a test quirk."
+	var/desc = ""
 	var/value = 0
 	var/human_only = TRUE
 	var/gain_text
@@ -103,7 +103,7 @@ Use this as a guideline
 	name = "Nearsighted"
 	///The trait's name
 
-	desc = "You are nearsighted without prescription glasses, but spawn with a pair."
+	desc = ""
 	///Short description, shows next to name in the trait panel
 
 	value = -1
@@ -115,7 +115,7 @@ Use this as a guideline
 	///If you need help finding where to put it, the declaration finder on GitHub is the best way to locate it
 
 	gain_text = "<span class='danger'>Things far away from you start looking blurry.</span>"
-	lose_text = "<span class='notice'>You start seeing faraway things normally again.</span>"
+	lose_text = "<span class='notice'>I start seeing faraway things normally again.</span>"
 	medical_record_text = "Subject has permanent nearsightedness."
 	///These three are self-explanatory
 

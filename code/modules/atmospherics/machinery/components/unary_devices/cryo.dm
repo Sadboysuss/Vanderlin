@@ -187,7 +187,7 @@
 	if(mob_occupant.health >= mob_occupant.getMaxHealth()) // Don't bother with fully healed people.
 		on = FALSE
 		update_icon()
-		playsound(src, 'sound/machines/cryo_warning.ogg', volume) // Bug the doctors.
+		playsound(src, 'sound/blank.ogg', volume) // Bug the doctors.
 		var/msg = "Patient fully restored."
 		if(autoeject) // Eject if configured.
 			msg += " Auto ejecting patient now."
@@ -271,14 +271,14 @@
 /obj/machinery/atmospherics/components/unary/cryo_cell/container_resist(mob/living/user)
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message("<span class='notice'>You see [user] kicking against the glass of [src]!</span>", \
-		"<span class='notice'>You struggle inside [src], kicking the release with your foot... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a thump from [src].</span>")
+	user.visible_message("<span class='notice'>I see [user] kicking against the glass of [src]!</span>", \
+		"<span class='notice'>I struggle inside [src], kicking the release with your foot... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a thump from [src].</span>")
 	if(do_after(user, breakout_time, target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src )
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open_machine()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/examine(mob/user)
@@ -299,7 +299,7 @@
 		if(L.incapacitated())
 			close_machine(target)
 	else
-		user.visible_message("<span class='notice'>[user] starts shoving [target] inside [src].</span>", "<span class='notice'>You start shoving [target] inside [src].</span>")
+		user.visible_message("<span class='notice'>[user] starts shoving [target] inside [src].</span>", "<span class='notice'>I start shoving [target] inside [src].</span>")
 		if (do_after(user, 25, target=target))
 			close_machine(target)
 
@@ -313,7 +313,7 @@
 			return
 		beaker = I
 		user.visible_message("<span class='notice'>[user] places [I] in [src].</span>", \
-							"<span class='notice'>You place [I] in [src].</span>")
+							"<span class='notice'>I place [I] in [src].</span>")
 		var/reagentlist = pretty_string_from_reagent_list(I.reagents.reagent_list)
 		log_game("[key_name(user)] added an [I] to cryo containing [reagentlist]")
 		return
@@ -324,7 +324,7 @@
 		update_icon()
 		return
 	else if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		to_chat(user, "<span class='warning'>You can't access the maintenance panel while the pod is " \
+		to_chat(user, "<span class='warning'>I can't access the maintenance panel while the pod is " \
 		+ (on ? "active" : (occupant ? "full" : "open")) + "!</span>")
 		return
 	return ..()

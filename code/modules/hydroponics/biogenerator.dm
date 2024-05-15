@@ -1,6 +1,6 @@
 /obj/machinery/biogenerator
 	name = "biogenerator"
-	desc = "Converts plants into biomass, which can be used to construct useful items."
+	desc = ""
 	icon = 'icons/obj/machines/biogenerator.dmi'
 	icon_state = "biogen-empty"
 	density = TRUE
@@ -72,7 +72,7 @@
 	return
 
 /obj/machinery/biogenerator/attackby(obj/item/O, mob/user, params)
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 
 	if(processing)
@@ -99,7 +99,7 @@
 				if(!user.transferItemToLoc(O, src))
 					return
 				beaker = O
-				to_chat(user, "<span class='notice'>You add the container to the machine.</span>")
+				to_chat(user, "<span class='notice'>I add the container to the machine.</span>")
 				update_icon()
 				updateUsrDialog()
 		else
@@ -120,11 +120,11 @@
 				if(SEND_SIGNAL(PB, COMSIG_TRY_STORAGE_TAKE, G, src))
 					i++
 			if(i<max_items)
-				to_chat(user, "<span class='info'>You empty the plant bag into the biogenerator.</span>")
+				to_chat(user, "<span class='info'>I empty the plant bag into the biogenerator.</span>")
 			else if(PB.contents.len == 0)
-				to_chat(user, "<span class='info'>You empty the plant bag into the biogenerator, filling it to its capacity.</span>")
+				to_chat(user, "<span class='info'>I empty the plant bag into the biogenerator, filling it to its capacity.</span>")
 			else
-				to_chat(user, "<span class='info'>You fill the biogenerator to its capacity.</span>")
+				to_chat(user, "<span class='info'>I fill the biogenerator to its capacity.</span>")
 		return TRUE //no afterattack
 
 	else if(istype(O, /obj/item/reagent_containers/food/snacks/grown))
@@ -135,12 +135,12 @@
 			to_chat(user, "<span class='warning'>The biogenerator is full! Activate it.</span>")
 		else
 			if(user.transferItemToLoc(O, src))
-				to_chat(user, "<span class='info'>You put [O.name] in [src.name]</span>")
+				to_chat(user, "<span class='info'>I put [O.name] in [src.name]</span>")
 		return TRUE //no afterattack
 	else if (istype(O, /obj/item/disk/design_disk))
 		user.visible_message("<span class='notice'>[user] begins to load \the [O] in \the [src]...</span>",
-			"<span class='notice'>You begin to load a design from \the [O]...</span>",
-			"<span class='hear'>You hear the chatter of a floppy drive.</span>")
+			"<span class='notice'>I begin to load a design from \the [O]...</span>",
+			"<span class='hear'>I hear the chatter of a floppy drive.</span>")
 		processing = TRUE
 		var/obj/item/disk/design_disk/D = O
 		if(do_after(user, 10, target = src))
@@ -150,7 +150,7 @@
 		processing = FALSE
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>You cannot put this in [src.name]!</span>")
+		to_chat(user, "<span class='warning'>I cannot put this in [src.name]!</span>")
 
 /obj/machinery/biogenerator/ui_interact(mob/user)
 	if(stat & BROKEN || panel_open)
@@ -162,7 +162,7 @@
 	else
 		switch(menustat)
 			if("nopoints")
-				dat += "<div class='statusDisplay'>You do not have enough biomass to create products.<BR>Please, put growns into reactor and activate it.</div>"
+				dat += "<div class='statusDisplay'>I do not have enough biomass to create products.<BR>Please, put growns into reactor and activate it.</div>"
 				menustat = "menu"
 			if("complete")
 				dat += "<div class='statusDisplay'>Operation complete.</div>"
@@ -223,7 +223,7 @@
 		processing = TRUE
 		update_icon()
 		updateUsrDialog()
-		playsound(src.loc, 'sound/machines/blender.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		use_power(S*30)
 		sleep(S+15/productivity)
 		processing = FALSE

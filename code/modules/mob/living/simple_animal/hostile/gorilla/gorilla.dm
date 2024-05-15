@@ -3,7 +3,7 @@
 
 /mob/living/simple_animal/hostile/gorilla
 	name = "Gorilla"
-	desc = "A ground-dwelling, predominantly herbivorous ape that inhabits the forests of central Africa."
+	desc = ""
 	icon = 'icons/mob/gorilla.dmi'
 	icon_state = "crawling"
 	icon_living = "crawling"
@@ -28,10 +28,10 @@
 	environment_smash = ENVIRONMENT_SMASH_WALLS
 	attack_verb_continuous = "pummels"
 	attack_verb_simple = "pummel"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	dextrous = TRUE
 	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
+	base_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 	faction = list("jungle")
 	robust_searching = TRUE
 	stat_attack = UNCONSCIOUS
@@ -97,16 +97,16 @@
 
 /mob/living/simple_animal/hostile/gorilla/handle_automated_speech(override)
 	if(speak_chance && (override || prob(speak_chance)))
-		playsound(src, 'sound/creatures/gorilla.ogg', 50)
+		playsound(src, 'sound/blank.ogg', 50)
 	..()
 
 /mob/living/simple_animal/hostile/gorilla/can_use_guns(obj/item/G)
-	to_chat(src, "<span class='warning'>Your meaty finger is much too large for the trigger guard!</span>")
+	to_chat(src, "<span class='warning'>My meaty finger is much too large for the trigger guard!</span>")
 	return FALSE
 
 
 /mob/living/simple_animal/hostile/gorilla/proc/oogaooga()
 	oogas++
 	if(oogas >= rand(2,6))
-		playsound(src, 'sound/creatures/gorilla.ogg', 50)
+		playsound(src, 'sound/blank.ogg', 50)
 		oogas = 0

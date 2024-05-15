@@ -12,42 +12,42 @@
 	key_third_person = "buzzes"
 	message = "buzzes."
 	message_param = "buzzes at %t."
-	sound = 'sound/machines/buzz-sigh.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/buzz2
 	key = "buzz2"
 	message = "buzzes twice."
-	sound = 'sound/machines/buzz-two.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/chime
 	key = "chime"
 	key_third_person = "chimes"
 	message = "chimes."
-	sound = 'sound/machines/chime.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/honk
 	key = "honk"
 	key_third_person = "honks"
 	message = "honks."
 	vary = TRUE
-	sound = 'sound/items/bikehorn.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/ping
 	key = "ping"
 	key_third_person = "pings"
 	message = "pings."
 	message_param = "pings at %t."
-	sound = 'sound/machines/ping.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/sad
 	key = "sad"
 	message = "plays a sad trombone..."
-	sound = 'sound/misc/sadtrombone.ogg'
+	sound = 'sound/blank.ogg'
 
 /datum/emote/silicon/warn
 	key = "warn"
 	message = "blares an alarm!"
-	sound = 'sound/machines/warning-buzzer.ogg'
+	sound = 'sound/blank.ogg'
 
 /mob/living/silicon/robot/verb/powerwarn()
 	set category = "Robot Commands"
@@ -57,6 +57,6 @@
 		if(!cell || !cell.charge)
 			visible_message("<span class='notice'>The power warning light on <span class='name'>[src]</span> flashes urgently.</span>", \
 							"You announce you are operating in low power mode.")
-			playsound(loc, 'sound/machines/buzz-two.ogg', 50, FALSE)
+			playsound(loc, 'sound/blank.ogg', 50, FALSE)
 		else
-			to_chat(src, "<span class='warning'>You can only use this emote when you're out of charge.</span>")
+			to_chat(src, "<span class='warning'>I can only use this emote when you're out of charge.</span>")

@@ -1,5 +1,5 @@
 /obj/item/clothing/under/color
-	desc = "A standard issue colored jumpsuit. Variety is the spice of life!"
+	desc = ""
 	dying_key = DYE_REGISTRY_UNDER
 	icon = 'icons/obj/clothing/under/color.dmi'
 	mob_overlay_icon = 'icons/mob/clothing/under/color.dmi'
@@ -17,7 +17,7 @@
 	var/obj/item/clothing/under/color/C = pick(subtypesof(/obj/item/clothing/under/color) - typesof(/obj/item/clothing/under/color/jumpskirt) - /obj/item/clothing/under/color/random - /obj/item/clothing/under/color/grey/glorf - /obj/item/clothing/under/color/black/ghost)
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
-		H.equip_to_slot_or_del(new C(H), SLOT_W_UNIFORM) //or else you end up with naked assistants running around everywhere...
+		H.equip_to_slot_or_del(new C(H), SLOT_PANTS) //or else you end up with naked assistants running around everywhere...
 	else
 		new C(loc)
 	return INITIALIZE_HINT_QDEL
@@ -30,7 +30,7 @@
 	var/obj/item/clothing/under/color/jumpskirt/C = pick(subtypesof(/obj/item/clothing/under/color/jumpskirt) - /obj/item/clothing/under/color/jumpskirt/random)
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
-		H.equip_to_slot_or_del(new C(H), SLOT_W_UNIFORM)
+		H.equip_to_slot_or_del(new C(H), SLOT_PANTS)
 	else
 		new C(loc)
 	return INITIALIZE_HINT_QDEL
@@ -55,19 +55,19 @@
 
 /obj/item/clothing/under/color/grey
 	name = "grey jumpsuit"
-	desc = "A tasteful grey jumpsuit that reminds you of the good old days."
+	desc = ""
 	icon_state = "grey"
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/color/jumpskirt/grey
 	name = "grey jumpskirt"
-	desc = "A tasteful grey jumpskirt that reminds you of the good old days."
+	desc = ""
 	icon_state = "grey_skirt"
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/color/grey/glorf
 	name = "ancient jumpsuit"
-	desc = "A terribly ragged and frayed grey jumpsuit. It looks like it hasn't been washed in over a decade."
+	desc = ""
 
 /obj/item/clothing/under/color/grey/glorf/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	owner.forcesay(GLOB.hit_appends)
@@ -95,7 +95,7 @@
 
 /obj/item/clothing/under/color/orange
 	name = "orange jumpsuit"
-	desc = "Don't wear this near paranoid security officers."
+	desc = ""
 	icon_state = "orange"
 	item_state = "o_suit"
 
@@ -107,7 +107,7 @@
 /obj/item/clothing/under/color/pink
 	name = "pink jumpsuit"
 	icon_state = "pink"
-	desc = "Just looking at this makes you feel <i>fabulous</i>."
+	desc = ""
 	item_state = "p_suit"
 
 /obj/item/clothing/under/color/jumpskirt/pink
@@ -218,14 +218,14 @@
 
 /obj/item/clothing/under/color/rainbow
 	name = "rainbow jumpsuit"
-	desc = "A multi-colored jumpsuit!"
+	desc = ""
 	icon_state = "rainbow"
 	item_state = "rainbow"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/color/jumpskirt/rainbow
 	name = "rainbow jumpskirt"
-	desc = "A multi-colored jumpskirt!"
+	desc = ""
 	icon_state = "rainbow_skirt"
 	item_state = "rainbow"
 	can_adjust = FALSE

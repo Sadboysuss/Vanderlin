@@ -2,7 +2,7 @@
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
 	name = "exosuit fabricator"
-	desc = "Nothing is being built."
+	desc = ""
 	density = TRUE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 20
@@ -155,7 +155,7 @@
 		say("Not enough resources. Queue processing stopped.")
 		return FALSE
 	being_built = D
-	desc = "It's building \a [initial(D.name)]."
+	desc = ""
 	materials.use_materials(res_coef)
 	rmat.silo_log(src, "built", -1, "[D.name]", res_coef)
 
@@ -260,7 +260,7 @@
 	updateUsrDialog()
 	return
 
-/obj/machinery/mecha_part_fabricator/proc/get_resource_cost_w_coeff(datum/design/D, var/datum/material/resource, roundto = 1)
+/obj/machinery/mecha_part_fabricator/proc/get_resource_cost_w_coeff(datum/design/D, datum/material/resource, roundto = 1)
 	return round(D.materials[resource]*component_coeff, roundto)
 
 /obj/machinery/mecha_part_fabricator/proc/get_construction_time_w_coeff(datum/design/D, roundto = 1) //aran
@@ -399,11 +399,11 @@
 	updateUsrDialog()
 	return
 
-/obj/machinery/mecha_part_fabricator/proc/do_process_queue()		
-	if(processing_queue || being_built)		
-		return FALSE		
+/obj/machinery/mecha_part_fabricator/proc/do_process_queue()
+	if(processing_queue || being_built)
+		return FALSE
 	processing_queue = 1
-	process_queue()		
+	process_queue()
 	processing_queue = 0
 
 /obj/machinery/mecha_part_fabricator/proc/eject_sheets(eject_sheet, eject_amt)
@@ -438,7 +438,7 @@
 
 /obj/machinery/mecha_part_fabricator/proc/is_insertion_ready(mob/user)
 	if(panel_open)
-		to_chat(user, "<span class='warning'>You can't load [src] while it's opened!</span>")
+		to_chat(user, "<span class='warning'>I can't load [src] while it's opened!</span>")
 		return FALSE
 	if(being_built)
 		to_chat(user, "<span class='warning'>\The [src] is currently processing! Please wait until completion.</span>")

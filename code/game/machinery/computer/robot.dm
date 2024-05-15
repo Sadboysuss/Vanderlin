@@ -1,6 +1,6 @@
 /obj/machinery/computer/robotics
 	name = "robotics control console"
-	desc = "Used to remotely lockdown or detonate linked Cyborgs and Drones."
+	desc = ""
 	icon_screen = "robot"
 	icon_keyboard = "rd_key"
 	req_access = list(ACCESS_ROBOTICS)
@@ -137,7 +137,7 @@
 					message_admins("<span class='notice'>[ADMIN_LOOKUPFLW(usr)] [!R.lockcharge ? "locked down" : "released"] [ADMIN_LOOKUPFLW(R)]!</span>")
 					log_game("[key_name(usr)] [!R.lockcharge ? "locked down" : "released"] [key_name(R)]!")
 					R.SetLockdown(!R.lockcharge)
-					to_chat(R, "[!R.lockcharge ? "<span class='notice'>Your lockdown has been lifted!" : "<span class='alert'>You have been locked down!"]</span>")
+					to_chat(R, "[!R.lockcharge ? "<span class='notice'>My lockdown has been lifted!" : "<span class='alert'>I have been locked down!"]</span>")
 					if(R.connected_ai)
 						to_chat(R.connected_ai, "[!R.lockcharge ? "<span class='notice'>NOTICE - Cyborg lockdown lifted" : "<span class='alert'>ALERT - Cyborg lockdown detected"]: <a href='?src=[REF(R.connected_ai)];track=[html_encode(R.name)]'>[R.name]</a></span><br>")
 

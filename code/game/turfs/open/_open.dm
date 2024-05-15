@@ -5,24 +5,45 @@
 	var/postdig_icon_change = FALSE
 	var/postdig_icon
 	var/wet
-
 	var/footstep = null
 	var/barefootstep = null
 	var/clawfootstep = null
 	var/heavyfootstep = null
+	var/footstepstealth = FALSE
+	baseturfs = /turf/open/transparent/openspace
+
+/turf/proc/get_slowdown(mob/user)
+	return 0
+
+/turf/open/get_slowdown(mob/user)
+	return slowdown
+
+/turf
+	var/landsound = null
 
 /turf/open/ComponentInitialize()
 	. = ..()
 	if(wet)
 		AddComponent(/datum/component/wet_floor, wet, INFINITY, 0, INFINITY, TRUE)
 
+
 //direction is direction of travel of A
 /turf/open/zPassIn(atom/movable/A, direction, turf/source)
-	return (direction == DOWN)
+	if(direction == DOWN)
+		for(var/obj/O in contents)
+			if(O.obj_flags & BLOCK_Z_IN_DOWN)
+				return FALSE
+		return TRUE
+	return FALSE
 
 //direction is direction of travel of A
 /turf/open/zPassOut(atom/movable/A, direction, turf/destination)
-	return (direction == UP)
+	if(direction == UP)
+		for(var/obj/O in contents)
+			if(O.obj_flags & BLOCK_Z_OUT_UP)
+				return FALSE
+		return TRUE
+	return FALSE
 
 //direction is direction of travel of air
 /turf/open/zAirIn(direction, turf/source)
@@ -60,14 +81,14 @@
 	heavyfootstep = null
 	var/sound
 
-/turf/open/indestructible/sound/Entered(var/mob/AM)
+/turf/open/indestructible/sound/Entered(mob/AM)
 	..()
 	if(istype(AM))
 		playsound(src,sound,50,TRUE)
 
 /turf/open/indestructible/necropolis
 	name = "necropolis floor"
-	desc = "It's regarding you suspiciously."
+	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "necro1"
 	baseturfs = /turf/open/indestructible/necropolis
@@ -110,7 +131,7 @@
 
 /turf/open/indestructible/paper
 	name = "notebook floor"
-	desc = "A floor made of invulnerable notebook paper."
+	desc = ""
 	icon_state = "paperfloor"
 	footstep = null
 	barefootstep = null
@@ -196,8 +217,8 @@
 			if(C.m_intent == MOVE_INTENT_WALK && (lube&NO_SLIP_WHEN_WALKING))
 				return 0
 		if(!(lube&SLIDE_ICE))
-			to_chat(C, "<span class='notice'>You slipped[ O ? " on the [O.name]" : ""]!</span>")
-			playsound(C.loc, 'sound/misc/slip.ogg', 50, TRUE, -3)
+			to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
+			playsound(C.loc, 'sound/blank.ogg', 50, TRUE, -3)
 
 		SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "slipped", /datum/mood_event/slipped)
 		if(force_drop)
@@ -211,7 +232,7 @@
 			C.Paralyze(paralyze_amount)
 			C.stop_pulling()
 		else
-			C.Knockdown(20)
+			C.Knockdown(1)
 
 		if(buckled_obj)
 			buckled_obj.unbuckle_mob(C)
@@ -230,6 +251,9 @@
 
 /turf/open/proc/MakeDry(wet_setting = TURF_WET_WATER, immediate = FALSE, amount = INFINITY)
 	SEND_SIGNAL(src, COMSIG_TURF_MAKE_DRY, wet_setting, immediate, amount)
+
+/turf/proc/OnDry()
+	return
 
 /turf/open/get_dumping_location()
 	return src

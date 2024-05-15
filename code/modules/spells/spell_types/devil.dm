@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/conjure_item/summon_pitchfork
 	name = "Summon Pitchfork"
-	desc = "A devil's weapon of choice.  Use this to summon/unsummon your pitchfork."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1
@@ -22,7 +22,7 @@
 
 /obj/effect/proc_holder/spell/targeted/conjure_item/violin
 	item_type = /obj/item/instrument/violin/golden
-	desc = "A devil's instrument of choice.  Use this to summon/unsummon your golden violin."
+	desc = ""
 	invocation_type = "whisper"
 	invocation = "I aint have this much fun since Georgia."
 	action_icon_state = "golden_violin"
@@ -32,7 +32,7 @@
 
 /obj/effect/proc_holder/spell/targeted/summon_contract
 	name = "Summon infernal contract"
-	desc = "Skip making a contract by hand, just do it by magic."
+	desc = ""
 	invocation_type = "whisper"
 	invocation = "Just sign on the dotted line."
 	include_user = FALSE
@@ -75,7 +75,7 @@
 
 /obj/effect/proc_holder/spell/aimed/fireball/hellish
 	name = "Hellfire"
-	desc = "This spell launches hellfire at the target."
+	desc = ""
 
 	school = "evocation"
 	charge_max = 80
@@ -90,7 +90,7 @@
 
 /obj/effect/proc_holder/spell/targeted/infernal_jaunt
 	name = "Infernal Jaunt"
-	desc = "Use hellfire to phase out of existence."
+	desc = ""
 	charge_max = 200
 	clothes_req = FALSE
 	selection_type = "range"
@@ -106,25 +106,25 @@
 	if(istype(user))
 		if(istype(user.loc, /obj/effect/dummy/phased_mob/slaughter/))
 			if(valid_location(user))
-				to_chat(user, "<span class='warning'>You are now phasing in.</span>")
+				to_chat(user, "<span class='warning'>I are now phasing in.</span>")
 				if(do_mob(user,user,150))
 					if(valid_location(user))
 						user.infernalphasein()
 					else
-						to_chat(user, "<span class='warning'>You are no longer near a potential signer.</span>")
+						to_chat(user, "<span class='warning'>I are no longer near a potential signer.</span>")
 
 			else
-				to_chat(user, "<span class='warning'>You can only re-appear near a potential signer.</span>")
+				to_chat(user, "<span class='warning'>I can only re-appear near a potential signer.</span>")
 				revert_cast()
 				return ..()
 		else
 			user.notransform = TRUE
 			user.fakefire()
-			to_chat(src, "<span class='warning'>You begin to phase back into sinful flames.</span>")
+			to_chat(src, "<span class='warning'>I begin to phase back into sinful flames.</span>")
 			if(do_mob(user,user,150))
 				user.infernalphaseout()
 			else
-				to_chat(user, "<span class='warning'>You must remain still while exiting.</span>")
+				to_chat(user, "<span class='warning'>I must remain still while exiting.</span>")
 				user.notransform = FALSE
 				user.fakefireextinguish()
 		start_recharge()
@@ -144,7 +144,7 @@
 	dust_animation()
 	spawn_dust()
 	visible_message("<span class='warning'>[src] disappears in a flashfire!</span>")
-	playsound(get_turf(src), 'sound/magic/enter_blood.ogg', 100, TRUE, -1)
+	playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -1)
 	var/obj/effect/dummy/phased_mob/slaughter/holder = new /obj/effect/dummy/phased_mob/slaughter(loc)
 	ExtinguishMob()
 	forceMove(holder)
@@ -160,12 +160,12 @@
 	forceMove(drop_location())
 	client.eye = src
 	visible_message("<span class='warning'><B>[src] appears in a fiery blaze!</B></span>")
-	playsound(get_turf(src), 'sound/magic/exit_blood.ogg', 100, TRUE, -1)
+	playsound(get_turf(src), 'sound/blank.ogg', 100, TRUE, -1)
 	addtimer(CALLBACK(src, .proc/fakefireextinguish), 15, TIMER_UNIQUE)
 
 /obj/effect/proc_holder/spell/targeted/sintouch
 	name = "Sin Touch"
-	desc = "Subtly encourage someone to sin."
+	desc = ""
 	charge_max = 1800
 	clothes_req = FALSE
 	selection_type = "range"
@@ -203,7 +203,7 @@
 
 /obj/effect/proc_holder/spell/targeted/summon_dancefloor
 	name = "Summon Dancefloor"
-	desc = "When what a Devil really needs is funk."
+	desc = ""
 	include_user = TRUE
 	range = -1
 	clothes_req = FALSE

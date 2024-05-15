@@ -160,7 +160,7 @@
 
 //Intent
 	action_intent = new /obj/screen/act_intent/robot()
-	action_intent.icon_state = mymob.a_intent
+	action_intent.icon_state = mymob.used_intent.name
 	action_intent.hud = src
 	static_inventory += action_intent
 

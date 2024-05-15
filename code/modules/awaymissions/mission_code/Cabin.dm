@@ -37,7 +37,7 @@
 
 /obj/structure/firepit
 	name = "firepit"
-	desc = "Warm and toasty."
+	desc = ""
 	icon = 'icons/obj/fireplace.dmi'
 	icon_state = "firepit-active"
 	density = FALSE
@@ -78,7 +78,7 @@
 		active = FALSE
 		toggleFirepit()
 
-/obj/structure/firepit/fire_act(exposed_temperature, exposed_volume)
+/obj/structure/firepit/fire_act(added, maxstacks)
 	if(!active)
 		active = TRUE
 		toggleFirepit()
@@ -89,9 +89,9 @@
 
 /obj/machinery/recycler/lumbermill
 	name = "lumbermill saw"
-	desc = "Faster then the cartoons!"
+	desc = ""
 	obj_flags = CAN_BE_HIT | EMAGGED
-	item_recycle_sound = 'sound/weapons/chainsawhit.ogg'
+	item_recycle_sound = 'sound/blank.ogg'
 
 /obj/machinery/recycler/lumbermill/recycle_item(obj/item/grown/log/L)
 	if(!istype(L))

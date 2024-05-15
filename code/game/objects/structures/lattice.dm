@@ -1,6 +1,6 @@
 /obj/structure/lattice
 	name = "lattice"
-	desc = "A lightweight support lattice. These hold our station together."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/lattice.dmi'
 	icon_state = "lattice"
 	density = FALSE
@@ -54,7 +54,7 @@
 
 /obj/structure/lattice/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	if(passed_mode == RCD_FLOORWALL)
-		to_chat(user, "<span class='notice'>You build a floor.</span>")
+		to_chat(user, "<span class='notice'>I build a floor.</span>")
 		var/turf/T = src.loc
 		if(isspaceturf(T))
 			T.PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
@@ -68,13 +68,13 @@
 
 /obj/structure/lattice/catwalk
 	name = "catwalk"
-	desc = "A catwalk for easier EVA maneuvering and cable placement."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/catwalk.dmi'
 	icon_state = "catwalk"
 	number_of_rods = 2
 	smooth = SMOOTH_TRUE
 	canSmoothWith = null
-	obj_flags = CAN_BE_HIT | BLOCK_Z_FALL 
+	obj_flags = CAN_BE_HIT
 
 /obj/structure/lattice/catwalk/deconstruction_hints(mob/user)
 	return "<span class='notice'>The supporting rods look like they could be <b>cut</b>.</span>"

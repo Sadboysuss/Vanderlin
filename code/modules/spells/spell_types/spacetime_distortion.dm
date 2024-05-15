@@ -1,13 +1,13 @@
 /obj/effect/proc_holder/spell/spacetime_dist
 	name = "Spacetime Distortion"
-	desc = "Entangle the strings of space-time in an area around you, randomizing the layout and making proper movement impossible. The strings vibrate..."
+	desc = ""
 	charge_max = 300
 	var/duration = 150
 	range = 7
 	var/list/effects
 	var/ready = TRUE
 	centcom_cancast = FALSE
-	sound = 'sound/effects/magic.ogg'
+	sound = 'sound/blank.ogg'
 	cooldown_min = 300
 	level_max = 0
 	action_icon_state = "spacetime"
@@ -62,12 +62,12 @@
 
 /obj/effect/cross_action
 	name = "cross me"
-	desc = "for crossing"
+	desc = ""
 	anchored = TRUE
 
 /obj/effect/cross_action/spacetime_dist
 	name = "spacetime distortion"
-	desc = "A distortion in spacetime. You can hear faint music..."
+	desc = ""
 	icon_state = ""
 	var/obj/effect/cross_action/spacetime_dist/linked_dist
 	var/busy = FALSE

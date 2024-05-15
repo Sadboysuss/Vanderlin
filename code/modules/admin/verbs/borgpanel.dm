@@ -1,7 +1,7 @@
 /datum/admins/proc/open_borgopanel(borgo in GLOB.silicon_mobs)
 	set category = "Admin"
 	set name = "Show Borg Panel"
-	set desc = "Show borg panel"
+	set desc = ""
 
 	if(!check_rights(R_ADMIN))
 		return

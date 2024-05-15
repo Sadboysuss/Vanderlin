@@ -1,6 +1,6 @@
 /obj/item/storage/briefcase
 	name = "briefcase"
-	desc = "It's made of AUTHENTIC faux-leather and has a price-tag still attached. Its owner must be a real professional."
+	desc = ""
 	icon_state = "briefcase"
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/briefcase_righthand.dmi'
@@ -35,7 +35,7 @@
 	..()
 
 /obj/item/storage/briefcase/sniperbundle
-	desc = "Its label reads \"genuine hardened Captain leather\", but suspiciously has no other tags or branding. Smells like L'Air du Temps."
+	desc = ""
 	force = 10
 
 /obj/item/storage/briefcase/sniperbundle/PopulateContents()

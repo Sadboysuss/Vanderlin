@@ -572,7 +572,7 @@
 	results = list(/datum/reagent/consumable/ethanol/narsour = 1)
 	required_reagents = list(/datum/reagent/blood = 1, /datum/reagent/consumable/lemonjuice = 1, /datum/reagent/consumable/ethanol/demonsblood = 1)
 	mix_message = "The mixture develops a sinister glow."
-	mix_sound = 'sound/effects/singlebeat.ogg'
+	mix_sound = 'sound/blank.ogg'
 
 /datum/chemical_reaction/quadruplesec
 	name = "Quadruple Sec"
@@ -580,7 +580,7 @@
 	results = list(/datum/reagent/consumable/ethanol/quadruple_sec = 15)
 	required_reagents = list(/datum/reagent/consumable/ethanol/triple_sec = 5, /datum/reagent/consumable/triple_citrus = 5, /datum/reagent/consumable/ethanol/creme_de_menthe = 5)
 	mix_message = "The snap of a taser emanates clearly from the mixture as it settles."
-	mix_sound = 'sound/weapons/taser.ogg'
+	mix_sound = 'sound/blank.ogg'
 
 /datum/chemical_reaction/grasshopper
 	name = "Grasshopper"
@@ -601,7 +601,7 @@
 	results = list(/datum/reagent/consumable/ethanol/quintuple_sec = 15)
 	required_reagents = list(/datum/reagent/consumable/ethanol/quadruple_sec = 5, /datum/reagent/consumable/clownstears = 5, /datum/reagent/consumable/ethanol/syndicatebomb = 5)
 	mix_message = "Judgement is upon you."
-	mix_sound = 'sound/items/airhorn2.ogg'
+	mix_sound = 'sound/blank.ogg'
 
 /datum/chemical_reaction/bastion_bourbon
 	name = "Bastion Bourbon"
@@ -715,7 +715,7 @@
 	results = list(/datum/reagent/consumable/ethanol/wizz_fizz = 3)
 	required_reagents = list(/datum/reagent/consumable/ethanol/triple_sec = 1, /datum/reagent/consumable/sodawater = 1, /datum/reagent/consumable/ethanol/champagne = 1)
 	mix_message = "The beverage starts to froth with an almost mystical zeal!"
-	mix_sound = 'sound/effects/bubbles2.ogg'
+	mix_sound = 'sound/blank.ogg'
 
 
 /datum/chemical_reaction/bug_spray
@@ -724,7 +724,7 @@
 	results = list(/datum/reagent/consumable/ethanol/bug_spray = 5)
 	required_reagents = list(/datum/reagent/consumable/ethanol/triple_sec = 2, /datum/reagent/consumable/lemon_lime = 1, /datum/reagent/consumable/ethanol/rum = 2, /datum/reagent/consumable/ethanol/vodka = 1)
 	mix_message = "The faint aroma of summer camping trips wafts through the air; but what's that buzzing noise?"
-	mix_sound = 'sound/creatures/bee.ogg'
+	mix_sound = 'sound/blank.ogg'
 
 /datum/chemical_reaction/jack_rose
 	name = "Jack Rose"

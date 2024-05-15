@@ -1,6 +1,6 @@
 /turf/closed/wall/mineral/cult
 	name = "runed metal wall"
-	desc = "A cold metal wall engraved with indecipherable symbols. Studying them causes your head to pound."
+	desc = ""
 	icon = 'icons/turf/walls/cult_wall.dmi'
 	icon_state = "cult"
 	canSmoothWith = null
@@ -28,7 +28,7 @@
 
 /turf/closed/wall/mineral/cult/artificer
 	name = "runed stone wall"
-	desc = "A cold stone wall engraved with indecipherable symbols. Studying them causes your head to pound."
+	desc = ""
 
 /turf/closed/wall/mineral/cult/artificer/break_wall()
 	new /obj/effect/temp_visual/cult/turf(get_turf(src))
@@ -44,7 +44,7 @@
 /turf/closed/wall/ice
 	icon = 'icons/turf/walls/icedmetal_wall.dmi'
 	icon_state = "iced"
-	desc = "A wall covered in a thick sheet of ice."
+	desc = ""
 	canSmoothWith = null
 	hardness = 35
 	slicing_duration = 150 //welding through the ice+metal
@@ -52,19 +52,19 @@
 
 /turf/closed/wall/rust
 	name = "rusted wall"
-	desc = "A rusted metal wall."
+	desc = ""
 	icon = 'icons/turf/walls/rusty_wall.dmi'
 	hardness = 45
 
 /turf/closed/wall/r_wall/rust
 	name = "rusted reinforced wall"
-	desc = "A huge chunk of rusted reinforced metal."
+	desc = ""
 	icon = 'icons/turf/walls/rusty_reinforced_wall.dmi'
 	hardness = 15
 
 /turf/closed/wall/mineral/bronze
 	name = "clockwork wall"
-	desc = "A huge chunk of bronze, decorated like gears and cogs."
+	desc = ""
 	icon = 'icons/turf/walls/clockwork_wall.dmi'
 	icon_state = "clockwork_wall"
 	sheet_type = /obj/item/stack/tile/bronze

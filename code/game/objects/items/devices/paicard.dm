@@ -77,20 +77,20 @@
 			if(pai.master_dna)
 				return
 			if(!iscarbon(usr))
-				to_chat(usr, "<span class='warning'>You don't have any DNA, or your DNA is incompatible with this device!</span>")
+				to_chat(usr, "<span class='warning'>I don't have any DNA, or my DNA is incompatible with this device!</span>")
 			else
 				var/mob/living/carbon/M = usr
 				pai.master = M.real_name
 				pai.master_dna = M.dna.unique_enzymes
-				to_chat(pai, "<span class='notice'>You have been bound to a new master.</span>")
+				to_chat(pai, "<span class='notice'>I have been bound to a new master.</span>")
 				pai.emittersemicd = FALSE
 		if(href_list["wipe"])
 			var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
 			if(confirm == "Yes")
 				if(pai)
-					to_chat(pai, "<span class='warning'>You feel yourself slipping away from reality.</span>")
-					to_chat(pai, "<span class='danger'>Byte by byte you lose your sense of self.</span>")
-					to_chat(pai, "<span class='userdanger'>Your mental faculties leave you.</span>")
+					to_chat(pai, "<span class='warning'>I feel myself slipping away from reality.</span>")
+					to_chat(pai, "<span class='danger'>Byte by byte you lose my sense of self.</span>")
+					to_chat(pai, "<span class='danger'>My mental faculties leave you.</span>")
 					to_chat(pai, "<span class='rose'>oblivion... </span>")
 					qdel(pai)
 		if(href_list["fix_speech"])
@@ -106,21 +106,21 @@
 				pai.can_receive = !pai.can_receive
 			pai.radio.wires.cut(transmit_holder)//wires.cut toggles cut and uncut states
 			transmit_holder = (transmitting ? pai.can_transmit : pai.can_receive) //recycling can be fun!
-			to_chat(usr,"<span class='warning'>You [transmit_holder ? "enable" : "disable"] your pAI's [transmitting ? "outgoing" : "incoming"] radio transmissions!</span>")
-			to_chat(pai,"<span class='warning'>Your owner has [transmit_holder ? "enabled" : "disabled"] your [transmitting ? "outgoing" : "incoming"] radio transmissions!</span>")
+			to_chat(usr,"<span class='warning'>I [transmit_holder ? "enable" : "disable"] my pAI's [transmitting ? "outgoing" : "incoming"] radio transmissions!</span>")
+			to_chat(pai,"<span class='warning'>My owner has [transmit_holder ? "enabled" : "disabled"] my [transmitting ? "outgoing" : "incoming"] radio transmissions!</span>")
 		if(href_list["setlaws"])
-			var/newlaws = copytext(sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.laws.supplied[1]) as message|null),1,MAX_MESSAGE_LEN)
+			var/newlaws = copytext(sanitize(input("Enter any additional directives you would like my pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.laws.supplied[1]) as message|null),1,MAX_MESSAGE_LEN)
 			if(newlaws && pai)
 				pai.add_supplied_law(0,newlaws)
 		if(href_list["toggle_holo"])
 			if(pai.canholo)
-				to_chat(pai, "<span class='userdanger'>Your owner has disabled your holomatrix projectors!</span>")
+				to_chat(pai, "<span class='danger'>My owner has disabled my holomatrix projectors!</span>")
 				pai.canholo = FALSE
-				to_chat(usr, "<span class='warning'>You disable your pAI's holomatrix!</span>")
+				to_chat(usr, "<span class='warning'>I disable my pAI's holomatrix!</span>")
 			else
-				to_chat(pai, "<span class='boldnotice'>Your owner has enabled your holomatrix projectors!</span>")
+				to_chat(pai, "<span class='boldnotice'>My owner has enabled my holomatrix projectors!</span>")
 				pai.canholo = TRUE
-				to_chat(usr, "<span class='notice'>You enable your pAI's holomatrix!</span>")
+				to_chat(usr, "<span class='notice'>I enable my pAI's holomatrix!</span>")
 
 	attack_self(usr)
 
@@ -132,7 +132,7 @@
 	src.pai = personality
 	src.add_overlay("pai-null")
 
-	playsound(loc, 'sound/effects/pai_boot.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	audible_message("\The [src] plays a cheerful startup noise!")
 
 /obj/item/paicard/proc/setEmotion(emotion)

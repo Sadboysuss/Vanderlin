@@ -1,6 +1,6 @@
 /obj/item/gun/energy/e_gun
 	name = "energy gun"
-	desc = "A basic hybrid energy gun with two settings: disable and kill."
+	desc = ""
 	icon_state = "energy"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser)
@@ -13,7 +13,7 @@
 
 /obj/item/gun/energy/e_gun/mini
 	name = "miniature energy gun"
-	desc = "A small, pistol-sized energy gun with a built-in flashlight. It has two settings: disable and kill."
+	desc = ""
 	icon_state = "mini"
 	item_state = "gun"
 	w_class = WEIGHT_CLASS_SMALL
@@ -31,27 +31,27 @@
 
 /obj/item/gun/energy/e_gun/stun
 	name = "tactical energy gun"
-	desc = "Military issue energy gun, is able to fire stun rounds."
+	desc = ""
 	icon_state = "energytac"
 	ammo_x_offset = 2
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/spec, /obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser)
 
 /obj/item/gun/energy/e_gun/old
 	name = "prototype energy gun"
-	desc = "NT-P:01 Prototype Energy Gun. Early stage development of a unique laser rifle that has multifaceted energy lens allowing the gun to alter the form of projectile it fires on command."
+	desc = ""
 	icon_state = "protolaser"
 	ammo_x_offset = 2
 	ammo_type = list(/obj/item/ammo_casing/energy/laser, /obj/item/ammo_casing/energy/electrode/old)
 
 /obj/item/gun/energy/e_gun/mini/practice_phaser
 	name = "practice phaser"
-	desc = "A modified version of the basic phaser gun, this one fires less concentrated energy bolts designed for target practice."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser/practice)
 	icon_state = "decloner"
 
 /obj/item/gun/energy/e_gun/hos
 	name = "\improper X-01 MultiPhase Energy Gun"
-	desc = "This is an expensive, modern recreation of an antique laser gun. This gun has several unique firemodes, but lacks the ability to recharge over time."
+	desc = ""
 	cell_type = /obj/item/stock_parts/cell{charge = 1200; maxcharge = 1200}
 	icon_state = "hoslaser"
 	force = 10
@@ -61,7 +61,7 @@
 
 /obj/item/gun/energy/e_gun/dragnet
 	name = "\improper DRAGnet"
-	desc = "The \"Dynamic Rapid-Apprehension of the Guilty\" net is a revolution in law enforcement technology."
+	desc = ""
 	icon_state = "dragnet"
 	item_state = "dragnet"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
@@ -72,12 +72,12 @@
 
 /obj/item/gun/energy/e_gun/dragnet/snare
 	name = "Energy Snare Launcher"
-	desc = "Fires an energy snare that slows the target down."
+	desc = ""
 	ammo_type = list(/obj/item/ammo_casing/energy/trap)
 
 /obj/item/gun/energy/e_gun/turret
 	name = "hybrid turret gun"
-	desc = "A heavy hybrid energy cannon with two settings: Stun and kill."
+	desc = ""
 	icon_state = "turretlaser"
 	item_state = "turretlaser"
 	slot_flags = null
@@ -90,7 +90,7 @@
 
 /obj/item/gun/energy/e_gun/nuclear
 	name = "advanced energy gun"
-	desc = "An energy gun with an experimental miniaturized nuclear reactor that automatically charges the internal power cell."
+	desc = ""
 	icon_state = "nucgun"
 	item_state = "nucgun"
 	charge_delay = 5
@@ -120,12 +120,12 @@
 			if(0 to 200)
 				fail_tick += (2*(fail_chance))
 				M.rad_act(40)
-				to_chat(M, "<span class='userdanger'>Your [name] feels warmer.</span>")
+				to_chat(M, "<span class='danger'>My [name] feels warmer.</span>")
 			if(201 to INFINITY)
 				SSobj.processing.Remove(src)
 				M.rad_act(80)
 				reactor_overloaded = TRUE
-				to_chat(M, "<span class='userdanger'>Your [name]'s reactor overloads!</span>")
+				to_chat(M, "<span class='danger'>My [name]'s reactor overloads!</span>")
 
 /obj/item/gun/energy/e_gun/nuclear/emp_act(severity)
 	. = ..()

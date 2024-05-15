@@ -3,7 +3,7 @@
  */
 /obj/item/storage/photo_album
 	name = "photo album"
-	desc = "A big book used to store photos and mementos."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "album"
 	item_state = "album"

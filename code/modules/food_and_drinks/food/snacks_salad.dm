@@ -15,7 +15,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/aesirsalad
 	name = "\improper Aesir salad"
-	desc = "Probably too incredible for mortal men to fully enjoy."
+	desc = ""
 	icon_state = "aesirsalad"
 	bonus_reagents = list(/datum/reagent/medicine/omnizine = 2, /datum/reagent/consumable/nutriment/vitamin = 6)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/medicine/omnizine = 8, /datum/reagent/consumable/nutriment/vitamin = 6)
@@ -24,7 +24,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/herbsalad
 	name = "herb salad"
-	desc = "A tasty salad with apples on top."
+	desc = ""
 	icon_state = "herbsalad"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -33,7 +33,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/validsalad
 	name = "valid salad"
-	desc = "It's just an herb salad with meatballs and fried potato slices. Nothing suspicious about it."
+	desc = ""
 	icon_state = "validsalad"
 	bonus_reagents = list(/datum/reagent/consumable/doctor_delight = 5, /datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/consumable/doctor_delight = 5, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -42,7 +42,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/oatmeal
 	name = "oatmeal"
-	desc = "A nice bowl of oatmeal."
+	desc = ""
 	icon_state = "oatmeal"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 7, /datum/reagent/consumable/milk = 10, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -51,7 +51,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/fruit
 	name = "fruit salad"
-	desc = "Your standard fruit salad."
+	desc = ""
 	icon_state = "fruitsalad"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/vitamin = 4)
 	tastes = list("fruit" = 1)
@@ -59,7 +59,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/jungle
 	name = "jungle salad"
-	desc = "Exotic fruits in a bowl."
+	desc = ""
 	icon_state = "junglesalad"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 7, /datum/reagent/consumable/banana = 5, /datum/reagent/consumable/nutriment/vitamin = 4)
@@ -68,7 +68,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/citrusdelight
 	name = "citrus delight"
-	desc = "Citrus overload!"
+	desc = ""
 	icon_state = "citrusdelight"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 7, /datum/reagent/consumable/nutriment/vitamin = 5)
@@ -77,7 +77,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/ricebowl
 	name = "ricebowl"
-	desc = "A bowl of raw rice."
+	desc = ""
 	icon_state = "ricebowl"
 	cooked_type = /obj/item/reagent_containers/food/snacks/salad/boiledrice
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
@@ -86,7 +86,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/boiledrice
 	name = "boiled rice"
-	desc = "A warm bowl of rice."
+	desc = ""
 	icon_state = "boiledrice"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -95,7 +95,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/ricepudding
 	name = "rice pudding"
-	desc = "Everybody loves rice pudding!"
+	desc = ""
 	icon_state = "ricepudding"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 2)
 	tastes = list("rice" = 1, "sweetness" = 1)
@@ -103,7 +103,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/ricepork
 	name = "rice and pork"
-	desc = "Well, it looks like pork..."
+	desc = ""
 	icon_state = "riceporkbowl"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	tastes = list("rice" = 1, "meat" = 1)
@@ -111,7 +111,7 @@
 
 /obj/item/reagent_containers/food/snacks/salad/eggbowl
 	name = "egg bowl"
-	desc = "A bowl of rice with a fried egg."
+	desc = ""
 	icon_state = "eggbowl"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	tastes = list("rice" = 1, "egg" = 1)

@@ -2,7 +2,7 @@
 
 /mob/living/simple_animal/hostile/headcrab
 	name = "headslug"
-	desc = "Absolutely not de-beaked or harmless. Keep away from corpses."
+	desc = ""
 	icon_state = "headcrab"
 	icon_living = "headcrab"
 	icon_dead = "headcrab_dead"
@@ -13,7 +13,7 @@
 	melee_damage_upper = 5
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/blank.ogg'
 	faction = list("creature")
 	robust_searching = 1
 	stat_attack = DEAD
@@ -44,15 +44,15 @@
 		var/mob/living/carbon/C = target
 		if(C.stat == DEAD)
 			if(HAS_TRAIT(C, TRAIT_XENO_HOST))
-				to_chat(src, "<span class='userdanger'>A foreign presence repels us from this body. Perhaps we should try to infest another?</span>")
+				to_chat(src, "<span class='danger'>A foreign presence repels us from this body. Perhaps we should try to infest another?</span>")
 				return
 			Infect(target)
-			to_chat(src, "<span class='userdanger'>With our egg laid, our death approaches rapidly...</span>")
+			to_chat(src, "<span class='danger'>With our egg laid, our death approaches rapidly...</span>")
 			addtimer(CALLBACK(src, .proc/death), 100)
 
 /obj/item/organ/body_egg/changeling_egg
 	name = "changeling egg"
-	desc = "Twitching and disgusting."
+	desc = ""
 	var/datum/mind/origin
 	var/time
 

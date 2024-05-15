@@ -1,6 +1,6 @@
 /obj/machinery/jukebox
 	name = "jukebox"
-	desc = "A classic music player."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "jukebox"
 	verb_say = "states"
@@ -14,7 +14,7 @@
 
 /obj/machinery/jukebox/disco
 	name = "radiant dance machine mark IV"
-	desc = "The first three prototypes were discontinued after mass casualty incidents."
+	desc = ""
 	icon_state = "disco"
 	req_access = list(ACCESS_ENGINE)
 	anchored = FALSE
@@ -23,7 +23,7 @@
 
 /obj/machinery/jukebox/disco/indestructible
 	name = "radiant dance machine mark V"
-	desc = "Now redesigned with data gathered from the extensive disco and plasma research."
+	desc = ""
 	req_access = null
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -67,12 +67,12 @@
 	if(!active && !(flags_1 & NODECONSTRUCT_1))
 		if(O.tool_behaviour == TOOL_WRENCH)
 			if(!anchored && !isinspace())
-				to_chat(user,"<span class='notice'>You secure [src] to the floor.</span>")
+				to_chat(user,"<span class='notice'>I secure [src] to the floor.</span>")
 				setAnchored(TRUE)
 			else if(anchored)
-				to_chat(user,"<span class='notice'>You unsecure and disconnect [src].</span>")
+				to_chat(user,"<span class='notice'>I unsecure and disconnect [src].</span>")
 				setAnchored(FALSE)
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			return
 	return ..()
 
@@ -91,11 +91,11 @@
 		return
 	if(!allowed(user))
 		to_chat(user,"<span class='warning'>Error: Access Denied.</span>")
-		user.playsound_local(src,'sound/misc/compiler-failure.ogg', 25, 1)
+		user.playsound_local(src,'sound/blank.ogg', 25, 1)
 		return
 	if(!songs.len)
 		to_chat(user,"<span class='warning'>Error: No music tracks have been authorized for your station. Petition Central Command to resolve this issue.</span>")
-		playsound(src,'sound/misc/compiler-failure.ogg', 25, TRUE)
+		playsound(src,'sound/blank.ogg', 25, TRUE)
 		return
 	var/list/dat = list()
 	dat +="<div class='statusDisplay' style='text-align:center'>"
@@ -120,7 +120,7 @@
 			if(!active)
 				if(stop > world.time)
 					to_chat(usr, "<span class='warning'>Error: The device is still resetting from the last activation, it will be ready again in [DisplayTimeText(stop-world.time)].</span>")
-					playsound(src, 'sound/misc/compiler-failure.ogg', 50, TRUE)
+					playsound(src, 'sound/blank.ogg', 50, TRUE)
 					return
 				activate_music()
 				START_PROCESSING(SSobj, src)
@@ -300,7 +300,7 @@
 
 #undef DISCO_INFENO_RANGE
 
-/obj/machinery/jukebox/disco/proc/dance(var/mob/living/M) //Show your moves
+/obj/machinery/jukebox/disco/proc/dance(mob/living/M) //Show your moves
 	set waitfor = FALSE
 	switch(rand(0,9))
 		if(0 to 1)
@@ -321,7 +321,7 @@
 	if(dir == WEST)
 		emote("flip")
 
-/obj/machinery/jukebox/disco/proc/dance3(var/mob/living/M)
+/obj/machinery/jukebox/disco/proc/dance3(mob/living/M)
 	var/matrix/initial_matrix = matrix(M.transform)
 	for (var/i in 1 to 75)
 		if (!M)
@@ -369,7 +369,7 @@
 	M.lying_fix()
 
 
-/obj/machinery/jukebox/disco/proc/dance4(var/mob/living/M)
+/obj/machinery/jukebox/disco/proc/dance4(mob/living/M)
 	var/speed = rand(1,3)
 	set waitfor = 0
 	var/time = 30
@@ -381,7 +381,7 @@
 				NS.set_resting(!NS.resting, TRUE)
 		 time--
 
-/obj/machinery/jukebox/disco/proc/dance5(var/mob/living/M)
+/obj/machinery/jukebox/disco/proc/dance5(mob/living/M)
 	animate(M, transform = matrix(180, MATRIX_ROTATE), time = 1, loop = 0)
 	var/matrix/initial_matrix = matrix(M.transform)
 	for (var/i in 1 to 60)
@@ -452,7 +452,7 @@
 		active = FALSE
 		STOP_PROCESSING(SSobj, src)
 		dance_over()
-		playsound(src,'sound/machines/terminal_off.ogg',50,TRUE)
+		playsound(src,'sound/blank.ogg',50,TRUE)
 		update_icon()
 		stop = world.time + 100
 

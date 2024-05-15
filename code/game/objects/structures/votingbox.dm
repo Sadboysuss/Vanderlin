@@ -1,6 +1,6 @@
 /obj/structure/votebox
 	name = "voting box"
-	desc = "A automatic voting box."
+	desc = ""
 
 	icon = 'icons/obj/votebox.dmi'
 	icon_state = "votebox_maint"
@@ -71,7 +71,7 @@
 			if("reset_voted")
 				if(voted)
 					voted.Cut()
-				to_chat(user,"<span class='notice'>You reset the voter buffer. Everyone can vote again.</span>")
+				to_chat(user,"<span class='notice'>I reset the voter buffer. Everyone can vote again.</span>")
 			if("raffle")
 				raffle(user)
 			if("shred")
@@ -84,7 +84,7 @@
 
 /obj/structure/votebox/proc/register_owner(obj/item/card/id/I,mob/living/user)
 	owner = I
-	to_chat(user,"<span class='notice'>You register [src] to your ID card.</span>")
+	to_chat(user,"<span class='notice'>I register [src] to your ID card.</span>")
 	ui_interact(user)
 
 /obj/structure/votebox/proc/set_description(mob/user)
@@ -108,12 +108,12 @@
 		if(!voted)
 			voted = list()
 		voted += voter_card
-		to_chat(user,"<span class='notice'>You cast your vote.</span>")
+		to_chat(user,"<span class='notice'>I cast your vote.</span>")
 
 /obj/structure/votebox/proc/shred(mob/user)
 	for(var/obj/item/paper/P in contents)
 		qdel(P)
-	to_chat(user,"<span class='notice'>You shred the current votes.</span>")
+	to_chat(user,"<span class='notice'>I shred the current votes.</span>")
 
 /obj/structure/votebox/wrench_act(mob/living/user, obj/item/I)
 	. = ..()
@@ -123,10 +123,10 @@
 /obj/structure/votebox/crowbar_act(mob/living/user, obj/item/I)
 	. = ..()
 	if(voting_active)
-		to_chat(user,"<span class='warning'>You can only retrieve votes if maintenance mode is active!</span>")
+		to_chat(user,"<span class='warning'>I can only retrieve votes if maintenance mode is active!</span>")
 		return FALSE
 	dump_contents()
-	to_chat(user,"<span class='notice'>You open vote retrieval hatch and dump all the votes.</span>")
+	to_chat(user,"<span class='notice'>I open vote retrieval hatch and dump all the votes.</span>")
 	return TRUE
 
 /obj/structure/votebox/dump_contents()

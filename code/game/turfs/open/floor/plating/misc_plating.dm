@@ -41,7 +41,7 @@
 	icon_state = "ash"
 	smooth = SMOOTH_MORE|SMOOTH_BORDER
 	var/smooth_icon = 'icons/turf/floors/ash.dmi'
-	desc = "The ground is covered in volcanic ash."
+	desc = ""
 	baseturfs = /turf/open/floor/plating/ashplanet/wateryrock //I assume this will be a chasm eventually, once this becomes an actual surface
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	planetary_atmos = TRUE
@@ -122,13 +122,13 @@
 /turf/open/floor/plating/beach/sand
 	gender = PLURAL
 	name = "sand"
-	desc = "Surf's up."
+	desc = ""
 	icon_state = "sand"
 	baseturfs = /turf/open/floor/plating/beach/sand
 
 /turf/open/floor/plating/beach/coastline_t
 	name = "coastline"
-	desc = "Tide's high tonight. Charge your batons."
+	desc = ""
 	icon_state = "sandwater_t"
 	baseturfs = /turf/open/floor/plating/beach/coastline_t
 
@@ -144,7 +144,7 @@
 /turf/open/floor/plating/beach/water
 	gender = PLURAL
 	name = "water"
-	desc = "You get the feeling that nobody's bothered to actually make this water functional..."
+	desc = ""
 	icon_state = "water"
 	baseturfs = /turf/open/floor/plating/beach/water
 	footstep = FOOTSTEP_LAVA //placeholder, kinda.
@@ -159,7 +159,7 @@
 /turf/open/floor/plating/ironsand
 	gender = PLURAL
 	name = "iron sand"
-	desc = "Like sand, but more <i>metal</i>."
+	desc = ""
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SAND
 	clawfootstep = FOOTSTEP_SAND
@@ -177,7 +177,7 @@
 
 /turf/open/floor/plating/ice
 	name = "ice sheet"
-	desc = "A sheet of solid ice. Looks slippery."
+	desc = ""
 	icon = 'icons/turf/floors/ice_turf.dmi'
 	icon_state = "unsmooth"
 	initial_gas_mix = FROZEN_ATMOS
@@ -220,7 +220,7 @@
 
 /turf/open/floor/plating/snowed
 	name = "snowed-over plating"
-	desc = "A section of heated plating, helps keep the snow from stacking up too high."
+	desc = ""
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snowplating"
 	initial_gas_mix = FROZEN_ATMOS
@@ -250,7 +250,7 @@
 
 /turf/open/floor/plating/grass
 	name = "grass"
-	desc = "A patch of grass."
+	desc = ""
 	icon_state = "grass"
 	broken_states = list("sand")
 	bullet_bounce_sound = null

@@ -8,7 +8,7 @@
 //Admin sound emitters with highly customizable functions!
 /obj/effect/sound_emitter
 	name = "sound emitter"
-	desc = "Emits sounds, presumably."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield2"
 	invisibility = INVISIBILITY_OBSERVER

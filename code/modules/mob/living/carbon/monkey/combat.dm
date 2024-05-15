@@ -100,7 +100,7 @@
 	blacklistItems[I] ++
 	return FALSE
 
-/mob/living/carbon/monkey/proc/pickup_and_wear(var/obj/item/clothing/C)
+/mob/living/carbon/monkey/proc/pickup_and_wear(obj/item/clothing/C)
 	if(!equip_to_appropriate_slot(C))
 		monkeyDrop(get_item_by_slot(C)) // remove the existing item if worn
 		addtimer(CALLBACK(src, .proc/equip_to_appropriate_slot, C), 5)
@@ -116,7 +116,7 @@
 		last_special = world.time + CLICK_CD_BREAKOUT
 		cuff_resist(I)
 
-/mob/living/carbon/monkey/proc/should_target(var/mob/living/L)
+/mob/living/carbon/monkey/proc/should_target(mob/living/L)
 	if(HAS_TRAIT(src, TRAIT_PACIFISM))
 		return FALSE
 
@@ -303,16 +303,16 @@
 
 	return IsStandingStill()
 
-/mob/living/carbon/monkey/proc/pickpocket(var/mob/M)
+/mob/living/carbon/monkey/proc/pickpocket(mob/M)
 	if(do_mob(src, M, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
 		for(var/obj/item/I in M.held_items)
 			if(I == pickupTarget)
-				M.visible_message("<span class='danger'>[src] snatches [pickupTarget] from [M].</span>", "<span class='userdanger'>[src] snatched [pickupTarget]!</span>")
+				M.visible_message("<span class='danger'>[src] snatches [pickupTarget] from [M].</span>", "<span class='danger'>[src] snatched [pickupTarget]!</span>")
 				if(M.temporarilyRemoveItemFromInventory(pickupTarget))
 					if(!QDELETED(pickupTarget) && !equip_item(pickupTarget))
 						pickupTarget.forceMove(drop_location())
 				else
-					M.visible_message("<span class='danger'>[src] tried to snatch [pickupTarget] from [M], but failed!</span>", "<span class='userdanger'>[src] tried to grab [pickupTarget]!</span>")
+					M.visible_message("<span class='danger'>[src] tried to snatch [pickupTarget] from [M], but failed!</span>", "<span class='danger'>[src] tried to grab [pickupTarget]!</span>")
 	pickpocketing = FALSE
 	pickupTarget = null
 	pickupTimer = 0
@@ -370,21 +370,21 @@
 	if(L != src)
 		enemies[L] += MONKEY_HATRED_AMOUNT
 
-	if(a_intent != INTENT_HARM)
+	if(used_intent.type != INTENT_HARM)
 		battle_screech()
 		a_intent = INTENT_HARM
 
 /mob/living/carbon/monkey/attack_hand(mob/living/L)
-	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
+	if(L.used_intent.type == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 		retaliate(L)
-	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
+	else if(L.used_intent.type == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 		retaliate(L)
 	return ..()
 
 /mob/living/carbon/monkey/attack_paw(mob/living/L)
-	if(L.a_intent == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
+	if(L.used_intent.type == INTENT_HARM && prob(MONKEY_RETALIATE_HARM_PROB))
 		retaliate(L)
-	else if(L.a_intent == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
+	else if(L.used_intent.type == INTENT_DISARM && prob(MONKEY_RETALIATE_DISARM_PROB))
 		retaliate(L)
 	return ..()
 
@@ -417,7 +417,7 @@
 		return
 	..()
 
-/mob/living/carbon/monkey/proc/monkeyDrop(var/obj/item/A)
+/mob/living/carbon/monkey/proc/monkeyDrop(obj/item/A)
 	if(A)
 		dropItemToGround(A, TRUE)
 		update_icons()

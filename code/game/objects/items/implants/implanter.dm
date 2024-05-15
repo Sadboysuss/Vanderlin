@@ -1,12 +1,12 @@
 /obj/item/implanter
 	name = "implanter"
-	desc = "A sterile automatic implant injector."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "implanter0"
 	item_state = "syringe_0"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
 	custom_materials = list(/datum/material/iron=600, /datum/material/glass=200)
@@ -33,7 +33,7 @@
 			if(src && imp)
 				if(imp.implant(M, user))
 					if (M == user)
-						to_chat(user, "<span class='notice'>You implant yourself.</span>")
+						to_chat(user, "<span class='notice'>I implant myself.</span>")
 					else
 						M.visible_message("<span class='notice'>[user] has implanted [M].</span>", "<span class='notice'>[user] implants you.</span>")
 					imp = null
@@ -44,7 +44,7 @@
 /obj/item/implanter/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You prod at [src] with [W]!</span>")
+			to_chat(user, "<span class='notice'>I prod at [src] with [W]!</span>")
 			return
 		var/t = stripped_input(user, "What would you like the label to be?", name, null)
 		if(user.get_active_held_item() != W)

@@ -1,6 +1,6 @@
 /mob/living/simple_animal/bot/secbot
 	name = "\improper Securitron"
-	desc = "A little security robot.  He looks less than thrilled."
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "secbot"
 	density = FALSE
@@ -21,7 +21,7 @@
 	data_hud_type = DATA_HUD_SECURITY_ADVANCED
 	path_image_color = "#FF0000"
 
-	a_intent = "harm"
+	a_intent = INTENT_HARM
 
 	var/baton_type = /obj/item/melee/baton
 	var/obj/item/weapon
@@ -45,14 +45,14 @@
 
 /mob/living/simple_animal/bot/secbot/beepsky
 	name = "Officer Beep O'sky"
-	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
+	desc = ""
 	idcheck = FALSE
 	weaponscheck = FALSE
 	auto_patrol = TRUE
 
 /mob/living/simple_animal/bot/secbot/beepsky/jr
 	name = "Officer Pipsqueak"
-	desc = "It's Officer Beep O'sky's smaller, just-as aggressive cousin, Pipsqueak."
+	desc = ""
 
 /mob/living/simple_animal/bot/secbot/beepsky/jr/Initialize()
 	. = ..()
@@ -70,7 +70,7 @@
 
 /mob/living/simple_animal/bot/secbot/pingsky
 	name = "Officer Pingsky"
-	desc = "It's Officer Pingsky! Delegated to satellite guard duty for harbouring anti-human sentiment."
+	desc = ""
 	radio_channel = RADIO_CHANNEL_AI_PRIVATE
 
 /mob/living/simple_animal/bot/secbot/Initialize()
@@ -111,7 +111,7 @@
 	if(base_speed < initial(base_speed) + 3)
 		base_speed += 3
 		addtimer(VARSET_CALLBACK(src, base_speed, base_speed - 3), 60)
-		playsound(src, 'sound/machines/defib_zap.ogg', 50)
+		playsound(src, 'sound/blank.ogg', 50)
 		visible_message("<span class='warning'>[src] shakes and speeds up!</span>")
 
 /mob/living/simple_animal/bot/secbot/set_custom_texts()
@@ -196,7 +196,7 @@ Auto Patrol: []"},
 	return
 
 /mob/living/simple_animal/bot/secbot/attack_hand(mob/living/carbon/human/H)
-	if((H.a_intent == INTENT_HARM) || (H.a_intent == INTENT_DISARM))
+	if((H.used_intent.type == INTENT_HARM) || (H.used_intent.type == INTENT_DISARM))
 		retaliate(H)
 		if(special_retaliate_after_attack(H))
 			return
@@ -205,7 +205,7 @@ Auto Patrol: []"},
 
 /mob/living/simple_animal/bot/secbot/attackby(obj/item/W, mob/user, params)
 	..()
-	if(W.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM) // Any intent but harm will heal, so we shouldn't get angry.
+	if(W.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM) // Any intent but harm will heal, so we shouldn't get angry.
 		return
 	if(W.tool_behaviour != TOOL_SCREWDRIVER && (W.force) && (!target) && (W.damtype != STAMINA) ) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
 		retaliate(user)
@@ -216,7 +216,7 @@ Auto Patrol: []"},
 	..()
 	if(emagged == 2)
 		if(user)
-			to_chat(user, "<span class='danger'>You short out [src]'s target assessment circuits.</span>")
+			to_chat(user, "<span class='danger'>I short out [src]'s target assessment circuits.</span>")
 			oldtarget_name = user.name
 		audible_message("<span class='danger'>[src] buzzes oddly!</span>")
 		declare_arrests = FALSE
@@ -254,9 +254,9 @@ Auto Patrol: []"},
 
 /mob/living/simple_animal/bot/secbot/proc/cuff(mob/living/carbon/C)
 	mode = BOT_ARREST
-	playsound(src, 'sound/weapons/cablecuff.ogg', 30, TRUE, -2)
+	playsound(src, 'sound/blank.ogg', 30, TRUE, -2)
 	C.visible_message("<span class='danger'>[src] is trying to put zipties on [C]!</span>",\
-						"<span class='userdanger'>[src] is trying to put zipties on you!</span>")
+						"<span class='danger'>[src] is trying to put zipties on you!</span>")
 	addtimer(CALLBACK(src, .proc/attempt_handcuff, C), 60)
 
 /mob/living/simple_animal/bot/secbot/proc/attempt_handcuff(mob/living/carbon/C)
@@ -270,7 +270,7 @@ Auto Patrol: []"},
 
 /mob/living/simple_animal/bot/secbot/proc/stun_attack(mob/living/carbon/C, harm = FALSE)
 	var/judgement_criteria = judgement_criteria()
-	playsound(src, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	icon_state = "[initial(icon_state)]-c"
 	addtimer(CALLBACK(src, /atom/.proc/update_icon), 2)
 	var/threat = 5
@@ -292,7 +292,7 @@ Auto Patrol: []"},
 		var/area/location = get_area(src)
 		speak("[arrest_type ? "Detaining" : "Arresting"] level [threat] scumbag <b>[C]</b> in [location].", radio_channel)
 	C.visible_message("<span class='danger'>[src] has stunned [C]!</span>",\
-							"<span class='userdanger'>[src] has stunned you!</span>")
+							"<span class='danger'>[src] has stunned you!</span>")
 
 /mob/living/simple_animal/bot/secbot/handle_automated_action()
 	if(!..())
@@ -423,9 +423,9 @@ Auto Patrol: []"},
 			oldtarget_name = C.name
 			speak("Level [threatlevel] infraction alert!")
 			if(ranged)
-				playsound(src, pick('sound/voice/ed209_20sec.ogg', 'sound/voice/edplaceholder.ogg'), 50, FALSE)
+				playsound(src, pick('sound/blank.ogg'), 50, FALSE)
 			else
-				playsound(src, pick('sound/voice/beepsky/criminal.ogg', 'sound/voice/beepsky/justice.ogg', 'sound/voice/beepsky/freeze.ogg'), 50, FALSE)
+				playsound(src, pick('sound/blank.ogg'), 50, FALSE)
 			visible_message("<b>[src]</b> points at [C.name]!")
 			mode = BOT_HUNT
 			INVOKE_ASYNC(src, .proc/handle_automated_action)
@@ -433,7 +433,7 @@ Auto Patrol: []"},
 		else
 			continue
 
-/mob/living/simple_animal/bot/secbot/proc/check_for_weapons(var/obj/item/slot_item)
+/mob/living/simple_animal/bot/secbot/proc/check_for_weapons(obj/item/slot_item)
 	if(slot_item && (slot_item.item_flags & NEEDS_PERMIT))
 		return TRUE
 	return FALSE
@@ -477,7 +477,7 @@ Auto Patrol: []"},
 	new /obj/effect/decal/cleanable/oil(loc)
 	..()
 
-/mob/living/simple_animal/bot/secbot/attack_alien(var/mob/living/carbon/alien/user as mob)
+/mob/living/simple_animal/bot/secbot/attack_alien(mob/living/carbon/alien/user as mob)
 	..()
 	if(!isalien(target))
 		target = user

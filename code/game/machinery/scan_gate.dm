@@ -9,7 +9,7 @@
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
-	desc = "A gate able to perform mid-depth scans on any organisms who pass under it."
+	desc = ""
 	icon = 'icons/obj/machines/scangate.dmi'
 	icon_state = "scangate"
 	use_power = IDLE_POWER_USE
@@ -58,14 +58,14 @@
 			if(allowed(user))
 				locked = FALSE
 				req_access = list()
-				to_chat(user, "<span class='notice'>You unlock [src].</span>")
+				to_chat(user, "<span class='notice'>I unlock [src].</span>")
 		else if(!(obj_flags & EMAGGED))
-			to_chat(user, "<span class='notice'>You lock [src] with [W].</span>")
+			to_chat(user, "<span class='notice'>I lock [src] with [W].</span>")
 			var/list/access = W.GetAccess()
 			req_access = access
 			locked = TRUE
 		else
-			to_chat(user, "<span class='warning'>You try to lock [src] with [W], but nothing happens.</span>")
+			to_chat(user, "<span class='warning'>I try to lock [src] with [W], but nothing happens.</span>")
 	else
 		return ..()
 
@@ -75,7 +75,7 @@
 	locked = FALSE
 	req_access = list()
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You fry the ID checking system.</span>")
+	to_chat(user, "<span class='notice'>I fry the ID checking system.</span>")
 
 /obj/machinery/scanner_gate/proc/perform_scan(mob/living/M)
 	var/beep = FALSE
@@ -136,7 +136,7 @@
 /obj/machinery/scanner_gate/proc/alarm_beep()
 	if(next_beep <= world.time)
 		next_beep = world.time + 20
-		playsound(src, 'sound/machines/scanbuzz.ogg', 100, FALSE)
+		playsound(src, 'sound/blank.ogg', 100, FALSE)
 	var/image/I = image(icon, src, "alarm_light", layer+1)
 	flick_overlay_view(I, src, 20)
 	set_scanline("alarm", 20)

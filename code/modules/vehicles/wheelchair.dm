@@ -1,6 +1,6 @@
 /obj/vehicle/ridden/wheelchair //ported from Hippiestation (by Jujumatic)
 	name = "wheelchair"
-	desc = "A chair with big wheels. It looks like you can move in this on your own."
+	desc = ""
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "wheelchair"
 	layer = OBJ_LAYER
@@ -28,7 +28,7 @@
 /obj/vehicle/ridden/wheelchair/obj_destruction(damage_flag)
 	new /obj/item/stack/rods(drop_location(), 1)
 	new /obj/item/stack/sheet/metal(drop_location(), 1)
-	..()
+	return ..()
 
 /obj/vehicle/ridden/wheelchair/Destroy()
 	if(has_buckled_mobs())
@@ -39,7 +39,7 @@
 /obj/vehicle/ridden/wheelchair/driver_move(mob/living/user, direction)
 	if(istype(user))
 		if(canmove && (user.get_num_arms() < arms_required))
-			to_chat(user, "<span class='warning'>You don't have enough arms to operate the wheels!</span>")
+			to_chat(user, "<span class='warning'>I don't have enough arms to operate the wheels!</span>")
 			canmove = FALSE
 			addtimer(VARSET_CALLBACK(src, canmove, TRUE), 20)
 			return FALSE
@@ -55,7 +55,7 @@
 /obj/vehicle/ridden/wheelchair/Moved()
 	. = ..()
 	cut_overlays()
-	playsound(src, 'sound/effects/roll.ogg', 75, TRUE)
+	playsound(src, 'sound/blank.ogg', 75, TRUE)
 	if(has_buckled_mobs())
 		handle_rotation_overlayed()
 
@@ -74,9 +74,9 @@
 
 /obj/vehicle/ridden/wheelchair/wrench_act(mob/living/user, obj/item/I)	//Attackby should stop it attacking the wheelchair after moving away during decon
 	..()
-	to_chat(user, "<span class='notice'>You begin to detach the wheels...</span>")
+	to_chat(user, "<span class='notice'>I begin to detach the wheels...</span>")
 	if(I.use_tool(src, user, 40, volume=50))
-		to_chat(user, "<span class='notice'>You detach the wheels and deconstruct the chair.</span>")
+		to_chat(user, "<span class='notice'>I detach the wheels and deconstruct the chair.</span>")
 		new /obj/item/stack/rods(drop_location(), 6)
 		new /obj/item/stack/sheet/metal(drop_location(), 4)
 		qdel(src)

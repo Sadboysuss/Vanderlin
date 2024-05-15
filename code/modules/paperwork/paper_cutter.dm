@@ -1,6 +1,6 @@
 /obj/item/papercutter
 	name = "paper cutter"
-	desc = "Standard office equipment. Precisely cuts paper using a large blade."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "papercutter"
 	force = 5
@@ -30,7 +30,7 @@
 		return (BRUTELOSS)
 	else
 		user.visible_message("<span class='suicide'>[user] repeatedly bashes [src.name] against [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
+		playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 		return (BRUTELOSS)
 
 
@@ -47,14 +47,14 @@
 		if(!user.transferItemToLoc(P, src))
 			return
 		playsound(loc, "pageturn", 60, TRUE)
-		to_chat(user, "<span class='notice'>You place [P] in [src].</span>")
+		to_chat(user, "<span class='notice'>I place [P] in [src].</span>")
 		storedpaper = P
 		update_icon()
 		return
 	if(istype(P, /obj/item/hatchet/cutterblade) && !storedcutter)
 		if(!user.transferItemToLoc(P, src))
 			return
-		to_chat(user, "<span class='notice'>You replace [src]'s [P].</span>")
+		to_chat(user, "<span class='notice'>I replace [src]'s [P].</span>")
 		P.forceMove(src)
 		storedcutter = P
 		update_icon()
@@ -76,14 +76,14 @@
 		return
 
 	if(!cuttersecured)
-		to_chat(user, "<span class='notice'>You remove [src]'s [storedcutter].</span>")
+		to_chat(user, "<span class='notice'>I remove [src]'s [storedcutter].</span>")
 		user.put_in_hands(storedcutter)
 		storedcutter = null
 		update_icon()
 
 	if(storedpaper)
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, TRUE)
-		to_chat(user, "<span class='notice'>You neatly cut [storedpaper].</span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I neatly cut [storedpaper].</span>")
 		storedpaper = null
 		qdel(storedpaper)
 		new /obj/item/paperslip(get_turf(src))
@@ -106,7 +106,7 @@
 
 /obj/item/paperslip
 	name = "paper slip"
-	desc = "A little slip of paper left over after a larger piece was cut. Whoa."
+	desc = ""
 	icon_state = "paperslip"
 	icon = 'icons/obj/bureaucracy.dmi'
 	resistance_flags = FLAMMABLE
@@ -120,7 +120,7 @@
 
 /obj/item/hatchet/cutterblade
 	name = "paper cutter"
-	desc = "The blade of a paper cutter. Most likely removed for polishing or sharpening."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "cutterblade"
 	item_state = "knife"

@@ -1,6 +1,6 @@
 /obj/structure/chair/e_chair
 	name = "electric chair"
-	desc = "Looks absolutely SHOCKING!"
+	desc = ""
 	icon_state = "echair0"
 	var/obj/item/assembly/shock_kit/part = null
 	var/last_time = 1
@@ -41,6 +41,6 @@
 		for(var/m in buckled_mobs)
 			var/mob/living/buckled_mob = m
 			buckled_mob.electrocute_act(85, src, 1)
-			to_chat(buckled_mob, "<span class='userdanger'>You feel a deep shock course through your body!</span>")
+			to_chat(buckled_mob, "<span class='danger'>I feel a deep shock course through your body!</span>")
 			addtimer(CALLBACK(buckled_mob, /mob/living.proc/electrocute_act, 85, src, 1), 1)
-	visible_message("<span class='danger'>The electric chair went off!</span>", "<span class='hear'>You hear a deep sharp shock!</span>")
+	visible_message("<span class='danger'>The electric chair went off!</span>", "<span class='hear'>I hear a deep sharp shock!</span>")

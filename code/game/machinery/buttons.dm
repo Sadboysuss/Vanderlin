@@ -1,6 +1,6 @@
 /obj/machinery/button
 	name = "button"
-	desc = "A remote control switch."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl"
 	var/skin = "doorctrl"
@@ -76,7 +76,7 @@
 				to_chat(user, "<span class='warning'>\The [W] is stuck to you!</span>")
 				return
 			device = W
-			to_chat(user, "<span class='notice'>You add [W] to the button.</span>")
+			to_chat(user, "<span class='notice'>I add [W] to the button.</span>")
 
 		if(!board && istype(W, /obj/item/electronics/airlock))
 			if(!user.transferItemToLoc(W, src))
@@ -87,21 +87,21 @@
 				req_one_access = board.accesses
 			else
 				req_access = board.accesses
-			to_chat(user, "<span class='notice'>You add [W] to the button.</span>")
+			to_chat(user, "<span class='notice'>I add [W] to the button.</span>")
 
 		if(!device && !board && W.tool_behaviour == TOOL_WRENCH)
-			to_chat(user, "<span class='notice'>You start unsecuring the button frame...</span>")
+			to_chat(user, "<span class='notice'>I start unsecuring the button frame...</span>")
 			W.play_tool_sound(src)
 			if(W.use_tool(src, user, 40))
-				to_chat(user, "<span class='notice'>You unsecure the button frame.</span>")
+				to_chat(user, "<span class='notice'>I unsecure the button frame.</span>")
 				transfer_fingerprints_to(new /obj/item/wallframe/button(get_turf(src)))
-				playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE)
 				qdel(src)
 
 		update_icon()
 		return
 
-	if(user.a_intent != INTENT_HARM && !(W.item_flags & NOBLUDGEON))
+	if(user.used_intent.type != INTENT_HARM && !(W.item_flags & NOBLUDGEON))
 		return attack_hand(user)
 	else
 		return ..()
@@ -150,14 +150,14 @@
 				req_one_access = list()
 				board = null
 			update_icon()
-			to_chat(user, "<span class='notice'>You remove electronics from the button frame.</span>")
+			to_chat(user, "<span class='notice'>I remove electronics from the button frame.</span>")
 
 		else
 			if(skin == "doorctrl")
 				skin = "launcher"
 			else
 				skin = "doorctrl"
-			to_chat(user, "<span class='notice'>You change the button frame's front panel.</span>")
+			to_chat(user, "<span class='notice'>I change the button frame's front panel.</span>")
 		return
 
 	if((stat & (NOPOWER|BROKEN)))
@@ -181,7 +181,7 @@
 
 /obj/machinery/button/door
 	name = "door button"
-	desc = "A door remote control switch."
+	desc = ""
 	var/normaldoorcontrol = FALSE
 	var/specialfunctions = OPEN // Bitflag, see assembly file
 	var/sync_doors = TRUE
@@ -228,7 +228,7 @@
 
 /obj/machinery/button/massdriver
 	name = "mass driver button"
-	desc = "A remote control switch for a mass driver."
+	desc = ""
 	icon_state = "launcher"
 	skin = "launcher"
 	device_type = /obj/item/assembly/control/massdriver
@@ -238,7 +238,7 @@
 
 /obj/machinery/button/ignition
 	name = "ignition switch"
-	desc = "A remote control switch for a mounted igniter."
+	desc = ""
 	icon_state = "launcher"
 	skin = "launcher"
 	device_type = /obj/item/assembly/control/igniter
@@ -248,7 +248,7 @@
 
 /obj/machinery/button/ignition/incinerator
 	name = "combustion chamber ignition switch"
-	desc = "A remote control switch for the combustion chamber's igniter."
+	desc = ""
 
 /obj/machinery/button/ignition/incinerator/toxmix
 	id = INCINERATOR_TOXMIX_IGNITER
@@ -261,7 +261,7 @@
 
 /obj/machinery/button/flasher
 	name = "flasher button"
-	desc = "A remote control switch for a mounted flasher."
+	desc = ""
 	icon_state = "launcher"
 	skin = "launcher"
 	device_type = /obj/item/assembly/control/flasher
@@ -271,7 +271,7 @@
 
 /obj/machinery/button/crematorium
 	name = "crematorium igniter"
-	desc = "Burn baby burn!"
+	desc = ""
 	icon_state = "launcher"
 	skin = "launcher"
 	device_type = /obj/item/assembly/control/crematorium
@@ -283,7 +283,7 @@
 
 /obj/item/wallframe/button
 	name = "button frame"
-	desc = "Used for building buttons."
+	desc = ""
 	icon_state = "button"
 	result_path = /obj/machinery/button
 	custom_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)

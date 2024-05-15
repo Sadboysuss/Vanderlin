@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/skeleton
-	name = "reanimated skeleton"
-	desc = "A real bonefied skeleton, doesn't seem like it wants to socialize."
+	name = "skeleton"
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "skeleton"
 	icon_living = "skeleton"
@@ -22,7 +22,7 @@
 	healable = 0 //they're skeletons how would bruise packs help them??
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/hallucinations/growl1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 10
 	robust_searching = 1
@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/hostile/skeleton/eskimo
 	name = "undead eskimo"
-	desc = "The reanimated remains of some poor traveler."
+	desc = ""
 	icon_state = "eskimo"
 	icon_living = "eskimo"
 	icon_dead = "eskimo_dead"
@@ -58,7 +58,7 @@
 
 /mob/living/simple_animal/hostile/skeleton/templar
 	name = "undead templar"
-	desc = "The reanimated remains of a holy templar knight."
+	desc = ""
 	icon_state = "templar"
 	icon_living = "templar"
 	icon_dead = "templar_dead"
@@ -81,7 +81,7 @@
 
 /mob/living/simple_animal/hostile/skeleton/ice
 	name = "ice skeleton"
-	desc = "A reanimated skeleton protected by a thick sheet of natural ice armor. Looks slow, though."
+	desc = ""
 	speed = 5
 	maxHealth = 75
 	health = 75
@@ -91,7 +91,7 @@
 
 /mob/living/simple_animal/hostile/skeleton/plasmaminer
 	name = "shambling miner"
-	desc = "A plasma-soaked miner, their exposed limbs turned into a grossly incandescent bone seemingly made of plasma."
+	desc = ""
 	icon_state = "plasma_miner"
 	icon_living = "plasma_miner"
 	icon_dead = "plasma_miner"
@@ -103,12 +103,12 @@
 	light_color = LIGHT_COLOR_PURPLE
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/hallucinations/growl1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	deathmessage = "collapses into a pile of bones, their suit dissolving among the plasma!"
 	loot = list(/obj/effect/decal/remains/plasma)
 
 /mob/living/simple_animal/hostile/skeleton/plasmaminer/jackhammer
-	desc = "A plasma-soaked miner, their exposed limbs turned into a grossly incandescent bone seemingly made of plasma. They seem to still have their mining tool in their hand, gripping tightly."
+	desc = ""
 	icon_state = "plasma_miner_tool"
 	icon_living = "plasma_miner_tool"
 	icon_dead = "plasma_miner_tool"
@@ -119,7 +119,7 @@
 	melee_damage_upper = 25
 	attack_verb_continuous = "blasts"
 	attack_verb_simple = "blast"
-	attack_sound = 'sound/weapons/sonic_jackhammer.ogg'
+	attack_sound = 'sound/blank.ogg'
 	loot = list(/obj/effect/decal/remains/plasma, /obj/item/pickaxe/drill/jackhammer)
 
 /mob/living/simple_animal/hostile/skeleton/plasmaminer/Initialize()

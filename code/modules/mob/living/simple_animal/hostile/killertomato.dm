@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/killertomato
 	name = "Killer Tomato"
-	desc = "It's a horrifyingly enormous beef tomato, and it's packing extra beef!"
+	desc = ""
 	icon_state = "tomato"
 	icon_living = "tomato"
 	icon_dead = "tomato_dead"
@@ -21,7 +21,7 @@
 	melee_damage_upper = 12
 	attack_verb_continuous = "slams"
 	attack_verb_simple = "slam"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	ventcrawler = VENTCRAWLER_ALWAYS
 	faction = list("plants")
 

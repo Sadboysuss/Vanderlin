@@ -7,7 +7,7 @@
 /obj/structure/transit_tube/station
 	name = "station tube station"
 	icon_state = "closed_station0"
-	desc = "The lynchpin of the transit system."
+	desc = ""
 	exit_delay = 1
 	enter_delay = 2
 	tube_construction = /obj/structure/c_transit_tube/station
@@ -56,7 +56,7 @@
 	R.transfer_fingerprints_to(TP)
 	TP.add_fingerprint(user)
 	TP.setDir(turn(src.dir, -90))
-	user.visible_message("<span class='notice'>[user] inserts [R].</span>", "<span class='notice'>You insert [R].</span>")
+	user.visible_message("<span class='notice'>[user] inserts [R].</span>", "<span class='notice'>I insert [R].</span>")
 	qdel(R)
 
 
@@ -65,7 +65,7 @@
 	if(.)
 		return
 	if(!pod_moving)
-		if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
+		if(user.pulling && user.used_intent.type == INTENT_GRAB && isliving(user.pulling))
 			if(open_status == STATION_TUBE_OPEN)
 				var/mob/living/GM = user.pulling
 				if(user.grab_state >= GRAB_AGGRESSIVE)
@@ -87,7 +87,7 @@
 
 					else if(open_status == STATION_TUBE_OPEN)
 						if(pod.contents.len && user.loc != pod)
-							user.visible_message("<span class='notice'>[user] starts emptying [pod]'s contents onto the floor.</span>", "<span class='notice'>You start emptying [pod]'s contents onto the floor...</span>")
+							user.visible_message("<span class='notice'>[user] starts emptying [pod]'s contents onto the floor.</span>", "<span class='notice'>I start emptying [pod]'s contents onto the floor...</span>")
 							if(do_after(user, 10, target = src)) //So it doesn't default to close_animation() on fail
 								if(pod && pod.loc == loc)
 									for(var/atom/movable/AM in pod)
@@ -215,7 +215,7 @@
 /obj/structure/transit_tube/station/dispenser
 	name = "station tube pod dispenser"
 	icon_state = "open_dispenser0"
-	desc = "The lynchpin of a GOOD transit system."
+	desc = ""
 	enter_delay = 1
 	tube_construction = /obj/structure/c_transit_tube/station/dispenser
 	base_icon = "dispenser0"
@@ -242,14 +242,14 @@
 		return
 	var/obj/structure/transit_tube_pod/dispensed/pod = new(loc)
 	AM.visible_message("<span class='notice'>[pod] forms around [AM].</span>", "<span class='notice'>[pod] materializes around you.</span>")
-	playsound(src, 'sound/weapons/emitter2.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	pod.setDir(turn(src.dir, -90))
 	AM.forceMove(pod)
 	pod.update_icon()
 	launch_pod()
 
 /obj/structure/transit_tube/station/dispenser/pod_stopped(obj/structure/transit_tube_pod/pod, from_dir)
-	playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	qdel(pod)
 
 /obj/structure/transit_tube/station/dispenser/flipped

@@ -3,7 +3,7 @@
 
 /obj/item/reagent_containers/food/snacks/chocolateegg
 	name = "chocolate egg"
-	desc = "Such, sweet, fattening food."
+	desc = ""
 	icon_state = "chocolateegg"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/coco = 2)
@@ -11,19 +11,50 @@
 	tastes = list("chocolate" = 4, "sweetness" = 1)
 	foodtype = JUNKFOOD | SUGAR
 
+/obj/item/reagent_containers/food/snacks/rogue/friedegg
+	icon = 'icons/roguetown/items/food.dmi'
+	trash = null
+	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
+	tastes = list("eggs" = 1)
+	name = "fryegg"
+	desc = ""
+	icon_state = "friedegg"
+	foodtype = MEAT
+	warming = 10 MINUTES
+
 /obj/item/reagent_containers/food/snacks/egg
-	name = "egg"
-	desc = "An egg!"
+	icon = 'icons/roguetown/items/food.dmi'
+	name = "cackleberry"
+	desc = ""
 	icon_state = "egg"
 	list_reagents = list(/datum/reagent/consumable/eggyolk = 5)
-	cooked_type = /obj/item/reagent_containers/food/snacks/boiledegg
+	cooked_type = null
+	fried_type = /obj/item/reagent_containers/food/snacks/rogue/friedegg
 	filling_color = "#F0E68C"
 	foodtype = MEAT
 	grind_results = list()
 	var/static/chick_count = 0 //I copied this from the chicken_count (note the "en" in there) variable from chicken code.
+	rotprocess = 15 MINUTES
+	var/fertile = FALSE
+
+/obj/item/reagent_containers/food/snacks/egg/become_rotten()
+	. = ..()
+	if(.)
+		fertile = FALSE
+
+
+/obj/item/reagent_containers/food/snacks/egg/Crossed(mob/living/carbon/human/H)
+	..()
+	if(istype(H))
+		var/turf/T = get_turf(src)
+		var/obj/O = new /obj/effect/decal/cleanable/food/egg_smudge(T)
+		O.pixel_x = rand(-8,8)
+		O.pixel_y = rand(-8,8)
+		visible_message("<span class='warning'>[H] crushes [src] underfoot.</span>")
+		qdel(src)
 
 /obj/item/reagent_containers/food/snacks/egg/gland
-	desc = "An egg! It looks weird..."
+	desc = ""
 
 /obj/item/reagent_containers/food/snacks/egg/gland/Initialize()
 	. = ..()
@@ -35,7 +66,9 @@
 /obj/item/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!..()) //was it caught by a mob?
 		var/turf/T = get_turf(hit_atom)
-		new /obj/effect/decal/cleanable/food/egg_smudge(T)
+		var/obj/O = new /obj/effect/decal/cleanable/food/egg_smudge(T)
+		O.pixel_x = rand(-8,8)
+		O.pixel_y = rand(-8,8)
 		if(prob(13)) //Roughly a 1/8 (12.5%) chance to make a chick, as in Minecraft. I decided not to include the chances for the creation of multiple chicks from the impact of one egg, since that'd probably require nested prob()s or something (and people might think that it was a bug, anyway).
 			if(chick_count < MAX_CHICKENS) //Chicken code uses this MAX_CHICKENS variable, so I figured that I'd use it again here. Even this check and the check in chicken code both use the MAX_CHICKENS variable, they use independent counter variables and thus are independent of each other.
 				new /mob/living/simple_animal/chick(T)
@@ -52,13 +85,13 @@
 			to_chat(usr, "<span class='notice'>[src] refuses to take on this colour!</span>")
 			return
 
-		to_chat(usr, "<span class='notice'>You colour [src] with [W].</span>")
+		to_chat(usr, "<span class='notice'>I colour [src] with [W].</span>")
 		icon_state = "egg-[clr]"
 	else if(istype(W, /obj/item/stamp/clown))
 		var/clowntype = pick("grock", "grimaldi", "rainbow", "chaos", "joker", "sexy", "standard", "bobble", "krusty", "bozo", "pennywise", "ronald", "jacobs", "kelly", "popov", "cluwne")
 		icon_state = "egg-clown-[clowntype]"
-		desc = "An egg that has been decorated with the grotesque, robustable likeness of a clown's face. "
-		to_chat(usr, "<span class='notice'>You stamp [src] with [W], creating an artistic and not remotely horrifying likeness of clown makeup.</span>")
+		desc = ""
+		to_chat(usr, "<span class='notice'>I stamp [src] with [W], creating an artistic and not remotely horrifying likeness of clown makeup.</span>")
 	else
 		..()
 
@@ -88,7 +121,7 @@
 
 /obj/item/reagent_containers/food/snacks/friedegg
 	name = "fried egg"
-	desc = "A fried egg, with a touch of salt and pepper."
+	desc = ""
 	icon_state = "friedegg"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	bitesize = 1
@@ -99,7 +132,7 @@
 
 /obj/item/reagent_containers/food/snacks/boiledegg
 	name = "boiled egg"
-	desc = "A hard boiled egg."
+	desc = ""
 	icon_state = "egg"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	filling_color = "#FFFFF0"
@@ -109,7 +142,7 @@
 
 /obj/item/reagent_containers/food/snacks/omelette	//FUCK THIS
 	name = "omelette du fromage"
-	desc = "That's all you can say!"
+	desc = ""
 	icon_state = "omelette"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -123,11 +156,11 @@
 	if(istype(W, /obj/item/kitchen/fork))
 		var/obj/item/kitchen/fork/F = W
 		if(F.forkload)
-			to_chat(user, "<span class='warning'>You already have omelette on your fork!</span>")
+			to_chat(user, "<span class='warning'>I already have omelette on your fork!</span>")
 		else
 			F.icon_state = "forkloaded"
 			user.visible_message("<span class='notice'>[user] takes a piece of omelette with [user.p_their()] fork!</span>", \
-				"<span class='notice'>You take a piece of omelette with your fork.</span>")
+				"<span class='notice'>I take a piece of omelette with your fork.</span>")
 
 			var/datum/reagent/R = pick(reagents.reagent_list)
 			reagents.remove_reagent(R.type, 1)
@@ -139,7 +172,7 @@
 
 /obj/item/reagent_containers/food/snacks/benedict
 	name = "eggs benedict"
-	desc = "There is only one egg on this, how rude."
+	desc = ""
 	icon_state = "benedict"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment/vitamin = 4)
 	trash = /obj/item/trash/plate

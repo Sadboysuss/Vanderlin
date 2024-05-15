@@ -1,9 +1,9 @@
 /obj/structure/closet/crate/bin
-	desc = "A trash bin, place your trash here for the janitor to collect."
+	desc = ""
 	name = "trash bin"
 	icon_state = "largebins"
-	open_sound = 'sound/effects/bin_open.ogg'
-	close_sound = 'sound/effects/bin_close.ogg'
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
 	anchored = TRUE
 	horizontal = FALSE
 	delivery_icon = null
@@ -25,7 +25,7 @@
 /obj/structure/closet/crate/bin/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/storage/bag/trash))
 		var/obj/item/storage/bag/trash/T = W
-		to_chat(user, "<span class='notice'>You fill the bag.</span>")
+		to_chat(user, "<span class='notice'>I fill the bag.</span>")
 		for(var/obj/item/O in src)
 			SEND_SIGNAL(T, COMSIG_TRY_STORAGE_INSERT, O, user, TRUE)
 		T.update_icon()

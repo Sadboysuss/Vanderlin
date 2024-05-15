@@ -85,8 +85,8 @@
 /datum/achievement_data/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.always_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/achievements)
-		assets.send(user)
+//		var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/achievements)
+//		assets.send(user)
 		ui = new(user, src, ui_key, "achievements", "Achievements Menu", 800, 1000, master_ui, state)
 		ui.open()
 
@@ -117,7 +117,10 @@
 /client/verb/checkachievements()
 	set category = "OOC"
 	set name = "Check achievements"
-	set desc = "See all of your achievements!"
+	set desc = ""
+	set hidden = 1
+	if(!holder)
+		return
 
 	player_details.achievements.ui_interact(usr)
-	
+

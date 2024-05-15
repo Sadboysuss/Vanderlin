@@ -2,7 +2,7 @@
 //Try looking in game/world.dm
 
 /**
-  * # World
+  * # WorldR
   *
   * Two possibilities exist: either we are alone in the Universe or we are not. Both are equally terrifying. ~ Arthur C. Clarke
   *
@@ -12,12 +12,16 @@
   */
 /world
 	mob = /mob/dead/new_player
-	turf = /turf/open/space/basic
-	area = /area/space
+	turf = /turf/closed
+	area = /area/rogue
 	view = "15x15"
 	hub = "Exadv1.spacestation13"
-	hub_password = "kMZy3U5jJHSiBQjr"
-	name = "/tg/ Station 13"
+	hub_password = "zX1svaLpIhl70uii"
+#ifdef ROGUEWORLD
+	name = "STONEKEEP (18+)"
+#else
+	name = "STONEKEEP (18+)"
+#endif
 	fps = 20
 #ifdef FIND_REF_NO_CHECK_TICK
 	loop_checks = FALSE

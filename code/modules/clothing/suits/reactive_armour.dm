@@ -1,6 +1,6 @@
 /obj/item/reactive_armour_shell
 	name = "reactive armour shell"
-	desc = "An experimental suit of armour, awaiting installation of an anomaly core."
+	desc = ""
 	icon_state = "reactiveoff"
 	icon = 'icons/obj/clothing/suits.dmi'
 	w_class = WEIGHT_CLASS_BULKY
@@ -18,7 +18,7 @@
 		var/armour_path = anomaly_armour_types[A.anomaly_type]
 		if(!armour_path)
 			armour_path = /obj/item/clothing/suit/armor/reactive/stealth //Lets not cheat the player if an anomaly type doesnt have its own armour coded
-		to_chat(user, "<span class='notice'>You insert [A] into the chest plate, and the armour gently hums to life.</span>")
+		to_chat(user, "<span class='notice'>I insert [A] into the chest plate, and the armour gently hums to life.</span>")
 		new armour_path(get_turf(src))
 		qdel(src)
 		qdel(A)
@@ -26,7 +26,7 @@
 //Reactive armor
 /obj/item/clothing/suit/armor/reactive
 	name = "reactive armor"
-	desc = "Doesn't seem to do much for some reason."
+	desc = ""
 	var/active = 0
 	var/reactivearmor_cooldown_duration = 0 //cooldown specific to reactive armor
 	var/reactivearmor_cooldown = 0
@@ -63,7 +63,7 @@
 //When the wearer gets hit, this armor will teleport the user a short distance away (to safety or to more danger, no one knows. That's the fun of it!)
 /obj/item/clothing/suit/armor/reactive/teleport
 	name = "reactive teleport armor"
-	desc = "Someone separated our Research Director from his own head!"
+	desc = ""
 	var/tele_range = 6
 	var/rad_amount= 15
 	reactivearmor_cooldown_duration = 100
@@ -77,7 +77,7 @@
 			owner.visible_message("<span class='danger'>The reactive teleport system is still recharging! It fails to teleport [H]!</span>")
 			return
 		owner.visible_message("<span class='danger'>The reactive teleport system flings [H] clear of [attack_text], shutting itself off in the process!</span>")
-		playsound(get_turf(owner),'sound/magic/blink.ogg', 100, TRUE)
+		playsound(get_turf(owner),'sound/blank.ogg', 100, TRUE)
 		var/list/turfs = new/list()
 		for(var/turf/T in orange(tele_range, H))
 			if(T.density)
@@ -102,7 +102,7 @@
 
 /obj/item/clothing/suit/armor/reactive/fire
 	name = "reactive incendiary armor"
-	desc = "An experimental suit of armor with a reactive sensor array rigged to a flame emitter. For the stylish pyromaniac."
+	desc = ""
 
 /obj/item/clothing/suit/armor/reactive/fire/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(!active)
@@ -112,7 +112,7 @@
 			owner.visible_message("<span class='danger'>The reactive incendiary armor on [owner] activates, but fails to send out flames as it is still recharging its flame jets!</span>")
 			return
 		owner.visible_message("<span class='danger'>[src] blocks [attack_text], sending out jets of flame!</span>")
-		playsound(get_turf(owner),'sound/magic/fireball.ogg', 100, TRUE)
+		playsound(get_turf(owner),'sound/blank.ogg', 100, TRUE)
 		for(var/mob/living/carbon/C in range(6, owner))
 			if(C != owner)
 				C.fire_stacks += 8
@@ -126,7 +126,7 @@
 
 /obj/item/clothing/suit/armor/reactive/stealth
 	name = "reactive stealth armor"
-	desc = "An experimental suit of armor that renders the wearer invisible on detection of imminent harm, and creates a decoy that runs away from the owner. You can't fight what you can't see."
+	desc = ""
 
 /obj/item/clothing/suit/armor/reactive/stealth/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(!active)
@@ -149,7 +149,7 @@
 
 /obj/item/clothing/suit/armor/reactive/tesla
 	name = "reactive tesla armor"
-	desc = "An experimental suit of armor with sensitive detectors hooked up to a huge capacitor grid, with emitters strutting out of it. Zap."
+	desc = ""
 	siemens_coefficient = -1
 	var/tesla_power = 25000
 	var/tesla_range = 20
@@ -184,7 +184,7 @@
 
 /obj/item/clothing/suit/armor/reactive/repulse
 	name = "reactive repulse armor"
-	desc = "An experimental suit of armor that violently throws back attackers."
+	desc = ""
 	var/repulse_force = MOVE_FORCE_EXTREMELY_STRONG
 
 /obj/item/clothing/suit/armor/reactive/repulse/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
@@ -194,7 +194,7 @@
 		if(world.time < reactivearmor_cooldown)
 			owner.visible_message("<span class='danger'>The repulse generator is still recharging!</span>")
 			return 0
-		playsound(get_turf(owner),'sound/magic/repulse.ogg', 100, TRUE)
+		playsound(get_turf(owner),'sound/blank.ogg', 100, TRUE)
 		owner.visible_message("<span class='danger'>[src] blocks [attack_text], converting the attack into a wave of force!</span>")
 		var/turf/T = get_turf(owner)
 		var/list/thrown_items = list()
@@ -210,7 +210,7 @@
 
 /obj/item/clothing/suit/armor/reactive/table
 	name = "reactive table armor"
-	desc = "If you can't beat the memes, embrace them."
+	desc = ""
 	var/tele_range = 10
 
 /obj/item/clothing/suit/armor/reactive/table/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)

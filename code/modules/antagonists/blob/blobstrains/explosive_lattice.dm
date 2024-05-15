@@ -2,7 +2,7 @@
 /datum/blobstrain/reagent/explosive_lattice
 	name = "Explosive Lattice"
 	description = "will do brute damage in an area around targets."
-	effectdesc = "will also resist explosions, but takes increased damage from fire and other energy sources."
+	effectdesc = ""
 	analyzerdescdamage = "Does medium brute damage and causes damage to everyone near its targets."
 	analyzerdesceffect = "Is highly resistant to explosions, but takes increased damage from fire and other energy sources."
 	color = "#8B2500"

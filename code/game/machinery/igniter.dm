@@ -1,6 +1,6 @@
 /obj/machinery/igniter
 	name = "igniter"
-	desc = "It's useful for igniting plasma."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "igniter0"
 	plane = FLOOR_PLANE
@@ -60,7 +60,7 @@
 
 /obj/machinery/sparker
 	name = "mounted igniter"
-	desc = "A wall-mounted ignition device."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "migniter"
 	resistance_flags = FIRE_PROOF
@@ -100,9 +100,9 @@
 		add_fingerprint(user)
 		src.disable = !src.disable
 		if (src.disable)
-			user.visible_message("<span class='notice'>[user] has disabled \the [src]!</span>", "<span class='notice'>You disable the connection to \the [src].</span>")
+			user.visible_message("<span class='notice'>[user] has disabled \the [src]!</span>", "<span class='notice'>I disable the connection to \the [src].</span>")
 		if (!src.disable)
-			user.visible_message("<span class='notice'>[user] has reconnected \the [src]!</span>", "<span class='notice'>You fix the connection to \the [src].</span>")
+			user.visible_message("<span class='notice'>[user] has reconnected \the [src]!</span>", "<span class='notice'>I fix the connection to \the [src].</span>")
 		update_icon()
 	else
 		return ..()

@@ -1,3 +1,55 @@
+
+//ROGUETRAITS (description when rmb skills button)
+#define RTRAIT_WEBWALK 					"Webwalker"
+#define RTRAIT_NOSTINK 					"Dead Nose"
+#define RTRAIT_ZJUMP 					"High Jumping"
+#define RTRAIT_NOSEGRAB 				"Intimidating"
+#define RTRAIT_SEEPRICES				"Golden Blood"
+#define RTRAIT_STRONGBITE				"Strong Bite"
+#define RTRAIT_TORTURER					"Torturer"
+#define RTRAIT_HATEWOMEN				"Ladykiller"
+#define RTRAIT_GOODLOVER				"Fabled Lover"
+#define RTRAIT_NOBLE					"Noble Blooded"
+#define RTRAIT_EMPATH					"Empath"
+#define RTRAIT_BREADY					"Battleready"
+#define RTRAIT_MEDIUMARMOR					"Maille Training"
+#define RTRAIT_HEAVYARMOR					"Plate Training"
+#define RTRAIT_VILLAIN					"Villain"
+
+#define TRAIT_NOFATSTAM				"nofatstam" //for ai
+#define TRAIT_NOSLEEP				"nosleep"
+#define TRAIT_BASHDOORS				"bashdoors"
+#define TRAIT_NOMOOD 			"no_mood"
+#define TRAIT_SIMPLE_WOUNDS		"simple_wounds"
+#define TRAIT_BANDITCAMP 				"banditcamp"
+#define TRAIT_VAMPMANSION			"vampiremansion"
+#define TRAIT_LIMPDICK 				"limp_dick"
+#define TRAIT_SEXPASS				"sexpass"
+#define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
+
+GLOBAL_LIST_INIT(roguetraits, list(
+	RTRAIT_WEBWALK = "I can move freely between webs.",
+	RTRAIT_NOSTINK = "My nose is numb to the smell of decay.",
+	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
+	RTRAIT_NOSEGRAB = "I love to grab the idiots by their noses.",
+	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
+	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
+	RTRAIT_TORTURER = "I've learned the art of confessions.",
+	RTRAIT_HATEWOMEN = "Double damage against female mobs.",
+	RTRAIT_GOODLOVER = "It's a lucky thing to share my bed.",
+	RTRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
+	RTRAIT_EMPATH = "I can notice stress levels in detail.",
+	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
+	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
+	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	RTRAIT_VILLAIN = "I am a devious, conniving villain!"
+	))
+
+
+
+
+
+
 // trait accessor defines
 #define ADD_TRAIT(target, trait, source) \
 	do { \
@@ -87,6 +139,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SHOCKIMMUNE		"shock_immunity"
 #define TRAIT_STABLEHEART		"stable_heart"
 #define TRAIT_STABLELIVER		"stable_liver"
+#define TRAIT_NOPAINSTUN		"no_pain-stun"
 #define TRAIT_RESISTHEAT		"resist_heat"
 #define TRAIT_RESISTHEATHANDS	"resist_heat_handsonly" //For when you want to be able to touch hot things, but still want fire to be an issue.
 #define TRAIT_RESISTCOLD		"resist_cold"
@@ -134,8 +187,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ABDUCTOR_TRAINING "abductor-training"
 #define TRAIT_ABDUCTOR_SCIENTIST_TRAINING "abductor-scientist-training"
 #define TRAIT_SURGEON           "surgeon"
-#define	TRAIT_STRONG_GRABBER	"strong_grabber"
-#define	TRAIT_MAGIC_CHOKE		"magic_choke"
+#define TRAIT_STRONG_GRABBER	"strong_grabber"
+#define TRAIT_MAGIC_CHOKE		"magic_choke"
 #define TRAIT_SOOTHED_THROAT    "soothed-throat"
 #define TRAIT_LAW_ENFORCEMENT_METABOLISM "law-enforcement-metabolism"
 #define TRAIT_ALWAYS_CLEAN      "always-clean"
@@ -151,6 +204,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PASSTABLE			"passtable"
 #define TRAIT_NOFLASH			"noflash" //Makes you immune to flashes
 #define TRAIT_XENO_IMMUNE		"xeno_immune"//prevents xeno huggies implanting skeletons
+#define TRAIT_NOPAIN			"no_pain"
+#define TRAIT_DRUQK				"druqk"
 
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it

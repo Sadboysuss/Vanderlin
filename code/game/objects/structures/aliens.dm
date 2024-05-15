@@ -24,12 +24,12 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(loc, 'sound/effects/attackblob.ogg', 100, TRUE)
+				playsound(loc, 'sound/blank.ogg', 100, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
 			if(damage_amount)
-				playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
+				playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 /*
  * Generic alien stuff, not related to the purple lizards but still alien-like
@@ -37,7 +37,7 @@
 
 /obj/structure/alien/gelpod
 	name = "gelatinous mound"
-	desc = "A mound of jelly-like substance encasing something inside."
+	desc = ""
 	icon = 'icons/obj/fluff.dmi'
 	icon_state = "gelmound"
 
@@ -51,7 +51,7 @@
  */
 /obj/structure/alien/resin
 	name = "resin"
-	desc = "Looks like some kind of thick resin."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/alien/resin_wall.dmi'
 	icon_state = "smooth"
 	density = TRUE
@@ -75,7 +75,7 @@
 
 /obj/structure/alien/resin/wall
 	name = "resin wall"
-	desc = "Thick resin solidified into a wall."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/alien/resin_wall.dmi'
 	icon_state = "smooth"	//same as resin, but consistency ho!
 	resintype = "wall"
@@ -86,7 +86,7 @@
 
 /obj/structure/alien/resin/membrane
 	name = "resin membrane"
-	desc = "Resin just thin enough to let light pass through."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/alien/resin_membrane.dmi'
 	icon_state = "smooth"
 	opacity = 0
@@ -111,7 +111,7 @@
 /obj/structure/alien/weeds
 	gender = PLURAL
 	name = "resin floor"
-	desc = "A thick resin surface covers the floor."
+	desc = ""
 	anchored = TRUE
 	density = FALSE
 	layer = TURF_LAYER
@@ -170,7 +170,7 @@
 //Weed nodes
 /obj/structure/alien/weeds/node
 	name = "glowing resin"
-	desc = "Blue bioluminescence shines from beneath the surface."
+	desc = ""
 	icon_state = "weednode"
 	light_color = LIGHT_COLOR_BLUE
 	light_power = 0.5
@@ -212,7 +212,7 @@
 
 /obj/structure/alien/egg
 	name = "egg"
-	desc = "A large mottled egg."
+	desc = ""
 	var/base_icon = "egg"
 	icon_state = "egg_growing"
 	density = FALSE
@@ -257,15 +257,15 @@
 	if(user.getorgan(/obj/item/organ/alien/plasmavessel))
 		switch(status)
 			if(BURST)
-				to_chat(user, "<span class='notice'>You clear the hatched egg.</span>")
-				playsound(loc, 'sound/effects/attackblob.ogg', 100, TRUE)
+				to_chat(user, "<span class='notice'>I clear the hatched egg.</span>")
+				playsound(loc, 'sound/blank.ogg', 100, TRUE)
 				qdel(src)
 				return
 			if(GROWING)
 				to_chat(user, "<span class='notice'>The child is not developed yet.</span>")
 				return
 			if(GROWN)
-				to_chat(user, "<span class='notice'>You retrieve the child.</span>")
+				to_chat(user, "<span class='notice'>I retrieve the child.</span>")
 				Burst(kill=FALSE)
 				return
 	else
@@ -304,6 +304,7 @@
 	if(!(flags_1 & NODECONSTRUCT_1))
 		if(status != BURST)
 			Burst(kill=TRUE)
+	..()
 
 /obj/structure/alien/egg/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 500)

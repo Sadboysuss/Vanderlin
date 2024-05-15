@@ -26,8 +26,8 @@
 
 /obj/structure/bookcase/random
 	var/category = null
-	var/book_count = 2
-	icon_state = "random_bookcase"
+	var/book_count = 10
+	icon_state = "bookcase"
 	anchored = TRUE
 	state = 2
 
@@ -38,18 +38,12 @@
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/bookcase/random/LateInitialize()
-	create_random_books(book_count, src, FALSE, category)
+	create_random_books_rogue(book_count, src)
 	update_icon()
 
 /proc/create_random_books(amount = 2, location, fail_loud = FALSE, category = null)
 	. = list()
 	if(!isnum(amount) || amount<1)
-		return
-	if (!SSdbcore.Connect())
-		if(fail_loud || prob(5))
-			var/obj/item/paper/P = new(location)
-			P.info = "There once was a book from Nantucket<br>But the database failed us, so f*$! it.<br>I tried to be good to you<br>Now this is an I.O.U<br>If you're feeling entitled, well, stuff it!<br><br><font color='gray'>~</font>"
-			P.update_icon()
 		return
 	if(prob(25))
 		category = null
@@ -65,6 +59,15 @@
 			B.name		=	"Book: [B.title]"
 			B.icon_state=	"book[rand(1,8)]"
 	qdel(query_get_random_books)
+
+/proc/create_random_books_rogue(amount = 2, location)
+	var/list/possible_books = subtypesof(/obj/item/book/rogue/)
+	for(var/b in 1 to amount)
+		var/obj/item/book/rogue/addition = pick(possible_books)
+		if(istype(addition, /obj/item/book/rogue/secret))
+			continue
+		new addition(location)
+
 
 /obj/structure/bookcase/random/fiction
 	name = "bookcase (Fiction)"

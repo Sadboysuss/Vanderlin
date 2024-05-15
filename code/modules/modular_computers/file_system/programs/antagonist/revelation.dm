@@ -1,8 +1,8 @@
 /datum/computer_file/program/revelation
 	filename = "revelation"
-	filedesc = "Revelation"
+	filedesc = ""
 	program_icon_state = "hostile"
-	extended_desc = "This virus can destroy hard drive of system it is executed on. It may be obfuscated to look like another non-malicious program. Once armed, it will destroy the system upon next execution."
+	extended_desc = ""
 	size = 13
 	requires_ntnet = 0
 	available_on_ntnet = 0
@@ -14,7 +14,7 @@
 
 	var/armed = 0
 
-/datum/computer_file/program/revelation/run_program(var/mob/living/user)
+/datum/computer_file/program/revelation/run_program(mob/living/user)
 	. = ..(user)
 	if(armed)
 		activate()

@@ -80,7 +80,7 @@ the new instance inside the host to be updated to the template's stats.
 /mob/camera/disease/Login()
 	..()
 	if(freemove)
-		to_chat(src, "<span class='warning'>You have [DisplayTimeText(freemove_end - world.time)] to select your first host. Click on a human to select your host.</span>")
+		to_chat(src, "<span class='warning'>I have [DisplayTimeText(freemove_end - world.time)] to select your first host. Click on a human to select your host.</span>")
 
 
 /mob/camera/disease/Stat()
@@ -126,7 +126,12 @@ the new instance inside the host to be updated to the template's stats.
 		link = FOLLOW_LINK(src, to_follow)
 	else
 		link = ""
-	// Recompose the message, because it's scrambled by default
+// Create map text prior to modifying message for goonchat
+	if(client)
+		if(client.prefs)
+			if (client?.prefs.chat_on_map && (client.prefs.see_chat_non_mob || ismob(speaker)))
+				create_chat_message(speaker, message_language, raw_message, spans, message_mode)
+			// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode)
 	to_chat(src, "[link] [message]")
 
@@ -152,7 +157,7 @@ the new instance inside the host to be updated to the template's stats.
 			set_name = "Sentient Virus"
 			break
 		if(taken_names[input])
-			to_chat(src, "<span class='warning'>You cannot use the name of such a well-known disease!</span>")
+			to_chat(src, "<span class='warning'>I cannot use the name of such a well-known disease!</span>")
 		else
 			set_name = input
 	real_name = "[set_name] (Sentient Disease)"
@@ -187,7 +192,7 @@ the new instance inside the host to be updated to the template's stats.
 		possible_hosts.Cut(1, 2)
 
 	if(del_on_fail)
-		to_chat(src, "<span class=userdanger'>No hosts were available for your disease to infect.</span>")
+		to_chat(src, "<span class='danger'>No hosts were available for your disease to infect.</span>")
 		qdel(src)
 	return FALSE
 
@@ -253,7 +258,7 @@ the new instance inside the host to be updated to the template's stats.
 		hosts -= V.affected_mob
 
 		if(!disease_instances.len)
-			to_chat(src, "<span class='userdanger'>The last of your infection has disappeared.</span>")
+			to_chat(src, "<span class='danger'>The last of your infection has disappeared.</span>")
 			set_following(null)
 			qdel(src)
 		refresh_adaptation_menu()
@@ -279,13 +284,13 @@ the new instance inside the host to be updated to the template's stats.
 	if(T)
 		forceMove(T)
 
-/mob/camera/disease/DblClickOn(var/atom/A, params)
+/mob/camera/disease/DblClickOn(atom/A, params)
 	if(hosts[A])
 		set_following(A)
 	else
 		..()
 
-/mob/camera/disease/ClickOn(var/atom/A, params)
+/mob/camera/disease/ClickOn(atom/A, params)
 	if(freemove && ishuman(A))
 		var/mob/living/carbon/human/H = A
 		if(alert(src, "Select [H.name] as your initial host?", "Select Host", "Yes", "No") != "Yes")
@@ -298,12 +303,12 @@ the new instance inside the host to be updated to the template's stats.
 		..()
 
 /mob/camera/disease/proc/adapt_cooldown()
-	to_chat(src, "<span class='notice'>You have altered your genetic structure. You will be unable to adapt again for [DisplayTimeText(adaptation_cooldown)].</span>")
+	to_chat(src, "<span class='notice'>I have altered your genetic structure. You will be unable to adapt again for [DisplayTimeText(adaptation_cooldown)].</span>")
 	next_adaptation_time = world.time + adaptation_cooldown
 	addtimer(CALLBACK(src, .proc/notify_adapt_ready), adaptation_cooldown)
 
 /mob/camera/disease/proc/notify_adapt_ready()
-	to_chat(src, "<span class='notice'>You are now ready to adapt again.</span>")
+	to_chat(src, "<span class='notice'>I are now ready to adapt again.</span>")
 	refresh_adaptation_menu()
 
 /mob/camera/disease/proc/refresh_adaptation_menu()

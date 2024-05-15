@@ -1,6 +1,6 @@
 /obj/item/computer_hardware/card_slot
 	name = "identification card authentication module"	// \improper breaks the find_hardware_by_name proc
-	desc = "A module allowing this computer to read or write data on ID cards. Necessary for some programs to run properly."
+	desc = ""
 	power_usage = 10 //W
 	icon_state = "card_mini"
 	w_class = WEIGHT_CLASS_TINY
@@ -61,7 +61,7 @@
 		return FALSE
 
 	if(stored_card && stored_card2)
-		to_chat(user, "<span class='warning'>You try to insert \the [I] into \the [src], but its slots are occupied.</span>")
+		to_chat(user, "<span class='warning'>I try to insert \the [I] into \the [src], but its slots are occupied.</span>")
 		return FALSE
 	if(user)
 		if(!user.transferItemToLoc(I, src))
@@ -73,8 +73,8 @@
 		stored_card = I
 	else
 		stored_card2 = I
-	to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span>")
-	playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+	to_chat(user, "<span class='notice'>I insert \the [I] into \the [src].</span>")
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		H.sec_hud_set_ID()
@@ -115,8 +115,8 @@
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.sec_hud_set_ID()
-		to_chat(user, "<span class='notice'>You remove the card[ejected>1 ? "s" : ""] from \the [src].</span>")
-		playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+		to_chat(user, "<span class='notice'>I remove the card[ejected>1 ? "s" : ""] from \the [src].</span>")
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		return TRUE
 	return FALSE
 
@@ -124,7 +124,7 @@
 	if(..())
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		to_chat(user, "<span class='notice'>You press down on the manual eject button with \the [I].</span>")
+		to_chat(user, "<span class='notice'>I press down on the manual eject button with \the [I].</span>")
 		try_eject(0,user)
 		return
 

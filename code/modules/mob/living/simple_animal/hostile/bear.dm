@@ -1,7 +1,7 @@
 //Space bears!
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"
-	desc = "You don't need to be faster than a space bear, you just need to outrun your crewmates."
+	desc = ""
 	icon_state = "bear"
 	icon_living = "bear"
 	icon_dead = "bear_dead"
@@ -30,7 +30,7 @@
 	melee_damage_upper = 30
 	attack_verb_continuous = "claws"
 	attack_verb_simple = "claw"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	friendly_verb_continuous = "bear hugs"
 	friendly_verb_simple = "bear hug"
 
@@ -48,19 +48,19 @@
 /mob/living/simple_animal/hostile/bear/Hudson
 	name = "Hudson"
 	gender = MALE
-	desc = "Feared outlaw, this guy is one bad news bear." //I'm sorry...
+	desc = "" //I'm sorry...
 
 /mob/living/simple_animal/hostile/bear/snow
 	name = "space polar bear"
 	icon_state = "snowbear"
 	icon_living = "snowbear"
 	icon_dead = "snowbear_dead"
-	desc = "It's a polar bear, in space, but not actually in space."
+	desc = ""
 	weather_immunities = list("snow")
 
 /mob/living/simple_animal/hostile/bear/russian
 	name = "combat bear"
-	desc = "A ferocious brown bear decked out in armor plating, a red star with yellow outlining details the shoulder plating."
+	desc = ""
 	icon_state = "combatbear"
 	icon_living = "combatbear"
 	icon_dead = "combatbear_dead"
@@ -68,7 +68,7 @@
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/bear = 5, /obj/item/clothing/head/bearpelt = 1, /obj/item/bear_armor = 1)
 	melee_damage_lower = 25
 	melee_damage_upper = 35
-	armour_penetration = 20
+	armor_penetration = 20
 	health = 120
 	maxHealth = 120
 	armored = TRUE
@@ -95,11 +95,11 @@
 		A.armored = TRUE
 		A.maxHealth += 60
 		A.health += 60
-		A.armour_penetration += 20
+		A.armor_penetration += 20
 		A.melee_damage_lower += 5
 		A.melee_damage_upper += 5
 		A.update_icons()
-		to_chat(user, "<span class='info'>You strap the armor plating to [A] and sharpen [A.p_their()] claws with the nail filer. This was a great idea.</span>")
+		to_chat(user, "<span class='info'>I strap the armor plating to [A] and sharpen [A.p_their()] claws with the nail filer. This was a great idea.</span>")
 		qdel(src)
 
 mob/living/simple_animal/hostile/bear/butter //The mighty companion to Cak. Several functions used from it.
@@ -107,18 +107,18 @@ mob/living/simple_animal/hostile/bear/butter //The mighty companion to Cak. Seve
 	icon_state = "butterbear"
 	icon_living = "butterbear"
 	icon_dead = "butterbear_dead"
-	desc = "I can't believe its not a bear!"
+	desc = ""
 	faction = list("neutral", "russian")
 	obj_damage = 11
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	armour_penetration = 0
+	armor_penetration = 0
 	response_harm_continuous = "takes a bite out of"
 	response_harm_simple = "take a bite out of"
-	attacked_sound = 'sound/items/eatfood.ogg'
+	attacked_sound = 'sound/blank.ogg'
 	deathmessage = "loses its false life and collapses!"
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/butter = 6, /obj/item/reagent_containers/food/snacks/meat/slab = 3, /obj/item/organ/brain = 1, /obj/item/organ/heart = 1)
-	attack_sound = 'sound/weapons/slap.ogg'
+	attack_sound = 'sound/blank.ogg'
 	attack_verb_continuous = "slaps"
 
 /mob/living/simple_animal/hostile/bear/butter/Life() //Heals butter bear really fast when he takes damage.
@@ -129,7 +129,7 @@ mob/living/simple_animal/hostile/bear/butter //The mighty companion to Cak. Seve
 
 /mob/living/simple_animal/hostile/bear/butter/attack_hand(mob/living/L) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
 	..()
-	if(L.a_intent == INTENT_HARM && L.reagents && !stat)
+	if(L.used_intent.type == INTENT_HARM && L.reagents && !stat)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment, 1)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.1)
 
@@ -139,12 +139,12 @@ mob/living/simple_animal/hostile/bear/butter //The mighty companion to Cak. Seve
 	if(!B || !B.brainmob || !B.brainmob.mind)
 		return
 	B.brainmob.mind.transfer_to(src)
-	to_chat(src, "<span class='big bold'>You are a butter bear!</span><b> You're a mostly harmless bear/butter hybrid that everyone loves. People can take bites out of you if they're hungry, but you regenerate health \
+	to_chat(src, "<span class='big bold'>I are a butter bear!</span><b> You're a mostly harmless bear/butter hybrid that everyone loves. People can take bites out of you if they're hungry, but you regenerate health \
 	so quickly that it generally doesn't matter. You're remarkably resilient to any damage besides this and it's hard for you to really die at all. You should go around and bring happiness and \
 	free butter to the station!</b>")
-	var/new_name = stripped_input(src, "Enter your name, or press \"Cancel\" to stick with Terrygold.", "Name Change")
+	var/new_name = stripped_input(src, "Enter my name, or press \"Cancel\" to stick with Terrygold.", "Name Change")
 	if(new_name)
-		to_chat(src, "<span class='notice'>Your name is now <b>\"new_name\"</b>!</span>")
+		to_chat(src, "<span class='notice'>My name is now <b>\"new_name\"</b>!</span>")
 		name = new_name
 
 mob/living/simple_animal/hostile/bear/butter/AttackingTarget() //Makes some attacks by the butter bear slip those who dare cross its path.
@@ -152,5 +152,5 @@ mob/living/simple_animal/hostile/bear/butter/AttackingTarget() //Makes some atta
 		var/mob/living/L = target
 		if((L.mobility_flags & MOBILITY_STAND))
 			L.Knockdown(20)
-			playsound(loc, 'sound/misc/slip.ogg', 15)
+			playsound(loc, 'sound/blank.ogg', 15)
 			L.visible_message("<span class='danger'>[L] slips on butter!</span>")

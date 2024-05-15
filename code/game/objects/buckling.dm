@@ -5,6 +5,8 @@
 	var/list/mob/living/buckled_mobs = null //list()
 	var/max_buckled_mobs = 1
 	var/buckle_prevents_pull = FALSE
+	var/buckleverb = "sit"
+	var/sleepy = 0
 
 //Interaction
 /atom/movable/attack_hand(mob/living/user)
@@ -13,7 +15,7 @@
 		return
 	if(can_buckle && has_buckled_mobs())
 		if(buckled_mobs.len > 1)
-			var/unbuckled = input(user, "Who do you wish to unbuckle?","Unbuckle Who?") as null|mob in sortNames(buckled_mobs)
+			var/unbuckled = input(user, "Who do you wish to remove?","?") as null|mob in sortNames(buckled_mobs)
 			if(user_unbuckle_mob(unbuckled,user))
 				return 1
 		else
@@ -51,9 +53,9 @@
 	M.buckling = src
 	if(!M.can_buckle() && !force)
 		if(M == usr)
-			to_chat(M, "<span class='warning'>You are unable to buckle yourself to [src]!</span>")
+			to_chat(M, "<span class='warning'>I am unable to [buckleverb] on [src].</span>")
 		else
-			to_chat(usr, "<span class='warning'>You are unable to buckle [M] to [src]!</span>")
+			to_chat(usr, "<span class='warning'>I am unable to [buckleverb] [M] on [src].</span>")
 		M.buckling = null
 		return FALSE
 
@@ -61,8 +63,7 @@
 		if(buckle_prevents_pull)
 			M.pulledby.stop_pulling()
 		else if(isliving(M.pulledby))
-			var/mob/living/L = M.pulledby
-			L.reset_pull_offsets(M, TRUE)
+			M.reset_offsets("pulledby")
 
 	if(!check_loc && M.loc != loc)
 		M.forceMove(loc)
@@ -73,6 +74,7 @@
 	buckled_mobs |= M
 	M.update_mobility()
 	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled)
+	M.set_glide_size(glide_size)
 	post_buckle_mob(M)
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_BUCKLE, M, force)
@@ -92,9 +94,11 @@
 		buckled_mob.anchored = initial(buckled_mob.anchored)
 		buckled_mob.update_mobility()
 		buckled_mob.clear_alert("buckled")
+		buckled_mob.set_glide_size(DELAY_TO_GLIDE_SIZE(buckled_mob.total_multiplicative_slowdown()))
 		buckled_mobs -= buckled_mob
 		SEND_SIGNAL(src, COMSIG_MOVABLE_UNBUCKLE, buckled_mob, force)
-
+//		if(buckle_lying)
+//			buckled_mob.set_resting(FALSE)
 		post_unbuckle_mob(.)
 
 /atom/movable/proc/unbuckle_all_mobs(force=FALSE)
@@ -119,25 +123,23 @@
 	. = buckle_mob(M, check_loc = check_loc)
 	if(.)
 		if(M == user)
-			M.visible_message("<span class='notice'>[M] buckles [M.p_them()]self to [src].</span>",\
-				"<span class='notice'>You buckle yourself to [src].</span>",\
-				"<span class='hear'>You hear metal clanking.</span>")
+			M.visible_message("<span class='notice'>[M] [buckleverb]s on [src].</span>",\
+				"<span class='notice'>I [buckleverb] on [src].</span>")
 		else
-			M.visible_message("<span class='warning'>[user] buckles [M] to [src]!</span>",\
-				"<span class='warning'>[user] buckles you to [src]!</span>",\
-				"<span class='hear'>You hear metal clanking.</span>")
+			M.visible_message("<span class='warning'>[user] [buckleverb]s [M] on [src]!</span>",\
+				"<span class='warning'>[user] [buckleverb]s me on [src]!</span>")
 
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	var/mob/living/M = unbuckle_mob(buckled_mob)
 	if(M)
 		if(M != user)
-			M.visible_message("<span class='notice'>[user] unbuckles [M] from [src].</span>",\
-				"<span class='notice'>[user] unbuckles you from [src].</span>",\
-				"<span class='hear'>You hear metal clanking.</span>")
+			M.visible_message("<span class='notice'>[user] pulls [M] from [src].</span>",\
+				"<span class='notice'>[user] pulls me from [src].</span>",\
+				"<span class='hear'>I hear metal clanking.</span>")
 		else
-			M.visible_message("<span class='notice'>[M] unbuckles [M.p_them()]self from [src].</span>",\
-				"<span class='notice'>You unbuckle yourself from [src].</span>",\
-				"<span class='hear'>You hear metal clanking.</span>")
+			M.visible_message("<span class='notice'>[M] gets off of [src].</span>",\
+				"<span class='notice'>I get off of [src].</span>",\
+				"<span class='hear'>I hear metal clanking.</span>")
 		add_fingerprint(user)
 		if(isliving(M.pulledby))
 			var/mob/living/L = M.pulledby

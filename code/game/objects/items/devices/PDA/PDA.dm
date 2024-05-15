@@ -13,7 +13,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda
 	name = "\improper PDA"
-	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
+	desc = ""
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
 	item_state = "electronic"
@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_TINY
-	slot_flags = ITEM_SLOT_ID | ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_RING | ITEM_SLOT_BELT
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/ttone = "beep" //The ringtone!
 	var/honkamt = 0 //How many honks left when infected with honk.exe
 	var/mimeamt = 0 //How many silence left when infected with mime.exe
-	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
+	var/note = "Congratulations, my station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
 	var/notehtml = ""
 	var/notescanned = FALSE // True if what is in the notekeeper was from a paper.
 	var/hidden = FALSE // Is the PDA hidden from the PDA list?
@@ -193,22 +193,22 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda/interact(mob/user)
 	if(!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(user, "<span class='warning'>I don't have the dexterity to do this!</span>")
 		return
 
 	..()
 
-	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
-	assets.send(user)
+//	var/datum/asset/spritesheet/assets = get_asset_datum(/datum/asset/spritesheet/simple/pda)
+//	assets.send(user)
 
-	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
-	emoji_s.send(user) //Already sent by chat but no harm doing this
+//	var/datum/asset/spritesheet/emoji_s = get_asset_datum(/datum/asset/spritesheet/goonchat)
+//	emoji_s.send(user) //Already sent by chat but no harm doing this
 
 	user.set_machine(src)
 
 	var/dat = "<!DOCTYPE html><html><head><title>Personal Data Assistant</title><link href=\"https://fonts.googleapis.com/css?family=Orbitron|Share+Tech+Mono|VT323\" rel=\"stylesheet\"></head><body bgcolor=\"" + background_color + "\"><style>body{" + font_mode + "}ul,ol{list-style-type: none;}a, a:link, a:visited, a:active, a:hover { color: #000000;text-decoration:none; }img {border-style:none;}a img{padding-right: 9px;}</style>"
-	dat += assets.css_tag()
-	dat += emoji_s.css_tag()
+//	dat += assets.css_tag()
+//	dat += emoji_s.css_tag()
 
 	dat += "<a href='byond://?src=[REF(src)];choice=Refresh'>[PDAIMG(refresh)]Refresh</a>"
 
@@ -450,7 +450,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 			if("Eject")//Ejects the cart, only done from hub.
 				if (!isnull(cartridge))
 					U.put_in_hands(cartridge)
-					to_chat(U, "<span class='notice'>You remove [cartridge] from [src].</span>")
+					to_chat(U, "<span class='notice'>I remove [cartridge] from [src].</span>")
 					scanmode = PDA_SCANNER_NONE
 					cartridge.host_pda = null
 					cartridge = null
@@ -493,11 +493,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 					scanmode = PDA_SCANNER_HALOGEN
 			if("Honk")
 				if ( !(last_noise && world.time < last_noise + 20) )
-					playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+					playsound(src, 'sound/blank.ogg', 50, TRUE)
 					last_noise = world.time
 			if("Trombone")
 				if ( !(last_noise && world.time < last_noise + 20) )
-					playsound(src, 'sound/misc/sadtrombone.ogg', 50, TRUE)
+					playsound(src, 'sound/blank.ogg', 50, TRUE)
 					last_noise = world.time
 			if("Gas Scan")
 				if(scanmode == PDA_SCANNER_GAS)
@@ -508,7 +508,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				var/alert_s = input(U,"Alert severity level","Ping Drones",null) as null|anything in list("Low","Medium","High","Critical")
 				var/area/A = get_area(U)
 				if(A && alert_s && !QDELETED(U))
-					var/msg = "<span class='boldnotice'>NON-DRONE PING: [U.name]: [alert_s] priority alert in [A.name]!</span>"
+					var/msg = "<span class='boldnotice'>NON-DRONE {PING}: [U.name]: [alert_s] priority alert in [A.name]!</span>"
 					_alert_drones(msg, TRUE, U)
 					to_chat(U, msg)
 
@@ -579,7 +579,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 						pai.attack_self(U)
 					if("2")		// Eject pAI device
 						usr.put_in_hands(pai)
-						to_chat(usr, "<span class='notice'>You remove the pAI from the [name].</span>")
+						to_chat(usr, "<span class='notice'>I remove the pAI from the [name].</span>")
 
 //LINK FUNCTIONS===================================
 
@@ -598,7 +598,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
-		playsound(src, 'sound/items/bikehorn.ogg', 30, TRUE)
+		playsound(src, 'sound/blank.ogg', 30, TRUE)
 
 	if(U.machine == src && href_list["skiprefresh"]!="1")//Final safety.
 		attack_self(U)//It auto-closes the menu prior if the user is not in range and so on.
@@ -612,13 +612,22 @@ GLOBAL_LIST_EMPTY(PDAs)
 		return
 	do_remove_id(usr)
 
+	if (id)
+		usr.put_in_hands(id)
+		to_chat(usr, "<span class='notice'>I remove the ID from the [name].</span>")
+		id = null
+		update_icon()
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			if(H.wear_ring == src)
+				H.sec_hud_set_ID()
 
 /obj/item/pda/proc/do_remove_id(mob/user)
 	if(!id)
 		return
 	if(user)
 		user.put_in_hands(id)
-		to_chat(user, "<span class='notice'>You remove the ID from the [name].</span>")
+		to_chat(user, "<span class='notice'>I remove the ID from the [name].</span>")
 	else
 		id.forceMove(get_turf(src))
 
@@ -628,7 +637,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
-		if(H.wear_id == src)
+		if(H.wear_ring == src)
 			H.sec_hud_set_ID()
 
 
@@ -688,7 +697,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	// Log it in our logs
 	tnote += "<i><b>&rarr; To [target_text]:</b></i><br>[signal.format_message()]<br>"
 	// Show it to ghosts
-	var/ghost_message = "<span class='name'>[owner] </span><span class='game say'>PDA Message</span> --> <span class='name'>[target_text]</span>: <span class='message'>[signal.format_message()]</span>"
+	var/ghost_message = "<span class='name'>[owner] </span><span class='say'>PDA Message</span> --> <span class='name'>[target_text]</span>: <span class='message'>[signal.format_message()]</span>"
 	for(var/mob/M in GLOB.player_list)
 		if(isobserver(M) && (M.client.prefs.chat_toggles & CHAT_GHOSTPDA))
 			to_chat(M, "[FOLLOW_LINK(M, user)] [ghost_message]")
@@ -705,7 +714,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	tnote += "<i><b>&larr; From <a href='byond://?src=[REF(src)];choice=Message;target=[REF(signal.source)]'>[signal.data["name"]]</a> ([signal.data["job"]]):</b></i><br>[signal.format_message()]<br>"
 
 	if (!silent)
-		playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		audible_message("[icon2html(src, hearers(src))] *[ttone]*", null, 3)
 	//Search for holder of the PDA.
 	var/mob/living/L = null
@@ -761,13 +770,13 @@ GLOBAL_LIST_EMPTY(PDAs)
 	remove_pen()
 
 /obj/item/pda/verb/verb_toggle_light()
-	set category = "Object"
+	set hidden = 1
 	set name = "Toggle Flashlight"
 
 	toggle_light()
 
 /obj/item/pda/verb/verb_remove_id()
-	set category = "Object"
+	set hidden = 1
 	set name = "Eject ID"
 	set src in usr
 
@@ -777,7 +786,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		to_chat(usr, "<span class='warning'>This PDA does not have an ID in it!</span>")
 
 /obj/item/pda/verb/verb_remove_pen()
-	set category = "Object"
+	set hidden = 1
 	set name = "Remove Pen"
 	set src in usr
 
@@ -801,7 +810,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	if(inserted_item)
 		usr.put_in_hands(inserted_item)
-		to_chat(usr, "<span class='notice'>You remove [inserted_item] from [src].</span>")
+		to_chat(usr, "<span class='notice'>I remove [inserted_item] from [src].</span>")
 		inserted_item = null
 		update_icon()
 	else
@@ -831,7 +840,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	id = inserting_id
 	if(ishuman(loc))
 		var/mob/living/carbon/human/human_wearer = loc
-		if(human_wearer.wear_id == src)
+		if(human_wearer.wear_ring == src)
 			human_wearer.sec_hud_set_ID()
 	if(old_id)
 		if(user)
@@ -847,7 +856,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 			return
 		cartridge = C
 		cartridge.host_pda = src
-		to_chat(user, "<span class='notice'>You insert [cartridge] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert [cartridge] into [src].</span>")
 		update_icon()
 
 	else if(istype(C, /obj/item/card/id))
@@ -863,7 +872,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		else
 			if(!id_check(user, idcard))
 				return
-			to_chat(user, "<span class='notice'>You put the ID into \the [src]'s slot.</span>")
+			to_chat(user, "<span class='notice'>I put the ID into \the [src]'s slot.</span>")
 			updateSelfDialog()//Update self dialog on success.
 
 			return	//Return in case of failed check or when successful.
@@ -872,7 +881,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		if(!user.transferItemToLoc(C, src))
 			return
 		pai = C
-		to_chat(user, "<span class='notice'>You slot \the [C] into [src].</span>")
+		to_chat(user, "<span class='notice'>I slot \the [C] into [src].</span>")
 		update_icon()
 		updateUsrDialog()
 	else if(is_type_in_list(C, contained_item)) //Checks if there is a pen
@@ -881,13 +890,13 @@ GLOBAL_LIST_EMPTY(PDAs)
 		else
 			if(!user.transferItemToLoc(C, src))
 				return
-			to_chat(user, "<span class='notice'>You slide \the [C] into \the [src].</span>")
+			to_chat(user, "<span class='notice'>I slide \the [C] into \the [src].</span>")
 			inserted_item = C
 			update_icon()
 	else if(istype(C, /obj/item/photo))
 		var/obj/item/photo/P = C
 		picture = P.picture
-		to_chat(user, "<span class='notice'>You scan \the [C].</span>")
+		to_chat(user, "<span class='notice'>I scan \the [C].</span>")
 	else
 		return ..()
 
@@ -949,9 +958,9 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	if (ismob(loc))
 		var/mob/M = loc
-		M.show_message("<span class='userdanger'>Your [src] explodes!</span>", MSG_VISUAL, "<span class='warning'>You hear a loud *pop*!</span>", MSG_AUDIBLE)
+		M.show_message("<span class='danger'>My [src] explodes!</span>", MSG_VISUAL, "<span class='warning'>I hear a loud *pop*!</span>", MSG_AUDIBLE)
 	else
-		visible_message("<span class='danger'>[src] explodes!</span>", "<span class='warning'>You hear a loud *pop*!</span>")
+		visible_message("<span class='danger'>[src] explodes!</span>", "<span class='warning'>I hear a loud *pop*!</span>")
 
 	if(T)
 		T.hotspot_expose(700,125)
@@ -1008,7 +1017,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/list/namecounts = list()
 
 	if(aiPDA.toff)
-		to_chat(user, "<span class='alert'>Turn on your receiver in order to send messages.</span>")
+		to_chat(user, "<span class='alert'>Turn on my receiver in order to send messages.</span>")
 		return
 
 	for (var/obj/item/pda/P in get_viewable_pdas())
@@ -1044,7 +1053,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		var/HTML = "<html><head><title>AI PDA Message Log</title></head><body>[aiPDA.tnote]</body></html>"
 		user << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
 	else
-		to_chat(user, "<span class='warning'>You do not have a PDA! You should make an issue report about this.</span>")
+		to_chat(user, "<span class='warning'>I do not have a PDA! You should make an issue report about this.</span>")
 
 // Pass along the pulse to atoms in contents, largely added so pAIs are vulnerable to EMP
 /obj/item/pda/emp_act(severity)

@@ -1,6 +1,6 @@
 /obj/machinery/computer/cargo
 	name = "supply console"
-	desc = "Used to order supplies, approve requests, and control the shuttle."
+	desc = ""
 	icon_screen = "supply"
 	circuit = /obj/item/circuitboard/computer/cargo
 	ui_x = 780
@@ -22,7 +22,7 @@
 
 /obj/machinery/computer/cargo/request
 	name = "supply request console"
-	desc = "Used to request supplies from cargo."
+	desc = ""
 	icon_screen = "request"
 	circuit = /obj/item/circuitboard/computer/cargo/request
 	requestonly = TRUE
@@ -52,7 +52,7 @@
 	if(obj_flags & EMAGGED)
 		return
 	user.visible_message("<span class='warning'>[user] swipes a suspicious card through [src]!</span>",
-	"<span class='notice'>You adjust [src]'s routing and receiver spectrum, unlocking special supplies and contraband.</span>")
+	"<span class='notice'>I adjust [src]'s routing and receiver spectrum, unlocking special supplies and contraband.</span>")
 
 	obj_flags |= EMAGGED
 	contraband = TRUE

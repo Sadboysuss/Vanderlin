@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
-	desc = "A rectangular steel crate."
+	desc = ""
 	icon = 'icons/obj/crates.dmi'
 	icon_state = "crate"
 	icon_living = "crate"
@@ -18,7 +18,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	emote_taunt = list("growls")
 	speak_emote = list("creaks")
 	taunt_chance = 30
@@ -72,7 +72,7 @@
 			var/mob/living/carbon/C = target
 			C.Paralyze(40)
 			C.visible_message("<span class='danger'>\The [src] knocks down \the [C]!</span>", \
-					"<span class='userdanger'>\The [src] knocks you down!</span>")
+					"<span class='danger'>\The [src] knocks you down!</span>")
 
 /mob/living/simple_animal/hostile/mimic/crate/proc/trigger()
 	if(!attempt_open)
@@ -182,7 +182,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 		var/mob/living/carbon/C = target
 		C.Paralyze(40)
 		C.visible_message("<span class='danger'>\The [src] knocks down \the [C]!</span>", \
-				"<span class='userdanger'>\The [src] knocks you down!</span>")
+				"<span class='danger'>\The [src] knocks you down!</span>")
 
 /mob/living/simple_animal/hostile/mimic/copy/machine
 	speak = list("HUMANS ARE IMPERFECT!", "YOU SHALL BE ASSIMILATED!", "YOU ARE HARMING YOURSELF", "You have been deemed hazardous. Will you comply?", \

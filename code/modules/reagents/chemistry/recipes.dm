@@ -13,8 +13,8 @@
 
 	var/required_temp = 0
 	var/is_cold_recipe = 0 // Set to 1 if you want the recipe to only react when it's BELOW the required temp.
-	var/mix_message = "The solution begins to bubble." //The message shown to nearby people upon mixing, if applicable
-	var/mix_sound = 'sound/effects/bubbles.ogg' //The sound played upon mixing, if applicable
+	var/mix_message //The message shown to nearby people upon mixing, if applicable
+	var/mix_sound //The sound played upon mixing, if applicable
 
 /datum/chemical_reaction/proc/on_reaction(datum/reagents/holder, created_volume)
 	return
@@ -36,7 +36,7 @@
 		message_admins(message, 0, 1)
 		log_game("[reaction_name] chemical mob spawn reaction occuring at [AREACOORD(T)] carried by [key_name(M)] with last fingerprint [A.fingerprintslast? A.fingerprintslast : "N/A"]")
 
-		playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, TRUE)
+		playsound(get_turf(holder.my_atom), 'sound/blank.ogg', 100, TRUE)
 
 		for(var/mob/living/carbon/C in viewers(get_turf(holder.my_atom), null))
 			C.flash_act()

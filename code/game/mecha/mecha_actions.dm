@@ -77,7 +77,7 @@
 		return
 	if(!chassis.selected)
 		chassis.selected = available_equipment[1]
-		chassis.occupant_message("<span class='notice'>You select [chassis.selected].</span>")
+		chassis.occupant_message("<span class='notice'>I select [chassis.selected].</span>")
 		send_byjax(chassis.occupant,"exosuit.browser","eq_list",chassis.get_equipment_list())
 		button_icon_state = "mech_cycle_equip_on"
 		UpdateButtonIcon()
@@ -88,11 +88,11 @@
 		if(A == chassis.selected)
 			if(available_equipment.len == number)
 				chassis.selected = null
-				chassis.occupant_message("<span class='notice'>You switch to no equipment.</span>")
+				chassis.occupant_message("<span class='notice'>I switch to no equipment.</span>")
 				button_icon_state = "mech_cycle_equip_off"
 			else
 				chassis.selected = available_equipment[number+1]
-				chassis.occupant_message("<span class='notice'>You switch to [chassis.selected].</span>")
+				chassis.occupant_message("<span class='notice'>I switch to [chassis.selected].</span>")
 				button_icon_state = "mech_cycle_equip_on"
 			send_byjax(chassis.occupant,"exosuit.browser","eq_list",chassis.get_equipment_list())
 			UpdateButtonIcon()
@@ -176,12 +176,12 @@
 		chassis.leg_overload_mode = 1
 		chassis.step_in = min(1, round(chassis.step_in/2))
 		chassis.step_energy_drain = max(chassis.overload_step_energy_drain_min,chassis.step_energy_drain*chassis.leg_overload_coeff)
-		chassis.occupant_message("<span class='danger'>You enable leg actuators overload.</span>")
+		chassis.occupant_message("<span class='danger'>I enable leg actuators overload.</span>")
 	else
 		chassis.leg_overload_mode = 0
 		chassis.step_in = initial(chassis.step_in)
 		chassis.step_energy_drain = chassis.normal_step_energy_drain
-		chassis.occupant_message("<span class='notice'>You disable leg actuators overload.</span>")
+		chassis.occupant_message("<span class='notice'>I disable leg actuators overload.</span>")
 	UpdateButtonIcon()
 
 /datum/action/innate/mecha/mech_smoke
@@ -212,7 +212,7 @@
 		chassis.occupant_message("<font color='[chassis.zoom_mode?"blue":"red"]'>Zoom mode [chassis.zoom_mode?"en":"dis"]abled.</font>")
 		if(chassis.zoom_mode)
 			owner.client.change_view(12)
-			SEND_SOUND(owner, sound('sound/mecha/imag_enh.ogg',volume=50))
+			SEND_SOUND(owner, sound('sound/blank.ogg',volume=50))
 		else
 			owner.client.change_view(CONFIG_GET(string/default_view)) //world.view - default mob view size
 		UpdateButtonIcon()
@@ -228,16 +228,16 @@
 	switch(chassis.damtype)
 		if("tox")
 			new_damtype = "brute"
-			chassis.occupant_message("<span class='notice'>Your exosuit's hands form into fists.</span>")
+			chassis.occupant_message("<span class='notice'>My exosuit's hands form into fists.</span>")
 		if("brute")
 			new_damtype = "fire"
-			chassis.occupant_message("<span class='notice'>A torch tip extends from your exosuit's hand, glowing red.</span>")
+			chassis.occupant_message("<span class='notice'>A torch tip extends from my exosuit's hand, glowing red.</span>")
 		if("fire")
 			new_damtype = "tox"
 			chassis.occupant_message("<span class='notice'>A bone-chillingly thick plasteel needle protracts from the exosuit's palm.</span>")
 	chassis.damtype = new_damtype
 	button_icon_state = "mech_damtype_[new_damtype]"
-	playsound(src, 'sound/mecha/mechmove01.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	UpdateButtonIcon()
 
 /datum/action/innate/mecha/mech_toggle_phasing

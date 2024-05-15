@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/tesla
 	name = "Tesla Blast"
-	desc = "Charge up a tesla arc and release it at a random nearby target! You can move freely while it charges. The arc jumps between targets and can knock them down."
+	desc = ""
 	charge_type = "recharge"
 	charge_max	= 300
 	clothes_req = TRUE
@@ -23,8 +23,8 @@
 
 /obj/effect/proc_holder/spell/targeted/tesla/proc/StartChargeup(mob/user = usr)
 	ready = TRUE
-	to_chat(user, "<span class='notice'>You start gathering the power.</span>")
-	Snd = new/sound('sound/magic/lightning_chargeup.ogg',channel = 7)
+	to_chat(user, "<span class='notice'>I start gathering the power.</span>")
+	Snd = new/sound('sound/blank.ogg',channel = 7)
 	halo = halo || mutable_appearance('icons/effects/effects.dmi', "electricity", EFFECTS_LAYER)
 	user.add_overlay(halo)
 	playsound(get_turf(user), Snd, 50, FALSE)
@@ -56,7 +56,7 @@
 		Reset(user)
 		return
 
-	playsound(get_turf(user), 'sound/magic/lightningbolt.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	user.Beam(target,icon_state="lightning[rand(1,12)]",time=5)
 
 	Bolt(user,target,30,5,user)
@@ -66,14 +66,14 @@
 	origin.Beam(target,icon_state="lightning[rand(1,12)]",time=5)
 	var/mob/living/carbon/current = target
 	if(current.anti_magic_check())
-		playsound(get_turf(current), 'sound/magic/lightningshock.ogg', 50, TRUE, -1)
-		current.visible_message("<span class='warning'>[current] absorbs the spell, remaining unharmed!</span>", "<span class='userdanger'>You absorb the spell, remaining unharmed!</span>")
+		playsound(get_turf(current), 'sound/blank.ogg', 50, TRUE, -1)
+		current.visible_message("<span class='warning'>[current] absorbs the spell, remaining unharmed!</span>", "<span class='danger'>I absorb the spell, remaining unharmed!</span>")
 	else if(bounces < 1)
 		current.electrocute_act(bolt_energy,"Lightning Bolt",flags = SHOCK_NOGLOVES)
-		playsound(get_turf(current), 'sound/magic/lightningshock.ogg', 50, TRUE, -1)
+		playsound(get_turf(current), 'sound/blank.ogg', 50, TRUE, -1)
 	else
 		current.electrocute_act(bolt_energy,"Lightning Bolt",flags = SHOCK_NOGLOVES)
-		playsound(get_turf(current), 'sound/magic/lightningshock.ogg', 50, TRUE, -1)
+		playsound(get_turf(current), 'sound/blank.ogg', 50, TRUE, -1)
 		var/list/possible_targets = new
 		for(var/mob/living/M in view(range,target))
 			if(user == M || target == M && los_check(current,M)) // || origin == M ? Not sure double shockings is good or not

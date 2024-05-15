@@ -1,8 +1,8 @@
 // Tomato
 /obj/item/seeds/tomato
 	name = "pack of tomato seeds"
-	desc = "These seeds grow into tomato plants."
-	icon_state = "seed-tomato"
+	desc = ""
+	icon_state = "seed"
 	species = "tomato"
 	plantname = "Tomato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/tomato
@@ -17,7 +17,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato
 	seed = /obj/item/seeds/tomato
 	name = "tomato"
-	desc = "I say to-mah-to, you say tom-mae-to."
+	desc = ""
 	icon_state = "tomato"
 	splat_type = /obj/effect/decal/cleanable/food/tomato_smudge
 	filling_color = "#FF6347"
@@ -30,8 +30,8 @@
 // Blood Tomato
 /obj/item/seeds/tomato/blood
 	name = "pack of blood-tomato seeds"
-	desc = "These seeds grow into blood-tomato plants."
-	icon_state = "seed-bloodtomato"
+	desc = ""
+	icon_state = "seed"
 	species = "bloodtomato"
 	plantname = "Blood-Tomato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/tomato/blood
@@ -42,7 +42,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato/blood
 	seed = /obj/item/seeds/tomato/blood
 	name = "blood-tomato"
-	desc = "So bloody...so...very...bloody....AHHHH!!!!"
+	desc = ""
 	icon_state = "bloodtomato"
 	splat_type = /obj/effect/gibspawner/generic
 	filling_color = "#FF0000"
@@ -53,8 +53,8 @@
 // Blue Tomato
 /obj/item/seeds/tomato/blue
 	name = "pack of blue-tomato seeds"
-	desc = "These seeds grow into blue-tomato plants."
-	icon_state = "seed-bluetomato"
+	desc = ""
+	icon_state = "seed"
 	species = "bluetomato"
 	plantname = "Blue-Tomato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/tomato/blue
@@ -68,7 +68,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato/blue
 	seed = /obj/item/seeds/tomato/blue
 	name = "blue-tomato"
-	desc = "I say blue-mah-to, you say blue-mae-to."
+	desc = ""
 	icon_state = "bluetomato"
 	splat_type = /obj/effect/decal/cleanable/oil
 	filling_color = "#0000FF"
@@ -77,8 +77,8 @@
 // Bluespace Tomato
 /obj/item/seeds/tomato/blue/bluespace
 	name = "pack of bluespace tomato seeds"
-	desc = "These seeds grow into bluespace tomato plants."
-	icon_state = "seed-bluespacetomato"
+	desc = ""
+	icon_state = "seed"
 	species = "bluespacetomato"
 	plantname = "Bluespace Tomato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/tomato/blue/bluespace
@@ -91,7 +91,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato/blue/bluespace
 	seed = /obj/item/seeds/tomato/blue/bluespace
 	name = "bluespace tomato"
-	desc = "So lubricated, you might slip through space-time."
+	desc = ""
 	icon_state = "bluespacetomato"
 	distill_reagent = null
 	wine_power = 80
@@ -99,8 +99,8 @@
 // Killer Tomato
 /obj/item/seeds/tomato/killer
 	name = "pack of killer-tomato seeds"
-	desc = "These seeds grow into killer-tomato plants."
-	icon_state = "seed-killertomato"
+	desc = ""
+	icon_state = "seed"
 	species = "killertomato"
 	plantname = "Killer-Tomato Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/tomato/killer
@@ -116,7 +116,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato/killer
 	seed = /obj/item/seeds/tomato/killer
 	name = "killer-tomato"
-	desc = "I say to-mah-to, you say tom-mae-to... OH GOD IT'S EATING MY LEGS!!"
+	desc = ""
 	icon_state = "killertomato"
 	var/awakening = 0
 	filling_color = "#FF0000"
@@ -131,7 +131,7 @@
 /obj/item/reagent_containers/food/snacks/grown/tomato/killer/attack_self(mob/user)
 	if(awakening || isspaceturf(user.loc))
 		return
-	to_chat(user, "<span class='notice'>You begin to awaken the Killer Tomato...</span>")
+	to_chat(user, "<span class='notice'>I begin to awaken the Killer Tomato...</span>")
 	awakening = TRUE
 	addtimer(CALLBACK(src, .proc/awaken), 3 SECONDS)
 	log_game("[key_name(user)] awakened a killer tomato at [AREACOORD(user)].")

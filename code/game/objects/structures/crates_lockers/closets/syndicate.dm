@@ -1,10 +1,10 @@
 /obj/structure/closet/syndicate
 	name = "armory closet"
-	desc = "Why is this here?"
+	desc = ""
 	icon_state = "syndicate"
 
 /obj/structure/closet/syndicate/personal
-	desc = "It's a personal storage unit for operative gear."
+	desc = ""
 
 /obj/structure/closet/syndicate/personal/PopulateContents()
 	..()
@@ -18,7 +18,7 @@
 	new /obj/item/clothing/glasses/night(src)
 
 /obj/structure/closet/syndicate/nuclear
-	desc = "It's a storage unit for a Syndicate boarding party."
+	desc = ""
 
 /obj/structure/closet/syndicate/nuclear/PopulateContents()
 	for(var/i in 1 to 5)
@@ -29,7 +29,7 @@
 	new /obj/item/pda/syndicate(src)
 
 /obj/structure/closet/syndicate/resources
-	desc = "An old, dusty locker."
+	desc = ""
 
 /obj/structure/closet/syndicate/resources/PopulateContents()
 	..()
@@ -92,7 +92,7 @@
 		new /obj/item/tank/jetpack/carbondioxide(src)
 
 /obj/structure/closet/syndicate/resources/everything
-	desc = "It's an emergency storage closet for repairs."
+	desc = ""
 
 /obj/structure/closet/syndicate/resources/everything/PopulateContents()
 	var/list/resources = list(

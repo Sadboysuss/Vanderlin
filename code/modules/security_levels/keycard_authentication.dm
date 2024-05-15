@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 
 /obj/machinery/keycard_auth
 	name = "Keycard Authentication Device"
-	desc = "This device is used to trigger station functions, which require more than one ID card to authenticate."
+	desc = ""
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
 	use_power = IDLE_POWER_USE
@@ -17,7 +17,7 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	ui_x = 375
 	ui_y = 125
-	
+
 	var/datum/callback/ev
 	var/event = ""
 	var/obj/machinery/keycard_auth/event_source
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	if(isanimal(user))
 		var/mob/living/simple_animal/A = user
 		if(!A.dextrous)
-			to_chat(user, "<span class='warning'>You are too primitive to use this device!</span>")
+			to_chat(user, "<span class='warning'>I are too primitive to use this device!</span>")
 			return UI_CLOSE
 	return ..()
 

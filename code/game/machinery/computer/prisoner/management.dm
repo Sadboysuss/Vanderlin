@@ -1,6 +1,6 @@
 /obj/machinery/computer/prisoner/management
 	name = "prisoner management console"
-	desc = "Used to manage tracking implants placed inside criminals."
+	desc = ""
 	icon_screen = "explosive"
 	icon_keyboard = "security_key"
 	req_access = list(ACCESS_BRIG)
@@ -17,7 +17,7 @@
 /obj/machinery/computer/prisoner/management/ui_interact(mob/user)
 	. = ..()
 	if(isliving(user))
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 	var/dat = ""
 	if(screen == 0)
 		dat += "<HR><A href='?src=[REF(src)];lock=1'>{Log In}</A>"
@@ -119,7 +119,7 @@
 		else if(href_list["lock"])
 			if(allowed(usr))
 				screen = !screen
-				playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 			else
 				to_chat(usr, "<span class='danger'>Unauthorized access.</span>")
 
@@ -130,7 +130,7 @@
 			var/obj/item/implant/I = locate(href_list["warn"]) in GLOB.tracked_implants
 			if(I && istype(I) && I.imp_in)
 				var/mob/living/R = I.imp_in
-				to_chat(R, "<span class='hear'>You hear a voice in your head saying: '[warning]'</span>")
+				to_chat(R, "<span class='hear'>I hear a voice in your head saying: '[warning]'</span>")
 				log_directed_talk(usr, R, warning, LOG_SAY, "implant message")
 
 		src.add_fingerprint(usr)

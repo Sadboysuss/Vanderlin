@@ -1,6 +1,6 @@
 /obj/item/firing_pin
 	name = "electronic firing pin"
-	desc = "A small authentication device, to be inserted into a firearm receiver to allow operation. NT safety regulations require all new designs to incorporate one."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "firing_pin"
 	item_state = "pen"
@@ -26,13 +26,13 @@
 			if(G.pin && (force_replace || G.pin.pin_removeable))
 				G.pin.forceMove(get_turf(G))
 				G.pin.gun_remove(user)
-				to_chat(user, "<span class='notice'>You remove [G]'s old pin.</span>")
+				to_chat(user, "<span class='notice'>I remove [G]'s old pin.</span>")
 
 			if(!G.pin)
 				if(!user.temporarilyRemoveItemFromInventory(src))
 					return
 				gun_insert(user, G)
-				to_chat(user, "<span class='notice'>You insert [src] into [G].</span>")
+				to_chat(user, "<span class='notice'>I insert [src] into [G].</span>")
 			else
 				to_chat(user, "<span class='notice'>This firearm already has a firing pin installed.</span>")
 
@@ -40,7 +40,7 @@
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You override the authentication mechanism.</span>")
+	to_chat(user, "<span class='notice'>I override the authentication mechanism.</span>")
 
 /obj/item/firing_pin/proc/gun_insert(mob/living/user, obj/item/gun/G)
 	gun = G
@@ -62,7 +62,7 @@
 	if(selfdestruct)
 		if(user)
 			user.show_message("<span class='danger'>SELF-DESTRUCTING...</span><br>", MSG_VISUAL)
-			to_chat(user, "<span class='userdanger'>[gun] explodes!</span>")
+			to_chat(user, "<span class='danger'>[gun] explodes!</span>")
 		explosion(get_turf(gun), -1, 0, 2, 3)
 		if(gun)
 			qdel(gun)
@@ -70,13 +70,13 @@
 
 /obj/item/firing_pin/magic
 	name = "magic crystal shard"
-	desc = "A small enchanted shard which allows magical weapons to fire."
+	desc = ""
 
 
 // Test pin, works only near firing range.
 /obj/item/firing_pin/test_range
 	name = "test-range firing pin"
-	desc = "This safety firing pin allows weapons to be fired within proximity to a firing range."
+	desc = ""
 	fail_message = "<span class='warning'>TEST RANGE CHECK FAILED.</span>"
 	pin_removeable = TRUE
 
@@ -91,7 +91,7 @@
 // Implant pin, checks for implant
 /obj/item/firing_pin/implant
 	name = "implant-keyed firing pin"
-	desc = "This is a security firing pin which only authorizes users who are implanted with a certain device."
+	desc = ""
 	fail_message = "<span class='warning'>IMPLANT CHECK FAILED.</span>"
 	var/obj/item/implant/req_implant = null
 
@@ -104,7 +104,7 @@
 
 /obj/item/firing_pin/implant/mindshield
 	name = "mindshield firing pin"
-	desc = "This Security firing pin authorizes the weapon for only mindshield-implanted users."
+	desc = ""
 	icon_state = "firing_pin_loyalty"
 	req_implant = /obj/item/implant/mindshield
 
@@ -119,19 +119,19 @@
 // Can replace other pins. Replace a pin in cap's laser for extra fun!
 /obj/item/firing_pin/clown
 	name = "hilarious firing pin"
-	desc = "Advanced clowntech that can convert any firearm into a far more useful object."
+	desc = ""
 	color = "#FFFF00"
 	fail_message = "<span class='warning'>HONK!</span>"
 	force_replace = TRUE
 
 /obj/item/firing_pin/clown/pin_auth(mob/living/user)
-	playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return FALSE
 
 // Ultra-honk pin, clown's deadly joke item.
 // A gun with ultra-honk pin is useful for clown and useless for everyone else.
 /obj/item/firing_pin/clown/ultra/pin_auth(mob/living/user)
-	playsound(src.loc, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	if(user && (!(HAS_TRAIT(user, TRAIT_CLUMSY)) && !(user.mind && user.mind.assigned_role == "Clown")))
 		return FALSE
 	return TRUE
@@ -146,15 +146,15 @@
 
 // Now two times deadlier!
 /obj/item/firing_pin/clown/ultra/selfdestruct
-	desc = "Advanced clowntech that can convert any firearm into a far more useful object. It has a small nitrobananium charge on it."
+	desc = ""
 	selfdestruct = TRUE
 
 
 // DNA-keyed pin.
-// When you want to keep your toys for yourself.
+// When you want to keep your toys for myself.
 /obj/item/firing_pin/dna
 	name = "DNA-keyed firing pin"
-	desc = "This is a DNA-locked firing pin which only authorizes one user. Attempt to fire once to DNA-link."
+	desc = ""
 	icon_state = "firing_pin_dna"
 	fail_message = "<span class='warning'>DNA CHECK FAILED.</span>"
 	var/unique_enzymes = null
@@ -182,18 +182,18 @@
 		..()
 
 /obj/item/firing_pin/dna/dredd
-	desc = "This is a DNA-locked firing pin which only authorizes one user. Attempt to fire once to DNA-link. It has a small explosive charge on it."
+	desc = ""
 	selfdestruct = TRUE
 
 // Paywall pin, brought to you by ARMA 3 DLC.
 // Checks if the user has a valid bank account on an ID and if so attempts to extract a one-time payment to authorize use of the gun. Otherwise fails to shoot.
 /obj/item/firing_pin/paywall
 	name = "paywall firing pin"
-	desc = "A firing pin with a built-in configurable paywall."
+	desc = ""
 	color = "#FFD700"
 	fail_message = ""
 	var/list/gun_owners = list() //list of people who've accepted the license prompt. If this is the multi-payment pin, then this means they accepted the waiver that each shot will cost them money
-	var/payment_amount //how much gets paid out to license yourself to the gun
+	var/payment_amount //how much gets paid out to license myself to the gun
 	var/obj/item/card/id/pin_owner
 	var/multi_payment = FALSE //if true, user has to pay everytime they fire the gun
 	var/owned = FALSE
@@ -201,7 +201,7 @@
 
 /obj/item/firing_pin/paywall/attack_self(mob/user)
 	multi_payment = !multi_payment
-	to_chat(user, "<span class='notice'>You set the pin to [( multi_payment ) ? "process payment for every shot" : "one-time license payment"].</span>")
+	to_chat(user, "<span class='notice'>I set the pin to [( multi_payment ) ? "process payment for every shot" : "one-time license payment"].</span>")
 
 /obj/item/firing_pin/paywall/examine(mob/user)
 	. = ..()
@@ -236,7 +236,7 @@
 			to_chat(user, "<span class='warning'>ERROR: This firing pin has already been authorized!</span>")
 			return
 		if(id == pin_owner)
-			to_chat(user, "<span class='notice'>You unlink the card from the firing pin.</span>")
+			to_chat(user, "<span class='notice'>I unlink the card from the firing pin.</span>")
 			gun_owners -= user
 			pin_owner = null
 			owned = FALSE
@@ -251,7 +251,7 @@
 		owned = TRUE
 		payment_amount = transaction_amount
 		gun_owners += user
-		to_chat(user, "<span class='notice'>You link the card to the firing pin.</span>")
+		to_chat(user, "<span class='notice'>I link the card to the firing pin.</span>")
 
 /obj/item/firing_pin/paywall/pin_auth(mob/living/user)
 	if(!istype(user))//nice try commie
@@ -294,7 +294,7 @@
 // Laser tag pins
 /obj/item/firing_pin/tag
 	name = "laser tag firing pin"
-	desc = "A recreational firing pin, used in laser tag units to ensure users have their vests on."
+	desc = ""
 	fail_message = "<span class='warning'>SUIT CHECK FAILED.</span>"
 	var/obj/item/clothing/suit/suit_requirement = null
 	var/tagcolor = ""
@@ -302,9 +302,9 @@
 /obj/item/firing_pin/tag/pin_auth(mob/living/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/M = user
-		if(istype(M.wear_suit, suit_requirement))
+		if(istype(M.wear_armor, suit_requirement))
 			return TRUE
-	to_chat(user, "<span class='warning'>You need to be wearing [tagcolor] laser tag armor!</span>")
+	to_chat(user, "<span class='warning'>I need to be wearing [tagcolor] laser tag armor!</span>")
 	return FALSE
 
 /obj/item/firing_pin/tag/red

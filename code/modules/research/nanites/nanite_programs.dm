@@ -1,6 +1,6 @@
 /datum/nanite_program
 	var/name = "Generic Nanite Program"
-	var/desc = "Warn a coder if you can read this."
+	var/desc = ""
 
 	var/datum/component/nanites/nanites
 	var/mob/living/host_mob
@@ -87,7 +87,7 @@
 	for(var/R in rules)
 		var/datum/nanite_rule/rule = R
 		rule.copy_to(target)
-		
+
 	if(istype(target,src))
 		copy_extra_settings_to(target)
 

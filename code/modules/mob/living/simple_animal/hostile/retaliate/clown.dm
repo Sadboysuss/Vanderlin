@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/clown
 	name = "Clown"
-	desc = "A denizen of clown planet."
+	desc = ""
 	icon = 'icons/mob/clown_mobs.dmi'
 	icon_state = "clown"
 	icon_living = "clown"
@@ -22,7 +22,7 @@
 	harm_intent_damage = 8
 	melee_damage_lower = 10
 	melee_damage_upper = 10
-	attack_sound = 'sound/items/bikehorn.ogg'
+	attack_sound = 'sound/blank.ogg'
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	del_on_death = 1
@@ -45,7 +45,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/attack_hand(mob/living/carbon/human/M)
 	..()
-	playsound(src.loc, 'sound/items/bikehorn.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/clown/Life()
 	. = ..()
@@ -64,7 +64,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/lube
 	name = "Living Lube"
-	desc = "A puddle of lube brought to life by the honkmother."
+	desc = ""
 	icon_state = "lube"
 	icon_living = "lube"
 	turns_per_move = 1
@@ -81,7 +81,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/banana
 	name = "Clownana"
-	desc = "A fusion of clown and banana DNA birthed from a botany experiment gone wrong."
+	desc = ""
 	icon_state = "banana tree"
 	icon_living = "banana tree"
 	response_disarm_continuous = "peels"
@@ -99,7 +99,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/honkling
 	name = "Honkling"
-	desc = "A divine being sent by the Honkmother to spread joy. It's not dangerous, but it's a bit of a nuisance."
+	desc = ""
 	icon_state = "honkling"
 	icon_living = "honkling"
 	turns_per_move = 1
@@ -115,7 +115,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/fleshclown
 	name = "Fleshclown"
-	desc = "A being forged out of the pure essence of pranking, cursed into existence by a cruel maker."
+	desc = ""
 	icon_state = "fleshclown"
 	icon_living = "fleshclown"
 	response_help_continuous = "reluctantly pokes"
@@ -140,7 +140,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/longface
 	name = "Longface"
-	desc = "Often found walking into the bar."
+	desc = ""
 	icon_state = "long face"
 	icon_living = "long face"
 	move_resist = INFINITY
@@ -166,7 +166,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk
 	name = "Honk Hulk"
-	desc = "A cruel and fearsome clown. Don't make him angry."
+	desc = ""
 	icon_state = "honkhulk"
 	icon_living = "honkhulk"
 	move_resist = INFINITY
@@ -194,7 +194,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk/chlown
 	name = "Chlown"
-	desc = "A real lunkhead who somehow gets all the girls."
+	desc = ""
 	icon_state = "chlown"
 	icon_living = "chlown"
 	response_help_continuous = "submits to"
@@ -208,15 +208,15 @@
 	maxHealth = 500
 	health = 500
 	speed = -2
-	armour_penetration = 20
+	armor_penetration = 20
 	attack_verb_continuous = "steals the girlfriend of"
 	attack_verb_simple = "steal the girlfriend of"
-	attack_sound = 'sound/items/airhorn2.ogg'
+	attack_sound = 'sound/blank.ogg'
 	loot = list(/obj/item/clothing/mask/gas/clown_hat, /obj/effect/gibspawner/human, /obj/effect/particle_effect/foam, /obj/item/soap)
 
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk/honcmunculus
 	name = "Honkmunculus"
-	desc = "A slender wiry figure of alchemical origin."
+	desc = ""
 	icon_state = "honkmunculus"
 	icon_living = "honkmunculus"
 	response_help_continuous = "skeptically pokes"
@@ -240,7 +240,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk/destroyer
 	name = "The Destroyer"
-	desc = "An ancient being born of arcane honking."
+	desc = ""
 	icon_state = "destroyer"
 	icon_living = "destroyer"
 	response_disarm_continuous = "bounces off of"
@@ -252,7 +252,7 @@
 	harm_intent_damage = 30
 	melee_damage_lower = 20
 	melee_damage_upper = 40
-	armour_penetration = 30
+	armor_penetration = 30
 	stat_attack = UNCONSCIOUS
 	attack_verb_continuous = "acts out divine vengeance on"
 	attack_verb_simple = "act out divine vengeance on"
@@ -262,7 +262,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/mutant
 	name = "Unknown"
-	desc = "Kill it for its own sake."
+	desc = ""
 	icon_state = "mutant"
 	icon_living = "mutant"
 	move_resist = INFINITY
@@ -289,7 +289,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/mutant/blob
 	name = "Something that was once a clown"
-	desc = "A grotesque bulging figure far mutated from it's original state."
+	desc = ""
 	icon_state = "blob"
 	icon_living = "blob"
 	speak = list("hey, buddy", "HONK!!!", "H-h-h-H-HOOOOONK!!!!", "HONKHONKHONK!!!", "HEY, BUCKO, GET BACK HERE!!!", "HOOOOOOOONK!!!")

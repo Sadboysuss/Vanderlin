@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = INIT_ORDER_MACHINES
 	flags = SS_KEEP_TIMING
+//	wait = 1
 	var/list/processing = list()
 	var/list/currentrun = list()
 	var/list/powernets = list()
@@ -44,8 +45,6 @@ SUBSYSTEM_DEF(machines)
 				thing.auto_use_power() //add back the power state
 		else
 			processing -= thing
-			if (!QDELETED(thing))
-				thing.datum_flags &= ~DF_ISPROCESSING
 		if (MC_TICK_CHECK)
 			return
 

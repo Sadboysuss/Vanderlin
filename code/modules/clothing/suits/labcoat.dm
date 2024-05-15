@@ -1,6 +1,6 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
-	desc = "A suit that protects against minor chemical spills."
+	desc = ""
 	icon_state = "labcoat"
 	item_state = "labcoat"
 	blood_overlay_type = "coat"
@@ -12,38 +12,38 @@
 
 /obj/item/clothing/suit/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
-	desc = "Bluer than the standard model."
+	desc = ""
 	icon_state = "labcoat_cmo"
 	item_state = "labcoat_cmo"
 
 /obj/item/clothing/suit/toggle/labcoat/emt
 	name = "\improper EMT's jacket"
-	desc = "A dark blue jacket with reflective strips for emergency medical technicians."
+	desc = ""
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"
 
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "\proper The Mad's labcoat"
-	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
+	desc = ""
 	icon_state = "labgreen"
 	item_state = "labgreen"
 
 /obj/item/clothing/suit/toggle/labcoat/genetics
 	name = "geneticist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a blue stripe on the shoulder."
+	desc = ""
 	icon_state = "labcoat_gen"
 
 /obj/item/clothing/suit/toggle/labcoat/chemist
 	name = "chemist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has an orange stripe on the shoulder."
+	desc = ""
 	icon_state = "labcoat_chem"
 
 /obj/item/clothing/suit/toggle/labcoat/virologist
 	name = "virologist labcoat"
-	desc = "A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder."
+	desc = ""
 	icon_state = "labcoat_vir"
 
 /obj/item/clothing/suit/toggle/labcoat/science
 	name = "scientist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
+	desc = ""
 	icon_state = "labcoat_tox"

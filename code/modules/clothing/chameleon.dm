@@ -57,7 +57,7 @@
 	else if(istype(old_headgear, /obj/item/clothing/mask/chameleon/drone))
 		new_headgear = new /obj/item/clothing/head/chameleon/drone()
 	else
-		to_chat(owner, "<span class='warning'>You shouldn't be able to toggle a camogear helmetmask if you're not wearing it.</span>")
+		to_chat(owner, "<span class='warning'>I shouldn't be able to toggle a camogear helmetmask if you're not wearing it.</span>")
 	if(new_headgear)
 		// Force drop the item in the headslot, even though
 		// it's has TRAIT_NODROP
@@ -122,7 +122,7 @@
 	if(O.toggle_helmet && (ispath(O.suit, /obj/item/clothing/suit/space/hardsuit) || ispath(O.suit, /obj/item/clothing/suit/hooded)) && ishuman(user))
 		var/mob/living/carbon/human/H = user
 		//make sure they are actually wearing the suit, not just holding it, and that they have a chameleon hat
-		if(istype(H.wear_suit, /obj/item/clothing/suit/chameleon) && istype(H.head, /obj/item/clothing/head/chameleon))
+		if(istype(H.wear_armor, /obj/item/clothing/suit/chameleon) && istype(H.head, /obj/item/clothing/head/chameleon))
 			var/helmet_type
 			if(ispath(O.suit, /obj/item/clothing/suit/space/hardsuit))
 				var/obj/item/clothing/suit/space/hardsuit/hardsuit = O.suit
@@ -236,7 +236,7 @@
 	select_look(owner)
 	return 1
 
-/datum/action/item_action/chameleon/change/proc/emp_randomise(var/amount = EMP_RANDOMISE_TIME)
+/datum/action/item_action/chameleon/change/proc/emp_randomise(amount = EMP_RANDOMISE_TIME)
 	START_PROCESSING(SSprocessing, src)
 	random_look(owner)
 
@@ -295,7 +295,7 @@
 	icon_state = "black"
 	item_state = "bl_suit"
 	mob_overlay_icon = 'icons/mob/clothing/under/color.dmi'
-	desc = "It's a plain jumpsuit. It has a small dial on the wrist."
+	desc = ""
 	sensor_mode = SENSOR_OFF //Hey who's this guy on the Syndicate Shuttle??
 	random_sensor = FALSE
 	resistance_flags = NONE
@@ -324,7 +324,7 @@
 
 /obj/item/clothing/suit/chameleon
 	name = "armor"
-	desc = "A slim armored vest that protects against most types of damage."
+	desc = ""
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
@@ -353,7 +353,7 @@
 
 /obj/item/clothing/glasses/chameleon
 	name = "Optical Meson Scanner"
-	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
+	desc = ""
 	icon_state = "meson"
 	item_state = "meson"
 	resistance_flags = NONE
@@ -380,7 +380,7 @@
 	chameleon_action.emp_randomise(INFINITY)
 
 /obj/item/clothing/gloves/chameleon
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = ""
 	name = "insulated gloves"
 	icon_state = "yellow"
 	item_state = "ygloves"
@@ -410,7 +410,7 @@
 
 /obj/item/clothing/head/chameleon
 	name = "grey cap"
-	desc = "It's a baseball hat in a tasteful grey colour."
+	desc = ""
 	icon_state = "greysoft"
 
 	resistance_flags = NONE
@@ -453,7 +453,7 @@
 
 /obj/item/clothing/mask/chameleon
 	name = "gas mask"
-	desc = "A face-covering mask that can be connected to an air supply. While good for concealing your identity, it isn't good for blocking gas flow." //More accurate
+	desc = "" //More accurate
 	icon_state = "gas_alt"
 	item_state = "gas_alt"
 	resistance_flags = NONE
@@ -512,7 +512,7 @@
 /obj/item/clothing/shoes/chameleon
 	name = "black shoes"
 	icon_state = "black"
-	desc = "A pair of black shoes."
+	desc = ""
 	permeability_coefficient = 0.05
 	resistance_flags = NONE
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
@@ -537,7 +537,7 @@
 /obj/item/clothing/shoes/chameleon/noslip
 	name = "black shoes"
 	icon_state = "black"
-	desc = "A pair of black shoes."
+	desc = ""
 	clothing_flags = NOSLIP
 	can_be_bloody = FALSE
 
@@ -568,7 +568,7 @@
 
 /obj/item/storage/belt/chameleon
 	name = "toolbelt"
-	desc = "Holds tools."
+	desc = ""
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
 /obj/item/storage/belt/chameleon/Initialize()
@@ -653,7 +653,7 @@
 
 /obj/item/clothing/neck/chameleon
 	name = "black tie"
-	desc = "A neosilk clip-on tie."
+	desc = ""
 	icon_state = "blacktie"
 	resistance_flags = NONE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)

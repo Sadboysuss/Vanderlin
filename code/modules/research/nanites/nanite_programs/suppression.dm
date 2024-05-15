@@ -2,7 +2,7 @@
 
 /datum/nanite_program/triggered/sleepy
 	name = "Sleep Induction"
-	desc = "The nanites cause rapid narcolepsy when triggered."
+	desc = ""
 	trigger_cost = 15
 	trigger_cooldown = 1200
 	rogue_types = list(/datum/nanite_program/brain_misfire, /datum/nanite_program/brain_decay)
@@ -10,13 +10,13 @@
 /datum/nanite_program/triggered/sleepy/trigger()
 	if(!..())
 		return
-	to_chat(host_mob, "<span class='warning'>You start to feel very sleepy...</span>")
+	to_chat(host_mob, "<span class='warning'>I start to feel very sleepy...</span>")
 	host_mob.drowsyness += 20
 	addtimer(CALLBACK(host_mob, /mob/living.proc/Sleeping, 200), rand(60,200))
 
 /datum/nanite_program/paralyzing
 	name = "Paralysis"
-	desc = "The nanites force muscle contraction, effectively paralyzing the host."
+	desc = ""
 	use_rate = 3
 	rogue_types = list(/datum/nanite_program/nerve_decay)
 
@@ -25,15 +25,15 @@
 
 /datum/nanite_program/paralyzing/enable_passive_effect()
 	. = ..()
-	to_chat(host_mob, "<span class='warning'>Your muscles seize! You can't move!</span>")
+	to_chat(host_mob, "<span class='warning'>My muscles seize! You can't move!</span>")
 
 /datum/nanite_program/paralyzing/disable_passive_effect()
 	. = ..()
-	to_chat(host_mob, "<span class='notice'>Your muscles relax, and you can move again.</span>")
+	to_chat(host_mob, "<span class='notice'>My muscles relax, and you can move again.</span>")
 
 /datum/nanite_program/triggered/shocking
 	name = "Electric Shock"
-	desc = "The nanites shock the host when triggered. Destroys a large amount of nanites!"
+	desc = ""
 	trigger_cost = 10
 	trigger_cooldown = 300
 	program_flags = NANITE_SHOCK_IMMUNE
@@ -46,7 +46,7 @@
 
 /datum/nanite_program/triggered/stun
 	name = "Neural Shock"
-	desc = "The nanites pulse the host's nerves when triggered, inapacitating them for a short period."
+	desc = ""
 	trigger_cost = 4
 	trigger_cooldown = 300
 	rogue_types = list(/datum/nanite_program/triggered/shocking, /datum/nanite_program/nerve_decay)
@@ -59,7 +59,7 @@
 
 /datum/nanite_program/pacifying
 	name = "Pacification"
-	desc = "The nanites suppress the aggression center of the brain, preventing the host from causing direct harm to others."
+	desc = ""
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/brain_misfire, /datum/nanite_program/brain_decay)
 
@@ -73,7 +73,7 @@
 
 /datum/nanite_program/blinding
 	name = "Blindness"
-	desc = "The nanites suppress the host's ocular nerves, blinding them while they're active."
+	desc = ""
 	use_rate = 1.5
 	rogue_types = list(/datum/nanite_program/nerve_decay)
 
@@ -87,7 +87,7 @@
 
 /datum/nanite_program/mute
 	name = "Mute"
-	desc = "The nanites suppress the host's speech, making them mute while they're active."
+	desc = ""
 	use_rate = 0.75
 	rogue_types = list(/datum/nanite_program/brain_decay, /datum/nanite_program/brain_misfire)
 
@@ -101,7 +101,7 @@
 
 /datum/nanite_program/fake_death
 	name = "Death Simulation"
-	desc = "The nanites induce a death-like coma into the host, able to fool most medical scans."
+	desc = ""
 	use_rate = 3.5
 	rogue_types = list(/datum/nanite_program/nerve_decay, /datum/nanite_program/necrotic, /datum/nanite_program/brain_decay)
 
@@ -128,7 +128,7 @@
 
 /datum/nanite_program/triggered/comm/speech
 	name = "Forced Speech"
-	desc = "The nanites force the host to say a pre-programmed sentence when triggered."
+	desc = ""
 	unique = FALSE
 	trigger_cost = 3
 	trigger_cooldown = 20
@@ -169,12 +169,12 @@
 		sent_message = sentence
 	if(host_mob.stat == DEAD)
 		return
-	to_chat(host_mob, "<span class='warning'>You feel compelled to speak...</span>")
+	to_chat(host_mob, "<span class='warning'>I feel compelled to speak...</span>")
 	host_mob.say(sent_message, forced = "nanite speech")
 
 /datum/nanite_program/triggered/comm/voice
 	name = "Skull Echo"
-	desc = "The nanites echo a synthesized message inside the host's skull."
+	desc = ""
 	unique = FALSE
 	trigger_cost = 1
 	trigger_cooldown = 20
@@ -213,11 +213,11 @@
 		sent_message = message
 	if(host_mob.stat == DEAD)
 		return
-	to_chat(host_mob, "<i>You hear a strange, robotic voice in your head...</i> \"<span class='robot'>[sent_message]</span>\"")
+	to_chat(host_mob, "<i>I hear a strange, robotic voice in my head...</i> \"<span class='robot'>[sent_message]</span>\"")
 
 /datum/nanite_program/triggered/comm/hallucination
 	name = "Hallucination"
-	desc = "The nanites make the host hallucinate something when triggered."
+	desc = ""
 	trigger_cost = 4
 	trigger_cooldown = 80
 	unique = FALSE
@@ -362,7 +362,7 @@
 
 /datum/nanite_program/good_mood
 	name = "Happiness Enhancer"
-	desc = "The nanites synthesize serotonin inside the host's brain, creating an artificial sense of happiness."
+	desc = ""
 	use_rate = 0.1
 	rogue_types = list(/datum/nanite_program/brain_decay)
 	extra_settings = list(NES_MOOD_MESSAGE)
@@ -392,7 +392,7 @@
 
 /datum/nanite_program/bad_mood
 	name = "Happiness Suppressor"
-	desc = "The nanites suppress the production of serotonin inside the host's brain, creating an artificial state of depression."
+	desc = ""
 	use_rate = 0.1
 	rogue_types = list(/datum/nanite_program/brain_decay)
 	extra_settings = list(NES_MOOD_MESSAGE)

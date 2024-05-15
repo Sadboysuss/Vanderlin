@@ -13,7 +13,7 @@ Contents:
 
 /obj/item/clothing/suit/space/space_ninja
 	name = "ninja suit"
-	desc = "A unique, vacuum-proof suit of nano-enhanced armor designed specifically for Spider Clan assassins."
+	desc = ""
 	icon_state = "s-ninja"
 	item_state = "s-ninja_suit"
 	allowed = list(/obj/item/gun, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals, /obj/item/stock_parts/cell)
@@ -102,13 +102,13 @@ Contents:
 		H.gib()
 		return FALSE
 	if(!istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-		to_chat(H, "<span class='userdanger'>ERROR</span>: 100113 UNABLE TO LOCATE HEAD GEAR\nABORTING...")
+		to_chat(H, "<span class='danger'>ERROR</span>: 100113 UNABLE TO LOCATE HEAD GEAR\nABORTING...")
 		return FALSE
 	if(!istype(H.shoes, /obj/item/clothing/shoes/space_ninja))
-		to_chat(H, "<span class='userdanger'>ERROR</span>: 122011 UNABLE TO LOCATE FOOT GEAR\nABORTING...")
+		to_chat(H, "<span class='danger'>ERROR</span>: 122011 UNABLE TO LOCATE FOOT GEAR\nABORTING...")
 		return FALSE
 	if(!istype(H.gloves, /obj/item/clothing/gloves/space_ninja))
-		to_chat(H, "<span class='userdanger'>ERROR</span>: 110223 UNABLE TO LOCATE HAND GEAR\nABORTING...")
+		to_chat(H, "<span class='danger'>ERROR</span>: 110223 UNABLE TO LOCATE HAND GEAR\nABORTING...")
 		return FALSE
 	affecting = H
 	ADD_TRAIT(src, TRAIT_NODROP, NINJA_SUIT_TRAIT)

@@ -1,11 +1,11 @@
-//These are all minor mutations that affect your speech somehow.
+//These are all minor mutations that affect my speech somehow.
 //Individual ones aren't commented since their functions should be evident at a glance
 
 /datum/mutation/human/nervousness
 	name = "Nervousness"
-	desc = "Causes the holder to stutter."
+	desc = ""
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>You feel nervous.</span>"
+	text_gain_indication = "<span class='danger'>I feel nervous.</span>"
 
 /datum/mutation/human/nervousness/on_life()
 	if(prob(10))
@@ -14,9 +14,9 @@
 
 /datum/mutation/human/wacky
 	name = "Wacky"
-	desc = "<span class='sans'>Unknown.</span>"
+	desc = ""
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='sans'>You feel an off sensation in your voicebox.</span>"
+	text_gain_indication = "<span class='sans'>I feel an off sensation in my voicebox.</span>"
 	text_lose_indication = "<span class='notice'>The off sensation passes.</span>"
 
 /datum/mutation/human/wacky/on_acquiring(mob/living/carbon/human/owner)
@@ -34,10 +34,10 @@
 
 /datum/mutation/human/mute
 	name = "Mute"
-	desc = "Completely inhibits the vocal section of the brain."
+	desc = ""
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>You feel unable to express yourself at all.</span>"
-	text_lose_indication = "<span class='danger'>You feel able to speak freely again.</span>"
+	text_gain_indication = "<span class='danger'>I feel unable to express myself at all.</span>"
+	text_lose_indication = "<span class='danger'>I feel able to speak freely again.</span>"
 
 /datum/mutation/human/mute/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -52,9 +52,9 @@
 
 /datum/mutation/human/smile
 	name = "Smile"
-	desc = "Causes the user to be in constant mania."
+	desc = ""
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='notice'>You feel so happy. Nothing can be wrong with anything. :)</span>"
+	text_gain_indication = "<span class='notice'>I feel so happy. Nothing can be wrong with anything. :)</span>"
 	text_lose_indication = "<span class='notice'>Everything is terrible again. :(</span>"
 
 /datum/mutation/human/smile/on_acquiring(mob/living/carbon/human/owner)
@@ -121,10 +121,10 @@
 
 /datum/mutation/human/unintelligible
 	name = "Unintelligible"
-	desc = "Partially inhibits the vocal center of the brain, severely distorting speech."
+	desc = ""
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>You can't seem to form any coherent thoughts!</span>"
-	text_lose_indication = "<span class='danger'>Your mind feels more clear.</span>"
+	text_gain_indication = "<span class='danger'>I can't seem to form any coherent thoughts!</span>"
+	text_lose_indication = "<span class='danger'>My mind feels more clear.</span>"
 
 /datum/mutation/human/unintelligible/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -138,9 +138,9 @@
 
 /datum/mutation/human/swedish
 	name = "Swedish"
-	desc = "A horrible mutation originating from the distant past. Thought to be eradicated after the incident in 2037."
+	desc = ""
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='notice'>You feel Swedish, however that works.</span>"
+	text_gain_indication = "<span class='notice'>I feel Swedish, however that works.</span>"
 	text_lose_indication = "<span class='notice'>The feeling of Swedishness passes.</span>"
 
 /datum/mutation/human/swedish/on_acquiring(mob/living/carbon/human/owner)
@@ -167,10 +167,10 @@
 
 /datum/mutation/human/chav
 	name = "Chav"
-	desc = "Unknown"
+	desc = ""
 	quality = MINOR_NEGATIVE
 	text_gain_indication = "<span class='notice'>Ye feel like a reet prat like, innit?</span>"
-	text_lose_indication = "<span class='notice'>You no longer feel like being rude and sassy.</span>"
+	text_lose_indication = "<span class='notice'>I no longer feel like being rude and sassy.</span>"
 
 /datum/mutation/human/chav/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -205,18 +205,18 @@
 		message = replacetext(message," windows "," windies ")
 		message = replacetext(message," window "," windy ")
 		message = replacetext(message," break "," do ")
-		message = replacetext(message," your "," yer ")
+		message = replacetext(message," my "," yer ")
 		message = replacetext(message," security "," coppers ")
 		speech_args[SPEECH_MESSAGE] = trim(message)
 
 
 /datum/mutation/human/elvis
 	name = "Elvis"
-	desc = "A terrifying mutation named after its 'patient-zero'."
+	desc = ""
 	quality = MINOR_NEGATIVE
 	locked = TRUE
-	text_gain_indication = "<span class='notice'>You feel pretty good, honeydoll.</span>"
-	text_lose_indication = "<span class='notice'>You feel a little less conversation would be great.</span>"
+	text_gain_indication = "<span class='notice'>I feel pretty good, honeydoll.</span>"
+	text_lose_indication = "<span class='notice'>I feel a little less conversation would be great.</span>"
 
 /datum/mutation/human/elvis/on_life()
 	switch(pick(1,2))
@@ -258,11 +258,11 @@
 
 /datum/mutation/human/stoner
 	name = "Stoner"
-	desc = "A common mutation that severely decreases intelligence."
+	desc = ""
 	quality = NEGATIVE
 	locked = TRUE
-	text_gain_indication = "<span class='notice'>You feel...totally chill, man!</span>"
-	text_lose_indication = "<span class='notice'>You feel like you have a better sense of time.</span>"
+	text_gain_indication = "<span class='notice'>I feel...totally chill, man!</span>"
+	text_lose_indication = "<span class='notice'>I feel like you have a better sense of time.</span>"
 
 /datum/mutation/human/stoner/on_acquiring(mob/living/carbon/human/owner)
 	..()

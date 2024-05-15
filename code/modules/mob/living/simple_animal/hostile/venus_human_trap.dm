@@ -2,7 +2,7 @@
 
 /obj/structure/alien/resin/flower_bud_enemy //inheriting basic attack/damage stuff from alien structures
 	name = "flower bud"
-	desc = "A large pulsating plant..."
+	desc = ""
 	icon = 'icons/effects/spacevines.dmi'
 	icon_state = "flower_bud"
 	layer = SPACEVINE_MOB_LAYER
@@ -34,7 +34,7 @@
 /obj/effect/ebeam/vine
 	name = "thick vine"
 	mouse_opacity = MOUSE_OPACITY_ICON
-	desc = "A thick vine, painful to the touch."
+	desc = ""
 
 
 /obj/effect/ebeam/vine/Crossed(atom/movable/AM)
@@ -42,13 +42,13 @@
 		var/mob/living/L = AM
 		if(!("vines" in L.faction))
 			L.adjustBruteLoss(5)
-			to_chat(L, "<span class='alert'>You cut yourself on the thorny vines.</span>")
+			to_chat(L, "<span class='alert'>I cut myself on the thorny vines.</span>")
 
 
 
 /mob/living/simple_animal/hostile/venus_human_trap
 	name = "venus human trap"
-	desc = "Now you know how the fly feels."
+	desc = ""
 	icon_state = "venus_human_trap"
 	layer = SPACEVINE_MOB_LAYER
 	health = 50
@@ -59,7 +59,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	a_intent = INTENT_HARM
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 0
 	faction = list("hostile","vines","plants")
@@ -111,7 +111,7 @@
 							if(O.density)
 								continue grasping
 					if(prob(grasp_chance))
-						to_chat(L, "<span class='userdanger'>\The [src] has you entangled!</span>")
+						to_chat(L, "<span class='danger'>\The [src] has you entangled!</span>")
 						grasping[L] = Beam(L, "vine", time=INFINITY, maxdistance=5, beam_type=/obj/effect/ebeam/vine)
 						tethers += list(L.AddComponent(/datum/component/tether, src, grasp_range+1, /obj/effect/ebeam/vine), AddComponent(/datum/component/tether, L, grasp_range+1, /obj/effect/ebeam/vine))
 						break //only take 1 new victim per cycle

@@ -27,7 +27,7 @@
 			//TODO make it toggleable to either forcedrop the items, or deny
 			//entry when holding them
 			// literally only an option for carbons though
-			to_chat(C, "<span class='warning'>You may not hold items while blood crawling!</span>")
+			to_chat(C, "<span class='warning'>I may not hold items while blood crawling!</span>")
 			return FALSE
 		var/obj/item/bloodcrawl/B1 = new(C)
 		var/obj/item/bloodcrawl/B2 = new(C)
@@ -46,7 +46,7 @@
 	var/turf/mobloc = get_turf(loc)
 
 	visible_message("<span class='warning'>[src] sinks into the pool of blood!</span>")
-	playsound(get_turf(src), 'sound/magic/enter_blood.ogg', 50, TRUE, -1)
+	playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
 	// Extinguish, unbuckle, stop being pulled, set our location into the
 	// dummy object
 	var/obj/effect/dummy/phased_mob/slaughter/holder = new /obj/effect/dummy/phased_mob/slaughter(mobloc)
@@ -73,32 +73,32 @@
 	var/kidnapped = FALSE
 
 	if(victim.stat == CONSCIOUS)
-		visible_message("<span class='warning'>[victim] kicks free of the blood pool just before entering it!</span>", null, "<span class='notice'>You hear splashing and struggling.</span>")
+		visible_message("<span class='warning'>[victim] kicks free of the blood pool just before entering it!</span>", null, "<span class='notice'>I hear splashing and struggling.</span>")
 	else if(victim.reagents && victim.reagents.has_reagent(/datum/reagent/consumable/ethanol/demonsblood, needs_metabolizing = TRUE))
-		visible_message("<span class='warning'>Something prevents [victim] from entering the pool!</span>", "<span class='warning'>A strange force is blocking [victim] from entering!</span>", "<span class='notice'>You hear a splash and a thud.</span>")
+		visible_message("<span class='warning'>Something prevents [victim] from entering the pool!</span>", "<span class='warning'>A strange force is blocking [victim] from entering!</span>", "<span class='notice'>I hear a splash and a thud.</span>")
 	else
 		victim.forceMove(src)
 		victim.emote("scream")
-		visible_message("<span class='warning'><b>[src] drags [victim] into the pool of blood!</b></span>", null, "<span class='notice'>You hear a splash.</span>")
+		visible_message("<span class='warning'><b>[src] drags [victim] into the pool of blood!</b></span>", null, "<span class='notice'>I hear a splash.</span>")
 		kidnapped = TRUE
 
 	if(kidnapped)
 		var/success = bloodcrawl_consume(victim)
 		if(!success)
-			to_chat(src, "<span class='danger'>You happily devour... nothing? Your meal vanished at some point!</span>")
+			to_chat(src, "<span class='danger'>I happily devour... nothing? Your meal vanished at some point!</span>")
 
 	notransform = FALSE
 	return TRUE
 
 /mob/living/proc/bloodcrawl_consume(mob/living/victim)
-	to_chat(src, "<span class='danger'>You begin to feast on [victim]... You can not move while you are doing this.</span>")
+	to_chat(src, "<span class='danger'>I begin to feast on [victim]... You can not move while you are doing this.</span>")
 
 	var/sound
 	if(istype(src, /mob/living/simple_animal/slaughter))
 		var/mob/living/simple_animal/slaughter/SD = src
 		sound = SD.feast_sound
 	else
-		sound = 'sound/magic/demon_consume.ogg'
+		sound = 'sound/blank.ogg'
 
 	for(var/i in 1 to 3)
 		playsound(get_turf(src),sound, 50, TRUE)
@@ -125,7 +125,7 @@
 			victim.exit_blood_effect()
 		return TRUE
 
-	to_chat(src, "<span class='danger'>You devour [victim]. Your health is fully restored.</span>")
+	to_chat(src, "<span class='danger'>I devour [victim]. Your health is fully restored.</span>")
 	revive(full_heal = TRUE, admin_revive = FALSE)
 
 	// No defib possible after laughter
@@ -139,7 +139,7 @@
 
 /obj/item/bloodcrawl
 	name = "blood crawl"
-	desc = "You are unable to hold anything while in this form."
+	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	item_flags = ABSTRACT | DROPDEL
 
@@ -148,7 +148,7 @@
 	ADD_TRAIT(src, TRAIT_NODROP, ABSTRACT_ITEM_TRAIT)
 
 /mob/living/proc/exit_blood_effect(obj/effect/decal/cleanable/B)
-	playsound(get_turf(src), 'sound/magic/exit_blood.ogg', 50, TRUE, -1)
+	playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
 	//Makes the mob have the color of the blood pool it came out of
 	var/newcolor = rgb(149, 10, 10)
 	if(istype(B, /obj/effect/decal/cleanable/xenoblood))

@@ -63,11 +63,11 @@
 	* If you have not grabbed something, do a normal tk attack
 	* If you have something, throw it at the target.  If it is already adjacent, do a normal attackby()
 	* If you click what you are holding, or attack_self(), do an attack_self_tk() on it.
-	* Deletes itself if it is ever not in your hand, or if you should have no access to TK.
+	* Deletes itself if it is ever not in my hand, or if you should have no access to TK.
 */
 /obj/item/tk_grab
 	name = "Telekinetic Grab"
-	desc = "Magic"
+	desc = ""
 	icon = 'icons/obj/magic.dmi'//Needs sprites
 	icon_state = "2"
 	item_flags = NOBLUDGEON | ABSTRACT | DROPDEL
@@ -90,7 +90,7 @@
 	return ..()
 
 /obj/item/tk_grab/process()
-	if(check_if_focusable(focus)) //if somebody grabs your thing, no waiting for them to put it down and hitting them again.
+	if(check_if_focusable(focus)) //if somebody grabs my thing, no waiting for them to put it down and hitting them again.
 		update_icon()
 
 /obj/item/tk_grab/dropped(mob/user)
@@ -153,7 +153,7 @@
 /proc/tkMaxRangeCheck(mob/user, atom/target)
 	var/d = get_dist(user, target)
 	if(d > TK_MAXRANGE)
-		to_chat(user, "<span class='warning'>Your mind won't reach that far.</span>")
+		to_chat(user, "<span class='warning'>My mind won't reach that far.</span>")
 		return
 	return TRUE
 

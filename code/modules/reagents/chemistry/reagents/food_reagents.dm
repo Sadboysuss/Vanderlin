@@ -11,16 +11,18 @@
 	name = "Consumable"
 	taste_description = "generic food"
 	taste_mult = 4
-	var/nutriment_factor = 1 * REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM
+	var/nutriment_factor = 1
+	var/hydration_factor = 0
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
 /datum/reagent/consumable/on_mob_life(mob/living/carbon/M)
-	current_cycle++
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_nutrition(nutriment_factor)
-	holder.remove_reagent(type, metabolization_rate)
+			H.adjust_nutrition(nutriment_factor * metabolization_rate)
+			H.adjust_hydration(hydration_factor * metabolization_rate)
+	return ..()
 
 /datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == INGEST)
@@ -42,10 +44,10 @@
 	name = "Nutriment"
 	description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	reagent_state = SOLID
-	nutriment_factor = 15 * REAGENTS_METABOLISM
+	nutriment_factor = 35 //EVERY 1 NUTRIMENT RESTORES 35 NUTRITION
 	color = "#664330" // rgb: 102, 67, 48
 
-	var/brute_heal = 1
+	var/brute_heal = 0
 	var/burn_heal = 0
 
 /datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M)
@@ -134,10 +136,10 @@
 	var/FryLoss = round(min(38, oil_damage * reac_volume))
 	if(!HAS_TRAIT(M, TRAIT_OIL_FRIED))
 		M.visible_message("<span class='warning'>The boiling oil sizzles as it covers [M]!</span>", \
-		"<span class='userdanger'>You're covered in boiling oil!</span>")
+		"<span class='danger'>You're covered in boiling oil!</span>")
 		if(FryLoss)
 			M.emote("scream")
-		playsound(M, 'sound/machines/fryer/deep_fryer_emerge.ogg', 25, TRUE)
+		playsound(M, 'sound/blank.ogg', 25, TRUE)
 		ADD_TRAIT(M, TRAIT_OIL_FRIED, "cooking_oil_react")
 		addtimer(CALLBACK(M, /mob/living/proc/unfry_mob), 3)
 	if(FryLoss)
@@ -164,7 +166,7 @@
 	taste_description = "sweetness"
 
 /datum/reagent/consumable/sugar/overdose_start(mob/living/M)
-	to_chat(M, "<span class='userdanger'>You go into hyperglycaemic shock! Lay off the twinkies!</span>")
+	to_chat(M, "<span class='danger'>I go into hyperglycaemic shock! Lay off the twinkies!</span>")
 	M.AdjustSleeping(600, FALSE)
 	. = 1
 
@@ -345,7 +347,7 @@
 	taste_description = "creamy chocolate"
 	glass_icon_state  = "chocolateglass"
 	glass_name = "glass of chocolate"
-	glass_desc = "Tasty."
+	glass_desc = ""
 
 /datum/reagent/consumable/hot_coco/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(5 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
@@ -381,7 +383,7 @@
 				M.emote(pick("twitch","giggle"))
 	..()
 
-/datum/reagent/consumable/garlic //NOTE: having garlic in your blood stops vampires from biting you.
+/datum/reagent/consumable/garlic //NOTE: having garlic in my blood stops vampires from biting you.
 	name = "Garlic Juice"
 	description = "Crushed garlic. Chefs love it, but it can make you smell bad."
 	color = "#FEFEFE"
@@ -391,7 +393,7 @@
 /datum/reagent/consumable/garlic/on_mob_life(mob/living/carbon/M)
 	if(isvampire(M)) //incapacitating but not lethal. Unfortunately, vampires cannot vomit.
 		if(prob(min(25,current_cycle)))
-			to_chat(M, "<span class='danger'>You can't get the scent of garlic out of your nose! You can barely think...</span>")
+			to_chat(M, "<span class='danger'>I can't get the scent of garlic out of my nose! You can barely think...</span>")
 			M.Paralyze(10)
 			M.Jitter(10)
 	else if(ishuman(M))
@@ -470,7 +472,7 @@
 
 /datum/reagent/consumable/flour
 	name = "Flour"
-	description = "This is what you rub all over yourself to pretend to be a ghost."
+	description = "This is what you rub all over myself to pretend to be a ghost."
 	reagent_state = SOLID
 	color = "#FFFFFF" // rgb: 0, 0, 0
 	taste_description = "chalky wheat"
@@ -585,10 +587,10 @@
 				unprotected = TRUE
 	if(unprotected)
 		if(!M.getorganslot(ORGAN_SLOT_EYES))	//can't blind somebody with no eyes
-			to_chat(M, "<span class='notice'>Your eye sockets feel wet.</span>")
+			to_chat(M, "<span class='notice'>My eye sockets feel wet.</span>")
 		else
 			if(!M.eye_blurry)
-				to_chat(M, "<span class='warning'>Tears well up in your eyes!</span>")
+				to_chat(M, "<span class='warning'>Tears well up in my eyes!</span>")
 			M.blind_eyes(2)
 			M.blur_eyes(5)
 	..()
@@ -598,7 +600,7 @@
 	if(M.eye_blurry)	//Don't worsen vision if it was otherwise fine
 		M.blur_eyes(4)
 		if(prob(10))
-			to_chat(M, "<span class='warning'>Your eyes sting!</span>")
+			to_chat(M, "<span class='warning'>My eyes sting!</span>")
 			M.blind_eyes(2)
 
 

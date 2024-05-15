@@ -12,7 +12,7 @@
 			U.Jitter(35)
 			U.stuttering = 20
 			if(U.getStaminaLoss() > 95)
-				to_chat(U, "<font color ='red', size ='4'><B>Your ears weren't meant for this spectral sound.</B></font>")
+				to_chat(U, "<font color ='red', size ='4'><B>My ears weren't meant for this spectral sound.</B></font>")
 				spectral_change(U)
 			return
 
@@ -48,13 +48,13 @@
 			else if(prob(30))
 				new/obj/item/instrument/trombone/spectral(T)
 			else
-				to_chat(H, "<span class='boldwarning'>The spooky gods forgot to ship your instrument. Better luck next unlife.</span>")
-		to_chat(H, "<span class='boldnotice'>You are the spooky skeleton!</span>")
-		to_chat(H, "<span class='boldnotice'>A new life and identity has begun. Help your fellow skeletons into bringing out the spooky-pocalypse. You haven't forgotten your past life, and are still beholden to past loyalties.</span>")
+				to_chat(H, "<span class='boldwarning'>The spooky gods forgot to ship my instrument. Better luck next unlife.</span>")
+		to_chat(H, "<span class='boldnotice'>I are the spooky skeleton!</span>")
+		to_chat(H, "<span class='boldnotice'>A new life and identity has begun. Help my fellow skeletons into bringing out the spooky-pocalypse. You haven't forgotten my past life, and are still beholden to past loyalties.</span>")
 		change_name(H)	//time for a new name!
 
 /datum/component/spooky/proc/change_name(mob/living/carbon/human/H)
-	var/t = sanitize_name(stripped_input(H, "Enter your new skeleton name", H.real_name, null, MAX_NAME_LEN))
+	var/t = sanitize_name(stripped_input(H, "Enter my new skeleton name", H.real_name, null, MAX_NAME_LEN))
 	if(!t)
 		t = "spooky skeleton"
 	H.fully_replace_character_name(null, t)

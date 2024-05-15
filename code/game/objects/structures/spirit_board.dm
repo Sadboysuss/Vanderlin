@@ -1,6 +1,6 @@
 /obj/structure/spirit_board
 	name = "spirit board"
-	desc = "A wooden board with letters etched into it, used in seances."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "spirit_board"
 	density = TRUE
@@ -11,7 +11,7 @@
 	var/lastuser = null
 
 /obj/structure/spirit_board/examine()
-	desc = "[initial(desc)] The planchette is sitting at \"[planchette]\"."
+	desc = ""
 	. = ..()
 
 /obj/structure/spirit_board/attack_hand(mob/user)

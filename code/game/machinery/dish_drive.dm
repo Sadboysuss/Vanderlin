@@ -42,16 +42,16 @@
 		return
 	var/obj/item/I = contents[contents.len] //the most recently-added item
 	user.put_in_hands(I)
-	to_chat(user, "<span class='notice'>You take out [I] from [src].</span>")
-	playsound(src, 'sound/items/pshoom.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I take out [I] from [src].</span>")
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	flick("synthesizer_beam", src)
 
 /obj/machinery/dish_drive/attackby(obj/item/I, mob/living/user, params)
-	if(is_type_in_list(I, collectable_items) && user.a_intent != INTENT_HARM)
+	if(is_type_in_list(I, collectable_items) && user.used_intent.type != INTENT_HARM)
 		if(!user.transferItemToLoc(I, src))
 			return
-		to_chat(user, "<span class='notice'>You put [I] in [src], and it's beamed into energy!</span>")
-		playsound(src, 'sound/items/pshoom.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I put [I] in [src], and it's beamed into energy!</span>")
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		flick("synthesizer_beam", src)
 		return
 	else if(default_deconstruction_screwdriver(user, "[initial(icon_state)]-o", initial(icon_state), I))
@@ -90,7 +90,7 @@
 			if(I.Adjacent(src))
 				visible_message("<span class='notice'>[src] beams up [I]!</span>")
 				I.forceMove(src)
-				playsound(src, 'sound/items/pshoom.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 				flick("synthesizer_beam", src)
 			else
 				step_towards(I, src)
@@ -98,7 +98,7 @@
 /obj/machinery/dish_drive/attack_ai(mob/living/user)
 	if(stat)
 		return
-	to_chat(user, "<span class='notice'>You send a disposal transmission signal to [src].</span>")
+	to_chat(user, "<span class='notice'>I send a disposal transmission signal to [src].</span>")
 	do_the_dishes(TRUE)
 
 /obj/machinery/dish_drive/AltClick(mob/living/user)
@@ -112,7 +112,7 @@
 	if(!bin)
 		if(manual)
 			visible_message("<span class='warning'>[src] buzzes. There are no disposal bins in range!</span>")
-			playsound(src, 'sound/machines/buzz-sigh.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 		return
 	var/disposed = 0
 	for(var/obj/item/I in contents)
@@ -122,8 +122,8 @@
 			disposed++
 	if (disposed)
 		visible_message("<span class='notice'>[src] [pick("whooshes", "bwooms", "fwooms", "pshooms")] and beams [disposed] stored item\s into the nearby [bin.name].</span>")
-		playsound(src, 'sound/items/pshoom.ogg', 50, TRUE)
-		playsound(bin, 'sound/items/pshoom.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
+		playsound(bin, 'sound/blank.ogg', 50, TRUE)
 		Beam(bin, icon_state = "rped_upgrade", time = 5)
 		bin.update_icon()
 		flick("synthesizer_beam", src)

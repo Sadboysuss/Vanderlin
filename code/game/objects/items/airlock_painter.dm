@@ -1,6 +1,6 @@
 /obj/item/airlock_painter
 	name = "airlock painter"
-	desc = "An advanced autopainter preprogrammed with several paintjobs for airlocks. Use it on an airlock during or after construction to change the paintjob."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "paint sprayer"
 	item_state = "paint sprayer"
@@ -12,7 +12,7 @@
 	flags_1 = CONDUCT_1
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
-	usesound = 'sound/effects/spray2.ogg'
+	usesound = 'sound/blank.ogg'
 
 	var/obj/item/toner/ink = null
 
@@ -25,7 +25,7 @@
 /obj/item/airlock_painter/proc/use_paint(mob/user)
 	if(can_use(user))
 		ink.charges--
-		playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		return 1
 	else
 		return 0
@@ -74,7 +74,7 @@
 		// TODO maybe add some colorful vomit?
 
 		user.visible_message("<span class='suicide'>[user] vomits out [user.p_their()] [L]!</span>")
-		playsound(user.loc, 'sound/effects/splat.ogg', 50, TRUE)
+		playsound(user.loc, 'sound/blank.ogg', 50, TRUE)
 
 		L.forceMove(T)
 
@@ -112,16 +112,16 @@
 			return
 		if(!user.transferItemToLoc(W, src))
 			return
-		to_chat(user, "<span class='notice'>You install [W] into [src].</span>")
+		to_chat(user, "<span class='notice'>I install [W] into [src].</span>")
 		ink = W
-		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	else
 		return ..()
 
 /obj/item/airlock_painter/attack_self(mob/user)
 	if(ink)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		ink.forceMove(user.drop_location())
 		user.put_in_hands(ink)
-		to_chat(user, "<span class='notice'>You remove [ink] from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove [ink] from [src].</span>")
 		ink = null

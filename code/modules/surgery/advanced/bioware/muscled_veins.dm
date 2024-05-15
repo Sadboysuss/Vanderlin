@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/muscled_veins
 	name = "Vein Muscle Membrane"
-	desc = "A surgical procedure which adds a muscled membrane to blood vessels, allowing them to pump blood without a heart."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
@@ -17,12 +17,12 @@
 	time = 125
 
 /datum/surgery_step/muscled_veins/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You start wrapping muscles around [target]'s circulatory system.</span>",
+	display_results(user, target, "<span class='notice'>I start wrapping muscles around [target]'s circulatory system.</span>",
 		"<span class='notice'>[user] starts wrapping muscles around [target]'s circulatory system.</span>",
 		"<span class='notice'>[user] starts manipulating [target]'s circulatory system.</span>")
 
 /datum/surgery_step/muscled_veins/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You reshape [target]'s circulatory system, adding a muscled membrane!</span>",
+	display_results(user, target, "<span class='notice'>I reshape [target]'s circulatory system, adding a muscled membrane!</span>",
 		"<span class='notice'>[user] reshapes [target]'s circulatory system, adding a muscled membrane!</span>",
 		"<span class='notice'>[user] finishes manipulating [target]'s circulatory system.</span>")
 	new /datum/bioware/muscled_veins(target)
@@ -30,7 +30,7 @@
 
 /datum/bioware/muscled_veins
 	name = "Threaded Veins"
-	desc = "The circulatory system is woven into a mesh, severely reducing the amount of blood lost from wounds."
+	desc = ""
 	mod_type = BIOWARE_CIRCULATION
 
 /datum/bioware/muscled_veins/on_gain()

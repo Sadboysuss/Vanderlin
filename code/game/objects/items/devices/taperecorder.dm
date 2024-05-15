@@ -1,6 +1,6 @@
 /obj/item/taperecorder
 	name = "universal recorder"
-	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "taperecorder_empty"
 	item_state = "analyzer"
@@ -38,19 +38,19 @@
 		if(!user.transferItemToLoc(I,src))
 			return
 		mytape = I
-		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert [I] into [src].</span>")
 		update_icon()
 
 
 /obj/item/taperecorder/proc/eject(mob/user)
 	if(mytape)
-		to_chat(user, "<span class='notice'>You remove [mytape] from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove [mytape] from [src].</span>")
 		stop()
 		user.put_in_hands(mytape)
 		mytape = null
 		update_icon()
 
-/obj/item/taperecorder/fire_act(exposed_temperature, exposed_volume)
+/obj/item/taperecorder/fire_act(added, maxstacks)
 	mytape.ruin() //Fires destroy the tape
 	..()
 
@@ -73,7 +73,7 @@
 
 /obj/item/taperecorder/verb/ejectverb()
 	set name = "Eject Tape"
-	set category = "Object"
+	set hidden = 1
 
 	if(!can_use(usr))
 		return
@@ -102,7 +102,7 @@
 
 /obj/item/taperecorder/verb/record()
 	set name = "Start Recording"
-	set category = "Object"
+	set hidden = 1
 
 	if(!can_use(usr))
 		return
@@ -133,7 +133,7 @@
 
 /obj/item/taperecorder/verb/stop()
 	set name = "Stop"
-	set category = "Object"
+	set hidden = 1
 
 	if(!can_use(usr))
 		return
@@ -153,7 +153,7 @@
 
 /obj/item/taperecorder/verb/play()
 	set name = "Play Tape"
-	set category = "Object"
+	set hidden = 1
 
 	if(!can_use(usr))
 		return
@@ -204,7 +204,7 @@
 
 /obj/item/taperecorder/verb/print_transcript()
 	set name = "Print Transcript"
-	set category = "Object"
+	set hidden = 1
 
 	if(!can_use(usr))
 		return
@@ -235,7 +235,7 @@
 
 /obj/item/tape
 	name = "tape"
-	desc = "A magnetic tape that can hold up to ten minutes of content."
+	desc = ""
 	icon_state = "tape_white"
 	icon = 'icons/obj/device.dmi'
 	item_state = "analyzer"
@@ -251,13 +251,13 @@
 	var/list/timestamp = list()
 	var/ruined = 0
 
-/obj/item/tape/fire_act(exposed_temperature, exposed_volume)
+/obj/item/tape/fire_act(added, maxstacks)
 	ruin()
 	..()
 
 /obj/item/tape/attack_self(mob/user)
 	if(!ruined)
-		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
+		to_chat(user, "<span class='notice'>I pull out all the tape!</span>")
 		ruin()
 
 
@@ -276,9 +276,9 @@
 
 /obj/item/tape/attackby(obj/item/I, mob/user, params)
 	if(ruined && I.tool_behaviour == TOOL_SCREWDRIVER || istype(I, /obj/item/pen))
-		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
+		to_chat(user, "<span class='notice'>I start winding the tape back in...</span>")
 		if(I.use_tool(src, user, 120))
-			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
+			to_chat(user, "<span class='notice'>I wound the tape back in.</span>")
 			fix()
 
 //Random colour tapes

@@ -36,6 +36,15 @@
 	var/list/atom_colours
 
 
+/// Last name used to calculate a color for the chatmessage overlays
+	var/chat_color_name
+	/// Last color calculated for the the chatmessage overlays
+	var/chat_color
+	/// A luminescence-shifted value of the last color calculated for chatmessage overlays
+	var/chat_color_darkened
+
+	var/voicecolor_override
+
 	///overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
 	var/list/priority_overlays
 	/// a very temporary list of overlays to remove
@@ -319,7 +328,7 @@
   *
   * Otherwise it simply forceMoves the atom into this atom
   */
-/atom/proc/CheckParts(list/parts_list)
+/atom/proc/CheckParts(list/parts_list, datum/crafting_recipe/R)
 	for(var/A in parts_list)
 		if(istype(A, /datum/reagent))
 			if(!reagents)
@@ -333,6 +342,13 @@
 				L.transferItemToLoc(M, src)
 			else
 				M.forceMove(src)
+
+/obj/item/CheckParts(list/parts_list, datum/crafting_recipe/R)
+	..()
+	if(R)
+		if(R.sellprice)
+			sellprice = R.sellprice
+			randomize_price()
 
 ///Hook for multiz???
 /atom/proc/update_multiz(prune_on_fail = FALSE)
@@ -380,10 +396,12 @@
 
 /// Can this atoms reagents be refilled
 /atom/proc/is_refillable()
+	testing("isrefill")
 	return reagents && (reagents.flags & REFILLABLE)
 
 /// Is this atom drainable of reagents
 /atom/proc/is_drainable()
+	testing("isdrain")
 	return reagents && (reagents.flags & DRAINABLE)
 
 /// Are you allowed to drop this atom
@@ -448,7 +466,10 @@
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[icon2html(src, user)] [thats? "That's ":""][get_examine_name(user)]"
+	return "[thats? "That's ":""][get_examine_name(user)]"
+
+/atom/proc/get_inspect_button()
+	return ""
 
 /**
   * Called when a mob examines (shift click or verb) this atom
@@ -459,32 +480,40 @@
   * Produces a signal COMSIG_PARENT_EXAMINE
   */
 /atom/proc/examine(mob/user)
-	. = list("[get_examine_string(user, TRUE)].")
+	. = list("[get_examine_string(user, TRUE)].[get_inspect_button()]")
 
 	if(desc)
-		. += desc
+		. += "<span class='info'>[desc]</span>"
 
-	if(custom_materials)
-		for(var/i in custom_materials)
-			var/datum/material/M = i
-			. += "<u>It is made out of [M.name]</u>."
+//	if(custom_materials)
+//		for(var/i in custom_materials)
+//			var/datum/material/M = i
+//			. += "<u>It is made out of [M.name]</u>."
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)
-			. += "It contains:"
 			if(length(reagents.reagent_list))
 				if(user.can_see_reagents()) //Show each individual reagent
+					. += "It contains:"
 					for(var/datum/reagent/R in reagents.reagent_list)
-						. += "[R.volume] units of [R.name]"
+						if(R.volume / 3 < 1)
+							. += "less than 1 oz of <font color=[R.color]>[R.name]</font>"
+						else
+							. += "[round(R.volume / 3)] oz of <font color=[R.color]>[R.name]</font>"
 				else //Otherwise, just show the total volume
 					var/total_volume = 0
+					var/reagent_color
 					for(var/datum/reagent/R in reagents.reagent_list)
 						total_volume += R.volume
-					. += "[total_volume] units of various reagents"
+					reagent_color = mix_color_from_reagents(reagents.reagent_list)
+					if(total_volume / 3 < 1)
+						. += "It contains less than 1 oz of <font color=[reagent_color]>something.</font>"
+					else
+						. += "It contains [round(total_volume / 3)] oz of <font color=[reagent_color]>something.</font>"
 			else
 				. += "Nothing."
 		else if(reagents.flags & AMOUNT_VISIBLE)
 			if(reagents.total_volume)
-				. += "<span class='notice'>It has [reagents.total_volume] unit\s left.</span>"
+				. += "<span class='notice'>It has [round(reagents.total_volume / 3)] oz left.</span>"
 			else
 				. += "<span class='danger'>It's empty.</span>"
 
@@ -524,7 +553,7 @@
 /atom/proc/relaymove(mob/user)
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 50
-		to_chat(user, "<span class='warning'>You can't move while buckled to [src]!</span>")
+		to_chat(user, "<span class='warning'>I should try resisting.</span>")
 	return
 
 /// Handle what happens when your contents are exploded by a bomb
@@ -550,8 +579,8 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_BLOB_ACT, B)
 	return
 
-/atom/proc/fire_act(exposed_temperature, exposed_volume)
-	SEND_SIGNAL(src, COMSIG_ATOM_FIRE_ACT, exposed_temperature, exposed_volume)
+/atom/proc/fire_act(added, maxstacks)
+	SEND_SIGNAL(src, COMSIG_ATOM_FIRE_ACT, added, maxstacks)
 	return
 
 /**
@@ -718,14 +747,18 @@
   * call chain
   */
 /atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+	if(src_object.parent == src)
+		return
 	var/list/things = src_object.contents()
 	var/datum/progressbar/progress = new(user, things.len, src)
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	while (do_after(user, 10, TRUE, src, FALSE, CALLBACK(STR, /datum/component/storage.proc/handle_mass_item_insertion, things, src_object, user, progress)))
 		stoplag(1)
 	qdel(progress)
-	to_chat(user, "<span class='notice'>You dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as you can.</span>")
+	to_chat(user, "<span class='notice'>I dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as I can.</span>")
 	STR.orient2hud(user)
+	STR.update_icon()
+	src_object.update_icon()
 	src_object.orient2hud(user)
 	if(user.active_storage) //refresh the HUD to show the transfered contents
 		user.active_storage.close(user)

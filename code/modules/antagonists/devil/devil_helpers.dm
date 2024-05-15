@@ -4,8 +4,8 @@
 		if(BANE_WHITECLOTHES)
 			if(ishuman(attacker))
 				var/mob/living/carbon/human/H = attacker
-				if(H.w_uniform && istype(H.w_uniform, /obj/item/clothing/under))
-					var/obj/item/clothing/under/U = H.w_uniform
+				if(H.wear_pants && istype(H.wear_pants, /obj/item/clothing/under))
+					var/obj/item/clothing/under/U = H.wear_pants
 					var/static/list/whiteness = list (
 						/obj/item/clothing/under/color/white = 2,
 						/obj/item/clothing/under/rank/civilian/bartender = 1,

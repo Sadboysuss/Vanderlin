@@ -1,6 +1,6 @@
 /obj/structure/trap
 	name = "IT'S A TRAP"
-	desc = "Stepping on me is a guaranteed bad day."
+	desc = ""
 	icon = 'icons/obj/hand_of_god_structures.dmi'
 	icon_state = "trap"
 	density = FALSE
@@ -42,7 +42,7 @@
 	if(user.mind && user.mind in immune_minds)
 		return
 	if(get_dist(user, src) <= 1)
-		. += "<span class='notice'>You reveal [src]!</span>"
+		. += "<span class='notice'>I reveal [src]!</span>"
 		flare()
 
 /obj/structure/trap/proc/flare()
@@ -84,7 +84,7 @@
 
 /obj/structure/trap/stun
 	name = "shock trap"
-	desc = "A trap that will shock and render you immobile. You'd better avoid it."
+	desc = ""
 	icon_state = "trap-shock"
 	var/stun_time = 100
 
@@ -94,7 +94,7 @@
 
 /obj/structure/trap/stun/hunter
 	name = "bounty trap"
-	desc = "A trap that only goes off when a fugitive steps on it, announcing the location and stunning the target. You'd better avoid it."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "bounty_trap_on"
 	stun_time = 200
@@ -126,7 +126,7 @@
 
 /obj/item/bountytrap
 	name = "bounty trap"
-	desc = "A trap that only goes off when a fugitive steps on it, announcing the location and stunning the target. It's currently inactive."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "bounty_trap_off"
 	var/obj/structure/trap/stun/hunter/stored_trap
@@ -149,14 +149,14 @@
 
 /obj/item/bountytrap/proc/announce_fugitive()
 	spark_system.start()
-	playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	radio.talk_into(src, "Fugitive has triggered this trap in the [get_area_name(src)]!", RADIO_CHANNEL_COMMON)
 
 /obj/item/bountytrap/attack_self(mob/living/user)
 	var/turf/T = get_turf(src)
 	if(!user || !user.transferItemToLoc(src, T))//visibly unequips
 		return
-	to_chat(user, "<span class=notice>You set up [src]. Examine while close to disarm it.</span>")
+	to_chat(user, "<span class=notice>I set up [src]. Examine while close to disarm it.</span>")
 	stored_trap.forceMove(T)//moves trap to ground
 	forceMove(stored_trap)//moves item into trap
 
@@ -168,7 +168,7 @@
 
 /obj/structure/trap/fire
 	name = "flame trap"
-	desc = "A trap that will set you ablaze. You'd better avoid it."
+	desc = ""
 	icon_state = "trap-fire"
 
 /obj/structure/trap/fire/trap_effect(mob/living/L)
@@ -178,7 +178,7 @@
 
 /obj/structure/trap/chill
 	name = "frost trap"
-	desc = "A trap that will chill you to the bone. You'd better avoid it."
+	desc = ""
 	icon_state = "trap-frost"
 
 /obj/structure/trap/chill/trap_effect(mob/living/L)
@@ -190,7 +190,7 @@
 
 /obj/structure/trap/damage
 	name = "earth trap"
-	desc = "A trap that will summon a small earthquake, just for you. You'd better avoid it."
+	desc = ""
 	icon_state = "trap-earth"
 
 
@@ -204,7 +204,7 @@
 
 /obj/structure/trap/ward
 	name = "divine ward"
-	desc = "A divine barrier, It looks like you could destroy it with enough effort, or wait for it to dissipate..."
+	desc = ""
 	icon_state = "ward"
 	density = TRUE
 	time_between_triggers = 1200 //Exists for 2 minutes
@@ -215,7 +215,7 @@
 
 /obj/structure/trap/cult
 	name = "unholy trap"
-	desc = "A trap that rings with unholy energy. You think you hear... chittering?"
+	desc = ""
 	icon_state = "trap-cult"
 
 /obj/structure/trap/cult/trap_effect(mob/living/L)

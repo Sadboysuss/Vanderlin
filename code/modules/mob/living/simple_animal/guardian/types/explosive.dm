@@ -41,7 +41,7 @@
 	if(!istype(A))
 		return
 	if(loc == summoner)
-		to_chat(src, "<span class='danger'><B>You must be manifested to create bombs!</B></span>")
+		to_chat(src, "<span class='danger'><B>I must be manifested to create bombs!</B></span>")
 		return
 	if(isobj(A) && Adjacent(A))
 		if(bomb_cooldown <= world.time && !stat)
@@ -51,7 +51,7 @@
 			RegisterSignal(A, boom_signals, .proc/kaboom)
 			addtimer(CALLBACK(src, .proc/disable, A), 600, TIMER_UNIQUE|TIMER_OVERRIDE)
 		else
-			to_chat(src, "<span class='danger'><B>Your powers are on cooldown! You must wait 20 seconds between bombs.</B></span>")
+			to_chat(src, "<span class='danger'><B>My powers are on cooldown! You must wait 20 seconds between bombs.</B></span>")
 
 /mob/living/simple_animal/hostile/guardian/bomb/proc/kaboom(atom/source, mob/living/explodee)
 	if(!istype(explodee))
@@ -61,7 +61,7 @@
 	to_chat(explodee, "<span class='danger'><B>[source] was boobytrapped!</B></span>")
 	to_chat(src, "<span class='danger'><B>Success! Your trap caught [explodee]</B></span>")
 	var/turf/T = get_turf(source)
-	playsound(T,'sound/effects/explosion2.ogg', 200, TRUE)
+	playsound(T,'sound/blank.ogg', 200, TRUE)
 	new /obj/effect/temp_visual/explosion(T)
 	explodee.ex_act(EXPLODE_HEAVY)
 	UNREGISTER_BOMB_SIGNALS(source)

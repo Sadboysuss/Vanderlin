@@ -5,7 +5,7 @@
 
 /obj/item/reagent_containers/food/snacks/cubancarp
 	name = "\improper Cuban carp"
-	desc = "A grifftastic sandwich that burns your tongue and then leaves it numb!"
+	desc = ""
 	icon_state = "cubancarp"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 4)
@@ -17,7 +17,7 @@
 
 /obj/item/reagent_containers/food/snacks/carpmeat
 	name = "carp fillet"
-	desc = "A fillet of spess carp meat."
+	desc = ""
 	icon_state = "fishfillet"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/toxin/carpotoxin = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
 	bitesize = 6
@@ -31,11 +31,11 @@
 
 /obj/item/reagent_containers/food/snacks/carpmeat/imitation
 	name = "imitation carp fillet"
-	desc = "Almost just like the real thing, kinda."
+	desc = ""
 
 /obj/item/reagent_containers/food/snacks/fishfingers
 	name = "fish fingers"
-	desc = "A finger of fish."
+	desc = ""
 	icon_state = "fishfingers"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
@@ -46,7 +46,7 @@
 
 /obj/item/reagent_containers/food/snacks/fishandchips
 	name = "fish and chips"
-	desc = "I do say so myself chap."
+	desc = ""
 	icon_state = "fishandchips"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6)
@@ -58,7 +58,7 @@
 
 /obj/item/reagent_containers/food/snacks/tofu
 	name = "tofu"
-	desc = "We all love tofu."
+	desc = ""
 	icon_state = "tofu"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	filling_color = "#F0E68C"
@@ -67,13 +67,13 @@
 
 /obj/item/reagent_containers/food/snacks/tofu/prison
 	name = "soggy tofu"
-	desc = "You refuse to eat this strange bean curd."
+	desc = ""
 	tastes = list("sour, rotten water" = 1)
 	foodtype = GROSS
 
 /obj/item/reagent_containers/food/snacks/spiderleg
 	name = "spider leg"
-	desc = "A still twitching leg of a giant spider... you don't really want to eat this, do you?"
+	desc = ""
 	icon_state = "spiderleg"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/toxin = 2)
 	cooked_type = /obj/item/reagent_containers/food/snacks/boiledspiderleg
@@ -83,7 +83,7 @@
 
 /obj/item/reagent_containers/food/snacks/cornedbeef
 	name = "corned beef and cabbage"
-	desc = "Now you can feel like a real tourist vacationing in Ireland."
+	desc = ""
 	icon_state = "cornedbeef"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 4)
@@ -93,7 +93,7 @@
 
 /obj/item/reagent_containers/food/snacks/bearsteak
 	name = "Filet migrawr"
-	desc = "Because eating bear wasn't manly enough."
+	desc = ""
 	icon_state = "bearsteak"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/vitamin = 6)
@@ -103,7 +103,7 @@
 
 /obj/item/reagent_containers/food/snacks/faggot
 	name = "faggot"
-	desc = "A great meal all round. Not a cord of wood."
+	desc = ""
 	icon_state = "faggot"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 1)
 	filling_color = "#800000"
@@ -112,7 +112,7 @@
 
 /obj/item/reagent_containers/food/snacks/sausage
 	name = "sausage"
-	desc = "A piece of mixed, long meat."
+	desc = ""
 	icon_state = "sausage"
 	filling_color = "#CD5C5C"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -135,35 +135,35 @@
 
 /obj/item/reagent_containers/food/snacks/kebab/human
 	name = "human-kebab"
-	desc = "A human meat, on a stick."
+	desc = ""
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 6)
 	tastes = list("tender meat" = 3, "metal" = 1)
 	foodtype = MEAT | GROSS
 
 /obj/item/reagent_containers/food/snacks/kebab/monkey
 	name = "meat-kebab"
-	desc = "Delicious meat, on a stick."
+	desc = ""
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)
 	tastes = list("meat" = 3, "metal" = 1)
 	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/kebab/tofu
 	name = "tofu-kebab"
-	desc = "Vegan meat, on a stick."
+	desc = ""
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	tastes = list("tofu" = 3, "metal" = 1)
 	foodtype = VEGETABLES
 
 /obj/item/reagent_containers/food/snacks/kebab/tail
 	name = "lizard-tail kebab"
-	desc = "Severed lizard tail on a stick."
+	desc = ""
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 4)
 	tastes = list("meat" = 8, "metal" = 4, "scales" = 1)
 	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/rawkhinkali
 	name = "raw khinkali"
-	desc = "One hundred khinkalis? Do I look like a pig?"
+	desc = ""
 	icon_state = "khinkali"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1, /datum/reagent/consumable/garlic = 1)
 	cooked_type = /obj/item/reagent_containers/food/snacks/khinkali
@@ -172,7 +172,7 @@
 
 /obj/item/reagent_containers/food/snacks/khinkali
 	name = "khinkali"
-	desc = "One hundred khinkalis? Do I look like a pig?"
+	desc = ""
 	icon_state = "khinkali"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 2, /datum/reagent/consumable/garlic = 1)
 	bitesize = 3
@@ -182,7 +182,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
-	desc = "Just add water!"
+	desc = ""
 	icon_state = "monkeycube"
 	bitesize = 12
 	list_reagents = list(/datum/reagent/monkey_powder = 30)
@@ -209,7 +209,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube/gorilla
 	name = "gorilla cube"
-	desc = "A Waffle Co. brand gorilla cube. Now with extra molecules!"
+	desc = ""
 	bitesize = 20
 	list_reagents = list(/datum/reagent/monkey_powder = 30, /datum/reagent/medicine/strange_reagent = 5)
 	tastes = list("the jungle" = 1, "bananas" = 1, "jimmies" = 1)
@@ -217,7 +217,7 @@
 
 /obj/item/reagent_containers/food/snacks/enchiladas
 	name = "enchiladas"
-	desc = "Viva La Mexico!"
+	desc = ""
 	icon_state = "enchiladas"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 2)
 	bitesize = 4
@@ -228,7 +228,7 @@
 
 /obj/item/reagent_containers/food/snacks/stewedsoymeat
 	name = "stewed soy meat"
-	desc = "Even non-vegetarians will LOVE this!"
+	desc = ""
 	icon_state = "stewedsoymeat"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1)
@@ -243,7 +243,7 @@
 
 /obj/item/reagent_containers/food/snacks/boiledspiderleg
 	name = "boiled spider leg"
-	desc = "A giant spider's leg that's still twitching after being cooked. Gross!"
+	desc = ""
 	icon_state = "spiderlegcooked"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/capsaicin = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -254,7 +254,7 @@
 
 /obj/item/reagent_containers/food/snacks/spidereggsham
 	name = "green eggs and ham"
-	desc = "Would you eat them on a train? Would you eat them on a plane? Would you eat them on a state of the art corporate deathtrap floating through space?"
+	desc = ""
 	icon_state = "spidereggsham"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 3)
@@ -266,7 +266,7 @@
 
 /obj/item/reagent_containers/food/snacks/sashimi
 	name = "carp sashimi"
-	desc = "Celebrate surviving attack from hostile alien lifeforms by hospitalising yourself."
+	desc = ""
 	icon_state = "sashimi"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/capsaicin = 4, /datum/reagent/consumable/nutriment/vitamin = 4)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/capsaicin = 5)
@@ -285,12 +285,12 @@
 /obj/item/reagent_containers/food/snacks/nugget/Initialize()
 	. = ..()
 	var/shape = pick("lump", "star", "lizard", "corgi")
-	desc = "A 'chicken' nugget vaguely shaped like a [shape]."
+	desc = ""
 	icon_state = "nugget_[shape]"
 
 /obj/item/reagent_containers/food/snacks/pigblanket
 	name = "pig in a blanket"
-	desc = "A tiny sausage wrapped in a flakey, buttery roll. Free this pig from its blanket prison by eating it."
+	desc = ""
 	icon_state = "pigblanket"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 1)
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -300,7 +300,7 @@
 
 /obj/item/reagent_containers/food/snacks/kebab/rat
 	name = "rat-kebab"
-	desc = "Not so delicious rat meat, on a stick."
+	desc = ""
 	icon_state = "ratkebab"
 	w_class = WEIGHT_CLASS_NORMAL
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 2)
@@ -315,7 +315,7 @@
 
 /obj/item/reagent_containers/food/snacks/bbqribs
 	name = "bbq ribs"
-	desc = "BBQ ribs, slathered in a healthy coating of BBQ sauce. The least vegan thing to ever exist."
+	desc = ""
 	icon_state = "ribs"
 	w_class = WEIGHT_CLASS_NORMAL
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/consumable/nutriment/vitamin = 2, /datum/reagent/consumable/bbqsauce = 5)

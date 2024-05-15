@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/nerve_splicing
 	name = "Nerve Splicing"
-	desc = "A surgical procedure which splices the patient's nerves, making them more resistant to stuns."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
@@ -17,12 +17,12 @@
 	time = 155
 
 /datum/surgery_step/splice_nerves/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You start splicing together [target]'s nerves.</span>",
+	display_results(user, target, "<span class='notice'>I start splicing together [target]'s nerves.</span>",
 		"<span class='notice'>[user] starts splicing together [target]'s nerves.</span>",
 		"<span class='notice'>[user] starts manipulating [target]'s nervous system.</span>")
 
 /datum/surgery_step/splice_nerves/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You successfully splice [target]'s nervous system!</span>",
+	display_results(user, target, "<span class='notice'>I successfully splice [target]'s nervous system!</span>",
 		"<span class='notice'>[user] successfully splices [target]'s nervous system!</span>",
 		"<span class='notice'>[user] finishes manipulating [target]'s nervous system.</span>")
 	new /datum/bioware/spliced_nerves(target)
@@ -30,7 +30,7 @@
 
 /datum/bioware/spliced_nerves
 	name = "Spliced Nerves"
-	desc = "Nerves are connected to each other multiple times, greatly reducing the impact of stunning effects."
+	desc = ""
 	mod_type = BIOWARE_NERVES
 
 /datum/bioware/spliced_nerves/on_gain()

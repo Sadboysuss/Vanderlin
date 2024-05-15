@@ -20,7 +20,7 @@
 			else
 				check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT))
 		if(. >= 5 || prob(33))
-			occupant_message("<span class='userdanger'>Taking damage!</span>")
+			occupant_message("<span class='danger'>Taking damage!</span>")
 		log_message("Took [damage_amount] points of damage. Damage type: [damage_type]", LOG_MECHA)
 
 /obj/mecha/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
@@ -58,8 +58,8 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE) // Ugh. Ideally we shouldn't be setting cooldowns outside of click code.
-	user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
-	playsound(loc, 'sound/weapons/tap.ogg', 40, TRUE, -1)
+//	user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+	playsound(loc, 'sound/blank.ogg', 40, TRUE, -1)
 	user.visible_message("<span class='danger'>[user] hits [name]. Nothing happens.</span>", null, null, COMBAT_MESSAGE_RANGE)
 	log_message("Attack by hand/paw. Attacker - [user].", LOG_MECHA, color="red")
 
@@ -68,7 +68,7 @@
 
 /obj/mecha/attack_alien(mob/living/user)
 	log_message("Attack by alien. Attacker - [user].", LOG_MECHA, color="red")
-	playsound(src.loc, 'sound/weapons/slash.ogg', 100, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 	attack_generic(user, 15, BRUTE, "melee", 0)
 
 /obj/mecha/attack_animal(mob/living/simple_animal/user)
@@ -80,7 +80,7 @@
 		var/play_soundeffect = 1
 		if(user.environment_smash)
 			play_soundeffect = 0
-			playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 		var/animal_damage = rand(user.melee_damage_lower,user.melee_damage_upper)
 		if(user.obj_damage)
 			animal_damage = user.obj_damage
@@ -198,8 +198,8 @@
 				if(!user.transferItemToLoc(W, src, silent = FALSE))
 					return
 				var/obj/item/stock_parts/cell/C = W
-				to_chat(user, "<span class='notice'>You install the power cell.</span>")
-				playsound(src, 'sound/items/screwdriver2.ogg', 50, FALSE)
+				to_chat(user, "<span class='notice'>I install the power cell.</span>")
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 				cell = C
 				log_message("Powercell installed", LOG_MECHA)
 			else
@@ -211,8 +211,8 @@
 			if(!scanmod)
 				if(!user.transferItemToLoc(W, src))
 					return
-				to_chat(user, "<span class='notice'>You install the scanning module.</span>")
-				playsound(src, 'sound/items/screwdriver2.ogg', 50, FALSE)
+				to_chat(user, "<span class='notice'>I install the scanning module.</span>")
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 				scanmod = W
 				log_message("[W] installed", LOG_MECHA)
 				update_part_values()
@@ -225,8 +225,8 @@
 			if(!capacitor)
 				if(!user.transferItemToLoc(W, src))
 					return
-				to_chat(user, "<span class='notice'>You install the capacitor.</span>")
-				playsound(src, 'sound/items/screwdriver2.ogg', 50, FALSE)
+				to_chat(user, "<span class='notice'>I install the capacitor.</span>")
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 				capacitor = W
 				log_message("[W] installed", LOG_MECHA)
 				update_part_values()
@@ -239,9 +239,9 @@
 			var/obj/item/stack/cable_coil/CC = W
 			if(CC.use(2))
 				clearInternalDamage(MECHA_INT_SHORT_CIRCUIT)
-				to_chat(user, "<span class='notice'>You replace the fused wires.</span>")
+				to_chat(user, "<span class='notice'>I replace the fused wires.</span>")
 			else
-				to_chat(user, "<span class='warning'>You need two lengths of cable to fix this mech!</span>")
+				to_chat(user, "<span class='warning'>I need two lengths of cable to fix this mech!</span>")
 		return
 
 	if(istype(W, /obj/item/mecha_parts))
@@ -256,46 +256,46 @@
 	. = TRUE
 	if(construction_state == MECHA_SECURE_BOLTS)
 		construction_state = MECHA_LOOSE_BOLTS
-		to_chat(user, "<span class='notice'>You undo the securing bolts.</span>")
+		to_chat(user, "<span class='notice'>I undo the securing bolts.</span>")
 		return
 	if(construction_state == MECHA_LOOSE_BOLTS)
 		construction_state = MECHA_SECURE_BOLTS
-		to_chat(user, "<span class='notice'>You tighten the securing bolts.</span>")
+		to_chat(user, "<span class='notice'>I tighten the securing bolts.</span>")
 
 /obj/mecha/crowbar_act(mob/living/user, obj/item/I)
 	..()
 	. = TRUE
 	if(construction_state == MECHA_LOOSE_BOLTS)
 		construction_state = MECHA_OPEN_HATCH
-		to_chat(user, "<span class='notice'>You open the hatch to the power unit.</span>")
+		to_chat(user, "<span class='notice'>I open the hatch to the power unit.</span>")
 		return
 	if(construction_state == MECHA_OPEN_HATCH)
 		construction_state = MECHA_LOOSE_BOLTS
-		to_chat(user, "<span class='notice'>You close the hatch to the power unit.</span>")
+		to_chat(user, "<span class='notice'>I close the hatch to the power unit.</span>")
 
 /obj/mecha/screwdriver_act(mob/living/user, obj/item/I)
 	..()
 	. = TRUE
 	if(internal_damage & MECHA_INT_TEMP_CONTROL)
 		clearInternalDamage(MECHA_INT_TEMP_CONTROL)
-		to_chat(user, "<span class='notice'>You repair the damaged temperature controller.</span>")
+		to_chat(user, "<span class='notice'>I repair the damaged temperature controller.</span>")
 		return
 
 /obj/mecha/welder_act(mob/living/user, obj/item/W)
 	. = ..()
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return
 	. = TRUE
 	if(internal_damage & MECHA_INT_TANK_BREACH)
 		if(!W.use_tool(src, user, 0, volume=50, amount=1))
 			return
 		clearInternalDamage(MECHA_INT_TANK_BREACH)
-		to_chat(user, "<span class='notice'>You repair the damaged gas tank.</span>")
+		to_chat(user, "<span class='notice'>I repair the damaged gas tank.</span>")
 		return
 	if(obj_integrity < max_integrity)
 		if(!W.use_tool(src, user, 0, volume=50, amount=1))
 			return
-		user.visible_message("<span class='notice'>[user] repairs some damage to [name].</span>", "<span class='notice'>You repair some damage to [src].</span>")
+		user.visible_message("<span class='notice'>[user] repairs some damage to [name].</span>", "<span class='notice'>I repair some damage to [src].</span>")
 		obj_integrity += min(10, max_integrity-obj_integrity)
 		if(obj_integrity == max_integrity)
 			to_chat(user, "<span class='notice'>It looks to be fully repaired now.</span>")
@@ -303,7 +303,7 @@
 	to_chat(user, "<span class='warning'>The [name] is at full integrity!</span>")
 
 /obj/mecha/proc/mech_toxin_damage(mob/living/target)
-	playsound(src, 'sound/effects/spray2.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(target.reagents)
 		if(target.reagents.get_reagent_amount(/datum/reagent/cryptobiolin) + force < force*2)
 			target.reagents.add_reagent(/datum/reagent/cryptobiolin, force/2)
@@ -316,7 +316,7 @@
 		return 0
 	use_power(melee_energy_drain)
 	if(M.damtype == BRUTE || M.damtype == BURN)
-		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
+		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.used_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
 		. = ..()
 
 /obj/mecha/proc/full_repair(charge_cell)

@@ -1,6 +1,6 @@
 /obj/structure/reagent_dispensers
 	name = "Dispenser"
-	desc = "..."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "water"
 	density = TRUE
@@ -42,25 +42,25 @@
 
 /obj/structure/reagent_dispensers/watertank
 	name = "water tank"
-	desc = "A water tank."
+	desc = ""
 	icon_state = "water"
 
 /obj/structure/reagent_dispensers/watertank/high
 	name = "high-capacity water tank"
-	desc = "A highly pressurized water tank made to hold gargantuan amounts of water."
+	desc = ""
 	icon_state = "water_high" //I was gonna clean my room...
 	tank_volume = 100000
 
 /obj/structure/reagent_dispensers/foamtank
 	name = "firefighting foam tank"
-	desc = "A tank full of firefighting foam."
+	desc = ""
 	icon_state = "foam"
 	reagent_id = /datum/reagent/firefighting_foam
 	tank_volume = 500
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fuel tank"
-	desc = "A tank full of industrial welding fuel. Do not consume."
+	desc = ""
 	icon_state = "fuel"
 	reagent_id = /datum/reagent/fuel
 
@@ -74,7 +74,7 @@
 /obj/structure/reagent_dispensers/fueltank/ex_act()
 	boom()
 
-/obj/structure/reagent_dispensers/fueltank/fire_act(exposed_temperature, exposed_volume)
+/obj/structure/reagent_dispensers/fueltank/fire_act(added, maxstacks)
 	boom()
 
 /obj/structure/reagent_dispensers/fueltank/tesla_act()
@@ -96,14 +96,14 @@
 		var/obj/item/weldingtool/W = I
 		if(!W.welding)
 			if(W.reagents.has_reagent(/datum/reagent/fuel, W.max_fuel))
-				to_chat(user, "<span class='warning'>Your [W.name] is already full!</span>")
+				to_chat(user, "<span class='warning'>My [W.name] is already full!</span>")
 				return
 			reagents.trans_to(W, W.max_fuel, transfered_by = user)
-			user.visible_message("<span class='notice'>[user] refills [user.p_their()] [W.name].</span>", "<span class='notice'>You refill [W].</span>")
-			playsound(src, 'sound/effects/refill.ogg', 50, TRUE)
+			user.visible_message("<span class='notice'>[user] refills [user.p_their()] [W.name].</span>", "<span class='notice'>I refill [W].</span>")
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			W.update_icon()
 		else
-			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='userdanger'>That was stupid of you.</span>")
+			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='danger'>That was stupid of you.</span>")
 
 			log_bomber(user, "detonated a", src, "via welding tool")
 
@@ -114,7 +114,7 @@
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "pepper spray refiller"
-	desc = "Contains condensed capsaicin for use in law \"enforcement.\""
+	desc = ""
 	icon_state = "pepper"
 	anchored = TRUE
 	density = FALSE
@@ -123,12 +123,12 @@
 /obj/structure/reagent_dispensers/peppertank/Initialize()
 	. = ..()
 	if(prob(1))
-		desc = "IT'S PEPPER TIME, BITCH!"
+		desc = ""
 
 
 /obj/structure/reagent_dispensers/water_cooler
 	name = "liquid cooler"
-	desc = "A machine that dispenses liquid to drink."
+	desc = ""
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "water_cooler"
 	anchored = TRUE
@@ -151,14 +151,14 @@
 	if(!paper_cups)
 		to_chat(user, "<span class='warning'>There aren't any cups left!</span>")
 		return
-	user.visible_message("<span class='notice'>[user] takes a cup from [src].</span>", "<span class='notice'>You take a paper cup from [src].</span>")
+	user.visible_message("<span class='notice'>[user] takes a cup from [src].</span>", "<span class='notice'>I take a paper cup from [src].</span>")
 	var/obj/item/reagent_containers/food/drinks/sillycup/S = new(get_turf(src))
 	user.put_in_hands(S)
 	paper_cups--
 
 /obj/structure/reagent_dispensers/beerkeg
 	name = "beer keg"
-	desc = "Beer is liquid bread, it's good for you..."
+	desc = ""
 	icon_state = "beer"
 	reagent_id = /datum/reagent/consumable/ethanol/beer
 
@@ -170,7 +170,7 @@
 
 /obj/structure/reagent_dispensers/virusfood
 	name = "virus food dispenser"
-	desc = "A dispenser of low-potency virus mutagenic."
+	desc = ""
 	icon_state = "virus_food"
 	anchored = TRUE
 	density = FALSE
@@ -179,7 +179,7 @@
 
 /obj/structure/reagent_dispensers/cooking_oil
 	name = "vat of cooking oil"
-	desc = "A huge metal vat with a tap on the front. Filled with cooking oil for use in frying food."
+	desc = ""
 	icon_state = "vat"
 	anchored = TRUE
 	reagent_id = /datum/reagent/consumable/cooking_oil
@@ -188,7 +188,7 @@
 	name = "stationairy water tank"
 	anchored = TRUE
 	icon_state = "water_stationairy"
-	desc = "A stationairy, plumbed, water tank."
+	desc = ""
 
 /obj/structure/reagent_dispensers/plumbed/wrench_act(mob/living/user, obj/item/I)
 	..()

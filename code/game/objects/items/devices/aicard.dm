@@ -1,6 +1,6 @@
 /obj/item/aicard
 	name = "intelliCard"
-	desc = "A storage device for AIs. Patent pending."
+	desc = ""
 	icon = 'icons/obj/aicards.dmi'
 	icon_state = "aicard" // aicard-full
 	item_state = "electronic"
@@ -14,12 +14,12 @@
 
 /obj/item/aicard/aitater
 	name = "intelliTater"
-	desc = "A stylish upgrade (?) to the intelliCard."
+	desc = ""
 	icon_state = "aitater"
 
 /obj/item/aicard/aispook
 	name = "intelliLantern"
-	desc = "A spoOoOoky upgrade to the intelliCard."
+	desc = ""
 	icon_state = "aispook"
 
 /obj/item/aicard/suicide_act(mob/living/user)
@@ -86,7 +86,7 @@
 				if(confirm == "Yes" && !..())
 					flush = TRUE
 					if(AI && AI.loc == src)
-						to_chat(AI, "<span class='userdanger'>Your core files are being wiped!</span>")
+						to_chat(AI, "<span class='danger'>My core files are being wiped!</span>")
 						while(AI.stat != DEAD && flush)
 							AI.adjustOxyLoss(5)
 							AI.updatehealth()
@@ -99,6 +99,6 @@
 			. = TRUE
 		if("radio")
 			AI.radio_enabled = !AI.radio_enabled
-			to_chat(AI, "<span class='warning'>Your Subspace Transceiver has been [AI.radio_enabled ? "enabled" : "disabled"]!</span>")
+			to_chat(AI, "<span class='warning'>My Subspace Transceiver has been [AI.radio_enabled ? "enabled" : "disabled"]!</span>")
 			. = TRUE
 	update_icon()

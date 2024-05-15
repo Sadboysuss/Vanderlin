@@ -1,12 +1,12 @@
 /obj/item/gun/magic
 	name = "staff of nothing"
-	desc = "This staff is boring to watch because even though it came first you've seen everything it can do in other staves for years."
+	desc = ""
 	icon = 'icons/obj/guns/magic.dmi'
 	icon_state = "staffofnothing"
 	item_state = "staff"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi' //not really a gun and some toys use these inhands
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
-	fire_sound = 'sound/weapons/emitter.ogg'
+	fire_sound = 'sound/blank.ogg'
 	flags_1 =  CONDUCT_1
 	w_class = WEIGHT_CLASS_HUGE
 	var/checks_antimagic = TRUE
@@ -26,7 +26,7 @@
 		var/area/A = get_area(user)
 		if(istype(A, /area/wizard_station))
 			add_fingerprint(user)
-			to_chat(user, "<span class='warning'>You know better than to violate the security of The Den, best wait until you leave to use [src].</span>")
+			to_chat(user, "<span class='warning'>I know better than to violate the security of The Den, best wait until you leave to use [src].</span>")
 			return
 		else
 			no_den_usage = 0

@@ -2,7 +2,7 @@
 /datum/blobstrain/reagent/shifting_fragments
 	name = "Shifting Fragments"
 	description = "will do medium brute damage."
-	effectdesc = "will also cause blob parts to shift away when attacked."
+	effectdesc = ""
 	analyzerdescdamage = "Does medium brute damage."
 	analyzerdesceffect = "When attacked, may shift away from the attacker."
 	color = "#C8963C"

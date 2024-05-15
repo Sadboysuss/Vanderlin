@@ -29,7 +29,7 @@
 /datum/antagonist/brother/on_removal()
 	SSticker.mode.brothers -= owner
 	if(owner.current)
-		to_chat(owner.current,"<span class='userdanger'>You are no longer the [special_role]!</span>")
+		to_chat(owner.current,"<span class='danger'>I are no longer the [special_role]!</span>")
 	owner.special_role = null
 	return ..()
 
@@ -59,18 +59,18 @@
 /datum/antagonist/brother/proc/give_meeting_area()
 	if(!owner.current || !team || !team.meeting_area)
 		return
-	to_chat(owner.current, "<B>Your designated meeting area:</B> [team.meeting_area]")
+	to_chat(owner.current, "<B>My designated meeting area:</B> [team.meeting_area]")
 	antag_memory += "<b>Meeting Area</b>: [team.meeting_area]<br>"
 
 /datum/antagonist/brother/greet()
 	var/brother_text = get_brother_names()
-	to_chat(owner.current, "<span class='alertsyndie'>You are the [owner.special_role] of [brother_text].</span>")
-	to_chat(owner.current, "The Syndicate only accepts those that have proven themselves. Prove yourself and prove your [team.member_name]s by completing your objectives together!")
+	to_chat(owner.current, "<span class='alertsyndie'>I are the [owner.special_role] of [brother_text].</span>")
+	to_chat(owner.current, "The Syndicate only accepts those that have proven themselves. Prove myself and prove my [team.member_name]s by completing my objectives together!")
 	owner.announce_objectives()
 	give_meeting_area()
 
 /datum/antagonist/brother/proc/finalize_brother()
-	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/tatoralert.ogg', 100, FALSE, pressure_affected = FALSE)
+	owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)
 
 /datum/antagonist/brother/admin_add(datum/mind/new_owner,mob/admin)
 	//show list of possible brothers

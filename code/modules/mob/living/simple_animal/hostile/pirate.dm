@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/pirate
 	name = "Pirate"
-	desc = "Does what he wants cause a pirate is free."
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "piratemelee"
 	icon_living = "piratemelee"
@@ -18,7 +18,7 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 15
@@ -36,10 +36,10 @@
 	icon_dead = "piratemelee_dead"
 	melee_damage_lower = 30
 	melee_damage_upper = 30
-	armour_penetration = 35
+	armor_penetration = 35
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/blade1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	var/obj/effect/light_emitter/red_energy_sword/sord
 
 	footstep_type = FOOTSTEP_MOB_SHOE
@@ -71,7 +71,7 @@
 	icon_state = "pirateranged"
 	icon_living = "pirateranged"
 	icon_dead = "pirateranged_dead"
-	projectilesound = 'sound/weapons/laser.ogg'
+	projectilesound = 'sound/blank.ogg'
 	ranged = 1
 	rapid = 2
 	rapid_fire_delay = 6

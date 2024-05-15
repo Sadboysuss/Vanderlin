@@ -1,6 +1,6 @@
 /obj/machinery/power/generator
 	name = "thermoelectric generator"
-	desc = "It's a high efficiency thermoelectric generator."
+	desc = ""
 	icon_state = "teg"
 	density = TRUE
 	use_power = NO_POWER_USE
@@ -198,7 +198,7 @@
 	if(!anchored)
 		kill_circs()
 	connect_to_network()
-	to_chat(user, "<span class='notice'>You [anchored?"secure":"unsecure"] [src].</span>")
+	to_chat(user, "<span class='notice'>I [anchored?"secure":"unsecure"] [src].</span>")
 	return TRUE
 
 /obj/machinery/power/generator/multitool_act(mob/living/user, obj/item/I)
@@ -206,7 +206,7 @@
 	if(!anchored)
 		return
 	find_circs()
-	to_chat(user, "<span class='notice'>You update [src]'s circulator links.</span>")
+	to_chat(user, "<span class='notice'>I update [src]'s circulator links.</span>")
 	return TRUE
 
 /obj/machinery/power/generator/screwdriver_act(mob/user, obj/item/I)
@@ -214,7 +214,7 @@
 		return TRUE
 	panel_open = !panel_open
 	I.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You [panel_open?"open":"close"] the panel on [src].</span>")
+	to_chat(user, "<span class='notice'>I [panel_open?"open":"close"] the panel on [src].</span>")
 	return TRUE
 
 /obj/machinery/power/generator/crowbar_act(mob/user, obj/item/I)

@@ -18,7 +18,7 @@ Contains:
 	//Death squad armored space suits, not hardsuits!
 /obj/item/clothing/head/helmet/space/hardsuit/deathsquad
 	name = "MK.III SWAT Helmet"
-	desc = "An advanced tactical space helmet."
+	desc = ""
 	icon_state = "deathsquad"
 	item_state = "deathsquad"
 	armor = list("melee" = 80, "bullet" = 80, "laser" = 50, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100)
@@ -32,7 +32,7 @@ Contains:
 
 /obj/item/clothing/suit/space/hardsuit/deathsquad
 	name = "MK.III SWAT Suit"
-	desc = "A prototype designed to replace the ageing MK.II SWAT suit. Based on the streamlined MK.II model, the traditional ceramic and graphene plate construction was replaced with plasteel, allowing superior armor against most threats. There's room for some kind of energy projection device on the back."
+	desc = ""
 	icon_state = "deathsquad"
 	item_state = "swat_suit"
 	allowed = list(/obj/item/gun, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals, /obj/item/kitchen/knife/combat)
@@ -46,7 +46,7 @@ Contains:
 	//NEW SWAT suit
 /obj/item/clothing/suit/space/swat
 	name = "MK.I SWAT Suit"
-	desc = "A tactical space suit first developed in a joint effort by the defunct IS-ERI and Nanotrasen in 20XX for military space operations. A tried and true workhorse, it is very difficult to move in but offers robust protection against all threats!"
+	desc = ""
 	icon_state = "heavy"
 	item_state = "swat_suit"
 	allowed = list(/obj/item/gun, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals, /obj/item/kitchen/knife/combat)
@@ -56,7 +56,7 @@ Contains:
 
 /obj/item/clothing/head/helmet/space/beret
 	name = "officer's beret"
-	desc = "An armored beret commonly used by special operations officers. Uses advanced force field technology to protect the head from space."
+	desc = ""
 	icon_state = "beret_badge"
 	dynamic_hair_suffix = "+generic"
 	dynamic_fhair_suffix = "+generic"
@@ -68,7 +68,7 @@ Contains:
 
 /obj/item/clothing/suit/space/officer
 	name = "officer's jacket"
-	desc = "An armored, space-proof jacket used in special operations."
+	desc = ""
 	icon_state = "detective"
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
@@ -84,7 +84,7 @@ Contains:
 	//NASA Voidsuit
 /obj/item/clothing/head/helmet/space/nasavoid
 	name = "NASA Void Helmet"
-	desc = "An old, NASA CentCom branch designed, dark red space suit helmet."
+	desc = ""
 	icon_state = "void"
 	item_state = "void"
 
@@ -92,12 +92,12 @@ Contains:
 	name = "NASA Voidsuit"
 	icon_state = "void"
 	item_state = "void"
-	desc = "An old, NASA CentCom branch designed, dark red space suit."
+	desc = ""
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/multitool)
 
 /obj/item/clothing/head/helmet/space/nasavoid/old
 	name = "Engineering Void Helmet"
-	desc = "A CentCom engineering dark red space suit helmet. While old and dusty, it still gets the job done."
+	desc = ""
 	icon_state = "void"
 	item_state = "void"
 
@@ -105,14 +105,14 @@ Contains:
 	name = "Engineering Voidsuit"
 	icon_state = "void"
 	item_state = "void"
-	desc = "A CentCom engineering dark red space suit. Age has degraded the suit making is difficult to move around in."
+	desc = ""
 	slowdown = 4
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/multitool)
 
 	//Space santa outfit suit
 /obj/item/clothing/head/helmet/space/santahat
 	name = "Santa's hat"
-	desc = "Ho ho ho. Merrry X-mas!"
+	desc = ""
 	icon_state = "santahat"
 	flags_cover = HEADCOVERSEYES
 
@@ -120,7 +120,7 @@ Contains:
 
 /obj/item/clothing/suit/space/santa
 	name = "Santa's suit"
-	desc = "Festive!"
+	desc = ""
 	icon_state = "santa"
 	item_state = "santa"
 	slowdown = 0
@@ -130,7 +130,7 @@ Contains:
 	//Space pirate outfit
 /obj/item/clothing/head/helmet/space/pirate
 	name = "pirate hat"
-	desc = "Yarr."
+	desc = ""
 	icon_state = "pirate"
 	item_state = "pirate"
 	armor = list("melee" = 30, "bullet" = 50, "laser" = 30,"energy" = 15, "bomb" = 30, "bio" = 30, "rad" = 30, "fire" = 60, "acid" = 75)
@@ -146,7 +146,7 @@ Contains:
 
 /obj/item/clothing/suit/space/pirate
 	name = "pirate coat"
-	desc = "Yarr."
+	desc = ""
 	icon_state = "pirate"
 	item_state = "pirate"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -160,7 +160,7 @@ Contains:
 	//Emergency Response Team suits
 /obj/item/clothing/head/helmet/space/hardsuit/ert
 	name = "emergency response team commander helmet"
-	desc = "The integrated helmet of an ERT hardsuit, this one has blue highlights."
+	desc = ""
 	icon_state = "hardsuit0-ert_commander"
 	item_state = "hardsuit0-ert_commander"
 	hardsuit_type = "ert_commander"
@@ -176,7 +176,7 @@ Contains:
 
 /obj/item/clothing/suit/space/hardsuit/ert
 	name = "emergency response team commander hardsuit"
-	desc = "The standard issue hardsuit of the ERT, this one has blue highlights. Offers superb protection against environmental hazards."
+	desc = ""
 	icon_state = "ert_command"
 	item_state = "ert_command"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert
@@ -190,14 +190,14 @@ Contains:
 	//ERT Security
 /obj/item/clothing/head/helmet/space/hardsuit/ert/sec
 	name = "emergency response team security helmet"
-	desc = "The integrated helmet of an ERT hardsuit, this one has red highlights."
+	desc = ""
 	icon_state = "hardsuit0-ert_security"
 	item_state = "hardsuit0-ert_security"
 	hardsuit_type = "ert_security"
 
 /obj/item/clothing/suit/space/hardsuit/ert/sec
 	name = "emergency response team security hardsuit"
-	desc = "The standard issue hardsuit of the ERT, this one has red highlights. Offers superb protection against environmental hazards."
+	desc = ""
 	icon_state = "ert_security"
 	item_state = "ert_security"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/sec
@@ -205,14 +205,14 @@ Contains:
 	//ERT Engineering
 /obj/item/clothing/head/helmet/space/hardsuit/ert/engi
 	name = "emergency response team engineering helmet"
-	desc = "The integrated helmet of an ERT hardsuit, this one has orange highlights."
+	desc = ""
 	icon_state = "hardsuit0-ert_engineer"
 	item_state = "hardsuit0-ert_engineer"
 	hardsuit_type = "ert_engineer"
 
 /obj/item/clothing/suit/space/hardsuit/ert/engi
 	name = "emergency response team engineering hardsuit"
-	desc = "The standard issue hardsuit of the ERT, this one has orange highlights. Offers superb protection against environmental hazards."
+	desc = ""
 	icon_state = "ert_engineer"
 	item_state = "ert_engineer"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/engi
@@ -220,14 +220,14 @@ Contains:
 	//ERT Medical
 /obj/item/clothing/head/helmet/space/hardsuit/ert/med
 	name = "emergency response team medical helmet"
-	desc = "The integrated helmet of an ERT hardsuit, this one has white highlights."
+	desc = ""
 	icon_state = "hardsuit0-ert_medical"
 	item_state = "hardsuit0-ert_medical"
 	hardsuit_type = "ert_medical"
 
 /obj/item/clothing/suit/space/hardsuit/ert/med
 	name = "emergency response team medical hardsuit"
-	desc = "The standard issue hardsuit of the ERT, this one has white highlights. Offers superb protection against environmental hazards."
+	desc = ""
 	icon_state = "ert_medical"
 	item_state = "ert_medical"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/med
@@ -235,14 +235,14 @@ Contains:
 	//ERT Janitor
 /obj/item/clothing/head/helmet/space/hardsuit/ert/jani
 	name = "emergency response team janitorial helmet"
-	desc = "The integrated helmet of an ERT hardsuit, this one has purple highlights."
+	desc = ""
 	icon_state = "hardsuit0-ert_janitor"
 	item_state = "hardsuit0-ert_janitor"
 	hardsuit_type = "ert_janitor"
 
 /obj/item/clothing/suit/space/hardsuit/ert/jani
 	name = "emergency response team janitorial hardsuit"
-	desc = "The standard issue hardsuit of the ERT, this one has purple highlights. Offers superb protection against environmental hazards. This one has extra clips for holding various janitorial tools."
+	desc = ""
 	icon_state = "ert_janitor"
 	item_state = "ert_janitor"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/jani
@@ -252,20 +252,20 @@ Contains:
 	name = "EVA suit"
 	icon_state = "space"
 	item_state = "s_suit"
-	desc = "A lightweight space suit with the basic ability to protect the wearer from the vacuum of space during emergencies."
+	desc = ""
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 20, "fire" = 50, "acid" = 65)
 
 /obj/item/clothing/head/helmet/space/eva
 	name = "EVA helmet"
 	icon_state = "space"
 	item_state = "space"
-	desc = "A lightweight space helmet with the basic ability to protect the wearer from the vacuum of space during emergencies."
+	desc = ""
 	flash_protect = FLASH_PROTECTION_NONE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 20, "fire" = 50, "acid" = 65)
 
 /obj/item/clothing/head/helmet/space/freedom
 	name = "eagle helmet"
-	desc = "An advanced, space-proof helmet. It appears to be modeled after an old-world eagle."
+	desc = ""
 	icon_state = "griffinhat"
 	item_state = "griffinhat"
 	armor = list("melee" = 20, "bullet" = 40, "laser" = 30, "energy" = 25, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 80, "acid" = 80)
@@ -275,7 +275,7 @@ Contains:
 
 /obj/item/clothing/suit/space/freedom
 	name = "eagle suit"
-	desc = "An advanced, light suit, fabricated from a mixture of synthetic feathers and space-resistant material. A gun holster appears to be integrated into the suit and the wings appear to be stuck in 'freedom' mode."
+	desc = ""
 	icon_state = "freedom"
 	item_state = "freedom"
 	allowed = list(/obj/item/gun, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals)
@@ -288,7 +288,7 @@ Contains:
 //Carpsuit, bestsuit, lovesuit
 /obj/item/clothing/head/helmet/space/hardsuit/carp
 	name = "carp helmet"
-	desc = "Spaceworthy and it looks like a space carp's head, smells like one too."
+	desc = ""
 	icon_state = "carp_helm"
 	item_state = "syndicate"
 	armor = list("melee" = -20, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 75, "fire" = 60, "acid" = 75)	//As whimpy as a space carp
@@ -302,7 +302,7 @@ Contains:
 
 /obj/item/clothing/suit/space/hardsuit/carp
 	name = "carp space suit"
-	desc = "A slimming piece of dubious space carp technology, you suspect it won't stand up to hand-to-hand blows."
+	desc = ""
 	icon_state = "carp_suit"
 	item_state = "space_suit_syndicate"
 	slowdown = 0	//Space carp magic, never stop believing
@@ -322,7 +322,7 @@ Contains:
 
 /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal
 	name = "paranormal response team helmet"
-	desc = "A helmet worn by those who deal with paranormal threats for a living."
+	desc = ""
 	icon_state = "hardsuit0-prt"
 	item_state = "hardsuit0-prt"
 	hardsuit_type = "prt"
@@ -336,7 +336,7 @@ Contains:
 
 /obj/item/clothing/suit/space/hardsuit/ert/paranormal
 	name = "paranormal response team hardsuit"
-	desc = "Powerful wards are built into this hardsuit, protecting the user from all manner of paranormal threats."
+	desc = ""
 	icon_state = "knight_grey"
 	item_state = "knight_grey"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal
@@ -361,21 +361,21 @@ Contains:
 
 /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker
 	name = "champion's hardsuit"
-	desc = "Voices echo from the hardsuit, driving the user insane."
+	desc = ""
 	icon_state = "hardsuit-berserker"
 	item_state = "hardsuit-berserker"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/berserker
 
 /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/berserker
 	name = "champion's helmet"
-	desc = "Peering into the eyes of the helmet is enough to seal damnation."
+	desc = ""
 	icon_state = "hardsuit0-berserker"
 	item_state = "hardsuit0-berserker"
 	hardsuit_type = "berserker"
 
 /obj/item/clothing/head/helmet/space/fragile
 	name = "emergency space helmet"
-	desc = "A bulky, air-tight helmet meant to protect the user during emergency situations. It doesn't look very durable."
+	desc = ""
 	icon_state = "syndicate-helm-orange"
 	item_state = "syndicate-helm-orange"
 	armor = list("melee" = 5, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 10, "fire" = 0, "acid" = 0)
@@ -383,7 +383,7 @@ Contains:
 
 /obj/item/clothing/suit/space/fragile
 	name = "emergency space suit"
-	desc = "A bulky, air-tight suit meant to protect the user during emergency situations. It doesn't look very durable."
+	desc = ""
 	var/torn = FALSE
 	icon_state = "syndicate-orange"
 	item_state = "syndicate-orange"
@@ -396,14 +396,14 @@ Contains:
 		to_chat(owner, "<span class='warning'>[src] tears from the damage, breaking the air-tight seal!</span>")
 		clothing_flags &= ~STOPSPRESSUREDAMAGE
 		name = "torn [src]."
-		desc = "A bulky suit meant to protect the user during emergency situations, at least until someone tore a hole in the suit."
+		desc = ""
 		torn = TRUE
-		playsound(loc, 'sound/weapons/slashmiss.ogg', 50, TRUE)
-		playsound(loc, 'sound/effects/refill.ogg', 50, TRUE)
+		playsound(loc, 'sound/blank.ogg', 50, TRUE)
+		playsound(loc, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/clothing/suit/space/hunter
 	name = "bounty hunting suit"
-	desc = "A custom version of the MK.II SWAT suit, modified to look rugged and tough. Works as a space suit, if you can find a helmet."
+	desc = ""
 	icon_state = "hunter"
 	item_state = "swat_suit"
 	allowed = list(/obj/item/gun, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals, /obj/item/kitchen/knife/combat)

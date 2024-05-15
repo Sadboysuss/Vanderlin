@@ -139,7 +139,7 @@
 
 /obj/machinery/computer/shuttle/snowdin/mining
 	name = "shuttle console"
-	desc = "A shuttle control computer."
+	desc = ""
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
@@ -156,7 +156,7 @@
 
 /turf/open/lava/plasma
 	name = "liquid plasma"
-	desc = "A flowing stream of chilled liquid plasma. You probably shouldn't get in."
+	desc = ""
 	icon_state = "liquidplasma"
 	initial_gas_mix = "o2=0;n2=82;plasma=24;TEMP=120"
 	baseturfs = /turf/open/lava/plasma
@@ -172,7 +172,7 @@
 		to_chat(user, "<span class='danger'>[C] is full.</span>")
 		return
 	C.reagents.add_reagent(/datum/reagent/toxin/plasma, rand(5, 10))
-	user.visible_message("<span class='notice'>[user] scoops some plasma from the [src] with \the [C].</span>", "<span class='notice'>You scoop out some plasma from the [src] using \the [C].</span>")
+	user.visible_message("<span class='notice'>[user] scoops some plasma from the [src] with \the [C].</span>", "<span class='notice'>I scoop out some plasma from the [src] using \the [C].</span>")
 
 /turf/open/lava/plasma/burn_stuff(AM)
 	. = 0
@@ -239,17 +239,17 @@
 							NB.no_update = TRUE
 							NB.change_bodypart_status()
 							PP.visible_message("<span class='warning'>[L] screams in pain as [L.p_their()] [NB] melts down to the bone!</span>", \
-											  "<span class='userdanger'>You scream out in pain as your [NB] melts down to the bone, leaving an eerie plasma-like glow where flesh used to be!</span>")
+											  "<span class='danger'>I scream out in pain as my [NB] melts down to the bone, leaving an eerie plasma-like glow where flesh used to be!</span>")
 						if(!plasma_parts.len && !robo_parts.len) //a person with no potential organic limbs left AND no robotic limbs, time to turn them into a plasmaman
 							PP.IgniteMob()
 							PP.set_species(/datum/species/plasmaman)
 							PP.visible_message("<span class='warning'>[L] bursts into a brilliant purple flame as [L.p_their()] entire body is that of a skeleton!</span>", \
-											  "<span class='userdanger'>Your senses numb as all of your remaining flesh is turned into a purple slurry, sloshing off your body and leaving only your bones to show in a vibrant purple!</span>")
+											  "<span class='danger'>My senses numb as all of my remaining flesh is turned into a purple slurry, sloshing off my body and leaving only my bones to show in a vibrant purple!</span>")
 
 
 /obj/vehicle/ridden/lavaboat/plasma
 	name = "plasma boat"
-	desc = "A boat used for traversing the streams of plasma without turning into an icecube."
+	desc = ""
 	icon_state = "goliath_boat"
 	icon = 'icons/obj/lavaland/dragonboat.dmi'
 	resistance_flags = FREEZE_PROOF
@@ -384,7 +384,7 @@
 	DELAY 30
 	SAY Nanotrasen is pleased to have you working in one of the many top-of-the-line research posts within the $%@!! sector!
 	DELAY 30
-	SAY Further job assignment information can be found at your local security post! Have a secure day!
+	SAY Further job assignment information can be found at my local security post! Have a secure day!
 	DELAY 20;"}
 
 /obj/item/disk/holodisk/snowdin/overrun
@@ -547,30 +547,30 @@
 
 /obj/structure/barricade/wooden/snowed
 	name = "crude plank barricade"
-	desc = "This space is blocked off by a wooden barricade. It seems to be covered in a layer of snow."
+	desc = ""
 	icon_state = "woodenbarricade-snow"
 	max_integrity = 125
 
 /obj/item/clothing/under/syndicate/coldres
 	name = "insulated tactical turtleneck"
-	desc = "A nondescript and slightly suspicious-looking turtleneck with digital camouflage cargo pants. The interior has been padded with special insulation for both warmth and protection."
+	desc = ""
 	armor = list("melee" = 20, "bullet" = 10, "laser" = 0,"energy" = 5, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 25, "acid" = 25)
 	cold_protection = CHEST|GROIN|ARMS|LEGS
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 
 /obj/item/clothing/shoes/combat/coldres
 	name = "insulated combat boots"
-	desc = "High speed, low drag combat boots, now with an added layer of insulation."
+	desc = ""
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 
 /obj/item/gun/magic/wand/fireball/inert
 	name = "weakened wand of fireball"
-	desc = "This wand shoots scorching balls of fire that explode into destructive flames. The years of the cold have weakened the magic inside the wand."
+	desc = ""
 	max_charges = 4
 
 /obj/item/gun/magic/wand/resurrection/inert
 	name = "weakened wand of healing"
-	desc = "This wand uses healing magics to heal and revive. The years of the cold have weakened the magic inside the wand."
+	desc = ""
 	max_charges = 5
 
 /obj/effect/mob_spawn/human/syndicatesoldier/coldres
@@ -590,8 +590,8 @@
 	death = FALSE
 	faction = ROLE_SYNDICATE
 	outfit = /datum/outfit/snowsyndie
-	flavour_text = "<span class='big bold'>You are a syndicate operative recently awoken from cryostasis in an underground outpost. Monitor Nanotrasen communications and record information. All intruders should be \
-	disposed of swiftly to assure no gathered information is stolen or lost. Try not to wander too far from the outpost as the caves can be a deadly place even for a trained operative such as yourself.</span>"
+	flavour_text = "<span class='big bold'>I are a syndicate operative recently awoken from cryostasis in an underground outpost. Monitor Nanotrasen communications and record information. All intruders should be \
+	disposed of swiftly to assure no gathered information is stolen or lost. Try not to wander too far from the outpost as the caves can be a deadly place even for a trained operative such as myself.</span>"
 
 /datum/outfit/snowsyndie
 	name = "Syndicate Snow Operative"

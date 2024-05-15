@@ -11,7 +11,7 @@
 
 /obj/item/toy/cards/deck/cas
 	name = "\improper CAS deck (white)"
-	desc = "A deck for the game Cards Against Spess, still popular after all these centuries. Warning: may include traces of broken fourth wall. This is the white deck."
+	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "deck_caswhite_full"
 	deckstyle = "caswhite"
@@ -23,7 +23,7 @@
 
 /obj/item/toy/cards/deck/cas/black
 	name = "\improper CAS deck (black)"
-	desc = "A deck for the game Cards Against Spess, still popular after all these centuries. Warning: may include traces of broken fourth wall. This is the black deck."
+	desc = ""
 	icon_state = "deck_casblack_full"
 	deckstyle = "casblack"
 	card_face = "cas_black"
@@ -77,7 +77,7 @@
 	src.cards -= choice
 	H.pickup(user)
 	user.put_in_hands(H)
-	user.visible_message("<span class='notice'>[user] draws a card from the deck.</span>", "<span class='notice'>You draw a card from the deck.</span>")
+	user.visible_message("<span class='notice'>[user] draws a card from the deck.</span>", "<span class='notice'>I draw a card from the deck.</span>")
 	update_icon()
 
 /obj/item/toy/cards/deck/cas/attackby(obj/item/I, mob/living/user, params)
@@ -91,7 +91,7 @@
 		RC.name = "[SC.name]"
 		RC.card_icon = SC.card_face
 		cards += RC
-		user.visible_message("<span class='notice'>[user] adds a card to the bottom of the deck.</span>","<span class='notice'>You add the card to the bottom of the deck.</span>")
+		user.visible_message("<span class='notice'>[user] adds a card to the bottom of the deck.</span>","<span class='notice'>I add the card to the bottom of the deck.</span>")
 		qdel(SC)
 	update_icon()
 
@@ -101,7 +101,7 @@
 
 /obj/item/toy/cards/singlecard/cas
 	name = "CAS card"
-	desc = "A CAS card."
+	desc = ""
 	icon_state = "cas_white"
 	flipped = 0
 	var/card_face = "cas_white"
@@ -120,7 +120,7 @@
 
 /obj/item/toy/cards/singlecard/cas/Flip()
 	set name = "Flip Card"
-	set category = "Object"
+	set hidden = 1
 	set src in range(1)
 	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
 		return
@@ -145,10 +145,10 @@
 /obj/item/toy/cards/singlecard/cas/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on [src]!</span>")
 			return
 		if(!blank)
-			to_chat(user, "<span class='warning'>You cannot write on that card!</span>")
+			to_chat(user, "<span class='warning'>I cannot write on that card!</span>")
 			return
 		var/cardtext = stripped_input(user, "What do you wish to write on the card?", "Card Writing", "", 50)
 		if(!cardtext || !user.canUseTopic(src, BE_CLOSE))

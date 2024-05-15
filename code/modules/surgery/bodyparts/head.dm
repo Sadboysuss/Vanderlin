@@ -1,22 +1,24 @@
 /obj/item/bodypart/head
 	name = BODY_ZONE_HEAD
-	desc = "Didn't make sense not to live for fun, your brain gets smart but your head gets dumb."
+	desc = ""
 	icon = 'icons/mob/human_parts.dmi'
 	icon_state = "default_human_head"
 	max_damage = 200
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
-	w_class = WEIGHT_CLASS_BULKY //Quite a hefty load
+	w_class = WEIGHT_CLASS_NORMAL //Quite a hefty load
 	slowdown = 1 //Balancing measure
 	throw_range = 2 //No head bowling
 	px_x = 0
 	px_y = -8
 	stam_damage_coeff = 1
 	max_stamina_damage = 100
+	dismemberable = FALSE
 
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
 	var/obj/item/organ/eyes/eyes
+	var/obj/item/organ/eyes/eyesl
 	var/obj/item/organ/ears/ears
 	var/obj/item/organ/tongue/tongue
 
@@ -34,6 +36,35 @@
 	var/lip_style = null
 	var/lip_color = "white"
 
+	offset = OFFSET_HEAD
+	offset_f = OFFSET_HEAD_F
+	//subtargets for crits
+	subtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_HAIR, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
+	//grabtargets for grabs
+	grabtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_HAIR, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
+	resistance_flags = FLAMMABLE
+
+	var/brainkill = FALSE
+
+/obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
+	var/used_limb = precise
+	switch(used_limb)
+		if(BODY_ZONE_HEAD)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_EARS)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_NOSE)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_HAIR)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_L_EYE)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_R_EYE)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_MOUTH)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+		if(BODY_ZONE_PRECISE_NECK)
+			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/choke)
 
 /obj/item/bodypart/head/Destroy()
 	QDEL_NULL(brainmob) //order is sensitive, see warning in handle_atom_del() below
@@ -63,13 +94,14 @@
 
 /obj/item/bodypart/head/examine(mob/user)
 	. = ..()
+
 	if(status == BODYPART_ORGANIC)
 		if(!brain)
-			. += "<span class='info'>The brain has been removed from [src].</span>"
-		else if(brain.suicided || brainmob?.suiciding)
+			. += "<span class='info'>The brain is missing.</span>"
+/*		else if(brain.suicided || brainmob?.suiciding)
 			. += "<span class='info'>There's a pretty dumb expression on [real_name]'s face; they must have really hated life. There is no hope of recovery.</span>"
 		else if(brain.brain_death || brainmob?.health <= HEALTH_THRESHOLD_DEAD)
-			. += "<span class='info'>It seems to be leaking some kind of... clear fluid? The brain inside must be in pretty bad shape... There is no coming back from that.</span>"
+			. += "<span class='info'></span>"
 		else if(brainmob)
 			if(brainmob.get_ghost(FALSE, TRUE))
 				. += "<span class='info'>Its muscles are still twitching slightly... It still seems to have a bit of life left to it.</span>"
@@ -78,7 +110,7 @@
 		else if(brain?.decoy_override)
 			. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
 		else
-			. += "<span class='info'>It seems completely devoid of life.</span>"
+			. += "<span class='info'>It seems completely devoid of life.</span>"*/
 
 		if(!eyes)
 			. += "<span class='info'>[real_name]'s eyes appear to have been removed.</span>"
@@ -91,18 +123,18 @@
 
 
 /obj/item/bodypart/head/can_dismember(obj/item/I)
-	if(!((owner.stat == DEAD) || owner.InFullCritical()))
-		return FALSE
+//	if(!((owner.stat == DEAD) || owner.InFullCritical()))
+//		return FALSE
 	return ..()
 
 /obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
 	var/turf/T = get_turf(src)
 	if(status != BODYPART_ROBOTIC)
-		playsound(T, 'sound/misc/splort.ogg', 50, TRUE, -1)
+		playsound(T, 'sound/blank.ogg', 50, TRUE, -1)
 	for(var/obj/item/I in src)
 		if(I == brain)
 			if(user)
-				user.visible_message("<span class='warning'>[user] saws [src] open and pulls out a brain!</span>", "<span class='notice'>You saw [src] open and pull out a brain.</span>")
+				user.visible_message("<span class='warning'>[user] saws [src] open and pulls out a brain!</span>", "<span class='notice'>I saw [src] open and pull out a brain.</span>")
 			if(brainmob)
 				brainmob.container = null
 				brainmob.forceMove(brain)
@@ -139,6 +171,8 @@
 
 	else if(!animal_origin)
 		var/mob/living/carbon/human/H = C
+		if(!H.dna || !H.dna.species)
+			return ..()
 		var/datum/species/S = H.dna.species
 
 		//Facial hair
@@ -225,7 +259,7 @@
 					hair_overlay.color = "#" + hair_color
 					hair_overlay.alpha = hair_alpha
 					. += hair_overlay
-
+			//ROGTODO add accessories (earrings, piercings) here
 
 		// lipstick
 		if(lip_style)

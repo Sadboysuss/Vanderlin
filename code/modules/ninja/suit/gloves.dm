@@ -21,7 +21,7 @@
 
 
 /obj/item/clothing/gloves/space_ninja
-	desc = "These nano-enhanced gloves insulate from electricity and provide fire resistance."
+	desc = ""
 	name = "ninja gloves"
 	icon_state = "s-ninja"
 	item_state = "s-ninja"
@@ -46,7 +46,7 @@
 
 	var/mob/living/carbon/human/H = loc
 
-	var/obj/item/clothing/suit/space/space_ninja/suit = H.wear_suit
+	var/obj/item/clothing/suit/space/space_ninja/suit = H.wear_armor
 	if(!istype(suit))
 		return FALSE
 	if(isturf(A))
@@ -72,7 +72,7 @@
 
 /obj/item/clothing/gloves/space_ninja/proc/toggledrain()
 	var/mob/living/carbon/human/U = loc
-	to_chat(U, "<span class='notice'>You [candrain?"disable":"enable"] special interaction.</span>")
+	to_chat(U, "<span class='notice'>I [candrain?"disable":"enable"] special interaction.</span>")
 	candrain=!candrain
 
 /obj/item/clothing/gloves/space_ninja/examine(mob/user)

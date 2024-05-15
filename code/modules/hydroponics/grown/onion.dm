@@ -1,7 +1,7 @@
 /obj/item/seeds/onion
 	name = "pack of onion seeds"
-	desc = "These seeds grow into onions."
-	icon_state = "seed-onion"
+	desc = ""
+	icon_state = "seed"
 	species = "onion"
 	plantname = "Onion Sprouts"
 	product = /obj/item/reagent_containers/food/snacks/grown/onion
@@ -19,7 +19,7 @@
 /obj/item/reagent_containers/food/snacks/grown/onion
 	seed = /obj/item/seeds/onion
 	name = "onion"
-	desc = "Nothing to cry over."
+	desc = ""
 	icon_state = "onion"
 	filling_color = "#C0C9A0"
 	bitesize_mod = 2
@@ -30,8 +30,8 @@
 
 /obj/item/seeds/onion/red
 	name = "pack of red onion seeds"
-	desc = "For growing exceptionally potent onions."
-	icon_state = "seed-onionred"
+	desc = ""
+	icon_state = "seed"
 	species = "onion_red"
 	plantname = "Red Onion Sprouts"
 	weed_chance = 1
@@ -41,7 +41,7 @@
 /obj/item/reagent_containers/food/snacks/grown/onion/red
 	seed = /obj/item/seeds/onion/red
 	name = "red onion"
-	desc = "Purple despite the name."
+	desc = ""
 	icon_state = "onion_red"
 	filling_color = "#C29ACF"
 	slice_path = /obj/item/reagent_containers/food/snacks/onion_slice/red
@@ -59,7 +59,7 @@
 
 /obj/item/reagent_containers/food/snacks/onion_slice
 	name = "onion slices"
-	desc = "Rings, not for wearing."
+	desc = ""
 	icon_state = "onionslice"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 2)
 	filling_color = "#C0C9A0"
@@ -68,7 +68,7 @@
 
 /obj/item/reagent_containers/food/snacks/onion_slice/red
 	name = "red onion slices"
-	desc = "They shine like exceptionally low quality amethyst."
+	desc = ""
 	icon_state = "onionslice_red"
 	filling_color = "#C29ACF"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 2, /datum/reagent/consumable/tearjuice = 2.5)

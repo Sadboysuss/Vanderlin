@@ -10,7 +10,7 @@
 	. = ..()
 	starting_area = get_area(loc)
 
-/mob/camera/aiEye/remote/base_construction/setLoc(var/t)
+/mob/camera/aiEye/remote/base_construction/setLoc(t)
 	var/area/curr_area = get_area(t)
 	if(curr_area == starting_area || istype(curr_area, /area/shuttle/auxillary_base))
 		return ..()
@@ -28,7 +28,7 @@
 
 /obj/machinery/computer/camera_advanced/base_construction
 	name = "base construction console"
-	desc = "An industrial computer integrated with a camera-assisted rapid construction drone."
+	desc = ""
 	networks = list("ss13")
 	var/obj/item/construction/rcd/internal/RCD //Internal RCD. The computer passes user commands to this in order to avoid massive copypaste.
 	circuit = /obj/item/circuitboard/computer/base_construction
@@ -148,7 +148,7 @@
 	var/area/build_area = get_area(build_target)
 
 	if(!istype(build_area, /area/shuttle/auxillary_base))
-		to_chat(owner, "<span class='warning'>You can only build within the mining base!</span>")
+		to_chat(owner, "<span class='warning'>I can only build within the mining base!</span>")
 		return FALSE
 
 	if(!is_station_level(build_target.z))
@@ -183,7 +183,7 @@
 
 	owner.changeNext_move(CLICK_CD_RANGE)
 	B.RCD.afterattack(rcd_target, owner, TRUE) //Activate the RCD and force it to work remotely!
-	playsound(target_turf, 'sound/items/deconstruct.ogg', 60, TRUE)
+	playsound(target_turf, 'sound/blank.ogg', 60, TRUE)
 
 /datum/action/innate/aux_base/switch_mode
 	name = "Switch Mode"
@@ -242,7 +242,7 @@ datum/action/innate/aux_base/place_fan/Activate()
 	new /obj/structure/fans/tiny(fan_turf)
 	B.fans_remaining--
 	to_chat(owner, "<span class='notice'>Tiny fan placed. [B.fans_remaining] remaining.</span>")
-	playsound(fan_turf, 'sound/machines/click.ogg', 50, TRUE)
+	playsound(fan_turf, 'sound/blank.ogg', 50, TRUE)
 
 datum/action/innate/aux_base/install_turret
 	name = "Install Plasma Anti-Wildlife Turret"
@@ -271,4 +271,4 @@ datum/action/innate/aux_base/install_turret/Activate()
 
 	B.turret_stock--
 	to_chat(owner, "<span class='notice'>Turret installation complete!</span>")
-	playsound(turret_turf, 'sound/items/drill_use.ogg', 65, TRUE)
+	playsound(turret_turf, 'sound/blank.ogg', 65, TRUE)

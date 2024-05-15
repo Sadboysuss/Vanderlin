@@ -1,6 +1,6 @@
 /proc/possess(obj/O in world)
 	set name = "Possess Obj"
-	set category = "Object"
+	set hidden = 0
 
 	if((O.obj_flags & DANGEROUS_POSSESSION) && CONFIG_GET(flag/forbid_singulo_possession))
 		to_chat(usr, "[O] is too powerful for you to possess.")
@@ -27,7 +27,7 @@
 
 /proc/release()
 	set name = "Release Obj"
-	set category = "Object"
+	set hidden = 0
 	//usr.loc = get_turf(usr)
 
 	if(usr.control_object && usr.name_archive) //if you have a name archived and if you are actually relassing an object
@@ -45,8 +45,8 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Release Object") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /proc/givetestverbs(mob/M in GLOB.mob_list)
-	set desc = "Give this guy possess/release verbs"
-	set category = "Debug"
+	set desc = ""
+	set category = "Admin"
 	set name = "Give Possessing Verbs"
 	M.verbs += /proc/possess
 	M.verbs += /proc/release

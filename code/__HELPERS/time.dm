@@ -17,6 +17,130 @@
 /proc/station_time_timestamp(format = "hh:mm:ss", wtime)
 	return time2text(station_time(TRUE, wtime), format)
 
+GLOBAL_VAR_INIT(tod, FALSE)
+GLOBAL_VAR_INIT(forecast, FALSE)
+GLOBAL_VAR_INIT(todoverride, FALSE)
+GLOBAL_VAR_INIT(dayspassed, FALSE)
+
+/proc/settod()
+	var/time = station_time()
+	var/oldtod = GLOB.tod
+	if(time >= SSnightshift.nightshift_start_time || time <= SSnightshift.nightshift_dawn_start)
+		GLOB.tod = "night"
+//		testing("set [tod]")
+	if(time > SSnightshift.nightshift_dawn_start && time <= SSnightshift.nightshift_day_start)
+		GLOB.tod = "dawn"
+//		testing("set [tod]")
+	if(time > SSnightshift.nightshift_day_start && time <= SSnightshift.nightshift_dusk_start)
+		GLOB.tod = "day"
+//		testing("set [tod]")
+	if(time > SSnightshift.nightshift_dusk_start && time <= SSnightshift.nightshift_start_time)
+		GLOB.tod = "dusk"
+//		testing("set [tod]")
+	if(GLOB.todoverride)
+		GLOB.tod = GLOB.todoverride
+	if((GLOB.tod != oldtod) && !GLOB.todoverride && (GLOB.dayspassed>1)) //weather check on tod changes
+		if(!GLOB.forecast)
+			switch(GLOB.tod)
+				if("dawn")
+					if(prob(12))
+						GLOB.forecast = "fog"
+					if(prob(13))
+						GLOB.forecast = "rain"
+				if("day")
+					if(prob(5))
+						GLOB.forecast = "rain"
+				if("dusk")
+					if(prob(13))
+						GLOB.forecast = "rain"
+				if("night")
+					if(prob(5))
+						GLOB.forecast = "fog"
+					if(prob(21))
+						GLOB.forecast = "rain"
+			if(GLOB.forecast == "rain")
+				var/foundnd
+				for(var/datum/weather/rain/R in SSweather.curweathers)
+					foundnd = TRUE
+				if(!foundnd)
+					SSweather.run_weather(/datum/weather/rain, 1)
+			if(GLOB.forecast == "fog")
+				var/foundnd
+				for(var/datum/weather/fog/R in SSweather.curweathers)
+					foundnd = TRUE
+				if(!foundnd)
+					SSweather.run_weather(/datum/weather/fog, 1)
+		else
+			switch(GLOB.forecast) //end the weather now
+				if("rain")
+					if(GLOB.tod == "day")
+						GLOB.forecast = "rainbow"
+					else
+						GLOB.forecast = null
+				if("rainbow")
+					GLOB.forecast = null
+				if("fog")
+					GLOB.forecast = null
+
+	if(GLOB.tod != oldtod)
+		if(GLOB.tod == "dawn")
+			GLOB.dayspassed++
+			if(GLOB.dayspassed == 8)
+				GLOB.dayspassed = 1
+		for(var/mob/living/player in GLOB.mob_list)
+			if(player.stat != DEAD && player.client)
+				player.do_time_change()
+
+	if(GLOB.tod)
+		return GLOB.tod
+	else
+		testing("COULDNT FIND TOD [GLOB.tod] .. [time]")
+		return null
+
+/mob/living/proc/do_time_change()
+	if(!mind)
+		return
+	if(GLOB.tod == "dawn")
+		var/text_to_show
+		switch(GLOB.dayspassed)
+			if(1)
+				text_to_show = "DAWN OF THE FIRST DAE\nMOON'S DAE"
+			if(2)
+				text_to_show = "DAWN OF THE SECOND DAE\nTIW'S DAE"
+			if(3)
+				text_to_show = "DAWN OF THE THIRD DAE\nWEDDING'S DAE"
+			if(4)
+				text_to_show = "DAWN OF THE FOURTH DAE\nTHULE'S DAE"
+			if(5)
+				text_to_show = "DAWN OF THE FIFTH DAE\nFREYJA'S DAE"
+			if(6)
+				text_to_show = "DAWN OF THE SIXTH DAE\nSATURN'S DAE"
+			if(7)
+				text_to_show = "DAWN OF THE SEVENTH DAE\nSUN'S DAE"
+		if(!text_to_show)
+			return
+		if(text_to_show in mind.areas_entered)
+			return
+		mind.areas_entered += text_to_show
+		var/obj/screen/area_text/T = new()
+		client.screen += T
+		T.maptext = {"<span style='vertical-align:top; text-align:center;
+					color: #7c5b10; font-size: 150%;
+					text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+					font-family: "Nosfer", "Pterra";'>[text_to_show]</span>"}
+		T.maptext_width = 205
+		T.maptext_height = 209
+		T.maptext_x = 12
+		T.maptext_y = -120
+		playsound_local(src, 'sound/misc/newday.ogg', 100, FALSE)
+		animate(T, alpha = 255, time = 10, easing = EASE_IN)
+		addtimer(CALLBACK(src, .proc/clear_area_text, T), 35)
+	var/obj/screen/daynight/D = new()
+	D.alpha = 0
+	client.screen += D
+	animate(D, alpha = 255, time = 20, easing = EASE_IN)
+	addtimer(CALLBACK(src, .proc/clear_time_icon, D), 30)
+
 /proc/station_time_debug(force_set)
 	if(isnum(force_set))
 		SSticker.gametime_offset = force_set

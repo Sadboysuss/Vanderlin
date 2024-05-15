@@ -1,6 +1,6 @@
 /obj/item/modular_computer/laptop
 	name = "laptop"
-	desc = "A portable laptop computer."
+	desc = ""
 
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-closed"
@@ -47,7 +47,7 @@
 
 /obj/item/modular_computer/laptop/verb/open_computer()
 	set name = "Toggle Open"
-	set category = "Object"
+	set hidden = 1
 	set src in view(1)
 
 	try_toggle_open(usr)
@@ -91,11 +91,11 @@
 
 /obj/item/modular_computer/laptop/proc/toggle_open(mob/living/user=null)
 	if(screen_on)
-		to_chat(user, "<span class='notice'>You close \the [src].</span>")
+		to_chat(user, "<span class='notice'>I close \the [src].</span>")
 		slowdown = initial(slowdown)
 		w_class = initial(w_class)
 	else
-		to_chat(user, "<span class='notice'>You open \the [src].</span>")
+		to_chat(user, "<span class='notice'>I open \the [src].</span>")
 		slowdown = slowdown_open
 		w_class = w_class_open
 

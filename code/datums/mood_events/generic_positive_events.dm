@@ -128,7 +128,7 @@
 	timeout = 3 MINUTES
 
 /datum/mood_event/religiously_comforted
-	description = "<span class='nicegreen'>You are comforted by the presence of a holy person.</span>\n"
+	description = "<span class='nicegreen'>I are comforted by the presence of a holy person.</span>\n"
 	mood_change = 3
 	timeout = 5 MINUTES
 
@@ -165,11 +165,11 @@
 	description = "<span class='nicegreen'>The bottle landing like that was satisfying.</span>\n"
 	mood_change = 2
 	timeout = 3 MINUTES
-  
+
 /datum/mood_event/hope_lavaland
 	description = "<span class='nicegreen'>What a peculiar emblem.  It makes me feel hopeful for my future.</span>\n"
 	mood_change = 5
-  
+
 /datum/mood_event/nanite_happiness
 	description = "<span class='nicegreen robot'>+++++++HAPPINESS ENHANCEMENT+++++++</span>\n"
 	mood_change = 7
@@ -180,6 +180,11 @@
 /datum/mood_event/area
 	description = "" //Fill this out in the area
 	mood_change = 0
+
+/datum/mood_event/bathcleaned
+	description = "<span class='nicegreen'>I feel like I've been scrubbed by a Goddess!</span>\n"
+	mood_change = 5
+	timeout = 10 MINUTES
 
 /datum/mood_event/area/add_effects(_mood_change, _description)
 	mood_change = _mood_change

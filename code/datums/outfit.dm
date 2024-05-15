@@ -53,11 +53,32 @@
 	/// Type path of item to go in the idcard slot
 	var/id = null
 
+	/// Type path of item to go in the idcard slot
+	var/wrists = null
+
 	/// Type path of item for left pocket slot
 	var/l_pocket = null
 
 	/// Type path of item for right pocket slot
 	var/r_pocket = null
+
+	var/beltr = null
+
+	var/beltl = null
+
+	var/backr = null
+
+	var/backl = null
+
+	var/cloak = null
+
+	var/shirt = null
+
+	var/mouth = null
+
+	var/pants = null
+
+	var/armor = null
 
 	/**
 	  * Type path of item to go in suit storage slot
@@ -88,7 +109,7 @@
 	/// Internals box. Will be inserted at the start of backpack_contents
 	var/box
 
-	/** 
+	/**
 	  * Any implants the mob should start implanted with
 	  *
 	  * Format of this list is (typepath, typepath, typepath)
@@ -112,6 +133,7 @@
 	  * These are all added and returns in the list for get_chamelon_diguise_info proc
 	  */
 	var/list/chameleon_extras
+
 
 /**
   * Called at the start of the equip proc
@@ -156,9 +178,9 @@
 
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
-		H.equip_to_slot_or_del(new uniform(H),SLOT_W_UNIFORM, TRUE)
+		H.equip_to_slot_or_del(new pants(H),SLOT_PANTS, TRUE)
 	if(suit)
-		H.equip_to_slot_or_del(new suit(H),SLOT_WEAR_SUIT, TRUE)
+		H.equip_to_slot_or_del(new suit(H),SLOT_ARMOR, TRUE)
 	if(back)
 		H.equip_to_slot_or_del(new back(H),SLOT_BACK, TRUE)
 	if(belt)
@@ -174,28 +196,50 @@
 	if(neck)
 		H.equip_to_slot_or_del(new neck(H),SLOT_NECK, TRUE)
 	if(ears)
-		H.equip_to_slot_or_del(new ears(H),SLOT_EARS, TRUE)
+		H.equip_to_slot_or_del(new ears(H),SLOT_WEAR_MASK, TRUE)
 	if(glasses)
 		H.equip_to_slot_or_del(new glasses(H),SLOT_GLASSES, TRUE)
 	if(id)
-		H.equip_to_slot_or_del(new id(H),SLOT_WEAR_ID, TRUE)
+		H.equip_to_slot_or_del(new id(H),SLOT_RING, TRUE)
+	if(wrists)
+		H.equip_to_slot_or_del(new wrists(H),SLOT_WRISTS, TRUE)
 	if(suit_store)
 		H.equip_to_slot_or_del(new suit_store(H),SLOT_S_STORE, TRUE)
-
+	if(cloak)
+		H.equip_to_slot_or_del(new cloak(H),SLOT_CLOAK, TRUE)
+	if(beltl)
+		H.equip_to_slot_or_del(new beltl(H),SLOT_BELT_L, TRUE)
+	if(beltr)
+		H.equip_to_slot_or_del(new beltr(H),SLOT_BELT_R, TRUE)
+	if(backr)
+		H.equip_to_slot_or_del(new backr(H),SLOT_BACK_R, TRUE)
+	if(backl)
+		H.equip_to_slot_or_del(new backl(H),SLOT_BACK_L, TRUE)
+	if(mouth)
+		H.equip_to_slot_or_del(new mouth(H),SLOT_MOUTH, TRUE)
 	if(undershirt)
 		H.undershirt = initial(undershirt.name)
-
+	if(pants)
+		H.equip_to_slot_or_del(new pants(H),SLOT_PANTS, TRUE)
+	if(armor)
+		H.equip_to_slot_or_del(new armor(H),SLOT_ARMOR, TRUE)
+	if(shirt)
+		H.equip_to_slot_or_del(new shirt(H),SLOT_SHIRT, TRUE)
 	if(accessory)
-		var/obj/item/clothing/under/U = H.w_uniform
+		var/obj/item/clothing/under/U = H.wear_pants
 		if(U)
 			U.attach_accessory(new accessory(H))
 		else
 			WARNING("Unable to equip accessory [accessory] in outfit [name]. No uniform present!")
 
-	if(l_hand)
-		H.put_in_l_hand(new l_hand(H))
-	if(r_hand)
-		H.put_in_r_hand(new r_hand(H))
+	if(!visualsOnly)
+		if(l_hand)
+	//		H.put_in_hands(new l_hand(get_turf(H)),TRUE)
+			H.equip_to_slot_or_del(new l_hand(H),SLOT_HANDS, TRUE)
+		if(r_hand)
+			testing("PIH")
+		//	H.put_in_hands(new r_hand(get_turf(H)),TRUE)
+			H.equip_to_slot_or_del(new r_hand(H),SLOT_HANDS, TRUE)
 
 	if(!visualsOnly) // Items in pockets or backpack don't show up on mob's icon.
 		if(l_pocket)
@@ -203,11 +247,11 @@
 		if(r_pocket)
 			H.equip_to_slot_or_del(new r_pocket(H),SLOT_R_STORE, TRUE)
 
-		if(box)
-			if(!backpack_contents)
-				backpack_contents = list()
-			backpack_contents.Insert(1, box)
-			backpack_contents[box] = 1
+//		if(box)
+//			if(!backpack_contents)
+//				backpack_contents = list()
+//			backpack_contents.Insert(1, box)
+//			backpack_contents[box] = 1
 
 		if(backpack_contents)
 			for(var/path in backpack_contents)
@@ -217,8 +261,8 @@
 				for(var/i in 1 to number)
 					H.equip_to_slot_or_del(new path(H),SLOT_IN_BACKPACK, TRUE)
 
-	if(!H.head && toggle_helmet && istype(H.wear_suit, /obj/item/clothing/suit/space/hardsuit))
-		var/obj/item/clothing/suit/space/hardsuit/HS = H.wear_suit
+	if(!H.head && toggle_helmet && istype(H.wear_armor, /obj/item/clothing/suit/space/hardsuit))
+		var/obj/item/clothing/suit/space/hardsuit/HS = H.wear_armor
 		HS.ToggleHelmet()
 
 	post_equip(H, visualsOnly)
@@ -250,12 +294,12 @@
 		H.back.add_fingerprint(H,1)	//The 1 sets a flag to ignore gloves
 		for(var/obj/item/I in H.back.contents)
 			I.add_fingerprint(H,1)
-	if(H.wear_id)
-		H.wear_id.add_fingerprint(H,1)
-	if(H.w_uniform)
-		H.w_uniform.add_fingerprint(H,1)
-	if(H.wear_suit)
-		H.wear_suit.add_fingerprint(H,1)
+	if(H.wear_ring)
+		H.wear_ring.add_fingerprint(H,1)
+	if(H.wear_pants)
+		H.wear_pants.add_fingerprint(H,1)
+	if(H.wear_armor)
+		H.wear_armor.add_fingerprint(H,1)
 	if(H.wear_mask)
 		H.wear_mask.add_fingerprint(H,1)
 	if(H.wear_neck)

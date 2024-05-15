@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/aoe_turf/conjure/the_traps
 	name = "The Traps!"
-	desc = "Summon a number of traps around you. They will damage and enrage any enemies that step on them."
+	desc = ""
 
 	charge_max = 250
 	cooldown_min = 50

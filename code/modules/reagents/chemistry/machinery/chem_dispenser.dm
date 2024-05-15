@@ -13,7 +13,7 @@
 
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
-	desc = "Creates and dispenses chemicals."
+	desc = ""
 	density = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dispenser"
@@ -145,7 +145,7 @@
 	if(obj_flags & EMAGGED)
 		to_chat(user, "<span class='warning'>[src] has no functional safeties to emag.</span>")
 		return
-	to_chat(user, "<span class='notice'>You short out [src]'s safeties.</span>")
+	to_chat(user, "<span class='notice'>I short out [src]'s safeties.</span>")
 	dispensable_reagents |= emagged_reagents//add the emagged reagents to the dispensable ones
 	obj_flags |= EMAGGED
 
@@ -307,9 +307,9 @@
 				for(var/reagent in recording_recipe)
 					var/reagent_id = GLOB.name2reagent[translate_legacy_chem_id(reagent)]
 					if(!dispensable_reagents.Find(reagent_id))
-						visible_message("<span class='warning'>[src] buzzes.</span>", "<span class='hear'>You hear a faint buzz.</span>")
+						visible_message("<span class='warning'>[src] buzzes.</span>", "<span class='hear'>I hear a faint buzz.</span>")
 						to_chat(usr, "<span class ='danger'>[src] cannot find <b>[reagent]</b>!</span>")
-						playsound(src, 'sound/machines/buzz-two.ogg', 50, TRUE)
+						playsound(src, 'sound/blank.ogg', 50, TRUE)
 						return
 				saved_recipes[name] = recording_recipe
 				recording_recipe = null
@@ -334,11 +334,11 @@
 		if(!user.transferItemToLoc(B, src))
 			return
 		replace_beaker(user, B)
-		to_chat(user, "<span class='notice'>You add [B] to [src].</span>")
+		to_chat(user, "<span class='notice'>I add [B] to [src].</span>")
 		updateUsrDialog()
 		update_icon()
-	else if(user.a_intent != INTENT_HARM && !istype(I, /obj/item/card/emag))
-		to_chat(user, "<span class='warning'>You can't load [I] into [src]!</span>")
+	else if(user.used_intent.type != INTENT_HARM && !istype(I, /obj/item/card/emag))
+		to_chat(user, "<span class='warning'>I can't load [I] into [src]!</span>")
 		return ..()
 	else
 		return ..()
@@ -433,7 +433,7 @@
 
 /obj/machinery/chem_dispenser/drinks
 	name = "soda dispenser"
-	desc = "Contains a large reservoir of soft drinks."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "soda_dispenser"
 	has_panel_overlay = FALSE
@@ -477,7 +477,7 @@
 	)
 
 /obj/machinery/chem_dispenser/drinks/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Contains a large reservoir of soft drinks. This model has had its safeties shorted out."
+	desc = ""
 	obj_flags = CAN_BE_HIT | EMAGGED
 	flags_1 = NODECONSTRUCT_1
 
@@ -496,7 +496,7 @@
 
 /obj/machinery/chem_dispenser/drinks/beer
 	name = "booze dispenser"
-	desc = "Contains a large reservoir of the good stuff."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "booze_dispenser"
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/beer
@@ -530,7 +530,7 @@
 	)
 
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Contains a large reservoir of the good stuff. This model has had its safeties shorted out."
+	desc = ""
 	obj_flags = CAN_BE_HIT | EMAGGED
 	flags_1 = NODECONSTRUCT_1
 
@@ -549,7 +549,7 @@
 
 /obj/machinery/chem_dispenser/mutagen
 	name = "mutagen dispenser"
-	desc = "Creates and dispenses mutagen."
+	desc = ""
 	dispensable_reagents = list(/datum/reagent/toxin/mutagen)
 	upgrade_reagents = null
 	emagged_reagents = list(/datum/reagent/toxin/plasma)
@@ -557,7 +557,7 @@
 
 /obj/machinery/chem_dispenser/mutagensaltpeter
 	name = "botanical chemical dispenser"
-	desc = "Creates and dispenses chemicals useful for botany."
+	desc = ""
 	flags_1 = NODECONSTRUCT_1
 
 	dispensable_reagents = list(
@@ -589,7 +589,7 @@
 	RefreshParts()
 
 /obj/machinery/chem_dispenser/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Creates and dispenses chemicals. This model has had its safeties shorted out."
+	desc = ""
 	obj_flags = CAN_BE_HIT | EMAGGED
 	flags_1 = NODECONSTRUCT_1
 
@@ -608,7 +608,7 @@
 
 /obj/machinery/chem_dispenser/abductor
 	name = "reagent synthesizer"
-	desc = "Synthesizes a variety of reagents using proto-matter."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "chem_dispenser"
 	has_panel_overlay = FALSE

@@ -81,7 +81,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 	var/list/third_rule_req = list(100, 100, 100, 90, 80, 70, 60, 50, 40, 30)
 	/// The probability for a third ruleset with index being every ten threat.
 	var/list/third_rule_prob = list(0,0,0,0,60,60,80,90,100,100)
-	/// Threat requirement for a second ruleset when high pop override is in effect. 
+	/// Threat requirement for a second ruleset when high pop override is in effect.
 	var/high_pop_second_rule_req = 40
 	/// Threat requirement for a third ruleset when high pop override is in effect.
 	var/high_pop_third_rule_req = 60
@@ -227,7 +227,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 			. += G.get_report()
 
 	print_command_report(., "Central Command Status Summary", announce=FALSE)
-	priority_announce("A summary has been copied and printed to all communications consoles.", "Security level elevated.", 'sound/ai/intercept.ogg')
+	priority_announce("A summary has been copied and printed to all communications consoles.", "Security level elevated.", 'sound/blank.ogg')
 	if(GLOB.security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
 
@@ -301,7 +301,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 		if(fexists(json_file))
 			configuration = json_decode(file2text(json_file))
 			if(configuration["Dynamic"])
-				for(var/variable in configuration["Dynamic"]) 
+				for(var/variable in configuration["Dynamic"])
 					if(!vars[variable])
 						stack_trace("Invalid dynamic configuration variable [variable] in game mode variable changes.")
 						continue

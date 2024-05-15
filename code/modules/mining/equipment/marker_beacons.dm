@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(marker_beacon_colors, sortList(list(
 /obj/item/stack/marker_beacon
 	name = "marker beacon"
 	singular_name = "marker beacon"
-	desc = "Prism-brand path illumination devices. Used by miners to mark paths and warn of danger."
+	desc = ""
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "marker"
 	merge_type = /obj/item/stack/marker_beacon
@@ -45,14 +45,14 @@ GLOBAL_LIST_INIT(marker_beacon_colors, sortList(list(
 
 /obj/item/stack/marker_beacon/attack_self(mob/user)
 	if(!isturf(user.loc))
-		to_chat(user, "<span class='warning'>You need more space to place a [singular_name] here.</span>")
+		to_chat(user, "<span class='warning'>I need more space to place a [singular_name] here.</span>")
 		return
 	if(locate(/obj/structure/marker_beacon) in user.loc)
 		to_chat(user, "<span class='warning'>There is already a [singular_name] here.</span>")
 		return
 	if(use(1))
-		to_chat(user, "<span class='notice'>You activate and anchor [amount ? "a":"the"] [singular_name] in place.</span>")
-		playsound(user, 'sound/machines/click.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I activate and anchor [amount ? "a":"the"] [singular_name] in place.</span>")
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		var/obj/structure/marker_beacon/M = new(user.loc, picked_color)
 		transfer_fingerprints_to(M)
 
@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(marker_beacon_colors, sortList(list(
 
 /obj/structure/marker_beacon
 	name = "marker beacon"
-	desc = "A Prism-brand path illumination device. It is anchored in place and glowing steadily."
+	desc = ""
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "marker"
 	layer = BELOW_OPEN_DOOR_LAYER
@@ -106,30 +106,30 @@ GLOBAL_LIST_INIT(marker_beacon_colors, sortList(list(
 	. = ..()
 	if(.)
 		return
-	to_chat(user, "<span class='notice'>You start picking [src] up...</span>")
+	to_chat(user, "<span class='notice'>I start picking [src] up...</span>")
 	if(do_after(user, remove_speed, target = src))
 		var/obj/item/stack/marker_beacon/M = new(loc)
 		M.picked_color = picked_color
 		M.update_icon()
 		transfer_fingerprints_to(M)
 		if(user.put_in_hands(M, TRUE)) //delete the beacon if it fails
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			qdel(src) //otherwise delete us
 
 /obj/structure/marker_beacon/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/stack/marker_beacon))
 		var/obj/item/stack/marker_beacon/M = I
-		to_chat(user, "<span class='notice'>You start picking [src] up...</span>")
+		to_chat(user, "<span class='notice'>I start picking [src] up...</span>")
 		if(do_after(user, remove_speed, target = src) && M.amount + 1 <= M.max_amount)
 			M.add(1)
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			qdel(src)
 			return
 	if(istype(I, /obj/item/light_eater))
-		var/obj/effect/decal/cleanable/ash/A = new /obj/effect/decal/cleanable/ash(drop_location())
+		var/obj/item/ash/A = new /obj/item/ash(drop_location())
 		A.desc += "\nLooks like this used to be \a [src] some time ago."
 		visible_message("<span class='danger'>[src] is disintegrated by [I]!</span>")
-		playsound(src, 'sound/items/welder.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		qdel(src)
 		return
 	return ..()

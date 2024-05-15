@@ -1,9 +1,9 @@
 /datum/computer_file/program/alarm_monitor
 	filename = "alarmmonitor"
-	filedesc = "Alarm Monitor"
+	filedesc = ""
 	ui_header = "alarm_green.gif"
 	program_icon_state = "alert-green"
-	extended_desc = "This program provides visual interface for station's alarm system."
+	extended_desc = ""
 	requires_ntnet = 1
 	network_destination = "alarm monitoring network"
 	size = 5

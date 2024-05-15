@@ -1,6 +1,6 @@
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
-	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
+	desc = ""
 	icon_state = "hardhat0_yellow"
 	item_state = "hardhat0_yellow"
 	var/brightness_on = 4 //luminosity when on
@@ -84,7 +84,7 @@
 	hat_type = "atmos"
 	dog_fashion = null
 	name = "atmospheric technician's firefighting helmet"
-	desc = "A firefighter's helmet, able to keep the user cool in any situation."
+	desc = ""
 	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	heat_protection = HEAD
@@ -92,9 +92,9 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_HELM_MIN_TEMP_PROTECT
 
-/obj/item/clothing/head/hardhat/weldhat 
+/obj/item/clothing/head/hardhat/weldhat
 	name = "welding hard hat"
-	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight AND welding shield! The bulb seems a little smaller though."
+	desc = ""
 	brightness_on = 3 //Needs a little bit of tradeoff
 	dog_fashion = null
 	actions_types = list(/datum/action/item_action/toggle_helmet_light, /datum/action/item_action/toggle_welding_screen)
@@ -119,7 +119,7 @@
 
 /obj/item/clothing/head/hardhat/weldhat/proc/toggle_welding_screen(mob/living/user)
 	if(weldingvisortoggle(user))
-		playsound(src, 'sound/mecha/mechmove03.ogg', 50, TRUE) //Visors don't just come from nothing
+		playsound(src, 'sound/blank.ogg', 50, TRUE) //Visors don't just come from nothing
 	update_icon()
 
 /obj/item/clothing/head/hardhat/weldhat/worn_overlays(isinhands)
@@ -132,7 +132,7 @@
 /obj/item/clothing/head/hardhat/weldhat/update_icon()
 	cut_overlays()
 	if(!up)
-		add_overlay("weldvisor") 
+		add_overlay("weldvisor")
 	..()
 
 /obj/item/clothing/head/hardhat/weldhat/orange
@@ -140,8 +140,8 @@
 	item_state = "hardhat0_orange"
 	hat_type = "orange"
 
-/obj/item/clothing/head/hardhat/weldhat/white 
-	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight AND welding shield!" //This bulb is not smaller
+/obj/item/clothing/head/hardhat/weldhat/white
+	desc = "" //This bulb is not smaller
 	icon_state = "hardhat0_white"
 	item_state = "hardhat0_white"
 	brightness_on = 4 //Boss always takes the best stuff
@@ -155,4 +155,4 @@
 /obj/item/clothing/head/hardhat/weldhat/dblue
 	icon_state = "hardhat0_dblue"
 	item_state = "hardhat0_dblue"
-	hat_type = "dblue" 
+	hat_type = "dblue"

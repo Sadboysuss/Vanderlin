@@ -1,6 +1,6 @@
 /obj/item/grenade/c4
 	name = "C-4 charge"
-	desc = "Used to put holes in specific areas without too much extra hole. A saboteur's favorite."
+	desc = ""
 	icon_state = "plastic-explosive0"
 	item_state = "plastic-explosive"
 	lefthand_file = 'icons/mob/inhands/weapons/bombs_lefthand.dmi'
@@ -82,7 +82,7 @@
 	if(!flag)
 		return
 
-	to_chat(user, "<span class='notice'>You start planting [src]. The timer is set to [det_time]...</span>")
+	to_chat(user, "<span class='notice'>I start planting [src]. The timer is set to [det_time]...</span>")
 
 	if(do_after(user, 30, target = AM))
 		if(!user.temporarilyRemoveItemFromInventory(src))
@@ -105,7 +105,7 @@
 			plastic_overlay.layer = FLOAT_LAYER
 
 		target.add_overlay(plastic_overlay)
-		to_chat(user, "<span class='notice'>You plant the bomb. Timer counting down from [det_time].</span>")
+		to_chat(user, "<span class='notice'>I plant the bomb. Timer counting down from [det_time].</span>")
 		addtimer(CALLBACK(src, .proc/prime), det_time*10)
 
 /obj/item/grenade/c4/proc/shout_syndicate_crap(mob/M)
@@ -153,7 +153,7 @@
 
 /obj/item/grenade/c4/x4
 	name = "X-4 charge"
-	desc = "A shaped high-explosive breaching charge. Designed to ensure user safety and wall nonsafety."
+	desc = ""
 	icon_state = "plasticx40"
 	item_state = "plasticx4"
 	directional = TRUE

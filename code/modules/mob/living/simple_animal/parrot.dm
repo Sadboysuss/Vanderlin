@@ -28,7 +28,7 @@
 
 /mob/living/simple_animal/parrot
 	name = "parrot"
-	desc = "The parrot squaks, \"It's a Parrot! BAWWK!\"" //'
+	desc = "" //'
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"
@@ -220,7 +220,7 @@
 	else if(href_list["add_inv"])
 		var/add_to = href_list["add_inv"]
 		if(!usr.get_active_held_item())
-			to_chat(usr, "<span class='warning'>You have nothing in your hand to put on its [add_to]!</span>")
+			to_chat(usr, "<span class='warning'>I have nothing in your hand to put on its [add_to]!</span>")
 			return
 		switch(add_to)
 			if("ears")
@@ -241,7 +241,7 @@
 					if(!usr.transferItemToLoc(headset_to_add, src))
 						return
 					ears = headset_to_add
-					to_chat(usr, "<span class='notice'>You fit the headset onto [src].</span>")
+					to_chat(usr, "<span class='notice'>I fit the headset onto [src].</span>")
 
 					clearlist(available_channels)
 					for(var/ch in headset_to_add.channels)
@@ -275,7 +275,7 @@
 	..()
 	if(client)
 		return
-	if(!stat && M.a_intent == INTENT_HARM)
+	if(!stat && M.used_intent.type == INTENT_HARM)
 
 		icon_state = icon_living //It is going to be flying regardless of whether it flees or attacks
 
@@ -290,7 +290,7 @@
 		else
 			parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
 			drop_held_item(0)
-	if(stat != DEAD && M.a_intent == INTENT_HELP)
+	if(stat != DEAD && M.used_intent.type == INTENT_HELP)
 		handle_automated_speech(1) //assured speak/emote
 	return
 
@@ -503,7 +503,7 @@
 				if(!parrot_perch || parrot_interest.loc != parrot_perch.loc)
 					held_item = parrot_interest
 					parrot_interest.forceMove(src)
-					visible_message("<span class='notice'>[src] grabs [held_item]!</span>", "<span class='notice'>You grab [held_item]!</span>", "<span class='hear'>You hear the sounds of wings flapping furiously.</span>")
+					visible_message("<span class='notice'>[src] grabs [held_item]!</span>", "<span class='notice'>I grab [held_item]!</span>", "<span class='hear'>I hear the sounds of wings flapping furiously.</span>")
 
 			parrot_interest = null
 			parrot_state = PARROT_SWOOP | PARROT_RETURN
@@ -677,13 +677,13 @@
 /mob/living/simple_animal/parrot/proc/steal_from_ground()
 	set name = "Steal from ground"
 	set category = "Parrot"
-	set desc = "Grabs a nearby item."
+	set desc = ""
 
 	if(stat)
 		return -1
 
 	if(held_item)
-		to_chat(src, "<span class='warning'>You are already holding [held_item]!</span>")
+		to_chat(src, "<span class='warning'>I are already holding [held_item]!</span>")
 		return 1
 
 	for(var/obj/item/I in view(1,src))
@@ -696,7 +696,7 @@
 
 			held_item = I
 			I.forceMove(src)
-			visible_message("<span class='notice'>[src] grabs [held_item]!</span>", "<span class='notice'>You grab [held_item]!</span>", "<span class='hear'>You hear the sounds of wings flapping furiously.</span>")
+			visible_message("<span class='notice'>[src] grabs [held_item]!</span>", "<span class='notice'>I grab [held_item]!</span>", "<span class='hear'>I hear the sounds of wings flapping furiously.</span>")
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take!</span>")
@@ -705,13 +705,13 @@
 /mob/living/simple_animal/parrot/proc/steal_from_mob()
 	set name = "Steal from mob"
 	set category = "Parrot"
-	set desc = "Steals an item right out of a person's hand!"
+	set desc = ""
 
 	if(stat)
 		return -1
 
 	if(held_item)
-		to_chat(src, "<span class='warning'>You are already holding [held_item]!</span>")
+		to_chat(src, "<span class='warning'>I are already holding [held_item]!</span>")
 		return 1
 
 	var/obj/item/stolen_item = null
@@ -725,7 +725,7 @@
 		if(stolen_item)
 			C.transferItemToLoc(stolen_item, src, TRUE)
 			held_item = stolen_item
-			visible_message("<span class='notice'>[src] grabs [held_item] out of [C]'s hand!</span>", "<span class='notice'>You snag [held_item] out of [C]'s hand!</span>", "<span class='hear'>You hear the sounds of wings flapping furiously.</span>")
+			visible_message("<span class='notice'>[src] grabs [held_item] out of [C]'s hand!</span>", "<span class='notice'>I snag [held_item] out of [C]'s hand!</span>", "<span class='hear'>I hear the sounds of wings flapping furiously.</span>")
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take!</span>")
@@ -734,7 +734,7 @@
 /mob/living/simple_animal/parrot/verb/drop_held_item_player()
 	set name = "Drop held item"
 	set category = "Parrot"
-	set desc = "Drop the item you're holding."
+	set desc = ""
 
 	if(stat)
 		return
@@ -746,14 +746,14 @@
 /mob/living/simple_animal/parrot/proc/drop_held_item(drop_gently = 1)
 	set name = "Drop held item"
 	set category = "Parrot"
-	set desc = "Drop the item you're holding."
+	set desc = ""
 
 	if(stat)
 		return -1
 
 	if(!held_item)
 		if(src == usr) //So that other mobs wont make this message appear when they're bludgeoning you.
-			to_chat(src, "<span class='warning'>You have nothing to drop!</span>")
+			to_chat(src, "<span class='warning'>I have nothing to drop!</span>")
 		return 0
 
 
@@ -772,11 +772,11 @@
 			var/obj/item/grenade/G = held_item
 			G.forceMove(drop_location())
 			G.prime()
-			to_chat(src, "<span class='danger'>You let go of [held_item]!</span>")
+			to_chat(src, "<span class='danger'>I let go of [held_item]!</span>")
 			held_item = null
 			return 1
 
-	to_chat(src, "<span class='notice'>You drop [held_item].</span>")
+	to_chat(src, "<span class='notice'>I drop [held_item].</span>")
 
 	held_item.forceMove(drop_location())
 	held_item = null
@@ -785,7 +785,7 @@
 /mob/living/simple_animal/parrot/proc/perch_player()
 	set name = "Sit"
 	set category = "Parrot"
-	set desc = "Sit on a nice comfy perch."
+	set desc = ""
 
 	if(stat || !client)
 		return
@@ -812,7 +812,7 @@
 /mob/living/simple_animal/parrot/proc/perch_mob_player()
 	set name = "Sit on Human's Shoulder"
 	set category = "Parrot"
-	set desc = "Sit on a nice comfy human being!"
+	set desc = ""
 
 	if(stat || !client)
 		return
@@ -828,7 +828,7 @@
 		icon_state = icon_living
 		parrot_state = PARROT_WANDER
 		if(buckled)
-			to_chat(src, "<span class='notice'>You are no longer sitting on [buckled]'s shoulder.</span>")
+			to_chat(src, "<span class='notice'>I are no longer sitting on [buckled]'s shoulder.</span>")
 			buckled.unbuckle_mob(src, TRUE)
 		buckled = null
 		pixel_x = initial(pixel_x)
@@ -845,24 +845,24 @@
 		pixel_x = pick(-8,8) //pick left or right shoulder
 		icon_state = icon_sit
 		parrot_state = PARROT_PERCH
-		to_chat(src, "<span class='notice'>You sit on [H]'s shoulder.</span>")
+		to_chat(src, "<span class='notice'>I sit on [H]'s shoulder.</span>")
 
 
 /mob/living/simple_animal/parrot/proc/toggle_mode()
 	set name = "Toggle mode"
 	set category = "Parrot"
-	set desc = "Time to bear those claws!"
+	set desc = ""
 
 	if(stat || !client)
 		return
 
-	if(a_intent != INTENT_HELP)
+	if(used_intent.type != INTENT_HELP)
 		melee_damage_upper = 0
 		a_intent = INTENT_HELP
 	else
 		melee_damage_upper = parrot_damage_upper
 		a_intent = INTENT_HARM
-	to_chat(src, "<span class='notice'>You will now [a_intent] others.</span>")
+	to_chat(src, "<span class='notice'>I will now [a_intent] others.</span>")
 	return
 
 /*
@@ -870,7 +870,7 @@
  */
 /mob/living/simple_animal/parrot/Poly
 	name = "Poly"
-	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	desc = ""
 	speak = list("Poly wanna cracker!", ":e Check the crystal, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS ABOUT TO DELAMINATE CALL THE SHUTTLE")
 	gold_core_spawnable = NO_SPAWN
 	speak_chance = 3
@@ -961,7 +961,7 @@
 
 /mob/living/simple_animal/parrot/Poly/ghost
 	name = "The Ghost of Poly"
-	desc = "Doomed to squawk the Earth."
+	desc = ""
 	color = "#FFFFFF77"
 	speak_chance = 20
 	status_flags = GODMODE
@@ -994,4 +994,4 @@
 	forceMove(H)
 	H.ForceContractDisease(P)
 	parrot_interest = null
-	H.visible_message("<span class='danger'>[src] dive bombs into [H]'s chest and vanishes!</span>", "<span class='userdanger'>[src] dive bombs into your chest, vanishing! This can't be good!</span>")
+	H.visible_message("<span class='danger'>[src] dive bombs into [H]'s chest and vanishes!</span>", "<span class='danger'>[src] dive bombs into your chest, vanishing! This can't be good!</span>")

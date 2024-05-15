@@ -3,7 +3,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /obj/item/hilbertshotel
     name = "Hilbert's Hotel"
-    desc = "A sphere of what appears to be an intricate network of bluespace. Observing it in detail seems to give you a headache as you try to comprehend the infinite amount of infinitesimally distinct points on its surface."
+    desc = ""
     icon_state = "hilbertshotel"
     w_class = WEIGHT_CLASS_SMALL
     resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -33,7 +33,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /obj/item/hilbertshotel/attack(mob/living/M, mob/living/user)
     if(M.mind)
-        to_chat(user, "<span class='notice'>You invite [M] to the hotel.</span>")
+        to_chat(user, "<span class='notice'>I invite [M] to the hotel.</span>")
         promptAndCheckIn(M)
     else
         to_chat(user, "<span class='warning'>[M] is not intelligent enough to understand how to use this device!</span>")
@@ -47,7 +47,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
     if(!chosenRoomNumber)
         return
     if(chosenRoomNumber > SHORT_REAL_LIMIT)
-        to_chat(user, "<span class='warning'>You have to check out the first [SHORT_REAL_LIMIT] rooms before you can go to a higher numbered one!</span>")
+        to_chat(user, "<span class='warning'>I have to check out the first [SHORT_REAL_LIMIT] rooms before you can go to a higher numbered one!</span>")
         return
     if((chosenRoomNumber < 1) || (chosenRoomNumber != round(chosenRoomNumber)))
         to_chat(user, "<span class='warning'>That is not a valid room number!</span>")
@@ -126,7 +126,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
     currentArea.reservation = currentReservation
     for(var/turf/closed/indestructible/hoteldoor/door in currentArea)
         door.parentSphere = src
-        door.desc = "The door to this hotel room. The placard reads 'Room [currentRoomnumber]'. Strange, this door doesnt even seem openable. The doorknob, however, seems to buzz with unusual energy...<br /><span class='info'>Alt-Click to look through the peephole.</span>"
+        door.desc = ""
     for(var/turf/open/space/bluespace/BSturf in currentArea)
         BSturf.parentSphere = src
 
@@ -195,19 +195,19 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 //Turfs and Areas
 /turf/closed/indestructible/hotelwall
 	name = "hotel wall"
-	desc = "A wall designed to protect the security of the hotel's guests."
+	desc = ""
 	icon_state = "hotelwall"
 	canSmoothWith = list(/turf/closed/indestructible/hotelwall)
 	explosion_block = INFINITY
 
 /turf/open/indestructible/hotelwood
-    desc = "Stylish dark wood with extra reinforcement. Secured firmly to the floor to prevent tampering."
+    desc = ""
     icon_state = "wood"
     footstep = FOOTSTEP_WOOD
     tiled_dirt = FALSE
 
 /turf/open/indestructible/hoteltile
-    desc = "Smooth tile with extra reinforcement. Secured firmly to the floor to prevent tampering."
+    desc = ""
     icon_state = "showroomfloor"
     footstep = FOOTSTEP_FLOOR
     tiled_dirt = FALSE
@@ -279,7 +279,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 /turf/closed/indestructible/hoteldoor/AltClick(mob/user)
     . = ..()
     if(get_dist(get_turf(src), get_turf(user)) <= 1)
-        to_chat(user, "<span class='notice'>You peak through the door's bluespace peephole...</span>")
+        to_chat(user, "<span class='notice'>I peak through the door's bluespace peephole...</span>")
         user.reset_perspective(parentSphere)
         user.set_machine(src)
         var/datum/action/peepholeCancel/PHC = new
@@ -294,12 +294,12 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /datum/action/peepholeCancel
     name = "Cancel View"
-    desc = "Stop looking through the bluespace peephole."
+    desc = ""
     button_icon_state = "cancel_peephole"
 
 /datum/action/peepholeCancel/Trigger()
     . = ..()
-    to_chat(owner, "<span class='warning'>You move away from the peephole.</span>")
+    to_chat(owner, "<span class='warning'>I move away from the peephole.</span>")
     owner.reset_perspective()
     owner.clear_fullscreen("remote_view", 0)
     qdel(src)
@@ -313,7 +313,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
     hidden = TRUE
     unique = FALSE
     dynamic_lighting = DYNAMIC_LIGHTING_FORCED
-    ambientsounds = list('sound/ambience/servicebell.ogg')
+    ambientsounds = list('sound/blank.ogg')
     var/roomnumber = 0
     var/obj/item/hilbertshotel/parentSphere
     var/datum/turf_reservation/reservation
@@ -416,7 +416,7 @@ GLOBAL_VAR_INIT(hhmysteryRoomNumber, 1337)
 
 /obj/item/analyzer/hilbertsanalyzer
     name = "custom rigged analyzer"
-    desc = "A hand-held environmental scanner which reports current gas levels. This one seems custom rigged to additionally be able to analyze some sort of bluespace device."
+    desc = ""
     icon_state = "hilbertsanalyzer"
 
 /obj/item/analyzer/hilbertsanalyzer/afterattack(atom/target, mob/user, proximity)

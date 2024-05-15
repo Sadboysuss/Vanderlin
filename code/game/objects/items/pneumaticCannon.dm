@@ -4,7 +4,7 @@
 #define PCANNON_FIFO 3
 /obj/item/pneumatic_cannon
 	name = "pneumatic cannon"
-	desc = "A gas-powered cannon that can fire any object loaded into it."
+	desc = ""
 	w_class = WEIGHT_CLASS_BULKY
 	force = 8 //Very heavy
 	attack_verb = list("bludgeoned", "smashed", "beaten")
@@ -32,7 +32,7 @@
 	var/charge_tick = 0
 	var/charge_type
 	var/selfcharge = FALSE
-	var/fire_sound = 'sound/weapons/sonic_jackhammer.ogg'
+	var/fire_sound = 'sound/blank.ogg'
 	var/spin_item = TRUE //Do the projectiles spin when launched?
 	trigger_guard = TRIGGER_GUARD_NORMAL
 
@@ -70,7 +70,7 @@
 	. += out.Join("\n")
 
 /obj/item/pneumatic_cannon/attackby(obj/item/W, mob/user, params)
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 	if(istype(W, /obj/item/tank/internals))
 		if(!tank)
@@ -89,7 +89,7 @@
 				pressureSetting = 3
 			if(3)
 				pressureSetting = 1
-		to_chat(user, "<span class='notice'>You tweak \the [src]'s pressure output to [pressureSetting].</span>")
+		to_chat(user, "<span class='notice'>I tweak \the [src]'s pressure output to [pressureSetting].</span>")
 	else if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		if(tank)
 			updateTank(tank, 1, user)
@@ -122,7 +122,7 @@
 	if(user)		//Only use transfer proc if there's a user, otherwise just set loc.
 		if(!user.transferItemToLoc(I, src))
 			return FALSE
-		to_chat(user, "<span class='notice'>You load \the [I] into \the [src].</span>")
+		to_chat(user, "<span class='notice'>I load \the [I] into \the [src].</span>")
 	else
 		I.forceMove(src)
 	loadedItems += I
@@ -134,7 +134,7 @@
 
 /obj/item/pneumatic_cannon/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
-	if(flag && user.a_intent == INTENT_HARM) //melee attack
+	if(flag && user.used_intent.type == INTENT_HARM) //melee attack
 		return
 	if(!istype(user))
 		return
@@ -157,7 +157,7 @@
 		return
 	if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(75) && clumsyCheck && iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.visible_message("<span class='warning'>[C] loses [C.p_their()] grip on [src], causing it to go off!</span>", "<span class='userdanger'>[src] slips out of your hands and goes off!</span>")
+		C.visible_message("<span class='warning'>[C] loses [C.p_their()] grip on [src], causing it to go off!</span>", "<span class='danger'>[src] slips out of your hands and goes off!</span>")
 		C.dropItemToGround(src, TRUE)
 		if(prob(10))
 			target = get_turf(user)
@@ -167,14 +167,14 @@
 		discharge = 1
 	if(!discharge)
 		user.visible_message("<span class='danger'>[user] fires \the [src]!</span>", \
-				    		 "<span class='danger'>You fire \the [src]!</span>")
+				    		 "<span class='danger'>I fire \the [src]!</span>")
 	log_combat(user, target, "fired at", src)
 	var/turf/T = get_target(target, get_turf(src))
 	playsound(src, fire_sound, 50, TRUE)
 	fire_items(T, user)
 	if(pressureSetting >= 3 && iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.visible_message("<span class='warning'>[C] is thrown down by the force of the cannon!</span>", "<span class='userdanger'>[src] slams into your shoulder, knocking you down!")
+		C.visible_message("<span class='warning'>[C] is thrown down by the force of the cannon!</span>", "<span class='danger'>[src] slams into your shoulder, knocking you down!")
 		C.Paralyze(60)
 
 /obj/item/pneumatic_cannon/proc/fire_items(turf/target, mob/user)
@@ -231,7 +231,7 @@
 
 /obj/item/pneumatic_cannon/ghetto //Obtainable by improvised methods; more gas per use, less capacity
 	name = "improvised pneumatic cannon"
-	desc = "A gas-powered, object-firing cannon made out of common parts."
+	desc = ""
 	force = 5
 	maxWeightClass = 10
 	gasPerThrow = 5
@@ -240,7 +240,7 @@
 	if(removing)
 		if(!tank)
 			return
-		to_chat(user, "<span class='notice'>You detach \the [thetank] from \the [src].</span>")
+		to_chat(user, "<span class='notice'>I detach \the [thetank] from \the [src].</span>")
 		tank.forceMove(user.drop_location())
 		user.put_in_hands(tank)
 		tank = null
@@ -250,7 +250,7 @@
 			return
 		if(!user.transferItemToLoc(thetank, src))
 			return
-		to_chat(user, "<span class='notice'>You hook \the [thetank] up to \the [src].</span>")
+		to_chat(user, "<span class='notice'>I hook \the [thetank] up to \the [src].</span>")
 		tank = thetank
 	update_icon()
 
@@ -274,7 +274,7 @@
 
 /obj/item/pneumatic_cannon/pie
 	name = "pie cannon"
-	desc = "Load cream pie for optimal results."
+	desc = ""
 	force = 10
 	icon_state = "piecannon"
 	gasPerThrow = 0
@@ -305,13 +305,13 @@
 
 /obj/item/pneumatic_cannon/speargun
 	name = "kinetic speargun"
-	desc = "A weapon favored by carp hunters. Fires specialized spears using kinetic energy."
+	desc = ""
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "speargun"
 	item_state = "speargun"
 	w_class = WEIGHT_CLASS_BULKY
 	force = 10
-	fire_sound = 'sound/weapons/gun/general/grenade_launch.ogg'
+	fire_sound = 'sound/blank.ogg'
 	gasPerThrow = 0
 	checktank = FALSE
 	range_multiplier = 3
@@ -326,7 +326,7 @@
 
 /obj/item/storage/backpack/magspear_quiver
 	name = "quiver"
-	desc = "A quiver for holding magspears."
+	desc = ""
 	icon_state = "quiver"
 	item_state = "quiver"
 

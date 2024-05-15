@@ -14,7 +14,7 @@
 
 
 /obj/item/modular_computer/laptop/preset/civillian
-	desc = "A low-end laptop often used for personal recreation."
+	desc = ""
 
 
 /obj/item/modular_computer/laptop/preset/civillian/install_programs()

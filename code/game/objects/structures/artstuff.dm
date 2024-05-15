@@ -5,7 +5,7 @@
 
 /obj/structure/easel
 	name = "easel"
-	desc = "Only for the finest of art!"
+	desc = ""
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "easel"
 	density = TRUE
@@ -21,7 +21,7 @@
 		painting = C
 		C.forceMove(get_turf(src))
 		C.layer = layer+0.1
-		user.visible_message("<span class='notice'>[user] puts \the [C] on \the [src].</span>","<span class='notice'>You place \the [C] on \the [src].</span>")
+		user.visible_message("<span class='notice'>[user] puts \the [C] on \the [src].</span>","<span class='notice'>I place \the [C] on \the [src].</span>")
 	else
 		return ..()
 
@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 
 /obj/item/canvas
 	name = "canvas"
-	desc = "Draw out your soul on this canvas!"
+	desc = ""
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "11x11"
 	resistance_flags = FLAMMABLE
@@ -129,7 +129,7 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 	if(blank)
 		//it's basically a giant etch-a-sketch
 		icon = blank
-		user.visible_message("<span class='notice'>[user] cleans the canvas.</span>","<span class='notice'>You clean the canvas.</span>")
+		user.visible_message("<span class='notice'>[user] cleans the canvas.</span>","<span class='notice'>I clean the canvas.</span>")
 
 
 #undef AMT_OF_CANVASES

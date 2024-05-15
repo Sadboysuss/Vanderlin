@@ -1,10 +1,10 @@
 /obj/item/extinguisher
 	name = "fire extinguisher"
-	desc = "A traditional red fire extinguisher."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "fire_extinguisher0"
 	item_state = "fire_extinguisher"
-	hitsound = 'sound/weapons/smash.ogg'
+	hitsound = list('sound/blank.ogg')
 	flags_1 = CONDUCT_1
 	throwforce = 10
 	w_class = WEIGHT_CLASS_NORMAL
@@ -28,7 +28,7 @@
 
 /obj/item/extinguisher/mini
 	name = "pocket fire extinguisher"
-	desc = "A light and compact fibreglass-framed model fire extinguisher."
+	desc = ""
 	icon_state = "miniFE0"
 	item_state = "miniFE"
 	hitsound = null	//it is much lighter, after all.
@@ -51,7 +51,7 @@
 
 /obj/item/extinguisher/advanced
 	name = "advanced fire extinguisher"
-	desc = "Used to stop thermonuclear fires from spreading inside your engine."
+	desc = ""
 	icon_state = "foam_extinguisher0"
 	//item_state = "foam_extinguisher" needs sprite
 	dog_fashion = null
@@ -79,7 +79,7 @@
 	return
 
 /obj/item/extinguisher/attack(mob/M, mob/user)
-	if(user.a_intent == INTENT_HELP && !safety) //If we're on help intent and going to spray people, don't bash them.
+	if(user.used_intent.type == INTENT_HELP && !safety) //If we're on help intent and going to spray people, don't bash them.
 		return FALSE
 	else
 		return ..()
@@ -110,7 +110,7 @@
 		var/transferred = W.reagents.trans_to(src, max_water, transfered_by = user)
 		if(transferred > 0)
 			to_chat(user, "<span class='notice'>\The [src] has been refilled by [transferred] units.</span>")
-			playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE, -6)
 			for(var/datum/reagent/water/R in reagents.reagent_list)
 				R.cooling_temperature = cooling_power
 		else
@@ -122,7 +122,7 @@
 
 /obj/item/extinguisher/afterattack(atom/target, mob/user , flag)
 	. = ..()
-	// Make it so the extinguisher doesn't spray yourself when you click your inventory items
+	// Make it so the extinguisher doesn't spray myself when you click your inventory items
 	if (target.loc == user)
 		return
 	//TODO; Add support for reagents in water.
@@ -142,7 +142,7 @@
 
 		src.last_use = world.time
 
-		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, TRUE, -3)
+		playsound(src.loc, 'sound/blank.ogg', 75, TRUE, -3)
 
 		var/direction = get_dir(src,target)
 
@@ -223,11 +223,11 @@
 	if(!user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
 	if(!user.is_holding(src))
-		to_chat(user, "<span class='notice'>You must be holding the [src] in your hands do this!</span>")
+		to_chat(user, "<span class='notice'>I must be holding the [src] in your hands do this!</span>")
 		return
 	EmptyExtinguisher(user)
 
-/obj/item/extinguisher/proc/EmptyExtinguisher(var/mob/user)
+/obj/item/extinguisher/proc/EmptyExtinguisher(mob/user)
 	if(loc == user && reagents.total_volume)
 		reagents.clear_reagents()
 
@@ -236,12 +236,12 @@
 			var/turf/open/theturf = T
 			theturf.MakeSlippery(TURF_WET_WATER, min_wet_time = 10 SECONDS, wet_time_to_add = 5 SECONDS)
 
-		user.visible_message("<span class='notice'>[user] empties out \the [src] onto the floor using the release valve.</span>", "<span class='info'>You quietly empty out \the [src] using its release valve.</span>")
+		user.visible_message("<span class='notice'>[user] empties out \the [src] onto the floor using the release valve.</span>", "<span class='info'>I quietly empty out \the [src] using its release valve.</span>")
 
 //firebot assembly
 /obj/item/extinguisher/attackby(obj/O, mob/user, params)
 	if(istype(O, /obj/item/bodypart/l_arm/robot) || istype(O, /obj/item/bodypart/r_arm/robot))
-		to_chat(user, "<span class='notice'>You add [O] to [src].</span>")
+		to_chat(user, "<span class='notice'>I add [O] to [src].</span>")
 		qdel(O)
 		qdel(src)
 		user.put_in_hands(new /obj/item/bot_assembly/firebot)

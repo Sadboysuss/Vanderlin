@@ -1,6 +1,6 @@
 /obj/item/wrench
 	name = "wrench"
-	desc = "A wrench with common uses. Can be found in your hand."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "wrench"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -10,10 +10,10 @@
 	force = 5
 	throwforce = 7
 	w_class = WEIGHT_CLASS_SMALL
-	usesound = 'sound/items/ratchet.ogg'
+	usesound = 'sound/blank.ogg'
 	custom_materials = list(/datum/material/iron=150)
-	drop_sound = 'sound/items/handling/wrench_drop.ogg'
-	pickup_sound =  'sound/items/handling/wrench_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	tool_behaviour = TOOL_WRENCH
@@ -22,21 +22,21 @@
 
 /obj/item/wrench/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is beating [user.p_them()]self to death with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/weapons/genhit.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
 /obj/item/wrench/abductor
 	name = "alien wrench"
-	desc = "A polarized wrench. It causes anything placed between the jaws to turn."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "wrench"
-	usesound = 'sound/effects/empulse.ogg'
+	usesound = 'sound/blank.ogg'
 	toolspeed = 0.1
 
 
 /obj/item/wrench/medical
 	name = "medical wrench"
-	desc = "A medical wrench with common(medical?) uses. Can be found in your hand."
+	desc = ""
 	icon_state = "wrench_medical"
 	force = 2 //MEDICAL
 	throwforce = 4
@@ -49,7 +49,7 @@
 	user.light_color = "#FAE48E"
 	user.set_light(2)
 	user.add_overlay(mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER))
-	playsound(loc, 'sound/effects/pray.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 
 	// Let the sound effect finish playing
 	sleep(20)
@@ -73,7 +73,7 @@
 
 /obj/item/wrench/cyborg
 	name = "hydraulic wrench"
-	desc = "An advanced robotic wrench, powered by internal hydraulics. Twice as fast as the handheld version."
+	desc = ""
 	icon = 'icons/obj/items_cyborg.dmi'
 	icon_state = "wrench_cyborg"
 	toolspeed = 0.5

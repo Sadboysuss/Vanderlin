@@ -105,7 +105,7 @@
 /obj/screen/guardian/Manifest
 	icon_state = "manifest"
 	name = "Manifest"
-	desc = "Spring forth into battle!"
+	desc = ""
 
 /obj/screen/guardian/Manifest/Click()
 	if(isguardian(usr))
@@ -116,7 +116,7 @@
 /obj/screen/guardian/Recall
 	icon_state = "recall"
 	name = "Recall"
-	desc = "Return to your user."
+	desc = ""
 
 /obj/screen/guardian/Recall/Click()
 	if(isguardian(usr))
@@ -126,7 +126,7 @@
 /obj/screen/guardian/ToggleMode
 	icon_state = "toggle"
 	name = "Toggle Mode"
-	desc = "Switch between ability modes."
+	desc = ""
 
 /obj/screen/guardian/ToggleMode/Click()
 	if(isguardian(usr))
@@ -139,12 +139,12 @@
 /obj/screen/guardian/ToggleMode/Assassin
 	icon_state = "stealth"
 	name = "Toggle Stealth"
-	desc = "Enter or exit stealth."
+	desc = ""
 
 /obj/screen/guardian/Communicate
 	icon_state = "communicate"
 	name = "Communicate"
-	desc = "Communicate telepathically with your user."
+	desc = ""
 
 /obj/screen/guardian/Communicate/Click()
 	if(isguardian(usr))
@@ -155,7 +155,7 @@
 /obj/screen/guardian/ToggleLight
 	icon_state = "light"
 	name = "Toggle Light"
-	desc = "Glow like star dust."
+	desc = ""
 
 /obj/screen/guardian/ToggleLight/Click()
 	if(isguardian(usr))

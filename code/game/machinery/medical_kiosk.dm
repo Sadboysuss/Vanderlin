@@ -4,7 +4,7 @@
 
 /obj/machinery/medical_kiosk
 	name = "medical kiosk"
-	desc = "A freestanding medical kiosk, which can provide a wide range of medical analysis for diagnosis."
+	desc = ""
 	icon = 'icons/obj/machines/medical_kiosk.dmi'
 	icon_state = "kiosk"
 	layer = ABOVE_MOB_LAYER
@@ -102,7 +102,7 @@
 			to_chat(user, "<span class='warning'>[O] is stuck to your hand!</span>")
 			return
 		user.visible_message("<span class='notice'>[user] snaps [O] onto [src]!</span>", \
-		"<span class='notice'>You press [O] into the side of [src], clicking into place.</span>")
+		"<span class='notice'>I press [O] into the side of [src], clicking into place.</span>")
 		 //This will be the scanner returning scanner_wand's selected_target variable and assigning it to the altPatient var
 		if(W.selected_target)
 			if(!(altPatient == W.return_patient()))
@@ -110,7 +110,7 @@
 			altPatient = W.return_patient()
 			user.visible_message("<span class='notice'>[W.return_patient()] has been set as the current patient.</span>")
 			W.selected_target = null
-		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		scanner_wand = O
 		return
 	return ..()
@@ -126,8 +126,8 @@
 		scanner_wand = null
 		return
 	user.visible_message("<span class='notice'>[user] unhooks the [scanner_wand] from [src].</span>", \
-	"<span class='notice'>You detach the [scanner_wand] from [src].</span>")
-	playsound(src, 'sound/machines/click.ogg', 60, TRUE)
+	"<span class='notice'>I detach the [scanner_wand] from [src].</span>")
+	playsound(src, 'sound/blank.ogg', 60, TRUE)
 	scanner_wand = null
 
 /obj/machinery/medical_kiosk/Destroy()
@@ -139,7 +139,7 @@
 	if(obj_flags & EMAGGED)
 		return
 	emagger.visible_message("<span class='warning'>[emagger] waves a suspicious card by the [src]'s biometric scanner!</span>",
-	"<span class='notice'>You overload the sensory electronics, the diagnostic readouts start jittering across the screen..</span>")
+	"<span class='notice'>I overload the sensory electronics, the diagnostic readouts start jittering across the screen..</span>")
 	obj_flags |= EMAGGED
 	var/obj/item/circuitboard/computer/cargo/board = circuit
 	board.obj_flags |= EMAGGED //Mirrors emag status onto the board as well.

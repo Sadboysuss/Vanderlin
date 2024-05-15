@@ -17,8 +17,8 @@
 
 
 /datum/outfit/ninja/post_equip(mob/living/carbon/human/H)
-	if(istype(H.wear_suit, suit))
-		var/obj/item/clothing/suit/space/space_ninja/S = H.wear_suit
+	if(istype(H.wear_armor, suit))
+		var/obj/item/clothing/suit/space/space_ninja/S = H.wear_armor
 		if(istype(H.belt, belt))
 			S.energyKatana = H.belt
 		S.randomize_param()

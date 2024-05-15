@@ -16,10 +16,17 @@
 	pressure_resistance = 8
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	throwforce = 10
+	vis_flags = VIS_INHERIT_PLANE
+
+	//FOV STUFF
+	plane = GAME_PLANE_FOV_HIDDEN
 
 	var/lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 	var/datum/mind/mind
 	var/static/next_mob_id = 0
+
+///Cursor icon used when holding shift over things
+	var/examine_cursor_icon = 'icons/effects/mousemice/human_looking.dmi'
 
 	/// List of movement speed modifiers applying to this mob
 	var/list/movespeed_modification				//Lazy list, see mob_movespeed.dm
@@ -51,6 +58,9 @@
 
 	/// Tick time the mob can next move
 	var/next_move = null
+	var/next_rmove = null
+	var/next_lmove = null
+	var/used_hand = 1
 
 	/**
 	  * Magic var that stops you moving and interacting with anything
@@ -89,6 +99,7 @@
 	var/jitteriness = 0//Carbon
 	/// Hunger level of the mob
 	var/nutrition = NUTRITION_LEVEL_START_MIN // randomised in Initialize
+	var/hydration = HYDRATION_LEVEL_START_MIN
 	/// Satiation level of the mob
 	var/satiety = 0//Carbon
 
@@ -96,11 +107,26 @@
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
 	/// The current intent of the mob
-	var/a_intent = INTENT_HELP//Living
+	var/datum/intent/a_intent = INTENT_HELP//Living
+	var/datum/intent/o_intent = INTENT_HELP
+	var/datum/rmb_intent/rmb_intent//Living
+	var/datum/intent/used_intent
+	var/datum/intent/mmb_intent
+	var/datum/intent/used_rmb_intent
 	/// List of possible intents a mob can have
-	var/list/possible_a_intents = null//Living
+	var/list/possible_mmb_intents = list()
+	var/list/possible_spell_intents = list()
+	var/list/possible_a_intents = list()//Living
+	var/list/possible_offhand_intents = list()//Living
+	var/list/possible_rmb_intents = list()
+	var/list/base_intents = list() //bare hand intents
+	var/l_index = 1
+	var/r_index = 1
+	var/r_ua_index = 1
+	var/l_ua_index = 1
+	var/oactive = FALSE //offhand active
 	/// The movement intent of the mob (run/wal)
-	var/m_intent = MOVE_INTENT_RUN//Living
+	var/m_intent = MOVE_INTENT_WALK//Living
 
 	/// The last known IP of the client who was in this mob
 	var/lastKnownIP = null
@@ -205,3 +231,52 @@
 	var/bloody_hands = 0
 
 	var/datum/focus //What receives our keyboard inputs. src by default
+
+	//Whether the mob is updating glide size when movespeed updates or not
+	var/updating_glide_size = TRUE
+
+	var/atkreleasing = 0
+	var/atkswinging = 0
+
+	//target goes here
+	var/mob/targetting = null
+	var/temptarget = FALSE
+	var/fixedeye = FALSE
+	var/tempfixeye = FALSE //targetting
+	var/image/targeti
+	var/image/swingi
+	var/rautoaiming = FALSE //targets any mob on a turf with rmb or lmb
+	var/lautoaiming = FALSE
+	var/unarmed_delay = 8 //delay before an unarmed attack goes off
+	var/boxaim = FALSE
+	var/mob/swingtarget = null
+
+	var/list/attack_grunts = null
+	var/list/takedamage_grunts = null
+
+	var/canparry = FALSE
+	var/candodge = FALSE
+
+	var/dodge_sound = 'sound/combat/dodge.ogg'
+	var/parry_sound = "unarmparry"
+
+	var/dodgecd = FALSE
+
+	var/setparrytime = 12
+	var/dodgetime = 12
+
+	var/last_dodge = 0
+	var/last_parry = 0
+	var/next_emote = 0
+	var/lastpoint = 0
+
+	var/mobid = 0 //incremented on spawn
+
+	var/cmode = 0
+	var/d_intent = INTENT_DODGE
+	var/islatejoin = FALSE
+	var/obj/effect/proc_holder/ranged_ability //Any ranged ability the mob has, as a click override
+
+	var/list/mob_timers = list()
+
+	var/music_playing = FALSE

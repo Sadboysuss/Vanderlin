@@ -18,7 +18,7 @@
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "donutbox6"
 	name = "donut box"
-	desc = "Mmm. Donuts."
+	desc = ""
 	resistance_flags = FLAMMABLE
 	var/icon_type = "donut"
 	var/spawn_type = null
@@ -88,7 +88,7 @@
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	name = "egg box"
-	desc = "A carton for containing eggs."
+	desc = ""
 	spawn_type = /obj/item/reagent_containers/food/snacks/egg
 
 /obj/item/storage/fancy/egg_box/ComponentInitialize()
@@ -103,7 +103,7 @@
 
 /obj/item/storage/fancy/candle_box
 	name = "candle pack"
-	desc = "A pack of red candles."
+	desc = ""
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candlebox5"
 	icon_type = "candle"
@@ -126,7 +126,7 @@
 ////////////
 /obj/item/storage/fancy/cigarettes
 	name = "\improper Space Cigarettes packet"
-	desc = "The most popular brand of cigarettes, sponsors of the Space Olympics."
+	desc = ""
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig"
 	item_state = "cigpacket"
@@ -155,7 +155,7 @@
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, W, user)
 		user.put_in_hands(W)
 		contents -= W
-		to_chat(user, "<span class='notice'>You take \a [W] out of the pack.</span>")
+		to_chat(user, "<span class='notice'>I take \a [W] out of the pack.</span>")
 	else
 		to_chat(user, "<span class='notice'>There are no [icon_type]s left in the pack.</span>")
 
@@ -196,7 +196,7 @@
 			SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, W, M)
 			M.equip_to_slot_if_possible(W, SLOT_WEAR_MASK)
 			contents -= W
-			to_chat(user, "<span class='notice'>You take \a [W] out of the pack.</span>")
+			to_chat(user, "<span class='notice'>I take \a [W] out of the pack.</span>")
 		else
 			..()
 	else
@@ -204,49 +204,49 @@
 
 /obj/item/storage/fancy/cigarettes/dromedaryco
 	name = "\improper DromedaryCo packet"
-	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
+	desc = ""
 	icon_state = "dromedary"
 	spawn_type = /obj/item/clothing/mask/cigarette/dromedary
 
 /obj/item/storage/fancy/cigarettes/cigpack_uplift
 	name = "\improper Uplift Smooth packet"
-	desc = "Your favorite brand, now menthol flavored."
+	desc = ""
 	icon_state = "uplift"
 	spawn_type = /obj/item/clothing/mask/cigarette/uplift
 
 /obj/item/storage/fancy/cigarettes/cigpack_robust
 	name = "\improper Robust packet"
-	desc = "Smoked by the robust."
+	desc = ""
 	icon_state = "robust"
 	spawn_type = /obj/item/clothing/mask/cigarette/robust
 
 /obj/item/storage/fancy/cigarettes/cigpack_robustgold
 	name = "\improper Robust Gold packet"
-	desc = "Smoked by the truly robust."
+	desc = ""
 	icon_state = "robustg"
 	spawn_type = /obj/item/clothing/mask/cigarette/robustgold
 
 /obj/item/storage/fancy/cigarettes/cigpack_carp
 	name = "\improper Carp Classic packet"
-	desc = "Since 2313."
+	desc = ""
 	icon_state = "carp"
 	spawn_type = /obj/item/clothing/mask/cigarette/carp
 
 /obj/item/storage/fancy/cigarettes/cigpack_syndicate
 	name = "cigarette packet"
-	desc = "An obscure brand of cigarettes."
+	desc = ""
 	icon_state = "syndie"
 	spawn_type = /obj/item/clothing/mask/cigarette/syndicate
 
 /obj/item/storage/fancy/cigarettes/cigpack_midori
 	name = "\improper Midori Tabako packet"
-	desc = "You can't understand the runes, but the packet smells funny."
+	desc = ""
 	icon_state = "midori"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/nicotine
 
 /obj/item/storage/fancy/cigarettes/cigpack_candy
 	name = "\improper Timmy's First Candy Smokes packet"
-	desc = "Unsure about smoking? Want to bring your children safely into the family tradition? Look no more with this special packet! Includes 100%* Nicotine-Free candy cigarettes."
+	desc = ""
 	icon_state = "candy"
 	icon_type = "candy cigarette"
 	spawn_type = /obj/item/clothing/mask/cigarette/candy
@@ -259,31 +259,31 @@
 
 /obj/item/storage/fancy/cigarettes/cigpack_shadyjims
 	name = "\improper Shady Jim's Super Slims packet"
-	desc = "Is your weight slowing you down? Having trouble running away from gravitational singularities? Can't stop stuffing your mouth? Smoke Shady Jim's Super Slims and watch all that fat burn away. Guaranteed results!"
+	desc = ""
 	icon_state = "shadyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/shadyjims
 
 /obj/item/storage/fancy/cigarettes/cigpack_xeno
 	name = "\improper Xeno Filtered packet"
-	desc = "Loaded with 100% pure slime. And also nicotine."
+	desc = ""
 	icon_state = "slime"
 	spawn_type = /obj/item/clothing/mask/cigarette/xeno
 
 /obj/item/storage/fancy/cigarettes/cigpack_cannabis
 	name = "\improper Freak Brothers' Special packet"
-	desc = "A label on the packaging reads, \"Endorsed by Phineas, Freddy and Franklin.\""
+	desc = ""
 	icon_state = "midori"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/cannabis
 
 /obj/item/storage/fancy/cigarettes/cigpack_mindbreaker
 	name = "\improper Leary's Delight packet"
-	desc = "Banned in over 36 galaxies."
+	desc = ""
 	icon_state = "shadyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/mindbreaker
 
 /obj/item/storage/fancy/rollingpapers
 	name = "rolling paper pack"
-	desc = "A pack of Nanotrasen brand rolling papers."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig_paper_pack"
@@ -307,7 +307,7 @@
 
 /obj/item/storage/fancy/cigarettes/cigars
 	name = "\improper premium cigar case"
-	desc = "A case of premium cigars. Very expensive."
+	desc = ""
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigarcase"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -336,13 +336,13 @@
 
 /obj/item/storage/fancy/cigarettes/cigars/cohiba
 	name = "\improper Cohiba Robusto cigar case"
-	desc = "A case of imported Cohiba cigars, renowned for their strong flavor."
+	desc = ""
 	icon_state = "cohibacase"
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/cohiba
 
 /obj/item/storage/fancy/cigarettes/cigars/havana
 	name = "\improper premium Havanian cigar case"
-	desc = "A case of classy Havanian cigars."
+	desc = ""
 	icon_state = "cohibacase"
 	spawn_type = /obj/item/clothing/mask/cigarette/cigar/havana
 
@@ -352,7 +352,7 @@
 
 /obj/item/storage/fancy/heart_box
 	name = "heart-shaped box"
-	desc = "A heart-shaped box for holding tiny chocolates."
+	desc = ""
 	icon = 'icons/obj/food/containers.dmi'
 	item_state = "chocolatebox"
 	icon_state = "chocolatebox"
@@ -370,7 +370,7 @@
 
 /obj/item/storage/fancy/nugget_box
 	name = "nugget box"
-	desc = "A cardboard box used for holding chicken nuggies."
+	desc = ""
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "nuggetbox"
 	icon_type = "nugget"

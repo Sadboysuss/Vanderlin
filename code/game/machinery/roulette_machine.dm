@@ -13,7 +13,7 @@
 ///Machine that lets you play roulette. Odds are pre-defined to be the same as European Roulette without the "En Prison" rule
 /obj/machinery/roulette
 	name = "Roulette Table"
-	desc = "A computerized roulette table. Swipe your ID to play or register yourself as owner!"
+	desc = ""
 	icon = 'icons/obj/machines/roulette.dmi'
 	icon_state = "idle"
 	density = TRUE
@@ -56,8 +56,8 @@
 		return
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
-		assets.send(user)
+//		var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
+//		assets.send(user)
 		ui = new(user, src, ui_key, "roulette", name, 455, 520, master_ui, state)
 		ui.open()
 
@@ -76,8 +76,8 @@
 			data["AccountBalance"] = 0
 		data["CanUnbolt"] = (H.get_idcard() == my_card)
 
-	if(!assets)
-		assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
+//	if(!assets)
+//		assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
 	return data
 
 /obj/machinery/roulette/ui_act(action, params)
@@ -100,7 +100,7 @@
 	update_icon() // Not applicable to all objects.
 
 /obj/machinery/roulette/ui_base_html(html)
-	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
+//	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/roulette)
 	. = replacetext(html, "<!--customheadhtml-->", assets.css_tag())
 
 ///Handles setting ownership and the betting itself.
@@ -111,7 +111,7 @@
 	if(playing)
 		return ..()
 	if(istype(W, /obj/item/card/id))
-		playsound(src, 'sound/machines/card_slide.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 		if(stat & MAINT || !on || locked)
 			to_chat(user, "<span class='notice'>The machine appears to be disabled.</span>")
@@ -120,8 +120,8 @@
 		if(my_card)
 			var/obj/item/card/id/player_card = W
 			if(player_card.registered_account.account_balance < chosen_bet_amount) //Does the player have enough funds
-				audible_message("<span class='warning'>You do not have the funds to play! Lower your bet or get more money.</span>")
-				playsound(src, 'sound/machines/buzz-two.ogg', 30, TRUE)
+				audible_message("<span class='warning'>I do not have the funds to play! Lower your bet or get more money.</span>")
+				playsound(src, 'sound/blank.ogg', 30, TRUE)
 				return FALSE
 			if(!chosen_bet_amount || isnull(chosen_bet_type))
 				return FALSE
@@ -138,8 +138,8 @@
 
 			icon_state = "rolling" //Prepare the new icon state for rolling before hand.
 			flick("flick_up", src)
-			playsound(src, 'sound/machines/piston_raise.ogg', 70)
-			playsound(src, 'sound/machines/chime.ogg', 50)
+			playsound(src, 'sound/blank.ogg', 70)
+			playsound(src, 'sound/blank.ogg', 50)
 
 			addtimer(CALLBACK(src, .proc/play, user, player_card, chosen_bet_type, chosen_bet_amount, potential_payout), 4) //Animation first
 			return TRUE
@@ -150,9 +150,9 @@
 				if(!msg)
 					return
 				name = msg
-				desc = "Owned by [new_card.registered_account.account_holder], draws directly from [user.p_their()] account."
+				desc = ""
 				my_card = new_card
-				to_chat(user, "<span class='notice'>You link the wheel to your account.</span>")
+				to_chat(user, "<span class='notice'>I link the wheel to your account.</span>")
 				power_change()
 				return
 	return ..()
@@ -170,14 +170,14 @@
 
 	var/rolled_number = rand(0, 36)
 
-	playsound(src, 'sound/machines/roulettewheel.ogg', 50)
+	playsound(src, 'sound/blank.ogg', 50)
 	addtimer(CALLBACK(src, .proc/finish_play, player_id, bet_type, bet_amount, payout, rolled_number), 34) //4 deciseconds more so the animation can play
 	addtimer(CALLBACK(src, .proc/finish_play_animation), 30)
 
 /obj/machinery/roulette/proc/finish_play_animation()
 	icon_state = "idle"
 	flick("flick_down", src)
-	playsound(src, 'sound/machines/piston_lower.ogg', 70)
+	playsound(src, 'sound/blank.ogg', 70)
 
 ///Ran after a while to check if the player won or not.
 /obj/machinery/roulette/proc/finish_play(obj/item/card/id/player_id, bet_type, bet_amount, potential_payout, rolled_number)
@@ -193,12 +193,12 @@
 	handle_color_light(color)
 
 	if(!is_winner)
-		audible_message("<span class='warning'>You lost! Better luck next time</span>")
-		playsound(src, 'sound/machines/synth_no.ogg', 50)
+		audible_message("<span class='warning'>I lost! Better luck next time</span>")
+		playsound(src, 'sound/blank.ogg', 50)
 		return FALSE
 
-	audible_message("<span class='notice'>You have won [potential_payout] credits! Congratulations!</span>")
-	playsound(src, 'sound/machines/synth_yes.ogg', 50)
+	audible_message("<span class='notice'>I have won [potential_payout] credits! Congratulations!</span>")
+	playsound(src, 'sound/blank.ogg', 50)
 
 	dispense_prize(potential_payout)
 
@@ -242,7 +242,7 @@
 
 	var/turf/drop_loc = get_step(loc, drop_dir)
 	var/obj/item/cash = new coin_to_drop(drop_loc)
-	playsound(cash, pick(list('sound/machines/coindrop.ogg', 'sound/machines/coindrop2.ogg')), 40, TRUE)
+	playsound(cash, pick(list('sound/blank.ogg')), 40, TRUE)
 
 	addtimer(CALLBACK(src, .proc/drop_coin), 3) //Recursion time
 
@@ -284,7 +284,7 @@
 	if(my_card.registered_account.account_balance >= payout)
 		return TRUE //We got the betting amount
 	audible_message("<span class='warning'>The bank account of [my_card.registered_account.account_holder] does not have enough funds to pay out the potential prize, contact them to fill up their account or lower your bet!</span>")
-	playsound(src, 'sound/machines/buzz-two.ogg', 30, TRUE)
+	playsound(src, 'sound/blank.ogg', 30, TRUE)
 	return FALSE
 
 /obj/machinery/roulette/update_icon(payout, color, rolled_number, is_winner = FALSE)
@@ -331,15 +331,15 @@
 /obj/machinery/roulette/welder_act(mob/living/user, obj/item/I)
 	. = ..()
 	if(stat & MAINT)
-		to_chat(user, "<span class='notice'>You start re-attaching the top section of [src]...</span>")
+		to_chat(user, "<span class='notice'>I start re-attaching the top section of [src]...</span>")
 		if(I.use_tool(src, user, 30, volume=50))
-			to_chat(user, "<span class='notice'>You re-attach the top section of [src].</span>")
+			to_chat(user, "<span class='notice'>I re-attach the top section of [src].</span>")
 			stat &= ~MAINT
 			icon_state = "idle"
 	else
-		to_chat(user, "<span class='notice'>You start welding the top section from [src]...</span>")
+		to_chat(user, "<span class='notice'>I start welding the top section from [src]...</span>")
 		if(I.use_tool(src, user, 30, volume=50))
-			to_chat(user, "<span class='notice'>You removed the top section of [src].</span>")
+			to_chat(user, "<span class='notice'>I removed the top section of [src].</span>")
 			stat |= MAINT
 			icon_state = "open"
 
@@ -356,7 +356,7 @@
 
 /obj/item/roulette_wheel_beacon
 	name = "roulette wheel beacon"
-	desc = "N.T. approved roulette wheel beacon, toss it down and you will have a complementary roulette wheel delivered to you."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon"
 	var/used

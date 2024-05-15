@@ -156,12 +156,12 @@ if it doesn't return 1 and show_msg=1 it will prints a message explaining why th
 generally it would be used like so:
 
 /proc/admin_proc()
-	if(!check_rights(R_ADMIN))
+	if(!check_rights(R_ADMIN,0))
 		return
 	to_chat(world, "you have enough rights!")
 
 NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
-you will have to do something like if(client.rights & R_ADMIN) yourself.
+you will have to do something like if(client.rights & R_ADMIN) myself.
 */
 /proc/check_rights(rights_required, show_msg=1)
 	if(usr && usr.client)

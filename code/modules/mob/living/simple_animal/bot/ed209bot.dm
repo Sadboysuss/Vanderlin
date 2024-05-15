@@ -1,6 +1,6 @@
 /mob/living/simple_animal/bot/secbot/ed209
 	name = "\improper ED-209 Security Robot"
-	desc = "A security robot. He looks less than thrilled."
+	desc = ""
 	icon_state = "ed209"
 	density = TRUE
 	health = 100
@@ -15,7 +15,7 @@
 	ranged = TRUE
 	var/lastfired = 0
 	var/shot_delay = 15
-	var/shoot_sound = 'sound/weapons/laser.ogg'
+	var/shoot_sound = 'sound/blank.ogg'
 	var/projectile = /obj/projectile/beam/disabler
 	var/fair_market_projectile = /obj/projectile/bullet/c38 // For shooting the worst scumbags of all: the poor
 
@@ -59,7 +59,7 @@
 	..()
 
 /mob/living/simple_animal/bot/secbot/ed209/proc/set_weapon()  //used to update the projectile type and firing sound
-	shoot_sound = 'sound/weapons/laser.ogg'
+	shoot_sound = 'sound/blank.ogg'
 	if(emagged == 2)
 		projectile = /obj/projectile/beam
 	else

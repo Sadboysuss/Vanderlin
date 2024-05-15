@@ -55,6 +55,14 @@
 #define SPAN_COMMAND "command_headset"
 #define SPAN_CLOWN "clown"
 
+#define SPAN_GEN "say"
+#define SPAN_DWARF "dwarf"
+#define SPAN_ELF "elf"
+#define SPAN_SAND "celestial"
+#define SPAN_DELF "delf"
+#define SPAN_HELL "infernal"
+#define SPAN_BEAST "beast"
+
 //bitflag #defines for return value of the radio() proc.
 #define ITALICS 1
 #define REDUCE_RANGE 2

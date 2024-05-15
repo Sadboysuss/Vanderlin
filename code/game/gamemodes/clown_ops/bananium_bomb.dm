@@ -1,6 +1,6 @@
 /obj/machinery/nuclearbomb/syndicate/bananium
 	name = "bananium fission explosive"
-	desc = "You probably shouldn't stick around to see if this is armed."
+	desc = ""
 	icon = 'icons/obj/machines/nuke.dmi'
 	icon_state = "bananiumbomb_base"
 
@@ -8,7 +8,7 @@
 	if(deconstruction_state != NUKESTATE_INTACT)
 		icon_state = "bananiumbomb_base"
 		return
-	
+
 	switch(get_nuke_state())
 		if(NUKE_OFF_LOCKED, NUKE_OFF_UNLOCKED)
 			icon_state = "bananiumbomb_base"
@@ -36,10 +36,10 @@
 			continue
 		H.Stun(10)
 		var/obj/item/clothing/C
-		if(!H.w_uniform || H.dropItemToGround(H.w_uniform))
+		if(!H.wear_pants || H.dropItemToGround(H.wear_pants))
 			C = new /obj/item/clothing/under/rank/civilian/clown(H)
 			ADD_TRAIT(C, TRAIT_NODROP, CLOWN_NUKE_TRAIT)
-			H.equip_to_slot_or_del(C, SLOT_W_UNIFORM)
+			H.equip_to_slot_or_del(C, SLOT_PANTS)
 
 		if(!H.shoes || H.dropItemToGround(H.shoes))
 			C = new /obj/item/clothing/shoes/clown_shoes(H)

@@ -3,7 +3,7 @@
  */
 /obj/structure/falsewall
 	name = "wall"
-	desc = "A huge chunk of metal used to separate rooms."
+	desc = ""
 	anchored = TRUE
 	icon = 'icons/turf/walls/wall.dmi'
 	icon_state = "wall"
@@ -84,7 +84,7 @@
 
 /obj/structure/falsewall/attackby(obj/item/W, mob/user, params)
 	if(opening)
-		to_chat(user, "<span class='warning'>You must wait until the door has stopped moving!</span>")
+		to_chat(user, "<span class='warning'>I must wait until the door has stopped moving!</span>")
 		return
 
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)
@@ -96,10 +96,10 @@
 			if(!isfloorturf(T))
 				to_chat(user, "<span class='warning'>[src] bolts must be tightened on the floor!</span>")
 				return
-			user.visible_message("<span class='notice'>[user] tightens some bolts on the wall.</span>", "<span class='notice'>You tighten the bolts on the wall.</span>")
+			user.visible_message("<span class='notice'>[user] tightens some bolts on the wall.</span>", "<span class='notice'>I tighten the bolts on the wall.</span>")
 			ChangeToWall()
 		else
-			to_chat(user, "<span class='warning'>You can't reach, close it first!</span>")
+			to_chat(user, "<span class='warning'>I can't reach, close it first!</span>")
 
 	else if(W.tool_behaviour == TOOL_WELDER)
 		if(W.use_tool(src, user, 0, volume=50))
@@ -108,11 +108,11 @@
 		return ..()
 
 /obj/structure/falsewall/proc/dismantle(mob/user, disassembled=TRUE, obj/item/tool = null)
-	user.visible_message("<span class='notice'>[user] dismantles the false wall.</span>", "<span class='notice'>You dismantle the false wall.</span>")
+	user.visible_message("<span class='notice'>[user] dismantles the false wall.</span>", "<span class='notice'>I dismantle the false wall.</span>")
 	if(tool)
 		tool.play_tool_sound(src, 100)
 	else
-		playsound(src, 'sound/items/welder.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 	deconstruct(disassembled)
 
 /obj/structure/falsewall/deconstruct(disassembled = TRUE)
@@ -137,7 +137,7 @@
 
 /obj/structure/falsewall/reinforced
 	name = "reinforced wall"
-	desc = "A huge chunk of reinforced metal used to separate rooms."
+	desc = ""
 	icon = 'icons/turf/walls/reinforced_wall.dmi'
 	icon_state = "r_wall"
 	walltype = /turf/closed/wall/r_wall
@@ -158,7 +158,7 @@
 
 /obj/structure/falsewall/uranium
 	name = "uranium wall"
-	desc = "A wall with uranium plating. This is probably a bad idea."
+	desc = ""
 	icon = 'icons/turf/walls/uranium_wall.dmi'
 	icon_state = "uranium"
 	mineral = /obj/item/stack/sheet/mineral/uranium
@@ -192,7 +192,7 @@
 
 /obj/structure/falsewall/gold
 	name = "gold wall"
-	desc = "A wall with gold plating. Swag!"
+	desc = ""
 	icon = 'icons/turf/walls/gold_wall.dmi'
 	icon_state = "gold"
 	mineral = /obj/item/stack/sheet/mineral/gold
@@ -201,7 +201,7 @@
 
 /obj/structure/falsewall/silver
 	name = "silver wall"
-	desc = "A wall with silver plating. Shiny."
+	desc = ""
 	icon = 'icons/turf/walls/silver_wall.dmi'
 	icon_state = "silver"
 	mineral = /obj/item/stack/sheet/mineral/silver
@@ -210,7 +210,7 @@
 
 /obj/structure/falsewall/diamond
 	name = "diamond wall"
-	desc = "A wall with diamond plating. You monster."
+	desc = ""
 	icon = 'icons/turf/walls/diamond_wall.dmi'
 	icon_state = "diamond"
 	mineral = /obj/item/stack/sheet/mineral/diamond
@@ -220,7 +220,7 @@
 
 /obj/structure/falsewall/plasma
 	name = "plasma wall"
-	desc = "A wall with plasma plating. This is definitely a bad idea."
+	desc = ""
 	icon = 'icons/turf/walls/plasma_wall.dmi'
 	icon_state = "plasma"
 	mineral = /obj/item/stack/sheet/mineral/plasma
@@ -237,7 +237,7 @@
 		return ..()
 
 /obj/structure/falsewall/plasma/proc/burnbabyburn(user)
-	playsound(src, 'sound/items/welder.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	atmos_spawn_air("plasma=400;TEMP=1000")
 	new /obj/structure/girder/displaced(loc)
 	qdel(src)
@@ -248,7 +248,7 @@
 
 /obj/structure/falsewall/bananium
 	name = "bananium wall"
-	desc = "A wall with bananium plating. Honk!"
+	desc = ""
 	icon = 'icons/turf/walls/bananium_wall.dmi'
 	icon_state = "bananium"
 	mineral = /obj/item/stack/sheet/mineral/bananium
@@ -258,7 +258,7 @@
 
 /obj/structure/falsewall/sandstone
 	name = "sandstone wall"
-	desc = "A wall with sandstone plating. Rough."
+	desc = ""
 	icon = 'icons/turf/walls/sandstone_wall.dmi'
 	icon_state = "sandstone"
 	mineral = /obj/item/stack/sheet/mineral/sandstone
@@ -267,7 +267,7 @@
 
 /obj/structure/falsewall/wood
 	name = "wooden wall"
-	desc = "A wall with wooden plating. Stiff."
+	desc = ""
 	icon = 'icons/turf/walls/wood_wall.dmi'
 	icon_state = "wood"
 	mineral = /obj/item/stack/sheet/mineral/wood
@@ -276,8 +276,8 @@
 
 /obj/structure/falsewall/iron
 	name = "rough metal wall"
-	desc = "A wall with rough metal plating."
-	icon = 'icons/turf/walls/iron_wall.dmi'
+	desc = ""
+	icon = 'icons/turf/walls/shuttle_wall.dmi'
 	icon_state = "iron"
 	mineral = /obj/item/stack/rods
 	mineral_amount = 5
@@ -286,8 +286,8 @@
 
 /obj/structure/falsewall/abductor
 	name = "alien wall"
-	desc = "A wall with alien alloy plating."
-	icon = 'icons/turf/walls/abductor_wall.dmi'
+	desc = ""
+	icon = 'icons/turf/walls/shuttle_wall.dmi'
 	icon_state = "abductor"
 	mineral = /obj/item/stack/sheet/mineral/abductor
 	walltype = /turf/closed/wall/mineral/abductor
@@ -295,7 +295,7 @@
 
 /obj/structure/falsewall/titanium
 	name = "wall"
-	desc = "A light-weight titanium wall used in shuttles."
+	desc = ""
 	icon = 'icons/turf/walls/shuttle_wall.dmi'
 	icon_state = "shuttle"
 	mineral = /obj/item/stack/sheet/mineral/titanium
@@ -305,7 +305,7 @@
 
 /obj/structure/falsewall/plastitanium
 	name = "wall"
-	desc = "An evil wall of plasma and titanium."
+	desc = ""
 	icon = 'icons/turf/walls/plastitanium_wall.dmi'
 	icon_state = "shuttle"
 	mineral = /obj/item/stack/sheet/mineral/plastitanium

@@ -3,7 +3,7 @@
 // consoles and laptops use "procssor" item that is held inside machinery piece
 /obj/item/modular_computer
 	name = "modular microcomputer"
-	desc = "A small portable microcomputer."
+	desc = ""
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
@@ -70,7 +70,7 @@
 	return ..()
 
 
-/obj/item/modular_computer/proc/add_verb(var/path)
+/obj/item/modular_computer/proc/add_verb(path)
 	switch(path)
 		if(MC_CARD)
 			verbs += /obj/item/modular_computer/proc/eject_id
@@ -91,7 +91,7 @@
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/proc/eject_id()
 	set name = "Eject ID"
-	set category = "Object"
+	set hidden = 1
 	set src in view(1)
 
 	if(issilicon(usr))
@@ -103,7 +103,7 @@
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/proc/eject_card()
 	set name = "Eject Intellicard"
-	set category = "Object"
+	set hidden = 1
 
 	if(issilicon(usr))
 		return
@@ -115,7 +115,7 @@
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/proc/eject_disk()
 	set name = "Eject Data Disk"
-	set category = "Object"
+	set hidden = 1
 
 	if(issilicon(usr))
 		return
@@ -198,7 +198,7 @@
 		return 0
 	else
 		obj_flags |= EMAGGED
-		to_chat(user, "<span class='notice'>You emag \the [src]. It's screen briefly shows a \"OVERRIDE ACCEPTED: New software downloads available.\" message.</span>")
+		to_chat(user, "<span class='notice'>I emag \the [src]. It's screen briefly shows a \"OVERRIDE ACCEPTED: New software downloads available.\" message.</span>")
 		return 1
 
 /obj/item/modular_computer/examine(mob/user)
@@ -237,9 +237,9 @@
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
 	if(obj_integrity <= integrity_failure * max_integrity)
 		if(issynth)
-			to_chat(user, "<span class='warning'>You send an activation signal to \the [src], but it responds with an error code. It must be damaged.</span>")
+			to_chat(user, "<span class='warning'>I send an activation signal to \the [src], but it responds with an error code. It must be damaged.</span>")
 		else
-			to_chat(user, "<span class='warning'>You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.</span>")
+			to_chat(user, "<span class='warning'>I press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.</span>")
 		return
 
 	// If we have a recharger, enable it automatically. Lets computer without a battery work.
@@ -249,17 +249,17 @@
 
 	if(all_components[MC_CPU] && use_power()) // use_power() checks if the PC is powered
 		if(issynth)
-			to_chat(user, "<span class='notice'>You send an activation signal to \the [src], turning it on.</span>")
+			to_chat(user, "<span class='notice'>I send an activation signal to \the [src], turning it on.</span>")
 		else
-			to_chat(user, "<span class='notice'>You press the power button and start up \the [src].</span>")
+			to_chat(user, "<span class='notice'>I press the power button and start up \the [src].</span>")
 		enabled = 1
 		update_icon()
 		ui_interact(user)
 	else // Unpowered
 		if(issynth)
-			to_chat(user, "<span class='warning'>You send an activation signal to \the [src] but it does not respond.</span>")
+			to_chat(user, "<span class='warning'>I send an activation signal to \the [src] but it does not respond.</span>")
 		else
-			to_chat(user, "<span class='warning'>You press the power button but \the [src] does not respond.</span>")
+			to_chat(user, "<span class='warning'>I press the power button but \the [src] does not respond.</span>")
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
@@ -420,10 +420,10 @@
 		if(!W.tool_start_check(user, amount=1))
 			return
 
-		to_chat(user, "<span class='notice'>You begin repairing damage to \the [src]...</span>")
+		to_chat(user, "<span class='notice'>I begin repairing damage to \the [src]...</span>")
 		if(W.use_tool(src, user, 20, volume=50, amount=1))
 			obj_integrity = max_integrity
-			to_chat(user, "<span class='notice'>You repair \the [src].</span>")
+			to_chat(user, "<span class='notice'>I repair \the [src].</span>")
 		return
 
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)

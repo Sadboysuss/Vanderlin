@@ -42,4 +42,5 @@
 
 /obj/item/storage/proc/emptyStorage()
 	var/datum/component/storage/ST = GetComponent(/datum/component/storage)
-	ST.do_quick_empty()
+	if(ST)
+		ST.do_quick_empty()

@@ -1,6 +1,6 @@
 /**********************Mining Scanners**********************/
 /obj/item/mining_scanner
-	desc = "A scanner that checks surrounding rock for useful minerals; it can also be used to stop gibtonite detonations."
+	desc = ""
 	name = "manual mining scanner"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "mining1"
@@ -30,7 +30,7 @@
 	qdel(src)
 
 /obj/item/t_scanner/adv_mining_scanner
-	desc = "A scanner that automatically checks surrounding rock for useful minerals; it can also be used to stop gibtonite detonations. This one has an extended range."
+	desc = ""
 	name = "advanced automatic mining scanner"
 	icon_state = "mining0"
 	item_state = "analyzer"
@@ -49,7 +49,7 @@
 
 /obj/item/t_scanner/adv_mining_scanner/lesser
 	name = "automatic mining scanner"
-	desc = "A scanner that automatically checks surrounding rock for useful minerals; it can also be used to stop gibtonite detonations."
+	desc = ""
 	range = 4
 	cooldown = 50
 

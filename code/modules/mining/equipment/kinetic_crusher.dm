@@ -15,9 +15,9 @@
 	force_wielded = 20
 	throwforce = 5
 	throw_speed = 4
-	armour_penetration = 10
+	armor_penetration = 10
 	custom_materials = list(/datum/material/iron=1150, /datum/material/glass=2075)
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = list('sound/blank.ogg')
 	attack_verb = list("smashed", "crushed", "cleaved", "chopped", "pulped")
 	sharpness = IS_SHARP
 	actions_types = list(/datum/action/item_action/toggle_light)
@@ -48,7 +48,7 @@
 /obj/item/twohanded/kinetic_crusher/attackby(obj/item/I, mob/living/user)
 	if(I.tool_behaviour == TOOL_CROWBAR)
 		if(LAZYLEN(trophies))
-			to_chat(user, "<span class='notice'>You remove [src]'s trophies.</span>")
+			to_chat(user, "<span class='notice'>I remove [src]'s trophies.</span>")
 			I.play_tool_sound(src)
 			for(var/t in trophies)
 				var/obj/item/crusher_trophy/T = t
@@ -91,7 +91,7 @@
 		D.preparePixelProjectile(target, user, clickparams)
 		D.firer = user
 		D.hammer_synced = src
-		playsound(user, 'sound/weapons/plasma_cutter.ogg', 100, TRUE)
+		playsound(user, 'sound/blank.ogg', 100, TRUE)
 		D.fire()
 		charged = FALSE
 		update_icon()
@@ -117,7 +117,7 @@
 				if(!QDELETED(C))
 					C.total_damage += detonation_damage + backstab_bonus //cheat a little and add the total before killing it, so certain mobs don't have much lower chances of giving an item
 				L.apply_damage(detonation_damage + backstab_bonus, BRUTE, blocked = def_check)
-				playsound(user, 'sound/weapons/kenetic_accel.ogg', 100, TRUE) //Seriously who spelled it wrong
+				playsound(user, 'sound/blank.ogg', 100, TRUE) //Seriously who spelled it wrong
 			else
 				if(!QDELETED(C))
 					C.total_damage += detonation_damage
@@ -127,11 +127,11 @@
 	if(!charged)
 		charged = TRUE
 		update_icon()
-		playsound(src.loc, 'sound/weapons/kenetic_reload.ogg', 60, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 60, TRUE)
 
 /obj/item/twohanded/kinetic_crusher/ui_action_click(mob/user, actiontype)
 	light_on = !light_on
-	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
+	playsound(user, 'sound/blank.ogg', 100, TRUE)
 	update_brightness(user)
 	update_icon()
 
@@ -189,7 +189,7 @@
 //trophies
 /obj/item/crusher_trophy
 	name = "tail spike"
-	desc = "A strange spike with no usage."
+	desc = ""
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "tail_spike"
 	var/bonus_value = 10 //if it has a bonus effect, this is how much that effect is
@@ -212,12 +212,12 @@
 	for(var/t in H.trophies)
 		var/obj/item/crusher_trophy/T = t
 		if(istype(T, denied_type) || istype(src, T.denied_type))
-			to_chat(user, "<span class='warning'>You can't seem to attach [src] to [H]. Maybe remove a few trophies?</span>")
+			to_chat(user, "<span class='warning'>I can't seem to attach [src] to [H]. Maybe remove a few trophies?</span>")
 			return FALSE
 	if(!user.transferItemToLoc(src, H))
 		return
 	H.trophies += src
-	to_chat(user, "<span class='notice'>You attach [src] to [H].</span>")
+	to_chat(user, "<span class='notice'>I attach [src] to [H].</span>")
 	return TRUE
 
 /obj/item/crusher_trophy/proc/remove_from(obj/item/twohanded/kinetic_crusher/H, mob/living/user)
@@ -233,7 +233,7 @@
 //goliath
 /obj/item/crusher_trophy/goliath_tentacle
 	name = "goliath tentacle"
-	desc = "A sliced-off goliath tentacle. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "goliath_tentacle"
 	denied_type = /obj/item/crusher_trophy/goliath_tentacle
 	bonus_value = 2
@@ -253,7 +253,7 @@
 //watcher
 /obj/item/crusher_trophy/watcher_wing
 	name = "watcher wing"
-	desc = "A wing ripped from a watcher. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "watcher_wing"
 	denied_type = /obj/item/crusher_trophy/watcher_wing
 	bonus_value = 5
@@ -273,7 +273,7 @@
 //magmawing watcher
 /obj/item/crusher_trophy/blaster_tubes/magma_wing
 	name = "magmawing watcher wing"
-	desc = "A still-searing wing from a magmawing watcher. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "magma_wing"
 	gender = NEUTER
 	bonus_value = 5
@@ -292,14 +292,14 @@
 //icewing watcher
 /obj/item/crusher_trophy/watcher_wing/ice_wing
 	name = "icewing watcher wing"
-	desc = "A carefully preserved frozen wing from an icewing watcher. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "ice_wing"
 	bonus_value = 8
 
 //legion
 /obj/item/crusher_trophy/legion_skull
 	name = "legion skull"
-	desc = "A dead and lifeless legion skull. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "legion_skull"
 	denied_type = /obj/item/crusher_trophy/legion_skull
 	bonus_value = 3
@@ -320,7 +320,7 @@
 //blood-drunk hunter
 /obj/item/crusher_trophy/miner_eye
 	name = "eye of a blood-drunk hunter"
-	desc = "Its pupil is collapsed and turned to mush. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "hunter_eye"
 	denied_type = /obj/item/crusher_trophy/miner_eye
 
@@ -332,7 +332,7 @@
 
 //ash drake
 /obj/item/crusher_trophy/tail_spike
-	desc = "A spike taken from an ash drake's tail. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	denied_type = /obj/item/crusher_trophy/tail_spike
 	bonus_value = 5
 
@@ -343,7 +343,7 @@
 	for(var/mob/living/L in oview(2, user))
 		if(L.stat == DEAD)
 			continue
-		playsound(L, 'sound/magic/fireball.ogg', 20, TRUE)
+		playsound(L, 'sound/blank.ogg', 20, TRUE)
 		new /obj/effect/temp_visual/fire(L.loc)
 		addtimer(CALLBACK(src, .proc/pushback, L, user), 1) //no free backstabs, we push AFTER module stuff is done
 		L.adjustFireLoss(bonus_value, forced = TRUE)
@@ -355,7 +355,7 @@
 //bubblegum
 /obj/item/crusher_trophy/demon_claws
 	name = "demon claws"
-	desc = "A set of blood-drenched claws from a massive demon's hand. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "demon_claws"
 	gender = PLURAL
 	denied_type = /obj/item/crusher_trophy/demon_claws
@@ -390,7 +390,7 @@
 //colossus
 /obj/item/crusher_trophy/blaster_tubes
 	name = "blaster tubes"
-	desc = "The blaster tubes from a colossus's arm. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "blaster_tubes"
 	gender = PLURAL
 	denied_type = /obj/item/crusher_trophy/blaster_tubes
@@ -419,7 +419,7 @@
 //hierophant
 /obj/item/crusher_trophy/vortex_talisman
 	name = "vortex talisman"
-	desc = "A glowing trinket that was originally the Hierophant's beacon. Suitable as a trophy for a kinetic crusher."
+	desc = ""
 	icon_state = "vortex_talisman"
 	denied_type = /obj/item/crusher_trophy/vortex_talisman
 

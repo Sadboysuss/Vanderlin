@@ -3,7 +3,7 @@
 
 /obj/item/gun
 	name = "gun"
-	desc = "It's a gun. It's pretty terrible, though."
+	desc = ""
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "detective"
 	item_state = "gun"
@@ -11,20 +11,21 @@
 	slot_flags = ITEM_SLOT_BELT
 	custom_materials = list(/datum/material/iron=2000)
 	w_class = WEIGHT_CLASS_NORMAL
+	possible_item_intents = list(INTENT_GENERIC, RANGED_FIRE)
 	throwforce = 5
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	force = 5
 	item_flags = NEEDS_PERMIT
 	attack_verb = list("struck", "hit", "bashed")
 
-	var/fire_sound = 'sound/weapons/gun/pistol/shot.ogg'
+	var/fire_sound = 'sound/blank.ogg'
 	var/vary_fire_sound = TRUE
 	var/fire_sound_volume = 50
-	var/dry_fire_sound = 'sound/weapons/gun/general/dry_fire.ogg'
+	var/dry_fire_sound = 'sound/blank.ogg'
 	var/suppressed = null					//whether or not a message is displayed when fired
 	var/can_suppress = FALSE
-	var/suppressed_sound = 'sound/weapons/gun/general/heavy_shot_suppressed.ogg'
+	var/suppressed_sound = 'sound/blank.ogg'
 	var/suppressed_volume = 60
 	var/can_unsuppress = TRUE
 	var/recoil = 0						//boom boom shake the room
@@ -118,24 +119,24 @@
 
 /obj/item/gun/examine(mob/user)
 	. = ..()
-	if(pin)
-		. += "It has \a [pin] installed."
-	else
-		. += "It doesn't have a <b>firing pin</b> installed, and won't fire."
+//	if(pin)
+//		. += "It has \a [pin] installed."
+//	else
+//		. += "It doesn't have a <b>firing pin</b> installed, and won't fire."
 
-	if(gun_light)
-		. += "It has \a [gun_light] [can_flashlight ? "" : "permanently "]mounted on it."
-		if(can_flashlight) //if it has a light and this is false, the light is permanent.
-			. += "<span class='info'>[gun_light] looks like it can be <b>unscrewed</b> from [src].</span>"
-	else if(can_flashlight)
-		. += "It has a mounting point for a <b>seclite</b>."
+//	if(gun_light)
+//		. += "It has \a [gun_light] [can_flashlight ? "" : "permanently "]mounted on it."
+//		if(can_flashlight) //if it has a light and this is false, the light is permanent.
+//			. += "<span class='info'>[gun_light] looks like it can be <b>unscrewed</b> from [src].</span>"
+//	else if(can_flashlight)
+//		. += "It has a mounting point for a <b>seclite</b>."
 
-	if(bayonet)
-		. += "It has \a [bayonet] [can_bayonet ? "" : "permanently "]affixed to it."
-		if(can_bayonet) //if it has a bayonet and this is false, the bayonet is permanent.
-			. += "<span class='info'>[bayonet] looks like it can be <b>unscrewed</b> from [src].</span>"
-	else if(can_bayonet)
-		. += "It has a <b>bayonet</b> lug on it."
+//	if(bayonet)
+//		. += "It has \a [bayonet] [can_bayonet ? "" : "permanently "]affixed to it."
+//		if(can_bayonet) //if it has a bayonet and this is false, the bayonet is permanent.
+//			. += "<span class='info'>[bayonet] looks like it can be <b>unscrewed</b> from [src].</span>"
+//	else if(can_bayonet)
+//		. += "It has a <b>bayonet</b> lug on it."
 
 /obj/item/gun/equipped(mob/living/user, slot)
 	. = ..()
@@ -165,19 +166,19 @@
 	else
 		playsound(user, fire_sound, fire_sound_volume, vary_fire_sound)
 		if(message)
-			if(pointblank)
-				user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", \
-								"<span class='danger'>You fire [src] point blank at [pbtarget]!</span>", \
-								"<span class='hear'>You hear a gunshot!</span>", COMBAT_MESSAGE_RANGE, pbtarget)
-				to_chat(pbtarget, "<span class='userdanger'>[user] fires [src] point blank at you!</span>")
+/*			if(pointblank)
+				user.visible_message("<span class='danger'>[user] shoots [src] point blank at [pbtarget]!</span>", \
+								"<span class='danger'>I shoot [src] point blank at [pbtarget]!</span>", \
+								COMBAT_MESSAGE_RANGE, pbtarget)
+				to_chat(pbtarget, "<span class='danger'>[user] shoots [src] point blank at me!</span>")
 				if(pb_knockback > 0)
 					var/atom/throw_target = get_edge_target_turf(pbtarget, user.dir)
 					pbtarget.throw_at(throw_target, pb_knockback, 2)
 
-			else
-				user.visible_message("<span class='danger'>[user] fires [src]!</span>", \
-								"<span class='danger'>You fire [src]!</span>", \
-								"<span class='hear'>You hear a gunshot!</span>", COMBAT_MESSAGE_RANGE)
+			else*/
+			user.visible_message("<span class='danger'>[user] shoots [src]!</span>", \
+							"<span class='danger'>I shoot [src]!</span>", \
+							COMBAT_MESSAGE_RANGE)
 
 /obj/item/gun/emp_act(severity)
 	. = ..()
@@ -187,14 +188,19 @@
 
 /obj/item/gun/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
+	testing("gun afterattack")
 	if(!target)
+		testing("no target")
 		return
 	if(firing_burst)
+		return
+	if(!user?.used_intent.tranged) //melee attack
 		return
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || user.a_intent == INTENT_HARM) //melee attack
+		if(!ismob(target)) //melee attack
+			testing("gun with melee attack selected")
 			return
 		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
 			return
@@ -204,32 +210,35 @@
 		if(!can_trigger_gun(L))
 			return
 
-	if(flag)
-		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-			handle_suicide(user, target, params)
-			return
+//	if(flag)
+//		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+//			handle_suicide(user, target, params)
+//			return
 
 	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)
 		return
 
+	if(user?.used_intent.arc_check())
+		target = get_turf(target)
+
 	//Exclude lasertag guns from the TRAIT_CLUMSY check.
 	if(clumsy_check)
 		if(istype(user))
 			if (HAS_TRAIT(user, TRAIT_CLUMSY) && prob(40))
-				to_chat(user, "<span class='userdanger'>You shoot yourself in the foot with [src]!</span>")
+				to_chat(user, "<span class='danger'>I shoot myself in the foot with [src]!</span>")
 				var/shot_leg = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 				process_fire(user, user, FALSE, params, shot_leg)
 				user.dropItemToGround(src, TRUE)
 				return
-	var/obj/item/bodypart/other_hand = user.has_hand_for_held_index(user.get_inactive_hand_index()) //returns non-disabled inactive hands 
+	var/obj/item/bodypart/other_hand = user.has_hand_for_held_index(user.get_inactive_hand_index()) //returns non-disabled inactive hands
 	if(weapon_weight == WEAPON_HEAVY && (user.get_inactive_held_item() || !other_hand))
-		to_chat(user, "<span class='warning'>You need two hands to fire \the [src]!</span>")
+		to_chat(user, "<span class='warning'>I need two hands to fire \the [src]!</span>")
 		return
 	//DUAL (or more!) WIELDING
 	var/bonus_spread = 0
 	var/loop_counter = 0
-	if(ishuman(user) && user.a_intent == INTENT_HARM)
+	if(ishuman(user) && user.used_intent.type == INTENT_HARM)
 		var/mob/living/carbon/human/H = user
 		for(var/obj/item/gun/G in H.held_items)
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
@@ -285,10 +294,10 @@
 			firing_burst = FALSE
 			return FALSE
 		else
-			if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
-				shoot_live_shot(user, 1, target, message)
-			else
-				shoot_live_shot(user, 0, target, message)
+//			if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
+//				shoot_live_shot(user, 1, target, message)
+//			else
+			shoot_live_shot(user, 0, target, message)
 			if (iteration >= burst_size)
 				firing_burst = FALSE
 	else
@@ -330,10 +339,10 @@
 				shoot_with_empty_chamber(user)
 				return
 			else
-				if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
-					shoot_live_shot(user, 1, target, message)
-				else
-					shoot_live_shot(user, 0, target, message)
+//				if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
+//					shoot_live_shot(user, 1, target, message)
+//				else
+				shoot_live_shot(user, 0, target, message)
 		else
 			shoot_with_empty_chamber(user)
 			return
@@ -355,7 +364,7 @@
 	semicd = FALSE
 
 /obj/item/gun/attack(mob/M as mob, mob/user)
-	if(user.a_intent == INTENT_HARM) //Flogging
+	if(!user.used_intent.tranged) //Flogging
 		if(bayonet)
 			M.attackby(bayonet, user)
 			return
@@ -364,14 +373,16 @@
 	return
 
 /obj/item/gun/attack_obj(obj/O, mob/user)
-	if(user.a_intent == INTENT_HARM)
+	if(!user.used_intent.tranged)
 		if(bayonet)
 			O.attackby(bayonet, user)
 			return
-	return ..()
+		else
+			return ..()
+	return
 
 /obj/item/gun/attackby(obj/item/I, mob/user, params)
-	if(user.a_intent == INTENT_HARM)
+	if(!user.used_intent.tranged)
 		return ..()
 	else if(istype(I, /obj/item/flashlight/seclite))
 		if(!can_flashlight)
@@ -380,7 +391,7 @@
 		if(!gun_light)
 			if(!user.transferItemToLoc(I, src))
 				return
-			to_chat(user, "<span class='notice'>You click [S] into place on [src].</span>")
+			to_chat(user, "<span class='notice'>I click [S] into place on [src].</span>")
 			if(S.on)
 				set_light(0)
 			gun_light = S
@@ -394,7 +405,7 @@
 			return ..()
 		if(!user.transferItemToLoc(I, src))
 			return
-		to_chat(user, "<span class='notice'>You attach [K] to [src]'s bayonet lug.</span>")
+		to_chat(user, "<span class='notice'>I attach [K] to [src]'s bayonet lug.</span>")
 		bayonet = K
 		var/state = "bayonet"							//Generic state.
 		if(bayonet.icon_state in icon_states('icons/obj/guns/bayonets.dmi'))		//Snowflake state?
@@ -429,7 +440,7 @@
 /obj/item/gun/proc/remove_gun_attachment(mob/living/user, obj/item/tool_item, obj/item/item_to_remove, removal_verb)
 	if(tool_item)
 		tool_item.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You [removal_verb ? removal_verb : "remove"] [item_to_remove] from [src].</span>")
+	to_chat(user, "<span class='notice'>I [removal_verb ? removal_verb : "remove"] [item_to_remove] from [src].</span>")
 	item_to_remove.forceMove(drop_location())
 
 	if(Adjacent(user) && !issilicon(user))
@@ -471,9 +482,9 @@
 
 	var/mob/living/carbon/human/user = usr
 	gun_light.on = !gun_light.on
-	to_chat(user, "<span class='notice'>You toggle the gunlight [gun_light.on ? "on":"off"].</span>")
+	to_chat(user, "<span class='notice'>I toggle the gunlight [gun_light.on ? "on":"off"].</span>")
 
-	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
+	playsound(user, 'sound/blank.ogg', 100, TRUE)
 	update_gunlight()
 
 /obj/item/gun/proc/update_gunlight()
@@ -521,10 +532,10 @@
 
 	if(user == target)
 		target.visible_message("<span class='warning'>[user] sticks [src] in [user.p_their()] mouth, ready to pull the trigger...</span>", \
-			"<span class='userdanger'>You stick [src] in your mouth, ready to pull the trigger...</span>")
+			"<span class='danger'>I stick [src] in your mouth, ready to pull the trigger...</span>")
 	else
 		target.visible_message("<span class='warning'>[user] points [src] at [target]'s head, ready to pull the trigger...</span>", \
-			"<span class='userdanger'>[user] points [src] at your head, ready to pull the trigger...</span>")
+			"<span class='danger'>[user] points [src] at your head, ready to pull the trigger...</span>")
 
 	semicd = TRUE
 
@@ -539,7 +550,7 @@
 
 	semicd = FALSE
 
-	target.visible_message("<span class='warning'>[user] pulls the trigger!</span>", "<span class='userdanger'>[(user == target) ? "You pull" : "[user] pulls"] the trigger!</span>")
+	target.visible_message("<span class='warning'>[user] pulls the trigger!</span>", "<span class='danger'>[(user == target) ? "You pull" : "[user] pulls"] the trigger!</span>")
 
 	if(chambered && chambered.BB)
 		chambered.BB.damage *= 5

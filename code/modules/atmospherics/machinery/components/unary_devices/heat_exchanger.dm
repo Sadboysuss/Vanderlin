@@ -3,7 +3,7 @@
 	icon_state = "he1"
 
 	name = "heat exchanger"
-	desc = "Exchanges heat between two input gases. Set up for fast heat transfer."
+	desc = ""
 
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE // not really used
@@ -14,7 +14,7 @@
 	var/update_cycle
 
 	pipe_state = "heunary"
-	
+
 /obj/machinery/atmospherics/components/unary/heat_exchanger/layer1
 	piping_layer = 1
 	icon_state = "he_map-1"

@@ -3,7 +3,7 @@
 
 /obj/singularity/energy_ball
 	name = "energy ball"
-	desc = "An energy ball."
+	desc = ""
 	icon = 'icons/obj/tesla_engine/energy_ball.dmi'
 	icon_state = "energy_ball"
 	pixel_x = -32
@@ -55,7 +55,7 @@
 
 		move_the_basket_ball(4 + orbiting_balls.len * 1.5)
 
-		playsound(src.loc, 'sound/magic/lightningbolt.ogg', 100, TRUE, extrarange = 30)
+		playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 30)
 
 		pixel_x = 0
 		pixel_y = 0
@@ -76,7 +76,7 @@
 		. += "There are [orbiting_balls.len] mini-balls orbiting it."
 
 
-/obj/singularity/energy_ball/proc/move_the_basket_ball(var/move_amount)
+/obj/singularity/energy_ball/proc/move_the_basket_ball(move_amount)
 	//we face the last thing we zapped, so this lets us favor that direction a bit
 	var/move_bias = pick(GLOB.alldirs)
 	for(var/i in 0 to move_amount)
@@ -96,7 +96,7 @@
 		energy_to_lower = energy_to_raise - 20
 		energy_to_raise = energy_to_raise * 1.25
 
-		playsound(src.loc, 'sound/magic/lightning_chargeup.ogg', 100, TRUE, extrarange = 30)
+		playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 30)
 		addtimer(CALLBACK(src, .proc/new_mini_ball), 100)
 
 	else if(energy < energy_to_lower && orbiting_balls.len)
@@ -132,7 +132,7 @@
 /obj/singularity/energy_ball/attack_tk(mob/user)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		to_chat(C, "<span class='userdanger'>That was a shockingly dumb idea.</span>")
+		to_chat(C, "<span class='danger'>That was a shockingly dumb idea.</span>")
 		var/obj/item/organ/brain/rip_u = locate(/obj/item/organ/brain) in C.internal_organs
 		C.ghostize(0)
 		qdel(rip_u)
@@ -274,7 +274,7 @@
 				closest_structure = S
 				closest_atom = A
 				closest_dist = dist
-				
+
 		else if(closest_structure)
 			continue
 

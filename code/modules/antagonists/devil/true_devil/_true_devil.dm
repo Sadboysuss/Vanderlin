@@ -1,11 +1,11 @@
 #define DEVIL_HANDS_LAYER 1
-#define DEVIL_HEAD_LAYER 2
+#define DEVIL_HAT_LAYER 2
 #define DEVIL_TOTAL_LAYERS 2
 
 
 /mob/living/carbon/true_devil
 	name = "True Devil"
-	desc = "A pile of infernal energy, taking a vaguely humanoid form."
+	desc = ""
 	icon = 'icons/mob/32x64.dmi'
 	icon_state = "true_devil"
 	gender = NEUTER
@@ -79,9 +79,9 @@
 	if(stat == DEAD)
 		. += "<span class='deadsay'>The hellfire seems to have been extinguished, for now at least.</span>"
 	else if(health < (maxHealth/10))
-		. += "<span class='warning'>You can see hellfire inside its gaping wounds.</span>"
+		. += "<span class='warning'>I can see hellfire inside its gaping wounds.</span>"
 	else if(health < (maxHealth/2))
-		. += "<span class='warning'>You can see hellfire inside its wounds.</span>"
+		. += "<span class='warning'>I can see hellfire inside its wounds.</span>"
 	. += "*---------*</span>"
 
 /mob/living/carbon/true_devil/IsAdvancedToolUser()
@@ -95,10 +95,10 @@
 
 /mob/living/carbon/true_devil/canUseTopic(atom/movable/M, be_close=FALSE, no_dexterity=FALSE, no_tk=FALSE)
 	if(incapacitated())
-		to_chat(src, "<span class='warning'>You can't do that right now!</span>")
+		to_chat(src, "<span class='warning'>I can't do that right now!</span>")
 		return FALSE
 	if(be_close && !in_range(M, src))
-		to_chat(src, "<span class='warning'>You are too far away!</span>")
+		to_chat(src, "<span class='warning'>I are too far away!</span>")
 		return FALSE
 	return TRUE
 
@@ -133,7 +133,7 @@
 			attack_message = "[user] has [message_verb] [src] with [I]!"
 	if(message_verb)
 		visible_message("<span class='danger'>[attack_message]</span>",
-		"<span class='userdanger'>[attack_message]</span>", null, COMBAT_MESSAGE_RANGE)
+		"<span class='danger'>[attack_message]</span>", null, COMBAT_MESSAGE_RANGE)
 	return TRUE
 
 /mob/living/carbon/true_devil/singularity_act()
@@ -161,33 +161,33 @@
 /mob/living/carbon/true_devil/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(.)
-		switch(M.a_intent)
-			if ("harm")
+		switch(M.used_intent.type)
+			if (INTENT_HARM)
 				var/damage = rand(1, 5)
 				playsound(loc, "punch", 25, TRUE, -1)
 				visible_message("<span class='danger'>[M] punches [src]!</span>", \
-						"<span class='userdanger'>[M] punches you!</span>")
+						"<span class='danger'>[M] punches you!</span>")
 				adjustBruteLoss(damage)
 				log_combat(M, src, "attacked")
 				updatehealth()
-			if ("disarm")
+			if (INTENT_DISARM)
 				if (!(mobility_flags & MOBILITY_STAND) && !ascended) //No stealing the arch devil's pitchfork.
 					if (prob(5))
 						Unconscious(40)
-						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+						playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 						log_combat(M, src, "pushed")
 						visible_message("<span class='danger'>[M] pushes [src] down!</span>", \
-							"<span class='userdanger'>[M] pushes you down!</span>")
+							"<span class='danger'>[M] pushes you down!</span>")
 					else
 						if (prob(25))
 							dropItemToGround(get_active_held_item())
-							playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+							playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 							visible_message("<span class='danger'>[M] disarms [src]!</span>", \
-							"<span class='userdanger'>[M] disarms you!</span>")
+							"<span class='danger'>[M] disarms you!</span>")
 						else
-							playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
+							playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
 							visible_message("<span class='danger'>[M] fails to disarm [src]!</span>", \
-							"<span class='userdanger'>[M] fails to disarm you!</span>")
+							"<span class='danger'>[M] fails to disarm you!</span>")
 
 /mob/living/carbon/true_devil/handle_breathing()
 	// devils do not need to breathe

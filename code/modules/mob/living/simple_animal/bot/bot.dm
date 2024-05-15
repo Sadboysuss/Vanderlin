@@ -190,7 +190,7 @@
 	if(locked) //First emag application unlocks the bot's interface. Apply a screwdriver to use the emag again.
 		locked = FALSE
 		emagged = 1
-		to_chat(user, "<span class='notice'>You bypass [src]'s controls.</span>")
+		to_chat(user, "<span class='notice'>I bypass [src]'s controls.</span>")
 		return
 	if(!locked && open) //Bot panel is unlocked by ID or emag, and the panel is screwed open. Ready for emagging.
 		emagged = 2
@@ -198,11 +198,11 @@
 		locked = TRUE //Access denied forever!
 		bot_reset()
 		turn_on() //The bot automatically turns on when emagged, unless recently hit with EMP.
-		to_chat(src, "<span class='userdanger'>(#$*#$^^( OVERRIDE DETECTED</span>")
+		to_chat(src, "<span class='danger'>(#$*#$^^( OVERRIDE DETECTED</span>")
 		log_combat(user, src, "emagged")
 		return
 	else //Bot is unlocked, but the maint panel has not been opened with a screwdriver yet.
-		to_chat(user, "<span class='warning'>You need to open maintenance panel first!</span>")
+		to_chat(user, "<span class='warning'>I need to open maintenance panel first!</span>")
 
 /mob/living/simple_animal/bot/examine(mob/user)
 	. = ..()
@@ -263,7 +263,7 @@
 
 
 /mob/living/simple_animal/bot/attack_hand(mob/living/carbon/human/H)
-	if(H.a_intent == INTENT_HELP)
+	if(H.used_intent.type == INTENT_HELP)
 		interact(H)
 	else
 		return ..()
@@ -301,14 +301,14 @@
 		if(open)
 			to_chat(user, "<span class='warning'>Close the access panel before manipulating the personality slot!</span>")
 		else
-			to_chat(user, "<span class='notice'>You attempt to pull [paicard] free...</span>")
+			to_chat(user, "<span class='notice'>I attempt to pull [paicard] free...</span>")
 			if(do_after(user, 30, target = src))
 				if (paicard)
-					user.visible_message("<span class='notice'>[user] uses [W] to pull [paicard] out of [bot_name]!</span>","<span class='notice'>You pull [paicard] out of [bot_name] with [W].</span>")
+					user.visible_message("<span class='notice'>[user] uses [W] to pull [paicard] out of [bot_name]!</span>","<span class='notice'>I pull [paicard] out of [bot_name] with [W].</span>")
 					ejectpai(user)
 	else
 		user.changeNext_move(CLICK_CD_MELEE)
-		if(W.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
+		if(W.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM)
 			if(health >= maxHealth)
 				to_chat(user, "<span class='warning'>[src] does not need a repair!</span>")
 				return
@@ -318,7 +318,7 @@
 
 			if(W.use_tool(src, user, 0, volume=40))
 				adjustHealth(-10)
-				user.visible_message("<span class='notice'>[user] repairs [src]!</span>","<span class='notice'>You repair [src].</span>")
+				user.visible_message("<span class='notice'>[user] repairs [src]!</span>","<span class='notice'>I repair [src].</span>")
 		else
 			if(W.force) //if force is non-zero
 				do_sparks(5, TRUE, src)
@@ -339,7 +339,7 @@
 	new /obj/effect/temp_visual/emp(loc)
 	if(paicard)
 		paicard.emp_act(severity)
-		src.visible_message("<span class='notice'>[paicard] is flies out of [bot_name]!</span>","<span class='warning'>You are forcefully ejected from [bot_name]!</span>")
+		src.visible_message("<span class='notice'>[paicard] is flies out of [bot_name]!</span>","<span class='warning'>I are forcefully ejected from [bot_name]!</span>")
 		ejectpai(0)
 	if(on)
 		turn_off()
@@ -841,7 +841,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 				bot_reset()
 		if("ejectpai")
 			if(paicard && (!locked || issilicon(usr) || IsAdminGhost(usr)))
-				to_chat(usr, "<span class='notice'>You eject [paicard] from [bot_name].</span>")
+				to_chat(usr, "<span class='notice'>I eject [paicard] from [bot_name].</span>")
 				ejectpai(usr)
 	update_controls()
 
@@ -907,9 +907,9 @@ Pass a positive integer as an argument to override a bot's default speed.
 				if(!user.transferItemToLoc(card, src))
 					return
 				paicard = card
-				user.visible_message("<span class='notice'>[user] inserts [card] into [src]!</span>", "<span class='notice'>You insert [card] into [src].</span>")
+				user.visible_message("<span class='notice'>[user] inserts [card] into [src]!</span>", "<span class='notice'>I insert [card] into [src].</span>")
 				paicard.pai.mind.transfer_to(src)
-				to_chat(src, "<span class='notice'>You sense your form change as you are uploaded into [src].</span>")
+				to_chat(src, "<span class='notice'>I sense your form change as you are uploaded into [src].</span>")
 				bot_name = name
 				name = paicard.pai.name
 				faction = user.faction.Copy()
@@ -938,7 +938,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		else
 			log_combat(src, paicard.pai, "ejected")
 		if(announce)
-			to_chat(paicard.pai, "<span class='notice'>You feel your control fade as [paicard] ejects from [bot_name].</span>")
+			to_chat(paicard.pai, "<span class='notice'>I feel your control fade as [paicard] ejects from [bot_name].</span>")
 		paicard = null
 		name = bot_name
 		faction = initial(faction)

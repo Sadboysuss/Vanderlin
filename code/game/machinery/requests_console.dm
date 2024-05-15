@@ -26,7 +26,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 
 /obj/machinery/requests_console
 	name = "requests console"
-	desc = "A console intended to send requests to different departments on the station."
+	desc = ""
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 	var/hackState = FALSE
 	var/announcementConsole = FALSE // FALSE = This console cannot be used to send department announcements, TRUE = This console can send department announcements
 	var/open = FALSE // TRUE if open
-	var/announceAuth = FALSE //Will be set to 1 when you authenticate yourself for announcements
+	var/announceAuth = FALSE //Will be set to 1 when you authenticate myself for announcements
 	var/msgVerified = "" //Will contain the name of the person who verified it
 	var/msgStamped = "" //If a message is stamped, this will contain the stamp name
 	var/message = ""
@@ -187,7 +187,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 			if(REQ_SCREEN_AUTHENTICATE)
 				dat += "<B>Message Authentication</B><BR><BR>"
 				dat += "<b>Message for [to_department]: </b>[message]<BR><BR>"
-				dat += "<div class='notice'>You may authenticate your message now by scanning your ID or your stamp</div><BR>"
+				dat += "<div class='notice'>I may authenticate your message now by scanning your ID or your stamp</div><BR>"
 				dat += "<b>Validated by:</b> [msgVerified ? msgVerified : "<i>Not Validated</i>"]<br>"
 				dat += "<b>Stamped by:</b> [msgStamped ? msgStamped : "<i>Not Stamped</i>"]<br><br>"
 				dat += "<A href='?src=[REF(src)];send=[TRUE]'>Send Message</A><BR>"
@@ -395,7 +395,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 	messages += "[header][sending]"
 
 	if(!silenced)
-		playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		say(alert)
 
 	if(radio_freq)
@@ -405,10 +405,10 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 /obj/machinery/requests_console/attackby(obj/item/O, mob/user, params)
 	if(O.tool_behaviour == TOOL_CROWBAR)
 		if(open)
-			to_chat(user, "<span class='notice'>You close the maintenance panel.</span>")
+			to_chat(user, "<span class='notice'>I close the maintenance panel.</span>")
 			open = FALSE
 		else
-			to_chat(user, "<span class='notice'>You open the maintenance panel.</span>")
+			to_chat(user, "<span class='notice'>I open the maintenance panel.</span>")
 			open = TRUE
 		update_icon()
 		return
@@ -416,12 +416,12 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 		if(open)
 			hackState = !hackState
 			if(hackState)
-				to_chat(user, "<span class='notice'>You modify the wiring.</span>")
+				to_chat(user, "<span class='notice'>I modify the wiring.</span>")
 			else
-				to_chat(user, "<span class='notice'>You reset the wiring.</span>")
+				to_chat(user, "<span class='notice'>I reset the wiring.</span>")
 			update_icon()
 		else
-			to_chat(user, "<span class='warning'>You must open the maintenance panel first!</span>")
+			to_chat(user, "<span class='warning'>I must open the maintenance panel first!</span>")
 		return
 
 	var/obj/item/card/id/ID = O.GetID()
@@ -434,7 +434,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 				announceAuth = TRUE
 			else
 				announceAuth = FALSE
-				to_chat(user, "<span class='warning'>You are not authorized to send announcements!</span>")
+				to_chat(user, "<span class='warning'>I are not authorized to send announcements!</span>")
 			updateUsrDialog()
 		return
 	if (istype(O, /obj/item/stamp))

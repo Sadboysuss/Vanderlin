@@ -13,13 +13,13 @@
 	time = 64
 
 /datum/surgery_step/sever_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You begin to sever [target]'s [parse_zone(target_zone)]...</span>",
+	display_results(user, target, "<span class='notice'>I begin to sever [target]'s [parse_zone(target_zone)]...</span>",
 		"<span class='notice'>[user] begins to sever [target]'s [parse_zone(target_zone)]!</span>",
 		"<span class='notice'>[user] begins to sever [target]'s [parse_zone(target_zone)]!</span>")
 
 /datum/surgery_step/sever_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/mob/living/carbon/human/L = target
-	display_results(user, target, "<span class='notice'>You sever [L]'s [parse_zone(target_zone)].</span>",
+	display_results(user, target, "<span class='notice'>I sever [L]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] severs [L]'s [parse_zone(target_zone)]!</span>",
 		"<span class='notice'>[user] severs [L]'s [parse_zone(target_zone)]!</span>")
 	if(surgery.operated_bodypart)

@@ -3,7 +3,7 @@
 // -------------------------
 /obj/machinery/smartfridge
 	name = "smartfridge"
-	desc = "Keeps cold things cold and hot things cold."
+	desc = ""
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "smartfridge"
 	layer = BELOW_OBJ_LAYER
@@ -91,7 +91,7 @@
 
 		if(accept_check(O))
 			load(O)
-			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
+			user.visible_message("<span class='notice'>[user] has added \the [O] to \the [src].</span>", "<span class='notice'>I add \the [O] to \the [src].</span>")
 			updateUsrDialog()
 			if (visible_contents)
 				update_icon()
@@ -111,10 +111,10 @@
 			if(loaded)
 				if(contents.len >= max_n_of_items)
 					user.visible_message("<span class='notice'>[user] loads \the [src] with \the [O].</span>", \
-									 "<span class='notice'>You fill \the [src] with \the [O].</span>")
+									 "<span class='notice'>I fill \the [src] with \the [O].</span>")
 				else
 					user.visible_message("<span class='notice'>[user] loads \the [src] with \the [O].</span>", \
-										 "<span class='notice'>You load \the [src] with \the [O].</span>")
+										 "<span class='notice'>I load \the [src] with \the [O].</span>")
 				if(O.contents.len > 0)
 					to_chat(user, "<span class='warning'>Some items are refused.</span>")
 				if (visible_contents)
@@ -124,7 +124,7 @@
 				to_chat(user, "<span class='warning'>There is nothing in [O] to put in [src]!</span>")
 				return FALSE
 
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		to_chat(user, "<span class='warning'>\The [src] smartly refuses [O].</span>")
 		updateUsrDialog()
 		return FALSE
@@ -235,7 +235,7 @@
 // ----------------------------
 /obj/machinery/smartfridge/drying_rack
 	name = "drying rack"
-	desc = "A wooden contraption, used to dry plant products, food and leather."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "drying_rack"
 	use_power = IDLE_POWER_USE
@@ -356,7 +356,7 @@
 // ----------------------------
 /obj/machinery/smartfridge/drinks
 	name = "drink showcase"
-	desc = "A refrigerated storage unit for tasty tasty alcohol."
+	desc = ""
 
 /obj/machinery/smartfridge/drinks/accept_check(obj/item/O)
 	if(!istype(O, /obj/item/reagent_containers) || (O.item_flags & ABSTRACT) || !O.reagents || !O.reagents.reagent_list.len)
@@ -368,7 +368,7 @@
 //  Food smartfridge
 // ----------------------------
 /obj/machinery/smartfridge/food
-	desc = "A refrigerated storage unit for food."
+	desc = ""
 
 /obj/machinery/smartfridge/food/accept_check(obj/item/O)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/))
@@ -380,7 +380,7 @@
 // -------------------------------------
 /obj/machinery/smartfridge/extract
 	name = "smart slime extract storage"
-	desc = "A refrigerated storage unit for slime extracts."
+	desc = ""
 
 /obj/machinery/smartfridge/extract/accept_check(obj/item/O)
 	if(istype(O, /obj/item/slime_extract))
@@ -397,7 +397,7 @@
 // -------------------------
 /obj/machinery/smartfridge/organ
 	name = "smart organ storage"
-	desc = "A refrigerated storage unit for organ storage."
+	desc = ""
 	max_n_of_items = 20	//vastly lower to prevent processing too long
 	var/repair_rate = 0
 
@@ -436,7 +436,7 @@
 // -----------------------------
 /obj/machinery/smartfridge/chemistry
 	name = "smart chemical storage"
-	desc = "A refrigerated storage unit for medicine storage."
+	desc = ""
 
 /obj/machinery/smartfridge/chemistry/accept_check(obj/item/O)
 	var/static/list/chemfridge_typecache = typecacheof(list(
@@ -477,7 +477,7 @@
 // ----------------------------
 /obj/machinery/smartfridge/chemistry/virology
 	name = "smart virus storage"
-	desc = "A refrigerated storage unit for volatile sample storage."
+	desc = ""
 
 /obj/machinery/smartfridge/chemistry/virology/preloaded
 	initial_contents = list(
@@ -495,7 +495,7 @@
 // ----------------------------
 /obj/machinery/smartfridge/disks
 	name = "disk compartmentalizer"
-	desc = "A machine capable of storing a variety of disks. Denoted by most as the DSU (disk storage unit)."
+	desc = ""
 	icon_state = "disktoaster"
 	pass_flags = PASSTABLE
 	visible_contents = FALSE

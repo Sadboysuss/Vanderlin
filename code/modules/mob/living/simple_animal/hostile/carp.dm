@@ -2,7 +2,7 @@
 
 /mob/living/simple_animal/hostile/carp
 	name = "space carp"
-	desc = "A ferocious, fang-bearing creature that resembles a fish."
+	desc = ""
 	icon = 'icons/mob/carp.dmi'
 	icon_state = "base"
 	icon_living = "base"
@@ -29,7 +29,7 @@
 	melee_damage_upper = 20
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	attack_sound = 'sound/weapons/bite.ogg'
+	attack_sound = 'sound/blank.ogg'
 	speak_emote = list("gnashes")
 
 	//Space carp aren't affected by cold.
@@ -129,7 +129,7 @@
 /mob/living/simple_animal/hostile/carp/megacarp
 	icon = 'icons/mob/broadMobs.dmi'
 	name = "Mega Space Carp"
-	desc = "A ferocious, fang bearing creature that resembles a shark. This one seems especially ticked off."
+	desc = ""
 	icon_state = "megacarp"
 	icon_living = "megacarp"
 	icon_dead = "megacarp_dead"
@@ -166,7 +166,7 @@
 
 /mob/living/simple_animal/hostile/carp/cayenne
 	name = "Cayenne"
-	desc = "A failed Syndicate experiment in weaponized space carp technology, it now serves as a lovable mascot."
+	desc = ""
 	gender = FEMALE
 	speak_emote = list("squeaks")
 	gold_core_spawnable = NO_SPAWN

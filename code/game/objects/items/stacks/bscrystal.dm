@@ -1,7 +1,7 @@
 //Bluespace crystals, used in telescience and when crushed it will blink you to a random turf.
 /obj/item/stack/ore/bluespace_crystal
 	name = "bluespace crystal"
-	desc = "A glowing bluespace crystal, not much is known about how they work. It looks very delicate."
+	desc = ""
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "bluespace_crystal"
 	singular_name = "bluespace crystal"
@@ -27,14 +27,14 @@
 	return 1
 
 /obj/item/stack/ore/bluespace_crystal/attack_self(mob/user)
-	user.visible_message("<span class='warning'>[user] crushes [src]!</span>", "<span class='danger'>You crush [src]!</span>")
+	user.visible_message("<span class='warning'>[user] crushes [src]!</span>", "<span class='danger'>I crush [src]!</span>")
 	new /obj/effect/particle_effect/sparks(loc)
 	playsound(loc, "sparks", 50, TRUE)
 	blink_mob(user)
 	use(1)
 
 /obj/item/stack/ore/bluespace_crystal/proc/blink_mob(mob/living/L)
-	do_teleport(L, get_turf(L), blink_range, asoundin = 'sound/effects/phasein.ogg', channel = TELEPORT_CHANNEL_BLUESPACE)
+	do_teleport(L, get_turf(L), blink_range, asoundin = 'sound/blank.ogg', channel = TELEPORT_CHANNEL_BLUESPACE)
 
 /obj/item/stack/ore/bluespace_crystal/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!..()) // not caught in mid-air
@@ -49,7 +49,7 @@
 //Artificial bluespace crystal, doesn't give you much research.
 /obj/item/stack/ore/bluespace_crystal/artificial
 	name = "artificial bluespace crystal"
-	desc = "An artificially made bluespace crystal, it looks delicate."
+	desc = ""
 	custom_materials = list(/datum/material/bluespace=MINERAL_MATERIAL_AMOUNT*0.5)
 	blink_range = 4 // Not as good as the organic stuff!
 	points = 0 //nice try
@@ -63,7 +63,7 @@
 	icon_state = "polycrystal"
 	item_state = "sheet-polycrystal"
 	singular_name = "bluespace polycrystal"
-	desc = "A stable polycrystal, made of fused-together bluespace crystals. You could probably break one off."
+	desc = ""
 	custom_materials = list(/datum/material/bluespace=MINERAL_MATERIAL_AMOUNT)
 	attack_verb = list("bluespace polybashed", "bluespace polybattered", "bluespace polybludgeoned", "bluespace polythrashed", "bluespace polysmashed")
 	novariants = TRUE
@@ -72,7 +72,7 @@
 	var/crystal_type = /obj/item/stack/ore/bluespace_crystal/refined
 
 /obj/item/stack/sheet/bluespace_crystal/attack_self(mob/user)// to prevent the construction menu from ever happening
-	to_chat(user, "<span class='warning'>You cannot crush the polycrystal in-hand, try breaking one off.</span>")
+	to_chat(user, "<span class='warning'>I cannot crush the polycrystal in-hand, try breaking one off.</span>")
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/stack/sheet/bluespace_crystal/attack_hand(mob/user)
@@ -83,8 +83,8 @@
 		user.put_in_hands(BC)
 		use(1)
 		if(!amount)
-			to_chat(user, "<span class='notice'>You break the final crystal off.</span>")
+			to_chat(user, "<span class='notice'>I break the final crystal off.</span>")
 		else
-			to_chat(user, "<span class='notice'>You break off a crystal.</span>")
+			to_chat(user, "<span class='notice'>I break off a crystal.</span>")
 	else
 		..()

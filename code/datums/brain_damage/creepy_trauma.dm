@@ -1,7 +1,7 @@
 /datum/brain_trauma/special/obsessed
 	name = "Psychotic Schizophrenia"
-	desc = "Patient has a subtype of delusional disorder, becoming irrationally attached to someone."
-	scan_desc = "psychotic schizophrenic delusions"
+	desc = ""
+	scan_desc = ""
 	gain_text = "If you see this message, make a github issue report. The trauma initialized wrong."
 	lose_text = "<span class='warning'>The voices in your head fall silent.</span>"
 	can_gain = TRUE
@@ -25,7 +25,7 @@
 			lose_text = ""
 			qdel(src)
 			return
-	gain_text = "<span class='warning'>You hear a sickening, raspy voice in your head. It wants one small task of you...</span>"
+	gain_text = "<span class='warning'>I hear a sickening, raspy voice in your head. It wants one small task of you...</span>"
 	owner.mind.add_antag_datum(/datum/antagonist/obsessed)
 	antagonist = owner.mind.has_antag_datum(/datum/antagonist/obsessed)
 	antagonist.trauma = src
@@ -91,11 +91,11 @@
 			owner.dizziness += 10
 			fail = TRUE
 		if(3)
-			to_chat(owner, "<span class='userdanger'>You feel your heart lurching in your chest...</span>")
+			to_chat(owner, "<span class='danger'>I feel your heart lurching in your chest...</span>")
 			owner.Stun(20)
 			shake_camera(owner, 15, 1)
 		if(4)
-			to_chat(owner, "<span class='warning'>You faint.</span>")
+			to_chat(owner, "<span class='warning'>I faint.</span>")
 			owner.Unconscious(80)
 			fail = TRUE
 	return fail

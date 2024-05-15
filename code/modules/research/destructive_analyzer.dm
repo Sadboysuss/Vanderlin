@@ -9,7 +9,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 */
 /obj/machinery/rnd/destructive_analyzer
 	name = "destructive analyzer"
-	desc = "Learn science by destroying things!"
+	desc = ""
 	icon_state = "d_analyzer"
 	circuit = /obj/item/circuitboard/machine/destructive_analyzer
 	var/decon_mod = 0
@@ -32,7 +32,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	..()
 
 /obj/machinery/rnd/destructive_analyzer/Insert_Item(obj/item/O, mob/user)
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		. = 1
 		if(!is_insertion_ready(user))
 			return
@@ -41,7 +41,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 			return
 		busy = TRUE
 		loaded_item = O
-		to_chat(user, "<span class='notice'>You add the [O.name] to the [src.name]!</span>")
+		to_chat(user, "<span class='notice'>I add the [O.name] to the [src.name]!</span>")
 		flick("d_analyzer_la", src)
 		addtimer(CALLBACK(src, .proc/finish_loading), 10)
 		if (linked_console)

@@ -2,8 +2,8 @@
 
 /obj/item/seeds/random
 	name = "pack of strange seeds"
-	desc = "Mysterious seeds as strange as their name implies. Spooky."
-	icon_state = "seed-x"
+	desc = ""
+	icon_state = "seed"
 	species = "?????"
 	plantname = "strange plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/random
@@ -24,7 +24,7 @@
 /obj/item/reagent_containers/food/snacks/grown/random
 	seed = /obj/item/seeds/random
 	name = "strange plant"
-	desc = "What could this even be?"
+	desc = ""
 	icon_state = "crunchy"
 	bitesize_mod = 2
 

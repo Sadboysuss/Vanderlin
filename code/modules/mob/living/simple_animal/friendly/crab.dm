@@ -1,7 +1,7 @@
 //Look Sir, free crabs!
 /mob/living/simple_animal/crab
 	name = "crab"
-	desc = "Free crabs!"
+	desc = ""
 	icon_state = "crab"
 	icon_living = "crab"
 	icon_dead = "crab_dead"
@@ -42,14 +42,14 @@
 /mob/living/simple_animal/crab/Coffee
 	name = "Coffee"
 	real_name = "Coffee"
-	desc = "It's Coffee, the other pet!"
+	desc = ""
 	gender = FEMALE
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/simple_animal/crab/evil
 	name = "Evil Crab"
 	real_name = "Evil Crab"
-	desc = "Unnerving, isn't it? It has to be planning something nefarious..."
+	desc = ""
 	icon_state = "evilcrab"
 	icon_living = "evilcrab"
 	icon_dead = "evilcrab_dead"
@@ -57,7 +57,7 @@
 
 /mob/living/simple_animal/crab/kreb
 	name = "Kreb"
-	desc = "This is a real crab. The other crabs are simply gubbucks in disguise!"
+	desc = ""
 	real_name = "Kreb"
 	icon_state = "kreb"
 	icon_living = "kreb"

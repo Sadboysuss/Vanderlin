@@ -1,6 +1,6 @@
 /obj/structure/statue
 	name = "statue"
-	desc = "Placeholder. Yell at Firecage if you SOMEHOW see this."
+	desc = ""
 	icon = 'icons/obj/statue.dmi'
 	icon_state = ""
 	density = TRUE
@@ -27,10 +27,10 @@
 				return FALSE
 
 			user.visible_message("<span class='notice'>[user] is slicing apart the [name].</span>", \
-								"<span class='notice'>You are slicing apart the [name]...</span>")
+								"<span class='notice'>I are slicing apart the [name]...</span>")
 			if(W.use_tool(src, user, 40, volume=50))
 				user.visible_message("<span class='notice'>[user] slices apart the [name].</span>", \
-									"<span class='notice'>You slice apart the [name]!</span>")
+									"<span class='notice'>I slice apart the [name]!</span>")
 				deconstruct(TRUE)
 			return
 	return ..()
@@ -59,12 +59,12 @@
 
 /obj/structure/statue/uranium/nuke
 	name = "statue of a nuclear fission explosive"
-	desc = "This is a grand statue of a Nuclear Explosive. It has a sickening green colour."
+	desc = ""
 	icon_state = "nuke"
 
 /obj/structure/statue/uranium/eng
 	name = "Statue of an engineer"
-	desc = "This statue has a sickening green colour."
+	desc = ""
 	icon_state = "eng"
 
 /obj/structure/statue/uranium/attackby(obj/item/W, mob/user, params)
@@ -99,7 +99,7 @@
 	max_integrity = 200
 	material_drop_type = /obj/item/stack/sheet/mineral/plasma
 	impressiveness = 20
-	desc = "This statue is suitably made from plasma."
+	desc = ""
 
 /obj/structure/statue/plasma/scientist
 	name = "statue of a scientist"
@@ -134,10 +134,10 @@
 	else
 		return ..()
 
-/obj/structure/statue/plasma/proc/PlasmaBurn(exposed_temperature)
+/obj/structure/statue/plasma/proc/PlasmaBurn(added)
 	if(QDELETED(src))
 		return
-	atmos_spawn_air("plasma=[oreAmount*10];TEMP=[exposed_temperature]")
+	atmos_spawn_air("plasma=[oreAmount*10];TEMP=[added]")
 	deconstruct(FALSE)
 
 /obj/structure/statue/plasma/proc/ignite(exposed_temperature)
@@ -150,7 +150,7 @@
 	max_integrity = 300
 	material_drop_type = /obj/item/stack/sheet/mineral/gold
 	impressiveness = 25
-	desc = "This is a highly valuable statue made from gold."
+	desc = ""
 
 /obj/structure/statue/gold/hos
 	name = "statue of the head of security"
@@ -178,7 +178,7 @@
 	max_integrity = 300
 	material_drop_type = /obj/item/stack/sheet/mineral/silver
 	impressiveness = 25
-	desc = "This is a valuable statue made from silver."
+	desc = ""
 
 /obj/structure/statue/silver/md
 	name = "statue of a medical officer"
@@ -206,7 +206,7 @@
 	max_integrity = 1000
 	material_drop_type = /obj/item/stack/sheet/mineral/diamond
 	impressiveness = 50
-	desc = "This is a very expensive diamond statue."
+	desc = ""
 
 /obj/structure/statue/diamond/captain
 	name = "statue of THE captain."
@@ -226,7 +226,7 @@
 	max_integrity = 300
 	material_drop_type = /obj/item/stack/sheet/mineral/bananium
 	impressiveness = 50
-	desc = "A bananium statue with a small engraving:'HOOOOOOONK'."
+	desc = ""
 	var/spam_flag = 0
 
 /obj/structure/statue/bananium/clown
@@ -252,7 +252,7 @@
 /obj/structure/statue/bananium/proc/honk()
 	if(!spam_flag)
 		spam_flag = TRUE
-		playsound(src.loc, 'sound/items/bikehorn.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		addtimer(VARSET_CALLBACK(src, spam_flag, FALSE), 2 SECONDS)
 
 /////////////////////sandstone/////////////////////////////////////////
@@ -264,13 +264,13 @@
 
 /obj/structure/statue/sandstone/assistant
 	name = "statue of an assistant"
-	desc = "A cheap statue of sandstone for a greyshirt."
+	desc = ""
 	icon_state = "assist"
 
 
 /obj/structure/statue/sandstone/venus //call me when we add marble i guess
 	name = "statue of a pure maiden"
-	desc = "An ancient marble statue. The subject is depicted with a floor-length braid and is wielding a toolbox. By Jove, it's easily the most gorgeous depiction of a woman you've ever seen. The artist must truly be a master of his craft. Shame about the broken arm, though."
+	desc = ""
 	icon = 'icons/obj/statuelarge.dmi'
 	icon_state = "venus"
 
@@ -282,12 +282,12 @@
 
 /obj/structure/statue/snow/snowman
 	name = "snowman"
-	desc = "Several lumps of snow put together to form a snowman."
+	desc = ""
 	icon_state = "snowman"
 
 /obj/structure/statue/snow/snowlegion
     name = "snowlegion"
-    desc = "Looks like that weird kid with the tiger plushie has been round here again."
+    desc = ""
     icon_state = "snowlegion"
 
 ///////////////////////////////bronze///////////////////////////////////
@@ -297,6 +297,7 @@
 
 /obj/structure/statue/bronze/marx
 	name = "\improper Karl Marx bust"
-	desc = "A bust depicting a certain 19th century economist. You get the feeling a specter is haunting the station."
+	desc = ""
 	icon_state = "marx"
 	art_type = /datum/component/art/rev
+

@@ -20,7 +20,7 @@
 	layer = OBJ_LAYER
 	invisibility = INVISIBILITY_OBSERVER	//the turret is invisible if it's inside its cover
 	density = TRUE
-	desc = "A covered turret that shoots at its enemies."
+	desc = ""
 	use_power = IDLE_POWER_USE				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
@@ -63,7 +63,7 @@
 
 
 	var/turret_flags = TURRET_FLAG_SHOOT_CRIMINALS | TURRET_FLAG_SHOOT_ANOMALOUS
-	
+
 	var/on = TRUE				//determines if the turret is on
 
 	var/list/faction = list("turret" ) // Same faction mobs will never be shot at, no matter the other settings
@@ -232,19 +232,19 @@
 		if(I.tool_behaviour == TOOL_CROWBAR)
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
-			to_chat(user, "<span class='notice'>You begin prying the metal coverings off...</span>")
+			to_chat(user, "<span class='notice'>I begin prying the metal coverings off...</span>")
 			if(I.use_tool(src, user, 20))
 				if(prob(70))
 					if(stored_gun)
 						stored_gun.forceMove(loc)
 						stored_gun = null
-					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
+					to_chat(user, "<span class='notice'>I remove the turret and salvage some components.</span>")
 					if(prob(50))
 						new /obj/item/stack/sheet/metal(loc, rand(1,4))
 					if(prob(50))
 						new /obj/item/assembly/prox_sensor(loc)
 				else
-					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
+					to_chat(user, "<span class='notice'>I remove the turret but did not manage to salvage anything.</span>")
 				qdel(src)
 
 	else if((I.tool_behaviour == TOOL_WRENCH) && (!on))
@@ -256,13 +256,13 @@
 			setAnchored(TRUE)
 			invisibility = INVISIBILITY_MAXIMUM
 			update_icon()
-			to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
+			to_chat(user, "<span class='notice'>I secure the exterior bolts on the turret.</span>")
 			if(has_cover)
 				cover = new /obj/machinery/porta_turret_cover(loc) //create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
 				cover.parent_turret = src //make the cover's parent src
 		else if(anchored)
 			setAnchored(FALSE)
-			to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
+			to_chat(user, "<span class='notice'>I unsecure the exterior bolts on the turret.</span>")
 			power_change()
 			invisibility = 0
 			qdel(cover) //deletes the cover, and the turret instance itself becomes its own cover.
@@ -279,14 +279,14 @@
 			return
 		var/obj/item/multitool/M = I
 		M.buffer = src
-		to_chat(user, "<span class='notice'>You add [src] to multitool buffer.</span>")
+		to_chat(user, "<span class='notice'>I add [src] to multitool buffer.</span>")
 	else
 		return ..()
 
 /obj/machinery/porta_turret/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
-	to_chat(user, "<span class='warning'>You short out [src]'s threat assessment circuits.</span>")
+	to_chat(user, "<span class='warning'>I short out [src]'s threat assessment circuits.</span>")
 	audible_message("<span class='hear'>[src] hums oddly...</span>")
 	obj_flags |= EMAGGED
 	controllock = TRUE
@@ -474,7 +474,7 @@
 			return 10
 
 	if(turret_flags & TURRET_FLAG_AUTH_WEAPONS)	//check for weapon authorization
-		if(isnull(perp.wear_id) || istype(perp.wear_id.GetID(), /obj/item/card/id/syndicate))
+		if(isnull(perp.wear_ring) || istype(perp.wear_ring.GetID(), /obj/item/card/id/syndicate))
 
 			if(allowed(perp)) //if the perp has security access, return 0
 				return 0
@@ -496,7 +496,7 @@
 	// If we aren't shooting heads then return a threatcount of 0
 	if (!(turret_flags & TURRET_FLAG_SHOOT_HEADS) && (perp.get_assignment() in GLOB.command_positions))
 		return 0
-	
+
 	return threatcount
 
 /obj/machinery/porta_turret/proc/in_faction(mob/target)
@@ -617,7 +617,7 @@
 		return FALSE
 	if(remote_controller)
 		if(warning_message)
-			to_chat(remote_controller, "<span class='warning'>Your uplink to [src] has been severed!</span>")
+			to_chat(remote_controller, "<span class='warning'>My uplink to [src] has been severed!</span>")
 		quit_action.Remove(remote_controller)
 		toggle_action.Remove(remote_controller)
 		remote_controller.click_intercept = null
@@ -647,12 +647,12 @@
 	mode = TURRET_LETHAL
 	stun_projectile = /obj/projectile/bullet
 	lethal_projectile = /obj/projectile/bullet
-	lethal_projectile_sound = 'sound/weapons/gun/pistol/shot.ogg'
-	stun_projectile_sound = 'sound/weapons/gun/pistol/shot.ogg'
+	lethal_projectile_sound = 'sound/blank.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	icon_state = "syndie_off"
 	base_icon_state = "syndie"
 	faction = list(ROLE_SYNDICATE)
-	desc = "A ballistic machine gun auto-turret."
+	desc = ""
 
 /obj/machinery/porta_turret/syndicate/ComponentInitialize()
 	. = ..()
@@ -668,23 +668,23 @@
 	icon_state = "standard_lethal"
 	base_icon_state = "standard"
 	stun_projectile = /obj/projectile/energy/electrode
-	stun_projectile_sound = 'sound/weapons/taser.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	lethal_projectile = /obj/projectile/beam/laser
-	lethal_projectile_sound = 'sound/weapons/laser.ogg'
-	desc = "An energy blaster auto-turret."
+	lethal_projectile_sound = 'sound/blank.ogg'
+	desc = ""
 
 /obj/machinery/porta_turret/syndicate/energy/heavy
 	icon_state = "standard_lethal"
 	base_icon_state = "standard"
 	stun_projectile = /obj/projectile/energy/electrode
-	stun_projectile_sound = 'sound/weapons/taser.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	lethal_projectile = /obj/projectile/beam/laser/heavylaser
-	lethal_projectile_sound = 'sound/weapons/lasercannonfire.ogg'
-	desc = "An energy blaster auto-turret."
+	lethal_projectile_sound = 'sound/blank.ogg'
+	desc = ""
 
 /obj/machinery/porta_turret/syndicate/energy/raven
 	stun_projectile =  /obj/projectile/beam/laser
-	stun_projectile_sound = 'sound/weapons/laser.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	faction = list("neutral","silicon","turret")
 
 
@@ -699,8 +699,8 @@
 	shot_delay = 3
 	stun_projectile = /obj/projectile/bullet/p50/penetrator/shuttle
 	lethal_projectile = /obj/projectile/bullet/p50/penetrator/shuttle
-	lethal_projectile_sound = 'sound/weapons/gun/smg/shot.ogg'
-	stun_projectile_sound = 'sound/weapons/gun/smg/shot.ogg'
+	lethal_projectile_sound = 'sound/blank.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	armor = list("melee" = 50, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 80, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
 
 /obj/machinery/porta_turret/syndicate/shuttle/target(atom/movable/target)
@@ -721,15 +721,15 @@
 
 /obj/machinery/porta_turret/aux_base
 	name = "perimeter defense turret"
-	desc = "A plasma beam turret calibrated to defend outposts against non-humanoid fauna. It is more effective when exposed to the environment."
+	desc = ""
 	installation = null
 	lethal_projectile = /obj/projectile/plasma/turret
-	lethal_projectile_sound = 'sound/weapons/plasma_cutter.ogg'
+	lethal_projectile_sound = 'sound/blank.ogg'
 	mode = TURRET_LETHAL //It would be useless in stun mode anyway
 	faction = list("neutral","silicon","turret") //Minebots, medibots, etc that should not be shot.
 
 /obj/machinery/porta_turret/aux_base/assess_perp(mob/living/carbon/human/perp)
-	return 0 //Never shoot humanoids. You are on your own if Ashwalkers or the like attack!
+	return 0 //Never shoot humanoids. You are on my own if Ashwalkers or the like attack!
 
 /obj/machinery/porta_turret/aux_base/setup()
 	return
@@ -751,8 +751,8 @@
 	scan_range = 9
 	stun_projectile = /obj/projectile/beam/laser
 	lethal_projectile = /obj/projectile/beam/laser
-	lethal_projectile_sound = 'sound/weapons/plasma_cutter.ogg'
-	stun_projectile_sound = 'sound/weapons/plasma_cutter.ogg'
+	lethal_projectile_sound = 'sound/blank.ogg'
+	stun_projectile_sound = 'sound/blank.ogg'
 	icon_state = "syndie_off"
 	base_icon_state = "syndie"
 	faction = list("neutral","silicon","turret")
@@ -772,7 +772,7 @@
 	max_integrity = 120
 	integrity_failure = 0.5
 	name = "Old Laser Turret"
-	desc = "A turret built with substandard parts and run down further with age. Still capable of delivering lethal lasers to the odd space carp, but not much else."
+	desc = ""
 	stun_projectile = /obj/projectile/beam/weak/penetrator
 	lethal_projectile = /obj/projectile/beam/weak/penetrator
 	faction = list("neutral","silicon","turret")
@@ -783,7 +783,7 @@
 
 /obj/machinery/turretid
 	name = "turret control panel"
-	desc = "Used to control a room's automated defenses."
+	desc = ""
 	icon = 'icons/obj/machines/turret_control.dmi'
 	icon_state = "control_standby"
 	density = FALSE
@@ -843,7 +843,7 @@
 		var/obj/item/multitool/M = I
 		if(M.buffer && istype(M.buffer, /obj/machinery/porta_turret))
 			turrets |= M.buffer
-			to_chat(user, "<span class='notice'>You link \the [M.buffer] with \the [src].</span>")
+			to_chat(user, "<span class='notice'>I link \the [M.buffer] with \the [src].</span>")
 			return
 
 	if (issilicon(user))
@@ -856,7 +856,7 @@
 				return
 
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>")
+			to_chat(user, "<span class='notice'>I [ locked ? "lock" : "unlock"] the panel.</span>")
 			if (locked)
 				if (user.machine==src)
 					user.unset_machine()
@@ -870,7 +870,7 @@
 /obj/machinery/turretid/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
-	to_chat(user, "<span class='notice'>You short out the turret controls' access analysis module.</span>")
+	to_chat(user, "<span class='notice'>I short out the turret controls' access analysis module.</span>")
 	obj_flags |= EMAGGED
 	locked = FALSE
 	if(user && user.machine == src)
@@ -886,7 +886,7 @@
 	. = ..()
 	if ( get_dist(src, user) > 0 )
 		if ( !(issilicon(user) || IsAdminGhost(user)) )
-			to_chat(user, "<span class='warning'>You are too far away!</span>")
+			to_chat(user, "<span class='warning'>I are too far away!</span>")
 			user.unset_machine()
 			user << browse(null, "window=turretid")
 			return
@@ -955,7 +955,7 @@
 
 /obj/item/wallframe/turret_control
 	name = "turret control frame"
-	desc = "Used for building turret control panels."
+	desc = ""
 	icon_state = "apc"
 	result_path = /obj/machinery/turretid
 	custom_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
@@ -1024,7 +1024,7 @@
 	. = 0
 	if(team_color == "blue")	//Lasertag turrets target the opposing team, how great is that? -Sieve
 		. = 0		//But does not target anyone else
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/redtag))
+		if(istype(perp.wear_armor, /obj/item/clothing/suit/redtag))
 			. += 4
 		if(perp.is_holding_item_of_type(/obj/item/gun/energy/laser/redtag))
 			. += 4
@@ -1033,7 +1033,7 @@
 
 	if(team_color == "red")
 		. = 0
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/bluetag))
+		if(istype(perp.wear_armor, /obj/item/clothing/suit/bluetag))
 			. += 4
 		if(perp.is_holding_item_of_type(/obj/item/gun/energy/laser/bluetag))
 			. += 4
@@ -1049,9 +1049,9 @@
 	. = ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(team_color == "blue" && istype(H.wear_suit, /obj/item/clothing/suit/redtag))
+		if(team_color == "blue" && istype(H.wear_armor, /obj/item/clothing/suit/redtag))
 			return
-		if(team_color == "red" && istype(H.wear_suit, /obj/item/clothing/suit/bluetag))
+		if(team_color == "red" && istype(H.wear_armor, /obj/item/clothing/suit/bluetag))
 			return
 
 	var/dat = "Status: <a href='?src=[REF(src)];power=1'>[on ? "On" : "Off"]</a>"

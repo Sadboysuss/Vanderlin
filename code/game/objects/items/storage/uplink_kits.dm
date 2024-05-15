@@ -195,13 +195,13 @@
 
 /obj/item/storage/box/syndicate/contract_kit
 	name = "Contract Kit"
-	desc = "Supplied to Syndicate contractors."
+	desc = ""
 	icon_state = "syndiebox"
 	illustration = "writing_syndie"
 
 /obj/item/storage/box/syndicate/contractor_loadout
 	name = "Standard Loadout"
-	desc = "Supplied to Syndicate contractors, providing their specialised space suit and chameleon uniform."
+	desc = ""
 	icon_state = "syndiebox"
 	illustration = "writing_syndie"
 
@@ -209,15 +209,15 @@
 	name = "Contractor Guide"
 
 /obj/item/paper/contractor_guide/Initialize()
-	info = {"<p>Welcome agent, congratulations on your new position as contractor. On top of your already assigned objectives,
+	info = {"<p>Welcome agent, congratulations on my new position as contractor. On top of my already assigned objectives,
 			this kit will provide you contracts to take on for TC payments.</p>
 
-			<p>Provided within, we give your specialist contractor space suit. It's even more compact, being able to fit into a pocket, and faster than the
-			Syndicate space suit available to you on the uplink. We also provide your chameleon jumpsuit and mask, both of which can be changed
-			to any form you need for the moment. The cigarettes are a special blend - it'll heal your injuries slowly overtime.</p>
+			<p>Provided within, we give my specialist contractor space suit. It's even more compact, being able to fit into a pocket, and faster than the
+			Syndicate space suit available to you on the uplink. We also provide my chameleon jumpsuit and mask, both of which can be changed
+			to any form you need for the moment. The cigarettes are a special blend - it'll heal my injuries slowly overtime.</p>
 
-			<p>Your standard issue contractor baton hits harder than the ones you might be used to, and likely be your go to weapon for kidnapping your
-			targets. The three additional items have been randomly selected from what we had available. We hope they're useful to you for your mission.</p>
+			<p>My standard issue contractor baton hits harder than the ones you might be used to, and likely be my go to weapon for kidnapping your
+			targets. The three additional items have been randomly selected from what we had available. We hope they're useful to you for my mission.</p>
 
 			<p>The contractor hub, available at the top right of the uplink, will provide you unique items and abilities. These are bought using Contractor Rep,
 			with two Rep being provided each time you complete a contract.</p>
@@ -225,8 +225,8 @@
 			<h3>Using the tablet</h3>
 			<ol>
 				<li>Open the Syndicate Contract Uplink program.</li>
-				<li>Here, you can accept a contract, and redeem your TC payments from completed contracts.</li>
-				<li>The payment number shown in brackets is the bonus you'll recieve when bringing your target <b>alive</b>. You recieve the
+				<li>Here, you can accept a contract, and redeem my TC payments from completed contracts.</li>
+				<li>The payment number shown in brackets is the bonus you'll recieve when bringing my target <b>alive</b>. You recieve the
 				other number regardless of if they were alive or dead.</li>
 				<li>Contracts are completed by bringing the target to designated dropoff, calling for extraction, and putting them
 				inside the pod.</li>
@@ -237,13 +237,13 @@
 			<p>The tablet can also be recharged at any cell charger.</p>
 			<h3>Extracting</h3>
 			<ol>
-				<li>Make sure both yourself and your target are at the dropoff.</li>
+				<li>Make sure both myself and my target are at the dropoff.</li>
 				<li>Call the extraction, and stand back from the drop point.</li>
-				<li>If it fails, make sure your target is inside, and there's a free space for the pod to land.</li>
-				<li>Grab your target, and drag them into the pod.</li>
+				<li>If it fails, make sure my target is inside, and there's a free space for the pod to land.</li>
+				<li>Grab my target, and drag them into the pod.</li>
 			</ol>
 			<h3>Ransoms</h3>
-			<p>We need your target for our own reasons, but we ransom them back to your mission area once their use is served. They will return back
+			<p>We need my target for our own reasons, but we ransom them back to my mission area once their use is served. They will return back
 			from where you sent them off from in several minutes time. Don't worry, we give you a cut of what we get paid. We pay this into whatever
 			ID card you have equipped, on top of the TC payment we give.</p>
 
@@ -302,13 +302,13 @@
 
 /obj/item/storage/box/syndie_kit
 	name = "box"
-	desc = "A sleek, sturdy box."
+	desc = ""
 	icon_state = "syndiebox"
 	illustration = "writing_syndie"
 
 /obj/item/storage/box/syndie_kit/origami_bundle
 	name = "origami kit"
-	desc = "A box full of a number of rather masterfully engineered paper planes and a manual on \"The Art of Origami\"."
+	desc = ""
 
 /obj/item/storage/box/syndie_kit/origami_bundle/PopulateContents()
 	new /obj/item/book/granter/action/origami(src)
@@ -522,7 +522,7 @@
 
 /obj/item/storage/box/syndie_kit/bee_grenades
 	name = "buzzkill grenade box"
-	desc = "A sleek, sturdy box with a buzzing noise coming from the inside. Uh oh."
+	desc = ""
 
 /obj/item/storage/box/syndie_kit/bee_grenades/PopulateContents()
 	for(var/i in 1 to 3)
@@ -541,7 +541,7 @@
 
 /obj/item/storage/box/syndie_kit/signaler
 	name = "signaler box"
-	desc = "Contains everything an agent would need to remotely detonate their bombs."
+	desc = ""
 
 /obj/item/storage/box/syndie_kit/signaler/PopulateContents()
 	for(var/i in 1 to 6)

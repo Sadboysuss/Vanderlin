@@ -1,6 +1,6 @@
 /obj/item/encryptionkey
 	name = "standard encryption key"
-	desc = "An encryption key for a radio headset."
+	desc = ""
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
 	w_class = WEIGHT_CLASS_TINY
@@ -12,7 +12,7 @@
 /obj/item/encryptionkey/Initialize()
 	. = ..()
 	if(!channels.len)
-		desc = "An encryption key for a radio headset.  Has no special codes in it. You should probably tell a coder!"
+		desc = ""
 
 /obj/item/encryptionkey/examine(mob/user)
 	. = ..()

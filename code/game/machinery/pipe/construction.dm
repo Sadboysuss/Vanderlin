@@ -9,7 +9,7 @@ Buildable meters
 
 /obj/item/pipe
 	name = "pipe"
-	desc = "A pipe."
+	desc = ""
 	var/pipe_type
 	var/pipename
 	force = 7
@@ -86,7 +86,7 @@ Buildable meters
 		resistance_flags |= FIRE_PROOF | LAVA_PROOF
 
 /obj/item/pipe/verb/flip()
-	set category = "Object"
+	set hidden = 1
 	set name = "Flip Pipe"
 	set src in view(1)
 
@@ -154,8 +154,8 @@ Buildable meters
 	W.play_tool_sound(src)
 	user.visible_message( \
 		"[user] fastens \the [src].", \
-		"<span class='notice'>You fasten \the [src].</span>", \
-		"<span class='hear'>You hear ratcheting.</span>")
+		"<span class='notice'>I fasten \the [src].</span>", \
+		"<span class='hear'>I hear ratcheting.</span>")
 
 	qdel(src)
 
@@ -189,7 +189,7 @@ Buildable meters
 
 /obj/item/pipe_meter
 	name = "meter"
-	desc = "A meter that can be laid on pipes."
+	desc = ""
 	icon = 'icons/obj/atmospherics/pipes/pipe_item.dmi'
 	icon_state = "meter"
 	item_state = "buildpipe"
@@ -204,11 +204,11 @@ Buildable meters
 			pipe = P
 			break
 	if(!pipe)
-		to_chat(user, "<span class='warning'>You need to fasten it to a pipe!</span>")
+		to_chat(user, "<span class='warning'>I need to fasten it to a pipe!</span>")
 		return TRUE
 	new /obj/machinery/meter(loc, piping_layer)
 	W.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You fasten the meter to the pipe.</span>")
+	to_chat(user, "<span class='notice'>I fasten the meter to the pipe.</span>")
 	qdel(src)
 
 /obj/item/pipe_meter/screwdriver_act(mob/living/user, obj/item/S)
@@ -217,12 +217,12 @@ Buildable meters
 		return TRUE
 
 	if(!isturf(loc))
-		to_chat(user, "<span class='warning'>You need to fasten it to the floor!</span>")
+		to_chat(user, "<span class='warning'>I need to fasten it to the floor!</span>")
 		return TRUE
 
 	new /obj/machinery/meter/turf(loc, piping_layer)
 	S.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You fasten the meter to the [loc.name].</span>")
+	to_chat(user, "<span class='notice'>I fasten the meter to the [loc.name].</span>")
 	qdel(src)
 
 /obj/item/pipe_meter/dropped()

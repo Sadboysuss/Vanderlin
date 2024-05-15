@@ -1,6 +1,6 @@
 /obj/item/inducer
 	name = "inducer"
-	desc = "A tool for inductively charging internal power cells."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "inducer-engi"
 	item_state = "inducer-engi"
@@ -34,7 +34,7 @@
 		cell.emp_act(severity)
 
 /obj/item/inducer/attack_obj(obj/O, mob/living/carbon/user)
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 
 	if(cantbeused(user))
@@ -47,7 +47,7 @@
 
 /obj/item/inducer/proc/cantbeused(mob/user)
 	if(!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You don't have the dexterity to use [src]!</span>")
+		to_chat(user, "<span class='warning'>I don't have the dexterity to use [src]!</span>")
 		return TRUE
 
 	if(!cell)
@@ -64,12 +64,12 @@
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		W.play_tool_sound(src)
 		if(!opened)
-			to_chat(user, "<span class='notice'>You unscrew the battery compartment.</span>")
+			to_chat(user, "<span class='notice'>I unscrew the battery compartment.</span>")
 			opened = TRUE
 			update_icon()
 			return
 		else
-			to_chat(user, "<span class='notice'>You close the battery compartment.</span>")
+			to_chat(user, "<span class='notice'>I close the battery compartment.</span>")
 			opened = FALSE
 			update_icon()
 			return
@@ -78,7 +78,7 @@
 			if(!cell)
 				if(!user.transferItemToLoc(W, src))
 					return
-				to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
+				to_chat(user, "<span class='notice'>I insert [W] into [src].</span>")
 				cell = W
 				update_icon()
 				return
@@ -115,7 +115,7 @@
 			to_chat(user, "<span class='notice'>[A] is fully charged!</span>")
 			recharging = FALSE
 			return TRUE
-		user.visible_message("<span class='notice'>[user] starts recharging [A] with [src].</span>", "<span class='notice'>You start recharging [A] with [src].</span>")
+		user.visible_message("<span class='notice'>[user] starts recharging [A] with [src].</span>", "<span class='notice'>I start recharging [A] with [src].</span>")
 		while(C.charge < C.maxcharge)
 			if(do_after(user, 10, target = user) && cell.charge)
 				done_any = TRUE
@@ -126,14 +126,14 @@
 			else
 				break
 		if(done_any) // Only show a message if we succeeded at least once
-			user.visible_message("<span class='notice'>[user] recharged [A]!</span>", "<span class='notice'>You recharged [A]!</span>")
+			user.visible_message("<span class='notice'>[user] recharged [A]!</span>", "<span class='notice'>I recharged [A]!</span>")
 		recharging = FALSE
 		return TRUE
 	recharging = FALSE
 
 
 /obj/item/inducer/attack(mob/M, mob/user)
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 
 	if(cantbeused(user))
@@ -146,7 +146,7 @@
 
 /obj/item/inducer/attack_self(mob/user)
 	if(opened && cell)
-		user.visible_message("<span class='notice'>[user] removes [cell] from [src]!</span>", "<span class='notice'>You remove [cell].</span>")
+		user.visible_message("<span class='notice'>[user] removes [cell] from [src]!</span>", "<span class='notice'>I remove [cell].</span>")
 		cell.update_icon()
 		user.put_in_hands(cell)
 		cell = null
@@ -173,7 +173,7 @@
 /obj/item/inducer/sci
 	icon_state = "inducer-sci"
 	item_state = "inducer-sci"
-	desc = "A tool for inductively charging internal power cells. This one has a science color scheme, and is less potent than its engineering counterpart."
+	desc = ""
 	cell_type = null
 	powertransfer = 500
 	opened = TRUE

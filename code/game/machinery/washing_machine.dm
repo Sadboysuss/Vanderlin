@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 
 /obj/machinery/washing_machine
 	name = "washing machine"
-	desc = "Gets rid of those pesky bloodstains, or your money back!"
+	desc = ""
 	icon = 'icons/obj/machines/washing_machine.dmi'
 	icon_state = "wm_1_0"
 	density = TRUE
@@ -201,7 +201,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 			inhand_x_dimension = initial(target_type.inhand_x_dimension)
 			inhand_y_dimension = initial(target_type.inhand_y_dimension)
 			name = initial(target_type.name)
-			desc = "[initial(target_type.desc)] The colors look a little dodgy."
+			desc = ""
 			return target_type //successfully "appearance copy" dyed something; returns the target type as a hacky way of extending
 	add_atom_colour(dye_color, FIXED_COLOUR_PRIORITY)
 	return FALSE
@@ -276,7 +276,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		update_icon()
 		return
 
-	else if(user.a_intent != INTENT_HARM)
+	else if(user.used_intent.type != INTENT_HARM)
 		if (!state_open)
 			to_chat(user, "<span class='warning'>Open the door first!</span>")
 			return TRUE
@@ -308,7 +308,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		to_chat(user, "<span class='warning'>[src] is busy!</span>")
 		return
 
-	if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
+	if(user.pulling && user.used_intent.type == INTENT_GRAB && isliving(user.pulling))
 		var/mob/living/L = user.pulling
 		if(L.buckled || L.has_buckled_mobs())
 			return

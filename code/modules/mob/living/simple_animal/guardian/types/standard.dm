@@ -14,7 +14,7 @@
 /mob/living/simple_animal/hostile/guardian/punch/verb/Battlecry()
 	set name = "Set Battlecry"
 	set category = "Guardian"
-	set desc = "Choose what you shout as you punch people."
+	set desc = ""
 	var/input = stripped_input(src,"What do you want your battlecry to be? Max length of 6 characters.", ,"", 7)
 	if(input)
 		battlecry = input

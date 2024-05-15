@@ -102,7 +102,7 @@
 
 /datum/action/vehicle/sealed/climb_out
 	name = "Climb Out"
-	desc = "Climb out of your vehicle!"
+	desc = ""
 	button_icon_state = "car_eject"
 
 /datum/action/vehicle/sealed/climb_out/Trigger()
@@ -114,7 +114,7 @@
 
 /datum/action/vehicle/sealed/remove_key
 	name = "Remove key"
-	desc = "Take your key out of the vehicle's ignition."
+	desc = ""
 	button_icon_state = "car_removekey"
 
 /datum/action/vehicle/sealed/remove_key/Trigger()
@@ -123,22 +123,22 @@
 //CLOWN CAR ACTION DATUMS
 /datum/action/vehicle/sealed/horn
 	name = "Honk Horn"
-	desc = "Honk your classy horn."
+	desc = ""
 	button_icon_state = "car_horn"
-	var/hornsound = 'sound/items/carhorn.ogg'
+	var/hornsound = 'sound/blank.ogg'
 	var/last_honk_time
 
 /datum/action/vehicle/sealed/horn/Trigger()
 	if(world.time - last_honk_time > 20)
 		vehicle_entered_target.visible_message("<span class='danger'>[vehicle_entered_target] loudly honks!</span>")
-		to_chat(owner, "<span class='notice'>You press the vehicle's horn.</span>")
+		to_chat(owner, "<span class='notice'>I press the vehicle's horn.</span>")
 		playsound(vehicle_entered_target, hornsound, 75)
 		last_honk_time = world.time
 
 /datum/action/vehicle/sealed/horn/clowncar/Trigger()
 	if(world.time - last_honk_time > 20)
 		vehicle_entered_target.visible_message("<span class='danger'>[vehicle_entered_target] loudly honks!</span>")
-		to_chat(owner, "<span class='notice'>You press the vehicle's horn.</span>")
+		to_chat(owner, "<span class='notice'>I press the vehicle's horn.</span>")
 		last_honk_time = world.time
 		if(vehicle_target.inserted_key)
 			vehicle_target.inserted_key.attack_self(owner) //The key plays a sound
@@ -147,7 +147,7 @@
 
 /datum/action/vehicle/sealed/DumpKidnappedMobs
 	name = "Dump Kidnapped Mobs"
-	desc = "Dump all objects and people in your car on the floor."
+	desc = ""
 	button_icon_state = "car_dump"
 
 /datum/action/vehicle/sealed/DumpKidnappedMobs/Trigger()
@@ -157,7 +157,7 @@
 
 /datum/action/vehicle/sealed/RollTheDice
 	name = "Press Colorful Button"
-	desc = "Press one of those colorful buttons on your display panel!"
+	desc = ""
 	button_icon_state = "car_rtd"
 
 /datum/action/vehicle/sealed/RollTheDice/Trigger()
@@ -167,7 +167,7 @@
 
 /datum/action/vehicle/sealed/Cannon
 	name = "Toggle Siege Mode"
-	desc = "Destroy them with their own fodder!"
+	desc = ""
 	button_icon_state = "car_cannon"
 
 /datum/action/vehicle/sealed/Cannon/Trigger()
@@ -179,7 +179,7 @@
 
 /datum/action/vehicle/sealed/Thank
 	name = "Thank the Clown Car Driver"
-	desc = "They're just doing their job."
+	desc = ""
 	button_icon_state = "car_thanktheclown"
 	var/last_thank_time
 
@@ -194,7 +194,7 @@
 
 /datum/action/vehicle/ridden/scooter/skateboard/ollie
 	name = "Ollie"
-	desc = "Get some air! Land on a table to do a gnarly grind."
+	desc = ""
 	button_icon_state = "skateboard_ollie"
 	///Cooldown to next jump
 	var/next_ollie
@@ -208,7 +208,7 @@
 		var/turf/landing_turf = get_step(V.loc, V.dir)
 		L.adjustStaminaLoss(V.instability*2)
 		if (L.getStaminaLoss() >= 100)
-			playsound(src, 'sound/effects/bang.ogg', 20, TRUE)
+			playsound(src, 'sound/blank.ogg', 20, TRUE)
 			V.unbuckle_mob(L)
 			L.throw_at(landing_turf, 2, 2)
 			L.Paralyze(40)
@@ -217,7 +217,7 @@
 			L.spin(4, 1)
 			animate(L, pixel_y = -6, time = 4)
 			animate(V, pixel_y = -6, time = 3)
-			playsound(V, 'sound/vehicles/skateboard_ollie.ogg', 50, TRUE)
+			playsound(V, 'sound/blank.ogg', 50, TRUE)
 			passtable_on(L, VEHICLE_TRAIT)
 			V.pass_flags |= PASSTABLE
 			L.Move(landing_turf, vehicle_target.dir)

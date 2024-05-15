@@ -1,6 +1,6 @@
 /obj/structure/sign/barsign // All Signs are 64 by 32 pixels, they take two tiles
 	name = "bar sign"
-	desc = "A bar sign which has not been initialized, somehow. Complain at a coder!"
+	desc = ""
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	req_access = list(ACCESS_BAR)
@@ -45,6 +45,7 @@
 /obj/structure/sign/barsign/obj_break(damage_flag)
 	if(!broken && !(flags_1 & NODECONSTRUCT_1))
 		broken = TRUE
+	..()
 
 /obj/structure/sign/barsign/deconstruct(disassembled = TRUE)
 	new /obj/item/stack/sheet/metal(drop_location(), 2)
@@ -54,9 +55,9 @@
 /obj/structure/sign/barsign/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
-			playsound(src.loc, 'sound/effects/glasshit.ogg', 75, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 75, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/sign/barsign/attack_ai(mob/user)
 	return attack_hand(user)
@@ -76,11 +77,11 @@
 /obj/structure/sign/barsign/attackby(obj/item/I, mob/user)
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!panel_open)
-			to_chat(user, "<span class='notice'>You open the maintenance panel.</span>")
+			to_chat(user, "<span class='notice'>I open the maintenance panel.</span>")
 			set_sign(new /datum/barsign/hiddensigns/signoff)
 			panel_open = TRUE
 		else
-			to_chat(user, "<span class='notice'>You close the maintenance panel.</span>")
+			to_chat(user, "<span class='notice'>I close the maintenance panel.</span>")
 			if(!broken)
 				if(!chosen_sign)
 					set_sign(new /datum/barsign/hiddensigns/signoff)
@@ -97,10 +98,10 @@
 			return
 
 		if(C.use(2))
-			to_chat(user, "<span class='notice'>You replace the burnt wiring.</span>")
+			to_chat(user, "<span class='notice'>I replace the burnt wiring.</span>")
 			broken = FALSE
 		else
-			to_chat(user, "<span class='warning'>You need at least two lengths of cable!</span>")
+			to_chat(user, "<span class='warning'>I need at least two lengths of cable!</span>")
 	else
 		return ..()
 
@@ -116,7 +117,7 @@
 	if(broken)
 		to_chat(user, "<span class='warning'>Nothing interesting happens!</span>")
 		return
-	to_chat(user, "<span class='notice'>You load an illegal barsign into the memory buffer...</span>")
+	to_chat(user, "<span class='notice'>I load an illegal barsign into the memory buffer...</span>")
 	sleep(10 SECONDS)
 	chosen_sign = set_sign(new /datum/barsign/hiddensigns/syndibarsign)
 
@@ -139,155 +140,155 @@
 /datum/barsign
 	var/name = "Name"
 	var/icon = "Icon"
-	var/desc = "desc"
+	var/desc = ""
 	var/hidden = FALSE
 	var/rename_area = TRUE
 
 /datum/barsign/New()
 	if(!desc)
-		desc = "It displays \"[name]\"."
+		desc = ""
 
 // Specific bar signs.
 
 /datum/barsign/maltesefalcon
 	name = "Maltese Falcon"
 	icon = "maltesefalcon"
-	desc = "The Maltese Falcon, Space Bar and Grill."
+	desc = ""
 
 /datum/barsign/thebark
 	name = "The Bark"
 	icon = "thebark"
-	desc = "Ian's bar of choice."
+	desc = ""
 
 /datum/barsign/harmbaton
 	name = "The Harmbaton"
 	icon = "theharmbaton"
-	desc = "A great dining experience for both security members and assistants."
+	desc = ""
 
 /datum/barsign/thesingulo
 	name = "The Singulo"
 	icon = "thesingulo"
-	desc = "Where people go that'd rather not be called by their name."
+	desc = ""
 
 /datum/barsign/thedrunkcarp
 	name = "The Drunk Carp"
 	icon = "thedrunkcarp"
-	desc = "Don't drink and swim."
+	desc = ""
 
 /datum/barsign/scotchservinwill
 	name = "Scotch Servin Willy's"
 	icon = "scotchservinwill"
-	desc = "Willy sure moved up in the world from clown to bartender."
+	desc = ""
 
 /datum/barsign/officerbeersky
 	name = "Officer Beersky's"
 	icon = "officerbeersky"
-	desc = "Man eat a dong, these drinks are great."
+	desc = ""
 
 /datum/barsign/thecavern
 	name = "The Cavern"
 	icon = "thecavern"
-	desc = "Fine drinks while listening to some fine tunes."
+	desc = ""
 
 /datum/barsign/theouterspess
 	name = "The Outer Spess"
 	icon = "theouterspess"
-	desc = "This bar isn't actually located in outer space."
+	desc = ""
 
 /datum/barsign/slipperyshots
 	name = "Slippery Shots"
 	icon = "slipperyshots"
-	desc = "Slippery slope to drunkeness with our shots!"
+	desc = ""
 
 /datum/barsign/thegreytide
 	name = "The Grey Tide"
 	icon = "thegreytide"
-	desc = "Abandon your toolboxing ways and enjoy a lazy beer!"
+	desc = ""
 
 /datum/barsign/honkednloaded
 	name = "Honked 'n' Loaded"
 	icon = "honkednloaded"
-	desc = "Honk."
+	desc = ""
 
 /datum/barsign/thenest
 	name = "The Nest"
 	icon = "thenest"
-	desc = "A good place to retire for a drink after a long night of crime fighting."
+	desc = ""
 
 /datum/barsign/thecoderbus
 	name = "The Coderbus"
 	icon = "thecoderbus"
-	desc = "A very controversial bar known for its wide variety of constantly-changing drinks."
+	desc = ""
 
 /datum/barsign/theadminbus
 	name = "The Adminbus"
 	icon = "theadminbus"
-	desc = "An establishment visited mainly by space-judges. It isn't bombed nearly as much as court hearings."
+	desc = ""
 
 /datum/barsign/oldcockinn
 	name = "The Old Cock Inn"
 	icon = "oldcockinn"
-	desc = "Something about this sign fills you with despair."
+	desc = ""
 
 /datum/barsign/thewretchedhive
 	name = "The Wretched Hive"
 	icon = "thewretchedhive"
-	desc = "Legally obligated to instruct you to check your drinks for acid before consumption."
+	desc = ""
 
 /datum/barsign/robustacafe
 	name = "The Robusta Cafe"
 	icon = "robustacafe"
-	desc = "Holder of the 'Most Lethal Barfights' record 5 years uncontested."
+	desc = ""
 
 /datum/barsign/emergencyrumparty
 	name = "The Emergency Rum Party"
 	icon = "emergencyrumparty"
-	desc = "Recently relicensed after a long closure."
+	desc = ""
 
 /datum/barsign/combocafe
 	name = "The Combo Cafe"
 	icon = "combocafe"
-	desc = "Renowned system-wide for their utterly uncreative drink combinations."
+	desc = ""
 
 /datum/barsign/vladssaladbar
 	name = "Vlad's Salad Bar"
 	icon = "vladssaladbar"
-	desc = "Under new management. Vlad was always a bit too trigger happy with that shotgun."
+	desc = ""
 
 /datum/barsign/theshaken
 	name = "The Shaken"
 	icon = "theshaken"
-	desc = "This establishment does not serve stirred drinks."
+	desc = ""
 
 /datum/barsign/thealenath
 	name = "The Ale' Nath"
 	icon = "thealenath"
-	desc = "All right, buddy. I think you've had EI NATH. Time to get a cab."
+	desc = ""
 
 /datum/barsign/thealohasnackbar
 	name = "The Aloha Snackbar"
 	icon = "alohasnackbar"
-	desc = "A tasteful, inoffensive tiki bar sign."
+	desc = ""
 
 /datum/barsign/thenet
 	name = "The Net"
 	icon = "thenet"
-	desc = "You just seem to get caught up in it for hours."
+	desc = ""
 
 /datum/barsign/maidcafe
 	name = "Maid Cafe"
 	icon = "maidcafe"
-	desc = "Welcome back, master!"
+	desc = ""
 
 /datum/barsign/the_lightbulb
 	name = "The Lightbulb"
 	icon = "the_lightbulb"
-	desc = "A cafe popular among moths and moffs. Once shut down for a week after the bartender used mothballs to protect her spare uniforms."
+	desc = ""
 
 /datum/barsign/goose
 	name = "The Loose Goose"
 	icon = "goose"
-	desc = "Drink till you puke and/or break the laws of reality!"
+	desc = ""
 
 /datum/barsign/hiddensigns
 	hidden = TRUE
@@ -300,16 +301,16 @@
 /datum/barsign/hiddensigns/empbarsign
 	name = null
 	icon = "empbarsign"
-	desc = "Something has gone very wrong."
+	desc = ""
 	rename_area = FALSE
 
 /datum/barsign/hiddensigns/syndibarsign
 	name = "Syndi Cat"
 	icon = "syndibarsign"
-	desc = "Syndicate or die."
+	desc = ""
 
 /datum/barsign/hiddensigns/signoff
 	name = null
 	icon = "empty"
-	desc = "This sign doesn't seem to be on."
+	desc = ""
 	rename_area = FALSE

@@ -33,7 +33,7 @@
 	var/supervisors = ""
 
 	//Sellection screen color
-	var/selection_color = "#ffffff"
+	var/selection_color = "#dbdce3"
 
 
 	//If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
@@ -43,6 +43,7 @@
 	var/minimal_player_age = 0
 
 	var/outfit = null
+	var/outfit_female = null
 
 	var/exp_requirements = 0
 
@@ -64,6 +65,45 @@
 	///Levels unlocked at roundstart in physiology
 	var/list/roundstart_experience
 
+	//allowed sex/race for picking
+	var/list/allowed_sexes = list(MALE,FEMALE)
+	var/list/allowed_races = ALL_RACES_LIST_NAMES
+	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
+	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+
+	/// Innate skill levels unlocked at roundstart. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
+	var/list/skills
+
+	var/list/spells
+
+	var/list/jobstats
+	var/list/jobstats_f
+
+	var/f_title = null
+
+	var/tutorial = null
+
+	var/whitelist_req = FALSE
+
+	var/bypass_jobban = FALSE
+	var/bypass_lastclass = FALSE
+
+	var/list/peopleiknow = list()
+	var/list/peopleknowme = list()
+
+	var/plevel_req = 0
+	var/min_pq = -999
+
+	var/show_in_credits = TRUE
+
+	var/give_bank_account = FALSE
+
+	var/can_random = TRUE
+
+
+/datum/job/proc/special_job_check(mob/dead/new_player/player)
+	return TRUE
+
 //Only override this proc
 //H is usually a human unless an /equip override transformed it
 /datum/job/proc/after_spawn(mob/living/H, mob/M, latejoin = FALSE)
@@ -71,11 +111,78 @@
 	if(mind_traits)
 		for(var/t in mind_traits)
 			ADD_TRAIT(H.mind, t, JOB_TRAIT)
-	if(roundstart_experience && ishuman(H))
+	var/list/roundstart_experience
+
+	if(!ishuman(H))
+		return
+
+	roundstart_experience = skills
+
+	if(roundstart_experience)
 		var/mob/living/carbon/human/experiencer = H
 		for(var/i in roundstart_experience)
 			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
+	if(spells)
+		for(var/S in spells)
+			if(H.mind)
+				H.mind.AddSpell(new S)
+
+	if(H.gender == FEMALE)
+		if(jobstats_f)
+			for(var/S in jobstats_f)
+				H.change_stat(S, jobstats_f[S])
+		else
+			for(var/S in jobstats)
+				H.change_stat(S, jobstats[S])
+	else
+		for(var/S in jobstats)
+			H.change_stat(S, jobstats[S])
+
+	for(var/X in peopleknowme)
+		for(var/datum/mind/MF in get_minds(X))
+			H.mind.person_knows_me(MF)
+	for(var/X in peopleiknow)
+		for(var/datum/mind/MF in get_minds(X))
+			H.mind.i_know_person(MF)
+
+	if(H.islatejoin && show_in_credits)
+		var/used_title = title
+		if((H.gender == FEMALE) && f_title)
+			used_title = f_title
+		scom_announce("[H.real_name] the [used_title] arrives from Kingsfield.")
+
+	if(give_bank_account)
+		if(give_bank_account > 1)
+			SStreasury.create_bank_account(H.real_name, give_bank_account)
+		else
+			SStreasury.create_bank_account(H.real_name)
+
+	if(show_in_credits)
+		SScrediticons.processing += H
+
+/mob/living/carbon/human/proc/add_credit()
+	if(!mind || !client)
+		return
+	var/thename = "[real_name]"
+	var/datum/job/J = SSjob.GetJob(mind.assigned_role)
+	var/used_title = J.title
+	if(gender == FEMALE && J.f_title)
+		used_title = J.f_title
+	if(used_title)
+		thename = "[real_name] the [used_title]"
+	GLOB.credits_icons[thename] = list()
+	var/client/C = client
+	var/datum/preferences/P = C.prefs
+	if(!P)
+		return
+	var/icon/I = get_flat_human_icon(null, J, P, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH))
+	if(I)
+		var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="credits")
+		I.Blend(female_s, ICON_MULTIPLY)
+		I.Scale(96,96)
+		GLOB.credits_icons[thename]["icon"] = I
+		GLOB.credits_icons[thename]["vc"] = voice_color
 
 /datum/job/proc/announce(mob/living/carbon/human/H)
 	if(head_announce)
@@ -108,9 +215,14 @@
 
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
-
-	if(outfit_override || outfit)
-		H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly)
+	if(H.gender == FEMALE)
+		if(outfit_override || outfit_female)
+			H.equipOutfit(outfit_override ? outfit_override : outfit_female, visualsOnly)
+		else if(outfit)
+			H.equipOutfit(outfit, visualsOnly)
+	else
+		if(outfit_override || outfit)
+			H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly)
 
 	H.dna.species.after_equip_job(src, H, visualsOnly)
 
@@ -184,7 +296,8 @@
 	var/pda_slot = SLOT_BELT
 
 /datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	switch(H.backpack)
+	..()
+/*	switch(H.backpack)
 		if(GBACKPACK)
 			back = /obj/item/storage/backpack //Grey backpack
 		if(GSATCHEL)
@@ -203,12 +316,10 @@
 	//converts the uniform string into the path we'll wear, whether it's the skirt or regular variant
 	var/holder
 	if(H.jumpsuit_style == PREF_SKIRT)
-		holder = "[uniform]/skirt"
-		if(!text2path(holder))
-			holder = "[uniform]"
+		holder = "[uniform]"
 	else
 		holder = "[uniform]"
-	uniform = text2path(holder)
+	uniform = text2path(holder)*/
 
 /datum/outfit/job/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
@@ -218,7 +329,7 @@
 	if(!J)
 		J = SSjob.GetJob(H.job)
 
-	var/obj/item/card/id/C = H.wear_id
+	var/obj/item/card/id/C = H.wear_ring
 	if(istype(C))
 		C.access = J.get_access()
 		shuffle_inplace(C.access) // Shuffle access list to make NTNet passkeys less predictable

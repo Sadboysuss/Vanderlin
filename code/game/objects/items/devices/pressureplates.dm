@@ -1,7 +1,7 @@
 
 /obj/item/pressure_plate
 	name = "pressure plate"
-	desc = "An electronic device that triggers when stepped on."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	item_state = "flash"
 	icon_state = "pressureplate"
@@ -9,7 +9,7 @@
 	var/trigger_mob = TRUE
 	var/trigger_item = FALSE
 	var/trigger_silent = FALSE
-	var/sound/trigger_sound = 'sound/effects/pressureplate.ogg'
+	var/sound/trigger_sound = 'sound/blank.ogg'
 	var/obj/item/assembly/signaler/sigdev = null
 	var/roundstart_signaller = FALSE
 	var/roundstart_signaller_freq = FREQ_PRESSURE_PLATE
@@ -37,7 +37,7 @@
 		return
 	if(trigger_mob && isliving(AM))
 		var/mob/living/L = AM
-		to_chat(L, "<span class='warning'>You feel something click beneath you!</span>")
+		to_chat(L, "<span class='warning'>I feel something click beneath you!</span>")
 	else if(!trigger_item)
 		return
 	can_trigger = FALSE
@@ -51,12 +51,12 @@
 /obj/item/pressure_plate/attackby(obj/item/I, mob/living/L)
 	if(istype(I, /obj/item/assembly/signaler) && !istype(sigdev) && removable_signaller && L.transferItemToLoc(I, src))
 		sigdev = I
-		to_chat(L, "<span class='notice'>You attach [I] to [src]!</span>")
+		to_chat(L, "<span class='notice'>I attach [I] to [src]!</span>")
 	return ..()
 
 /obj/item/pressure_plate/attack_self(mob/living/L)
 	if(removable_signaller && istype(sigdev))
-		to_chat(L, "<span class='notice'>You remove [sigdev] from [src].</span>")
+		to_chat(L, "<span class='notice'>I remove [sigdev] from [src].</span>")
 		if(!L.put_in_hands(sigdev))
 			sigdev.forceMove(get_turf(src))
 		sigdev = null

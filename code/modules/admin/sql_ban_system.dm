@@ -202,10 +202,10 @@
 				banned_from += query_get_banned_roles.item[1]
 			qdel(query_get_banned_roles)
 		var/break_counter = 0
-		output += "<div class='row'><div class='column'><label class='rolegroup command'><input type='checkbox' name='Command' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_dep\")'" : ""]>Command</label><div class='content'>"
+		output += "<div class='row'><div class='column'><label class='rolegroup command'><input type='checkbox' name='Nobility' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_dep\")'" : ""]>Command</label><div class='content'>"
 		//all heads are listed twice so have a javascript call to toggle both their checkboxes when one is pressed
 		//for simplicity this also includes the captain even though it doesn't do anything
-		for(var/job in GLOB.command_positions)
+		for(var/job in GLOB.noble_positions)
 			if(break_counter > 0 && (break_counter % 3 == 0))
 				output += "<br>"
 			output += {"<label class='inputlabel checkbox'>[job]
@@ -215,11 +215,11 @@
 			break_counter++
 		output += "</div></div>"
 		//standard departments all have identical handling
-		var/list/job_lists = list("Security" = GLOB.security_positions,
-							"Engineering" = GLOB.engineering_positions,
-							"Medical" = GLOB.medical_positions,
-							"Science" = GLOB.science_positions,
-							"Supply" = GLOB.supply_positions)
+		var/list/job_lists = list("Youngfolk" = GLOB.youngfolk_positions,
+							"Garrison" = GLOB.garrison_positions,
+							"Church" = GLOB.church_positions,
+							"Merchants" = GLOB.serf_positions,
+							"Peasants" = GLOB.peasant_positions)
 		for(var/department in job_lists)
 			//the first element is the department head so they need the same javascript call as above
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_com\")'" : ""]>[department]</label><div class='content'>"
@@ -282,7 +282,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+//		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/list/error_state = list()
 	var/player_key
@@ -399,7 +399,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+//		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/player_ckey = sanitizeSQL(ckey(player_key))
 	player_ip = sanitizeSQL(player_ip)
@@ -499,7 +499,7 @@
 	var/is_admin = FALSE
 	if(C)
 		build_ban_cache(C)
-		to_chat(C, "<span class='boldannounce'>You have been [applies_to_admins ? "admin " : ""]banned by [usr.client.key] from [roles_to_ban[1] == "Server" ? "the server" : " Roles: [roles_to_ban.Join(", ")]"].\nReason: [reason]</span><br><span class='danger'>This ban is [isnull(duration) ? "permanent." : "temporary, it will be removed in [time_message]."] The round ID is [GLOB.round_id].</span><br><span class='danger'>To appeal this ban go to [appeal_url]</span>")
+		to_chat(C, "<span class='boldannounce'>I have been [applies_to_admins ? "admin " : ""]banned by [usr.client.key] from [roles_to_ban[1] == "Server" ? "the server" : " Roles: [roles_to_ban.Join(", ")]"].\nReason: [reason]</span><br><span class='danger'>This ban is [isnull(duration) ? "permanent." : "temporary, it will be removed in [time_message]."] The round ID is [GLOB.round_id].</span><br><span class='danger'>To appeal this ban go to [appeal_url]</span>")
 		if(GLOB.admin_datums[C.ckey] || GLOB.deadmins[C.ckey])
 			is_admin = TRUE
 		if(roles_to_ban[1] == "Server" && (!is_admin || (is_admin && applies_to_admins)))
@@ -509,7 +509,7 @@
 	for(var/client/i in GLOB.clients - C)
 		if(i.address == player_ip || i.computer_id == player_cid)
 			build_ban_cache(i)
-			to_chat(i, "<span class='boldannounce'>You have been [applies_to_admins ? "admin " : ""]banned by [usr.client.key] from [roles_to_ban[1] == "Server" ? "the server" : " Roles: [roles_to_ban.Join(", ")]"].\nReason: [reason]</span><br><span class='danger'>This ban is [isnull(duration) ? "permanent." : "temporary, it will be removed in [time_message]."] The round ID is [GLOB.round_id].</span><br><span class='danger'>To appeal this ban go to [appeal_url]</span>")
+			to_chat(i, "<span class='boldannounce'>I have been [applies_to_admins ? "admin " : ""]banned by [usr.client.key] from [roles_to_ban[1] == "Server" ? "the server" : " Roles: [roles_to_ban.Join(", ")]"].\nReason: [reason]</span><br><span class='danger'>This ban is [isnull(duration) ? "permanent." : "temporary, it will be removed in [time_message]."] The round ID is [GLOB.round_id].</span><br><span class='danger'>To appeal this ban go to [appeal_url]</span>")
 			if(GLOB.admin_datums[i.ckey] || GLOB.deadmins[i.ckey])
 				is_admin = TRUE
 			if(roles_to_ban[1] == "Server" && (!is_admin || (is_admin && applies_to_admins)))
@@ -519,7 +519,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+//		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/datum/browser/unban_panel = new(usr, "unbanpanel", "Unbanning Panel", 850, 600)
 	unban_panel.add_stylesheet("unbanpanelcss", 'html/admin/unbanpanel.css')
@@ -614,7 +614,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+//		//to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/target = ban_target_string(player_key, player_ip, player_cid)
 	if(alert(usr, "Please confirm unban of [target] from [role].", "Unban confirmation", "Yes", "No") == "No")
@@ -646,7 +646,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		////to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	ban_id = sanitizeSQL(ban_id)
 	var/player_ckey = sanitizeSQL(ckey(player_key))
@@ -741,7 +741,7 @@
 	if(!check_rights(R_BAN))
 		return
 	if(!SSdbcore.Connect())
-		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
+		////to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	ban_id = sanitizeSQL(ban_id)
 	var/datum/DBQuery/query_get_ban_edits = SSdbcore.NewQuery("SELECT edits FROM [format_table_name("ban")] WHERE id = '[ban_id]'")

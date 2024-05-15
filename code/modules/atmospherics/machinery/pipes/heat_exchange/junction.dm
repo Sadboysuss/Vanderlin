@@ -3,7 +3,7 @@
 	icon_state = "pipe11-2"
 
 	name = "junction"
-	desc = "A one meter junction that connects regular and heat-exchanging pipe."
+	desc = ""
 
 	minimum_temperature_difference = 300
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT

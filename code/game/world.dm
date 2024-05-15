@@ -18,6 +18,7 @@ GLOBAL_VAR(restart_counter)
   * Nothing happens until something moves. ~Albert Einstein
   *
   */
+
 /world/New()
 
 	log_world("World loaded at [time_stamp()]!")
@@ -38,8 +39,11 @@ GLOBAL_VAR(restart_counter)
 
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
-	SSdbcore.CheckSchemaVersion()
-	SSdbcore.SetRoundID()
+//	SSdbcore.CheckSchemaVersion()
+//	SSdbcore.SetRoundID()
+	var/timestamp = replacetext(time_stamp(), ":", ".")
+
+	GLOB.rogue_round_id = "[pick(GLOB.roundid)][rand(0,9)][rand(0,9)][rand(0,9)]-[timestamp]"
 	SetupLogs()
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
@@ -50,10 +54,23 @@ GLOBAL_VAR(restart_counter)
 #endif
 
 	LoadVerbs(/datum/verbs/menu)
-	if(CONFIG_GET(flag/usewhitelist))
-		load_whitelist()
+	load_whitelist()
 
-	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
+	load_blacklist()
+
+	load_nameban()
+
+	load_psychokiller()
+
+	load_crownlist()
+
+	load_bypassage()
+
+	load_patreons()
+
+//	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
+
+	GLOB.timezoneOffset = 16 * 36000
 
 	if(fexists(RESTART_COUNTER_PATH))
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
@@ -66,6 +83,7 @@ GLOBAL_VAR(restart_counter)
 
 	if(TEST_RUN_PARAMETER in params)
 		HandleTestRun()
+
 
 /world/proc/HandleTestRun()
 	//trigger things to run the whole process
@@ -99,10 +117,14 @@ GLOBAL_VAR(restart_counter)
 		GLOB.log_directory = "data/logs/[texttime]/round-"
 		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD")]_"
 		GLOB.picture_log_directory = "data/picture_logs/[texttime]/round-"
-		if(GLOB.round_id)
-			GLOB.log_directory += "[GLOB.round_id]"
-			GLOB.picture_logging_prefix += "R_[GLOB.round_id]_"
-			GLOB.picture_log_directory += "[GLOB.round_id]"
+		if(GLOB.rogue_round_id)
+			var/timestamp = replacetext(time_stamp(), ":", ".")
+			GLOB.log_directory += "[timestamp]-"
+			GLOB.picture_log_directory += "[timestamp]-"
+			GLOB.picture_logging_prefix += "T_[timestamp]_"
+			GLOB.log_directory += "[GLOB.rogue_round_id]"
+			GLOB.picture_logging_prefix += "R_[GLOB.rogue_round_id]_"
+			GLOB.picture_log_directory += "[GLOB.rogue_round_id]"
 		else
 			var/timestamp = replacetext(time_stamp(), ":", ".")
 			GLOB.log_directory += "[timestamp]"
@@ -126,6 +148,7 @@ GLOBAL_VAR(restart_counter)
 	GLOB.sql_error_log = "[GLOB.log_directory]/sql.log"
 	GLOB.world_qdel_log = "[GLOB.log_directory]/qdel.log"
 	GLOB.world_map_error_log = "[GLOB.log_directory]/map_errors.log"
+	GLOB.character_list_log = "[GLOB.log_directory]/character_list.log"
 	GLOB.world_runtime_log = "[GLOB.log_directory]/runtime.log"
 	GLOB.query_debug_log = "[GLOB.log_directory]/query_debug.log"
 	GLOB.world_job_debug_log = "[GLOB.log_directory]/job_debug.log"
@@ -146,6 +169,7 @@ GLOBAL_VAR(restart_counter)
 	start_log(GLOB.world_runtime_log)
 	start_log(GLOB.world_job_debug_log)
 	start_log(GLOB.tgui_log)
+	start_log(GLOB.character_list_log)
 
 	GLOB.changelog_hash = md5('html/changelog.html') //for telling if the changelog has changed recently
 	if(fexists(GLOB.config_error_log))
@@ -161,8 +185,32 @@ GLOBAL_VAR(restart_counter)
 	log_runtime(GLOB.revdata.get_log_message())
 
 /world/Topic(T, addr, master, key)
-	TGS_TOPIC	//redirect to server tools if necessary
+	var/list/input = params2list(T)
 
+	if(!("botpassword" in input))
+		return
+	else
+		if(input["botpassword"] != "MACHINETONGUE")
+			return
+//		if("discord" in input)
+//			register_discord(input["discord"]) //looks for the ckey and registers it
+		if("status" in input)
+			var/list/s = list()
+
+			if(SSticker.current_state <= GAME_STATE_PREGAME)
+				s["inlobby"] = 1
+			else
+				s["inlobby"] = 2
+
+			var/player_count = 0
+			for(var/client/C in GLOB.clients)
+				player_count++
+			s["players"] = player_count
+
+			return list2params(s)
+
+//	TGS_TOPIC	//redirect to server tools if necessary
+/*
 	var/static/list/topic_handlers = TopicHandlers()
 
 	var/list/input = params2list(T)
@@ -179,7 +227,8 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	handler = new handler()
-	return handler.TryRun(input)
+	return handler.TryRun(input)*/
+
 
 /world/proc/AnnouncePR(announcement, list/payload)
 	var/static/list/PRcounts = list()	//PR id -> number of times announced this round
@@ -217,14 +266,26 @@ GLOBAL_VAR(restart_counter)
 	qdel(src)	//shut it down
 
 /world/Reboot(reason = 0, fast_track = FALSE)
-	if (reason || fast_track) //special reboot, do none of the normal stuff
-		if (usr)
-			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
-			message_admins("[key_name_admin(usr)] Has requested an immediate world restart via client side debugging tools")
-		to_chat(world, "<span class='boldannounce'>Rebooting World immediately due to host request.</span>")
-	else
-		to_chat(world, "<span class='boldannounce'>Rebooting world...</span>")
-		Master.Shutdown()	//run SS shutdowns
+//	if (reason || fast_track) //special reboot, do none of the normal stuff
+//		if (usr)
+//			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
+//			message_admins("[key_name_admin(usr)] Has requested an immediate world restart via client side debugging tools")
+//		to_chat(world, "<span class='boldannounce'>Rebooting World immediately due to host request.</span>")
+//	else
+//	to_chat(world, "<span class='boldannounce'><b><u><a href='byond://winset?command=.reconnect'>CLICK TO RECONNECT</a></u></b></span>")
+
+	var/round_end_sound = pick('sound/roundend/knave.ogg',
+	'sound/roundend/twohours.ogg',
+	'sound/roundend/rest.ogg',
+	'sound/roundend/gather.ogg',
+	'sound/roundend/dwarfs.ogg')
+	for(var/client/thing in GLOB.clients)
+		if(!thing)
+			continue
+		thing << sound(round_end_sound)
+
+	to_chat(world, "Please be patient as the server restarts. You will be automatically reconnected in about 60 seconds.")
+	Master.Shutdown()	//run SS shutdowns? rtchange
 
 	TgsReboot()
 
@@ -233,6 +294,7 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	if(TgsAvailable())
+		testing("tgsavailable passed")
 		var/do_hard_reboot
 		// check the hard reboot counter
 		var/ruhr = CONFIG_GET(number/rounds_until_hard_restart)
@@ -252,11 +314,36 @@ GLOBAL_VAR(restart_counter)
 			log_world("World hard rebooted at [time_stamp()]")
 			shutdown_logging() // See comment below.
 			TgsEndProcess()
+	else
+		testing("tgsavailable [TgsAvailable()]")
 
 	log_world("World rebooted at [time_stamp()]")
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 	..()
 
+/world/proc/update_status()
+	var/s = ""
+	s += "<center><a href=\"https://discord.gg/6UzZQYqVHT\">"
+#ifdef MATURESERVER
+	s += "<big><b>STONEKEEP (18+)</b></big></a><br>"
+	s += "<b>Dark Medieval Fantasy World Roleplay,Whitelist Adult Content. https://discord.gg/224QdHzv3x</b></center><br>"
+#else
+	s += "<big><b>ROGUEWORLD</b></big></a><br>"
+	s += "<b>Fantasy Computer Survival Game</b></center><br>"
+#endif
+//	s += "<img src=\"https://i.imgur.com/shj547T.jpg\"></a></center>"
+
+//	s += "! <b>UPDATE 4.4</b> 4/22/2022<br><br>"
+#ifdef MATURESERVER
+	s += "\["
+	if(SSticker.current_state <= GAME_STATE_PREGAME)
+		s += "<b>GAME STATUS:</b> IN LOBBY"
+	else
+		s += "<b>GAME STATUS:</b> PLAYING"
+#endif
+	status = s
+	return s
+/*
 /world/proc/update_status()
 
 	var/list/features = list()
@@ -308,7 +395,7 @@ GLOBAL_VAR(restart_counter)
 		s += ": [jointext(features, ", ")]"
 
 	status = s
-
+*/
 /world/proc/update_hub_visibility(new_visibility)
 	if(new_visibility == GLOB.hub_visibility)
 		return
@@ -324,6 +411,21 @@ GLOBAL_VAR(restart_counter)
 	SSidlenpcpool.MaxZChanged()
 
 
+/*
+#ifdef TESTING
+/client/verb/maxzcdec()
+	set category = "DEBUGTEST"
+	set name = "decr"
+	set desc = ""
+	world.decrementMaxZ()
+	to_chat(src, "\n<font color='purple'>Maxz [world.maxz]</font>")
+#endif
+
+/world/proc/decrementMaxZ()
+	maxz = 1
+//	SSmobs.MaxZDec()
+//	SSidlenpcpool.MaxZdec()
+*/
 /world/proc/change_fps(new_value = 20)
 	if(new_value <= 0)
 		CRASH("change_fps() called with [new_value] new_value.")

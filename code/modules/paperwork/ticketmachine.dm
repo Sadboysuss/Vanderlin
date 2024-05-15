@@ -5,7 +5,7 @@
 	name = "ticket machine"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "ticketmachine"
-	desc = "A marvel of bureaucratic engineering encased in an efficient plastic shell. It can be refilled with a hand labeler refill roll and linked to buttons with a multitool."
+	desc = ""
 	density = FALSE
 	maptext_height = 26
 	maptext_width = 32
@@ -26,13 +26,13 @@
 		return
 	var/obj/item/multitool/M = I
 	M.buffer = src
-	to_chat(user, "<span class='notice'>You store linkage information in [I]'s buffer.</span>")
+	to_chat(user, "<span class='notice'>I store linkage information in [I]'s buffer.</span>")
 	return TRUE
 
 /obj/machinery/ticket_machine/emag_act(mob/user) //Emag the ticket machine to dispense burning tickets, as well as randomize its number to destroy the HoP's mind.
 	if(obj_flags & EMAGGED)
 		return
-	to_chat(user, "<span class='warning'>You overload [src]'s bureaucratic logic circuitry to its MAXIMUM setting.</span>")
+	to_chat(user, "<span class='warning'>I overload [src]'s bureaucratic logic circuitry to its MAXIMUM setting.</span>")
 	ticket_number = rand(0,max_number)
 	current_number = ticket_number
 	obj_flags |= EMAGGED
@@ -55,7 +55,7 @@
 		qdel(tickets[current_number])
 	if(current_number < ticket_number)
 		current_number ++ //Increment the one we're serving.
-		playsound(src, 'sound/misc/announce_dig.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		say("Now serving ticket #[current_number]!")
 		if(!(obj_flags & EMAGGED) && tickets[current_number])
 			tickets[current_number].audible_message("<span class='notice'>\the [tickets[current_number]] vibrates!</span>")
@@ -63,7 +63,7 @@
 
 /obj/machinery/button/ticket_machine
 	name = "increment ticket counter"
-	desc = "Use this button after you've served someone to tell the next person to come forward."
+	desc = ""
 	device_type = /obj/item/assembly/control/ticket_machine
 	req_access = list()
 	id = "ticket_machine_default"
@@ -88,7 +88,7 @@
 
 /obj/item/assembly/control/ticket_machine
 	name = "ticket machine controller"
-	desc = "A remote controller for the HoP's ticket machine."
+	desc = ""
 	var/obj/machinery/ticket_machine/linked //To whom are we linked?
 
 /obj/item/assembly/control/ticket_machine/Initialize()
@@ -142,9 +142,9 @@
 		if(!(ticket_number >= max_number))
 			to_chat(user, "<span class='notice'>[src] refuses [I]! There [max_number-ticket_number==1 ? "is" : "are"] still [max_number-ticket_number] ticket\s left!</span>")
 			return
-		to_chat(user, "<span class='notice'>You start to refill [src]'s ticket holder (doing this will reset its ticket count!).</span>")
+		to_chat(user, "<span class='notice'>I start to refill [src]'s ticket holder (doing this will reset its ticket count!).</span>")
 		if(do_after(user, 30, target = src))
-			to_chat(user, "<span class='notice'>You insert [I] into [src] as it whirs nondescriptly.</span>")
+			to_chat(user, "<span class='notice'>I insert [I] into [src] as it whirs nondescriptly.</span>")
 			qdel(I)
 			ticket_number = 0
 			current_number = 0
@@ -163,17 +163,17 @@
 /obj/machinery/ticket_machine/attack_hand(mob/living/carbon/user)
 	. = ..()
 	if(!ready)
-		to_chat(user,"<span class='warning'>You press the button, but nothing happens...</span>")
+		to_chat(user,"<span class='warning'>I press the button, but nothing happens...</span>")
 		return
 	if(ticket_number >= max_number)
 		to_chat(user,"<span class='warning'>Ticket supply depleted, please refill this unit with a hand labeller refill cartridge!</span>")
 		return
 	if((user in ticket_holders) && !(obj_flags & EMAGGED))
-		to_chat(user, "<span class='warning'>You already have a ticket!</span>")
+		to_chat(user, "<span class='warning'>I already have a ticket!</span>")
 		return
-	playsound(src, 'sound/machines/terminal_insert_disc.ogg', 100, FALSE)
+	playsound(src, 'sound/blank.ogg', 100, FALSE)
 	ticket_number ++
-	to_chat(user, "<span class='notice'>You take a ticket from [src], looks like you're ticket number #[ticket_number]...</span>")
+	to_chat(user, "<span class='notice'>I take a ticket from [src], looks like you're ticket number #[ticket_number]...</span>")
 	var/obj/item/ticket_machine_ticket/theirticket = new /obj/item/ticket_machine_ticket(get_turf(src))
 	theirticket.name = "Ticket #[ticket_number]"
 	theirticket.maptext = "<font color='#000000'>[ticket_number]</font>"
@@ -195,7 +195,7 @@
 
 /obj/item/ticket_machine_ticket
 	name = "Ticket"
-	desc = "A ticket which shows your place in the Head of Personnel's line. Made from Nanotrasen patented NanoPaper®. Though solid, its form seems to shimmer slightly. Feels (and burns) just like the real thing."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "ticket"
 	maptext_x = 7
@@ -217,12 +217,12 @@
 	if(P.get_temperature())
 		if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(10))
 			user.visible_message("<span class='warning'>[user] accidentally ignites [user.p_them()]self!</span>", \
-								"<span class='userdanger'>You miss the paper and accidentally light yourself on fire!</span>")
+								"<span class='danger'>I miss the paper and accidentally light myself on fire!</span>")
 			user.dropItemToGround(P)
 			user.adjust_fire_stacks(1)
 			user.IgniteMob()
 			return
-		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>You light [src] on fire!</span>")
+		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>I light [src] on fire!</span>")
 		fire_act()
 
 /obj/item/paper/extinguish()

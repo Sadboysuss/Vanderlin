@@ -46,6 +46,7 @@
 #define DEFAULT_UNDERLAY_ICON_STATE 	"plating"
 
 /atom/var/smooth = SMOOTH_FALSE
+/atom/var/smooth_diag = TRUE
 /atom/var/top_left_corner
 /atom/var/top_right_corner
 /atom/var/bottom_left_corner
@@ -74,37 +75,38 @@
 		else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
 			adjacencies |= 1 << direction
 
-	if(adjacencies & N_NORTH)
-		if(adjacencies & N_WEST)
-			AM = find_type_in_direction(A, NORTHWEST)
-			if(AM == NULLTURF_BORDER)
-				if((A.smooth & SMOOTH_BORDER))
+	if(A.smooth_diag)
+		if(adjacencies & N_NORTH)
+			if(adjacencies & N_WEST)
+				AM = find_type_in_direction(A, NORTHWEST)
+				if(AM == NULLTURF_BORDER)
+					if((A.smooth & SMOOTH_BORDER))
+						adjacencies |= N_NORTHWEST
+				else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
 					adjacencies |= N_NORTHWEST
-			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
-				adjacencies |= N_NORTHWEST
-		if(adjacencies & N_EAST)
-			AM = find_type_in_direction(A, NORTHEAST)
-			if(AM == NULLTURF_BORDER)
-				if((A.smooth & SMOOTH_BORDER))
+			if(adjacencies & N_EAST)
+				AM = find_type_in_direction(A, NORTHEAST)
+				if(AM == NULLTURF_BORDER)
+					if((A.smooth & SMOOTH_BORDER))
+						adjacencies |= N_NORTHEAST
+				else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
 					adjacencies |= N_NORTHEAST
-			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
-				adjacencies |= N_NORTHEAST
 
-	if(adjacencies & N_SOUTH)
-		if(adjacencies & N_WEST)
-			AM = find_type_in_direction(A, SOUTHWEST)
-			if(AM == NULLTURF_BORDER)
-				if((A.smooth & SMOOTH_BORDER))
+		if(adjacencies & N_SOUTH)
+			if(adjacencies & N_WEST)
+				AM = find_type_in_direction(A, SOUTHWEST)
+				if(AM == NULLTURF_BORDER)
+					if((A.smooth & SMOOTH_BORDER))
+						adjacencies |= N_SOUTHWEST
+				else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
 					adjacencies |= N_SOUTHWEST
-			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
-				adjacencies |= N_SOUTHWEST
-		if(adjacencies & N_EAST)
-			AM = find_type_in_direction(A, SOUTHEAST)
-			if(AM == NULLTURF_BORDER)
-				if((A.smooth & SMOOTH_BORDER))
+			if(adjacencies & N_EAST)
+				AM = find_type_in_direction(A, SOUTHEAST)
+				if(AM == NULLTURF_BORDER)
+					if((A.smooth & SMOOTH_BORDER))
+						adjacencies |= N_SOUTHEAST
+				else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
 					adjacencies |= N_SOUTHEAST
-			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
-				adjacencies |= N_SOUTHEAST
 
 	return adjacencies
 
@@ -123,7 +125,7 @@
 		if(A.smooth & SMOOTH_DIAGONAL)
 			A.diagonal_smooth(adjacencies)
 		else
-			cardinal_smooth(A, adjacencies)
+			A.cardinal_smooth(adjacencies)
 
 /atom/proc/diagonal_smooth(adjacencies)
 	switch(adjacencies)
@@ -146,7 +148,7 @@
 			replace_smooth_overlays("d-nw","d-nw-1")
 
 		else
-			cardinal_smooth(src, adjacencies)
+			cardinal_smooth(adjacencies)
 			return
 
 	icon_state = ""
@@ -184,7 +186,7 @@
 			P.roll_and_drop(src)
 
 
-/proc/cardinal_smooth(atom/A, adjacencies)
+/atom/proc/cardinal_smooth(adjacencies)
 	//NW CORNER
 	var/nw = "1-i"
 	if((adjacencies & N_NORTH) && (adjacencies & N_WEST))
@@ -239,28 +241,28 @@
 
 	var/list/New
 
-	if(A.top_left_corner != nw)
-		A.cut_overlay(A.top_left_corner)
-		A.top_left_corner = nw
+	if(top_left_corner != nw)
+		cut_overlay(top_left_corner)
+		top_left_corner = nw
 		LAZYADD(New, nw)
 
-	if(A.top_right_corner != ne)
-		A.cut_overlay(A.top_right_corner)
-		A.top_right_corner = ne
+	if(top_right_corner != ne)
+		cut_overlay(top_right_corner)
+		top_right_corner = ne
 		LAZYADD(New, ne)
 
-	if(A.bottom_right_corner != sw)
-		A.cut_overlay(A.bottom_right_corner)
-		A.bottom_right_corner = sw
+	if(bottom_right_corner != sw)
+		cut_overlay(bottom_right_corner)
+		bottom_right_corner = sw
 		LAZYADD(New, sw)
 
-	if(A.bottom_left_corner != se)
-		A.cut_overlay(A.bottom_left_corner)
-		A.bottom_left_corner = se
+	if(bottom_left_corner != se)
+		cut_overlay(bottom_left_corner)
+		bottom_left_corner = se
 		LAZYADD(New, se)
 
 	if(New)
-		A.add_overlay(New)
+		add_overlay(New)
 
 /proc/find_type_in_direction(atom/source, direction)
 	var/turf/target_turf = get_step(source, direction)
@@ -299,7 +301,7 @@
 		return A && A.type == source.type ? A : null
 
 //Icon smoothing helpers
-/proc/smooth_zlevel(var/zlevel, now = FALSE)
+/proc/smooth_zlevel(zlevel, now = FALSE)
 	var/list/away_turfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
 	for(var/V in away_turfs)
 		var/turf/T = V

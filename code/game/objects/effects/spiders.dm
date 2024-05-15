@@ -2,7 +2,7 @@
 /obj/structure/spider
 	name = "web"
 	icon = 'icons/effects/effects.dmi'
-	desc = "It's stringy and sticky."
+	desc = ""
 	anchored = TRUE
 	density = FALSE
 	max_integrity = 15
@@ -11,7 +11,7 @@
 
 /obj/structure/spider/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type == BURN)//the stickiness of the web mutes all attack sounds except fire damage type
-		playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/structure/spider/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
@@ -28,11 +28,19 @@
 		take_damage(5, BURN, 0, 0)
 
 /obj/structure/spider/stickyweb
+	name = "web"
 	icon_state = "stickyweb1"
+	resistance_flags = FLAMMABLE
+	alpha = 109
+	opacity = TRUE
 
 /obj/structure/spider/stickyweb/Initialize()
 	if(prob(50))
 		icon_state = "stickyweb2"
+	dir = pick(GLOB.cardinals)
+	alpha = rand(80,109)
+//	animate(src, alpha = 0, loop = -1, time = rand(1,20), easing = BOUNCE_EASING, flags = ANIMATION_PARALLEL)
+//	animate(alpha = initial(alpha), time = rand(1,20))
 	. = ..()
 
 /obj/structure/spider/stickyweb/CanPass(atom/movable/mover, turf/target)
@@ -41,16 +49,23 @@
 	else if(isliving(mover))
 		if(istype(mover.pulledby, /mob/living/simple_animal/hostile/poison/giant_spider))
 			return TRUE
-		if(prob(50))
-			to_chat(mover, "<span class='danger'>You get stuck in \the [src] for a moment.</span>")
+		if(prob(50) && !HAS_TRAIT(mover, RTRAIT_WEBWALK))
+			to_chat(mover, "<span class='danger'>I get stuck in \the [src] for a moment.</span>")
 			return FALSE
 	else if(istype(mover, /obj/projectile))
 		return prob(30)
 	return TRUE
 
+
+/obj/structure/spider/stickyweb/fire_act(added, maxstacks)
+	visible_message("<span class='warning'>[src] catches fire!</span>")
+	var/turf/T = get_turf(src)
+	qdel(src)
+	new /obj/effect/hotspot(T)
+
 /obj/structure/spider/eggcluster
 	name = "egg cluster"
-	desc = "They seem to pulse slightly with an inner life."
+	desc = ""
 	icon_state = "eggs"
 	var/amount_grown = 0
 	var/player_spiders = 0
@@ -79,7 +94,7 @@
 
 /obj/structure/spider/spiderling
 	name = "spiderling"
-	desc = "It never stays still for long."
+	desc = ""
 	icon_state = "spiderling"
 	anchored = FALSE
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
@@ -141,7 +156,7 @@
 			var/obj/machinery/atmospherics/components/unary/vent_pump/exit_vent = pick(vents)
 			if(prob(50))
 				visible_message("<B>[src] scrambles into the ventilation ducts!</B>", \
-								"<span class='hear'>You hear something scampering through the ventilation ducts.</span>")
+								"<span class='hear'>I hear something scampering through the ventilation ducts.</span>")
 
 			spawn(rand(20,60))
 				forceMove(exit_vent)
@@ -154,7 +169,7 @@
 						return
 
 					if(prob(50))
-						audible_message("<span class='hear'>You hear something scampering through the ventilation ducts.</span>")
+						audible_message("<span class='hear'>I hear something scampering through the ventilation ducts.</span>")
 					sleep(travel_time)
 
 					if(!exit_vent || exit_vent.welded)
@@ -202,7 +217,7 @@
 
 /obj/structure/spider/cocoon
 	name = "cocoon"
-	desc = "Something wrapped in silky spider web."
+	desc = ""
 	icon_state = "cocoon1"
 	max_integrity = 60
 
@@ -214,8 +229,8 @@
 	var/breakout_time = 600
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	to_chat(user, "<span class='notice'>You struggle against the tight bonds... (This will take about [DisplayTimeText(breakout_time)].)</span>")
-	visible_message("<span class='notice'>You see something struggling and writhing in \the [src]!</span>")
+	to_chat(user, "<span class='notice'>I struggle against the tight bonds... (This will take about [DisplayTimeText(breakout_time)].)</span>")
+	visible_message("<span class='notice'>I see something struggling and writhing in \the [src]!</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src)
 			return

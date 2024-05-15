@@ -1,15 +1,17 @@
 //separate dm since hydro is getting bloated already
 
 /obj/structure/glowshroom
-	name = "glowshroom"
-	desc = "Mycena Bregprox, a species of mushroom that glows in the dark."
+	name = "kneestingers"
+	desc = ""
 	anchored = TRUE
 	opacity = 0
 	density = FALSE
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "glowshroom" //replaced in New
+	icon = 'icons/roguetown/misc/foliage.dmi'
+	icon_state = "glowshroom1" //replaced in New
 	layer = ABOVE_NORMAL_TURF_LAYER
 	max_integrity = 30
+	blade_dulling = DULLING_CUT
+	resistance_flags = FLAMMABLE
 	var/delay = 1200
 	var/floor = 0
 	var/generation = 1
@@ -19,15 +21,55 @@
 	/turf/open/lava,
 	/turf/open/floor/plating/beach/water))
 
+/obj/structure/glowshroom/fire_act(added, maxstacks)
+	visible_message("<span class='warning'>[src] catches fire!</span>")
+	var/turf/T = get_turf(src)
+	qdel(src)
+	new /obj/effect/hotspot(T)
+
+/obj/structure/glowshroom/CanPass(atom/movable/mover, turf/target)
+	if(isliving(mover) && mover.z == z)
+//		var/throwdir = get_dir(src, mover)
+		var/mob/living/L = mover
+		if(L.electrocute_act(30, src))
+			L.consider_ambush()
+			if(L.throwing)
+				L.throwing.finalize(FALSE)
+//			if(mover.loc != loc && L.stat == CONSCIOUS)
+//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
+			return FALSE
+	. = ..()
+
+/obj/structure/glowshroom/Crossed(AM as mob|obj)
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(L.z == z)
+			if(L.electrocute_act(30, src))
+				L.emote("painscream")
+				L.consider_ambush()
+	. = ..()
+
+/obj/structure/glowshroom/attackby(obj/item/W, mob/user, params)
+	if(isliving(user) && W && user.z == z)
+		if(W.flags_1 & CONDUCT_1)
+			var/mob/living/L = user
+			if(L.electrocute_act(30, src))
+				L.emote("painscream")
+				L.consider_ambush()
+				if(L.throwing)
+					L.throwing.finalize(FALSE)
+				return FALSE
+	..()
+
 /obj/structure/glowshroom/glowcap
 	name = "glowcap"
-	desc = "Mycena Ruthenia, a species of mushroom that, while it does glow in the dark, is not actually bioluminescent."
+	desc = ""
 	icon_state = "glowcap"
 	myseed = /obj/item/seeds/glowshroom/glowcap
 
 /obj/structure/glowshroom/shadowshroom
 	name = "shadowshroom"
-	desc = "Mycena Umbra, a species of mushroom that emits shadow instead of light."
+	desc = ""
 	icon_state = "shadowshroom"
 	myseed = /obj/item/seeds/glowshroom/shadowshroom
 
@@ -36,7 +78,7 @@
 
 /obj/structure/glowshroom/examine(mob/user)
 	. = ..()
-	. += "This is a [generation]\th generation [name]!"
+//	. += "This is a [generation]\th generation [name]!"
 
 /obj/structure/glowshroom/Destroy()
 	if(myseed)
@@ -64,7 +106,14 @@
 		G = new G
 		myseed.genes += G
 	set_light(G.glow_range(myseed), G.glow_power(myseed), G.glow_color)
-	setDir(CalcDir())
+//	setDir(CalcDir())
+
+	icon_state = "glowshroom[rand(1,3)]"
+
+	pixel_x = rand(-4, 4)
+	pixel_y = rand(0,5)
+
+/*
 	var/base_icon_state = initial(icon_state)
 	if(!floor)
 		switch(dir) //offset to make it be on the wall rather than on the floor
@@ -79,8 +128,8 @@
 		icon_state = "[base_icon_state][rand(1,3)]"
 	else //if on the floor, glowshroom on-floor sprite
 		icon_state = base_icon_state
-
-	addtimer(CALLBACK(src, .proc/Spread), delay)
+*/
+//	addtimer(CALLBACK(src, .proc/Spread), delay)
 
 /obj/structure/glowshroom/proc/Spread()
 	var/turf/ownturf = get_turf(src)
@@ -163,7 +212,7 @@
 
 /obj/structure/glowshroom/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type == BURN && damage_amount)
-		playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/glowshroom/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300)
@@ -173,5 +222,5 @@
 	. = 1
 	visible_message("<span class='danger'>[src] melts away!</span>")
 	var/obj/effect/decal/cleanable/molten_object/I = new (get_turf(src))
-	I.desc = "Looks like this was \an [src] some time ago."
+	I.desc = ""
 	qdel(src)

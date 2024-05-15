@@ -1,5 +1,5 @@
 /obj/item/caution
-	desc = "Caution! Wet Floor!"
+	desc = ""
 	name = "wet floor sign"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "caution"
@@ -14,7 +14,7 @@
 
 /obj/item/choice_beacon
 	name = "choice beacon"
-	desc = "Hey, why are you viewing this?!! Please let Centcom know about this odd occurance."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gangtool-blue"
 	item_state = "radio"
@@ -31,7 +31,7 @@
 	if(user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return TRUE
 	else
-		playsound(src, 'sound/machines/buzz-sigh.ogg', 40, TRUE)
+		playsound(src, 'sound/blank.ogg', 40, TRUE)
 		return FALSE
 
 /obj/item/choice_beacon/proc/generate_options(mob/living/M)
@@ -65,7 +65,7 @@
 
 /obj/item/choice_beacon/hero
 	name = "heroic beacon"
-	desc = "To summon heroes from the past to protect the future."
+	desc = ""
 
 /obj/item/choice_beacon/hero/generate_display_names()
 	var/static/list/hero_item_list
@@ -108,7 +108,7 @@
 
 /obj/item/choice_beacon/augments
 	name = "augment beacon"
-	desc = "Summons augmentations. Can be used 3 times!"
+	desc = ""
 	uses = 3
 
 /obj/item/choice_beacon/augments/generate_display_names()
@@ -129,10 +129,10 @@
 
 /obj/item/choice_beacon/augments/spawn_option(obj/choice,mob/living/M)
 	new choice(get_turf(M))
-	to_chat(M, "<span class='hear'>You hear something crackle from the beacon for a moment before a voice speaks. \"Please stand by for a message from S.E.L.F. Message as follows: <b>Item request received. Your package has been transported, use the autosurgeon supplied to apply the upgrade.</b> Message ends.\"</span>")
+	to_chat(M, "<span class='hear'>I hear something crackle from the beacon for a moment before a voice speaks. \"Please stand by for a message from S.E.L.F. Message as follows: <b>Item request received. Your package has been transported, use the autosurgeon supplied to apply the upgrade.</b> Message ends.\"</span>")
 
 /obj/item/skub
-	desc = "It's skub."
+	desc = ""
 	name = "skub"
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "skub"
@@ -143,5 +143,5 @@
 	user.visible_message("<span class='suicide'>[user] has declared themself as anti-skub! The skub tears them apart!</span>")
 
 	user.gib()
-	playsound(src, 'sound/items/eatfood.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	return MANUAL_SUICIDE

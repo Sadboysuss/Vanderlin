@@ -172,7 +172,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 
 /obj/item/wallframe/newscaster
 	name = "newscaster frame"
-	desc = "Used to build newscasters, just secure to the wall."
+	desc = ""
 	icon_state = "newscaster"
 	custom_materials = list(/datum/material/iron=14000, /datum/material/glass=8000)
 	result_path = /obj/machinery/newscaster
@@ -180,7 +180,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 
 /obj/machinery/newscaster
 	name = "newscaster"
-	desc = "A standard Nanotrasen-licensed newsfeed handler for use in commercial space stations. All the news you absolutely have no use for, in one place!"
+	desc = ""
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
 	verb_say = "beeps"
@@ -711,30 +711,30 @@ GLOBAL_LIST_EMPTY(allCasters)
 
 /obj/machinery/newscaster/attackby(obj/item/I, mob/living/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, "<span class='notice'>You start [anchored ? "un" : ""]securing [name]...</span>")
+		to_chat(user, "<span class='notice'>I start [anchored ? "un" : ""]securing [name]...</span>")
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 60))
-			playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+			playsound(loc, 'sound/blank.ogg', 50, TRUE)
 			if(stat & BROKEN)
 				to_chat(user, "<span class='warning'>The broken remains of [src] fall on the ground.</span>")
 				new /obj/item/stack/sheet/metal(loc, 5)
 				new /obj/item/shard(loc)
 				new /obj/item/shard(loc)
 			else
-				to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure [name].</span>")
+				to_chat(user, "<span class='notice'>I [anchored ? "un" : ""]secure [name].</span>")
 				new /obj/item/wallframe/newscaster(loc)
 			qdel(src)
-	else if(I.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
+	else if(I.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM)
 		if(stat & BROKEN)
 			if(!I.tool_start_check(user, amount=0))
 				return
 			user.visible_message("<span class='notice'>[user] is repairing [src].</span>", \
-							"<span class='notice'>You begin repairing [src]...</span>", \
-							"<span class='hear'>You hear welding.</span>")
+							"<span class='notice'>I begin repairing [src]...</span>", \
+							"<span class='hear'>I hear welding.</span>")
 			if(I.use_tool(src, user, 40, volume=50))
 				if(!(stat & BROKEN))
 					return
-				to_chat(user, "<span class='notice'>You repair [src].</span>")
+				to_chat(user, "<span class='notice'>I repair [src].</span>")
 				obj_integrity = max_integrity
 				stat &= ~BROKEN
 				update_icon()
@@ -747,11 +747,11 @@ GLOBAL_LIST_EMPTY(allCasters)
 	switch(damage_type)
 		if(BRUTE)
 			if(stat & BROKEN)
-				playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, TRUE)
+				playsound(loc, 'sound/blank.ogg', 100, TRUE)
 			else
-				playsound(loc, 'sound/effects/glasshit.ogg', 90, TRUE)
+				playsound(loc, 'sound/blank.ogg', 90, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/machinery/newscaster/deconstruct(disassembled = TRUE)
@@ -764,11 +764,11 @@ GLOBAL_LIST_EMPTY(allCasters)
 /obj/machinery/newscaster/obj_break(damage_flag)
 	. = ..()
 	if(.)
-		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/machinery/newscaster/attack_paw(mob/user)
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		to_chat(user, "<span class='warning'>The newscaster controls are far too complicated for your tiny brain!</span>")
 	else
 		take_damage(5, BRUTE, "melee")
@@ -792,7 +792,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 			else
 				targetcam = R.aicamera
 		else
-			to_chat(user, "<span class='warning'>You cannot interface with silicon photo uploading!</span>")
+			to_chat(user, "<span class='warning'>I cannot interface with silicon photo uploading!</span>")
 		if(!targetcam.stored.len)
 			to_chat(usr, "<span class='boldannounce'>No images saved.</span>")
 			return
@@ -803,15 +803,15 @@ GLOBAL_LIST_EMPTY(allCasters)
 /obj/machinery/newscaster/proc/scan_user(mob/living/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
-		if(human_user.wear_id)
-			if(istype(human_user.wear_id, /obj/item/pda))
-				var/obj/item/pda/P = human_user.wear_id
+		if(human_user.wear_ring)
+			if(istype(human_user.wear_ring, /obj/item/pda))
+				var/obj/item/pda/P = human_user.wear_ring
 				if(P.id)
 					scanned_user = "[P.id.registered_name] ([P.id.assignment])"
 				else
 					scanned_user = "Unknown"
-			else if(istype(human_user.wear_id, /obj/item/card/id) )
-				var/obj/item/card/id/ID = human_user.wear_id
+			else if(istype(human_user.wear_ring, /obj/item/card/id) )
+				var/obj/item/card/id/ID = human_user.wear_ring
 				scanned_user ="[ID.registered_name] ([ID.assignment])"
 			else
 				scanned_user ="Unknown"
@@ -850,15 +850,15 @@ GLOBAL_LIST_EMPTY(allCasters)
 		alert = TRUE
 		update_icon()
 		addtimer(CALLBACK(src,.proc/remove_alert),alert_delay,TIMER_UNIQUE|TIMER_OVERRIDE)
-		playsound(loc, 'sound/machines/twobeep_high.ogg', 75, TRUE)
+		playsound(loc, 'sound/blank.ogg', 75, TRUE)
 	else
 		say("Attention! Wanted issue distributed!")
-		playsound(loc, 'sound/machines/warning-buzzer.ogg', 75, TRUE)
+		playsound(loc, 'sound/blank.ogg', 75, TRUE)
 
 
 /obj/item/newspaper
 	name = "newspaper"
-	desc = "An issue of The Griffon, the newspaper circulating aboard Nanotrasen Space Stations."
+	desc = ""
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "newspaper"
 	lefthand_file = 'icons/mob/inhands/misc/books_lefthand.dmi'
@@ -882,7 +882,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 	user.say(";JOURNALISM IS MY CALLING! EVERYBODY APPRECIATES UNBIASED REPORTI-GLORF", forced="newspaper suicide")
 	var/mob/living/carbon/human/H = user
 	var/obj/W = new /obj/item/reagent_containers/food/drinks/bottle/whiskey(H.loc)
-	playsound(H.loc, 'sound/items/drink.ogg', rand(10,50), TRUE)
+	playsound(H.loc, 'sound/blank.ogg', rand(10,50), TRUE)
 	W.reagents.trans_to(H, W.reagents.total_volume, transfered_by = user)
 	user.visible_message("<span class='suicide'>[user] downs the contents of [W.name] in one gulp! Shoulda stuck to sudoku!</span>")
 
@@ -1014,7 +1014,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 /obj/item/newspaper/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on [src]!</span>")
 			return
 		if(scribble_page == curr_page)
 			to_chat(user, "<span class='warning'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</span>")

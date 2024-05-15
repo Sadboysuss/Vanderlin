@@ -102,22 +102,22 @@
 /datum/component/forensics/proc/add_fibers(mob/living/carbon/human/M)
 	var/fibertext
 	var/item_multiplier = isitem(src)?1.2:1
-	if(M.wear_suit)
-		fibertext = "Material from \a [M.wear_suit]."
+	if(M.wear_armor)
+		fibertext = "Material from \a [M.wear_armor]."
 		if(prob(10*item_multiplier) && !LAZYACCESS(fibers, fibertext))
 			LAZYSET(fibers, fibertext, fibertext)
-		if(!(M.wear_suit.body_parts_covered & CHEST))
-			if(M.w_uniform)
-				fibertext = "Fibers from \a [M.w_uniform]."
+		if(!(M.wear_armor.body_parts_covered & CHEST))
+			if(M.wear_pants)
+				fibertext = "Fibers from \a [M.wear_pants]."
 				if(prob(12*item_multiplier) && !LAZYACCESS(fibers, fibertext)) //Wearing a suit means less of the uniform exposed.
 					LAZYSET(fibers, fibertext, fibertext)
-		if(!(M.wear_suit.body_parts_covered & HANDS))
+		if(!(M.wear_armor.body_parts_covered & HANDS))
 			if(M.gloves)
 				fibertext = "Material from a pair of [M.gloves.name]."
 				if(prob(20*item_multiplier) && !LAZYACCESS(fibers, fibertext))
 					LAZYSET(fibers, fibertext, fibertext)
-	else if(M.w_uniform)
-		fibertext = "Fibers from \a [M.w_uniform]."
+	else if(M.wear_pants)
+		fibertext = "Fibers from \a [M.wear_pants]."
 		if(prob(15*item_multiplier) && !LAZYACCESS(fibers, fibertext))
 			// "Added fibertext: [fibertext]"
 			LAZYSET(fibers, fibertext, fibertext)

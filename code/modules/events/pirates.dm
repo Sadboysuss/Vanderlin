@@ -26,7 +26,7 @@
 	ship_name = pick(strings(PIRATE_NAMES_FILE, "ship_names"))
 
 /datum/round_event/pirates/announce(fake)
-	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", 'sound/ai/commandreport.ogg')
+	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", 'sound/blank.ogg')
 	if(fake)
 		return
 	threat = new
@@ -94,7 +94,7 @@
 
 /obj/machinery/shuttle_scrambler
 	name = "Data Siphon"
-	desc = "This heap of machinery steals credits and data from unprotected systems and locks down cargo shuttles."
+	desc = ""
 	icon = 'icons/obj/machines/dominator.dmi'
 	icon_state = "dominator"
 	density = TRUE
@@ -124,7 +124,7 @@
 	SSshuttle.registerTradeBlockade(src)
 	AddComponent(/datum/component/gps, "Nautical Signal")
 	active = TRUE
-	to_chat(user,"<span class='notice'>You toggle [src] [active ? "on":"off"].</span>")
+	to_chat(user,"<span class='notice'>I toggle [src] [active ? "on":"off"].</span>")
 	to_chat(user,"<span class='warning'>The scrambling signal can be now tracked by GPS.</span>")
 	START_PROCESSING(SSobj,src)
 
@@ -151,7 +151,7 @@
 /obj/machinery/shuttle_scrambler/proc/dump_loot(mob/user)
 	if(credits_stored)	// Prevents spamming empty holochips
 		new /obj/item/holochip(drop_location(), credits_stored)
-		to_chat(user,"<span class='notice'>You retrieve the siphoned credits!</span>")
+		to_chat(user,"<span class='notice'>I retrieve the siphoned credits!</span>")
 		credits_stored = 0
 	else
 		to_chat(user,"<span class='notice'>There's nothing to withdraw.</span>")
@@ -184,7 +184,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate/pirate
 	name = "pirate shuttle navigation computer"
-	desc = "Used to designate a precise transit location for the pirate shuttle."
+	desc = ""
 	shuttleId = "pirateship"
 	lock_override = CAMERA_LOCK_STATION
 	shuttlePortId = "pirateship_custom"
@@ -206,7 +206,7 @@
 
 /obj/machinery/loot_locator
 	name = "Booty Locator"
-	desc = "This sophisticated machine scans the nearby space for items of value."
+	desc = ""
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "tdoppler"
 	density = TRUE
@@ -250,7 +250,7 @@
 /obj/machinery/piratepad/multitool_act(mob/living/user, obj/item/multitool/I)
 	. = ..()
 	if (istype(I))
-		to_chat(user, "<span class='notice'>You register [src] in [I]s buffer.</span>")
+		to_chat(user, "<span class='notice'>I register [src] in [I]s buffer.</span>")
 		I.buffer = src
 		return TRUE
 
@@ -272,7 +272,7 @@
 /obj/machinery/computer/piratepad_control/multitool_act(mob/living/user, obj/item/multitool/I)
 	. = ..()
 	if (istype(I) && istype(I.buffer,/obj/machinery/piratepad))
-		to_chat(user, "<span class='notice'>You link [src] with [I.buffer] in [I] buffer.</span>")
+		to_chat(user, "<span class='notice'>I link [src] with [I.buffer] in [I] buffer.</span>")
 		pad = I.buffer
 		updateDialog()
 		return TRUE

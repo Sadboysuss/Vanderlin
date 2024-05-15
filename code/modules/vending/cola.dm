@@ -1,7 +1,7 @@
 
 /obj/machinery/vending/cola
 	name = "\improper Robust Softdrinks"
-	desc = "A softdrink vendor provided by Robust Industries, LLC."
+	desc = ""
 	icon_state = "Cola_Machine"
 	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
@@ -30,7 +30,7 @@
 /obj/machinery/vending/cola/random
 	name = "\improper Random Drinkies"
 	icon_state = "random_cola"
-	desc = "Uh oh!"
+	desc = ""
 
 /obj/machinery/vending/cola/random/Initialize()
 	..()
@@ -47,19 +47,19 @@
 /obj/machinery/vending/cola/red
 	icon_state = "red_cola"
 	name = "\improper Space Cola Vendor"
-	desc = "It vends cola, in space."
+	desc = ""
 	product_slogans = "Cola in space!"
 
 /obj/machinery/vending/cola/space_up
 	icon_state = "space_up"
 	name = "\improper Space-up! Vendor"
-	desc = "Indulge in an explosion of flavor."
+	desc = ""
 	product_slogans = "Space-up! Like a hull breach in your mouth."
 
 /obj/machinery/vending/cola/starkist
 	icon_state = "starkist"
 	name = "\improper Star-kist Vendor"
-	desc = "The taste of a star in liquid form."
+	desc = ""
 	product_slogans = "Drink the stars! Star-kist!"
 
 /obj/machinery/vending/cola/sodie
@@ -68,12 +68,12 @@
 /obj/machinery/vending/cola/pwr_game
 	icon_state = "pwr_game"
 	name = "\improper Pwr Game Vendor"
-	desc = "You want it, we got it. Brought to you in partnership with Vlad's Salads."
+	desc = ""
 	product_slogans = "The POWER that gamers crave! PWR GAME!"
 
 /obj/machinery/vending/cola/shamblers
 	name = "\improper Shambler's Vendor"
-	desc = "~Shake me up some of that Shambler's Juice!~"
+	desc = ""
 	icon_state = "shamblers_juice"
 	products = list(/obj/item/reagent_containers/food/drinks/soda_cans/cola = 10,
 		            /obj/item/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,

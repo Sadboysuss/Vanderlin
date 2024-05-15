@@ -44,16 +44,16 @@
 					aspell.charge_counter = aspell.charge_max
 				switch(aspell.spell_level)
 					if(1)
-						to_chat(user, "<span class='notice'>You have improved [aspell.name] into Efficient [aspell.name].</span>")
+						to_chat(user, "<span class='notice'>I have improved [aspell.name] into Efficient [aspell.name].</span>")
 						aspell.name = "Efficient [aspell.name]"
 					if(2)
-						to_chat(user, "<span class='notice'>You have further improved [aspell.name] into Quickened [aspell.name].</span>")
+						to_chat(user, "<span class='notice'>I have further improved [aspell.name] into Quickened [aspell.name].</span>")
 						aspell.name = "Quickened [aspell.name]"
 					if(3)
-						to_chat(user, "<span class='notice'>You have further improved [aspell.name] into Free [aspell.name].</span>")
+						to_chat(user, "<span class='notice'>I have further improved [aspell.name] into Free [aspell.name].</span>")
 						aspell.name = "Free [aspell.name]"
 					if(4)
-						to_chat(user, "<span class='notice'>You have further improved [aspell.name] into Instant [aspell.name].</span>")
+						to_chat(user, "<span class='notice'>I have further improved [aspell.name] into Instant [aspell.name].</span>")
 						aspell.name = "Instant [aspell.name]"
 				if(aspell.spell_level >= aspell.level_max)
 					to_chat(user, "<span class='warning'>This spell cannot be strengthened any further!</span>")
@@ -62,7 +62,7 @@
 	//No same spell found - just learn it
 	SSblackbox.record_feedback("tally", "wizard_spell_learned", 1, name)
 	user.mind.AddSpell(S)
-	to_chat(user, "<span class='notice'>You have learned [S.name].</span>")
+	to_chat(user, "<span class='notice'>I have learned [S.name].</span>")
 	return TRUE
 
 /datum/spellbook_entry/proc/CanRefund(mob/living/carbon/human/user,obj/item/spellbook/book)
@@ -78,7 +78,7 @@
 /datum/spellbook_entry/proc/Refund(mob/living/carbon/human/user,obj/item/spellbook/book) //return point value or -1 for failure
 	var/area/wizard_station/A = GLOB.areas_by_type[/area/wizard_station]
 	if(!(user in A.contents))
-		to_chat(user, "<span class='warning'>You can only refund spells at the wizard lair!</span>")
+		to_chat(user, "<span class='warning'>I can only refund spells at the wizard lair!</span>")
 		return -1
 	if(!S)
 		S = new spell_type()
@@ -293,54 +293,54 @@
 
 /datum/spellbook_entry/item/staffchange
 	name = "Staff of Change"
-	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/change
 
 /datum/spellbook_entry/item/staffanimation
 	name = "Staff of Animation"
-	desc = "An arcane staff capable of shooting bolts of eldritch energy which cause inanimate objects to come to life. This magic doesn't affect machines."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/animate
 	category = "Assistance"
 
 /datum/spellbook_entry/item/staffchaos
 	name = "Staff of Chaos"
-	desc = "A caprious tool that can fire all sorts of magic without any rhyme or reason. Using it on people you care about is not recommended."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/chaos
 
 /datum/spellbook_entry/item/spellblade
 	name = "Spellblade"
-	desc = "A sword capable of firing blasts of energy which rip targets limb from limb."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/spellblade
 
 /datum/spellbook_entry/item/staffdoor
 	name = "Staff of Door Creation"
-	desc = "A particular staff that can mold solid walls into ornate doors. Useful for getting around in the absence of other transportation. Does not work on glass."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/door
 	cost = 1
 	category = "Mobility"
 
 /datum/spellbook_entry/item/staffhealing
 	name = "Staff of Healing"
-	desc = "An altruistic staff that can heal the lame and raise the dead."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/healing
 	cost = 1
 	category = "Defensive"
 
 /datum/spellbook_entry/item/lockerstaff
 	name = "Staff of the Locker"
-	desc = "A staff that shoots lockers. It eats anyone it hits on its way, leaving a welded locker with your victims behind."
+	desc = ""
 	item_path = /obj/item/gun/magic/staff/locker
 	category = "Defensive"
 
 /datum/spellbook_entry/item/scryingorb
 	name = "Scrying Orb"
-	desc = "An incandescent orb of crackling energy. Using it will allow you to release your ghost while alive, allowing you to spy upon the station and talk to the deceased. In addition, buying it will permanently grant you X-ray vision."
+	desc = ""
 	item_path = /obj/item/scrying
 	category = "Defensive"
 
 /datum/spellbook_entry/item/soulstones
 	name = "Six Soul Stone Shards and the spell Artificer"
-	desc = "Soul Stone Shards are ancient tools capable of capturing and harnessing the spirits of the dead and dying. The spell Artificer allows you to create arcane machines for the captured souls to pilot."
+	desc = ""
 	item_path = /obj/item/storage/belt/soulstone/full
 	category = "Assistance"
 
@@ -352,19 +352,19 @@
 
 /datum/spellbook_entry/item/necrostone
 	name = "A Necromantic Stone"
-	desc = "A Necromantic stone is able to resurrect three dead individuals as skeletal thralls for you to command."
+	desc = ""
 	item_path = /obj/item/necromantic_stone
 	category = "Assistance"
 
 /datum/spellbook_entry/item/wands
 	name = "Wand Assortment"
-	desc = "A collection of wands that allow for a wide variety of utility. Wands have a limited number of charges, so be conservative with their use. Comes in a handy belt."
+	desc = ""
 	item_path = /obj/item/storage/belt/wands/full
 	category = "Defensive"
 
 /datum/spellbook_entry/item/armor
 	name = "Mastercrafted Armor Set"
-	desc = "An artefact suit of armor that allows you to cast spells while providing more protection against attacks and the void of space."
+	desc = ""
 	item_path = /obj/item/clothing/suit/space/hardsuit/wizard
 	category = "Defensive"
 
@@ -376,7 +376,7 @@
 
 /datum/spellbook_entry/item/contract
 	name = "Contract of Apprenticeship"
-	desc = "A magical contract binding an apprentice wizard to your service, using it will summon them to your side."
+	desc = ""
 	item_path = /obj/item/antag_spawner/contract
 	category = "Assistance"
 
@@ -394,7 +394,7 @@
 
 /datum/spellbook_entry/item/bloodbottle
 	name = "Bottle of Blood"
-	desc = "A bottle of magically infused blood, the smell of which will attract extradimensional beings when broken. Be careful though, the kinds of creatures summoned by blood magic are indiscriminate in their killing, and you yourself may become a victim."
+	desc = ""
 	item_path = /obj/item/antag_spawner/slaughter_demon
 	limit = 3
 	category = "Assistance"
@@ -415,31 +415,31 @@
 
 /datum/spellbook_entry/item/mjolnir
 	name = "Mjolnir"
-	desc = "A mighty hammer on loan from Thor, God of Thunder. It crackles with barely contained power."
+	desc = ""
 	item_path = /obj/item/twohanded/mjollnir
 
 /datum/spellbook_entry/item/singularity_hammer
 	name = "Singularity Hammer"
-	desc = "A hammer that creates an intensely powerful field of gravity where it strikes, pulling everything nearby to the point of impact."
+	desc = ""
 	item_path = /obj/item/twohanded/singularityhammer
 
 /datum/spellbook_entry/item/battlemage
 	name = "Battlemage Armour"
-	desc = "An ensorceled suit of armour, protected by a powerful shield. The shield can completely negate sixteen attacks before being permanently depleted."
+	desc = ""
 	item_path = /obj/item/clothing/suit/space/hardsuit/shielded/wizard
 	limit = 1
 	category = "Defensive"
 
 /datum/spellbook_entry/item/battlemage_charge
 	name = "Battlemage Armour Charges"
-	desc = "A powerful defensive rune, it will grant eight additional charges to a suit of battlemage armour."
+	desc = ""
 	item_path = /obj/item/wizard_armour_charge
 	category = "Defensive"
 	cost = 1
 
 /datum/spellbook_entry/item/warpwhistle
 	name = "Warp Whistle"
-	desc = "A strange whistle that will transport you to a distant safe place on the station. There is a window of vulnerability at the beginning of every use."
+	desc = ""
 	item_path = /obj/item/warpwhistle
 	category = "Mobility"
 	cost = 1
@@ -468,7 +468,7 @@
 
 /datum/spellbook_entry/summon/ghosts
 	name = "Summon Ghosts"
-	desc = "Spook the crew out by making them see dead people. Be warned, ghosts are capricious and occasionally vindicative, and some will use their incredibly minor abilities to frustrate you."
+	desc = ""
 	cost = 0
 
 /datum/spellbook_entry/summon/ghosts/IsAvailible()
@@ -481,13 +481,13 @@
 	SSblackbox.record_feedback("tally", "wizard_spell_learned", 1, name)
 	new /datum/round_event/wizard/ghost()
 	active = TRUE
-	to_chat(user, "<span class='notice'>You have cast summon ghosts!</span>")
-	playsound(get_turf(user), 'sound/effects/ghost2.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I have cast summon ghosts!</span>")
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	return TRUE
 
 /datum/spellbook_entry/summon/guns
 	name = "Summon Guns"
-	desc = "Nothing could possibly go wrong with arming a crew of lunatics just itching for an excuse to kill you. There is a good chance that they will shoot each other first."
+	desc = ""
 
 /datum/spellbook_entry/summon/guns/IsAvailible()
 	if(!SSticker.mode) // In case spellbook is placed on map
@@ -500,13 +500,13 @@
 	SSblackbox.record_feedback("tally", "wizard_spell_learned", 1, name)
 	rightandwrong(SUMMON_GUNS, user, 10)
 	active = TRUE
-	playsound(get_turf(user), 'sound/magic/castsummon.ogg', 50, TRUE)
-	to_chat(user, "<span class='notice'>You have cast summon guns!</span>")
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I have cast summon guns!</span>")
 	return TRUE
 
 /datum/spellbook_entry/summon/magic
 	name = "Summon Magic"
-	desc = "Share the wonders of magic with the crew and show them why they aren't to be trusted with it at the same time."
+	desc = ""
 
 /datum/spellbook_entry/summon/magic/IsAvailible()
 	if(!SSticker.mode) // In case spellbook is placed on map
@@ -519,13 +519,13 @@
 	SSblackbox.record_feedback("tally", "wizard_spell_learned", 1, name)
 	rightandwrong(SUMMON_MAGIC, user, 10)
 	active = TRUE
-	playsound(get_turf(user), 'sound/magic/castsummon.ogg', 50, TRUE)
-	to_chat(user, "<span class='notice'>You have cast summon magic!</span>")
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I have cast summon magic!</span>")
 	return TRUE
 
 /datum/spellbook_entry/summon/events
 	name = "Summon Events"
-	desc = "Give Murphy's law a little push and replace all events with special wizard ones that will confound and confuse everyone. Multiple castings increase the rate of these events."
+	desc = ""
 	var/times = 0
 
 /datum/spellbook_entry/summon/events/IsAvailible()
@@ -539,8 +539,8 @@
 	SSblackbox.record_feedback("tally", "wizard_spell_learned", 1, name)
 	summonevents()
 	times++
-	playsound(get_turf(user), 'sound/magic/castsummon.ogg', 50, TRUE)
-	to_chat(user, "<span class='notice'>You have cast summon events.</span>")
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I have cast summon events.</span>")
 	return TRUE
 
 /datum/spellbook_entry/summon/events/GetInfo()
@@ -551,7 +551,7 @@
 
 /datum/spellbook_entry/summon/curse_of_madness
 	name = "Curse of Madness"
-	desc = "Curses the station, warping the minds of everyone inside, causing lasting traumas. Warning: this spell can affect you if not cast from a safe distance."
+	desc = ""
 	cost = 4
 
 /datum/spellbook_entry/summon/curse_of_madness/Buy(mob/living/carbon/human/user, obj/item/spellbook/book)
@@ -561,13 +561,13 @@
 	if(!message)
 		return FALSE
 	curse_of_madness(user, message)
-	to_chat(user, "<span class='notice'>You have cast the curse of insanity!</span>")
-	playsound(user, 'sound/magic/mandswap.ogg', 50, TRUE)
+	to_chat(user, "<span class='notice'>I have cast the curse of insanity!</span>")
+	playsound(user, 'sound/blank.ogg', 50, TRUE)
 	return TRUE
 
 /obj/item/spellbook
 	name = "spell book"
-	desc = "An unearthly tome that glows with power."
+	desc = ""
 	icon = 'icons/obj/library.dmi'
 	icon_state ="book"
 	throw_speed = 2
@@ -608,7 +608,7 @@
 		if(contract.used)
 			to_chat(user, "<span class='warning'>The contract has been used, you can't get your points back now!</span>")
 		else
-			to_chat(user, "<span class='notice'>You feed the contract back into the spellbook, refunding your points.</span>")
+			to_chat(user, "<span class='notice'>I feed the contract back into the spellbook, refunding your points.</span>")
 			uses += 2
 			for(var/datum/spellbook_entry/item/contract/CT in entries)
 				if(!isnull(CT.limit))
@@ -680,7 +680,7 @@
 
 /obj/item/spellbook/attack_self(mob/user)
 	if(!owner)
-		to_chat(user, "<span class='notice'>You bind the spellbook to yourself.</span>")
+		to_chat(user, "<span class='notice'>I bind the spellbook to myself.</span>")
 		owner = user
 		return
 	if(user != owner)

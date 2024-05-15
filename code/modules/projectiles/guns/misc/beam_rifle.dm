@@ -16,7 +16,7 @@
 	icon = 'icons/obj/guns/energy.dmi'
 	icon_state = "esniper"
 	item_state = "esniper"
-	fire_sound = 'sound/weapons/beam_sniper.ogg'
+	fire_sound = 'sound/blank.ogg'
 	slot_flags = ITEM_SLOT_BACK
 	force = 15
 	custom_materials = null
@@ -102,13 +102,13 @@
 			zoom_lock = 0
 		switch(zoom_lock)
 			if(ZOOM_LOCK_AUTOZOOM_FREEMOVE)
-				to_chat(user, "<span class='boldnotice'>You switch [src]'s zooming processor to free directional.</span>")
+				to_chat(user, "<span class='boldnotice'>I switch [src]'s zooming processor to free directional.</span>")
 			if(ZOOM_LOCK_AUTOZOOM_ANGLELOCK)
-				to_chat(user, "<span class='boldnotice'>You switch [src]'s zooming processor to locked directional.</span>")
+				to_chat(user, "<span class='boldnotice'>I switch [src]'s zooming processor to locked directional.</span>")
 			if(ZOOM_LOCK_CENTER_VIEW)
-				to_chat(user, "<span class='boldnotice'>You switch [src]'s zooming processor to center mode.</span>")
+				to_chat(user, "<span class='boldnotice'>I switch [src]'s zooming processor to center mode.</span>")
 			if(ZOOM_LOCK_OFF)
-				to_chat(user, "<span class='boldnotice'>You disable [src]'s zooming system.</span>")
+				to_chat(user, "<span class='boldnotice'>I disable [src]'s zooming system.</span>")
 		reset_zooming()
 	else
 		..()
@@ -158,7 +158,7 @@
 
 /obj/item/gun/energy/beam_rifle/attack_self(mob/user)
 	projectile_setting_pierce = !projectile_setting_pierce
-	to_chat(user, "<span class='boldnotice'>You set \the [src] to [projectile_setting_pierce? "pierce":"impact"] mode.</span>")
+	to_chat(user, "<span class='boldnotice'>I set \the [src] to [projectile_setting_pierce? "pierce":"impact"] mode.</span>")
 	aiming_beam()
 
 /obj/item/gun/energy/beam_rifle/proc/update_slowdown()
@@ -309,7 +309,7 @@
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || user.a_intent == INTENT_HARM) //melee attack
+		if(!ismob(target) || user.used_intent.type == INTENT_HARM) //melee attack
 			return
 		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
 			return
@@ -330,7 +330,7 @@
 
 /obj/item/ammo_casing/energy/beam_rifle
 	name = "particle acceleration lens"
-	desc = "Don't look into barrel!"
+	desc = ""
 	var/wall_pierce_amount = 0
 	var/wall_devastate = 0
 	var/aoe_structure_range = 1
@@ -412,12 +412,12 @@
 	projectile_type = /obj/projectile/beam/beam_rifle/hitscan
 	select_name = "beam"
 	e_cost = 10000
-	fire_sound = 'sound/weapons/beam_sniper.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/projectile/beam/beam_rifle
 	name = "particle beam"
 	icon = null
-	hitsound = 'sound/effects/explosion3.ogg'
+	hitsound = 'sound/blank.ogg'
 	damage = 0				//Handled manually.
 	damage_type = BURN
 	flag = "energy"
@@ -449,7 +449,7 @@
 	new /obj/effect/temp_visual/explosion/fast(epicenter)
 	for(var/mob/living/L in range(aoe_mob_range, epicenter))		//handle aoe mob damage
 		L.adjustFireLoss(aoe_mob_damage)
-		to_chat(L, "<span class='userdanger'>\The [src] sears you!</span>")
+		to_chat(L, "<span class='danger'>\The [src] sears you!</span>")
 	for(var/turf/T in range(aoe_fire_range, epicenter))		//handle aoe fire
 		if(prob(aoe_fire_chance))
 			new /obj/effect/hotspot(T)
@@ -507,7 +507,7 @@
 		cached = get_turf(target)
 	if(nodamage)
 		return FALSE
-	playsound(cached, 'sound/effects/explosion3.ogg', 100, TRUE)
+	playsound(cached, 'sound/blank.ogg', 100, TRUE)
 	AOE(cached)
 	if(!QDELETED(target))
 		handle_impact(target)

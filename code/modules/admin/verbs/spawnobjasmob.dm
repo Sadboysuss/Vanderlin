@@ -1,6 +1,6 @@
 /datum/admins/proc/spawn_objasmob(object as text)
 	set category = "Debug"
-	set desc = "(obj path) Spawn object-mob"
+	set desc = ""
 	set name = "Spawn object-mob"
 
 	if(!check_rights(R_SPAWN))

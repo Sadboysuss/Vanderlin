@@ -11,7 +11,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 
 /obj/machinery/computer/card
 	name = "identification console"
-	desc = "You can use this to manage jobs and ID access."
+	desc = ""
 	icon_screen = "id"
 	icon_keyboard = "id_key"
 	req_one_access = list(ACCESS_HEADS, ACCESS_CHANGE_IDS)
@@ -144,13 +144,13 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 
 	if(target)
 		if(holder_item && inserting_item.InsertID(target))
-			playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 		else
 			id_eject(user, target)
 
 	user.visible_message("<span class='notice'>[user] inserts \the [card_to_insert] into \the [src].</span>",
-						"<span class='notice'>You insert \the [card_to_insert] into \the [src].</span>")
-	playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+						"<span class='notice'>I insert \the [card_to_insert] into \the [src].</span>")
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
 	updateUsrDialog()
 	return TRUE
 
@@ -163,8 +163,8 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		if(!issilicon(user) && Adjacent(user))
 			user.put_in_hands(target)
 		user.visible_message("<span class='notice'>[user] gets \the [target] from \the [src].</span>", \
-							"<span class='notice'>You get \the [target] from \the [src].</span>")
-		playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+							"<span class='notice'>I get \the [target] from \the [src].</span>")
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		updateUsrDialog()
 		return TRUE
 
@@ -402,7 +402,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							authenticated = 1
 						else
 							authenticated = 2
-						playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
+						playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 					else
 						if((ACCESS_HOP in inserted_scan_id.access) && ((target_dept==1) || !target_dept))
@@ -424,12 +424,12 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 						if(region_access)
 							authenticated = 1
 			else if ((!( authenticated ) && issilicon(usr)) && (!inserted_modify_id))
-				to_chat(usr, "<span class='warning'>You can't modify an ID without an ID inserted to modify! Once one is in the modify slot on the computer, you can log in.</span>")
+				to_chat(usr, "<span class='warning'>I can't modify an ID without an ID inserted to modify! Once one is in the modify slot on the computer, you can log in.</span>")
 		if ("logout")
 			region_access = null
 			head_subordinates = null
 			authenticated = 0
-			playsound(src, 'sound/machines/terminal_off.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 		if("access")
 			if(href_list["allowed"])
@@ -470,13 +470,13 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 					inserted_modify_id.access = ( istype(src, /obj/machinery/computer/card/centcom) ? get_centcom_access(t1) : jobdatum.get_access() )
 				if (inserted_modify_id)
 					inserted_modify_id.assignment = t1
-					playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+					playsound(src, 'sound/blank.ogg', 50, FALSE)
 		if ("demote")
 			if(inserted_modify_id.assignment in head_subordinates || inserted_modify_id.assignment == "Assistant")
 				inserted_modify_id.assignment = "Unassigned"
-				playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 			else
-				to_chat(usr, "<span class='alert'>You are not authorized to demote this position.</span>")
+				to_chat(usr, "<span class='alert'>I are not authorized to demote this position.</span>")
 		if ("reg")
 			if (authenticated)
 				var/t2 = inserted_modify_id
@@ -484,7 +484,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 					var/newName = reject_bad_name(href_list["reg"])
 					if(newName)
 						inserted_modify_id.registered_name = newName
-						playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+						playsound(src, 'sound/blank.ogg', 50, FALSE)
 					else
 						to_chat(usr, "<span class='alert'>Invalid name entered.</span>")
 						updateUsrDialog()
@@ -512,7 +512,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 					GLOB.time_last_changed_position = world.time / 10
 				j.total_positions++
 				opened_positions[edit_job_target]++
-				playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 		if("make_job_unavailable")
 			// MAKE JOB POSITION UNAVAILABLE FOR LATE JOINERS
@@ -530,7 +530,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 					GLOB.time_last_changed_position = world.time / 10
 				j.total_positions--
 				opened_positions[edit_job_target]--
-				playsound(src, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 		if ("prioritize_job")
 			// TOGGLE WHETHER JOB APPEARS AS PRIORITIZED IN THE LOBBY
@@ -551,7 +551,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 				else
 					SSjob.prioritized_jobs += j
 				to_chat(usr, "<span class='notice'>[j.title] has been successfully [priority ? "prioritized" : "unprioritized"]. Potential employees will notice your request.</span>")
-				playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 
 		if ("print")
 			if (!( printing ))
@@ -564,7 +564,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 				P.info = t1
 				P.name = "paper- 'Crew Manifest'"
 				printing = null
-				playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
+				playsound(src, 'sound/blank.ogg', 50, FALSE)
 	if (inserted_modify_id)
 		inserted_modify_id.update_label()
 	updateUsrDialog()
@@ -581,7 +581,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 
 /obj/machinery/computer/card/minor
 	name = "department management console"
-	desc = "You can use this to change ID's for specific departments."
+	desc = ""
 	icon_screen = "idminor"
 	circuit = /obj/item/circuitboard/computer/card/minor
 

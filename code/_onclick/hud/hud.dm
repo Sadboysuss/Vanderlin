@@ -5,14 +5,8 @@
 */
 
 // The default UI style is the first one in the list
-GLOBAL_LIST_INIT(available_ui_styles, list(
-	"Midnight" = 'icons/mob/screen_midnight.dmi',
-	"Retro" = 'icons/mob/screen_retro.dmi',
-	"Plasmafire" = 'icons/mob/screen_plasmafire.dmi',
-	"Slimecore" = 'icons/mob/screen_slimecore.dmi',
-	"Operative" = 'icons/mob/screen_operative.dmi',
-	"Clockwork" = 'icons/mob/screen_clockwork.dmi'
-))
+GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
+	"Rogue" = 'icons/mob/roguehud.dmi')))
 
 /proc/ui_style2icon(ui_style)
 	return GLOB.available_ui_styles[ui_style] || GLOB.available_ui_styles[GLOB.available_ui_styles[1]]
@@ -22,7 +16,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	var/hud_shown = TRUE			//Used for the HUD toggle (F12)
 	var/hud_version = HUD_STYLE_STANDARD	//Current displayed version of the HUD
-	var/inventory_shown = FALSE		//Equipped item inventory
+	var/inventory_shown = TRUE		//Equipped item inventory
 	var/hotkey_ui_hidden = FALSE	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/ling/chems/lingchemdisplay
@@ -35,12 +29,26 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	var/obj/screen/devil/soul_counter/devilsouldisplay
 
-	var/obj/screen/action_intent
-	var/obj/screen/zone_select
+	var/obj/screen/act_intent/action_intent
+	var/obj/screen/grain
+	var/obj/screen/scannies
+	var/obj/screen/act_intent/rogintent/magic/spell_intent
+	var/obj/screen/zone_sel/zone_select
 	var/obj/screen/pull_icon
 	var/obj/screen/rest_icon
-	var/obj/screen/throw_icon
+	var/obj/screen/throw_catch/throw_icon
 	var/obj/screen/module_store_icon
+	var/obj/screen/backhudl
+	var/obj/screen/hsover
+	var/obj/screen/quad_intents/quad_intents
+	var/obj/screen/give_intent/give_intent
+	var/obj/screen/def_intent/def_intent
+	var/obj/screen/fov
+	var/obj/screen/fov_blocker
+	var/obj/screen/clock
+	var/obj/screen/stress/stressies
+	var/obj/screen/cmode_button
+	var/obj/screen/rmbintent/rmb_intent
 
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
@@ -55,11 +63,21 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/action_buttons_hidden = FALSE
 
 	var/obj/screen/healths
+	var/obj/screen/bloods
 	var/obj/screen/healthdoll
 	var/obj/screen/internals
+	var/obj/screen/rogfat/fats
+	var/obj/screen/rogstam/stams
+
+	var/image/object_overlay
+	var/obj/screen/overlay_curloc
 
 	// subtypes can override this to force a specific UI style
 	var/ui_style
+
+	var/obj/screen/read/reads
+	var/obj/screen/textl
+	var/obj/screen/textr
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -68,23 +86,34 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		// will fall back to the default if any of these are null
 		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
 
-	hide_actions_toggle = new
-	hide_actions_toggle.InitialiseIcon(src)
-	if(mymob.client)
-		hide_actions_toggle.locked = mymob.client.prefs.buttons_locked
+//	hide_actions_toggle = new
+//	hide_actions_toggle.InitialiseIcon(src)
+//	if(mymob.client)
+//		hide_actions_toggle.locked = mymob.client.prefs.buttons_locked
 
-	hand_slots = list()
+	if(!hand_slots)
+		hand_slots = list()
+	else
+		hand_slots.Cut()
 
 	for(var/mytype in subtypesof(/obj/screen/plane_master))
 		var/obj/screen/plane_master/instance = new mytype()
 		plane_masters["[instance.plane]"] = instance
 		instance.backdrop(mymob)
 
+/datum/hud/new_player/New(mob/owner)
+	..()
+	scannies = new /obj/screen/scannies
+	scannies.hud = src
+	static_inventory += scannies
+	if(owner.client?.prefs?.crt == TRUE)
+		scannies.alpha = 70
+
 /datum/hud/Destroy()
 	if(mymob.hud_used == src)
 		mymob.hud_used = null
 
-	QDEL_NULL(hide_actions_toggle)
+//	QDEL_NULL(hide_actions_toggle)
 	QDEL_NULL(module_store_icon)
 	QDEL_LIST(static_inventory)
 
@@ -92,6 +121,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	action_intent = null
 	zone_select = null
 	pull_icon = null
+	backhudl = null
 
 	QDEL_LIST(toggleable_inventory)
 	QDEL_LIST(hotkeybuttons)
@@ -150,7 +180,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			if(infodisplay.len)
 				screenmob.client.screen += infodisplay
 
-			screenmob.client.screen += hide_actions_toggle
+//			screenmob.client.screen += hide_actions_toggle
 
 			if(action_intent)
 				action_intent.screen_loc = initial(action_intent.screen_loc) //Restore intent selection to the original position
@@ -241,7 +271,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	ui_style = new_ui_style
 	build_hand_slots()
-	hide_actions_toggle.InitialiseIcon(src)
+//	hide_actions_toggle.InitialiseIcon(src)
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12()
@@ -263,7 +293,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		var/obj/screen/inventory/hand/H = hand_slots[h]
 		if(H)
 			static_inventory -= H
-	hand_slots = list()
+	if(hand_slots)
+		hand_slots.Cut()
+	else
+		hand_slots = list()
 	var/obj/screen/inventory/hand/hand_box
 	for(var/i in 1 to mymob.held_items.len)
 		hand_box = new /obj/screen/inventory/hand()

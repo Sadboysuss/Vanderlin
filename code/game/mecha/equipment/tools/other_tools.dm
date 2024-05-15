@@ -6,7 +6,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/teleporter
 	name = "mounted teleporter"
-	desc = "An exosuit module that allows exosuits to teleport to any position in view."
+	desc = ""
 	icon_state = "mecha_teleport"
 	equip_cooldown = 150
 	energy_drain = 1000
@@ -26,7 +26,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator
 	name = "mounted wormhole generator"
-	desc = "An exosuit module that allows generating of small quasi-stable wormholes."
+	desc = ""
 	icon_state = "mecha_wholegen"
 	equip_cooldown = 50
 	energy_drain = 300
@@ -69,7 +69,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
 	name = "mounted gravitational catapult"
-	desc = "An exosuit mounted Gravitational Catapult."
+	desc = ""
 	icon_state = "mecha_teleport"
 	equip_cooldown = 10
 	energy_drain = 100
@@ -151,7 +151,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster //what is that noise? A BAWWW from TK mutants.
 	name = "armor booster module (Close Combat Weaponry)"
-	desc = "Boosts exosuit armor against armed melee attacks. Requires energy to operate."
+	desc = ""
 	icon_state = "mecha_abooster_ccw"
 	equip_cooldown = 10
 	energy_drain = 50
@@ -169,7 +169,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
 	name = "armor booster module (Ranged Weaponry)"
-	desc = "Boosts exosuit armor against ranged attacks. Completely blocks taser shots. Requires energy to operate."
+	desc = ""
 	icon_state = "mecha_abooster_proj"
 	equip_cooldown = 10
 	energy_drain = 50
@@ -189,7 +189,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid
 	name = "exosuit repair droid"
-	desc = "An automated repair droid for exosuits. Scans for damage and repairs it. Can fix almost all types of external or internal damage."
+	desc = ""
 	icon_state = "repair_droid"
 	energy_drain = 50
 	range = 0
@@ -274,7 +274,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay
 	name = "exosuit energy relay"
-	desc = "An exosuit module that wirelessly drains energy from any available power channel in area. The performance index is quite low."
+	desc = ""
 	icon_state = "tesla"
 	energy_drain = 0
 	range = 0
@@ -300,7 +300,7 @@
 		return 1000 //making magic
 
 
-/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay/proc/GET_MUTATION_POWER_channel(var/area/A)
+/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay/proc/GET_MUTATION_POWER_channel(area/A)
 	var/pow_chan
 	if(A)
 		for(var/c in use_channels)
@@ -359,7 +359,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/generator
 	name = "exosuit plasma converter"
-	desc = "An exosuit module that generates power using solid plasma as fuel. Pollutes the environment."
+	desc = ""
 	icon_state = "tesla"
 	range = MECHA_MELEE
 	var/coeff = 100
@@ -407,7 +407,7 @@
 		if(result)
 			send_byjax(chassis.occupant,"exosuit.browser","[REF(src)]",src.get_equip_info())
 
-/obj/item/mecha_parts/mecha_equipment/generator/proc/load_fuel(var/obj/item/stack/sheet/P)
+/obj/item/mecha_parts/mecha_equipment/generator/proc/load_fuel(obj/item/stack/sheet/P)
 	if(P.type == fuel.type && P.amount > 0)
 		var/to_load = max(max_fuel - fuel.amount*fuel.mats_per_stack,0)
 		if(to_load)
@@ -454,7 +454,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/generator/nuclear
 	name = "exonuclear reactor"
-	desc = "An exosuit module that generates power using uranium as fuel. Pollutes the environment."
+	desc = ""
 	icon_state = "tesla"
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
@@ -474,7 +474,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/thrusters
 	name = "generic exosuit thrusters" //parent object, in-game sources will be a child object
-	desc = "A generic set of thrusters, from an unknown source. Uses not-understood methods to propel exosuits seemingly for free."
+	desc = ""
 	icon_state = "thrusters"
 	selectable = FALSE
 	var/effect_type = /obj/effect/particle_effect/sparks
@@ -528,13 +528,13 @@
 /obj/item/mecha_parts/mecha_equipment/thrusters/get_equip_info()
 	return "[..()] \[<a href='?src=[REF(src)];mode=0'>Enable</a>|<a href='?src=[REF(src)];mode=1'>Disable</a>\]"
 
-/obj/item/mecha_parts/mecha_equipment/thrusters/proc/thrust(var/movement_dir)
+/obj/item/mecha_parts/mecha_equipment/thrusters/proc/thrust(movement_dir)
 	if(!chassis)
 		return FALSE
 	generate_effect(movement_dir)
 	return TRUE //This parent should never exist in-game outside admeme use, so why not let it be a creative thruster?
 
-/obj/item/mecha_parts/mecha_equipment/thrusters/proc/generate_effect(var/movement_dir)
+/obj/item/mecha_parts/mecha_equipment/thrusters/proc/generate_effect(movement_dir)
 	var/obj/effect/particle_effect/E = new effect_type(get_turf(chassis))
 	E.dir = turn(movement_dir, 180)
 	step(E, turn(movement_dir, 180))
@@ -543,7 +543,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/gas
 	name = "RCS thruster package"
-	desc = "A set of thrusters that allow for exosuit movement in zero-gravity enviroments, by expelling gas from the internal life support tank."
+	desc = ""
 	effect_type = /obj/effect/particle_effect/smoke
 	var/move_cost = 20 //moles per step
 
@@ -553,7 +553,7 @@
 		return FALSE
 	. = ..()
 
-/obj/item/mecha_parts/mecha_equipment/thrusters/gas/thrust(var/movement_dir)
+/obj/item/mecha_parts/mecha_equipment/thrusters/gas/thrust(movement_dir)
 	if(!chassis || !chassis.internal_tank)
 		return FALSE
 	var/moles = chassis.internal_tank.air_contents.total_moles()
@@ -568,12 +568,12 @@
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/ion //for mechs with built-in thrusters, should never really exist un-attached to a mech
 	name = "Ion thruster package"
-	desc = "A set of thrusters that allow for exosuit movement in zero-gravity enviroments."
+	desc = ""
 	detachable = FALSE
 	salvageable = FALSE
 	effect_type = /obj/effect/particle_effect/ion_trails
 
-/obj/item/mecha_parts/mecha_equipment/thrusters/ion/thrust(var/movement_dir)
+/obj/item/mecha_parts/mecha_equipment/thrusters/ion/thrust(movement_dir)
 	if(!chassis)
 		return FALSE
 	if(chassis.use_power(chassis.step_energy_drain))

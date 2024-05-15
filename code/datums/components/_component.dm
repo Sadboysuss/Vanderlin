@@ -13,15 +13,15 @@
 	/// Defines how duplicate existing components are handled when added to a datum
 	/// See `COMPONENT_DUPE_*` definitions for available options
 	var/dupe_mode = COMPONENT_DUPE_HIGHLANDER
-	
+
 	/// The type to check for duplication
 	/// `null` means exact match on `type` (default)
 	/// Any other type means that and all subtypes
 	var/dupe_type
-	
+
 	/// The datum this components belongs to
 	var/datum/parent
-	
+
 	/// Only set to true if you are able to properly transfer this component
 	/// At a minimum RegisterWithParent and UnregisterFromParent should be used
 	/// Make sure you also implement PostTransfer for any post transfer handling
@@ -197,6 +197,8 @@
   * * sig_typeor_types Signal string key or list of signal keys to stop listening to specifically
   */
 /datum/proc/UnregisterSignal(datum/target, sig_type_or_types)
+	if(!target)
+		return
 	var/list/lookup = target.comp_lookup
 	if(!signal_procs || !signal_procs[target] || !lookup)
 		return

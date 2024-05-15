@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/cat_butcherer
 	name = "Cat Surgeon"
-	desc = "A man with the quest of chasing endless feline tail."
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "cat_butcher"
 	icon_living = "cat_butcher"
@@ -18,7 +18,7 @@
 	melee_damage_upper = 15
 	attack_verb_continuous = "slashes at"
 	attack_verb_simple = "slash at"
-	attack_sound = 'sound/weapons/circsawhit.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	loot = list(/obj/effect/mob_spawn/human/corpse/cat_butcher, /obj/item/circular_saw)
@@ -35,7 +35,7 @@
 		var/mob/living/carbon/human/L = target
 		var/obj/item/organ/tail/cat/tail = L.getorgan(/obj/item/organ/tail/cat)
 		if(!QDELETED(tail))
-			visible_message("<span class='notice'>[src] severs [L]'s tail in one swift swipe!</span>", "<span class='notice'>You sever [L]'s tail in one swift swipe.</span>")
+			visible_message("<span class='notice'>[src] severs [L]'s tail in one swift swipe!</span>", "<span class='notice'>I sever [L]'s tail in one swift swipe.</span>")
 			tail.Remove(L)
 			var/obj/item/organ/tail/cat/dropped_tail = new(target.drop_location())
 			dropped_tail.color = L.hair_color

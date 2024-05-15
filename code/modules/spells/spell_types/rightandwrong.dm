@@ -120,7 +120,7 @@ GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 	var/obj/item/gun/G = new gun_type(get_turf(H))
 	if (istype(G)) // The list contains some non-gun type guns like the speargun which do not have this proc
 		G.unlock()
-	playsound(get_turf(H),'sound/magic/summon_guns.ogg', 50, TRUE)
+	playsound(get_turf(H),'sound/blank.ogg', 50, TRUE)
 
 	var/in_hand = H.put_in_hands(G) // not always successful
 
@@ -144,18 +144,18 @@ GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 		lucky = TRUE
 
 	var/obj/item/M = new magic_type(get_turf(H))
-	playsound(get_turf(H),'sound/magic/summon_magic.ogg', 50, TRUE)
+	playsound(get_turf(H),'sound/blank.ogg', 50, TRUE)
 
 	var/in_hand = H.put_in_hands(M)
 
 	to_chat(H, "<span class='warning'>\A [M] appears [in_hand ? "in your hand" : "at your feet"]!</span>")
 	if(lucky)
-		to_chat(H, "<span class='notice'>You feel incredibly lucky.</span>")
+		to_chat(H, "<span class='notice'>I feel incredibly lucky.</span>")
 
 
 /proc/rightandwrong(summon_type, mob/user, survivor_probability)
 	if(user) //in this case either someone holding a spellbook or a badmin
-		to_chat(user, "<span class='warning'>You summoned [summon_type]!</span>")
+		to_chat(user, "<span class='warning'>I summoned [summon_type]!</span>")
 		message_admins("[ADMIN_LOOKUPFLW(user)] summoned [summon_type]!")
 		log_game("[key_name(user)] summoned [summon_type]!")
 

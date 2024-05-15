@@ -84,7 +84,7 @@
 /datum/game_mode/proc/post_setup(report) //Gamemodes can override the intercept report. Passing TRUE as the argument will force a report.
 	if(!report)
 		report = !CONFIG_GET(flag/no_intercept_report)
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/display_roundstart_logout_report), ROUNDSTART_LOGOUT_REPORT_TIME)
+//	addtimer(CALLBACK(GLOBAL_PROC, .proc/display_roundstart_logout_report), ROUNDSTART_LOGOUT_REPORT_TIME)
 
 	if(CONFIG_GET(flag/reopen_roundstart_suicide_roles))
 		var/delay = CONFIG_GET(number/reopen_roundstart_suicide_roles_delay)
@@ -148,12 +148,13 @@
 
 	replacementmode = pickweight(usable_modes)
 
-	switch(SSshuttle.emergency.mode) //Rounds on the verge of ending don't get new antags, they just run out
-		if(SHUTTLE_STRANDED, SHUTTLE_ESCAPE)
-			return 1
-		if(SHUTTLE_CALL)
-			if(SSshuttle.emergency.timeLeft(1) < initial(SSshuttle.emergencyCallTime)*0.5)
+	if(SSshuttle.emergency)
+		switch(SSshuttle.emergency.mode) //Rounds on the verge of ending don't get new antags, they just run out
+			if(SHUTTLE_STRANDED, SHUTTLE_ESCAPE)
 				return 1
+			if(SHUTTLE_CALL)
+				if(SSshuttle.emergency.timeLeft(1) < initial(SSshuttle.emergencyCallTime)*0.5)
+					return 1
 
 	var/matc = CONFIG_GET(number/midround_antag_time_check)
 	if(world.time >= (matc * 600))
@@ -294,7 +295,7 @@
 			intercepttext += G.get_report()
 
 	print_command_report(intercepttext, "Central Command Status Summary", announce=FALSE)
-	priority_announce("A summary has been copied and printed to all communications consoles.", "Enemy communication intercepted. Security level elevated.", 'sound/ai/intercept.ogg')
+	priority_announce("A summary has been copied and printed to all communications consoles.", "Enemy communication intercepted. Security level elevated.", 'sound/blank.ogg')
 	if(GLOB.security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
 
@@ -354,16 +355,17 @@
 	WARNING("Something has gone terribly wrong. /datum/game_mode/proc/antag_pick failed to select a candidate. Falling back to pick()")
 	return pick(candidates)
 
-/datum/game_mode/proc/get_players_for_role(role)
+/datum/game_mode/proc/get_players_for_role(role, pre_do, check_pq = TRUE)
 	var/list/players = list()
 	var/list/candidates = list()
-	var/list/drafted = list()
-	var/datum/mind/applicant = null
+//	var/list/drafted = list()
+//	var/datum/mind/applicant = null
 
 	// Ultimate randomizing code right here
 	for(var/i in GLOB.new_player_list)
 		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences())
+//			if(player.client && player.client.whitelisted() && !player.client.blacklisted())
 			players += player
 
 	// Shuffling, the players list is now ping-independent!!!
@@ -372,17 +374,27 @@
 
 	for(var/mob/dead/new_player/player in players)
 		if(player.client && player.ready == PLAYER_READY_TO_PLAY)
+			if(check_pq)
+				if(get_playerquality(player.ckey) <= -10)
+					continue
 			if(role in player.client.prefs.be_special)
-				if(!is_banned_from(player.ckey, list(role, ROLE_SYNDICATE)) && !QDELETED(player))
-					if(age_check(player.client)) //Must be older than the minimum age
-						candidates += player.mind				// Get a list of all the people who want to be the antagonist for this round
+//				if(!is_banned_from(player.ckey, list(role, ROLE_SYNDICATE)) && !QDELETED(player))
+				candidates += player.mind				// Get a list of all the people who want to be the antagonist for this round
+				continue
+			if(role == ROLE_NBEAST)
+				if(prob(1))
+					candidates += player.mind
 
 	if(restricted_jobs)
 		for(var/datum/mind/player in candidates)
 			for(var/job in restricted_jobs)					// Remove people who want to be antagonist but have a job already that precludes it
 				if(player.assigned_role == job)
 					candidates -= player
+				if(pre_do)
+					if(player.current.client.prefs.job_preferences[job] == JP_HIGH)
+						candidates -= player
 
+/*
 	if(candidates.len < recommended_enemies)
 		for(var/mob/dead/new_player/player in players)
 			if(player.client && player.ready == PLAYER_READY_TO_PLAY)
@@ -407,7 +419,7 @@
 
 		else												// Not enough scrubs, ABORT ABORT ABORT
 			break
-
+*/
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than recommended_enemies
 							//			recommended_enemies if the number of people with that role set to yes is less than recomended_enemies,
 							//			Less if there are not enough valid players in the game entirely to make recommended_enemies.

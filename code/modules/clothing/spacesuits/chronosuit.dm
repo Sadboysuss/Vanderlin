@@ -1,6 +1,6 @@
 /obj/item/clothing/head/helmet/space/chronos
 	name = "Chronosuit Helmet"
-	desc = "A white helmet with an opaque blue visor."
+	desc = ""
 	icon_state = "chronohelmet"
 	item_state = "chronohelmet"
 	slowdown = 1
@@ -20,7 +20,7 @@
 
 /obj/item/clothing/suit/space/chronos
 	name = "Chronosuit"
-	desc = "An advanced spacesuit equipped with time-bluespace teleportation and anti-compression technology."
+	desc = ""
 	icon_state = "chronosuit"
 	item_state = "chronosuit"
 	actions_types = list(/datum/action/item_action/toggle)
@@ -74,9 +74,9 @@
 	var/mob/living/carbon/human/user = src.loc
 	switch(severity)
 		if(1)
-			if(activated && user && ishuman(user) && (user.wear_suit == src))
+			if(activated && user && ishuman(user) && (user.wear_armor == src))
 				to_chat(user, "<span class='danger'>E:FATAL:RAM_READ_FAIL\nE:FATAL:STACK_EMPTY\nE:FATAL:READ_NULL_POINT\nE:FATAL:PWR_BUS_OVERLOAD</span>")
-				to_chat(user, "<span class='userdanger'>An electromagnetic pulse disrupts your [name] and violently tears you out of time-bluespace!</span>")
+				to_chat(user, "<span class='danger'>An electromagnetic pulse disrupts my [name] and violently tears you out of time-bluespace!</span>")
 				user.emote("scream")
 			deactivate(1, 1)
 
@@ -107,7 +107,7 @@
 
 /obj/item/clothing/suit/space/chronos/proc/chronowalk(atom/location)
 	var/mob/living/carbon/human/user = src.loc
-	if(activated && !teleporting && user && istype(user) && location && user.loc && location.loc && user.wear_suit == src && user.stat == CONSCIOUS)
+	if(activated && !teleporting && user && istype(user) && location && user.loc && location.loc && user.wear_armor == src && user.stat == CONSCIOUS)
 		teleporting = 1
 		var/turf/from_turf = get_turf(user)
 		var/turf/to_turf = get_turf(location)
@@ -128,7 +128,7 @@
 		for(var/exposed_item in exposed)
 			var/obj/item/exposed_I = exposed_item
 			if(exposed_I && !(exposed_I.type in chronosafe_items) && user.dropItemToGround(exposed_I))
-				to_chat(user, "<span class='notice'>Your [exposed_I.name] got left behind.</span>")
+				to_chat(user, "<span class='notice'>My [exposed_I.name] got left behind.</span>")
 
 		user.ExtinguishMob()
 
@@ -168,7 +168,7 @@
 /obj/item/clothing/suit/space/chronos/process()
 	if(activated)
 		var/mob/living/carbon/human/user = src.loc
-		if(user && ishuman(user) && (user.wear_suit == src))
+		if(user && ishuman(user) && (user.wear_armor == src))
 			if(camera && (user.remote_control == camera))
 				if(!teleporting)
 					if(camera.loc != user && ((camera.x != user.x) || (camera.y != user.y) || (camera.z != user.z)))
@@ -185,7 +185,7 @@
 	if(!activating && !activated && !teleporting)
 		activating = 1
 		var/mob/living/carbon/human/user = src.loc
-		if(user && ishuman(user) && user.wear_suit == src)
+		if(user && ishuman(user) && user.wear_armor == src)
 			to_chat(user, "\nChronosuitMK4 login: root")
 			to_chat(user, "Password:\n")
 			to_chat(user, "root@ChronosuitMK4# chronowalk4 --start\n")
@@ -220,7 +220,7 @@
 		finish_chronowalk()
 		if(user && ishuman(user))
 			teleport_now.Remove(user)
-			if(user.wear_suit == src)
+			if(user.wear_armor == src)
 				if(hard_landing)
 					user.electrocute_act(35, src, flags = SHOCK_NOGLOVES)
 					user.Paralyze(200)
@@ -270,7 +270,7 @@
 	if(target_ui)
 		QDEL_NULL(target_ui)
 
-/obj/effect/chronos_cam/relaymove(var/mob/user, direction)
+/obj/effect/chronos_cam/relaymove(mob/user, direction)
 	if(!holder)
 		qdel(src)
 		return

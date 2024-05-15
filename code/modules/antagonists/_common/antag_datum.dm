@@ -17,11 +17,13 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/can_hijack = HIJACK_NEUTRAL //If these antags are alone on shuttle hijack happens.
 	var/antag_hud_type
 	var/antag_hud_name
+	var/list/confess_lines
 
 	//Antag panel properties
 	var/show_in_antagpanel = TRUE	//This will hide adding this antag type in antag panel, use only for internal subtypes that shouldn't be added directly but still show if possessed by mind
 	var/antagpanel_category = "Uncategorized"	//Antagpanel will display these together, REQUIRED
 	var/show_name_in_check_antagonists = FALSE //Will append antagonist name in admin listings - use for categories that share more than one antag type
+	var/increase_votepwr = TRUE
 
 /datum/antagonist/New()
 	GLOB.antagonists += src
@@ -33,6 +35,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 		LAZYREMOVE(owner.antag_datums, src)
 	owner = null
 	return ..()
+
+/datum/antagonist/proc/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
+	return
 
 /datum/antagonist/proc/can_be_owned(datum/mind/new_owner)
 	. = TRUE
@@ -92,8 +97,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 //Proc called when the datum is given to a mind.
 /datum/antagonist/proc/on_gain()
 	if(owner && owner.current)
-		if(!silent)
-			greet()
+//		if(!silent)
+//			greet()
 		apply_innate_effects()
 		give_antag_moodies()
 		if(is_banned(owner.current) && replace_banned)
@@ -105,6 +110,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(!M)
 		return FALSE
 	. = (is_banned_from(M.ckey, list(ROLE_SYNDICATE, job_rank)) || QDELETED(M))
+
+/datum/antagonist/proc/on_life(mob/user)
+	return
 
 /datum/antagonist/proc/replace_banned_player()
 	set waitfor = FALSE
@@ -151,6 +159,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 //Individual roundend report
 /datum/antagonist/proc/roundend_report()
+	testing("doreport")
 	var/list/report = list()
 
 	if(!owner)
@@ -169,6 +178,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(objectives.len == 0 || objectives_complete)
 		report += "<span class='greentext big'>The [name] was successful!</span>"
 	else
+		testing("redtext")
 		report += "<span class='redtext big'>The [name] has failed!</span>"
 
 	return report.Join("<br>")

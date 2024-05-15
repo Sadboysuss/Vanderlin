@@ -1,7 +1,7 @@
 /obj/effect/acid
 	gender = PLURAL
 	name = "acid"
-	desc = "Burbling corrosive stuff."
+	desc = ""
 	icon_state = "acid"
 	density = FALSE
 	opacity = 0
@@ -38,7 +38,7 @@
 		return 0
 
 	if(prob(5))
-		playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 	for(var/obj/O in target)
 		if(prob(20) && !(resistance_flags & UNACIDABLE))
@@ -61,8 +61,8 @@
 			var/acid_used = min(acid_level*0.05, 20)
 			if(L.acid_act(10, acid_used, "feet"))
 				acid_level = max(0, acid_level - acid_used*10)
-				playsound(L, 'sound/weapons/sear.ogg', 50, TRUE)
-				to_chat(L, "<span class='userdanger'>[src] burns you!</span>")
+				playsound(L, 'sound/blank.ogg', 50, TRUE)
+				to_chat(L, "<span class='danger'>[src] burns you!</span>")
 
 //xenomorph corrosive acid
 /obj/effect/acid/alien
@@ -73,7 +73,7 @@
 	. = ..()
 	if(.)
 		if(prob(45))
-			playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(loc, 'sound/blank.ogg', 100, TRUE)
 		target_strength--
 		if(target_strength <= 0)
 			target.visible_message("<span class='warning'>[target] collapses under its own weight into a puddle of goop and undigested debris!</span>")

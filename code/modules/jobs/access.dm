@@ -16,7 +16,7 @@
 	else if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
-		if(check_access(H.get_active_held_item()) || src.check_access(H.wear_id))
+		if(check_access(H.get_active_held_item()) || src.check_access(H.wear_ring))
 			return TRUE
 	else if(ismonkey(M) || isalienadult(M))
 		var/mob/living/carbon/george = M
@@ -302,7 +302,7 @@
 		if(ACCESS_CE)
 			return "CE Office"
 		if(ACCESS_APOTHECARY)
-			return "Apothecary"
+			return "Archivist"
 		if(ACCESS_RC_ANNOUNCE)
 			return "RC Announcements"
 		if(ACCESS_KEYCARD_AUTH)

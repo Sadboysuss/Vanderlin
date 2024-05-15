@@ -2,7 +2,7 @@
 	icon_state = "passive_vent_map-2"
 
 	name = "passive vent"
-	desc = "It is an open vent."
+	desc = ""
 	can_unwrench = TRUE
 
 	level = 1

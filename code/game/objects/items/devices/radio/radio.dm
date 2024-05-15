@@ -3,12 +3,12 @@
 	name = "station bounced radio"
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
-	desc = "A basic handheld radio that communicates with local telecommunication networks."
+	desc = ""
 	dog_fashion = /datum/dog_fashion/back
 
 	flags_1 = CONDUCT_1 | HEAR_1
 	slot_flags = ITEM_SLOT_BELT
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	w_class = WEIGHT_CLASS_SMALL
 	custom_materials = list(/datum/material/iron=75, /datum/material/glass=25)
@@ -403,7 +403,7 @@
 					keyslot = null
 
 			recalculateChannels()
-			to_chat(user, "<span class='notice'>You pop out the encryption key in the radio.</span>")
+			to_chat(user, "<span class='notice'>I pop out the encryption key in the radio.</span>")
 
 		else
 			to_chat(user, "<span class='warning'>This radio doesn't have any encryption keys!</span>")

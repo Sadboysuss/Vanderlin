@@ -1,8 +1,8 @@
 // Starthistle
 /obj/item/seeds/starthistle
 	name = "pack of starthistle seeds"
-	desc = "A robust species of weed that often springs up in-between the cracks of spaceship parking lots."
-	icon_state = "seed-starthistle"
+	desc = ""
+	icon_state = "seed"
 	species = "starthistle"
 	plantname = "Starthistle"
 	lifespan = 70
@@ -31,8 +31,8 @@
 // Corpse flower
 /obj/item/seeds/starthistle/corpse_flower
 	name = "pack of corpse flower seeds"
-	desc = "A species of plant that emits a horrible odor. The odor stops being produced in difficult atmospheric conditions."
-	icon_state = "seed-corpse-flower"
+	desc = ""
+	icon_state = "seed"
 	species = "corpse-flower"
 	plantname = "Corpse flower"
 	production = 2
@@ -65,8 +65,8 @@
 //Galaxy Thistle
 /obj/item/seeds/galaxythistle
 	name = "pack of galaxythistle seeds"
-	desc = "An impressive species of weed that is thought to have evolved from the simple milk thistle. Contains flavolignans that can help repair a damaged liver."
-	icon_state = "seed-galaxythistle"
+	desc = ""
+	icon_state = "seed"
 	species = "galaxythistle"
 	plantname = "Galaxythistle"
 	product = /obj/item/reagent_containers/food/snacks/grown/galaxythistle
@@ -90,7 +90,7 @@
 /obj/item/reagent_containers/food/snacks/grown/galaxythistle
 	seed = /obj/item/seeds/galaxythistle
 	name = "galaxythistle flower head"
-	desc = "This spiny cluster of florets reminds you of the highlands."
+	desc = ""
 	icon_state = "galaxythistle"
 	filling_color = "#1E7549"
 	bitesize_mod = 3
@@ -101,8 +101,8 @@
 // Cabbage
 /obj/item/seeds/cabbage
 	name = "pack of cabbage seeds"
-	desc = "These seeds grow into cabbages."
-	icon_state = "seed-cabbage"
+	desc = ""
+	icon_state = "seed"
 	species = "cabbage"
 	plantname = "Cabbages"
 	product = /obj/item/reagent_containers/food/snacks/grown/cabbage
@@ -120,7 +120,7 @@
 /obj/item/reagent_containers/food/snacks/grown/cabbage
 	seed = /obj/item/seeds/cabbage
 	name = "cabbage"
-	desc = "Ewwwwwwwwww. Cabbage."
+	desc = ""
 	icon_state = "cabbage"
 	filling_color = "#90EE90"
 	bitesize_mod = 2
@@ -130,8 +130,8 @@
 // Sugarcane
 /obj/item/seeds/sugarcane
 	name = "pack of sugarcane seeds"
-	desc = "These seeds grow into sugarcane."
-	icon_state = "seed-sugarcane"
+	desc = ""
+	icon_state = "seed"
 	species = "sugarcane"
 	plantname = "Sugarcane"
 	product = /obj/item/reagent_containers/food/snacks/grown/sugarcane
@@ -147,7 +147,7 @@
 /obj/item/reagent_containers/food/snacks/grown/sugarcane
 	seed = /obj/item/seeds/sugarcane
 	name = "sugarcane"
-	desc = "Sickly sweet."
+	desc = ""
 	icon_state = "sugarcane"
 	filling_color = "#FFD700"
 	bitesize_mod = 2
@@ -157,8 +157,8 @@
 // Gatfruit
 /obj/item/seeds/gatfruit
 	name = "pack of gatfruit seeds"
-	desc = "These seeds grow into .357 revolvers."
-	icon_state = "seed-gatfruit"
+	desc = ""
+	icon_state = "seed"
 	species = "gatfruit"
 	plantname = "Gatfruit Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/shell/gatfruit
@@ -177,7 +177,7 @@
 /obj/item/reagent_containers/food/snacks/grown/shell/gatfruit
 	seed = /obj/item/seeds/gatfruit
 	name = "gatfruit"
-	desc = "It smells like burning."
+	desc = ""
 	icon_state = "gatfruit"
 	trash = /obj/item/gun/ballistic/revolver
 	bitesize_mod = 2
@@ -188,8 +188,8 @@
 //Cherry Bombs
 /obj/item/seeds/cherry/bomb
 	name = "pack of cherry bomb pits"
-	desc = "They give you vibes of dread and frustration."
-	icon_state = "seed-cherry_bomb"
+	desc = ""
+	icon_state = "seed"
 	species = "cherry_bomb"
 	plantname = "Cherry Bomb Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/cherry_bomb
@@ -199,7 +199,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb
 	name = "cherry bombs"
-	desc = "You think you can hear the hissing of a tiny fuse."
+	desc = ""
 	icon_state = "cherry_bomb"
 	filling_color = rgb(20, 20, 20)
 	seed = /obj/item/seeds/cherry/bomb
@@ -209,7 +209,7 @@
 	wine_power = 80
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb/attack_self(mob/living/user)
-	user.visible_message("<span class='warning'>[user] plucks the stem from [src]!</span>", "<span class='userdanger'>You pluck the stem from [src], which begins to hiss loudly!</span>")
+	user.visible_message("<span class='warning'>[user] plucks the stem from [src]!</span>", "<span class='danger'>I pluck the stem from [src], which begins to hiss loudly!</span>")
 	log_bomber(user, "primed a", src, "for detonation")
 	prime()
 
@@ -224,7 +224,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb/proc/prime()
 	icon_state = "cherry_bomb_lit"
-	playsound(src, 'sound/effects/fuse.ogg', seed.potency, FALSE)
+	playsound(src, 'sound/blank.ogg', seed.potency, FALSE)
 	reagents.chem_temp = 1000 //Sets off the gunpowder
 	reagents.handle_reactions()
 

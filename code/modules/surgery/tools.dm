@@ -1,6 +1,6 @@
 /obj/item/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -14,13 +14,13 @@
 	toolspeed = 1
 
 /obj/item/retractor/augment
-	desc = "Micro-mechanical manipulator for retracting stuff."
+	desc = ""
 	toolspeed = 0.5
 
 
 /obj/item/hemostat
 	name = "hemostat"
-	desc = "You think you have seen this before."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -35,13 +35,13 @@
 	toolspeed = 1
 
 /obj/item/hemostat/augment
-	desc = "Tiny servos power a pair of pincers to stop bleeding."
+	desc = ""
 	toolspeed = 0.5
 
 
 /obj/item/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -56,18 +56,18 @@
 	toolspeed = 1
 
 /obj/item/cautery/augment
-	desc = "A heated element that cauterizes wounds."
+	desc = ""
 	toolspeed = 0.5
 
 
 /obj/item/surgicaldrill
 	name = "surgical drill"
-	desc = "You can drill using this item. You dig?"
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
-	hitsound = 'sound/weapons/circsawhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	custom_materials = list(/datum/material/iron=10000, /datum/material/glass=6000)
 	flags_1 = CONDUCT_1
 	item_flags = SURGICAL_TOOL
@@ -78,8 +78,8 @@
 	toolspeed = 1
 
 /obj/item/surgicaldrill/augment
-	desc = "Effectively a small power drill contained within your arm, edges dulled to prevent tissue damage. May or may not pierce the heavens."
-	hitsound = 'sound/weapons/circsawhit.ogg'
+	desc = ""
+	hitsound = 'sound/blank.ogg'
 	force = 10
 	w_class = WEIGHT_CLASS_SMALL
 	toolspeed = 0.5
@@ -87,7 +87,7 @@
 
 /obj/item/scalpel
 	name = "scalpel"
-	desc = "Cut, cut, and once more cut."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -102,7 +102,7 @@
 	throw_range = 5
 	custom_materials = list(/datum/material/iron=4000, /datum/material/glass=1000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	sharpness = IS_SHARP_ACCURATE
 	tool_behaviour = TOOL_SCALPEL
 	toolspeed = 1
@@ -112,7 +112,7 @@
 	AddComponent(/datum/component/butchering, 80 * toolspeed, 100, 0)
 
 /obj/item/scalpel/augment
-	desc = "Ultra-sharp blade attached directly to your bone for extra-accuracy."
+	desc = ""
 	toolspeed = 0.5
 
 /obj/item/scalpel/suicide_act(mob/user)
@@ -122,13 +122,13 @@
 
 /obj/item/circular_saw
 	name = "circular saw"
-	desc = "For heavy duty cutting."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	hitsound = 'sound/weapons/circsawhit.ogg'
-	mob_throw_hit_sound =  'sound/weapons/pierce.ogg'
+	hitsound = 'sound/blank.ogg'
+	mob_throw_hit_sound =  'sound/blank.ogg'
 	flags_1 = CONDUCT_1
 	item_flags = SURGICAL_TOOL
 	force = 15
@@ -144,10 +144,10 @@
 
 /obj/item/circular_saw/Initialize()
 	. = ..()
-	AddComponent(/datum/component/butchering, 40 * toolspeed, 100, 5, 'sound/weapons/circsawhit.ogg') //saws are very accurate and fast at butchering
+	AddComponent(/datum/component/butchering, 40 * toolspeed, 100, 5, 'sound/blank.ogg') //saws are very accurate and fast at butchering
 
 /obj/item/circular_saw/augment
-	desc = "A small but very fast spinning saw. Edges dulled to prevent accidental cutting inside of the surgeon."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	force = 10
 	toolspeed = 0.5
@@ -155,7 +155,7 @@
 
 /obj/item/surgical_drapes
 	name = "surgical drapes"
-	desc = "Nanotrasen brand surgical drapes provide optimal safety and infection control."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "surgical_drapes"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -170,7 +170,7 @@
 
 /obj/item/organ_storage //allows medical cyborgs to manipulate organs without hands
 	name = "organ storage bag"
-	desc = "A container for holding body parts."
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "evidenceobj"
 	item_flags = SURGICAL_TOOL
@@ -186,7 +186,7 @@
 		to_chat(user, "<span class='warning'>[src] can only hold body parts!</span>")
 		return
 
-	user.visible_message("<span class='notice'>[user] puts [I] into [src].</span>", "<span class='notice'>You put [I] inside [src].</span>")
+	user.visible_message("<span class='notice'>[user] puts [I] into [src].</span>", "<span class='notice'>I put [I] inside [src].</span>")
 	icon_state = "evidence"
 	var/xx = I.pixel_x
 	var/yy = I.pixel_y
@@ -198,25 +198,25 @@
 	I.pixel_y = yy
 	add_overlay(img)
 	add_overlay("evidence")
-	desc = "An organ storage container holding [I]."
+	desc = ""
 	I.forceMove(src)
 	w_class = I.w_class
 
 /obj/item/organ_storage/attack_self(mob/user)
 	if(contents.len)
 		var/obj/item/I = contents[1]
-		user.visible_message("<span class='notice'>[user] dumps [I] from [src].</span>", "<span class='notice'>You dump [I] from [src].</span>")
+		user.visible_message("<span class='notice'>[user] dumps [I] from [src].</span>", "<span class='notice'>I dump [I] from [src].</span>")
 		cut_overlays()
 		I.forceMove(get_turf(src))
 		icon_state = "evidenceobj"
-		desc = "A container for holding body parts."
+		desc = ""
 	else
 		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 	return
 
 /obj/item/surgical_processor //allows medical cyborgs to scan and initiate advanced surgeries
 	name = "\improper Surgical Processor"
-	desc = "A device for scanning and initiating surgeries from a disk or operating computer."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "spectrometer"
 	item_flags = NOBLUDGEON
@@ -227,13 +227,13 @@
 	if(!proximity)
 		return
 	if(istype(O, /obj/item/disk/surgery))
-		to_chat(user, "<span class='notice'>You load the surgery protocol from [O] into [src].</span>")
+		to_chat(user, "<span class='notice'>I load the surgery protocol from [O] into [src].</span>")
 		var/obj/item/disk/surgery/D = O
 		if(do_after(user, 10, target = O))
 			advanced_surgeries |= D.surgeries
 		return TRUE
 	if(istype(O, /obj/machinery/computer/operating))
-		to_chat(user, "<span class='notice'>You copy surgery protocols from [O] into [src].</span>")
+		to_chat(user, "<span class='notice'>I copy surgery protocols from [O] into [src].</span>")
 		var/obj/machinery/computer/operating/OC = O
 		if(do_after(user, 10, target = O))
 			advanced_surgeries |= OC.advanced_surgeries
@@ -242,10 +242,10 @@
 
 /obj/item/scalpel/advanced
 	name = "laser scalpel"
-	desc = "An advanced scalpel which uses laser technology to cut."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel_a"
-	hitsound = 'sound/weapons/blade1.ogg'
+	hitsound = 'sound/blank.ogg'
 	force = 16
 	toolspeed = 0.7
 	light_color = LIGHT_COLOR_GREEN
@@ -256,16 +256,16 @@
 	set_light(1)
 
 /obj/item/scalpel/advanced/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/machines/click.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	if(tool_behaviour == TOOL_SCALPEL)
 		tool_behaviour = TOOL_SAW
-		to_chat(user, "<span class='notice'>You increase the power of [src], now it can cut bones.</span>")
+		to_chat(user, "<span class='notice'>I increase the power of [src], now it can cut bones.</span>")
 		set_light(2)
 		force += 1 //we don't want to ruin sharpened stuff
 		icon_state = "saw_a"
 	else
 		tool_behaviour = TOOL_SCALPEL
-		to_chat(user, "<span class='notice'>You lower the power of [src], it can no longer cut bones.</span>")
+		to_chat(user, "<span class='notice'>I lower the power of [src], it can no longer cut bones.</span>")
 		set_light(1)
 		force -= 1
 		icon_state = "scalpel_a"
@@ -276,20 +276,20 @@
 
 /obj/item/retractor/advanced
 	name = "mechanical pinches"
-	desc = "An agglomerate of rods and gears."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor_a"
 	toolspeed = 0.7
 
 /obj/item/retractor/advanced/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/items/change_drill.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	if(tool_behaviour == TOOL_RETRACTOR)
 		tool_behaviour = TOOL_HEMOSTAT
-		to_chat(user, "<span class='notice'>You configure the gears of [src], they are now in hemostat mode.</span>")
+		to_chat(user, "<span class='notice'>I configure the gears of [src], they are now in hemostat mode.</span>")
 		icon_state = "hemostat_a"
 	else
 		tool_behaviour = TOOL_RETRACTOR
-		to_chat(user, "<span class='notice'>You configure the gears of [src], they are now in retractor mode.</span>")
+		to_chat(user, "<span class='notice'>I configure the gears of [src], they are now in retractor mode.</span>")
 		icon_state = "retractor_a"
 
 /obj/item/retractor/advanced/examine()
@@ -298,10 +298,10 @@
 
 /obj/item/surgicaldrill/advanced
 	name = "searing tool"
-	desc = "It projects a high power laser used for medical application."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "surgicaldrill_a"
-	hitsound = 'sound/items/welder.ogg'
+	hitsound = 'sound/blank.ogg'
 	toolspeed = 0.7
 	light_color = LIGHT_COLOR_RED
 
@@ -310,14 +310,14 @@
 	set_light(1)
 
 /obj/item/surgicaldrill/advanced/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/weapons/tap.ogg', 50, TRUE)
+	playsound(get_turf(user), 'sound/blank.ogg', 50, TRUE)
 	if(tool_behaviour == TOOL_DRILL)
 		tool_behaviour = TOOL_CAUTERY
-		to_chat(user, "<span class='notice'>You focus the lenses of [src], it is now in mending mode.</span>")
+		to_chat(user, "<span class='notice'>I focus the lenses of [src], it is now in mending mode.</span>")
 		icon_state = "cautery_a"
 	else
 		tool_behaviour = TOOL_DRILL
-		to_chat(user, "<span class='notice'>You dilate the lenses of [src], it is now in drilling mode.</span>")
+		to_chat(user, "<span class='notice'>I dilate the lenses of [src], it is now in drilling mode.</span>")
 		icon_state = "surgicaldrill_a"
 
 /obj/item/surgicaldrill/advanced/examine()

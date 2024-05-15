@@ -4,14 +4,14 @@
 /obj/item/melee/proc/check_martial_counter(mob/living/carbon/human/target, mob/living/carbon/human/user)
 	if(target.check_block())
 		target.visible_message("<span class='danger'>[target.name] blocks [src] and twists [user]'s arm behind [user.p_their()] back!</span>",
-					"<span class='userdanger'>You block the attack!</span>")
+					"<span class='danger'>I block the attack!</span>")
 		user.Stun(40)
 		return TRUE
 
 
 /obj/item/melee/chainofcommand
 	name = "chain of command"
-	desc = "A tool used by great men to placate the frothing masses."
+	desc = ""
 	icon_state = "chain"
 	item_state = "chain"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -22,7 +22,7 @@
 	throwforce = 7
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
-	hitsound = 'sound/weapons/chainhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	custom_materials = list(/datum/material/iron = 1000)
 
 /obj/item/melee/chainofcommand/suicide_act(mob/user)
@@ -31,7 +31,7 @@
 
 /obj/item/melee/synthetic_arm_blade
 	name = "synthetic arm blade"
-	desc = "A grotesque blade that on closer inspection seems made of synthetic flesh, it still feels like it would hurt very badly as a weapon."
+	desc = ""
 	icon = 'icons/obj/changeling_items.dmi'
 	icon_state = "arm_blade"
 	item_state = "arm_blade"
@@ -40,7 +40,7 @@
 	w_class = WEIGHT_CLASS_HUGE
 	force = 20
 	throwforce = 10
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharpness = IS_SHARP
 
@@ -50,7 +50,7 @@
 
 /obj/item/melee/sabre
 	name = "officer's sabre"
-	desc = "An elegant weapon, its monomolecular edge is capable of cutting through flesh and bone with ease."
+	desc = ""
 	icon_state = "sabre"
 	item_state = "sabre"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -61,10 +61,10 @@
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 50
-	armour_penetration = 75
+	armor_penetration = 75
 	sharpness = IS_SHARP
 	attack_verb = list("slashed", "cut")
-	hitsound = 'sound/weapons/rapierhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	custom_materials = list(/datum/material/iron = 1000)
 
 /obj/item/melee/sabre/Initialize()
@@ -79,12 +79,12 @@
 /obj/item/melee/sabre/on_exit_storage(datum/component/storage/concrete/S)
 	var/obj/item/storage/belt/sabre/B = S.real_location()
 	if(istype(B))
-		playsound(B, 'sound/items/unsheath.ogg', 25, TRUE)
+		playsound(B, 'sound/blank.ogg', 25, TRUE)
 
 /obj/item/melee/sabre/on_enter_storage(datum/component/storage/concrete/S)
 	var/obj/item/storage/belt/sabre/B = S.real_location()
 	if(istype(B))
-		playsound(B, 'sound/items/sheath.ogg', 25, TRUE)
+		playsound(B, 'sound/blank.ogg', 25, TRUE)
 
 /obj/item/melee/sabre/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] is trying to cut off all [user.p_their()] limbs with [src]! it looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -119,7 +119,7 @@
 
 /obj/item/melee/sabre/proc/suicide_dismember(mob/living/user, obj/item/bodypart/affecting)
 	if(!QDELETED(affecting) && affecting.dismemberable && affecting.owner == user && !QDELETED(user))
-		playsound(user, hitsound, 25, TRUE)
+		playsound(user,  pick(hitsound), 25, TRUE)
 		affecting.dismember(BRUTE)
 		user.adjustBruteLoss(20)
 
@@ -131,7 +131,7 @@
 
 /obj/item/melee/beesword
 	name = "The Stinger"
-	desc = "Taken from a giant bee and folded over one thousand times in pure honey. Can sting through anything."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "beesword"
 	item_state = "stinger"
@@ -143,9 +143,9 @@
 	sharpness = IS_SHARP
 	throwforce = 10
 	block_chance = 20
-	armour_penetration = 65
+	armor_penetration = 65
 	attack_verb = list("slashed", "stung", "prickled", "poked")
-	hitsound = 'sound/weapons/rapierhit.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/melee/beesword/afterattack(atom/target, mob/user, proximity)
 	. = ..()
@@ -163,7 +163,7 @@
 
 /obj/item/melee/classic_baton
 	name = "police baton"
-	desc = "A wooden truncheon for beating criminal scum."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "baton"
 	item_state = "classic_baton"
@@ -200,8 +200,8 @@
 /obj/item/melee/classic_baton/proc/get_on_description()
 	. = list()
 
-	.["local_on"] = "<span class ='warning'>You extend the baton.</span>"
-	.["local_off"] = "<span class ='notice'>You collapse the baton.</span>"
+	.["local_on"] = "<span class ='warning'>I extend the baton.</span>"
+	.["local_off"] = "<span class ='notice'>I collapse the baton.</span>"
 
 	return .
 
@@ -210,7 +210,7 @@
 	. = list()
 
 	.["visible"] =  "<span class ='danger'>[user] knocks [target] down with [src]!</span>"
-	.["local"] = "<span class ='userdanger'>[user] knocks you down with [src]!</span>"
+	.["local"] = "<span class ='danger'>[user] knocks you down with [src]!</span>"
 
 	return .
 
@@ -219,7 +219,7 @@
 	. = list()
 
 	.["visible"] = "<span class='danger'>[user] pulses [target]'s sensors with the baton!</span>"
-	.["local"] = "<span class='danger'>You pulse [target]'s sensors with the baton!</span>"
+	.["local"] = "<span class='danger'>I pulse [target]'s sensors with the baton!</span>"
 
 	return .
 
@@ -237,7 +237,7 @@
 
 	add_fingerprint(user)
 	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
-		to_chat(user, "<span class ='userdanger'>You hit yourself over the head!</span>")
+		to_chat(user, "<span class ='danger'>I hit myself over the head!</span>")
 
 		user.Paralyze(knockdown_time_carbon * force)
 		user.adjustStaminaLoss(stamina_damage)
@@ -251,7 +251,7 @@
 		return
 	if(iscyborg(target))
 		// We don't stun if we're on harm.
-		if (user.a_intent != INTENT_HARM)
+		if (user.used_intent.type != INTENT_HARM)
 			if (affect_silicon)
 				var/list/desc = get_silicon_stun_description(target, user)
 
@@ -271,7 +271,7 @@
 		return
 	if(!isliving(target))
 		return
-	if (user.a_intent == INTENT_HARM)
+	if (user.used_intent.type == INTENT_HARM)
 		if(!..())
 			return
 		if(!iscyborg(target))
@@ -312,7 +312,7 @@
 
 /obj/item/melee/classic_baton/telescopic
 	name = "telescopic baton"
-	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "telebaton_0"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -323,7 +323,7 @@
 	item_flags = NONE
 	force = 0
 	on = FALSE
-	on_sound = 'sound/weapons/batonextend.ogg'
+	on_sound = 'sound/blank.ogg'
 
 	on_icon_state = "telebaton_1"
 	off_icon_state = "telebaton_0"
@@ -375,7 +375,7 @@
 
 /obj/item/melee/classic_baton/telescopic/contractor_baton
 	name = "contractor baton"
-	desc = "A compact, specialised baton assigned to Syndicate contractors. Applies light electrical shocks to targets."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "contractor_baton_0"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -389,8 +389,8 @@
 	cooldown = 25
 	stamina_damage = 85
 	affect_silicon = TRUE
-	on_sound = 'sound/weapons/contractorbatonextend.ogg'
-	on_stun_sound = 'sound/effects/contractorbatonhit.ogg'
+	on_sound = 'sound/blank.ogg'
+	on_stun_sound = 'sound/blank.ogg'
 
 	on_icon_state = "contractor_baton_1"
 	off_icon_state = "contractor_baton_0"
@@ -408,7 +408,7 @@
 
 /obj/item/melee/supermatter_sword
 	name = "supermatter sword"
-	desc = "In a station full of bad ideas, this might just be the worst."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "supermatter_sword"
 	item_state = "supermatter_sword"
@@ -417,7 +417,7 @@
 	slot_flags = null
 	w_class = WEIGHT_CLASS_BULKY
 	force = 0.001
-	armour_penetration = 1000
+	armor_penetration = 1000
 	var/obj/machinery/power/supermatter_crystal/shard
 	var/balanced = 1
 	force_string = "INFINITE"
@@ -463,17 +463,17 @@
 
 /obj/item/melee/supermatter_sword/ex_act(severity, target)
 	visible_message("<span class='danger'>The blast wave smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
+	"<span class='hear'>I hear a loud crack as you are washed with a wave of heat.</span>")
 	consume_everything()
 
 /obj/item/melee/supermatter_sword/acid_act()
 	visible_message("<span class='danger'>The acid smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
+	"<span class='hear'>I hear a loud crack as you are washed with a wave of heat.</span>")
 	consume_everything()
 
 /obj/item/melee/supermatter_sword/bullet_act(obj/projectile/P)
 	visible_message("<span class='danger'>[P] smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
+	"<span class='hear'>I hear a loud crack as you are washed with a wave of heat.</span>")
 	consume_everything(P)
 	return BULLET_ACT_HIT
 
@@ -495,9 +495,9 @@
 	var/turf/newT = T.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 	if(newT.type == oldtype)
 		return
-	playsound(T, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(T, 'sound/blank.ogg', 50, TRUE)
 	T.visible_message("<span class='danger'>[T] smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
+	"<span class='hear'>I hear a loud crack as you are washed with a wave of heat.</span>")
 	shard.Consume()
 	CALCULATE_ADJACENT_TURFS(T)
 
@@ -506,7 +506,7 @@
 
 /obj/item/melee/curator_whip
 	name = "curator's whip"
-	desc = "Somewhat eccentric and outdated, it still stings like hell to be hit by."
+	desc = ""
 	icon_state = "whip"
 	item_state = "chain"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -515,18 +515,18 @@
 	force = 15
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
-	hitsound = 'sound/weapons/whip.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/melee/curator_whip/afterattack(target, mob/user, proximity_flag)
 	. = ..()
 	if(ishuman(target) && proximity_flag)
 		var/mob/living/carbon/human/H = target
 		H.drop_all_held_items()
-		H.visible_message("<span class='danger'>[user] disarms [H]!</span>", "<span class='userdanger'>[user] disarmed you!</span>")
+		H.visible_message("<span class='danger'>[user] disarms [H]!</span>", "<span class='danger'>[user] disarmed you!</span>")
 
 /obj/item/melee/roastingstick
 	name = "advanced roasting stick"
-	desc = "A telescopic roasting stick with a miniature shield generator designed to ensure entry into various high-tech shielded cooking ovens and firepits."
+	desc = ""
 	icon_state = "roastingstick_0"
 	item_state = "null"
 	slot_flags = ITEM_SLOT_BELT
@@ -550,18 +550,18 @@
 		extend(user)
 	else
 		if (held_sausage)
-			to_chat(user, "<span class='warning'>You can't retract [src] while [held_sausage] is attached!</span>")
+			to_chat(user, "<span class='warning'>I can't retract [src] while [held_sausage] is attached!</span>")
 			return
 		retract(user)
 
-	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	add_fingerprint(user)
 
 /obj/item/melee/roastingstick/attackby(atom/target, mob/user)
 	..()
 	if (istype(target, /obj/item/reagent_containers/food/snacks/sausage))
 		if (!on)
-			to_chat(user, "<span class='warning'>You must extend [src] to attach anything to it!</span>")
+			to_chat(user, "<span class='warning'>I must extend [src] to attach anything to it!</span>")
 			return
 		if (held_sausage)
 			to_chat(user, "<span class='warning'>[held_sausage] is already attached to [src]!</span>")
@@ -587,13 +587,13 @@
 		add_overlay(sausage)
 
 /obj/item/melee/roastingstick/proc/extend(user)
-	to_chat(user, "<span class='warning'>You extend [src].</span>")
+	to_chat(user, "<span class='warning'>I extend [src].</span>")
 	icon_state = "roastingstick_1"
 	item_state = "nullrod"
 	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/melee/roastingstick/proc/retract(user)
-	to_chat(user, "<span class='notice'>You collapse [src].</span>")
+	to_chat(user, "<span class='notice'>I collapse [src].</span>")
 	icon_state = "roastingstick_0"
 	item_state = null
 	w_class = WEIGHT_CLASS_SMALL
@@ -609,34 +609,34 @@
 		return
 	if (is_type_in_typecache(target, ovens))
 		if (held_sausage && held_sausage.roasted)
-			to_chat("<span class='warning'>Your [held_sausage] has already been cooked!</span>")
+			to_chat("<span class='warning'>My [held_sausage] has already been cooked!</span>")
 			return
 		if (istype(target, /obj/singularity) && get_dist(user, target) < 10)
-			to_chat(user, "<span class='notice'>You send [held_sausage] towards [target].</span>")
-			playsound(src, 'sound/items/rped.ogg', 50, TRUE)
+			to_chat(user, "<span class='notice'>I send [held_sausage] towards [target].</span>")
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			beam = user.Beam(target,icon_state="rped_upgrade",time=100)
 		else if (user.Adjacent(target))
-			to_chat(user, "<span class='notice'>You extend [src] towards [target].</span>")
-			playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, TRUE)
+			to_chat(user, "<span class='notice'>I extend [src] towards [target].</span>")
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		else
 			return
 		if(do_after(user, 100, target = user))
 			finish_roasting(user, target)
 		else
 			QDEL_NULL(beam)
-			playsound(src, 'sound/weapons/batonextend.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/melee/roastingstick/proc/finish_roasting(user, atom/target)
-	to_chat(user, "<span class='notice'>You finish roasting [held_sausage].</span>")
-	playsound(src,'sound/items/welder2.ogg',50,TRUE)
+	to_chat(user, "<span class='notice'>I finish roasting [held_sausage].</span>")
+	playsound(src,'sound/blank.ogg',50,TRUE)
 	held_sausage.add_atom_colour(rgb(103,63,24), FIXED_COLOUR_PRIORITY)
 	held_sausage.name = "[target.name]-roasted [held_sausage.name]"
-	held_sausage.desc = "[held_sausage.desc] It has been cooked to perfection on \a [target]."
+	held_sausage.desc = ""
 	update_icon()
 
 /obj/item/melee/cleric_mace
 	name = "cleric mace"
-	desc = "The grandson of the club, yet the grandfather of the baseball bat. Most notably used by holy orders in days past."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "mace_greyscale"
 	item_state = "mace_greyscale"
@@ -649,7 +649,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	throwforce = 8
 	block_chance = 10
-	armour_penetration = 50
+	armor_penetration = 50
 	attack_verb = list("smacked", "struck", "cracked", "beaten")
 	var/overlay_state = "mace_handle"
 	var/mutable_appearance/overlay

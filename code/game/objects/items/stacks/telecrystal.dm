@@ -1,6 +1,6 @@
 /obj/item/stack/telecrystal
 	name = "telecrystal"
-	desc = "It seems to be pulsing with suspiciously enticing energies."
+	desc = ""
 	singular_name = "telecrystal"
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "telecrystal"
@@ -17,7 +17,7 @@
 				if(hidden_uplink)
 					hidden_uplink.telecrystals += amount
 					use(amount)
-					to_chat(user, "<span class='notice'>You press [src] onto yourself and charge your hidden uplink.</span>")
+					to_chat(user, "<span class='notice'>I press [src] onto myself and charge your hidden uplink.</span>")
 	else
 		return ..()
 
@@ -32,7 +32,7 @@
 			return
 		cart.telecrystals += amount
 		use(amount)
-		to_chat(user, "<span class='notice'>You slot [src] into [cart]. The next time it's used, it will also give telecrystals.</span>")
+		to_chat(user, "<span class='notice'>I slot [src] into [cart]. The next time it's used, it will also give telecrystals.</span>")
 
 /obj/item/stack/telecrystal/five
 	amount = 5

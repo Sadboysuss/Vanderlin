@@ -1,6 +1,6 @@
 /obj/item/implant/spell
 	name = "spell implant"
-	desc = "Allows you to cast a spell as if you were a wizard."
+	desc = ""
 	activated = FALSE
 
 	var/autorobeless = TRUE // Whether to automagically make the spell robeless on implant
@@ -38,5 +38,5 @@
 
 /obj/item/implantcase/spell
 	name = "implant case - 'Wizardry'"
-	desc = "A glass case containing an implant that can teach the user the arts of Wizardry."
+	desc = ""
 	imp_type = /obj/item/implant/spell

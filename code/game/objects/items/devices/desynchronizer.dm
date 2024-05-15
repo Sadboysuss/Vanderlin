@@ -1,6 +1,6 @@
 /obj/item/desynchronizer
 	name = "desynchronizer"
-	desc = "An experimental device that can temporarily desynchronize the user from spacetime, effectively making them disappear while it's active."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "desynchronizer"
 	item_state = "electronic"
@@ -39,14 +39,14 @@
 		new_duration = new_duration SECONDS
 		new_duration = CLAMP(new_duration, 50, max_duration)
 		duration = new_duration
-		to_chat(user, "<span class='notice'>You set the duration to [DisplayTimeText(duration)].</span>")
+		to_chat(user, "<span class='notice'>I set the duration to [DisplayTimeText(duration)].</span>")
 
 /obj/item/desynchronizer/proc/desync(mob/living/user)
 	if(sync_holder)
 		return
 	sync_holder = new(drop_location())
 	new /obj/effect/temp_visual/desynchronizer(drop_location())
-	to_chat(user, "<span class='notice'>You activate [src], desynchronizing yourself from the present. You can still see your surroundings, but you feel eerily dissociated from reality.</span>")
+	to_chat(user, "<span class='notice'>I activate [src], desynchronizing myself from the present. You can still see your surroundings, but you feel eerily dissociated from reality.</span>")
 	user.forceMove(sync_holder)
 	SEND_SIGNAL(user, COMSIG_MOVABLE_SECLUDED_LOCATION)
 	for(var/thing in user)
@@ -68,7 +68,7 @@
 
 /obj/effect/abstract/sync_holder
 	name = "desyncronized pocket"
-	desc = "A pocket in spacetime, keeping the user a fraction of a second in the future."
+	desc = ""
 	icon = null
 	icon_state = null
 	alpha = 0

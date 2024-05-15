@@ -96,4 +96,4 @@
 	p.pixel_y = rand(-10, 10)
 	C.toner -= printcost	 //All fun allowed.
 	visible_message("<span class='notice'>[C.name] spits out a photograph from a narrow slot on its chassis.</span>")
-	to_chat(usr, "<span class='notice'>You print a photograph.</span>")
+	to_chat(usr, "<span class='notice'>I print a photograph.</span>")

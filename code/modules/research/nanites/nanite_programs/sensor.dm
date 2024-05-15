@@ -1,6 +1,6 @@
 /datum/nanite_program/sensor
 	name = "Sensor Nanites"
-	desc = "These nanites send a signal code when a certain condition is met."
+	desc = ""
 	unique = FALSE
 	extra_settings = list(NES_SENT_CODE)
 	var/can_rule = FALSE
@@ -36,7 +36,7 @@
 
 /datum/nanite_program/sensor/repeat
 	name = "Signal Repeater"
-	desc = "When triggered, sends another signal to the nanites, optionally with a delay."
+	desc = ""
 	can_trigger = TRUE
 	trigger_cost = 0
 	trigger_cooldown = 10
@@ -73,7 +73,7 @@
 
 /datum/nanite_program/sensor/relay_repeat
 	name = "Relay Signal Repeater"
-	desc = "When triggered, sends another signal to a relay channel, optionally with a delay."
+	desc = ""
 	can_trigger = TRUE
 	trigger_cost = 0
 	trigger_cooldown = 10
@@ -125,7 +125,7 @@
 
 /datum/nanite_program/sensor/health
 	name = "Health Sensor"
-	desc = "The nanites receive a signal when the host's health is above/below a target percentage."
+	desc = ""
 	extra_settings = list(NES_SENT_CODE,NES_HEALTH_PERCENT,NES_DIRECTION)
 	can_rule = TRUE
 	var/spent = FALSE
@@ -189,7 +189,7 @@
 
 /datum/nanite_program/sensor/crit
 	name = "Critical Health Sensor"
-	desc = "The nanites receive a signal when the host first reaches critical health."
+	desc = ""
 	can_rule = TRUE
 	var/spent = FALSE
 
@@ -209,7 +209,7 @@
 
 /datum/nanite_program/sensor/death
 	name = "Death Sensor"
-	desc = "The nanites receive a signal when they detect the host is dead."
+	desc = ""
 	can_rule = TRUE
 	var/spent = FALSE
 
@@ -222,7 +222,7 @@
 
 /datum/nanite_program/sensor/nanite_volume
 	name = "Nanite Volume Sensor"
-	desc = "The nanites receive a signal when the nanite supply is above/below a certain percentage."
+	desc = ""
 	extra_settings = list(NES_SENT_CODE,NES_NANITE_PERCENT,NES_DIRECTION)
 	can_rule = TRUE
 	var/spent = FALSE
@@ -287,7 +287,7 @@
 
 /datum/nanite_program/sensor/damage
 	name = "Damage Sensor"
-	desc = "The nanites receive a signal when a host's specific damage type is above/below a target value."
+	desc = ""
 	extra_settings = list(NES_SENT_CODE,NES_DAMAGE_TYPE,NES_DAMAGE,NES_DIRECTION)
 	can_rule = TRUE
 	var/spent = FALSE
@@ -374,7 +374,7 @@
 
 /datum/nanite_program/sensor/voice
 	name = "Voice Sensor"
-	desc = "Sends a signal when the nanites hear a determined word or sentence."
+	desc = ""
 	extra_settings = list(NES_SENT_CODE,NES_SENTENCE,NES_INCLUSIVE_MODE)
 	var/spent = FALSE
 	var/sentence = ""
@@ -432,7 +432,7 @@
 
 /datum/nanite_program/sensor/species
 	name = "Species Sensor"
-	desc = "When triggered, the nanites scan the host to determine their species and output a signal depending on the conditions set in the settings."
+	desc = ""
 	can_trigger = TRUE
 	trigger_cost = 0
 	trigger_cooldown = 5

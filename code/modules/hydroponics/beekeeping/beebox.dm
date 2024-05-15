@@ -18,8 +18,8 @@
 /mob/living/carbon/human/bee_friendly()
 	if(dna && dna.species && dna.species.id == "pod") //bees pollinate plants, duh.
 		return 1
-	if (wear_suit && head && istype(wear_suit, /obj/item/clothing) && istype(head, /obj/item/clothing))
-		var/obj/item/clothing/CS = wear_suit
+	if (wear_armor && head && istype(wear_armor, /obj/item/clothing) && istype(head, /obj/item/clothing))
+		var/obj/item/clothing/CS = wear_armor
 		var/obj/item/clothing/CH = head
 		if (CS.clothing_flags & CH.clothing_flags & THICKMATERIAL)
 			return 1
@@ -28,7 +28,7 @@
 
 /obj/structure/beebox
 	name = "apiary"
-	desc = "Dr. Miles Manners is just your average wasp-themed super hero by day, but by night he becomes DR. BEES!"
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "beebox"
 	anchored = TRUE

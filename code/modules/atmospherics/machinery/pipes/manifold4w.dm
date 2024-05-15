@@ -5,7 +5,7 @@
 	icon_state = "manifold4w-2"
 
 	name = "4-way pipe manifold"
-	desc = "A manifold composed of regular pipes."
+	desc = ""
 
 	initialize_directions = NORTH|SOUTH|EAST|WEST
 

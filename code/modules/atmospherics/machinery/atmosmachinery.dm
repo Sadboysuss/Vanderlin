@@ -185,7 +185,7 @@
 
 	var/turf/T = get_turf(src)
 	if (level==1 && isturf(T) && T.intact)
-		to_chat(user, "<span class='warning'>You must remove the plating first!</span>")
+		to_chat(user, "<span class='warning'>I must remove the plating first!</span>")
 		return TRUE
 
 	var/datum/gas_mixture/int_air = return_air()
@@ -195,7 +195,7 @@
 	var/unsafe_wrenching = FALSE
 	var/internal_pressure = int_air.return_pressure()-env_air.return_pressure()
 
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+	to_chat(user, "<span class='notice'>I begin to unfasten \the [src]...</span>")
 
 	if (internal_pressure > 2*ONE_ATMOSPHERE)
 		to_chat(user, "<span class='warning'>As you begin unwrenching \the [src] a gush of air blows in your face... maybe you should reconsider?</span>")
@@ -204,8 +204,8 @@
 	if(I.use_tool(src, user, 20, volume=50))
 		user.visible_message( \
 			"[user] unfastens \the [src].", \
-			"<span class='notice'>You unfasten \the [src].</span>", \
-			"<span class='hear'>You hear ratchet.</span>")
+			"<span class='notice'>I unfasten \the [src].</span>", \
+			"<span class='hear'>I hear ratchet.</span>")
 		investigate_log("was <span class='warning'>REMOVED</span> by [key_name(usr)]", INVESTIGATE_ATMOS)
 
 		//You unwrenched a pipe full of pressure? Let's splat you into the wall, silly.
@@ -226,7 +226,7 @@
 		var/datum/gas_mixture/env_air = loc.return_air()
 		pressures = int_air.return_pressure() - env_air.return_pressure()
 
-	user.visible_message("<span class='danger'>[user] is sent flying by pressure!</span>","<span class='userdanger'>The pressure sends you flying!</span>")
+	user.visible_message("<span class='danger'>[user] is sent flying by pressure!</span>","<span class='danger'>The pressure sends you flying!</span>")
 
 	// if get_dir(src, user) is not 0, target is the edge_target_turf on that dir
 	// otherwise, edge_target_turf uses a random cardinal direction
@@ -299,7 +299,7 @@
 		if(target_move.can_crawl_through())
 			if(is_type_in_typecache(target_move, GLOB.ventcrawl_machinery))
 				user.forceMove(target_move.loc) //handle entering and so on.
-				user.visible_message("<span class='notice'>You hear something squeezing through the ducts...</span>", "<span class='notice'>You climb out the ventilation system.")
+				user.visible_message("<span class='notice'>I hear something squeezing through the ducts...</span>", "<span class='notice'>I climb out the ventilation system.")
 			else
 				var/list/pipenetdiff = returnPipenets() ^ target_move.returnPipenets()
 				if(pipenetdiff.len)
@@ -308,10 +308,10 @@
 				user.client.eye = target_move  //Byond only updates the eye every tick, This smooths out the movement
 				if(world.time - user.last_played_vent > VENT_SOUND_DELAY)
 					user.last_played_vent = world.time
-					playsound(src, 'sound/machines/ventcrawl.ogg', 50, TRUE, -3)
+					playsound(src, 'sound/blank.ogg', 50, TRUE, -3)
 	else if(is_type_in_typecache(src, GLOB.ventcrawl_machinery) && can_crawl_through()) //if we move in a way the pipe can connect, but doesn't - or we're in a vent
 		user.forceMove(loc)
-		user.visible_message("<span class='notice'>You hear something squeezing through the ducts...</span>", "<span class='notice'>You climb out the ventilation system.")
+		user.visible_message("<span class='notice'>I hear something squeezing through the ducts...</span>", "<span class='notice'>I climb out the ventilation system.")
 
 	//PLACEHOLDER COMMENT FOR ME TO READD THE 1 (?) DS DELAY THAT WAS IMPLEMENTED WITH A... TIMER?
 

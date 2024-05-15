@@ -78,6 +78,9 @@
 #define ANTAG_HUD_OBSESSED	23
 #define ANTAG_HUD_FUGITIVE	24
 
+//rogue
+#define ROGUE_HUD_MARRIED	25
+
 // Notification action types
 #define NOTIFY_JUMP "jump"
 #define NOTIFY_ATTACK "attack"

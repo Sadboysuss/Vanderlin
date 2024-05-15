@@ -5,7 +5,7 @@
 
 /obj/machinery/computer/emergency_shuttle
 	name = "emergency shuttle console"
-	desc = "For shuttle control."
+	desc = ""
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	ui_x = 400
@@ -62,7 +62,7 @@
 	var/obj/item/card/id/ID = user.get_idcard(TRUE)
 
 	if(!ID)
-		to_chat(user, "<span class='warning'>You don't have an ID.</span>")
+		to_chat(user, "<span class='warning'>I don't have an ID.</span>")
 		return
 
 	if(!(ACCESS_HEADS in ID.access))
@@ -185,6 +185,8 @@
 	dir = EAST
 	port_direction = WEST
 	var/sound_played = 0 //If the launch sound has been sent to all players on the shuttle itself
+	var/startTime = 0 // this + ROUNDTIMERBOAT is real launch time
+	var/earlyLaunch = FALSE
 
 /obj/docking_port/mobile/emergency/canDock(obj/docking_port/stationary/S)
 	return SHUTTLE_CAN_DOCK //If the emergency shuttle can't move, the whole game breaks, so it will force itself to land even if it has to crush a few departments in the process
@@ -192,7 +194,9 @@
 /obj/docking_port/mobile/emergency/register()
 	. = ..()
 	SSshuttle.emergency = src
-
+//#ifdef MATURESERVER
+//	SSshuttle.moveShuttle("emergency", "emergency_home", TRUE)
+//#endif
 /obj/docking_port/mobile/emergency/Destroy(force)
 	if(force)
 		// This'll make the shuttle subsystem use the backup shuttle.
@@ -203,22 +207,22 @@
 	. = ..()
 
 /obj/docking_port/mobile/emergency/request(obj/docking_port/stationary/S, area/signalOrigin, reason, redAlert, set_coefficient=null)
-	if(!isnum(set_coefficient))
-		var/security_num = seclevel2num(get_security_level())
-		switch(security_num)
-			if(SEC_LEVEL_GREEN)
-				set_coefficient = 2
-			if(SEC_LEVEL_BLUE)
-				set_coefficient = 1
-			else
-				set_coefficient = 0.5
-	var/call_time = SSshuttle.emergencyCallTime * set_coefficient * engine_coeff
+//	if(!isnum(set_coefficient))
+//		var/security_num = seclevel2num(get_security_level())
+//		switch(security_num)
+//			if(SEC_LEVEL_GREEN)
+//				set_coefficient = 2
+//			if(SEC_LEVEL_BLUE)
+//				set_coefficient = 1
+//			else
+//				set_coefficient = 0.5
+//	var/call_time = SSshuttle.emergencyCallTime * set_coefficient * engine_coeff
 	switch(mode)
 		// The shuttle can not normally be called while "recalling", so
 		// if this proc is called, it's via admin fiat
 		if(SHUTTLE_RECALL, SHUTTLE_IDLE, SHUTTLE_CALL)
 			mode = SHUTTLE_CALL
-			setTimer(call_time)
+			setTimer(0) //call_time went here
 		else
 			return
 
@@ -229,7 +233,7 @@
 	else
 		SSshuttle.emergencyLastCallLoc = null
 
-	priority_announce("The emergency shuttle has been called. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [timeLeft(600)] minutes.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nCall signal traced. Results can be viewed on any communications console." : "" ]", null, 'sound/ai/shuttlecalled.ogg', "Priority")
+//	priority_announce("The emergency shuttle has been called. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [timeLeft(600)] minutes.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nCall signal traced. Results can be viewed on any communications console." : "" ]", null, 'sound/blank.ogg', "Priority")
 
 /obj/docking_port/mobile/emergency/cancel(area/signalOrigin)
 	if(mode != SHUTTLE_CALL)
@@ -244,7 +248,7 @@
 		SSshuttle.emergencyLastCallLoc = signalOrigin
 	else
 		SSshuttle.emergencyLastCallLoc = null
-	priority_announce("The emergency shuttle has been recalled.[SSshuttle.emergencyLastCallLoc ? " Recall signal traced. Results can be viewed on any communications console." : "" ]", null, 'sound/ai/shuttlerecalled.ogg', "Priority")
+	priority_announce("The emergency shuttle has been recalled.[SSshuttle.emergencyLastCallLoc ? " Recall signal traced. Results can be viewed on any communications console." : "" ]", null, 'sound/blank.ogg', "Priority")
 
 /obj/docking_port/mobile/emergency/proc/is_hijacked()
 	var/has_people = FALSE
@@ -276,8 +280,30 @@
 					if(prevent)
 						return FALSE
 
-
 	return has_people && hijacker_present
+
+/obj/docking_port/mobile/emergency/proc/vampire_werewolf()
+	var/list/vampires = list()
+	var/list/werewolves = list()
+	for(var/mob/living/player in GLOB.player_list)
+		if(player.mind)
+			if(player.stat != DEAD)
+				if(isbrain(player)) //also technically dead
+					continue
+				if(shuttle_areas[get_area(player)])
+					if(player.mind.has_antag_datum(/datum/antagonist/werewolf))
+						werewolves += player
+						continue
+					if(player.mind.has_antag_datum(/datum/antagonist/vampire))
+						vampires += player
+						continue
+	if(vampires.len)
+		if(!werewolves.len)
+			return "vampire"
+	if(werewolves.len)
+		if(!vampires.len)
+			return "werewolf"
+
 
 /obj/docking_port/mobile/emergency/proc/ShuttleDBStuff()
 	set waitfor = FALSE
@@ -314,9 +340,11 @@
 					setTimer(20)
 					return
 				mode = SHUTTLE_DOCKED
-				setTimer(SSshuttle.emergencyDockTime)
-				send2irc("Server", "The Emergency Shuttle has docked with the station.")
-				priority_announce("The Emergency Shuttle has docked with the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, 'sound/ai/shuttledock.ogg', "Priority")
+//				setTimer(ROUNDTIMERBOAT) //important
+//				startTime = world.time //important
+
+//				send2irc("Server", "The Emergency Shuttle has docked with the station.")
+//				priority_announce("The Emergency Shuttle has docked with the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, 'sound/blank.ogg', "Priority")
 				ShuttleDBStuff()
 
 
@@ -367,7 +395,7 @@
 				mode = SHUTTLE_ESCAPE
 				launch_status = ENDGAME_LAUNCHED
 				setTimer(SSshuttle.emergencyEscapeTime * engine_coeff)
-				priority_announce("The Emergency Shuttle has left the station. Estimate [timeLeft(600)] minutes until the shuttle docks at Central Command.", null, null, "Priority")
+				priority_announce("The last boat has left. Roguetown is doomed.", null, 'sound/misc/boatleave.ogg')
 
 		if(SHUTTLE_STRANDED)
 			SSshuttle.checkHostileEnvironment()
@@ -461,7 +489,7 @@
 	if(obj_flags & EMAGGED)
 		return
 	ENABLE_BITFIELD(obj_flags, EMAGGED)
-	to_chat(user, "<span class='warning'>You fry the pod's alert level checking system.</span>")
+	to_chat(user, "<span class='warning'>I fry the pod's alert level checking system.</span>")
 
 /obj/machinery/computer/shuttle/pod/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
 	. = ..()
@@ -513,11 +541,11 @@
 
 /obj/item/pickaxe/emergency
 	name = "emergency disembarkation tool"
-	desc = "For extracting yourself from rough landings."
+	desc = ""
 
 /obj/item/storage/pod
 	name = "emergency space suits"
-	desc = "A wall mounted safe containing space suits. Will only open in emergencies."
+	desc = ""
 	anchored = TRUE
 	density = FALSE
 	icon = 'icons/obj/storage.dmi'

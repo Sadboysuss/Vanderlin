@@ -7,9 +7,10 @@
 
 	var/button_icon_state
 	var/appearance_cache
-
+	locked = TRUE
 	var/id
 	var/ordered = TRUE //If the button gets placed into the default bar
+	nomouseover = FALSE
 
 /obj/screen/movable/action_button/proc/can_use(mob/user)
 	if (linked_action)
@@ -25,7 +26,7 @@
 		return
 	if((istype(over_object, /obj/screen/movable/action_button) && !istype(over_object, /obj/screen/movable/action_button/hide_toggle)))
 		if(locked)
-			to_chat(usr, "<span class='warning'>Action button \"[name]\" is locked, unlock it first.</span>")
+//			to_chat(usr, "<span class='warning'>Action button \"[name]\" is locked, unlock it first.</span>")
 			return
 		var/obj/screen/movable/action_button/B = over_object
 		var/list/actions = usr.actions
@@ -41,7 +42,7 @@
 /obj/screen/movable/action_button/Click(location,control,params)
 	if (!can_use(usr))
 		return
-
+/*
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
 		if(locked)
@@ -55,19 +56,23 @@
 		to_chat(usr, "<span class='notice'>Action button \"[name]\" [locked ? "" : "un"]locked.</span>")
 		if(id && usr.client) //try to (un)remember position
 			usr.client.prefs.action_buttons_screen_locs["[name]_[id]"] = locked ? moved : null
-		return TRUE
+		return TRUE*/
 	if(usr.next_click > world.time)
 		return
 	usr.next_click = world.time + 1
+	if(ismob(usr))
+		var/mob/M = usr
+		M.playsound_local(M, 'sound/misc/click.ogg', 100)
 	linked_action.Trigger()
 	return TRUE
 
 //Hide/Show Action Buttons ... Button
 /obj/screen/movable/action_button/hide_toggle
 	name = "Hide Buttons"
-	desc = "Shift-click any button to reset its position, and Control-click it to lock it in place. Alt-click this button to reset all buttons to their default positions."
+	desc = ""
 	icon = 'icons/mob/actions.dmi'
 	icon_state = "bg_default"
+	locked = TRUE
 	var/hidden = 0
 	var/hide_icon = 'icons/mob/actions.dmi'
 	var/hide_state = "hide"
@@ -78,7 +83,7 @@
 /obj/screen/movable/action_button/hide_toggle/Initialize()
 	. = ..()
 	var/static/list/icon_cache = list()
-	
+
 	var/cache_key = "[hide_icon][hide_state]"
 	hide_appearance = icon_cache[cache_key]
 	if(!hide_appearance)
@@ -163,10 +168,11 @@
 /obj/screen/movable/action_button/MouseEntered(location,control,params)
 	if(!QDELETED(src))
 		openToolTip(usr,src,params,title = name,content = desc,theme = actiontooltipstyle)
-
+	..()
 
 /obj/screen/movable/action_button/MouseExited()
 	closeToolTip(usr)
+	..()
 
 /datum/hud/proc/get_action_buttons_icons()
 	. = list()
@@ -213,16 +219,16 @@
 			if(reload_screen)
 				client.screen += B
 
-		if(!button_number)
-			hud_used.hide_actions_toggle.screen_loc = null
-			return
+//		if(!button_number)
+//			hud_used.hide_actions_toggle.screen_loc = null
+//			return
 
-	if(!hud_used.hide_actions_toggle.moved)
-		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
-	else
-		hud_used.hide_actions_toggle.screen_loc = hud_used.hide_actions_toggle.moved
-	if(reload_screen)
-		client.screen += hud_used.hide_actions_toggle
+//	if(!hud_used.hide_actions_toggle.moved)
+//		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
+//	else
+//		hud_used.hide_actions_toggle.screen_loc = hud_used.hide_actions_toggle.moved
+//	if(reload_screen)
+//		client.screen += hud_used.hide_actions_toggle
 
 
 
@@ -237,7 +243,7 @@
 
 	var/coord_row = "[row ? -row : "+0"]"
 
-	return "WEST[coord_col]:[coord_col_offset],NORTH[coord_row]:-6"
+	return "WEST[coord_col]:[coord_col_offset],SOUTH[coord_row]:3"
 
 /datum/hud/proc/SetButtonCoords(obj/screen/button,number)
 	var/row = round((number-1)/AB_MAX_COLUMNS)

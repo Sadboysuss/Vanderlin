@@ -1,13 +1,13 @@
 /*! Material datum
 
-Simple datum which is instanced once per type and is used for every object of said material. It has a variety of variables that define behavior. Subtyping from this makes it easier to create your own materials. 
+Simple datum which is instanced once per type and is used for every object of said material. It has a variety of variables that define behavior. Subtyping from this makes it easier to create your own materials.
 
 */
 
 
 /datum/material
 	var/name = "material"
-	var/desc = "its..stuff."
+	var/desc = ""
 	///Var that's mostly used by science machines to identify specific materials, should most likely be phased out at some point
 	var/id = "mat"
 	///Base color of the material, is used for greyscale. Item isn't changed in color if this is null.
@@ -27,7 +27,7 @@ Simple datum which is instanced once per type and is used for every object of sa
 	///Armor modifiers, multiplies an items normal armor vars by these amounts.
 	var/armor_modifiers = list("melee" = 1, "bullet" = 1, "laser" = 1, "energy" = 1, "bomb" = 1, "bio" = 1, "rad" = 1, "fire" = 1, "acid" = 1)
 	///How beautiful is this material per unit
-	var/beauty_modifier = 0 
+	var/beauty_modifier = 0
 
 ///This proc is called when the material is added to an object.
 /datum/material/proc/on_applied(atom/source, amount, material_flags)
@@ -47,9 +47,9 @@ Simple datum which is instanced once per type and is used for every object of sa
 		on_applied_obj(source, amount, material_flags)
 
 ///This proc is called when the material is added to an object specifically.
-/datum/material/proc/on_applied_obj(var/obj/o, amount, material_flags)
+/datum/material/proc/on_applied_obj(obj/o, amount, material_flags)
 	var/new_max_integrity = CEILING(o.max_integrity * integrity_modifier, 1)
-	o.modify_max_integrity(new_max_integrity) 
+	o.modify_max_integrity(new_max_integrity)
 	o.force *= strength_modifier
 	o.throwforce *= strength_modifier
 
@@ -72,12 +72,12 @@ Simple datum which is instanced once per type and is used for every object of sa
 
 	if(material_flags & MATERIAL_ADD_PREFIX)
 		source.name = initial(source.name)
-	
+
 	if(istype(source, /obj)) //objs
 		on_removed_obj(source, material_flags)
 
 ///This proc is called when the material is removed from an object specifically.
-/datum/material/proc/on_removed_obj(var/obj/o, amount, material_flags)
+/datum/material/proc/on_removed_obj(obj/o, amount, material_flags)
 	var/new_max_integrity = initial(o.max_integrity)
 	o.modify_max_integrity(new_max_integrity)
 	o.force = initial(o.force)

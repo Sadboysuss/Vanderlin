@@ -1,6 +1,6 @@
 /obj/item/suspiciousphone
 	name = "suspicious phone"
-	desc = "This device raises pink levels to unknown highs."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "suspiciousphone"
 	w_class = WEIGHT_CLASS_SMALL
@@ -12,7 +12,7 @@
 		to_chat(user, "<span class='warning'>This device is too advanced for you!</span>")
 		return
 	if(dumped)
-		to_chat(user, "<span class='warning'>You already activated Protocol CRAB-17.</span>")
+		to_chat(user, "<span class='warning'>I already activated Protocol CRAB-17.</span>")
 		return FALSE
 	if(alert(user, "Are you sure you want to crash this market with no survivors?", "Protocol CRAB-17", "Yes", "No") == "Yes")
 		if(dumped || QDELETED(src)) //Prevents fuckers from cheesing alert
@@ -25,7 +25,7 @@
 
 /obj/structure/checkoutmachine
 	name = "Nanotrasen Space-Coin Market"
-	desc = "This is good for spacecoin because"
+	desc = ""
 	icon = 'icons/obj/money_machine.dmi'
 	icon_state = "bogdanoff"
 	layer = LARGE_MOB_LAYER
@@ -63,7 +63,7 @@
 		if(do_after(user, 40, target = src))
 			if(!card.registered_account.being_dumped)
 				return
-			to_chat(user, "<span class='warning'>You quickly cash out your funds to a more secure banking location. Funds are safu.</span>") // This is a reference and not a typo
+			to_chat(user, "<span class='warning'>I quickly cash out your funds to a more secure banking location. Funds are safu.</span>") // This is a reference and not a typo
 			card.registered_account.being_dumped = FALSE
 			card.registered_account.withdrawDelay = 0
 			if(check_if_finished())
@@ -87,17 +87,17 @@
 	sleep(10)
 	if(QDELETED(src))
 		return
-	playsound(src, 'sound/machines/click.ogg', 15, TRUE, -3)
+	playsound(src, 'sound/blank.ogg', 15, TRUE, -3)
 	cut_overlay("flaps")
 	sleep(10)
 	if(QDELETED(src))
 		return
-	playsound(src, 'sound/machines/click.ogg', 15, TRUE, -3)
+	playsound(src, 'sound/blank.ogg', 15, TRUE, -3)
 	cut_overlay("hatch")
 	sleep(30)
 	if(QDELETED(src))
 		return
-	playsound(src,'sound/machines/twobeep.ogg',50,FALSE)
+	playsound(src,'sound/blank.ogg',50,FALSE)
 	var/mutable_appearance/hologram = mutable_appearance(icon, "hologram")
 	hologram.pixel_y = 16
 	add_overlay(hologram)
@@ -129,7 +129,7 @@
 	sleep(5)
 	if(QDELETED(src))
 		return
-	playsound(src,'sound/machines/triple_beep.ogg',50,FALSE)
+	playsound(src,'sound/blank.ogg',50,FALSE)
 	add_overlay("text")
 	sleep(10)
 	if(QDELETED(src))
@@ -187,13 +187,13 @@
 	name = ""
 	icon = 'icons/obj/money_machine_64.dmi'
 	pixel_z = 300
-	desc = "Get out of the way!"
+	desc = ""
 	layer = FLY_LAYER//that wasnt flying, that was falling with style!
 	icon_state = "missile_blur"
 
 /obj/effect/dumpeetTarget
 	name = "Landing Zone Indicator"
-	desc = "A holographic projection designating the landing zone of something. It's probably best to stand back."
+	desc = ""
 	icon = 'icons/mob/actions/actions_items.dmi'
 	icon_state = "sniper_zoom"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
@@ -209,7 +209,7 @@
 	. = ..()
 	bogdanoff = user
 	addtimer(CALLBACK(src, .proc/startLaunch), 100)
-	sound_to_playing_players('sound/items/dump_it.ogg', 20)
+	sound_to_playing_players('sound/blank.ogg', 20)
 	deadchat_broadcast("Protocol CRAB-17 has been activated. A space-coin market has been launched at the station!", turf_target = get_turf(src))
 
 /obj/effect/dumpeetTarget/proc/startLaunch()
@@ -217,7 +217,7 @@
 	dump = new /obj/structure/checkoutmachine(null, bogdanoff)
 	priority_announce("The spacecoin bubble has popped! Get to the credit deposit machine at [get_area(src)] and cash out before you lose all of your funds!", sender_override = "CRAB-17 Protocol")
 	animate(DF, pixel_z = -8, time = 5, , easing = LINEAR_EASING)
-	playsound(src,  'sound/weapons/mortar_whistle.ogg', 70, TRUE, 6)
+	playsound(src,  'sound/blank.ogg', 70, TRUE, 6)
 	addtimer(CALLBACK(src, .proc/endLaunch), 5, TIMER_CLIENT_TIME) //Go onto the last step after a very short falling animation
 
 

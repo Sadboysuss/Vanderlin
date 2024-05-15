@@ -1,63 +1,69 @@
 /mob/living/carbon/examine(mob/user)
 	var/t_He = p_they(TRUE)
-	var/t_His = p_their(TRUE)
 	var/t_his = p_their()
-	var/t_him = p_them()
 	var/t_has = p_have()
 	var/t_is = p_are()
 
-	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
+	. = list("<span class='info'>✠ ------------ ✠\nThis is \a <EM>[src]</EM>!")
 	var/list/obscured = check_obscured_slots()
 
+	var/m1 = "[t_He] [t_is]"
+	var/m2 = "[t_his]"
+	var/m3 = "[t_He] [t_has]"
+	if(user == src)
+		m1 = "I am"
+		m2 = "my"
+		m3 = "I have"
+
 	if (handcuffed)
-		. += "<span class='warning'>[t_He] [t_is] [icon2html(handcuffed, user)] handcuffed!</span>"
+		. += "<span class='warning'>[m1] tied up with \a [handcuffed]!</span>"
 	if (head)
-		. += "[t_He] [t_is] wearing [head.get_examine_string(user)] on [t_his] head. "
+		. += "[m3] [head.get_examine_string(user)] on [m2] head. "
 	if(wear_mask && !(SLOT_WEAR_MASK in obscured))
-		. += "[t_He] [t_is] wearing [wear_mask.get_examine_string(user)] on [t_his] face."
+		. += "[m3] [wear_mask.get_examine_string(user)] on [m2] face."
 	if(wear_neck && !(SLOT_NECK in obscured))
-		. += "[t_He] [t_is] wearing [wear_neck.get_examine_string(user)] around [t_his] neck."
+		. += "[m3] [wear_neck.get_examine_string(user)] around [m2] neck."
 
 	for(var/obj/item/I in held_items)
 		if(!(I.item_flags & ABSTRACT))
-			. += "[t_He] [t_is] holding [I.get_examine_string(user)] in [t_his] [get_held_index_name(get_held_index_of_item(I))]."
+			. += "[m1] holding [I.get_examine_string(user)] in [m2] [get_held_index_name(get_held_index_of_item(I))]."
 
 	if (back)
-		. += "[t_He] [t_has] [back.get_examine_string(user)] on [t_his] back."
+		. += "[m3] [back.get_examine_string(user)] on [m2] back."
 	var/appears_dead = 0
-	if (stat == DEAD)
+/*	if (stat == DEAD)
 		appears_dead = 1
 		if(getorgan(/obj/item/organ/brain))
 			. += "<span class='deadsay'>[t_He] [t_is] limp and unresponsive, with no signs of life.</span>"
 		else if(get_bodypart(BODY_ZONE_HEAD))
-			. += "<span class='deadsay'>It appears that [t_his] brain is missing...</span>"
+			. += "<span class='deadsay'>It appears that [t_his] brain is missing...</span>"*/
 
 	var/list/missing = get_missing_limbs()
 	for(var/t in missing)
 		if(t==BODY_ZONE_HEAD)
-			. += "<span class='deadsay'><B>[t_His] [parse_zone(t)] is missing!</B></span>"
+			. += "<span class='deadsay'><B>[capitalize(m2)] [parse_zone(t)] is gone.</B></span>"
 			continue
-		. += "<span class='warning'><B>[t_His] [parse_zone(t)] is missing!</B></span>"
+		. += "<span class='warning'><B>[capitalize(m2)] [parse_zone(t)] is gone.</B></span>"
 
 	var/list/msg = list("<span class='warning'>")
 	var/temp = getBruteLoss()
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
 		if(temp)
 			if (temp < 25)
-				msg += "[t_He] [t_has] minor bruising.\n"
+				msg += "[m3] some bruises.\n"
 			else if (temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> bruising!\n"
+				msg += "[m3] a lot of bruises!\n"
 			else
-				msg += "<B>[t_He] [t_has] severe bruising!</B>\n"
+				msg += "<B>[m1] black and blue!!</B>\n"
 
 		temp = getFireLoss()
 		if(temp)
 			if (temp < 25)
-				msg += "[t_He] [t_has] minor burns.\n"
+				msg += "[m3] some burns.\n"
 			else if (temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> burns!\n"
+				msg += "[m3] many burns!\n"
 			else
-				msg += "<B>[t_He] [t_has] severe burns!</B>\n"
+				msg += "<B>[m1] dragon food!!</B>\n"
 
 		temp = getCloneLoss()
 		if(temp)
@@ -77,7 +83,7 @@
 		msg += "[t_He] look[p_s()] a little soaked.\n"
 
 	if(pulledby && pulledby.grab_state)
-		msg += "[t_He] [t_is] restrained by [pulledby]'s grip.\n"
+		msg += "[m1] restrained by [pulledby]'s grip.\n"
 
 	msg += "</span>"
 
@@ -85,13 +91,23 @@
 
 	if(!appears_dead)
 		if(stat == UNCONSCIOUS)
-			. += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
+			. += "<span class='warning'>[m1] unconscious.</span>"
 		else if(InCritical())
-			. += "[t_His] breathing is shallow and labored."
-
+			. += "<span class='warning'>[m1] barely conscious.</span>"
+	if (stat == DEAD)
+		appears_dead = 1
+		. += "<span class='warning'>[m1] unconscious.</span>"
 	var/trait_exam = common_trait_examine()
 	if (!isnull(trait_exam))
 		. += trait_exam
+
+	if(isliving(user))
+		var/mob/living/L = user
+		if(STASTR > L.STASTR)
+			if(STASTR > 15)
+				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
+			else
+				. += "<span class='warning'><B>[t_He] look[p_s()] stronger than I.</B></span>"
 
 	var/datum/component/mood/mood = src.GetComponent(/datum/component/mood)
 	if(mood)
@@ -108,4 +124,4 @@
 				. += "[t_He] look[p_s()] very happy."
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
 				. += "[t_He] look[p_s()] ecstatic."
-	. += "*---------*</span>"
+	. += "✠ ------------ ✠</span>"

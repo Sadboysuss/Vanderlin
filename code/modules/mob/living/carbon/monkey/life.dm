@@ -34,10 +34,10 @@
 			if(!IsParalyzed())
 				emote("collapse")
 			Paralyze(RAD_MOB_KNOCKDOWN_AMOUNT)
-			to_chat(src, "<span class='danger'>You feel weak.</span>")
+			to_chat(src, "<span class='danger'>I feel weak.</span>")
 		if(radiation > RAD_MOB_MUTATE)
 			if(prob(1))
-				to_chat(src, "<span class='danger'>You mutate!</span>")
+				to_chat(src, "<span class='danger'>I mutate!</span>")
 				easy_randmut(NEGATIVE+MINOR_NEGATIVE)
 				emote("gasp")
 				domutcheck()
@@ -135,6 +135,7 @@
 	return
 
 /mob/living/carbon/monkey/handle_random_events()
+	..()
 	if (prob(1) && prob(2))
 		emote("scratch")
 

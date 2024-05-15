@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/shapeshift
 	name = "Shapechange"
-	desc = "Take on the shape of another for a time to use their natural abilities. Once you've made your choice it cannot be changed."
+	desc = ""
 	clothes_req = FALSE
 	human_req = FALSE
 	charge_max = 200
@@ -48,8 +48,10 @@
 		if(S)
 			Restore(M)
 		else
+			if(shapeshift_type == /mob/living/simple_animal/hostile/retaliate/gaseousform)
+				spawn(100)
+					Restore(M)
 			Shapeshift(M)
-
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/proc/Shapeshift(mob/living/caster)
 	var/obj/shapeshift_holder/H = locate() in caster
@@ -75,10 +77,10 @@
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/dragon
 	name = "Dragon Form"
-	desc = "Take on the shape a lesser ash drake."
+	desc = ""
 	invocation = "RAAAAAAAAWR!"
 	convert_damage = FALSE
-	
+
 
 	shapeshift_type = /mob/living/simple_animal/hostile/megafauna/dragon/lesser
 

@@ -20,7 +20,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/plain
 	name = "bread"
-	desc = "Some plain old earthen bread."
+	desc = ""
 	icon_state = "bread"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 7)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 10)
@@ -31,14 +31,14 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/plain
 	name = "bread slice"
-	desc = "A slice of home."
+	desc = ""
 	icon_state = "breadslice"
 	customfoodfilling = 1
 	foodtype = GRAIN
 
 /obj/item/reagent_containers/food/snacks/store/bread/meat
 	name = "meatbread loaf"
-	desc = "The culinary base of every self-respecting eloquen/tg/entleman."
+	desc = ""
 	icon_state = "meatbread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/meat
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 10)
@@ -48,13 +48,13 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/meat
 	name = "meatbread slice"
-	desc = "A slice of delicious meatbread."
+	desc = ""
 	icon_state = "meatbreadslice"
 	foodtype = GRAIN | MEAT
 
 /obj/item/reagent_containers/food/snacks/store/bread/xenomeat
 	name = "xenomeatbread loaf"
-	desc = "The culinary base of every self-respecting eloquen/tg/entleman. Extra Heretical."
+	desc = ""
 	icon_state = "xenomeatbread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/xenomeat
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 10)
@@ -64,7 +64,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/xenomeat
 	name = "xenomeatbread slice"
-	desc = "A slice of delicious meatbread. Extra Heretical."
+	desc = ""
 	icon_state = "xenobreadslice"
 	filling_color = "#32CD32"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -72,7 +72,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/spidermeat
 	name = "spider meat loaf"
-	desc = "Reassuringly green meatloaf made from spider meat."
+	desc = ""
 	icon_state = "spidermeatbread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/spidermeat
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 10)
@@ -82,7 +82,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/spidermeat
 	name = "spider meat bread slice"
-	desc = "A slice of meatloaf made from an animal that most likely still wants you dead."
+	desc = ""
 	icon_state = "xenobreadslice"
 	filling_color = "#7CFC00"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/toxin = 3, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -90,7 +90,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/banana
 	name = "banana-nut bread"
-	desc = "A heavenly and filling treat."
+	desc = ""
 	icon_state = "bananabread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/banana
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/banana = 20)
@@ -101,7 +101,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/banana
 	name = "banana-nut bread slice"
-	desc = "A slice of delicious banana bread."
+	desc = ""
 	icon_state = "bananabreadslice"
 	filling_color = "#FFD700"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/banana = 4)
@@ -109,7 +109,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/tofu
 	name = "Tofubread"
-	desc = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
+	desc = ""
 	icon_state = "tofubread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/tofu
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 10)
@@ -119,7 +119,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/tofu
 	name = "tofubread slice"
-	desc = "A slice of delicious tofubread."
+	desc = ""
 	icon_state = "tofubreadslice"
 	filling_color = "#FF8C00"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -127,7 +127,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/creamcheese
 	name = "cream cheese bread"
-	desc = "Yum yum yum!"
+	desc = ""
 	icon_state = "creamcheesebread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/creamcheese
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 5)
@@ -137,7 +137,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/creamcheese
 	name = "cream cheese bread slice"
-	desc = "A slice of yum!"
+	desc = ""
 	icon_state = "creamcheesebreadslice"
 	filling_color = "#FF8C00"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -145,7 +145,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/bread/mimana
 	name = "mimana bread"
-	desc = "Best eaten in silence."
+	desc = ""
 	icon_state = "mimanabread"
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/mimana
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 5)
@@ -155,7 +155,7 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/mimana
 	name = "mimana bread slice"
-	desc = "A slice of silence!"
+	desc = ""
 	icon_state = "mimanabreadslice"
 	filling_color = "#C0C0C0"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/toxin/mutetoxin = 1, /datum/reagent/consumable/nothing = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
@@ -169,7 +169,7 @@
 
 /obj/item/reagent_containers/food/snacks/baguette
 	name = "baguette"
-	desc = "Bon appetit!"
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "baguette"
 	item_state = "baguette"
@@ -183,7 +183,7 @@
 
 /obj/item/reagent_containers/food/snacks/garlicbread
 	name = "garlic bread"
-	desc = "Alas, it is limited."
+	desc = ""
 	icon = 'icons/obj/food/burgerbread.dmi'
 	icon_state = "garlicbread"
 	item_state = "garlicbread"
@@ -195,7 +195,7 @@
 
 /obj/item/reagent_containers/food/snacks/deepfryholder
 	name = "Deep Fried Foods Holder Obj"
-	desc = "If you can see this description the code for the deep fryer fucked up."
+	desc = ""
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = ""
 	bitesize = 2
@@ -242,25 +242,25 @@
 		if(0 to 15)
 			add_atom_colour(rgb(166,103,54), FIXED_COLOUR_PRIORITY)
 			name = "lightly-fried [name]"
-			desc = "[desc] It's been lightly fried in a deep fryer."
+			desc = ""
 		if(16 to 49)
 			add_atom_colour(rgb(103,63,24), FIXED_COLOUR_PRIORITY)
 			name = "fried [name]"
-			desc = "[desc] It's been fried, increasing its tastiness value by [rand(1, 75)]%."
+			desc = ""
 		if(50 to 59)
 			add_atom_colour(rgb(63,23,4), FIXED_COLOUR_PRIORITY)
 			name = "deep-fried [name]"
-			desc = "[desc] Deep-fried to perfection."
+			desc = ""
 		if(60 to INFINITY)
 			add_atom_colour(rgb(33,19,9), FIXED_COLOUR_PRIORITY)
 			name = "the physical manifestation of the very concept of fried foods"
-			desc = "A heavily-fried...something.  Who can tell anymore?"
+			desc = ""
 	filling_color = color
 	foodtype |= FRIED
 
 /obj/item/reagent_containers/food/snacks/butterbiscuit
 	name = "butter biscuit"
-	desc = "Well butter my biscuit!"
+	desc = ""
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "butterbiscuit"
 	filling_color = "#F0E68C"
@@ -271,7 +271,7 @@
 
 /obj/item/reagent_containers/food/snacks/butterdog
 	name = "butterdog"
-	desc = "Made from exotic butters."
+	desc = ""
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "butterdog"
 	bitesize = 1

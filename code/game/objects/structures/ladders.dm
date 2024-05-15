@@ -1,12 +1,14 @@
 // Basic ladder. By default links to the z-level above/below.
 /obj/structure/ladder
 	name = "ladder"
-	desc = "A sturdy metal ladder."
-	icon = 'icons/obj/structures.dmi'
+	desc = ""
+	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "ladder11"
 	anchored = TRUE
 	var/obj/structure/ladder/down   //the ladder below this one
 	var/obj/structure/ladder/up     //the ladder above this one
+	obj_flags = BLOCK_Z_OUT_DOWN
+	max_integrity = 0
 
 /obj/structure/ladder/Initialize(mapload, obj/structure/ladder/up, obj/structure/ladder/down)
 	..()
@@ -74,26 +76,33 @@
 		qdel(src)
 
 /obj/structure/ladder/proc/travel(going_up, mob/user, is_ghost, obj/structure/ladder/ladder)
+	if(is_ghost)
+		return
+
+	if(!is_ghost)
+		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
+		if(!do_after(user, 30, TRUE, src))
+			return
+
 	if(!is_ghost)
 		show_fluff_message(going_up, user)
 		ladder.add_fingerprint(user)
-
 	var/turf/T = get_turf(ladder)
 	var/atom/movable/AM
-	if(user.pulling)
+	if(ismob(user.pulling))
 		AM = user.pulling
 		AM.forceMove(T)
 	user.forceMove(T)
 	if(AM)
-		user.start_pulling(AM)
+		user.start_pulling(AM,supress_message = TRUE)
 
 /obj/structure/ladder/proc/use(mob/user, is_ghost=FALSE)
-	if (!is_ghost && !in_range(src, user))
+	if(!in_range(src, user))
 		return
 
 	if (up && down)
 		var/result = alert("Go up or down [src]?", "Ladder", "Up", "Down", "Cancel")
-		if (!is_ghost && !in_range(src, user))
+		if (!in_range(src, user))
 			return  // nice try
 		switch(result)
 			if("Up")
@@ -135,15 +144,15 @@
 
 /obj/structure/ladder/proc/show_fluff_message(going_up, mob/user)
 	if(going_up)
-		user.visible_message("<span class='notice'>[user] climbs up [src].</span>", "<span class='notice'>You climb up [src].</span>")
+		user.visible_message("<span class='notice'>[user] climbs up [src].</span>", "<span class='notice'>I climb up [src].</span>")
 	else
-		user.visible_message("<span class='notice'>[user] climbs down [src].</span>", "<span class='notice'>You climb down [src].</span>")
+		user.visible_message("<span class='notice'>[user] climbs down [src].</span>", "<span class='notice'>I climb down [src].</span>")
 
 
 // Indestructible away mission ladders which link based on a mapped ID and height value rather than X/Y/Z.
 /obj/structure/ladder/unbreakable
 	name = "sturdy ladder"
-	desc = "An extremely sturdy metal ladder."
+	desc = ""
 	resistance_flags = INDESTRUCTIBLE
 	var/id
 	var/height = 0  // higher numbers are considered physically higher
@@ -181,3 +190,46 @@
 				break  // break if both our connections are filled
 
 	update_icon()
+
+/obj/structure/ladder/earth
+	icon_state = "ladderearth"
+
+/obj/structure/ladder/earth/update_icon()
+	if(up && down)
+		icon_state = "ladder11"
+
+	else if(up)
+		icon_state = "ladder10"
+
+	else if(down)
+		icon_state = "ladderearth"
+
+	else	//wtf make your ladders properly assholes
+		icon_state = "ladder00"
+
+/obj/structure/wallladder
+	name = "wall ladder"
+	desc = ""
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "ladderwall"
+	anchored = TRUE
+	var/obj/structure/ladder/down   //the ladder below this one
+	var/obj/structure/ladder/up     //the ladder above this one
+	obj_flags = BLOCK_Z_OUT_DOWN
+	max_integrity = 200
+	blade_dulling = DULLING_BASHCHOP
+
+
+
+/obj/structure/wallladder/OnCrafted(dirin)
+	dir = dirin
+	layer = BELOW_MOB_LAYER
+	switch(dir)
+		if(NORTH)
+			pixel_y = 16
+		if(SOUTH)
+			layer = ABOVE_MOB_LAYER
+		if(WEST)
+			pixel_x = -4
+		if(EAST)
+			pixel_x = 4

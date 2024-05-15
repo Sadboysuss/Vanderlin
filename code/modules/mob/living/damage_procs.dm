@@ -8,14 +8,26 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE)
+/mob/living/proc/apply_damage(damage = 0, damagetype = BRUTE, def_zone = null, blocked = 0, forced = FALSE, spread_damage = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
-	var/hit_percent = (100-blocked)/100
+	var/hit_percent = 1
+	damage = max(damage-blocked,0)
+//	var/hit_percent = (100-blocked)/100
 	if(!damage || (!forced && hit_percent <= 0))
+		testing("faildam")
 		return 0
+	set_typing_indicator(FALSE)
 	var/damage_amount =  forced ? damage : damage * hit_percent
 	switch(damagetype)
 		if(BRUTE)
+//			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+//				if(stat != DEAD && def_zone)
+//					testing("def_zone check [def_zone] [src]")
+//					if((health - damage_amount) <= 0)
+//						var/list/acceptable_death_zones = list("body", "chest", "stomach", "belly", "head", "torso")
+//						if(!(def_zone in acceptable_death_zones))
+//							testing("[def_zone] is not an acceptable death zone for [src]")
+//							return 1
 			adjustBruteLoss(damage_amount, forced = forced)
 		if(BURN)
 			adjustFireLoss(damage_amount, forced = forced)
@@ -27,6 +39,7 @@
 			adjustCloneLoss(damage_amount, forced = forced)
 		if(STAMINA)
 			adjustStaminaLoss(damage_amount, forced = forced)
+	update_damage_overlays()
 	return 1
 
 /mob/living/proc/apply_damage_type(damage = 0, damagetype = BRUTE) //like apply damage except it always uses the damage procs
@@ -160,6 +173,8 @@
 /mob/living/proc/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
+	if(mob_timers && amount > 0)
+		mob_timers["lastoxydam"] = world.time
 	oxyloss = CLAMP((oxyloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
 	if(updating_health)
 		updatehealth()
@@ -243,6 +258,7 @@
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_bodypart_damage(brute = 0, burn = 0, stamina = 0, updating_health = TRUE, required_status)
 	adjustBruteLoss(-brute, FALSE) //zero as argument for no instant health update
+	heal_wounds(-brute)
 	adjustFireLoss(-burn, FALSE)
 	adjustStaminaLoss(-stamina, FALSE)
 	if(updating_health)
@@ -261,6 +277,7 @@
 // heal MANY bodyparts, in random order
 /mob/living/proc/heal_overall_damage(brute = 0, burn = 0, stamina = 0, required_status, updating_health = TRUE)
 	adjustBruteLoss(-brute, FALSE) //zero as argument for no instant health update
+	heal_wounds(-brute)
 	adjustFireLoss(-burn, FALSE)
 	adjustStaminaLoss(-stamina, FALSE)
 	if(updating_health)

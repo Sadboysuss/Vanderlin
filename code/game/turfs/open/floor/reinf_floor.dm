@@ -1,7 +1,7 @@
 
 /turf/open/floor/engine
 	name = "reinforced floor"
-	desc = "Extremely sturdy."
+	desc = ""
 	icon_state = "engine"
 	thermal_conductivity = 0.025
 	heat_capacity = INFINITY
@@ -38,7 +38,7 @@
 
 /turf/open/floor/engine/wrench_act(mob/living/user, obj/item/I)
 	..()
-	to_chat(user, "<span class='notice'>You begin removing rods...</span>")
+	to_chat(user, "<span class='notice'>I begin removing rods...</span>")
 	if(I.use_tool(src, user, 30, volume=80))
 		if(!istype(src, /turf/open/floor/engine))
 			return TRUE
@@ -126,7 +126,7 @@
 
 /turf/open/floor/engine/cult
 	name = "engraved floor"
-	desc = "The air smells strange over this sinister flooring."
+	desc = ""
 	icon_state = "plating"
 	floor_tile = null
 	var/obj/effect/cult_turf/overlay/floor/bloodcult/realappearance

@@ -5,7 +5,7 @@
 
 /obj/machinery/teleport/hub
 	name = "teleporter hub"
-	desc = "It's the hub of a teleporting machine."
+	desc = ""
 	icon_state = "tele0"
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 10
@@ -47,7 +47,7 @@
 
 /obj/machinery/teleport/hub/Bumped(atom/movable/AM)
 	if(is_centcom_level(z))
-		to_chat(AM, "<span class='warning'>You can't use this here!</span>")
+		to_chat(AM, "<span class='warning'>I can't use this here!</span>")
 		return
 	if(is_ready())
 		teleport(AM)
@@ -77,7 +77,7 @@
 				if(ishuman(M))//don't remove people from the round randomly you jerks
 					var/mob/living/carbon/human/human = M
 					if(human.dna && human.dna.species.id == "human")
-						to_chat(M, "<span class='hear'>You hear a buzzing in your ears.</span>")
+						to_chat(M, "<span class='hear'>I hear a buzzing in your ears.</span>")
 						human.set_species(/datum/species/fly)
 						log_game("[human] ([key_name(human)]) was turned into a fly person")
 
@@ -104,7 +104,7 @@
 
 /obj/machinery/teleport/station
 	name = "teleporter station"
-	desc = "The power control station for a bluespace teleporter. Used for toggling power, and can activate a test-fire to prevent malfunctions."
+	desc = ""
 	icon_state = "controller"
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 10
@@ -166,13 +166,13 @@
 		var/obj/item/multitool/M = W
 		if(panel_open)
 			M.buffer = src
-			to_chat(user, "<span class='notice'>You download the data to the [W.name]'s buffer.</span>")
+			to_chat(user, "<span class='notice'>I download the data to the [W.name]'s buffer.</span>")
 		else
 			if(M.buffer && istype(M.buffer, /obj/machinery/teleport/station) && M.buffer != src)
 				if(linked_stations.len < efficiency)
 					linked_stations.Add(M.buffer)
 					M.buffer = null
-					to_chat(user, "<span class='notice'>You upload the data from the [W.name]'s buffer.</span>")
+					to_chat(user, "<span class='notice'>I upload the data from the [W.name]'s buffer.</span>")
 				else
 					to_chat(user, "<span class='alert'>This station can't hold more information, try to use better parts.</span>")
 		return
@@ -186,7 +186,7 @@
 	else if(W.tool_behaviour == TOOL_WIRECUTTER)
 		if(panel_open)
 			link_console_and_hub()
-			to_chat(user, "<span class='notice'>You reconnect the station to nearby machinery.</span>")
+			to_chat(user, "<span class='notice'>I reconnect the station to nearby machinery.</span>")
 			return
 	else
 		return ..()

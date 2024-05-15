@@ -20,6 +20,10 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 		verbs += /mob/dead/proc/server_hop
 	set_focus(src)
 	return INITIALIZE_HINT_NORMAL
+	
+/mob/dead/Destroy()
+	GLOB.mob_list -= src
+	return ..()
 
 /mob/dead/canUseStorage()
 	return FALSE
@@ -42,32 +46,90 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	loc = destination
 	Moved(oldloc, NONE, TRUE)
 
-/mob/dead/Stat()
-	..()
 
-	if(!statpanel("Status"))
+/mob/dead/new_player/proc/lobby_refresh()
+	set waitfor = 0
+//	src << browse(null, "window=lobby_window")
+
+	if(!client)
 		return
-	stat(null, "Game Mode: [SSticker.hide_mode ? "Secret" : "[GLOB.master_mode]"]")
+
+	if(client.is_new_player())
+		return
 
 	if(SSticker.HasRoundStarted())
+		src << browse(null, "window=lobby_window")
 		return
+
+	var/list/dat = list("<center>")
 
 	var/time_remaining = SSticker.GetTimeLeft()
 	if(time_remaining > 0)
-		stat(null, "Time To Start: [round(time_remaining/10)]s")
+		dat += "Time To Start: [round(time_remaining/10)]s<br>"
 	else if(time_remaining == -10)
-		stat(null, "Time To Start: DELAYED")
+		dat += "Time To Start: DELAYED<br>"
 	else
-		stat(null, "Time To Start: SOON")
+		dat += "Time To Start: SOON<br>"
 
-	stat(null, "Players: [SSticker.totalPlayers]")
-	if(client.holder)
-		stat(null, "Players Ready: [SSticker.totalPlayersReady]")
+	dat += "Total players ready: [SSticker.totalPlayersReady]<br>"
+	dat += "<B>Classes:</B><br>"
+
+	dat += "</center>"
+
+	for(var/datum/job/job in SSjob.occupations)
+		if(!job)
+			continue
+		var/readiedas = 0
+		var/list/PL = list()
+		for(var/mob/dead/new_player/player in GLOB.player_list)
+			if(!player)
+				continue
+			if(player.client.prefs.job_preferences[job.title] == JP_HIGH)
+				if(player.ready == PLAYER_READY_TO_PLAY)
+					readiedas++
+					if(!(player.client.ckey in GLOB.hiderole))
+						if(player.client.prefs.real_name)
+							var/thing = "[player.client.prefs.real_name]"
+							if(istype(job, /datum/job/roguetown/hand))
+								if(player != src)
+									if(client.prefs.job_preferences["King"] == JP_HIGH)
+										thing = "<a href='byond://?src=[REF(src)];sethand=[player.client.ckey]'>[player.client.prefs.real_name]</a>"
+								for(var/mob/dead/new_player/Lord in GLOB.player_list)
+									if(Lord.client.prefs.job_preferences["King"] == JP_HIGH)
+										if(Lord.brohand == player.ckey)
+											thing = "*[thing]*"
+											break
+							PL += thing
+
+		var/list/PL2 = list()
+		for(var/i in 1 to PL.len)
+			if(i == PL.len)
+				PL2 += "[PL[i]]"
+			else
+				PL2 += "[PL[i]], "
+
+		if(readiedas)
+			if(PL2.len)
+				dat += "<B>[job.title]</B> ([readiedas]) - [PL2.Join()]<br>"
+			else
+				dat += "<B>[job.title]</B> ([readiedas])<br>"
+	var/datum/browser/popup = new(src, "lobby_window", "<div align='center'>LOBBY</div>", 330, 430)
+	popup.set_window_options("can_close=0;can_minimize=0;can_maximize=0;can_resize=1;")
+	popup.set_content(dat.Join())
+	if(!client)
+		return
+	if(winexists(src, "lobby_window"))
+		src << browse(popup.get_content(), "window=lobby_window") //dont update the size or annoyingly refresh
+		qdel(popup)
+		return
+	else
+		popup.open(FALSE)
 
 /mob/dead/proc/server_hop()
 	set category = "OOC"
 	set name = "Server Hop!"
 	set desc= "Jump to the other server"
+	set hidden = 1
 	if(notransform)
 		return
 	var/list/csa = CONFIG_GET(keyed_list/cross_server)

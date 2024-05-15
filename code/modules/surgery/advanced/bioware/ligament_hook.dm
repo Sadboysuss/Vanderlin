@@ -18,12 +18,12 @@
 	time = 125
 
 /datum/surgery_step/reshape_ligaments/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You start reshaping [target]'s ligaments into a hook-like shape.</span>",
+	display_results(user, target, "<span class='notice'>I start reshaping [target]'s ligaments into a hook-like shape.</span>",
 		"<span class='notice'>[user] starts reshaping [target]'s ligaments into a hook-like shape.</span>",
 		"<span class='notice'>[user] starts manipulating [target]'s ligaments.</span>")
 
 /datum/surgery_step/reshape_ligaments/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You reshape [target]'s ligaments into a connective hook!</span>",
+	display_results(user, target, "<span class='notice'>I reshape [target]'s ligaments into a connective hook!</span>",
 		"<span class='notice'>[user] reshapes [target]'s ligaments into a connective hook!</span>",
 		"<span class='notice'>[user] finishes manipulating [target]'s ligaments.</span>")
 	new /datum/bioware/hooked_ligaments(target)
@@ -31,7 +31,7 @@
 
 /datum/bioware/hooked_ligaments
 	name = "Hooked Ligaments"
-	desc = "The ligaments and nerve endings that connect the torso to the limbs are formed into a hook-like shape, so limbs can be attached without requiring surgery, but are easier to sever."
+	desc = ""
 	mod_type = BIOWARE_LIGAMENTS
 
 /datum/bioware/hooked_ligaments/on_gain()

@@ -1,6 +1,6 @@
 /obj/item/computer_hardware/ai_slot
 	name = "intelliCard interface slot"
-	desc = "A module allowing this computer to interface with most common intelliCard modules. Necessary for some programs to run properly."
+	desc = ""
 	power_usage = 100 //W
 	icon_state = "card_mini"
 	w_class = WEIGHT_CLASS_SMALL
@@ -33,13 +33,13 @@
 		return FALSE
 
 	if(stored_card)
-		to_chat(user, "<span class='warning'>You try to insert \the [I] into \the [src], but the slot is occupied.</span>")
+		to_chat(user, "<span class='warning'>I try to insert \the [I] into \the [src], but the slot is occupied.</span>")
 		return FALSE
 	if(user && !user.transferItemToLoc(I, src))
 		return FALSE
 
 	stored_card = I
-	to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span>")
+	to_chat(user, "<span class='notice'>I insert \the [I] into \the [src].</span>")
 
 	return TRUE
 
@@ -54,7 +54,7 @@
 		return FALSE
 
 	if(stored_card)
-		to_chat(user, "<span class='notice'>You remove [stored_card] from [src].</span>")
+		to_chat(user, "<span class='notice'>I remove [stored_card] from [src].</span>")
 		locked = FALSE
 		if(user)
 			user.put_in_hands(stored_card)
@@ -69,6 +69,6 @@
 	if(..())
 		return
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		to_chat(user, "<span class='notice'>You press down on the manual eject button with \the [I].</span>")
+		to_chat(user, "<span class='notice'>I press down on the manual eject button with \the [I].</span>")
 		try_eject(,user,1)
 		return

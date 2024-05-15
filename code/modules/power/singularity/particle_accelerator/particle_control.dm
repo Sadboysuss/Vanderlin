@@ -1,6 +1,6 @@
 /obj/machinery/particle_accelerator/control_box
 	name = "Particle Accelerator Control Console"
-	desc = "This controls the density of the particles."
+	desc = ""
 	icon = 'icons/obj/machines/particle_accelerator.dmi'
 	icon_state = "control_box"
 	anchored = FALSE
@@ -280,7 +280,7 @@
 				W.play_tool_sound(src, 75)
 				anchored = TRUE
 				user.visible_message("<span class='notice'>[user.name] secures the [name] to the floor.</span>", \
-					"<span class='notice'>You secure the external bolts.</span>")
+					"<span class='notice'>I secure the external bolts.</span>")
 				construction_state = PA_CONSTRUCTION_UNWIRED
 				did_something = TRUE
 		if(PA_CONSTRUCTION_UNWIRED)
@@ -288,31 +288,31 @@
 				W.play_tool_sound(src, 75)
 				anchored = FALSE
 				user.visible_message("<span class='notice'>[user.name] detaches the [name] from the floor.</span>", \
-					"<span class='notice'>You remove the external bolts.</span>")
+					"<span class='notice'>I remove the external bolts.</span>")
 				construction_state = PA_CONSTRUCTION_UNSECURED
 				did_something = TRUE
 			else if(istype(W, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/CC = W
 				if(CC.use(1))
 					user.visible_message("<span class='notice'>[user.name] adds wires to the [name].</span>", \
-						"<span class='notice'>You add some wires.</span>")
+						"<span class='notice'>I add some wires.</span>")
 					construction_state = PA_CONSTRUCTION_PANEL_OPEN
 					did_something = TRUE
 		if(PA_CONSTRUCTION_PANEL_OPEN)
 			if(W.tool_behaviour == TOOL_WIRECUTTER)//TODO:Shock user if its on?
 				user.visible_message("<span class='notice'>[user.name] removes some wires from the [name].</span>", \
-					"<span class='notice'>You remove some wires.</span>")
+					"<span class='notice'>I remove some wires.</span>")
 				construction_state = PA_CONSTRUCTION_UNWIRED
 				did_something = TRUE
 			else if(W.tool_behaviour == TOOL_SCREWDRIVER)
 				user.visible_message("<span class='notice'>[user.name] closes the [name]'s access panel.</span>", \
-					"<span class='notice'>You close the access panel.</span>")
+					"<span class='notice'>I close the access panel.</span>")
 				construction_state = PA_CONSTRUCTION_COMPLETE
 				did_something = TRUE
 		if(PA_CONSTRUCTION_COMPLETE)
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)
 				user.visible_message("<span class='notice'>[user.name] opens the [name]'s access panel.</span>", \
-					"<span class='notice'>You open the access panel.</span>")
+					"<span class='notice'>I open the access panel.</span>")
 				construction_state = PA_CONSTRUCTION_PANEL_OPEN
 				did_something = TRUE
 

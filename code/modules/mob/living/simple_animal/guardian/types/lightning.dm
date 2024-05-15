@@ -9,7 +9,7 @@
 	attack_verb_continuous = "shocks"
 	attack_verb_simple = "shock"
 	melee_damage_type = BURN
-	attack_sound = 'sound/machines/defib_zap.ogg'
+	attack_sound = 'sound/blank.ogg'
 	damage_coeff = list(BRUTE = 0.7, BURN = 0.7, TOX = 0.7, CLONE = 0.7, STAMINA = 0, OXY = 0.7)
 	range = 7
 	playstyle_string = "<span class='holoparasite'>As a <b>lightning</b> type, you will apply lightning chains to targets on attack and have a lightning chain to your summoner. Lightning chains will shock anyone near them.</span>"
@@ -105,8 +105,8 @@
 					L.electrocute_act(0)
 					L.visible_message(
 						"<span class='danger'>[L] was shocked by the lightning chain!</span>", \
-						"<span class='userdanger'>You are shocked by the lightning chain!</span>", \
-						"<span class='hear'>You hear a heavy electrical crack.</span>" \
+						"<span class='danger'>I are shocked by the lightning chain!</span>", \
+						"<span class='hear'>I hear a heavy electrical crack.</span>" \
 					)
 				L.adjustFireLoss(1.2) //adds up very rapidly
 				. = 1

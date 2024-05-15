@@ -13,7 +13,7 @@
 
 /obj/machinery/abductor/console
 	name = "abductor console"
-	desc = "Ship command center."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "console"
 	density = TRUE
@@ -29,7 +29,7 @@
 	if(.)
 		return
 	if(!HAS_TRAIT(user, TRAIT_ABDUCTOR_TRAINING) && !HAS_TRAIT(user.mind, TRAIT_ABDUCTOR_TRAINING))
-		to_chat(user, "<span class='warning'>You start mashing alien buttons at random!</span>")
+		to_chat(user, "<span class='warning'>I start mashing alien buttons at random!</span>")
 		if(do_after(user,100, target = src))
 			TeleporterSend()
 		return
@@ -128,8 +128,8 @@
 		pad.Retrieve(gizmo.marked)
 
 /obj/machinery/abductor/console/proc/TeleporterSend()
-	if(pad)
-		pad.Send()
+//	if(pad)
+//		pad.Send()
 
 /obj/machinery/abductor/console/proc/FlipVest()
 	if(vest)
@@ -226,9 +226,9 @@
 
 /obj/machinery/abductor/console/attackby(obj/O, mob/user, params)
 	if(istype(O, /obj/item/abductor/gizmo) && AddGizmo(O))
-		to_chat(user, "<span class='notice'>You link the tool to the console.</span>")
+		to_chat(user, "<span class='notice'>I link the tool to the console.</span>")
 	else if(istype(O, /obj/item/clothing/suit/armor/abductor/vest) && AddVest(O))
-		to_chat(user, "<span class='notice'>You link the vest to the console.</span>")
+		to_chat(user, "<span class='notice'>I link the vest to the console.</span>")
 	else
 		return ..()
 

@@ -1,7 +1,7 @@
 /mob/living/simple_animal/shade
 	name = "Shade"
 	real_name = "Shade"
-	desc = "A bound spirit."
+	desc = ""
 	gender = PLURAL
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
@@ -53,9 +53,9 @@
 			adjustHealth(-25)
 			Beam(M,icon_state="sendbeam",time=4)
 			M.visible_message("<span class='danger'>[M] heals \the <b>[src]</b>.</span>", \
-					   "<span class='cult'>You heal <b>[src]</b>, leaving <b>[src]</b> at <b>[health]/[maxHealth]</b> health.</span>")
+					   "<span class='cult'>I heal <b>[src]</b>, leaving <b>[src]</b> at <b>[health]/[maxHealth]</b> health.</span>")
 		else
-			to_chat(M, "<span class='cult'>You cannot heal <b>[src]</b>, as [p_theyre()] unharmed!</span>")
+			to_chat(M, "<span class='cult'>I cannot heal <b>[src]</b>, as [p_theyre()] unharmed!</span>")
 	else if(src != M)
 		return ..()
 

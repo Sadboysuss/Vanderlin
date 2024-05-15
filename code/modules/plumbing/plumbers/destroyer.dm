@@ -1,6 +1,6 @@
 /obj/machinery/plumbing/disposer
 	name = "chemical disposer"
-	desc = "Breaks down chemicals and annihilates them."
+	desc = ""
 	icon_state = "disposal"
 	///we remove 10 reagents per second
 	var/disposal_rate = 10

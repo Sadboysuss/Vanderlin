@@ -5,7 +5,7 @@
 	item_state = "ttv"
 	lefthand_file = 'icons/mob/inhands/weapons/bombs_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/bombs_righthand.dmi'
-	desc = "Regulates the transfer of air between two tanks."
+	desc = ""
 	w_class = WEIGHT_CLASS_BULKY
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
@@ -27,12 +27,12 @@
 			if(!user.transferItemToLoc(item, src))
 				return
 			tank_one = item
-			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
+			to_chat(user, "<span class='notice'>I attach the tank to the transfer valve.</span>")
 		else if(!tank_two)
 			if(!user.transferItemToLoc(item, src))
 				return
 			tank_two = item
-			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
+			to_chat(user, "<span class='notice'>I attach the tank to the transfer valve.</span>")
 
 		update_icon()
 //TODO: Have this take an assemblyholder
@@ -47,7 +47,7 @@
 		if(!user.transferItemToLoc(item, src))
 			return
 		attached_device = A
-		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")
+		to_chat(user, "<span class='notice'>I attach the [item] to the valve controls and secure it.</span>")
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
 		log_bomber(user, "attached a [item.name] to a ttv -", src, null, FALSE)

@@ -2,7 +2,7 @@
 
 /obj/machinery/lapvend
 	name = "computer vendor"
-	desc = "A vending machine with microfabricator capable of dispensing various NT-branded computers."
+	desc = ""
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "robotics"
 	layer = 2.9
@@ -249,7 +249,7 @@
 		credits += HC.credits
 		visible_message("<span class='info'>[user] inserts a $[HC.credits] holocredit chip into [src].</span>")
 		qdel(HC)
-		return		
+		return
 	else if(istype(I, /obj/item/card/id))
 		if(state != 2)
 			return

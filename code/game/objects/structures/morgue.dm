@@ -86,7 +86,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 	add_fingerprint(user)
 	if(istype(P, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on the side of [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on the side of [src]!</span>")
 			return
 		var/t = stripped_input(user, "What would you like the label to be?", text("[]", name), null)
 		if (user.get_active_held_item() != P)
@@ -112,19 +112,19 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
 	user.visible_message(null, \
-		"<span class='notice'>You lean on the back of [src] and start pushing the tray open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
-		"<span class='hear'>You hear a metallic creaking from [src].</span>")
+		"<span class='notice'>I lean on the back of [src] and start pushing the tray open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
+		"<span class='hear'>I hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
 		if(!user || user.stat != CONSCIOUS || user.loc != src )
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
-			"<span class='notice'>You successfully break out of [src]!</span>")
+			"<span class='notice'>I successfully break out of [src]!</span>")
 		open()
 
 /obj/structure/bodycontainer/proc/open()
 	recursive_organ_check(src)
-	playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-	playsound(src, 'sound/effects/roll.ogg', 5, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 5, TRUE)
 	var/turf/T = get_step(src, dir)
 	connected.setDir(dir)
 	for(var/atom/movable/AM in src)
@@ -132,8 +132,8 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 	update_icon()
 
 /obj/structure/bodycontainer/proc/close()
-	playsound(src, 'sound/effects/roll.ogg', 5, TRUE)
-	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 5, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	for(var/atom/movable/AM in connected.loc)
 		if(!AM.anchored || AM == connected)
 			if(ismob(AM) && !isliving(AM))
@@ -150,7 +150,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
  */
 /obj/structure/bodycontainer/morgue
 	name = "morgue"
-	desc = "Used to keep bodies in until someone fetches them. Now includes a high-tech alert system."
+	desc = ""
 	icon_state = "morgue1"
 	dir = EAST
 	var/beeper = TRUE
@@ -171,7 +171,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 	if(!user.canUseTopic(src, !issilicon(user)))
 		return
 	beeper = !beeper
-	to_chat(user, "<span class='notice'>You turn the speaker function [beeper ? "on" : "off"].</span>")
+	to_chat(user, "<span class='notice'>I turn the speaker function [beeper ? "on" : "off"].</span>")
 
 /obj/structure/bodycontainer/morgue/update_icon()
 	if (!connected || connected.loc != src) // Open or tray is gone.
@@ -192,7 +192,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 					icon_state = "morgue4" // Cloneable
 					if(mob_occupant.stat == DEAD && beeper)
 						if(world.time > next_beep)
-							playsound(src, 'sound/weapons/gun/general/empty_alarm.ogg', 50, FALSE) //Clone them you blind fucks
+							playsound(src, 'sound/blank.ogg', 50, FALSE) //Clone them you blind fucks
 							next_beep = world.time + beep_cooldown
 					break
 
@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 GLOBAL_LIST_EMPTY(crematoriums)
 /obj/structure/bodycontainer/crematorium
 	name = "crematorium"
-	desc = "A human incinerator. Works well on barbecue nights."
+	desc = ""
 	icon_state = "crema1"
 	dir = SOUTH
 	var/id = 1
@@ -254,11 +254,11 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	var/list/conts = GetAllContents() - src - connected
 
 	if(!conts.len)
-		audible_message("<span class='hear'>You hear a hollow crackle.</span>")
+		audible_message("<span class='hear'>I hear a hollow crackle.</span>")
 		return
 
 	else
-		audible_message("<span class='hear'>You hear a roar as the crematorium activates.</span>")
+		audible_message("<span class='hear'>I hear a roar as the crematorium activates.</span>")
 
 		locked = TRUE
 		update_icon()
@@ -279,19 +279,19 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		for(var/obj/O in conts) //conts defined above, ignores crematorium and tray
 			qdel(O)
 
-		if(!locate(/obj/effect/decal/cleanable/ash) in get_step(src, dir))//prevent pile-up
-			new/obj/effect/decal/cleanable/ash/crematorium(src)
+		if(!locate(/obj/item/ash) in get_step(src, dir))//prevent pile-up
+			new/obj/item/ash(src)
 
 		sleep(30)
 
 		if(!QDELETED(src))
 			locked = FALSE
 			update_icon()
-			playsound(src.loc, 'sound/machines/ding.ogg', 50, TRUE) //you horrible people
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE) //you horrible people
 
 /obj/structure/bodycontainer/crematorium/creamatorium
 	name = "creamatorium"
-	desc = "A human incinerator. Works well during ice cream socials."
+	desc = ""
 
 /obj/structure/bodycontainer/crematorium/creamatorium/cremate(mob/user)
 	var/list/icecreams = new()
@@ -367,7 +367,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
  */
 /obj/structure/tray/c_tray
 	name = "crematorium tray"
-	desc = "Apply body before burning."
+	desc = ""
 	icon_state = "cremat"
 
 /*
@@ -375,7 +375,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
  */
 /obj/structure/tray/m_tray
 	name = "morgue tray"
-	desc = "Apply corpse before closing."
+	desc = ""
 	icon_state = "morguet"
 
 /obj/structure/tray/m_tray/CanPass(atom/movable/mover, turf/target)

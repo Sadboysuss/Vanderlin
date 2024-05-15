@@ -1,8 +1,8 @@
 // Watermelon
 /obj/item/seeds/watermelon
 	name = "pack of watermelon seeds"
-	desc = "These seeds grow into watermelon plants."
-	icon_state = "seed-watermelon"
+	desc = ""
+	icon_state = "seed"
 	species = "watermelon"
 	plantname = "Watermelon Vines"
 	product = /obj/item/reagent_containers/food/snacks/grown/watermelon
@@ -24,7 +24,7 @@
 /obj/item/reagent_containers/food/snacks/grown/watermelon
 	seed = /obj/item/seeds/watermelon
 	name = "watermelon"
-	desc = "It's full of watery goodness."
+	desc = ""
 	icon_state = "watermelon"
 	slice_path = /obj/item/reagent_containers/food/snacks/watermelonslice
 	slices_num = 5
@@ -39,8 +39,8 @@
 // Holymelon
 /obj/item/seeds/watermelon/holy
 	name = "pack of holymelon seeds"
-	desc = "These seeds grow into holymelon plants."
-	icon_state = "seed-holymelon"
+	desc = ""
+	icon_state = "seed"
 	species = "holymelon"
 	plantname = "Holy Melon Vines"
 	product = /obj/item/reagent_containers/food/snacks/grown/holymelon
@@ -52,7 +52,7 @@
 /obj/item/reagent_containers/food/snacks/grown/holymelon
 	seed = /obj/item/seeds/watermelon/holy
 	name = "holymelon"
-	desc = "The water within this melon has been blessed by some deity that's particularly fond of watermelon."
+	desc = ""
 	icon_state = "holymelon"
 	filling_color = "#FFD700"
 	dried_type = null
@@ -73,4 +73,4 @@
 /obj/item/reagent_containers/food/snacks/grown/holymelon/proc/expire(mob/user)
 	to_chat(user, "<span class='warning'>[src] rapidly turns into ash!</span>")
 	qdel(src)
-	new /obj/effect/decal/cleanable/ash(drop_location())
+	new /obj/item/ash(drop_location())

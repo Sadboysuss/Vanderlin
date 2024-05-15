@@ -1,5 +1,5 @@
 /obj/structure/closet/crate/secure
-	desc = "A secure crate."
+	desc = ""
 	name = "secure crate"
 	icon_state = "securecrate"
 	secure = TRUE
@@ -35,38 +35,38 @@
 	qdel(src)
 
 /obj/structure/closet/crate/secure/weapon
-	desc = "A secure weapons crate."
+	desc = ""
 	name = "weapons crate"
 	icon_state = "weaponcrate"
 
 /obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
+	desc = ""
 	name = "plasma crate"
 	icon_state = "plasmacrate"
 
 /obj/structure/closet/crate/secure/gear
-	desc = "A secure gear crate."
+	desc = ""
 	name = "gear crate"
 	icon_state = "secgearcrate"
 
 /obj/structure/closet/crate/secure/hydroponics
-	desc = "A crate with a lock on it, painted in the scheme of the station's botanists."
+	desc = ""
 	name = "secure hydroponics crate"
 	icon_state = "hydrosecurecrate"
 
 /obj/structure/closet/crate/secure/engineering
-	desc = "A crate with a lock on it, painted in the scheme of the station's engineers."
+	desc = ""
 	name = "secure engineering crate"
 	icon_state = "engi_secure_crate"
 
 /obj/structure/closet/crate/secure/science
 	name = "secure science crate"
-	desc = "A crate with a lock on it, painted in the scheme of the station's scientists."
+	desc = ""
 	icon_state = "scisecurecrate"
 
 /obj/structure/closet/crate/secure/owned
 	name = "private crate"
-	desc = "A crate cover designed to only open for who purchased its contents."
+	desc = ""
 	icon_state = "privatecrate"
 	var/datum/bank_account/buyer_account
 	var/privacy_lock = TRUE
@@ -90,7 +90,7 @@
 							add_fingerprint(user)
 						locked = !locked
 						user.visible_message("<span class='notice'>[user] unlocks [src]'s privacy lock.</span>",
-										"<span class='notice'>You unlock [src]'s privacy lock.</span>")
+										"<span class='notice'>I unlock [src]'s privacy lock.</span>")
 						privacy_lock = FALSE
 						update_icon()
 					else if(!silent)

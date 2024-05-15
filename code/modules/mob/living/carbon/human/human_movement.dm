@@ -20,7 +20,7 @@
 	return ..()
 
 /mob/living/carbon/human/experience_pressure_difference()
-	playsound(src, 'sound/effects/space_wind.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(shoes && istype(shoes, /obj/item/clothing))
 		var/obj/item/clothing/S = shoes
 		if (S.clothing_flags & NOSLIP)
@@ -37,13 +37,43 @@
 	return ((shoes && shoes.negates_gravity()) || (dna.species.negates_gravity(src)))
 
 /mob/living/carbon/human/Move(NewLoc, direct)
-	. = ..()
+/*	if(fixedeye || tempfixeye)
+		switch(dir)
+			if(NORTH)
+				if(direct == WEST|EAST)
+					OffBalance(30)
+			if(SOUTH)
+				if(direct == WEST|EAST)
+					OffBalance(30)
+			if(EAST)
+				if(direct == NORTH|SOUTH)
+					OffBalance(30)
+			if(WEST)
+				if(direct == NORTH|SOUTH)
+					OffBalance(30)*/
 
-	if(shoes)
-		if(mobility_flags & MOBILITY_STAND)
-			if(loc == NewLoc)
-				if(!has_gravity(loc))
-					return
+	. = ..()
+	if(loc == NewLoc)
+		if(!has_gravity(loc))
+			return
+
+		if(wear_armor)
+			if(mobility_flags & MOBILITY_STAND)
+				var/obj/item/clothing/C = wear_armor
+				C.step_action()
+
+		if(wear_shirt)
+			if(mobility_flags & MOBILITY_STAND)
+				var/obj/item/clothing/C = wear_shirt
+				C.step_action()
+
+		if(cloak)
+			if(mobility_flags & MOBILITY_STAND)
+				var/obj/item/clothing/C = cloak
+				C.step_action()
+
+		if(shoes)
+			if(mobility_flags & MOBILITY_STAND)
 				var/obj/item/clothing/shoes/S = shoes
 
 				//Bloody footprints
@@ -64,6 +94,19 @@
 					update_inv_shoes()
 				//End bloody footprints
 				S.step_action()
+		if(mouth)
+			if(mouth.spitoutmouth && prob(5))
+				visible_message("<span class='warning'>[src] spits out [mouth].</span>")
+				dropItemToGround(mouth, silent = FALSE)
+		if(held_items.len)
+			for(var/obj/item/I in held_items)
+				if(I.minstr)
+					var/effective = I.minstr
+					if(I.wielded)
+						effective = max(I.minstr / 2, 1)
+					if(effective > STASTR)
+						if(prob(effective))
+							dropItemToGround(I, silent = FALSE)
 
 /mob/living/carbon/human/Process_Spacemove(movement_dir = 0) //Temporary laziness thing. Will change to handles by species reee.
 	if(dna.species.space_move(src))

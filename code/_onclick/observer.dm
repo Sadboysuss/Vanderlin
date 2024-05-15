@@ -16,6 +16,9 @@
 		forceMove(get_turf(A))
 		update_parallax_contents()
 
+/mob/dead/observer/rogue/DblClickOn(atom/A, params)
+	return
+
 /mob/dead/observer/ClickOn(atom/A, params)
 	if(check_click_intercept(params,A))
 		return

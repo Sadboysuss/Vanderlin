@@ -4,7 +4,7 @@
 
 /obj/item/detective_scanner
 	name = "forensic scanner"
-	desc = "Used to remotely scan objects and biomass for DNA and fingerprints. Can print a report of the findings."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "forensicnew"
 	w_class = WEIGHT_CLASS_SMALL
@@ -79,7 +79,7 @@
 		scanning = 1
 
 		user.visible_message("<span class='notice'>\The [user] points the [src.name] at \the [A] and performs a forensic scan.</span>")
-		to_chat(user, "<span class='notice'>You scan \the [A]. The scanner is now analysing the results...</span>")
+		to_chat(user, "<span class='notice'>I scan \the [A]. The scanner is now analysing the results...</span>")
 
 
 		// GATHER INFORMATION
@@ -167,7 +167,7 @@
 				to_chat(holder, "<span class='warning'>Unable to locate any fingerprints, materials, fibers, or blood on \the [target_name]!</span>")
 		else
 			if(holder)
-				to_chat(holder, "<span class='notice'>You finish scanning \the [target_name].</span>")
+				to_chat(holder, "<span class='notice'>I finish scanning \the [target_name].</span>")
 
 		add_log("---------------------------------------------------------", 0)
 		scanning = 0

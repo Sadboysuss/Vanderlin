@@ -1,5 +1,5 @@
 /obj/item/grenade/syndieminibomb
-	desc = "A syndicate manufactured explosive used to sow destruction and chaos."
+	desc = ""
 	name = "syndicate minibomb"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "syndicate"
@@ -13,7 +13,7 @@
 
 /obj/item/grenade/syndieminibomb/concussion
 	name = "HE Grenade"
-	desc = "A compact shrapnel grenade meant to devastate nearby organisms and cause some damage in the process. Pull pin and throw opposite direction."
+	desc = ""
 	icon_state = "concussion"
 
 /obj/item/grenade/syndieminibomb/concussion/prime()
@@ -23,11 +23,11 @@
 
 /obj/item/grenade/syndieminibomb/concussion/frag
 	name = "frag grenade"
-	desc = "Fire in the hole."
+	desc = ""
 	icon_state = "frag"
 
 /obj/item/grenade/gluon
-	desc = "An advanced grenade that releases a harmful stream of gluons inducing radiation in those nearby. These gluon streams will also make victims feel exhausted, and induce shivering. This extreme coldness will also likely wet any nearby floors."
+	desc = ""
 	name = "gluon frag grenade"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "bluefrag"
@@ -38,7 +38,7 @@
 
 /obj/item/grenade/gluon/prime()
 	update_mob()
-	playsound(loc, 'sound/effects/empulse.ogg', 50, TRUE)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE)
 	radiation_pulse(src, rad_damage)
 	for(var/turf/T in view(freeze_range,loc))
 		if(isfloorturf(T))

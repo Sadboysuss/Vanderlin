@@ -14,7 +14,7 @@
 	custom_materials = list(/datum/material/iron=2000) //one sheet, but where can you make them?
 	tool_behaviour = TOOL_MINING
 	toolspeed = 1
-	usesound = list('sound/effects/picaxe1.ogg', 'sound/effects/picaxe2.ogg', 'sound/effects/picaxe3.ogg')
+	usesound = list('sound/blank.ogg')
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 
 /obj/item/pickaxe/suicide_act(mob/living/user)
@@ -26,7 +26,7 @@
 
 /obj/item/pickaxe/mini
 	name = "compact pickaxe"
-	desc = "A smaller, compact version of the standard pickaxe."
+	desc = ""
 	icon_state = "minipick"
 	force = 10
 	throwforce = 7
@@ -39,7 +39,7 @@
 	icon_state = "spickaxe"
 	item_state = "spickaxe"
 	toolspeed = 0.5 //mines faster than a normal pickaxe, bought from mining vendor
-	desc = "A silver-plated pickaxe that mines slightly faster than standard-issue."
+	desc = ""
 	force = 17
 
 /obj/item/pickaxe/diamond
@@ -47,7 +47,7 @@
 	icon_state = "dpickaxe"
 	item_state = "dpickaxe"
 	toolspeed = 0.3
-	desc = "A pickaxe with a diamond pick head. Extremely robust at cracking rock walls and digging up dirt."
+	desc = ""
 	force = 19
 
 /obj/item/pickaxe/drill
@@ -56,13 +56,13 @@
 	item_state = "jackhammer"
 	slot_flags = ITEM_SLOT_BELT
 	toolspeed = 0.6 //available from roundstart, faster than a pickaxe.
-	usesound = 'sound/weapons/drill.ogg'
-	hitsound = 'sound/weapons/drill.ogg'
-	desc = "An electric mining drill for the especially scrawny."
+	usesound = 'sound/blank.ogg'
+	hitsound = 'sound/blank.ogg'
+	desc = ""
 
 /obj/item/pickaxe/drill/cyborg
 	name = "cyborg mining drill"
-	desc = "An integrated electric mining drill."
+	desc = ""
 	flags_1 = NONE
 
 /obj/item/pickaxe/drill/cyborg/Initialize()
@@ -73,7 +73,7 @@
 	name = "diamond-tipped mining drill"
 	icon_state = "diamonddrill"
 	toolspeed = 0.2
-	desc = "Yours is the drill that will pierce the heavens!"
+	desc = ""
 
 /obj/item/pickaxe/drill/cyborg/diamond //This is the BORG version!
 	name = "diamond-tipped cyborg mining drill" //To inherit the NODROP_1 flag, and easier to change borg specific drill mechanics.
@@ -86,13 +86,13 @@
 	item_state = "jackhammer"
 	toolspeed = 0.1 //the epitome of powertools. extremely fast mining
 	w_class = WEIGHT_CLASS_HUGE //the epitome of power(gamer)tools is CHUNCKY
-	usesound = 'sound/weapons/sonic_jackhammer.ogg'
-	hitsound = 'sound/weapons/sonic_jackhammer.ogg'
-	desc = "Cracks rocks with sonic blasts, and doubles as a demolition power tool for smashing walls."
+	usesound = 'sound/blank.ogg'
+	hitsound = 'sound/blank.ogg'
+	desc = ""
 
 /obj/item/shovel
 	name = "shovel"
-	desc = "A large tool for digging and moving dirt."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "shovel"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
@@ -102,7 +102,7 @@
 	force = 8
 	tool_behaviour = TOOL_SHOVEL
 	toolspeed = 1
-	usesound = 'sound/effects/shovel_dig.ogg'
+	usesound = 'sound/blank.ogg'
 	throwforce = 4
 	item_state = "shovel"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -123,7 +123,7 @@
 
 /obj/item/shovel/spade
 	name = "spade"
-	desc = "A small tool for digging and moving dirt."
+	desc = ""
 	icon_state = "spade"
 	item_state = "spade"
 	lefthand_file = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi'
@@ -134,7 +134,7 @@
 
 /obj/item/shovel/serrated
 	name = "serrated bone shovel"
-	desc = "A wicked tool that cleaves through dirt just as easily as it does flesh. The design was styled after ancient lavaland tribal designs."
+	desc = ""
 	icon_state = "shovel_bone"
 	item_state = "shovel_bone"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'

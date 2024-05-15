@@ -2,6 +2,12 @@
 
 //Misc mob defines
 
+//for vision cone
+#define FOV_DEFAULT 	           	(1<<0)
+#define FOV_RIGHT 	            	(1<<1)
+#define FOV_LEFT 	            	(1<<2)
+#define FOV_BEHIND 	 	          	(1<<3) //180
+
 //Ready states at roundstart for mob/dead/new_player
 #define PLAYER_NOT_READY 0
 #define PLAYER_READY_TO_PLAY 1
@@ -10,15 +16,20 @@
 //movement intent defines for the m_intent var
 #define MOVE_INTENT_WALK "walk"
 #define MOVE_INTENT_RUN  "run"
+#define MOVE_INTENT_SNEAK "sneak"
+
+//resist
+#define RESIST_INTENT 0
+#define SUBMIT_INTENT 1
 
 //Blood levels
-#define BLOOD_VOLUME_MAXIMUM		2000
+#define BLOOD_VOLUME_MAXIMUM		600
 #define BLOOD_VOLUME_SLIME_SPLIT	1120
-#define BLOOD_VOLUME_NORMAL			560
-#define BLOOD_VOLUME_SAFE			475
-#define BLOOD_VOLUME_OKAY			336
-#define BLOOD_VOLUME_BAD			224
-#define BLOOD_VOLUME_SURVIVE		122
+#define BLOOD_VOLUME_NORMAL			500
+#define BLOOD_VOLUME_SAFE			450
+#define BLOOD_VOLUME_OKAY			350
+#define BLOOD_VOLUME_BAD			250
+#define BLOOD_VOLUME_SURVIVE		100
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -57,6 +68,8 @@
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
 #define BODYPART_DISABLED_PARALYSIS 2
+#define BODYPART_DISABLED_CRIT 3 //plays a sound
+#define BODYPART_DISABLED_FALL 4 //temporary 60 seconds paralyzed
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'
@@ -73,18 +86,18 @@
 
 #define STAMINA_REGEN_BLOCK_TIME (10 SECONDS)
 
-#define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
-#define HEAT_DAMAGE_LEVEL_2 3 //Amount of damage applied when your body temperature passes the 400K point
-#define HEAT_DAMAGE_LEVEL_3 8 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
+#define HEAT_DAMAGE_LEVEL_1 1 //Amount of damage applied when your body temperature just passes the 360.15k safety point
+#define HEAT_DAMAGE_LEVEL_2 1 //Amount of damage applied when your body temperature passes the 400K point
+#define HEAT_DAMAGE_LEVEL_3 1 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
 
-#define COLD_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when your body temperature just passes the 260.15k safety point
-#define COLD_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 200K point
-#define COLD_DAMAGE_LEVEL_3 3 //Amount of damage applied when your body temperature passes the 120K point
+#define COLD_DAMAGE_LEVEL_1 1 //Amount of damage applied when your body temperature just passes the 260.15k safety point
+#define COLD_DAMAGE_LEVEL_2 1 //Amount of damage applied when your body temperature passes the 200K point
+#define COLD_DAMAGE_LEVEL_3 1 //Amount of damage applied when your body temperature passes the 120K point
 
 //Note that gas heat damage is only applied once every FOUR ticks.
-#define HEAT_GAS_DAMAGE_LEVEL_1 2 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
-#define HEAT_GAS_DAMAGE_LEVEL_2 4 //Amount of damage applied when the current breath's temperature passes the 400K point
-#define HEAT_GAS_DAMAGE_LEVEL_3 8 //Amount of damage applied when the current breath's temperature passes the 1000K point
+#define HEAT_GAS_DAMAGE_LEVEL_1 1 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
+#define HEAT_GAS_DAMAGE_LEVEL_2 1 //Amount of damage applied when the current breath's temperature passes the 400K point
+#define HEAT_GAS_DAMAGE_LEVEL_3 1 //Amount of damage applied when the current breath's temperature passes the 1000K point
 
 #define COLD_GAS_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when the current breath's temperature just passes the 260.15k safety point
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
@@ -155,15 +168,23 @@
 #define SANITY_INSANE 0
 
 //Nutrition levels for humans
-#define NUTRITION_LEVEL_FAT 600
-#define NUTRITION_LEVEL_FULL 550
-#define NUTRITION_LEVEL_WELL_FED 450
-#define NUTRITION_LEVEL_FED 350
-#define NUTRITION_LEVEL_HUNGRY 250
-#define NUTRITION_LEVEL_STARVING 150
+#define NUTRITION_LEVEL_FULL 1000
+#define NUTRITION_LEVEL_FAT 800
+#define NUTRITION_LEVEL_WELL_FED 700
+#define NUTRITION_LEVEL_FED 500
+#define NUTRITION_LEVEL_HUNGRY 350
+#define NUTRITION_LEVEL_STARVING 100
 
-#define NUTRITION_LEVEL_START_MIN 250
-#define NUTRITION_LEVEL_START_MAX 400
+#define HYDRATION_LEVEL_FULL 1000
+#define HYDRATION_LEVEL_SMALLTHIRST 600
+#define HYDRATION_LEVEL_THIRSTY 350
+#define HYDRATION_LEVEL_DEHYDRATED 100
+
+#define NUTRITION_LEVEL_START_MIN 500
+#define NUTRITION_LEVEL_START_MAX 900
+
+#define HYDRATION_LEVEL_START_MIN 500
+#define HYDRATION_LEVEL_START_MAX 600
 
 //Disgust levels for humans
 #define DISGUST_LEVEL_MAXEDOUT 150
@@ -172,7 +193,7 @@
 #define DISGUST_LEVEL_GROSS 25
 
 //Used as an upper limit for species that continuously gain nutriment
-#define NUTRITION_LEVEL_ALMOST_FULL 535
+#define NUTRITION_LEVEL_ALMOST_FULL 995
 
 //Charge levels for Ethereals
 #define ETHEREAL_CHARGE_NONE 0
@@ -211,6 +232,11 @@
 #define AI_IDLE		2
 #define AI_OFF		3
 #define AI_Z_OFF	4
+
+#define AI_COMBAT	5
+#define AI_RETREAT	6
+#define AI_HUNT		7
+#define AI_FLEE		8
 
 //determines if a mob can smash through it
 #define ENVIRONMENT_SMASH_NONE			0
@@ -256,22 +282,47 @@
 // Offsets defines
 
 #define OFFSET_UNIFORM "uniform"
-#define OFFSET_ID "id"
+#define OFFSET_ID "wear_ring"
 #define OFFSET_GLOVES "gloves"
+#define OFFSET_WRISTS "wear_wrists"
 #define OFFSET_GLASSES "glasses"
 #define OFFSET_EARS "ears"
 #define OFFSET_SHOES "shoes"
 #define OFFSET_S_STORE "s_store"
 #define OFFSET_FACEMASK "mask"
 #define OFFSET_HEAD "head"
-#define OFFSET_FACE "face"
+#define OFFSET_FACE "face" //facial hair and hair
 #define OFFSET_BELT "belt"
 #define OFFSET_BACK "back"
 #define OFFSET_SUIT "suit"
 #define OFFSET_NECK "neck"
+#define OFFSET_CLOAK "cloak"
+#define OFFSET_MOUTH "mouth"
+#define OFFSET_PANTS "wear_pants"
+#define OFFSET_SHIRT "wear_shirt"
+#define OFFSET_ARMOR "wear_armor"
+#define OFFSET_HANDS "hands"
+#define OFFSET_UNDIES "underwear"
+
+#define OFFSET_ID_F "wear_ringf"
+#define OFFSET_GLOVES_F "glovesf"
+#define OFFSET_WRISTS_F "wear_wristsf"
+#define OFFSET_FACEMASK_F "maskf"
+#define OFFSET_HEAD_F "headf"
+#define OFFSET_FACE_F "facef"
+#define OFFSET_BELT_F "beltf"
+#define OFFSET_BACK_F "backf"
+#define OFFSET_NECK_F "neckf"
+#define OFFSET_CLOAK_F "cloakf"
+#define OFFSET_MOUTH_F "mouthf"
+#define OFFSET_PANTS_F "wear_pantsf"
+#define OFFSET_SHIRT_F "wear_shirtf"
+#define OFFSET_ARMOR_F "wear_armorf"
+#define OFFSET_HANDS_F "handsf"
+#define OFFSET_UNDIES_F "underwearf"
 
 //MINOR TWEAKS/MISC
-#define AGE_MIN				17	//youngest a character can be
+#define AGE_MIN				18	//youngest a character can be
 #define AGE_MAX				85	//oldest a character can be
 #define WIZARD_AGE_MIN		30	//youngest a wizard can be
 #define APPRENTICE_AGE_MIN	29	//youngest an apprentice can be
@@ -279,9 +330,9 @@
 #define POCKET_STRIP_DELAY			40	//time taken (in deciseconds) to search somebody's pockets
 #define DOOR_CRUSH_DAMAGE	15	//the amount of damage that airlocks deal when they crush you
 
-#define	HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
-#define	ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
-#define	REAGENTS_METABOLISM 0.4	//How many units of reagent are consumed per tick, by default.
+#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+#define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
+#define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 
 // Eye protection
@@ -304,14 +355,14 @@
 #define MAX_REVIVE_FIRE_DAMAGE 180
 #define MAX_REVIVE_BRUTE_DAMAGE 180
 
-#define HUMAN_FIRE_STACK_ICON_NUM	3
+#define HUMAN_FIRE_STACK_ICON_NUM	5
 
 #define GRAB_PIXEL_SHIFT_PASSIVE 6
 #define GRAB_PIXEL_SHIFT_AGGRESSIVE 12
 #define GRAB_PIXEL_SHIFT_NECK 16
 
-#define PULL_PRONE_SLOWDOWN 1.5
-#define HUMAN_CARRY_SLOWDOWN 0.35
+#define PULL_PRONE_SLOWDOWN 2
+#define HUMAN_CARRY_SLOWDOWN 0
 
 //Flags that control what things can spawn species (whitelist)
 //Badmin magic mirror
@@ -330,3 +381,7 @@
 #define WABBAJACK     (1<<6)
 
 #define SLEEP_CHECK_DEATH(X) sleep(X); if(QDELETED(src) || stat == DEAD) return;
+
+//defense intents
+#define INTENT_DODGE 1
+#define INTENT_PARRY 2

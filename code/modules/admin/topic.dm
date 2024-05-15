@@ -6,7 +6,7 @@
 	var/msg = !auth ? "no" : "a bad"
 	message_admins("[key_name_admin(usr)] clicked an href with [msg] authorization key!")
 	if(CONFIG_GET(flag/debug_admin_hrefs))
-		message_admins("Debug mode enabled, call not blocked. Please ask your coders to review this round's logs.")
+		message_admins("Debug mode enabled, call not blocked. Please ask my coders to review this round's logs.")
 		log_world("UAH: [href]")
 		return TRUE
 	log_admin_private("[key_name(usr)] clicked an href with [msg] authorization key! [href]")
@@ -430,7 +430,7 @@
 			if(!M.client)
 				to_chat(usr, "<span class='danger'>Error: [M] no longer has a client!</span>")
 				return
-			to_chat(M, "<span class='danger'>You have been kicked from the server by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"].</span>")
+			to_chat(M, "<span class='danger'>I have been kicked from the server by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"].</span>")
 			log_admin("[key_name(usr)] kicked [key_name(M)].")
 			message_admins("<span class='adminnotice'>[key_name_admin(usr)] kicked [key_name_admin(M)].</span>")
 			qdel(M.client)
@@ -988,7 +988,7 @@
 			return
 
 		M.forceMove(pick(GLOB.prisonwarp))
-		to_chat(M, "<span class='adminnotice'>You have been sent to Prison!</span>")
+		to_chat(M, "<span class='adminnotice'>I have been sent to Prison!</span>")
 
 		log_admin("[key_name(usr)] has sent [key_name(M)] to Prison!")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to Prison!")
@@ -1000,7 +1000,7 @@
 		var/mob/M = locate(href_list["sendbacktolobby"])
 
 		if(!isobserver(M))
-			to_chat(usr, "<span class='notice'>You can only send ghost players back to the Lobby.</span>")
+			to_chat(usr, "<span class='notice'>I can only send ghost players back to the Lobby.</span>")
 			return
 
 		if(!M.client)
@@ -1039,7 +1039,7 @@
 		L.Unconscious(100)
 		sleep(5)
 		L.forceMove(pick(GLOB.tdome1))
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>You have been sent to the Thunderdome.</span>"), 5 SECONDS)
+		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>I have been sent to the Thunderdome.</span>"), 5 SECONDS)
 		log_admin("[key_name(usr)] has sent [key_name(L)] to the thunderdome. (Team 1)")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(L)] to the thunderdome. (Team 1)")
 
@@ -1065,7 +1065,7 @@
 		L.Unconscious(100)
 		sleep(5)
 		L.forceMove(pick(GLOB.tdome2))
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>You have been sent to the Thunderdome.</span>"), 5 SECONDS)
+		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>I have been sent to the Thunderdome.</span>"), 5 SECONDS)
 		log_admin("[key_name(usr)] has sent [key_name(L)] to the thunderdome. (Team 2)")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(L)] to the thunderdome. (Team 2)")
 
@@ -1088,7 +1088,7 @@
 		L.Unconscious(100)
 		sleep(5)
 		L.forceMove(pick(GLOB.tdomeadmin))
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>You have been sent to the Thunderdome.</span>"), 5 SECONDS)
+		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>I have been sent to the Thunderdome.</span>"), 5 SECONDS)
 		log_admin("[key_name(usr)] has sent [key_name(L)] to the thunderdome. (Admin.)")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(L)] to the thunderdome. (Admin.)")
 
@@ -1113,12 +1113,12 @@
 
 		if(ishuman(L))
 			var/mob/living/carbon/human/observer = L
-			observer.equip_to_slot_or_del(new /obj/item/clothing/under/suit/black(observer), SLOT_W_UNIFORM)
+			observer.equip_to_slot_or_del(new /obj/item/clothing/under/suit/black(observer), SLOT_PANTS)
 			observer.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(observer), SLOT_SHOES)
 		L.Unconscious(100)
 		sleep(5)
 		L.forceMove(pick(GLOB.tdomeobserve))
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>You have been sent to the Thunderdome.</span>"), 5 SECONDS)
+		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, L, "<span class='adminnotice'>I have been sent to the Thunderdome.</span>"), 5 SECONDS)
 		log_admin("[key_name(usr)] has sent [key_name(L)] to the thunderdome. (Observer.)")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(L)] to the thunderdome. (Observer.)")
 
@@ -1418,8 +1418,8 @@
 		log_admin("[key_name(H)] got their [new_item], spawned by [key_name(src.owner)].")
 		message_admins("[key_name(H)] got their [new_item], spawned by [key_name(src.owner)].")
 		SSblackbox.record_feedback("amount", "admin_cookies_spawned", 1)
-		to_chat(H, "<span class='adminnotice'>Your prayers have been answered!! You received the <b>best [new_item.name]!</b></span>")
-		SEND_SOUND(H, sound('sound/effects/pray_chaplain.ogg'))
+		to_chat(H, "<span class='adminnotice'>My prayers have been answered!! You received the <b>best [new_item.name]!</b></span>")
+		SEND_SOUND(H, sound('sound/blank.ogg'))
 
 	else if(href_list["adminsmite"])
 		if(!check_rights(R_ADMIN|R_FUN))
@@ -1759,7 +1759,7 @@
 	else if(href_list["ac_set_new_message"])
 		if(!check_rights(R_ADMIN))
 			return
-		src.admincaster_feed_message.body = adminscrub(input(usr, "Write your Feed story.", "Network Channel Handler", ""))
+		src.admincaster_feed_message.body = adminscrub(input(usr, "Write my Feed story.", "Network Channel Handler", ""))
 		while (findtext(src.admincaster_feed_message.returnBody(-1)," ") == 1)
 			src.admincaster_feed_message.body = copytext(src.admincaster_feed_message.returnBody(-1),2,length(src.admincaster_feed_message.returnBody(-1))+1)
 		src.access_news_network()
@@ -1939,7 +1939,7 @@
 	else if(href_list["ac_set_signature"])
 		if(!check_rights(R_ADMIN))
 			return
-		src.admin_signature = adminscrub(input(usr, "Provide your desired signature.", "Network Identity Handler", ""))
+		src.admin_signature = adminscrub(input(usr, "Provide my desired signature.", "Network Identity Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_del_comment"])
@@ -1971,7 +1971,7 @@
 			if(alert("Are you sure you want to kick all [afkonly ? "AFK" : ""] clients from the lobby??","Message","Yes","Cancel") != "Yes")
 				to_chat(usr, "Kick clients from lobby aborted")
 				return
-			var/list/listkicked = kick_clients_in_lobby("<span class='danger'>You were kicked from the lobby by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"].</span>", afkonly)
+			var/list/listkicked = kick_clients_in_lobby("<span class='danger'>I were kicked from the lobby by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"].</span>", afkonly)
 
 			var/strkicked = ""
 			for(var/name in listkicked)
@@ -2200,6 +2200,44 @@
 
 	else if(href_list["beakerpanel"])
 		beaker_panel_act(href_list)
+
+	else if(href_list["readcommends"])
+		var/the_key = href_list["readcommends"]
+		var/popup_window_data = "<center>[the_key]</center>"
+
+		var/json_file = file("data/player_saves/[copytext(the_key,1,2)]/[the_key]/commends.json")
+		if(!fexists(json_file))
+			WRITE_FILE(json_file, "{}")
+		var/list/json = json_decode(file2text(json_file))
+		for(var/giver in json)
+			popup_window_data += "[giver]: [json[giver]]<br>"
+
+		var/datum/browser/noclose/popup = new(usr, "commendscheck", "", 370, 220)
+		popup.set_content(popup_window_data)
+		popup.open()
+
+	else if(href_list["cursemenu"])
+		var/the_key = href_list["cursemenu"]
+		var/popup_window_data = "<center>[the_key]</center>"
+
+		var/json_file = file("data/player_saves/[copytext(the_key,1,2)]/[the_key]/curses.json")
+		if(!fexists(json_file))
+			WRITE_FILE(json_file, "{}")
+		var/list/json = json_decode(file2text(json_file))
+		for(var/curse in CURSE_MASTER_LIST)
+			var/yes_cursed
+			for(var/X in json)
+				if(X == curse)
+					yes_cursed = TRUE
+					break
+			if(yes_cursed)
+				popup_window_data += "[curse] ENABLED<br>"
+			else
+				popup_window_data += "[curse] DISABLED<br>"
+
+		var/datum/browser/noclose/popup = new(usr, "cursecheck", "", 370, 220)
+		popup.set_content(popup_window_data)
+		popup.open()
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

@@ -45,7 +45,11 @@
 	///Currently playing ambience sound
 	var/ambience_playing = null
 	///Whether an ambience sound has been played and one shouldn't be played again, unset by a callback
-	var/played = FALSE
+	var/list/played = list()
+	var/list/nextspooky = 0
+
+	var/patreonlevel = -1
+
 		////////////
 		//SECURITY//
 		////////////
@@ -105,7 +109,7 @@
 	var/datum/chatOutput/chatOutput
 
  	///lazy list of all credit object bound to this client
-	var/list/credits
+	var/list/credits = list()
 
  	///these persist between logins/logouts during the same round.
 	var/datum/player_details/player_details
@@ -121,5 +125,115 @@
 	var/next_keysend_trip_reset = 0
 	///When set to true, user will be autokicked if they trip the keysends in a second limit again
 	var/keysend_tripped = FALSE
+
+	var/obj/screen/movable/mouseover/mouseovertext
+	var/obj/screen/movable/mouseover/mouseoverbox
 	///custom movement keys for this client
 	var/list/movement_keys = list()
+
+	/// Messages currently seen by this client
+	var/list/seen_messages
+
+	var/list/current_weathers = list()
+	var/last_lighting_update = 0
+
+	var/list/open_popups = list()
+
+	var/discord_registration
+	var/discord_name
+
+	var/loop_sound = FALSE
+	var/rain_sound = FALSE
+	var/last_droning_sound
+	var/sound/droning_sound
+
+/client/proc/update_weather(force)
+	if(!mob)
+		return
+	if(!isobserver(mob) && !isliving(mob))
+		return
+	if(!force)
+		if(last_lighting_update)
+			if(length(last_lighting_update & list(mob.x, mob.y, mob.z)) == 3)
+				return
+	last_lighting_update = list(mob.x, mob.y, mob.z)
+	var/area/A = get_area(mob)
+	var/obj/PMW = locate(/obj/screen/plane_master/weather) in screen
+	if(PMW && A)
+		if(A.outdoors)
+			PMW.filters = list()
+		else
+			if(!PMW.filters || !islist(PMW.filters) || !PMW.filters.len)
+				PMW.filters = filter(type="alpha", render_source = "*rainzone", flags = MASK_INVERSE)
+
+	for(var/W in current_weathers)
+		var/found = FALSE
+		for(var/datum/weather/WE in SSweather.curweathers)
+			if(WE.type == W)
+				if(WE.stage == MAIN_STAGE)
+					for(var/image/I in current_weathers[W])
+						if(!(I in images))
+							images += I
+					for(var/obj/O in current_weathers[W])
+						if(!(O in screen))
+							screen += O
+					found = TRUE
+		if(!found)
+			for(var/I in current_weathers[W])
+				current_weathers[W] -= I
+				fade_weather(I)
+
+	for(var/datum/weather/WE in SSweather.curweathers)
+		if(WE.stage != MAIN_STAGE)
+			continue
+		if(!current_weathers[WE.type])
+			current_weathers[WE.type] = list()
+		for(var/image/P in current_weathers[WE.type]) //need to update position of particles
+			current_weathers[WE.type] -= P
+			fade_weather(P)
+		for(var/P in WE.particles)
+			if(ispath(P,/obj/emitters/weather))
+				var/obj/emitters/PE = new P
+				var/image/I = image(null,mob.loc)
+				I.plane = WEATHER_PLANE
+				I.vis_contents += PE
+				images += I
+				current_weathers[WE.type] += I
+			else
+				var/found = FALSE
+				for(var/obj/screen/WO in current_weathers[WE.type])
+					if(istype(WO,P))
+						found = TRUE
+						break
+				if(found)
+					continue
+				var/obj/screen/PE = new P()
+				screen += PE
+				current_weathers[WE.type] += PE
+
+/client/proc/fade_weather(W)
+	if(!W)
+		return
+	var/image/P = W
+	if(istype(P))
+		animate(P,alpha = 0, time=20)
+		addtimer(CALLBACK(src,.proc/kill_weather,P),20)
+	else //screen obj
+		var/obj/screen/O = W
+		animate(O,alpha = 0, time=10)
+		addtimer(CALLBACK(src,.proc/kill_weather,O),10)
+
+
+/client/proc/kill_weather(P)
+	if(!P)
+		return
+	var/image/I = P
+	if(istype(I))
+		images -= I
+		for(var/obj/O in I.vis_contents)
+			I.vis_contents -= O
+			qdel(O)
+		qdel(I)
+	else
+		screen -= P
+		qdel(P)

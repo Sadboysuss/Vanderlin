@@ -4,7 +4,7 @@
 #define SEND_SOUND(target, sound) DIRECT_OUTPUT(target, sound)
 #define SEND_TEXT(target, text) DIRECT_OUTPUT(target, text)
 #define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
-#define WRITE_LOG(log, text) rustg_log_write(log, text)
+#define WRITE_LOG(log, text) text2file(text,log) //rustg_log_write
 
 //print a warning message to world.log
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [UNLINT(src)] usr: [usr].")
@@ -187,14 +187,17 @@
 /proc/log_mapping(text)
 	WRITE_LOG(GLOB.world_map_error_log, text)
 
-/* ui logging */ 
- 
+/proc/log_character(text)
+	WRITE_LOG(GLOB.character_list_log, text)
+
+/* ui logging */
+
 /proc/log_tgui(text)
 	WRITE_LOG(GLOB.tgui_log, text)
 
 /* For logging round startup. */
 /proc/start_log(log)
-	WRITE_LOG(log, "Starting up round ID [GLOB.round_id].\n-------------------------")
+	WRITE_LOG(log, "Starting up round ID [GLOB.rogue_round_id].\n-------------------------")
 
 /* Close open log handles. This should be called as late as possible, and no logging should hapen after. */
 /proc/shutdown_logging()

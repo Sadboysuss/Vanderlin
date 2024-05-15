@@ -7,13 +7,13 @@ FLOOR SAFES
 //SAFES
 /obj/structure/safe
 	name = "safe"
-	desc = "A huge chunk of metal with a dial embedded in it. Fine print on the dial reads \"Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, explosion resistant, and assistant resistant.\""
+	desc = ""
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "safe"
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT 
+	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT
 	var/open = FALSE		//is the safe open?
 	var/tumbler_1_pos	//the tumbler position- from 0 to 72
 	var/tumbler_1_open	//the tumbler position to open at- 0 to 72
@@ -52,9 +52,9 @@ FLOOR SAFES
 		return 1
 	if(user && canhear)
 		if(tumbler_1_pos == tumbler_1_open)
-			to_chat(user, "<span class='hear'>You hear a [pick("tonk", "krunk", "plunk")] from [src].</span>")
+			to_chat(user, "<span class='hear'>I hear a [pick("tonk", "krunk", "plunk")] from [src].</span>")
 		if(tumbler_2_pos == tumbler_2_open)
-			to_chat(user, "<span class='hear'>You hear a [pick("tink", "krink", "plink")] from [src].</span>")
+			to_chat(user, "<span class='hear'>I hear a [pick("tink", "krink", "plink")] from [src].</span>")
 	if(tumbler_1_pos == tumbler_1_open && tumbler_2_pos == tumbler_2_open)
 		if(user)
 			visible_message("<i><b>[pick("Spring", "Sprang", "Sproing", "Clunk", "Krunk")]!</b></i>")
@@ -105,13 +105,13 @@ FLOOR SAFES
 
 	if(href_list["open"])
 		if(check_unlocked())
-			to_chat(user, "<span class='notice'>You [open ? "close" : "open"] [src].</span>")
+			to_chat(user, "<span class='notice'>I [open ? "close" : "open"] [src].</span>")
 			open = !open
 			update_icon()
 			updateUsrDialog()
 			return
 		else
-			to_chat(user, "<span class='warning'>You can't [open ? "close" : "open"] [src], the lock is engaged!</span>")
+			to_chat(user, "<span class='warning'>I can't [open ? "close" : "open"] [src], the lock is engaged!</span>")
 			return
 
 	if(href_list["decrement"])
@@ -119,11 +119,11 @@ FLOOR SAFES
 		if(dial == tumbler_1_pos + 1 || dial == tumbler_1_pos - 71)
 			tumbler_1_pos = decrement(tumbler_1_pos)
 			if(canhear)
-				to_chat(user, "<span class='hear'>You hear a [pick("clack", "scrape", "clank")] from [src].</span>")
+				to_chat(user, "<span class='hear'>I hear a [pick("clack", "scrape", "clank")] from [src].</span>")
 			if(tumbler_1_pos == tumbler_2_pos + 37 || tumbler_1_pos == tumbler_2_pos - 35)
 				tumbler_2_pos = decrement(tumbler_2_pos)
 				if(canhear)
-					to_chat(user, "<span class='hear'>You hear a [pick("click", "chink", "clink")] from [src].</span>")
+					to_chat(user, "<span class='hear'>I hear a [pick("click", "chink", "clink")] from [src].</span>")
 			check_unlocked(user, canhear)
 		updateUsrDialog()
 		return
@@ -133,11 +133,11 @@ FLOOR SAFES
 		if(dial == tumbler_1_pos - 1 || dial == tumbler_1_pos + 71)
 			tumbler_1_pos = increment(tumbler_1_pos)
 			if(canhear)
-				to_chat(user, "<span class='hear'>You hear a [pick("clack", "scrape", "clank")] from [src].</span>")
+				to_chat(user, "<span class='hear'>I hear a [pick("clack", "scrape", "clank")] from [src].</span>")
 			if(tumbler_1_pos == tumbler_2_pos - 37 || tumbler_1_pos == tumbler_2_pos + 35)
 				tumbler_2_pos = increment(tumbler_2_pos)
 				if(canhear)
-					to_chat(user, "<span class='hear'>You hear a [pick("click", "chink", "clink")] from [src].</span>")
+					to_chat(user, "<span class='hear'>I hear a [pick("click", "chink", "clink")] from [src].</span>")
 			check_unlocked(user, canhear)
 		updateUsrDialog()
 		return
@@ -161,7 +161,7 @@ FLOOR SAFES
 			if(!user.transferItemToLoc(I, src))
 				to_chat(user, "<span class='warning'>\The [I] is stuck to your hand, you cannot put it in the safe!</span>")
 				return
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, "<span class='notice'>I put [I] in [src].</span>")
 			updateUsrDialog()
 			return
 		else
@@ -207,5 +207,5 @@ FLOOR SAFES
 		hide(T.intact)
 
 
-/obj/structure/safe/floor/hide(var/intact)
+/obj/structure/safe/floor/hide(intact)
 	invisibility = intact ? INVISIBILITY_MAXIMUM : 0

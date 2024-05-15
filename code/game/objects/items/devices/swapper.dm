@@ -1,6 +1,6 @@
 /obj/item/swapper
 	name = "quantum spin inverter"
-	desc = "An experimental device that is able to swap the locations of two entities by switching their particles' spin values. Must be linked to another device to function."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "swapper"
 	item_state = "electronic"
@@ -36,7 +36,7 @@
 		if(linked_swapper)
 			to_chat(user, "<span class='warning'>[src] is already linked. Break the current link to establish a new one.</span>")
 			return
-		to_chat(user, "<span class='notice'>You establish a quantum link between the two devices.</span>")
+		to_chat(user, "<span class='notice'>I establish a quantum link between the two devices.</span>")
 		linked_swapper = other_swapper
 		other_swapper.linked_swapper = src
 		update_icon()
@@ -51,9 +51,9 @@
 	if(QDELETED(linked_swapper))
 		to_chat(user, "<span class='warning'>[src] is not linked with another swapper.</span>")
 		return
-	playsound(src, 'sound/weapons/flash.ogg', 25, TRUE)
-	to_chat(user, "<span class='notice'>You activate [src].</span>")
-	playsound(linked_swapper, 'sound/weapons/flash.ogg', 25, TRUE)
+	playsound(src, 'sound/blank.ogg', 25, TRUE)
+	to_chat(user, "<span class='notice'>I activate [src].</span>")
+	playsound(linked_swapper, 'sound/blank.ogg', 25, TRUE)
 	if(ismob(linked_swapper.loc))
 		var/mob/holder = linked_swapper.loc
 		to_chat(holder, "<span class='notice'>[linked_swapper] starts buzzing.</span>")
@@ -72,7 +72,7 @@
 /obj/item/swapper/AltClick(mob/living/user)
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
-	to_chat(user, "<span class='notice'>You break the current quantum link.</span>")
+	to_chat(user, "<span class='notice'>I break the current quantum link.</span>")
 	if(!QDELETED(linked_swapper))
 		linked_swapper.linked_swapper = null
 		linked_swapper.update_icon()
@@ -111,4 +111,4 @@
 		do_teleport(B, target_A, forceMove = TRUE, channel = TELEPORT_CHANNEL_QUANTUM)
 		if(ismob(B))
 			var/mob/M = B
-			to_chat(M, "<span class='warning'>[linked_swapper] activates, and you find yourself somewhere else.</span>")
+			to_chat(M, "<span class='warning'>[linked_swapper] activates, and you find myself somewhere else.</span>")

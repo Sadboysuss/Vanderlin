@@ -1,6 +1,6 @@
 /obj/item/melee/baton
 	name = "stun baton"
-	desc = "A stun baton for incapacitating people with."
+	desc = ""
 	icon_state = "stunbaton"
 	item_state = "baton"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
@@ -86,7 +86,7 @@
 			if(!user.transferItemToLoc(W, src))
 				return
 			cell = W
-			to_chat(user, "<span class='notice'>You install a cell in [src].</span>")
+			to_chat(user, "<span class='notice'>I install a cell in [src].</span>")
 			update_icon()
 
 	else if(W.tool_behaviour == TOOL_SCREWDRIVER)
@@ -94,7 +94,7 @@
 			cell.update_icon()
 			cell.forceMove(get_turf(src))
 			cell = null
-			to_chat(user, "<span class='notice'>You remove the cell from [src].</span>")
+			to_chat(user, "<span class='notice'>I remove the cell from [src].</span>")
 			status = 0
 			update_icon()
 	else
@@ -117,7 +117,7 @@
 /obj/item/melee/baton/attack(mob/M, mob/living/carbon/human/user)
 	if(status && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		user.visible_message("<span class='danger'>[user] accidentally hits [user.p_them()]self with [src]!</span>", \
-							"<span class='userdanger'>You accidentally hit yourself with [src]!</span>")
+							"<span class='danger'>I accidentally hit myself with [src]!</span>")
 		user.Knockdown(stunforce*3)
 		deductcharge(hitcost)
 		return
@@ -132,7 +132,7 @@
 		if(check_martial_counter(L, user))
 			return
 
-	if(user.a_intent != INTENT_HARM)
+	if(user.used_intent.type != INTENT_HARM)
 		if(status)
 			if(cooldown_check <= world.time)
 				if(baton_effect(M, user))
@@ -154,7 +154,7 @@
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(H.check_shields(src, 0, "[user]'s [name]", MELEE_ATTACK)) //No message; check_shields() handles that
-			playsound(L, 'sound/weapons/genhit.ogg', 50, TRUE)
+			playsound(L, 'sound/blank.ogg', 50, TRUE)
 			return 0
 	if(iscyborg(loc))
 		var/mob/living/silicon/robot/R = loc
@@ -178,10 +178,10 @@
 		L.lastattacker = user.real_name
 		L.lastattackerckey = user.ckey
 		L.visible_message("<span class='danger'>[user] has stunned [L] with [src]!</span>", \
-								"<span class='userdanger'>[user] has stunned you with [src]!</span>")
+								"<span class='danger'>[user] has stunned you with [src]!</span>")
 		log_combat(user, L, "stunned")
 
-	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
@@ -199,7 +199,7 @@
 	else
 		target.Knockdown(stunforce)
 	if(!target.IsKnockdown())
-		to_chat(target, "<span class='warning'>You muscles seize, making you collapse[trait_check ? ", but your body quickly recovers..." : "!"]</span>")
+		to_chat(target, "<span class='warning'>I muscles seize, making you collapse[trait_check ? ", but your body quickly recovers..." : "!"]</span>")
 
 /obj/item/melee/baton/emp_act(severity)
 	. = ..()
@@ -209,7 +209,7 @@
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/melee/baton/cattleprod
 	name = "stunprod"
-	desc = "An improvised stun baton."
+	desc = ""
 	icon_state = "stunprod"
 	item_state = "prod"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'

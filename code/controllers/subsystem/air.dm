@@ -326,8 +326,8 @@ SUBSYSTEM_DEF(air)
 			EG.self_breakdown(space_is_all_consuming = 1)
 			EG.dismantle()
 			CHECK_TICK
-
-		var/msg = "HEY! LISTEN! [DisplayTimeText(world.timeofday - timer)] were wasted processing [starting_ats] turf(s) (connected to [ending_ats] other turfs) with atmos differences at round start."
+		var/msg = ""
+		log_game("HEY! LISTEN! [DisplayTimeText(world.timeofday - timer)] were wasted processing [starting_ats] turf(s) (connected to [ending_ats] other turfs) with atmos differences at round start.")
 		to_chat(world, "<span class='boldannounce'>[msg]</span>")
 		warning(msg)
 

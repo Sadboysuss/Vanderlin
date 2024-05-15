@@ -213,7 +213,7 @@
 
 /obj/item/disk/holodisk
 	name = "holorecord disk"
-	desc = "Stores recorder holocalls."
+	desc = ""
 	icon_state = "holodisk"
 	obj_flags = UNIQUE_RENAME
 	custom_materials = list(/datum/material/iron = 100, /datum/material/glass = 100)
@@ -241,7 +241,7 @@
 			record.caller_image = holodiskOriginal.record.caller_image
 			record.entries = holodiskOriginal.record.entries.Copy()
 			record.language = holodiskOriginal.record.language
-			to_chat(user, "<span class='notice'>You copy the record from [holodiskOriginal] to [src] by connecting the ports!</span>")
+			to_chat(user, "<span class='notice'>I copy the record from [holodiskOriginal] to [src] by connecting the ports!</span>")
 			name = holodiskOriginal.name
 		else
 			to_chat(user, "<span class='warning'>[holodiskOriginal] has no record on it!</span>")
@@ -368,7 +368,7 @@
 
 /obj/item/disk/holodisk/donutstation/whiteship
 	name = "Blackbox Print-out #DS024"
-	desc = "A holodisk containing the last viable recording of DS024's blackbox."
+	desc = ""
 	preset_image_type = /datum/preset_holoimage/engineer/ce
 	preset_record_text = {"
 	NAME Geysr Shorthalt

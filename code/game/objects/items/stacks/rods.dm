@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 
 /obj/item/stack/rods
 	name = "metal rod"
-	desc = "Some rods. Can be used for building or something."
+	desc = ""
 	singular_name = "metal rod"
 	icon_state = "rods"
 	item_state = "rods"
@@ -15,14 +15,17 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 	w_class = WEIGHT_CLASS_NORMAL
 	force = 9
 	throwforce = 10
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=1000)
 	mats_per_stack = 1000
 	max_amount = 50
 	attack_verb = list("hit", "bludgeoned", "whacked")
-	hitsound = 'sound/weapons/gun/general/grenade_launch.ogg'
+	hitsound = 'sound/blank.ogg'
 	novariants = TRUE
+
+/obj/item/stack/rods/New()
+	qdel()
 
 /obj/item/stack/rods/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins to stuff \the [src] down [user.p_their()] throat! It looks like [user.p_theyre()] trying to commit suicide!</span>")//it looks like theyre ur mum
@@ -35,7 +38,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 /obj/item/stack/rods/get_main_recipes()
 	. = ..()
 	. += GLOB.rod_recipes
-	
+
 /obj/item/stack/rods/update_icon()
 	var/amount = get_amount()
 	if((amount <= 5) && (amount > 0))
@@ -46,14 +49,14 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 /obj/item/stack/rods/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_WELDER)
 		if(get_amount() < 2)
-			to_chat(user, "<span class='warning'>You need at least two rods to do this!</span>")
+			to_chat(user, "<span class='warning'>I need at least two rods to do this!</span>")
 			return
 
 		if(W.use_tool(src, user, 0, volume=40))
 			var/obj/item/stack/sheet/metal/new_item = new(usr.loc)
 			user.visible_message("<span class='notice'>[user.name] shaped [src] into metal with [W].</span>", \
-						 "<span class='notice'>You shape [src] into metal with [W].</span>", \
-						 "<span class='hear'>You hear welding.</span>")
+						 "<span class='notice'>I shape [src] into metal with [W].</span>", \
+						 "<span class='hear'>I hear welding.</span>")
 			var/obj/item/stack/rods/R = src
 			src = null
 			var/replace = (user.get_inactive_held_item()==R)
@@ -64,7 +67,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 	else if(istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = W
 		if(amount != 1)
-			to_chat(user, "<span class='warning'>You must use a single rod!</span>")
+			to_chat(user, "<span class='warning'>I must use a single rod!</span>")
 		else if(S.w_class > WEIGHT_CLASS_SMALL)
 			to_chat(user, "<span class='warning'>The ingredient is too big for [src]!</span>")
 		else

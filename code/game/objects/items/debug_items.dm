@@ -2,7 +2,7 @@
 
 /obj/item/debug/human_spawner
 	name = "human spawner"
-	desc = "Spawn a human by aiming at a turf and clicking. Use in hand to change type."
+	desc = ""
 	icon = 'icons/obj/guns/magic.dmi'
 	icon_state = "nothingwand"
 	item_state = "wand"

@@ -2,7 +2,7 @@
 // This is a base type, use subtypes on the map.
 /obj/structure/disposalpipe/sorting
 	name = "sorting disposal pipe"
-	desc = "An underfloor disposal pipe with a sorting mechanism."
+	desc = ""
 	icon_state = "pipe-j1s"
 	initialize_dirs = DISP_DIR_RIGHT | DISP_DIR_FLIP
 
@@ -68,7 +68,7 @@
 			else
 				sortTypes |= O.currTag
 				to_chat(user, "<span class='notice'>Added \"[GLOB.TAGGERLOCATIONS[O.currTag]]\" filter.</span>")
-			playsound(src, 'sound/machines/twobeep_high.ogg', 100, TRUE)
+			playsound(src, 'sound/blank.ogg', 100, TRUE)
 	else
 		return ..()
 
@@ -80,7 +80,7 @@
 
 // Wrap sorting junction, sorts objects destined for the mail office mail table (tomail = 1)
 /obj/structure/disposalpipe/sorting/wrap
-	desc = "An underfloor disposal pipe which sorts wrapped and unwrapped objects."
+	desc = ""
 	flip_type = /obj/structure/disposalpipe/sorting/wrap/flip
 	initialize_dirs = DISP_DIR_RIGHT | DISP_DIR_FLIP
 

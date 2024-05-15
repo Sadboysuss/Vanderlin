@@ -62,6 +62,7 @@ SUBSYSTEM_DEF(throwing)
 	var/paused = FALSE
 	var/delayed_time = 0
 	var/last_move = 0
+	var/extra = FALSE
 
 /datum/thrownthing/Destroy()
 	SSthrowing.processing -= thrownthing
@@ -145,9 +146,16 @@ SUBSYSTEM_DEF(throwing)
 	if(target)
 		thrownthing.throw_impact(target, src)
 
+	if(QDELETED(thrownthing))
+		qdel(src)
+		return
+
 	if (callback)
 		callback.Invoke()
-	
+
+	if(extra)
+		thrownthing.throw_at(get_step(thrownthing, thrownthing.dir), 1, 1, thrownthing, spin = FALSE)
+
 	if(!thrownthing.zfalling) // I don't think you can zfall while thrown but hey, just in case.
 		var/turf/T = get_turf(thrownthing)
 		if(T && thrownthing.has_gravity(T))

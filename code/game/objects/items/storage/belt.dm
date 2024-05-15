@@ -1,6 +1,6 @@
 /obj/item/storage/belt
 	name = "belt"
-	desc = "Can hold various things."
+	desc = ""
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
@@ -9,7 +9,7 @@
 	slot_flags = ITEM_SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 	max_integrity = 300
-	equip_sound = 'sound/items/equip/toolbelt_equip.ogg'
+	equip_sound = 'sound/blank.ogg'
 	var/content_overlays = FALSE //If this is true, the belt will gain overlays based on what it's holding
 
 /obj/item/storage/belt/suicide_act(mob/living/carbon/user)
@@ -30,13 +30,13 @@
 
 /obj/item/storage/belt/utility
 	name = "toolbelt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
-	desc = "Holds tools."
+	desc = ""
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	content_overlays = TRUE
 	custom_price = 50
-	drop_sound = 'sound/items/handling/toolbelt_drop.ogg'
-	pickup_sound =  'sound/items/handling/toolbelt_pickup.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 /obj/item/storage/belt/utility/ComponentInitialize()
 	. = ..()
@@ -71,7 +71,7 @@
 
 /obj/item/storage/belt/utility/chief
 	name = "\improper Chief Engineer's toolbelt" //"the Chief Engineer's toolbelt", because "Chief Engineer's toolbelt" is not a proper noun
-	desc = "Holds tools, looks snazzy."
+	desc = ""
 	icon_state = "utilitybelt_ce"
 	item_state = "utility_ce"
 
@@ -115,7 +115,7 @@
 
 /obj/item/storage/belt/medical
 	name = "medical belt"
-	desc = "Can hold various medical equipment."
+	desc = ""
 	icon_state = "medicalbelt"
 	item_state = "medical"
 
@@ -177,7 +177,7 @@
 
 /obj/item/storage/belt/security
 	name = "security belt"
-	desc = "Can hold security gear like handcuffs and flashes."
+	desc = ""
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
 	content_overlays = TRUE
@@ -217,7 +217,7 @@
 
 /obj/item/storage/belt/security/webbing
 	name = "security webbing"
-	desc = "Unique and versatile chest rig, can hold security gear."
+	desc = ""
 	icon_state = "securitywebbing"
 	item_state = "securitywebbing"
 	content_overlays = FALSE
@@ -230,7 +230,7 @@
 
 /obj/item/storage/belt/mining
 	name = "explorer's webbing"
-	desc = "A versatile chest rig, cherished by miners and hunters alike."
+	desc = ""
 	icon_state = "explorer1"
 	item_state = "explorer1"
 	w_class = WEIGHT_CLASS_BULKY
@@ -291,7 +291,7 @@
 
 /obj/item/storage/belt/mining/primitive
 	name = "hunter's belt"
-	desc = "A versatile belt, woven from sinew."
+	desc = ""
 	icon_state = "ebelt"
 	item_state = "ebelt"
 
@@ -302,7 +302,7 @@
 
 /obj/item/storage/belt/soulstone
 	name = "soul stone belt"
-	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away."
+	desc = ""
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 
@@ -324,7 +324,7 @@
 
 /obj/item/storage/belt/champion
 	name = "championship belt"
-	desc = "Proves to the world that you are the strongest!"
+	desc = ""
 	icon_state = "championbelt"
 	item_state = "champion"
 	custom_materials = list(/datum/material/gold=400)
@@ -339,7 +339,7 @@
 
 /obj/item/storage/belt/military
 	name = "chest rig"
-	desc = "A set of tactical webbing worn by Syndicate boarding parties."
+	desc = ""
 	icon_state = "militarywebbing"
 	item_state = "militarywebbing"
 	resistance_flags = FIRE_PROOF
@@ -354,8 +354,8 @@
 
 /obj/item/storage/belt/military/snack/Initialize()
 	. = ..()
-	var/sponsor = pick("DonkCo", "Waffle Co.", "Roffle Co.", "Gorlax Marauders", "Tiger Cooperative")
-	desc = "A set of snack-tical webbing worn by athletes of the [sponsor] VR sports division."
+//	var/sponsor = pick("DonkCo", "Waffle Co.", "Roffle Co.", "Gorlax Marauders", "Tiger Cooperative")
+//	desc = ""
 
 /obj/item/storage/belt/military/snack/ComponentInitialize()
 	. = ..()
@@ -398,7 +398,7 @@
 
 /obj/item/storage/belt/military/abductor
 	name = "agent belt"
-	desc = "A belt used by abductor agents."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "belt"
 	item_state = "security"
@@ -414,13 +414,13 @@
 
 /obj/item/storage/belt/military/army
 	name = "army belt"
-	desc = "A belt used by military forces."
+	desc = ""
 	icon_state = "grenadebeltold"
 	item_state = "security"
 
 /obj/item/storage/belt/military/assault
 	name = "assault belt"
-	desc = "A tactical assault belt."
+	desc = ""
 	icon_state = "assaultbelt"
 	item_state = "security"
 
@@ -431,7 +431,7 @@
 
 /obj/item/storage/belt/grenade
 	name = "grenadier belt"
-	desc = "A belt for holding grenades."
+	desc = ""
 	icon_state = "grenadebeltnew"
 	item_state = "security"
 
@@ -471,7 +471,7 @@
 
 /obj/item/storage/belt/wands
 	name = "wand belt"
-	desc = "A belt designed to hold various rods of power. A veritable fanny pack of exotic magic."
+	desc = ""
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 
@@ -497,7 +497,7 @@
 
 /obj/item/storage/belt/janitor
 	name = "janibelt"
-	desc = "A belt used to hold most janitorial supplies."
+	desc = ""
 	icon_state = "janibelt"
 	item_state = "janibelt"
 
@@ -530,7 +530,7 @@
 
 /obj/item/storage/belt/bandolier
 	name = "bandolier"
-	desc = "A bandolier for holding shotgun ammunition."
+	desc = ""
 	icon_state = "bandolier"
 	item_state = "bandolier"
 
@@ -545,10 +545,10 @@
 
 /obj/item/storage/belt/holster
 	name = "shoulder holster"
-	desc = "A holster to carry a handgun and ammo. WARNING: Badasses only."
+	desc = ""
 	icon_state = "holster"
 	item_state = "holster"
-	alternate_worn_layer = UNDER_SUIT_LAYER
+	alternate_worn_layer = UNDER_ARMOR_LAYER
 
 /obj/item/storage/belt/holster/ComponentInitialize()
 	. = ..()
@@ -570,7 +570,7 @@
 
 /obj/item/storage/belt/fannypack
 	name = "fannypack"
-	desc = "A dorky fannypack for keeping small items in."
+	desc = ""
 	icon_state = "fannypack_leather"
 	item_state = "fannypack_leather"
 	dying_key = DYE_REGISTRY_FANNYPACK
@@ -634,7 +634,7 @@
 
 /obj/item/storage/belt/sabre
 	name = "sabre sheath"
-	desc = "An ornate sheath designed to hold an officer's blade."
+	desc = ""
 	icon_state = "sheath"
 	item_state = "sheath"
 	w_class = WEIGHT_CLASS_BULKY
@@ -659,7 +659,7 @@
 		return
 	if(length(contents))
 		var/obj/item/I = contents[1]
-		user.visible_message("<span class='notice'>[user] takes [I] out of [src].</span>", "<span class='notice'>You take [I] out of [src].</span>")
+		user.visible_message("<span class='notice'>[user] takes [I] out of [src].</span>", "<span class='notice'>I take [I] out of [src].</span>")
 		user.put_in_hands(I)
 		update_icon()
 	else

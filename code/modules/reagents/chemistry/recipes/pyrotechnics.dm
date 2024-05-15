@@ -151,7 +151,7 @@
 
 /datum/chemical_reaction/reagent_explosion/potassium_explosion/holyboom/on_reaction(datum/reagents/holder, created_volume)
 	if(created_volume >= 150)
-		playsound(get_turf(holder.my_atom), 'sound/effects/pray.ogg', 80, FALSE, round(created_volume/48))
+		playsound(get_turf(holder.my_atom), 'sound/blank.ogg', 80, FALSE, round(created_volume/48))
 		strengthdiv = 8
 		for(var/mob/living/simple_animal/revenant/R in get_hearers_in_view(7,get_turf(holder.my_atom)))
 			var/deity
@@ -159,14 +159,14 @@
 				deity = GLOB.deity
 			else
 				deity = "Christ"
-			to_chat(R, "<span class='userdanger'>The power of [deity] compels you!</span>")
+			to_chat(R, "<span class='danger'>The power of [deity] compels you!</span>")
 			R.stun(20)
 			R.reveal(100)
 			R.adjustHealth(50)
 		sleep(20)
 		for(var/mob/living/carbon/C in get_hearers_in_view(round(created_volume/48,1),get_turf(holder.my_atom)))
 			if(iscultist(C))
-				to_chat(C, "<span class='userdanger'>The divine explosion sears you!</span>")
+				to_chat(C, "<span class='danger'>The divine explosion sears you!</span>")
 				C.Paralyze(40)
 				C.adjust_fire_stacks(5)
 				C.IgniteMob()
@@ -219,9 +219,9 @@
 /datum/chemical_reaction/beesplosion/on_reaction(datum/reagents/holder, created_volume)
 	var/location = holder.my_atom.drop_location()
 	if(created_volume < 5)
-		playsound(location,'sound/effects/sparks1.ogg', 100, TRUE)
+		playsound(location,'sound/blank.ogg', 100, TRUE)
 	else
-		playsound(location,'sound/creatures/bee.ogg', 100, TRUE)
+		playsound(location,'sound/blank.ogg', 100, TRUE)
 		var/list/beeagents = list()
 		for(var/R in holder.reagent_list)
 			if(required_reagents[R])
@@ -381,7 +381,7 @@
 	var/location = get_turf(holder.my_atom)
 	var/datum/effect_system/smoke_spread/chem/S = new
 	S.attach(location)
-	playsound(location, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	playsound(location, 'sound/blank.ogg', 50, TRUE, -3)
 	if(S)
 		S.set_up(holder, smoke_radius, location, 0)
 		S.start()
@@ -400,7 +400,7 @@
 	var/smoke_radius = round(sqrt(created_volume / 2), 1)
 	var/datum/effect_system/smoke_spread/chem/S = new
 	S.attach(location)
-	playsound(location, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	playsound(location, 'sound/blank.ogg', 50, TRUE, -3)
 	if(S)
 		S.set_up(holder, smoke_radius, location, 0)
 		S.start()
@@ -418,7 +418,7 @@
 		return
 	holder.remove_reagent(/datum/reagent/sonic_powder, created_volume*3)
 	var/location = get_turf(holder.my_atom)
-	playsound(location, 'sound/effects/bang.ogg', 25, TRUE)
+	playsound(location, 'sound/blank.ogg', 25, TRUE)
 	for(var/mob/living/carbon/C in get_hearers_in_view(created_volume/3, location))
 		C.soundbang_act(1, 100, rand(0, 5))
 
@@ -430,7 +430,7 @@
 
 /datum/chemical_reaction/sonic_powder_deafen/on_reaction(datum/reagents/holder, created_volume)
 	var/location = get_turf(holder.my_atom)
-	playsound(location, 'sound/effects/bang.ogg', 25, TRUE)
+	playsound(location, 'sound/blank.ogg', 25, TRUE)
 	for(var/mob/living/carbon/C in get_hearers_in_view(created_volume/10, location))
 		C.soundbang_act(1, 100, rand(0, 5))
 
@@ -517,7 +517,7 @@
 	strengthdiv = 100
 	modifier = -100
 	mix_message = "<span class='boldannounce'>The teslium starts to spark as electricity arcs away from it!</span>"
-	mix_sound = 'sound/machines/defib_zap.ogg'
+	mix_sound = 'sound/blank.ogg'
 	var/tesla_flags = TESLA_MOB_DAMAGE | TESLA_OBJ_DAMAGE | TESLA_MOB_STUN
 
 /datum/chemical_reaction/reagent_explosion/teslium_lightning/on_reaction(datum/reagents/holder, created_volume)
@@ -527,15 +527,15 @@
 	sleep(5)
 	if(created_volume >= 75)
 		tesla_zap(holder.my_atom, 7, T1, tesla_flags)
-		playsound(holder.my_atom, 'sound/machines/defib_zap.ogg', 50, TRUE)
+		playsound(holder.my_atom, 'sound/blank.ogg', 50, TRUE)
 		sleep(15)
 	if(created_volume >= 40)
 		tesla_zap(holder.my_atom, 7, T2, tesla_flags)
-		playsound(holder.my_atom, 'sound/machines/defib_zap.ogg', 50, TRUE)
+		playsound(holder.my_atom, 'sound/blank.ogg', 50, TRUE)
 		sleep(15)
 	if(created_volume >= 10)			//10 units minimum for lightning, 40 units for secondary blast, 75 units for tertiary blast.
 		tesla_zap(holder.my_atom, 7, T3, tesla_flags)
-		playsound(holder.my_atom, 'sound/machines/defib_zap.ogg', 50, TRUE)
+		playsound(holder.my_atom, 'sound/blank.ogg', 50, TRUE)
 	..()
 
 /datum/chemical_reaction/reagent_explosion/teslium_lightning/heat

@@ -2,7 +2,7 @@
 
 /obj/structure/cursed_slot_machine //Greed's slot machine: Used in the Greed ruin. Deals clone damage on each use, with a successful use giving a d20 of fate.
 	name = "greed's slot machine"
-	desc = "High stakes, high rewards."
+	desc = ""
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "slots1"
 	anchored = TRUE
@@ -17,20 +17,20 @@
 	obj_flags |= IN_USE
 	user.adjustCloneLoss(20)
 	if(user.stat)
-		to_chat(user, "<span class='userdanger'>No... just one more try...</span>")
+		to_chat(user, "<span class='danger'>No... just one more try...</span>")
 		user.gib()
 	else
-		user.visible_message("<span class='warning'>[user] pulls [src]'s lever with a glint in [user.p_their()] eyes!</span>", "<span class='warning'>You feel a draining as you pull the lever, but you \
+		user.visible_message("<span class='warning'>[user] pulls [src]'s lever with a glint in [user.p_their()] eyes!</span>", "<span class='warning'>I feel a draining as you pull the lever, but you \
 		know it'll be worth it.</span>")
 	icon_state = "slots2"
-	playsound(src, 'sound/lavaland/cursed_slot_machine.ogg', 50, FALSE)
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
 	addtimer(CALLBACK(src, .proc/determine_victor, user), 50)
 
 /obj/structure/cursed_slot_machine/proc/determine_victor(mob/living/user)
 	icon_state = "slots1"
 	obj_flags &= ~IN_USE
 	if(prob(win_prob))
-		playsound(src, 'sound/lavaland/cursed_slot_machine_jackpot.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 		new/obj/structure/cursed_money(get_turf(src))
 		if(user)
 			to_chat(user, "<span class='boldwarning'>You've hit jackpot. Laughter echoes around you as your reward appears in the machine's place.</span>")
@@ -42,7 +42,7 @@
 
 /obj/structure/cursed_money
 	name = "bag of money"
-	desc = "RICH! YES! YOU KNEW IT WAS WORTH IT! YOU'RE RICH! RICH! RICH!"
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "moneybag"
 	anchored = FALSE
@@ -63,7 +63,7 @@
 		return
 	user.visible_message("<span class='warning'>[user] opens the bag and \
 		and removes a die. The bag then vanishes.</span>",
-		"<span class='boldwarning'>You open the bag...!</span>\n\
+		"<span class='boldwarning'>I open the bag...!</span>\n\
 		<span class='danger'>And see a bag full of dice. Confused, \
 		you take one... and the bag vanishes.</span>")
 	var/turf/T = get_turf(user)
@@ -73,7 +73,7 @@
 
 /obj/effect/gluttony //Gluttony's wall: Used in the Gluttony ruin. Only lets the overweight through.
 	name = "gluttony's wall"
-	desc = "Only those who truly indulge may pass."
+	desc = ""
 	anchored = TRUE
 	density = TRUE
 	icon_state = "blob"
@@ -95,7 +95,7 @@
 
 /obj/structure/mirror/magic/pride //Pride's mirror: Used in the Pride ruin.
 	name = "pride's mirror"
-	desc = "Pride cometh before the..."
+	desc = ""
 	icon_state = "magic_mirror"
 
 /obj/structure/mirror/magic/pride/New()
@@ -124,7 +124,7 @@
 
 /obj/item/kitchen/knife/envy //Envy's knife: Found in the Envy ruin. Attackers take on the appearance of whoever they strike.
 	name = "envy's knife"
-	desc = "Their success will be yours."
+	desc = ""
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
 	item_state = "knife"
@@ -133,7 +133,7 @@
 	force = 18
 	throwforce = 10
 	w_class = WEIGHT_CLASS_NORMAL
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/kitchen/knife/envy/afterattack(atom/movable/AM, mob/living/carbon/human/user, proximity)
 	. = ..()

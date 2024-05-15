@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/med_data//TODO:SANITY
 	name = "medical records console"
-	desc = "This can be used to check medical records."
+	desc = ""
 	icon_screen = "medcomp"
 	icon_keyboard = "med_key"
 	req_one_access = list(ACCESS_MEDICAL, ACCESS_FORENSICS_LOCKERS)
@@ -25,7 +25,7 @@
 /obj/machinery/computer/med_data/ui_interact(mob/user)
 	. = ..()
 	if(isliving(user))
-		playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
+		playsound(src, 'sound/blank.ogg', 50, FALSE)
 	var/dat
 	if(temp)
 		dat = text("<TT>[temp]</TT><BR><BR><A href='?src=[REF(src)];temp=1'>Clear Screen</A>")
@@ -194,7 +194,7 @@
 			screen = null
 			active1 = null
 			active2 = null
-			playsound(src, 'sound/machines/terminal_off.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 		else if(href_list["choice"])
 			// SORTING!
 			if(href_list["choice"] == "Sorting")
@@ -231,7 +231,7 @@
 				screen = 1
 			else
 				to_chat(usr, "<span class='danger'>Unauthorized access.</span>")
-			playsound(src, 'sound/machines/terminal_on.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 		if(authenticated)
 			if(href_list["screen"])
 				screen = text2num(href_list["screen"])
@@ -505,7 +505,7 @@
 				if(!( printing ))
 					printing = 1
 					GLOB.data_core.medicalPrintCount++
-					playsound(loc, 'sound/items/poster_being_created.ogg', 100, TRUE)
+					playsound(loc, 'sound/blank.ogg', 100, TRUE)
 					sleep(30)
 					var/obj/item/paper/P = new /obj/item/paper( loc )
 					P.info = "<CENTER><B>Medical Record - (MR-[GLOB.data_core.medicalPrintCount])</B></CENTER><BR>"
@@ -572,7 +572,7 @@
 
 /obj/machinery/computer/med_data/laptop
 	name = "medical laptop"
-	desc = "A cheap Nanotrasen medical laptop, it functions as a medical records computer. It's bolted to the table."
+	desc = ""
 	icon_state = "laptop"
 	icon_screen = "medlaptop"
 	icon_keyboard = "laptop_key"

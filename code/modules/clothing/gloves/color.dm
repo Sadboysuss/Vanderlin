@@ -2,7 +2,7 @@
 	dying_key = DYE_REGISTRY_GLOVES
 
 /obj/item/clothing/gloves/color/yellow
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = ""
 	name = "insulated gloves"
 	icon_state = "yellow"
 	item_state = "ygloves"
@@ -11,7 +11,7 @@
 	resistance_flags = NONE
 
 /obj/item/clothing/gloves/color/fyellow                             //Cheap Chinese Crap
-	desc = "These gloves are cheap knockoffs of the coveted ones - no way this can end badly."
+	desc = ""
 	name = "budget insulated gloves"
 	icon_state = "yellow"
 	item_state = "ygloves"
@@ -24,7 +24,7 @@
 	siemens_coefficient = pick(0,0.5,0.5,0.5,0.5,0.75,1.5)
 
 /obj/item/clothing/gloves/color/fyellow/old
-	desc = "Old and worn out insulated gloves, hopefully they still work."
+	desc = ""
 	name = "worn out insulated gloves"
 
 /obj/item/clothing/gloves/color/fyellow/old/Initialize()
@@ -32,7 +32,7 @@
 	siemens_coefficient = pick(0,0,0,0.5,0.5,0.5,0.75)
 
 /obj/item/clothing/gloves/color/black
-	desc = "These gloves are fire-resistant."
+	desc = ""
 	name = "black gloves"
 	icon_state = "black"
 	item_state = "blackgloves"
@@ -46,7 +46,7 @@
 /obj/item/clothing/gloves/color/black/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WIRECUTTER)
 		if(can_be_cut && icon_state == initial(icon_state))//only if not dyed
-			to_chat(user, "<span class='notice'>You snip the fingertips off of [src].</span>")
+			to_chat(user, "<span class='notice'>I snip the fingertips off of [src].</span>")
 			I.play_tool_sound(src)
 			new /obj/item/clothing/gloves/fingerless(drop_location())
 			qdel(src)
@@ -54,68 +54,68 @@
 
 /obj/item/clothing/gloves/color/orange
 	name = "orange gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "orange"
 	item_state = "orangegloves"
 
 /obj/item/clothing/gloves/color/red
 	name = "red gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "red"
 	item_state = "redgloves"
 
 
 /obj/item/clothing/gloves/color/red/insulated
 	name = "insulated gloves"
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = ""
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	resistance_flags = NONE
 
 /obj/item/clothing/gloves/color/rainbow
 	name = "rainbow gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "rainbow"
 	item_state = "rainbowgloves"
 
 /obj/item/clothing/gloves/color/blue
 	name = "blue gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "blue"
 	item_state = "bluegloves"
 
 /obj/item/clothing/gloves/color/purple
 	name = "purple gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "purple"
 	item_state = "purplegloves"
 
 /obj/item/clothing/gloves/color/green
 	name = "green gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "green"
 	item_state = "greengloves"
 
 /obj/item/clothing/gloves/color/grey
 	name = "grey gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "gray"
 	item_state = "graygloves"
 
 /obj/item/clothing/gloves/color/light_brown
 	name = "light brown gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "lightbrown"
 	item_state = "lightbrowngloves"
 
 /obj/item/clothing/gloves/color/brown
 	name = "brown gloves"
-	desc = "A pair of gloves, they don't look special in any way."
+	desc = ""
 	icon_state = "brown"
 	item_state = "browngloves"
 
 /obj/item/clothing/gloves/color/captain
-	desc = "Regal blue gloves, with a nice gold trim, a diamond anti-shock coating, and an integrated thermal barrier. Swanky."
+	desc = ""
 	name = "captain's gloves"
 	icon_state = "captain"
 	item_state = "egloves"
@@ -130,7 +130,7 @@
 
 /obj/item/clothing/gloves/color/latex
 	name = "latex gloves"
-	desc = "Cheap sterile gloves made from latex. Transfers minor paramedic knowledge to the user via budget nanochips."
+	desc = ""
 	icon_state = "latex"
 	item_state = "latex"
 	siemens_coefficient = 0.3
@@ -150,7 +150,7 @@
 
 /obj/item/clothing/gloves/color/latex/nitrile
 	name = "nitrile gloves"
-	desc = "Pricy sterile gloves that are thicker than latex. Transfers intimate paramedic knowledge into the user via nanochips."
+	desc = ""
 	icon_state = "nitrile"
 	item_state = "nitrilegloves"
 	transfer_prints = FALSE
@@ -158,13 +158,13 @@
 
 /obj/item/clothing/gloves/color/white
 	name = "white gloves"
-	desc = "These look pretty fancy."
+	desc = ""
 	icon_state = "white"
 	item_state = "wgloves"
 
 /obj/effect/spawner/lootdrop/gloves
 	name = "random gloves"
-	desc = "These gloves are supposed to be a random color..."
+	desc = ""
 	icon = 'icons/obj/clothing/gloves.dmi'
 	icon_state = "random_gloves"
 	loot = list(

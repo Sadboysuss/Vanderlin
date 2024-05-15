@@ -2,7 +2,7 @@
 //The ash walker den consumes corpses or unconscious mobs to create ash walker eggs. For more info on those, check ghost_role_spawners.dm
 /obj/structure/lavaland/ash_walker
 	name = "necropolis tendril nest"
-	desc = "A vile tendril of corruption. It's surrounded by a nest of rapidly growing eggs..."
+	desc = ""
 	icon = 'icons/mob/nest.dmi'
 	icon_state = "ash_walker_nest"
 
@@ -39,7 +39,7 @@
 	for(var/mob/living/H in view(src, 1)) //Only for corpse right next to/on same tile
 		if(H.stat)
 			visible_message("<span class='warning'>Serrated tendrils eagerly pull [H] to [src], tearing the body apart as its blood seeps over the eggs.</span>")
-			playsound(get_turf(src),'sound/magic/demon_consume.ogg', 100, TRUE)
+			playsound(get_turf(src),'sound/blank.ogg', 100, TRUE)
 			for(var/obj/item/W in H)
 				if(!H.dropItemToGround(W))
 					qdel(W)

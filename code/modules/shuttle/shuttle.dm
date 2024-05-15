@@ -125,9 +125,10 @@
 		T.maptext = null
 	if(_color)
 		var/turf/T = locate(L[1], L[2], z)
-		T.color = "#0f0"
-		T = locate(L[3], L[4], z)
-		T.color = "#00f"
+		if(T)
+			T.color = "#0f0"
+			T = locate(L[3], L[4], z)
+			T.color = "#00f"
 #endif
 
 //return first-found touching dockingport
@@ -645,6 +646,8 @@
 
 //returns timeLeft
 /obj/docking_port/mobile/proc/timeLeft(divisor)
+	//rtstuff
+	return max(0, timer - world.time)
 	if(divisor <= 0)
 		divisor = 10
 
@@ -683,9 +686,11 @@
 		return "--:--"
 
 	var/timeleft = timeLeft()
-	if(timeleft > 1 HOURS)
-		return "--:--"
-	else if(timeleft > 0)
+	return "[timeleft]"
+//	if(timeleft > 1 HOURS)
+//		return "--:--"
+//	else if(timeleft > 0)
+	if(timeleft > 0)
 		return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 	else
 		return "00:00"
@@ -695,15 +700,15 @@
 	var/obj/docking_port/stationary/dockedAt = get_docked()
 	var/docked_at = dockedAt?.name || "unknown"
 	if(istype(dockedAt, /obj/docking_port/stationary/transit))
-		if (timeLeft() > 1 HOURS)
-			return "hyperspace"
+//		if (timeLeft() > 1 HOURS)
+//			return "hyperspace"
+//		else
+		var/obj/docking_port/stationary/dst
+		if(mode == SHUTTLE_RECALL)
+			dst = previous
 		else
-			var/obj/docking_port/stationary/dst
-			if(mode == SHUTTLE_RECALL)
-				dst = previous
-			else
-				dst = destination
-			. = "transit towards [dst?.name || "unknown location"] ([getTimerStr()])"
+			dst = destination
+		. = "transit towards [dst?.name || "unknown location"] ([getTimerStr()])"
 	else if(mode == SHUTTLE_RECHARGING)
 		return "[docked_at], recharging [getTimerStr()]"
 	else
@@ -739,7 +744,7 @@
 	return null
 
 /obj/docking_port/mobile/proc/hyperspace_sound(phase, list/areas)
-	var/selected_sound
+/*	var/selected_sound
 	switch(phase)
 		if(HYPERSPACE_WARMUP)
 			selected_sound = "hyperspace_begin"
@@ -748,26 +753,31 @@
 		if(HYPERSPACE_END)
 			selected_sound = "hyperspace_end"
 		else
-			CRASH("Invalid hyperspace sound phase: [phase]")
+			CRASH("Invalid hyperspace sound phase: [phase]")*/
 	// This previously was played from each door at max volume, and was one of the worst things I had ever seen.
 	// Now it's instead played from the nearest engine if close, or the first engine in the list if far since it doesn't really matter.
 	// Or a door if for some reason the shuttle has no engine, fuck oh hi daniel fuck it
 	var/range = (engine_coeff * max(width, height))
 	var/long_range = range * 2.5
 	var/atom/distant_source
-	if(engine_list[1])
-		distant_source = engine_list[1]
-	else
-		for(var/A in areas)
-			distant_source = locate(/obj/machinery/door) in A
-			if(distant_source)
-				break
+//	if(engine_list[1])
+//		distant_source = engine_list[1]
+//	else
+//		for(var/A in areas)
+//			distant_source = locate(/obj/machinery/door) in A
+//			if(distant_source)
+//				break
+
+	/*for(var/A in areas)
+		distant_source = locate(/obj/structure/boatbell) in A
+		if(distant_source)
+			break*/
 
 	if(distant_source)
 		for(var/mob/M in SSmobs.clients_by_zlevel[z])
 			var/dist_far = get_dist(M, distant_source)
 			if(dist_far <= long_range && dist_far > range)
-				M.playsound_local(distant_source, "sound/effects/[selected_sound]_distance.ogg", 100, falloff = 20)
+				M.playsound_local(distant_source, "sound/misc/boatleave.ogg", 100, falloff = 20)
 			else if(dist_far <= range)
 				var/source
 				if(engine_list.len == 0)
@@ -779,7 +789,7 @@
 						if(dist_near < closest_dist)
 							source = O
 							closest_dist = dist_near
-				M.playsound_local(source, "sound/effects/[selected_sound].ogg", 100, falloff = range / 2)
+				M.playsound_local(source, "sound/effects/boatleave.ogg", 100, falloff = range / 2)
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time
@@ -856,11 +866,18 @@
 	//Mapping a new docking point for each ship mappers could potentially want docking with centcom would take up lots of space, just let them keep flying off into the sunset for their greentext
 	if(launch_status == ENDGAME_LAUNCHED)
 		launch_status = ENDGAME_TRANSIT
+	for(var/V in GLOB.player_list)
+		if(iscarbon(V))
+			var/mob/living/carbon/M = V
+			var/area/newarea = get_area(src)
+			if((get_area(M) == newarea) && M.stat != DEAD)
+				M.adjust_triumphs(1)
 
 /obj/docking_port/mobile/pod/on_emergency_dock()
+	..()
 	if(launch_status == ENDGAME_LAUNCHED)
 		initiate_docking(SSshuttle.getDock("[id]_away")) //Escape pods dock at centcom
 		mode = SHUTTLE_ENDGAME
 
 /obj/docking_port/mobile/emergency/on_emergency_dock()
-	return
+	..()

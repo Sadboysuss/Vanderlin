@@ -15,7 +15,7 @@
 		return
 	for(var/turf/T in getline(get_turf(H), get_turf(C)))
 		if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
-			to_chat(H, "<span class='warning'>You may not use an energy net through solid obstacles!</span>")
+			to_chat(H, "<span class='warning'>I may not use an energy net through solid obstacles!</span>")
 			return
 	if(!ninjacost(200,N_STEALTH_CANCEL))
 		H.Beam(C,"n_beam",time=15)
@@ -23,7 +23,7 @@
 		var/obj/structure/energy_net/E = new /obj/structure/energy_net(C.drop_location())
 		E.affecting = C
 		E.master = H
-		H.visible_message("<span class='danger'>[H] caught [C] with an energy net!</span>","<span class='notice'>You caught [C] with an energy net!</span>")
+		H.visible_message("<span class='danger'>[H] caught [C] with an energy net!</span>","<span class='notice'>I caught [C] with an energy net!</span>")
 
 		if(C.buckled)
 			C.buckled.unbuckle_mob(affecting,TRUE)

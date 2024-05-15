@@ -26,7 +26,7 @@
 	ranged = TRUE
 	ranged_cooldown_time = 10
 	projectiletype = /obj/projectile/seedling
-	projectilesound = 'sound/weapons/pierce.ogg'
+	projectilesound = 'sound/blank.ogg'
 	robust_searching = TRUE
 	stat_attack = UNCONSCIOUS
 	move_resist = MOVE_FORCE_EXTREMELY_STRONG
@@ -43,8 +43,8 @@
 	light_range = 2
 	flag = "energy"
 	light_color = LIGHT_COLOR_YELLOW
-	hitsound = 'sound/weapons/sear.ogg'
-	hitsound_wall = 'sound/weapons/effects/searwall.ogg'
+	hitsound = 'sound/blank.ogg'
+	hitsound_wall = 'sound/blank.ogg'
 	nondirectional_sprite = TRUE
 
 /obj/projectile/seedling/Bump(atom/A)//Stops seedlings from destroying other jungle mobs through FF
@@ -138,9 +138,9 @@
 		combatant_state = SEEDLING_STATE_ACTIVE
 		living_target.apply_status_effect(/datum/status_effect/seedling_beam_indicator, src)
 		beam_debuff_target = living_target
-		playsound(src,'sound/effects/seedling_chargeup.ogg', 100, FALSE)
+		playsound(src,'sound/blank.ogg', 100, FALSE)
 		if(get_dist(src,living_target) > 7)
-			playsound(living_target,'sound/effects/seedling_chargeup.ogg', 100, FALSE)
+			playsound(living_target,'sound/blank.ogg', 100, FALSE)
 		solar_beam_identifier = world.time
 		addtimer(CALLBACK(src, .proc/Beamu, living_target, solar_beam_identifier), 35)
 
@@ -161,7 +161,7 @@
 			living_target.adjustFireLoss(30)
 			living_target.adjust_fire_stacks(0.2)//Just here for the showmanship
 			living_target.IgniteMob()
-			playsound(living_target,'sound/weapons/sear.ogg', 50, TRUE)
+			playsound(living_target,'sound/blank.ogg', 50, TRUE)
 			addtimer(CALLBACK(src, .proc/AttackRecovery), 5)
 			return
 	AttackRecovery()

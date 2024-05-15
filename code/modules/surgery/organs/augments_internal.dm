@@ -1,14 +1,14 @@
 
 /obj/item/organ/cyberimp
 	name = "cybernetic implant"
-	desc = "A state-of-the-art implant that improves a baseline's functionality."
+	desc = ""
 	status = ORGAN_ROBOTIC
 	organ_flags = ORGAN_SYNTHETIC
 	var/implant_color = "#FFFFFF"
 	var/implant_overlay
 	var/syndicate_implant = FALSE //Makes the implant invisible to health analyzers and medical HUDs.
 
-/obj/item/organ/cyberimp/New(var/mob/M = null)
+/obj/item/organ/cyberimp/New(mob/M = null)
 	if(iscarbon(M))
 		src.Insert(M)
 	if(implant_overlay)
@@ -23,7 +23,7 @@
 
 /obj/item/organ/cyberimp/brain
 	name = "cybernetic brain implant"
-	desc = "Injectors of extra sub-routines for the brain."
+	desc = ""
 	icon_state = "brain_implant"
 	implant_overlay = "brain_implant_overlay"
 	zone = BODY_ZONE_HEAD
@@ -35,12 +35,12 @@
 		return
 	var/stun_amount = 200/severity
 	owner.Stun(stun_amount)
-	to_chat(owner, "<span class='warning'>Your body seizes up!</span>")
+	to_chat(owner, "<span class='warning'>My body seizes up!</span>")
 
 
 /obj/item/organ/cyberimp/brain/anti_drop
 	name = "anti-drop implant"
-	desc = "This cybernetic brain implant will allow you to force your hand muscles to contract, preventing item dropping. Twitch ear to toggle."
+	desc = ""
 	var/active = 0
 	var/list/stored_items = list()
 	implant_color = "#DE7E00"
@@ -55,17 +55,17 @@
 
 		var/list/L = owner.get_empty_held_indexes()
 		if(LAZYLEN(L) == owner.held_items.len)
-			to_chat(owner, "<span class='notice'>You are not holding any items, your hands relax...</span>")
+			to_chat(owner, "<span class='notice'>I are not holding any items, my hands relax...</span>")
 			active = 0
 			stored_items = list()
 		else
 			for(var/obj/item/I in stored_items)
-				to_chat(owner, "<span class='notice'>Your [owner.get_held_index_name(owner.get_held_index_of_item(I))]'s grip tightens.</span>")
+				to_chat(owner, "<span class='notice'>My [owner.get_held_index_name(owner.get_held_index_of_item(I))]'s grip tightens.</span>")
 				ADD_TRAIT(I, TRAIT_NODROP, ANTI_DROP_IMPLANT_TRAIT)
 
 	else
 		release_items()
-		to_chat(owner, "<span class='notice'>Your hands relax...</span>")
+		to_chat(owner, "<span class='notice'>My hands relax...</span>")
 
 
 /obj/item/organ/cyberimp/brain/anti_drop/emp_act(severity)
@@ -79,7 +79,7 @@
 	for(var/obj/item/I in stored_items)
 		A = pick(oview(range))
 		I.throw_at(A, range, 2)
-		to_chat(owner, "<span class='warning'>Your [owner.get_held_index_name(owner.get_held_index_of_item(I))] spasms and throws the [I.name]!</span>")
+		to_chat(owner, "<span class='warning'>My [owner.get_held_index_name(owner.get_held_index_of_item(I))] spasms and throws the [I.name]!</span>")
 	stored_items = list()
 
 
@@ -89,14 +89,14 @@
 	stored_items = list()
 
 
-/obj/item/organ/cyberimp/brain/anti_drop/Remove(var/mob/living/carbon/M, special = 0)
+/obj/item/organ/cyberimp/brain/anti_drop/Remove(mob/living/carbon/M, special = 0)
 	if(active)
 		ui_action_click()
 	..()
 
 /obj/item/organ/cyberimp/brain/anti_stun
 	name = "CNS Rebooter implant"
-	desc = "This implant will automatically give you back control over your central nervous system, reducing downtime when stunned."
+	desc = ""
 	implant_color = "#FFFF00"
 	slot = ORGAN_SLOT_BRAIN_ANTISTUN
 
@@ -144,7 +144,7 @@
 
 /obj/item/organ/cyberimp/mouth/breathing_tube
 	name = "breathing tube implant"
-	desc = "This simple implant adds an internals connector to your back, allowing you to use internals without a mask and protecting you from being choked."
+	desc = ""
 	icon_state = "implant_mask"
 	slot = ORGAN_SLOT_BREATHING_TUBE
 	w_class = WEIGHT_CLASS_TINY
@@ -154,14 +154,14 @@
 	if(!owner || . & EMP_PROTECT_SELF)
 		return
 	if(prob(60/severity))
-		to_chat(owner, "<span class='warning'>Your breathing tube suddenly closes!</span>")
+		to_chat(owner, "<span class='warning'>My breathing tube suddenly closes!</span>")
 		owner.losebreath += 2
 
 //BOX O' IMPLANTS
 
 /obj/item/storage/box/cyber_implants
 	name = "boxed cybernetic implants"
-	desc = "A sleek, sturdy box."
+	desc = ""
 	icon_state = "cyber_implants"
 	var/list/boxed = list(
 		/obj/item/autosurgeon/thermal_eyes,

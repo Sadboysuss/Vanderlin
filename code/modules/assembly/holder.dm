@@ -105,7 +105,7 @@
 /obj/item/assembly_holder/screwdriver_act(mob/user, obj/item/tool)
 	if(..())
 		return TRUE
-	to_chat(user, "<span class='notice'>You disassemble [src]!</span>")
+	to_chat(user, "<span class='notice'>I disassemble [src]!</span>")
 	if(a_left)
 		a_left.on_detach()
 		a_left = null

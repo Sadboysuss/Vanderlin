@@ -16,10 +16,24 @@
 			return legcuffed
 		if(SLOT_BELT)
 			return belt
-		if(SLOT_WEAR_ID)
-			return wear_id
-		if(SLOT_EARS)
-			return ears
+		if(SLOT_RING)
+			return wear_ring
+		if(SLOT_WRISTS)
+			return wear_wrists
+		if(SLOT_MOUTH)
+			return mouth
+		if(SLOT_SHIRT)
+			return wear_shirt
+		if(SLOT_CLOAK)
+			return cloak
+		if(SLOT_BACK_R)
+			return backr
+		if(SLOT_BACK_L)
+			return backl
+		if(SLOT_BELT_L)
+			return beltl
+		if(SLOT_BELT_R)
+			return beltr
 		if(SLOT_GLASSES)
 			return glasses
 		if(SLOT_GLOVES)
@@ -28,10 +42,10 @@
 			return head
 		if(SLOT_SHOES)
 			return shoes
-		if(SLOT_WEAR_SUIT)
-			return wear_suit
-		if(SLOT_W_UNIFORM)
-			return w_uniform
+		if(SLOT_ARMOR)
+			return wear_armor
+		if(SLOT_PANTS)
+			return wear_pants
 		if(SLOT_L_STORE)
 			return l_store
 		if(SLOT_R_STORE)
@@ -49,14 +63,22 @@
 		s_store,
 		handcuffed,
 		legcuffed,
-		wear_suit,
+		wear_armor,
 		gloves,
 		shoes,
 		belt,
-		wear_id,
+		wear_ring,
+		wear_wrists,
 		l_store,
 		r_store,
-		w_uniform
+		wear_pants,
+		wear_shirt,
+		cloak,
+		backr,
+		backl,
+		beltr,
+		beltl,
+		mouth
 		)
 
 /mob/living/carbon/human/proc/get_head_slots()
@@ -66,6 +88,7 @@
 		wear_neck,
 		glasses,
 		ears,
+		mouth,
 		)
 
 /mob/living/carbon/human/proc/get_storage_slots()
@@ -75,6 +98,11 @@
 		l_store,
 		r_store,
 		s_store,
+		backr,
+		backl,
+		beltr,
+		beltl,
+		mouth
 		)
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
@@ -86,13 +114,19 @@
 	var/not_handled = FALSE //Added in case we make this type path deeper one day
 	switch(slot)
 		if(SLOT_BELT)
+
 			belt = I
 			update_inv_belt()
-		if(SLOT_WEAR_ID)
-			wear_id = I
+		if(SLOT_RING)
+			wear_ring = I
 			sec_hud_set_ID()
 			update_inv_wear_id()
-		if(SLOT_EARS)
+		if(SLOT_WRISTS)
+
+			wear_wrists = I
+			update_inv_wrists()
+		if(SLOT_HEAD)
+
 			ears = I
 			update_inv_ears()
 		if(SLOT_GLASSES)
@@ -109,23 +143,49 @@
 				update_sight()
 			update_inv_glasses()
 		if(SLOT_GLOVES)
+
 			gloves = I
 			update_inv_gloves()
 		if(SLOT_SHOES)
+
 			shoes = I
 			update_inv_shoes()
-		if(SLOT_WEAR_SUIT)
-			wear_suit = I
+		if(SLOT_ARMOR)
+
+			wear_armor = I
 			if(I.flags_inv & HIDEJUMPSUIT)
-				update_inv_w_uniform()
-			if(wear_suit.breakouttime) //when equipping a straightjacket
+				update_inv_shirt()
+			if(wear_armor.breakouttime) //when equipping a straightjacket
 				stop_pulling() //can't pull if restrained
 				update_action_buttons_icon() //certain action buttons will no longer be usable.
-			update_inv_wear_suit()
-		if(SLOT_W_UNIFORM)
-			w_uniform = I
+			update_inv_armor()
+		if(SLOT_PANTS)
+
+			wear_pants = I
 			update_suit_sensors()
-			update_inv_w_uniform()
+			update_inv_pants()
+		if(SLOT_SHIRT)
+
+			wear_shirt = I
+			update_inv_shirt()
+		if(SLOT_CLOAK)
+
+			cloak = I
+			update_inv_cloak()
+		if(SLOT_BELT_L)
+			beltl = I
+			update_inv_belt()
+		if(SLOT_BELT_R)
+			beltr = I
+			update_inv_belt()
+		if(SLOT_BACK_R)
+
+			backr = I
+			update_inv_back()
+		if(SLOT_BACK_L)
+
+			backl = I
+			update_inv_back()
 		if(SLOT_L_STORE)
 			l_store = I
 			update_inv_pockets()
@@ -135,12 +195,37 @@
 		if(SLOT_S_STORE)
 			s_store = I
 			update_inv_s_store()
+		if(SLOT_MOUTH)
+
+			mouth = I
+			update_inv_mouth()
+		if(SLOT_IN_BACKPACK)
+			not_handled = TRUE
+			if(beltr)
+				testing("insert1")
+				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+					not_handled = FALSE
+			if(beltl && not_handled)
+				testing("insert2")
+				if(SEND_SIGNAL(beltl, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+					not_handled = FALSE
+			if(belt && not_handled)
+				testing("insert3")
+				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+					not_handled = FALSE
 		else
-			to_chat(src, "<span class='danger'>You are trying to equip this item to an unsupported inventory slot. Report this to a coder!</span>")
+			not_handled = TRUE
+//		else
+//			to_chat(src, "<span class='danger'>I am trying to equip this item to an unsupported inventory slot. Report this to a coder!</span>")
 
 	//Item is handled and in slot, valid to call callback, for this proc should always be true
 	if(!not_handled)
 		I.equipped(src, slot, initial)
+
+
+	if(hud_used)
+		hud_used.throw_icon?.update_icon()
+		hud_used.give_intent?.update_icon()
 
 	return not_handled //For future deeper overrides
 
@@ -157,31 +242,31 @@
 		return
 	if(index && !QDELETED(src) && dna.species.mutanthands) //hand freed, fill with claws, skip if we're getting deleted.
 		put_in_hand(new dna.species.mutanthands(), index)
-	if(I == wear_suit)
+	if(I == wear_armor)
 		if(s_store && invdrop)
-			dropItemToGround(s_store, TRUE) //It makes no sense for your suit storage to stay on you if you drop your suit.
-		if(wear_suit.breakouttime) //when unequipping a straightjacket
+			dropItemToGround(s_store, TRUE, silent = silent) //It makes no sense for your suit storage to stay on you if you drop your suit.
+		if(wear_armor.breakouttime) //when unequipping a straightjacket
 			drop_all_held_items() //suit is restraining
 			update_action_buttons_icon() //certain action buttons may be usable again.
-		wear_suit = null
+		wear_armor = null
 		if(!QDELETED(src)) //no need to update we're getting deleted anyway
 			if(I.flags_inv & HIDEJUMPSUIT)
 				update_inv_w_uniform()
-			update_inv_wear_suit()
-	else if(I == w_uniform)
+			update_inv_armor()
+	else if(I == wear_pants)
 		if(invdrop)
 			if(r_store)
-				dropItemToGround(r_store, TRUE) //Again, makes sense for pockets to drop.
+				dropItemToGround(r_store, TRUE, silent = silent) //Again, makes sense for pockets to drop.
 			if(l_store)
-				dropItemToGround(l_store, TRUE)
-			if(wear_id)
-				dropItemToGround(wear_id)
-			if(belt)
-				dropItemToGround(belt)
-		w_uniform = null
+				dropItemToGround(l_store, TRUE, silent = silent)
+//			if(wear_ring)
+//				dropItemToGround(wear_ring)
+//			if(belt)
+//				dropItemToGround(belt)
+		wear_pants = null
 		update_suit_sensors()
 		if(!QDELETED(src))
-			update_inv_w_uniform()
+			update_inv_pants()
 	else if(I == gloves)
 		gloves = null
 		if(!QDELETED(src))
@@ -209,14 +294,23 @@
 		if(!QDELETED(src))
 			update_inv_shoes()
 	else if(I == belt)
+		if(beltr || beltl)
+			dropItemToGround(beltr, TRUE, silent = FALSE)
+			dropItemToGround(beltl, TRUE, silent = FALSE)
+		var/obj/item/storage/S = I
+		S.emptyStorage()
 		belt = null
 		if(!QDELETED(src))
 			update_inv_belt()
-	else if(I == wear_id)
-		wear_id = null
+	else if(I == wear_ring)
+		wear_ring = null
 		sec_hud_set_ID()
 		if(!QDELETED(src))
 			update_inv_wear_id()
+	else if(I == wear_wrists)
+		wear_wrists = null
+		if(!QDELETED(src))
+			update_inv_wrists()
 	else if(I == r_store)
 		r_store = null
 		if(!QDELETED(src))
@@ -229,6 +323,40 @@
 		s_store = null
 		if(!QDELETED(src))
 			update_inv_s_store()
+	else if(I == wear_shirt)
+		wear_shirt = null
+		if(!QDELETED(src))
+			update_inv_shirt()
+	else if(I == beltl)
+		beltl = null
+		if(!QDELETED(src))
+			update_inv_belt()
+	else if(I == beltr)
+		beltr = null
+		if(!QDELETED(src))
+			update_inv_belt()
+	else if(I == backl)
+		backl = null
+		if(!QDELETED(src))
+			update_inv_back()
+	else if(I == backr)
+		backr = null
+		if(!QDELETED(src))
+			update_inv_back()
+	else if(I == cloak)
+		cloak = null
+		if(!QDELETED(src))
+			update_inv_cloak()
+	else if(I == mouth)
+		mouth = null
+		if(!QDELETED(src))
+			update_inv_mouth()
+
+//	if(!QDELETED(src))
+//		if(I.eweight)
+//			encumbrance -= I.eweight
+//			if(encumbrance < 0)
+//				encumbrance = 0
 
 /mob/living/carbon/human/wear_mask_update(obj/item/I, toggle_off = 1)
 	if((I.flags_inv & (HIDEHAIR|HIDEFACIALHAIR)) || (initial(I.flags_inv) & (HIDEHAIR|HIDEFACIALHAIR)))
@@ -284,7 +412,7 @@
 	var/obj/item/equipped_back = get_item_by_slot(SLOT_BACK)
 	if(!equipped_back) // We also let you equip a backpack like this
 		if(!thing)
-			to_chat(src, "<span class='warning'>You have no backpack to take something out of!</span>")
+			to_chat(src, "<span class='warning'>I have no backpack to take something out of!</span>")
 			return
 		if(equip_to_slot_if_possible(thing, SLOT_BACK))
 			update_inv_hands()
@@ -293,11 +421,11 @@
 		if(!thing)
 			equipped_back.attack_hand(src)
 		else
-			to_chat(src, "<span class='warning'>You can't fit anything in!</span>")
+			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
 		return
 	if(thing) // put thing in backpack
 		if(!SEND_SIGNAL(equipped_back, COMSIG_TRY_STORAGE_INSERT, thing, src))
-			to_chat(src, "<span class='warning'>You can't fit anything in!</span>")
+			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
 		return
 	if(!equipped_back.contents.len) // nothing to take out
 		to_chat(src, "<span class='warning'>There's nothing in your backpack to take out!</span>")
@@ -307,7 +435,7 @@
 		return
 	stored.attack_hand(src) // take out thing from backpack
 	return
-	
+
 /mob/living/carbon/human/proc/smart_equipbelt() // put held thing in belt or take most recent item out of belt
 	if(incapacitated())
 		return
@@ -315,7 +443,7 @@
 	var/obj/item/equipped_belt = get_item_by_slot(SLOT_BELT)
 	if(!equipped_belt) // We also let you equip a belt like this
 		if(!thing)
-			to_chat(src, "<span class='warning'>You have no belt to take something out of!</span>")
+			to_chat(src, "<span class='warning'>I have no belt to take something out of!</span>")
 			return
 		if(equip_to_slot_if_possible(thing, SLOT_BELT))
 			update_inv_hands()
@@ -324,11 +452,11 @@
 		if(!thing)
 			equipped_belt.attack_hand(src)
 		else
-			to_chat(src, "<span class='warning'>You can't fit anything in!</span>")
+			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
 		return
 	if(thing) // put thing in belt
 		if(!SEND_SIGNAL(equipped_belt, COMSIG_TRY_STORAGE_INSERT, thing, src))
-			to_chat(src, "<span class='warning'>You can't fit anything in!</span>")
+			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
 		return
 	if(!equipped_belt.contents.len) // nothing to take out
 		to_chat(src, "<span class='warning'>There's nothing in your belt to take out!</span>")

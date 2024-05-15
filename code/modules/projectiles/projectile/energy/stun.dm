@@ -6,7 +6,7 @@
 	paralyze = 100
 	stutter = 5
 	jitter = 20
-	hitsound = 'sound/weapons/taserhit.ogg'
+	hitsound = 'sound/blank.ogg'
 	range = 7
 	tracer_type = /obj/effect/projectile/tracer/stun
 	muzzle_type = /obj/effect/projectile/muzzle/stun

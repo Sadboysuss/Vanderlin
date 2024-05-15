@@ -11,7 +11,7 @@
 //More types of drones
 /mob/living/simple_animal/drone/syndrone
 	name = "Syndrone"
-	desc = "A modified maintenance drone. This one brings with it the feeling of terror."
+	desc = ""
 	icon_state = "drone_synd"
 	icon_living = "drone_synd"
 	picked = TRUE //the appearence of syndrones is static, you don't get to change it.
@@ -38,7 +38,7 @@
 
 /mob/living/simple_animal/drone/syndrone/Login()
 	..()
-	to_chat(src, "<span class='notice'>You can kill and eat other drones to increase your health!</span>" )
+	to_chat(src, "<span class='notice'>I can kill and eat other drones to increase your health!</span>" )
 
 /mob/living/simple_animal/drone/syndrone/badass
 	name = "Badass Syndrone"
@@ -61,7 +61,7 @@
 
 /obj/effect/mob_spawn/drone/syndrone
 	name = "syndrone shell"
-	desc = "A shell of a syndrone, a modified maintenance drone designed to infiltrate and annihilate."
+	desc = ""
 	icon_state = "syndrone_item"
 	mob_name = "syndrone"
 	mob_type = /mob/living/simple_animal/drone/syndrone
@@ -73,7 +73,7 @@
 
 /obj/effect/mob_spawn/drone/snowflake
 	name = "snowflake drone shell"
-	desc = "A shell of a snowflake drone, a maintenance drone with a built in holographic projector to display hats and masks."
+	desc = ""
 	mob_name = "snowflake drone"
 	mob_type = /mob/living/simple_animal/drone/snowflake
 
@@ -98,21 +98,21 @@
 
 /obj/effect/mob_spawn/drone/derelict
 	name = "derelict drone shell"
-	desc = "A long-forgotten drone shell. It seems kind of... Space Russian."
+	desc = ""
 	icon = 'icons/mob/drone.dmi'
 	icon_state = "drone_maint_hat"
 	mob_name = "derelict drone"
 	mob_type = /mob/living/simple_animal/drone/derelict
 	anchored = TRUE
 	flavour_text = {"
-	<b>You are a drone on Kosmicheskaya Stantsiya 13. Something has brought you out of hibernation, and the station is in gross disrepair. Build, repair, maintain and improve the station that housed you on activation.</b>
+	<b>I are a drone on Kosmicheskaya Stantsiya 13. Something has brought you out of hibernation, and the station is in gross disrepair. Build, repair, maintain and improve the station that housed you on activation.</b>
 	"}
 
 /mob/living/simple_animal/drone/derelict
 	name = "derelict drone"
 	default_hatmask = /obj/item/clothing/head/ushanka
 	laws = \
-	"1. You may not involve yourself in the matters of another sentient being outside the station that housed your activation, even if such matters conflict with Law Two or Law Three, unless the other being is another Drone.\n"+\
+	"1. You may not involve myself in the matters of another sentient being outside the station that housed your activation, even if such matters conflict with Law Two or Law Three, unless the other being is another Drone.\n"+\
 	"2. You may not harm any sentient being, regardless of intent or circumstance.\n"+\
 	"3. Your goals are to actively build, maintain, repair, improve, and provide power to the best of your abilities within the facility that housed your activation."
 	flavortext = \

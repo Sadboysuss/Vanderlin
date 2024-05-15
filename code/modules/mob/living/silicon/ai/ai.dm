@@ -114,15 +114,15 @@
 	if(target_ai.mind)
 		target_ai.mind.transfer_to(src)
 		if(mind.special_role)
-			mind.store_memory("As an AI, you must obey your silicon laws above all else. Your objectives will consider you to be dead.")
-			to_chat(src, "<span class='userdanger'>You have been installed as an AI! </span>")
-			to_chat(src, "<span class='danger'>You must obey your silicon laws above all else. Your objectives will consider you to be dead.</span>")
+			mind.store_memory("As an AI, you must obey my silicon laws above all else. Your objectives will consider you to be dead.")
+			to_chat(src, "<span class='danger'>I have been installed as an AI! </span>")
+			to_chat(src, "<span class='danger'>I must obey my silicon laws above all else. Your objectives will consider you to be dead.</span>")
 
-	to_chat(src, "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
-	to_chat(src, "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>")
+	to_chat(src, "<B>I are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
+	to_chat(src, "<B>To look at other parts of the station, click on myself to get a camera menu.</B>")
 	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
 	to_chat(src, "To use something, simply click on it.")
-	to_chat(src, "Use say :b to speak to your cyborgs through binary.")
+	to_chat(src, "Use say :b to speak to my cyborgs through binary.")
 	to_chat(src, "For department channels, use the following say commands:")
 	to_chat(src, ":o - AI Private, :c - Command, :s - Security, :e - Engineering, :u - Supply, :v - Service, :m - Medical, :n - Science.")
 	show_laws()
@@ -290,7 +290,7 @@
 		to_chat(usr, "<span class='warning'>Wireless control is disabled!</span>")
 		return
 
-	var/reason = input(src, "What is the nature of your emergency? ([CALL_SHUTTLE_REASON_LENGTH] characters required.)", "Confirm Shuttle Call") as null|text
+	var/reason = input(src, "What is the nature of my emergency? ([CALL_SHUTTLE_REASON_LENGTH] characters required.)", "Confirm Shuttle Call") as null|text
 
 	if(incapacitated())
 		return
@@ -339,7 +339,7 @@
 			to_chat(src, "<span class='warning'>Insufficient backup power!</span>")
 			return
 		battery = battery - 50
-		to_chat(src, "<span class='notice'>You route power from your backup battery to move the bolts.</span>")
+		to_chat(src, "<span class='notice'>I route power from my backup battery to move the bolts.</span>")
 	var/is_anchored = FALSE
 	if(move_resist == MOVE_FORCE_OVERPOWERING)
 		move_resist = MOVE_FORCE_NORMAL
@@ -349,7 +349,7 @@
 		move_resist = MOVE_FORCE_OVERPOWERING
 		ADD_TRAIT(src, TRAIT_NO_TELEPORT, src)
 
-	to_chat(src, "<b>You are now [is_anchored ? "" : "un"]anchored.</b>")
+	to_chat(src, "<b>I are now [is_anchored ? "" : "un"]anchored.</b>")
 	// the message in the [] will change depending whether or not the AI is anchored
 
 /mob/living/silicon/ai/update_mobility() //If the AI dies, mobs won't go through it anymore
@@ -422,7 +422,7 @@
 		if(!Bot || Bot.remote_disabled || control_disabled)
 			return //True if there is no bot found, the bot is manually emagged, or the AI is carded with wireless off.
 		waypoint_mode = 1
-		to_chat(src, "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>")
+		to_chat(src, "<span class='notice'>Set my waypoint by clicking on a valid location free of obstructions.</span>")
 		return
 	if(href_list["interface"]) //Remotely connect to a bot!
 		Bot = locate(href_list["interface"]) in GLOB.alive_mob_list
@@ -448,13 +448,13 @@
 			return
 
 		if(controlled_mech)
-			to_chat(src, "<span class='warning'>You are already loaded into an onboard computer!</span>")
+			to_chat(src, "<span class='warning'>I are already loaded into an onboard computer!</span>")
 			return
 		if(!GLOB.cameranet.checkCameraVis(M))
 			to_chat(src, "<span class='warning'>Exosuit is no longer near active cameras.</span>")
 			return
 		if(!isturf(loc))
-			to_chat(src, "<span class='warning'>You aren't in your core!</span>")
+			to_chat(src, "<span class='warning'>I aren't in my core!</span>")
 			return
 		if(M)
 			M.transfer_ai(AI_MECH_HACK, src, usr) //Called om the mech itself.
@@ -477,7 +477,7 @@
 /mob/living/silicon/ai/proc/botcall()
 	set category = "AI Commands"
 	set name = "Access Robot Control"
-	set desc = "Wirelessly control various automatic robots."
+	set desc = ""
 	if(incapacitated())
 		return
 
@@ -661,7 +661,7 @@
 //I am the icon meister. Bow fefore me.	//>fefore
 /mob/living/silicon/ai/proc/ai_hologram_change()
 	set name = "Change Hologram"
-	set desc = "Change the default hologram available to AI to something else."
+	set desc = ""
 	set category = "AI Commands"
 
 	if(incapacitated())
@@ -737,7 +737,7 @@
 
 	var/obj/machinery/power/apc/apc = src.loc
 	if(!istype(apc))
-		to_chat(src, "<span class='notice'>You are already in your Main Core.</span>")
+		to_chat(src, "<span class='notice'>I are already in my Main Core.</span>")
 		return
 	apc.malfvacate()
 
@@ -781,7 +781,7 @@
 
 /mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Transceiver Settings"
-	set desc = "Allows you to change settings of your radio."
+	set desc = ""
 	set category = "AI Commands"
 
 	if(incapacitated())
@@ -797,7 +797,7 @@
 
 /mob/living/silicon/ai/proc/set_automatic_say_channel()
 	set name = "Set Auto Announce Mode"
-	set desc = "Modify the default radio setting for your automatic announcements."
+	set desc = ""
 	set category = "AI Commands"
 
 	if(incapacitated())
@@ -829,17 +829,17 @@
 /mob/living/silicon/ai/can_buckle()
 	return 0
 
-/mob/living/silicon/ai/incapacitated(ignore_restraints = FALSE, ignore_grab = FALSE, check_immobilized = FALSE, ignore_stasis = FALSE)
+/mob/living/silicon/ai/incapacitated(ignore_restraints = FALSE, ignore_grab = TRUE, check_immobilized = FALSE, ignore_stasis = FALSE)
 	if(aiRestorePowerRoutine)
 		return TRUE
 	return ..()
 
 /mob/living/silicon/ai/canUseTopic(atom/movable/M, be_close=FALSE, no_dexterity=FALSE, no_tk=FALSE)
 	if(control_disabled || incapacitated())
-		to_chat(src, "<span class='warning'>You can't do that right now!</span>")
+		to_chat(src, "<span class='warning'>I can't do that right now!</span>")
 		return FALSE
 	if(be_close && !in_range(M, src))
-		to_chat(src, "<span class='warning'>You are too far away!</span>")
+		to_chat(src, "<span class='warning'>I are too far away!</span>")
 		return FALSE
 	return can_see(M) //stop AIs from leaving windows open and using then after they lose vision
 
@@ -867,7 +867,7 @@
 	else
 		jobpart = "Unknown"
 
-	var/rendered = "<i><span class='game say'>[start]<span class='name'>[hrefpart][namepart] ([jobpart])</a> </span><span class='message'>[raw_message]</span></span></i>"
+	var/rendered = "<i><span class='say'>[start]<span class='name'>[hrefpart][namepart] ([jobpart])</a> </span><span class='message'>[raw_message]</span></span></i>"
 
 	show_message(rendered, 2)
 
@@ -889,8 +889,8 @@
 
 /mob/living/silicon/ai/proc/add_malf_picker()
 	to_chat(src, "In the top right corner of the screen you will find the Malfunctions tab, where you can purchase various abilities, from upgraded surveillance to station ending doomsday devices.")
-	to_chat(src, "You are also capable of hacking APCs, which grants you more points to spend on your Malfunction powers. The drawback is that a hacked APC will give you away if spotted by the crew. Hacking an APC takes 60 seconds.")
-	view_core() //A BYOND bug requires you to be viewing your core before your verbs update
+	to_chat(src, "You are also capable of hacking APCs, which grants you more points to spend on my Malfunction powers. The drawback is that a hacked APC will give you away if spotted by the crew. Hacking an APC takes 60 seconds.")
+	view_core() //A BYOND bug requires you to be viewing my core before my verbs update
 	verbs += /mob/living/silicon/ai/proc/choose_modules
 	malf_picker = new /datum/module_picker
 
@@ -938,10 +938,10 @@
 
 	if(!istype(apc) || QDELETED(apc) || apc.stat & BROKEN)
 		to_chat(src, "<span class='danger'>Hack aborted. The designated APC no longer exists on the power network.</span>")
-		playsound(get_turf(src), 'sound/machines/buzz-two.ogg', 50, TRUE, ignore_walls = FALSE)
+		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, ignore_walls = FALSE)
 	else if(apc.aidisabled)
 		to_chat(src, "<span class='danger'>Hack aborted. \The [apc] is no longer responding to our systems.</span>")
-		playsound(get_turf(src), 'sound/machines/buzz-sigh.ogg', 50, TRUE, ignore_walls = FALSE)
+		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, ignore_walls = FALSE)
 	else
 		malf_picker.processing_time += 10
 
@@ -950,11 +950,11 @@
 		apc.locked = TRUE
 		apc.coverlocked = TRUE
 
-		playsound(get_turf(src), 'sound/machines/ding.ogg', 50, TRUE, ignore_walls = FALSE)
-		to_chat(src, "Hack complete. \The [apc] is now under your exclusive control.")
+		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, ignore_walls = FALSE)
+		to_chat(src, "Hack complete. \The [apc] is now under my exclusive control.")
 		apc.update_icon()
 
-/mob/living/silicon/ai/verb/deploy_to_shell(var/mob/living/silicon/robot/target)
+/mob/living/silicon/ai/verb/deploy_to_shell(mob/living/silicon/robot/target)
 	set category = "AI Commands"
 	set name = "Deploy to Shell"
 
@@ -989,7 +989,7 @@
 
 /datum/action/innate/deploy_shell
 	name = "Deploy to AI Shell"
-	desc = "Wirelessly control a specialized cyborg shell."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_AI.dmi'
 	button_icon_state = "ai_shell"
 
@@ -1001,7 +1001,7 @@
 
 /datum/action/innate/deploy_last_shell
 	name = "Reconnect to shell"
-	desc = "Reconnect to the most recently used AI shell."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_AI.dmi'
 	button_icon_state = "ai_last_shell"
 	var/mob/living/silicon/robot/last_used_shell
@@ -1017,7 +1017,7 @@
 
 /mob/living/silicon/ai/proc/disconnect_shell()
 	if(deployed_shell) //Forcibly call back AI in event of things such as damage, EMP or power loss.
-		to_chat(src, "<span class='danger'>Your remote connection has been reset!</span>")
+		to_chat(src, "<span class='danger'>My remote connection has been reset!</span>")
 		deployed_shell.undeploy()
 	diag_hud_set_deployed()
 

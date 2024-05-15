@@ -1,6 +1,6 @@
 /obj/item/energy_katana
 	name = "energy katana"
-	desc = "A katana infused with strong energy."
+	desc = ""
 	icon_state = "energy_katana"
 	item_state = "energy_katana"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
@@ -8,9 +8,9 @@
 	force = 40
 	throwforce = 20
 	block_chance = 50
-	armour_penetration = 50
+	armor_penetration = 50
 	w_class = WEIGHT_CLASS_NORMAL
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_BELT
 	sharpness = IS_SHARP
@@ -29,7 +29,7 @@
 
 /obj/item/energy_katana/attack_self(mob/user)
 	dash_toggled = !dash_toggled
-	to_chat(user, "<span class='notice'>You [dash_toggled ? "enable" : "disable"] the dash function on [src].</span>")
+	to_chat(user, "<span class='notice'>I [dash_toggled ? "enable" : "disable"] the dash function on [src].</span>")
 
 /obj/item/energy_katana/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
@@ -38,14 +38,14 @@
 	if(proximity_flag && (isobj(target) || issilicon(target)))
 		spark_system.start()
 		playsound(user, "sparks", 50, TRUE)
-		playsound(user, 'sound/weapons/blade1.ogg', 50, TRUE)
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		target.emag_act(user)
 
 /obj/item/energy_katana/pickup(mob/living/user)
 	. = ..()
 	jaunt.Grant(user, src)
 	user.update_icons()
-	playsound(src, 'sound/items/unsheath.ogg', 25, TRUE)
+	playsound(src, 'sound/blank.ogg', 25, TRUE)
 
 /obj/item/energy_katana/dropped(mob/user)
 	. = ..()
@@ -58,8 +58,8 @@
 /obj/item/energy_katana/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(ishuman(hit_atom))
 		var/mob/living/carbon/human/H = hit_atom
-		if(istype(H.wear_suit, /obj/item/clothing/suit/space/space_ninja))
-			var/obj/item/clothing/suit/space/space_ninja/SN = H.wear_suit
+		if(istype(H.wear_armor, /obj/item/clothing/suit/space/space_ninja))
+			var/obj/item/clothing/suit/space/space_ninja/SN = H.wear_armor
 			if(SN.energyKatana == src)
 				returnToOwner(H, 0, 1)
 				return

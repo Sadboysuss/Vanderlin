@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/shuttle/syndicate
 	name = "syndicate shuttle terminal"
-	desc = "The terminal used to control the syndicate transport shuttle."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/syndicate_shuttle
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
@@ -14,7 +14,7 @@
 
 /obj/machinery/computer/shuttle/syndicate/recall
 	name = "syndicate shuttle recall terminal"
-	desc = "Use this if your friends left you behind."
+	desc = ""
 	possible_destinations = "syndicate_away"
 
 
@@ -34,7 +34,7 @@
 
 /obj/machinery/computer/shuttle/syndicate/drop_pod
 	name = "syndicate assault pod control"
-	desc = "Controls the drop pod's launch system."
+	desc = ""
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "dorm_available"
 	light_color = LIGHT_COLOR_BLUE
@@ -51,7 +51,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/syndicate
 	name = "syndicate shuttle navigation computer"
-	desc = "Used to designate a precise transit location for the syndicate shuttle."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	shuttleId = "syndicate"

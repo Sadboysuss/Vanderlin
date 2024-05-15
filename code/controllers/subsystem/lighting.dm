@@ -1,11 +1,13 @@
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 2
+	wait = 0
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
+	priority = FIRE_PRIORITY_DEFAULT
 	var/static/list/sources_queue = list() // List of lighting sources queued for update.
 	var/static/list/corners_queue = list() // List of lighting corners queued for update.
 	var/static/list/objects_queue = list() // List of lighting objects queued for update.
+	processing_flag = PROCESSING_LIGHTING
 
 /datum/controller/subsystem/lighting/stat_entry()
 	..("L:[length(sources_queue)]|C:[length(corners_queue)]|O:[length(objects_queue)]")

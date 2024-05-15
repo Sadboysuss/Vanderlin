@@ -4,7 +4,7 @@
 	//- floor_tile is now a path, and not a tile obj
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
-	baseturfs = /turf/open/floor/plating
+	baseturfs = /turf/open/transparent/openspace
 
 	footstep = FOOTSTEP_FLOOR
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -74,13 +74,10 @@
 		if(2)
 			switch(pick(1,2;75,3))
 				if(1)
-					if(!length(baseturfs) || !ispath(baseturfs[baseturfs.len-1], /turf/open/floor))
+					if(!length(baseturfs))
 						ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-						ReplaceWithLattice()
 					else
 						ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
-					if(prob(33))
-						new /obj/item/stack/sheet/metal(src)
 				if(2)
 					ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
 				if(3)
@@ -89,8 +86,6 @@
 					else
 						break_tile()
 					hotspot_expose(1000,CELL_VOLUME)
-					if(prob(33))
-						new /obj/item/stack/sheet/metal(src)
 		if(3)
 			if (prob(50))
 				src.break_tile()
@@ -184,10 +179,10 @@
 		broken = 0
 		burnt = 0
 		if(user && !silent)
-			to_chat(user, "<span class='notice'>You remove the broken plating.</span>")
+			to_chat(user, "<span class='notice'>I remove the broken plating.</span>")
 	else
 		if(user && !silent)
-			to_chat(user, "<span class='notice'>You remove the floor tile.</span>")
+			to_chat(user, "<span class='notice'>I remove the floor tile.</span>")
 		if(floor_tile && make_tile)
 			new floor_tile(src)
 	return make_plating()
@@ -242,13 +237,13 @@
 /turf/open/floor/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_FLOORWALL)
-			to_chat(user, "<span class='notice'>You build a wall.</span>")
+			to_chat(user, "<span class='notice'>I build a wall.</span>")
 			PlaceOnTop(/turf/closed/wall)
 			return TRUE
 		if(RCD_AIRLOCK)
 			if(locate(/obj/machinery/door/airlock) in src)
 				return FALSE
-			to_chat(user, "<span class='notice'>You build an airlock.</span>")
+			to_chat(user, "<span class='notice'>I build an airlock.</span>")
 			var/obj/machinery/door/airlock/A = new the_rcd.airlock_type(src)
 
 			A.electronics = new/obj/item/electronics/airlock(A)
@@ -266,12 +261,12 @@
 		if(RCD_DECONSTRUCT)
 			if(!ScrapeAway(flags = CHANGETURF_INHERIT_AIR))
 				return FALSE
-			to_chat(user, "<span class='notice'>You deconstruct [src].</span>")
+			to_chat(user, "<span class='notice'>I deconstruct [src].</span>")
 			return TRUE
 		if(RCD_WINDOWGRILLE)
 			if(locate(/obj/structure/grille) in src)
 				return FALSE
-			to_chat(user, "<span class='notice'>You construct the grille.</span>")
+			to_chat(user, "<span class='notice'>I construct the grille.</span>")
 			var/obj/structure/grille/G = new(src)
 			G.anchored = TRUE
 			return TRUE

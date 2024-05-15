@@ -25,6 +25,7 @@
 	var/now_fixed
 	var/high_threshold_cleared
 	var/low_threshold_cleared
+	dropshrink = 0.5
 
 /obj/item/organ/proc/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE)
 	if(!iscarbon(M) || owner == M)
@@ -59,7 +60,7 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.Remove(M)
-	START_PROCESSING(SSobj, src)
+//	START_PROCESSING(SSobj, src)
 
 
 /obj/item/organ/proc/on_find(mob/living/finder)
@@ -94,7 +95,7 @@
 		. += "<span class='warning'>[src] is starting to look discolored.</span>"
 
 
-/obj/item/organ/proc/prepare_eat()
+/obj/item/organ/proc/prepare_eat(mob/living/carbon/human/user)
 	var/obj/item/reagent_containers/food/snacks/organ/S = new
 	S.name = name
 	S.desc = desc
@@ -108,8 +109,9 @@
 	name = "appendix"
 	icon_state = "appendix"
 	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
+	list_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/berrypoison = 1)
 	foodtype = RAW | MEAT | GROSS
+	eat_effect = /datum/status_effect/debuff/uncookedfood
 
 /obj/item/organ/Initialize()
 	. = ..()
@@ -120,8 +122,7 @@
 		// The special flag is important, because otherwise mobs can die
 		// while undergoing transformation into different mobs.
 		Remove(owner, special=TRUE)
-	else
-		STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/organ/attack(mob/living/carbon/M, mob/user)
@@ -146,10 +147,10 @@
 	if(maximum < damage)
 		return
 	damage = CLAMP(damage + d, 0, maximum)
-	var/mess = check_damage_thresholds(owner)
+//	var/mess = check_damage_thresholds(owner)
 	prev_damage = damage
-	if(mess && owner)
-		to_chat(owner, mess)
+//	if(mess && owner)
+//		to_chat(owner, mess)
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals

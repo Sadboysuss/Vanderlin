@@ -1,5 +1,5 @@
 /obj/item/clothing/mask/breath
-	desc = "A close-fitting mask that can be connected to an air supply."
+	desc = ""
 	name = "breath mask"
 	icon_state = "breath"
 	item_state = "m_mask"
@@ -33,7 +33,7 @@
 	. += "<span class='notice'>Alt-click [src] to adjust it.</span>"
 
 /obj/item/clothing/mask/breath/medical
-	desc = "A close-fitting sterile mask that can be connected to an air supply."
+	desc = ""
 	name = "medical mask"
 	icon_state = "medical"
 	item_state = "m_mask"

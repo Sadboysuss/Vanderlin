@@ -1,8 +1,8 @@
 /datum/computer_file/program/ntnetmonitor
 	filename = "ntmonitor"
-	filedesc = "NTNet Diagnostics and Monitoring"
+	filedesc = ""
 	program_icon_state = "comm_monitor"
-	extended_desc = "This program monitors stationwide NTNet network, provides access to logging systems, and allows for configuration changes"
+	extended_desc = ""
 	size = 12
 	requires_ntnet = 1
 	required_access = ACCESS_NETWORK	//NETWORK CONTROL IS A MORE SECURE PROGRAM.

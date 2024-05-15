@@ -15,11 +15,11 @@
 
 /datum/station_goal/station_shield/on_report()
 	//Unlock
-	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/shield_sat]
-	P.special_enabled = TRUE
+//	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/shield_sat]
+//	P.special_enabled = TRUE
 
-	P = SSshuttle.supply_packs[/datum/supply_pack/engineering/shield_sat_control]
-	P.special_enabled = TRUE
+//	P = SSshuttle.supply_packs[/datum/supply_pack/engineering/shield_sat_control]
+//	P.special_enabled = TRUE
 
 /datum/station_goal/station_shield/check_completion()
 	if(..())
@@ -38,7 +38,7 @@
 
 /obj/machinery/computer/sat_control
 	name = "satellite control"
-	desc = "Used to control the satellite network."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/sat_control
 	ui_x = 400
 	ui_y = 305
@@ -108,10 +108,10 @@
 /obj/machinery/satellite/proc/toggle(mob/user)
 	if(!active && !isinspace())
 		if(user)
-			to_chat(user, "<span class='warning'>You can only activate [src] in space.</span>")
+			to_chat(user, "<span class='warning'>I can only activate [src] in space.</span>")
 		return FALSE
 	if(user)
-		to_chat(user, "<span class='notice'>You [active ? "deactivate": "activate"] [src].</span>")
+		to_chat(user, "<span class='notice'>I [active ? "deactivate": "activate"] [src].</span>")
 	active = !active
 	if(active)
 		animate(src, pixel_y = 2, time = 10, loop = -1)
@@ -131,7 +131,7 @@
 
 /obj/machinery/satellite/meteor_shield
 	name = "\improper Meteor Shield Satellite"
-	desc = "A meteor point-defense satellite."
+	desc = ""
 	mode = "M-SHIELD"
 	speed_process = TRUE
 	var/kill_range = 14
@@ -177,6 +177,6 @@
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You access the satellite's debug mode, increasing the chance of meteor strikes.</span>")
+	to_chat(user, "<span class='notice'>I access the satellite's debug mode, increasing the chance of meteor strikes.</span>")
 	if(active)
 		change_meteor_chance(2)

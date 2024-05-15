@@ -24,10 +24,10 @@
 	C.gain_trauma(/datum/brain_trauma/special/obsessed)//ZAP
 
 /datum/antagonist/obsessed/greet()
-	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/creepalert.ogg', 100, FALSE, pressure_affected = FALSE)
-	to_chat(owner, "<span class='userdanger'>You are the Obsessed!</span>")
+	owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)
+	to_chat(owner, "<span class='danger'>I are the Obsessed!</span>")
 	to_chat(owner, "<B>The Voices have reached out to you, and are using you to complete their evil deeds.</B>")
-	to_chat(owner, "<B>You don't know their connection, but The Voices compel you to stalk [trauma.obsession], forcing them into a state of constant paranoia.</B>")
+	to_chat(owner, "<B>I don't know their connection, but The Voices compel you to stalk [trauma.obsession], forcing them into a state of constant paranoia.</B>")
 	to_chat(owner, "<B>The Voices will retaliate if you fail to complete your tasks or spend too long away from your target.</B>")
 	to_chat(owner, "<span class='boldannounce'>This role does NOT enable you to otherwise surpass what's deemed creepy behavior per the rules.</span>")//ironic if you know the history of the antag
 	owner.announce_objectives()
@@ -45,7 +45,7 @@
 	var/mob/living/M = mob_override || owner.current
 	remove_antag_hud(antag_hud_type, M)
 
-/datum/antagonist/obsessed/proc/forge_objectives(var/datum/mind/obsessionmind)
+/datum/antagonist/obsessed/proc/forge_objectives(datum/mind/obsessionmind)
 	var/list/objectives_left = list("spendtime", "polaroid", "hug")
 	var/datum/objective/assassinate/obsessed/kill = new
 	kill.owner = owner

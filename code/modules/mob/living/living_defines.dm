@@ -1,7 +1,9 @@
+
+
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
-	see_in_dark = 2
+	see_in_dark = 8
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD)
 	pressure_resistance = 10
 
@@ -25,6 +27,7 @@
 	var/mobility_flags = MOBILITY_FLAGS_DEFAULT
 
 	var/resting = FALSE
+	var/wallpressed = FALSE
 
 	var/lying = 0			//number of degrees. DO NOT USE THIS IN CHECKS. CHECK FOR MOBILITY FLAGS INSTEAD!!
 	var/lying_prev = 0		//last value of lying on update_mobility
@@ -83,8 +86,7 @@
 
 	var/stun_absorption = null //converted to a list of stun absorption sources this mob has when one is added
 
-	var/blood_volume = 0 //how much blood the mob has
-	var/obj/effect/proc_holder/ranged_ability //Any ranged ability the mob has, as a click override
+	var/blood_volume = BLOOD_VOLUME_NORMAL //how much blood the mob has
 
 	var/see_override = 0 //0 for no override, sets see_invisible = see_override in silicon & carbon life process via update_sight()
 
@@ -121,3 +123,49 @@
 
 	var/list/ownedSoullinks //soullinks we are the owner of
 	var/list/sharedSoullinks //soullinks we are a/the sharer of
+
+	var/maxrogstam = 1000
+	var/maxrogfat = 100
+	var/rogstam = 1000
+	var/rogfat = 0
+
+	var/last_fatigued = 0
+	var/last_ps = 0
+
+	var/ambushable = 0
+
+	var/surrendering = 0
+
+	var/defprob = 50 //base chance to defend against this mob's attacks, for simple mob combat
+	var/defdrain = 5
+	var/encumbrance = 0
+
+	var/eyesclosed = 0
+	var/fallingas = 0
+
+	var/bleed_rate = 0 //how much are we bleeding
+	var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding
+
+	var/list/next_attack_msg = list()
+
+	var/datum/component/personal_crafting/craftingthing
+	var/last_crafted
+
+	var/obj/item/grabbing/r_grab = null
+	var/obj/item/grabbing/l_grab = null
+
+	var/list/simple_embedded_objects = list()
+
+	var/datum/sex_controller/sexcon
+
+	var/slowdown
+
+	var/last_dir_change = 0
+
+	var/list/death_trackers = list()
+
+	var/rot_type = /datum/component/rot/simple
+	
+	var/rogue_sneaking = FALSE
+	
+	var/rogue_sneaking_light_threshhold = 0.15

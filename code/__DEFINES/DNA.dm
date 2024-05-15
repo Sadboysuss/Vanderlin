@@ -125,6 +125,11 @@
 #define AGENDER			16
 /// Do not draw eyes or eyeless overlay
 #define NOEYESPRITES	17
+#define SKINCOLOR		18
+#define YOUNGBEARD		19 //dwarves only
+#define STUBBLE			20
+#define OLDGREY			21
+
 
 //organ slots
 #define ORGAN_SLOT_BRAIN "brain"

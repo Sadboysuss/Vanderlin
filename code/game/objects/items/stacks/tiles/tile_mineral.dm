@@ -1,7 +1,7 @@
 /obj/item/stack/tile/mineral/plasma
 	name = "plasma tile"
 	singular_name = "plasma floor tile"
-	desc = "A tile made out of highly flammable plasma. This can only end well."
+	desc = ""
 	icon_state = "tile_plasma"
 	item_state = "tile-plasma"
 	turf_type = /turf/open/floor/mineral/plasma
@@ -11,7 +11,7 @@
 /obj/item/stack/tile/mineral/uranium
 	name = "uranium tile"
 	singular_name = "uranium floor tile"
-	desc = "A tile made out of uranium. You feel a bit woozy."
+	desc = ""
 	icon_state = "tile_uranium"
 	item_state = "tile-uranium"
 	turf_type = /turf/open/floor/mineral/uranium
@@ -21,7 +21,7 @@
 /obj/item/stack/tile/mineral/gold
 	name = "gold tile"
 	singular_name = "gold floor tile"
-	desc = "A tile made out of gold, the swag seems strong here."
+	desc = ""
 	icon_state = "tile_gold"
 	item_state = "tile-gold"
 	turf_type = /turf/open/floor/mineral/gold
@@ -31,7 +31,7 @@
 /obj/item/stack/tile/mineral/silver
 	name = "silver tile"
 	singular_name = "silver floor tile"
-	desc = "A tile made out of silver, the light shining from it is blinding."
+	desc = ""
 	icon_state = "tile_silver"
 	item_state = "tile-silver"
 	turf_type = /turf/open/floor/mineral/silver
@@ -41,7 +41,7 @@
 /obj/item/stack/tile/mineral/diamond
 	name = "diamond tile"
 	singular_name = "diamond floor tile"
-	desc = "A tile made out of diamond. Wow, just, wow."
+	desc = ""
 	icon_state = "tile_diamond"
 	item_state = "tile-diamond"
 	turf_type = /turf/open/floor/mineral/diamond
@@ -51,7 +51,7 @@
 /obj/item/stack/tile/mineral/bananium
 	name = "bananium tile"
 	singular_name = "bananium floor tile"
-	desc = "A tile made out of bananium, HOOOOOOOOONK!"
+	desc = ""
 	icon_state = "tile_bananium"
 	item_state = "tile-bananium"
 	turf_type = /turf/open/floor/mineral/bananium
@@ -61,7 +61,7 @@
 /obj/item/stack/tile/mineral/abductor
 	name = "alien floor tile"
 	singular_name = "alien floor tile"
-	desc = "A tile made out of alien alloy."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "tile_abductor"
 	item_state = "tile-abductor"
@@ -71,7 +71,7 @@
 /obj/item/stack/tile/mineral/titanium
 	name = "titanium tile"
 	singular_name = "titanium floor tile"
-	desc = "A tile made of titanium, used for shuttles."
+	desc = ""
 	icon_state = "tile_shuttle"
 	item_state = "tile-shuttle"
 	turf_type = /turf/open/floor/mineral/titanium
@@ -81,7 +81,7 @@
 /obj/item/stack/tile/mineral/plastitanium
 	name = "plastitanium tile"
 	singular_name = "plastitanium floor tile"
-	desc = "A tile made of plastitanium, used for very evil shuttles."
+	desc = ""
 	icon_state = "tile_darkshuttle"
 	item_state = "tile-darkshuttle"
 	turf_type = /turf/open/floor/mineral/plastitanium
@@ -92,7 +92,7 @@
 /obj/item/stack/tile/mineral/snow
 	name = "snow tile"
 	singular_name = "snow tile"
-	desc = "A layer of snow."
+	desc = ""
 	icon_state = "tile_snow"
 	item_state = "tile-silver"
 	turf_type = /turf/open/floor/grass/snow/safe

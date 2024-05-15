@@ -1,6 +1,6 @@
 /obj/machinery/door
 	name = "door"
-	desc = "It opens and closes."
+	desc = ""
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door1"
 	opacity = 1
@@ -88,7 +88,7 @@
 
 /obj/machinery/door/proc/try_safety_unlock(mob/user)
 	if(safety_mode && !hasPower() && density)
-		to_chat(user, "<span class='notice'>You begin unlocking the airlock safety mechanism...</span>")
+		to_chat(user, "<span class='notice'>I begin unlocking the airlock safety mechanism...</span>")
 		if(do_after(user, 15 SECONDS, target = src))
 			try_to_crowbar(null, user)
 			return TRUE
@@ -165,7 +165,7 @@
 	. = ..()
 	if(.)
 		return
-	if(try_safety_unlock(user))	
+	if(try_safety_unlock(user))
 		return
 	return try_to_activate_door(user)
 
@@ -206,7 +206,7 @@
 	return
 
 /obj/machinery/door/attackby(obj/item/I, mob/user, params)
-	if(user.a_intent != INTENT_HARM && (I.tool_behaviour == TOOL_CROWBAR || istype(I, /obj/item/twohanded/fireaxe)))
+	if(user.used_intent.type != INTENT_HARM && (I.tool_behaviour == TOOL_CROWBAR || istype(I, /obj/item/twohanded/fireaxe)))
 		var/forced_open = FALSE
 		if(istype(I, /obj/item/crowbar))
 			var/obj/item/crowbar/C = I
@@ -216,7 +216,7 @@
 	else if(I.tool_behaviour == TOOL_WELDER)
 		try_to_weld(I, user)
 		return TRUE
-	else if(!(I.item_flags & NOBLUDGEON) && user.a_intent != INTENT_HARM)
+	else if(!(I.item_flags & NOBLUDGEON) && user.used_intent.type != INTENT_HARM)
 		try_to_activate_door(user)
 		return TRUE
 	return ..()
@@ -231,13 +231,13 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(glass)
-				playsound(loc, 'sound/effects/glasshit.ogg', 90, TRUE)
+				playsound(loc, 'sound/blank.ogg', 90, TRUE)
 			else if(damage_amount)
-				playsound(loc, 'sound/weapons/smash.ogg', 50, TRUE)
+				playsound(loc, 'sound/blank.ogg', 50, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
+				playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/machinery/door/emp_act(severity)
 	. = ..()
@@ -338,7 +338,7 @@
 
 /obj/machinery/door/proc/crush()
 	for(var/mob/living/L in get_turf(src))
-		L.visible_message("<span class='warning'>[src] closes on [L], crushing [L.p_them()]!</span>", "<span class='userdanger'>[src] closes on you and crushes you!</span>")
+		L.visible_message("<span class='warning'>[src] closes on [L], crushing [L.p_them()]!</span>", "<span class='danger'>[src] closes on you and crushes you!</span>")
 		if(isalien(L))  //For xenos
 			L.adjustBruteLoss(DOOR_CRUSH_DAMAGE * 1.5) //Xenos go into crit after aproximately the same amount of crushes as humans.
 			L.emote("roar")

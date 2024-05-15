@@ -4,7 +4,7 @@
 /datum/bioware
 	var/name = "Generic Bioware"
 	var/mob/living/carbon/human/owner
-	var/desc = "If you see this something's wrong, warn a coder."
+	var/desc = ""
 	var/active = FALSE
 	var/mod_type = BIOWARE_GENERIC
 
@@ -17,7 +17,7 @@
 			return
 	owner.bioware += src
 	on_gain()
-	
+
 /datum/bioware/Destroy()
 	owner = null
 	if(active)

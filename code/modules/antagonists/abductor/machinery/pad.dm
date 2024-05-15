@@ -1,6 +1,6 @@
 /obj/machinery/abductor/pad
 	name = "Alien Telepad"
-	desc = "Use this to transport to and from the humans' habitat."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "alien-pad-idle"
 	var/turf/teleport_target

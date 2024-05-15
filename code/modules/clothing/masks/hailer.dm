@@ -3,7 +3,7 @@
 
 /obj/item/clothing/mask/gas/sechailer
 	name = "security gas mask"
-	desc = "A standard issue Security gas mask with integrated 'Compli-o-nator 3000' device. Plays over a dozen pre-recorded compliance phrases designed to get scumbags to stand still whilst you tase them. Do not tamper with the device."
+	desc = ""
 	actions_types = list(/datum/action/item_action/halt, /datum/action/item_action/adjust)
 	icon_state = "sechailer"
 	item_state = "sechailer"
@@ -22,7 +22,7 @@
 
 /obj/item/clothing/mask/gas/sechailer/swat
 	name = "\improper SWAT mask"
-	desc = "A close-fitting tactical mask with an especially aggressive Compli-o-nator 3000."
+	desc = ""
 	actions_types = list(/datum/action/item_action/halt)
 	icon_state = "swat"
 	item_state = "swat"
@@ -32,13 +32,13 @@
 
 /obj/item/clothing/mask/gas/sechailer/swat/spacepol
 	name = "spacepol mask"
-	desc = "A close-fitting tactical mask created in cooperation with a certain megacorporation, comes with an especially aggressive Compli-o-nator 3000."
+	desc = ""
 	icon_state = "spacepol"
 	item_state = "spacepol"
 
 /obj/item/clothing/mask/gas/sechailer/cyborg
 	name = "security hailer"
-	desc = "A set of recognizable pre-recorded messages for cyborgs to use when apprehending criminals."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "taperecorder_idle"
 	aggressiveness = 1 //Borgs are nicecurity!
@@ -49,22 +49,22 @@
 		return TRUE
 	switch(aggressiveness)
 		if(1)
-			to_chat(user, "<span class='notice'>You set the restrictor to the middle position.</span>")
+			to_chat(user, "<span class='notice'>I set the restrictor to the middle position.</span>")
 			aggressiveness = 2
 		if(2)
-			to_chat(user, "<span class='notice'>You set the restrictor to the last position.</span>")
+			to_chat(user, "<span class='notice'>I set the restrictor to the last position.</span>")
 			aggressiveness = 3
 		if(3)
-			to_chat(user, "<span class='notice'>You set the restrictor to the first position.</span>")
+			to_chat(user, "<span class='notice'>I set the restrictor to the first position.</span>")
 			aggressiveness = 1
 		if(4)
-			to_chat(user, "<span class='danger'>You adjust the restrictor but nothing happens, probably because it's broken.</span>")
+			to_chat(user, "<span class='danger'>I adjust the restrictor but nothing happens, probably because it's broken.</span>")
 	return TRUE
 
 /obj/item/clothing/mask/gas/sechailer/wirecutter_act(mob/living/user, obj/item/I)
 	..()
 	if(aggressiveness != 4)
-		to_chat(user, "<span class='danger'>You broke the restrictor!</span>")
+		to_chat(user, "<span class='danger'>I broke the restrictor!</span>")
 		aggressiveness = 4
 	return TRUE
 
@@ -79,14 +79,16 @@
 /obj/item/clothing/mask/gas/sechailer/emag_act(mob/user as mob)
 	if(safety)
 		safety = FALSE
-		to_chat(user, "<span class='warning'>You silently fry [src]'s vocal circuit with the cryptographic sequencer.</span>")
+		to_chat(user, "<span class='warning'>I silently fry [src]'s vocal circuit with the cryptographic sequencer.</span>")
 	else
 		return
 
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
-	set category = "Object"
+	set hidden = 1
 	set name = "HALT"
 	set src in usr
+	if(!usr.client.holder)
+		return
 	if(!isliving(usr))
 		return
 	if(!can_use(usr))
@@ -109,10 +111,10 @@
 			if(3)
 				to_chat(usr, "<span class='warning'>\The [src] is starting to heat up.</span>")
 			if(4)
-				to_chat(usr, "<span class='userdanger'>\The [src] is heating up dangerously from overuse!</span>")
+				to_chat(usr, "<span class='danger'>\The [src] is heating up dangerously from overuse!</span>")
 			if(5) //overload
 				broken_hailer = 1
-				to_chat(usr, "<span class='userdanger'>\The [src]'s power modulator overloads and breaks.</span>")
+				to_chat(usr, "<span class='danger'>\The [src]'s power modulator overloads and breaks.</span>")
 				return
 
 		switch(aggressiveness)		// checks if the user has unlocked the restricted phrases

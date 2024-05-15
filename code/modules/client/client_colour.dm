@@ -56,14 +56,11 @@
 	if(!client)
 		return
 	client.color = ""
-	if(!client_colours.len)
+	if(!client_colours?.len)
 		return
 	var/datum/client_colour/CC = client_colours[1]
 	if(CC)
 		client.color = CC.colour
-
-
-
 
 /datum/client_colour/glass_colour
 	priority = 0
@@ -105,6 +102,19 @@
 /datum/client_colour/monochrome
 	colour = list(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 	priority = INFINITY //we can't see colors anyway!
+
+/datum/client_colour/test1
+	colour = list(1,1,1,0.5, 1,1,1,0.5, 1,1,1,0.5)
+	priority = 1
+
+/datum/client_colour/test2
+	colour = list(0.8,0.2,0.2, 0.2,0.8,0.3, 0.2,0.3,0.8)
+	priority = 1
+
+/datum/client_colour/test3
+	colour = list(1,1,1, 1,1,1, 1,1,1)
+	priority = 1
+
 
 /datum/client_colour/monochrome/trance
 	priority = 1

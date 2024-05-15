@@ -1,7 +1,7 @@
 //A slow but strong beast that tries to stun using its tentacles
 /mob/living/simple_animal/hostile/asteroid/goliath
 	name = "goliath"
-	desc = "A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "Goliath"
 	icon_living = "Goliath"
@@ -25,7 +25,7 @@
 	melee_damage_upper = 25
 	attack_verb_continuous = "pulverizes"
 	attack_verb_simple = "pulverize"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "does nothing to the rocky hide of the"
 	vision_range = 5
 	aggro_vision_range = 9
@@ -85,7 +85,7 @@
 //Lavaland Goliath
 /mob/living/simple_animal/hostile/asteroid/goliath/beast
 	name = "goliath"
-	desc = "A hulking, armor-plated beast with long tendrils arching from its back."
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "goliath"
 	icon_living = "goliath"
@@ -108,7 +108,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient
 	name = "ancient goliath"
-	desc = "Goliaths are biologically immortal, and rare specimens have survived for centuries. This one is clearly ancient, and its tentacles constantly churn the earth around it."
+	desc = ""
 	icon_state = "Goliath"
 	icon_living = "Goliath"
 	icon_aggro = "Goliath_alert"

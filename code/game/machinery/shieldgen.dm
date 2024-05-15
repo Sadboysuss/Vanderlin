@@ -1,6 +1,6 @@
 /obj/structure/emergency_shield
 	name = "emergency energy shield"
-	desc = "An energy shield used to contain hull breaches."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
 	density = TRUE
@@ -34,9 +34,9 @@
 /obj/structure/emergency_shield/play_attack_sound(damage, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BURN)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 		if(BRUTE)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 
 /obj/structure/emergency_shield/take_damage(damage, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
@@ -45,7 +45,7 @@
 
 /obj/structure/emergency_shield/sanguine
 	name = "sanguine barrier"
-	desc = "A potent shield summoned by cultists to defend their rites."
+	desc = ""
 	icon_state = "shield-red"
 	max_integrity = 60
 
@@ -54,7 +54,7 @@
 
 /obj/structure/emergency_shield/invoker
 	name = "Invoker's Shield"
-	desc = "A weak shield summoned by cultists to protect them while they carry out delicate rituals."
+	desc = ""
 	color = "#FF0000"
 	max_integrity = 20
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -66,7 +66,7 @@
 
 /obj/machinery/shieldgen
 	name = "anti-breach shielding projector"
-	desc = "Used to seal minor hull breaches."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
 	density = TRUE
@@ -130,14 +130,14 @@
 
 	if (active)
 		user.visible_message("<span class='notice'>[user] deactivated \the [src].</span>", \
-			"<span class='notice'>You deactivate \the [src].</span>", \
-			"<span class='hear'>You hear heavy droning fade out.</span>")
+			"<span class='notice'>I deactivate \the [src].</span>", \
+			"<span class='hear'>I hear heavy droning fade out.</span>")
 		shields_down()
 	else
 		if(anchored)
 			user.visible_message("<span class='notice'>[user] activated \the [src].</span>", \
-				"<span class='notice'>You activate \the [src].</span>", \
-				"<span class='hear'>You hear heavy droning.</span>")
+				"<span class='notice'>I activate \the [src].</span>", \
+				"<span class='hear'>I hear heavy droning.</span>")
 			shields_up()
 		else
 			to_chat(user, "<span class='warning'>The device must first be secured to the floor!</span>")
@@ -148,22 +148,22 @@
 		W.play_tool_sound(src, 100)
 		panel_open = !panel_open
 		if(panel_open)
-			to_chat(user, "<span class='notice'>You open the panel and expose the wiring.</span>")
+			to_chat(user, "<span class='notice'>I open the panel and expose the wiring.</span>")
 		else
-			to_chat(user, "<span class='notice'>You close the panel.</span>")
+			to_chat(user, "<span class='notice'>I close the panel.</span>")
 	else if(istype(W, /obj/item/stack/cable_coil) && (stat & BROKEN) && panel_open)
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
-			to_chat(user, "<span class='warning'>You need one length of cable to repair [src]!</span>")
+			to_chat(user, "<span class='warning'>I need one length of cable to repair [src]!</span>")
 			return
-		to_chat(user, "<span class='notice'>You begin to replace the wires...</span>")
+		to_chat(user, "<span class='notice'>I begin to replace the wires...</span>")
 		if(do_after(user, 30, target = src))
 			if(coil.get_amount() < 1)
 				return
 			coil.use(1)
 			obj_integrity = max_integrity
 			stat &= ~BROKEN
-			to_chat(user, "<span class='notice'>You repair \the [src].</span>")
+			to_chat(user, "<span class='notice'>I repair \the [src].</span>")
 			update_icon()
 
 	else if(W.tool_behaviour == TOOL_WRENCH)
@@ -172,11 +172,11 @@
 			return
 		if(!anchored && !isinspace())
 			W.play_tool_sound(src, 100)
-			to_chat(user, "<span class='notice'>You secure \the [src] to the floor!</span>")
+			to_chat(user, "<span class='notice'>I secure \the [src] to the floor!</span>")
 			setAnchored(TRUE)
 		else if(anchored)
 			W.play_tool_sound(src, 100)
-			to_chat(user, "<span class='notice'>You unsecure \the [src] from the floor!</span>")
+			to_chat(user, "<span class='notice'>I unsecure \the [src] from the floor!</span>")
 			if(active)
 				to_chat(user, "<span class='notice'>\The [src] shuts off!</span>")
 				shields_down()
@@ -185,7 +185,7 @@
 	else if(W.GetID())
 		if(allowed(user) && !(obj_flags & EMAGGED))
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the controls.</span>")
+			to_chat(user, "<span class='notice'>I [locked ? "lock" : "unlock"] the controls.</span>")
 		else if(obj_flags & EMAGGED)
 			to_chat(user, "<span class='danger'>Error, access controller damaged!</span>")
 		else
@@ -201,7 +201,7 @@
 	obj_flags |= EMAGGED
 	locked = FALSE
 	playsound(src, "sparks", 100, TRUE)
-	to_chat(user, "<span class='warning'>You short out the access controller.</span>")
+	to_chat(user, "<span class='warning'>I short out the access controller.</span>")
 
 /obj/machinery/shieldgen/update_icon_state()
 	if(active)
@@ -213,7 +213,7 @@
 #define ACTIVE_HASFIELDS 2
 /obj/machinery/power/shieldwallgen
 	name = "shield wall generator"
-	desc = "A shield generator."
+	desc = ""
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "shield_wall_gen"
 	anchored = FALSE
@@ -233,7 +233,7 @@
 
 /obj/machinery/power/shieldwallgen/xenobiologyaccess		//use in xenobiology containment
 	name = "xenobiology shield wall generator"
-	desc = "A shield generator meant for use in xenobiology."
+	desc = ""
 	req_access = list(ACCESS_XENOBIOLOGY)
 
 /obj/machinery/power/shieldwallgen/Initialize()
@@ -269,7 +269,7 @@
 		else
 			visible_message("<span class='danger'>The [src.name] shuts down due to lack of power!</span>", \
 				"If this message is ever seen, something is wrong.",
-				"<span class='hear'>You hear heavy droning fade out.</span>")
+				"<span class='hear'>I hear heavy droning fade out.</span>")
 			icon_state = "shield_wall_gen"
 			active = FALSE
 			log_game("[src] deactivated due to lack of power at [AREACOORD(src)]")
@@ -347,7 +347,7 @@
 	if(W.GetID())
 		if(allowed(user) && !(obj_flags & EMAGGED))
 			locked = !locked
-			to_chat(user, "<span class='notice'>You [src.locked ? "lock" : "unlock"] the controls.</span>")
+			to_chat(user, "<span class='notice'>I [src.locked ? "lock" : "unlock"] the controls.</span>")
 		else if(obj_flags & EMAGGED)
 			to_chat(user, "<span class='danger'>Error, access controller damaged!</span>")
 		else
@@ -373,14 +373,14 @@
 
 	if(active)
 		user.visible_message("<span class='notice'>[user] turned \the [src] off.</span>", \
-			"<span class='notice'>You turn off \the [src].</span>", \
-			"<span class='hear'>You hear heavy droning fade out.</span>")
+			"<span class='notice'>I turn off \the [src].</span>", \
+			"<span class='hear'>I hear heavy droning fade out.</span>")
 		active = FALSE
 		log_game("[src] was deactivated by [key_name(user)] at [AREACOORD(src)]")
 	else
 		user.visible_message("<span class='notice'>[user] turned \the [src] on.</span>", \
-			"<span class='notice'>You turn on \the [src].</span>", \
-			"<span class='hear'>You hear heavy droning.</span>")
+			"<span class='notice'>I turn on \the [src].</span>", \
+			"<span class='hear'>I hear heavy droning.</span>")
 		active = ACTIVE_SETUPFIELDS
 		log_game("[src] was activated by [key_name(user)] at [AREACOORD(src)]")
 	add_fingerprint(user)
@@ -392,12 +392,12 @@
 	obj_flags |= EMAGGED
 	locked = FALSE
 	playsound(src, "sparks", 100, TRUE)
-	to_chat(user, "<span class='warning'>You short out the access controller.</span>")
+	to_chat(user, "<span class='warning'>I short out the access controller.</span>")
 
 //////////////Containment Field START
 /obj/machinery/shieldwall
 	name = "shield wall"
-	desc = "An energy shield."
+	desc = ""
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
 	density = TRUE
@@ -434,9 +434,9 @@
 /obj/machinery/shieldwall/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BURN)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 		if(BRUTE)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 
 //the shield wall is immune to damage but it drains the stored power of the generators.
 /obj/machinery/shieldwall/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)

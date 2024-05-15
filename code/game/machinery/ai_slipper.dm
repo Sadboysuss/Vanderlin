@@ -1,6 +1,6 @@
 /obj/machinery/ai_slipper
 	name = "foam dispenser"
-	desc = "A remotely-activatable dispenser for crowd-controlling foam."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "ai-slipper0"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
@@ -37,7 +37,7 @@
 		return
 	new /obj/effect/particle_effect/foam(loc)
 	uses--
-	to_chat(user, "<span class='notice'>You activate [src]. It now has <b>[uses]</b> uses of foam remaining.</span>")
+	to_chat(user, "<span class='notice'>I activate [src]. It now has <b>[uses]</b> uses of foam remaining.</span>")
 	cooldown = world.time + cooldown_time
 	power_change()
 	addtimer(CALLBACK(src, .proc/power_change), cooldown_time)

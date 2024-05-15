@@ -1,17 +1,17 @@
-//Hulk turns your skin green, and allows you to punch through walls.
+//Hulk turns my skin green, and allows you to punch through walls.
 /datum/mutation/human/hulk
 	name = "Hulk"
-	desc = "A poorly understood genome that causes the holder's muscles to expand, inhibit speech and gives the person a bad skin condition."
+	desc = ""
 	quality = POSITIVE
 	locked = TRUE
 	difficulty = 16
-	text_gain_indication = "<span class='notice'>Your muscles hurt!</span>"
+	text_gain_indication = "<span class='notice'>My muscles hurt!</span>"
 	species_allowed = list("human") //no skeleton/lizard hulk
 	health_req = 25
 	instability = 40
 	var/scream_delay = 50
 	var/last_scream = 0
-	
+
 
 /datum/mutation/human/hulk/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -28,7 +28,7 @@
 /datum/mutation/human/hulk/proc/on_attack_hand(mob/living/source, atom/target, proximity)
 	if(!proximity)
 		return
-	if(source.a_intent != INTENT_HARM)
+	if(source.used_intent.type != INTENT_HARM)
 		return
 	if(target.attack_hulk(owner))
 		if(world.time > (last_scream + scream_delay))
@@ -42,7 +42,7 @@
 /datum/mutation/human/hulk/on_life()
 	if(owner.health < 0)
 		on_losing(owner)
-		to_chat(owner, "<span class='danger'>You suddenly feel very weak.</span>")
+		to_chat(owner, "<span class='danger'>I suddenly feel very weak.</span>")
 
 /datum/mutation/human/hulk/on_losing(mob/living/carbon/human/owner)
 	if(..())

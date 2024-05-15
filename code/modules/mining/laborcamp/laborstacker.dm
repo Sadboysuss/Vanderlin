@@ -4,7 +4,7 @@ GLOBAL_LIST(labor_sheet_values)
 
 /obj/machinery/mineral/labor_claim_console
 	name = "point claim console"
-	desc = "A stacking console with an electromagnetic writer, used to track ore mined by prisoners."
+	desc = ""
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
 	density = FALSE
@@ -132,7 +132,7 @@ GLOBAL_LIST(labor_sheet_values)
 
 /obj/machinery/mineral/labor_points_checker
 	name = "points checking console"
-	desc = "A console used by prisoners to check the progress on their quotas. Simply swipe a prisoner ID."
+	desc = ""
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
 	density = FALSE

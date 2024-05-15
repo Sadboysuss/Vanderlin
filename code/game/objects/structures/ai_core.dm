@@ -4,7 +4,7 @@
 	name = "\improper AI core"
 	icon = 'icons/mob/ai.dmi'
 	icon_state = "0"
-	desc = "The framework for an artificial intelligence core."
+	desc = ""
 	max_integrity = 500
 	var/state = EMPTY_CORE
 	var/datum/ai_laws/laws
@@ -39,7 +39,7 @@
 
 /obj/structure/AIcore/latejoin_inactive
 	name = "networked AI core"
-	desc = "This AI core is connected by bluespace transmitters to NTNet, allowing for an AI personality to be downloaded to it on the fly mid-shift."
+	desc = ""
 	can_deconstruct = FALSE
 	icon_state = "ai-empty"
 	anchored = TRUE
@@ -51,7 +51,7 @@
 /obj/structure/AIcore/latejoin_inactive/examine(mob/user)
 	. = ..()
 	. += "Its transmitter seems to be <b>[active? "on" : "off"]</b>."
-	. += "<span class='notice'>You could [active? "deactivate" : "activate"] it with a multitool.</span>"
+	. += "<span class='notice'>I could [active? "deactivate" : "activate"] it with a multitool.</span>"
 
 /obj/structure/AIcore/latejoin_inactive/proc/is_available()			//If people still manage to use this feature to spawn-kill AI latejoins ahelp them.
 	if(!available)
@@ -75,7 +75,7 @@
 /obj/structure/AIcore/latejoin_inactive/attackby(obj/item/P, mob/user, params)
 	if(P.tool_behaviour == TOOL_MULTITOOL)
 		active = !active
-		to_chat(user, "<span class='notice'>You [active? "activate" : "deactivate"] \the [src]'s transmitters.</span>")
+		to_chat(user, "<span class='notice'>I [active? "activate" : "deactivate"] \the [src]'s transmitters.</span>")
 		return
 	return ..()
 
@@ -99,9 +99,9 @@
 			if(!P.tool_start_check(user, amount=0))
 				return
 
-			to_chat(user, "<span class='notice'>You start to deconstruct the frame...</span>")
+			to_chat(user, "<span class='notice'>I start to deconstruct the frame...</span>")
 			if(P.use_tool(src, user, 20, volume=50) && state == EMPTY_CORE)
-				to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
+				to_chat(user, "<span class='notice'>I deconstruct the frame.</span>")
 				deconstruct(TRUE)
 			return
 	else
@@ -110,8 +110,8 @@
 				if(istype(P, /obj/item/circuitboard/aicore))
 					if(!user.transferItemToLoc(P, src))
 						return
-					playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-					to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
+					playsound(loc, 'sound/blank.ogg', 50, TRUE)
+					to_chat(user, "<span class='notice'>I place the circuit board inside the frame.</span>")
 					update_icon()
 					state = CIRCUIT_CORE
 					circuit = P
@@ -119,13 +119,13 @@
 			if(CIRCUIT_CORE)
 				if(P.tool_behaviour == TOOL_SCREWDRIVER)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
+					to_chat(user, "<span class='notice'>I screw the circuit board into place.</span>")
 					state = SCREWED_CORE
 					update_icon()
 					return
 				if(P.tool_behaviour == TOOL_CROWBAR)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
+					to_chat(user, "<span class='notice'>I remove the circuit board.</span>")
 					state = EMPTY_CORE
 					update_icon()
 					circuit.forceMove(loc)
@@ -134,21 +134,21 @@
 			if(SCREWED_CORE)
 				if(P.tool_behaviour == TOOL_SCREWDRIVER && circuit)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
+					to_chat(user, "<span class='notice'>I unfasten the circuit board.</span>")
 					state = CIRCUIT_CORE
 					update_icon()
 					return
 				if(istype(P, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = P
 					if(C.get_amount() >= 5)
-						playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-						to_chat(user, "<span class='notice'>You start to add cables to the frame...</span>")
+						playsound(loc, 'sound/blank.ogg', 50, TRUE)
+						to_chat(user, "<span class='notice'>I start to add cables to the frame...</span>")
 						if(do_after(user, 20, target = src) && state == SCREWED_CORE && C.use(5))
-							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
+							to_chat(user, "<span class='notice'>I add cables to the frame.</span>")
 							state = CABLED_CORE
 							update_icon()
 					else
-						to_chat(user, "<span class='warning'>You need five lengths of cable to wire the AI core!</span>")
+						to_chat(user, "<span class='warning'>I need five lengths of cable to wire the AI core!</span>")
 					return
 			if(CABLED_CORE)
 				if(P.tool_behaviour == TOOL_WIRECUTTER)
@@ -156,7 +156,7 @@
 						to_chat(user, "<span class='warning'>Get that [brain.name] out of there first!</span>")
 					else
 						P.play_tool_sound(src)
-						to_chat(user, "<span class='notice'>You remove the cables.</span>")
+						to_chat(user, "<span class='notice'>I remove the cables.</span>")
 						state = SCREWED_CORE
 						update_icon()
 						new /obj/item/stack/cable_coil(drop_location(), 5)
@@ -165,14 +165,14 @@
 				if(istype(P, /obj/item/stack/sheet/rglass))
 					var/obj/item/stack/sheet/rglass/G = P
 					if(G.get_amount() >= 2)
-						playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-						to_chat(user, "<span class='notice'>You start to put in the glass panel...</span>")
+						playsound(loc, 'sound/blank.ogg', 50, TRUE)
+						to_chat(user, "<span class='notice'>I start to put in the glass panel...</span>")
 						if(do_after(user, 20, target = src) && state == CABLED_CORE && G.use(2))
-							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
+							to_chat(user, "<span class='notice'>I put in the glass panel.</span>")
 							state = GLASS_CORE
 							update_icon()
 					else
-						to_chat(user, "<span class='warning'>You need two sheets of reinforced glass to insert them into the AI core!</span>")
+						to_chat(user, "<span class='warning'>I need two sheets of reinforced glass to insert them into the AI core!</span>")
 					return
 
 				if(istype(P, /obj/item/aiModule))
@@ -209,13 +209,13 @@
 						return
 
 					brain = M
-					to_chat(user, "<span class='notice'>You add [M.name] to the frame.</span>")
+					to_chat(user, "<span class='notice'>I add [M.name] to the frame.</span>")
 					update_icon()
 					return
 
 				if(P.tool_behaviour == TOOL_CROWBAR && brain)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You remove the brain.</span>")
+					to_chat(user, "<span class='notice'>I remove the brain.</span>")
 					brain.forceMove(loc)
 					brain = null
 					update_icon()
@@ -224,7 +224,7 @@
 			if(GLASS_CORE)
 				if(P.tool_behaviour == TOOL_CROWBAR)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
+					to_chat(user, "<span class='notice'>I remove the glass panel.</span>")
 					state = CABLED_CORE
 					update_icon()
 					new /obj/item/stack/sheet/rglass(loc, 2)
@@ -232,7 +232,7 @@
 
 				if(P.tool_behaviour == TOOL_SCREWDRIVER)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You connect the monitor.</span>")
+					to_chat(user, "<span class='notice'>I connect the monitor.</span>")
 					if(brain)
 						SSticker.mode.remove_antag_for_borging(brain.brainmob.mind)
 
@@ -259,7 +259,7 @@
 
 				if(P.tool_behaviour == TOOL_SCREWDRIVER)
 					P.play_tool_sound(src)
-					to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+					to_chat(user, "<span class='notice'>I disconnect the monitor.</span>")
 					state = GLASS_CORE
 					update_icon()
 					return
@@ -328,7 +328,7 @@ That prevents a few funky behaviors.
 		AI.control_disabled = FALSE
 		AI.radio_enabled = TRUE
 		AI.forceMove(loc) // to replace the terminal.
-		to_chat(AI, "<span class='notice'>You have been uploaded to a stationary terminal. Remote device connection restored.</span>")
+		to_chat(AI, "<span class='notice'>I have been uploaded to a stationary terminal. Remote device connection restored.</span>")
 		to_chat(user, "<span class='boldnotice'>Transfer successful</span>: [AI.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed.")
 		card.AI = null
 		AI.battery = circuit.battery

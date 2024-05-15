@@ -20,6 +20,12 @@ GLOBAL_LIST_EMPTY(jobspawn_overrides)			//These will take precedence over normal
 
 GLOBAL_LIST_EMPTY(wizardstart)
 GLOBAL_LIST_EMPTY(nukeop_start)
+GLOBAL_LIST_EMPTY(bandit_starts)
+GLOBAL_LIST_EMPTY(vlord_starts)
+GLOBAL_LIST_EMPTY(vspawn_starts)
+GLOBAL_LIST_EMPTY(dknight_starts)
+GLOBAL_LIST_EMPTY(vlordspawn_starts)
+GLOBAL_LIST_EMPTY(delf_starts)
 GLOBAL_LIST_EMPTY(nukeop_leader_start)
 GLOBAL_LIST_EMPTY(newplayer_start)
 GLOBAL_LIST_EMPTY(prisonwarp)	//admin prisoners go to these
@@ -31,6 +37,11 @@ GLOBAL_LIST_EMPTY(tdomeobserve)
 GLOBAL_LIST_EMPTY(tdomeadmin)
 GLOBAL_LIST_EMPTY(prisonwarped)	//list of players already warped
 GLOBAL_LIST_EMPTY(blobstart) //stationloving objects, blobs, santa, respawning devils
+GLOBAL_LIST_EMPTY(underworldspawn)
+GLOBAL_LIST_EMPTY(underworldcoin)
+GLOBAL_LIST_EMPTY(hauntstart)
+GLOBAL_LIST_EMPTY(testportals)
+GLOBAL_LIST_EMPTY(traveltiles)
 GLOBAL_LIST_EMPTY(secequipment) //sec equipment lockers that scale with the number of sec players
 GLOBAL_LIST_EMPTY(deathsquadspawn)
 GLOBAL_LIST_EMPTY(emergencyresponseteamspawn)
@@ -46,3 +57,7 @@ GLOBAL_LIST_EMPTY(sortedAreas)
 GLOBAL_LIST_EMPTY_TYPED(areas_by_type, /area)
 
 GLOBAL_LIST_EMPTY(all_abstract_markers)
+
+GLOBAL_LIST_EMPTY(fires_list)
+
+GLOBAL_LIST_EMPTY(streetlamp_list)

@@ -23,7 +23,7 @@
 /obj/machinery/telecomms/message_server
 	icon_state = "message_server"
 	name = "Messaging Server"
-	desc = "A machine that processes and routes PDA and request console messages."
+	desc = ""
 	density = TRUE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 10
@@ -95,7 +95,7 @@
 
 /obj/machinery/telecomms/message_server/update_overlays()
 	. = ..()
-	
+
 	if(calibrating)
 		. += "message_server_calibrate"
 

@@ -1,7 +1,7 @@
 //Paper Wizard Boss
 /mob/living/simple_animal/hostile/boss/paper_wizard
 	name = "Mjor the Creative"
-	desc = "A wizard with a taste for the arts."
+	desc = ""
 	mob_biotypes = MOB_HUMANOID
 	boss_abilities = list(/datum/action/boss/wizard_summon_minions, /datum/action/boss/wizard_mimic)
 	faction = list("hostile","stickman")
@@ -19,8 +19,8 @@
 	maxHealth = 1000
 	loot = list(/obj/effect/temp_visual/paperwiz_dying)
 	projectiletype = /obj/projectile/temp
-	projectilesound = 'sound/weapons/emitter.ogg'
-	attack_sound = 'sound/hallucinations/growl1.ogg'
+	projectilesound = 'sound/blank.ogg'
+	attack_sound = 'sound/blank.ogg'
 	var/list/copies = list()
 
 	footstep_type = FOOTSTEP_MOB_SHOE
@@ -90,7 +90,7 @@
 			boss.atb.refund(boss_cost)
 
 /mob/living/simple_animal/hostile/boss/paper_wizard/copy
-	desc = "'Tis a ruse!"
+	desc = ""
 	health = 1
 	maxHealth = 1
 	alpha = 200
@@ -136,7 +136,7 @@
 //fancy effects
 /obj/effect/temp_visual/paper_scatter
 	name = "scattering paper"
-	desc = "Pieces of paper scattering to the wind."
+	desc = ""
 	layer = ABOVE_OPEN_TURF_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "paper_scatter"
@@ -146,7 +146,7 @@
 
 /obj/effect/temp_visual/paperwiz_dying
 	name = "craft portal"
-	desc = "A wormhole sucking the wizard into the void. Neat."
+	desc = ""
 	layer = ABOVE_OPEN_TURF_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "paperwiz_poof"
@@ -157,14 +157,14 @@
 /obj/effect/temp_visual/paperwiz_dying/Initialize()
 	. = ..()
 	visible_message("<span class='boldannounce'>The wizard cries out in pain as a gate appears behind him, sucking him in!</span>")
-	playsound(get_turf(src),'sound/magic/mandswap.ogg', 50, TRUE, TRUE)
-	playsound(get_turf(src),'sound/hallucinations/wail.ogg', 50, TRUE, TRUE)
+	playsound(get_turf(src),'sound/blank.ogg', 50, TRUE, TRUE)
+	playsound(get_turf(src),'sound/blank.ogg', 50, TRUE, TRUE)
 
 /obj/effect/temp_visual/paperwiz_dying/Destroy()
 	for(var/mob/M in range(7,src))
 		shake_camera(M, 7, 1)
 	var/turf/T = get_turf(src)
-	playsound(T,'sound/magic/summon_magic.ogg', 50, TRUE, TRUE)
+	playsound(T,'sound/blank.ogg', 50, TRUE, TRUE)
 	new /obj/effect/temp_visual/paper_scatter(T)
 	new /obj/item/clothing/suit/wizrobe/paper(T)
 	new /obj/item/clothing/head/collectable/paper(T)

@@ -1,12 +1,12 @@
 //Causes fire damage to anyone not standing on a dense object.
 /datum/weather/floor_is_lava
 	name = "the floor is lava"
-	desc = "The ground turns into surprisingly cool lava, lightly damaging anything on the floor."
+	desc = ""
 
-	telegraph_message = "<span class='warning'>You feel the ground beneath you getting hot. Waves of heat distort the air.</span>"
+	telegraph_message = "<span class='warning'>I feel the ground beneath you getting hot. Waves of heat distort the air.</span>"
 	telegraph_duration = 150
 
-	weather_message = "<span class='userdanger'>The floor is lava! Get on top of something!</span>"
+	weather_message = "<span class='danger'>The floor is lava! Get on top of something!</span>"
 	weather_duration_lower = 300
 	weather_duration_upper = 600
 	weather_overlay = "lava"
@@ -38,3 +38,4 @@
 	if(L.movement_type & FLYING)
 		return
 	L.adjustFireLoss(3)
+	return ..()

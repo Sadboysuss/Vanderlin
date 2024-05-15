@@ -1,7 +1,7 @@
 #define CONFUSION_STACK_MAX_MULTIPLIER 2
 /obj/item/assembly/flash
 	name = "flash"
-	desc = "A powerful and versatile flashbulb device, with applications ranging from disorienting attackers to acting as visual receptors in robot production."
+	desc = ""
 	icon_state = "flash"
 	item_state = "flashtool"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
@@ -55,7 +55,7 @@
 		update_icon()
 	if(ismob(loc))
 		var/mob/M = loc
-		M.visible_message("<span class='danger'>[src] burns out!</span>","<span class='userdanger'>[src] burns out!</span>")
+		M.visible_message("<span class='danger'>[src] burns out!</span>","<span class='danger'>[src] burns out!</span>")
 	else
 		var/turf/T = get_turf(src)
 		T.visible_message("<span class='danger'>[src] burns out!</span>")
@@ -96,7 +96,7 @@
 	if(burnt_out || (world.time < last_trigger + cooldown))
 		return FALSE
 	last_trigger = world.time
-	playsound(src, 'sound/weapons/flash.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	flash_lighting_fx(FLASH_LIGHT_RANGE, light_power, light_color)
 	times_used++
 	flash_recharge()
@@ -122,14 +122,14 @@
 			if(user)
 				terrible_conversion_proc(M, user)
 				visible_message("<span class='danger'>[user] blinds [M] with the flash!</span>")
-				to_chat(user, "<span class='danger'>You blind [M] with the flash!</span>")
-				to_chat(M, "<span class='userdanger'>[user] blinds you with the flash!</span>")
+				to_chat(user, "<span class='danger'>I blind [M] with the flash!</span>")
+				to_chat(M, "<span class='danger'>[user] blinds you with the flash!</span>")
 			else
-				to_chat(M, "<span class='userdanger'>You are blinded by [src]!</span>")
+				to_chat(M, "<span class='danger'>I are blinded by [src]!</span>")
 			M.Paralyze(rand(80,120))
 		else if(user)
 			visible_message("<span class='warning'>[user] fails to blind [M] with the flash!</span>")
-			to_chat(user, "<span class='warning'>You fail to blind [M] with the flash!</span>")
+			to_chat(user, "<span class='warning'>I fail to blind [M] with the flash!</span>")
 			to_chat(M, "<span class='danger'>[user] fails to blind you with the flash!</span>")
 		else
 			to_chat(M, "<span class='danger'>[src] fails to blind you!</span>")
@@ -152,10 +152,10 @@
 		var/diff = 5 * CONFUSION_STACK_MAX_MULTIPLIER - M.confused
 		R.confused += min(5, diff)
 		R.flash_act(affect_silicon = 1)
-		user.visible_message("<span class='warning'>[user] overloads [R]'s sensors with the flash!</span>", "<span class='danger'>You overload [R]'s sensors with the flash!</span>")
+		user.visible_message("<span class='warning'>[user] overloads [R]'s sensors with the flash!</span>", "<span class='danger'>I overload [R]'s sensors with the flash!</span>")
 		return TRUE
 
-	user.visible_message("<span class='warning'>[user] fails to blind [M] with the flash!</span>", "<span class='warning'>You fail to blind [M] with the flash!</span>")
+	user.visible_message("<span class='warning'>[user] fails to blind [M] with the flash!</span>", "<span class='warning'>I fail to blind [M] with the flash!</span>")
 
 /obj/item/assembly/flash/attack_self(mob/living/carbon/user, flag = 0, emp = 0)
 	if(holder)
@@ -213,7 +213,7 @@
 
 /obj/item/assembly/flash/memorizer
 	name = "memorizer"
-	desc = "If you see this, you're not likely to remember it any time soon."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "memorizer"
 	item_state = "nullrod"
@@ -222,14 +222,14 @@
 
 /obj/item/assembly/flash/armimplant
 	name = "photon projector"
-	desc = "A high-powered photon projector implant normally used for lighting purposes, but also doubles as a flashbulb weapon. Self-repair protocols fix the flashbulb if it ever burns out."
+	desc = ""
 	var/flashcd = 20
 	var/overheat = 0
 	var/obj/item/organ/cyberimp/arm/flash/I = null
 
 /obj/item/assembly/flash/armimplant/burn_out()
 	if(I && I.owner)
-		to_chat(I.owner, "<span class='warning'>Your photon projector implant overheats and deactivates!</span>")
+		to_chat(I.owner, "<span class='warning'>My photon projector implant overheats and deactivates!</span>")
 		I.Retract()
 	overheat = TRUE
 	addtimer(CALLBACK(src, .proc/cooldown), flashcd * 2)
@@ -237,11 +237,11 @@
 /obj/item/assembly/flash/armimplant/try_use_flash(mob/user = null)
 	if(overheat)
 		if(I && I.owner)
-			to_chat(I.owner, "<span class='warning'>Your photon projector is running too hot to be used again so quickly!</span>")
+			to_chat(I.owner, "<span class='warning'>My photon projector is running too hot to be used again so quickly!</span>")
 		return FALSE
 	overheat = TRUE
 	addtimer(CALLBACK(src, .proc/cooldown), flashcd)
-	playsound(src, 'sound/weapons/flash.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	update_icon(1)
 	return TRUE
 
@@ -250,7 +250,7 @@
 	overheat = FALSE
 
 /obj/item/assembly/flash/hypnotic
-	desc = "A modified flash device, programmed to emit a sequence of subliminal flashes that can send a vulnerable target into a hypnotic trance."
+	desc = ""
 	flashing_overlay = "flash-hypno"
 	light_color = LIGHT_COLOR_PINK
 	cooldown = 20
@@ -273,7 +273,7 @@
 			if(M.hypnosis_vulnerable())
 				hypnosis = TRUE
 			if(user)
-				user.visible_message("<span class='danger'>[user] blinds [M] with the flash!</span>", "<span class='danger'>You hypno-flash [M]!</span>")
+				user.visible_message("<span class='danger'>[user] blinds [M] with the flash!</span>", "<span class='danger'>I hypno-flash [M]!</span>")
 
 			if(!hypnosis)
 				to_chat(M, "<span class='notice'>The light makes you feel oddly relaxed...</span>")
@@ -285,7 +285,7 @@
 				M.apply_status_effect(/datum/status_effect/trance, 200, TRUE)
 
 		else if(user)
-			user.visible_message("<span class='warning'>[user] fails to blind [M] with the flash!</span>", "<span class='warning'>You fail to hypno-flash [M]!</span>")
+			user.visible_message("<span class='warning'>[user] fails to blind [M] with the flash!</span>", "<span class='warning'>I fail to hypno-flash [M]!</span>")
 		else
 			to_chat(M, "<span class='danger'>[src] fails to blind you!</span>")
 

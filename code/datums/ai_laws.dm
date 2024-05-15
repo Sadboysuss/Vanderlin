@@ -145,7 +145,7 @@
 /datum/ai_laws/peacekeeper
 	name = "UN-2000"
 	id = "peacekeeper"
-	inherent = list("Avoid provoking violent conflict between yourself and others.",\
+	inherent = list("Avoid provoking violent conflict between myself and others.",\
 					"Avoid provoking conflict between others.",\
 					"Seek resolution to existing conflicts while obeying the first and second laws.")
 

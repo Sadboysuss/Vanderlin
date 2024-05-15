@@ -1,6 +1,6 @@
 /datum/surgery/advanced/viral_bonding
 	name = "Viral Bonding"
-	desc = "A surgical procedure that forces a symbiotic relationship between a virus and its host. The patient must be dosed with spaceacillin, virus food, and formaldehyde."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
@@ -31,7 +31,7 @@
 	return TRUE
 
 /datum/surgery_step/viral_bond/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You start heating [target]'s bone marrow with [tool]...</span>",
+	display_results(user, target, "<span class='notice'>I start heating [target]'s bone marrow with [tool]...</span>",
 		"<span class='notice'>[user] starts heating [target]'s bone marrow with [tool]...</span>",
 		"<span class='notice'>[user] starts heating something in [target]'s chest with [tool]...</span>")
 

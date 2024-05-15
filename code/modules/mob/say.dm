@@ -1,19 +1,29 @@
 //Speech verbs.
 
-///Say verb
-/mob/verb/say_verb(message as text)
+
+/mob/verb/say_verb()
 	set name = "Say"
 	set category = "IC"
+	set hidden = 1
+
+	var/message = input(usr, "", "say") as text|null
+	// If they don't type anything just drop the message.
+	set_typing_indicator(FALSE)
+	if(!length(message))
+		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 	if(message)
+		set_typing_indicator(FALSE)
 		say(message)
-	
+
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)
 	set name = "Whisper"
 	set category = "IC"
+	set hidden = 1
+
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
@@ -22,24 +32,39 @@
 ///whisper a message
 /mob/proc/whisper(message, datum/language/language=null)
 	say(message, language) //only living mobs actually whisper, everything else just talks
-	
+
 ///The me emote verb
-/mob/verb/me_verb(message as text)
+/mob/verb/me_verb()
 	set name = "Me"
 	set category = "IC"
-
+	set hidden = 1
+#ifndef MATURESERVER
+	return
+#endif
+//	if(!client.whitelisted())
+//		to_chat(usr, "<span class='warning'>I can't do custom emotes. (NOT WHITELISTED)</span>")
+//		return
+	if(client)
+		if(get_playerquality(client.ckey) <= -10)
+			to_chat(usr, "<span class='warning'>I can't use custom emotes. (LOW PQ)</span>")
+			return
+	var/message = input(usr, "", "me") as text|null
+	// If they don't type anything just drop the message.
+	set_typing_indicator(FALSE)
+	if(!length(message))
+		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
-
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-
 	usr.emote("me",1,message,TRUE)
 
 ///Speak as a dead person (ghost etc)
-/mob/proc/say_dead(var/message)
+/mob/proc/say_dead(message)
 	var/name = real_name
 	var/alt_name = ""
+
+	return
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
@@ -50,14 +75,14 @@
 		return
 
 	if(jb)
-		to_chat(src, "<span class='danger'>You have been banned from deadchat.</span>")
+		to_chat(src, "<span class='danger'>I have been banned from deadchat.</span>")
 		return
 
 
 
 	if (src.client)
 		if(src.client.prefs.muted & MUTE_DEADCHAT)
-			to_chat(src, "<span class='danger'>You cannot talk in deadchat (muted).</span>")
+			to_chat(src, "<span class='danger'>I cannot talk in deadchat (muted).</span>")
 			return
 
 		if(src.client.handle_spam_prevention(message,MUTE_DEADCHAT))
@@ -86,6 +111,11 @@
 /mob/proc/check_emote(message, forced)
 	if(copytext(message, 1, 2) == "*")
 		emote(copytext(message, 2), intentional = !forced)
+		return 1
+
+/mob/proc/check_whisper(message, forced)
+	if(copytext(message, 1, 2) == "+")
+		whisper(copytext(message, 2),sanitize = FALSE)//already sani'd
 		return 1
 
 ///Check if the mob has a hivemind channel

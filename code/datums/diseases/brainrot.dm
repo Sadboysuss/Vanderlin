@@ -8,7 +8,7 @@
 	agent = "Cryptococcus Cosmosis"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	cure_chance = 15//higher chance to cure, since two reagents are required
-	desc = "This disease destroys the braincells, causing brain fever, brain necrosis and general intoxication."
+	desc = ""
 	required_organs = list(/obj/item/organ/brain)
 	severity = DISEASE_SEVERITY_HARMFUL
 
@@ -22,7 +22,7 @@
 			if(prob(2))
 				affected_mob.emote("yawn")
 			if(prob(2))
-				to_chat(affected_mob, "<span class='danger'>You don't feel like yourself.</span>")
+				to_chat(affected_mob, "<span class='danger'>I don't feel like myself.</span>")
 			if(prob(5))
 				affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1, 170)
 				affected_mob.updatehealth()
@@ -35,7 +35,7 @@
 				affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2, 170)
 				affected_mob.updatehealth()
 				if(prob(2))
-					to_chat(affected_mob, "<span class='danger'>Your try to remember something important...but can't.</span>")
+					to_chat(affected_mob, "<span class='danger'>My try to remember something important...but can't.</span>")
 
 		if(4)
 			if(prob(2))
@@ -46,11 +46,11 @@
 				affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 170)
 				affected_mob.updatehealth()
 				if(prob(2))
-					to_chat(affected_mob, "<span class='danger'>Strange buzzing fills your head, removing all thoughts.</span>")
+					to_chat(affected_mob, "<span class='danger'>Strange buzzing fills my head, removing all thoughts.</span>")
 			if(prob(3))
-				to_chat(affected_mob, "<span class='danger'>You lose consciousness...</span>")
+				to_chat(affected_mob, "<span class='danger'>I lose consciousness...</span>")
 				affected_mob.visible_message("<span class='warning'>[affected_mob] suddenly collapses!</span>", \
-											"<span class='userdanger'>You suddenly collapse!</span>")
+											"<span class='danger'>I suddenly collapse!</span>")
 				affected_mob.Unconscious(rand(100,200))
 				if(prob(1))
 					affected_mob.emote("snore")

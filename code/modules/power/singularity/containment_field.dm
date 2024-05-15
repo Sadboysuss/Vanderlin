@@ -2,7 +2,7 @@
 
 /obj/machinery/field/containment
 	name = "containment field"
-	desc = "An energy field."
+	desc = ""
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
 	density = FALSE
@@ -43,9 +43,9 @@
 /obj/machinery/field/containment/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BURN)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 		if(BRUTE)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, TRUE)
+			playsound(loc, 'sound/blank.ogg', 75, TRUE)
 
 /obj/machinery/field/containment/blob_act(obj/structure/blob/B)
 	return FALSE
@@ -123,8 +123,8 @@
 			user.Stun(40)
 		user.take_overall_damage(0, shock_damage)
 		user.visible_message("<span class='danger'>[user.name] was shocked by the [src.name]!</span>", \
-		"<span class='userdanger'>Energy pulse detected, system damaged!</span>", \
-		"<span class='hear'>You hear an electrical crack.</span>")
+		"<span class='danger'>Energy pulse detected, system damaged!</span>", \
+		"<span class='hear'>I hear an electrical crack.</span>")
 
 	user.updatehealth()
 	bump_field(user)

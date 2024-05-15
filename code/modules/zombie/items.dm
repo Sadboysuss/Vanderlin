@@ -10,7 +10,7 @@
 	icon_state = "bloodhand_left"
 	var/icon_left = "bloodhand_left"
 	var/icon_right = "bloodhand_right"
-	hitsound = 'sound/hallucinations/growl1.ogg'
+	hitsound = 'sound/blank.ogg'
 	force = 21 // Just enough to break airlocks with melee attacks
 	damtype = "brute"
 

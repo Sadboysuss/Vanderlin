@@ -1,6 +1,6 @@
 /obj/machinery/rnd/production/circuit_imprinter/department
 	name = "department circuit imprinter"
-	desc = "A special circuit imprinter with a built in interface meant for departmental usage, with built in ExoSync receivers allowing it to print designs researched that match its ROM-encoded department type."
+	desc = ""
 	icon_state = "circuit_imprinter"
 	circuit = /obj/item/circuitboard/machine/circuit_imprinter/department
 	requires_console = FALSE

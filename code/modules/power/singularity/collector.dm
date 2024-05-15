@@ -8,7 +8,7 @@
 #define PRIVATE_TECHWEB_GAIN (1 - PUBLIC_TECHWEB_GAIN) //how many research points go to the user
 /obj/machinery/power/rad_collector
 	name = "Radiation Collector Array"
-	desc = "A device which uses Hawking Radiation and plasma to produce power."
+	desc = ""
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "ca"
 	anchored = FALSE
@@ -35,7 +35,7 @@
 	anchored = TRUE
 
 /obj/machinery/power/rad_collector/anchored/delta //Deltastation's engine is shared by engineers and atmos techs
-	desc = "A device which uses Hawking Radiation and plasma to produce power. This model allows access by Atmospheric Technicians."
+	desc = ""
 	req_access = list(ACCESS_ENGINE_EQUIP, ACCESS_ATMOSPHERICS)
 
 /obj/machinery/power/rad_collector/Destroy()
@@ -50,7 +50,7 @@
 	if(!bitcoinmining)
 		if(!loaded_tank.air_contents.gases[/datum/gas/plasma])
 			investigate_log("<font color='red'>out of fuel</font>.", INVESTIGATE_SINGULO)
-			playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			eject()
 		else
 			var/gasdrained = min(powerproduction_drain*drainratio,loaded_tank.air_contents.gases[/datum/gas/plasma][MOLES])
@@ -64,7 +64,7 @@
 			stored_energy-=power_produced
 	else if(is_station_level(z) && SSresearch.science_tech)
 		if(!loaded_tank.air_contents.gases[/datum/gas/tritium] || !loaded_tank.air_contents.gases[/datum/gas/oxygen])
-			playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			eject()
 		else
 			var/gasdrained = bitcoinproduction_drain*drainratio
@@ -86,7 +86,7 @@
 		if(!src.locked)
 			toggle_power()
 			user.visible_message("<span class='notice'>[user.name] turns the [src.name] [active? "on":"off"].</span>", \
-			"<span class='notice'>You turn the [src.name] [active? "on":"off"].</span>")
+			"<span class='notice'>I turn the [src.name] [active? "on":"off"].</span>")
 			var/fuel
 			if(loaded_tank)
 				fuel = loaded_tank.air_contents.gases[/datum/gas/plasma]
@@ -131,7 +131,7 @@
 		if(allowed(user))
 			if(active)
 				locked = !locked
-				to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the controls.</span>")
+				to_chat(user, "<span class='notice'>I [locked ? "lock" : "unlock"] the controls.</span>")
 			else
 				to_chat(user, "<span class='warning'>The controls can only be locked when \the [src] is active!</span>")
 		else
@@ -183,7 +183,7 @@
 		to_chat(user, "<span class='warning'>[src] is currently active, producing [bitcoinmining ? "research points":"power"].</span>")
 		return TRUE
 	bitcoinmining = !bitcoinmining
-	to_chat(user, "<span class='warning'>You [bitcoinmining ? "enable":"disable"] the research point production feature of [src].</span>")
+	to_chat(user, "<span class='warning'>I [bitcoinmining ? "enable":"disable"] the research point production feature of [src].</span>")
 	return TRUE
 
 /obj/machinery/power/rad_collector/return_analyzable_air()

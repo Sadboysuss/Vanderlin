@@ -16,7 +16,7 @@
 			if(!(antag_flag_override in P.client.prefs.be_special) || is_banned_from(P.ckey, list(antag_flag_override, ROLE_SYNDICATE)))
 				candidates.Remove(P)
 				continue
-		else 
+		else
 			if(!(antag_flag in P.client.prefs.be_special) || is_banned_from(P.ckey, list(antag_flag, ROLE_SYNDICATE)))
 				candidates.Remove(P)
 				continue
@@ -133,8 +133,8 @@
 	else if (check_heads_victory())
 		finished = STATION_VICTORY
 		SSshuttle.clearHostileEnvironment(src)
-		priority_announce("It appears the mutiny has been quelled. Please return yourself and your colleagues to work. \
-			We have remotely blacklisted the head revolutionaries from your cloning software to prevent accidental cloning.", null, 'sound/ai/attention.ogg', null, "Central Command Loyalty Monitoring Division")
+		priority_announce("It appears the mutiny has been quelled. Please return myself and your colleagues to work. \
+			We have remotely blacklisted the head revolutionaries from your cloning software to prevent accidental cloning.", null, 'sound/blank.ogg', null, "Central Command Loyalty Monitoring Division")
 		revolution.save_members()
 		for(var/datum/mind/M in revolution.members)	// Remove antag datums and prevents podcloned or exiled headrevs restarting rebellions.
 			if(M.has_antag_datum(/datum/antagonist/rev/head))
@@ -149,7 +149,7 @@
 		return RULESET_STOP_PROCESSING
 
 /// Checks for revhead loss conditions and other antag datums.
-/datum/dynamic_ruleset/latejoin/provocateur/proc/check_eligible(var/datum/mind/M)
+/datum/dynamic_ruleset/latejoin/provocateur/proc/check_eligible(datum/mind/M)
 	var/turf/T = get_turf(M.current)
 	if(!considered_afk(M) && considered_alive(M) && is_station_level(T.z) && !M.antag_datums?.len && !HAS_TRAIT(M, TRAIT_MINDSHIELD))
 		return TRUE

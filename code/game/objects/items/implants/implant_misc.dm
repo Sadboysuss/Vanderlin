@@ -1,6 +1,6 @@
 /obj/item/implant/weapons_auth
 	name = "firearms authentication implant"
-	desc = "Lets you shoot your guns."
+	desc = ""
 	icon_state = "auth"
 	activated = 0
 
@@ -15,7 +15,7 @@
 
 /obj/item/implant/adrenalin
 	name = "adrenal implant"
-	desc = "Removes all stuns."
+	desc = ""
 	icon_state = "adrenal"
 	uses = 3
 
@@ -33,7 +33,7 @@
 /obj/item/implant/adrenalin/activate()
 	. = ..()
 	uses--
-	to_chat(imp_in, "<span class='notice'>You feel a sudden surge of energy!</span>")
+	to_chat(imp_in, "<span class='notice'>I feel a sudden surge of energy!</span>")
 	imp_in.set_resting(FALSE)
 	imp_in.reagents.add_reagent(/datum/reagent/medicine/badstims, 6)
 	if(!uses)
@@ -46,7 +46,7 @@
 
 /obj/item/implant/emp
 	name = "emp implant"
-	desc = "Triggers an EMP."
+	desc = ""
 	icon_state = "emp"
 	uses = 3
 
@@ -111,7 +111,7 @@
 	radio_key = /obj/item/encryptionkey/headset_cargo
 
 /obj/item/implant/radio/syndicate
-	desc = "Are you there God? It's me, Syndicate Comms Agent."
+	desc = ""
 	radio_key = /obj/item/encryptionkey/syndicate
 	subspace_transmission = TRUE
 

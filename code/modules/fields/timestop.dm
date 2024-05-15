@@ -2,7 +2,7 @@
 /obj/effect/timestop
 	anchored = TRUE
 	name = "chronofield"
-	desc = "ZA WARUDO"
+	desc = ""
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "time"
 	layer = FLY_LAYER
@@ -37,12 +37,12 @@
 
 /obj/effect/timestop/Destroy()
 	qdel(chronofield)
-	playsound(src, 'sound/magic/timeparadox2.ogg', 75, TRUE, frequency = -1) //reverse!
+	playsound(src, 'sound/blank.ogg', 75, TRUE, frequency = -1) //reverse!
 	return ..()
 
 /obj/effect/timestop/proc/timestop()
 	target = get_turf(src)
-	playsound(src, 'sound/magic/timeparadox2.ogg', 75, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 75, TRUE, -1)
 	chronofield = make_field(/datum/proximity_monitor/advanced/timestop, list("current_range" = freezerange, "host" = src, "immune" = immune, "check_anti_magic" = check_anti_magic, "check_holy" = check_holy))
 	QDEL_IN(src, duration)
 

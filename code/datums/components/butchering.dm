@@ -2,7 +2,7 @@
 	var/speed = 80 //time in deciseconds taken to butcher something
 	var/effectiveness = 100 //percentage effectiveness; numbers above 100 yield extra drops
 	var/bonus_modifier = 0 //percentage increase to bonus item chance
-	var/butcher_sound = 'sound/weapons/slice.ogg' //sound played when butchering
+	var/butcher_sound = 'sound/blank.ogg' //sound played when butchering
 	var/butchering_enabled = TRUE
 	var/can_be_blunt = FALSE
 
@@ -23,7 +23,8 @@
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK, .proc/onItemAttack)
 
 /datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/M, mob/living/user)
-	if(user.a_intent != INTENT_HARM)
+	return
+	if(user.used_intent.type != INTENT_HARM)
 		return
 	if(M.stat == DEAD && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
 		if(butchering_enabled && (can_be_blunt || source.get_sharpness()))
@@ -41,17 +42,17 @@
 			return COMPONENT_ITEM_NO_ATTACK
 
 /datum/component/butchering/proc/startButcher(obj/item/source, mob/living/M, mob/living/user)
-	to_chat(user, "<span class='notice'>You begin to butcher [M]...</span>")
+	to_chat(user, "<span class='notice'>I begin to butcher [M]...</span>")
 	playsound(M.loc, butcher_sound, 50, TRUE, -1)
 	if(do_mob(user, M, speed) && M.Adjacent(source))
 		Butcher(user, M)
 
 /datum/component/butchering/proc/startNeckSlice(obj/item/source, mob/living/carbon/human/H, mob/living/user)
 	user.visible_message("<span class='danger'>[user] is slitting [H]'s throat!</span>", \
-					"<span class='danger'>You start slicing [H]'s throat!</span>", \
-					"<span class='hear'>You hear a cutting noise!</span>", ignored_mobs = H)
-	H.show_message("<span class='userdanger'>Your throat is being slit by [user]!</span>", MSG_VISUAL, \
-					"<span class = 'userdanger'>Something is cutting into your neck!</span>", NONE)
+					"<span class='danger'>I start slicing [H]'s throat!</span>", \
+					"<span class='hear'>I hear a cutting noise!</span>", ignored_mobs = H)
+	H.show_message("<span class='danger'>My throat is being slit by [user]!</span>", MSG_VISUAL, \
+					"<span class = 'danger'>Something is cutting into my neck!</span>", NONE)
 	log_combat(user, H, "starts slicing the throat of")
 
 	playsound(H.loc, butcher_sound, 50, TRUE, -1)
@@ -62,7 +63,7 @@
 			return
 
 		H.visible_message("<span class='danger'>[user] slits [H]'s throat!</span>", \
-					"<span class='userdanger'>[user] slits your throat...</span>")
+					"<span class='danger'>[user] slits my throat...</span>")
 		log_combat(user, H, "finishes slicing the throat of")
 		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD)
 		H.bleed_rate = CLAMP(H.bleed_rate + 20, 0, 30)
@@ -78,10 +79,10 @@
 		for(var/_i in 1 to amount)
 			if(!prob(final_effectiveness))
 				if(butcher)
-					to_chat(butcher, "<span class='warning'>You fail to harvest some of the [initial(bones.name)] from [meat].</span>")
+					to_chat(butcher, "<span class='warning'>I fail to harvest some of the [initial(bones.name)] from [meat].</span>")
 			else if(prob(bonus_chance))
 				if(butcher)
-					to_chat(butcher, "<span class='info'>You harvest some extra [initial(bones.name)] from [meat]!</span>")
+					to_chat(butcher, "<span class='info'>I harvest some extra [initial(bones.name)] from [meat]!</span>")
 				for(var/i in 1 to 2)
 					new bones (T)
 			else
@@ -95,7 +96,7 @@
 		meat.guaranteed_butcher_results.Remove(sinew)
 	if(butcher)
 		butcher.visible_message("<span class='notice'>[butcher] butchers [meat].</span>", \
-								"<span class='notice'>You butcher [meat].</span>")
+								"<span class='notice'>I butcher [meat].</span>")
 	ButcherEffects(meat)
 	meat.harvest(butcher)
 	meat.gib(FALSE, FALSE, TRUE)

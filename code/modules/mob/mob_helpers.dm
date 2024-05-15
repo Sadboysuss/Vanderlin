@@ -12,9 +12,19 @@
 	if(!zone)
 		return BODY_ZONE_CHEST
 	switch(zone)
-		if(BODY_ZONE_PRECISE_EYES)
+		if(BODY_ZONE_PRECISE_R_EYE)
+			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_L_EYE)
+			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_NOSE)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_MOUTH)
+			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_HAIR)
+			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_EARS)
+			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_NECK)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_L_HAND)
 			zone = BODY_ZONE_L_ARM
@@ -26,6 +36,13 @@
 			zone = BODY_ZONE_R_LEG
 		if(BODY_ZONE_PRECISE_GROIN)
 			zone = BODY_ZONE_CHEST
+		if(BODY_ZONE_PRECISE_STOMACH)
+			zone = BODY_ZONE_CHEST
+		if(BODY_ZONE_R_INHAND)
+			zone = BODY_ZONE_R_ARM
+		if(BODY_ZONE_L_INHAND)
+			zone = BODY_ZONE_L_ARM
+
 	return zone
 
 /**
@@ -43,7 +60,7 @@
 
 ///Would this zone be above the neck
 /proc/above_neck(zone)
-	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES)
+	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 	if(zones.Find(zone))
 		return 1
 	else
@@ -319,10 +336,356 @@
 	if(hud_used && hud_used.action_intent)
 		hud_used.action_intent.icon_state = "[a_intent]"
 
+/mob/proc/examine_intent(var/numb, offhand = FALSE)
+	var/datum/intent/to_examine
+	if(offhand)
+		if(numb)
+			if(numb > possible_offhand_intents.len)
+				return
+			else
+				to_examine = possible_offhand_intents[numb]
+	else
+		if(numb)
+			if(numb > possible_a_intents.len)
+				return
+			else
+				to_examine = possible_a_intents[numb]
+	if(to_examine)
+		to_examine.examine(src)
+
+/mob/verb/rog_intent_change(numb as num,offhand as num)
+	set name = "intent-change"
+	set hidden = 1
+	if(atkswinging)
+		stop_attack()
+	if(offhand)
+		if(numb)
+			if(numb > possible_offhand_intents.len)
+				return
+			else
+				if(active_hand_index == 1)
+					r_index = numb
+				else
+					l_index = numb
+				o_intent = possible_offhand_intents[numb]
+		else
+			if(active_hand_index == 1)
+				r_index = numb
+			else
+				l_index = numb
+			o_intent = null
+		if(o_intent)
+			o_intent.afterchange()
+	else
+		var/obj/item/Masteritem = get_active_held_item()
+		if(numb)
+			if(numb > possible_a_intents.len)
+				return
+			else
+				if(active_hand_index == 1)
+					if(!Masteritem)
+						l_ua_index = numb
+					l_index = numb
+				else
+					if(!Masteritem)
+						r_ua_index = numb
+					r_index = numb
+				a_intent = possible_a_intents[numb]
+		else
+			if(active_hand_index == 1)
+				if(!Masteritem)
+					l_ua_index = numb
+				l_index = numb
+			else
+				if(!Masteritem)
+					r_ua_index = numb
+				r_index = numb
+			a_intent = null
+		if(a_intent)
+			a_intent.afterchange()
+		used_intent = a_intent
+	if(hud_used?.action_intent)
+		hud_used.action_intent.switch_intent(r_index,l_index,oactive)
+
+/mob/proc/update_a_intents()
+	possible_a_intents.Cut()
+	possible_offhand_intents.Cut()
+	var/list/intents = list()
+	var/obj/item/Masteritem = get_active_held_item()
+	if(Masteritem)
+		intents = Masteritem.possible_item_intents
+		if(Masteritem.wielded)
+			intents = Masteritem.gripped_intents
+		if(Masteritem.altgripped)
+			intents = Masteritem.alt_intents
+	else
+		if(active_hand_index == 1)
+			r_index = r_ua_index
+		else
+			l_index = l_ua_index
+		intents = base_intents.Copy()
+	for(var/defintent in intents)
+		if(Masteritem)
+			possible_a_intents += new defintent(src, Masteritem)
+		else
+			possible_a_intents += new defintent(src)
+	Masteritem = get_inactive_held_item()
+	if(Masteritem)
+		intents = Masteritem.possible_item_intents
+		if(Masteritem.wielded)
+			intents = Masteritem.gripped_intents
+		if(Masteritem.altgripped)
+			intents = Masteritem.alt_intents
+	else
+		if(active_hand_index == 1)
+			l_index = l_ua_index
+		else
+			r_index = r_ua_index
+		intents = base_intents.Copy()
+	for(var/defintent in intents)
+		if(Masteritem)
+			possible_offhand_intents += new defintent(src, Masteritem)
+		else
+			possible_offhand_intents += new defintent(src)
+	if(hud_used?.action_intent)
+		if(active_hand_index == 1)
+			hud_used.action_intent.update_icon(possible_a_intents,possible_offhand_intents,oactive)
+		else
+			hud_used.action_intent.update_icon(possible_offhand_intents,possible_a_intents,oactive)
+	if(active_hand_index == 1)
+		if(l_index <= possible_a_intents.len)
+			rog_intent_change(l_index)
+		else
+			rog_intent_change(1)
+		rog_intent_change(r_index, 1)
+	else
+		if(r_index <= possible_a_intents.len)
+			rog_intent_change(r_index)
+		else
+			rog_intent_change(1)
+		rog_intent_change(l_index, 1)
+
+/mob/verb/mmb_intent_change(input as text)
+	set name = "mmb-change"
+	set hidden = 1
+	if(!hud_used)
+		return
+	if(atkswinging)
+		stop_attack()
+	if(!input)
+		qdel(mmb_intent)
+		mmb_intent = null
+	if(input != QINTENT_SPELL)
+		if(ranged_ability)
+			ranged_ability.deactivate()
+	switch(input)
+		if(QINTENT_KICK)
+			if(mmb_intent?.type == INTENT_KICK)
+				qdel(mmb_intent)
+				input = null
+				mmb_intent = null
+			else
+				mmb_intent = new INTENT_KICK(src)
+		if(QINTENT_STEAL)
+			if(mmb_intent?.type == INTENT_STEAL)
+				qdel(mmb_intent)
+				input = null
+				mmb_intent = null
+			else
+				mmb_intent = new INTENT_STEAL(src)
+		if(QINTENT_BITE)
+			if(mmb_intent?.type == INTENT_BITE)
+				qdel(mmb_intent)
+				input = null
+				mmb_intent = null
+			else
+				mmb_intent = new INTENT_BITE(src)
+		if(QINTENT_JUMP)
+			if(mmb_intent?.type == INTENT_JUMP)
+				qdel(mmb_intent)
+				input = null
+				mmb_intent = null
+			else
+				mmb_intent = new INTENT_JUMP(src)
+		if(QINTENT_GIVE)
+			if(mmb_intent?.type == INTENT_GIVE)
+				qdel(mmb_intent)
+				input = null
+				mmb_intent = null
+			else
+				mmb_intent = new INTENT_GIVE(src)
+		if(QINTENT_SPELL)
+			if(mmb_intent)
+				qdel(mmb_intent)
+			testing("spellselect [ranged_ability]")
+			mmb_intent = new INTENT_SPELL(src)
+			mmb_intent.releasedrain = ranged_ability.get_fatigue_drain()
+			mmb_intent.chargedrain = ranged_ability.chargedrain
+			mmb_intent.chargetime = ranged_ability.get_chargetime()
+			mmb_intent.warnie = ranged_ability.warnie
+			mmb_intent.charge_invocation = ranged_ability.charge_invocation
+			mmb_intent.no_early_release = ranged_ability.no_early_release
+			mmb_intent.movement_interrupt = ranged_ability.movement_interrupt
+			mmb_intent.charging_slowdown = ranged_ability.charging_slowdown
+			mmb_intent.chargedloop = ranged_ability.chargedloop
+			mmb_intent.update_chargeloop()
+
+	hud_used.quad_intents.switch_intent(input)
+	hud_used.give_intent.switch_intent(input)
+	givingto = null
+
+/mob/verb/def_intent_change(input as num)
+	set name = "def-change"
+	set hidden = 1
+
+	if(input == d_intent)
+		return
+	d_intent = input
+	playsound_local(src, 'sound/misc/click.ogg', 100)
+	if(hud_used)
+		if(hud_used.def_intent)
+			hud_used.def_intent.update_icon()
+	update_inv_hands()
+
+
+/mob/verb/toggle_cmode()
+	set name = "cmode-change"
+	set hidden = 1
+
+	var/mob/living/L
+	if(isliving(src))
+		L = src
+	var/client/client = L.client
+	if(L.IsSleeping())
+		if(cmode)
+			playsound_local(src, 'sound/misc/comboff.ogg', 100)
+			SSdroning.play_area_sound(get_area(src), client)
+			cmode = FALSE
+		if(hud_used)
+			if(hud_used.cmode_button)
+				hud_used.cmode_button.update_icon()
+		return
+	if(cmode)
+		playsound_local(src, 'sound/misc/comboff.ogg', 100)
+		SSdroning.play_area_sound(get_area(src), client)
+		cmode = FALSE
+	else
+		cmode = TRUE
+		playsound_local(src, 'sound/misc/combon.ogg', 100)
+		if(L.cmode_music)
+			SSdroning.play_combat_music(L.cmode_music, client)
+	if(hud_used)
+		if(hud_used.cmode_button)
+			hud_used.cmode_button.update_icon()
+
+/mob
+	var/last_aimhchange = 0
+	var/aimheight = 11
+	var/cmode_music = 'sound/music/combat.ogg'
+
+/mob/proc/aimheight_change(input)
+	var/old_zone = zone_selected
+	if(isnum(input))
+		aimheight = input
+	if(input == "up")
+		aimheight = min(aimheight+1, 19)
+	if(input == "down")
+		aimheight = max(aimheight-1, 1)
+
+	switch(aimheight)
+		if(19)
+			zone_selected = BODY_ZONE_HEAD
+		if(18)
+			zone_selected = BODY_ZONE_PRECISE_HAIR
+		if(17)
+			zone_selected = BODY_ZONE_PRECISE_EARS
+		if(16)
+			zone_selected = BODY_ZONE_PRECISE_R_EYE
+		if(15)
+			zone_selected = BODY_ZONE_PRECISE_L_EYE
+		if(14)
+			zone_selected = BODY_ZONE_PRECISE_NOSE
+		if(13)
+			zone_selected = BODY_ZONE_PRECISE_MOUTH
+		if(12)
+			zone_selected = BODY_ZONE_PRECISE_NECK
+		if(11)
+			zone_selected = BODY_ZONE_CHEST
+		if(10)
+			zone_selected = BODY_ZONE_PRECISE_STOMACH
+		if(9)
+			zone_selected = BODY_ZONE_PRECISE_GROIN
+		if(8)
+			zone_selected = BODY_ZONE_R_ARM
+		if(7)
+			zone_selected = BODY_ZONE_PRECISE_R_HAND
+		if(6)
+			zone_selected = BODY_ZONE_L_ARM
+		if(5)
+			zone_selected = BODY_ZONE_PRECISE_L_HAND
+		if(4)
+			zone_selected = BODY_ZONE_R_LEG
+		if(3)
+			zone_selected = BODY_ZONE_PRECISE_R_FOOT
+		if(2)
+			zone_selected = BODY_ZONE_L_LEG
+		if(1)
+			zone_selected = BODY_ZONE_PRECISE_L_FOOT
+
+	if(zone_selected != old_zone)
+		playsound_local(src, 'sound/misc/click.ogg', 50, TRUE)
+		if(hud_used)
+			if(hud_used.zone_select)
+				hud_used.zone_select.update_icon()
+
+/mob/proc/select_zone(choice)
+	zone_selected = choice
+	switch(choice)
+		if(BODY_ZONE_HEAD)
+			aimheight = 19
+		if(BODY_ZONE_PRECISE_HAIR)
+			aimheight = 18
+		if(BODY_ZONE_PRECISE_EARS)
+			aimheight = 17
+		if(BODY_ZONE_PRECISE_R_EYE)
+			aimheight = 16
+		if(BODY_ZONE_PRECISE_L_EYE)
+			aimheight = 15
+		if(BODY_ZONE_PRECISE_NOSE)
+			aimheight = 14
+		if(BODY_ZONE_PRECISE_MOUTH)
+			aimheight = 13
+		if(BODY_ZONE_PRECISE_NECK)
+			aimheight = 12
+		if(BODY_ZONE_CHEST)
+			aimheight = 11
+		if(BODY_ZONE_PRECISE_STOMACH)
+			aimheight = 10
+		if(BODY_ZONE_PRECISE_GROIN)
+			aimheight = 9
+		if(BODY_ZONE_R_ARM)
+			aimheight = 8
+		if(BODY_ZONE_PRECISE_R_HAND)
+			aimheight = 7
+		if(BODY_ZONE_L_ARM)
+			aimheight = 6
+		if(BODY_ZONE_PRECISE_L_HAND)
+			aimheight = 5
+		if(BODY_ZONE_R_LEG)
+			aimheight = 4
+		if(BODY_ZONE_PRECISE_R_FOOT)
+			aimheight = 3
+		if(BODY_ZONE_L_LEG)
+			aimheight = 2
+		if(BODY_ZONE_PRECISE_L_FOOT)
+			aimheight = 1
+
 ///Checks if passed through item is blind
 /proc/is_blind(A)
 	if(ismob(A))
 		var/mob/B = A
+		if(HAS_TRAIT(B, TRAIT_BLIND))
+			return TRUE
 		return B.eye_blind
 	return FALSE
 
@@ -451,13 +814,13 @@
 			if(affecting.heal_damage(brute_heal, burn_heal, 0, BODYPART_ROBOTIC))
 				H.update_damage_overlays()
 			user.visible_message("<span class='notice'>[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name].</span>", \
-			"<span class='notice'>You fix some of the [dam ? "dents on" : "burnt wires in"] [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
+			"<span class='notice'>I fix some of the [dam ? "dents on" : "burnt wires in"] [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
 			return 1 //successful heal
 		else
 			to_chat(user, "<span class='warning'>[affecting] is already in good condition!</span>")
 
 ///Is the passed in mob an admin ghost
-/proc/IsAdminGhost(var/mob/user)
+/proc/IsAdminGhost(mob/user)
 	if(!user)		//Are they a mob? Auto interface updates call this with a null src
 		return
 	if(!user.client) // Do they have a client?
@@ -495,7 +858,7 @@
 		var/mob/dead/observer/C = pick(candidates)
 		to_chat(M, "Your mob has been taken over by a ghost!")
 		message_admins("[key_name_admin(C)] has taken control of ([ADMIN_LOOKUPFLW(M)])")
-		M.ghostize(0)
+		M.ghostize(0,drawskip=TRUE)
 		M.key = C.key
 		return TRUE
 	else

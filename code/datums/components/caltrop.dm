@@ -37,7 +37,7 @@
 		if(O.status == BODYPART_ROBOTIC)
 			return
 
-		var/feetCover = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) || (H.w_uniform && (H.w_uniform.body_parts_covered & FEET))
+		var/feetCover = (H.wear_armor && (H.wear_armor.body_parts_covered & FEET)) || (H.wear_pants && (H.wear_pants.body_parts_covered & FEET))
 
 		if(!(flags & CALTROP_BYPASS_SHOES) && (H.shoes || feetCover))
 			return
@@ -53,10 +53,10 @@
 		if(cooldown < world.time - 10) //cooldown to avoid message spam.
 			if(!H.incapacitated(ignore_restraints = TRUE))
 				H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
-						"<span class='userdanger'>You step on [A]!</span>")
+						"<span class='danger'>I step on [A]!</span>")
 			else
 				H.visible_message("<span class='danger'>[H] slides on [A]!</span>", \
-						"<span class='userdanger'>You slide on [A]!</span>")
+						"<span class='danger'>I slide on [A]!</span>")
 
 			cooldown = world.time
 		H.Paralyze(60)

@@ -10,7 +10,7 @@
 
 /mob/living/simple_animal/bot/mulebot
 	name = "\improper MULEbot"
-	desc = "A Multiple Utility Load Effector bot."
+	desc = ""
 	icon_state = "mulebot0"
 	density = TRUE
 	move_resist = MOVE_FORCE_STRONG
@@ -96,22 +96,22 @@
 			return
 		cell = I
 		visible_message("<span class='notice'>[user] inserts a cell into [src].</span>",
-						"<span class='notice'>You insert the new cell into [src].</span>")
+						"<span class='notice'>I insert the new cell into [src].</span>")
 	else if(I.tool_behaviour == TOOL_CROWBAR && open && cell)
 		cell.add_fingerprint(usr)
 		cell.forceMove(loc)
 		cell = null
 		visible_message("<span class='notice'>[user] crowbars out the power cell from [src].</span>",
-						"<span class='notice'>You pry the powercell out of [src].</span>")
+						"<span class='notice'>I pry the powercell out of [src].</span>")
 	else if(is_wire_tool(I) && open)
 		return attack_hand(user)
 	else if(load && ismob(load))  // chance to knock off rider
 		if(prob(1 + I.force * 2))
 			unload(0)
 			user.visible_message("<span class='danger'>[user] knocks [load] off [src] with \the [I]!</span>",
-									"<span class='danger'>You knock [load] off [src] with \the [I]!</span>")
+									"<span class='danger'>I knock [load] off [src] with \the [I]!</span>")
 		else
-			to_chat(user, "<span class='warning'>You hit [src] with \the [I] but to no effect!</span>")
+			to_chat(user, "<span class='warning'>I hit [src] with \the [I] but to no effect!</span>")
 			..()
 	else
 		..()
@@ -123,7 +123,7 @@
 		emagged = TRUE
 	if(!open)
 		locked = !locked
-		to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] [src]'s controls!</span>")
+		to_chat(user, "<span class='notice'>I [locked ? "lock" : "unlock"] [src]'s controls!</span>")
 	flick("mulebot-emagged", src)
 	playsound(src, "sparks", 100, FALSE)
 
@@ -214,7 +214,7 @@
 				turn_off()
 			else if(cell && !open)
 				if(!turn_on())
-					to_chat(usr, "<span class='warning'>You can't switch on [src]!</span>")
+					to_chat(usr, "<span class='warning'>I can't switch on [src]!</span>")
 					return
 			. = TRUE
 		else
@@ -320,13 +320,13 @@
 	switch(type)
 		if(SIGH)
 			audible_message("<span class='hear'>[src] makes a sighing buzz.</span>")
-			playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
+			playsound(loc, 'sound/blank.ogg', 50, FALSE)
 		if(ANNOYED)
 			audible_message("<span class='hear'>[src] makes an annoyed buzzing sound.</span>")
-			playsound(loc, 'sound/machines/buzz-two.ogg', 50, FALSE)
+			playsound(loc, 'sound/blank.ogg', 50, FALSE)
 		if(DELIGHT)
 			audible_message("<span class='hear'>[src] makes a delighted ping!</span>")
-			playsound(loc, 'sound/machines/ping.ogg', 50, FALSE)
+			playsound(loc, 'sound/blank.ogg', 50, FALSE)
 
 
 // mousedrop a crate to load the bot
@@ -594,14 +594,14 @@
 	if(!reached_target)
 		radio_channel = RADIO_CHANNEL_SUPPLY //Supply channel
 		audible_message("<span class='hear'>[src] makes a chiming sound!</span>")
-		playsound(loc, 'sound/machines/chime.ogg', 50, FALSE)
+		playsound(loc, 'sound/blank.ogg', 50, FALSE)
 		reached_target = 1
 
 		if(pathset) //The AI called us here, so notify it of our arrival.
 			loaddir = dir //The MULE will attempt to load a crate in whatever direction the MULE is "facing".
 			if(calling_ai)
 				to_chat(calling_ai, "<span class='notice'>[icon2html(src, calling_ai)] [src] wirelessly plays a chiming sound!</span>")
-				playsound(calling_ai, 'sound/machines/chime.ogg',40, FALSE)
+				playsound(calling_ai, 'sound/blank.ogg',40, FALSE)
 				calling_ai = null
 				radio_channel = RADIO_CHANNEL_AI_PRIVATE //Report on AI Private instead if the AI is controlling us.
 
@@ -654,8 +654,8 @@
 /mob/living/simple_animal/bot/mulebot/proc/RunOver(mob/living/carbon/human/H)
 	log_combat(src, H, "run over", null, "(DAMTYPE: [uppertext(BRUTE)])")
 	H.visible_message("<span class='danger'>[src] drives over [H]!</span>", \
-					"<span class='userdanger'>[src] drives over you!</span>")
-	playsound(loc, 'sound/effects/splat.ogg', 50, TRUE)
+					"<span class='danger'>[src] drives over you!</span>")
+	playsound(loc, 'sound/blank.ogg', 50, TRUE)
 
 	var/damage = rand(5,15)
 	H.apply_damage(2*damage, BRUTE, BODY_ZONE_HEAD, run_armor_check(BODY_ZONE_HEAD, "melee"))
@@ -748,7 +748,7 @@
 
 /mob/living/simple_animal/bot/mulebot/paranormal//allows ghosts only unless hacked to actually be useful
 	name = "paranormal MULEbot"
-	desc = "A Multiple Utility Load Effector bot. It only seems to accept paranormal forces, and for this reason is fucking useless."
+	desc = ""
 	icon_state = "paranormalmulebot0"
 	base_icon = "paranormalmulebot"
 	var/static/mutable_appearance/ghost_overlay

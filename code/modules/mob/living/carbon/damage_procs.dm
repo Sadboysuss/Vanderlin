@@ -2,7 +2,9 @@
 
 /mob/living/carbon/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
-	var/hit_percent = (100-blocked)/100
+	var/hit_percent = 1
+	damage = max(damage-blocked,0)
+//	var/hit_percent = (100-blocked)/100
 	if(!damage || (!forced && hit_percent <= 0))
 		return 0
 
@@ -43,7 +45,10 @@
 					update_damage_overlays()
 			else
 				adjustStaminaLoss(damage_amount, forced = forced)
-	return TRUE
+	if(damage_amount)
+		return damage_amount
+	else
+		return TRUE
 
 
 //These procs fetch a cumulative total damage from all bodyparts
@@ -153,7 +158,7 @@
 		var/obj/item/bodypart/BP = X
 		if(status && (BP.status != status))
 			continue
-		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || (stamina && BP.stamina_dam))
+		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || (stamina && BP.stamina_dam) || BP.wounds.len)
 			parts += BP
 	return parts
 
@@ -222,24 +227,33 @@
 
 	var/list/obj/item/bodypart/parts = get_damageable_bodyparts(required_status)
 	var/update = 0
-	while(parts.len && (brute > 0 || burn > 0 || stamina > 0))
-		var/obj/item/bodypart/picked = pick(parts)
-		var/brute_per_part = round(brute/parts.len, DAMAGE_PRECISION)
-		var/burn_per_part = round(burn/parts.len, DAMAGE_PRECISION)
-		var/stamina_per_part = round(stamina/parts.len, DAMAGE_PRECISION)
+	var/remaining_brute = brute
+	var/remaining_burn = burn
+	if(brute > 0 || burn > 0 || stamina > 0)
+		for(var/I in 1 to parts.len)
+			var/obj/item/bodypart/picked = pick(parts)
+			var/brute_per_part = rand(0,remaining_brute)
+			var/burn_per_part = rand(0,remaining_burn)
+			var/stamina_per_part = round(stamina/parts.len, DAMAGE_PRECISION)
 
-		var/brute_was = picked.brute_dam
-		var/burn_was = picked.burn_dam
-		var/stamina_was = picked.stamina_dam
+			if(I == parts.len)
+				brute_per_part = remaining_brute
+				burn_per_part = remaining_burn
+
+			remaining_brute -= brute_per_part
+			remaining_burn -= burn_per_part
+
+			var/brute_was = picked.brute_dam
+			var/burn_was = picked.burn_dam
+			var/stamina_was = picked.stamina_dam
 
 
-		update |= picked.receive_damage(brute_per_part, burn_per_part, stamina_per_part, FALSE, required_status)
+			update |= picked.receive_damage(brute_per_part, burn_per_part, stamina_per_part, FALSE, required_status)
 
-		brute	= round(brute - (picked.brute_dam - brute_was), DAMAGE_PRECISION)
-		burn	= round(burn - (picked.burn_dam - burn_was), DAMAGE_PRECISION)
-		stamina = round(stamina - (picked.stamina_dam - stamina_was), DAMAGE_PRECISION)
+			brute	= round(brute - (picked.brute_dam - brute_was), DAMAGE_PRECISION)
+			burn	= round(burn - (picked.burn_dam - burn_was), DAMAGE_PRECISION)
+			stamina = round(stamina - (picked.stamina_dam - stamina_was), DAMAGE_PRECISION)
 
-		parts -= picked
 	if(updating_health)
 		updatehealth()
 	if(update)

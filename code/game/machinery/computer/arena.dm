@@ -59,7 +59,7 @@
 	var/list/countdowns = list() //List of countdown effects ticking down to start
 
 	//Sound played when the fight starts.
-	var/start_sound = 'sound/items/airhorn2.ogg'
+	var/start_sound = 'sound/blank.ogg'
 	var/start_sound_volume = 50
 
 /obj/machinery/computer/arena/Initialize(mapload, obj/item/circuitboard/C)
@@ -208,7 +208,7 @@
 	// Could use update_icon on spawnpoints here to show they're on
 	if(ready_to_spawn)
 		for(var/mob/M in all_contestants())
-			to_chat(M,"<span class='userdanger'>Arena you're signed up for is ready!</span>")
+			to_chat(M,"<span class='danger'>Arena you're signed up for is ready!</span>")
 
 /obj/machinery/computer/arena/proc/all_contestants()
 	. = list()
@@ -232,7 +232,7 @@
 	var/timetext = DisplayTimeText(start_delay)
 	to_chat(user,"<span class='notice'>The match will start in [timetext].</span>")
 	for(var/mob/M in all_contestants())
-		to_chat(M,"<span class='userdanger'>The gates will open in [timetext]!</span>")
+		to_chat(M,"<span class='danger'>The gates will open in [timetext]!</span>")
 	start_time = world.time + start_delay
 	addtimer(CALLBACK(src,.proc/begin),start_delay)
 	for(var/team in teams)
@@ -249,7 +249,7 @@
 			var/obj/machinery/arena_spawn/A = get_spawn(team)
 			playsound(A,start_sound, start_sound_volume)
 	for(var/mob/M in all_contestants())
-		to_chat(M,"<span class='userdanger'>START!</span>")
+		to_chat(M,"<span class='danger'>START!</span>")
 	//Clean up the countdowns
 	QDEL_LIST(countdowns)
 	start_time = null

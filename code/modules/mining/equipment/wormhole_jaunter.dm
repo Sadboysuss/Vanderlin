@@ -1,7 +1,7 @@
 /**********************Jaunter**********************/
 /obj/item/wormhole_jaunter
 	name = "wormhole jaunter"
-	desc = "A single use device harnessing outdated wormhole technology, Nanotrasen has since turned its eyes to bluespace for more accurate teleportation. The wormholes it creates are unpleasant to travel through, to say the least.\nThanks to modifications provided by the Free Golems, this jaunter can be worn on the belt to provide protection from chasms."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "Jaunter"
 	item_state = "electronic"
@@ -9,7 +9,7 @@
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	slot_flags = ITEM_SLOT_BELT
 
@@ -47,7 +47,7 @@
 	var/obj/effect/portal/jaunt_tunnel/J = new (get_turf(src), src, 100, null, FALSE, get_turf(chosen_beacon))
 	if(adjacent)
 		try_move_adjacent(J)
-	playsound(src,'sound/effects/sparks4.ogg',50,TRUE)
+	playsound(src,'sound/blank.ogg',50,TRUE)
 	qdel(src)
 
 /obj/item/wormhole_jaunter/emp_act(power)
@@ -71,26 +71,26 @@
 
 /obj/item/wormhole_jaunter/proc/chasm_react(mob/user)
 	if(user.get_item_by_slot(SLOT_BELT) == src)
-		to_chat(user, "<span class='notice'>Your [name] activates, saving you from the chasm!</span>")
+		to_chat(user, "<span class='notice'>My [name] activates, saving you from the chasm!</span>")
 		SSblackbox.record_feedback("tally", "jaunter", 1, "Chasm") // chasm automatic activation
 		activate(user, FALSE)
 	else
-		to_chat(user, "<span class='userdanger'>[src] is not attached to your belt, preventing it from saving you from the chasm. RIP.</span>")
+		to_chat(user, "<span class='danger'>[src] is not attached to my belt, preventing it from saving you from the chasm. RIP.</span>")
 
 //jaunter tunnel
 /obj/effect/portal/jaunt_tunnel
 	name = "jaunt tunnel"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "bhole3"
-	desc = "A stable hole in the universe made by a wormhole jaunter. Turbulent doesn't even begin to describe how rough passage through one of these is, but at least it will always get you somewhere near a beacon."
-	mech_sized = TRUE //save your ripley
+	desc = ""
+	mech_sized = TRUE //save my ripley
 	innate_accuracy_penalty = 6
 
 /obj/effect/portal/jaunt_tunnel/teleport(atom/movable/M)
 	. = ..()
 	if(.)
 		// KERPLUNK
-		playsound(M,'sound/weapons/resonator_blast.ogg',50,TRUE)
+		playsound(M,'sound/blank.ogg',50,TRUE)
 		if(iscarbon(M))
 			var/mob/living/carbon/L = M
 			L.Paralyze(60)

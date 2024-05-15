@@ -12,7 +12,7 @@
 
 /obj/structure/shuttle/engine
 	name = "engine"
-	desc = "A bluespace engine used to make shuttles move."
+	desc = ""
 	density = TRUE
 	anchored = TRUE
 	var/engine_power = 1
@@ -49,12 +49,12 @@
 				return TRUE
 
 			user.visible_message("<span class='notice'>[user.name] starts to weld the [name] to the floor.</span>", \
-				"<span class='notice'>You start to weld \the [src] to the floor...</span>", \
-				"<span class='hear'>You hear welding.</span>")
+				"<span class='notice'>I start to weld \the [src] to the floor...</span>", \
+				"<span class='hear'>I hear welding.</span>")
 
 			if(I.use_tool(src, user, ENGINE_WELDTIME, volume=50))
 				state = ENGINE_WELDED
-				to_chat(user, "<span class='notice'>You weld \the [src] to the floor.</span>")
+				to_chat(user, "<span class='notice'>I weld \the [src] to the floor.</span>")
 				alter_engine_power(engine_power)
 
 		if(ENGINE_WELDED)
@@ -62,12 +62,12 @@
 				return TRUE
 
 			user.visible_message("<span class='notice'>[user.name] starts to cut the [name] free from the floor.</span>", \
-				"<span class='notice'>You start to cut \the [src] free from the floor...</span>", \
-				"<span class='hear'>You hear welding.</span>")
+				"<span class='notice'>I start to cut \the [src] free from the floor...</span>", \
+				"<span class='hear'>I hear welding.</span>")
 
 			if(I.use_tool(src, user, ENGINE_WELDTIME, volume=50))
 				state = ENGINE_WRENCHED
-				to_chat(user, "<span class='notice'>You cut \the [src] free from the floor.</span>")
+				to_chat(user, "<span class='notice'>I cut \the [src] free from the floor.</span>")
 				alter_engine_power(-engine_power)
 	return TRUE
 
@@ -88,19 +88,19 @@
 /obj/structure/shuttle/engine/heater
 	name = "engine heater"
 	icon_state = "heater"
-	desc = "Directs energy into compressed particles in order to power engines."
+	desc = ""
 	engine_power = 0 // todo make these into 2x1 parts
 
 /obj/structure/shuttle/engine/platform
 	name = "engine platform"
 	icon_state = "platform"
-	desc = "A platform for engine components."
+	desc = ""
 	engine_power = 0
 
 /obj/structure/shuttle/engine/propulsion
 	name = "propulsion engine"
 	icon_state = "propulsion"
-	desc = "A standard reliable bluespace engine used by many forms of shuttles."
+	desc = ""
 	opacity = 1
 
 /obj/structure/shuttle/engine/propulsion/left
@@ -113,7 +113,7 @@
 
 /obj/structure/shuttle/engine/propulsion/burst
 	name = "burst engine"
-	desc = "An engine that releases a large bluespace burst to propel it."
+	desc = ""
 
 /obj/structure/shuttle/engine/propulsion/burst/cargo
 	state = ENGINE_UNWRENCHED
@@ -130,14 +130,14 @@
 /obj/structure/shuttle/engine/router
 	name = "engine router"
 	icon_state = "router"
-	desc = "Redirects around energized particles in engine structures."
+	desc = ""
 
 /obj/structure/shuttle/engine/large
 	name = "engine"
 	opacity = 1
 	icon = 'icons/obj/2x2.dmi'
 	icon_state = "large_engine"
-	desc = "A very large bluespace engine used to propel very large ships."
+	desc = ""
 	bound_width = 64
 	bound_height = 64
 	appearance_flags = 0
@@ -147,7 +147,7 @@
 	opacity = 1
 	icon = 'icons/obj/3x3.dmi'
 	icon_state = "huge_engine"
-	desc = "An extremely large bluespace engine used to propel extremely large ships."
+	desc = ""
 	bound_width = 96
 	bound_height = 96
 	appearance_flags = 0

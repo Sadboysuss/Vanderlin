@@ -35,13 +35,13 @@
 /obj/item/ammo_casing/energy/laser/heavy
 	projectile_type = /obj/projectile/beam/laser/heavylaser
 	select_name = "anti-vehicle"
-	fire_sound = 'sound/weapons/lasercannonfire.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/laser/pulse
 	projectile_type = /obj/projectile/beam/pulse
 	e_cost = 200
 	select_name = "DESTROY"
-	fire_sound = 'sound/weapons/pulse.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/laser/bluetag
 	projectile_type = /obj/projectile/beam/lasertag/bluetag
@@ -62,9 +62,9 @@
 /obj/item/ammo_casing/energy/xray
 	projectile_type = /obj/projectile/beam/xray
 	e_cost = 50
-	fire_sound = 'sound/weapons/laser3.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/mindflayer
 	projectile_type = /obj/projectile/beam/mindflayer
 	select_name = "MINDFUCK"
-	fire_sound = 'sound/weapons/laser.ogg'
+	fire_sound = 'sound/blank.ogg'

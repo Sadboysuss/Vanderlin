@@ -1,7 +1,7 @@
 //Floorbot
 /mob/living/simple_animal/bot/floorbot
 	name = "\improper Floorbot"
-	desc = "A little floor repairing robot, he looks so excited!"
+	desc = ""
 	icon = 'icons/mob/aibots.dmi'
 	icon_state = "floorbot0"
 	density = FALSE
@@ -122,9 +122,9 @@
 		tiles.use(loaded)
 		specialtiles += loaded
 		if(loaded > 0)
-			to_chat(user, "<span class='notice'>You load [loaded] tiles into the floorbot. It now contains [specialtiles] tiles.</span>")
+			to_chat(user, "<span class='notice'>I load [loaded] tiles into the floorbot. It now contains [specialtiles] tiles.</span>")
 		else
-			to_chat(user, "<span class='warning'>You need at least one floor tile to put into [src]!</span>")
+			to_chat(user, "<span class='warning'>I need at least one floor tile to put into [src]!</span>")
 	else
 		..()
 
@@ -339,7 +339,7 @@
 			visible_message("<span class='notice'>[src] begins repairing the floor.</span>")
 			sleep(50)
 			if(mode == BOT_REPAIRING && F && src.loc == F)
-				F.broken = FALSE 
+				F.broken = FALSE
 				F.burnt = FALSE
 				F.PlaceOnTop(/turf/open/floor/plasteel, flags = CHANGETURF_INHERIT_AIR)
 

@@ -2,6 +2,8 @@
 /atom
 	var/light_power = 1 // Intensity of the light.
 	var/light_range = 0 // Range in tiles of the light.
+	var/light_depth = 1 // how many zs we can go down through open spaces
+	var/light_height = 1
 	var/light_color     // Hexadecimal RGB string representing the colour of the light.
 
 	var/tmp/datum/light_source/light // Our light source. Don't fuck with this directly unless you have a good reason!
@@ -60,7 +62,7 @@
 
 // Should always be used to change the opacity of an atom.
 // It notifies (potentially) affected light sources so they can update (if needed).
-/atom/proc/set_opacity(var/new_opacity)
+/atom/proc/set_opacity(new_opacity)
 	if (new_opacity == opacity)
 		return
 

@@ -64,7 +64,7 @@
 		if(istype(new_mob))
 			if(bantype && is_banned_from(affected_mob.ckey, bantype))
 				replace_banned_player(new_mob)
-			new_mob.a_intent = INTENT_HARM
+			new_mob.used_intent = INTENT_HARM
 			if(affected_mob.mind)
 				affected_mob.mind.transfer_to(new_mob)
 			else
@@ -75,18 +75,18 @@
 		new_mob.real_name = new_mob.name
 		qdel(affected_mob)
 
-/datum/disease/transformation/proc/replace_banned_player(var/mob/living/new_mob) // This can run well after the mob has been transferred, so need a handle on the new mob to kill it if needed.
+/datum/disease/transformation/proc/replace_banned_player(mob/living/new_mob) // This can run well after the mob has been transferred, so need a handle on the new mob to kill it if needed.
 	set waitfor = FALSE
 
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as [affected_mob.name]?", bantype, null, bantype, 50, affected_mob)
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
-		to_chat(affected_mob, "<span class='userdanger'>Your mob has been taken over by a ghost! Appeal your job ban if you want to avoid this in the future!</span>")
+		to_chat(affected_mob, "<span class='danger'>My mob has been taken over by a ghost! Appeal my job ban if you want to avoid this in the future!</span>")
 		message_admins("[key_name_admin(C)] has taken control of ([key_name_admin(affected_mob)]) to replace a jobbanned player.")
 		affected_mob.ghostize(0)
 		affected_mob.key = C.key
 	else
-		to_chat(new_mob, "<span class='userdanger'>Your mob has been claimed by death! Appeal your job ban if you want to avoid this in the future!</span>")
+		to_chat(new_mob, "<span class='danger'>My mob has been claimed by death! Appeal my job ban if you want to avoid this in the future!</span>")
 		new_mob.death()
 		if (!QDELETED(new_mob))
 			new_mob.ghostize(can_reenter_corpse = FALSE)
@@ -102,7 +102,7 @@
 	permeability_mod = 1
 	cure_chance = 1
 	disease_flags = CAN_CARRY|CAN_RESIST
-	desc = "Monkeys with this disease will bite humans, causing humans to mutate into a monkey."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	stage_prob = 4
 	visibility_flags = 0
@@ -114,9 +114,9 @@
 	stage1	= list()
 	stage2	= list()
 	stage3	= list()
-	stage4	= list("<span class='warning'>Your back hurts.</span>", "<span class='warning'>You breathe through your mouth.</span>",
-					"<span class='warning'>You have a craving for bananas.</span>", "<span class='warning'>Your mind feels clouded.</span>")
-	stage5	= list("<span class='warning'>You feel like monkeying around.</span>")
+	stage4	= list("<span class='warning'>My back hurts.</span>", "<span class='warning'>I breathe through my mouth.</span>",
+					"<span class='warning'>I have a craving for bananas.</span>", "<span class='warning'>My mind feels clouded.</span>")
+	stage5	= list("<span class='warning'>I feel like monkeying around.</span>")
 
 /datum/disease/transformation/jungle_fever/do_disease_transformation(mob/living/carbon/affected_mob)
 	if(affected_mob.mind && !is_monkey(affected_mob.mind))
@@ -131,10 +131,10 @@
 	switch(stage)
 		if(2)
 			if(prob(2))
-				to_chat(affected_mob, "<span class='notice'>Your [pick("back", "arm", "leg", "elbow", "head")] itches.</span>")
+				to_chat(affected_mob, "<span class='notice'>My [pick("back", "arm", "leg", "elbow", "head")] itches.</span>")
 		if(3)
 			if(prob(4))
-				to_chat(affected_mob, "<span class='danger'>You feel a stabbing pain in your head.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel a stabbing pain in my head.</span>")
 				affected_mob.confused += 10
 		if(4)
 			if(prob(3))
@@ -161,14 +161,14 @@
 	cures = list(/datum/reagent/copper)
 	cure_chance = 5
 	agent = "R2D2 Nanomachines"
-	desc = "This disease, actually acute nanomachine infection, converts the victim into a cyborg."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list()
 	stage2	= list("Your joints feel stiff.", "<span class='danger'>Beep...boop..</span>")
-	stage3	= list("<span class='danger'>Your joints feel very stiff.</span>", "Your skin feels loose.", "<span class='danger'>You can feel something move...inside.</span>")
-	stage4	= list("<span class='danger'>Your skin feels very loose.</span>", "<span class='danger'>You can feel... something...inside you.</span>")
-	stage5	= list("<span class='danger'>Your skin feels as if it's about to burst off!</span>")
+	stage3	= list("<span class='danger'>My joints feel very stiff.</span>", "Your skin feels loose.", "<span class='danger'>I can feel something move...inside.</span>")
+	stage4	= list("<span class='danger'>My skin feels very loose.</span>", "<span class='danger'>I can feel... something...inside you.</span>")
+	stage5	= list("<span class='danger'>My skin feels as if it's about to burst off!</span>")
 	new_form = /mob/living/silicon/robot
 	infectable_biotypes = MOB_ORGANIC|MOB_UNDEAD|MOB_ROBOTIC
 	bantype = "Cyborg"
@@ -180,7 +180,7 @@
 			if (prob(8))
 				affected_mob.say(pick("Beep, boop", "beep, beep!", "Boop...bop"), forced = "robotic transformation")
 			if (prob(4))
-				to_chat(affected_mob, "<span class='danger'>You feel a stabbing pain in your head.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel a stabbing pain in my head.</span>")
 				affected_mob.Unconscious(40)
 		if(4)
 			if (prob(20))
@@ -194,14 +194,14 @@
 	cures = list(/datum/reagent/medicine/spaceacillin, /datum/reagent/glycerol)
 	cure_chance = 5
 	agent = "Rip-LEY Alien Microbes"
-	desc = "This disease changes the victim into a xenomorph."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list()
 	stage2	= list("Your throat feels scratchy.", "<span class='danger'>Kill...</span>")
-	stage3	= list("<span class='danger'>Your throat feels very scratchy.</span>", "Your skin feels tight.", "<span class='danger'>You can feel something move...inside.</span>")
-	stage4	= list("<span class='danger'>Your skin feels very tight.</span>", "<span class='danger'>Your blood boils!</span>", "<span class='danger'>You can feel... something...inside you.</span>")
-	stage5	= list("<span class='danger'>Your skin feels as if it's about to burst off!</span>")
+	stage3	= list("<span class='danger'>My throat feels very scratchy.</span>", "Your skin feels tight.", "<span class='danger'>I can feel something move...inside.</span>")
+	stage4	= list("<span class='danger'>My skin feels very tight.</span>", "<span class='danger'>My blood boils!</span>", "<span class='danger'>I can feel... something...inside you.</span>")
+	stage5	= list("<span class='danger'>My skin feels as if it's about to burst off!</span>")
 	new_form = /mob/living/carbon/alien/humanoid/hunter
 	bantype = ROLE_ALIEN
 
@@ -210,7 +210,7 @@
 	switch(stage)
 		if(3)
 			if (prob(4))
-				to_chat(affected_mob, "<span class='danger'>You feel a stabbing pain in your head.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel a stabbing pain in my head.</span>")
 				affected_mob.Unconscious(40)
 		if(4)
 			if (prob(20))
@@ -223,14 +223,14 @@
 	cures = list(/datum/reagent/consumable/frostoil)
 	cure_chance = 80
 	agent = "Advanced Mutation Toxin"
-	desc = "This highly concentrated extract converts anything into more of itself."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list("You don't feel very well.")
 	stage2	= list("Your skin feels a little slimy.")
-	stage3	= list("<span class='danger'>Your appendages are melting away.</span>", "<span class='danger'>Your limbs begin to lose their shape.</span>")
-	stage4	= list("<span class='danger'>You are turning into a slime.</span>")
-	stage5	= list("<span class='danger'>You have become a slime.</span>")
+	stage3	= list("<span class='danger'>My appendages are melting away.</span>", "<span class='danger'>My limbs begin to lose their shape.</span>")
+	stage4	= list("<span class='danger'>I are turning into a slime.</span>")
+	stage5	= list("<span class='danger'>I have become a slime.</span>")
 	new_form = /mob/living/simple_animal/slime/random
 
 /datum/disease/transformation/slime/stage_act()
@@ -251,13 +251,13 @@
 	cure_text = "Death"
 	cures = list(/datum/reagent/medicine/adminordrazine)
 	agent = "Fell Doge Majicks"
-	desc = "This disease transforms the victim into a corgi."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list("BARK.")
 	stage2	= list("You feel the need to wear silly hats.")
 	stage3	= list("<span class='danger'>Must... eat... chocolate....</span>", "<span class='danger'>YAP</span>")
-	stage4	= list("<span class='danger'>Visions of washing machines assail your mind!</span>")
+	stage4	= list("<span class='danger'>Visions of washing machines assail my mind!</span>")
 	stage5	= list("<span class='danger'>AUUUUUU!!!</span>")
 	new_form = /mob/living/simple_animal/pet/dog/corgi
 
@@ -276,15 +276,15 @@
 	cure_text = /datum/reagent/consumable/nothing
 	cures = list(/datum/reagent/medicine/adminordrazine)
 	agent = "Gluttony's Blessing"
-	desc = "A 'gift' from somewhere terrible."
+	desc = ""
 	stage_prob = 20
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
 	stage1	= list("Your stomach rumbles.")
 	stage2	= list("Your skin feels saggy.")
-	stage3	= list("<span class='danger'>Your appendages are melting away.</span>", "<span class='danger'>Your limbs begin to lose their shape.</span>")
+	stage3	= list("<span class='danger'>My appendages are melting away.</span>", "<span class='danger'>My limbs begin to lose their shape.</span>")
 	stage4	= list("<span class='danger'>You're ravenous.</span>")
-	stage5	= list("<span class='danger'>You have become a morph.</span>")
+	stage5	= list("<span class='danger'>I have become a morph.</span>")
 	new_form = /mob/living/simple_animal/hostile/morph
 	infectable_biotypes = MOB_ORGANIC|MOB_MINERAL|MOB_UNDEAD //magic!
 	transformed_antag_datum = /datum/antagonist/morph
@@ -292,18 +292,18 @@
 /datum/disease/transformation/gondola
 	name = "Gondola Transformation"
 	cure_text = "Condensed Capsaicin, ingested or injected." //getting pepper sprayed doesn't help
-	cures = list(/datum/reagent/consumable/condensedcapsaicin) //beats the hippie crap right out of your system
+	cures = list(/datum/reagent/consumable/condensedcapsaicin) //beats the hippie crap right out of my system
 	cure_chance = 80
 	stage_prob = 5
 	agent = "Tranquility"
-	desc = "Consuming the flesh of a Gondola comes at a terrible price."
+	desc = ""
 	severity = DISEASE_SEVERITY_BIOHAZARD
 	visibility_flags = 0
-	stage1	= list("You seem a little lighter in your step.")
-	stage2	= list("You catch yourself smiling for no reason.")
-	stage3	= list("<span class='danger'>A cruel sense of calm overcomes you.</span>", "<span class='danger'>You can't feel your arms!</span>", "<span class='danger'>You let go of the urge to hurt clowns.</span>")
-	stage4	= list("<span class='danger'>You can't feel your arms. It does not bother you anymore.</span>", "<span class='danger'>You forgive the clown for hurting you.</span>")
-	stage5	= list("<span class='danger'>You have become a Gondola.</span>")
+	stage1	= list("You seem a little lighter in my step.")
+	stage2	= list("You catch myself smiling for no reason.")
+	stage3	= list("<span class='danger'>A cruel sense of calm overcomes you.</span>", "<span class='danger'>I can't feel my arms!</span>", "<span class='danger'>I let go of the urge to hurt clowns.</span>")
+	stage4	= list("<span class='danger'>I can't feel my arms. It does not bother you anymore.</span>", "<span class='danger'>I forgive the clown for hurting you.</span>")
+	stage5	= list("<span class='danger'>I have become a Gondola.</span>")
 	new_form = /mob/living/simple_animal/pet/gondola
 
 /datum/disease/transformation/gondola/stage_act()
@@ -325,6 +325,6 @@
 			if (prob(20))
 				affected_mob.reagents.add_reagent_list(list(/datum/reagent/pax = 5))
 			if (prob(2))
-				to_chat(affected_mob, "<span class='danger'>You let go of what you were holding.</span>")
+				to_chat(affected_mob, "<span class='danger'>I let go of what you were holding.</span>")
 				var/obj/item/I = affected_mob.get_active_held_item()
 				affected_mob.dropItemToGround(I)

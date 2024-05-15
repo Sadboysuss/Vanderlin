@@ -1,12 +1,13 @@
 /mob/living/carbon/death(gibbed)
 	if(stat == DEAD)
 		return
+	stop_looking()
 
 	silent = FALSE
 	losebreath = 0
 
-	if(!gibbed)
-		emote("deathgasp")
+//	if(!gibbed)
+//		emote("deathgasp")
 
 	. = ..()
 
@@ -16,6 +17,16 @@
 
 	if(SSticker.mode)
 		SSticker.mode.check_win() //Calls the rounds wincheck, mainly for wizard, malf, and changeling now
+
+/mob/living/carbon/dust(just_ash, drop_items, force)
+	if(drop_items)
+		var/turf/T = get_turf(src)
+		if(T)
+			for(var/X in bodyparts)
+				var/obj/item/bodypart/BP = X
+				for(var/obj/item/I in BP.embedded_objects)
+					I.forceMove(T)
+	return ..()
 
 /mob/living/carbon/proc/inflate_gib() // Plays an animation that makes mobs appear to inflate before finally gibbing
 	addtimer(CALLBACK(src, .proc/gib, null, null, TRUE, TRUE), 25)

@@ -1,6 +1,6 @@
 /obj/mecha
 	name = "mecha"
-	desc = "Exosuit"
+	desc = ""
 	icon = 'icons/mecha/mecha.dmi'
 	density = TRUE //Dense. To raise the heat.
 	opacity = 1 ///opaque. Menacing.
@@ -64,8 +64,8 @@
 	var/max_equip = 3
 
 	var/step_silent = FALSE //Used for disabling mech step sounds while using thrusters or pushing off lockers
-	var/stepsound = 'sound/mecha/mechstep.ogg'
-	var/turnsound = 'sound/mecha/mechturn.ogg'
+	var/stepsound = 'sound/blank.ogg'
+	var/turnsound = 'sound/blank.ogg'
 
 	var/melee_cooldown = 10
 	var/melee_can_hit = 1
@@ -199,7 +199,7 @@
 /obj/mecha/proc/restore_equipment()
 	equipment_disabled = 0
 	if(occupant)
-		SEND_SOUND(occupant, sound('sound/items/timer.ogg', volume=50))
+		SEND_SOUND(occupant, sound('sound/blank.ogg', volume=50))
 		to_chat(occupant, "<span=notice>Equipment control unit has been rebooted successfully.</span>")
 		occupant.update_mouse_pointer()
 
@@ -232,7 +232,7 @@
 	return internal_tank
 
 ///Adds a cell, for use in Map-spawned mechs, Nuke Ops mechs, and admin-spawned mechs. Mechs built by hand will replace this.
-/obj/mecha/proc/add_cell(var/obj/item/stock_parts/cell/C=null)
+/obj/mecha/proc/add_cell(obj/item/stock_parts/cell/C=null)
 	QDEL_NULL(cell)
 	if(C)
 		C.forceMove(src)
@@ -241,7 +241,7 @@
 	cell = new /obj/item/stock_parts/cell/high/plus(src)
 
 ///Adds a scanning module, for use in Map-spawned mechs, Nuke Ops mechs, and admin-spawned mechs. Mechs built by hand will replace this.
-/obj/mecha/proc/add_scanmod(var/obj/item/stock_parts/scanning_module/sm=null)
+/obj/mecha/proc/add_scanmod(obj/item/stock_parts/scanning_module/sm=null)
 	QDEL_NULL(scanmod)
 	if(sm)
 		sm.forceMove(src)
@@ -250,7 +250,7 @@
 	scanmod = new /obj/item/stock_parts/scanning_module(src)
 
 ///Adds a capacitor, for use in Map-spawned mechs, Nuke Ops mechs, and admin-spawned mechs. Mechs built by hand will replace this.
-/obj/mecha/proc/add_capacitor(var/obj/item/stock_parts/capacitor/cap=null)
+/obj/mecha/proc/add_capacitor(obj/item/stock_parts/capacitor/cap=null)
 	QDEL_NULL(capacitor)
 	if(cap)
 		cap.forceMove(src)
@@ -499,13 +499,13 @@
 	if(!Adjacent(target))
 		if(selected && selected.is_ranged())
 			if(HAS_TRAIT(L, TRAIT_PACIFISM) && selected.harmful)
-				to_chat(user, "<span class='warning'>You don't want to harm other living beings!</span>")
+				to_chat(user, "<span class='warning'>I don't want to harm other living beings!</span>")
 				return
 			if(selected.action(target,params))
 				selected.start_cooldown()
 	else if(selected && selected.is_melee())
 		if(isliving(target) && selected.harmful && HAS_TRAIT(L, TRAIT_PACIFISM))
-			to_chat(user, "<span class='warning'>You don't want to harm other living beings!</span>")
+			to_chat(user, "<span class='warning'>I don't want to harm other living beings!</span>")
 			return
 		if(selected.action(target,params))
 			selected.start_cooldown()
@@ -538,7 +538,7 @@
 		occupant_message("<span class='warning'>Air port connection has been severed!</span>")
 		log_message("Lost connection to gas port.", LOG_MECHA)
 
-/obj/mecha/Process_Spacemove(var/movement_dir = 0)
+/obj/mecha/Process_Spacemove(movement_dir = 0)
 	. = ..()
 	if(.)
 		return TRUE
@@ -549,7 +549,7 @@
 			if(backup.newtonian_move(turn(movement_dir, 180)))
 				step_silent = TRUE
 				if(occupant)
-					to_chat(occupant, "<span class='info'>You push off [backup] to propel yourself.</span>")
+					to_chat(occupant, "<span class='info'>I push off [backup] to propel myself.</span>")
 		return TRUE
 
 	if(can_move <= world.time && active_thrusters && movement_dir && active_thrusters.thrust(movement_dir))
@@ -565,7 +565,7 @@
 		return
 	if(user != occupant) //While not "realistic", this piece is player friendly.
 		user.forceMove(get_turf(src))
-		to_chat(user, "<span class='notice'>You climb out from [src].</span>")
+		to_chat(user, "<span class='notice'>I climb out from [src].</span>")
 		return 0
 	if(internal_tank?.connected_port)
 		if(world.time - last_message > 20)
@@ -639,7 +639,7 @@
 	step_silent = FALSE
 	return result
 
-/obj/mecha/Bump(var/atom/obstacle)
+/obj/mecha/Bump(atom/obstacle)
 	if(phasing && get_charge() >= phasing_energy_drain && !throwing)
 		if(!can_move)
 			return
@@ -696,7 +696,7 @@
 /obj/mecha/proc/setInternalDamage(int_dam_flag)
 	internal_damage |= int_dam_flag
 	log_message("Internal damage of type [int_dam_flag].", LOG_MECHA)
-	SEND_SOUND(occupant, sound('sound/machines/warning-buzzer.ogg',wait=0))
+	SEND_SOUND(occupant, sound('sound/blank.ogg',wait=0))
 	diag_hud_set_mechstat()
 	return
 
@@ -727,7 +727,7 @@
 			to_chat(user, "[B.get_mecha_info()]")
 			break
 		//Nothing like a big, red link to make the player feel powerful!
-		to_chat(user, "<a href='?src=[REF(user)];ai_take_control=[REF(src)]'><span class='userdanger'>ASSUME DIRECT CONTROL?</span></a><br>")
+		to_chat(user, "<a href='?src=[REF(user)];ai_take_control=[REF(src)]'><span class='danger'>ASSUME DIRECT CONTROL?</span></a><br>")
 	else
 		examine(user)
 		if(occupant)
@@ -739,7 +739,7 @@
 			to_chat(user, "<span class='notice'>[icon2html(src, user)] Status of [name]:</span>\n[A.get_mecha_info()]")
 			break
 		if(!can_control_mech)
-			to_chat(user, "<span class='warning'>You cannot control exosuits without AI control beacons installed.</span>")
+			to_chat(user, "<span class='warning'>I cannot control exosuits without AI control beacons installed.</span>")
 			return
 		to_chat(user, "<a href='?src=[REF(user)];ai_take_control=[REF(src)]'><span class='boldnotice'>Take control of exosuit?</span></a><br>")
 
@@ -769,7 +769,7 @@
 			AI.controlled_mech = null
 			AI.remote_control = null
 			icon_state = initial(icon_state)+"-open"
-			to_chat(AI, "<span class='notice'>You have been downloaded to a mobile storage device. Wireless connection offline.</span>")
+			to_chat(AI, "<span class='notice'>I have been downloaded to a mobile storage device. Wireless connection offline.</span>")
 			to_chat(user, "<span class='boldnotice'>Transfer successful</span>: [AI.name] ([rand(1000,9999)].exe) removed from [name] and stored within local memory.")
 
 		if(AI_MECH_HACK) //Called by AIs on the mech
@@ -777,7 +777,7 @@
 			if(AI.can_dominate_mechs)
 				if(occupant) //Oh, I am sorry, were you using that?
 					to_chat(AI, "<span class='warning'>Pilot detected! Forced ejection initiated!</span>")
-					to_chat(occupant, "<span class='danger'>You have been forcibly ejected!</span>")
+					to_chat(occupant, "<span class='danger'>I have been forcibly ejected!</span>")
 					go_out(1) //IT IS MINE, NOW. SUCK IT, RD!
 			ai_enter_mech(AI, interaction)
 
@@ -808,16 +808,16 @@
 	silicon_pilot = TRUE
 	icon_state = initial(icon_state)
 	update_icon()
-	playsound(src, 'sound/machines/windowdoor.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(!internal_damage)
-		SEND_SOUND(occupant, sound('sound/mecha/nominal.ogg',volume=50))
+		SEND_SOUND(occupant, sound('sound/blank.ogg',volume=50))
 	AI.cancel_camera()
 	AI.controlled_mech = src
 	AI.remote_control = src
 	AI.mobility_flags = ALL //Much easier than adding AI checks! Be sure to set this back to 0 if you decide to allow an AI to leave a mech somehow.
 	AI.can_shunt = 0 //ONE AI ENTERS. NO AI LEAVES.
 	to_chat(AI, AI.can_dominate_mechs ? "<span class='announce'>Takeover of [name] complete! You are now loaded onto the onboard computer. Do not attempt to leave the station sector!</span>" :\
-		"<span class='notice'>You have been uploaded to a mech's onboard computer.</span>")
+		"<span class='notice'>I have been uploaded to a mech's onboard computer.</span>")
 	to_chat(AI, "<span class='reallybig boldnotice'>Use Middle-Mouse to activate mech functions and equipment. Click normally for AI interactions.</span>")
 	if(interaction == AI_TRANS_FROM_CARD)
 		GrantActions(AI, FALSE) //No eject/return to core action for AI uploaded by card
@@ -900,11 +900,11 @@
 		log_message("Permission denied (No keycode).", LOG_MECHA)
 		return
 	if(user.buckled)
-		to_chat(user, "<span class='warning'>You are currently buckled and cannot move.</span>")
+		to_chat(user, "<span class='warning'>I are currently buckled and cannot move.</span>")
 		log_message("Permission denied (Buckled).", LOG_MECHA)
 		return
 	if(user.has_buckled_mobs()) //mob attached to us
-		to_chat(user, "<span class='warning'>You can't enter the exosuit with other creatures attached to you!</span>")
+		to_chat(user, "<span class='warning'>I can't enter the exosuit with other creatures attached to you!</span>")
 		log_message("Permission denied (Attached mobs).", LOG_MECHA)
 		return
 
@@ -912,17 +912,17 @@
 
 	if(do_after(user, enter_delay, target = src))
 		if(obj_integrity <= 0)
-			to_chat(user, "<span class='warning'>You cannot get in the [name], it has been destroyed!</span>")
+			to_chat(user, "<span class='warning'>I cannot get in the [name], it has been destroyed!</span>")
 		else if(occupant)
 			to_chat(user, "<span class='danger'>[occupant] was faster! Try better next time, loser.</span>")
 		else if(user.buckled)
-			to_chat(user, "<span class='warning'>You can't enter the exosuit while buckled.</span>")
+			to_chat(user, "<span class='warning'>I can't enter the exosuit while buckled.</span>")
 		else if(user.has_buckled_mobs())
-			to_chat(user, "<span class='warning'>You can't enter the exosuit with other creatures attached to you!</span>")
+			to_chat(user, "<span class='warning'>I can't enter the exosuit with other creatures attached to you!</span>")
 		else
 			moved_inside(user)
 	else
-		to_chat(user, "<span class='warning'>You stop entering the exosuit!</span>")
+		to_chat(user, "<span class='warning'>I stop entering the exosuit!</span>")
 	return
 
 /obj/mecha/proc/moved_inside(mob/living/carbon/human/H)
@@ -936,9 +936,9 @@
 		log_message("[H] moved in as pilot.", LOG_MECHA)
 		icon_state = initial(icon_state)
 		setDir(dir_in)
-		playsound(src, 'sound/machines/windowdoor.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(!internal_damage)
-			SEND_SOUND(occupant, sound('sound/mecha/nominal.ogg',volume=50))
+			SEND_SOUND(occupant, sound('sound/blank.ogg',volume=50))
 		return 1
 	else
 		return 0
@@ -965,7 +965,7 @@
 		else
 			to_chat(user, "<span class='warning'>Occupant detected!</span>")
 	else
-		to_chat(user, "<span class='notice'>You stop inserting the MMI.</span>")
+		to_chat(user, "<span class='notice'>I stop inserting the MMI.</span>")
 	return FALSE
 
 /obj/mecha/proc/mmi_moved_inside(obj/item/mmi/mmi_as_oc, mob/user)
@@ -994,19 +994,19 @@
 	setDir(dir_in)
 	log_message("[mmi_as_oc] moved in as pilot.", LOG_MECHA)
 	if(!internal_damage)
-		SEND_SOUND(occupant, sound('sound/mecha/nominal.ogg',volume=50))
+		SEND_SOUND(occupant, sound('sound/blank.ogg',volume=50))
 	GrantActions(brainmob)
 	log_game("[key_name(user)] has put the MMI/posibrain of [key_name(brainmob)] into [src] at [AREACOORD(src)]")
 	return TRUE
 
 /obj/mecha/container_resist(mob/living/user)
 	is_currently_ejecting = TRUE
-	to_chat(occupant, "<span class='notice'>You begin the ejection procedure. Equipment is disabled during this process. Hold still to finish ejecting.</span>")
+	to_chat(occupant, "<span class='notice'>I begin the ejection procedure. Equipment is disabled during this process. Hold still to finish ejecting.</span>")
 	if(do_after(occupant, has_gravity() ? exit_delay : 0 , target = src))
-		to_chat(occupant, "<span class='notice'>You exit the mech.</span>")
+		to_chat(occupant, "<span class='notice'>I exit the mech.</span>")
 		go_out()
 	else
-		to_chat(occupant, "<span class='notice'>You stop exiting the mech. Weapons are enabled again.</span>")
+		to_chat(occupant, "<span class='notice'>I stop exiting the mech. Weapons are enabled again.</span>")
 	is_currently_ejecting = FALSE
 
 /obj/mecha/Exited(atom/movable/M, atom/newloc)
@@ -1049,7 +1049,7 @@
 			return
 		else
 			if(!AI.linked_core)
-				to_chat(AI, "<span class='userdanger'>Inactive core destroyed. Unable to return.</span>")
+				to_chat(AI, "<span class='danger'>Inactive core destroyed. Unable to return.</span>")
 				AI.linked_core = null
 				return
 			to_chat(AI, "<span class='notice'>Returning to core...</span>")
@@ -1148,7 +1148,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 ////// Ammo stuff /////
 ///////////////////////
 
-/obj/mecha/proc/ammo_resupply(var/obj/item/mecha_ammo/A, mob/user,var/fail_chat_override = FALSE)
+/obj/mecha/proc/ammo_resupply(var/obj/item/mecha_ammo/A, mob/user,fail_chat_override = FALSE)
 	if(!A.rounds)
 		if(!fail_chat_override)
 			to_chat(user, "<span class='warning'>This box of ammo is empty!</span>")
@@ -1172,7 +1172,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 					else
 						gun.projectiles_cache = gun.projectiles_cache + ammo_needed
 					playsound(get_turf(user),A.load_audio,50,TRUE)
-					to_chat(user, "<span class='notice'>You add [ammo_needed] [A.round_term][ammo_needed > 1?"s":""] to the [gun.name]</span>")
+					to_chat(user, "<span class='notice'>I add [ammo_needed] [A.round_term][ammo_needed > 1?"s":""] to the [gun.name]</span>")
 					A.rounds = A.rounds - ammo_needed
 					A.update_name()
 					return TRUE
@@ -1183,13 +1183,13 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 					else
 						gun.projectiles_cache = gun.projectiles_cache + A.rounds
 					playsound(get_turf(user),A.load_audio,50,TRUE)
-					to_chat(user, "<span class='notice'>You add [A.rounds] [A.round_term][A.rounds > 1?"s":""] to the [gun.name]</span>")
+					to_chat(user, "<span class='notice'>I add [A.rounds] [A.round_term][A.rounds > 1?"s":""] to the [gun.name]</span>")
 					A.rounds = 0
 					A.update_name()
 					return TRUE
 	if(!fail_chat_override)
 		if(found_gun)
-			to_chat(user, "<span class='notice'>You can't fit any more ammo of this type!</span>")
+			to_chat(user, "<span class='notice'>I can't fit any more ammo of this type!</span>")
 		else
 			to_chat(user, "<span class='notice'>None of the equipment on this exosuit can use this ammo!</span>")
 	return FALSE

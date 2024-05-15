@@ -20,7 +20,7 @@
 	sub_role = "Agent"
 	outfit = /datum/outfit/abductor/agent
 	landmark_type = /obj/effect/landmark/abductor/agent
-	greet_text = "Use your stealth technology and equipment to incapacitate humans for your scientist to retrieve."
+	greet_text = "Use my stealth technology and equipment to incapacitate humans for my scientist to retrieve."
 	show_in_antagpanel = TRUE
 
 /datum/antagonist/abductor/scientist
@@ -28,7 +28,7 @@
 	sub_role = "Scientist"
 	outfit = /datum/outfit/abductor/scientist
 	landmark_type = /obj/effect/landmark/abductor/scientist
-	greet_text = "Use your experimental console and surgical equipment to monitor your agent and experiment upon abducted humans."
+	greet_text = "Use my experimental console and surgical equipment to monitor my agent and experiment upon abducted humans."
 	show_in_antagpanel = TRUE
 
 /datum/antagonist/abductor/create_team(datum/team/abductor_team/new_team)
@@ -51,14 +51,14 @@
 
 /datum/antagonist/abductor/on_removal()
 	if(owner.current)
-		to_chat(owner.current,"<span class='userdanger'>You are no longer the [owner.special_role]!</span>")
+		to_chat(owner.current,"<span class='danger'>I are no longer the [owner.special_role]!</span>")
 	owner.special_role = null
 	REMOVE_TRAIT(owner, TRAIT_ABDUCTOR_TRAINING, ABDUCTOR_ANTAGONIST)
 	return ..()
 
 /datum/antagonist/abductor/greet()
-	to_chat(owner.current, "<span class='notice'>You are the [owner.special_role]!</span>")
-	to_chat(owner.current, "<span class='notice'>With the help of your teammate, kidnap and experiment on station crew members!</span>")
+	to_chat(owner.current, "<span class='notice'>I are the [owner.special_role]!</span>")
+	to_chat(owner.current, "<span class='notice'>With the help of my teammate, kidnap and experiment on station crew members!</span>")
 	to_chat(owner.current, "<span class='notice'>[greet_text]</span>")
 	owner.announce_objectives()
 
@@ -172,8 +172,8 @@
 	. = ..()
 
 /datum/antagonist/abductee/greet()
-	to_chat(owner, "<span class='warning'><b>Your mind snaps!</b></span>")
-	to_chat(owner, "<big><span class='warning'><b>You can't remember how you got here...</b></span></big>")
+	to_chat(owner, "<span class='warning'><b>My mind snaps!</b></span>")
+	to_chat(owner, "<big><span class='warning'><b>I can't remember how you got here...</b></span></big>")
 	owner.announce_objectives()
 
 /datum/antagonist/abductee/proc/give_objective()

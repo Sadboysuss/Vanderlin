@@ -7,22 +7,87 @@
 	message = "cries."
 	emote_type = EMOTE_AUDIBLE
 
-/datum/emote/living/carbon/human/dap
-	key = "dap"
-	key_third_person = "daps"
-	message = "sadly can't find anybody to give daps to, and daps themself. Shameful."
-	message_param = "give daps to %t."
-	restraint_check = TRUE
+/mob/living/carbon/human/verb/emote_cry()
+	set name = "Cry"
+	set category = "Noises"
+
+	emote("cry", intentional = TRUE)
+
+/datum/emote/living/carbon/human/cry/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(. && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(C.silent || !C.canspeak())
+			message = "makes a noise. Tears stream down their face."
+
+
+/datum/emote/living/carbon/human/sexmoanlight
+	key = "sexmoanlight"
+	emote_type = EMOTE_AUDIBLE
+	nomsg = TRUE
+	only_forced_audio = TRUE
+
+/datum/emote/living/carbon/human/sexmoanlight/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(. && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(C.silent || !C.canspeak())
+			message = "makes a noise."
+
+/datum/emote/living/carbon/human/sexmoanhvy
+	key = "sexmoanhvy"
+	emote_type = EMOTE_AUDIBLE
+	nomsg = TRUE
+	only_forced_audio = TRUE
+
+/datum/emote/living/carbon/human/sexmoanhvy/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(. && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(C.silent || !C.canspeak())
+			message = "makes a noise."
 
 /datum/emote/living/carbon/human/eyebrow
 	key = "eyebrow"
 	message = "raises an eyebrow."
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_eyebrow()
+	set name = "Raise Eyebrow"
+	set category = "Emotes"
+
+	emote("eyebrow", intentional = TRUE)
+
+/datum/emote/living/carbon/human/psst
+	key = "psst"
+	key_third_person = "pssts"
+	emote_type = EMOTE_AUDIBLE
+	nomsg = TRUE
+
+/mob/living/carbon/human/verb/emote_psst()
+	set name = "Psst"
+	set category = "Noises"
+
+	emote("psst", intentional = TRUE)
 
 /datum/emote/living/carbon/human/grumble
 	key = "grumble"
 	key_third_person = "grumbles"
-	message = "grumbles!"
+	message = "grumbles."
 	emote_type = EMOTE_AUDIBLE
+
+/mob/living/carbon/human/verb/emote_grumble()
+	set name = "Grumble"
+	set category = "Noises"
+
+	emote("grumble", intentional = TRUE)
+
+/datum/emote/living/carbon/human/grumble/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(. && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(C.silent || !C.canspeak())
+			message = "makes a muffled grumbling noise."
 
 /datum/emote/living/carbon/human/handshake
 	key = "handshake"
@@ -31,44 +96,12 @@
 	restraint_check = TRUE
 	emote_type = EMOTE_AUDIBLE
 
-/datum/emote/living/carbon/human/hug
-	key = "hug"
-	key_third_person = "hugs"
-	message = "hugs themself."
-	message_param = "hugs %t."
-	restraint_check = TRUE
-	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/carbon/human/mumble
 	key = "mumble"
 	key_third_person = "mumbles"
-	message = "mumbles!"
+	message = "mumbles."
 	emote_type = EMOTE_AUDIBLE
-
-/datum/emote/living/carbon/human/scream
-	key = "scream"
-	key_third_person = "screams"
-	message = "screams!"
-	emote_type = EMOTE_AUDIBLE
-	only_forced_audio = TRUE
-	vary = TRUE
-
-/datum/emote/living/carbon/human/scream/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/H = user
-	if(H.mind?.miming)
-		return
-	if(ishumanbasic(H) || isfelinid(H))
-		if(user.gender == FEMALE)
-			return pick('sound/voice/human/femalescream_1.ogg', 'sound/voice/human/femalescream_2.ogg', 'sound/voice/human/femalescream_3.ogg', 'sound/voice/human/femalescream_4.ogg', 'sound/voice/human/femalescream_5.ogg')
-		else
-			if(prob(1))
-				return 'sound/voice/human/wilhelm_scream.ogg'
-			return pick('sound/voice/human/malescream_1.ogg', 'sound/voice/human/malescream_2.ogg', 'sound/voice/human/malescream_3.ogg', 'sound/voice/human/malescream_4.ogg', 'sound/voice/human/malescream_5.ogg', 'sound/voice/human/malescream_6.ogg')
-	else if(ismoth(H))
-		return 'sound/voice/moth/scream_moth.ogg'
-
 
 /datum/emote/living/carbon/human/pale
 	key = "pale"

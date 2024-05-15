@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/nanotrasen
 	name = "Nanotrasen Private Security Officer"
-	desc = "An officer part of Nanotrasen's private security force, he seems rather unpleased to meet you."
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "nanotrasen"
 	icon_living = "nanotrasen"
@@ -19,7 +19,7 @@
 	melee_damage_upper = 15
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	loot = list(/obj/effect/mob_spawn/human/corpse/nanotrasensoldier)
 	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
@@ -45,7 +45,7 @@
 	retreat_distance = 3
 	minimum_distance = 5
 	casingtype = /obj/item/ammo_casing/c45
-	projectilesound = 'sound/weapons/gun/pistol/shot_alt.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/pistol/m1911,
 				/obj/effect/mob_spawn/human/corpse/nanotrasensoldier)
 
@@ -55,6 +55,6 @@
 	icon_living = "nanotrasenrangedsmg"
 	rapid = 3
 	casingtype = /obj/item/ammo_casing/c46x30mm
-	projectilesound = 'sound/weapons/gun/smg/shot.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/wt550,
 				/obj/effect/mob_spawn/human/corpse/nanotrasensoldier)

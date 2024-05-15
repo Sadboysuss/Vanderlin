@@ -1,7 +1,7 @@
 #define WELDER_FUEL_BURN_INTERVAL 13
 /obj/item/weldingtool
 	name = "welding tool"
-	desc = "A standard edition welder provided by Nanotrasen."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
 	item_state = "welder"
@@ -12,11 +12,11 @@
 	force = 3
 	throwforce = 5
 	hitsound = "swing_hit"
-	usesound = list('sound/items/welder.ogg', 'sound/items/welder2.ogg')
-	drop_sound = 'sound/items/handling/weldingtool_drop.ogg'
-	pickup_sound =  'sound/items/handling/weldingtool_pickup.ogg'
-	var/acti_sound = 'sound/items/welderactivate.ogg'
-	var/deac_sound = 'sound/items/welderdeactivate.ogg'
+	usesound = list('sound/blank.ogg')
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
+	var/acti_sound = 'sound/blank.ogg'
+	var/deac_sound = 'sound/blank.ogg'
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
@@ -109,11 +109,11 @@
 
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
 
-	if(affecting && affecting.status == BODYPART_ROBOTIC && user.a_intent != INTENT_HARM)
+	if(affecting && affecting.status == BODYPART_ROBOTIC && user.used_intent.type != INTENT_HARM)
 		if(src.use_tool(H, user, 0, volume=50, amount=1))
 			if(user == H)
 				user.visible_message("<span class='notice'>[user] starts to fix some of the dents on [H]'s [affecting.name].</span>",
-					"<span class='notice'>You start fixing some of the dents on [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
+					"<span class='notice'>I start fixing some of the dents on [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
 				if(!do_mob(user, H, 50))
 					return
 			item_heal_robotic(H, user, 15, 0)
@@ -124,10 +124,10 @@
 	. = ..()
 	if(!proximity)
 		return
-	
+
 	if(isOn())
 		handle_fuel_and_temps(1, user)
-		
+
 		if(!QDELETED(O) && isliving(O)) // can't ignite something that doesn't exist
 			var/mob/living/L = O
 			if(L.IgniteMob())
@@ -136,17 +136,17 @@
 
 	if(!status && O.is_refillable())
 		reagents.trans_to(O, reagents.total_volume, transfered_by = user)
-		to_chat(user, "<span class='notice'>You empty [src]'s fuel tank into [O].</span>")
+		to_chat(user, "<span class='notice'>I empty [src]'s fuel tank into [O].</span>")
 		update_icon()
 
 /obj/item/weldingtool/attack_qdeleted(atom/O, mob/user, proximity)
 	. = ..()
 	if(!proximity)
 		return
-	
+
 	if(isOn())
 		handle_fuel_and_temps(1, user)
-		
+
 		if(!QDELETED(O) && isliving(O)) // can't ignite something that doesn't exist
 			var/mob/living/L = O
 			if(L.IgniteMob())
@@ -211,18 +211,18 @@
 	welding = !welding
 	if(welding)
 		if(get_fuel() >= 1)
-			to_chat(user, "<span class='notice'>You switch [src] on.</span>")
+			to_chat(user, "<span class='notice'>I switch [src] on.</span>")
 			playsound(loc, acti_sound, 50, TRUE)
 			force = 15
 			damtype = "fire"
-			hitsound = 'sound/items/welder.ogg'
+			hitsound = 'sound/blank.ogg'
 			update_icon()
 			START_PROCESSING(SSobj, src)
 		else
-			to_chat(user, "<span class='warning'>You need more fuel!</span>")
+			to_chat(user, "<span class='warning'>I need more fuel!</span>")
 			switched_off(user)
 	else
-		to_chat(user, "<span class='notice'>You switch [src] off.</span>")
+		to_chat(user, "<span class='notice'>I switch [src] off.</span>")
 		playsound(loc, deac_sound, 50, TRUE)
 		switched_off(user)
 
@@ -273,7 +273,7 @@
 	if(get_fuel() >= amount)
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>You need more welding fuel to complete this task!</span>")
+		to_chat(user, "<span class='warning'>I need more welding fuel to complete this task!</span>")
 		return FALSE
 
 
@@ -283,7 +283,7 @@
 		return
 	status = !status
 	if(status)
-		to_chat(user, "<span class='notice'>You resecure [src] and close the fuel tank.</span>")
+		to_chat(user, "<span class='notice'>I resecure [src] and close the fuel tank.</span>")
 		DISABLE_BITFIELD(reagents.flags, OPENCONTAINER)
 	else
 		to_chat(user, "<span class='notice'>[src] can now be attached, modified, and refuelled.</span>")
@@ -299,10 +299,10 @@
 				user.transferItemToLoc(src, F, TRUE)
 			F.weldtool = src
 			add_fingerprint(user)
-			to_chat(user, "<span class='notice'>You add a rod to a welder, starting to build a flamethrower.</span>")
+			to_chat(user, "<span class='notice'>I add a rod to a welder, starting to build a flamethrower.</span>")
 			user.put_in_hands(F)
 		else
-			to_chat(user, "<span class='warning'>You need one rod to start building a flamethrower!</span>")
+			to_chat(user, "<span class='warning'>I need one rod to start building a flamethrower!</span>")
 
 /obj/item/weldingtool/ignition_effect(atom/A, mob/user)
 	if(use_tool(A, user, 0, amount=1))
@@ -312,7 +312,7 @@
 
 /obj/item/weldingtool/largetank
 	name = "industrial welding tool"
-	desc = "A slightly larger welder with a larger tank."
+	desc = ""
 	icon_state = "indwelder"
 	max_fuel = 40
 	custom_materials = list(/datum/material/glass=60)
@@ -322,7 +322,7 @@
 
 /obj/item/weldingtool/largetank/cyborg
 	name = "integrated welding tool"
-	desc = "An advanced welder designed to be used in robotic systems. Custom framework doubles the speed of welding."
+	desc = ""
 	icon = 'icons/obj/items_cyborg.dmi'
 	icon_state = "indwelder_cyborg"
 	toolspeed = 0.5
@@ -335,7 +335,7 @@
 
 /obj/item/weldingtool/mini
 	name = "emergency welding tool"
-	desc = "A miniature welder used during emergencies."
+	desc = ""
 	icon_state = "miniwelder"
 	max_fuel = 10
 	w_class = WEIGHT_CLASS_TINY
@@ -347,7 +347,7 @@
 
 /obj/item/weldingtool/abductor
 	name = "alien welding tool"
-	desc = "An alien welding tool. Whatever fuel it uses, it never runs out."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "welder"
 	toolspeed = 0.1
@@ -361,7 +361,7 @@
 
 /obj/item/weldingtool/hugetank
 	name = "upgraded industrial welding tool"
-	desc = "An upgraded welder based of the industrial welder."
+	desc = ""
 	icon_state = "upindwelder"
 	item_state = "upindwelder"
 	max_fuel = 80
@@ -369,7 +369,7 @@
 
 /obj/item/weldingtool/experimental
 	name = "experimental welding tool"
-	desc = "An experimental welder capable of self-fuel generation and less harmful to the eyes."
+	desc = ""
 	icon_state = "exwelder"
 	item_state = "exwelder"
 	max_fuel = 40

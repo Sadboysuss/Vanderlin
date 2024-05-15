@@ -1,6 +1,6 @@
 /client/proc/one_click_antag()
 	set name = "Create Antagonist"
-	set desc = "Auto-create an antagonist of your choice"
+	set desc = ""
 	set category = "Admin"
 
 	if(holder)
@@ -303,7 +303,7 @@
 	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_ADMIN)
 	return preview_icon
 
-/datum/admins/proc/makeEmergencyresponseteam(var/datum/ert/ertemplate = null)
+/datum/admins/proc/makeEmergencyresponseteam(datum/ert/ertemplate = null)
 	if (ertemplate)
 		ertemplate = new ertemplate
 	else

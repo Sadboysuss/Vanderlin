@@ -57,11 +57,11 @@
 
 /datum/round_event/portal_storm/announce(fake)
 	set waitfor = 0
-	sound_to_playing_players('sound/magic/lightning_chargeup.ogg')
+	sound_to_playing_players('sound/blank.ogg')
 	sleep(80)
 	priority_announce("Massive bluespace anomaly detected en route to [station_name()]. Brace for impact.")
 	sleep(20)
-	sound_to_playing_players('sound/magic/lightningbolt.ogg')
+	sound_to_playing_players('sound/blank.ogg')
 
 /datum/round_event/portal_storm/tick()
 	spawn_effects(get_random_station_turf())
@@ -97,7 +97,7 @@
 		return
 	T = get_step(T, SOUTHWEST) //align center of image with turf
 	flick_overlay_static(storm, T, 15)
-	playsound(T, 'sound/magic/lightningbolt.ogg', rand(80, 100), TRUE)
+	playsound(T, 'sound/blank.ogg', rand(80, 100), TRUE)
 
 /datum/round_event/portal_storm/proc/spawn_hostile()
 	if(!hostile_types || !hostile_types.len)

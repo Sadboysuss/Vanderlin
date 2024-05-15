@@ -6,8 +6,8 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	)))
 
 /mob/living/silicon/robot/attackby(obj/item/I, mob/living/user)
-	if(I.slot_flags & ITEM_SLOT_HEAD && hat_offset != INFINITY && user.a_intent == INTENT_HELP && !is_type_in_typecache(I, GLOB.blacklisted_borg_hats))
-		to_chat(user, "<span class='notice'>You begin to place [I] on [src]'s head...</span>")
+	if(I.slot_flags & ITEM_SLOT_HEAD && hat_offset != INFINITY && user.used_intent.type == INTENT_HELP && !is_type_in_typecache(I, GLOB.blacklisted_borg_hats))
+		to_chat(user, "<span class='notice'>I begin to place [I] on [src]'s head...</span>")
 		to_chat(src, "<span class='notice'>[user] is placing [I] on your head...</span>")
 		if(do_after(user, 30, target = src))
 			if (user.temporarilyRemoveItemFromInventory(I, TRUE))
@@ -18,22 +18,22 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	return ..()
 
 /mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/humanoid/M)
-	if (M.a_intent == INTENT_DISARM)
+	if (M.used_intent.type == INTENT_DISARM)
 		if(mobility_flags & MOBILITY_STAND)
 			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			var/obj/item/I = get_active_held_item()
 			if(I)
 				uneq_active()
 				visible_message("<span class='danger'>[M] disarmed [src]!</span>", \
-					"<span class='userdanger'>[M] has disabled [src]'s active module!</span>", null, COMBAT_MESSAGE_RANGE)
+					"<span class='danger'>[M] has disabled [src]'s active module!</span>", null, COMBAT_MESSAGE_RANGE)
 				log_combat(M, src, "disarmed", "[I ? " removing \the [I]" : ""]")
 			else
 				Stun(40)
 				step(src,get_dir(M,src))
 				log_combat(M, src, "pushed")
 				visible_message("<span class='danger'>[M] has forced back [src]!</span>", \
-					"<span class='userdanger'>[M] has forced back [src]!</span>", null, COMBAT_MESSAGE_RANGE)
-			playsound(loc, 'sound/weapons/pierce.ogg', 50, TRUE, -1)
+					"<span class='danger'>[M] has forced back [src]!</span>", null, COMBAT_MESSAGE_RANGE)
+			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	else
 		..()
 	return
@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 			cell.update_icon()
 			cell.add_fingerprint(user)
 			user.put_in_active_hand(cell)
-			to_chat(user, "<span class='notice'>You remove \the [cell].</span>")
+			to_chat(user, "<span class='notice'>I remove \the [cell].</span>")
 			cell = null
 			update_icons()
 			diag_hud_set_borgcell()
@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		return
 	if(!opened)//Cover is closed
 		if(locked)
-			to_chat(user, "<span class='notice'>You emag the cover lock.</span>")
+			to_chat(user, "<span class='notice'>I emag the cover lock.</span>")
 			locked = FALSE
 			if(shell) //A warning to Traitors who may not know that emagging AI shells does not slave them.
 				to_chat(user, "<span class='boldwarning'>[src] seems to be controlled remotely! Emagging the interface may not work as expected.</span>")
@@ -109,10 +109,10 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	if(world.time < emag_cooldown)
 		return
 	if(wiresexposed)
-		to_chat(user, "<span class='warning'>You must unexpose the wires first!</span>")
+		to_chat(user, "<span class='warning'>I must unexpose the wires first!</span>")
 		return
 
-	to_chat(user, "<span class='notice'>You emag [src]'s interface.</span>")
+	to_chat(user, "<span class='notice'>I emag [src]'s interface.</span>")
 	emag_cooldown = world.time + 100
 
 	if(connected_ai && connected_ai.mind && connected_ai.mind.has_antag_datum(/datum/antagonist/traitor))

@@ -1,8 +1,8 @@
 // Banana
 /obj/item/seeds/banana
 	name = "pack of banana seeds"
-	desc = "They're seeds that grow into banana trees. When grown, keep away from clown."
-	icon_state = "seed-banana"
+	desc = ""
+	icon_state = "seed"
 	species = "banana"
 	plantname = "Banana Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/banana
@@ -17,7 +17,7 @@
 /obj/item/reagent_containers/food/snacks/grown/banana
 	seed = /obj/item/seeds/banana
 	name = "banana"
-	desc = "It's an excellent prop for a clown."
+	desc = ""
 	icon_state = "banana"
 	item_state = "banana"
 	trash = /obj/item/grown/bananapeel
@@ -29,7 +29,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/banana/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is aiming [src] at [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	sleep(25)
 	if(!user)
 		return (OXYLOSS)
@@ -44,27 +44,27 @@
 /obj/item/grown/bananapeel
 	seed = /obj/item/seeds/banana
 	name = "banana peel"
-	desc = "A peel from a banana."
+	desc = ""
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	icon_state = "banana_peel"
 	item_state = "banana_peel"
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 
 /obj/item/grown/bananapeel/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is deliberately slipping on [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/misc/slip.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
 
 // Mimana - invisible sprites are totally a feature!
 /obj/item/seeds/banana/mime
 	name = "pack of mimana seeds"
-	desc = "They're seeds that grow into mimana trees. When grown, keep away from mime."
-	icon_state = "seed-mimana"
+	desc = ""
+	icon_state = "seed"
 	species = "mimana"
 	plantname = "Mimana Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/banana/mime
@@ -76,7 +76,7 @@
 /obj/item/reagent_containers/food/snacks/grown/banana/mime
 	seed = /obj/item/seeds/banana/mime
 	name = "mimana"
-	desc = "It's an excellent prop for a mime."
+	desc = ""
 	icon_state = "mimana"
 	trash = /obj/item/grown/bananapeel/mimanapeel
 	filling_color = "#FFFFEE"
@@ -85,15 +85,15 @@
 /obj/item/grown/bananapeel/mimanapeel
 	seed = /obj/item/seeds/banana/mime
 	name = "mimana peel"
-	desc = "A mimana peel."
+	desc = ""
 	icon_state = "mimana_peel"
 	item_state = "mimana_peel"
 
 // Bluespace Banana
 /obj/item/seeds/banana/bluespace
 	name = "pack of bluespace banana seeds"
-	desc = "They're seeds that grow into bluespace banana trees. When grown, keep away from bluespace clown."
-	icon_state = "seed-banana-blue"
+	desc = ""
+	icon_state = "seed"
 	species = "bluespacebanana"
 	icon_grow = "banana-grow"
 	plantname = "Bluespace Banana Tree"
@@ -117,13 +117,13 @@
 /obj/item/grown/bananapeel/bluespace
 	seed = /obj/item/seeds/banana/bluespace
 	name = "bluespace banana peel"
-	desc = "A peel from a bluespace banana."
+	desc = ""
 	icon_state = "banana_peel_blue"
 
 // Other
 /obj/item/grown/bananapeel/specialpeel     //used by /obj/item/clothing/shoes/clown_shoes/banana_shoes
 	name = "synthesized banana peel"
-	desc = "A synthetic banana peel."
+	desc = ""
 
 /obj/item/grown/bananapeel/specialpeel/ComponentInitialize()
 	. = ..()

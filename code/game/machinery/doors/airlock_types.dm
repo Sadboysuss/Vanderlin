@@ -206,7 +206,7 @@
 
 /obj/machinery/door/airlock/plasma
 	name = "plasma airlock"
-	desc = "No way this can end badly."
+	desc = ""
 	icon = 'icons/obj/doors/airlocks/station/plasma.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_plasma
 
@@ -247,10 +247,10 @@
 
 /obj/machinery/door/airlock/bananium
 	name = "bananium airlock"
-	desc = "Honkhonkhonk"
+	desc = ""
 	icon = 'icons/obj/doors/airlocks/station/bananium.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_bananium
-	doorOpen = 'sound/items/bikehorn.ogg'
+	doorOpen = 'sound/blank.ogg'
 
 /obj/machinery/door/airlock/bananium/glass
 	opacity = 0
@@ -423,7 +423,7 @@
 
 /obj/machinery/door/airlock/abductor
 	name = "alien airlock"
-	desc = "With humanity's current technological level, it could take years to hack this advanced airlock... or maybe we should give a screwdriver a try?"
+	desc = ""
 	icon = 'icons/obj/doors/airlocks/abductor/abductor_airlock.dmi'
 	overlays_file = 'icons/obj/doors/airlocks/abductor/overlays.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_abductor
@@ -482,7 +482,7 @@
 			new /obj/effect/temp_visual/cult/sac(loc)
 			var/atom/throwtarget
 			throwtarget = get_edge_target_turf(src, get_dir(src, get_step_away(L, src)))
-			SEND_SOUND(L, sound(pick('sound/hallucinations/turn_around1.ogg','sound/hallucinations/turn_around2.ogg'),0,1,50))
+			SEND_SOUND(L, sound(pick('sound/blank.ogg'),0,1,50))
 			flash_color(L, flash_color="#960000", flash_time=20)
 			L.Paralyze(40)
 			L.throw_at(throwtarget, 5, 1,src)
@@ -492,7 +492,7 @@
 	icon = 'icons/obj/doors/airlocks/station/maintenance.dmi'
 	overlays_file = 'icons/obj/doors/airlocks/station/overlays.dmi'
 	name = "airlock"
-	desc = "It opens and closes."
+	desc = ""
 	stealthy = TRUE
 	update_icon()
 
@@ -538,7 +538,7 @@
 
 /obj/machinery/door/airlock/cult/weak
 	name = "brittle cult airlock"
-	desc = "An airlock hastily corrupted by blood magic, it is unusually brittle in this state."
+	desc = ""
 	normal_integrity = 150
 	damage_deflection = 5
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)

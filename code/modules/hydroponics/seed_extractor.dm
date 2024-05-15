@@ -41,7 +41,7 @@
 
 /obj/machinery/seed_extractor
 	name = "seed extractor"
-	desc = "Extracts and bags seeds from produce."
+	desc = ""
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "sextractor"
 	density = TRUE
@@ -84,21 +84,21 @@
 			++loaded
 			add_seed(G)
 		if (loaded)
-			to_chat(user, "<span class='notice'>You put as many seeds from \the [O.name] into [src] as you can.</span>")
+			to_chat(user, "<span class='notice'>I put as many seeds from \the [O.name] into [src] as you can.</span>")
 		else
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
 
 	else if(seedify(O,-1, src, user))
-		to_chat(user, "<span class='notice'>You extract some seeds.</span>")
+		to_chat(user, "<span class='notice'>I extract some seeds.</span>")
 		return
 	else if (istype(O, /obj/item/seeds))
 		if(add_seed(O))
-			to_chat(user, "<span class='notice'>You add [O] to [src.name].</span>")
+			to_chat(user, "<span class='notice'>I add [O] to [src.name].</span>")
 			updateUsrDialog()
 		return
-	else if(user.a_intent != INTENT_HARM)
-		to_chat(user, "<span class='warning'>You can't extract any seeds from \the [O.name]!</span>")
+	else if(user.used_intent.type != INTENT_HARM)
+		to_chat(user, "<span class='warning'>I can't extract any seeds from \the [O.name]!</span>")
 	else
 		return ..()
 

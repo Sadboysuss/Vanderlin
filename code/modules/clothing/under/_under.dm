@@ -6,9 +6,9 @@
 	permeability_coefficient = 0.9
 	slot_flags = ITEM_SLOT_ICLOTHING
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	equip_sound = 'sound/items/equip/jumpsuit_equip.ogg'
-	drop_sound = 'sound/items/handling/cloth_drop.ogg'
-	pickup_sound =  'sound/items/handling/cloth_pickup.ogg'
+	equip_sound = 'sound/blank.ogg'
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 	var/fitted = FEMALE_UNIFORM_FULL // For use in alternate clothing styles for women
 	var/has_sensor = HAS_SENSORS // For the crew computer
 	var/random_sensor = TRUE
@@ -20,14 +20,15 @@
 	var/mutable_appearance/accessory_overlay
 	var/mutantrace_variation = NO_MUTANTRACE_VARIATION //Are there special sprites for specific situations? Don't use this unless you need to.
 	var/freshly_laundered = FALSE
+	bloody_icon_state = "bodyblood"
 
 /obj/item/clothing/under/worn_overlays(isinhands = FALSE)
 	. = list()
 	if(!isinhands)
-		if(damaged_clothes)
-			. += mutable_appearance('icons/effects/item_damage.dmi', "damageduniform")
-		if(HAS_BLOOD_DNA(src))
-			. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
+//		if(damaged_clothes)
+//			. += mutable_appearance('icons/effects/item_damage.dmi', "damageduniform")
+//		if(HAS_BLOOD_DNA(src))
+//			. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
 		if(accessory_overlay)
 			. += accessory_overlay
 
@@ -36,7 +37,7 @@
 		var/obj/item/stack/cable_coil/C = I
 		C.use(1)
 		has_sensor = HAS_SENSORS
-		to_chat(user,"<span class='notice'>You repair the suit sensors on [src] with [C].</span>")
+		to_chat(user,"<span class='notice'>I repair the suit sensors on [src] with [C].</span>")
 		return 1
 	if(!attach_accessory(I, user))
 		return ..()
@@ -46,6 +47,7 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_w_uniform()
+		M.update_inv_pants()
 	if(has_sensor > NO_SENSORS)
 		has_sensor = BROKEN_SENSORS
 
@@ -77,7 +79,7 @@
 			adjusted = DIGITIGRADE_STYLE
 		H.update_inv_w_uniform()
 
-	if(slot == SLOT_W_UNIFORM && freshly_laundered)
+	if(slot == SLOT_PANTS && freshly_laundered)
 		freshly_laundered = FALSE
 		SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "fresh_laundry", /datum/mood_event/fresh_laundry)
 
@@ -115,7 +117,7 @@
 				return
 
 			if(user && notifyAttach)
-				to_chat(user, "<span class='notice'>You attach [I] to [src].</span>")
+				to_chat(user, "<span class='notice'>I attach [I] to [src].</span>")
 
 			var/accessory_color = attached_accessory.icon_state
 			accessory_overlay = mutable_appearance('icons/mob/clothing/accessories.dmi', "[accessory_color]")
@@ -139,9 +141,9 @@
 		var/obj/item/clothing/accessory/A = attached_accessory
 		attached_accessory.detach(src, user)
 		if(user.put_in_hands(A))
-			to_chat(user, "<span class='notice'>You detach [A] from [src].</span>")
+			to_chat(user, "<span class='notice'>I detach [A] from [src].</span>")
 		else
-			to_chat(user, "<span class='notice'>You detach [A] from [src] and it falls on the floor.</span>")
+			to_chat(user, "<span class='notice'>I detach [A] from [src] and it falls on the floor.</span>")
 
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
@@ -153,7 +155,7 @@
 	. = ..()
 	if(freshly_laundered)
 		. += "It looks fresh and clean."
-	if(can_adjust)
+/*	if(can_adjust)
 		if(adjusted == ALT_STYLE)
 			. += "Alt-click on [src] to wear it normally."
 		else
@@ -171,7 +173,7 @@
 			if(SENSOR_COORDS)
 				. += "Its vital tracker and tracking beacon appear to be enabled."
 	if(attached_accessory)
-		. += "\A [attached_accessory] is attached to it."
+		. += "\A [attached_accessory] is attached to it."*/
 
 /obj/item/clothing/under/rank
 	dying_key = DYE_REGISTRY_UNDER

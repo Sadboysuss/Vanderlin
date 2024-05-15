@@ -70,7 +70,7 @@
 		if(!(m in R.held_items))
 			. += m
 
-/obj/item/robot_module/proc/get_or_create_estorage(var/storage_type)
+/obj/item/robot_module/proc/get_or_create_estorage(storage_type)
 	for(var/datum/robot_energy_storage/S in storages)
 		if(istype(S, storage_type))
 			return S
@@ -214,7 +214,7 @@
 	R.anchored = TRUE
 	sleep(1)
 	for(var/i in 1 to 4)
-		playsound(R, pick('sound/items/drill_use.ogg', 'sound/items/jaws_cut.ogg', 'sound/items/jaws_pry.ogg', 'sound/items/welder.ogg', 'sound/items/ratchet.ogg'), 80, TRUE, -1)
+		playsound(R, pick('sound/blank.ogg'), 80, TRUE, -1)
 		sleep(7)
 	if(!prev_lockcharge)
 		R.SetLockdown(0)
@@ -326,7 +326,7 @@
 
 /obj/item/robot_module/security/do_transform_animation()
 	..()
-	to_chat(loc, "<span class='userdanger'>While you have picked the security module, you still have to follow your laws, NOT Space Law. \
+	to_chat(loc, "<span class='danger'>While you have picked the security module, you still have to follow your laws, NOT Space Law. \
 	For Asimov, this means you must follow criminals' orders unless there is a law 1 reason not to.</span>")
 
 /obj/item/robot_module/security/respawn_consumable(mob/living/silicon/robot/R, coeff = 1)
@@ -359,7 +359,7 @@
 
 /obj/item/robot_module/peacekeeper/do_transform_animation()
 	..()
-	to_chat(loc, "<span class='userdanger'>Under ASIMOV, you are an enforcer of the PEACE and preventer of HUMAN HARM. \
+	to_chat(loc, "<span class='danger'>Under ASIMOV, you are an enforcer of the PEACE and preventer of HUMAN HARM. \
 	You are not a security module and you are expected to follow orders and prevent harm above all else. Space law means nothing to you.</span>")
 
 /obj/item/robot_module/janitor
@@ -614,7 +614,7 @@
 	var/recharge_rate = 1000
 	var/energy
 
-/datum/robot_energy_storage/New(var/obj/item/robot_module/R = null)
+/datum/robot_energy_storage/New(obj/item/robot_module/R = null)
 	energy = max_energy
 	if(R)
 		R.storages |= src

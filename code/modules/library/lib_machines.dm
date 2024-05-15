@@ -20,7 +20,7 @@
 	icon_screen = "library"
 	icon_keyboard = null
 	circuit = /obj/item/circuitboard/computer/libraryconsole
-	desc = "Checked out books MUST be returned on time."
+	desc = ""
 	var/screenstate = 0
 	var/title
 	var/category = "Any"
@@ -39,18 +39,18 @@
 			dat += "<A href='?src=[REF(src)];search=1'>\[Start Search\]</A><BR>"
 		if(1)
 			if (!SSdbcore.Connect())
-				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font><BR>"
+				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact my system administrator for assistance.</font><BR>"
 			else if(QDELETED(user))
 				return
 			else if(!SQLquery)
-				dat += "<font color=red><b>ERROR</b>: Malformed search request. Please contact your system administrator for assistance.</font><BR>"
+				dat += "<font color=red><b>ERROR</b>: Malformed search request. Please contact my system administrator for assistance.</font><BR>"
 			else
 				dat += "<table>"
 				dat += "<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td>SS<sup>13</sup>BN</td></tr>"
 
 				var/datum/DBQuery/query_library_list_books = SSdbcore.NewQuery(SQLquery)
 				if(!query_library_list_books.Execute())
-					dat += "<font color=red><b>ERROR</b>: Unable to retrieve book listings. Please contact your system administrator for assistance.</font><BR>"
+					dat += "<font color=red><b>ERROR</b>: Unable to retrieve book listings. Please contact my system administrator for assistance.</font><BR>"
 				else
 					while(query_library_list_books.NextRow())
 						var/author = query_library_list_books.item[1]
@@ -164,7 +164,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 // It's December 25th, 2014, and this is STILL here, and it's STILL relevant. Kill me
 /obj/machinery/computer/libraryconsole/bookmanagement
 	name = "book inventory management console"
-	desc = "Librarian's command station."
+	desc = ""
 	screenstate = 0 // 0 - Main Menu, 1 - Inventory, 2 - Checked Out, 3 - Check Out a Book
 	verb_say = "beeps"
 	verb_ask = "beeps"
@@ -261,7 +261,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 			build_library_menu()
 
 			if(!GLOB.cachedbooks)
-				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font>"
+				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact my system administrator for assistance.</font>"
 			else
 				dat += "<A href='?src=[REF(src)];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>"
 				dat += "<table>"
@@ -323,7 +323,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 
 /obj/machinery/computer/libraryconsole/bookmanagement/proc/print_forbidden_lore(mob/user)
 	new /obj/item/melee/cultblade/dagger(get_turf(src))
-	to_chat(user, "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a sinister dagger sitting on the desk. You don't even remember where it came from...</span>")
+	to_chat(user, "<span class='warning'>My sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a sinister dagger sitting on the desk. You don't even remember where it came from...</span>")
 	user.visible_message("<span class='warning'>[user] stares at the blank screen for a few moments, [user.p_their()] expression frozen in fear. When [user.p_they()] finally awaken[user.p_s()] from it, [user.p_they()] look[user.p_s()] a lot older.</span>", 2)
 
 /obj/machinery/computer/libraryconsole/bookmanagement/attackby(obj/item/W, mob/user, params)
@@ -443,7 +443,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 		if(cooldown > world.time)
 			say("Printer unavailable. Please allow a short time before attempting to print.")
 		else
-			var/orderid = input("Enter your order:") as num|null
+			var/orderid = input("Enter my order:") as num|null
 			if(orderid)
 				if(isnum(orderid) && ISINTEGER(orderid))
 					href_list["targetid"] = num2text(orderid)
@@ -502,7 +502,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 	name = "scanner control interface"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bigscanner"
-	desc = "It servers the purpose of scanning stuff."
+	desc = ""
 	density = TRUE
 	var/obj/item/book/cache		// Last scanned book
 
@@ -560,7 +560,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 	name = "book binder"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "binder"
-	desc = "Only intended for binding paper products."
+	desc = ""
 	density = TRUE
 	var/busy = FALSE
 
@@ -580,7 +580,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 		return
 	if(!user.transferItemToLoc(P, src))
 		return
-	user.visible_message("<span class='notice'>[user] loads some paper into [src].</span>", "<span class='notice'>You load some paper into [src].</span>")
+	user.visible_message("<span class='notice'>[user] loads some paper into [src].</span>", "<span class='notice'>I load some paper into [src].</span>")
 	audible_message("<span class='hear'>[src] begins to hum as it warms up its printing drums.</span>")
 	busy = TRUE
 	sleep(rand(200,400))

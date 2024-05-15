@@ -47,7 +47,7 @@ Doesn't work on other aliens/AI.*/
 /obj/effect/proc_holder/alien/proc/cost_check(check_turf = FALSE, mob/living/carbon/user, silent = FALSE)
 	if(user.stat)
 		if(!silent)
-			to_chat(user, "<span class='noticealien'>You must be conscious to do this.</span>")
+			to_chat(user, "<span class='noticealien'>I must be conscious to do this.</span>")
 		return FALSE
 	if(user.getPlasma() < plasma_cost)
 		if(!silent)
@@ -69,7 +69,7 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/plant
 	name = "Plant Weeds"
-	desc = "Plants some alien weeds."
+	desc = ""
 	plasma_cost = 50
 	check_turf = TRUE
 	action_icon_state = "alien_plant"
@@ -84,7 +84,7 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/whisper
 	name = "Whisper"
-	desc = "Whisper to someone."
+	desc = ""
 	plasma_cost = 10
 	action_icon_state = "alien_whisper"
 
@@ -104,8 +104,8 @@ Doesn't work on other aliens/AI.*/
 			to_chat(user, "<span class='notice'>As you try to communicate with [M], you're suddenly stopped by a vision of a massive tinfoil wall that streches beyond visible range. It seems you've been foiled.</span>")
 			return
 		log_directed_talk(user, M, msg, LOG_SAY, tag="alien whisper")
-		to_chat(M, "<span class='noticealien'>You hear a strange, alien voice in your head...</span>[msg]")
-		to_chat(user, "<span class='noticealien'>You said: \"[msg]\" to [M]</span>")
+		to_chat(M, "<span class='noticealien'>I hear a strange, alien voice in your head...</span>[msg]")
+		to_chat(user, "<span class='noticealien'>I said: \"[msg]\" to [M]</span>")
 		for(var/ded in GLOB.dead_mob_list)
 			if(!isobserver(ded))
 				continue
@@ -118,7 +118,7 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/transfer
 	name = "Transfer Plasma"
-	desc = "Transfer Plasma to another alien."
+	desc = ""
 	plasma_cost = 0
 	action_icon_state = "alien_transfer"
 
@@ -137,14 +137,14 @@ Doesn't work on other aliens/AI.*/
 			M.adjustPlasma(amount)
 			user.adjustPlasma(-amount)
 			to_chat(M, "<span class='noticealien'>[user] has transferred [amount] plasma to you.</span>")
-			to_chat(user, "<span class='noticealien'>You transfer [amount] plasma to [M].</span>")
+			to_chat(user, "<span class='noticealien'>I transfer [amount] plasma to [M].</span>")
 		else
-			to_chat(user, "<span class='noticealien'>You need to be closer!</span>")
+			to_chat(user, "<span class='noticealien'>I need to be closer!</span>")
 	return
 
 /obj/effect/proc_holder/alien/acid
 	name = "Corrosive Acid"
-	desc = "Drench an object in acid, destroying it over time."
+	desc = ""
 	plasma_cost = 200
 	action_icon_state = "alien_acid"
 
@@ -160,7 +160,7 @@ Doesn't work on other aliens/AI.*/
 			user.visible_message("<span class='alertalien'>[user] vomits globs of vile stuff all over [target]. It begins to sizzle and melt under the bubbling mess of acid!</span>")
 			return 1
 		else
-			to_chat(user, "<span class='noticealien'>You cannot dissolve this object.</span>")
+			to_chat(user, "<span class='noticealien'>I cannot dissolve this object.</span>")
 
 
 			return 0
@@ -190,17 +190,17 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/neurotoxin
 	name = "Spit Neurotoxin"
-	desc = "Spits neurotoxin at someone, paralyzing them for a short time."
+	desc = ""
 	action_icon_state = "alien_neurotoxin_0"
 	active = FALSE
 
 /obj/effect/proc_holder/alien/neurotoxin/fire(mob/living/carbon/user)
 	var/message
 	if(active)
-		message = "<span class='notice'>You empty your neurotoxin gland.</span>"
+		message = "<span class='notice'>I empty your neurotoxin gland.</span>"
 		remove_ranged_ability(message)
 	else
-		message = "<span class='notice'>You prepare your neurotoxin gland. <B>Left-click to fire at a target!</B></span>"
+		message = "<span class='notice'>I prepare your neurotoxin gland. <B>Left-click to fire at a target!</B></span>"
 		add_ranged_ability(user, message, TRUE)
 
 /obj/effect/proc_holder/alien/neurotoxin/update_icon()
@@ -218,7 +218,7 @@ Doesn't work on other aliens/AI.*/
 	var/mob/living/carbon/user = ranged_ability_user
 
 	if(user.getPlasma() < p_cost)
-		to_chat(user, "<span class='warning'>You need at least [p_cost] plasma to spit.</span>")
+		to_chat(user, "<span class='warning'>I need at least [p_cost] plasma to spit.</span>")
 		remove_ranged_ability()
 		return
 
@@ -227,7 +227,7 @@ Doesn't work on other aliens/AI.*/
 	if(!isturf(U) || !isturf(T))
 		return FALSE
 
-	user.visible_message("<span class='danger'>[user] spits neurotoxin!</span>", "<span class='alertalien'>You spit neurotoxin.</span>")
+	user.visible_message("<span class='danger'>[user] spits neurotoxin!</span>", "<span class='alertalien'>I spit neurotoxin.</span>")
 	var/obj/projectile/bullet/neurotoxin/A = new /obj/projectile/bullet/neurotoxin(user.loc)
 	A.preparePixelProjectile(target, user, params)
 	A.fire()
@@ -255,7 +255,7 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/resin
 	name = "Secrete Resin"
-	desc = "Secrete tough malleable resin."
+	desc = ""
 	plasma_cost = 55
 	check_turf = TRUE
 	var/list/structures = list(
@@ -278,7 +278,7 @@ Doesn't work on other aliens/AI.*/
 		return FALSE
 	if (!cost_check(check_turf,user))
 		return FALSE
-	to_chat(user, "<span class='notice'>You shape a [choice].</span>")
+	to_chat(user, "<span class='notice'>I shape a [choice].</span>")
 	user.visible_message("<span class='notice'>[user] vomits up a thick purple substance and begins to shape it.</span>")
 
 	choice = structures[choice]
@@ -287,7 +287,7 @@ Doesn't work on other aliens/AI.*/
 
 /obj/effect/proc_holder/alien/sneak
 	name = "Sneak"
-	desc = "Blend into the shadows to stalk your prey."
+	desc = ""
 	active = 0
 
 	action_icon_state = "alien_sneak"
@@ -297,12 +297,12 @@ Doesn't work on other aliens/AI.*/
 		user.alpha = 75 //Still easy to see in lit areas with bright tiles, almost invisible on resin.
 		user.sneaking = 1
 		active = 1
-		to_chat(user, "<span class='noticealien'>You blend into the shadows...</span>")
+		to_chat(user, "<span class='noticealien'>I blend into the shadows...</span>")
 	else
 		user.alpha = initial(user.alpha)
 		user.sneaking = 0
 		active = 0
-		to_chat(user, "<span class='noticealien'>You reveal yourself!</span>")
+		to_chat(user, "<span class='noticealien'>I reveal yourself!</span>")
 
 
 /mob/living/carbon/proc/getPlasma()

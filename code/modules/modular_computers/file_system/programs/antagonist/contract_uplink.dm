@@ -1,8 +1,8 @@
 /datum/computer_file/program/contract_uplink
 	filename = "contractor uplink"
-	filedesc = "Syndicate Contractor Uplink"
+	filedesc = ""
 	program_icon_state = "assign"
-	extended_desc = "A standard, Syndicate issued system for handling important contracts while on the field."
+	extended_desc = ""
 	size = 10
 	requires_ntnet = 0
 	available_on_ntnet = 0
@@ -16,7 +16,7 @@
 	var/page = CONTRACT_UPLINK_PAGE_CONTRACTS
 	var/assigned = FALSE
 
-/datum/computer_file/program/contract_uplink/run_program(var/mob/living/user)
+/datum/computer_file/program/contract_uplink/run_program(mob/living/user)
 	. = ..(user)
 
 /datum/computer_file/program/contract_uplink/ui_act(action, params)
@@ -33,7 +33,7 @@
 			// Set as the active contract
 			hard_drive.traitor_data.contractor_hub.assigned_contracts[contract_id].status = CONTRACT_STATUS_ACTIVE
 			hard_drive.traitor_data.contractor_hub.current_contract = hard_drive.traitor_data.contractor_hub.assigned_contracts[contract_id]
-			
+
 			program_icon_state = "single_contract"
 			return 1
 		if("PRG_login")
@@ -45,7 +45,7 @@
 			if (traitor_data)
 				// Only play greet sound, and handle contractor hub when assigning for the first time.
 				if (!traitor_data.contractor_hub)
-					user.playsound_local(user, 'sound/effects/contractstartup.ogg', 100, 0)
+					user.playsound_local(user, 'sound/blank.ogg', 100, 0)
 					traitor_data.contractor_hub = new
 					traitor_data.contractor_hub.create_hub_items()
 
@@ -61,15 +61,15 @@
 		if("PRG_call_extraction")
 			if (hard_drive.traitor_data.contractor_hub.current_contract.status != CONTRACT_STATUS_EXTRACTING)
 				if (hard_drive.traitor_data.contractor_hub.current_contract.handle_extraction(user))
-					user.playsound_local(user, 'sound/effects/confirmdropoff.ogg', 100, 1)
+					user.playsound_local(user, 'sound/blank.ogg', 100, 1)
 					hard_drive.traitor_data.contractor_hub.current_contract.status = CONTRACT_STATUS_EXTRACTING
 
 					program_icon_state = "extracted"
 				else
-					user.playsound_local(user, 'sound/machines/uplinkerror.ogg', 50)
-					error = "Either both you or your target aren't at the dropoff location, or the pod hasn't got a valid place to land. Clear space, or make sure you're both inside."
-			else 
-				user.playsound_local(user, 'sound/machines/uplinkerror.ogg', 50)
+					user.playsound_local(user, 'sound/blank.ogg', 50)
+					error = "Either both you or my target aren't at the dropoff location, or the pod hasn't got a valid place to land. Clear space, or make sure you're both inside."
+			else
+				user.playsound_local(user, 'sound/blank.ogg', 50)
 				error = "Already extracting... Place the target into the pod. If the pod was destroyed, you will need to cancel this contract."
 
 			return 1
@@ -84,20 +84,20 @@
 			return 1
 		if("PRG_redeem_TC")
 			if (hard_drive.traitor_data.contractor_hub.contract_TC_to_redeem)
-				var/obj/item/stack/telecrystal/crystals = new /obj/item/stack/telecrystal(get_turf(user), 
+				var/obj/item/stack/telecrystal/crystals = new /obj/item/stack/telecrystal(get_turf(user),
 															hard_drive.traitor_data.contractor_hub.contract_TC_to_redeem)
 				if(ishuman(user))
 					var/mob/living/carbon/human/H = user
 					if(H.put_in_hands(crystals))
-						to_chat(H, "<span class='notice'>Your payment materializes into your hands!</span>")
+						to_chat(H, "<span class='notice'>My payment materializes into my hands!</span>")
 					else
-						to_chat(user, "<span class='notice'>Your payment materializes onto the floor.</span>")
+						to_chat(user, "<span class='notice'>My payment materializes onto the floor.</span>")
 
 				hard_drive.traitor_data.contractor_hub.contract_TC_payed_out += hard_drive.traitor_data.contractor_hub.contract_TC_to_redeem
 				hard_drive.traitor_data.contractor_hub.contract_TC_to_redeem = 0
 				return 1
 			else
-				user.playsound_local(user, 'sound/machines/uplinkerror.ogg', 50)
+				user.playsound_local(user, 'sound/blank.ogg', 50)
 			return 1
 		if ("PRG_clear_error")
 			error = ""
@@ -132,7 +132,7 @@
 			if (traitor_data.contractor_hub.current_contract.status == CONTRACT_STATUS_EXTRACTING)
 				data["extraction_enroute"] = TRUE
 				screen_to_be = "extracted"
-		
+
 		data["logged_in"] = TRUE
 		data["station_name"] = GLOB.station_name
 		data["redeemable_tc"] = traitor_data.contractor_hub.contract_TC_to_redeem
@@ -165,9 +165,9 @@
 		var/direction
 		if (traitor_data.contractor_hub.current_contract)
 			var/turf/curr = get_turf(user)
-			var/turf/dropoff_turf 
+			var/turf/dropoff_turf
 			data["current_location"] = "[get_area_name(curr, TRUE)]"
-			
+
 			for (var/turf/content in traitor_data.contractor_hub.current_contract.contract.dropoff.contents)
 				if (isturf(content))
 					dropoff_turf = content
@@ -184,12 +184,12 @@
 
 		if (page == CONTRACT_UPLINK_PAGE_HUB)
 			screen_to_be = "store"
-		
+
 		if (!screen_to_be)
 			screen_to_be = "contracts"
 	else
 		data["logged_in"] = FALSE
-		
+
 	if (!screen_to_be)
 		screen_to_be = "assign"
 

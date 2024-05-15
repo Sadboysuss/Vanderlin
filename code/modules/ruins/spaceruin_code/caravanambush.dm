@@ -2,27 +2,27 @@
 
 /obj/item/wrench/caravan
 	color = "#ff0000"
-	desc = "A prototype of a new wrench design, allegedly the red color scheme makes it go faster."
+	desc = ""
 	name = "experimental wrench"
 	toolspeed = 0.3
 
 /obj/item/screwdriver/caravan
 	color = "#ff0000"
-	desc = "A prototype of a new screwdriver design, allegedly the red color scheme makes it go faster."
+	desc = ""
 	name = "experimental screwdriver"
 	toolspeed = 0.3
 	random_color = FALSE
 
 /obj/item/wirecutters/caravan
 	color = "#ff0000"
-	desc = "A prototype of a new wirecutter design, allegedly the red color scheme makes it go faster."
+	desc = ""
 	name = "experimental wirecutters"
 	toolspeed = 0.3
 	random_color = FALSE
 
 /obj/item/crowbar/red/caravan
 	color = "#ff0000"
-	desc = "A prototype of a new crowbar design, allegedly the red color scheme makes it go faster."
+	desc = ""
 	name = "experimental crowbar"
 	toolspeed = 0.3
 
@@ -48,7 +48,7 @@
 
 /obj/machinery/computer/shuttle/caravan/trade1
 	name = "Small Freighter Shuttle Console"
-	desc = "Used to control the Small Freighter."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/caravan/trade1
 	shuttleId = "caravantrade1"
 	possible_destinations = "whiteship_away;whiteship_home;whiteship_z4;whiteship_lavaland;caravantrade1_custom;caravantrade1_ambush"
@@ -63,7 +63,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/caravan/trade1
 	name = "Small Freighter Navigation Computer"
-	desc = "Used to designate a precise transit location for the Small Freighter."
+	desc = ""
 	shuttleId = "caravantrade1"
 	lock_override = NONE
 	shuttlePortId = "caravantrade1_custom"
@@ -75,7 +75,7 @@
 
 /obj/machinery/computer/shuttle/caravan/pirate
 	name = "Pirate Cutter Shuttle Console"
-	desc = "Used to control the Pirate Cutter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	light_color = LIGHT_COLOR_RED
@@ -85,7 +85,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/caravan/pirate
 	name = "Pirate Cutter Navigation Computer"
-	desc = "Used to designate a precise transit location for the Pirate Cutter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	shuttleId = "caravanpirate"
@@ -98,7 +98,7 @@
 
 /obj/machinery/computer/shuttle/caravan/syndicate1
 	name = "Syndicate Fighter Shuttle Console"
-	desc = "Used to control the Syndicate Fighter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	light_color = LIGHT_COLOR_RED
@@ -109,7 +109,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/caravan/syndicate1
 	name = "Syndicate Fighter Navigation Computer"
-	desc = "Used to designate a precise transit location for the Syndicate Fighter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	shuttleId = "caravansyndicate1"
@@ -122,7 +122,7 @@
 
 /obj/machinery/computer/shuttle/caravan/syndicate2
 	name = "Syndicate Fighter Shuttle Console"
-	desc = "Used to control the Syndicate Fighter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	req_access = list(ACCESS_SYNDICATE)
@@ -133,7 +133,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/caravan/syndicate2
 	name = "Syndicate Fighter Navigation Computer"
-	desc = "Used to designate a precise transit location for the Syndicate Fighter."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	shuttleId = "caravansyndicate2"
@@ -146,7 +146,7 @@
 
 /obj/machinery/computer/shuttle/caravan/syndicate3
 	name = "Syndicate Drop Ship Console"
-	desc = "Used to control the Syndicate Drop Ship."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	req_access = list(ACCESS_SYNDICATE)
@@ -157,7 +157,7 @@
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/caravan/syndicate3
 	name = "Syndicate Drop Ship Navigation Computer"
-	desc = "Used to designate a precise transit location for the Syndicate Drop Ship."
+	desc = ""
 	icon_screen = "syndishuttle"
 	icon_keyboard = "syndie_key"
 	shuttleId = "caravansyndicate3"

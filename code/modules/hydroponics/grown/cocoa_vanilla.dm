@@ -1,8 +1,8 @@
 // Cocoa Pod
 /obj/item/seeds/cocoapod
 	name = "pack of cocoa pod seeds"
-	desc = "These seeds grow into cacao trees. They look fattening." //SIC: cocoa is the seeds. The trees are spelled cacao.
-	icon_state = "seed-cocoapod"
+	desc = "" //SIC: cocoa is the seeds. The trees are spelled cacao.
+	icon_state = "seed"
 	species = "cocoapod"
 	plantname = "Cocao Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/cocoapod
@@ -21,7 +21,7 @@
 /obj/item/reagent_containers/food/snacks/grown/cocoapod
 	seed = /obj/item/seeds/cocoapod
 	name = "cocoa pod"
-	desc = "Fattening... Mmmmm... chucklate."
+	desc = ""
 	icon_state = "cocoapod"
 	filling_color = "#FFD700"
 	bitesize_mod = 2
@@ -32,8 +32,8 @@
 // Vanilla Pod
 /obj/item/seeds/cocoapod/vanillapod
 	name = "pack of vanilla pod seeds"
-	desc = "These seeds grow into vanilla trees. They look fattening."
-	icon_state = "seed-vanillapod"
+	desc = ""
+	icon_state = "seed"
 	species = "vanillapod"
 	plantname = "Vanilla Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/vanillapod
@@ -44,7 +44,7 @@
 /obj/item/reagent_containers/food/snacks/grown/vanillapod
 	seed = /obj/item/seeds/cocoapod/vanillapod
 	name = "vanilla pod"
-	desc = "Fattening... Mmmmm... vanilla."
+	desc = ""
 	icon_state = "vanillapod"
 	filling_color = "#FFD700"
 	foodtype = FRUIT
@@ -53,8 +53,8 @@
 
 /obj/item/seeds/cocoapod/bungotree
 	name = "pack of bungo tree seeds"
-	desc = "These seeds grow into bungo trees. They appear to be heavy and almost perfectly spherical."
-	icon_state = "seed-bungotree"
+	desc = ""
+	icon_state = "seed"
 	species = "bungotree"
 	plantname = "Bungo Tree"
 	product = /obj/item/reagent_containers/food/snacks/grown/bungofruit
@@ -74,7 +74,7 @@
 /obj/item/reagent_containers/food/snacks/grown/bungofruit
 	seed = /obj/item/seeds/cocoapod/bungotree
 	name = "bungo fruit"
-	desc = "A strange fruit, tough leathery skin protects its juicy flesh and large poisonous seed."
+	desc = ""
 	icon_state = "bungo"
 	trash = /obj/item/reagent_containers/food/snacks/grown/bungopit
 	filling_color = "#E8C22F"
@@ -87,10 +87,10 @@
 	seed = /obj/item/seeds/cocoapod/bungotree
 	name = "bungo pit"
 	icon_state = "bungopit"
-	desc = "A large seed, it is said to be potent enough to be able to stop a mans heart."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 5
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	foodtype = TOXIC
 	tastes = list("acrid bitterness" = 1)

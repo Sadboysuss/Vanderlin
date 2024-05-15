@@ -22,21 +22,21 @@
 	druggy = max(druggy+amount, 0)
 	if(druggy)
 		overlay_fullscreen("high", /obj/screen/fullscreen/high)
-		throw_alert("high", /obj/screen/alert/high)
-		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "high", /datum/mood_event/high)
+//		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "high", /datum/mood_event/high)
 	else
 		clear_fullscreen("high")
-		clear_alert("high")
-		SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "high")
+//		SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "high")
+//	update_body_parts_head_only()
 
 /mob/living/carbon/set_drugginess(amount)
 	druggy = max(amount, 0)
 	if(druggy)
 		overlay_fullscreen("high", /obj/screen/fullscreen/high)
-		throw_alert("high", /obj/screen/alert/high)
+//		throw_alert("high", /obj/screen/alert/high)
 	else
 		clear_fullscreen("high")
-		clear_alert("high")
+//		clear_alert("high")
+//	update_body_parts_head_only()
 
 /mob/living/carbon/adjust_disgust(amount)
 	disgust = CLAMP(disgust+amount, 0, DISGUST_LEVEL_MAXEDOUT)

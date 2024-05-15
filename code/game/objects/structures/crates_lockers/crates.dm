@@ -1,28 +1,31 @@
 /obj/structure/closet/crate
 	name = "crate"
-	desc = "A rectangular steel crate."
+	desc = ""
 	icon = 'icons/obj/crates.dmi'
 	icon_state = "crate"
 	req_access = null
 	can_weld_shut = FALSE
 	horizontal = TRUE
 	allow_objects = TRUE
-	allow_dense = TRUE
+	allow_dense = FALSE
 	dense_when_open = TRUE
 	climbable = TRUE
 	climb_time = 10 //real fast, because let's be honest stepping into or onto a crate is easy
 	climb_stun = 0 //climbing onto crates isn't hard, guys
 	delivery_icon = "deliverycrate"
-	open_sound = 'sound/machines/crate_open.ogg'
-	close_sound = 'sound/machines/crate_close.ogg'
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
 	open_sound_volume = 35
 	close_sound_volume = 50
 	drag_slowdown = 0
 	var/obj/item/paper/fluff/jobs/cargo/manifest/manifest
+	var/base_icon_state
 
 /obj/structure/closet/crate/Initialize()
 	. = ..()
-	if(icon_state == "[initial(icon_state)]open")
+	if(!base_icon_state)
+		base_icon_state = initial(icon_state)
+	if(icon_state == "[base_icon_state]open")
 		opened = TRUE
 	update_icon()
 
@@ -37,7 +40,7 @@
 	return !density
 
 /obj/structure/closet/crate/update_icon()
-	icon_state = "[initial(icon_state)][opened ? "open" : ""]"
+	icon_state = "[base_icon_state][opened ? "open" : ""]"
 
 	cut_overlays()
 	if(manifest)
@@ -54,14 +57,14 @@
 	. = ..()
 	if(. && manifest)
 		to_chat(user, "<span class='notice'>The manifest is torn off [src].</span>")
-		playsound(src, 'sound/items/poster_ripped.ogg', 75, TRUE)
+		playsound(src, 'sound/blank.ogg', 75, TRUE)
 		manifest.forceMove(get_turf(src))
 		manifest = null
 		update_icon()
 
 /obj/structure/closet/crate/proc/tear_manifest(mob/user)
-	to_chat(user, "<span class='notice'>You tear the manifest off of [src].</span>")
-	playsound(src, 'sound/items/poster_ripped.ogg', 75, TRUE)
+	to_chat(user, "<span class='notice'>I tear the manifest off of [src].</span>")
+	playsound(src, 'sound/blank.ogg', 75, TRUE)
 
 	manifest.forceMove(loc)
 	if(ishuman(user))
@@ -70,35 +73,48 @@
 	update_icon()
 
 /obj/structure/closet/crate/coffin
-	name = "coffin"
-	desc = "It's a burial receptacle for the dearly departed."
-	icon_state = "coffin"
+	name = "casket"
+	desc = "Death basket."
+	icon_state = "casket"
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
-	material_drop = /obj/item/stack/sheet/mineral/wood
+	icon = 'icons/roguetown/misc/structure.dmi'
 	material_drop_amount = 5
-	open_sound = 'sound/machines/wooden_closet_open.ogg'
-	close_sound = 'sound/machines/wooden_closet_close.ogg'
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
+	open_sound_volume = 25
+	close_sound_volume = 50
+
+/obj/structure/closet/crate/coffin/vampire
+	name = "sleep casket"
+	desc = "A fancy coffin."
+	icon_state = "vcasket"
+	resistance_flags = FLAMMABLE
+	max_integrity = 70
+	icon = 'icons/roguetown/misc/structure.dmi'
+	material_drop_amount = 5
+	open_sound = 'sound/blank.ogg'
+	close_sound = 'sound/blank.ogg'
 	open_sound_volume = 25
 	close_sound_volume = 50
 
 /obj/structure/closet/crate/internals
-	desc = "An internals crate."
+	desc = ""
 	name = "internals crate"
 	icon_state = "o2crate"
 
 /obj/structure/closet/crate/trashcart
-	desc = "A heavy, metal trashcart with wheels."
+	desc = ""
 	name = "trash cart"
 	icon_state = "trashcart"
 
 /obj/structure/closet/crate/medical
-	desc = "A medical crate."
+	desc = ""
 	name = "medical crate"
 	icon_state = "medicalcrate"
 
 /obj/structure/closet/crate/freezer
-	desc = "A freezer."
+	desc = ""
 	name = "freezer"
 	icon_state = "freezer"
 
@@ -125,7 +141,7 @@
 
 /obj/structure/closet/crate/freezer/blood
 	name = "blood freezer"
-	desc = "A freezer containing packs of blood."
+	desc = ""
 
 /obj/structure/closet/crate/freezer/blood/PopulateContents()
 	. = ..()
@@ -143,7 +159,7 @@
 
 /obj/structure/closet/crate/freezer/surplus_limbs
 	name = "surplus prosthetic limbs"
-	desc = "A crate containing an assortment of cheap prosthetic limbs."
+	desc = ""
 
 /obj/structure/closet/crate/freezer/surplus_limbs/PopulateContents()
 	. = ..()
@@ -157,13 +173,13 @@
 	new /obj/item/bodypart/r_leg/robot/surplus(src)
 
 /obj/structure/closet/crate/radiation
-	desc = "A crate with a radiation sign on it."
+	desc = ""
 	name = "radiation crate"
 	icon_state = "radiation"
 
 /obj/structure/closet/crate/hydroponics
 	name = "hydroponics crate"
-	desc = "All you need to destroy those pesky weeds and pests."
+	desc = ""
 	icon_state = "hydrocrate"
 
 /obj/structure/closet/crate/engineering
@@ -174,7 +190,7 @@
 	icon_state = "engi_e_crate"
 
 /obj/structure/closet/crate/rcd
-	desc = "A crate for the storage of an RCD."
+	desc = ""
 	name = "\improper RCD crate"
 	icon_state = "engi_crate"
 
@@ -186,7 +202,7 @@
 
 /obj/structure/closet/crate/science
 	name = "science crate"
-	desc = "A science crate."
+	desc = ""
 	icon_state = "scicrate"
 
 /obj/structure/closet/crate/solarpanel_small

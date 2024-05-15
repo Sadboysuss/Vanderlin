@@ -32,8 +32,8 @@
 	. = ..()
 
 /datum/antagonist/highlander/greet()
-	to_chat(owner, "<span class='boldannounce'>Your [sword.name] cries out for blood. Claim the lives of others, and your own will be restored!\n\
-	Activate it in your hand, and it will lead to the nearest target. Attack the nuclear authentication disk with it, and you will store it.</span>")
+	to_chat(owner, "<span class='boldannounce'>My [sword.name] cries out for blood. Claim the lives of others, and my own will be restored!\n\
+	Activate it in my hand, and it will lead to the nearest target. Attack the nuclear authentication disk with it, and you will store it.</span>")
 
 	owner.announce_objectives()
 
@@ -47,8 +47,8 @@
 			qdel(I)
 	H.regenerate_icons()
 	H.revive(full_heal = TRUE, admin_revive = TRUE)
-	H.equip_to_slot_or_del(new /obj/item/clothing/under/costume/kilt/highlander(H), SLOT_W_UNIFORM)
-	H.equip_to_slot_or_del(new /obj/item/radio/headset/heads/captain(H), SLOT_EARS)
+	H.equip_to_slot_or_del(new /obj/item/clothing/under/costume/kilt/highlander(H), SLOT_PANTS)
+	H.equip_to_slot_or_del(new /obj/item/radio/headset/heads/captain(H), SLOT_HEAD)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/beret/highlander(H), SLOT_HEAD)
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(H), SLOT_SHOES)
 	H.equip_to_slot_or_del(new /obj/item/pinpointer/nuke(H), SLOT_L_STORE)
@@ -61,7 +61,7 @@
 	W.registered_name = H.real_name
 	ADD_TRAIT(W, TRAIT_NODROP, HIGHLANDER)
 	W.update_label()
-	H.equip_to_slot_or_del(W, SLOT_WEAR_ID)
+	H.equip_to_slot_or_del(W, SLOT_RING)
 
 	sword = new(H)
 	if(!GLOB.highlander)
@@ -72,6 +72,6 @@
 
 	var/obj/item/bloodcrawl/antiwelder = new(H)
 	antiwelder.name = "compulsion of honor"
-	antiwelder.desc = "You are unable to hold anything in this hand until you're the last one left!"
+	antiwelder.desc = ""
 	antiwelder.icon_state = "bloodhand_right"
 	H.put_in_hands(antiwelder)

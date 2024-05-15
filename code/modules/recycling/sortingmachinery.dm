@@ -1,6 +1,6 @@
 /obj/structure/bigDelivery
 	name = "large parcel"
-	desc = "A large delivery parcel."
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycloset"
 	density = TRUE
@@ -10,7 +10,7 @@
 	var/obj/item/paper/note
 
 /obj/structure/bigDelivery/interact(mob/user)
-	playsound(src.loc, 'sound/items/poster_ripped.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	qdel(src)
 
 /obj/structure/bigDelivery/Destroy()
@@ -40,11 +40,11 @@
 			var/tag = uppertext(GLOB.TAGGERLOCATIONS[O.currTag])
 			to_chat(user, "<span class='notice'>*[tag]*</span>")
 			sortTag = O.currTag
-			playsound(loc, 'sound/machines/twobeep_high.ogg', 100, TRUE)
+			playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 	else if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on the side of [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on the side of [src]!</span>")
 			return
 		var/str = copytext(sanitize(input(user,"Label text?","Set label","")),1,MAX_NAME_LEN)
 		if(!user.canUseTopic(src, BE_CLOSE))
@@ -62,7 +62,7 @@
 			giftwrapped = TRUE
 			icon_state = "gift[icon_state]"
 		else
-			to_chat(user, "<span class='warning'>You need more paper!</span>")
+			to_chat(user, "<span class='warning'>I need more paper!</span>")
 
 	else if(istype(W, /obj/item/paper))
 		if(note)
@@ -71,7 +71,7 @@
 		if(!user.transferItemToLoc(W, src))
 			to_chat(user, "<span class='warning'>For some reason, you can't attach [W]!</span>")
 			return
-		user.visible_message("<span class='notice'>[user] attaches [W] to [src].</span>", "<span class='notice'>You attach [W] to [src].</span>")
+		user.visible_message("<span class='notice'>[user] attaches [W] to [src].</span>", "<span class='notice'>I attach [W] to [src].</span>")
 		note = W
 		if(giftwrapped)
 			add_overlay(copytext("[icon_state]_note",5))
@@ -86,22 +86,22 @@
 		var/atom/movable/AM = loc //can't unwrap the wrapped container if it's inside something.
 		AM.relay_container_resist(user, O)
 		return
-	to_chat(user, "<span class='notice'>You lean on the back of [O] and start pushing to rip the wrapping around it.</span>")
+	to_chat(user, "<span class='notice'>I lean on the back of [O] and start pushing to rip the wrapping around it.</span>")
 	if(do_after(user, 50, target = O))
 		if(!user || user.stat != CONSCIOUS || user.loc != O || O.loc != src )
 			return
-		to_chat(user, "<span class='notice'>You successfully removed [O]'s wrapping !</span>")
+		to_chat(user, "<span class='notice'>I successfully removed [O]'s wrapping !</span>")
 		O.forceMove(loc)
-		playsound(src.loc, 'sound/items/poster_ripped.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		qdel(src)
 	else
 		if(user.loc == src) //so we don't get the message if we resisted multiple times and succeeded.
-			to_chat(user, "<span class='warning'>You fail to remove [O]'s wrapping!</span>")
+			to_chat(user, "<span class='warning'>I fail to remove [O]'s wrapping!</span>")
 
 
 /obj/item/smallDelivery
-	name = "parcel"
-	desc = "A brown paper delivery parcel."
+	name = "package"
+	desc = ""
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverypackage3"
 	item_state = "deliverypackage"
@@ -118,7 +118,8 @@
 	for(var/X in contents)
 		var/atom/movable/AM = X
 		user.put_in_hands(AM)
-	playsound(src.loc, 'sound/items/poster_ripped.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	user.visible_message("<span class='warning'>[user] opens [src].</span>")
 	qdel(src)
 
 /obj/item/smallDelivery/attack_self_tk(mob/user)
@@ -132,7 +133,7 @@
 		for(var/X in contents)
 			var/atom/movable/AM = X
 			AM.forceMove(src.loc)
-	playsound(src.loc, 'sound/items/poster_ripped.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	qdel(src)
 
 /obj/item/smallDelivery/examine(mob/user)
@@ -143,6 +144,8 @@
 		else
 			. += "There's a [note.name] attached to it..."
 			. += note.examine(user)
+	if(mailer)
+		. += "It's from [mailer], addressed to [mailedto].</a>"
 
 /obj/item/smallDelivery/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/destTagger))
@@ -152,11 +155,11 @@
 			var/tag = uppertext(GLOB.TAGGERLOCATIONS[O.currTag])
 			to_chat(user, "<span class='notice'>*[tag]*</span>")
 			sortTag = O.currTag
-			playsound(loc, 'sound/machines/twobeep_high.ogg', 100, TRUE)
+			playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 	else if(istype(W, /obj/item/pen))
 		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on the side of [src]!</span>")
+			to_chat(user, "<span class='notice'>I scribble illegibly on the side of [src]!</span>")
 			return
 		var/str = copytext(sanitize(input(user,"Label text?","Set label","")),1,MAX_NAME_LEN)
 		if(!user.canUseTopic(src, BE_CLOSE))
@@ -174,25 +177,25 @@
 			giftwrapped = 1
 			user.visible_message("<span class='notice'>[user] wraps the package in festive paper!</span>")
 		else
-			to_chat(user, "<span class='warning'>You need more paper!</span>")
+			to_chat(user, "<span class='warning'>I need more paper!</span>")
 
-	else if(istype(W, /obj/item/paper))
+/*	else if(istype(W, /obj/item/paper))
 		if(note)
 			to_chat(user, "<span class='warning'>This package already has a note attached!</span>")
 			return
 		if(!user.transferItemToLoc(W, src))
 			to_chat(user, "<span class='warning'>For some reason, you can't attach [W]!</span>")
 			return
-		user.visible_message("<span class='notice'>[user] attaches [W] to [src].</span>", "<span class='notice'>You attach [W] to [src].</span>")
+		user.visible_message("<span class='notice'>[user] attaches [W] to [src].</span>", "<span class='notice'>I attach [W] to [src].</span>")
 		note = W
 		if(giftwrapped)
 			add_overlay(copytext("[icon_state]_note",5))
 			return
-		add_overlay("[icon_state]_note")
+		add_overlay("[icon_state]_note")*/
 
 /obj/item/destTagger
 	name = "destination tagger"
-	desc = "Used to set the destination of properly wrapped packages."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "cargotagger"
 	var/currTag = 0 //Destinations are stored in code\globalvars\lists\flavor_misc.dm
@@ -206,7 +209,7 @@
 
 /obj/item/destTagger/borg
 	name = "cyborg destination tagger"
-	desc = "Used to fool the disposal mail network into thinking that you're a harmless parcel. Does actually work as a regular destination tagger as well."
+	desc = ""
 
 /obj/item/destTagger/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] begins tagging [user.p_their()] final destination! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -214,7 +217,7 @@
 		to_chat(user, "<span class='notice'>*HELL*</span>")//lizard nerf
 	else
 		to_chat(user, "<span class='notice'>*HEAVEN*</span>")
-	playsound(src, 'sound/machines/twobeep_high.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	return BRUTELOSS
 
 /obj/item/destTagger/proc/openwindow(mob/user)

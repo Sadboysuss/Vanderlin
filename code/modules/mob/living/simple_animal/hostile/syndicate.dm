@@ -16,7 +16,7 @@
 
 /mob/living/simple_animal/hostile/syndicate
 	name = "Syndicate Operative"
-	desc = "Death to Nanotrasen."
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "syndicate"
 	icon_living = "syndicate"
@@ -35,7 +35,7 @@
 	melee_damage_upper = 10
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	loot = list(/obj/effect/mob_spawn/human/corpse/syndicatesoldier)
 	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
@@ -80,7 +80,7 @@
 	loot = list(/obj/effect/gibspawner/human)
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	status_flags = 0
 	var/projectile_deflect_chance = 0
 
@@ -115,8 +115,8 @@
 	icon_living = "syndicate_sword"
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/blade1.ogg'
-	armour_penetration = 35
+	attack_sound = 'sound/blank.ogg'
+	armor_penetration = 35
 	light_color = LIGHT_COLOR_RED
 	status_flags = 0
 	var/obj/effect/light_emitter/red_energy_sword/sord
@@ -174,13 +174,13 @@
 	icon_state = "syndicate_pistol"
 	icon_living = "syndicate_pistol"
 	casingtype = /obj/item/ammo_casing/c10mm
-	projectilesound = 'sound/weapons/gun/pistol/shot.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/effect/gibspawner/human)
 	dodging = FALSE
 	rapid_melee = 1
 
 /mob/living/simple_animal/hostile/syndicate/ranged/infiltrator //shuttle loan event
-	projectilesound = 'sound/weapons/gun/smg/shot_suppressed.ogg'
+	projectilesound = 'sound/blank.ogg'
 	loot = list(/obj/effect/mob_spawn/human/corpse/syndicatesoldier)
 
 /mob/living/simple_animal/hostile/syndicate/ranged/space
@@ -210,7 +210,7 @@
 	icon_state = "syndicate_smg"
 	icon_living = "syndicate_smg"
 	casingtype = /obj/item/ammo_casing/c45
-	projectilesound = 'sound/weapons/gun/smg/shot.ogg'
+	projectilesound = 'sound/blank.ogg'
 
 /mob/living/simple_animal/hostile/syndicate/ranged/smg/pilot //caravan ambush ruin
 	name = "Syndicate Salvage Pilot"
@@ -284,7 +284,7 @@
 
 /mob/living/simple_animal/hostile/viscerator
 	name = "viscerator"
-	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
+	desc = ""
 	icon_state = "viscerator_attack"
 	icon_living = "viscerator_attack"
 	pass_flags = PASSTABLE | PASSMOB
@@ -298,7 +298,7 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	attack_verb_continuous = "cuts"
 	attack_verb_simple = "cut"
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	faction = list(ROLE_SYNDICATE)
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0

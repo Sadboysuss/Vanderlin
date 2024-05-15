@@ -17,7 +17,7 @@
 
 /obj/effect/proc_holder/alien/evolve
 	name = "Evolve to Praetorian"
-	desc = "Praetorian"
+	desc = ""
 	plasma_cost = 500
 
 	action_icon_state = "alien_evolve_drone"
@@ -28,11 +28,11 @@
 		to_chat(user, "<span class='danger'>Without the hivemind, you can't possibly hold the responsibility of leadership!</span>")
 		return 0
 	if(node.recent_queen_death)
-		to_chat(user, "<span class='danger'>Your thoughts are still too scattered to take up the position of leadership.</span>")
+		to_chat(user, "<span class='danger'>My thoughts are still too scattered to take up the position of leadership.</span>")
 		return 0
 
 	if(!isturf(user.loc))
-		to_chat(user, "<span class='warning'>You can't evolve here!</span>")
+		to_chat(user, "<span class='warning'>I can't evolve here!</span>")
 		return 0
 	if(!get_alien_type(/mob/living/carbon/alien/humanoid/royal))
 		var/mob/living/carbon/alien/humanoid/royal/praetorian/new_xeno = new (user.loc)

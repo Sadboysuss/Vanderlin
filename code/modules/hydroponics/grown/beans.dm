@@ -1,8 +1,8 @@
 // Soybeans
 /obj/item/seeds/soya
 	name = "pack of soybean seeds"
-	desc = "These seeds grow into soybean plants."
-	icon_state = "seed-soybean"
+	desc = ""
+	icon_state = "seed"
 	species = "soybean"
 	plantname = "Soybean Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/soybeans
@@ -20,7 +20,7 @@
 /obj/item/reagent_containers/food/snacks/grown/soybeans
 	seed = /obj/item/seeds/soya
 	name = "soybeans"
-	desc = "It's pretty bland, but oh the possibilities..."
+	desc = ""
 	gender = PLURAL
 	icon_state = "soybeans"
 	filling_color = "#F0E68C"
@@ -33,8 +33,8 @@
 // Koibean
 /obj/item/seeds/soya/koi
 	name = "pack of koibean seeds"
-	desc = "These seeds grow into koibean plants."
-	icon_state = "seed-koibean"
+	desc = ""
+	icon_state = "seed"
 	species = "koibean"
 	plantname = "Koibean Plants"
 	product = /obj/item/reagent_containers/food/snacks/grown/koibeans
@@ -46,7 +46,7 @@
 /obj/item/reagent_containers/food/snacks/grown/koibeans
 	seed = /obj/item/seeds/soya/koi
 	name = "koibean"
-	desc = "Something about these seems fishy."
+	desc = ""
 	icon_state = "koibeans"
 	filling_color = "#F0E68C"
 	bitesize_mod = 2

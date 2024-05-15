@@ -18,8 +18,8 @@
 
 
 /datum/species/dullahan/check_roundstart_eligible()
-	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
-		return TRUE
+//	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
+//		return TRUE
 	return FALSE
 
 /datum/species/dullahan/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
@@ -85,13 +85,13 @@
 
 /obj/item/organ/eyes/dullahan
 	name = "head vision"
-	desc = "An abstraction."
+	desc = ""
 	actions_types = list(/datum/action/item_action/organ_action/dullahan)
 	zone = "abstract"
 
 /datum/action/item_action/organ_action/dullahan
 	name = "Toggle Perspective"
-	desc = "Switch between seeing normally from your head, or blindly from your body."
+	desc = ""
 
 /datum/action/item_action/organ_action/dullahan/Trigger()
 	. = ..()

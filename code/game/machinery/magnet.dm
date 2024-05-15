@@ -8,7 +8,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_magnet-f"
 	name = "electromagnetic generator"
-	desc = "A device that uses station power to create points of magnetic energy."
+	desc = ""
 	level = 1		// underfloor
 	layer = LOW_OBJ_LAYER
 	use_power = IDLE_POWER_USE

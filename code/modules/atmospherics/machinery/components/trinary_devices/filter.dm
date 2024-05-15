@@ -3,7 +3,7 @@
 	density = FALSE
 
 	name = "gas filter"
-	desc = "Very useful for filtering gasses."
+	desc = ""
 
 	can_unwrench = TRUE
 	var/transfer_rate = MAX_TRANSFER_RATE
@@ -177,7 +177,7 @@
 /obj/machinery/atmospherics/components/trinary/filter/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational())
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], turn it off first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], turn it off first!</span>")
 		return FALSE
 
 // mapping

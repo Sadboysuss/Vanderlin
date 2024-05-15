@@ -6,7 +6,10 @@
 #define STICKYBAN_MAX_EXISTING_USER_MATCHES 3 //ie, users who were connected before the ban triggered
 #define STICKYBAN_MAX_ADMIN_MATCHES 1
 
+GLOBAL_VAR(last_connection)
+
 /world/IsBanned(key, address, computer_id, type, real_bans_only=FALSE)
+
 	debug_world_log("isbanned(): '[args.Join("', '")]'")
 	if (!key || (!real_bans_only && (!address || !computer_id)))
 		if(real_bans_only)
@@ -25,8 +28,12 @@
 	if(GLOB.admin_datums[ckey] || GLOB.deadmins[ckey])
 		admin = TRUE
 
-	var/client/C = GLOB.directory[ckey]
+//	if(GLOB.last_connection)
+//		if(!admin)
+//			if(world.time < GLOB.last_connection + 5 SECONDS)
+//				return list("reason"="server congestion", "desc"="Error: The queue is congested. Try connecting again.")
 
+	var/client/C = GLOB.directory[ckey]
 
 	//Whitelist
 	if(!real_bans_only && !C && CONFIG_GET(flag/usewhitelist))
@@ -35,10 +42,39 @@
 				log_admin("The admin [key] has been allowed to bypass the whitelist")
 				if (message)
 					message_admins("<span class='adminnotice'>The admin [key] has been allowed to bypass the whitelist</span>")
-					addclientmessage(ckey,"<span class='adminnotice'>You have been allowed to bypass the whitelist</span>")
+					addclientmessage(ckey,"<span class='adminnotice'>I have been allowed to bypass the whitelist</span>")
 			else
 				log_access("Failed Login: [key] - Not on whitelist")
-				return list("reason"="whitelist", "desc" = "\nReason: You are not on the white list for this server")
+				return list("reason"="whitelist", "desc" = "\nBecome whitelisted! discord.gg/6UzZQYqVHT")
+/*
+#ifdef MATURESERVER
+	if(!check_whitelist(ckey))
+		var/num = get_roundsplayed(ckey)
+		if(num >= 10)
+			if(check_patreon_lvl(ckey) < 2)
+				log_access("Failed Login: [key] - TrialExpire")
+				return list("reason"="trialexpire", "desc" = "\nBecome whitelisted to continue playing here! discord.gg/6UzZQYqVHT")
+#endif
+*/
+/*	//Blacklist
+	if(!real_bans_only && !C && CONFIG_GET(flag/useblacklist))
+		if(check_blacklist(ckey))
+			if (admin)
+				log_admin("The admin [key] has been allowed to bypass the blacklist")
+				if (message)
+					message_admins("<span class='adminnotice'>The admin [key] has been allowed to bypass the blacklist</span>")
+					addclientmessage(ckey,"<span class='adminnotice'>I have been allowed to bypass the blacklist</span>")
+			else
+				log_access("Failed Login: [key] - Blacklisted")
+				return list("reason"="blacklist", "desc" = "\nSomething went wrong. Contact the Game Master.")
+*/
+
+
+	if(!real_bans_only && !C)
+		if (!admin)
+			if(get_playerquality(ckey) <= -100)
+				log_access("Failed Login: [ckey] - PQ at -100")
+				return list("reason"="pqlow", "desc"="\nYou have completed the game!")
 
 	//Guest Checking
 	if(!real_bans_only && !C && IsGuestKey(key))
@@ -54,7 +90,7 @@
 	if(!real_bans_only && !C && extreme_popcap && !admin)
 		var/popcap_value = GLOB.clients.len
 		if(popcap_value >= extreme_popcap && !GLOB.joined_player_list.Find(ckey))
-			if(!CONFIG_GET(flag/byond_member_bypass_popcap) || !world.IsSubscribed(ckey, "BYOND"))
+			if(!IsPatreon(ckey))
 				log_access("Failed Login: [key] - Population cap reached")
 				return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
 
@@ -203,17 +239,26 @@
 			log_admin("The admin [key] has been allowed to bypass a matching host/sticky ban on [bannedckey]")
 			if (message)
 				message_admins("<span class='adminnotice'>The admin [key] has been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
-				addclientmessage(ckey,"<span class='adminnotice'>You have been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
+				addclientmessage(ckey,"<span class='adminnotice'>I have been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
 			return null
 
 		if (C) //user is already connected!.
-			to_chat(C, "<span class='redtext'>You are about to get disconnected for matching a sticky ban after you connected. If this turns out to be the ban evasion detection system going haywire, we will automatically detect this and revert the matches. if you feel that this is the case, please wait EXACTLY 6 seconds then reconnect using file -> reconnect to see if the match was automatically reversed.</span>")
+			to_chat(C, "<span class='redtext'>I are about to get disconnected for matching a sticky ban after you connected. If this turns out to be the ban evasion detection system going haywire, we will automatically detect this and revert the matches. if you feel that this is the case, please wait EXACTLY 6 seconds then reconnect using file -> reconnect to see if the match was automatically reversed.</span>")
 
-		var/desc = "\nReason:(StickyBan) You, or another user of this computer or connection ([bannedckey]) is banned from playing here. The ban reason is:\n[ban["message"]]\nThis ban was applied by [ban["admin"]]\nThis is a BanEvasion Detection System ban, if you think this ban is a mistake, please wait EXACTLY 6 seconds, then try again before filing an appeal.\n"
+		var/desc = ""
 		. = list("reason" = "Stickyban", "desc" = desc)
 		log_access("Failed Login: [key] [computer_id] [address] - StickyBanned [ban["message"]] Target Username: [bannedckey] Placed by [ban["admin"]]")
 
+	if(!.)
+		GLOB.last_connection = world.time
+
 	return .
+
+/proc/IsPatreon(ckey)
+	if(ckey in GLOB.allpatreons)
+		return TRUE
+	else
+		return FALSE
 
 /proc/restore_stickybans()
 	for (var/banned_ckey in GLOB.stickybanadmintexts)
@@ -223,6 +268,24 @@
 	if (GLOB.stickbanadminexemptiontimerid)
 		deltimer(GLOB.stickbanadminexemptiontimerid)
 	GLOB.stickbanadminexemptiontimerid = null
+
+/client/proc/is_new_player()
+#ifdef ALLOWPLAY
+	return FALSE
+#endif
+#ifdef TESTSERVER
+	return FALSE
+#endif
+	if(!check_whitelist(ckey))
+//		if(text2num(CheckJoinDate(ckey)) > 2021)
+		if(holder)
+			return FALSE
+		else
+			if(!check_bypassage(ckey))
+				var/plevel = patreonlevel()
+				if(plevel < 1 || !plevel)
+					if(!discord_name())
+						return TRUE
 
 #undef STICKYBAN_MAX_MATCHES
 #undef STICKYBAN_MAX_EXISTING_USER_MATCHES

@@ -92,7 +92,7 @@
 	. = ..()
 	create_reagents(1000) //limited by the size of the reagent holder anyway.
 	START_PROCESSING(SSfastprocess, src)
-	playsound(src, 'sound/effects/bubbles2.ogg', 80, TRUE, -3)
+	playsound(src, 'sound/blank.ogg', 80, TRUE, -3)
 
 /obj/effect/particle_effect/foam/ComponentInitialize()
 	. = ..()
@@ -261,7 +261,7 @@
 	layer = EDGED_TURF_LAYER
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	name = "foamed metal"
-	desc = "A lightweight foamed metal wall."
+	desc = ""
 	gender = PLURAL
 	max_integrity = 20
 	CanAtmosPass = ATMOS_PASS_DENSITY
@@ -279,7 +279,7 @@
 	return attack_hand(user)
 
 /obj/structure/foamedmetal/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
-	playsound(src.loc, 'sound/weapons/tap.ogg', 100, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/foamedmetal/attack_hand(mob/user)
 	. = ..()
@@ -287,8 +287,8 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
-	to_chat(user, "<span class='warning'>You hit [src] but bounce off it!</span>")
-	playsound(src.loc, 'sound/weapons/tap.ogg', 100, TRUE)
+	to_chat(user, "<span class='warning'>I hit [src] but bounce off it!</span>")
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target)
 	return !density
@@ -300,7 +300,7 @@
 //Atmos Backpack Resin, transparent, prevents atmos and filters the air
 /obj/structure/foamedmetal/resin
 	name = "\improper ATMOS Resin"
-	desc = "A lightweight, transparent resin used to suffocate fires, scrub the air of toxins, and restore the air to a safe temperature."
+	desc = ""
 	opacity = FALSE
 	icon_state = "atmos_resin"
 	alpha = 120

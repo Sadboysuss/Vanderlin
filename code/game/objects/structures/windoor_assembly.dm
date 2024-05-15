@@ -14,7 +14,7 @@
 
 	name = "windoor Assembly"
 	icon_state = "l_windoor_assembly01"
-	desc = "A small glass and wire assembly for windoors."
+	desc = ""
 	anchored = FALSE
 	density = FALSE
 	dir = NORTH
@@ -92,10 +92,10 @@
 					return
 
 				user.visible_message("<span class='notice'>[user] disassembles the windoor assembly.</span>",
-					"<span class='notice'>You start to disassemble the windoor assembly...</span>")
+					"<span class='notice'>I start to disassemble the windoor assembly...</span>")
 
 				if(W.use_tool(src, user, 40, volume=50))
-					to_chat(user, "<span class='notice'>You disassemble the windoor assembly.</span>")
+					to_chat(user, "<span class='notice'>I disassemble the windoor assembly.</span>")
 					var/obj/item/stack/sheet/rglass/RG = new (get_turf(src), 5)
 					RG.add_fingerprint(user)
 					if(secure)
@@ -111,7 +111,7 @@
 						to_chat(user, "<span class='warning'>There is already a windoor in that location!</span>")
 						return
 				user.visible_message("<span class='notice'>[user] secures the windoor assembly to the floor.</span>",
-					"<span class='notice'>You start to secure the windoor assembly to the floor...</span>")
+					"<span class='notice'>I start to secure the windoor assembly to the floor...</span>")
 
 				if(W.use_tool(src, user, 40, volume=100))
 					if(anchored)
@@ -120,7 +120,7 @@
 						if(WD.dir == dir)
 							to_chat(user, "<span class='warning'>There is already a windoor in that location!</span>")
 							return
-					to_chat(user, "<span class='notice'>You secure the windoor assembly.</span>")
+					to_chat(user, "<span class='notice'>I secure the windoor assembly.</span>")
 					setAnchored(TRUE)
 					if(secure)
 						name = "secure anchored windoor assembly"
@@ -130,12 +130,12 @@
 			//Unwrenching an unsecure assembly un-anchors it. Step 4 undone
 			else if(W.tool_behaviour == TOOL_WRENCH && anchored)
 				user.visible_message("<span class='notice'>[user] unsecures the windoor assembly to the floor.</span>",
-					"<span class='notice'>You start to unsecure the windoor assembly to the floor...</span>")
+					"<span class='notice'>I start to unsecure the windoor assembly to the floor...</span>")
 
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!anchored)
 						return
-					to_chat(user, "<span class='notice'>You unsecure the windoor assembly.</span>")
+					to_chat(user, "<span class='notice'>I unsecure the windoor assembly.</span>")
 					setAnchored(FALSE)
 					if(secure)
 						name = "secure windoor assembly"
@@ -146,16 +146,16 @@
 			else if(istype(W, /obj/item/stack/sheet/plasteel) && !secure)
 				var/obj/item/stack/sheet/plasteel/P = W
 				if(P.get_amount() < 2)
-					to_chat(user, "<span class='warning'>You need more plasteel to do this!</span>")
+					to_chat(user, "<span class='warning'>I need more plasteel to do this!</span>")
 					return
-				to_chat(user, "<span class='notice'>You start to reinforce the windoor with plasteel...</span>")
+				to_chat(user, "<span class='notice'>I start to reinforce the windoor with plasteel...</span>")
 
 				if(do_after(user,40, target = src))
 					if(!src || secure || P.get_amount() < 2)
 						return
 
 					P.use(2)
-					to_chat(user, "<span class='notice'>You reinforce the windoor.</span>")
+					to_chat(user, "<span class='notice'>I reinforce the windoor.</span>")
 					secure = TRUE
 					if(anchored)
 						name = "secure anchored windoor assembly"
@@ -164,16 +164,16 @@
 
 			//Adding cable to the assembly. Step 5 complete.
 			else if(istype(W, /obj/item/stack/cable_coil) && anchored)
-				user.visible_message("<span class='notice'>[user] wires the windoor assembly.</span>", "<span class='notice'>You start to wire the windoor assembly...</span>")
+				user.visible_message("<span class='notice'>[user] wires the windoor assembly.</span>", "<span class='notice'>I start to wire the windoor assembly...</span>")
 
 				if(do_after(user, 40, target = src))
 					if(!src || !anchored || src.state != "01")
 						return
 					var/obj/item/stack/cable_coil/CC = W
 					if(!CC.use(1))
-						to_chat(user, "<span class='warning'>You need more cable to do this!</span>")
+						to_chat(user, "<span class='warning'>I need more cable to do this!</span>")
 						return
-					to_chat(user, "<span class='notice'>You wire the windoor.</span>")
+					to_chat(user, "<span class='notice'>I wire the windoor.</span>")
 					state = "02"
 					if(secure)
 						name = "secure wired windoor assembly"
@@ -186,13 +186,13 @@
 
 			//Removing wire from the assembly. Step 5 undone.
 			if(W.tool_behaviour == TOOL_WIRECUTTER)
-				user.visible_message("<span class='notice'>[user] cuts the wires from the airlock assembly.</span>", "<span class='notice'>You start to cut the wires from airlock assembly...</span>")
+				user.visible_message("<span class='notice'>[user] cuts the wires from the airlock assembly.</span>", "<span class='notice'>I start to cut the wires from airlock assembly...</span>")
 
 				if(W.use_tool(src, user, 40, volume=100))
 					if(state != "02")
 						return
 
-					to_chat(user, "<span class='notice'>You cut the windoor wires.</span>")
+					to_chat(user, "<span class='notice'>I cut the windoor wires.</span>")
 					new/obj/item/stack/cable_coil(get_turf(user), 1)
 					state = "01"
 					if(secure)
@@ -206,13 +206,13 @@
 					return
 				W.play_tool_sound(src, 100)
 				user.visible_message("<span class='notice'>[user] installs the electronics into the airlock assembly.</span>",
-					"<span class='notice'>You start to install electronics into the airlock assembly...</span>")
+					"<span class='notice'>I start to install electronics into the airlock assembly...</span>")
 
 				if(do_after(user, 40, target = src))
 					if(!src || electronics)
 						W.forceMove(drop_location())
 						return
-					to_chat(user, "<span class='notice'>You install the airlock electronics.</span>")
+					to_chat(user, "<span class='notice'>I install the airlock electronics.</span>")
 					name = "near finished windoor assembly"
 					electronics = W
 				else
@@ -224,10 +224,10 @@
 					return
 
 				user.visible_message("<span class='notice'>[user] removes the electronics from the airlock assembly.</span>",
-					"<span class='notice'>You start to uninstall electronics from the airlock assembly...</span>")
+					"<span class='notice'>I start to uninstall electronics from the airlock assembly...</span>")
 
 				if(W.use_tool(src, user, 40, volume=100) && electronics)
-					to_chat(user, "<span class='notice'>You remove the airlock electronics.</span>")
+					to_chat(user, "<span class='notice'>I remove the airlock electronics.</span>")
 					name = "wired windoor assembly"
 					var/obj/item/electronics/airlock/ae
 					ae = electronics
@@ -252,12 +252,12 @@
 					return
 				user << browse(null, "window=windoor_access")
 				user.visible_message("<span class='notice'>[user] pries the windoor into the frame.</span>",
-					"<span class='notice'>You start prying the windoor into the frame...</span>")
+					"<span class='notice'>I start prying the windoor into the frame...</span>")
 
 				if(W.use_tool(src, user, 40, volume=100) && electronics)
 
 					density = TRUE //Shouldn't matter but just incase
-					to_chat(user, "<span class='notice'>You finish the windoor.</span>")
+					to_chat(user, "<span class='notice'>I finish the windoor.</span>")
 
 					if(secure)
 						var/obj/machinery/door/window/brigdoor/windoor = new /obj/machinery/door/window/brigdoor(loc)
@@ -341,7 +341,7 @@
 //Flips the windoor assembly, determines whather the door opens to the left or the right
 /obj/structure/windoor_assembly/verb/flip()
 	set name = "Flip Windoor Assembly"
-	set category = "Object"
+	set hidden = 1
 	set src in oview(1)
 	if(usr.stat || usr.restrained())
 		return

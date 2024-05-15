@@ -1,5 +1,5 @@
 /obj/mecha/combat/gygax
-	desc = "A lightweight, security exosuit. Popular among private and corporate security."
+	desc = ""
 	name = "\improper Gygax"
 	icon_state = "gygax"
 	step_in = 3
@@ -22,7 +22,7 @@
 		mechstep(direction) //agile mechs get to move and turn in the same step
 
 /obj/mecha/combat/gygax/dark
-	desc = "A lightweight exosuit, painted in a dark scheme. This model appears to have some modifications."
+	desc = ""
 	name = "\improper Dark Gygax"
 	icon_state = "darkgygax"
 	max_integrity = 300

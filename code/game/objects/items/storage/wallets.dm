@@ -1,10 +1,10 @@
 /obj/item/storage/wallet
 	name = "wallet"
-	desc = "It can hold a few small and personal things."
+	desc = ""
 	icon_state = "wallet"
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = FLAMMABLE
-	slot_flags = ITEM_SLOT_ID
+	slot_flags = ITEM_SLOT_RING
 	component_type = /datum/component/storage/concrete/wallet
 
 	var/obj/item/card/id/front_id = null
@@ -56,7 +56,7 @@
 		combined_access |= I.access
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
-		if(H.wear_id == src)
+		if(H.wear_ring == src)
 			H.sec_hud_set_ID()
 	update_icon()
 	update_label()

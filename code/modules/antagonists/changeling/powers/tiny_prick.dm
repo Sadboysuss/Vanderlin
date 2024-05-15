@@ -1,6 +1,6 @@
 /datum/action/changeling/sting//parent path, not meant for users afaik
 	name = "Tiny Prick"
-	desc = "Stabby stabby"
+	desc = ""
 
 /datum/action/changeling/sting/Trigger()
 	var/mob/user = owner
@@ -60,13 +60,13 @@
 		return
 	to_chat(user, "<span class='notice'>We stealthily sting [target.name].</span>")
 	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/changeling))
-		to_chat(target, "<span class='warning'>You feel a tiny prick.</span>")
+		to_chat(target, "<span class='warning'>I feel a tiny prick.</span>")
 	return 1
 
 
 /datum/action/changeling/sting/transformation
 	name = "Transformation Sting"
-	desc = "We silently sting a human, injecting a retrovirus that forces them to transform. Costs 50 chemicals."
+	desc = ""
 	helptext = "The victim will transform much like a changeling would. Does not provide a warning to others. Mutations will not be transferred, and monkeys will become human."
 	button_icon_state = "sting_transform"
 	chemical_cost = 50
@@ -113,14 +113,14 @@
 
 /datum/action/changeling/sting/false_armblade
 	name = "False Armblade Sting"
-	desc = "We silently sting a human, injecting a retrovirus that mutates their arm to temporarily appear as an armblade. Costs 20 chemicals."
+	desc = ""
 	helptext = "The victim will form an armblade much like a changeling would, except the armblade is dull and useless."
 	button_icon_state = "sting_armblade"
 	chemical_cost = 20
 	dna_cost = 1
 
 /obj/item/melee/arm_blade/false
-	desc = "A grotesque mass of flesh that used to be your arm. Although it looks dangerous at first, you can tell it's actually quite dull and useless."
+	desc = ""
 	force = 5 //Basically as strong as a punch
 	fake = TRUE
 
@@ -147,26 +147,26 @@
 
 	var/obj/item/melee/arm_blade/false/blade = new(target,1)
 	target.put_in_hands(blade)
-	target.visible_message("<span class='warning'>A grotesque blade forms around [target.name]\'s arm!</span>", "<span class='userdanger'>Your arm twists and mutates, transforming into a horrific monstrosity!</span>", "<span class='hear'>You hear organic matter ripping and tearing!</span>")
-	playsound(target, 'sound/effects/blobattack.ogg', 30, TRUE)
+	target.visible_message("<span class='warning'>A grotesque blade forms around [target.name]\'s arm!</span>", "<span class='danger'>My arm twists and mutates, transforming into a horrific monstrosity!</span>", "<span class='hear'>I hear organic matter ripping and tearing!</span>")
+	playsound(target, 'sound/blank.ogg', 30, TRUE)
 
 	addtimer(CALLBACK(src, .proc/remove_fake, target, blade), 600)
 	return TRUE
 
 /datum/action/changeling/sting/false_armblade/proc/remove_fake(mob/target, obj/item/melee/arm_blade/false/blade)
-	playsound(target, 'sound/effects/blobattack.ogg', 30, TRUE)
+	playsound(target, 'sound/blank.ogg', 30, TRUE)
 	target.visible_message("<span class='warning'>With a sickening crunch, \
 	[target] reforms [target.p_their()] [blade.name] into an arm!</span>",
 	"<span class='warning'>[blade] reforms back to normal.</span>",
-	"<span class='italics>You hear organic matter ripping and tearing!</span>")
+	"<span class='italics>I hear organic matter ripping and tearing!</span>")
 
 	qdel(blade)
 	target.update_inv_hands()
 
 /datum/action/changeling/sting/extract_dna
 	name = "Extract DNA Sting"
-	desc = "We stealthily sting a target and extract their DNA. Costs 25 chemicals."
-	helptext = "Will give you the DNA of your target, allowing you to transform into them."
+	desc = ""
+	helptext = "Will give you the DNA of my target, allowing you to transform into them."
 	button_icon_state = "sting_extract"
 	chemical_cost = 25
 	dna_cost = 0
@@ -185,7 +185,7 @@
 
 /datum/action/changeling/sting/mute
 	name = "Mute Sting"
-	desc = "We silently sting a human, completely silencing them for a short time. Costs 20 chemicals."
+	desc = ""
 	helptext = "Does not provide a warning to the victim that they have been stung, until they try to speak and cannot."
 	button_icon_state = "sting_mute"
 	chemical_cost = 20
@@ -198,7 +198,7 @@
 
 /datum/action/changeling/sting/blind
 	name = "Blind Sting"
-	desc = "We temporarily blind our victim. Costs 25 chemicals."
+	desc = ""
 	helptext = "This sting completely blinds a target for a short time, and leaves them with blurred vision for a long time."
 	button_icon_state = "sting_blind"
 	chemical_cost = 25
@@ -206,7 +206,7 @@
 
 /datum/action/changeling/sting/blind/sting_action(mob/user, mob/living/carbon/target)
 	log_combat(user, target, "stung", "blind sting")
-	to_chat(target, "<span class='danger'>Your eyes burn horrifically!</span>")
+	to_chat(target, "<span class='danger'>My eyes burn horrifically!</span>")
 	target.become_nearsighted(EYE_DAMAGE)
 	target.blind_eyes(20)
 	target.blur_eyes(40)
@@ -214,7 +214,7 @@
 
 /datum/action/changeling/sting/LSD
 	name = "Hallucination Sting"
-	desc = "We cause mass terror to our victim."
+	desc = ""
 	helptext = "We evolve the ability to sting a target with a powerful hallucinogenic chemical. The target does not notice they have been stung, and the effect occurs after 30 to 60 seconds."
 	button_icon_state = "sting_lsd"
 	chemical_cost = 10
@@ -231,7 +231,7 @@
 
 /datum/action/changeling/sting/cryo
 	name = "Cryogenic Sting"
-	desc = "We silently sting our victim with a cocktail of chemicals that freezes them from the inside. Costs 15 chemicals."
+	desc = ""
 	helptext = "Does not provide a warning to the victim, though they will likely realize they are suddenly freezing."
 	button_icon_state = "sting_cryo"
 	chemical_cost = 15

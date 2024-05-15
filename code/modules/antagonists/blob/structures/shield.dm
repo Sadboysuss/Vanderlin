@@ -2,8 +2,8 @@
 	name = "strong blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_shield"
-	desc = "A solid wall of slightly twitching tendrils."
-	var/damaged_desc = "A wall of twitching tendrils."
+	desc = ""
+	var/damaged_desc = ""
 	max_integrity = 150
 	brute_resist = 0.25
 	explosion_block = 3
@@ -24,7 +24,7 @@
 	if(obj_integrity < max_integrity * 0.5)
 		icon_state = "[initial(icon_state)]_damaged"
 		name = "weakened [initial(name)]"
-		desc = "[damaged_desc]"
+		desc = ""
 		atmosblock = FALSE
 	else
 		icon_state = initial(icon_state)
@@ -35,8 +35,8 @@
 
 /obj/structure/blob/shield/reflective
 	name = "reflective blob"
-	desc = "A solid wall of slightly twitching tendrils with a reflective glow."
-	damaged_desc = "A wall of twitching tendrils with a reflective glow."
+	desc = ""
+	damaged_desc = ""
 	icon_state = "blob_glow"
 	flags_1 = CHECK_RICOCHET_1
 	point_return = 8

@@ -2,7 +2,7 @@
 
 /obj/structure/closet/crate/secure/loot
 	name = "abandoned crate"
-	desc = "What could be inside?"
+	desc = ""
 	icon_state = "securecrate"
 	integrity_failure = 0 //no breaking open the crate
 	var/code = null
@@ -162,7 +162,7 @@
 				add_overlay("securecrateg")
 				tamperproof = 0 // set explosion chance to zero, so we dont accidently hit it with a multitool and instantly die
 			else if (input == null || sanitycheck == null || length(input) != codelen)
-				to_chat(user, "<span class='notice'>You leave the crate alone.</span>")
+				to_chat(user, "<span class='notice'>I leave the crate alone.</span>")
 			else
 				to_chat(user, "<span class='warning'>A red light flashes.</span>")
 				lastattempt = input

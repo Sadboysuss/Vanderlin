@@ -1,7 +1,7 @@
 /**********************Lazarus Injector**********************/
 /obj/item/lazarus_injector
 	name = "lazarus injector"
-	desc = "An injector with a cocktail of nanomachines and chemicals, this device can seemingly raise animals from the dead, making them become friendly to the user. Unfortunately, the process is useless on higher forms of life and incredibly costly, so these were hidden in storage until an executive thought they'd be great motivation for some of their employees."
+	desc = ""
 	icon = 'icons/obj/syringe.dmi'
 	icon_state = "lazarus_hypo"
 	item_state = "hypo"
@@ -9,7 +9,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	var/loaded = 1
 	var/malfunctioning = 0
@@ -41,7 +41,7 @@
 				loaded = 0
 				user.visible_message("<span class='notice'>[user] injects [M] with [src], reviving it.</span>")
 				SSblackbox.record_feedback("tally", "lazarus_injector", 1, M.type)
-				playsound(src,'sound/effects/refill.ogg',50,TRUE)
+				playsound(src,'sound/blank.ogg',50,TRUE)
 				icon_state = "lazarus_empty"
 				return
 			else

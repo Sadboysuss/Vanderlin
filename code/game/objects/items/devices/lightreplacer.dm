@@ -41,7 +41,7 @@
 /obj/item/lightreplacer
 
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with broken or working light bulbs, or sheets of glass."
+	desc = ""
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
@@ -79,10 +79,10 @@
 			return
 		else if(G.use(decrement))
 			AddUses(increment)
-			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
+			to_chat(user, "<span class='notice'>I insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
 			return
 		else
-			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights!</span>")
+			to_chat(user, "<span class='warning'>I need one sheet of glass to replace lights!</span>")
 
 	if(istype(W, /obj/item/shard))
 		if(uses >= max_uses)
@@ -91,7 +91,7 @@
 		if(!user.temporarilyRemoveItemFromInventory(W))
 			return
 		AddUses(round(increment*0.75))
-		to_chat(user, "<span class='notice'>You insert a shard of glass into \the [src]. You have [uses] light\s remaining.</span>")
+		to_chat(user, "<span class='notice'>I insert a shard of glass into \the [src]. You have [uses] light\s remaining.</span>")
 		qdel(W)
 		return
 
@@ -106,7 +106,7 @@
 		else
 			if(!user.temporarilyRemoveItemFromInventory(W))
 				return
-			to_chat(user, "<span class='notice'>You insert [L] into \the [src].</span>")
+			to_chat(user, "<span class='notice'>I insert [L] into \the [src].</span>")
 			AddShards(1, user)
 			qdel(L)
 		return
@@ -140,7 +140,7 @@
 			to_chat(user, "<span class='warning'>\The [src] is full!</span>")
 			return
 
-		to_chat(user, "<span class='notice'>You fill \the [src] with lights from \the [S]. " + status_string() + "</span>")
+		to_chat(user, "<span class='notice'>I fill \the [src] with lights from \the [S]. " + status_string() + "</span>")
 
 /obj/item/lightreplacer/emag_act()
 	if(obj_flags & EMAGGED)
@@ -159,7 +159,7 @@
 	return "It has [uses] light\s remaining (plus [bulb_shards] fragment\s)."
 
 /obj/item/lightreplacer/proc/Use(mob/user)
-	playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	AddUses(-1)
 	return 1
 
@@ -175,10 +175,10 @@
 	bulb_shards = bulb_shards % shards_required
 	if(new_bulbs != 0)
 		to_chat(user, "<span class='notice'>\The [src] has fabricated a new bulb from the broken glass it has stored. It now has [uses] uses.</span>")
-		playsound(src.loc, 'sound/machines/ding.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	return new_bulbs
 
-/obj/item/lightreplacer/proc/Charge(var/mob/user)
+/obj/item/lightreplacer/proc/Charge(mob/user)
 	charge += 1
 	if(charge > 3)
 		AddUses(1)
@@ -190,7 +190,7 @@
 		if(CanUse(U))
 			if(!Use(U))
 				return
-			to_chat(U, "<span class='notice'>You replace \the [target.fitting] with \the [src].</span>")
+			to_chat(U, "<span class='notice'>I replace \the [target.fitting] with \the [src].</span>")
 
 			if(target.status != LIGHT_EMPTY)
 				AddShards(1, U)

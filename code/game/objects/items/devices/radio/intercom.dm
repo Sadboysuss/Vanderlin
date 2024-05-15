@@ -1,6 +1,6 @@
 /obj/item/radio/intercom
 	name = "station intercom"
-	desc = "Talk through this."
+	desc = ""
 	icon_state = "intercom"
 	anchored = TRUE
 	w_class = WEIGHT_CLASS_BULKY
@@ -35,25 +35,25 @@
 /obj/item/radio/intercom/attackby(obj/item/I, mob/living/user, params)
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(unfastened)
-			user.visible_message("<span class='notice'>[user] starts tightening [src]'s screws...</span>", "<span class='notice'>You start screwing in [src]...</span>")
+			user.visible_message("<span class='notice'>[user] starts tightening [src]'s screws...</span>", "<span class='notice'>I start screwing in [src]...</span>")
 			if(I.use_tool(src, user, 30, volume=50))
-				user.visible_message("<span class='notice'>[user] tightens [src]'s screws!</span>", "<span class='notice'>You tighten [src]'s screws.</span>")
+				user.visible_message("<span class='notice'>[user] tightens [src]'s screws!</span>", "<span class='notice'>I tighten [src]'s screws.</span>")
 				unfastened = FALSE
 		else
-			user.visible_message("<span class='notice'>[user] starts loosening [src]'s screws...</span>", "<span class='notice'>You start unscrewing [src]...</span>")
+			user.visible_message("<span class='notice'>[user] starts loosening [src]'s screws...</span>", "<span class='notice'>I start unscrewing [src]...</span>")
 			if(I.use_tool(src, user, 40, volume=50))
-				user.visible_message("<span class='notice'>[user] loosens [src]'s screws!</span>", "<span class='notice'>You unscrew [src], loosening it from the wall.</span>")
+				user.visible_message("<span class='notice'>[user] loosens [src]'s screws!</span>", "<span class='notice'>I unscrew [src], loosening it from the wall.</span>")
 				unfastened = TRUE
 		return
 	else if(I.tool_behaviour == TOOL_WRENCH)
 		if(!unfastened)
-			to_chat(user, "<span class='warning'>You need to unscrew [src] from the wall first!</span>")
+			to_chat(user, "<span class='warning'>I need to unscrew [src] from the wall first!</span>")
 			return
-		user.visible_message("<span class='notice'>[user] starts unsecuring [src]...</span>", "<span class='notice'>You start unsecuring [src]...</span>")
+		user.visible_message("<span class='notice'>[user] starts unsecuring [src]...</span>", "<span class='notice'>I start unsecuring [src]...</span>")
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 80))
-			user.visible_message("<span class='notice'>[user] unsecures [src]!</span>", "<span class='notice'>You detach [src] from the wall.</span>")
-			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
+			user.visible_message("<span class='notice'>[user] unsecures [src]!</span>", "<span class='notice'>I detach [src] from the wall.</span>")
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			new/obj/item/wallframe/intercom(get_turf(src))
 			qdel(src)
 		return
@@ -125,7 +125,7 @@
 //Created through the autolathe or through deconstructing intercoms. Can be applied to wall to make a new intercom on it!
 /obj/item/wallframe/intercom
 	name = "intercom frame"
-	desc = "A ready-to-go intercom. Just slap it on a wall and screw it in!"
+	desc = ""
 	icon_state = "intercom"
 	result_path = /obj/item/radio/intercom/unscrewed
 	pixel_shift = 29

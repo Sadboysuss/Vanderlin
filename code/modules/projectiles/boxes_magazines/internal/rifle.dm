@@ -1,6 +1,6 @@
 /obj/item/ammo_box/magazine/internal/boltaction
 	name = "bolt action rifle internal magazine"
-	desc = "Oh god, this shouldn't be here"
+	desc = ""
 	ammo_type = /obj/item/ammo_casing/a762
 	caliber = "a762"
 	max_ammo = 5

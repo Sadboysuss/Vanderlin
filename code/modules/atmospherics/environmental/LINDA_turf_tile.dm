@@ -85,6 +85,7 @@
 	return return_air()
 
 /turf/temperature_expose()
+	return
 	if(temperature > heat_capacity)
 		to_be_destroyed = TRUE
 
@@ -178,6 +179,8 @@
 
 	for(var/t in adjacent_turfs)
 		var/turf/open/enemy_tile = t
+		if(!istype(enemy_tile))
+			continue
 
 		if(fire_count <= enemy_tile.current_cycle)
 			continue

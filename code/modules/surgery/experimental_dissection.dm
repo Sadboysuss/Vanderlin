@@ -1,11 +1,11 @@
 #define BASE_HUMAN_REWARD 500
-#define EXPDIS_FAIL_MSG "<span class='notice'>You dissect [target], but do not find anything particularly interesting.</span>"
+#define EXPDIS_FAIL_MSG "<span class='notice'>I dissect [target], but do not find anything particularly interesting.</span>"
 #define PUBLIC_TECHWEB_GAIN 0.6 //how many research points go directly into the main pool
 #define PRIVATE_TECHWEB_GAIN (1 - PUBLIC_TECHWEB_GAIN) //how many research points go directly into the main pool
 
 /datum/surgery/advanced/experimental_dissection
 	name = "Dissection"
-	desc = "A surgical procedure which analyzes the biology of a corpse, and automatically adds new findings to the research database."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
@@ -33,7 +33,7 @@
 	repeatable = TRUE
 
 /datum/surgery_step/dissection/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	user.visible_message("<span class='notice'>[user] starts dissecting [target].</span>", "<span class='notice'>You start dissecting [target].</span>")
+	user.visible_message("<span class='notice'>[user] starts dissecting [target].</span>", "<span class='notice'>I start dissecting [target].</span>")
 
 /datum/surgery_step/dissection/proc/check_value(mob/living/target, datum/surgery/advanced/experimental_dissection/ED)
 	var/cost = BASE_HUMAN_REWARD
@@ -74,7 +74,7 @@
 
 /datum/surgery_step/dissection/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/points_earned = check_value(target, surgery)
-	user.visible_message("<span class='notice'>[user] dissects [target], discovering [points_earned] point\s of data!</span>", "<span class='notice'>You dissect [target], finding [points_earned] point\s worth of discoveries, you also write a few notes.</span>")
+	user.visible_message("<span class='notice'>[user] dissects [target], discovering [points_earned] point\s of data!</span>", "<span class='notice'>I dissect [target], finding [points_earned] point\s worth of discoveries, you also write a few notes.</span>")
 
 	SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = points_earned*PUBLIC_TECHWEB_GAIN))
 	new /obj/item/research_notes(user.loc, points_earned*PRIVATE_TECHWEB_GAIN, "biology")

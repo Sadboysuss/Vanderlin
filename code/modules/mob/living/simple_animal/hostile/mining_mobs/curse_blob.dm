@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/asteroid/curseblob
 	name = "curse mass"
-	desc = "A mass of purple... smoke?"
+	desc = ""
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "curseblob"
 	icon_living = "curseblob"
@@ -17,7 +17,7 @@
 	melee_damage_type = BURN
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/effects/curseattack.ogg'
+	attack_sound = 'sound/blank.ogg'
 	throw_message = "passes through the smokey body of"
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
@@ -30,7 +30,7 @@
 /mob/living/simple_animal/hostile/asteroid/curseblob/Initialize(mapload)
 	. = ..()
 	timerid = QDEL_IN(src, 600)
-	playsound(src, 'sound/effects/curse1.ogg', 100, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 100, TRUE, -1)
 
 /mob/living/simple_animal/hostile/asteroid/curseblob/Destroy()
 	new /obj/effect/temp_visual/dir_setting/curse/blob(loc, dir)

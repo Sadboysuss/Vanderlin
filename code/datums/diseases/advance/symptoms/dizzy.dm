@@ -18,7 +18,7 @@ Bonus
 /datum/symptom/dizzy // Not the egg
 
 	name = "Dizziness"
-	desc = "The virus causes inflammation of the vestibular system, leading to bouts of dizziness."
+	desc = ""
 	resistance = -2
 	stage_speed = -3
 	transmittable = -1
@@ -47,7 +47,7 @@ Bonus
 			if(prob(base_message_chance) && !suppress_warning)
 				to_chat(M, "<span class='warning'>[pick("You feel dizzy.", "Your head spins.")]</span>")
 		else
-			to_chat(M, "<span class='userdanger'>A wave of dizziness washes over you!</span>")
+			to_chat(M, "<span class='danger'>A wave of dizziness washes over you!</span>")
 			if(M.dizziness <= 70)
 				M.dizziness += 30
 			if(power >= 2)

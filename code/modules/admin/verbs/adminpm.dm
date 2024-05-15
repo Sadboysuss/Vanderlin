@@ -69,7 +69,7 @@
 		return
 
 	if(!holder && !current_ticket)	//no ticket? https://www.youtube.com/watch?v=iHSPf6x1Fdo
-		to_chat(src, "<span class='danger'>You can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>")
+		to_chat(src, "<span class='danger'>I can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>")
 		to_chat(src, "<span class='notice'>Message: [msg]</span>")
 		return
 
@@ -169,7 +169,7 @@
 
 			//play the receiving admin the adminhelp sound (if they have them enabled)
 			if(recipient.prefs.toggles & SOUND_ADMINHELP)
-				SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
+				SEND_SOUND(recipient, sound('sound/blank.ogg'))
 
 		else
 			if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
@@ -184,7 +184,7 @@
 				admin_ticket_log(recipient, "<font color='purple'>PM From [key_name_admin(src)]: [keywordparsedmsg]</font>")
 
 				//always play non-admin recipients the adminhelp sound
-				SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
+				SEND_SOUND(recipient, sound('sound/blank.ogg'))
 
 				//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
 				if(CONFIG_GET(flag/popup_admin_pm))
@@ -302,7 +302,7 @@
 
 	window_flash(C, ignorepref = TRUE)
 	//always play non-admin recipients the adminhelp sound
-	SEND_SOUND(C, 'sound/effects/adminhelp.ogg')
+	SEND_SOUND(C, 'sound/blank.ogg')
 
 	C.ircreplyamount = IRCREPLYCOUNT
 

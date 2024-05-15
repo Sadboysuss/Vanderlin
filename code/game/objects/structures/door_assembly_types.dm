@@ -209,7 +209,7 @@
 
 /obj/structure/door_assembly/door_assembly_bananium
 	name = "bananium airlock assembly"
-	desc = "Honk."
+	desc = ""
 	icon = 'icons/obj/doors/airlocks/station/bananium.dmi'
 	base_name = "bananium airlock"
 	airlock_type = /obj/machinery/door/airlock/bananium

@@ -22,7 +22,7 @@
 	color = LIGHTING_BASE_MATRIX
 
 	myturf = loc
-	if (myturf.lighting_object)
+	if(myturf.lighting_object)
 		qdel(myturf.lighting_object, force = TRUE)
 	myturf.lighting_object = src
 	myturf.luminosity = 0
@@ -33,7 +33,7 @@
 	needs_update = TRUE
 	SSlighting.objects_queue += src
 
-/atom/movable/lighting_object/Destroy(var/force)
+/atom/movable/lighting_object/Destroy(force)
 	if (force)
 		SSlighting.objects_queue -= src
 		if (loc != myturf)
@@ -124,7 +124,16 @@
 			ar, ag, ab, 00,
 			00, 00, 00, 01
 		)
-
+/*		if(color)
+			animate(src, color = list(rr, rg, rb,00,gr, gg, gb, 00,br, bg, bb, 00,ar, ag, ab, 00,00, 00, 00, 01), time = 5)
+		else
+			color = list(
+				rr, rg, rb, 00,
+				gr, gg, gb, 00,
+				br, bg, bb, 00,
+				ar, ag, ab, 00,
+				00, 00, 00, 01
+			)*/
 	luminosity = set_luminosity
 
 // Variety of overrides so the overlays don't get affected by weird things.

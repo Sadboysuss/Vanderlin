@@ -19,7 +19,7 @@ Bonus
 /datum/symptom/weight_loss
 
 	name = "Weight Loss"
-	desc = "The virus mutates the host's metabolism, making it almost unable to gain nutrition from food."
+	desc = ""
 	stealth = -2
 	resistance = 2
 	stage_speed = -2
@@ -29,7 +29,7 @@ Bonus
 	base_message_chance = 100
 	symptom_delay_min = 15
 	symptom_delay_max = 45
-	threshold_desc = "<b>Stealth 4:</b> The symptom is less noticeable."
+	threshold_desc = ""
 
 /datum/symptom/weight_loss/Start(datum/disease/advance/A)
 	if(!..())

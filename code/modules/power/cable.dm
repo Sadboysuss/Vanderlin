@@ -13,7 +13,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 ////////////////////////////////
 /obj/structure/cable
 	name = "power cable"
-	desc = "A flexible, superconducting insulated cable for heavy-duty power transfer."
+	desc = ""
 	icon = 'icons/obj/power_cond/layer_cable.dmi'
 	icon_state = "l2-1-2-4-8-node"
 	color = "yellow"
@@ -151,7 +151,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 	if(W.tool_behaviour == TOOL_WIRECUTTER)
 		if (shock(user, 50))
 			return
-		user.visible_message("<span class='notice'>[user] cuts the cable.</span>", "<span class='notice'>You cut the cable.</span>")
+		user.visible_message("<span class='notice'>[user] cuts the cable.</span>", "<span class='notice'>I cut the cable.</span>")
 		investigate_log("was cut by [key_name(usr)] in [AREACOORD(src)]", INVESTIGATE_WIRES)
 		deconstruct()
 		return
@@ -393,7 +393,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	merge_type = /obj/item/stack/cable_coil // This is here to let its children merge between themselves
 	color = "yellow"
 	var/cable_color = "yellow"
-	desc = "A coil of insulated power cable."
+	desc = ""
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
@@ -405,7 +405,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	singular_name = "cable piece"
 	full_w_class = WEIGHT_CLASS_SMALL
 	grind_results = list(/datum/reagent/copper = 2) //2 copper per cable in the coil
-	usesound = 'sound/items/deconstruct.ogg'
+	usesound = 'sound/blank.ogg'
 	var/obj/structure/cable/target_type = /obj/structure/cable
 
 /obj/item/stack/cable_coil/Initialize(mapload, new_amount = null)
@@ -467,7 +467,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
 	if(affecting && affecting.status == BODYPART_ROBOTIC)
 		if(user == H)
-			user.visible_message("<span class='notice'>[user] starts to fix some of the wires in [H]'s [affecting.name].</span>", "<span class='notice'>You start fixing some of the wires in [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
+			user.visible_message("<span class='notice'>[user] starts to fix some of the wires in [H]'s [affecting.name].</span>", "<span class='notice'>I start fixing some of the wires in [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
 			if(!do_mob(user, H, 50))
 				return
 		if(item_heal_robotic(H, user, 0, 15))
@@ -500,7 +500,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 		return
 
 	if(!isturf(T) || T.intact || !T.can_have_cabling())
-		to_chat(user, "<span class='warning'>You can only lay cables on catwalks and plating!</span>")
+		to_chat(user, "<span class='warning'>I can only lay cables on catwalks and plating!</span>")
 		return
 
 	if(get_amount() < 1) // Out of cable
@@ -508,7 +508,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 		return
 
 	if(get_dist(T,user) > 1) // Too far
-		to_chat(user, "<span class='warning'>You can't lay cable at a place that far away!</span>")
+		to_chat(user, "<span class='warning'>I can't lay cable at a place that far away!</span>")
 		return
 
 	for(var/obj/structure/cable/C in T)
@@ -557,7 +557,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list(new/datum/stack_recipe("cable restrain
 
 /obj/structure/cable_bridge
 	name = "cable bridge"
-	desc = "A bridge to connect different cable layers, or link terminals to incompatible cable layers."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cable_bridge"
 	level = 1 //is underfloor

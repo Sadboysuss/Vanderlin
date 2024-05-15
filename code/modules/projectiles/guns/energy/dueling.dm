@@ -100,9 +100,9 @@
 	countdown_step--
 	if(countdown_step == 0)
 		state = DUEL_FIRING
-		message_duelists("<span class='userdanger'>Fire!</span>")
+		message_duelists("<span class='danger'>Fire!</span>")
 	else
-		message_duelists("<span class='userdanger'>[countdown_step]!</span>")
+		message_duelists("<span class='danger'>[countdown_step]!</span>")
 
 /datum/duel/proc/check_fired()
 	if(fired.len == 2)
@@ -130,7 +130,7 @@
 
 /obj/item/gun/energy/dueling
 	name = "dueling pistol"
-	desc = "High-tech dueling pistol. Launches chaff and projectile according to preset settings."
+	desc = ""
 	icon_state = "dueling_pistol"
 	item_state = "gun"
 	ammo_x_offset = 2
@@ -172,7 +172,7 @@
 			setting = DUEL_SETTING_C
 		if(DUEL_SETTING_C)
 			setting = DUEL_SETTING_A
-	to_chat(user,"<span class='notice'>You switch [src] setting to [setting] mode.</span>")
+	to_chat(user,"<span class='notice'>I switch [src] setting to [setting] mode.</span>")
 	update_icon()
 
 /obj/item/gun/energy/dueling/update_icon(force_update)
@@ -211,7 +211,7 @@
 /obj/item/gun/energy/dueling/process_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread)
 	if(duel.state == DUEL_READY)
 		duel.confirmations[src] = TRUE
-		to_chat(user,"<span class='notice'>You confirm your readiness.</span>")
+		to_chat(user,"<span class='notice'>I confirm your readiness.</span>")
 		return
 	else if(!is_duelist(target)) //I kinda want to leave this out just to see someone shoot a bystander or missing.
 		to_chat(user,"<span class='warning'>[src] safety system prevents shooting anyone but your designated opponent.</span>")
@@ -305,7 +305,7 @@
 //Storage case.
 /obj/item/storage/lockbox/dueling
 	name = "dueling pistol case"
-	desc = "Let's solve this like gentlespacemen."
+	desc = ""
 	icon_state = "medalbox+l"
 	item_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'

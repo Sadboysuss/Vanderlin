@@ -7,8 +7,8 @@
 	inherent_traits = list(TRAIT_ALWAYS_CLEAN)
 	inherent_factions = list("plants", "vines")
 	attack_verb = "slash"
-	attack_sound = 'sound/weapons/slice.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
+	attack_sound = 'sound/blank.ogg'
+	miss_sound = 'sound/blank.ogg'
 	burnmod = 1.25
 	heatmod = 1.5
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/plant
@@ -46,7 +46,7 @@
 			if(prob(15))
 				H.rad_act(rand(30,80))
 				H.Paralyze(100)
-				H.visible_message("<span class='warning'>[H] writhes in pain as [H.p_their()] vacuoles boil.</span>", "<span class='userdanger'>You writhe in pain as your vacuoles boil!</span>", "<span class='hear'>You hear the crunching of leaves.</span>")
+				H.visible_message("<span class='warning'>[H] writhes in pain as [H.p_their()] vacuoles boil.</span>", "<span class='danger'>I writhe in pain as your vacuoles boil!</span>", "<span class='hear'>I hear the crunching of leaves.</span>")
 				if(prob(80))
 					H.easy_randmut(NEGATIVE+MINOR_NEGATIVE)
 				else
@@ -55,6 +55,6 @@
 				H.domutcheck()
 			else
 				H.adjustFireLoss(rand(5,15))
-				H.show_message("<span class='userdanger'>The radiation beam singes you!</span>")
+				H.show_message("<span class='danger'>The radiation beam singes you!</span>")
 		if(/obj/projectile/energy/florayield)
 			H.set_nutrition(min(H.nutrition+30, NUTRITION_LEVEL_FULL))

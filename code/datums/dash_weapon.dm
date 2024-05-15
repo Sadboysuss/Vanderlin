@@ -1,6 +1,6 @@
 /datum/action/innate/dash
 	name = "Dash"
-	desc = "Teleport to the targeted location."
+	desc = ""
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "jetboot"
 	var/current_charges = 1
@@ -8,8 +8,8 @@
 	var/charge_rate = 250
 	var/mob/living/carbon/human/holder
 	var/obj/item/dashing_item
-	var/dash_sound = 'sound/magic/blink.ogg'
-	var/recharge_sound = 'sound/magic/charge.ogg'
+	var/dash_sound = 'sound/blank.ogg'
+	var/recharge_sound = 'sound/blank.ogg'
 	var/beam_effect = "blur"
 	var/phasein = /obj/effect/temp_visual/dir_setting/ninja/phase
 	var/phaseout = /obj/effect/temp_visual/dir_setting/ninja/phase/out

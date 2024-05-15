@@ -21,7 +21,7 @@
 	icon = 'icons/mob/screen_alien.dmi'
 	icon_state = "queen_finder"
 	name = "queen sense"
-	desc = "Allows you to sense the general direction of your Queen."
+	desc = ""
 	screen_loc = ui_alien_queen_finder
 
 /datum/hud/alien
@@ -54,7 +54,7 @@
 	static_inventory += using
 
 	using = new /obj/screen/act_intent/alien()
-	using.icon_state = mymob.a_intent
+	using.icon_state = mymob.used_intent.name
 	using.hud = src
 	static_inventory += using
 	action_intent = using
@@ -76,11 +76,11 @@
 	using.hud = src
 	static_inventory += using
 
-	using = new /obj/screen/resist()
-	using.icon = ui_style
-	using.screen_loc = ui_above_movement
-	using.hud = src
-	hotkeybuttons += using
+//	using = new /obj/screen/resist()
+//	using.icon = ui_style
+//	using.screen_loc = ui_above_movement
+//	using.hud = src
+//	hotkeybuttons += using
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style

@@ -7,7 +7,7 @@
 	cure_chance = 6
 	agent = ""
 	viable_mobtypes = list(/mob/living/carbon/human)
-	desc = "A DNA-altering retrovirus that scrambles the structural and unique enzymes of a host constantly."
+	desc = ""
 	severity = DISEASE_SEVERITY_HARMFUL
 	permeability_mod = 0.4
 	stage_prob = 2
@@ -32,38 +32,38 @@
 		if(1)
 			if(restcure)
 				if(!(affected_mob.mobility_flags & MOBILITY_STAND) && prob(30))
-					to_chat(affected_mob, "<span class='notice'>You feel better.</span>")
+					to_chat(affected_mob, "<span class='notice'>I feel better.</span>")
 					cure()
 					return
 			if (prob(8))
-				to_chat(affected_mob, "<span class='danger'>Your head hurts.</span>")
+				to_chat(affected_mob, "<span class='danger'>My head hurts.</span>")
 			if (prob(9))
-				to_chat(affected_mob, "<span class='danger'>You feel a tingling sensation in your chest.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel a tingling sensation in my chest.</span>")
 			if (prob(9))
-				to_chat(affected_mob, "<span class='danger'>You feel angry.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel angry.</span>")
 		if(2)
 			if(restcure)
 				if(!(affected_mob.mobility_flags & MOBILITY_STAND) && prob(20))
-					to_chat(affected_mob, "<span class='notice'>You feel better.</span>")
+					to_chat(affected_mob, "<span class='notice'>I feel better.</span>")
 					cure()
 					return
 			if (prob(8))
-				to_chat(affected_mob, "<span class='danger'>Your skin feels loose.</span>")
+				to_chat(affected_mob, "<span class='danger'>My skin feels loose.</span>")
 			if (prob(10))
-				to_chat(affected_mob, "<span class='danger'>You feel very strange.</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel very strange.</span>")
 			if (prob(4))
-				to_chat(affected_mob, "<span class='danger'>You feel a stabbing pain in your head!</span>")
+				to_chat(affected_mob, "<span class='danger'>I feel a stabbing pain in my head!</span>")
 				affected_mob.Unconscious(40)
 			if (prob(4))
-				to_chat(affected_mob, "<span class='danger'>Your stomach churns.</span>")
+				to_chat(affected_mob, "<span class='danger'>My stomach churns.</span>")
 		if(3)
 			if(restcure)
 				if(!(affected_mob.mobility_flags & MOBILITY_STAND) && prob(20))
-					to_chat(affected_mob, "<span class='notice'>You feel better.</span>")
+					to_chat(affected_mob, "<span class='notice'>I feel better.</span>")
 					cure()
 					return
 			if (prob(10))
-				to_chat(affected_mob, "<span class='danger'>Your entire body vibrates.</span>")
+				to_chat(affected_mob, "<span class='danger'>My entire body vibrates.</span>")
 
 			if (prob(35))
 				if(prob(50))
@@ -74,7 +74,7 @@
 		if(4)
 			if(restcure)
 				if(!(affected_mob.mobility_flags & MOBILITY_STAND) && prob(5))
-					to_chat(affected_mob, "<span class='notice'>You feel better.</span>")
+					to_chat(affected_mob, "<span class='notice'>I feel better.</span>")
 					cure()
 					return
 			if (prob(60))

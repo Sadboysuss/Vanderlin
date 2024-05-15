@@ -161,7 +161,7 @@
 
 /turf/open/floor/mineral/bananium/proc/honk()
 	if(spam_flag < world.time)
-		playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		spam_flag = world.time + 20
 
 /turf/open/floor/mineral/bananium/proc/squeak()

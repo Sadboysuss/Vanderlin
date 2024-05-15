@@ -1,6 +1,6 @@
 /obj/item/toy/eightball
 	name = "magic eightball"
-	desc = "A black ball with a stenciled number eight in white on the side. It seems full of dark liquid.\nThe instructions state that you should ask your question aloud, and then shake."
+	desc = ""
 
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "eightball"
@@ -54,7 +54,7 @@
 		to_chat(user, "<span class='warning'>[src] was shaken recently, it needs time to settle.</span>")
 		return
 
-	user.visible_message("<span class='notice'>[user] starts shaking [src].</span>", "<span class='notice'>You start shaking [src].</span>", "<span class='hear'>You hear shaking and sloshing.</span>")
+	user.visible_message("<span class='notice'>[user] starts shaking [src].</span>", "<span class='notice'>I start shaking [src].</span>", "<span class='hear'>I hear shaking and sloshing.</span>")
 
 	shaking = TRUE
 
@@ -81,7 +81,7 @@
 
 /obj/item/toy/eightball/broken
 	name = "broken magic eightball"
-	desc = "A black ball with a stenciled number eight in white on the side. It is cracked and seems empty."
+	desc = ""
 	var/fixed_answer
 
 /obj/item/toy/eightball/broken/Initialize(mapload)

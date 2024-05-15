@@ -1,17 +1,17 @@
 //Radiation storms occur when the station passes through an irradiated area, and irradiate anyone not standing in protected areas (maintenance, emergency storage, etc.)
 /datum/weather/rad_storm
 	name = "radiation storm"
-	desc = "A cloud of intense radiation passes through the area dealing rad damage to those who are unprotected."
+	desc = ""
 
 	telegraph_duration = 400
 	telegraph_message = "<span class='danger'>The air begins to grow warm.</span>"
 
-	weather_message = "<span class='userdanger'><i>You feel waves of heat wash over you! Find shelter!</i></span>"
+	weather_message = "<span class='danger'><i>I feel waves of heat wash over you! Find shelter!</i></span>"
 	weather_overlay = "ash_storm"
 	weather_duration_lower = 600
 	weather_duration_upper = 1500
 	weather_color = "green"
-	weather_sound = 'sound/misc/bloblarm.ogg'
+	weather_sound = 'sound/blank.ogg'
 
 	end_duration = 100
 	end_message = "<span class='notice'>The air seems to be cooling off again.</span>"
@@ -43,6 +43,7 @@
 							H.easy_randmut(POSITIVE)
 						H.domutcheck()
 		L.rad_act(20)
+	return ..()
 
 /datum/weather/rad_storm/end()
 	if(..())

@@ -1,10 +1,10 @@
 /datum/language/slime
 	name = "Slime"
-	desc = "A melodic and complex language spoken by slimes. Some of the notes are inaudible to humans."
+	desc = ""
 	speech_verb = "warbles"
 	ask_verb = "warbles"
 	exclaim_verb = "warbles"
-	key = "k"
+	key = "3"
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 	default_priority = 70
 

@@ -7,7 +7,11 @@
 	var/clusterMin = 1
 	var/clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	var/allowAtomsOnSpace = FALSE
-
+	var/checkdensity = TRUE
+	var/list/excluded_turfs = list()
+	var/list/allowed_turfs = list()
+	var/list/allowed_areas = list()
+	var/include_subtypes = TRUE
 
 //Syncs the module up with its mother
 /datum/mapGeneratorModule/proc/sync(datum/mapGenerator/mum)
@@ -29,9 +33,30 @@
 /datum/mapGeneratorModule/proc/place(turf/T)
 	if(!T)
 		return 0
-
 	var/clustering = 0
 	var/skipLoopIteration = FALSE
+
+	if(T.type in excluded_turfs)
+		return
+
+	if(allowed_turfs.len)
+		if(!(T.type in allowed_turfs))
+			return
+
+	if(allowed_areas.len)
+		var/area/A = get_area(T)
+		if(A)
+			if(include_subtypes)
+				var/found
+				for(var/AT in allowed_areas)
+					if(istype(A, AT))
+						found = TRUE
+						break
+				if(!found)
+					return
+			else
+				if(!(A.type in allowed_areas))
+					return
 
 	//Turfs don't care whether atoms can be placed here
 	for(var/turfPath in spawnableTurfs)
@@ -108,12 +133,13 @@
 	. = 1
 	if(!T)
 		return 0
-	if(T.density)
-		. = 0
-	for(var/atom/A in T)
-		if(A.density)
+	if(checkdensity)
+		if(T.density)
 			. = 0
-			break
+		for(var/atom/A in T)
+			if(A.density)
+				. = 0
+				break
 	if(!allowAtomsOnSpace && (isspaceturf(T)))
 		. = 0
 

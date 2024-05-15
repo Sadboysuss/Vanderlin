@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	29
+#define SAVEFILE_VERSION_MAX	30
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -45,7 +45,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 29)
 		key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
 		parent.update_movement_keys()
-		to_chat(parent, "<span class='userdanger'>Empty keybindings, setting default to [hotkeys ? "Hotkey" : "Classic"] mode</span>")
+		to_chat(parent, "<span class='danger'>Empty keybindings, setting default to [hotkeys ? "Hotkey" : "Classic"] mode</span>")
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 19)
@@ -116,7 +116,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if (!(underwear in GLOB.underwear_list))
 			underwear = "Nude"
 	if(current_version < 25)
-		randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = TRUE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
+		randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = FALSE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 		if(S["name_is_always_random"] == 1)
 			randomise[RANDOM_NAME] = TRUE
 		if(S["body_is_always_random"] == 1)
@@ -129,6 +129,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			S["hair_style_name"]	>> hairstyle
 		if(S["facial_style_name"])
 			S["facial_style_name"]	>> facial_hairstyle
+	if(current_version < 30)
+		S["voice_color"]		>> voice_color
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -156,11 +158,21 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["lastchangelog"]		>> lastchangelog
 	S["UI_style"]			>> UI_style
 	S["hotkeys"]			>> hotkeys
+	S["chat_on_map"]		>> chat_on_map
+	S["showrolls"]			>> showrolls
+	S["max_chat_length"]	>> max_chat_length
+	S["see_chat_non_mob"] 	>> see_chat_non_mob
 	S["tgui_fancy"]			>> tgui_fancy
 	S["tgui_lock"]			>> tgui_lock
 	S["buttons_locked"]		>> buttons_locked
 	S["windowflash"]		>> windowflashing
 	S["be_special"] 		>> be_special
+	S["triumphs"]			>> triumphs
+	S["musicvol"]			>> musicvol
+	S["anonymize"]			>> anonymize
+	S["crt"]			>> crt
+	S["mastervol"]			>> mastervol
+	S["lastclass"]			>> lastclass
 
 
 	S["default_slot"]		>> default_slot
@@ -199,6 +211,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style		= sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys			= sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
+	chat_on_map		= sanitize_integer(chat_on_map, 0, 1, initial(chat_on_map))
+	showrolls		= sanitize_integer(showrolls, 0, 1, initial(showrolls))
+	max_chat_length = sanitize_integer(max_chat_length, 1, CHAT_MESSAGE_MAX_LENGTH, initial(max_chat_length))
+	see_chat_non_mob	= sanitize_integer(see_chat_non_mob, 0, 1, initial(see_chat_non_mob))
 	tgui_fancy		= sanitize_integer(tgui_fancy, 0, 1, initial(tgui_fancy))
 	tgui_lock		= sanitize_integer(tgui_lock, 0, 1, initial(tgui_lock))
 	buttons_locked	= sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
@@ -220,6 +236,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_islist(key_bindings, list())
 
+	//ROGUETOWN
+	parallax = PARALLAX_INSANE
 
 	return TRUE
 
@@ -231,14 +249,26 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 	S.cd = "/"
 
+	parallax = PARALLAX_INSANE
+
 	WRITE_FILE(S["version"] , SAVEFILE_VERSION_MAX)		//updates (or failing that the sanity checks) will ensure data is not invalid at load. Assume up-to-date
 
 	//general preferences
 	WRITE_FILE(S["asaycolor"], asaycolor)
+	WRITE_FILE(S["triumphs"], triumphs)
+	WRITE_FILE(S["musicvol"], musicvol)
+	WRITE_FILE(S["anonymize"], anonymize)
+	WRITE_FILE(S["crt"], crt)
+	WRITE_FILE(S["lastclass"], lastclass)
+	WRITE_FILE(S["mastervol"], mastervol)
 	WRITE_FILE(S["ooccolor"], ooccolor)
 	WRITE_FILE(S["lastchangelog"], lastchangelog)
 	WRITE_FILE(S["UI_style"], UI_style)
 	WRITE_FILE(S["hotkeys"], hotkeys)
+	WRITE_FILE(S["chat_on_map"], chat_on_map)
+	WRITE_FILE(S["showrolls"], showrolls)
+	WRITE_FILE(S["max_chat_length"], max_chat_length)
+	WRITE_FILE(S["see_chat_non_mob"], see_chat_non_mob)
 	WRITE_FILE(S["tgui_fancy"], tgui_fancy)
 	WRITE_FILE(S["tgui_lock"], tgui_lock)
 	WRITE_FILE(S["buttons_locked"], buttons_locked)
@@ -291,12 +321,23 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 
 	//Species
-	var/species_id
-	S["species"]			>> species_id
-	if(species_id)
-		var/newtype = GLOB.species_list[species_id]
+	var/species_name
+	S["species"]			>> species_name
+	if(species_name)
+		var/newtype = GLOB.species_list[species_name]
 		if(newtype)
 			pref_species = new newtype
+
+
+
+	var/charflaw_type
+	S["charflaw"]			>> charflaw_type
+	if(charflaw_type)
+		charflaw = new charflaw_type()
+	else
+		charflaw = pick(GLOB.character_flaws)
+		charflaw = GLOB.character_flaws[charflaw]
+		charflaw = new charflaw()
 
 	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
 		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
@@ -307,16 +348,21 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Character
 	S["real_name"]			>> real_name
 	S["gender"]				>> gender
+	S["domhand"]			>> domhand
+//	S["alignment"]			>> alignment
 	S["age"]				>> age
 	S["hair_color"]			>> hair_color
 	S["facial_hair_color"]	>> facial_hair_color
 	S["eye_color"]			>> eye_color
+	S["voice_color"]		>> voice_color
 	S["skin_tone"]			>> skin_tone
 	S["hairstyle_name"]	>> hairstyle
 	S["facial_style_name"]	>> facial_hairstyle
 	S["underwear"]			>> underwear
 	S["underwear_color"]	>> underwear_color
 	S["undershirt"]			>> undershirt
+	S["accessory"]			>> accessory
+	S["detail"]			>> detail
 	S["socks"]				>> socks
 	S["backpack"]			>> backpack
 	S["jumpsuit_style"]		>> jumpsuit_style
@@ -333,12 +379,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_lizard_legs"]			>> features["legs"]
 	S["feature_moth_wings"]				>> features["moth_wings"]
 	S["feature_moth_markings"]			>> features["moth_markings"]
-	if(!CONFIG_GET(flag/join_with_mutant_humans))
-		features["tail_human"] = "none"
-		features["ears"] = "none"
-	else
-		S["feature_human_tail"]				>> features["tail_human"]
-		S["feature_human_ears"]				>> features["ears"]
+	S["feature_human_tail"]				>> features["tail_human"]
+	S["feature_human_ears"]				>> features["ears"]
+
+	var/patron_name
+	S["selected_patron"]	>> patron_name
+	if(patron_name)
+		var/newtype = GLOB.patronlist[patron_name]
+		if(newtype)
+			selected_patron = new newtype
+
+//	S["selected_patron"]				>> selected_patron
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -386,11 +437,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		facial_hairstyle			= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_male_list)
 		underwear		= sanitize_inlist(underwear, GLOB.underwear_m)
 		undershirt 		= sanitize_inlist(undershirt, GLOB.undershirt_m)
+		accessory		= sanitize_inlist(accessory, GLOB.accessories_m)
+		detail		= sanitize_inlist(detail, GLOB.detail_m)
 	else if(gender == FEMALE)
 		hairstyle			= sanitize_inlist(hairstyle, GLOB.hairstyles_female_list)
 		facial_hairstyle			= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_female_list)
 		underwear		= sanitize_inlist(underwear, GLOB.underwear_f)
 		undershirt		= sanitize_inlist(undershirt, GLOB.undershirt_f)
+		accessory		= sanitize_inlist(accessory, GLOB.accessories_f)
+		detail		= sanitize_inlist(detail, GLOB.detail_f)
 	else
 		hairstyle			= sanitize_inlist(hairstyle, GLOB.hairstyles_list)
 		facial_hairstyle			= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_list)
@@ -398,12 +453,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		undershirt 		= sanitize_inlist(undershirt, GLOB.undershirt_list)
 
 	socks			= sanitize_inlist(socks, GLOB.socks_list)
-	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
+//	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	hair_color			= sanitize_hexcolor(hair_color, 3, 0)
 	facial_hair_color			= sanitize_hexcolor(facial_hair_color, 3, 0)
 	underwear_color			= sanitize_hexcolor(underwear_color, 3, 0)
 	eye_color		= sanitize_hexcolor(eye_color, 3, 0)
-	skin_tone		= sanitize_inlist(skin_tone, GLOB.skin_tones)
+	voice_color		= voice_color
+	skin_tone		= skin_tone
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
@@ -443,23 +499,29 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Character
 	WRITE_FILE(S["real_name"]			, real_name)
-	WRITE_FILE(S["gender"]			, gender)
-	WRITE_FILE(S["age"]			, age)
+	WRITE_FILE(S["gender"]				, gender)
+	WRITE_FILE(S["domhand"]				, domhand)
+//	WRITE_FILE(S["alignment"]			, alignment)
+	WRITE_FILE(S["age"]					, age)
 	WRITE_FILE(S["hair_color"]			, hair_color)
-	WRITE_FILE(S["facial_hair_color"]			, facial_hair_color)
+	WRITE_FILE(S["facial_hair_color"]	, facial_hair_color)
 	WRITE_FILE(S["eye_color"]			, eye_color)
+	WRITE_FILE(S["voice_color"]			, voice_color)
 	WRITE_FILE(S["skin_tone"]			, skin_tone)
-	WRITE_FILE(S["hairstyle_name"]			, hairstyle)
-	WRITE_FILE(S["facial_style_name"]			, facial_hairstyle)
+	WRITE_FILE(S["hairstyle_name"]		, hairstyle)
+	WRITE_FILE(S["facial_style_name"]	, facial_hairstyle)
 	WRITE_FILE(S["underwear"]			, underwear)
-	WRITE_FILE(S["underwear_color"]			, underwear_color)
+	WRITE_FILE(S["underwear_color"]		, underwear_color)
 	WRITE_FILE(S["undershirt"]			, undershirt)
-	WRITE_FILE(S["socks"]			, socks)
+	WRITE_FILE(S["accessory"]			, accessory)
+	WRITE_FILE(S["detail"]				, detail)
+	WRITE_FILE(S["socks"]				, socks)
 	WRITE_FILE(S["backpack"]			, backpack)
-	WRITE_FILE(S["jumpsuit_style"]			, jumpsuit_style)
+	WRITE_FILE(S["jumpsuit_style"]		, jumpsuit_style)
 	WRITE_FILE(S["uplink_loc"]			, uplink_spawn_loc)
 	WRITE_FILE(S["randomise"]		, randomise)
-	WRITE_FILE(S["species"]			, pref_species.id)
+	WRITE_FILE(S["species"]			, pref_species.name)
+	WRITE_FILE(S["charflaw"]			, charflaw.type)
 	WRITE_FILE(S["feature_mcolor"]					, features["mcolor"])
 	WRITE_FILE(S["feature_ethcolor"]					, features["ethcolor"])
 	WRITE_FILE(S["feature_lizard_tail"]			, features["tail_lizard"])
@@ -491,6 +553,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Quirks
 	WRITE_FILE(S["all_quirks"]			, all_quirks)
 
+	//Patron
+	WRITE_FILE(S["selected_patron"]		, selected_patron.name)
+
 	return TRUE
 
 
@@ -502,10 +567,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 //Some crude tools for testing savefiles
 //path is the savefile path
 /client/verb/savefile_export(path as text)
+	set hidden = TRUE
 	var/savefile/S = new /savefile(path)
 	S.ExportText("/",file("[path].txt"))
 //path is the savefile path
 /client/verb/savefile_import(path as text)
+	set hidden = TRUE
 	var/savefile/S = new /savefile(path)
 	S.ImportText("/",file("[path].txt"))
 

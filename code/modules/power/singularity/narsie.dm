@@ -1,6 +1,6 @@
 /obj/singularity/narsie //Moving narsie to a child object of the singularity so it can be made to function differently. --NEO
 	name = "Nar'Sie's Avatar"
-	desc = "Your mind begins to bubble and ooze as it tries to comprehend what it sees."
+	desc = ""
 	icon = 'icons/obj/magic_terror.dmi'
 	pixel_x = -89
 	pixel_y = -85
@@ -29,7 +29,7 @@
 /obj/singularity/narsie/large/Initialize()
 	. = ..()
 	send_to_playing_players("<span class='narsie'>NAR'SIE HAS RISEN</span>")
-	sound_to_playing_players('sound/creatures/narsie_rises.ogg')
+	sound_to_playing_players('sound/blank.ogg')
 
 	var/area/A = get_area(src)
 	if(A)
@@ -70,7 +70,7 @@
 
 /obj/singularity/narsie/large/cult/proc/begin_the_end()
 	sleep(50)
-	priority_announce("An acausal dimensional event has been detected in your sector. Event has been flagged EXTINCTION-CLASS. Directing all available assets toward simulating solutions. SOLUTION ETA: 60 SECONDS.","Central Command Higher Dimensional Affairs", 'sound/misc/airraid.ogg')
+	priority_announce("An acausal dimensional event has been detected in your sector. Event has been flagged EXTINCTION-CLASS. Directing all available assets toward simulating solutions. SOLUTION ETA: 60 SECONDS.","Central Command Higher Dimensional Affairs", 'sound/blank.ogg')
 	sleep(500)
 	priority_announce("Simulations on acausal dimensional event complete. Deploying solution package now. Deployment ETA: ONE MINUTE. ","Central Command Higher Dimensional Affairs")
 	sleep(50)
@@ -80,7 +80,7 @@
 	sleep(600)
 	if(resolved == FALSE)
 		resolved = TRUE
-		sound_to_playing_players('sound/machines/alarm.ogg')
+		sound_to_playing_players('sound/blank.ogg')
 		addtimer(CALLBACK(GLOBAL_PROC, .proc/cult_ending_helper), 120)
 
 /obj/singularity/narsie/large/cult/Destroy()
@@ -90,7 +90,7 @@
 /proc/ending_helper()
 	SSticker.force_ending = 1
 
-/proc/cult_ending_helper(var/no_explosion = 0)
+/proc/cult_ending_helper(no_explosion = 0)
 	if(no_explosion)
 		Cinematic(CINEMATIC_CULT,world,CALLBACK(GLOBAL_PROC,/proc/ending_helper))
 	else
@@ -120,7 +120,7 @@
 	for(var/mob/living/carbon/M in viewers(consume_range, src))
 		if(M.stat == CONSCIOUS)
 			if(!iscultist(M))
-				to_chat(M, "<span class='cultsmall'>You feel conscious thought crumble away in an instant as you gaze upon [src.name]...</span>")
+				to_chat(M, "<span class='cultsmall'>I feel conscious thought crumble away in an instant as you gaze upon [src.name]...</span>")
 				M.apply_effect(60, EFFECT_STUN)
 
 

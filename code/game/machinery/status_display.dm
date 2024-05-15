@@ -301,7 +301,7 @@
 /// Pictograph display which the AI can use to emote.
 /obj/machinery/status_display/ai
 	name = "\improper AI display"
-	desc = "A small screen which the AI can use to present itself."
+	desc = ""
 
 	var/mode = SD_BLANK
 	var/emotion = "Neutral"

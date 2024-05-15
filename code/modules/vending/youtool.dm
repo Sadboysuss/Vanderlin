@@ -1,6 +1,6 @@
 /obj/machinery/vending/tool
 	name = "\improper YouTool"
-	desc = "Tools for tools."
+	desc = ""
 	icon_state = "tool"
 	icon_deny = "tool-deny"
 	products = list(/obj/item/stack/cable_coil = 10,

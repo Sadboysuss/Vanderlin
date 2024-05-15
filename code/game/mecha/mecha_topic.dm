@@ -63,7 +63,7 @@
 		tank_temperature = internal_tank ? int_tank_air.temperature : "Unknown"
 		cabin_pressure = round(return_pressure(),0.01)
 	. =	{"[report_internal_damage()]
-		[integrity<30?"<span class='userdanger'>DAMAGE LEVEL CRITICAL</span><br>":null]
+		[integrity<30?"<span class='danger'>DAMAGE LEVEL CRITICAL</span><br>":null]
 		<b>Integrity: </b> [integrity]%<br>
 		<b>Powercell charge: </b>[isnull(cell_charge)?"No powercell installed":"[cell.percent()]%"]<br>
 		<b>Air source: </b>[internal_tank?"[use_internal_tank?"Internal Airtank":"Environment"]":"Environment"]<br>
@@ -88,11 +88,11 @@
 /obj/mecha/proc/report_internal_damage()
 	. = ""
 	var/list/dam_reports = list(
-		"[MECHA_INT_FIRE]" = "<span class='userdanger'>INTERNAL FIRE</span>",
-		"[MECHA_INT_TEMP_CONTROL]" = "<span class='userdanger'>LIFE SUPPORT SYSTEM MALFUNCTION</span>",
-		"[MECHA_INT_TANK_BREACH]" = "<span class='userdanger'>GAS TANK BREACH</span>",
-		"[MECHA_INT_CONTROL_LOST]" = "<span class='userdanger'>COORDINATION SYSTEM CALIBRATION FAILURE</span> - <a href='?src=[REF(src)];repair_int_control_lost=1'>Recalibrate</a>",
-		"[MECHA_INT_SHORT_CIRCUIT]" = "<span class='userdanger'>SHORT CIRCUIT</span>"
+		"[MECHA_INT_FIRE]" = "<span class='danger'>INTERNAL FIRE</span>",
+		"[MECHA_INT_TEMP_CONTROL]" = "<span class='danger'>LIFE SUPPORT SYSTEM MALFUNCTION</span>",
+		"[MECHA_INT_TANK_BREACH]" = "<span class='danger'>GAS TANK BREACH</span>",
+		"[MECHA_INT_CONTROL_LOST]" = "<span class='danger'>COORDINATION SYSTEM CALIBRATION FAILURE</span> - <a href='?src=[REF(src)];repair_int_control_lost=1'>Recalibrate</a>",
+		"[MECHA_INT_SHORT_CIRCUIT]" = "<span class='danger'>SHORT CIRCUIT</span>"
 								)
 	for(var/tflag in dam_reports)
 		var/intdamflag = text2num(tflag)
@@ -100,7 +100,7 @@
 			. += dam_reports[tflag]
 			. += "<br />"
 	if(return_pressure() > WARNING_HIGH_PRESSURE)
-		. += "<span class='userdanger'>DANGEROUSLY HIGH CABIN PRESSURE</span><br />"
+		. += "<span class='danger'>DANGEROUSLY HIGH CABIN PRESSURE</span><br />"
 
 ///HTML for list of equipment.
 /obj/mecha/proc/get_equipment_list() //outputs mecha equipment list in html
@@ -319,7 +319,7 @@
 		if(!equip || !equip.selectable)
 			return
 		selected = equip
-		occupant_message("<span class='notice'>You switch to [equip].</span>")
+		occupant_message("<span class='notice'>I switch to [equip].</span>")
 		visible_message("<span class='notice'>[src] raises [equip].</span>")
 		send_byjax(usr, "exosuit.browser", "eq_list", get_equipment_list())
 		return
@@ -391,10 +391,10 @@
 	//Turns on the DNA lock
 	if(href_list["dna_lock"])
 		if(!iscarbon(occupant) || !occupant.dna)
-			occupant_message("<span class='notice'>You feel a prick as the needle takes your DNA sample.</span>")
+			occupant_message("<span class='notice'>I feel a prick as the needle takes your DNA sample.</span>")
 			return
 		dna_lock = occupant.dna.unique_enzymes
-		occupant_message("<span class='notice'>You feel a prick as the needle takes your DNA sample.</span>")
+		occupant_message("<span class='notice'>I feel a prick as the needle takes your DNA sample.</span>")
 		return
 
 	//Resets the DNA lock

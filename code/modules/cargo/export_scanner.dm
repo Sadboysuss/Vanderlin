@@ -1,6 +1,6 @@
 /obj/item/export_scanner
 	name = "export scanner"
-	desc = "A device used to check objects against Nanotrasen exports and bounty database."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "export_scanner"
 	item_state = "radio"
@@ -27,7 +27,7 @@
 			cargo_console = C
 			to_chat(user, "<span class='notice'>Scanner linked to [C].</span>")
 	else if(!istype(cargo_console))
-		to_chat(user, "<span class='warning'>You must link [src] to a cargo console first!</span>")
+		to_chat(user, "<span class='warning'>I must link [src] to a cargo console first!</span>")
 	else
 		// Before you fix it:
 		// yes, checking manifests is a part of intended functionality.

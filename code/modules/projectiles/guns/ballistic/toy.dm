@@ -1,10 +1,10 @@
 /obj/item/gun/ballistic/automatic/toy
 	name = "foam force SMG"
-	desc = "A prototype three-round burst toy submachine gun. Ages 8 and up."
+	desc = ""
 	icon_state = "saber"
 	item_state = "gun"
 	mag_type = /obj/item/ammo_box/magazine/toy/smg
-	fire_sound = 'sound/items/syringeproj.ogg'
+	fire_sound = 'sound/blank.ogg'
 	force = 0
 	throwforce = 0
 	burst_size = 3
@@ -22,12 +22,12 @@
 
 /obj/item/gun/ballistic/automatic/toy/pistol
 	name = "foam force pistol"
-	desc = "A small, easily concealable toy handgun. Ages 8 and up."
+	desc = ""
 	icon_state = "pistol"
 	bolt_type = BOLT_TYPE_LOCKING
 	w_class = WEIGHT_CLASS_SMALL
 	mag_type = /obj/item/ammo_box/magazine/toy/pistol
-	fire_sound = 'sound/items/syringeproj.ogg'
+	fire_sound = 'sound/blank.ogg'
 	burst_size = 1
 	fire_delay = 0
 	actions_types = list()
@@ -47,11 +47,11 @@
 
 /obj/item/gun/ballistic/shotgun/toy
 	name = "foam force shotgun"
-	desc = "A toy shotgun with wood furniture and a four-shell capacity underneath. Ages 8 and up."
+	desc = ""
 	force = 0
 	throwforce = 0
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/toy
-	fire_sound = 'sound/items/syringeproj.ogg'
+	fire_sound = 'sound/blank.ogg'
 	clumsy_check = FALSE
 	item_flags = NONE
 	casing_ejector = FALSE
@@ -72,18 +72,18 @@
 
 /obj/item/gun/ballistic/shotgun/toy/crossbow
 	name = "foam force crossbow"
-	desc = "A weapon favored by many overactive children. Ages 8 and up."
+	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamcrossbow"
 	item_state = "crossbow"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/toy/crossbow
-	fire_sound = 'sound/items/syringeproj.ogg'
+	fire_sound = 'sound/blank.ogg'
 	slot_flags = ITEM_SLOT_BELT
 	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/gun/ballistic/automatic/c20r/toy //This is the syndicate variant with syndicate firing pin and riot darts.
 	name = "donksoft SMG"
-	desc = "A bullpup two-round burst toy SMG, designated 'C-20r'. Ages 8 and up."
+	desc = ""
 	can_suppress = TRUE
 	item_flags = NONE
 	mag_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
@@ -103,8 +103,8 @@
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy //This is the syndicate variant with syndicate firing pin and riot darts.
 	name = "donksoft LMG"
-	desc = "A heavily modified toy light machine gun, designated 'L6 SAW'. Ages 8 and up."
-	fire_sound = 'sound/items/syringeproj.ogg'
+	desc = ""
+	fire_sound = 'sound/blank.ogg'
 	can_suppress = FALSE
 	item_flags = NONE
 	mag_type = /obj/item/ammo_box/magazine/toy/m762/riot

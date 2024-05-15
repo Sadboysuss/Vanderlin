@@ -49,8 +49,8 @@
 		. = is_convertable_to_cult(new_owner.current,cult_team)
 
 /datum/antagonist/cult/greet()
-	to_chat(owner, "<span class='userdanger'>You are a member of the cult!</span>")
-	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/bloodcult.ogg', 100, FALSE, pressure_affected = FALSE)//subject to change
+	to_chat(owner, "<span class='danger'>I are a member of the cult!</span>")
+	owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)//subject to change
 	owner.announce_objectives()
 
 /datum/antagonist/cult/on_gain()
@@ -87,10 +87,10 @@
 	var/item_name = initial(item_path.name)
 	var/where = mob.equip_in_one_of_slots(T, slots)
 	if(!where)
-		to_chat(mob, "<span class='userdanger'>Unfortunately, you weren't able to get a [item_name]. This is very bad and you should adminhelp immediately (press F1).</span>")
+		to_chat(mob, "<span class='danger'>Unfortunately, you weren't able to get a [item_name]. This is very bad and you should adminhelp immediately (press F1).</span>")
 		return 0
 	else
-		to_chat(mob, "<span class='danger'>You have a [item_name] in your [where].</span>")
+		to_chat(mob, "<span class='danger'>I have a [item_name] in my [where].</span>")
 		if(where == "backpack")
 			SEND_SIGNAL(mob.back, COMSIG_TRY_STORAGE_SHOW, mob)
 		return TRUE
@@ -101,7 +101,7 @@
 	if(mob_override)
 		current = mob_override
 	add_antag_hud(antag_hud_type, antag_hud_name, current)
-	handle_clown_mutation(current, mob_override ? null : "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	handle_clown_mutation(current, mob_override ? null : "Your training has allowed you to overcome my clownish nature, allowing you to wield weapons without harming myself.")
 	current.faction |= "cult"
 	current.grant_language(/datum/language/narsie)
 	if(!cult_team.cult_master)
@@ -140,7 +140,7 @@
 	SSticker.mode.cult -= owner
 	if(!silent)
 		owner.current.visible_message("<span class='deconversion_message'>[owner.current] looks like [owner.current.p_theyve()] just reverted to [owner.current.p_their()] old faith!</span>", null, null, null, owner.current)
-		to_chat(owner.current, "<span class='userdanger'>An unfamiliar white light flashes through your mind, cleansing the taint of the Geometer and all your memories as her servant.</span>")
+		to_chat(owner.current, "<span class='danger'>An unfamiliar white light flashes through my mind, cleansing the taint of the Geometer and all my memories as her servant.</span>")
 		owner.current.log_message("has renounced the cult of Nar'Sie!", LOG_ATTACK, color="#960000")
 	if(cult_team.blood_target && cult_team.blood_target_image && owner.current.client)
 		owner.current.client.images -= cult_team.blood_target_image
@@ -196,8 +196,8 @@
 	set_antag_hud(current, "cultmaster")
 
 /datum/antagonist/cult/master/greet()
-	to_chat(owner.current, "<span class='cultlarge'>You are the cult's Master</span>. As the cult's Master, you have a unique title and loud voice when communicating, are capable of marking \
-	targets, such as a location or a noncultist, to direct the cult to them, and, finally, you are capable of summoning the entire living cult to your location <b><i>once</i></b>.")
+	to_chat(owner.current, "<span class='cultlarge'>I are the cult's Master</span>. As the cult's Master, you have a unique title and loud voice when communicating, are capable of marking \
+	targets, such as a location or a noncultist, to direct the cult to them, and, finally, you are capable of summoning the entire living cult to my location <b><i>once</i></b>.")
 	to_chat(owner.current, "Use these abilities to direct the cult to victory at any cost.")
 
 /datum/antagonist/cult/master/apply_innate_effects(mob/living/mob_override)
@@ -264,16 +264,16 @@
 	if(ratio > CULT_RISEN && !cult_risen)
 		for(var/datum/mind/B in members)
 			if(B.current)
-				SEND_SOUND(B.current, 'sound/hallucinations/i_see_you2.ogg')
-				to_chat(B.current, "<span class='cultlarge'>The veil weakens as your cult grows, your eyes begin to glow...</span>")
+				SEND_SOUND(B.current, 'sound/blank.ogg')
+				to_chat(B.current, "<span class='cultlarge'>The veil weakens as my cult grows, my eyes begin to glow...</span>")
 				addtimer(CALLBACK(src, .proc/rise, B.current), 200)
 		cult_risen = TRUE
 
 	if(ratio > CULT_ASCENDENT && !cult_ascendent)
 		for(var/datum/mind/B in members)
 			if(B.current)
-				SEND_SOUND(B.current, 'sound/hallucinations/im_here1.ogg')
-				to_chat(B.current, "<span class='cultlarge'>Your cult is ascendent and the red harvest approaches - you cannot hide your true nature for much longer!!</span>")
+				SEND_SOUND(B.current, 'sound/blank.ogg')
+				to_chat(B.current, "<span class='cultlarge'>My cult is ascendent and the red harvest approaches - you cannot hide my true nature for much longer!!</span>")
 				addtimer(CALLBACK(src, .proc/ascend, B.current), 200)
 		cult_ascendent = TRUE
 

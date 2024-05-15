@@ -3,7 +3,7 @@
 /datum/blobstrain/reagent/blazing_oil
 	name = "Blazing Oil"
 	description = "will do medium burn damage and set targets on fire."
-	effectdesc = "will also release bursts of flame when burnt, but takes damage from water."
+	effectdesc = ""
 	analyzerdescdamage = "Does medium burn damage and sets targets on fire."
 	analyzerdesceffect = "Releases fire when burnt, but takes damage from water and other extinguishing liquids."
 	color = "#B68D00"

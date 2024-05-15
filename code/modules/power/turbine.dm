@@ -24,7 +24,7 @@
 
 /obj/machinery/power/compressor
 	name = "compressor"
-	desc = "The compressor stage of a gas turbine generator."
+	desc = ""
 	icon = 'icons/obj/atmospherics/pipes/simple.dmi'
 	icon_state = "compressor"
 	density = TRUE
@@ -52,7 +52,7 @@
 
 /obj/machinery/power/turbine
 	name = "gas turbine generator"
-	desc = "A gas turbine used for backup power generation."
+	desc = ""
 	icon = 'icons/obj/atmospherics/pipes/simple.dmi'
 	icon_state = "turbine"
 	density = TRUE
@@ -307,7 +307,7 @@
 
 /obj/machinery/computer/turbine_computer
 	name = "gas turbine control computer"
-	desc = "A computer to remotely control a gas turbine."
+	desc = ""
 	icon_screen = "turbinecomp"
 	icon_keyboard = "tech_key"
 	circuit = /obj/item/circuitboard/computer/turbine_computer

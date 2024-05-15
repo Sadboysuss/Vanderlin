@@ -1,18 +1,30 @@
+GLOBAL_LIST_EMPTY(TodUpdate)
+
 SUBSYSTEM_DEF(nightshift)
 	name = "Night Shift"
-	wait = 600
+	wait = 10 SECONDS
 	flags = SS_NO_TICK_CHECK
+	priority = 1
+	var/current_tod = null
 
 	var/nightshift_active = FALSE
-	var/nightshift_start_time = 702000		//7:30 PM, station time
-	var/nightshift_end_time = 270000		//7:30 AM, station time
-	var/nightshift_first_check = 30 SECONDS
+	var/nightshift_start_time = 630000	//5:30 PM
+	var/nightshift_end_time = 252000	//7:00 AM
+	var/nightshift_dawn_start = 198000	//5:30 AM
+	var/nightshift_day_start = 252000	//7:00 AM
+	var/nightshift_dusk_start = 576000	//4:00 PM
+
+	//1hr = 36000
+	//30m = 18000
+
+	var/nightshift_first_check = 2 SECONDS
 
 	var/high_security_mode = FALSE
 
 /datum/controller/subsystem/nightshift/Initialize()
 	if(!CONFIG_GET(flag/enable_night_shifts))
 		can_fire = FALSE
+	current_tod = settod()
 	return ..()
 
 /datum/controller/subsystem/nightshift/fire(resumed = FALSE)
@@ -21,13 +33,13 @@ SUBSYSTEM_DEF(nightshift)
 	check_nightshift()
 
 /datum/controller/subsystem/nightshift/proc/announce(message)
-	priority_announce(message, sound='sound/misc/notice2.ogg', sender_override="Automated Lighting System Announcement")
+	priority_announce(message, sound='sound/misc/bell.ogg', sender_override="Automated Lighting System Announcement")
 
 /datum/controller/subsystem/nightshift/proc/check_nightshift()
-	var/emergency = GLOB.security_level >= SEC_LEVEL_RED
-	var/announcing = TRUE
-	var/time = station_time()
-	var/night_time = (time < nightshift_end_time) || (time > nightshift_start_time)
+//	var/emergency = GLOB.security_level >= SEC_LEVEL_RED
+//	var/announcing = FALSE
+//	var/time = station_time()
+/*	var/night_time = (time < nightshift_day_start) || (time > nightshift_dusk_start) || (settod() in list("night", "dawn", "dusk"))
 	if(high_security_mode != emergency)
 		high_security_mode = emergency
 		if(night_time)
@@ -35,21 +47,40 @@ SUBSYSTEM_DEF(nightshift)
 			if(!emergency)
 				announce("Restoring night lighting configuration to normal operation.")
 			else
-				announce("Disabling night lighting: Station is in a state of emergency.")  
+				announce("Disabling night lighting: Station is in a state of emergency.")
 	if(emergency)
 		night_time = FALSE
 	if(nightshift_active != night_time)
-		update_nightshift(night_time, announcing)
+		update_nightshift(night_time, announcing)*/
+	var/curtod = settod()
+	if(current_tod != curtod)
+		testing("curtod [curtod] current_tod [current_tod] globtod [GLOB.tod]")
+		current_tod = GLOB.tod
+		update_nightshift()
 
-/datum/controller/subsystem/nightshift/proc/update_nightshift(active, announce = TRUE)
-	nightshift_active = active
-	if(announce)
-		if (active)
-			announce("Good evening, crew. To reduce power consumption and stimulate the circadian rhythms of some species, all of the lights aboard the station have been dimmed for the night.")
-		else
-			announce("Good morning, crew. As it is now day time, all of the lights aboard the station have been restored to their former brightness.")
-	for(var/A in GLOB.apcs_list)
-		var/obj/machinery/power/apc/APC = A
-		if (APC.area && (APC.area.type in GLOB.the_station_areas))
-			APC.set_nightshift(active)
-			CHECK_TICK
+/datum/controller/subsystem/nightshift/proc/update_nightshift()
+	set waitfor = FALSE
+	for(var/obj/effect/sunlight/L in GLOB.sunlights)
+		START_PROCESSING(SStodchange, L)
+	for(var/obj/A in GLOB.TodUpdate)
+		A.update_tod(GLOB.tod)
+	for(var/mob/living/M in GLOB.mob_list)
+		M.update_tod(GLOB.tod)
+
+/obj/proc/update_tod(todd)
+	return
+
+/mob/living/proc/update_tod(todd)
+	return
+
+/mob/living/carbon/human/update_tod(todd)
+	if(client)
+		var/area/areal = get_area(src)
+		if(!cmode)
+			SSdroning.play_area_sound(areal, src.client)
+		SSdroning.play_loop(areal, src.client)
+	if(todd == "night")
+		if(HAS_TRAIT(src, TRAIT_NOFATSTAM))
+			return ..()
+		if(tiredness >= 100)
+			apply_status_effect(/datum/status_effect/debuff/sleepytime)

@@ -6,8 +6,8 @@
 	var/transfer_access = null				// List of required access to download or file host the program
 	var/program_state = PROGRAM_STATE_KILLED// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
 	var/obj/item/modular_computer/computer	// Device that runs this program.
-	var/filedesc = "Unknown Program"		// User-friendly name of this program.
-	var/extended_desc = "N/A"				// Short description of this program's function.
+	var/filedesc = ""		// User-friendly name of this program.
+	var/extended_desc = ""				// Short description of this program's function.
 	var/program_icon_state = null			// Program-specific screen icon state
 	var/requires_ntnet = 0					// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
 	var/requires_ntnet_feature = 0			// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)

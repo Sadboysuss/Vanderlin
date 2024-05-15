@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/item/extraction_pack
 	name = "fulton extraction pack"
-	desc = "A balloon that can be used to extract equipment or personnel to a Fulton Recovery Beacon. Anything not bolted down can be moved. Link the pack to a beacon by using the pack in hand."
+	desc = ""
 	icon = 'icons/obj/fulton.dmi'
 	icon_state = "extraction_pack"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 		if(!A)
 			return
 		beacon = A
-		to_chat(user, "<span class='notice'>You link the extraction pack to the beacon system.</span>")
+		to_chat(user, "<span class='notice'>I link the extraction pack to the beacon system.</span>")
 
 /obj/item/extraction_pack/afterattack(atom/movable/A, mob/living/carbon/human/user, flag, params)
 	. = ..()
@@ -64,9 +64,9 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			return
 		if(A.anchored || (A.move_resist > max_force_fulton))
 			return
-		to_chat(user, "<span class='notice'>You start attaching the pack to [A]...</span>")
+		to_chat(user, "<span class='notice'>I start attaching the pack to [A]...</span>")
 		if(do_after(user,50,target=A))
-			to_chat(user, "<span class='notice'>You attach the pack to [A] and activate it.</span>")
+			to_chat(user, "<span class='notice'>I attach the pack to [A] and activate it.</span>")
 			if(loc == user && istype(user.back, /obj/item/storage/backpack))
 				var/obj/item/storage/backpack/B = user.back
 				SEND_SIGNAL(B, COMSIG_TRY_STORAGE_INSERT, src, user, FALSE, FALSE)
@@ -96,7 +96,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			balloon.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 			holder_obj.cut_overlay(balloon2)
 			holder_obj.add_overlay(balloon)
-			playsound(holder_obj.loc, 'sound/items/fultext_deploy.ogg', 50, TRUE, -3)
+			playsound(holder_obj.loc, 'sound/blank.ogg', 50, TRUE, -3)
 			animate(holder_obj, pixel_z = 10, time = 20)
 			sleep(20)
 			animate(holder_obj, pixel_z = 15, time = 10)
@@ -107,7 +107,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			sleep(10)
 			animate(holder_obj, pixel_z = 10, time = 10)
 			sleep(10)
-			playsound(holder_obj.loc, 'sound/items/fultext_launch.ogg', 50, TRUE, -3)
+			playsound(holder_obj.loc, 'sound/blank.ogg', 50, TRUE, -3)
 			animate(holder_obj, pixel_z = 1000, time = 30)
 			if(ishuman(A))
 				var/mob/living/carbon/human/L = A
@@ -144,7 +144,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/item/fulton_core
 	name = "extraction beacon signaller"
-	desc = "Emits a signal which fulton recovery devices can lock onto. Activate in hand to create a beacon."
+	desc = ""
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "subspace_amplifier"
 
@@ -155,7 +155,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/structure/extraction_point
 	name = "fulton recovery beacon"
-	desc = "A beacon for the fulton recovery system. Activate a pack in your hand to link it to a beacon."
+	desc = ""
 	icon = 'icons/obj/fulton.dmi'
 	icon_state = "extraction_point"
 	anchored = TRUE
@@ -173,7 +173,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/effect/extraction_holder
 	name = "extraction holder"
-	desc = "you shouldnt see this"
+	desc = ""
 	var/atom/movable/stored_obj
 
 /obj/item/extraction_pack/proc/check_for_living_mobs(atom/A)

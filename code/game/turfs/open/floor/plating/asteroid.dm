@@ -63,12 +63,12 @@
 			if(!isturf(user.loc))
 				return
 
-			to_chat(user, "<span class='notice'>You start digging...</span>")
+			to_chat(user, "<span class='notice'>I start digging...</span>")
 
 			if(W.use_tool(src, user, 40, volume=50))
 				if(!can_dig(user))
 					return TRUE
-				to_chat(user, "<span class='notice'>You dig a hole.</span>")
+				to_chat(user, "<span class='notice'>I dig a hole.</span>")
 				getDug()
 				SSblackbox.record_feedback("tally", "pick_used_mining", 1, W.type)
 				return TRUE
@@ -314,7 +314,7 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 /turf/open/floor/plating/asteroid/snow
 	gender = PLURAL
 	name = "snow"
-	desc = "Looks cold."
+	desc = ""
 	icon = 'icons/turf/snow.dmi'
 	baseturfs = /turf/open/floor/plating/asteroid/snow
 	icon_state = "snow"
@@ -340,7 +340,7 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 
 /turf/open/floor/plating/asteroid/snow/ice
 	name = "icy snow"
-	desc = "Looks colder."
+	desc = ""
 	baseturfs = /turf/open/floor/plating/asteroid/snow/ice
 	initial_gas_mix = "o2=0;n2=82;plasma=24;TEMP=120"
 	floor_variance = 0

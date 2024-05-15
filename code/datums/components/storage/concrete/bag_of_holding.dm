@@ -1,6 +1,6 @@
 /datum/component/storage/concrete/bluespace/bag_of_holding/handle_item_insertion(obj/item/W, prevent_warning = FALSE, mob/living/user)
 	var/atom/A = parent
-	if(A == W)		//don't put yourself into yourself.
+	if(A == W)		//don't put myself into myself.
 		return
 	var/list/obj/item/storage/backpack/holding/matching = typecache_filter_list(W.GetAllContents(), typecacheof(/obj/item/storage/backpack/holding))
 	matching -= A
@@ -11,7 +11,7 @@
 		var/turf/loccheck = get_turf(A)
 		to_chat(user, "<span class='danger'>The Bluespace interfaces of the two devices catastrophically malfunction!</span>")
 		qdel(W)
-		playsound(loccheck,'sound/effects/supermatter.ogg', 200, TRUE)
+		playsound(loccheck,'sound/blank.ogg', 200, TRUE)
 
 		message_admins("[ADMIN_LOOKUPFLW(user)] detonated a bag of holding at [ADMIN_VERBOSEJMP(loccheck)].")
 		log_game("[key_name(user)] detonated a bag of holding at [loc_name(loccheck)].")

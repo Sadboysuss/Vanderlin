@@ -4,7 +4,7 @@
 /obj/item/camera
 	name = "camera"
 	icon = 'icons/obj/items_and_weapons.dmi'
-	desc = "A polaroid camera."
+	desc = ""
 	icon_state = "camera"
 	item_state = "camera"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
@@ -40,7 +40,7 @@
 /obj/item/camera/attack_self(mob/user)
 	if(!disk)
 		return
-	to_chat(user, "<span class='notice'>You eject [disk] out the back of [src].</span>")
+	to_chat(user, "<span class='notice'>I eject [disk] out the back of [src].</span>")
 	user.put_in_hands(disk)
 	disk = null
 
@@ -55,7 +55,7 @@
 		return
 
 	var/desired_y = input(user, "How wide do you want the camera to shoot, between [picture_size_y_min] and [picture_size_y_max]?", "Zoom", picture_size_y) as num|null
-	
+
 	if (isnull(desired_y))
 		return
 
@@ -77,7 +77,7 @@
 			return
 		if(!user.temporarilyRemoveItemFromInventory(I))
 			return
-		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		to_chat(user, "<span class='notice'>I insert [I] into [src].</span>")
 		qdel(I)
 		pictures_left = pictures_max
 		return
@@ -86,7 +86,7 @@
 			if(!user.transferItemToLoc(I, src))
 				to_chat(user, "<span class='warning'>[I] is stuck to your hand!</span>")
 				return TRUE
-			to_chat(user, "<span class='notice'>You slide [I] into the back of [src].</span>")
+			to_chat(user, "<span class='notice'>I slide [I] into the back of [src].</span>")
 			disk = I
 		else
 			to_chat(user, "<span class='warning'>There's already a disk inside [src].</span>")
@@ -226,7 +226,7 @@
 			if(name1)
 				picture.picture_name = name1
 			if(desc1)
-				picture.picture_desc = "[desc1] - [picture.picture_desc]"
+				picture.picture_desc = ""
 			if(caption)
 				picture.caption = caption
 		else

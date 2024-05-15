@@ -1,6 +1,6 @@
 /datum/action/changeling/absorbDNA
 	name = "Absorb DNA"
-	desc = "Absorb the DNA of our victim. Requires us to strangle them."
+	desc = ""
 	button_icon_state = "absorb_dna"
 	chemical_cost = 0
 	dna_cost = 0
@@ -39,7 +39,7 @@
 				user.visible_message("<span class='warning'>[user] extends a proboscis!</span>", "<span class='notice'>We extend a proboscis.</span>")
 			if(3)
 				user.visible_message("<span class='danger'>[user] stabs [target] with the proboscis!</span>", "<span class='notice'>We stab [target] with the proboscis.</span>")
-				to_chat(target, "<span class='userdanger'>You feel a sharp stabbing pain!</span>")
+				to_chat(target, "<span class='danger'>I feel a sharp stabbing pain!</span>")
 				target.take_overall_damage(40)
 
 		SSblackbox.record_feedback("nested tally", "changeling_powers", 1, list("Absorb DNA", "[i]"))
@@ -50,7 +50,7 @@
 
 	SSblackbox.record_feedback("nested tally", "changeling_powers", 1, list("Absorb DNA", "4"))
 	user.visible_message("<span class='danger'>[user] sucks the fluids from [target]!</span>", "<span class='notice'>We have absorbed [target].</span>")
-	to_chat(target, "<span class='userdanger'>You are absorbed by the changeling!</span>")
+	to_chat(target, "<span class='danger'>I are absorbed by the changeling!</span>")
 
 	if(!changeling.has_dna(target.dna))
 		changeling.add_new_profile(target)

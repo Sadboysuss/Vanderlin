@@ -12,7 +12,7 @@
 
 /datum/reagent/medicine/on_mob_life(mob/living/carbon/M)
 	current_cycle++
-	holder.remove_reagent(type, metabolization_rate / M.metabolism_efficiency) //medicine reagents stay longer if you have a better metabolism
+	. = ..()
 
 /datum/reagent/medicine/leporazine
 	name = "Leporazine"
@@ -24,7 +24,7 @@
 		M.adjust_bodytemperature(-40 * TEMPERATURE_DAMAGE_COEFFICIENT, BODYTEMP_NORMAL)
 	else if(M.bodytemperature < (BODYTEMP_NORMAL + 1))
 		M.adjust_bodytemperature(40 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
-	..()
+	return ..()
 
 /datum/reagent/medicine/adminordrazine //An OP chemical for admins
 	name = "Adminordrazine"
@@ -244,7 +244,7 @@
 	if(last_added)
 		M.blood_volume -= last_added
 		last_added = 0
-	if(M.blood_volume < maximum_reachable)	//Can only up to double your effective blood level.
+	if(M.blood_volume < maximum_reachable)	//Can only up to double my effective blood level.
 		var/amount_to_add = min(M.blood_volume, volume*5)
 		var/new_blood_level = min(M.blood_volume + amount_to_add, maximum_reachable)
 		last_added = new_blood_level - M.blood_volume
@@ -257,11 +257,11 @@
 
 /datum/reagent/medicine/salglu_solution/overdose_process(mob/living/M)
 	if(prob(3))
-		to_chat(M, "<span class='warning'>You feel salty.</span>")
+		to_chat(M, "<span class='warning'>I feel salty.</span>")
 		holder.add_reagent(/datum/reagent/consumable/sodiumchloride, 1)
 		holder.remove_reagent(/datum/reagent/medicine/salglu_solution, 0.5)
 	else if(prob(3))
-		to_chat(M, "<span class='warning'>You feel sweet.</span>")
+		to_chat(M, "<span class='warning'>I feel sweet.</span>")
 		holder.add_reagent(/datum/reagent/consumable/sugar, 1)
 		holder.remove_reagent(/datum/reagent/medicine/salglu_solution, 0.5)
 	if(prob(33))
@@ -289,7 +289,7 @@
 		if(method in list(INGEST, VAPOR, INJECT))
 			M.adjust_nutrition(-5)
 			if(show_message)
-				to_chat(M, "<span class='warning'>Your stomach feels empty and cramps!</span>")
+				to_chat(M, "<span class='warning'>My stomach feels empty and cramps!</span>")
 		else
 			var/mob/living/carbon/C = M
 			for(var/s in C.surgeries)
@@ -297,7 +297,7 @@
 				S.speed_modifier = max(0.1, S.speed_modifier)
 
 			if(show_message)
-				to_chat(M, "<span class='danger'>You feel your wounds fade away to nothing!</span>" )
+				to_chat(M, "<span class='danger'>I feel my wounds fade away to nothing!</span>" )
 	..()
 
 /datum/reagent/medicine/mine_salve/on_mob_end_metabolize(mob/living/M)
@@ -434,7 +434,7 @@
 	if(prob(20) && iscarbon(M))
 		var/obj/item/I = M.get_active_held_item()
 		if(I && M.dropItemToGround(I))
-			to_chat(M, "<span class='notice'>Your hands spaz out and you drop what you were holding!</span>")
+			to_chat(M, "<span class='notice'>My hands spaz out and you drop what you were holding!</span>")
 			M.Jitter(10)
 
 	M.AdjustAllImmobility(-20, FALSE)
@@ -446,11 +446,11 @@
 	if(prob(2) && iscarbon(M))
 		var/datum/disease/D = new /datum/disease/heart_failure
 		M.ForceContractDisease(D)
-		to_chat(M, "<span class='userdanger'>You're pretty sure you just felt your heart stop for a second there..</span>")
-		M.playsound_local(M, 'sound/effects/singlebeat.ogg', 100, 0)
+		to_chat(M, "<span class='danger'>You're pretty sure you just felt my heart stop for a second there..</span>")
+		M.playsound_local(M, 'sound/blank.ogg', 100, 0)
 
 	if(prob(7))
-		to_chat(M, "<span class='notice'>[pick("Your head pounds.", "You feel a tight pain in your chest.", "You find it hard to stay still.", "You feel your heart practically beating out of your chest.")]</span>")
+		to_chat(M, "<span class='notice'>[pick("Your head pounds.", "You feel a tight pain in my chest.", "You find it hard to stay still.", "You feel my heart practically beating out of my chest.")]</span>")
 
 	if(prob(33))
 		M.adjustToxLoss(1*REM, 0)
@@ -460,7 +460,7 @@
 
 /datum/reagent/medicine/ephedrine/addiction_act_stage1(mob/living/M)
 	if(prob(3) && iscarbon(M))
-		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
+		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>I have a seizure!</span>")
 		M.Unconscious(100)
 		M.Jitter(350)
 
@@ -472,7 +472,7 @@
 
 /datum/reagent/medicine/ephedrine/addiction_act_stage2(mob/living/M)
 	if(prob(6) && iscarbon(M))
-		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
+		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>I have a seizure!</span>")
 		M.Unconscious(100)
 		M.Jitter(350)
 
@@ -484,7 +484,7 @@
 
 /datum/reagent/medicine/ephedrine/addiction_act_stage3(mob/living/M)
 	if(prob(12) && iscarbon(M))
-		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
+		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>I have a seizure!</span>")
 		M.Unconscious(100)
 		M.Jitter(350)
 
@@ -496,7 +496,7 @@
 
 /datum/reagent/medicine/ephedrine/addiction_act_stage4(mob/living/M)
 	if(prob(24) && iscarbon(M))
-		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
+		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>I have a seizure!</span>")
 		M.Unconscious(100)
 		M.Jitter(350)
 
@@ -542,7 +542,7 @@
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "numb", /datum/mood_event/narcotic_medium, name)
 	switch(current_cycle)
 		if(11)
-			to_chat(M, "<span class='warning'>You start to feel tired...</span>" )
+			to_chat(M, "<span class='warning'>I start to feel tired...</span>" )
 		if(12 to 24)
 			M.drowsyness += 1
 		if(24 to INFINITY)
@@ -605,13 +605,13 @@
 	eyes.applyOrganDamage(-2)
 	if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
 		if(prob(20))
-			to_chat(M, "<span class='warning'>Your vision slowly returns...</span>")
+			to_chat(M, "<span class='warning'>My vision slowly returns...</span>")
 			M.cure_blind(EYE_DAMAGE)
 			M.cure_nearsighted(EYE_DAMAGE)
 			M.blur_eyes(35)
 
 	else if(HAS_TRAIT_FROM(M, TRAIT_NEARSIGHT, EYE_DAMAGE))
-		to_chat(M, "<span class='warning'>The blackness in your peripheral vision fades.</span>")
+		to_chat(M, "<span class='warning'>The blackness in my peripheral vision fades.</span>")
 		M.cure_nearsighted(EYE_DAMAGE)
 		M.blur_eyes(10)
 	else if(M.eye_blind || M.eye_blurry)
@@ -728,13 +728,13 @@
 					C.blood_volume = max(C.blood_volume, BLOOD_VOLUME_NORMAL) //so you don't instantly re-die from a lack of blood
 				for(var/organ in C.internal_organs)
 					var/obj/item/organ/O = organ
-					O.setOrganDamage(0) //so you don't near-instantly re-die because your heart has decayed to the point of complete failure
+					O.setOrganDamage(0) //so you don't near-instantly re-die because my heart has decayed to the point of complete failure
 
 			M.adjustOxyLoss(-20, 0)
 			M.adjustToxLoss(-20, 0)
 			M.updatehealth()
 			if(M.revive(full_heal = FALSE, admin_revive = FALSE))
-				M.emote("gasp")
+				M.emote("breathgasp")
 				log_combat(M, M, "revived", src)
 	..()
 
@@ -901,7 +901,7 @@
 /datum/reagent/medicine/syndicate_nanites/overdose_process(mob/living/carbon/M) //wtb flavortext messages that hint that you're vomitting up robots
 	if(prob(25))
 		M.reagents.remove_reagent(type, metabolization_rate*15) // ~5 units at a rate of 0.4 but i wanted a nice number in code
-		M.vomit(20) // nanite safety protocols make your body expel them to prevent harmies
+		M.vomit(20) // nanite safety protocols make my body expel them to prevent harmies
 	..()
 	. = 1
 
@@ -931,7 +931,7 @@
 		M.jitteriness = min(max(0, M.jitteriness + 3), 30)
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2 * REM, 150)
 		if(prob(10))
-			M.say(pick("Yeah, well, you know, that's just, like, uh, your opinion, man.", "Am I glad he's frozen in there and that we're out here, and that he's the sheriff and that we're frozen out here, and that we're in there, and I just remembered, we're out here. What I wanna know is: Where's the caveman?", "It ain't me, it ain't me...", "Make love, not war!", "Stop, hey, what's that sound? Everybody look what's going down...", "Do you believe in magic in a young girl's heart?"), forced = /datum/reagent/medicine/earthsblood)
+			M.say(pick("Yeah, well, you know, that's just, like, uh, my opinion, man.", "Am I glad he's frozen in there and that we're out here, and that he's the sheriff and that we're frozen out here, and that we're in there, and I just remembered, we're out here. What I wanna know is: Where's the caveman?", "It ain't me, it ain't me...", "Make love, not war!", "Stop, hey, what's that sound? Everybody look what's going down...", "Do you believe in magic in a young girl's heart?"), forced = /datum/reagent/medicine/earthsblood)
 	M.druggy = min(max(0, M.druggy + 10), 15) //See above
 	..()
 	. = 1
@@ -1120,7 +1120,7 @@
 	..()
 
 /datum/reagent/medicine/modafinil/overdose_start(mob/living/M)
-	to_chat(M, "<span class='userdanger'>You feel awfully out of breath and jittery!</span>")
+	to_chat(M, "<span class='danger'>I feel awfully out of breath and jittery!</span>")
 	metabolization_rate = 0.025 * REAGENTS_METABOLISM // sets metabolism to 0.01 per tick on overdose
 
 /datum/reagent/medicine/modafinil/overdose_process(mob/living/M)
@@ -1141,11 +1141,11 @@
 			if(prob(50))
 				M.losebreath++
 			if(prob(20))
-				to_chat(M, "<span class='userdanger'>You have a sudden fit!</span>")
+				to_chat(M, "<span class='danger'>I have a sudden fit!</span>")
 				M.emote("moan")
 				M.Paralyze(20, 1, 0) // you should be in a bad spot at this point unless epipen has been used
 		if(81)
-			to_chat(M, "<span class='userdanger'>You feel too exhausted to continue!</span>") // at this point you will eventually die unless you get charcoal
+			to_chat(M, "<span class='danger'>I feel too exhausted to continue!</span>") // at this point you will eventually die unless you get charcoal
 			M.adjustOxyLoss(0.1*REM, 0)
 			M.adjustStaminaLoss(0.1*REM, 0)
 		if(82 to INFINITY)
@@ -1340,7 +1340,7 @@
 	if(prob(30) && iscarbon(M))
 		var/obj/item/I = M.get_active_held_item()
 		if(I && M.dropItemToGround(I))
-			to_chat(M, "<span class='notice'>Your hands spaz out and you drop what you were holding!</span>")
+			to_chat(M, "<span class='notice'>My hands spaz out and you drop what you were holding!</span>")
 	if(prob(33))
 		M.losebreath++
 		M.adjustOxyLoss(1, 0)

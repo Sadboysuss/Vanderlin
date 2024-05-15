@@ -11,7 +11,7 @@ Borg Hypospray
 */
 /obj/item/reagent_containers/borghypo
 	name = "cyborg hypospray"
-	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
+	desc = ""
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -111,8 +111,8 @@ Borg Hypospray
 	if(!istype(M))
 		return
 	if(R.total_volume && M.can_inject(user, 1, user.zone_selected,bypass_protection))
-		to_chat(M, "<span class='warning'>You feel a tiny prick!</span>")
-		to_chat(user, "<span class='notice'>You inject [M] with the injector.</span>")
+		to_chat(M, "<span class='warning'>I feel a tiny prick!</span>")
+		to_chat(user, "<span class='notice'>I inject [M] with the injector.</span>")
 		if(M.reagents)
 			var/trans = R.trans_to(M, amount_per_transfer_from_this, transfered_by = user, method = INJECT)
 			to_chat(user, "<span class='notice'>[trans] unit\s injected. [R.total_volume] unit\s remaining.</span>")
@@ -127,7 +127,7 @@ Borg Hypospray
 	if(!chosen_reagent)
 		return
 	mode = chosen_reagent
-	playsound(loc, 'sound/effects/pop.ogg', 50, FALSE)
+	playsound(loc, 'sound/blank.ogg', 50, FALSE)
 	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 	to_chat(user, "<span class='notice'>[src] is now dispensing '[R.name]'.</span>")
 	return
@@ -169,19 +169,19 @@ Borg Hypospray
 
 /obj/item/reagent_containers/borghypo/clown
 	name = "laughter injector"
-	desc = "Keeps the crew happy and productive!"
+	desc = ""
 	reagent_ids = list(/datum/reagent/consumable/laughter)
 	accepts_reagent_upgrades = FALSE
 
 /obj/item/reagent_containers/borghypo/clown/hacked
 	name = "laughter injector"
-	desc = "Keeps the crew so happy they don't work!"
+	desc = ""
 	reagent_ids = list(/datum/reagent/consumable/superlaughter)
 	accepts_reagent_upgrades = FALSE
 
 /obj/item/reagent_containers/borghypo/syndicate
 	name = "syndicate cyborg hypospray"
-	desc = "An experimental piece of Syndicate technology used to produce powerful restorative nanites used to very quickly restore injuries of all types. Also metabolizes potassium iodide, for radiation poisoning, and morphine, for offense."
+	desc = ""
 	icon_state = "borghypo_s"
 	charge_cost = 20
 	recharge_time = 2
@@ -194,7 +194,7 @@ Borg Shaker
 */
 /obj/item/reagent_containers/borghypo/borgshaker
 	name = "cyborg shaker"
-	desc = "An advanced drink synthesizer and mixer."
+	desc = ""
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "shaker"
 	possible_transfer_amounts = list(5,10,20)
@@ -202,20 +202,20 @@ Borg Shaker
 	recharge_time = 3
 	accepts_reagent_upgrades = FALSE
 
-	reagent_ids = list(/datum/reagent/consumable/applejuice, /datum/reagent/consumable/banana, /datum/reagent/consumable/coffee, 
-	/datum/reagent/consumable/cream, /datum/reagent/consumable/dr_gibb, /datum/reagent/consumable/grenadine, 
-	/datum/reagent/consumable/ice, /datum/reagent/consumable/lemonjuice, /datum/reagent/consumable/lemon_lime, 
-	/datum/reagent/consumable/limejuice, /datum/reagent/consumable/menthol, /datum/reagent/consumable/milk, 
-	/datum/reagent/consumable/nothing, /datum/reagent/consumable/orangejuice, /datum/reagent/consumable/peachjuice, 
-	/datum/reagent/consumable/sodawater, /datum/reagent/consumable/space_cola, /datum/reagent/consumable/spacemountainwind, 
-	/datum/reagent/consumable/pwr_game, /datum/reagent/consumable/shamblers, /datum/reagent/consumable/soymilk, 
-	/datum/reagent/consumable/space_up, /datum/reagent/consumable/tea, /datum/reagent/consumable/tomatojuice, 
-	/datum/reagent/consumable/tonic, /datum/reagent/water, 
-	/datum/reagent/consumable/ethanol/ale, /datum/reagent/consumable/ethanol/applejack, /datum/reagent/consumable/ethanol/beer, 
-	/datum/reagent/consumable/ethanol/cognac, /datum/reagent/consumable/ethanol/creme_de_menthe, 
-	/datum/reagent/consumable/ethanol/creme_de_cacao, /datum/reagent/consumable/ethanol/gin, /datum/reagent/consumable/ethanol/kahlua, 
-	/datum/reagent/consumable/ethanol/rum, /datum/reagent/consumable/ethanol/sake, /datum/reagent/consumable/ethanol/tequila, 
-	/datum/reagent/consumable/ethanol/triple_sec, /datum/reagent/consumable/ethanol/vermouth, 
+	reagent_ids = list(/datum/reagent/consumable/applejuice, /datum/reagent/consumable/banana, /datum/reagent/consumable/coffee,
+	/datum/reagent/consumable/cream, /datum/reagent/consumable/dr_gibb, /datum/reagent/consumable/grenadine,
+	/datum/reagent/consumable/ice, /datum/reagent/consumable/lemonjuice, /datum/reagent/consumable/lemon_lime,
+	/datum/reagent/consumable/limejuice, /datum/reagent/consumable/menthol, /datum/reagent/consumable/milk,
+	/datum/reagent/consumable/nothing, /datum/reagent/consumable/orangejuice, /datum/reagent/consumable/peachjuice,
+	/datum/reagent/consumable/sodawater, /datum/reagent/consumable/space_cola, /datum/reagent/consumable/spacemountainwind,
+	/datum/reagent/consumable/pwr_game, /datum/reagent/consumable/shamblers, /datum/reagent/consumable/soymilk,
+	/datum/reagent/consumable/space_up, /datum/reagent/consumable/tea, /datum/reagent/consumable/tomatojuice,
+	/datum/reagent/consumable/tonic, /datum/reagent/water,
+	/datum/reagent/consumable/ethanol/ale, /datum/reagent/consumable/ethanol/applejack, /datum/reagent/consumable/ethanol/beer,
+	/datum/reagent/consumable/ethanol/cognac, /datum/reagent/consumable/ethanol/creme_de_menthe,
+	/datum/reagent/consumable/ethanol/creme_de_cacao, /datum/reagent/consumable/ethanol/gin, /datum/reagent/consumable/ethanol/kahlua,
+	/datum/reagent/consumable/ethanol/rum, /datum/reagent/consumable/ethanol/sake, /datum/reagent/consumable/ethanol/tequila,
+	/datum/reagent/consumable/ethanol/triple_sec, /datum/reagent/consumable/ethanol/vermouth,
 	/datum/reagent/consumable/ethanol/whiskey, /datum/reagent/consumable/ethanol/wine)
 
 /obj/item/reagent_containers/borghypo/borgshaker/attack(mob/M, mob/user)
@@ -248,7 +248,7 @@ Borg Shaker
 			return
 
 		var/trans = R.trans_to(target, amount_per_transfer_from_this, transfered_by = user)
-		to_chat(user, "<span class='notice'>You transfer [trans] unit\s of the solution to [target].</span>")
+		to_chat(user, "<span class='notice'>I transfer [trans] unit\s of the solution to [target].</span>")
 
 /obj/item/reagent_containers/borghypo/borgshaker/DescribeContents()
 	var/datum/reagents/RS = reagent_list[mode]
@@ -260,7 +260,7 @@ Borg Shaker
 
 /obj/item/reagent_containers/borghypo/borgshaker/hacked
 	name = "cyborg shaker"
-	desc = "Will mix drinks that knock them dead."
+	desc = ""
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "threemileislandglass"
 	possible_transfer_amounts = list(5,10,20)
@@ -277,14 +277,14 @@ Borg Shaker
 	accepts_reagent_upgrades = FALSE
 
 /obj/item/reagent_containers/borghypo/peace/hacked
-	desc = "Everything's peaceful in death!"
+	desc = ""
 	icon_state = "borghypo_s"
 	reagent_ids = list(/datum/reagent/peaceborg/confuse,/datum/reagent/peaceborg/tire,/datum/reagent/pax/peaceborg,/datum/reagent/toxin/staminatoxin,/datum/reagent/toxin/sulfonal,/datum/reagent/toxin/sodium_thiopental,/datum/reagent/toxin/cyanide,/datum/reagent/toxin/fentanyl)
 	accepts_reagent_upgrades = FALSE
 
 /obj/item/reagent_containers/borghypo/epi
 	name = "epinephrine injector"
-	desc = "An advanced chemical synthesizer and injection system, designed to stabilize patients."
+	desc = ""
 	reagent_ids = list(/datum/reagent/medicine/epinephrine)
 	accepts_reagent_upgrades = FALSE
 

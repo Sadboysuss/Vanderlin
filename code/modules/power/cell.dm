@@ -1,6 +1,6 @@
 /obj/item/stock_parts/cell
 	name = "power cell"
-	desc = "A rechargeable electrochemical power cell."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cell"
 	item_state = "cell"
@@ -168,7 +168,7 @@
 
 /obj/item/stock_parts/cell/crap
 	name = "\improper Nanotrasen brand rechargeable AA battery"
-	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
+	desc = "" //TOTALLY TRADEMARK INFRINGEMENT
 	maxcharge = 500
 	custom_materials = list(/datum/material/glass=40)
 
@@ -179,14 +179,14 @@
 
 /obj/item/stock_parts/cell/upgraded
 	name = "upgraded power cell"
-	desc = "A power cell with a slightly higher capacity than normal!"
+	desc = ""
 	maxcharge = 2500
 	custom_materials = list(/datum/material/glass=50)
 	chargerate = 1000
 
 /obj/item/stock_parts/cell/upgraded/plus
 	name = "upgraded power cell+"
-	desc = "A power cell with an even higher capacity than the base model!"
+	desc = ""
 	maxcharge = 5000
 
 /obj/item/stock_parts/cell/secborg
@@ -221,7 +221,7 @@
 
 /obj/item/stock_parts/cell/high/plus
 	name = "high-capacity power cell+"
-	desc = "Where did these come from?"
+	desc = ""
 	icon_state = "h+cell"
 	maxcharge = 15000
 	chargerate = 2250
@@ -257,7 +257,7 @@
 
 /obj/item/stock_parts/cell/bluespace
 	name = "bluespace power cell"
-	desc = "A rechargeable transdimensional power cell."
+	desc = ""
 	icon_state = "bscell"
 	maxcharge = 40000
 	custom_materials = list(/datum/material/glass=600)
@@ -281,7 +281,7 @@
 
 /obj/item/stock_parts/cell/infinite/abductor
 	name = "void core"
-	desc = "An alien power cell that produces energy seemingly out of nowhere."
+	desc = ""
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cell"
 	maxcharge = 50000
@@ -293,7 +293,7 @@
 
 /obj/item/stock_parts/cell/potato
 	name = "potato battery"
-	desc = "A rechargeable starch based power cell."
+	desc = ""
 	icon = 'icons/obj/hydroponics/harvest.dmi'
 	icon_state = "potato"
 	charge = 100
@@ -303,7 +303,7 @@
 
 /obj/item/stock_parts/cell/high/slime
 	name = "charged slime core"
-	desc = "A yellow slime core infused with plasma, it crackles with power."
+	desc = ""
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "yellow slime extract"
 	custom_materials = null
@@ -315,7 +315,7 @@
 
 /obj/item/stock_parts/cell/emproof
 	name = "\improper EMP-proof cell"
-	desc = "An EMP-proof cell."
+	desc = ""
 	maxcharge = 500
 	rating = 3
 
@@ -333,7 +333,7 @@
 
 /obj/item/stock_parts/cell/beam_rifle
 	name = "beam rifle capacitor"
-	desc = "A high powered capacitor that can provide huge amounts of energy in an instant."
+	desc = ""
 	maxcharge = 50000
 	chargerate = 5000	//Extremely energy intensive
 
@@ -348,7 +348,7 @@
 
 /obj/item/stock_parts/cell/emergency_light
 	name = "miniature power cell"
-	desc = "A tiny power cell with a very low power capacity. Used in light fixtures to power them in the event of an outage."
+	desc = ""
 	maxcharge = 120 //Emergency lights use 0.2 W per tick, meaning ~10 minutes of emergency power from a cell
 	custom_materials = list(/datum/material/glass = 20)
 	w_class = WEIGHT_CLASS_TINY

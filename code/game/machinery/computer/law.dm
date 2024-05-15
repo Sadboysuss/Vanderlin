@@ -15,7 +15,7 @@
 		if(stat & (NOPOWER|BROKEN|MAINT))
 			return
 		if(!current)
-			to_chat(user, "<span class='alert'>You haven't selected anything to transmit laws to!</span>")
+			to_chat(user, "<span class='alert'>I haven't selected anything to transmit laws to!</span>")
 			return
 		if(!can_upload_to(current))
 			to_chat(user, "<span class='alert'>Upload failed! Check to make sure [current.name] is functioning properly.</span>")
@@ -37,7 +37,7 @@
 
 /obj/machinery/computer/upload/ai
 	name = "\improper AI upload console"
-	desc = "Used to upload laws to the AI."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/aiupload
 
 /obj/machinery/computer/upload/ai/interact(mob/user)
@@ -58,7 +58,7 @@
 
 /obj/machinery/computer/upload/borg
 	name = "cyborg upload console"
-	desc = "Used to upload laws to Cyborgs."
+	desc = ""
 	circuit = /obj/item/circuitboard/computer/borgupload
 
 /obj/machinery/computer/upload/borg/interact(mob/user)

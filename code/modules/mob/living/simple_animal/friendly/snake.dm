@@ -12,7 +12,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake
         name = "snake"
-        desc = "A slithery snake. These legless reptiles are the bane of mice and adventurers alike."
+        desc = ""
         icon_state = "snake"
         icon_living = "snake"
         icon_dead = "snake_dead"
@@ -59,7 +59,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/poison/snake/AttackingTarget()
         if(istype(target, /mob/living/simple_animal/mouse))
-                visible_message("<span class='notice'>[name] consumes [target] in a single gulp!</span>", "<span class='notice'>You consume [target] in a single gulp!</span>")
+                visible_message("<span class='notice'>[name] consumes [target] in a single gulp!</span>", "<span class='notice'>I consume [target] in a single gulp!</span>")
                 QDEL_NULL(target)
                 adjustBruteLoss(-2)
         else

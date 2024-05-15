@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/medigel
 	name = "medical gel"
-	desc = "A medical gel applicator bottle, designed for precision application, with an unscrewable cap."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "medigel"
 	item_state = "spraycan"
@@ -30,7 +30,7 @@
 		amount_per_transfer_from_this = squirt_amount
 	else
 		amount_per_transfer_from_this = initial(amount_per_transfer_from_this)
-	to_chat(user, "<span class='notice'>You will now apply the medigel's contents in [squirt_mode ? "short bursts":"extended sprays"]. You'll now use [amount_per_transfer_from_this] units per use.</span>")
+	to_chat(user, "<span class='notice'>I will now apply the medigel's contents in [squirt_mode ? "short bursts":"extended sprays"]. You'll now use [amount_per_transfer_from_this] units per use.</span>")
 
 /obj/item/reagent_containers/medigel/attack(mob/M, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
@@ -44,48 +44,48 @@
 				return
 			if(!reagents || !reagents.total_volume)
 				return
-		to_chat(M, "<span class='notice'>You [apply_method] yourself with [src].</span>")
+		to_chat(M, "<span class='notice'>I [apply_method] myself with [src].</span>")
 
 	else
 		log_combat(user, M, "attempted to apply", src, reagents.log_list())
 		M.visible_message("<span class='danger'>[user] attempts to [apply_method] [src] on [M].</span>", \
-							"<span class='userdanger'>[user] attempts to [apply_method] [src] on you.</span>")
+							"<span class='danger'>[user] attempts to [apply_method] [src] on you.</span>")
 		if(!do_mob(user, M))
 			return
 		if(!reagents || !reagents.total_volume)
 			return
 		M.visible_message("<span class='danger'>[user] [apply_method]s [M] down with [src].</span>", \
-							"<span class='userdanger'>[user] [apply_method]s you down with [src].</span>")
+							"<span class='danger'>[user] [apply_method]s you down with [src].</span>")
 
 	if(!reagents || !reagents.total_volume)
 		return
 
 	else
 		log_combat(user, M, "applied", src, reagents.log_list())
-		playsound(src, 'sound/effects/spray.ogg', 30, TRUE, -6)
+		playsound(src, 'sound/blank.ogg', 30, TRUE, -6)
 		reagents.trans_to(M, amount_per_transfer_from_this, transfered_by = user, method = apply_type)
 	return
 
 /obj/item/reagent_containers/medigel/libital
 	name = "medical gel (libital)"
-	desc = "A medical gel applicator bottle, designed for precision application, with an unscrewable cap. This one contains libital, for treating cuts and bruises. Libital does minor liver damage. Diluted with Granibitaluri."
+	desc = ""
 	icon_state = "brutegel"
 	list_reagents = list(/datum/reagent/medicine/C2/libital = 20, /datum/reagent/medicine/granibitaluri = 40)
 
 /obj/item/reagent_containers/medigel/aiuri
 	name = "medical gel (aiuri)"
-	desc = "A medical gel applicator bottle, designed for precision application, with an unscrewable cap. This one contains aiuri, useful for treating burns. Aiuri does minor eye damage. Diluted with Granibitaluri"
+	desc = ""
 	icon_state = "burngel"
 	list_reagents = list(/datum/reagent/medicine/C2/aiuri = 20, /datum/reagent/medicine/granibitaluri = 40)
 
 /obj/item/reagent_containers/medigel/instabitaluri
 	name = "medical gel (instabitaluri)"
-	desc = "A medical gel applicator bottle, designed for precision application, with an unscrewable cap. This one contains instabitaluri, a brute and burn healing agent."
+	desc = ""
 	icon_state = "synthgel"
 	list_reagents = list(/datum/reagent/medicine/C2/instabitaluri = 60)
 	custom_price = 80
 
 /obj/item/reagent_containers/medigel/sterilizine
 	name = "sterilizer gel"
-	desc = "gel bottle loaded with non-toxic sterilizer. Useful in preparation for surgery."
+	desc = ""
 	list_reagents = list(/datum/reagent/space_cleaner/sterilizine = 60)

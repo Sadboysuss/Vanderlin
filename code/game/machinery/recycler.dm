@@ -2,7 +2,7 @@
 
 /obj/machinery/recycler
 	name = "recycler"
-	desc = "A large crushing machine used to recycle small items inefficiently. There are lights on the side."
+	desc = ""
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "grinder-o0"
 	layer = ABOVE_ALL_MOB_LAYER // Overhead
@@ -15,7 +15,7 @@
 	var/amount_produced = 50
 	var/crush_damage = 1000
 	var/eat_victim_items = TRUE
-	var/item_recycle_sound = 'sound/items/welder.ogg'
+	var/item_recycle_sound = 'sound/blank.ogg'
 
 /obj/machinery/recycler/Initialize()
 	AddComponent(/datum/component/butchering/recycler, 1, amount_produced,amount_produced/5)
@@ -69,7 +69,7 @@
 		safety_mode = FALSE
 		update_icon()
 	playsound(src, "sparks", 75, TRUE, -1)
-	to_chat(user, "<span class='notice'>You use the cryptographic sequencer on [src].</span>")
+	to_chat(user, "<span class='notice'>I use the cryptographic sequencer on [src].</span>")
 
 /obj/machinery/recycler/update_icon_state()
 	..()
@@ -119,7 +119,7 @@
 			recycle_item(AM)
 			items_recycled++
 		else
-			playsound(src, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
+			playsound(src, 'sound/blank.ogg', 50, FALSE)
 	if(items_recycled && sound)
 		playsound(src, item_recycle_sound, 50, TRUE)
 
@@ -146,14 +146,14 @@
 
 
 /obj/machinery/recycler/proc/emergency_stop(mob/living/L)
-	playsound(src, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
 	safety_mode = TRUE
 	update_icon()
 	L.forceMove(loc)
 	addtimer(CALLBACK(src, .proc/reboot), SAFETY_COOLDOWN)
 
 /obj/machinery/recycler/proc/reboot()
-	playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
 	safety_mode = FALSE
 	update_icon()
 
@@ -162,9 +162,9 @@
 	L.forceMove(loc)
 
 	if(issilicon(L))
-		playsound(src, 'sound/items/welder.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 	else
-		playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 	if(iscarbon(L))
 		if(L.stat == CONSCIOUS)

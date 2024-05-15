@@ -7,7 +7,7 @@ Slimecrossing Items
 //Rewind camera - I'm already Burning Sepia
 /obj/item/camera/rewind
 	name = "sepia-tinted camera"
-	desc = "They say a picture is like a moment stopped in time."
+	desc = ""
 	pictures_left = 1
 	pictures_max = 1
 	can_customise = FALSE
@@ -60,9 +60,9 @@ Slimecrossing Items
 		return
 	if(!used)//selfie time
 		if(user == target)
-			to_chat(user, "<span class=notice>You take a selfie!</span>")
+			to_chat(user, "<span class=notice>I take a selfie!</span>")
 		else
-			to_chat(user, "<span class=notice>You take a photo with [target]!</span>")
+			to_chat(user, "<span class=notice>I take a photo with [target]!</span>")
 			to_chat(target, "<span class=notice>[user] takes a photo with you!</span>")
 		to_chat(target, "<span class=notice>You'll remember this moment forever!</span>")
 
@@ -75,7 +75,7 @@ Slimecrossing Items
 //Timefreeze camera - Old Burning Sepia result. Kept in case admins want to spawn it
 /obj/item/camera/timefreeze
 	name = "sepia-tinted camera"
-	desc = "They say a picture is like a moment stopped in time."
+	desc = ""
 	pictures_left = 1
 	pictures_max = 1
 	var/used = FALSE
@@ -86,14 +86,14 @@ Slimecrossing Items
 	if(!used) //refilling the film does not refill the timestop
 		new /obj/effect/timestop(get_turf(target), 2, 50, list(user))
 		used = TRUE
-		desc = "This camera has seen better days."
+		desc = ""
 	. = ..()
 
 
 //Hypercharged slime cell - Charged Yellow
 /obj/item/stock_parts/cell/high/slime/hypercharged
 	name = "hypercharged slime core"
-	desc = "A charged yellow slime extract, infused with even more plasma. It almost hurts to touch."
+	desc = ""
 	rating = 7 //Roughly 1.5 times the original.
 	maxcharge = 20000 //2 times the normal one.
 	chargerate = 2250 //1.5 times the normal rate.
@@ -101,16 +101,16 @@ Slimecrossing Items
 //Barrier cube - Chilling Grey
 /obj/item/barriercube
 	name = "barrier cube"
-	desc = "A compressed cube of slime. When squeezed, it grows to massive size!"
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "barriercube"
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/barriercube/attack_self(mob/user)
 	if(locate(/obj/structure/barricade/slime) in get_turf(loc))
-		to_chat(user, "<span class='warning'>You can't fit more than one barrier in the same space!</span>")
+		to_chat(user, "<span class='warning'>I can't fit more than one barrier in the same space!</span>")
 		return
-	to_chat(user, "<span class='notice'>You squeeze [src].</span>")
+	to_chat(user, "<span class='notice'>I squeeze [src].</span>")
 	var/obj/B = new /obj/structure/barricade/slime(get_turf(loc))
 	B.visible_message("<span class='warning'>[src] suddenly grows into a large, gelatinous barrier!</span>")
 	qdel(src)
@@ -118,7 +118,7 @@ Slimecrossing Items
 //Slime barricade - Chilling Grey
 /obj/structure/barricade/slime
 	name = "gelatinous barrier"
-	desc = "A huge chunk of grey slime. Bullets might get stuck in it."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "slimebarrier"
 	proj_pass_rate = 40
@@ -127,7 +127,7 @@ Slimecrossing Items
 //Melting Gel Wall - Chilling Metal
 /obj/effect/forcefield/slimewall
 	name = "solidified gel"
-	desc = "A mass of solidified slime gel - completely impenetrable, but it's melting away!"
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "slimebarrier_thick"
 	CanAtmosPass = ATMOS_PASS_NO
@@ -137,13 +137,13 @@ Slimecrossing Items
 //Rainbow barrier - Chilling Rainbow
 /obj/effect/forcefield/slimewall/rainbow
 	name = "rainbow barrier"
-	desc = "Despite others' urgings, you probably shouldn't taste this."
+	desc = ""
 	icon_state = "rainbowbarrier"
 
 //Ration pack - Chilling Silver
 /obj/item/reagent_containers/food/snacks/rationpack
 	name = "ration pack"
-	desc = "A square bar that sadly <i>looks</i> like chocolate, packaged in a nondescript grey wrapper. Has saved soldiers' lives before - usually by stopping bullets."
+	desc = ""
 	icon_state = "rationpack"
 	bitesize = 3
 	junkiness = 15
@@ -166,7 +166,7 @@ Slimecrossing Items
 //Ice stasis block - Chilling Dark Blue
 /obj/structure/ice_stasis
 	name = "ice block"
-	desc = "A massive block of ice. You can see something vaguely humanoid inside."
+	desc = ""
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "frozen"
 	density = TRUE
@@ -175,18 +175,18 @@ Slimecrossing Items
 
 /obj/structure/ice_stasis/Initialize()
 	. = ..()
-	playsound(src, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 /obj/structure/ice_stasis/Destroy()
 	for(var/atom/movable/M in contents)
 		M.forceMove(loc)
-	playsound(src, 'sound/effects/glassbr3.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return ..()
 
 //Gold capture device - Chilling Gold
 /obj/item/capturedevice
 	name = "gold capture device"
-	desc = "Bluespace technology packed into a roughly egg-shaped device, used to store nonhuman creatures. Can't catch them all, though - it only fits one."
+	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/slimecrossing.dmi'
 	icon_state = "capturedevice"
@@ -199,15 +199,15 @@ Slimecrossing Items
 		to_chat(user, "<span class='warning'>The capture device only works on simple creatures.</span>")
 		return
 	if(M.mind)
-		to_chat(user, "<span class='notice'>You offer the device to [M].</span>")
+		to_chat(user, "<span class='notice'>I offer the device to [M].</span>")
 		if(alert(M, "Would you like to enter [user]'s capture device?", "Gold Capture Device", "Yes", "No") == "Yes")
 			if(user.canUseTopic(src, BE_CLOSE) && user.canUseTopic(M, BE_CLOSE))
-				to_chat(user, "<span class='notice'>You store [M] in the capture device.</span>")
+				to_chat(user, "<span class='notice'>I store [M] in the capture device.</span>")
 				to_chat(M, "<span class='notice'>The world warps around you, and you're suddenly in an endless void, with a window to the outside floating in front of you.</span>")
 				store(M, user)
 			else
-				to_chat(user, "<span class='warning'>You were too far away from [M].</span>")
-				to_chat(M, "<span class='warning'>You were too far away from [user].</span>")
+				to_chat(user, "<span class='warning'>I were too far away from [M].</span>")
+				to_chat(M, "<span class='warning'>I were too far away from [user].</span>")
 		else
 			to_chat(user, "<span class='warning'>[M] refused to enter the device.</span>")
 			return
@@ -215,17 +215,17 @@ Slimecrossing Items
 		if(istype(M, /mob/living/simple_animal/hostile) && !("neutral" in M.faction))
 			to_chat(user, "<span class='warning'>This creature is too aggressive to capture.</span>")
 			return
-	to_chat(user, "<span class='notice'>You store [M] in the capture device.</span>")
+	to_chat(user, "<span class='notice'>I store [M] in the capture device.</span>")
 	store(M)
 
 /obj/item/capturedevice/attack_self(mob/user)
 	if(contents.len)
-		to_chat(user, "<span class='notice'>You open the capture device!</span>")
+		to_chat(user, "<span class='notice'>I open the capture device!</span>")
 		release()
 	else
 		to_chat(user, "<span class='warning'>The device is empty...</span>")
 
-/obj/item/capturedevice/proc/store(var/mob/living/M)
+/obj/item/capturedevice/proc/store(mob/living/M)
 	M.forceMove(src)
 
 /obj/item/capturedevice/proc/release()

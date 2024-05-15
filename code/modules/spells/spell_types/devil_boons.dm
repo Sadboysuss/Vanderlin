@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/targeted/summon_wealth
 	name = "Summon wealth"
-	desc = "The reward for selling your soul."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1
@@ -28,7 +28,7 @@
 
 /obj/effect/proc_holder/spell/targeted/view_range
 	name = "Distant vision"
-	desc = "The reward for selling your soul."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1
@@ -47,7 +47,7 @@
 
 /obj/effect/proc_holder/spell/targeted/summon_friend
 	name = "Summon Friend"
-	desc = "The reward for selling your soul."
+	desc = ""
 	invocation_type = "none"
 	include_user = TRUE
 	range = -1
@@ -61,7 +61,7 @@
 
 /obj/effect/proc_holder/spell/targeted/summon_friend/cast(list/targets, mob/user = usr)
 	if(!QDELETED(friend))
-		to_chat(friend, "<span class='userdanger'>Your master has deemed you a poor friend. Your durance in hell will now resume.</span>")
+		to_chat(friend, "<span class='danger'>My master has deemed you a poor friend. Your durance in hell will now resume.</span>")
 		friend.dust(TRUE)
 		qdel(friendShell)
 		return

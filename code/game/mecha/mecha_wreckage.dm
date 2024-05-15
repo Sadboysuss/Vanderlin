@@ -5,7 +5,7 @@
 
 /obj/structure/mecha_wreckage
 	name = "exosuit wreckage"
-	desc = "Remains of some unfortunate mecha. Completely irreparable, but perhaps something can be salvaged."
+	desc = ""
 	icon = 'icons/mecha/mecha.dmi'
 	density = TRUE
 	anchored = FALSE
@@ -54,16 +54,16 @@
 	..()
 	. = TRUE
 	if(salvage_num <= 0 || !length(welder_salvage))
-		to_chat(user, "<span class='notice'>You don't see anything that can be cut with [I]!</span>")
+		to_chat(user, "<span class='notice'>I don't see anything that can be cut with [I]!</span>")
 		return
 	if(!I.use_tool(src, user, 0, volume=50))
 		return
 	if(prob(30))
-		to_chat(user, "<span class='notice'>You fail to salvage anything valuable from [src]!</span>")
+		to_chat(user, "<span class='notice'>I fail to salvage anything valuable from [src]!</span>")
 		return
 	var/type = pick(welder_salvage)
 	var/N = new type(get_turf(user))
-	user.visible_message("<span class='notice'>[user] cuts [N] from [src].</span>", "<span class='notice'>You cut [N] from [src].</span>")
+	user.visible_message("<span class='notice'>[user] cuts [N] from [src].</span>", "<span class='notice'>I cut [N] from [src].</span>")
 	if(!istype(N, /obj/item/stack))
 		welder_salvage -= type
 	salvage_num--
@@ -72,10 +72,10 @@
 	..()
 	. = TRUE
 	if(wires_removed)
-		to_chat(user, "<span class='notice'>You don't see anything that can be cut with [I]!</span>")
+		to_chat(user, "<span class='notice'>I don't see anything that can be cut with [I]!</span>")
 		return
 	var/N = new /obj/item/stack/cable_coil(get_turf(user), rand(1,3))
-	user.visible_message("<span class='notice'>[user] cuts [N] from [src].</span>", "<span class='notice'>You cut [N] from [src].</span>")
+	user.visible_message("<span class='notice'>[user] cuts [N] from [src].</span>", "<span class='notice'>I cut [N] from [src].</span>")
 	wires_removed = TRUE
 
 /obj/structure/mecha_wreckage/crowbar_act(mob/living/user, obj/item/I)
@@ -84,10 +84,10 @@
 	if(crowbar_salvage.len)
 		var/obj/S = pick(crowbar_salvage)
 		S.forceMove(user.drop_location())
-		user.visible_message("<span class='notice'>[user] pries [S] from [src].</span>", "<span class='notice'>You pry [S] from [src].</span>")
+		user.visible_message("<span class='notice'>[user] pries [S] from [src].</span>", "<span class='notice'>I pry [S] from [src].</span>")
 		crowbar_salvage -= S
 		return
-	to_chat(user, "<span class='notice'>You don't see anything that can be cut with [I]!</span>")
+	to_chat(user, "<span class='notice'>I don't see anything that can be cut with [I]!</span>")
 
 /obj/structure/mecha_wreckage/transfer_ai(interaction, mob/user, null, obj/item/aicard/card)
 	if(!..())
@@ -132,7 +132,7 @@
 /obj/structure/mecha_wreckage/mauler
 	name = "\improper Mauler wreckage"
 	icon_state = "mauler-broken"
-	desc = "The syndicate won't be very happy about this..."
+	desc = ""
 
 /obj/structure/mecha_wreckage/seraph
 	name = "\improper Seraph wreckage"
@@ -142,7 +142,7 @@
 	name = "\improper Reticence wreckage"
 	icon_state = "reticence-broken"
 	color = "#87878715"
-	desc = "..."
+	desc = ""
 
 /obj/structure/mecha_wreckage/ripley
 	name = "\improper Ripley wreckage"
@@ -175,7 +175,7 @@
 /obj/structure/mecha_wreckage/honker
 	name = "\improper H.O.N.K wreckage"
 	icon_state = "honker-broken"
-	desc = "All is right in the universe."
+	desc = ""
 	parts = list(
 				/obj/item/mecha_parts/chassis/honker,
 				/obj/item/mecha_parts/part/honker_torso,

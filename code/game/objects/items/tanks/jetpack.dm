@@ -1,6 +1,6 @@
 /obj/item/tank/jetpack
 	name = "jetpack (empty)"
-	desc = "A tank of compressed gas for use as propulsion in zero-gravity areas. Use with caution."
+	desc = ""
 	icon_state = "jetpack"
 	item_state = "jetpack"
 	lefthand_file = 'icons/mob/inhands/equipment/jetpacks_lefthand.dmi'
@@ -30,7 +30,7 @@
 	else if(istype(action, /datum/action/item_action/jetpack_stabilization))
 		if(on)
 			stabilizers = !stabilizers
-			to_chat(user, "<span class='notice'>You turn the jetpack stabilization [stabilizers ? "on" : "off"].</span>")
+			to_chat(user, "<span class='notice'>I turn the jetpack stabilization [stabilizers ? "on" : "off"].</span>")
 	else
 		toggle_internals(user)
 
@@ -41,10 +41,10 @@
 
 	if(!on)
 		turn_on(user)
-		to_chat(user, "<span class='notice'>You turn the jetpack on.</span>")
+		to_chat(user, "<span class='notice'>I turn the jetpack on.</span>")
 	else
 		turn_off(user)
-		to_chat(user, "<span class='notice'>You turn the jetpack off.</span>")
+		to_chat(user, "<span class='notice'>I turn the jetpack off.</span>")
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.UpdateButtonIcon()
@@ -97,7 +97,7 @@
 
 /obj/item/tank/jetpack/improvised
 	name = "improvised jetpack"
-	desc = "A jetpack made from two air tanks, a fire extinguisher and some atmospherics equipment. It doesn't look like it can hold much."
+	desc = ""
 	icon_state = "jetpack-improvised"
 	item_state = "jetpack-sec"
 	volume = 20 //normal jetpacks have 70 volume
@@ -111,7 +111,7 @@
 		turn_off(user)
 		return
 	if(rand(0,250) == 0)
-		to_chat(user, "<span class='notice'>You feel your jetpack's engines cut out.</span>")
+		to_chat(user, "<span class='notice'>I feel your jetpack's engines cut out.</span>")
 		turn_off(user)
 		return
 
@@ -127,19 +127,19 @@
 
 /obj/item/tank/jetpack/void
 	name = "void jetpack (oxygen)"
-	desc = "It works well in a void."
+	desc = ""
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
 
 /obj/item/tank/jetpack/oxygen
 	name = "jetpack (oxygen)"
-	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
+	desc = ""
 	icon_state = "jetpack"
 	item_state = "jetpack"
 
 /obj/item/tank/jetpack/oxygen/harness
 	name = "jet harness (oxygen)"
-	desc = "A lightweight tactical harness, used by those who don't want to be weighed down by traditional jetpacks."
+	desc = ""
 	icon_state = "jetpack-mini"
 	item_state = "jetpack-mini"
 	volume = 40
@@ -148,7 +148,7 @@
 
 /obj/item/tank/jetpack/oxygen/captain
 	name = "captain's jetpack"
-	desc = "A compact, lightweight jetpack containing a high amount of compressed oxygen."
+	desc = ""
 	icon_state = "jetpack-captain"
 	item_state = "jetpack-captain"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -157,7 +157,7 @@
 
 /obj/item/tank/jetpack/oxygen/security
 	name = "security jetpack (oxygen)"
-	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas by security forces."
+	desc = ""
 	icon_state = "jetpack-sec"
 	item_state = "jetpack-sec"
 
@@ -165,7 +165,7 @@
 
 /obj/item/tank/jetpack/carbondioxide
 	name = "jetpack (carbon dioxide)"
-	desc = "A tank of compressed carbon dioxide for use as propulsion in zero-gravity areas. Painted black to indicate that it should not be used as a source for internals."
+	desc = ""
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
 	distribute_pressure = 0
@@ -174,7 +174,7 @@
 
 /obj/item/tank/jetpack/suit
 	name = "hardsuit jetpack upgrade"
-	desc = "A modular, compact set of thrusters designed to integrate with a hardsuit. It is fueled by a tank inserted into the suit's storage compartment."
+	desc = ""
 	icon_state = "jetpack-mining"
 	item_state = "jetpack-black"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -202,7 +202,7 @@
 
 	var/mob/living/carbon/human/H = user
 	if(!istype(H.s_store, /obj/item/tank/internals))
-		to_chat(user, "<span class='warning'>You need a tank in your suit storage!</span>")
+		to_chat(user, "<span class='warning'>I need a tank in your suit storage!</span>")
 		return
 	..()
 
@@ -248,7 +248,7 @@
 
 /mob/living/carbon/human/get_jetpack()
 	var/obj/item/tank/jetpack/J = ..()
-	if(!istype(J) && istype(wear_suit, /obj/item/clothing/suit/space/hardsuit))
-		var/obj/item/clothing/suit/space/hardsuit/C = wear_suit
+	if(!istype(J) && istype(wear_armor, /obj/item/clothing/suit/space/hardsuit))
+		var/obj/item/clothing/suit/space/hardsuit/C = wear_armor
 		J = C.jetpack
 	return J

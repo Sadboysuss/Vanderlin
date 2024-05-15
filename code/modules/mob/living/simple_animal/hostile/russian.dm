@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/russian
 	name = "Russian"
-	desc = "For the Motherland!"
+	desc = ""
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "russianmelee"
 	icon_living = "russianmelee"
@@ -17,7 +17,7 @@
 	melee_damage_upper = 15
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
-	attack_sound = 'sound/weapons/punch1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	a_intent = INTENT_HARM
 	loot = list(/obj/effect/mob_spawn/human/corpse/russian,
 				/obj/item/kitchen/knife)
@@ -38,7 +38,7 @@
 	ranged = 1
 	retreat_distance = 5
 	minimum_distance = 5
-	projectilesound = 'sound/weapons/gun/revolver/shot.ogg'
+	projectilesound = 'sound/blank.ogg'
 	casingtype = /obj/item/ammo_casing/n762
 
 

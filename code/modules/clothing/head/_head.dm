@@ -8,6 +8,7 @@
 	var/blockTracking = 0 //For AI tracking
 	var/can_toggle = null
 	dynamic_hair_suffix = "+generic"
+	bloody_icon_state = "helmetblood"
 
 /obj/item/clothing/head/Initialize()
 	. = ..()
@@ -19,8 +20,9 @@
 /obj/item/clothing/head/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	. = ..()
 	///if the thrown object's target zone isn't the head
-	if(thrownthing.target_zone != BODY_ZONE_HEAD)
-		return
+/*	if(thrownthing)
+		if(thrownthing.target_zone != BODY_ZONE_HEAD)
+			return
 	///ignore any hats with the tinfoil counter-measure enabled
 	if(clothing_flags & ANTI_TINFOIL_MANEUVER)
 		return
@@ -57,17 +59,17 @@
 		else
 			R.visible_message("<span class='notice'>[src] lands neatly on top of [R]!</span>", "<span class='notice'>[src] lands perfectly on top of you.</span>")
 			R.place_on_head(src) //hats aren't designed to snugly fit borg heads or w/e so they'll always manage to knock eachother off
-
+*/
 
 
 
 /obj/item/clothing/head/worn_overlays(isinhands = FALSE)
 	. = list()
-	if(!isinhands)
-		if(damaged_clothes)
-			. += mutable_appearance('icons/effects/item_damage.dmi', "damagedhelmet")
-		if(HAS_BLOOD_DNA(src))
-			. += mutable_appearance('icons/effects/blood.dmi', "helmetblood")
+//	if(!isinhands)
+//		if(damaged_clothes)
+//			. += mutable_appearance('icons/effects/item_damage.dmi', "damagedhelmet")
+//		if(HAS_BLOOD_DNA(src))
+//			. += mutable_appearance('icons/effects/blood.dmi', "helmetblood")
 
 /obj/item/clothing/head/update_clothes_damaged_state(damaging = TRUE)
 	..()

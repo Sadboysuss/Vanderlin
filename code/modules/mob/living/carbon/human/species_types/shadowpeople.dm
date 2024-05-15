@@ -34,7 +34,7 @@
 	id = "nightmare"
 	limbs_id = "shadow"
 	burnmod = 1.5
-	no_equip = list(SLOT_WEAR_MASK, SLOT_WEAR_SUIT, SLOT_GLOVES, SLOT_SHOES, SLOT_W_UNIFORM, SLOT_S_STORE)
+	no_equip = list(SLOT_WEAR_MASK, SLOT_ARMOR, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_S_STORE)
 	species_traits = list(NOBLOOD,NO_UNDERWEAR,NO_DNA_COPY,NOTRANSSTING,NOEYESPRITES)
 	inherent_traits = list(TRAIT_NOFLASH, TRAIT_RESISTCOLD,TRAIT_NOBREATH,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_CHUNKYFINGERS,TRAIT_RADIMMUNE,TRAIT_VIRUSIMMUNE,TRAIT_PIERCEIMMUNE,TRAIT_NODISMEMBER,TRAIT_NOHUNGER)
 	mutanteyes = /obj/item/organ/eyes/night_vision/nightmare
@@ -67,7 +67,7 @@
 
 /obj/item/organ/brain/nightmare
 	name = "tumorous mass"
-	desc = "A fleshy growth that was dug out of the skull of a Nightmare."
+	desc = ""
 	icon_state = "brain-x-d"
 	var/obj/effect/proc_holder/spell/targeted/shadowwalk/shadowwalk
 
@@ -89,7 +89,7 @@
 
 /obj/item/organ/heart/nightmare
 	name = "heart of darkness"
-	desc = "An alien organ that twists and writhes when exposed to light."
+	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "demon_heart-on"
 	color = "#1C1C1C"
@@ -102,12 +102,12 @@
 	if(M != user)
 		return ..()
 	user.visible_message("<span class='warning'>[user] raises [src] to [user.p_their()] mouth and tears into it with [user.p_their()] teeth!</span>", \
-						 "<span class='danger'>[src] feels unnaturally cold in your hands. You raise [src] your mouth and devour it!</span>")
-	playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
+						 "<span class='danger'>[src] feels unnaturally cold in my hands. You raise [src] my mouth and devour it!</span>")
+	playsound(user, 'sound/blank.ogg', 50, TRUE)
 
 
 	user.visible_message("<span class='warning'>Blood erupts from [user]'s arm as it reforms into a weapon!</span>", \
-						 "<span class='userdanger'>Icy blood pumps through your veins as your arm reforms itself!</span>")
+						 "<span class='danger'>Icy blood pumps through my veins as my arm reforms itself!</span>")
 	user.temporarilyRemoveItemFromInventory(src, TRUE)
 	Insert(user)
 
@@ -138,7 +138,7 @@
 		var/light_amount = T.get_lumcount()
 		if(light_amount < SHADOW_SPECIES_LIGHT_THRESHOLD)
 			respawn_progress++
-			playsound(owner,'sound/effects/singlebeat.ogg',40,TRUE)
+			playsound(owner,'sound/blank.ogg',40,TRUE)
 	if(respawn_progress >= HEART_RESPAWN_THRESHHOLD)
 		owner.revive(full_heal = TRUE, admin_revive = FALSE)
 		if(!(owner.dna.species.id == "shadow" || owner.dna.species.id == "nightmare"))
@@ -146,10 +146,10 @@
 			Remove(owner, HEART_SPECIAL_SHADOWIFY)
 			old_owner.set_species(/datum/species/shadow)
 			Insert(old_owner, HEART_SPECIAL_SHADOWIFY)
-			to_chat(owner, "<span class='userdanger'>You feel the shadows invade your skin, leaping into the center of your chest! You're alive!</span>")
-			SEND_SOUND(owner, sound('sound/effects/ghost.ogg'))
+			to_chat(owner, "<span class='danger'>I feel the shadows invade my skin, leaping into the center of my chest! You're alive!</span>")
+			SEND_SOUND(owner, sound('sound/blank.ogg'))
 		owner.visible_message("<span class='warning'>[owner] staggers to [owner.p_their()] feet!</span>")
-		playsound(owner, 'sound/hallucinations/far_noise.ogg', 50, TRUE)
+		playsound(owner, 'sound/blank.ogg', 50, TRUE)
 		respawn_progress = 0
 
 //Weapon
@@ -160,7 +160,7 @@
 	icon_state = "arm_blade"
 	item_state = "arm_blade"
 	force = 25
-	armour_penetration = 35
+	armor_penetration = 35
 	lefthand_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
 	item_flags = ABSTRACT | DROPDEL
@@ -187,7 +187,7 @@
 			var/mob/living/silicon/robot/borg = AM
 			if(!borg.lamp_cooldown)
 				borg.update_headlamp(TRUE, INFINITY)
-				to_chat(borg, "<span class='danger'>Your headlamp is fried! You'll need a human to help replace it.</span>")
+				to_chat(borg, "<span class='danger'>My headlamp is fried! You'll need a human to help replace it.</span>")
 		else
 			for(var/obj/item/O in AM)
 				if(O.light_range && O.light_power)
@@ -210,7 +210,7 @@
 	else
 		visible_message("<span class='danger'>[O] is disintegrated by [src]!</span>")
 		O.burn()
-	playsound(src, 'sound/items/welder.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 
 #undef HEART_SPECIAL_SHADOWIFY
 #undef HEART_RESPAWN_THRESHHOLD

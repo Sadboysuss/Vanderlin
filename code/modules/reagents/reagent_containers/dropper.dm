@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/dropper
 	name = "dropper"
-	desc = "A dropper. Holds up to 5 units."
+	desc = ""
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
@@ -21,7 +21,7 @@
 			return
 
 		if(!target.is_injectable(user))
-			to_chat(user, "<span class='warning'>You cannot transfer reagents to [target]!</span>")
+			to_chat(user, "<span class='warning'>I cannot transfer reagents to [target]!</span>")
 			return
 
 		var/trans = 0
@@ -40,9 +40,9 @@
 					trans = reagents.trans_to(safe_thing, amount_per_transfer_from_this, transfered_by = user, method = TOUCH)
 
 					target.visible_message("<span class='danger'>[user] tries to squirt something into [target]'s eyes, but fails!</span>", \
-											"<span class='userdanger'>[user] tries to squirt something into your eyes, but fails!</span>")
+											"<span class='danger'>[user] tries to squirt something into your eyes, but fails!</span>")
 
-					to_chat(user, "<span class='notice'>You transfer [trans] unit\s of the solution.</span>")
+					to_chat(user, "<span class='notice'>I transfer [trans] unit\s of the solution.</span>")
 					update_icon()
 					return
 			else if(isalien(target)) //hiss-hiss has no eyes!
@@ -50,7 +50,7 @@
 				return
 
 			target.visible_message("<span class='danger'>[user] squirts something into [target]'s eyes!</span>", \
-									"<span class='userdanger'>[user] squirts something into your eyes!</span>")
+									"<span class='danger'>[user] squirts something into your eyes!</span>")
 
 			reagents.reaction(target, TOUCH, fraction)
 			var/mob/M = target
@@ -62,13 +62,13 @@
 			log_combat(user, M, "squirted", R)
 
 		trans = src.reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user)
-		to_chat(user, "<span class='notice'>You transfer [trans] unit\s of the solution.</span>")
+		to_chat(user, "<span class='notice'>I transfer [trans] unit\s of the solution.</span>")
 		update_icon()
 
 	else
 
 		if(!target.is_drawable(user, FALSE)) //No drawing from mobs here
-			to_chat(user, "<span class='warning'>You cannot directly remove reagents from [target]!</span>")
+			to_chat(user, "<span class='warning'>I cannot directly remove reagents from [target]!</span>")
 			return
 
 		if(!target.reagents.total_volume)
@@ -77,7 +77,7 @@
 
 		var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user)
 
-		to_chat(user, "<span class='notice'>You fill [src] with [trans] unit\s of the solution.</span>")
+		to_chat(user, "<span class='notice'>I fill [src] with [trans] unit\s of the solution.</span>")
 
 		update_icon()
 

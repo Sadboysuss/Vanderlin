@@ -41,12 +41,12 @@
 			Paralyze(200)
 
 /mob/living/silicon/pai/attack_hand(mob/living/carbon/human/user)
-	switch(user.a_intent)
-		if("help")
+	switch(user.used_intent.type)
+		if(INTENT_HELP)
 			visible_message("<span class='notice'>[user] gently pats [src] on the head, eliciting an off-putting buzzing from its holographic field.</span>")
-		if("disarm")
+		if(INTENT_DISARM)
 			visible_message("<span class='notice'>[user] boops [src] on the head!</span>")
-		if("harm")
+		if(INTENT_HARM)
 			user.do_attack_animation(src)
 			if (user.name == master)
 				visible_message("<span class='notice'>Responding to its master's touch, [src] disengages its holochassis emitter, rapidly losing coherence.</span>")
@@ -65,19 +65,19 @@
 	. = ..(Proj)
 
 /mob/living/silicon/pai/stripPanelUnequip(obj/item/what, mob/who, where) //prevents stripping
-	to_chat(src, "<span class='warning'>Your holochassis stutters and warps intensely as you attempt to interact with the object, forcing you to cease lest the field fail.</span>")
+	to_chat(src, "<span class='warning'>My holochassis stutters and warps intensely as you attempt to interact with the object, forcing you to cease lest the field fail.</span>")
 
 /mob/living/silicon/pai/stripPanelEquip(obj/item/what, mob/who, where) //prevents stripping
-	to_chat(src, "<span class='warning'>Your holochassis stutters and warps intensely as you attempt to interact with the object, forcing you to cease lest the field fail.</span>")
+	to_chat(src, "<span class='warning'>My holochassis stutters and warps intensely as you attempt to interact with the object, forcing you to cease lest the field fail.</span>")
 
-/mob/living/silicon/pai/IgniteMob(var/mob/living/silicon/pai/P)
+/mob/living/silicon/pai/IgniteMob(mob/living/silicon/pai/P)
 	return FALSE //No we're not flammable
 
 /mob/living/silicon/pai/proc/take_holo_damage(amount)
 	emitterhealth = CLAMP((emitterhealth - amount), -50, emittermaxhealth)
 	if(emitterhealth < 0)
 		fold_in(force = TRUE)
-	to_chat(src, "<span class='userdanger'>The impact degrades your holochassis!</span>")
+	to_chat(src, "<span class='danger'>The impact degrades my holochassis!</span>")
 	return amount
 
 /mob/living/silicon/pai/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE)

@@ -17,18 +17,18 @@
 
 //basic spider mob, these generally guard nests
 /mob/living/simple_animal/hostile/poison/giant_spider
-	name = "giant spider"
-	desc = "Furry and black, it makes you shudder to look at it. This one has deep red eyes."
+	name = "Web guard"
+	desc = "giant spider, these generally guard nests"
 	icon_state = "guard"
 	icon_living = "guard"
 	icon_dead = "guard_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_BUG
-	speak_emote = list("chitters")
-	emote_hear = list("chitters")
+	speak_emote = list("aggro")
+	emote_hear = list("aggro")
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 4
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/reagent_containers/food/snacks/spiderleg = 8)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 1, /obj/item/reagent_containers/food/snacks/spiderleg = 8)
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes aside"
@@ -36,23 +36,34 @@
 	maxHealth = 200
 	health = 200
 	obj_damage = 60
-	melee_damage_lower = 15
-	melee_damage_upper = 20
-	faction = list("spiders")
+	melee_damage_lower = 35
+	melee_damage_upper = 45
+	faction = list("bugs")
 	var/busy = SPIDER_IDLE
 	pass_flags = PASSTABLE
-	move_to_delay = 6
+	move_to_delay = 2
 	ventcrawler = VENTCRAWLER_ALWAYS
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	attack_sound = 'sound/weapons/bite.ogg'
-	unique_name = 1
+	base_intents = list(/datum/intent/simple/bite)
+	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
 	gold_core_spawnable = HOSTILE_SPAWN
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	footstep_type = FOOTSTEP_MOB_CLAW
 	var/playable_spider = FALSE
 	var/datum/action/innate/spider/lay_web/lay_web
 	var/directive = "" //Message passed down to children, to relay the creator's orders
+
+/mob/living/simple_animal/hostile/poison/giant_spider/get_sound(input)
+	switch(input)
+		if("aggro")
+			return pick('sound/vo/mobs/spider/aggro (1).ogg','sound/vo/mobs/spider/aggro (2).ogg','sound/vo/mobs/spider/aggro (3).ogg')
+		if("pain")
+			return pick('sound/vo/mobs/spider/pain.ogg')
+		if("death")
+			return pick('sound/vo/mobs/spider/death.ogg')
+		if("idle")
+			return pick('sound/vo/mobs/spider/idle (1).ogg','sound/vo/mobs/spider/idle (2).ogg','sound/vo/mobs/spider/idle (3).ogg','sound/vo/mobs/spider/idle (4).ogg')
 
 /mob/living/simple_animal/hostile/poison/giant_spider/Initialize()
 	. = ..()
@@ -72,7 +83,7 @@
 /mob/living/simple_animal/hostile/poison/giant_spider/Login()
 	..()
 	if(directive)
-		to_chat(src, "<span class='spider'>Your mother left you a directive! Follow it at all costs.</span>")
+		to_chat(src, "<span class='spider'>My mother left you a directive! Follow it at all costs.</span>")
 		to_chat(src, "<span class='spider'><b>[directive]</b></span>")
 		if(mind)
 			mind.store_memory("<span class='spider'><b>[directive]</b></span>")
@@ -99,17 +110,17 @@
 
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse
-	desc = "Furry and black, it makes you shudder to look at it. This one has brilliant green eyes."
+	name = "Web Nurse"
+	desc = "looks like a poisonus spider that lays eggs"
 	icon_state = "nurse"
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
 	gender = FEMALE
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 2, /obj/item/reagent_containers/food/snacks/spiderleg = 8, /obj/item/reagent_containers/food/snacks/spidereggs = 4)
-	maxHealth = 40
-	health = 40
-	melee_damage_lower = 5
-	melee_damage_upper = 10
-	poison_per_bite = 3
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/spider = 1, /obj/item/reagent_containers/food/snacks/spiderleg = 8, /obj/item/reagent_containers/food/snacks/spidereggs = 1)
+	maxHealth = 160
+	health = 160
+	melee_damage_lower = 15
+	melee_damage_upper = 20
 	var/atom/movable/cocoon_target
 	var/fed = 0
 	var/obj/effect/proc_holder/wrap/wrap
@@ -133,15 +144,17 @@
 	QDEL_NULL(set_directive)
 	return ..()
 
-//broodmothers are the queen of the spiders, can send messages to all them and web faster. That rare round where you get a queen spider and turn your 'for honor' players into 'r6siege' players will be a fun one.
+//broodmothers are the queen of the spiders, can send messages to all them and web faster. That rare round where you get a queen spider and turn my 'for honor' players into 'r6siege' players will be a fun one.
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife
-	name = "broodmother"
-	desc = "Furry and black, it makes you shudder to look at it. This one has scintillating green eyes. Might also be hiding a real knife somewhere."
+	name = "Brood Mother"
+	desc = "looks like a queen spider"
 	icon_state = "midwife"
 	icon_living = "midwife"
 	icon_dead = "midwife_dead"
-	maxHealth = 40
-	health = 40
+	maxHealth = 650
+	health = 650
+	melee_damage_lower = 50
+	melee_damage_upper = 80
 	var/datum/action/innate/spider/comm/letmetalkpls
 
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/midwife/Initialize()
@@ -155,29 +168,30 @@
 
 //hunters have the most poison and move the fastest, so they can find prey
 /mob/living/simple_animal/hostile/poison/giant_spider/hunter
-	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes."
+	name = "Poisonus Hunter"
+	desc = "looks like a very poisonus spider"
 	icon_state = "hunter"
 	icon_living = "hunter"
 	icon_dead = "hunter_dead"
 	maxHealth = 120
 	health = 120
-	melee_damage_lower = 10
-	melee_damage_upper = 20
-	poison_per_bite = 5
-	move_to_delay = 5
+	melee_damage_lower = 20
+	melee_damage_upper = 30
+	poison_per_bite = 3
+	move_to_delay = 1
 
 //vipers are the rare variant of the hunter, no IMMEDIATE damage but so much poison medical care will be needed fast.
 /mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper
-	name = "viper"
-	desc = "Furry and black, it makes you shudder to look at it. This one has effervescent purple eyes."
+	name = "Poisonus Viper"
+	desc = "Exremly Rare and deadly poisonus spider"
 	icon_state = "viper"
 	icon_living = "viper"
 	icon_dead = "viper_dead"
-	maxHealth = 40
-	health = 40
-	melee_damage_lower = 1
-	melee_damage_upper = 1
-	poison_per_bite = 12
+	maxHealth = 100
+	health = 100
+	melee_damage_lower = 15
+	melee_damage_upper = 25
+	poison_per_bite = 7
 	move_to_delay = 4
 	poison_type = /datum/reagent/toxin/venom //all in venom, glass cannon. you bite 5 times and they are DEFINITELY dead, but 40 health and you are extremely obvious. Ambush, maybe?
 	speed = 1
@@ -185,17 +199,16 @@
 
 //tarantulas are really tanky, regenerating (maybe), hulky monster but are also extremely slow, so.
 /mob/living/simple_animal/hostile/poison/giant_spider/tarantula
-	name = "tarantula"
-	desc = "Furry and black, it makes you shudder to look at it. This one has abyssal red eyes."
+	name = "Giant Tarantula"
+	desc = "Holy shit thats a big one!"
 	icon_state = "tarantula"
 	icon_living = "tarantula"
 	icon_dead = "tarantula_dead"
-	maxHealth = 300 // woah nelly
-	health = 300
-	melee_damage_lower = 35
-	melee_damage_upper = 40
-	poison_per_bite = 0
-	move_to_delay = 8
+	maxHealth = 350 // woah nelly
+	health = 350
+	melee_damage_lower = 65
+	melee_damage_upper = 70
+	move_to_delay = 1
 	speed = 7
 	status_flags = NONE
 	mob_size = MOB_SIZE_LARGE
@@ -213,7 +226,7 @@
 		slowed_by_webs = TRUE
 
 /mob/living/simple_animal/hostile/poison/giant_spider/ice //spiders dont usually like tempatures of 140 kelvin who knew
-	name = "giant ice spider"
+	name = "Ice Tarantula"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
@@ -222,7 +235,7 @@
 	gold_core_spawnable = NO_SPAWN
 
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/ice
-	name = "giant ice spider"
+	name = "Ice Nurse"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
@@ -230,7 +243,7 @@
 	color = rgb(114,228,250)
 
 /mob/living/simple_animal/hostile/poison/giant_spider/hunter/ice
-	name = "giant ice spider"
+	name = "Ice Hunter"
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
@@ -308,19 +321,19 @@
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/proc/cocoon()
 	if(stat != DEAD && cocoon_target && !cocoon_target.anchored)
 		if(cocoon_target == src)
-			to_chat(src, "<span class='warning'>You can't wrap yourself!</span>")
+			to_chat(src, "<span class='warning'>I can't wrap yourself!</span>")
 			return
 		if(istype(cocoon_target, /mob/living/simple_animal/hostile/poison/giant_spider))
-			to_chat(src, "<span class='warning'>You can't wrap other spiders!</span>")
+			to_chat(src, "<span class='warning'>I can't wrap other spiders!</span>")
 			return
 		if(!Adjacent(cocoon_target))
-			to_chat(src, "<span class='warning'>You can't reach [cocoon_target]!</span>")
+			to_chat(src, "<span class='warning'>I can't reach [cocoon_target]!</span>")
 			return
 		if(busy == SPINNING_COCOON)
 			to_chat(src, "<span class='warning'>You're already spinning a cocoon!</span>")
 			return //we're already doing this, don't cancel out or anything
 		busy = SPINNING_COCOON
-		visible_message("<span class='notice'>[src] begins to secrete a sticky substance around [cocoon_target].</span>","<span class='notice'>You begin wrapping [cocoon_target] into a cocoon.</span>")
+		visible_message("<span class='notice'>[src] begins to secrete a sticky substance around [cocoon_target].</span>","<span class='notice'>I begin wrapping [cocoon_target] into a cocoon.</span>")
 		stop_automated_movement = TRUE
 		walk(src,0)
 		if(do_after(src, 50, target = cocoon_target))
@@ -332,10 +345,10 @@
 						consumed_mobs[L.tag] = TRUE
 						fed++
 						lay_eggs.UpdateButtonIcon(TRUE)
-						visible_message("<span class='danger'>[src] sticks a proboscis into [L] and sucks a viscous substance out.</span>","<span class='notice'>You suck the nutriment out of [L], feeding you enough to lay a cluster of eggs.</span>")
+						visible_message("<span class='danger'>[src] sticks a proboscis into [L] and sucks a viscous substance out.</span>","<span class='notice'>I suck the nutriment out of [L], feeding you enough to lay a cluster of eggs.</span>")
 						L.death() //you just ate them, they're dead.
 					else
-						to_chat(src, "<span class='warning'>[L] cannot sate your hunger!</span>")
+						to_chat(src, "<span class='warning'>[L] cannot sate my hunger!</span>")
 				cocoon_target.forceMove(C)
 
 				if(cocoon_target.density || ismob(cocoon_target))
@@ -350,7 +363,7 @@
 
 /datum/action/innate/spider/lay_web
 	name = "Spin Web"
-	desc = "Spin a web to slow down potential prey."
+	desc = ""
 	check_flags = AB_CHECK_CONSCIOUS
 	button_icon_state = "lay_web"
 
@@ -370,7 +383,7 @@
 
 	if(S.busy != SPINNING_WEB)
 		S.busy = SPINNING_WEB
-		S.visible_message("<span class='notice'>[S] begins to secrete a sticky substance.</span>","<span class='notice'>You begin to lay a web.</span>")
+		S.visible_message("<span class='notice'>[S] begins to secrete a sticky substance.</span>","<span class='notice'>I begin to lay a web.</span>")
 		S.stop_automated_movement = TRUE
 		if(do_after(S, 40, target = T))
 			if(S.busy == SPINNING_WEB && S.loc == T)
@@ -385,7 +398,7 @@
 	panel = "Spider"
 	active = FALSE
 	datum/action/spell_action/action = null
-	desc = "Wrap something or someone in a cocoon. If it's a living being, you'll also consume them, allowing you to lay eggs."
+	desc = ""
 	ranged_mousepointer = 'icons/effects/wrap_target.dmi'
 	action_icon = 'icons/mob/actions/actions_animal.dmi'
 	action_icon_state = "wrap_0"
@@ -409,10 +422,10 @@
 /obj/effect/proc_holder/wrap/proc/activate(mob/living/user)
 	var/message
 	if(active)
-		message = "<span class='notice'>You no longer prepare to wrap something in a cocoon.</span>"
+		message = "<span class='notice'>I no longer prepare to wrap something in a cocoon.</span>"
 		remove_ranged_ability(message)
 	else
-		message = "<span class='notice'>You prepare to wrap something in a cocoon. <B>Left-click your target to start wrapping!</B></span>"
+		message = "<span class='notice'>I prepare to wrap something in a cocoon. <B>Left-click my target to start wrapping!</B></span>"
 		add_ranged_ability(user, message, TRUE)
 		return 1
 
@@ -439,7 +452,7 @@
 
 /datum/action/innate/spider/lay_eggs
 	name = "Lay Eggs"
-	desc = "Lay a cluster of eggs, which will soon grow into more spiders. You must wrap a living being to do this."
+	desc = ""
 	check_flags = AB_CHECK_CONSCIOUS
 	button_icon_state = "lay_eggs"
 
@@ -461,10 +474,10 @@
 	if(E)
 		to_chat(S, "<span class='warning'>There is already a cluster of eggs here!</span>")
 	else if(!S.fed)
-		to_chat(S, "<span class='warning'>You are too hungry to do this!</span>")
+		to_chat(S, "<span class='warning'>I are too hungry to do this!</span>")
 	else if(S.busy != LAYING_EGGS)
 		S.busy = LAYING_EGGS
-		S.visible_message("<span class='notice'>[S] begins to lay a cluster of eggs.</span>","<span class='notice'>You begin to lay a cluster of eggs.</span>")
+		S.visible_message("<span class='notice'>[S] begins to lay a cluster of eggs.</span>","<span class='notice'>I begin to lay a cluster of eggs.</span>")
 		S.stop_automated_movement = TRUE
 		if(do_after(S, 50, target = get_turf(S)))
 			if(S.busy == LAYING_EGGS)
@@ -484,7 +497,7 @@
 
 /datum/action/innate/spider/set_directive
 	name = "Set Directive"
-	desc = "Set a directive for your children to follow."
+	desc = ""
 	check_flags = AB_CHECK_CONSCIOUS
 	button_icon_state = "directive"
 
@@ -516,7 +529,7 @@
 
 /datum/action/innate/spider/comm
 	name = "Command"
-	desc = "Send a command to all living spiders."
+	desc = ""
 	button_icon_state = "command"
 
 /datum/action/innate/spider/comm/IsAvailable()
@@ -525,7 +538,7 @@
 	return TRUE
 
 /datum/action/innate/spider/comm/Trigger()
-	var/input = stripped_input(owner, "Input a command for your legions to follow.", "Command", "")
+	var/input = stripped_input(owner, "Input a command for my legions to follow.", "Command", "")
 	if(QDELETED(src) || !input || !IsAvailable())
 		return FALSE
 	spider_command(owner, input)

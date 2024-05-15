@@ -12,9 +12,9 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	movement_type = FLYING
 	//The sound this plays on impact.
-	var/hitsound = 'sound/weapons/pierce.ogg'
+	var/hitsound = 'sound/blank.ogg'
 	var/hitsound_wall = ""
-
+	glide_size = 8
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/def_zone = ""	//Aiming at
 	var/atom/movable/firer = null//Who shot it
@@ -84,7 +84,7 @@
 	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions
 	var/flag = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb
 	///How much armor this projectile pierces.
-	var/armour_penetration = 0
+	var/armor_penetration = 0
 	var/projectile_type = /obj/projectile
 	var/range = 50 //This will de-increment every step. When 0, it will deletze the projectile.
 	var/decayedRange			//stores original range
@@ -109,6 +109,16 @@
 
 	var/temporary_unstoppable_movement = FALSE
 
+	var/woundclass = null
+	var/embedchance = 0
+	var/obj/item/dropped = FALSE
+	var/ammo_type
+
+	var/arcshot = FALSE
+
+/obj/projectile/proc/handle_drop()
+	return
+
 /obj/projectile/Initialize()
 	. = ..()
 	permutated = list()
@@ -120,6 +130,8 @@
 		on_range()
 
 /obj/projectile/proc/on_range() //if we want there to be effects when they reach the end of their range
+//	on_hit(get_turf(src))
+	Bump(get_turf(src))
 	qdel(src)
 
 //to get the correct limb (if any) for the projectile hit message
@@ -177,23 +189,11 @@
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir)
 			if(prob(33))
 				L.add_splatter_floor(target_loca)
-		else if(impact_effect_type && !hitscan)
-			new impact_effect_type(target_loca, hitx, hity)
 
-		var/organ_hit_text = ""
-		var/limb_hit = L.check_limb_hit(def_zone)//to get the correct message info.
-		if(limb_hit)
-			organ_hit_text = " in \the [parse_zone(limb_hit)]"
-		if(suppressed)
-			playsound(loc, hitsound, 5, TRUE, -1)
-			to_chat(L, "<span class='userdanger'>You're shot by \a [src][organ_hit_text]!</span>")
-		else
-			if(hitsound)
-				var/volume = vol_by_damage()
-				playsound(loc, hitsound, volume, TRUE, -1)
-			L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]!</span>", \
-					"<span class='userdanger'>You're hit by \a [src][organ_hit_text]!</span>", null, COMBAT_MESSAGE_RANGE)
-		L.on_hit(src)
+	if(impact_effect_type && !hitscan)
+		new impact_effect_type(target_loca, hitx, hity)
+
+	L.on_hit(src)
 
 	var/reagent_note
 	if(reagents && reagents.reagent_list)
@@ -236,8 +236,9 @@
 				store_hitscan_collision(pcache)
 			return TRUE
 
-	var/distance = get_dist(T, starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
-	def_zone = ran_zone(def_zone, max(100-(7*distance), 5)) //Lower accurancy/longer range tradeoff. 7 is a balanced number to use.
+//	var/distance = get_dist(T, starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
+//	def_zone = ran_zone(def_zone, max(100-(7*distance), 5)) //Lower accurancy/longer range tradeoff. 7 is a balanced number to use.
+	def_zone = def_zone
 
 	if(isturf(A) && hitsound_wall)
 		var/volume = CLAMP(vol_by_damage() + 20, 0, 100)
@@ -245,8 +246,18 @@
 			volume = 5
 		playsound(loc, hitsound_wall, volume, TRUE, -1)
 
-	return process_hit(T, select_target(T, A))
-
+	if(arcshot)
+		if(A.loc != original)
+			if(ismob(A))
+				var/mob/M = A
+				if(!CHECK_BITFIELD(movement_type, UNSTOPPABLE))
+					temporary_unstoppable_movement = TRUE
+					ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
+				M.playsound_local(T, "whiz", 100, FALSE, pressure_affected = FALSE)
+				return process_hit(T, qdel_self=2, hit_something=TRUE)
+		return process_hit(T, select_target(T, A))
+	else
+		return process_hit(T, select_target(T, A))
 #define QDEL_SELF 1			//Delete if we're not UNSTOPPABLE flagged non-temporarily
 #define DO_NOT_QDEL 2		//Pass through.
 #define FORCE_QDEL 3		//Force deletion.
@@ -267,7 +278,12 @@
 			ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
 		return process_hit(T, select_target(T), qdel_self, TRUE)		//Hit whatever else we can since we're piercing through but we're still on the same tile.
 	else if(result == BULLET_ACT_TURF)									//We hit the turf but instead we're going to also hit something else on it.
-		return process_hit(T, select_target(T), QDEL_SELF, TRUE)
+		return process_hit(T, select_target(T), qdel_self, TRUE)
+	else if(result == BULLET_ACT_MISS)
+		if(!CHECK_BITFIELD(movement_type, UNSTOPPABLE))
+			temporary_unstoppable_movement = TRUE
+			ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
+		return process_hit(T, select_target(T), qdel_self, TRUE)
 	else		//Whether it hit or blocked, we're done!
 		qdel_self = QDEL_SELF
 		hit_something = TRUE
@@ -394,7 +410,7 @@
 	fired = TRUE
 	if(hitscan)
 		process_hitscan()
-	if(!(datum_flags & DF_ISPROCESSING))
+	if(!(datum_flags & PROCESSING_PROJECTILE))
 		START_PROCESSING(SSprojectiles, src)
 	pixel_move(1, FALSE)	//move it now!
 
@@ -530,6 +546,12 @@
 /obj/projectile/proc/can_hit_target(atom/target, list/passthrough, direct_target = FALSE, ignore_loc = FALSE)
 	if(QDELETED(target))
 		return FALSE
+	if(!isliving(target))
+		if(direct_target)
+			testing("DIRECT TARGET")
+			if(isturf(target))
+				if(arcshot)
+					return TRUE
 	if(!ignore_source_check && firer)
 		var/mob/M = firer
 		if((target == firer) || ((target == firer.loc) && ismecha(firer.loc)) || (target in firer.buckled_mobs) || (istype(M) && (M.buckled == target)))
@@ -554,6 +576,11 @@
 /obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, spread = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
+	if(targloc && curloc)
+		if(targloc.z > curloc.z)
+			var/turf/above = get_step_multiz(curloc, UP)
+			if(istype(above, /turf/open/transparent/openspace))
+				curloc = above
 	trajectory_ignore_forcemove = TRUE
 	forceMove(get_turf(source))
 	trajectory_ignore_forcemove = FALSE
@@ -622,7 +649,7 @@
 		if(temporary_unstoppable_movement)
 			temporary_unstoppable_movement = FALSE
 			DISABLE_BITFIELD(movement_type, UNSTOPPABLE)
-		if(fired && can_hit_target(original, permutated, TRUE))
+		if(fired && can_hit_target(original, permutated, (newloc == original)))
 			Bump(original)
 
 /obj/projectile/Destroy()

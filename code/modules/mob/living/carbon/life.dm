@@ -1,3 +1,22 @@
+/mob/living/proc/handle_wounds()
+	for(var/datum/wound/WO in simple_wounds)
+		if(WO.passive_heal)
+			if(WO.whp > 0)
+				WO.whp = WO.whp - 1
+				if(WO.whp <= 0)
+					simple_wounds -= WO
+					qdel(WO)
+
+/mob/living/carbon/handle_wounds()
+	for(var/obj/item/bodypart/BP in bodyparts)
+		for(var/datum/wound/WO in BP.wounds)
+			if(WO.passive_heal)
+				if(WO.whp > 0)
+					WO.whp = WO.whp - 1
+					if(WO.whp <= 0)
+						BP.wounds -= WO
+						qdel(WO)
+
 /mob/living/carbon/Life()
 	set invisibility = 0
 
@@ -18,32 +37,177 @@
 		if (QDELETED(src))
 			return
 
-		if(.) //not dead
-			handle_blood()
+		handle_blood()
 
-		if(stat != DEAD)
-			var/bprv = handle_bodyparts()
-			if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
-				update_stamina() //needs to go before updatehealth to remove stamcrit
-				updatehealth()
+		handle_roguebreath()
+		handle_wounds()
+		var/bprv = handle_bodyparts()
+		if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
+			update_stamina() //needs to go before updatehealth to remove stamcrit
+			updatehealth()
+		update_stress()
+		handle_nausea()
+		if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!heart_attacking)
+				adjustOxyLoss(-1.6)
+			else
+				if(getOxyLoss() < 20)
+					heart_attacking = FALSE
 
-		if(stat != DEAD)
-			handle_brain_damage()
+		//healing while sleeping in  abed
+		if(stat)
+			if(buckled?.sleepy)
+				var/yess = HAS_TRAIT(src, TRAIT_NOHUNGER)
+				if(nutrition > 0 || yess)
+					rogstam_add(buckled.sleepy * 15)
+				if(hydration > 0 || yess)
+					if(!bleed_rate)
+						blood_volume = min(blood_volume + 10, BLOOD_VOLUME_MAXIMUM)
+					for(var/X in bodyparts)
+						var/obj/item/bodypart/affecting = X
+						if(affecting.get_bleedrate() <= 0.1)
+							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC) || affecting.heal_wounds(3, sleep_heal = TRUE))
+								src.update_damage_overlays()
+					adjustToxLoss(-buckled.sleepy)
+					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+						Sleeping(300)
+		if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+			if(buckled?.sleepy)
+				if(eyesclosed)
+					if(!fallingas)
+						to_chat(src, "<span class='warning'>I'll fall asleep soon...</span>")
+					fallingas++
+					if(fallingas > 15)
+						Sleeping(300)
+				else
+					rogstam_add(buckled.sleepy * 10)
+			else if(fallingas)
+				fallingas = 0
+			tiredness = min(tiredness + 1, 100)
+
+		handle_brain_damage()
 
 	else
 		. = ..()
 
-	if(stat == DEAD)
-		stop_sound_channel(CHANNEL_HEARTBEAT)
-		LoadComponent(/datum/component/rot/corpse)
 
 	check_cremation()
 
 	//Updates the number of stored chemicals for powers
-	handle_changeling()
+//	handle_changeling()
 
 	if(stat != DEAD)
 		return 1
+
+/mob/living/carbon/DeadLife()
+	set invisibility = 0
+
+	if(notransform)
+		return
+
+	if(!IS_IN_STASIS(src))
+		. = ..()
+		if (QDELETED(src))
+			return
+		handle_blood()
+
+	check_cremation()
+
+/mob/living/carbon/handle_random_events()//BP/WOUND BASED PAIN
+	if(HAS_TRAIT(src, TRAIT_NOPAIN))
+		return
+	if(!stat)
+		var/painpercent = get_complex_pain() / (STAEND * 10)
+		painpercent = painpercent * 100
+
+		if(world.time > mob_timers["painstun"])
+			mob_timers["painstun"] = world.time + 100
+			var/probby = 40 - (STAEND * 2)
+			probby = max(probby, 10)
+			if(lying || IsKnockdown())
+				if(prob(3) && (painpercent >= 80) )
+					emote("painmoan")
+			else
+				if(painpercent >= 100)
+					if(prob(probby))
+						Immobilize(10)
+						emote("painscream")
+						stuttering += 5
+						addtimer(CALLBACK(src, .proc/Stun, 110), 10)
+						addtimer(CALLBACK(src, .proc/Knockdown, 110), 10)
+						mob_timers["painstun"] = world.time + 160
+					else
+						emote("painmoan")
+						stuttering += 5
+				else
+					if(painpercent >= 80)
+						if(probby)
+							emote("painmoan")
+
+		if(painpercent >= 100)
+			add_stress(/datum/stressevent/painmax)
+
+/mob/living/carbon/proc/handle_roguebreath()
+	return
+
+/mob/living/carbon/human/handle_roguebreath()
+	..()
+	if(HAS_TRAIT(src, TRAIT_NOBREATH))
+		return TRUE
+	if(istype(loc, /obj/structure/closet/dirthole))
+		adjustOxyLoss(5)
+	if(istype(loc, /obj/structure/closet/burial_shroud))
+		var/obj/O = loc
+		if(istype(O.loc, /obj/structure/closet/dirthole))
+			adjustOxyLoss(5)
+	if(isopenturf(loc))
+		var/turf/open/T = loc
+		if(T.pollutants)
+			var/obj/effect/pollutant_effect/P = T.pollutants
+			if(reagents)
+				for(var/datum/pollutant/X in P.pollute_list)
+					for(var/A in X.reagents_on_breathe)
+						reagents.add_reagent(A, X.reagents_on_breathe[A])
+
+/mob/living/proc/handle_inwater()
+	ExtinguishMob()
+
+/mob/living/carbon/handle_inwater()
+	..()
+	if(lying)
+		if(HAS_TRAIT(src, TRAIT_NOBREATH))
+			return TRUE
+		adjustOxyLoss(5)
+		emote("drown")
+
+/mob/living/carbon/human/handle_inwater()
+	. = ..()
+	if(!lying)
+		if(istype(loc, /turf/open/water/bath))
+			if(!wear_armor && !wear_shirt && !wear_pants)
+				var/mob/living/carbon/V = src
+				V.add_stress(/datum/stressevent/bathwater)
+
+/mob/living/carbon/proc/get_complex_pain()
+	var/amt = 0
+	for(var/I in bodyparts)
+		var/obj/item/bodypart/BP = I
+		if(BP.status == BODYPART_ROBOTIC)
+			continue
+		var/BPinteg
+		//pain from base damage is amplified based on how much con you have
+		BPinteg = ((BP.brute_dam / BP.max_damage) * 100) + BPinteg
+		BPinteg = ((BP.burn_dam / BP.max_damage) * 100) + BPinteg
+		for(var/W in BP.wounds) //wound damage is added normally and stacks higher than 100
+			var/datum/wound/WO = W
+			if(WO.woundpain > 0)
+				BPinteg += WO.woundpain
+//		BPinteg = min(((totwound / BP.max_damage) * 100) + BPinteg, initial(BP.max_damage))
+//		if(BPinteg > amt) //this is here to ensure that pain doesn't add up, but is rather picked from the worst limb
+		amt += BPinteg
+	return amt
+
+
 
 ///////////////
 // BREATHING //
@@ -51,6 +215,7 @@
 
 //Start of a breath chain, calls breathe()
 /mob/living/carbon/handle_breathing(times_fired)
+	return
 	var/next_breath = 4
 	var/obj/item/organ/lungs/L = getorganslot(ORGAN_SLOT_LUNGS)
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
@@ -268,7 +433,7 @@
 			if(5 to 20)
 				//At somewhat higher pp, warning becomes more obvious
 				if(prob(15))
-					to_chat(src, "<span class='warning'>You smell something horribly decayed inside this room.</span>")
+					to_chat(src, "<span class='warning'>I smell something horribly decayed inside this room.</span>")
 					SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "smell", /datum/mood_event/disgust/bad_smell)
 			if(15 to 30)
 				//Small chance to vomit. By now, people have internals on anyway
@@ -318,9 +483,6 @@
 			if(!.)
 				return FALSE //to differentiate between no internals and active, but empty internals
 
-/mob/living/carbon/proc/handle_blood()
-	return
-
 /mob/living/carbon/proc/handle_bodyparts()
 	var/stam_regen = FALSE
 	if(stam_regen_start_time <= world.time)
@@ -331,6 +493,24 @@
 		var/obj/item/bodypart/BP = I
 		if(BP.needs_processing)
 			. |= BP.on_life(stam_regen)
+
+/mob/living/carbon/proc/canspeak()
+	for(var/I in bodyparts)
+		var/obj/item/bodypart/BP = I
+		if(BP.body_zone == BODY_ZONE_HEAD)
+			for(var/datum/wound/artery/throat/A in BP.wounds)
+				return FALSE
+			for(var/obj/item/grabbing/G in grabbedby)
+				if(G.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+					return FALSE
+			if(mouth && mouth.muteinmouth)
+				return FALSE
+	if(sexcon)
+		if(sexcon.weeating)
+			return FALSE
+	if(istype(loc, /turf/open/water) && lying)
+		return FALSE
+	return TRUE
 
 /mob/living/carbon/proc/handle_organs()
 	if(stat != DEAD)
@@ -503,17 +683,20 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
-		if(drunkenness >= 6)
-			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "drunk", /datum/mood_event/drunk)
-			if(prob(25))
+		if(drunkenness >= 1)
+			if(has_flaw(/datum/charflaw/addiction/alcoholic))
+				sate_addiction()
+		if(drunkenness >= 3)
+//			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "drunk", /datum/mood_event/drunk)
+			if(prob(3))
 				slurring += 2
 			jitteriness = max(jitteriness - 3, 0)
+			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
-			SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "drunk")
-
+			remove_stress(/datum/stressevent/drunk)
 		if(drunkenness >= 11 && slurring < 5)
 			slurring += 1.2
-
+/*
 		if(mind && (mind.assigned_role == "Scientist" || mind.assigned_role == "Research Director"))
 			if(SSresearch.science_tech)
 				if(drunkenness >= 12.9 && drunkenness <= 13.8)
@@ -530,42 +713,43 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 					if(prob(5))
 						SSresearch.science_tech.remove_point_list(list(TECHWEB_POINT_TYPE_GENERIC = BALLMER_POINTS))
 						say(pick(GLOB.ballmer_windows_me_msg), forced = "ballmer")
-
+*/
 		if(drunkenness >= 41)
 			if(prob(25))
 				confused += 2
 			Dizzy(10)
 
 		if(drunkenness >= 51)
+			adjustToxLoss(1)
 			if(prob(3))
 				confused += 15
 				vomit() // vomiting clears toxloss, consider this a blessing
 			Dizzy(25)
 
 		if(drunkenness >= 61)
+			adjustToxLoss(1)
 			if(prob(50))
 				blur_eyes(5)
 
 		if(drunkenness >= 71)
-			blur_eyes(5)
+			adjustToxLoss(1)
+			if(prob(10))
+				blur_eyes(5)
 
 		if(drunkenness >= 81)
-			adjustToxLoss(1)
+			adjustToxLoss(3)
 			if(prob(5) && !stat)
-				to_chat(src, "<span class='warning'>Maybe you should lie down for a bit...</span>")
+				to_chat(src, "<span class='warning'>Maybe I should lie down for a bit...</span>")
 
 		if(drunkenness >= 91)
-			adjustToxLoss(1)
-			adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.4)
+			adjustToxLoss(5)
+//			adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.4)
 			if(prob(20) && !stat)
-				if(SSshuttle.emergency.mode == SHUTTLE_DOCKED && is_station_level(z)) //QoL mainly
-					to_chat(src, "<span class='warning'>You're so tired... but you can't miss that shuttle...</span>")
-				else
-					to_chat(src, "<span class='warning'>Just a quick nap...</span>")
-					Sleeping(900)
+				to_chat(src, "<span class='warning'>Just a quick nap...</span>")
+				Sleeping(900)
 
 		if(drunkenness >= 101)
-			adjustToxLoss(2) //Let's be honest you shouldn't be alive by now
+			adjustToxLoss(5) //Let's be honest you shouldn't be alive by now
 
 //used in human and monkey handle_environment()
 /mob/living/carbon/proc/natural_bodytemperature_stabilization()
@@ -603,8 +787,8 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	if(HAS_TRAIT(src, TRAIT_STABLELIVER) || HAS_TRAIT(src, TRAIT_NOMETABOLISM))
 		return
 	adjustToxLoss(4, TRUE,  TRUE)
-	if(prob(30))
-		to_chat(src, "<span class='warning'>You feel a stabbing pain in your abdomen!</span>")
+//	if(prob(30))
+//		to_chat(src, "<span class='warning'>I feel a stabbing pain in your abdomen!</span>")
 
 /////////////
 //CREMATION//
@@ -612,6 +796,9 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 /mob/living/carbon/proc/check_cremation()
 	//Only cremate while actively on fire
 	if(!on_fire)
+		return
+
+	if(stat != DEAD)
 		return
 
 	//Only starts when the chest has taken full damage
@@ -623,43 +810,64 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	var/obj/item/bodypart/limb
 	var/list/limb_list = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/still_has_limbs = FALSE
+	var/should_update_body = FALSE
 	for(var/zone in limb_list)
 		limb = get_bodypart(zone)
-		if(limb)
+		if(limb && !limb.skeletonized)
 			still_has_limbs = TRUE
 			if(limb.get_damage() >= limb.max_damage)
 				limb.cremation_progress += rand(2,5)
-				if(limb.cremation_progress >= 100)
+				if(dna && dna.species && !(NOBLOOD in dna.species.species_traits))
+					blood_volume = max(blood_volume - 10, 0)
+				if(limb.cremation_progress >= 50)
 					if(limb.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-						limb.drop_limb()
-						limb.visible_message("<span class='warning'>[src]'s [limb.name] crumbles into ash!</span>")
-						qdel(limb)
-					else
-						limb.drop_limb()
-						limb.visible_message("<span class='warning'>[src]'s [limb.name] detaches from [p_their()] body!</span>")
+						limb.skeletonize()
+						should_update_body = TRUE
+//						limb.drop_limb()
+//						limb.visible_message("<span class='warning'>[src]'s [limb.name] crumbles into ash!</span>")
+//						qdel(limb)
+//					else
+//						limb.drop_limb()
+//						limb.visible_message("<span class='warning'>[src]'s [limb.name] detaches from [p_their()] body!</span>")
 	if(still_has_limbs)
 		return
 
 	//Burn the head last
 	var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
-	if(head)
+	if(head && !head.skeletonized)
 		if(head.get_damage() >= head.max_damage)
-			head.cremation_progress += rand(2,5)
-			if(head.cremation_progress >= 100)
+			head.cremation_progress += 999
+			if(head.cremation_progress >= 20)
 				if(head.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-					head.drop_limb()
-					head.visible_message("<span class='warning'>[src]'s head crumbles into ash!</span>")
-					qdel(head)
-				else
-					head.drop_limb()
-					head.visible_message("<span class='warning'>[src]'s head detaches from [p_their()] body!</span>")
+					limb.skeletonize()
+					should_update_body = TRUE
+//					head.drop_limb()
+//					head.visible_message("<span class='warning'>[src]'s head crumbles into ash!</span>")
+//					qdel(head)
+//				else
+//					head.drop_limb()
+//					head.visible_message("<span class='warning'>[src]'s head detaches from [p_their()] body!</span>")
 		return
 
 	//Nothing left: dust the body, drop the items (if they're flammable they'll burn on their own)
-	chest.cremation_progress += rand(2,5)
-	if(chest.cremation_progress >= 100)
-		visible_message("<span class='warning'>[src]'s body crumbles into a pile of ash!</span>")
-		dust(TRUE, TRUE)
+	if(chest && !chest.skeletonized)
+		if(chest.get_damage() >= chest.max_damage)
+			chest.cremation_progress += 999
+			if(chest.cremation_progress >= 19)
+		//		visible_message("<span class='warning'>[src]'s body crumbles into a pile of ash!</span>")
+		//		dust(TRUE, TRUE)
+				chest.skeletonized = TRUE
+				if(ishuman(src))
+					var/mob/living/carbon/human/H = src
+					H.underwear = "Nude"
+				should_update_body = TRUE
+				if(dna && dna.species)
+					if(dna && dna.species && !(NOBLOOD in dna.species.species_traits))
+						blood_volume = 0
+					dna.species.species_traits |= NOBLOOD
+
+	if(should_update_body)
+		update_body()
 
 ////////////////
 //BRAIN DAMAGE//

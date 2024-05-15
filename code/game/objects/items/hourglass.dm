@@ -2,7 +2,7 @@
 
 /obj/item/hourglass
 	name = "hourglass"
-	desc = "Nanotrasen patented gravity invariant hourglass. Guaranteed to flow perfectly under any conditions."
+	desc = ""
 	var/obj/effect/countdown/hourglass/countdown
 	var/time = 1 MINUTES
 	var/finish_time //So countdown doesn't need to fiddle with timers
@@ -22,11 +22,11 @@
 
 /obj/item/hourglass/proc/toggle(mob/user)
 	if(!timing_id)
-		to_chat(user,"<span class='notice'>You flip the [src].</span>")
+		to_chat(user,"<span class='notice'>I flip the [src].</span>")
 		start()
 		flick("hourglass_flip",src)
 	else
-		to_chat(user,"<span class='notice'>You stop the [src].</span>") //Sand magically flows back because that's more convinient to use.
+		to_chat(user,"<span class='notice'>I stop the [src].</span>") //Sand magically flows back because that's more convinient to use.
 		stop()
 
 /obj/item/hourglass/update_icon()

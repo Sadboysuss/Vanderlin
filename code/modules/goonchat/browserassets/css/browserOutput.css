@@ -7,13 +7,13 @@ html, body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	color: #a4bad6;
+	color: #c9c1ba;
 }
 body {
-	background: #171717;
-	font-family: Verdana, sans-serif;
+	background: #000000;
+	font-family: Pterra, TrueType;
 	font-size: 13px;
-	font-color: #a4bad6;
+	font-color: #c9c1ba;
 	line-height: 1.2;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -21,6 +21,7 @@ body {
 	scrollbar-face-color:#1A1A1A;
 	scrollbar-track-color:#171717;
 	scrollbar-highlight-color:#171717;
+	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
 }
 
 em {
@@ -97,9 +98,9 @@ a.popt {text-decoration: none;}
 	font-variant: small-caps;
 	font-size: 1.1em;
 	font-weight: bold;
-	color: #a4bad6;
+	color: #c9c1ba;
 }
-#newMessages:hover {background: #171717;}
+#newMessages:hover {background: #000000;}
 #newMessages i {vertical-align: middle; padding-left: 3px;}
 #ping {
 	position: fixed;
@@ -127,7 +128,7 @@ a.popt {text-decoration: none;}
 	height: 30px;
 	padding: 5px 0;
 	display: block;
-	color: #a4bad6;
+	color: #EEEEEE;
 	text-decoration: none;
 	line-height: 28px;
 	border-top: 1px solid #171717;
@@ -245,9 +246,9 @@ a.popt {text-decoration: none;}
 ******************************************/
 
 /* MOTD */
-.motd {color: #a4bad6;	font-family: Verdana, sans-serif;}
-.motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6 {color: #a4bad6;	text-decoration: underline;}
-.motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover {color: #a4bad6;}
+.motd {color: #c9c1ba;	font-family: Pterra, TrueType;}
+.motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6 {color: #c9c1ba;	text-decoration: underline;}
+.motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover {color: #c9c1ba;}
 
 /* ADD HERE FOR BOLD */
 .bold, .name, .prefix, .ooc, .looc, .adminooc, .admin, .medal, .yell {font-weight: bold;}
@@ -258,8 +259,8 @@ a.popt {text-decoration: none;}
 /* OUTPUT COLORS */
 .highlight {background: yellow;}
 
-h1, h2, h3, h4, h5, h6	{color: #a4bad6;font-family: Georgia, Verdana, sans-serif;}
-h1.alert, h2.alert		{color: #a4bad6;}
+h1, h2, h3, h4, h5, h6	{color: #c9c1ba;font-family: Pterra, TrueType;}
+h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 
 em						{font-style: normal;	font-weight: bold;}
 
@@ -294,31 +295,31 @@ em						{font-style: normal;	font-weight: bold;}
 .yell					{					font-weight: bold;}
 
 .alert					{color: #d82020;}
-h1.alert, h2.alert		{color: #000000;}
 
-.emote					{					font-style: italic;}
+.emote					{color: #b1bb9f;}
 
-.userdanger				{color: #c51e1e;	font-weight: bold;	font-size: 185%;}
-.danger					{color: #c51e1e;}
-.warning				{color: #c51e1e;	font-style: italic;}
+.userdanger				{color: #c71d1d;	font-weight: bold;	font-size: 115%;}
+.danger					{color: #b9322b;	font-weight: bold;}
+.warning				{color: #b9322b;						font-size: 85%;}
 .alertwarning			{color: #FF0000;	font-weight: bold}
-.boldwarning			{color: #c51e1e;	font-style: italic;	font-weight: bold}
+.boldwarning			{color: #b9322b;	font-weight: bold}
 .announce				{color: #c51e1e;	font-weight: bold;}
 .boldannounce			{color: #c51e1e;	font-weight: bold;}
 .greenannounce			{color: #059223;	font-weight: bold;}
 .rose					{color: #ff5050;}
-.info					{color: #6685f5;}
-.notice					{color: #6685f5;}
-.boldnotice				{color: #6685f5;	font-weight: bold;}
+.info					{color: #a9a5b6;						font-size: 85%;}
+.notice					{color: #f1d669;}
+.boldnotice				{color: #f1d669;	font-weight: bold;}
 .hear					{color: #6685f5;	font-style: italic;}
 .adminnotice			{color: #6685f5;}
 .adminhelp				{color: #ff0000;	font-weight: bold;}
-.unconscious			{color: #a4bad6;	font-weight: bold;}
+.unconscious			{color: #c9c1ba;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
-.green					{color: #059223;}
-.red					{color: #FF0000}
-.blue					{color: #215cff}
-.nicegreen				{color: #059223;}
+.green					{color: #80b077;}
+.red					{color: #b84d47}
+.blue					{color: #6a8cb7}
+.purple					{color: #967aaf;}
+.nicegreen				{color: #9bccd0;}
 
 .cult					{color: #aa1c1c;}
 .cultitalic				{color: #aa1c1c;	font-style: italic;}
@@ -331,7 +332,6 @@ h1.alert, h2.alert		{color: #000000;}
 .colossus				{color: #7F282A;	font-size: 310%;}
 .hierophant				{color: #b441ee;	font-weight: bold;	font-style: italic;}
 .hierophant_warning		{color: #c56bf1;	font-style: italic;}
-.purple					{color: #9956d3;}
 .holoparasite			{color: #88809c;}
 
 .revennotice			{color: #1d2953;}
@@ -360,15 +360,15 @@ h1.alert, h2.alert		{color: #000000;}
 .robot					{font-family: "Courier New", cursive, sans-serif;}
 
 .command_headset		{font-weight: bold;	font-size: 160%;}
-.small					{font-size: 60%;}
-.big					{font-size: 185%;}
-.reallybig				{font-size: 245%;}
-.extremelybig			{font-size: 310%;}
-.greentext				{color: #059223;	font-size: 185%;}
-.redtext				{color: #c51e1e;	font-size: 185%;}
+.small					{font-size: 75%;}
+.big					{font-size: 120%;}
+.reallybig				{font-size: 180%;}
+.extremelybig			{font-size: 220%;}
+.greentext				{color: #3ac583;	font-size: 110%;}
+.redtext				{color: #c73838;	font-size: 110%;}
 .clown					{color: #ff70c1;	font-size: 160%;	font-family: "Comic Sans MS", cursive, sans-serif;	font-weight: bold;}
 .his_grace				{color: #15D512;	font-family: "Courier New", cursive, sans-serif;	font-style: italic;}
-.hypnophrase			{color: #202020;	font-weight: bold;	animation: hypnocolor 1500ms infinite;}
+.hypnophrase			{color: #202020;	font-weight: bold;	animation: hypnocolor 1500ms infinite; animation-direction: alternate;}
 @keyframes hypnocolor {
 	0%		{color: #202020;}
 	25%		{color: #4b02ac;}

@@ -341,11 +341,11 @@
 
 	if(prob(50) && icon_state == initial(icon_state))
 		name = "space minimoog"
-		desc = "This is a minimoog, like a space piano, but more spacey!"
+		desc = ""
 		icon_state = "minimoog"
 	else
 		name = "space piano"
-		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
+		desc = ""
 		icon_state = "piano"
 
 /obj/structure/piano/Destroy()
@@ -375,7 +375,7 @@
 		return
 
 	if(!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(user, "<span class='warning'>I don't have the dexterity to do this!</span>")
 		return 1
 	user.set_machine(src)
 	song.interact(user)

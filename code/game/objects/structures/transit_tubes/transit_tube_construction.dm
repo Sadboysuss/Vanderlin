@@ -5,7 +5,7 @@
 	name = "unattached transit tube"
 	icon = 'icons/obj/atmospherics/pipes/transit_tube.dmi'
 	icon_state = "straight"
-	desc = "An unattached segment of transit tube."
+	desc = ""
 	density = FALSE
 	layer = LOW_ITEM_LAYER //same as the built tube
 	anchored = FALSE
@@ -21,7 +21,7 @@
 	for(var/obj/structure/transit_tube/tube in source_turf)
 		existing_tubes +=1
 		if(existing_tubes >= 2)
-			to_chat(user, "<span class='warning'>You cannot wrench any more transit tubes!</span> ")
+			to_chat(user, "<span class='warning'>I cannot wrench any more transit tubes!</span> ")
 			return FALSE
 	return TRUE
 
@@ -44,10 +44,10 @@
 	..()
 	if(!can_wrench_in_loc(user))
 		return
-	to_chat(user, "<span class='notice'>You start attaching the [name]...</span>")
+	to_chat(user, "<span class='notice'>I start attaching the [name]...</span>")
 	add_fingerprint(user)
 	if(I.use_tool(src, user, time_to_unwrench, volume=50, extra_checks=CALLBACK(src, .proc/can_wrench_in_loc, user)))
-		to_chat(user, "<span class='notice'>You attach the [name].</span>")
+		to_chat(user, "<span class='notice'>I attach the [name].</span>")
 		var/obj/structure/transit_tube/R = new build_type(loc, dir)
 		transfer_fingerprints_to(R)
 		qdel(src)

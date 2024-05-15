@@ -4,7 +4,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/hydraulic_clamp
 	name = "hydraulic clamp"
-	desc = "Equipment for engineering exosuits. Lifts objects and loads them into cargo."
+	desc = ""
 	icon_state = "mecha_clamp"
 	equip_cooldown = 15
 	energy_drain = 10
@@ -78,19 +78,19 @@
 		var/mob/living/M = target
 		if(M.stat == DEAD)
 			return
-		if(chassis.occupant.a_intent == INTENT_HARM)
+		if(chassis.occupant.used_intent.type == INTENT_HARM)
 			M.take_overall_damage(dam_force)
 			if(!M)
 				return
 			M.adjustOxyLoss(round(dam_force/2))
 			M.updatehealth()
 			target.visible_message("<span class='danger'>[chassis] squeezes [target]!</span>", \
-								"<span class='userdanger'>[chassis] squeezes you!</span>",\
-								"<span class='hear'>You hear something crack.</span>")
-			log_combat(chassis.occupant, M, "attacked", "[name]", "(INTENT: [uppertext(chassis.occupant.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+								"<span class='danger'>[chassis] squeezes you!</span>",\
+								"<span class='hear'>I hear something crack.</span>")
+			log_combat(chassis.occupant, M, "attacked", "[name]", "(INTENT: [uppertext(chassis.occupant.used_intent)]) (DAMTYPE: [uppertext(damtype)])")
 		else
 			step_away(M,chassis)
-			occupant_message("<span class='notice'>You push [target] out of the way.</span>")
+			occupant_message("<span class='notice'>I push [target] out of the way.</span>")
 			chassis.visible_message("<span class='notice'>[chassis] pushes [target] out of the way.</span>")
 		return 1
 
@@ -99,13 +99,13 @@
 //This is pretty much just for the death-ripley
 /obj/item/mecha_parts/mecha_equipment/hydraulic_clamp/kill
 	name = "\improper KILL CLAMP"
-	desc = "They won't know what clamped them!"
+	desc = ""
 	energy_drain = 0
 	dam_force = 0
 	var/real_clamp = FALSE
 
 /obj/item/mecha_parts/mecha_equipment/hydraulic_clamp/kill/real
-	desc = "They won't know what clamped them! This time for real!"
+	desc = ""
 	energy_drain = 10
 	dam_force = 20
 	real_clamp = TRUE
@@ -138,7 +138,7 @@
 		var/mob/living/M = target
 		if(M.stat == DEAD)
 			return
-		if(chassis.occupant.a_intent == INTENT_HARM)
+		if(chassis.occupant.used_intent.type == INTENT_HARM)
 			if(real_clamp)
 				M.take_overall_damage(dam_force)
 				if(!M)
@@ -146,12 +146,12 @@
 				M.adjustOxyLoss(round(dam_force/2))
 				M.updatehealth()
 				target.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury!</span>", \
-									"<span class='userdanger'>[chassis] destroys you in an unholy fury!</span>")
-				log_combat(chassis.occupant, M, "attacked", "[name]", "(INTENT: [uppertext(chassis.occupant.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+									"<span class='danger'>[chassis] destroys you in an unholy fury!</span>")
+				log_combat(chassis.occupant, M, "attacked", "[name]", "(INTENT: [uppertext(chassis.occupant.used_intent)]) (DAMTYPE: [uppertext(damtype)])")
 			else
 				target.visible_message("<span class='danger'>[chassis] destroys [target] in an unholy fury!</span>", \
-									"<span class='userdanger'>[chassis] destroys you in an unholy fury!</span>")
-		else if(chassis.occupant.a_intent == INTENT_DISARM)
+									"<span class='danger'>[chassis] destroys you in an unholy fury!</span>")
+		else if(chassis.occupant.used_intent.type == INTENT_DISARM)
 			if(real_clamp)
 				var/mob/living/carbon/C = target
 				var/play_sound = FALSE
@@ -169,22 +169,22 @@
 				if(play_sound)
 					playsound(src, get_dismember_sound(), 80, TRUE)
 					target.visible_message("<span class='danger'>[chassis] rips [target]'s arms off!</span>", \
-								   "<span class='userdanger'>[chassis] rips your arms off!</span>")
-					log_combat(chassis.occupant, M, "dismembered of[limbs_gone],", "[name]", "(INTENT: [uppertext(chassis.occupant.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+								   "<span class='danger'>[chassis] rips your arms off!</span>")
+					log_combat(chassis.occupant, M, "dismembered of[limbs_gone],", "[name]", "(INTENT: [uppertext(chassis.occupant.used_intent)]) (DAMTYPE: [uppertext(damtype)])")
 			else
 				target.visible_message("<span class='danger'>[chassis] rips [target]'s arms off!</span>", \
-								   "<span class='userdanger'>[chassis] rips your arms off!</span>")
+								   "<span class='danger'>[chassis] rips your arms off!</span>")
 		else
 			step_away(M,chassis)
 			target.visible_message("<span class='danger'>[chassis] tosses [target] like a piece of paper!</span>", \
-								"<span class='userdanger'>[chassis] tosses you like a piece of paper!</span>")
+								"<span class='danger'>[chassis] tosses you like a piece of paper!</span>")
 		return 1
 
 
 
 /obj/item/mecha_parts/mecha_equipment/extinguisher
 	name = "exosuit extinguisher"
-	desc = "Equipment for engineering exosuits. A rapid-firing high capacity fire extinguisher."
+	desc = ""
 	icon_state = "mecha_exting"
 	equip_cooldown = 5
 	energy_drain = 0
@@ -203,10 +203,10 @@
 		var/obj/structure/reagent_dispensers/watertank/WT = target
 		WT.reagents.trans_to(src, 1000)
 		occupant_message("<span class='notice'>Extinguisher refilled.</span>")
-		playsound(chassis, 'sound/effects/refill.ogg', 50, TRUE, -6)
+		playsound(chassis, 'sound/blank.ogg', 50, TRUE, -6)
 	else
 		if(reagents.total_volume > 0)
-			playsound(chassis, 'sound/effects/extinguish.ogg', 75, TRUE, -3)
+			playsound(chassis, 'sound/blank.ogg', 75, TRUE, -3)
 			var/direction = get_dir(chassis,target)
 			var/turf/T = get_turf(target)
 			var/turf/T1 = get_step(T,turn(direction, 90))
@@ -251,7 +251,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/rcd
 	name = "mounted RCD"
-	desc = "An exosuit-mounted Rapid Construction Device."
+	desc = ""
 	icon_state = "mecha_rcd"
 	equip_cooldown = 10
 	energy_drain = 250
@@ -275,7 +275,7 @@
 		target = get_turf(target)
 	if(!action_checks(target) || get_dist(chassis, target)>3)
 		return
-	playsound(chassis, 'sound/machines/click.ogg', 50, TRUE)
+	playsound(chassis, 'sound/blank.ogg', 50, TRUE)
 
 	switch(mode)
 		if(0)
@@ -285,34 +285,34 @@
 				if(do_after_cooldown(W))
 					chassis.spark_system.start()
 					W.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-					playsound(W, 'sound/items/deconstruct.ogg', 50, TRUE)
+					playsound(W, 'sound/blank.ogg', 50, TRUE)
 			else if(isfloorturf(target))
 				var/turf/open/floor/F = target
 				occupant_message("<span class='notice'>Deconstructing [F]...</span>")
 				if(do_after_cooldown(target))
 					chassis.spark_system.start()
 					F.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-					playsound(F, 'sound/items/deconstruct.ogg', 50, TRUE)
+					playsound(F, 'sound/blank.ogg', 50, TRUE)
 			else if (istype(target, /obj/machinery/door/airlock))
 				occupant_message("<span class='notice'>Deconstructing [target]...</span>")
 				if(do_after_cooldown(target))
 					chassis.spark_system.start()
 					qdel(target)
-					playsound(target, 'sound/items/deconstruct.ogg', 50, TRUE)
+					playsound(target, 'sound/blank.ogg', 50, TRUE)
 		if(1)
 			if(isspaceturf(target))
 				var/turf/open/space/S = target
 				occupant_message("<span class='notice'>Building Floor...</span>")
 				if(do_after_cooldown(S))
 					S.PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
-					playsound(S, 'sound/items/deconstruct.ogg', 50, TRUE)
+					playsound(S, 'sound/blank.ogg', 50, TRUE)
 					chassis.spark_system.start()
 			else if(isfloorturf(target))
 				var/turf/open/floor/F = target
 				occupant_message("<span class='notice'>Building Wall...</span>")
 				if(do_after_cooldown(F))
 					F.PlaceOnTop(/turf/closed/wall)
-					playsound(F, 'sound/items/deconstruct.ogg', 50, TRUE)
+					playsound(F, 'sound/blank.ogg', 50, TRUE)
 					chassis.spark_system.start()
 		if(2)
 			if(isfloorturf(target))
@@ -321,12 +321,12 @@
 					chassis.spark_system.start()
 					var/obj/machinery/door/airlock/T = new /obj/machinery/door/airlock(target)
 					T.autoclose = TRUE
-					playsound(target, 'sound/items/deconstruct.ogg', 50, TRUE)
-					playsound(target, 'sound/effects/sparks2.ogg', 50, TRUE)
+					playsound(target, 'sound/blank.ogg', 50, TRUE)
+					playsound(target, 'sound/blank.ogg', 50, TRUE)
 
 
 
-/obj/item/mecha_parts/mecha_equipment/rcd/do_after_cooldown(var/atom/target)
+/obj/item/mecha_parts/mecha_equipment/rcd/do_after_cooldown(atom/target)
 	. = ..()
 
 /obj/item/mecha_parts/mecha_equipment/rcd/Topic(href,href_list)
@@ -351,7 +351,7 @@
 //Dunno where else to put this so shrug
 /obj/item/mecha_parts/mecha_equipment/ripleyupgrade
 	name = "Ripley MK-II Conversion Kit"
-	desc = "A pressurized canopy attachment kit for an Autonomous Power Loader Unit \"Ripley\" MK-I mecha, to convert it to the slower, but space-worthy MK-II design. This kit cannot be removed, once applied."
+	desc = ""
 	icon_state = "ripleyupgrade"
 
 /obj/item/mecha_parts/mecha_equipment/ripleyupgrade/can_attach(obj/mecha/working/ripley/M)
@@ -407,5 +407,5 @@
 		N.name = M.name
 	M.wreckage = 0
 	qdel(M)
-	playsound(get_turf(N),'sound/items/ratchet.ogg',50,TRUE)
+	playsound(get_turf(N),'sound/blank.ogg',50,TRUE)
 	return

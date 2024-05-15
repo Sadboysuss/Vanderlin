@@ -13,7 +13,7 @@
  */
 /obj/item/locator
 	name = "bluespace locator"
-	desc = "Used to track portable teleportation beacons and targets with embedded tracking implants."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "locator"
 	var/temp = null
@@ -22,7 +22,7 @@
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=400)
 
@@ -96,7 +96,7 @@
 									direct = "weak"
 							temp += "[W.imp_in.name]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
 
-				temp += "<B>You are at \[[sr.x],[sr.y],[sr.z]\]</B> in orbital coordinates.<BR><BR><A href='byond://?src=[REF(src)];refresh=1'>Refresh</A><BR>"
+				temp += "<B>I are at \[[sr.x],[sr.y],[sr.z]\]</B> in orbital coordinates.<BR><BR><A href='byond://?src=[REF(src)];refresh=1'>Refresh</A><BR>"
 			else
 				temp += "<B><FONT color='red'>Processing Error:</FONT></B> Unable to locate orbital position.<BR>"
 		else
@@ -116,7 +116,7 @@
  */
 /obj/item/hand_tele
 	name = "hand tele"
-	desc = "A portable item using blue-space technology."
+	desc = ""
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hand_tele"
 	item_state = "electronic"
@@ -124,7 +124,7 @@
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	custom_materials = list(/datum/material/iron=10000)
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
@@ -145,7 +145,7 @@
 /obj/item/hand_tele/proc/try_dispel_portal(atom/target, mob/user)
 	if(is_parent_of_portal(target))
 		qdel(target)
-		to_chat(user, "<span class='notice'>You dispel [target] with \the [src]!</span>")
+		to_chat(user, "<span class='notice'>I dispel [target] with \the [src]!</span>")
 		return TRUE
 	return FALSE
 

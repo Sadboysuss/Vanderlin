@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 
 /obj/item/stack/sheet/glass
 	name = "glass"
-	desc = "HOLY SHEET! That is a lot of glass."
+	desc = ""
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
 	item_state = "sheet-glass"
@@ -49,11 +49,11 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/CC = W
 		if (get_amount() < 1 || CC.get_amount() < 5)
-			to_chat(user, "<span class='warning>You need five lengths of coil and one sheet of glass to make wired glass!</span>")
+			to_chat(user, "<span class='warning>I need five lengths of coil and one sheet of glass to make wired glass!</span>")
 			return
 		CC.use(5)
 		use(1)
-		to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
+		to_chat(user, "<span class='notice'>I attach wire to the [name].</span>")
 		var/obj/item/stack/light_w/new_tile = new(user.loc)
 		new_tile.add_fingerprint(user)
 	else if(istype(W, /obj/item/stack/rods))
@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 			if(QDELETED(src) && replace)
 				user.put_in_hands(RG)
 		else
-			to_chat(user, "<span class='warning'>You need one rod and one sheet of glass to make reinforced glass!</span>")
+			to_chat(user, "<span class='warning'>I need one rod and one sheet of glass to make reinforced glass!</span>")
 			return
 	else
 		return ..()
@@ -81,7 +81,7 @@ GLOBAL_LIST_INIT(pglass_recipes, list ( \
 
 /obj/item/stack/sheet/plasmaglass
 	name = "plasma glass"
-	desc = "A glass sheet made out of a plasma-silicate alloy. It looks extremely tough and heavily fire resistant."
+	desc = ""
 	singular_name = "plasma glass sheet"
 	icon_state = "sheet-pglass"
 	item_state = "sheet-pglass"
@@ -113,7 +113,7 @@ GLOBAL_LIST_INIT(pglass_recipes, list ( \
 			if(QDELETED(src) && replace)
 				user.put_in_hands(RG)
 		else
-			to_chat(user, "<span class='warning'>You need one rod and one sheet of plasma glass to make reinforced plasma glass!</span>")
+			to_chat(user, "<span class='warning'>I need one rod and one sheet of plasma glass to make reinforced plasma glass!</span>")
 			return
 	else
 		return ..()
@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 
 /obj/item/stack/sheet/rglass
 	name = "reinforced glass"
-	desc = "Glass which seems to have rods or something stuck in them."
+	desc = ""
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 	item_state = "sheet-rglass"
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(prglass_recipes, list ( \
 
 /obj/item/stack/sheet/plasmarglass
 	name = "reinforced plasma glass"
-	desc = "A glass sheet made out of a plasma-silicate alloy and a rod matrix. It looks hopelessly tough and nearly fire-proof!"
+	desc = ""
 	singular_name = "reinforced plasma glass sheet"
 	icon_state = "sheet-prglass"
 	item_state = "sheet-prglass"
@@ -200,7 +200,7 @@ GLOBAL_LIST_INIT(titaniumglass_recipes, list(
 
 /obj/item/stack/sheet/titaniumglass
 	name = "titanium glass"
-	desc = "A glass sheet made out of a titanium-silicate alloy."
+	desc = ""
 	singular_name = "titanium glass sheet"
 	icon_state = "sheet-titaniumglass"
 	item_state = "sheet-titaniumglass"
@@ -219,7 +219,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 
 /obj/item/stack/sheet/plastitaniumglass
 	name = "plastitanium glass"
-	desc = "A glass sheet made out of a plasma-titanium-silicate alloy."
+	desc = ""
 	singular_name = "plastitanium glass sheet"
 	icon_state = "sheet-plastitaniumglass"
 	item_state = "sheet-plastitaniumglass"
@@ -235,7 +235,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 
 /obj/item/shard
 	name = "shard"
-	desc = "A nasty looking shard of glass."
+	desc = ""
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
 	w_class = WEIGHT_CLASS_TINY
@@ -246,7 +246,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	custom_materials = list(/datum/material/glass=MINERAL_MATERIAL_AMOUNT)
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	resistance_flags = ACID_PROOF
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 100)
 	max_integrity = 40
@@ -326,18 +326,18 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 			if(G.amount >= G.max_amount)
 				continue
 			G.attackby(NG, user)
-		to_chat(user, "<span class='notice'>You add the newly-formed [NG.name] to the stack. It now contains [NG.amount] sheet\s.</span>")
+		to_chat(user, "<span class='notice'>I add the newly-formed [NG.name] to the stack. It now contains [NG.amount] sheet\s.</span>")
 		qdel(src)
 	return TRUE
 
 /obj/item/shard/Crossed(mob/living/L)
 	if(istype(L) && has_gravity(loc))
-		playsound(loc, 'sound/effects/glass_step.ogg', HAS_TRAIT(L, TRAIT_LIGHT_STEP) ? 30 : 50, TRUE)
+		playsound(loc, 'sound/foley/glass_step.ogg', HAS_TRAIT(L, TRAIT_LIGHT_STEP) ? 30 : 50, TRUE)
 	return ..()
 
 /obj/item/shard/plasma
 	name = "purple shard"
-	desc = "A nasty looking shard of plasma glass."
+	desc = ""
 	force = 6
 	throwforce = 11
 	icon_state = "plasmalarge"

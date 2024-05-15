@@ -2,7 +2,7 @@
 /datum/blobstrain/reagent/pressurized_slime
 	name = "Pressurized Slime"
 	description = "will do low brute, oxygen, and stamina damage, and wet tiles under targets."
-	effectdesc = "will also wet tiles near blobs that are attacked or killed."
+	effectdesc = ""
 	analyzerdescdamage = "Does low brute damage, low oxygen damage, drains stamina, and wets tiles under targets, extinguishing them."
 	analyzerdesceffect = "When attacked or killed, lubricates nearby tiles, extinguishing anything on them."
 	color = "#AAAABB"

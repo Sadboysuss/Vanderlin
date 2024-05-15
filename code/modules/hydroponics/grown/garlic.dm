@@ -1,7 +1,7 @@
 /obj/item/seeds/garlic
 	name = "pack of garlic seeds"
-	desc = "A packet of extremely pungent seeds."
-	icon_state = "seed-garlic"
+	desc = ""
+	icon_state = "seed"
 	species = /datum/reagent/consumable/garlic
 	plantname = "Garlic Sprouts"
 	product = /obj/item/reagent_containers/food/snacks/grown/garlic
@@ -14,7 +14,7 @@
 /obj/item/reagent_containers/food/snacks/grown/garlic
 	seed = /obj/item/seeds/garlic
 	name = "garlic"
-	desc = "Delicious, but with a potentially overwhelming odor."
+	desc = ""
 	icon_state = "garlic"
 	filling_color = "#C0C9A0"
 	bitesize_mod = 2

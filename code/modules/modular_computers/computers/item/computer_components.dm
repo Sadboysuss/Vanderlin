@@ -22,7 +22,7 @@
 
 	all_components[H.device_type] = H
 
-	to_chat(user, "<span class='notice'>You install \the [H] into \the [src].</span>")
+	to_chat(user, "<span class='notice'>I install \the [H] into \the [src].</span>")
 	H.holder = src
 	H.forceMove(src)
 	H.on_install(src, user)
@@ -35,7 +35,7 @@
 
 	all_components.Remove(H.device_type)
 
-	to_chat(user, "<span class='notice'>You remove \the [H] from \the [src].</span>")
+	to_chat(user, "<span class='notice'>I remove \the [H] from \the [src].</span>")
 
 	H.forceMove(get_turf(src))
 	H.holder = null

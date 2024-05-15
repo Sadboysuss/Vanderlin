@@ -6,7 +6,7 @@
 	var/obj/screen/using
 
 	using = new /obj/screen/act_intent/alien()
-	using.icon_state = mymob.a_intent
+	using.icon_state = mymob.used_intent.name
 	using.hud = src
 	static_inventory += using
 	action_intent = using
@@ -18,7 +18,7 @@
 	alien_queen_finder = new /obj/screen/alien/alien_queen_finder()
 	alien_queen_finder.hud = src
 	infodisplay += alien_queen_finder
-	
+
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = 'icons/mob/screen_alien.dmi'
 	pull_icon.update_icon()

@@ -1,6 +1,6 @@
 /obj/item/clothing/head/soft
 	name = "cargo cap"
-	desc = "It's a baseball hat in a tasteless yellow colour."
+	desc = ""
 	icon_state = "cargosoft"
 	item_state = "helmet"
 	var/soft_type = "cargo"
@@ -15,9 +15,10 @@
 	..()
 
 /obj/item/clothing/head/soft/verb/flipcap()
-	set category = "Object"
+	set hidden = 1
 	set name = "Flip cap"
-
+	if(!usr.client.holder)
+		return
 	flip(usr)
 
 
@@ -34,10 +35,10 @@
 		flipped = !flipped
 		if(src.flipped)
 			icon_state = "[soft_type]soft_flipped"
-			to_chat(user, "<span class='notice'>You flip the hat backwards.</span>")
+			to_chat(user, "<span class='notice'>I flip the hat backwards.</span>")
 		else
 			icon_state = "[soft_type]soft"
-			to_chat(user, "<span class='notice'>You flip the hat back in normal position.</span>")
+			to_chat(user, "<span class='notice'>I flip the hat back in normal position.</span>")
 		usr.update_inv_head()	//so our mob-overlays update
 
 /obj/item/clothing/head/soft/examine(mob/user)
@@ -46,77 +47,77 @@
 
 /obj/item/clothing/head/soft/red
 	name = "red cap"
-	desc = "It's a baseball hat in a tasteless red colour."
+	desc = ""
 	icon_state = "redsoft"
 	soft_type = "red"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/blue
 	name = "blue cap"
-	desc = "It's a baseball hat in a tasteless blue colour."
+	desc = ""
 	icon_state = "bluesoft"
 	soft_type = "blue"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/green
 	name = "green cap"
-	desc = "It's a baseball hat in a tasteless green colour."
+	desc = ""
 	icon_state = "greensoft"
 	soft_type = "green"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/yellow
 	name = "yellow cap"
-	desc = "It's a baseball hat in a tasteless yellow colour."
+	desc = ""
 	icon_state = "yellowsoft"
 	soft_type = "yellow"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/grey
 	name = "grey cap"
-	desc = "It's a baseball hat in a tasteful grey colour."
+	desc = ""
 	icon_state = "greysoft"
 	soft_type = "grey"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/orange
 	name = "orange cap"
-	desc = "It's a baseball hat in a tasteless orange colour."
+	desc = ""
 	icon_state = "orangesoft"
 	soft_type = "orange"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/mime
 	name = "white cap"
-	desc = "It's a baseball hat in a tasteless white colour."
+	desc = ""
 	icon_state = "mimesoft"
 	soft_type = "mime"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/purple
 	name = "purple cap"
-	desc = "It's a baseball hat in a tasteless purple colour."
+	desc = ""
 	icon_state = "purplesoft"
 	soft_type = "purple"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/black
 	name = "black cap"
-	desc = "It's a baseball hat in a tasteless black colour."
+	desc = ""
 	icon_state = "blacksoft"
 	soft_type = "black"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/rainbow
 	name = "rainbow cap"
-	desc = "It's a baseball hat in a bright rainbow of colors."
+	desc = ""
 	icon_state = "rainbowsoft"
 	soft_type = "rainbow"
 	dog_fashion = null
 
 /obj/item/clothing/head/soft/sec
 	name = "security cap"
-	desc = "It's a robust baseball hat in tasteful red colour."
+	desc = ""
 	icon_state = "secsoft"
 	soft_type = "sec"
 	armor = list("melee" = 30, "bullet" = 25, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 20, "acid" = 50)
@@ -125,7 +126,7 @@
 
 /obj/item/clothing/head/soft/emt
 	name = "EMT cap"
-	desc = "It's a baseball hat with a dark turquoise color and a reflective cross on the top."
+	desc = ""
 	icon_state = "emtsoft"
 	soft_type = "emt"
 	dog_fashion = null

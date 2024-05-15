@@ -77,7 +77,7 @@
 /mob/living/simple_animal/pet/dog/corgi
 	name = "\improper corgi"
 	real_name = "corgi"
-	desc = "It's a corgi."
+	desc = ""
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
@@ -112,7 +112,7 @@
 /mob/living/simple_animal/pet/dog/pug
 	name = "\improper pug"
 	real_name = "pug"
-	desc = "It's a pug."
+	desc = ""
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "pug"
 	icon_living = "pug"
@@ -123,7 +123,7 @@
 
 /mob/living/simple_animal/pet/dog/corgi/exoticcorgi
 	name = "Exotic Corgi"
-	desc = "As cute as it is colorful!"
+	desc = ""
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "corgigrey"
 	icon_living = "corgigrey"
@@ -187,15 +187,15 @@
 /mob/living/simple_animal/pet/dog/corgi/attackby(obj/item/O, mob/user, params)
 	if (istype(O, /obj/item/razor))
 		if (shaved)
-			to_chat(user, "<span class='warning'>You can't shave this corgi, it's already been shaved!</span>")
+			to_chat(user, "<span class='warning'>I can't shave this corgi, it's already been shaved!</span>")
 			return
 		if (nofur)
-			to_chat(user, "<span class='warning'>You can't shave this corgi, it doesn't have a fur coat!</span>")
+			to_chat(user, "<span class='warning'>I can't shave this corgi, it doesn't have a fur coat!</span>")
 			return
-		user.visible_message("<span class='notice'>[user] starts to shave [src] using \the [O].</span>", "<span class='notice'>You start to shave [src] using \the [O]...</span>")
+		user.visible_message("<span class='notice'>[user] starts to shave [src] using \the [O].</span>", "<span class='notice'>I start to shave [src] using \the [O]...</span>")
 		if(do_after(user, 50, target = src))
 			user.visible_message("<span class='notice'>[user] shaves [src]'s hair using \the [O].</span>")
-			playsound(loc, 'sound/items/welder2.ogg', 20, TRUE)
+			playsound(loc, 'sound/blank.ogg', 20, TRUE)
 			shaved = TRUE
 			icon_living = "[initial(icon_living)]_shaved"
 			icon_dead = "[initial(icon_living)]_shaved_dead"
@@ -271,7 +271,7 @@
 					var/obj/item/item_to_add = usr.get_active_held_item()
 
 					if(!item_to_add)
-						usr.visible_message("<span class='notice'>[usr] pets [src].</span>", "<span class='notice'>You rest your hand on [src]'s back for a moment.</span>")
+						usr.visible_message("<span class='notice'>[usr] pets [src].</span>", "<span class='notice'>I rest your hand on [src]'s back for a moment.</span>")
 						return
 
 					if(!usr.temporarilyRemoveItemFromInventory(item_to_add))
@@ -288,7 +288,7 @@
 						allowed = TRUE
 
 					if(!allowed)
-						to_chat(usr, "<span class='warning'>You set [item_to_add] on [src]'s back, but it falls off!</span>")
+						to_chat(usr, "<span class='warning'>I set [item_to_add] on [src]'s back, but it falls off!</span>")
 						item_to_add.forceMove(drop_location())
 						if(prob(25))
 							step_rand(item_to_add)
@@ -317,10 +317,10 @@
 
 	if(inventory_head)
 		if(user)
-			to_chat(user, "<span class='warning'>You can't put more than one hat on [src]!</span>")
+			to_chat(user, "<span class='warning'>I can't put more than one hat on [src]!</span>")
 		return
 	if(!item_to_add)
-		user.visible_message("<span class='notice'>[user] pets [src].</span>", "<span class='notice'>You rest your hand on [src]'s head for a moment.</span>")
+		user.visible_message("<span class='notice'>[user] pets [src].</span>", "<span class='notice'>I rest your hand on [src]'s head for a moment.</span>")
 		if(flags_1 & HOLOGRAM_1)
 			return
 		SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, src, /datum/mood_event/pet_animal, src)
@@ -341,14 +341,14 @@
 			to_chat(user, "<span class='notice'>There is merely a dull, lifeless look in [real_name]'s eyes as you put the [item_to_add] on [p_them()].</span>")
 		else if(user)
 			user.visible_message("<span class='notice'>[user] puts [item_to_add] on [real_name]'s head. [src] looks at [user] and barks once.</span>",
-				"<span class='notice'>You put [item_to_add] on [real_name]'s head. [src] gives you a peculiar look, then wags [p_their()] tail once and barks.</span>",
-				"<span class='hear'>You hear a friendly-sounding bark.</span>")
+				"<span class='notice'>I put [item_to_add] on [real_name]'s head. [src] gives you a peculiar look, then wags [p_their()] tail once and barks.</span>",
+				"<span class='hear'>I hear a friendly-sounding bark.</span>")
 		item_to_add.forceMove(src)
 		src.inventory_head = item_to_add
 		update_corgi_fluff()
 		regenerate_icons()
 	else
-		to_chat(user, "<span class='warning'>You set [item_to_add] on [src]'s head, but it falls off!</span>")
+		to_chat(user, "<span class='warning'>I set [item_to_add] on [src]'s head, but it falls off!</span>")
 		item_to_add.forceMove(drop_location())
 		if(prob(25))
 			step_rand(item_to_add)
@@ -381,7 +381,7 @@
 	name = "Ian"
 	real_name = "Ian"	//Intended to hold the name without altering it.
 	gender = MALE
-	desc = "It's the HoP's beloved corgi."
+	desc = ""
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "bops"
@@ -407,14 +407,14 @@
 			P.name = "Ian"
 			P.real_name = "Ian"
 			P.gender = MALE
-			P.desc = "It's the HoP's beloved corgi puppy."
+			P.desc = ""
 			Write_Memory(FALSE)
 			return INITIALIZE_HINT_QDEL
 	else if(age == record_age)
 		icon_state = "old_corgi"
 		icon_living = "old_corgi"
 		icon_dead = "old_corgi_dead"
-		desc = "At a ripe old age of [record_age], Ian's not as spry as he used to be, but he'll always be the HoP's beloved corgi." //RIP
+		desc = "" //RIP
 		turns_per_move = 20
 
 /mob/living/simple_animal/pet/dog/corgi/Ian/Life()
@@ -471,14 +471,14 @@
 	WRITE_FILE(json_file, json_encode(file_data))
 
 /mob/living/simple_animal/pet/dog/corgi/Ian/narsie_act()
-	playsound(src, 'sound/magic/demon_dies.ogg', 75, TRUE)
+	playsound(src, 'sound/blank.ogg', 75, TRUE)
 	var/mob/living/simple_animal/pet/dog/corgi/narsie/N = new(loc)
 	N.setDir(dir)
 	gib()
 
 /mob/living/simple_animal/pet/dog/corgi/narsie
 	name = "Nars-Ian"
-	desc = "Ia! Ia!"
+	desc = ""
 	icon_state = "narsian"
 	icon_living = "narsian"
 	icon_dead = "narsian_dead"
@@ -493,7 +493,7 @@
 		if(P != src && !istype(P,/mob/living/simple_animal/pet/dog/corgi/narsie))
 			visible_message("<span class='warning'>[src] devours [P]!</span>", \
 			"<span class='cult big bold'>DELICIOUS SOULS</span>")
-			playsound(src, 'sound/magic/demon_attack1.ogg', 75, TRUE)
+			playsound(src, 'sound/blank.ogg', 75, TRUE)
 			narsie_act()
 			if(P.mind)
 				if(P.mind.hasSoul)
@@ -561,7 +561,7 @@
 /mob/living/simple_animal/pet/dog/corgi/puppy
 	name = "\improper corgi puppy"
 	real_name = "corgi"
-	desc = "It's a corgi puppy!"
+	desc = ""
 	icon_state = "puppy"
 	icon_living = "puppy"
 	icon_dead = "puppy_dead"
@@ -573,7 +573,7 @@
 //puppies cannot wear anything.
 /mob/living/simple_animal/pet/dog/corgi/puppy/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(usr, "<span class='warning'>You can't fit this on [src]!</span>")
+		to_chat(usr, "<span class='warning'>I can't fit this on [src]!</span>")
 		return
 	..()
 
@@ -581,7 +581,7 @@
 /mob/living/simple_animal/pet/dog/corgi/puppy/void		//Tribute to the corgis born in nullspace
 	name = "\improper void puppy"
 	real_name = "voidy"
-	desc = "A corgi puppy that has been infused with deep space energy. It's staring back..."
+	desc = ""
 	icon_state = "void_puppy"
 	icon_living = "void_puppy"
 	icon_dead = "void_puppy_dead"
@@ -599,7 +599,7 @@
 	name = "Lisa"
 	real_name = "Lisa"
 	gender = FEMALE
-	desc = "She's tearing you apart."
+	desc = ""
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 	icon_state = "lisa"
@@ -627,10 +627,10 @@
 
 /mob/living/simple_animal/pet/dog/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	switch(M.a_intent)
-		if("help")
+	switch(M.used_intent.type)
+		if(INTENT_HELP)
 			wuv(1,M)
-		if("harm")
+		if(INTENT_HARM)
 			wuv(-1,M)
 
 /mob/living/simple_animal/pet/dog/proc/wuv(change, mob/M)

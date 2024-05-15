@@ -8,7 +8,7 @@
 									//10 is the default weight. 20 is twice more likely; 5 is half as likely as this default.
 									//0 here does NOT disable the event, it just makes it extremely unlikely
 
-	var/earliest_start = 20 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 20 mins
+	var/earliest_start = 12 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 20 mins
 	var/min_players = 0				//The minimum amount of alive, non-AFK human players on server required to start the event.
 
 	var/occurrences = 0				//How many times this event has occured
@@ -18,13 +18,17 @@
 	var/holidayID = ""				//string which should be in the SSeventss.holidays list if you wish this event to be holiday-specific
 									//anything with a (non-null) holidayID which does not match holiday, cannot run.
 	var/wizardevent = FALSE
-	var/alert_observers = TRUE		//should we let the ghosts and admins know this event is firing
+	var/alert_observers = FALSE		//should we let the ghosts and admins know this event is firing
 									//should be disabled on events that fire a lot
 
 	var/list/gamemode_blacklist = list() // Event won't happen in these gamemodes
 	var/list/gamemode_whitelist = list() // Event will happen ONLY in these gamemodes if not empty
 
 	var/triggering	//admin cancellation
+
+	var/req_omen = FALSE
+	var/list/todreq = list("day", "dawn", "night", "dusk")
+
 
 /datum/round_event_control/New()
 	if(config && !wizardevent) // Magic is unaffected by configs
@@ -49,8 +53,13 @@
 		return FALSE
 	if(gamemode_whitelist.len && !(gamemode in gamemode_whitelist))
 		return FALSE
-	if(holidayID && (!SSevents.holidays || !SSevents.holidays[holidayID]))
+	if(!(GLOB.tod in todreq))
 		return FALSE
+	if(req_omen)
+		if(!GLOB.badomens.len)
+			return FALSE
+//	if(holidayID && (!SSevents.holidays || !SSevents.holidays[holidayID]))
+//		return FALSE
 	return TRUE
 
 /datum/round_event_control/proc/preRunEvent()
@@ -69,14 +78,22 @@
 
 	if(!triggering)
 		return EVENT_CANCELLED	//admin cancelled
+
+	if(req_omen)
+		if(!GLOB.badomens.len)
+			return EVENT_CANCELLED
+		badomen(pick_n_take(GLOB.badomens))
+		testing("[name] has started")
+
 	triggering = FALSE
+
 	return EVENT_READY
 
 /datum/round_event_control/Topic(href, href_list)
 	..()
 	if(href_list["cancel"])
 		if(!triggering)
-			to_chat(usr, "<span class='admin'>You are too late to cancel that event</span>")
+			to_chat(usr, "<span class='admin'>I are too late to cancel that event</span>")
 			return
 		triggering = FALSE
 		message_admins("[key_name_admin(usr)] cancelled event [name].")
@@ -93,8 +110,8 @@
 	testing("[time2text(world.time, "hh:mm:ss")] [E.type]")
 	if(random)
 		log_game("Random Event triggering: [name] ([typepath])")
-	if (alert_observers)
-		deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered!", "<b>[name]</b>") //STOP ASSUMING IT'S BADMINS!
+//	if (alert_observers)
+//		deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered!", "<b>[name]</b>") //STOP ASSUMING IT'S BADMINS!
 	return E
 
 //Special admins setup
@@ -112,7 +129,7 @@
 
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
 	var/current_players	= 0 //Amount of of alive, non-AFK human players on server at the time of event start
-	var/fakeable = TRUE		//Can be faked by fake news event.
+	var/fakeable = FALSE		//Can be faked by fake news event.
 
 //Called first before processing.
 //Allows you to setup your event, such as randomly
@@ -136,7 +153,8 @@
 /datum/round_event/proc/announce_to_ghosts(atom/atom_of_interest)
 	if(control.alert_observers)
 		if (atom_of_interest)
-			notify_ghosts("[control.name] has an object of interest: [atom_of_interest]!", source=atom_of_interest, action=NOTIFY_ORBIT, header="Something's Interesting!")
+//			notify_ghosts("[control.name] has an object of interest: [atom_of_interest]!", source=atom_of_interest, action=NOTIFY_ORBIT, header="Something's Interesting!")
+			return
 	return
 
 //Called when the tick is equal to the announceWhen variable.

@@ -23,11 +23,7 @@
  * Twohanded
  */
 /obj/item/twohanded
-	var/wielded = 0
 	var/force_unwielded = 0
-	var/force_wielded = 0
-	var/wieldsound = null
-	var/unwieldsound = null
 
 /obj/item/twohanded/proc/unwield(mob/living/carbon/user, show_message = TRUE)
 	if(!wielded || !user)
@@ -47,27 +43,25 @@
 		user.update_inv_hands()
 	if(show_message)
 		if(iscyborg(user))
-			to_chat(user, "<span class='notice'>You free up your module.</span>")
+			to_chat(user, "<span class='notice'>I free up your module.</span>")
 		else
-			to_chat(user, "<span class='notice'>You are now carrying [src] with one hand.</span>")
-	if(unwieldsound)
-		playsound(loc, unwieldsound, 50, TRUE)
+			to_chat(user, "<span class='notice'>I are now carrying [src] with one hand.</span>")
 	var/obj/item/twohanded/offhand/O = user.get_inactive_held_item()
 	if(O && istype(O))
 		O.unwield()
 	return
 
-/obj/item/twohanded/proc/wield(mob/living/carbon/user)
+/obj/item/twohanded/wield(mob/living/carbon/user)
 	if(wielded)
 		return
 	if(ismonkey(user))
 		to_chat(user, "<span class='warning'>It's too heavy for you to wield fully.</span>")
 		return
 	if(user.get_inactive_held_item())
-		to_chat(user, "<span class='warning'>You need your other hand to be empty!</span>")
+		to_chat(user, "<span class='warning'>I need your other hand to be empty!</span>")
 		return
 	if(user.get_num_arms() < 2)
-		to_chat(user, "<span class='warning'>You don't have enough intact hands.</span>")
+		to_chat(user, "<span class='warning'>I don't have enough intact hands.</span>")
 		return
 	wielded = 1
 	if(force_wielded)
@@ -75,14 +69,12 @@
 	name = "[name] (Wielded)"
 	update_icon()
 	if(iscyborg(user))
-		to_chat(user, "<span class='notice'>You dedicate your module to [src].</span>")
+		to_chat(user, "<span class='notice'>I dedicate your module to [src].</span>")
 	else
-		to_chat(user, "<span class='notice'>You grab [src] with both hands.</span>")
-	if (wieldsound)
-		playsound(loc, wieldsound, 50, TRUE)
+		to_chat(user, "<span class='notice'>I grab [src] with both hands.</span>")
 	var/obj/item/twohanded/offhand/O = new(user) ////Let's reserve his other hand~
 	O.name = "[name] - offhand"
-	O.desc = "Your second grip on [src]."
+	O.desc = ""
 	O.wielded = TRUE
 	user.put_in_inactive_hand(O)
 	return
@@ -210,7 +202,7 @@
 	if(!wielded)
 		return
 	if(show_message)
-		to_chat(user, "<span class='notice'>You drop [src].</span>")
+		to_chat(user, "<span class='notice'>I drop [src].</span>")
 	..(user, FALSE)
 
 /*
@@ -221,7 +213,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/axes_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/axes_righthand.dmi'
 	name = "fire axe"
-	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
+	desc = ""
 	force = 5
 	throwforce = 15
 	w_class = WEIGHT_CLASS_BULKY
@@ -229,7 +221,7 @@
 	force_unwielded = 5
 	force_wielded = 24
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	sharpness = IS_SHARP
 	max_integrity = 200
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
@@ -266,19 +258,17 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	name = "double-bladed energy sword"
-	desc = "Handle with care."
+	desc = ""
 	force = 3
 	throwforce = 5
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
 	var/w_class_on = WEIGHT_CLASS_BULKY
 	force_unwielded = 3
 	force_wielded = 34
-	wieldsound = 'sound/weapons/saberon.ogg'
-	unwieldsound = 'sound/weapons/saberoff.ogg'
 	hitsound = "swing_hit"
-	armour_penetration = 35
+	armor_penetration = 35
 	var/saber_color = "green"
 	light_color = "#00ff00"//green
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -343,7 +333,7 @@
 /obj/item/twohanded/dualsaber/attack(mob/target, mob/living/carbon/human/user)
 	if(user.has_dna())
 		if(user.dna.check_mutation(HULK))
-			to_chat(user, "<span class='warning'>You grip the blade too hard and accidentally close it!</span>")
+			to_chat(user, "<span class='warning'>I grip the blade too hard and accidentally close it!</span>")
 			unwield()
 			return
 	..()
@@ -357,7 +347,7 @@
 	dance_rotate(user, CALLBACK(user, /mob.proc/dance_flip))
 
 /obj/item/twohanded/dualsaber/proc/impale(mob/living/user)
-	to_chat(user, "<span class='warning'>You twirl around a bit before losing your balance and impaling yourself on [src].</span>")
+	to_chat(user, "<span class='warning'>I twirl around a bit before losing your balance and impaling myself on [src].</span>")
 	if (force_wielded)
 		user.take_bodypart_damage(20,25,check_armor = TRUE)
 	else
@@ -371,13 +361,13 @@
 /obj/item/twohanded/dualsaber/wield(mob/living/carbon/M) //Specific wield () hulk checks due to reflection chance for balance issues and switches hitsounds.
 	if(M.has_dna())
 		if(M.dna.check_mutation(HULK))
-			to_chat(M, "<span class='warning'>You lack the grace to wield this!</span>")
+			to_chat(M, "<span class='warning'>I lack the grace to wield this!</span>")
 			return
 	..()
 	if(wielded)
 		sharpness = IS_SHARP
 		w_class = w_class_on
-		hitsound = 'sound/weapons/blade1.ogg'
+		hitsound = 'sound/blank.ogg'
 		START_PROCESSING(SSobj, src)
 		set_light(brightness_on)
 
@@ -411,7 +401,7 @@
 		if(C.wear_mask)
 			in_mouth = ", barely missing [user.p_their()] nose"
 	. = "<span class='warning'>[user] swings [user.p_their()] [name][in_mouth]. [user.p_they(TRUE)] light[user.p_s()] [user.p_their()] [A.name] in the process.</span>"
-	playsound(loc, hitsound, get_clamped_volume(), TRUE, -1)
+	playsound(loc,  pick(hitsound), get_clamped_volume(), TRUE, -1)
 	add_fingerprint(user)
 	// Light your candles while spinning around the room
 	INVOKE_ASYNC(src, .proc/jedi_spin, user)
@@ -446,7 +436,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/polearms_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/polearms_righthand.dmi'
 	name = "spear"
-	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	desc = ""
 	force = 10
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
@@ -455,9 +445,9 @@
 	throwforce = 20
 	throw_speed = 4
 	embedding = list("embedded_impact_pain_multiplier" = 3)
-	armour_penetration = 10
+	armor_penetration = 10
 	custom_materials = list(/datum/material/iron=1150, /datum/material/glass=2075)
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	sharpness = IS_SHARP
 	max_integrity = 200
@@ -502,7 +492,7 @@
 		G = new /obj/item/grenade/iedcasing() //For admin-spawned explosive lances
 	G.forceMove(src)
 	explosive = G
-	desc = "A makeshift spear with [G] attached to it"
+	desc = ""
 	update_icon()
 
 
@@ -557,7 +547,7 @@
 // CHAINSAW
 /obj/item/twohanded/required/chainsaw
 	name = "chainsaw"
-	desc = "A versatile power tool. Useful for limbing trees and delimbing humans."
+	desc = ""
 	icon_state = "chainsaw_off"
 	lefthand_file = 'icons/mob/inhands/weapons/chainsaw_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/chainsaw_righthand.dmi'
@@ -579,18 +569,18 @@
 
 /obj/item/twohanded/required/chainsaw/Initialize()
 	. = ..()
-	AddComponent(/datum/component/butchering, 30, 100, 0, 'sound/weapons/chainsawhit.ogg', TRUE)
+	AddComponent(/datum/component/butchering, 30, 100, 0, 'sound/blank.ogg', TRUE)
 
 /obj/item/twohanded/required/chainsaw/suicide_act(mob/living/carbon/user)
 	if(on)
 		user.visible_message("<span class='suicide'>[user] begins to tear [user.p_their()] head off with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		playsound(src, 'sound/weapons/chainsawhit.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 		var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
 		if(myhead)
 			myhead.dismember()
 	else
 		user.visible_message("<span class='suicide'>[user] smashes [src] into [user.p_their()] neck, destroying [user.p_their()] esophagus! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		playsound(src, 'sound/weapons/genhit1.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 	return(BRUTELOSS)
 
 /obj/item/twohanded/required/chainsaw/attack_self(mob/user)
@@ -603,7 +593,7 @@
 	butchering.butchering_enabled = on
 
 	if(on)
-		hitsound = 'sound/weapons/chainsawhit.ogg'
+		hitsound = 'sound/blank.ogg'
 	else
 		hitsound = "swing_hit"
 
@@ -619,21 +609,21 @@
 
 /obj/item/twohanded/required/chainsaw/doomslayer
 	name = "THE GREAT COMMUNICATOR"
-	desc = "<span class='warning'>VRRRRRRR!!!</span>"
-	armour_penetration = 100
+	desc = ""
+	armor_penetration = 100
 	force_on = 30
 
 /obj/item/twohanded/required/chainsaw/doomslayer/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	if(attack_type == PROJECTILE_ATTACK)
 		owner.visible_message("<span class='danger'>Ranged attacks just make [owner] angrier!</span>")
-		playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 75, TRUE)
+		playsound(src, pick('sound/blank.ogg'), 75, TRUE)
 		return 1
 	return 0
 
 //GREY TIDE
 /obj/item/twohanded/spear/grey_tide
 	name = "\improper Grey Tide"
-	desc = "Recovered from the aftermath of a revolt aboard Defense Outpost Theta Aegis, in which a seemingly endless tide of Assistants caused heavy casualities among Nanotrasen military forces."
+	desc = ""
 	force_unwielded = 15
 	force_wielded = 25
 	attack_verb = list("gored")
@@ -658,14 +648,14 @@
 	lefthand_file = 'icons/mob/inhands/weapons/polearms_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/polearms_righthand.dmi'
 	name = "pitchfork"
-	desc = "A simple tool used for moving hay."
+	desc = ""
 	force = 7
 	throwforce = 15
 	w_class = WEIGHT_CLASS_BULKY
 	force_unwielded = 7
 	force_wielded = 15
 	attack_verb = list("attacked", "impaled", "pierced")
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 	sharpness = IS_SHARP
 	max_integrity = 200
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
@@ -673,7 +663,7 @@
 
 /obj/item/twohanded/pitchfork/demonic
 	name = "demonic pitchfork"
-	desc = "A red pitchfork, it looks like the work of the devil."
+	desc = ""
 	force = 19
 	throwforce = 24
 	force_unwielded = 19
@@ -727,7 +717,7 @@
 	if(iswallturf(target))
 		var/turf/closed/wall/W = target
 		user.visible_message("<span class='danger'>[user] blasts \the [target] with \the [src]!</span>")
-		playsound(target, 'sound/magic/disintegrate.ogg', 100, TRUE)
+		playsound(target, 'sound/blank.ogg', 100, TRUE)
 		W.break_wall()
 		W.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 		return
@@ -739,10 +729,10 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	name = "vibro sword"
-	desc = "A potent weapon capable of cutting through nearly anything. Wielding it in two hands will allow you to deflect gunfire."
+	desc = ""
 	force_unwielded = 20
 	force_wielded = 40
-	armour_penetration = 100
+	armor_penetration = 100
 	block_chance = 40
 	throwforce = 20
 	throw_speed = 4
@@ -750,7 +740,7 @@
 	attack_verb = list("cut", "sliced", "diced")
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'sound/blank.ogg'
 
 /obj/item/twohanded/vibro_weapon/Initialize()
 	. = ..()
@@ -763,7 +753,7 @@
 		if(prob(final_block_chance))
 			if(attack_type == PROJECTILE_ATTACK)
 				owner.visible_message("<span class='danger'>[owner] deflects [attack_text] with [src]!</span>")
-				playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 75, TRUE)
+				playsound(src, pick('sound/blank.ogg'), 75, TRUE)
 				return 1
 			else
 				owner.visible_message("<span class='danger'>[owner] parries [attack_text] with [src]!</span>")
@@ -779,7 +769,7 @@
 /obj/item/twohanded/fireaxe/boneaxe  // Blatant imitation of the fireaxe, but made out of bone.
 	icon_state = "bone_axe0"
 	name = "bone axe"
-	desc = "A large, vicious axe crafted out of several sharpened bone plates and crudely tied together. Made of monsters, by killing monsters, for killing monsters."
+	desc = ""
 	force_wielded = 23
 
 /obj/item/twohanded/fireaxe/boneaxe/update_icon()
@@ -791,19 +781,19 @@
 /obj/item/twohanded/spear/bonespear	//Blatant imitation of spear, but made out of bone. Not valid for explosive modification.
 	icon_state = "bone_spear0"
 	name = "bone spear"
-	desc = "A haphazardly-constructed yet still deadly weapon. The pinnacle of modern technology."
+	desc = ""
 	force = 12
 	force_unwielded = 12
 	force_wielded = 20
 	throwforce = 22
-	armour_penetration = 15				//Enhanced armor piercing
+	armor_penetration = 15				//Enhanced armor piercing
 
 /obj/item/twohanded/spear/bonespear/update_icon()
 	icon_state = "bone_spear[wielded]"
 
 /obj/item/twohanded/binoculars
 	name = "binoculars"
-	desc = "Used for long-distance surveillance."
+	desc = ""
 	item_state = "binoculars"
 	icon_state = "binoculars"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
@@ -824,7 +814,7 @@
 		return
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, .proc/unwield)
 	listeningTo = user
-	user.visible_message("<span class='notice'>[user] holds [src] up to [user.p_their()] eyes.</span>", "<span class='notice'>You hold [src] up to your eyes.</span>")
+	user.visible_message("<span class='notice'>[user] holds [src] up to [user.p_their()] eyes.</span>", "<span class='notice'>I hold [src] up to your eyes.</span>")
 	item_state = "binoculars_wielded"
 	user.regenerate_icons()
 	if(!user?.client)
@@ -849,7 +839,7 @@
 	. = ..()
 	UnregisterSignal(listeningTo, COMSIG_MOVABLE_MOVED)
 	listeningTo = null
-	user.visible_message("<span class='notice'>[user] lowers [src].</span>", "<span class='notice'>You lower [src].</span>")
+	user.visible_message("<span class='notice'>[user] lowers [src].</span>", "<span class='notice'>I lower [src].</span>")
 	item_state = "binoculars"
 	user.regenerate_icons()
 	if(user && user.client)

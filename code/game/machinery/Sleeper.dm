@@ -6,7 +6,7 @@
 
 /obj/machinery/sleeper
 	name = "sleeper"
-	desc = "An enclosed machine used to stabilize and heal patients."
+	desc = ""
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper"
 	density = FALSE
@@ -27,7 +27,7 @@
 	)
 	var/list/chem_buttons	//Used when emagged to scramble which chem is used, eg: mutadone -> morphine
 	var/scrambled_chems = FALSE //Are chem buttons scrambled? used as a warning
-	var/enter_message = "<span class='notice'><b>You feel cool air surround you. You go numb as your senses turn inward.</b></span>"
+	var/enter_message = "<span class='notice'><b>I feel cool air surround you. You go numb as your senses turn inward.</b></span>"
 	payment_department = ACCOUNT_MED
 	fair_market_price = 5
 
@@ -63,7 +63,7 @@
 
 /obj/machinery/sleeper/container_resist(mob/living/user)
 	visible_message("<span class='notice'>[occupant] emerges from [src]!</span>",
-		"<span class='notice'>You climb out of [src]!</span>")
+		"<span class='notice'>I climb out of [src]!</span>")
 	open_machine()
 
 /obj/machinery/sleeper/Exited(atom/movable/user)
@@ -133,7 +133,7 @@
 	. = !(state_open || panel_open || (flags_1 & NODECONSTRUCT_1)) && I.tool_behaviour == TOOL_CROWBAR
 	if(.)
 		I.play_tool_sound(src, 50)
-		visible_message("<span class='notice'>[usr] pries open [src].</span>", "<span class='notice'>You pry open [src].</span>")
+		visible_message("<span class='notice'>[usr] pries open [src].</span>", "<span class='notice'>I pry open [src].</span>")
 		open_machine()
 
 /obj/machinery/sleeper/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
@@ -233,7 +233,7 @@
 
 /obj/machinery/sleeper/emag_act(mob/user)
 	scramble_chem_buttons()
-	to_chat(user, "<span class='warning'>You scramble the sleeper's user interface!</span>")
+	to_chat(user, "<span class='warning'>I scramble the sleeper's user interface!</span>")
 
 /obj/machinery/sleeper/proc/inject_chem(chem, mob/user)
 	if((chem in available_chems) && chem_allowed(chem))

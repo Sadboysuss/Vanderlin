@@ -1,7 +1,7 @@
 ///a reaction chamber for plumbing. pretty much everything can react, but this one keeps the reagents seperated and only reacts under your given terms
 /obj/machinery/plumbing/reaction_chamber
 	name = "reaction chamber"
-	desc = "Keeps chemicals seperated until given conditions are met."
+	desc = ""
 	icon_state = "reaction_chamber"
 
 	buffer = 200

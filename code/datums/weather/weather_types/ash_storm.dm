@@ -1,13 +1,13 @@
 //Ash storms happen frequently on lavaland. They heavily obscure vision, and cause high fire damage to anyone caught outside.
 /datum/weather/ash_storm
 	name = "ash storm"
-	desc = "An intense atmospheric storm lifts ash off of the planet's surface and billows it down across the area, dealing intense fire damage to the unprotected."
+	desc = ""
 
 	telegraph_message = "<span class='boldwarning'>An eerie moan rises on the wind. Sheets of burning ash blacken the horizon. Seek shelter.</span>"
 	telegraph_duration = 300
 	telegraph_overlay = "light_ash"
 
-	weather_message = "<span class='userdanger'><i>Smoldering clouds of scorching ash billow down around you! Get inside!</i></span>"
+	weather_message = "<span class='danger'><i>Smoldering clouds of scorching ash billow down around you! Get inside!</i></span>"
 	weather_duration_lower = 600
 	weather_duration_upper = 1200
 	weather_overlay = "ash_storm"
@@ -94,12 +94,13 @@
 	if(is_ash_immune(L))
 		return
 	L.adjustFireLoss(4)
+	return ..()
 
 
 //Emberfalls are the result of an ash storm passing by close to the playable area of lavaland. They have a 10% chance to trigger in place of an ash storm.
 /datum/weather/ash_storm/emberfall
 	name = "emberfall"
-	desc = "A passing ash storm blankets the area in harmless embers."
+	desc = ""
 
 	weather_message = "<span class='notice'>Gentle embers waft down around you like grotesque snow. The storm seems to have passed you by...</span>"
 	weather_overlay = "light_ash"

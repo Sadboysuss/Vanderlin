@@ -1,8 +1,8 @@
 // Cannabis
 /obj/item/seeds/cannabis
 	name = "pack of cannabis seeds"
-	desc = "Taxable."
-	icon_state = "seed-cannabis"
+	desc = ""
+	icon_state = "seed"
 	species = "cannabis"
 	plantname = "Cannabis Plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/cannabis
@@ -22,8 +22,8 @@
 
 /obj/item/seeds/cannabis/rainbow
 	name = "pack of rainbow weed seeds"
-	desc = "These seeds grow into rainbow weed. Groovy... and also highly addictive."
-	icon_state = "seed-megacannabis"
+	desc = ""
+	icon_state = "seed"
 	species = "megacannabis"
 	plantname = "Rainbow Weed"
 	product = /obj/item/reagent_containers/food/snacks/grown/cannabis/rainbow
@@ -33,8 +33,8 @@
 
 /obj/item/seeds/cannabis/death
 	name = "pack of deathweed seeds"
-	desc = "These seeds grow into deathweed. Not groovy."
-	icon_state = "seed-blackcannabis"
+	desc = ""
+	icon_state = "seed"
 	species = "blackcannabis"
 	plantname = "Deathweed"
 	product = /obj/item/reagent_containers/food/snacks/grown/cannabis/death
@@ -44,8 +44,8 @@
 
 /obj/item/seeds/cannabis/white
 	name = "pack of lifeweed seeds"
-	desc = "I will give unto him that is munchies of the fountain of the cravings of life, freely."
-	icon_state = "seed-whitecannabis"
+	desc = ""
+	icon_state = "seed"
 	species = "whitecannabis"
 	plantname = "Lifeweed"
 	product = /obj/item/reagent_containers/food/snacks/grown/cannabis/white
@@ -56,8 +56,8 @@
 
 /obj/item/seeds/cannabis/ultimate
 	name = "pack of omega weed seeds"
-	desc = "These seeds grow into omega weed."
-	icon_state = "seed-ocannabis"
+	desc = ""
+	icon_state = "seed"
 	species = "ocannabis"
 	plantname = "Omega Weed"
 	product = /obj/item/reagent_containers/food/snacks/grown/cannabis/ultimate
@@ -83,7 +83,7 @@
 	seed = /obj/item/seeds/cannabis
 	icon = 'goon/icons/obj/hydroponics.dmi'
 	name = "cannabis leaf"
-	desc = "Recently legalized in most galaxies."
+	desc = ""
 	icon_state = "cannabis"
 	filling_color = "#00FF00"
 	bitesize_mod = 2
@@ -94,28 +94,28 @@
 /obj/item/reagent_containers/food/snacks/grown/cannabis/rainbow
 	seed = /obj/item/seeds/cannabis/rainbow
 	name = "rainbow cannabis leaf"
-	desc = "Is it supposed to be glowing like that...?"
+	desc = ""
 	icon_state = "megacannabis"
 	wine_power = 60
 
 /obj/item/reagent_containers/food/snacks/grown/cannabis/death
 	seed = /obj/item/seeds/cannabis/death
 	name = "death cannabis leaf"
-	desc = "Looks a bit dark. Oh well."
+	desc = ""
 	icon_state = "blackcannabis"
 	wine_power = 40
 
 /obj/item/reagent_containers/food/snacks/grown/cannabis/white
 	seed = /obj/item/seeds/cannabis/white
 	name = "white cannabis leaf"
-	desc = "It feels smooth and nice to the touch."
+	desc = ""
 	icon_state = "whitecannabis"
 	wine_power = 10
 
 /obj/item/reagent_containers/food/snacks/grown/cannabis/ultimate
 	seed = /obj/item/seeds/cannabis/ultimate
 	name = "omega cannabis leaf"
-	desc = "You feel dizzy looking at it. What the fuck?"
+	desc = ""
 	icon_state = "ocannabis"
 	volume = 420
 	wine_power = 90

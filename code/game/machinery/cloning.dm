@@ -10,7 +10,7 @@
 
 /obj/machinery/clonepod
 	name = "cloning pod"
-	desc = "An electronically-lockable pod for growing organic tissue."
+	desc = ""
 	density = TRUE
 	icon = 'icons/obj/machines/cloning.dmi'
 	icon_state = "pod_0"
@@ -112,7 +112,7 @@
 
 /obj/item/disk/data/attack_self(mob/user)
 	read_only = !read_only
-	to_chat(user, "<span class='notice'>You flip the write-protect tab to [read_only ? "protected" : "unprotected"].</span>")
+	to_chat(user, "<span class='notice'>I flip the write-protect tab to [read_only ? "protected" : "unprotected"].</span>")
 
 /obj/item/disk/data/examine(mob/user)
 	. = ..()
@@ -221,11 +221,11 @@
 
 		if(grab_ghost_when == CLONER_FRESH_CLONE)
 			H.grab_ghost()
-			to_chat(H, "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>")
+			to_chat(H, "<span class='notice'><b>Consciousness slowly creeps over you as my body regenerates.</b><br><i>So this is what cloning feels like?</i></span>")
 
 		if(grab_ghost_when == CLONER_MATURE_CLONE)
 			H.ghostize(TRUE)	//Only does anything if they were still in their old body and not already a ghost
-			to_chat(H.get_ghost(TRUE), "<span class='notice'>Your body is beginning to regenerate in a cloning pod. You will become conscious when it is complete.</span>")
+			to_chat(H.get_ghost(TRUE), "<span class='notice'>My body is beginning to regenerate in a cloning pod. You will become conscious when it is complete.</span>")
 
 	if(H)
 		H.faction |= factions
@@ -373,7 +373,7 @@
 			add_fingerprint(user)
 			connected_message("Emergency Ejection")
 			SPEAK("An emergency ejection of [clonemind.name] has occurred. Survival not guaranteed.")
-			to_chat(user, "<span class='notice'>You force an emergency ejection. </span>")
+			to_chat(user, "<span class='notice'>I force an emergency ejection. </span>")
 			go_out()
 			log_cloning("[key_name(user)] manually ejected [key_name(mob_occupant)] from [src] at [AREACOORD(src)].")
 			log_combat(user, mob_occupant, "ejected", W, "from [src]")
@@ -383,7 +383,7 @@
 /obj/machinery/clonepod/emag_act(mob/user)
 	if(!occupant)
 		return
-	to_chat(user, "<span class='warning'>You corrupt the genetic compiler.</span>")
+	to_chat(user, "<span class='warning'>I corrupt the genetic compiler.</span>")
 	malfunction()
 	add_fingerprint(user)
 	log_cloning("[key_name(user)] emagged [src] at [AREACOORD(src)], causing it to malfunction.")
@@ -414,7 +414,7 @@
 		unattached_flesh.Cut()
 		mess = FALSE
 		new /obj/effect/gibspawner/generic(get_turf(src), mob_occupant)
-		audible_message("<span class='hear'>You hear a splat.</span>")
+		audible_message("<span class='hear'>I hear a splat.</span>")
 		icon_state = "pod_0"
 		return
 
@@ -430,7 +430,7 @@
 
 	if(grab_ghost_when == CLONER_MATURE_CLONE)
 		mob_occupant.grab_ghost()
-		to_chat(occupant, "<span class='notice'><b>There is a bright flash!</b><br><i>You feel like a new being.</i></span>")
+		to_chat(occupant, "<span class='notice'><b>There is a bright flash!</b><br><i>I feel like a new being.</i></span>")
 		mob_occupant.flash_act()
 
 	occupant.forceMove(T)
@@ -448,7 +448,7 @@
 	if(mob_occupant)
 		connected_message("Critical Error!")
 		SPEAK("Critical error! Please contact a Thinktronic Systems \
-			technician, as your warranty may be affected.")
+			technician, as my warranty may be affected.")
 		mess = TRUE
 		maim_clone(mob_occupant)	//Remove every bit that's grown back so far to drop later, also destroys bits that haven't grown yet
 		icon_state = "pod_g"
@@ -456,9 +456,9 @@
 			clonemind.transfer_to(mob_occupant)
 		mob_occupant.grab_ghost() // We really just want to make you suffer.
 		flash_color(mob_occupant, flash_color="#960000", flash_time=100)
-		to_chat(mob_occupant, "<span class='warning'><b>Agony blazes across your consciousness as your body is torn apart.</b><br><i>Is this what dying is like? Yes it is.</i></span>")
-		playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
-		SEND_SOUND(mob_occupant, sound('sound/hallucinations/veryfar_noise.ogg',0,1,50))
+		to_chat(mob_occupant, "<span class='warning'><b>Agony blazes across my consciousness as my body is torn apart.</b><br><i>Is this what dying is like? Yes it is.</i></span>")
+		playsound(src, 'sound/blank.ogg', 50)
+		SEND_SOUND(mob_occupant, sound('sound/blank.ogg',0,1,50))
 		log_cloning("[key_name(mob_occupant)] destroyed within [src] at [AREACOORD(src)] due to malfunction.")
 		QDEL_IN(mob_occupant, 40)
 
@@ -493,10 +493,10 @@
 
 /obj/machinery/clonepod/proc/horrifyingsound()
 	for(var/i in 1 to 5)
-		playsound(src,pick('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg'), 100, rand(0.95,1.05))
+		playsound(src,pick('sound/blank.ogg'), 100, rand(0.95,1.05))
 		sleep(1)
 	sleep(10)
-	playsound(src,'sound/hallucinations/wail.ogg', 100, TRUE)
+	playsound(src,'sound/blank.ogg', 100, TRUE)
 
 /obj/machinery/clonepod/deconstruct(disassembled = TRUE)
 	if(occupant)
@@ -545,7 +545,7 @@
 /obj/item/paper/guides/jobs/medical/cloning
 	name = "paper - 'H-87 Cloning Apparatus Manual"
 	info = {"<h4>Getting Started</h4>
-	Congratulations, your station has purchased the H-87 industrial cloning device!<br>
+	Congratulations, my station has purchased the H-87 industrial cloning device!<br>
 	Using the H-87 is almost as simple as brain surgery! Simply insert the target humanoid into the scanning chamber and select the scan option to create a new profile!<br>
 	<b>That's all there is to it!</b><br>
 	<i>Notice, cloning system cannot scan inorganic life or small primates.  Scan may fail if subject has suffered extreme brain damage.</i><br>
@@ -553,13 +553,13 @@
 	Profile Deletion has been restricted to \[Station Head\] level access.</p>
 	<h4>Cloning from a profile</h4>
 	Cloning is as simple as pressing the CLONE option at the bottom of the desired profile.<br>
-	Per your company's EMPLOYEE PRIVACY RIGHTS agreement, the H-87 has been blocked from cloning crewmembers while they are still alive.<br>
+	Per my company's EMPLOYEE PRIVACY RIGHTS agreement, the H-87 has been blocked from cloning crewmembers while they are still alive.<br>
 	<br>
 	<p>The provided CLONEPOD SYSTEM will produce the desired clone.  Standard clone maturation times (With SPEEDCLONE technology) are roughly 90 seconds.
 	The cloning pod may be unlocked early with any \[Medical Researcher\] ID after initial maturation is complete.</p><br>
 	<i>Please note that resulting clones may have a small DEVELOPMENTAL DEFECT as a result of genetic drift.</i><br>
 	<h4>Profile Management</h4>
-	<p>The H-87 (as well as your station's standard genetics machine) can accept STANDARD DATA DISKETTES.
+	<p>The H-87 (as well as my station's standard genetics machine) can accept STANDARD DATA DISKETTES.
 	These diskettes are used to transfer genetic information between machines and profiles.
 	A load/save dialog will become available in each profile if a disk is inserted.</p><br>
 	<i>A good diskette is a great way to counter aforementioned genetic drift!</i><br>

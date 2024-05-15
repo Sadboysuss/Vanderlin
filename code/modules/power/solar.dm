@@ -3,7 +3,7 @@
 
 /obj/machinery/power/solar
 	name = "solar panel"
-	desc = "A solar panel. Generates electricity when in contact with sunlight."
+	desc = ""
 	icon = 'goon/icons/obj/power.dmi'
 	icon_state = "sp_base"
 	density = TRUE
@@ -60,11 +60,11 @@
 	update_icon()
 
 /obj/machinery/power/solar/crowbar_act(mob/user, obj/item/I)
-	playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-	user.visible_message("<span class='notice'>[user] begins to take the glass off [src].</span>", "<span class='notice'>You begin to take the glass off [src]...</span>")
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	user.visible_message("<span class='notice'>[user] begins to take the glass off [src].</span>", "<span class='notice'>I begin to take the glass off [src]...</span>")
 	if(I.use_tool(src, user, 50))
-		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
-		user.visible_message("<span class='notice'>[user] takes the glass off [src].</span>", "<span class='notice'>You take the glass off [src].</span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+		user.visible_message("<span class='notice'>[user] takes the glass off [src].</span>", "<span class='notice'>I take the glass off [src].</span>")
 		deconstruct(TRUE)
 	return TRUE
 
@@ -72,17 +72,17 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(stat & BROKEN)
-				playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 60, TRUE)
+				playsound(loc, 'sound/blank.ogg', 60, TRUE)
 			else
-				playsound(loc, 'sound/effects/glasshit.ogg', 90, TRUE)
+				playsound(loc, 'sound/blank.ogg', 90, TRUE)
 		if(BURN)
-			playsound(loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 
 /obj/machinery/power/solar/obj_break(damage_flag)
 	. = ..()
 	if(.)
-		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 		unset_control()
 
 /obj/machinery/power/solar/deconstruct(disassembled = TRUE)
@@ -180,7 +180,7 @@
 
 /obj/item/solar_assembly
 	name = "solar panel assembly"
-	desc = "A solar panel assembly kit, allows constructions of a solar panel, or with a tracking circuit board, a solar tracker."
+	desc = ""
 	icon = 'goon/icons/obj/power.dmi'
 	icon_state = "sp_base"
 	item_state = "electropack"
@@ -205,32 +205,32 @@
 /obj/item/solar_assembly/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_WRENCH && isturf(loc))
 		if(isinspace())
-			to_chat(user, "<span class='warning'>You can't secure [src] here.</span>")
+			to_chat(user, "<span class='warning'>I can't secure [src] here.</span>")
 			return
 		anchored = !anchored
 		if(anchored)
-			user.visible_message("<span class='notice'>[user] wrenches the solar assembly into place.</span>", "<span class='notice'>You wrench the solar assembly into place.</span>")
+			user.visible_message("<span class='notice'>[user] wrenches the solar assembly into place.</span>", "<span class='notice'>I wrench the solar assembly into place.</span>")
 			W.play_tool_sound(src, 75)
 		else
-			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from its place.</span>", "<span class='notice'>You unwrench the solar assembly from its place.</span>")
+			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from its place.</span>", "<span class='notice'>I unwrench the solar assembly from its place.</span>")
 			W.play_tool_sound(src, 75)
 		return 1
 
 	if(istype(W, /obj/item/stack/sheet/glass) || istype(W, /obj/item/stack/sheet/rglass))
 		if(!anchored)
-			to_chat(user, "<span class='warning'>You need to secure the assembly before you can add glass.</span>")
+			to_chat(user, "<span class='warning'>I need to secure the assembly before you can add glass.</span>")
 			return
 		var/obj/item/stack/sheet/S = W
 		if(S.use(2))
 			glass_type = W.type
-			playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-			user.visible_message("<span class='notice'>[user] places the glass on the solar assembly.</span>", "<span class='notice'>You place the glass on the solar assembly.</span>")
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+			user.visible_message("<span class='notice'>[user] places the glass on the solar assembly.</span>", "<span class='notice'>I place the glass on the solar assembly.</span>")
 			if(tracker)
 				new /obj/machinery/power/tracker(get_turf(src), src)
 			else
 				new /obj/machinery/power/solar(get_turf(src), src)
 		else
-			to_chat(user, "<span class='warning'>You need two sheets of glass to put them into a solar panel!</span>")
+			to_chat(user, "<span class='warning'>I need two sheets of glass to put them into a solar panel!</span>")
 			return
 		return 1
 
@@ -240,13 +240,13 @@
 				return
 			tracker = 1
 			qdel(W)
-			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>", "<span class='notice'>You insert the electronics into the solar assembly.</span>")
+			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>", "<span class='notice'>I insert the electronics into the solar assembly.</span>")
 			return 1
 	else
 		if(W.tool_behaviour == TOOL_CROWBAR)
 			new /obj/item/electronics/tracker(src.loc)
 			tracker = 0
-			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>", "<span class='notice'>You take out the electronics from the solar assembly.</span>")
+			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>", "<span class='notice'>I take out the electronics from the solar assembly.</span>")
 			return 1
 	return ..()
 
@@ -256,7 +256,7 @@
 
 /obj/machinery/power/solar_control
 	name = "solar panel control"
-	desc = "A controller for solar panel arrays."
+	desc = ""
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "computer"
 	density = TRUE
@@ -424,7 +424,7 @@
 				A.anchored = TRUE
 				qdel(src)
 			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+				to_chat(user, "<span class='notice'>I disconnect the monitor.</span>")
 				var/obj/structure/frame/computer/A = new /obj/structure/frame/computer( src.loc )
 				var/obj/item/circuitboard/computer/solar_control/M = new /obj/item/circuitboard/computer/solar_control( A )
 				for (var/obj/C in src)
@@ -434,7 +434,7 @@
 				A.icon_state = "4"
 				A.anchored = TRUE
 				qdel(src)
-	else if(user.a_intent != INTENT_HARM && !(I.item_flags & NOBLUDGEON))
+	else if(user.used_intent.type != INTENT_HARM && !(I.item_flags & NOBLUDGEON))
 		attack_hand(user)
 	else
 		return ..()
@@ -443,16 +443,16 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(stat & BROKEN)
-				playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 70, TRUE)
 			else
-				playsound(src.loc, 'sound/effects/glasshit.ogg', 75, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 75, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/machinery/power/solar_control/obj_break(damage_flag)
 	. = ..()
 	if(.)
-		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
+		playsound(loc, 'sound/blank.ogg', 100, TRUE)
 
 /obj/machinery/power/solar_control/process()
 	lastgen = gen
@@ -491,4 +491,4 @@
 
 /obj/item/paper/guides/jobs/engi/solars
 	name = "paper- 'Going green! Setup your own solar array instructions.'"
-	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or plasma! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
+	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or plasma! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>I can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"

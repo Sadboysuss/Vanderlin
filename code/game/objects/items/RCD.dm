@@ -11,7 +11,7 @@ RLD
 
 /obj/item/construction
 	name = "not for ingame use"
-	desc = "A device used to rapidly build and deconstruct. Reload with metal, plasteel, glass or compressed matter cartridges."
+	desc = ""
 	opacity = 0
 	density = FALSE
 	anchored = FALSE
@@ -19,7 +19,7 @@ RLD
 	item_flags = NOBLUDGEON
 	force = 0
 	throwforce = 10
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron=100000)
@@ -75,7 +75,7 @@ RLD
 		if(R.ammoamt <= 0)
 			qdel(R)
 		matter += load
-		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 		loaded = 1
 	else if(istype(W, /obj/item/stack/sheet/metal) || istype(W, /obj/item/stack/sheet/glass))
 		loaded = loadwithsheets(W, sheetmultiplier, user)
@@ -97,7 +97,7 @@ RLD
 			upgrade |= rcd_up.upgrade
 			if((rcd_up.upgrade & RCD_UPGRADE_SILO_LINK) && !silo_mats)
 				silo_mats = AddComponent(/datum/component/remote_materials, "RCD", FALSE, FALSE)
-			playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+			playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 			qdel(W)
 	else
 		return ..()
@@ -109,17 +109,17 @@ RLD
 		var/amount_to_use = min(S.amount, maxsheets)
 		S.use(amount_to_use)
 		matter += value*amount_to_use
-		playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-		to_chat(user, "<span class='notice'>You insert [amount_to_use] [S.name] sheets into [src]. </span>")
+		playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I insert [amount_to_use] [S.name] sheets into [src]. </span>")
 		return 1
-	to_chat(user, "<span class='warning'>You can't insert any more [S.name] sheets into [src]!</span>")
+	to_chat(user, "<span class='warning'>I can't insert any more [S.name] sheets into [src]!</span>")
 	return 0
 
 /obj/item/construction/proc/activate()
-	playsound(src.loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 
 /obj/item/construction/attack_self(mob/user)
-	playsound(src.loc, 'sound/effects/pop.ogg', 50, FALSE)
+	playsound(src.loc, 'sound/blank.ogg', 50, FALSE)
 	if(prob(20))
 		spark_system.start()
 
@@ -209,7 +209,7 @@ RLD
 
 /obj/item/construction/rcd/verb/toggle_window_type_verb()
 	set name = "RCD : Toggle Window Type"
-	set category = "Object"
+	set hidden = 1
 	set src in view(1)
 
 	if(!usr.canUseTopic(src, BE_CLOSE))
@@ -226,12 +226,12 @@ RLD
 		window_type = /obj/structure/window/fulltile
 		window_type_name = "glass"
 
-	to_chat(user, "<span class='notice'>You change \the [src]'s window mode to [window_type_name].</span>")
+	to_chat(user, "<span class='notice'>I change \the [src]'s window mode to [window_type_name].</span>")
 
 /obj/item/construction/rcd/proc/toggle_silo_link(mob/user)
 	if(silo_mats)
 		silo_link = !silo_link
-		to_chat(user, "<span class='notice'>You change \the [src]'s storage link state: [silo_link ? "ON" : "OFF"].</span>")
+		to_chat(user, "<span class='notice'>I change \the [src]'s storage link state: [silo_link ? "ON" : "OFF"].</span>")
 	else
 		to_chat(user, "<span class='warning'>\the [src] dont have remote storage connection.</span>")
 
@@ -479,7 +479,7 @@ RLD
 				if(A.rcd_act(user, src, rcd_results["mode"]))
 					useResource(rcd_results["cost"], user)
 					activate()
-					playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+					playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 					return TRUE
 
 /obj/item/construction/rcd/Initialize()
@@ -548,8 +548,8 @@ RLD
 			return
 		else
 			return
-	playsound(src, 'sound/effects/pop.ogg', 50, FALSE)
-	to_chat(user, "<span class='notice'>You change RCD's mode to '[choice]'.</span>")
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
+	to_chat(user, "<span class='notice'>I change RCD's mode to '[choice]'.</span>")
 
 /obj/item/construction/rcd/proc/target_check(atom/A, mob/user) // only returns true for stuff the device can actually work with
 	if((isturf(A) && A.density && mode==RCD_DECONSTRUCT) || (isturf(A) && !A.density) || (istype(A, /obj/machinery/door/airlock) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/grille) || (istype(A, /obj/structure/window) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/girder))
@@ -587,7 +587,7 @@ RLD
 
 /obj/item/construction/rcd/borg
 	no_ammo_message = "<span class='warning'>Insufficient charge.</span>"
-	desc = "A device used to rapidly build walls and floors."
+	desc = ""
 	canRturf = TRUE
 	var/energyfactor = 72
 
@@ -636,7 +636,7 @@ RLD
 
 /obj/item/rcd_ammo
 	name = "compressed matter cartridge"
-	desc = "Highly compressed matter for the RCD."
+	desc = ""
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "rcd"
 	item_state = "rcdammo"
@@ -662,7 +662,7 @@ RLD
 
 /obj/item/construction/rcd/arcd
 	name = "advanced rapid-construction-device (ARCD)"
-	desc = "A prototype RCD with ranged capability and extended capacity. Reload with metal, plasteel, glass or compressed matter cartridges."
+	desc = ""
 	max_matter = 300
 	matter = 300
 	delay_mod = 0.6
@@ -687,7 +687,7 @@ RLD
 
 /obj/item/construction/rld
 	name = "rapid-light-device (RLD)"
-	desc = "A device used to rapidly provide lighting sources to an area. Reload with metal, plasteel, glass or compressed matter cartridges."
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rld-5"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -725,16 +725,16 @@ RLD
 	switch(mode)
 		if(REMOVE_MODE)
 			mode = LIGHT_MODE
-			to_chat(user, "<span class='notice'>You change RLD's mode to 'Permanent Light Construction'.</span>")
+			to_chat(user, "<span class='notice'>I change RLD's mode to 'Permanent Light Construction'.</span>")
 		if(LIGHT_MODE)
 			mode = GLOW_MODE
-			to_chat(user, "<span class='notice'>You change RLD's mode to 'Light Launcher'.</span>")
+			to_chat(user, "<span class='notice'>I change RLD's mode to 'Light Launcher'.</span>")
 		if(GLOW_MODE)
 			mode = REMOVE_MODE
-			to_chat(user, "<span class='notice'>You change RLD's mode to 'Deconstruct'.</span>")
+			to_chat(user, "<span class='notice'>I change RLD's mode to 'Deconstruct'.</span>")
 
 
-/obj/item/construction/rld/proc/checkdupes(var/target)
+/obj/item/construction/rld/proc/checkdupes(target)
 	. = list()
 	var/turf/checking = get_turf(target)
 	for(var/obj/machinery/light/dupe in checking)
@@ -751,9 +751,9 @@ RLD
 		if(REMOVE_MODE)
 			if(istype(A, /obj/machinery/light/))
 				if(checkResource(deconcost, user))
-					to_chat(user, "<span class='notice'>You start deconstructing [A]...</span>")
+					to_chat(user, "<span class='notice'>I start deconstructing [A]...</span>")
 					user.Beam(A,icon_state="nzcrentrs_power",time=15)
-					playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+					playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 					if(do_after(user, decondelay, target = A))
 						if(!useResource(deconcost, user))
 							return 0
@@ -765,10 +765,10 @@ RLD
 			if(iswallturf(A))
 				var/turf/closed/wall/W = A
 				if(checkResource(floorcost, user))
-					to_chat(user, "<span class='notice'>You start building a wall light...</span>")
+					to_chat(user, "<span class='notice'>I start building a wall light...</span>")
 					user.Beam(A,icon_state="nzcrentrs_power",time=15)
-					playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-					playsound(src.loc, 'sound/effects/light_flicker.ogg', 50, FALSE)
+					playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+					playsound(src.loc, 'sound/blank.ogg', 50, FALSE)
 					if(do_after(user, floordelay, target = A))
 						if(!istype(W))
 							return FALSE
@@ -782,7 +782,7 @@ RLD
 								candidates += C
 						if(!candidates.len)
 							to_chat(user, "<span class='warning'>Valid target not found...</span>")
-							playsound(src.loc, 'sound/misc/compiler-failure.ogg', 30, TRUE)
+							playsound(src.loc, 'sound/blank.ogg', 30, TRUE)
 							return FALSE
 						for(var/turf/open/O in candidates)
 							if(istype(O))
@@ -811,10 +811,10 @@ RLD
 			if(isfloorturf(A))
 				var/turf/open/floor/F = A
 				if(checkResource(floorcost, user))
-					to_chat(user, "<span class='notice'>You start building a floor light...</span>")
+					to_chat(user, "<span class='notice'>I start building a floor light...</span>")
 					user.Beam(A,icon_state="nzcrentrs_power",time=15)
-					playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
-					playsound(src.loc, 'sound/effects/light_flicker.ogg', 50, TRUE)
+					playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+					playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 					if(do_after(user, floordelay, target = A))
 						if(!istype(F))
 							return 0
@@ -831,7 +831,7 @@ RLD
 		if(GLOW_MODE)
 			if(useResource(launchcost, user))
 				activate()
-				to_chat(user, "<span class='notice'>You fire a glowstick!</span>")
+				to_chat(user, "<span class='notice'>I fire a glowstick!</span>")
 				var/obj/item/flashlight/glowstick/G  = new /obj/item/flashlight/glowstick(start)
 				G.color = color_choice
 				G.light_color = G.color
@@ -843,7 +843,7 @@ RLD
 
 /obj/item/construction/plumbing
 	name = "Plumbing Constructor"
-	desc = "An expertly modified RCD outfitted to construct plumbing machinery."
+	desc = ""
 	icon_state = "plumberer2"
 	icon = 'icons/obj/tools.dmi'
 
@@ -875,8 +875,8 @@ RLD
 		return
 
 	blueprint = name_to_type[choice]
-	playsound(src, 'sound/effects/pop.ogg', 50, FALSE)
-	to_chat(user, "<span class='notice'>You change [name]s blueprint to '[choice]'.</span>")
+	playsound(src, 'sound/blank.ogg', 50, FALSE)
+	to_chat(user, "<span class='notice'>I change [name]s blueprint to '[choice]'.</span>")
 
 ///pretty much rcd_create, but named differently to make myself feel less bad for copypasting from a sibling-type
 /obj/item/construction/plumbing/proc/create_machine(atom/A, mob/user)
@@ -888,7 +888,7 @@ RLD
 			if(checkResource(machinery_data["cost"][blueprint], user) && canPlace(A))
 				useResource(machinery_data["cost"][blueprint], user)
 				activate()
-				playsound(src.loc, 'sound/machines/click.ogg', 50, TRUE)
+				playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 				new blueprint (A, FALSE, FALSE)
 				return TRUE
 
@@ -911,27 +911,27 @@ RLD
 			return
 		if(do_after(user, 20, target = P))
 			P.deconstruct() //Let's not substract matter
-			playsound(get_turf(src), 'sound/machines/click.ogg', 50, TRUE) //this is just such a great sound effect
+			playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE) //this is just such a great sound effect
 	else
 		create_machine(A, user)
 
 /obj/item/rcd_upgrade
 	name = "RCD advanced design disk"
-	desc = "It seems to be empty."
+	desc = ""
 	icon = 'icons/obj/module.dmi'
 	icon_state = "datadisk3"
 	var/upgrade
 
 /obj/item/rcd_upgrade/frames
-	desc = "It contains the design for machine frames and computer frames."
+	desc = ""
 	upgrade = RCD_UPGRADE_FRAMES
 
 /obj/item/rcd_upgrade/simple_circuits
-	desc = "It contains the design for firelock, air alarm, fire alarm, apc circuits and crap power cells."
+	desc = ""
 	upgrade = RCD_UPGRADE_SIMPLE_CIRCUITS
 
 /obj/item/rcd_upgrade/silo_link
-	desc = "It contains direct silo connection RCD upgrade."
+	desc = ""
 	upgrade = RCD_UPGRADE_SILO_LINK
 
 #undef GLOW_MODE

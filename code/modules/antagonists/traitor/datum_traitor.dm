@@ -41,7 +41,7 @@
 	UnregisterSignal(owner.current, COMSIG_MOVABLE_HEAR, .proc/handle_hearing)
 	SSticker.mode.traitors -= owner
 	if(!silent && owner.current)
-		to_chat(owner.current,"<span class='userdanger'>You are no longer the [special_role]!</span>")
+		to_chat(owner.current,"<span class='danger'>I are no longer the [special_role]!</span>")
 	owner.special_role = null
 	return ..()
 
@@ -193,7 +193,7 @@
 			.=2
 
 /datum/antagonist/traitor/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>You are the [owner.special_role].</span>")
+	to_chat(owner.current, "<span class='alertsyndie'>I are the [owner.special_role].</span>")
 	owner.announce_objectives()
 	if(should_give_codewords)
 		give_codewords()
@@ -202,18 +202,18 @@
 	switch(traitor_kind)
 		if(TRAITOR_AI)
 			add_law_zero()
-			owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/malf.ogg', 100, FALSE, pressure_affected = FALSE)
+			owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)
 			owner.current.grant_language(/datum/language/codespeak)
 		if(TRAITOR_HUMAN)
 			if(should_equip)
 				equip(silent)
-			owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/tatoralert.ogg', 100, FALSE, pressure_affected = FALSE)
+			owner.current.playsound_local(get_turf(owner.current), 'sound/blank.ogg', 100, FALSE, pressure_affected = FALSE)
 
 /datum/antagonist/traitor/apply_innate_effects(mob/living/mob_override)
 	. = ..()
 	var/mob/living/M = mob_override || owner.current
 	add_antag_hud(antag_hud_type, antag_hud_name, M)
-	handle_clown_mutation(M, mob_override ? null : "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	handle_clown_mutation(M, mob_override ? null : "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming myself.")
 	var/mob/living/silicon/ai/A = M
 	if(istype(A) && traitor_kind == TRAITOR_AI)
 		A.hack_software = TRUE
@@ -243,7 +243,7 @@
 	antag_memory += "<b>Code Response</b>: <span class='red'>[responses]</span><br>"
 
 	to_chat(traitor_mob, "Use the codewords during regular conversation to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
-	to_chat(traitor_mob, "<span class='alertwarning'>You memorize the codewords, allowing you to recognise them when heard.</span>")
+	to_chat(traitor_mob, "<span class='alertwarning'>I memorize the codewords, allowing you to recognise them when heard.</span>")
 
 /datum/antagonist/traitor/proc/add_law_zero()
 	var/mob/living/silicon/ai/killer = owner.current
@@ -256,7 +256,7 @@
 	to_chat(killer, "Your radio has been upgraded! Use :t to speak on an encrypted channel with Syndicate Agents!")
 	killer.add_malf_picker()
 
-/datum/antagonist/traitor/proc/equip(var/silent = FALSE)
+/datum/antagonist/traitor/proc/equip(silent = FALSE)
 	if(traitor_kind == TRAITOR_HUMAN)
 		owner.equip_traitor(employer, silent, src)
 
@@ -346,7 +346,7 @@
 		result += "<span class='greentext'>The [special_role_text] was successful!</span>"
 	else
 		result += "<span class='redtext'>The [special_role_text] has failed!</span>"
-		SEND_SOUND(owner.current, 'sound/ambience/ambifailure.ogg')
+		SEND_SOUND(owner.current, 'sound/blank.ogg')
 
 	return result.Join("<br>")
 

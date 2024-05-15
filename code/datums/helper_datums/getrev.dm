@@ -52,8 +52,10 @@
 /client/verb/showrevinfo()
 	set category = "OOC"
 	set name = "Show Server Revision"
-	set desc = "Check the current server code revision"
-
+	set desc = ""
+	set hidden = 1
+	if(!holder)
+		return
 	var/list/msg = list("")
 	// Round ID
 	if(GLOB.round_id)

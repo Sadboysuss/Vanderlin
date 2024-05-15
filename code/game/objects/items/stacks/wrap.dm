@@ -6,7 +6,7 @@
 
 /obj/item/stack/wrapping_paper
 	name = "wrapping paper"
-	desc = "Wrap packages with this festive paper to make gifts."
+	desc = ""
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "wrap_paper"
 	item_flags = NOBLUDGEON
@@ -28,7 +28,7 @@
 /obj/item/stack/packageWrap
 	name = "package wrapper"
 	singular_name = "wrapping sheet"
-	desc = "You can use this to wrap items in."
+	desc = ""
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "deliveryPaper"
 	item_flags = NOBLUDGEON
@@ -46,7 +46,7 @@
 		P.add_fingerprint(user)
 		return OXYLOSS
 	else
-		to_chat(user, "<span class='warning'>You need more paper!</span>")
+		to_chat(user, "<span class='warning'>I need more paper!</span>")
 		return SHAME
 
 /obj/item/proc/can_be_package_wrapped() //can the item be wrapped with package wrapper into a delivery package
@@ -97,7 +97,7 @@
 		if(O.opened)
 			return
 		if(!O.delivery_icon) //no delivery icon means unwrappable closet (e.g. body bags)
-			to_chat(user, "<span class='warning'>You can't wrap this!</span>")
+			to_chat(user, "<span class='warning'>I can't wrap this!</span>")
 			return
 		if(use(3))
 			var/obj/structure/bigDelivery/P = new /obj/structure/bigDelivery(get_turf(O.loc))
@@ -106,7 +106,7 @@
 			P.add_fingerprint(user)
 			O.add_fingerprint(user)
 		else
-			to_chat(user, "<span class='warning'>You need more paper!</span>")
+			to_chat(user, "<span class='warning'>I need more paper!</span>")
 			return
 	else
 		to_chat(user, "<span class='warning'>The object you are trying to wrap is unsuitable for the sorting machinery!</span>")
@@ -123,10 +123,10 @@
 
 /obj/item/c_tube
 	name = "cardboard tube"
-	desc = "A tube... of cardboard."
+	desc = ""
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "c_tube"
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 3
+	throw_speed = 1
 	throw_range = 5

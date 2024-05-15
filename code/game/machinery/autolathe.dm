@@ -4,7 +4,7 @@
 
 /obj/machinery/autolathe
 	name = "autolathe"
-	desc = "It produces items using metal and glass."
+	desc = ""
 	icon_state = "autolathe"
 	density = TRUE
 	use_power = IDLE_POWER_USE
@@ -116,7 +116,7 @@
 		wires.interact(user)
 		return TRUE
 
-	if(user.a_intent == INTENT_HARM) //so we can hit the machine
+	if(user.used_intent.type == INTENT_HARM) //so we can hit the machine
 		return ..()
 
 	if(stat)
@@ -124,8 +124,8 @@
 
 	if(istype(O, /obj/item/disk/design_disk))
 		user.visible_message("<span class='notice'>[user] begins to load \the [O] in \the [src]...</span>",
-			"<span class='notice'>You begin to load a design from \the [O]...</span>",
-			"<span class='hear'>You hear the chatter of a floppy drive.</span>")
+			"<span class='notice'>I begin to load a design from \the [O]...</span>",
+			"<span class='hear'>I hear the chatter of a floppy drive.</span>")
 		busy = TRUE
 		var/obj/item/disk/design_disk/D = O
 		if(do_after(user, 14.4, target = src))
@@ -145,8 +145,8 @@
 		flick("autolathe_r",src)//plays glass insertion animation by default otherwise
 	else
 		flick("autolathe_o",src)//plays metal insertion animation
-			
-				
+
+
 		use_power(min(1000, amount_inserted / 100))
 	updateUsrDialog()
 

@@ -1,6 +1,6 @@
 /mob/living/simple_animal/mouse
 	name = "mouse"
-	desc = "It's a nasty, ugly, evil, disease-ridden rodent."
+	desc = ""
 	icon_state = "mouse_gray"
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
@@ -31,7 +31,7 @@
 
 /mob/living/simple_animal/mouse/Initialize()
 	. = ..()
-	AddComponent(/datum/component/squeak, list('sound/effects/mousesqueek.ogg'=1), 100)
+	AddComponent(/datum/component/squeak, list('sound/blank.ogg'=1), 100)
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	icon_state = "mouse_[body_color]"
@@ -53,7 +53,7 @@
 			M.name = name
 			if(toast)
 				M.add_atom_colour("#3A3A3A", FIXED_COLOUR_PRIORITY)
-				M.desc = "It's toast."
+				M.desc = ""
 		qdel(src)
 	else
 		..(gibbed)
@@ -73,7 +73,7 @@
 			if(C && prob(15))
 				if(C.avail())
 					visible_message("<span class='warning'>[src] chews through the [C]. It's toast!</span>")
-					playsound(src, 'sound/effects/sparks2.ogg', 100, TRUE)
+					playsound(src, 'sound/blank.ogg', 100, TRUE)
 					C.deconstruct()
 					death(toast=1)
 				else
@@ -99,7 +99,7 @@
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom
 	name = "Tom"
-	desc = "Jerry the cat is not amused."
+	desc = ""
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "gently pushes aside"
@@ -110,7 +110,7 @@
 
 /obj/item/reagent_containers/food/snacks/deadmouse
 	name = "dead mouse"
-	desc = "It looks like somebody dropped the bass on it. A lizard's favorite meal."
+	desc = ""
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "mouse_gray_dead"
 	bitesize = 3
@@ -125,13 +125,13 @@
 		. += "<span class='warning'>It's dripping with fuel and smells terrible.</span>"
 
 /obj/item/reagent_containers/food/snacks/deadmouse/attackby(obj/item/I, mob/user, params)
-	if(I.get_sharpness() && user.a_intent == INTENT_HARM)
+	if(I.get_sharpness() && user.used_intent.type == INTENT_HARM)
 		if(isturf(loc))
 			new /obj/item/reagent_containers/food/snacks/meat/slab/mouse(loc)
-			to_chat(user, "<span class='notice'>You butcher [src].</span>")
+			to_chat(user, "<span class='notice'>I butcher [src].</span>")
 			qdel(src)
 		else
-			to_chat(user, "<span class='warning'>You need to put [src] on a surface to butcher it!</span>")
+			to_chat(user, "<span class='warning'>I need to put [src] on a surface to butcher it!</span>")
 	else
 		return ..()
 
@@ -141,7 +141,7 @@
 		var/datum/reagents/target_reagents = target.reagents
 		var/trans_amount = reagents.maximum_volume - reagents.total_volume * (4 / 3)
 		if(target_reagents.has_reagent(/datum/reagent/fuel) && target_reagents.trans_to(src, trans_amount))
-			to_chat(user, "<span class='notice'>You dip [src] into [target].</span>")
+			to_chat(user, "<span class='notice'>I dip [src] into [target].</span>")
 			reagents.trans_to(target, reagents.total_volume)
 		else
 			to_chat(user, "<span class='warning'>That's a terrible idea.</span>")

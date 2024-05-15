@@ -48,11 +48,14 @@ GLOBAL_VAR(command_name)
 /proc/set_station_name(newname)
 	GLOB.station_name = newname
 
-	var/config_server_name = CONFIG_GET(string/servername)
-	if(config_server_name)
-		world.name = "[config_server_name][config_server_name == GLOB.station_name ? "" : ": [GLOB.station_name]"]"
-	else
-		world.name = GLOB.station_name
+#ifdef ROGUEWORLD
+	world.name = "ROGUEWORLD (18+)"
+#else
+	world.name = "ROGUETOWN (18+)"
+#endif
+#ifdef TESTSERVER
+	world.name = "ROGUETOWN (TESTING)"
+#endif
 
 
 /proc/new_station_name()

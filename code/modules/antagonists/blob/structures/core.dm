@@ -2,7 +2,7 @@
 	name = "blob core"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blank_blob"
-	desc = "A huge, pulsating yellow mass."
+	desc = ""
 	max_integrity = 400
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 90)
 	explosion_block = 6
@@ -22,7 +22,7 @@
 	. = ..()
 
 /obj/structure/blob/core/proc/generate_announcement()
-	priority_announce("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", 'sound/ai/outbreak5.ogg')
+	priority_announce("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", 'sound/blank.ogg')
 
 /obj/structure/blob/core/scannerreport()
 	return "Directs the blob's expansion, gradually expands, and sustains nearby blob spores and blobbernauts."

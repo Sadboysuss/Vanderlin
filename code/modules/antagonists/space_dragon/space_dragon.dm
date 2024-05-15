@@ -12,7 +12,7 @@
 					Attacking dead bodies will allow me to gib them to restore health.\n\
 					From the wizard's writings, he had been studying this station and its hierarchy. From this, I know who leads the station, and will kill them so the station underlings see me as their new leader.</b>")
 	owner.announce_objectives()
-	SEND_SOUND(owner.current, sound('sound/magic/demon_attack1.ogg'))
+	SEND_SOUND(owner.current, sound('sound/blank.ogg'))
 
 /datum/antagonist/space_dragon/proc/forge_objectives()
 	var/current_heads = SSjob.get_all_heads()

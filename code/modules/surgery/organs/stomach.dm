@@ -5,15 +5,15 @@
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_STOMACH
 	attack_verb = list("gored", "squished", "slapped", "digested")
-	desc = "Onaka ga suite imasu."
+	desc = ""
 
 	healing_factor = STANDARD_ORGAN_HEALING
 	decay_factor = STANDARD_ORGAN_DECAY
 
-	low_threshold_passed = "<span class='info'>Your stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
-	high_threshold_passed = "<span class='warning'>Your stomach flares up with constant pain- you can hardly stomach the idea of food right now!</span>"
-	high_threshold_cleared = "<span class='info'>The pain in your stomach dies down for now, but food still seems unappealing.</span>"
-	low_threshold_cleared = "<span class='info'>The last bouts of pain in your stomach have died out.</span>"
+	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
+	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain- you can hardly stomach the idea of food right now!</span>"
+	high_threshold_cleared = "<span class='info'>The pain in my stomach dies down for now, but food still seems unappealing.</span>"
+	low_threshold_cleared = "<span class='info'>The last bouts of pain in my stomach have died out.</span>"
 
 	var/disgust_metabolism = 1
 
@@ -35,12 +35,12 @@
 	if(Nutri)
 		if(prob((damage/40) * Nutri.volume * Nutri.volume))
 			H.vomit(damage)
-			to_chat(H, "<span class='warning'>Your stomach reels in pain as you're incapable of holding down all that food!</span>")
+			to_chat(H, "<span class='warning'>My stomach reels in pain as you're incapable of holding down all that food!</span>")
 
 	else if(Nutri && damage > high_threshold)
 		if(prob((damage/10) * Nutri.volume * Nutri.volume))
 			H.vomit(damage)
-			to_chat(H, "<span class='warning'>Your stomach reels in pain as you're incapable of holding down all that food!</span>")
+			to_chat(H, "<span class='warning'>My stomach reels in pain as you're incapable of holding down all that food!</span>")
 
 /obj/item/organ/stomach/proc/handle_disgust(mob/living/carbon/human/H)
 	if(H.disgust)
@@ -50,7 +50,7 @@
 				H.stuttering += 1
 				H.confused += 2
 			if(prob(10) && !H.stat)
-				to_chat(H, "<span class='warning'>You feel kind of iffy...</span>")
+				to_chat(H, "<span class='warning'>I feel kind of iffy...</span>")
 			H.jitteriness = max(H.jitteriness - 3, 0)
 		if(H.disgust >= DISGUST_LEVEL_VERYGROSS)
 			if(prob(pukeprob)) //iT hAndLeS mOrE ThaN PukInG
@@ -87,17 +87,17 @@
 /obj/item/organ/stomach/fly
 	name = "insectoid stomach"
 	icon_state = "stomach-x" //xenomorph liver? It's just a black liver so it fits.
-	desc = "A mutant stomach designed to handle the unique diet of a flyperson."
+	desc = ""
 
 /obj/item/organ/stomach/plasmaman
 	name = "digestive crystal"
 	icon_state = "stomach-p"
-	desc = "A strange crystal that is responsible for metabolizing the unseen energy force that feeds plasmamen."
+	desc = ""
 
 /obj/item/organ/stomach/ethereal
 	name = "biological battery"
 	icon_state = "stomach-p" //Welp. At least it's more unique in functionaliy.
-	desc = "A crystal-like organ that stores the electric charge of ethereals."
+	desc = ""
 	var/crystal_charge = ETHEREAL_CHARGE_FULL
 
 /obj/item/organ/stomach/ethereal/on_life()
@@ -121,7 +121,7 @@
 	if(flags & SHOCK_ILLUSION)
 		return
 	adjust_charge(shock_damage * siemens_coeff * 2)
-	to_chat(owner, "<span class='notice'>You absorb some of the shock into your body!</span>")
+	to_chat(owner, "<span class='notice'>I absorb some of the shock into my body!</span>")
 
 /obj/item/organ/stomach/ethereal/proc/adjust_charge(amount)
 	crystal_charge = CLAMP(crystal_charge + amount, ETHEREAL_CHARGE_NONE, ETHEREAL_CHARGE_FULL)

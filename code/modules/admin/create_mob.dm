@@ -11,15 +11,16 @@
 	user << browse(create_panel_helper(create_mob_html), "window=create_mob;size=425x475")
 
 /proc/randomize_human(mob/living/carbon/human/H)
+	set waitfor = 0
 	H.gender = pick(MALE, FEMALE)
 	H.real_name = random_unique_name(H.gender)
 	H.name = H.real_name
 	H.underwear = random_underwear(H.gender)
-	H.underwear_color = random_short_color()
+//	H.underwear_color = random_short_color()
 	H.skin_tone = random_skin_tone()
 	H.hairstyle = random_hairstyle(H.gender)
 	H.facial_hairstyle = random_facial_hairstyle(H.gender)
-	H.hair_color = random_short_color()
+	H.hair_color = random_haircolor()
 	H.facial_hair_color = H.hair_color
 	H.eye_color = random_eye_color()
 	H.dna.blood_type = random_blood_type()
@@ -29,7 +30,30 @@
 	H.dna.features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
 	H.dna.features["tail_lizard"] = pick(GLOB.tails_list_lizard)
 	H.dna.features["snout"] = pick(GLOB.snouts_list)
-	H.dna.features["horns"] = pick(GLOB.horns_list)
+	for(var/X in GLOB.horns_list.Copy())
+		var/datum/sprite_accessory/S = GLOB.horns_list[X]
+		if(!S)
+			continue
+		if(!(H.dna.species.id in S.specuse))
+			continue
+		if(S.gender == NEUTER)
+			H.dna.features["horns"] = X
+			break
+		if(H.gender == S.gender)
+			H.dna.features["horns"] = X
+			break
+	for(var/X in GLOB.tails_list_human.Copy())
+		var/datum/sprite_accessory/S = GLOB.tails_list_human[X]
+		if(!S)
+			continue
+		if(!(H.dna.species.id in S.specuse))
+			continue
+		if(S.gender == NEUTER)
+			H.dna.features["tail_human"] = X
+			break
+		if(H.gender == S.gender)
+			H.dna.features["tail_human"] = X
+			break
 	H.dna.features["frills"] = pick(GLOB.frills_list)
 	H.dna.features["spines"] = pick(GLOB.spines_list)
 	H.dna.features["body_markings"] = pick(GLOB.body_markings_list)

@@ -1,7 +1,7 @@
 ///We take a constant input of reagents, and produce a pill once a set volume is reached
 /obj/machinery/plumbing/pill_press
 	name = "pill press"
-	desc = "A press that presses pills."
+	desc = ""
 	icon_state = "pill_press"
 	///the minimum size a pill can be
 	var/minimum_pill = 5
@@ -50,10 +50,10 @@
 		stored_pills += P
 		if(pill_number == RANDOM_PILL_STYLE)
 			P.icon_state = "pill[rand(1,21)]"
-		else 
+		else
 			P.icon_state = "pill[pill_number]"
 		if(P.icon_state == "pill4") //mirrored from chem masters
-			P.desc = "A tablet or capsule, but not just any, a red one, one taken by the ones not scared of knowledge, freedom, uncertainty and the brutal truths of reality."
+			P.desc = ""
 	if(stored_pills.len)
 		var/pill_amount = 0
 		for(var/obj/item/reagent_containers/pill/P in loc)
@@ -64,7 +64,7 @@
 			var/atom/movable/AM = stored_pills[1] //AM because forceMove is all we need
 			stored_pills -= AM
 			AM.forceMove(drop_location())
-			
+
 
 /obj/machinery/plumbing/pill_press/ui_base_html(html)
 	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
@@ -73,8 +73,8 @@
 /obj/machinery/plumbing/pill_press/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
-		assets.send(user)
+//		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
+//		assets.send(user)
 		ui = new(user, src, ui_key, "chem_press", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
@@ -99,5 +99,5 @@
 			var/new_name = stripped_input(usr, "Enter a pill name.", name, pill_name)
 			if(findtext(new_name, "pill")) //names like pillatron and Pilliam are thus valid
 				pill_name = new_name
-			else 
+			else
 				pill_name = new_name + " pill"

@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/alien
 	name = "alien hunter"
-	desc = "Hiss!"
+	desc = ""
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alienh"
 	icon_living = "alienh"
@@ -21,7 +21,7 @@
 	speak_emote = list("hisses")
 	bubble_icon = "alien"
 	a_intent = INTENT_HARM
-	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_sound = 'sound/blank.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 15
 	faction = list(ROLE_ALIEN)
@@ -31,7 +31,7 @@
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	unique_name = 1
 	gold_core_spawnable = NO_SPAWN
-	deathsound = 'sound/voice/hiss6.ogg'
+	deathsound = 'sound/blank.ogg'
 	deathmessage = "lets out a waning guttural screech, green blood bubbling from its maw..."
 
 /mob/living/simple_animal/hostile/alien/Initialize()
@@ -70,7 +70,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 	projectiletype = /obj/projectile/neurotox
-	projectilesound = 'sound/weapons/pierce.ogg'
+	projectilesound = 'sound/blank.ogg'
 
 
 /mob/living/simple_animal/hostile/alien/queen
@@ -89,7 +89,7 @@
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/xeno = 4,
 							/obj/item/stack/sheet/animalhide/xeno = 1)
 	projectiletype = /obj/projectile/neurotox
-	projectilesound = 'sound/weapons/pierce.ogg'
+	projectilesound = 'sound/blank.ogg'
 	status_flags = 0
 	unique_name = 0
 	var/sterile = 1

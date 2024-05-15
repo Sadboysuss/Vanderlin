@@ -1,6 +1,6 @@
 /obj/item/twohanded/rcl
 	name = "rapid pipe cleaner layer"
-	desc = "A device used to rapidly deploy pipe cleaners. It has screws on the side which can be removed to slide off the pipe cleaners. Do not use without insulation!"
+	desc = ""
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rcl-0"
 	item_state = "rcl-0"
@@ -43,12 +43,12 @@
 		else
 			return
 		update_icon()
-		to_chat(user, "<span class='notice'>You add the pipe cleaners to [src]. It now contains [loaded.amount].</span>")
+		to_chat(user, "<span class='notice'>I add the pipe cleaners to [src]. It now contains [loaded.amount].</span>")
 	else if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!loaded)
 			return
 		if(ghetto && prob(10)) //Is it a ghetto RCL? If so, give it a 10% chance to fall apart
-			to_chat(user, "<span class='warning'>You attempt to loosen the securing screws on the side, but it falls apart!</span>")
+			to_chat(user, "<span class='warning'>I attempt to loosen the securing screws on the side, but it falls apart!</span>")
 			while(loaded.amount > 30) //There are only two kinds of situations: "nodiff" (60,90), or "diff" (31-59, 61-89)
 				var/diff = loaded.amount % 30
 				if(diff)
@@ -60,7 +60,7 @@
 			qdel(src)
 			return
 
-		to_chat(user, "<span class='notice'>You loosen the securing screws on the side, allowing you to lower the guiding edge and retrieve the wires.</span>")
+		to_chat(user, "<span class='notice'>I loosen the securing screws on the side, allowing you to lower the guiding edge and retrieve the wires.</span>")
 		while(loaded.amount > 30) //There are only two kinds of situations: "nodiff" (60,90), or "diff" (31-59, 61-89)
 			var/diff = loaded.amount % 30
 			if(diff)

@@ -1,6 +1,6 @@
 /datum/surgery/advanced/bioware/nerve_grounding
 	name = "Nerve Grounding"
-	desc = "A surgical procedure which makes the patient's nerves act as grounding rods, protecting them from electrical shocks."
+	desc = ""
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
@@ -17,12 +17,12 @@
 	time = 155
 
 /datum/surgery_step/ground_nerves/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You start rerouting [target]'s nerves.</span>",
+	display_results(user, target, "<span class='notice'>I start rerouting [target]'s nerves.</span>",
 		"<span class='notice'>[user] starts rerouting [target]'s nerves.</span>",
 		"<span class='notice'>[user] starts manipulating [target]'s nervous system.</span>")
 
 /datum/surgery_step/ground_nerves/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>You successfully reroute [target]'s nervous system!</span>",
+	display_results(user, target, "<span class='notice'>I successfully reroute [target]'s nervous system!</span>",
 		"<span class='notice'>[user] successfully reroutes [target]'s nervous system!</span>",
 		"<span class='notice'>[user] finishes manipulating [target]'s nervous system.</span>")
 	new /datum/bioware/grounded_nerves(target)
@@ -30,7 +30,7 @@
 
 /datum/bioware/grounded_nerves
 	name = "Grounded Nerves"
-	desc = "Nerves form a safe path for electricity to traverse, protecting the body from electric shocks."
+	desc = ""
 	mod_type = BIOWARE_NERVES
 
 /datum/bioware/grounded_nerves/on_gain()

@@ -20,7 +20,7 @@
 
 /obj/machinery/computer/scan_consolenew
 	name = "\improper DNA scanner access console"
-	desc = "Scan DNA."
+	desc = ""
 	icon_screen = "dna"
 	icon_keyboard = "med_key"
 	density = TRUE
@@ -70,16 +70,16 @@
 			diskette.forceMove(drop_location())
 			diskette = null
 		diskette = I
-		to_chat(user, "<span class='notice'>You insert [I].</span>")
+		to_chat(user, "<span class='notice'>I insert [I].</span>")
 		updateUsrDialog()
 		return
 	if (istype(I, /obj/item/chromosome))
 		if(LAZYLEN(stored_chromosomes) < max_chromosomes)
 			I.forceMove(src)
 			stored_chromosomes += I
-			to_chat(user, "<span class='notice'>You insert [I].</span>")
+			to_chat(user, "<span class='notice'>I insert [I].</span>")
 		else
-			to_chat(user, "<span class='warning'>You cannot store any more chromosomes!</span>")
+			to_chat(user, "<span class='warning'>I cannot store any more chromosomes!</span>")
 		return
 	if(istype(I, /obj/item/dnainjector/activator))
 		var/obj/item/dnainjector/activator/A = I
@@ -124,12 +124,13 @@
 		return
 	var/datum/browser/popup = new(user, "scannernew", "DNA Modifier Console", 800, 630) // Set up the popup browser window
 	if(user.client)
-		var/datum/asset/simple/assets =  get_asset_datum(/datum/asset/simple/genetics)
-		assets.send(user.client)
+		return
+//		var/datum/asset/simple/assets =  get_asset_datum(/datum/asset/simple/genetics)
+//		assets.send(user.client)
 	if(!(in_range(src, user) || issilicon(user)))
 		popup.close()
 		return
-	popup.add_stylesheet("scannernew", 'html/browser/scannernew.css')
+//	popup.add_stylesheet("scannernew", 'html/browser/scannernew.css')
 
 	var/mob/living/carbon/viable_occupant
 	var/list/occupant_status = list("<div class='line'><div class='statusLabel'>Subject Status:</div><div class='statusValue'>")
@@ -463,7 +464,7 @@
 		temp_html += "ERR-"
 		return
 	var/mut_name = "Unknown gene"
-	var/mut_desc = "No information available."
+	var/mut_desc = ""
 	var/alias
 	var/discovered = FALSE
 	var/active = FALSE
@@ -887,7 +888,7 @@
 				if(chromosomes.len)
 					var/obj/item/chromosome/CM = input("Select a chromosome to apply", "Apply Chromosome") as null|anything in sortNames(chromosomes)
 					if(CM)
-						to_chat(usr, "<span class='notice'>You apply [CM] to [HM.name].</span>")
+						to_chat(usr, "<span class='notice'>I apply [CM] to [HM.name].</span>")
 						stored_chromosomes -= CM
 						CM.apply(HM)
 		if("expand_advinjector")

@@ -3,7 +3,7 @@
 
 /obj/machinery/power/rtg
 	name = "radioisotope thermoelectric generator"
-	desc = "A simple nuclear power generator, used in small outposts to reliably provide power for decades."
+	desc = ""
 	icon = 'icons/obj/power.dmi'
 	icon_state = "rtg"
 	density = TRUE
@@ -49,7 +49,7 @@
 	return ..()
 
 /obj/machinery/power/rtg/advanced
-	desc = "An advanced RTG capable of moderating isotope decay, increasing power output but reducing lifetime. It uses plasma-fueled radiation collectors to increase output even further."
+	desc = ""
 	power_gen = 1250 // 2500 on T1, 10000 on T4.
 	circuit = /obj/item/circuitboard/machine/rtg/advanced
 
@@ -60,7 +60,7 @@
 	name = "Void Core"
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "core"
-	desc = "An alien power source that produces energy seemingly out of nowhere."
+	desc = ""
 	circuit = /obj/item/circuitboard/machine/abductor/core
 	power_gen = 20000 // 280 000 at T1, 400 000 at T4. Starts at T4.
 	irradiate = FALSE // Green energy!
@@ -73,8 +73,8 @@
 		return
 	going_kaboom = TRUE
 	visible_message("<span class='danger'>\The [src] lets out a shower of sparks as it starts to lose stability!</span>",\
-		"<span class='hear'>You hear a loud electrical crack!</span>")
-	playsound(src.loc, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
+		"<span class='hear'>I hear a loud electrical crack!</span>")
+	playsound(src.loc, 'sound/blank.ogg', 100, TRUE, extrarange = 5)
 	tesla_zap(src, 5, power_gen * 0.05)
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/explosion, get_turf(src), 2, 3, 4, 8), 100) // Not a normal explosion.
 
@@ -93,7 +93,7 @@
 	else
 		overload()
 
-/obj/machinery/power/rtg/abductor/fire_act(exposed_temperature, exposed_volume)
+/obj/machinery/power/rtg/abductor/fire_act(added, maxstacks)
 	overload()
 
 /obj/machinery/power/rtg/abductor/tesla_act()

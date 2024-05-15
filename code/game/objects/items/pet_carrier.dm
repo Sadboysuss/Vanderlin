@@ -4,7 +4,7 @@
 //Comes with a handy lock to prevent them from running off.
 /obj/item/pet_carrier
 	name = "pet carrier"
-	desc = "A big white-and-blue pet carrier. Good for carrying <s>meat to the chef</s> cute animals around."
+	desc = ""
 	icon = 'icons/obj/pet_carrier.dmi'
 	icon_state = "pet_carrier_open"
 	item_state = "pet_carrier"
@@ -57,15 +57,15 @@
 
 /obj/item/pet_carrier/attack_self(mob/living/user)
 	if(open)
-		to_chat(user, "<span class='notice'>You close [src]'s door.</span>")
-		playsound(user, 'sound/effects/bin_close.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I close [src]'s door.</span>")
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		open = FALSE
 	else
 		if(locked)
 			to_chat(user, "<span class='warning'>[src] is locked!</span>")
 			return
-		to_chat(user, "<span class='notice'>You open [src]'s door.</span>")
-		playsound(user, 'sound/effects/bin_open.ogg', 50, TRUE)
+		to_chat(user, "<span class='notice'>I open [src]'s door.</span>")
+		playsound(user, 'sound/blank.ogg', 50, TRUE)
 		open = TRUE
 	update_icon()
 
@@ -73,18 +73,18 @@
 	if(open || !user.canUseTopic(src, BE_CLOSE))
 		return
 	locked = !locked
-	to_chat(user, "<span class='notice'>You flip the lock switch [locked ? "down" : "up"].</span>")
+	to_chat(user, "<span class='notice'>I flip the lock switch [locked ? "down" : "up"].</span>")
 	if(locked)
-		playsound(user, 'sound/machines/boltsdown.ogg', 30, TRUE)
+		playsound(user, 'sound/blank.ogg', 30, TRUE)
 	else
-		playsound(user, 'sound/machines/boltsup.ogg', 30, TRUE)
+		playsound(user, 'sound/blank.ogg', 30, TRUE)
 	update_icon()
 
 /obj/item/pet_carrier/attack(mob/living/target, mob/living/user)
-	if(user.a_intent == INTENT_HARM)
+	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 	if(!open)
-		to_chat(user, "<span class='warning'>You need to open [src]'s door!</span>")
+		to_chat(user, "<span class='warning'>I need to open [src]'s door!</span>")
 		return
 	if(target.mob_size > max_occupant_weight)
 		if(ishuman(target))
@@ -94,7 +94,7 @@
 			else
 				to_chat(user, "<span class='warning'>Humans, generally, do not fit into pet carriers.</span>")
 		else
-			to_chat(user, "<span class='warning'>You get the feeling [target] isn't meant for a [name].</span>")
+			to_chat(user, "<span class='warning'>I get the feeling [target] isn't meant for a [name].</span>")
 		return
 	if(user == target)
 		to_chat(user, "<span class='warning'>Why would you ever do that?</span>")
@@ -120,22 +120,22 @@
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
 	if(user.mob_size <= MOB_SIZE_SMALL)
-		to_chat(user, "<span class='notice'>You poke a limb through [src]'s bars and start fumbling for the lock switch... (This will take some time.)</span>")
-		to_chat(loc, "<span class='warning'>You see [user] reach through the bars and fumble for the lock switch!</span>")
+		to_chat(user, "<span class='notice'>I poke a limb through [src]'s bars and start fumbling for the lock switch... (This will take some time.)</span>")
+		to_chat(loc, "<span class='warning'>I see [user] reach through the bars and fumble for the lock switch!</span>")
 		if(!do_after(user, rand(300, 400), target = user) || open || !locked || !(user in occupants))
 			return
 		loc.visible_message("<span class='warning'>[user] flips the lock switch on [src] by reaching through!</span>", null, null, null, user)
 		to_chat(user, "<span class='boldannounce'>Bingo! The lock pops open!</span>")
 		locked = FALSE
-		playsound(src, 'sound/machines/boltsup.ogg', 30, TRUE)
+		playsound(src, 'sound/blank.ogg', 30, TRUE)
 		update_icon()
 	else
 		loc.visible_message("<span class='warning'>[src] starts rattling as something pushes against the door!</span>", null, null, null, user)
-		to_chat(user, "<span class='notice'>You start pushing out of [src]... (This will take about 20 seconds.)</span>")
+		to_chat(user, "<span class='notice'>I start pushing out of [src]... (This will take about 20 seconds.)</span>")
 		if(!do_after(user, 200, target = user) || open || !locked || !(user in occupants))
 			return
 		loc.visible_message("<span class='warning'>[user] shoves out of	[src]!</span>", null, null, null, user)
-		to_chat(user, "<span class='notice'>You shove open [src]'s door against the lock's resistance and fall out!</span>")
+		to_chat(user, "<span class='notice'>I shove open [src]'s door against the lock's resistance and fall out!</span>")
 		locked = FALSE
 		open = TRUE
 		update_icon()
@@ -154,7 +154,7 @@
 	. = ..()
 	if(isopenturf(over_atom) && usr.canUseTopic(src, BE_CLOSE, ismonkey(usr)) && usr.Adjacent(over_atom) && open && occupants.len)
 		usr.visible_message("<span class='notice'>[usr] unloads [src].</span>", \
-		"<span class='notice'>You unload [src] onto [over_atom].</span>")
+		"<span class='notice'>I unload [src] onto [over_atom].</span>")
 		for(var/V in occupants)
 			remove_occupant(V, over_atom)
 
@@ -163,8 +163,8 @@
 		to_chat(user, "<span class='warning'>[src] is already carrying too much!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] starts loading [target] into [src].</span>", \
-	"<span class='notice'>You start loading [target] into [src]...</span>", null, null, target)
-	to_chat(target, "<span class='userdanger'>[user] starts loading you into [user.p_their()] [name]!</span>")
+	"<span class='notice'>I start loading [target] into [src]...</span>", null, null, target)
+	to_chat(target, "<span class='danger'>[user] starts loading you into [user.p_their()] [name]!</span>")
 	if(!do_mob(user, target, 30))
 		return
 	if(target in occupants)
@@ -173,8 +173,8 @@
 		to_chat(user, "<span class='warning'>[src] is already carrying too much!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] loads [target] into [src]!</span>", \
-	"<span class='notice'>You load [target] into [src].</span>", null, null, target)
-	to_chat(target, "<span class='userdanger'>[user] loads you into [user.p_their()] [name]!</span>")
+	"<span class='notice'>I load [target] into [src].</span>", null, null, target)
+	to_chat(target, "<span class='danger'>[user] loads you into [user.p_their()] [name]!</span>")
 	add_occupant(target)
 
 /obj/item/pet_carrier/proc/add_occupant(mob/living/occupant)

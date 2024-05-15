@@ -12,7 +12,7 @@
 
 /obj/structure/fence
 	name = "fence"
-	desc = "A chain link fence. Not as effective as a wall, but generally it keeps people out."
+	desc = ""
 	density = TRUE
 	anchored = TRUE
 
@@ -71,14 +71,14 @@
 			return
 
 		user.visible_message("<span class='danger'>\The [user] starts cutting through \the [src] with \the [W].</span>",\
-		"<span class='danger'>You start cutting through \the [src] with \the [W].</span>")
+		"<span class='danger'>I start cutting through \the [src] with \the [W].</span>")
 
 		if(do_after(user, CUT_TIME*W.toolspeed, target = src))
 			if(current_stage == hole_size)
 				switch(++hole_size)
 					if(MEDIUM_HOLE)
 						visible_message("<span class='notice'>\The [user] cuts into \the [src] some more.</span>")
-						to_chat(user, "<span class='info'>You could probably fit yourself through that hole now. Although climbing through would be much faster if you made it even bigger.</span>")
+						to_chat(user, "<span class='info'>I could probably fit myself through that hole now. Although climbing through would be much faster if you made it even bigger.</span>")
 						climbable = TRUE
 					if(LARGE_HOLE)
 						visible_message("<span class='notice'>\The [user] completely cuts through \the [src].</span>")
@@ -106,7 +106,7 @@
 
 /obj/structure/fence/door
 	name = "fence door"
-	desc = "Not very useful without a real lock."
+	desc = ""
 	icon_state = "door_closed"
 	cuttable = FALSE
 	var/open = FALSE
@@ -137,7 +137,7 @@
 			open = FALSE
 
 	update_door_status()
-	playsound(src, 'sound/machines/click.ogg', 100, TRUE)
+	playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 /obj/structure/fence/door/proc/update_door_status()
 	switch(open)

@@ -2,7 +2,7 @@
 	icon_state = "connector_map-2"
 
 	name = "connector port"
-	desc = "For connecting portables devices related to atmospherics control."
+	desc = ""
 
 	can_unwrench = TRUE
 
@@ -39,7 +39,7 @@
 /obj/machinery/atmospherics/components/unary/portables_connector/can_unwrench(mob/user)
 	. = ..()
 	if(. && connected_device)
-		to_chat(user, "<span class='warning'>You cannot unwrench [src], detach [connected_device] first!</span>")
+		to_chat(user, "<span class='warning'>I cannot unwrench [src], detach [connected_device] first!</span>")
 		return FALSE
 
 /obj/machinery/atmospherics/components/unary/portables_connector/layer1

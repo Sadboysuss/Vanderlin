@@ -1,6 +1,6 @@
 /datum/reagent/drug
 	name = "Drug"
-	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+	metabolization_rate = 0.1
 	taste_description = "bitterness"
 	var/trippy = TRUE //Does this drug make you trip?
 
@@ -15,22 +15,57 @@
 	overdose_threshold = 30
 
 /datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M)
-	M.set_drugginess(15)
-	if(isturf(M.loc) && !isspaceturf(M.loc))
-		if(M.mobility_flags & MOBILITY_MOVE)
-			if(prob(10))
-				step(M, pick(GLOB.cardinals))
-	if(prob(7))
-		M.emote(pick("twitch","drool","moan","giggle"))
+	M.set_drugginess(30)
+	if(prob(5))
+		if(M.gender == FEMALE)
+			M.emote(pick("twitch_s","giggle"))
+		else
+			M.emote(pick("twitch_s","chuckle"))
+	M.apply_status_effect(/datum/status_effect/buff/weed)
+	if(M.has_flaw(/datum/charflaw/addiction/smoker))
+		M.sate_addiction()
 	..()
 
+/datum/reagent/drug/space_drugs/on_mob_end_metabolize(mob/living/M)
+	M.clear_fullscreen("weedsm")
+	M.update_body_parts_head_only()
+
+/*
+	if(M.client)
+		SSdroning.play_area_sound(get_area(M), M.client)
+*/
+
+/datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
+	..()
+	M.set_drugginess(30)
+	M.update_body_parts_head_only()
+	M.overlay_fullscreen("weedsm", /obj/screen/fullscreen/weedsm)
+
+/*
+	if(M.client)
+		SSdroning.area_entered(get_area(M), M.client)
+*/
+
+/obj/screen/fullscreen/weedsm
+	icon_state = "smok"
+	plane = BLACKNESS_PLANE
+	layer = AREA_LAYER
+	blend_mode = 0
+	alpha = 100
+	show_when_dead = FALSE
+
+/obj/screen/fullscreen/weedsm/Initialize()
+	..()
+//			if(L.has_status_effect(/datum/status_effect/buff/weed))
+	filters += filter(type="angular_blur",x=5,y=5,size=1)
+
 /datum/reagent/drug/space_drugs/overdose_start(mob/living/M)
-	to_chat(M, "<span class='userdanger'>You start tripping hard!</span>")
+	to_chat(M, "<span class='danger'>I start tripping hard!</span>")
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/overdose, name)
 
 /datum/reagent/drug/space_drugs/overdose_process(mob/living/M)
-	if(M.hallucination < volume && prob(20))
-		M.hallucination += 5
+	M.adjustToxLoss(0.1*REM, 0)
+	M.adjustOxyLoss(1.1*REM, 0)
 	..()
 
 /datum/reagent/drug/nicotine
@@ -38,14 +73,24 @@
 	description = "Slightly reduces stun times. If overdosed it will deal toxin and oxygen damage."
 	reagent_state = LIQUID
 	color = "#60A584" // rgb: 96, 165, 132
-	addiction_threshold = 10
+	addiction_threshold = 999
 	taste_description = "smoke"
 	trippy = FALSE
-	overdose_threshold=15
-	metabolization_rate = 0.125 * REAGENTS_METABOLISM
+	overdose_threshold=999
+	metabolization_rate = 0.1 * REAGENTS_METABOLISM
+
+
+/datum/reagent/drug/nicotine/on_mob_end_metabolize(mob/living/M)
+//	M.remove_stress(/datum/stressevent/pweed)
+	..()
+
+/datum/reagent/drug/nicotine/on_mob_metabolize(mob/living/M)
+	var/mob/living/carbon/V = M
+	V.add_stress(/datum/stressevent/pweed)
+	..()
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M)
-	if(prob(1))
+/*	if(prob(1))
 		var/smoke_message = pick("You feel relaxed.", "You feel calmed.","You feel alert.","You feel rugged.")
 		to_chat(M, "<span class='notice'>[smoke_message]</span>")
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "smoked", /datum/mood_event/smoked, name)
@@ -53,7 +98,9 @@
 	M.AdjustKnockdown(-5, FALSE)
 	M.AdjustUnconscious(-5, FALSE)
 	M.AdjustParalyzed(-5, FALSE)
-	M.AdjustImmobilized(-5, FALSE)
+	M.AdjustImmobilized(-5, FALSE)*/
+	if(M.has_flaw(/datum/charflaw/addiction/smoker))
+		M.sate_addiction()
 	..()
 	. = 1
 
@@ -142,12 +189,12 @@
 
 /datum/reagent/drug/krokodil/addiction_act_stage2(mob/living/M)
 	if(prob(25))
-		to_chat(M, "<span class='danger'>Your skin feels loose...</span>")
+		to_chat(M, "<span class='danger'>My skin feels loose...</span>")
 	..()
 
 /datum/reagent/drug/krokodil/addiction_act_stage3(mob/living/M)
 	if(prob(25))
-		to_chat(M, "<span class='danger'>Your skin starts to peel away...</span>")
+		to_chat(M, "<span class='danger'>My skin starts to peel away...</span>")
 	M.adjustBruteLoss(3*REM, 0)
 	..()
 	. = 1
@@ -155,8 +202,8 @@
 /datum/reagent/drug/krokodil/addiction_act_stage4(mob/living/carbon/human/M)
 	CHECK_DNA_AND_SPECIES(M)
 	if(!istype(M.dna.species, /datum/species/krokodil_addict))
-		to_chat(M, "<span class='userdanger'>Your skin falls off easily!</span>")
-		M.adjustBruteLoss(50*REM, 0) // holy shit your skin just FELL THE FUCK OFF
+		to_chat(M, "<span class='danger'>My skin falls off easily!</span>")
+		M.adjustBruteLoss(50*REM, 0) // holy shit my skin just FELL THE FUCK OFF
 		M.set_species(/datum/species/krokodil_addict)
 	else
 		M.adjustBruteLoss(5*REM, 0)
@@ -469,7 +516,7 @@
 	. = 1
 
 /datum/reagent/drug/pumpup/overdose_start(mob/living/M)
-	to_chat(M, "<span class='userdanger'>You can't stop shaking, your heart beats faster and faster...</span>")
+	to_chat(M, "<span class='danger'>I can't stop shaking, my heart beats faster and faster...</span>")
 
 /datum/reagent/drug/pumpup/overdose_process(mob/living/M)
 	M.Jitter(5)

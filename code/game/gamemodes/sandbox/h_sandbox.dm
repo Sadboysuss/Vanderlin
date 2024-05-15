@@ -135,14 +135,14 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 			if("hsbsuit")
 				var/mob/living/carbon/human/P = usr
 				if(!istype(P)) return
-				if(P.wear_suit)
-					P.wear_suit.forceMove(P.drop_location())
-					P.wear_suit.layer = initial(P.wear_suit.layer)
-					P.wear_suit.plane = initial(P.wear_suit.plane)
-					P.wear_suit = null
-				P.wear_suit = new/obj/item/clothing/suit/space(P)
-				P.wear_suit.layer = ABOVE_HUD_LAYER
-				P.wear_suit.plane = ABOVE_HUD_PLANE
+				if(P.wear_armor)
+					P.wear_armor.forceMove(P.drop_location())
+					P.wear_armor.layer = initial(P.wear_armor.layer)
+					P.wear_armor.plane = initial(P.wear_armor.plane)
+					P.wear_armor = null
+				P.wear_armor = new/obj/item/clothing/suit/space(P)
+				P.wear_armor.layer = ABOVE_HUD_LAYER
+				P.wear_armor.plane = ABOVE_HUD_PLANE
 				P.update_inv_wear_suit()
 				if(P.head)
 					P.head.forceMove(P.drop_location())

@@ -39,10 +39,10 @@
 				H.color = "#000000"
 		adjustHealth(-maxHealth*0.0125)
 
-/mob/living/simple_animal/hostile/blob/fire_act(exposed_temperature, exposed_volume)
+/mob/living/simple_animal/hostile/blob/fire_act(added, maxstacks)
 	..()
-	if(exposed_temperature)
-		adjustFireLoss(CLAMP(0.01 * exposed_temperature, 1, 5))
+	if(added)
+		adjustFireLoss(CLAMP(0.01 * added, 1, 5))
 	else
 		adjustFireLoss(5)
 
@@ -72,7 +72,7 @@
 
 /mob/living/simple_animal/hostile/blob/blobspore
 	name = "blob spore"
-	desc = "A floating, fragile spore."
+	desc = ""
 	icon_state = "blobpod"
 	icon_living = "blobpod"
 	health = 30
@@ -87,7 +87,7 @@
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	attack_verb_continuous = "hits"
 	attack_verb_simple = "hit"
-	attack_sound = 'sound/weapons/genhit1.ogg'
+	attack_sound = 'sound/blank.ogg'
 	movement_type = FLYING
 	del_on_death = 1
 	deathmessage = "explodes into a cloud of gas!"
@@ -114,13 +114,13 @@
 
 /mob/living/simple_animal/hostile/blob/blobspore/proc/Zombify(mob/living/carbon/human/H)
 	is_zombie = 1
-	if(H.wear_suit)
-		var/obj/item/clothing/suit/armor/A = H.wear_suit
+	if(H.wear_armor)
+		var/obj/item/clothing/suit/armor/A = H.wear_armor
 		maxHealth += A.armor.melee //That zombie's got armor, I want armor!
 	maxHealth += 40
 	health = maxHealth
 	name = "blob zombie"
-	desc = "A shambling corpse animated by the blob."
+	desc = ""
 	mob_biotypes |= MOB_HUMANOID
 	melee_damage_lower += 8
 	melee_damage_upper += 11
@@ -195,7 +195,7 @@
 
 /mob/living/simple_animal/hostile/blob/blobbernaut
 	name = "blobbernaut"
-	desc = "A hulking, mobile chunk of blobmass."
+	desc = ""
 	icon_state = "blobbernaut"
 	icon_living = "blobbernaut"
 	icon_dead = "blobbernaut_dead"
@@ -207,7 +207,7 @@
 	obj_damage = 60
 	attack_verb_continuous = "slams"
 	attack_verb_simple = "slam"
-	attack_sound = 'sound/effects/blobattack.ogg'
+	attack_sound = 'sound/blank.ogg'
 	verb_say = "gurgles"
 	verb_ask = "demands"
 	verb_exclaim = "roars"

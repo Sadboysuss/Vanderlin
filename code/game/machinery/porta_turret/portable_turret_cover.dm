@@ -44,12 +44,12 @@
 
 		if(!parent_turret.anchored)
 			parent_turret.setAnchored(TRUE)
-			to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
+			to_chat(user, "<span class='notice'>I secure the exterior bolts on the turret.</span>")
 			parent_turret.invisibility = 0
 			parent_turret.update_icon()
 		else
 			parent_turret.setAnchored(FALSE)
-			to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
+			to_chat(user, "<span class='notice'>I unsecure the exterior bolts on the turret.</span>")
 			parent_turret.invisibility = INVISIBILITY_MAXIMUM
 			parent_turret.update_icon()
 			qdel(src)
@@ -66,7 +66,7 @@
 			return
 		var/obj/item/multitool/M = I
 		M.buffer = parent_turret
-		to_chat(user, "<span class='notice'>You add [parent_turret] to multitool buffer.</span>")
+		to_chat(user, "<span class='notice'>I add [parent_turret] to multitool buffer.</span>")
 	else
 		return ..()
 
@@ -87,7 +87,7 @@
 
 /obj/machinery/porta_turret_cover/emag_act(mob/user)
 	if(!(parent_turret.obj_flags & EMAGGED))
-		to_chat(user, "<span class='notice'>You short out [parent_turret]'s threat assessment circuits.</span>")
+		to_chat(user, "<span class='notice'>I short out [parent_turret]'s threat assessment circuits.</span>")
 		visible_message("<span class='hear'>[parent_turret] hums oddly...</span>")
 		parent_turret.obj_flags |= EMAGGED
 		parent_turret.on = FALSE

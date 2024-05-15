@@ -2,7 +2,7 @@
 /datum/material/iron
 	name = "iron"
 	id = "iron"
-	desc = "Common iron ore often found in sedimentary and igneous layers of the crust."
+	desc = ""
 	color = "#878687"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/metal
@@ -12,7 +12,7 @@
 /datum/material/glass
 	name = "glass"
 	id = "glass"
-	desc = "Glass forged by melting sand."
+	desc = ""
 	color = "#88cdf1"
 	alpha = 150
 	categories = list(MAT_CATEGORY_RIGID = TRUE)
@@ -31,7 +31,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/silver
 	name = "silver"
 	id = "silver"
-	desc = "Silver"
+	desc = ""
 	color = list(255/255, 284/255, 302/255,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/silver
@@ -42,7 +42,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/gold
 	name = "gold"
 	id = "gold"
-	desc = "Gold"
+	desc = ""
 	color = list(340/255, 240/255, 50/255,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0) //gold is shiny, but not as bright as bananium
 	strength_modifier = 1.2
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
@@ -55,7 +55,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/diamond
 	name = "diamond"
 	id = "diamond"
-	desc = "Highly pressurized carbon"
+	desc = ""
 	color = list(48/255, 272/255, 301/255,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/diamond
@@ -68,7 +68,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/uranium
 	name = "uranium"
 	id = "uranium"
-	desc = "Uranium"
+	desc = ""
 	color = rgb(48, 237, 26)
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/uranium
@@ -88,7 +88,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/plasma
 	name = "plasma"
 	id = "plasma"
-	desc = "Isn't plasma a state of matter? Oh whatever."
+	desc = ""
 	color = list(298/255, 46/255, 352/255,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/plasma
@@ -111,7 +111,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/bluespace
 	name = "bluespace crystal"
 	id = "bluespace_crystal"
-	desc = "Crystals with bluespace properties"
+	desc = ""
 	color = list(119/255, 217/255, 396/255,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
 	alpha = 200
 	categories = list(MAT_CATEGORY_ORE = TRUE)
@@ -123,7 +123,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/bananium
 	name = "bananium"
 	id = "bananium"
-	desc = "Material with hilarious properties"
+	desc = ""
 	color = list(460/255, 464/255, 0, 0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0) //obnoxiously bright yellow
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/bananium
@@ -133,7 +133,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/bananium/on_applied(atom/source, amount, material_flags)
 	. = ..()
-	source.AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg'=1), 50)
+	source.AddComponent(/datum/component/squeak, list('sound/blank.ogg'=1), 50)
 	source.AddComponent(/datum/component/slippery, min(amount / 10, 80))
 
 
@@ -147,7 +147,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/titanium
 	name = "titanium"
 	id = "titanium"
-	desc = "Titanium"
+	desc = ""
 	color = "#b3c0c7"
 	strength_modifier = 1.3
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
@@ -159,7 +159,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/runite
 	name = "runite"
 	id = "runite"
-	desc = "Runite"
+	desc = ""
 	color = "#3F9995"
 	strength_modifier = 1.3
 	categories = list(MAT_CATEGORY_RIGID = TRUE)
@@ -172,7 +172,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/plastic
 	name = "plastic"
 	id = "plastic"
-	desc = "Plastic"
+	desc = ""
 	color = "#caccd9"
 	strength_modifier = 0.85
 	sheet_type = /obj/item/stack/sheet/plastic
@@ -184,7 +184,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/biomass
 	name = "biomass"
 	id = "biomass"
-	desc = "Organic matter"
+	desc = ""
 	color = "#735b4d"
 	strength_modifier = 0.8
 	value_per_unit = 0.025
@@ -193,7 +193,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/adamantine
 	name = "adamantine"
 	id = "adamantine"
-	desc = "A powerful material made out of magic, I mean science!"
+	desc = ""
 	color = "#6d7e8e"
 	strength_modifier = 1.5
 	categories = list(MAT_CATEGORY_RIGID = TRUE)
@@ -206,7 +206,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 /datum/material/mythril
 	name = "mythril"
 	id = "mythril"
-	desc = "How this even exists is byond me"
+	desc = ""
 	color = "#f2d5d7"
 	categories = list(MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/mythril

@@ -47,7 +47,6 @@
 	return ..()
 
 /mob/living/carbon/monkey/create_internal_organs()
-	internal_organs += new /obj/item/organ/appendix
 	internal_organs += new /obj/item/organ/lungs
 	internal_organs += new /obj/item/organ/heart
 	internal_organs += new /obj/item/organ/brain
@@ -112,7 +111,7 @@
 
 /mob/living/carbon/monkey/can_use_guns(obj/item/G)
 	if(G.trigger_guard == TRIGGER_GUARD_NONE)
-		to_chat(src, "<span class='warning'>You are unable to fire this!</span>")
+		to_chat(src, "<span class='warning'>I are unable to fire this!</span>")
 		return FALSE
 	return TRUE
 

@@ -6,7 +6,7 @@
 	flag = "rad"
 	irradiate = 5000
 	speed = 0.4
-	hitsound = 'sound/weapons/emitter2.ogg'
+	hitsound = 'sound/blank.ogg'
 	impact_type = /obj/effect/projectile/impact/xray
 	var/static/list/particle_colors = list(
 		"red" = "#FF0000",

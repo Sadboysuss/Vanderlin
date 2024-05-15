@@ -1,7 +1,7 @@
 
 /obj/item/gps
 	name = "global positioning system"
-	desc = "Helping lost spacemen find their way through the planets since 2016."
+	desc = ""
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "gps-c"
 	w_class = WEIGHT_CLASS_SMALL
@@ -24,12 +24,12 @@
 /obj/item/gps/mining
 	icon_state = "gps-m"
 	gpstag = "MINE0"
-	desc = "A positioning system helpful for rescuing trapped or injured miners, keeping one on you at all times while mining might just save your life."
+	desc = ""
 
 /obj/item/gps/cyborg
 	icon_state = "gps-b"
 	gpstag = "BORG0"
-	desc = "A mining cyborg internal positioning system. Used as a recovery beacon for damaged cyborg assets, or a collaboration tool for mining teams."
+	desc = ""
 
 /obj/item/gps/cyborg/Initialize()
 	. = ..()
@@ -38,7 +38,7 @@
 /obj/item/gps/mining/internal
 	icon_state = "gps-m"
 	gpstag = "MINER"
-	desc = "A positioning system helpful for rescuing trapped or injured miners, keeping one on you at all times while mining might just save your life."
+	desc = ""
 
 /obj/item/gps/visible_debug
 	name = "visible GPS"

@@ -2,7 +2,7 @@
 	projectile_type = /obj/projectile/energy/bolt
 	select_name = "bolt"
 	e_cost = 500
-	fire_sound = 'sound/weapons/genhit.ogg'
+	fire_sound = 'sound/blank.ogg'
 
 /obj/item/ammo_casing/energy/bolt/halloween
 	projectile_type = /obj/projectile/energy/bolt/halloween

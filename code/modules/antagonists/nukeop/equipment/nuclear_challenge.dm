@@ -12,9 +12,9 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 	item_state = "radio"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
-	desc = "Use to send a declaration of hostilities to the target, delaying your shuttle departure for 20 minutes while they prepare for your assault.  \
-			Such a brazen move will attract the attention of powerful benefactors within the Syndicate, who will supply your team with a massive amount of bonus telecrystals.  \
-			Must be used within five minutes, or your benefactors will lose interest."
+	desc = "Use to send a declaration of hostilities to the target, delaying my shuttle departure for 20 minutes while they prepare for my assault.  \
+			Such a brazen move will attract the attention of powerful benefactors within the Syndicate, who will supply my team with a massive amount of bonus telecrystals.  \
+			Must be used within five minutes, or my benefactors will lose interest."
 	var/declaring_war = FALSE
 	var/uplink_type = /obj/item/uplink/nuclear
 
@@ -23,7 +23,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 		return
 
 	declaring_war = TRUE
-	var/are_you_sure = alert(user, "Consult your team carefully before you declare war on [station_name()]]. Are you sure you want to alert the enemy crew? You have [DisplayTimeText(world.time-SSticker.round_start_time - CHALLENGE_TIME_LIMIT)] to decide", "Declare war?", "Yes", "No")
+	var/are_you_sure = alert(user, "Consult my team carefully before you declare war on [station_name()]]. Are you sure you want to alert the enemy crew? You have [DisplayTimeText(world.time-SSticker.round_start_time - CHALLENGE_TIME_LIMIT)] to decide", "Declare war?", "Yes", "No")
 	declaring_war = FALSE
 
 	if(!check_allowed(user))
@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 	var/war_declaration = "[user.real_name] has declared [user.p_their()] intent to utterly destroy [station_name()] with a nuclear device, and dares the crew to try and stop [user.p_them()]."
 
 	declaring_war = TRUE
-	var/custom_threat = alert(user, "Do you want to customize your declaration?", "Customize?", "Yes", "No")
+	var/custom_threat = alert(user, "Do you want to customize my declaration?", "Customize?", "Yes", "No")
 	declaring_war = FALSE
 
 	if(!check_allowed(user))
@@ -44,15 +44,15 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 	if(custom_threat == "Yes")
 		declaring_war = TRUE
-		war_declaration = stripped_input(user, "Insert your custom declaration", "Declaration")
+		war_declaration = stripped_input(user, "Insert my custom declaration", "Declaration")
 		declaring_war = FALSE
 
 	if(!check_allowed(user) || !war_declaration)
 		return
 
-	priority_announce(war_declaration, title = "Declaration of War", sound = 'sound/machines/alarm.ogg')
+	priority_announce(war_declaration, title = "Declaration of War", sound = 'sound/blank.ogg')
 
-	to_chat(user, "You've attracted the attention of powerful forces within the syndicate. A bonus bundle of telecrystals has been granted to your team. Great things await you if you complete the mission.")
+	to_chat(user, "You've attracted the attention of powerful forces within the syndicate. A bonus bundle of telecrystals has been granted to my team. Great things await you if you complete the mission.")
 
 	for(var/V in GLOB.syndicate_shuttle_boards)
 		var/obj/item/circuitboard/computer/syndicate_shuttle/board = V
@@ -83,7 +83,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 	for (var/mob/living/L in orphans)
 		var/TC = new /obj/item/stack/telecrystal(user.drop_location(), tc_per_nukie)
-		to_chat(L, "<span class='warning'>Your uplink could not be found so your share of the team's bonus telecrystals has been bluespaced to your [L.put_in_hands(TC) ? "hands" : "feet"].</span>")
+		to_chat(L, "<span class='warning'>My uplink could not be found so my share of the team's bonus telecrystals has been bluespaced to my [L.put_in_hands(TC) ? "hands" : "feet"].</span>")
 		tc_to_distribute -= tc_per_nukie
 
 	if (tc_to_distribute > 0) // What shall we do with the remainder...
@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 			if (C.stat != DEAD)
 				var/obj/item/stack/telecrystal/TC = new(C.drop_location(), tc_to_distribute)
 				TC.throw_at(get_step(C, C.dir), 3, 3)
-				C.visible_message("<span class='notice'>[C] coughs up a half-digested telecrystal</span>","<span class='notice'>You cough up a half-digested telecrystal!</span>")
+				C.visible_message("<span class='notice'>[C] coughs up a half-digested telecrystal</span>","<span class='notice'>I cough up a half-digested telecrystal!</span>")
 				break
 
 	CONFIG_SET(number/shuttle_refuel_delay, max(CONFIG_GET(number/shuttle_refuel_delay), CHALLENGE_SHUTTLE_DELAY))
@@ -101,13 +101,13 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 
 /obj/item/nuclear_challenge/proc/check_allowed(mob/living/user)
 	if(declaring_war)
-		to_chat(user, "<span class='boldwarning'>You are already in the process of declaring war! Make your mind up.</span>")
+		to_chat(user, "<span class='boldwarning'>I are already in the process of declaring war! Make my mind up.</span>")
 		return FALSE
 	if(GLOB.player_list.len < CHALLENGE_MIN_PLAYERS)
 		to_chat(user, "<span class='boldwarning'>The enemy crew is too small to be worth declaring war on.</span>")
 		return FALSE
 	if(!user.onSyndieBase())
-		to_chat(user, "<span class='boldwarning'>You have to be at your base to use this.</span>")
+		to_chat(user, "<span class='boldwarning'>I have to be at my base to use this.</span>")
 		return FALSE
 	if(world.time-SSticker.round_start_time > CHALLENGE_TIME_LIMIT)
 		to_chat(user, "<span class='boldwarning'>It's too late to declare hostilities. Your benefactors are already busy with other schemes. You'll have to make do with what you have on hand.</span>")

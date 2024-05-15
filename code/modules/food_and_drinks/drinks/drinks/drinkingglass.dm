@@ -2,7 +2,7 @@
 
 /obj/item/reagent_containers/food/drinks/drinkingglass
 	name = "drinking glass"
-	desc = "Your standard drinking glass."
+	desc = ""
 	custom_price = 5
 	icon_state = "glass_empty"
 	amount_per_transfer_from_this = 10
@@ -11,9 +11,9 @@
 	max_integrity = 20
 	spillable = TRUE
 	resistance_flags = ACID_PROOF
-	obj_flags = UNIQUE_RENAME
-	drop_sound = 'sound/items/handling/drinkglass_drop.ogg'
-	pickup_sound =  'sound/items/handling/drinkglass_pickup.ogg'
+	obj_flags = CAN_BE_HIT | UNIQUE_RENAME
+	drop_sound = 'sound/blank.ogg'
+	pickup_sound =  'sound/blank.ogg'
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/on_reagent_change(changetype)
 	cut_overlays()
@@ -42,7 +42,7 @@
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/shotglass
 	name = "shot glass"
-	desc = "A shot glass - the universal symbol for bad decisions."
+	desc = ""
 	custom_price = 5
 	icon_state = "shotglass"
 	gulp_size = 15
@@ -59,7 +59,7 @@
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/largest_reagent = reagents.get_master_reagent()
 		name = "filled shot glass"
-		desc = "The challenge is not taking as many as you can, but guessing what it is before you pass out."
+		desc = ""
 
 		if(largest_reagent.shot_glass_icon_state)
 			icon_state = largest_reagent.shot_glass_icon_state
@@ -73,7 +73,7 @@
 	else
 		icon_state = "shotglass"
 		name = "shot glass"
-		desc = "A shot glass - the universal symbol for bad decisions."
+		desc = ""
 		return
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/filled/Initialize()
@@ -99,7 +99,7 @@
 			if(reagents.total_volume >= reagents.maximum_volume)
 				to_chat(user, "<span class='notice'>[src] is full.</span>")
 			else
-				to_chat(user, "<span class='notice'>You break [E] in [src].</span>")
+				to_chat(user, "<span class='notice'>I break [E] in [src].</span>")
 				reagents.add_reagent(/datum/reagent/consumable/eggyolk, 5)
 				qdel(E)
 			return
@@ -107,9 +107,9 @@
 		..()
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/attack(obj/target, mob/user)
-	if(user.a_intent == INTENT_HARM && ismob(target) && target.reagents && reagents.total_volume)
+	if(user.used_intent.type == INTENT_HARM && ismob(target) && target.reagents && reagents.total_volume)
 		target.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
-						"<span class='userdanger'>[user] splashes the contents of [src] onto you!</span>")
+						"<span class='danger'>[user] splashes the contents of [src] onto you!</span>")
 		log_combat(user, target, "splashed", src)
 		reagents.reaction(target, TOUCH)
 		reagents.clear_reagents()
@@ -121,9 +121,9 @@
 	if((!proximity) || !check_allowed_items(target,target_self=1))
 		return
 
-	else if(reagents.total_volume && user.a_intent == INTENT_HARM)
+	else if(reagents.total_volume && user.used_intent.type == INTENT_HARM)
 		user.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
-							"<span class='notice'>You splash the contents of [src] onto [target].</span>")
+							"<span class='notice'>I splash the contents of [src] onto [target].</span>")
 		reagents.reaction(target, TOUCH)
 		reagents.clear_reagents()
 		return

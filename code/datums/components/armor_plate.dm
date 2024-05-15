@@ -49,7 +49,7 @@
 	if(!istype(I,upgrade_item))
 		return
 	if(amount >= maxamount)
-		to_chat(user, "<span class='warning'>You can't improve [parent] any further!</span>")
+		to_chat(user, "<span class='warning'>I can't improve [parent] any further!</span>")
 		return
 
 	if(istype(I,/obj/item/stack))
@@ -67,9 +67,9 @@
 	if(ismecha(O))
 		var/obj/mecha/R = O
 		R.update_icon()
-		to_chat(user, "<span class='info'>You strengthen [R], improving its resistance against melee, bullet and laser damage.</span>")
+		to_chat(user, "<span class='info'>I strengthen [R], improving its resistance against melee, bullet and laser damage.</span>")
 	else
-		to_chat(user, "<span class='info'>You strengthen [O], improving its resistance against melee attacks.</span>")
+		to_chat(user, "<span class='info'>I strengthen [O], improving its resistance against melee attacks.</span>")
 
 
 /datum/component/armor_plate/proc/dropplates(datum/source, force)

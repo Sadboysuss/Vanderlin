@@ -30,6 +30,10 @@
 	var/datum/supply_pack/pack
 	var/datum/bank_account/paying_account
 
+/datum/supply_order/Destroy()
+	pack = null
+	return ..()
+
 /datum/supply_order/New(datum/supply_pack/pack, orderer, orderer_rank, orderer_ckey, reason, paying_account)
 	id = SSshuttle.ordernum++
 	src.pack = pack
@@ -112,5 +116,5 @@
 /datum/supply_order/proc/generateCombo(miscbox, misc_own, misc_contents)
 	for (var/I in misc_contents)
 		new I(miscbox)
-	generateManifest(miscbox, misc_own, "")
+//	generateManifest(miscbox, misc_own, "")
 	return

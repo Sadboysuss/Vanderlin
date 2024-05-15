@@ -9,7 +9,7 @@
  */
 /obj/machinery/photocopier
 	name = "photocopier"
-	desc = "Used to copy important documents and anatomy studies."
+	desc = ""
 	icon = 'icons/obj/library.dmi'
 	icon_state = "photocopier"
 	density = TRUE
@@ -111,8 +111,8 @@
 		else if(ass) //ASS COPY. By Miauw
 			for(var/i = 0, i < copies, i++)
 				var/icon/temp_img
-				if(ishuman(ass) && (ass.get_item_by_slot(SLOT_W_UNIFORM) || ass.get_item_by_slot(SLOT_WEAR_SUIT)))
-					to_chat(usr, "<span class='notice'>You feel kind of silly, copying [ass == usr ? "your" : ass][ass == usr ? "" : "\'s"] ass with [ass == usr ? "your" : "[ass.p_their()]"] clothes on.</span>" )
+				if(ishuman(ass) && (ass.get_item_by_slot(SLOT_PANTS) || ass.get_item_by_slot(SLOT_ARMOR)))
+					to_chat(usr, "<span class='notice'>I feel kind of silly, copying [ass == usr ? "your" : ass][ass == usr ? "" : "\'s"] ass with [ass == usr ? "your" : "[ass.p_their()]"] clothes on.</span>" )
 					break
 				else if(toner >= 5 && !busy && check_ass()) //You have to be sitting on the copier and either be a xeno or a human without clothes on.
 					if(isalienadult(ass) || istype(ass, /mob/living/simple_animal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
@@ -126,7 +126,7 @@
 					busy = TRUE
 					sleep(15)
 					var/obj/item/photo/p = new /obj/item/photo (loc)
-					var/datum/picture/toEmbed = new(name = "[ass]'s Ass", desc = "You see [ass]'s ass on the photo.", image = temp_img)
+					var/datum/picture/toEmbed = new(name = "[ass]'s Ass", desc = "", image = temp_img)
 					p.pixel_x = rand(-10, 10)
 					p.pixel_y = rand(-10, 10)
 					toEmbed.psize_x = 128
@@ -148,7 +148,7 @@
 			remove_photocopy(doccopy, usr)
 			doccopy = null
 		else if(check_ass())
-			to_chat(ass, "<span class='notice'>You feel a slight pressure on your ass.</span>")
+			to_chat(ass, "<span class='notice'>I feel a slight pressure on your ass.</span>")
 		updateUsrDialog()
 	else if(href_list["min"])
 		if(copies > 1)
@@ -187,7 +187,7 @@
 
 /obj/machinery/photocopier/proc/do_insertion(obj/item/O, mob/user)
 	O.forceMove(src)
-	to_chat(user, "<span class='notice'>You insert [O] into [src].</span>")
+	to_chat(user, "<span class='notice'>I insert [O] into [src].</span>")
 	flick("photocopier1", src)
 	updateUsrDialog()
 
@@ -197,7 +197,7 @@
 		user.put_in_hands(O)
 	else
 		O.forceMove(drop_location())
-	to_chat(user, "<span class='notice'>You take [O] out of [src].</span>")
+	to_chat(user, "<span class='notice'>I take [O] out of [src].</span>")
 
 /obj/machinery/photocopier/attackby(obj/item/O, mob/user, params)
 	if(default_unfasten_wrench(user, O))
@@ -241,7 +241,7 @@
 				return
 			qdel(O)
 			toner = 40
-			to_chat(user, "<span class='notice'>You insert [O] into [src].</span>")
+			to_chat(user, "<span class='notice'>I insert [O] into [src].</span>")
 			updateUsrDialog()
 		else
 			to_chat(user, "<span class='warning'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
@@ -256,6 +256,7 @@
 	if(. && toner > 0)
 		new /obj/effect/decal/cleanable/oil(get_turf(src))
 		toner = 0
+	..()
 
 /obj/machinery/photocopier/MouseDrop_T(mob/target, mob/user)
 	check_ass() //Just to make sure that you can re-drag somebody onto it after they moved off.
@@ -263,18 +264,18 @@
 		return
 	src.add_fingerprint(user)
 	if(target == user)
-		user.visible_message("<span class='notice'>[user] starts climbing onto the photocopier!</span>", "<span class='notice'>You start climbing onto the photocopier...</span>")
+		user.visible_message("<span class='notice'>[user] starts climbing onto the photocopier!</span>", "<span class='notice'>I start climbing onto the photocopier...</span>")
 	else
-		user.visible_message("<span class='warning'>[user] starts putting [target] onto the photocopier!</span>", "<span class='notice'>You start putting [target] onto the photocopier...</span>")
+		user.visible_message("<span class='warning'>[user] starts putting [target] onto the photocopier!</span>", "<span class='notice'>I start putting [target] onto the photocopier...</span>")
 
 	if(do_after(user, 20, target = src))
 		if(!target || QDELETED(target) || QDELETED(src) || !Adjacent(target)) //check if the photocopier/target still exists.
 			return
 
 		if(target == user)
-			user.visible_message("<span class='notice'>[user] climbs onto the photocopier!</span>", "<span class='notice'>You climb onto the photocopier.</span>")
+			user.visible_message("<span class='notice'>[user] climbs onto the photocopier!</span>", "<span class='notice'>I climb onto the photocopier.</span>")
 		else
-			user.visible_message("<span class='warning'>[user] puts [target] onto the photocopier!</span>", "<span class='notice'>You put [target] onto the photocopier.</span>")
+			user.visible_message("<span class='warning'>[user] puts [target] onto the photocopier!</span>", "<span class='notice'>I put [target] onto the photocopier.</span>")
 
 		target.forceMove(drop_location())
 		ass = target
@@ -298,7 +299,7 @@
 		updateUsrDialog()
 		return 0
 	else if(ishuman(ass))
-		if(!ass.get_item_by_slot(SLOT_W_UNIFORM) && !ass.get_item_by_slot(SLOT_WEAR_SUIT))
+		if(!ass.get_item_by_slot(SLOT_PANTS) && !ass.get_item_by_slot(SLOT_ARMOR))
 			return 1
 		else
 			return 0

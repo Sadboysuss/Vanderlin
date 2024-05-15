@@ -1,6 +1,6 @@
 /turf/open/floor/light
 	name = "light floor"
-	desc = "A wired glass tile embedded into the floor."
+	desc = ""
 	light_range = 5
 	icon_state = "light_on"
 	floor_tile = /obj/item/stack/tile/light
@@ -79,7 +79,7 @@
 			qdel(C)
 			state = 0 //fixing it by bashing it with a light bulb, fun eh?
 			update_icon()
-			to_chat(user, "<span class='notice'>You replace the light bulb.</span>")
+			to_chat(user, "<span class='notice'>I replace the light bulb.</span>")
 		else
 			to_chat(user, "<span class='notice'>The light bulb seems fine, no need to replace it.</span>")
 
@@ -95,10 +95,10 @@
 // (also has a longer delay than colour_cycle between cycling colours)
 /turf/open/floor/light/colour_cycle/dancefloor_a
 	name = "dancefloor"
-	desc = "Funky floor."
+	desc = ""
 	coloredlights = list("dancefloor_A")
 
 /turf/open/floor/light/colour_cycle/dancefloor_b
 	name = "dancefloor"
-	desc = "Funky floor."
+	desc = ""
 	coloredlights = list("dancefloor_B")

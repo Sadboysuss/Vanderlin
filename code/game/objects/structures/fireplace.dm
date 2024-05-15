@@ -4,7 +4,7 @@
 
 /obj/structure/fireplace
 	name = "fireplace"
-	desc = "A large stone brick fireplace."
+	desc = ""
 	icon = 'icons/obj/fireplace.dmi'
 	icon_state = "fireplace"
 	density = FALSE
@@ -43,24 +43,24 @@
 		var/space_remaining = MAXIMUM_BURN_TIMER - burn_time_remaining()
 		var/space_for_logs = round(space_remaining / LOG_BURN_TIMER)
 		if(space_for_logs < 1)
-			to_chat(user, "<span class='warning'>You can't fit any more of [T] in [src]!</span>")
+			to_chat(user, "<span class='warning'>I can't fit any more of [T] in [src]!</span>")
 			return
 		var/logs_used = min(space_for_logs, wood.amount)
 		wood.use(logs_used)
 		adjust_fuel_timer(LOG_BURN_TIMER * logs_used)
 		user.visible_message("<span class='notice'>[user] tosses some \
-			wood into [src].</span>", "<span class='notice'>You add \
+			wood into [src].</span>", "<span class='notice'>I add \
 			some fuel to [src].</span>")
 	else if(istype(T, /obj/item/paper_bin))
 		var/obj/item/paper_bin/paper_bin = T
 		user.visible_message("<span class='notice'>[user] throws [T] into \
-			[src].</span>", "<span class='notice'>You add [T] to [src].\
+			[src].</span>", "<span class='notice'>I add [T] to [src].\
 			</span>")
 		adjust_fuel_timer(PAPER_BURN_TIMER * paper_bin.total_paper)
 		qdel(paper_bin)
 	else if(istype(T, /obj/item/paper))
 		user.visible_message("<span class='notice'>[user] throws [T] into \
-			[src].</span>", "<span class='notice'>You throw [T] into [src].\
+			[src].</span>", "<span class='notice'>I throw [T] into [src].\
 			</span>")
 		adjust_fuel_timer(PAPER_BURN_TIMER)
 		qdel(T)
@@ -109,7 +109,7 @@
 		put_out()
 		return
 
-	playsound(src, 'sound/effects/comfyfire.ogg',50,FALSE, FALSE, TRUE)
+	playsound(src, 'sound/blank.ogg',50,FALSE, FALSE, TRUE)
 	var/turf/T = get_turf(src)
 	T.hotspot_expose(700, 5)
 	update_icon()
@@ -139,7 +139,7 @@
 
 /obj/structure/fireplace/proc/ignite()
 	lit = TRUE
-	desc = "A large stone brick fireplace, warm and cozy."
+	desc = ""
 	flame_expiry_timer = world.time + fuel_added
 	fuel_added = 0
 	update_icon()

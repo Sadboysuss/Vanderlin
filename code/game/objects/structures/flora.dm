@@ -3,10 +3,15 @@
 	max_integrity = 150
 	anchored = TRUE
 
+/obj/structure/flora/Initialize()
+	..()
+	if(isclosedturf(loc))
+		return INITIALIZE_HINT_QDEL
+
 //trees
 /obj/structure/flora/tree
 	name = "tree"
-	desc = "A large tree."
+	desc = ""
 	density = TRUE
 	pixel_x = -16
 	layer = FLY_LAYER
@@ -16,11 +21,11 @@
 	if(log_amount && (!(flags_1 & NODECONSTRUCT_1)))
 		if(W.get_sharpness() && W.force > 0)
 			if(W.hitsound)
-				playsound(get_turf(src), W.hitsound, 100, FALSE, FALSE)
-			user.visible_message("<span class='notice'>[user] begins to cut down [src] with [W].</span>","<span class='notice'>You begin to cut down [src] with [W].</span>", "<span class='hear'>You hear the sound of sawing.</span>")
+				playsound(get_turf(src),  W.hitsound, 100, FALSE, FALSE)
+			user.visible_message("<span class='notice'>[user] begins to cut down [src] with [W].</span>","<span class='notice'>I begin to cut down [src] with [W].</span>", "<span class='hear'>I hear the sound of sawing.</span>")
 			if(do_after(user, 1000/W.force, target = src)) //5 seconds with 20 force, 8 seconds with a hatchet, 20 seconds with a shard.
-				user.visible_message("<span class='notice'>[user] fells [src] with the [W].</span>","<span class='notice'>You fell [src] with the [W].</span>", "<span class='hear'>You hear the sound of a tree falling.</span>")
-				playsound(get_turf(src), 'sound/effects/meteorimpact.ogg', 100 , FALSE, FALSE)
+				user.visible_message("<span class='notice'>[user] fells [src] with the [W].</span>","<span class='notice'>I fell [src] with the [W].</span>", "<span class='hear'>I hear the sound of a tree falling.</span>")
+				playsound(get_turf(src), 'sound/blank.ogg', 100 , FALSE, FALSE)
 				for(var/i=1 to log_amount)
 					new /obj/item/grown/log/tree(get_turf(src))
 
@@ -34,7 +39,7 @@
 
 /obj/structure/flora/stump
 	name = "stump"
-	desc = "This represents our promise to the crew, and the station itself, to cut down as many trees as possible." //running naked through the trees
+	desc = "" //running naked through the trees
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "tree_stump"
 	density = FALSE
@@ -42,7 +47,7 @@
 
 /obj/structure/flora/tree/pine
 	name = "pine tree"
-	desc = "A coniferous pine tree."
+	desc = ""
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
 	var/list/icon_states = list("pine_1", "pine_2", "pine_3")
@@ -55,13 +60,13 @@
 
 /obj/structure/flora/tree/pine/xmas
 	name = "xmas tree"
-	desc = "A wondrous decorated Christmas tree."
+	desc = ""
 	icon_state = "pine_c"
 	icon_states = null
 
 /obj/structure/flora/tree/pine/xmas/presents
 	icon_state = "pinepresents"
-	desc = "A wondrous decorated Christmas tree. It has presents!"
+	desc = ""
 	var/gift_type = /obj/item/a_gift/anything
 	var/unlimited = FALSE
 	var/static/list/took_presents //shared between all xmas trees
@@ -90,17 +95,17 @@
 	user.put_in_hands(G)
 
 /obj/structure/flora/tree/pine/xmas/presents/unlimited
-	desc = "A wonderous decorated Christmas tree. It has a seemly endless supply of presents!"
+	desc = ""
 	unlimited = TRUE
 
 /obj/structure/flora/tree/dead
 	icon = 'icons/obj/flora/deadtrees.dmi'
-	desc = "A dead tree. How it died, you know not."
+	desc = ""
 	icon_state = "tree_1"
 
 /obj/structure/flora/tree/palm
 	icon = 'icons/misc/beach2.dmi'
-	desc = "A tree straight from the tropics."
+	desc = ""
 	icon_state = "palm1"
 
 /obj/structure/flora/tree/palm/Initialize()
@@ -112,11 +117,11 @@
 	name = "festivus pole"
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "festivus_pole"
-	desc = "During last year's Feats of Strength the Research Director was able to suplex this passing immobile rod into a planter."
+	desc = ""
 
 /obj/structure/festivus/anchored
 	name = "suplexed rod"
-	desc = "A true feat of strength, almost as good as last year."
+	desc = ""
 	icon_state = "anchored_rod"
 	anchored = TRUE
 
@@ -127,7 +132,7 @@
 /obj/structure/flora/tree/jungle
 	name = "tree"
 	icon_state = "tree"
-	desc = "It's seriously hampering your view of the jungle."
+	desc = ""
 	icon = 'icons/obj/flora/jungletrees.dmi'
 	pixel_x = -48
 	pixel_y = -20
@@ -144,7 +149,7 @@
 //grass
 /obj/structure/flora/grass
 	name = "grass"
-	desc = "A patch of overgrown grass."
+	desc = ""
 	icon = 'icons/obj/flora/snowflora.dmi'
 	gender = PLURAL	//"this is grass" not "this is a grass"
 
@@ -174,7 +179,7 @@
 //bushes
 /obj/structure/flora/bush
 	name = "bush"
-	desc = "Some type of shrub."
+	desc = ""
 	icon = 'icons/obj/flora/snowflora.dmi'
 	icon_state = "snowbush1"
 	anchored = TRUE
@@ -183,11 +188,11 @@
 	icon_state = "snowbush[rand(1, 6)]"
 	. = ..()
 
-//newbushes
+// ausbush
 
 /obj/structure/flora/ausbushes
 	name = "bush"
-	desc = "Some kind of plant."
+	desc = ""
 	icon = 'icons/obj/flora/ausflora.dmi'
 	icon_state = "firstbush_1"
 
@@ -305,7 +310,7 @@
 	name = "potted plant"
 	icon = 'icons/obj/flora/plants.dmi'
 	icon_state = "plant-01"
-	desc = "A little bit of nature contained in a pot."
+	desc = ""
 	layer = ABOVE_MOB_LAYER
 	w_class = WEIGHT_CLASS_HUGE
 	force = 10
@@ -345,12 +350,12 @@
 
 /obj/item/twohanded/required/kirbyplants/dead
 	name = "RD's potted plant"
-	desc = "A gift from the botanical staff, presented after the RD's reassignment. There's a tag on it that says \"Y'all come back now, y'hear?\"\nIt doesn't look very healthy..."
+	desc = ""
 	icon_state = "plant-25"
 
 /obj/item/twohanded/required/kirbyplants/photosynthetic
 	name = "photosynthetic potted plant"
-	desc = "A bioluminescent plant."
+	desc = ""
 	icon_state = "plant-09"
 	light_color = "#2cb2e8"
 	light_range = 3
@@ -361,7 +366,7 @@
 
 /obj/structure/flora/rock
 	icon_state = "basalt"
-	desc = "A volcanic rock. Pioneers used to ride these babies for miles."
+	desc = ""
 	icon = 'icons/obj/flora/rocks.dmi'
 	resistance_flags = FIRE_PROOF
 	density = TRUE
@@ -372,13 +377,13 @@
 
 /obj/structure/flora/rock/pile
 	icon_state = "lavarocks"
-	desc = "A pile of rocks."
+	desc = ""
 
 //Jungle grass
 
 /obj/structure/flora/grass/jungle
 	name = "jungle grass"
-	desc = "Thick alien flora."
+	desc = ""
 	icon = 'icons/obj/flora/jungleflora.dmi'
 	icon_state = "grassa"
 
@@ -394,7 +399,7 @@
 
 /obj/structure/flora/rock/jungle
 	icon_state = "rock"
-	desc = "A pile of rocks."
+	desc = ""
 	icon = 'icons/obj/flora/jungleflora.dmi'
 	density = FALSE
 
@@ -407,7 +412,7 @@
 
 /obj/structure/flora/junglebush
 	name = "bush"
-	desc = "A wild plant that is found in jungles."
+	desc = ""
 	icon = 'icons/obj/flora/jungleflora.dmi'
 	icon_state = "busha"
 
@@ -439,3 +444,18 @@
 /obj/structure/flora/rock/pile/largejungle/Initialize()
 	. = ..()
 	icon_state = "[initial(icon_state)][rand(1,3)]"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

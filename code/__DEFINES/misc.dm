@@ -4,6 +4,8 @@
 // #define EAST 4
 // #define WEST 8
 
+#define CORNERDIRS			list(SOUTHWEST,NORTHWEST,SOUTHEAST,NORTHEAST)
+
 #define TEXT_NORTH			"[NORTH]"
 #define TEXT_SOUTH			"[SOUTH]"
 #define TEXT_EAST			"[EAST]"
@@ -11,46 +13,66 @@
 
 
 //Human Overlays Indexes/////////
-#define MUTATIONS_LAYER			28		//mutations. Tk headglows, cold resistance glow, etc
-#define BODY_BEHIND_LAYER		27		//certain mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODYPARTS_LAYER			26		//Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODY_ADJ_LAYER			25		//certain mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_LAYER				24		//underwear, undershirts, socks, eyes, lips(makeup)
-#define FRONT_MUTATIONS_LAYER	23		//mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define DAMAGE_LAYER			22		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			21
-#define ID_LAYER				20 //lmao at the idiot who put both ids and hands on the same layer
-#define HANDS_PART_LAYER		19
-#define GLOVES_LAYER			18
-#define SHOES_LAYER				17
-#define EARS_LAYER				16
-#define SUIT_LAYER				15
-#define GLASSES_LAYER			14
-#define BELT_LAYER				13		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		12
-#define NECK_LAYER				11
-#define BACK_LAYER				10
-#define HAIR_LAYER				9		//TODO: make part of head layer?
-#define FACEMASK_LAYER			8
-#define HEAD_LAYER				7
+#define MUTATIONS_LAYER			47		//mutations. Tk headglows, cold resistance glow, etc
+#define CLOAK_BEHIND_LAYER		46
+#define HANDS_BEHIND_LAYER		45
+#define BELT_BEHIND_LAYER		44
+#define BACK_BEHIND_LAYER		43
+#define BODY_BEHIND_LAYER		42		//certain mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODYPARTS_LAYER			41		//Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
+#define BODY_ADJ_LAYER			40		//certain mutantrace features (snout, body markings) that must appear above the body parts
+#define BODY_LAYER				39		//underwear, undershirts, socks, eyes, lips(makeup)
+#define FRONT_MUTATIONS_LAYER	38		//mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
+#define DAMAGE_LAYER			37		//damage indicators (cuts and burns)
+#define PANTS_LAYER				36
+#define SHOES_LAYER				35
+#define LEG_PART_LAYER			34
+#define LEG_DAMAGE_LAYER		33
+#define LEGSLEEVE_LAYER			32
+#define SHOESLEEVE_LAYER		31
+#define SHIRT_LAYER				30
+#define GLOVES_LAYER			29
+#define WRISTS_LAYER			28
+#define ARMOR_LAYER				27
+#define TABARD_LAYER			26
+#define BELT_LAYER				25		//only when looking south
+#define UNDER_CLOAK_LAYER		24
+#define HANDS_PART_LAYER		23
+#define ARM_DAMAGE_LAYER		22
+#define SHIRTSLEEVE_LAYER		21
+#define GLOVESLEEVE_LAYER		20
+#define WRISTSLEEVE_LAYER		19
+#define ARMORSLEEVE_LAYER		18
+#define RING_LAYER				17
+#define GLASSES_LAYER			16
+#define NECK_LAYER				15
+#define CLOAK_LAYER				14		//only when looking north or west/east
+#define HAIR_LAYER				13		//TODO: make part of head layer?
+#define MASK_LAYER				12
+#define HAIREXTRA_LAYER			11
+#define MOUTH_LAYER				10
+#define HEAD_LAYER				9
+#define BACK_LAYER				8		//only when looking north
+#define HANDS_LAYER				7
 #define HANDCUFF_LAYER			6
 #define LEGCUFF_LAYER			5
-#define HANDS_LAYER				4
-#define BODY_FRONT_LAYER		3
-#define HALO_LAYER				2		//blood cult ascended halo, because there's currently no better solution for adding/removing
-#define FIRE_LAYER				1		//If you're on fire
-#define TOTAL_LAYERS			28		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define BODY_FRONT_LAYER		4
+#define HALO_LAYER				3		//blood cult ascended halo, because there's currently no better solution for adding/removing
+#define FIRE_LAYER				2		//If you're on fire
+#define TURF_LAYER				1		//If you're on fire
+#define TOTAL_LAYERS			47		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+
+#define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
 
 //Human Overlay Index Shortcuts for alternate_worn_layer, layers
 //Because I *KNOW* somebody will think layer+1 means "above"
 //IT DOESN'T OK, IT MEANS "UNDER"
-#define UNDER_SUIT_LAYER			(SUIT_LAYER+1)
-#define UNDER_HEAD_LAYER			(HEAD_LAYER+1)
+#define UNDER_ARMOR_LAYER			(ARMOR_LAYER+1)
+#define UNDER_HAT_LAYER			(HEAD_LAYER+1)
 
 //AND -1 MEANS "ABOVE", OK?, OK!?!
 #define ABOVE_SHOES_LAYER			(SHOES_LAYER-1)
 #define ABOVE_BODY_FRONT_LAYER		(BODY_FRONT_LAYER-1)
-
 
 //Security levels
 #define SEC_LEVEL_GREEN	0
@@ -128,9 +150,11 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define BLOOD_AMOUNT_PER_DECAL		20
 
 //Bloody shoe blood states
+#define BLOOD_STATE_MUD				"mud"
 #define BLOOD_STATE_HUMAN			"blood"
 #define BLOOD_STATE_XENO			"xeno"
 #define BLOOD_STATE_OIL				"oil"
+#define BLOOD_STATE_GREEN			"green"
 #define BLOOD_STATE_NOT_BLOODY		"no blood whatsoever"
 
 //suit sensors: sensor_mode defines
@@ -158,7 +182,7 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define IS_WET_OPEN_TURF(O) O.GetComponent(/datum/component/wet_floor)
 
 //Maximum amount of time, (in deciseconds) a tile can be wet for.
-#define MAXIMUM_WET_TIME 5 MINUTES
+#define MAXIMUM_WET_TIME 12000
 
 //unmagic-strings for types of polls
 #define POLLTYPE_OPTION		"OPTION"
@@ -424,7 +448,7 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define PDAIMG(what) {"<span class="pda16x16 [#what]"></span>"}
 
 //Filters
-#define AMBIENT_OCCLUSION filter(type="drop_shadow", x=0, y=-2, size=4, color="#04080FAA")
+#define AMBIENT_OCCLUSION filter(type="drop_shadow", x=0, y=-0, size=1, offset = 0, color="#04080FAA")
 #define GAUSSIAN_BLUR(filter_size) filter(type="blur", size=filter_size)
 
 #define STANDARD_GRAVITY 1 //Anything above this is high gravity, anything below no grav

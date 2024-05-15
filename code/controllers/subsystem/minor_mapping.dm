@@ -5,7 +5,8 @@ SUBSYSTEM_DEF(minor_mapping)
 
 /datum/controller/subsystem/minor_mapping/Initialize(timeofday)
 	trigger_migration(CONFIG_GET(number/mice_roundstart))
-	place_satchels()
+//	place_sunlight()
+//	place_satchels()
 	return ..()
 
 /datum/controller/subsystem/minor_mapping/proc/trigger_migration(num_mice=10)
@@ -33,7 +34,6 @@ SUBSYSTEM_DEF(minor_mapping)
 		S.hide(intact=TRUE)
 		amount--
 
-
 /proc/find_exposed_wires()
 	var/list/exposed_wires = list()
 
@@ -55,5 +55,32 @@ SUBSYSTEM_DEF(minor_mapping)
 		for(var/t in block(locate(1,1,z), locate(world.maxx,world.maxy,z)))
 			if(isfloorturf(t) && !isplatingturf(t))
 				suitable += t
+
+	return shuffle(suitable)
+/*
+/datum/controller/subsystem/minor_mapping/proc/place_sunlight(amount=0) //shitcode hack
+	var/list/turfs = find_sun_suitable_turfs()
+	while(turfs.len && amount > 0)
+		var/detected = FALSE
+		var/turf/T = pick_n_take(turfs)
+		var/turf/F
+		var/list/surrounding_turfs = block(locate(T.x - 5, T.y - 5, T.z), locate(T.x + 5, T.y + 5, T.z))
+		for(F in surrounding_turfs)
+			var/obj/machinery/light/sun/S = locate() in F
+			if(S)
+				detected = TRUE
+		if(!detected)
+			new /obj/machinery/light/sun(T)
+		amount--
+*/
+/proc/find_sun_suitable_turfs()
+	var/list/suitable = list()
+
+	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
+		for(var/t in block(locate(1,1,z), locate(world.maxx,world.maxy,z)))
+			if(isfloorturf(t))
+				var/area/A = get_area(t)
+				if(istype(A, /area/rogue/outdoors))
+					suitable += t
 
 	return shuffle(suitable)

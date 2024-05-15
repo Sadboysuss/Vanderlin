@@ -2,7 +2,7 @@
 /datum/blobstrain/reagent/synchronous_mesh
 	name = "Synchronous Mesh"
 	description = "will do massively increased brute damage for each blob near the target."
-	effectdesc = "will also spread damage between each blob near the attacked blob."
+	effectdesc = ""
 	analyzerdescdamage = "Does brute damage, increasing for each blob near the target."
 	analyzerdesceffect = "When attacked, spreads damage between all blobs near the attacked blob."
 	color = "#65ADA2"

@@ -41,7 +41,7 @@
 //Station blueprints!!!
 /obj/item/areaeditor/blueprints
 	name = "station blueprints"
-	desc = "Blueprints of the station. There is a \"Classified\" stamp and several coffee stains on it."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "blueprints"
 	fluffnotice = "Property of Nanotrasen. For heads of staff only. Store in high-secure storage."
@@ -101,9 +101,9 @@
 	if(href_list["view_wireset"])
 		legend = href_list["view_wireset"];
 	if(href_list["view_blueprints"])
-		set_viewer(usr, "<span class='notice'>You flip the blueprints over to view the complex information diagram.</span>")
+		set_viewer(usr, "<span class='notice'>I flip the blueprints over to view the complex information diagram.</span>")
 	if(href_list["hide_blueprints"])
-		clear_viewer(usr,"<span class='notice'>You flip the blueprints over to view the simple information diagram.</span>")
+		clear_viewer(usr,"<span class='notice'>I flip the blueprints over to view the simple information diagram.</span>")
 	if(href_list["refresh"])
 		clear_viewer(usr)
 		set_viewer(usr)
@@ -160,7 +160,7 @@
 	return AREA_STATION
 
 /obj/item/areaeditor/blueprints/proc/view_wire_devices(mob/user)
-	var/message = "<br>You examine the wire legend.<br>"
+	var/message = "<br>I examine the wire legend.<br>"
 	for(var/wireset in GLOB.wire_color_directory)
 		message += "<br><a href='?src=[REF(src)];view_wireset=[wireset]'>[GLOB.wire_name_directory[wireset]]</a>"
 	message += "</p>"
@@ -191,7 +191,7 @@
 
 	rename_area(A, str)
 
-	to_chat(usr, "<span class='notice'>You rename the '[prevname]' to '[str]'.</span>")
+	to_chat(usr, "<span class='notice'>I rename the '[prevname]' to '[str]'.</span>")
 	log_game("[key_name(usr)] has renamed [prevname] to [str]")
 	A.update_areasize()
 	interact()
@@ -201,7 +201,7 @@
 
 /obj/item/areaeditor/blueprints/cyborg
 	name = "station schematics"
-	desc = "A digital copy of the station blueprints stored in your memory."
+	desc = ""
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "blueprints"
 	fluffnotice = "Intellectual Property of Nanotrasen. For use in engineering cyborgs only. Wipe from memory upon departure from the station."

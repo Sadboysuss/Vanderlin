@@ -10,7 +10,7 @@
 
 /obj/structure/barricade
 	name = "chest high wall"
-	desc = "Looks like this would make good cover."
+	desc = ""
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
@@ -26,12 +26,12 @@
 	return
 
 /obj/structure/barricade/attackby(obj/item/I, mob/user, params)
-	if(I.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM && bar_material == METAL)
+	if(I.tool_behaviour == TOOL_WELDER && user.used_intent.type != INTENT_HARM && bar_material == METAL)
 		if(obj_integrity < max_integrity)
 			if(!I.tool_start_check(user, amount=0))
 				return
 
-			to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
+			to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
 			if(I.use_tool(src, user, 40, volume=40))
 				obj_integrity = CLAMP(obj_integrity + 20, 0, max_integrity)
 	else
@@ -58,7 +58,7 @@
 
 /obj/structure/barricade/wooden
 	name = "wooden barricade"
-	desc = "This space is blocked off by a wooden barricade."
+	desc = ""
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "woodenbarricade"
 	bar_material = WOOD
@@ -68,10 +68,10 @@
 	if(istype(I,/obj/item/stack/sheet/mineral/wood))
 		var/obj/item/stack/sheet/mineral/wood/W = I
 		if(W.amount < 5)
-			to_chat(user, "<span class='warning'>You need at least five wooden planks to make a wall!</span>")
+			to_chat(user, "<span class='warning'>I need at least five wooden planks to make a wall!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>You start adding [I] to [src]...</span>")
+			to_chat(user, "<span class='notice'>I start adding [I] to [src]...</span>")
 			if(do_after(user, 50, target=src))
 				W.use(5)
 				var/turf/T = get_turf(src)
@@ -83,14 +83,14 @@
 
 /obj/structure/barricade/wooden/crude
 	name = "crude plank barricade"
-	desc = "This space is blocked off by a crude assortment of planks."
+	desc = ""
 	icon_state = "woodenbarricade-old"
 	drop_amount = 1
 	max_integrity = 50
 	proj_pass_rate = 65
 
 /obj/structure/barricade/wooden/crude/snow
-	desc = "This space is blocked off by a crude assortment of planks. It seems to be covered in a layer of snow."
+	desc = ""
 	icon_state = "woodenbarricade-snow-old"
 	max_integrity = 75
 
@@ -100,7 +100,7 @@
 
 /obj/structure/barricade/sandbags
 	name = "sandbags"
-	desc = "Bags of sand. Self explanatory."
+	desc = ""
 	icon = 'icons/obj/smooth_structures/sandbags.dmi'
 	icon_state = "sandbags"
 	max_integrity = 280
@@ -114,7 +114,7 @@
 
 /obj/structure/barricade/security
 	name = "security barrier"
-	desc = "A deployable barrier. Provides good cover in fire fights."
+	desc = ""
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "barrier0"
 	density = FALSE
@@ -141,7 +141,7 @@
 
 /obj/item/grenade/barrier
 	name = "barrier grenade"
-	desc = "Instant cover."
+	desc = ""
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "flashbang"
 	item_state = "flashbang"

@@ -3,7 +3,7 @@
 
 /obj/machinery/computer/operating
 	name = "operating computer"
-	desc = "Monitors patient vitals and displays surgery steps. Can be loaded with surgery disks to perform experimental procedures. Automatically syncs to stasis beds within its line of sight for surgical tech advancement."
+	desc = ""
 	icon_screen = "crew"
 	icon_keyboard = "med_key"
 	circuit = /obj/item/circuitboard/computer/operating
@@ -31,8 +31,8 @@
 /obj/machinery/computer/operating/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/disk/surgery))
 		user.visible_message("<span class='notice'>[user] begins to load \the [O] in \the [src]...</span>", \
-			"<span class='notice'>You begin to load a surgery protocol from \the [O]...</span>", \
-			"<span class='hear'>You hear the chatter of a floppy drive.</span>")
+			"<span class='notice'>I begin to load a surgery protocol from \the [O]...</span>", \
+			"<span class='hear'>I hear the chatter of a floppy drive.</span>")
 		var/obj/item/disk/surgery/D = O
 		if(do_after(user, 10, target = src))
 			advanced_surgeries |= D.surgeries

@@ -32,7 +32,7 @@
 // -----------------------------
 /obj/item/storage/bag/trash
 	name = "trash bag"
-	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
+	desc = ""
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "trashbag"
 	item_state = "trashbag"
@@ -52,7 +52,7 @@
 
 /obj/item/storage/bag/trash/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] puts [src] over [user.p_their()] head and starts chomping at the insides! Disgusting!</span>")
-	playsound(loc, 'sound/items/eatfood.ogg', 50, TRUE, -1)
+	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
 	return (TOXLOSS)
 
 /obj/item/storage/bag/trash/update_icon()
@@ -73,12 +73,12 @@
 		J.mybag=src
 		J.update_icon()
 	else
-		to_chat(user, "<span class='warning'>You are unable to fit your [name] into the [J.name].</span>")
+		to_chat(user, "<span class='warning'>I are unable to fit my [name] into the [J.name].</span>")
 		return
 
 /obj/item/storage/bag/trash/bluespace
 	name = "trash bag of holding"
-	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
+	desc = ""
 	icon_state = "bluetrashbag"
 	item_flags = NO_MAT_REDEMPTION
 
@@ -97,7 +97,7 @@
 
 /obj/item/storage/bag/ore
 	name = "mining satchel"
-	desc = "This little bugger can be used to store and transport ores."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKET
@@ -150,25 +150,25 @@
 				show_message = TRUE
 			else
 				if(!spam_protection)
-					to_chat(user, "<span class='warning'>Your [name] is full and can't hold any more!</span>")
+					to_chat(user, "<span class='warning'>My [name] is full and can't hold any more!</span>")
 					spam_protection = TRUE
 					continue
 	if(show_message)
 		playsound(user, "rustle", 50, TRUE)
 		if (box)
 			user.visible_message("<span class='notice'>[user] offloads the ores beneath [user.p_them()] into [box].</span>", \
-			"<span class='notice'>You offload the ores beneath you into your [box].</span>")
+			"<span class='notice'>I offload the ores beneath you into my [box].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] scoops up the ores beneath [user.p_them()].</span>", \
-				"<span class='notice'>You scoop up the ores beneath you with your [name].</span>")
+				"<span class='notice'>I scoop up the ores beneath you with my [name].</span>")
 	spam_protection = FALSE
 
 /obj/item/storage/bag/ore/cyborg
 	name = "cyborg mining satchel"
 
-/obj/item/storage/bag/ore/holding //miners, your messiah has arrived
+/obj/item/storage/bag/ore/holding //miners, my messiah has arrived
 	name = "mining satchel of holding"
-	desc = "A revolution in convenience, this satchel allows for huge amounts of ore storage. It's been outfitted with anti-malfunction safety measures."
+	desc = ""
 	icon_state = "satchel_bspace"
 
 /obj/item/storage/bag/ore/holding/ComponentInitialize()
@@ -206,13 +206,13 @@
 
 /obj/item/storage/bag/plants/portaseeder
 	name = "portable seed extractor"
-	desc = "For the enterprising botanist on the go. Less efficient than the stationary model, it creates one seed per plant."
+	desc = ""
 	icon_state = "portaseeder"
 
 /obj/item/storage/bag/plants/portaseeder/verb/dissolve_contents()
 	set name = "Activate Seed Extraction"
-	set category = "Object"
-	set desc = "Activate to convert your plants into plantable seeds."
+	set hidden = 1
+	set desc = ""
 	if(usr.incapacitated())
 		return
 	for(var/obj/item/O in contents)
@@ -226,7 +226,7 @@
 
 /obj/item/storage/bag/sheetsnatcher
 	name = "sheet snatcher"
-	desc = "A patented Nanotrasen storage system designed for any kind of mineral sheet."
+	desc = ""
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
 
@@ -265,7 +265,7 @@
 
 /obj/item/storage/bag/books
 	name = "book bag"
-	desc = "A bag for books."
+	desc = ""
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookbag"
 	w_class = WEIGHT_CLASS_BULKY //Bigger than a book because physics
@@ -286,12 +286,12 @@
 
 /*
  * Trays - Agouri
- */
+ *///wip
 /obj/item/storage/bag/tray
 	name = "tray"
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "tray"
-	desc = "A metal tray to lay food on."
+	desc = ""
 	force = 5
 	throwforce = 10
 	throw_speed = 3
@@ -300,24 +300,37 @@
 	flags_1 = CONDUCT_1
 	custom_materials = list(/datum/material/iron=3000)
 
+/obj/item/storage/bag/tray/psy
+	name = "tray"
+	icon = 'icons/obj/food/containers.dmi'
+	icon_state = "tray_psy"
+	desc = ""
+
 /obj/item/storage/bag/tray/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.insert_preposition = "on"
+	update_icon()
+
+/obj/item/storage/bag/tray/Moved()
+	. = ..()
+	update_icon()
 
 /obj/item/storage/bag/tray/attack(mob/living/M, mob/living/user)
-	. = ..()
+	..()
 	// Drop all the things. All of them.
 	var/list/obj/item/oldContents = contents.Copy()
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_QUICK_EMPTY)
+
 	// Make each item scatter a bit
-	for(var/obj/item/I in oldContents)
-		INVOKE_ASYNC(src, .proc/do_scatter, I)
+	for (var/obj/item/I in oldContents)
+		if (I)
+			do_scatter(I)
 
 	if(prob(50))
-		playsound(M, 'sound/items/trayhit1.ogg', 50, TRUE)
+		playsound(M, 'sound/blank.ogg', 50, TRUE)
 	else
-		playsound(M, 'sound/items/trayhit2.ogg', 50, TRUE)
+		playsound(M, 'sound/blank.ogg', 50, TRUE)
 
 	if(ishuman(M) || ismonkey(M))
 		if(prob(10))
@@ -325,24 +338,34 @@
 	update_icon()
 
 /obj/item/storage/bag/tray/proc/do_scatter(obj/item/I)
-	for(var/i in 1 to rand(1,2))
-		if(I)
-			step(I, pick(NORTH,SOUTH,EAST,WEST))
-			sleep(rand(2,4))
+	if (I)
+		for (var/i in 1 to rand(1, 2))
+			var/xOffset = rand(-16, 16)  // Adjust the range as needed
+			var/yOffset = rand(-16, 16)  // Adjust the range as needed
+
+			I.x = xOffset
+			I.y = yOffset
+
+
+			sleep(rand(2, 4))
 
 /obj/item/storage/bag/tray/update_icon()
 	cut_overlays()
 	for(var/obj/item/I in contents)
 		add_overlay(new /mutable_appearance(I))
+		var/mutable_appearance/I_copy = new(I)
+		I_copy.plane = FLOAT_PLANE + 1
+		I_copy.layer = FLOAT_LAYER
+		add_overlay(I_copy)
 
-/obj/item/storage/bag/tray/Entered()
+
+/obj/item/storage/bag/tray/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	update_icon()
 
-/obj/item/storage/bag/tray/Exited()
+/obj/item/storage/bag/tray/Exited(atom/movable/gone, direction)
 	. = ..()
 	update_icon()
-
 /*
  *	Chemistry bag
  */
@@ -351,7 +374,7 @@
 	name = "chemistry bag"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bag"
-	desc = "A bag for storing pills, patches, and bottles."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 
@@ -380,7 +403,7 @@
 	name = "bio bag"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "biobag"
-	desc = "A bag for the safe transportation and disposal of biowaste and other biological materials."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 
@@ -412,7 +435,7 @@
 	name = "construction bag"
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "construction_bag"
-	desc = "A bag for storing small construction components."
+	desc = ""
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 

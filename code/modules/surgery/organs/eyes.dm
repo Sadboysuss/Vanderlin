@@ -1,8 +1,8 @@
 /obj/item/organ/eyes
-	name = BODY_ZONE_PRECISE_EYES
-	icon_state = "eyeballs"
-	desc = "I see you!"
-	zone = BODY_ZONE_PRECISE_EYES
+	name = "eye"
+	icon_state = "eye1"
+	desc = ""
+	zone = BODY_ZONE_PRECISE_R_EYE
 	slot = ORGAN_SLOT_EYES
 	gender = PLURAL
 
@@ -14,13 +14,13 @@
 
 	low_threshold_passed = "<span class='info'>Distant objects become somewhat less tangible.</span>"
 	high_threshold_passed = "<span class='info'>Everything starts to look a lot less clear.</span>"
-	now_failing = "<span class='warning'>Darkness envelopes you, as your eyes go blind!</span>"
+	now_failing = "<span class='warning'>Darkness envelopes you, as my eyes go blind!</span>"
 	now_fixed = "<span class='info'>Color and shapes are once again perceivable.</span>"
-	high_threshold_cleared = "<span class='info'>Your vision functions passably once more.</span>"
-	low_threshold_cleared = "<span class='info'>Your vision is cleared of any ailment.</span>"
+	high_threshold_cleared = "<span class='info'>My vision functions passably once more.</span>"
+	low_threshold_cleared = "<span class='info'>My vision is cleared of any ailment.</span>"
 
 	var/sight_flags = 0
-	var/see_in_dark = 2
+	var/see_in_dark = 8
 	var/tint = 0
 	var/eye_color = "" //set to a hex code to override a mob's eye color
 	var/eye_icon_state = "eyes"
@@ -68,7 +68,7 @@
 	if((organ_flags & ORGAN_FAILING) && (damage < maxHealth))
 		organ_flags &= ~ORGAN_FAILING
 		C.cure_blind(EYE_DAMAGE)
-	//various degrees of "oh fuck my eyes", from "point a laser at your eye" to "staring at the Sun" intensities
+	//various degrees of "oh fuck my eyes", from "point a laser at my eye" to "staring at the Sun" intensities
 	if(damage > 20)
 		damaged = TRUE
 		if((organ_flags & ORGAN_FAILING))
@@ -86,7 +86,7 @@
 
 /obj/item/organ/eyes/night_vision
 	name = "shadow eyes"
-	desc = "A spooky set of eyes that can see in the dark."
+	desc = ""
 	see_in_dark = 8
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	actions_types = list(/datum/action/item_action/organ_action/use)
@@ -108,28 +108,32 @@
 
 /obj/item/organ/eyes/night_vision/alien
 	name = "alien eyes"
-	desc = "It turned out they had them after all!"
+	desc = ""
 	sight_flags = SEE_MOBS
 
 /obj/item/organ/eyes/night_vision/zombie
 	name = "undead eyes"
-	desc = "Somewhat counterintuitively, these half-rotten eyes actually have superior vision to those of a living human."
+	desc = ""
+
+/obj/item/organ/eyes/night_vision/werewolf
+	name = "moonlight eyes"
+	desc = ""
 
 /obj/item/organ/eyes/night_vision/nightmare
 	name = "burning red eyes"
-	desc = "Even without their shadowy owner, looking at these eyes gives you a sense of dread."
+	desc = ""
 	icon_state = "burning_eyes"
 
 /obj/item/organ/eyes/night_vision/mushroom
 	name = "fung-eye"
-	desc = "While on the outside they look inert and dead, the eyes of mushroom people are actually very advanced."
+	desc = ""
 
 ///Robotic
 
 /obj/item/organ/eyes/robotic
 	name = "robotic eyes"
 	icon_state = "cybernetic_eyeballs"
-	desc = "Your vision is augmented."
+	desc = ""
 	status = ORGAN_ROBOTIC
 	organ_flags = ORGAN_SYNTHETIC
 
@@ -139,19 +143,19 @@
 		return
 	if(prob(10 * severity))
 		return
-	to_chat(owner, "<span class='warning'>Static obfuscates your vision!</span>")
+	to_chat(owner, "<span class='warning'>Static obfuscates my vision!</span>")
 	owner.flash_act(visual = 1)
 
 /obj/item/organ/eyes/robotic/xray
 	name = "\improper X-ray eyes"
-	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
+	desc = ""
 	eye_color = "000"
 	see_in_dark = 8
 	sight_flags = SEE_MOBS | SEE_OBJS | SEE_TURFS
 
 /obj/item/organ/eyes/robotic/thermals
 	name = "thermal eyes"
-	desc = "These cybernetic eye implants will give you thermal vision. Vertical slit pupil included."
+	desc = ""
 	eye_color = "FC0"
 	sight_flags = SEE_MOBS
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
@@ -160,7 +164,7 @@
 
 /obj/item/organ/eyes/robotic/flashlight
 	name = "flashlight eyes"
-	desc = "It's two flashlights rigged together with some wire. Why would you put these in someone's head?"
+	desc = ""
 	eye_color ="fee5a3"
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flashlight_eyes"
@@ -191,7 +195,7 @@
 // Welding shield implant
 /obj/item/organ/eyes/robotic/shield
 	name = "shielded robotic eyes"
-	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
+	desc = ""
 	flash_protect = FLASH_PROTECTION_WELDER
 
 /obj/item/organ/eyes/robotic/shield/emp_act(severity)
@@ -201,7 +205,7 @@
 
 /obj/item/organ/eyes/robotic/glow
 	name = "High Luminosity Eyes"
-	desc = "Special glowing eyes, used by snowflakes who want to be special."
+	desc = ""
 	eye_color = "000"
 	actions_types = list(/datum/action/item_action/organ_action/use, /datum/action/item_action/organ_action/toggle)
 	var/current_color_string = "#ffffff"
@@ -297,14 +301,14 @@
 /obj/item/organ/eyes/robotic/glow/proc/activate(silent = FALSE)
 	start_visuals()
 	if(!silent)
-		to_chat(owner, "<span class='warning'>Your [src] clicks and makes a whining noise, before shooting out a beam of light!</span>")
+		to_chat(owner, "<span class='warning'>My [src] clicks and makes a whining noise, before shooting out a beam of light!</span>")
 	active = TRUE
 	cycle_mob_overlay()
 
 /obj/item/organ/eyes/robotic/glow/proc/deactivate(silent = FALSE)
 	clear_visuals()
 	if(!silent)
-		to_chat(owner, "<span class='warning'>Your [src] shuts off!</span>")
+		to_chat(owner, "<span class='warning'>My [src] shuts off!</span>")
 	active = FALSE
 	remove_mob_overlay()
 
@@ -378,12 +382,12 @@
 
 /obj/item/organ/eyes/moth
 	name = "moth eyes"
-	desc = "These eyes seem to have increased sensitivity to bright light, with no improvement to low light vision."
+	desc = ""
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
 /obj/item/organ/eyes/snail
 	name = "snail eyes"
-	desc = "These eyes seem to have a large range, but might be cumbersome with glasses."
+	desc = ""
 	eye_icon_state = "snail_eyes"
 	icon_state = "snail_eyeballs"
 
