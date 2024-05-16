@@ -48,7 +48,6 @@ GLOBAL_VAR(restart_counter)
 	else // We got a db connected, GLOB.round_id ticks up based on where its at on the db.
 		GLOB.rogue_round_id = "[pick(GLOB.roundid)][GLOB.round_id]-[timestamp]"
 	SetupLogs()
-	load_poll_data()
 	send2chat("<@&1229725256290144258> New round starting!", "new-round-ping")
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
@@ -299,6 +298,7 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	if(TgsAvailable())
+		send2chat("Round ending!", "new-round-ping")
 		testing("tgsavailable passed")
 		var/do_hard_reboot
 		// check the hard reboot counter
