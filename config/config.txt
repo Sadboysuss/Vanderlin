@@ -14,22 +14,22 @@ $include antag_rep.txt
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-# SERVERNAME tgstation
+SERVERNAME StoneKeep
 
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
 # SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-STATIONNAME Space Station 13
+STATIONNAME StoneKeep
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
 #HUB
 
 ## Lobby time: This is the amount of time between rounds that players have to setup their characters and be ready.
-LOBBY_COUNTDOWN 120
+LOBBY_COUNTDOWN 500
 
 ## Round End Time: This is the amount of time after the round ends that players have to murder death kill each other.
-ROUND_END_COUNTDOWN 90
+ROUND_END_COUNTDOWN 190
 
 ## Comment this out if you want to use the SQL based admin system, the legacy system uses admins.txt.
 ## You need to set up your database to use the SQL based system.
@@ -80,19 +80,19 @@ LOG_OOC
 LOG_SAY
 
 ## log admin actions
-LOG_ADMIN
+#LOG_ADMIN
 
 ## log admin chat
 LOG_ADMINCHAT
 
 ## log client access (logon/logoff)
-LOG_ACCESS
+#LOG_ACCESS
 
 ## log game actions (start of round, results, etc.)
 LOG_GAME
 
 ## log player votes
-LOG_VOTE
+#LOG_VOTE
 
 ## log client Whisper
 LOG_WHISPER
@@ -104,22 +104,22 @@ LOG_EMOTE
 LOG_ATTACK
 
 ## log pda messages
-LOG_PDA
+#LOG_PDA
 
 ## log telecomms messages
-LOG_TELECOMMS
+#LOG_TELECOMMS
 
 ## log prayers
-LOG_PRAYER
+#LOG_PRAYER
 
 ## log lawchanges
-LOG_LAW
+#LOG_LAW
 
 ## log crew manifest to seperate file
-LOG_MANIFEST
+#LOG_MANIFEST
 
 ## log job divide debugging information
-#LOG_JOB_DEBUG
+LOG_JOB_DEBUG
 
 ## log all world.Topic() calls
 # LOG_WORLD_TOPIC
@@ -135,10 +135,10 @@ LOG_MANIFEST
 # LOG_MECHA
 
 ## log virus and actions
-LOG_VIRUS
+#LOG_VIRUS
 
 ## log cloning actions
-LOG_CLONING
+#LOG_CLONING
 
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
@@ -174,7 +174,7 @@ ID_CONSOLE_JOBSLOT_DELAY 30
 VOTE_DELAY 6000
 
 ## time period (deciseconds) which voting session will last (default 1 minute)
-VOTE_PERIOD 600
+VOTE_PERIOD 1200
 
 ## prevents dead players from voting or starting votes
 # NO_DEAD_VOTE
@@ -183,13 +183,13 @@ VOTE_PERIOD 600
 # DEFAULT_NO_VOTE
 
 ## disable abandon mob
-NORESPAWN
+#NORESPAWN
 
 ## disables calling del(src) on newmobs if they logout before spawnin in
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY Yournamehere
+HOSTEDBY your_name_here
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
@@ -199,7 +199,7 @@ HOSTEDBY Yournamehere
 GUEST_BAN
 
 ## Comment this out to disable checking for the cid randomizer dll. (disabled if database isn't enabled or connected)
-CHECK_RANDOMIZER
+#CHECK_RANDOMIZER
 
 ## IPINTEL:
 ## This allows you to detect likely proxies by checking ips against getipintel.net
@@ -223,7 +223,9 @@ CHECK_RANDOMIZER
 #WEBCLIENT_ONLY_BYOND_MEMBERS
 
 ## Set to prevent anyone but those ckeys listed in config/whitelist.txt and config/admins.txt from joining your server
-#USEWHITELIST
+USEWHITELIST
+
+USEBLACKLIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
 ## Don't set this to the same server, BYOND will automatically restart players to the server when it has restarted.
@@ -258,7 +260,7 @@ CHECK_RANDOMIZER
 # GITHUBREPOID 3234987
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://justanotherday.example.com
+ BANAPPEALS stonekeepbyond@gmail.com
 
 ## System command that invokes youtube-dl, used by Play Internet Sound.
 ## You can install youtube-dl with
@@ -280,27 +282,27 @@ CHECK_RANDOMIZER
 #POPUP_ADMIN_PM
 
 ## Uncomment to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
-ALLOW_HOLIDAYS
+#ALLOW_HOLIDAYS
 
 ## Uncomment to show the names of the admin sending a pm from IRC instead of showing as a stealthmin.
 #SHOW_IRC_NAME
 
 ## Defines the ticklimit for subsystem initialization (In percents of a byond tick). Lower makes world start smoother. Higher makes it faster.
 ##This is currently a testing optimized setting. A good value for production would be 98.
-TICK_LIMIT_MC_INIT 500
+TICK_LIMIT_MC_INIT 98
 
 ##Defines the ticklag for the world. Ticklag is the amount of time between game ticks (aka byond ticks) (in 1/10ths of a second).
 ##	This also controls the client network update rate, as well as the default client fps
-TICKLAG 0.5
+TICKLAG 1.0
 
 ##Can also be set as per-second value, the following value is identical to the above.
-#FPS 20
+#FPS 11
 
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
 
 ## Uncomment this to let players see their own notes (they can still be set by admins only)
-#SEE_OWN_NOTES
+SEE_OWN_NOTES
 
 ### Comment these two out to prevent notes fading out over time for admins.
 ## Notes older then this will start fading out.
@@ -317,10 +319,10 @@ NOTE_STALE_DAYS 365.2422
 SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, consider using alternative game servers.
 
 ## Uncomment for 'hard' population caps, players will not be allowed to spawn if the living crew exceeds the listed number, though they may still observe or wait for the living crew to decrease in size.
-#HARD_POPCAP 150
+HARD_POPCAP 100
 
 ## Message for hard cap
-HARD_POPCAP_MESSAGE The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers.
+HARD_POPCAP_MESSAGE Too many people are alive. Wait for those living to die or donate to our patreon for a reserved slot.
 
 ## Uncomment for 'extreme' population caps, players will not be allowed to join the server if living crew exceeds the listed number.
 #EXTREME_POPCAP 200
@@ -333,11 +335,11 @@ BYOND_MEMBER_BYPASS_POPCAP
 
 ## Notify admins when a new player connects for the first x days a player's been around. (0 for first connection only, -1 for never)
 ##	Requres database
-NOTIFY_NEW_PLAYER_AGE 0
+#NOTIFY_NEW_PLAYER_AGE 0
 
 ## Notify admins when a player connects if their byond account was created in the last X days
 ## Requires database
-NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
+#NOTIFY_NEW_PLAYER_ACCOUNT_AGE 30
 
 ## Notify the irc channel when a new player makes their first connection
 ##	Requres database
@@ -364,19 +366,19 @@ NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
 AUTOCONVERT_NOTES
 
 ## Comment this out to stop admin messages sent anytime an admin disconnects from a round in play, you can edit the messages in admin.dm
-ANNOUNCE_ADMIN_LOGOUT
+#ANNOUNCE_ADMIN_LOGOUT
 
 ## Uncomment to have an admin message sent anytime an admin connects to a round in play, you can edit the messages in admin.dm
 #ANNOUNCE_ADMIN_LOGIN
 
 ## Map rotation
 ## You should edit maps.txt to match your configuration when you enable this.
-MAPROTATION
+#MAPROTATION
 
 ## Map voting
 ## Allows players to vote with their preffered map setting
 ## When it's set to zero, the map will be randomly picked each round
-PREFERENCE_MAP_VOTING 1
+PREFERENCE_MAP_VOTING 0
 
 ## Map rotate chance delta
 ## This is the chance of map rotation factored to the round length.
@@ -386,7 +388,7 @@ PREFERENCE_MAP_VOTING 1
 
 ## AUTOADMIN
 ## The default admin rank
-AUTOADMIN_RANK Game Master
+#AUTOADMIN_RANK Game Master
 
 ## Uncomment to automatically give that admin rank to all players
 #AUTOADMIN
@@ -435,17 +437,17 @@ MINUTE_TOPIC_LIMIT 100
 ## Set to 0 to disable.
 SECOND_CLICK_LIMIT 15
 
-MINUTE_CLICK_LIMIT 400
+MINUTE_CLICK_LIMIT 600
 
 ##Error handling related options
 ## The "cooldown" time for each occurence of a unique error
-#ERROR_COOLDOWN 600
+ERROR_COOLDOWN 600
 ## How many occurences before the next will silence them
-#ERROR_LIMIT 90
+ERROR_LIMIT 3
 ## How long a unique error will be silenced for
-#ERROR_SILENCE_TIME 6000
+ERROR_SILENCE_TIME 6000
 ##How long to wait between messaging admins about occurences of a unique error
-#ERROR_MSG_DELAY 50
+ERROR_MSG_DELAY 50
 
 
 ## Chat Announce Options
@@ -459,7 +461,7 @@ MINUTE_CLICK_LIMIT 400
 
 
 ## Allow admin hrefs that don't use the new token system, will eventually be removed
-DEBUG_ADMIN_HREFS
+#DEBUG_ADMIN_HREFS
 
 ###Master Controller High Pop Mode###
 
@@ -473,19 +475,19 @@ BASE_MC_TICK_RATE 1
 ##	will make it run every 2 byond ticks, but will also double the effect of anti-lag heuristics. You can instead set it to something like
 ##	1.1 to make it run every 2 byond ticks, but only increase the effect of anti-lag heuristics by 10%. or 1.5 for 50%.
 ##	(As an aside, you could in theory also reduce the effect of anti-lag heuristics in the base tick rate by setting it to something like 0.5)
-HIGH_POP_MC_TICK_RATE 1.1
+HIGH_POP_MC_TICK_RATE 0.5
 
 ##Engage high pop mode if player count raises above this (Player in this context means any connected user. Lobby, ghost or in-game all count)
-HIGH_POP_MC_MODE_AMOUNT 65
+HIGH_POP_MC_MODE_AMOUNT 999
 
 ##Disengage high pop mode if player count drops below this
-DISABLE_HIGH_POP_MC_MODE_AMOUNT 60
+DISABLE_HIGH_POP_MC_MODE_AMOUNT 999
 
 ## Uncomment to prevent the world from sleeping while no players are connected after initializations
-#RESUME_AFTER_INITIALIZATIONS
+RESUME_AFTER_INITIALIZATIONS
 
 ## Uncomment to set the number of /world/Reboot()s before the DreamDaemon restarts itself. 0 means restart every round. Requires tgstation server tools.
-#ROUNDS_UNTIL_HARD_RESTART 10
+ROUNDS_UNTIL_HARD_RESTART 0
 
 
 ##Default view size, in tiles.

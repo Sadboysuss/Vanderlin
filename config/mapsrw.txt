@@ -13,8 +13,9 @@ Format:
 	votable (is this map votable)
 endmap
 
-map roguetown
+map rogueworld
 	default
 	#voteweight 1.5
 	votable
 endmap
+
