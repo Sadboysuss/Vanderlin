@@ -90,9 +90,9 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 //RT species
 #define ishumannorthern(A) (is_species(A, /datum/species/human/northern))
 #define isdwarf(A) (is_species(A, /datum/species/dwarf))
-#define isdwarfmountain(A) (is_species(A, /datum/species/dwarf/mountain))
 #define iself(A) (is_species(A, /datum/species/elf))
 #define isdarkelf(A) (is_species(A, /datum/species/elf/dark))
+#define iswoodelf(A) (is_species(A, /datum/species/elf/snow))
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
 #define istiefling(A) (is_species(A, /datum/species/tieberian))
 
