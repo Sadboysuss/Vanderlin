@@ -33,7 +33,7 @@
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/knight
 	gloves = /obj/item/clothing/gloves/roguetown/plate
-	pants = /obj/item/clothing/under/roguetown/platelegs
+	pants = /obj/item/clothing/under/roguetown/trou/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/captain
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
