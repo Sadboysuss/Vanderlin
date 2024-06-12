@@ -277,132 +277,193 @@
 	icon_state = "eyekey"
 	lockid = "porta"
 
-//custom key
-/obj/item/roguekey/custom
-	name = "custom key"
-	desc = "A custom key designed by a blacksmith."
+// Dakkatown Keys
+/obj/item/roguekey/monastery
+	name = "monastery key"
+	icon_state = "greenkey"
+	lockid = "monastery"
+
+/obj/item/roguekey/houses
+	name = ""
+	icon_state = ""
+	lockid = ""
+
+/obj/item/roguekey/houses/house1
+	name = "house i key"
 	icon_state = "brownkey"
+	lockid = "house1"
 
-/obj/item/roguekey/custom/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = (input(user, "What would you name this key?", "", "") as text) 
-		if(input)
-			name = name + " key"
-			to_chat(user, "<span class='notice'>You rename the key to [name].</span>")
-
-//custom key blank
-/obj/item/customblank //i'd prefer not to make a seperate item for this honestly
-	name = "blank custom key"
-	desc = "A key without its teeth carved in. Endless possibilities..."
-	icon = 'icons/roguetown/items/keys.dmi'
+/obj/item/roguekey/houses/house2
+	name = "house ii key"
 	icon_state = "brownkey"
-	w_class = WEIGHT_CLASS_TINY
-	dropshrink = 0.75
-	var/lockhash = 0
+	lockid = "house2"
 
-/obj/item/customblank/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = input(user, "What would you like to set the key ID to?", "", 0) as num
-		input = max(0, input)
-		to_chat(user, "<span class='notice'>You set the key ID to [input].</span>")
-		lockhash = 10000 + input //having custom lock ids start at 10000 leaves it outside the range that opens normal doors, so you can't make a key that randomly unlocks existing key ids like the church
+/obj/item/roguekey/houses/house3
+	name = "house iii key"
+	icon_state = "brownkey"
+	lockid = "house3"
 
-/obj/item/customblank/attack_right(mob/user)
-	if(istype(user.get_active_held_item(), /obj/item/roguekey))
-		var/obj/item/roguekey/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You trace the teeth from [held] to [src].</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/customlock))
-		var/obj/item/customlock/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You fine-tune [src] to the lock's internals.</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockhash != 0)
-		var/obj/item/roguekey/custom/F = new (get_turf(src))
-		F.lockhash = src.lockhash
-		to_chat(user, "<span class='notice'>You finish [F].</span>")
-		qdel(src)
+/obj/item/roguekey/houses/house4
+	name = "house iv key"
+	icon_state = "brownkey"
+	lockid = "house4"
 
+/obj/item/roguekey/houses/house5
+	name = "house v key"
+	icon_state = "brownkey"
+	lockid = "house5"
 
-//custom lock unfinished
-/obj/item/customlock
-	name = "unfinished lock"
-	desc = "A lock without its pins set. Endless possibilities..."
-	icon = 'icons/roguetown/items/keys.dmi'
-	icon_state = "lock"
-	w_class = WEIGHT_CLASS_SMALL
-	dropshrink = 0.75
-	var/lockhash = 0
+/obj/item/roguekey/houses/house6
+	name = "house vi key"
+	icon_state = "brownkey"
+	lockid = "house6"
 
-/obj/item/customlock/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = input(user, "What would you like to set the lock ID to?", "", 0) as num
-		input = max(0, input)
-		to_chat(user, "<span class='notice'>You set the lock ID to [input].</span>")
-		lockhash = 10000 + input //same deal as the customkey
-	else if(istype(I, /obj/item/roguekey))
-		var/obj/item/roguekey/ID = I
-		if(ID.lockhash == src.lockhash)
-			to_chat(user, "<span class='notice'>[I] twists cleanly in [src].</span>")
-		else
-			to_chat(user, "<span class='warning'>[I] jams in [src],</span>")
-	else if(istype(I, /obj/item/customblank))
-		var/obj/item/customblank/ID = I
-		if(ID.lockhash == src.lockhash)
-			to_chat(user, "<span class='notice'>[I] twists cleanly in [src].</span>") //this makes no sense since the teeth aren't formed yet but i want people to be able to check whether the locks theyre making actually fit
-		else
-			to_chat(user, "<span class='warning'>[I] jams in [src].</span>")
+/obj/item/roguekey/houses/house7
+	name = "house vii key"
+	icon_state = "brownkey"
+	lockid = "house7"
 
-/obj/item/customlock/attack_right(mob/user)
-	if(istype(user.get_active_held_item(), /obj/item/roguekey))//i need to figure out how to avoid these massive if/then trees, this sucks
-		var/obj/item/roguekey/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You align the lock's internals to [held].</span>") //locks for non-custom keys
-	else if(istype(user.get_active_held_item(), /obj/item/customblank))
-		var/obj/item/customblank/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You align the lock's internals to [held].</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockhash != 0)
-		var/obj/item/customlock/finished/F = new (get_turf(src))
-		F.lockhash = src.lockhash
-		to_chat(user, "<span class='notice'>You finish [F].</span>")
-		qdel(src)
+/obj/item/roguekey/houses/house8
+	name = "house viii key"
+	icon_state = "brownkey"
+	lockid = "house8"
 
-//finished lock
-/obj/item/customlock/finished
-	name = "lock"
-	desc = "A customized iron lock that is used by keys."
-	var/holdname = ""
+/obj/item/roguekey/houses/house9
+	name = "house ix key"
+	icon_state = "brownkey"
+	lockid = "house9"
 
-/obj/item/customlock/finished/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		src.holdname = input(user, "What would you like to name this?", "", "") as text
-		if(holdname)
-			to_chat(user, "<span class='notice'>You label the [name] with [holdname].</span>")
-	else
-		..()
+/obj/item/roguekey/apartments
+	name = ""
+	icon_state = ""
+	lockid = ""
 
-/obj/item/customlock/finished/attack_right(mob/user)//does nothing. probably better ways to do this but whatever
+/obj/item/roguekey/apartments/apartment1
+	name = "apartment i key"
+	icon_state = "brownkey"
+	lockid = "apartment1"
 
-/obj/item/customlock/finished/attack_obj(obj/structure/K, mob/living/user)
-	if(istype(K, /obj/structure/closet))
-		var/obj/structure/closet/KE = K
-		if(KE.keylock == TRUE)
-			to_chat(user, "<span class='warning'>[K] already has a lock.</span>")
-		else
-			KE.keylock = TRUE
-			KE.lockhash = src.lockhash
-			if(src.holdname)
-				KE.name = (src.holdname + " " + KE.name)
-			to_chat(user, "<span class='notice'>You add [src] to [K].</span>")
-			qdel(src)
-	if(istype(K, /obj/structure/mineral_door))
-		var/obj/structure/mineral_door/KE = K
-		if(KE.keylock == TRUE)
-			to_chat(user, "<span class='warning'>[K] already has a lock.</span>")
-		else
-			KE.keylock = TRUE
-			KE.lockhash = src.lockhash
-			if(src.holdname)
-				KE.name = src.holdname
-			to_chat(user, "<span class='notice'>You add [src] to [K].</span>")
-			qdel(src)
+/obj/item/roguekey/apartments/apartment2
+	name = "apartment ii key"
+	icon_state = "brownkey"
+	lockid = "apartment2"
+
+/obj/item/roguekey/apartments/apartment3
+	name = "apartment iii key"
+	icon_state = "brownkey"
+	lockid = "apartment3"
+
+/obj/item/roguekey/apartments/apartment4
+	name = "apartment iv key"
+	icon_state = "brownkey"
+	lockid = "apartment4"
+
+/obj/item/roguekey/apartments/apartment5
+	name = "apartment v key"
+	icon_state = "brownkey"
+	lockid = "apartment5"
+
+/obj/item/roguekey/apartments/apartment6
+	name = "apartment vi key"
+	icon_state = "brownkey"
+	lockid = "apartment6"
+
+/obj/item/roguekey/apartments/apartment7
+	name = "apartment vii key"
+	icon_state = "brownkey"
+	lockid = "apartment7"
+
+/obj/item/roguekey/apartments/apartment8
+	name = "apartment viii key"
+	icon_state = "brownkey"
+	lockid = "apartment8"
+
+/obj/item/roguekey/apartments/apartment9
+	name = "apartment ix key"
+	icon_state = "brownkey"
+	lockid = "apartment9"
+
+/obj/item/roguekey/shops
+	name = ""
+	icon_state = ""
+	lockid = ""
+
+/obj/item/roguekey/shops/shop1
+	name = "shop i key"
+	icon_state = "rustkey"
+	lockid = "shop1"
+
+/obj/item/roguekey/shops/shop2
+	name = "shop ii key"
+	icon_state = "rustkey"
+	lockid = "shop2"
+
+/obj/item/roguekey/shops/shop3
+	name = "shop iii key"
+	icon_state = "rustkey"
+	lockid = "shop3"
+
+/obj/item/roguekey/shops/shop4
+	name = "shop iv key"
+	icon_state = "rustkey"
+	lockid = "shop4"
+
+/obj/item/roguekey/shops/shop5
+	name = "shop v key"
+	icon_state = "rustkey"
+	lockid = "shop5"
+
+/obj/item/roguekey/shops/shop6
+	name = "shop vi key"
+	icon_state = "rustkey"
+	lockid = "shop6"
+
+/obj/item/roguekey/shops/shop7
+	name = "shop vii key"
+	icon_state = "rustkey"
+	lockid = "shop7"
+
+/obj/item/roguekey/shops/shop8
+	name = "shop viii key"
+	icon_state = "rustkey"
+	lockid = "shop8"
+
+/obj/item/roguekey/shops/shop9
+	name = "shop ix key"
+	icon_state = "rustkey"
+	lockid = "shop9"
+
+/obj/item/roguekey/theatre
+	name = "theatre key"
+	icon_state = "mazekey"
+	lockid = "theatre"
+
+/obj/item/roguekey/butcher
+	name = "butcher's key"
+	icon_state = "rustkey"
+	lockid = "butcher"
+
+/obj/item/roguekey/farmer
+	name = "farmer's key"
+	icon_state = "rustkey"
+	lockid = "farm"
+
+obj/item/roguekey/elder
+	name = "elder's key"
+	icon_state = "rustkey"
+	lockid = "elder"
+
+obj/item/roguekey/apothecary
+	name = "apothecary's key"
+	icon_state = "rustkey"
+	lockid = "apothecary"
+
+obj/item/roguekey/weaponsmith
+	name = "weaponsmith's key"
+	icon_state = "rustkey"
+	lockid = "weaponsmith"
+
+obj/item/roguekey/armorsmith
+	name = "armorsmith's key"
+	icon_state = "rustkey"
+	lockid = "armorsmith"
