@@ -682,7 +682,6 @@
 		transfer_fingerprints_to(newparts)
 	qdel(src)
 
-
 /obj/structure/rack/rogue
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "rack"
@@ -700,7 +699,6 @@
 	pixel_y = 32
 
 /obj/structure/rack/rogue/shelf/big
-	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "shelf_big"
 	climbable = FALSE
 	dir = SOUTH
@@ -709,6 +707,9 @@
 /obj/structure/rack/rogue/shelf/biggest
 	icon_state = "shelf_biggest"
 	pixel_y = 0
+
+// temporary
+/obj/item/cooking/platter
 
 /*
  * Rack Parts
