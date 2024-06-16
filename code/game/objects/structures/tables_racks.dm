@@ -230,6 +230,7 @@
 /*
  * Glass tables
  */
+
 /obj/structure/table/glass
 	name = "glass table"
 	desc = ""
@@ -504,6 +505,7 @@
 /*
  * Reinforced tables
  */
+
 /obj/structure/table/reinforced
 	name = "reinforced table"
 	desc = ""
@@ -597,6 +599,7 @@
 /*
  * Racks
  */
+
 /obj/structure/rack
 	name = "rack"
 	desc = ""
@@ -672,7 +675,7 @@
 	take_damage(rand(4,8), BRUTE, "melee", 1)*/
 
 /*
- * Rack destruction
+ * Rack Destruction
  */
 
 /obj/structure/rack/deconstruct(disassembled = TRUE)
@@ -681,6 +684,7 @@
 		var/obj/item/rack_parts/newparts = new(loc)
 		transfer_fingerprints_to(newparts)
 	qdel(src)
+
 
 /obj/structure/rack/rogue
 	icon = 'icons/roguetown/misc/structure.dmi'
