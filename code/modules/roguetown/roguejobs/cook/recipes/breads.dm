@@ -507,14 +507,14 @@
 /datum/crafting_recipe/roguetown/cooking/handpie
 	name = "mince field pie"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/rogue/meat/mince = 2,
-		/obj/item/reagent_containers/food/snacks/rogue/doughslice = 1)
-	result = list(/obj/item/reagent_containers/food/snacks/rogue/handpie, 
-				/obj/item/reagent_containers/food/snacks/rogue/handpie)
+		/obj/item/reagent_containers/food/snacks/rogue/meat/mince = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/piedoughslice = 1)
+	parts = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/mince = 1)
+	result = /obj/item/reagent_containers/food/snacks/rogue/handpie
 
 /obj/item/reagent_containers/food/snacks/rogue/handpie
 	name = "unbaked mince field pie"
-	desc = "An uncooked field pie filled with minced meat. Must be baked to become edible."
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpieuncooked"
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/cooked/handpie
@@ -524,7 +524,7 @@
 	name = "mince field pie"
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpie"
-	desc = "A field pie made with minced meat. A decent ration for long trips."
+	desc = ""
 	foodtype = GRAIN | MEAT
 	list_reagents = list(/datum/reagent/consumable/nutriment = 10)
 	tastes = list("baked dough with crumbly meat" = 1)
@@ -533,14 +533,14 @@
 /datum/crafting_recipe/roguetown/cooking/chandpie
 	name = "cheese field pie"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/rogue/cheese = 2,
-		/obj/item/reagent_containers/food/snacks/rogue/doughslice = 1)
-	result = list(/obj/item/reagent_containers/food/snacks/rogue/chandpie, 
-				/obj/item/reagent_containers/food/snacks/rogue/chandpie)
+		/obj/item/reagent_containers/food/snacks/rogue/cheese = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/piedoughslice = 1)
+	parts = list(
+		/obj/item/reagent_containers/food/snacks/rogue/cheese = 1)
+	result = /obj/item/reagent_containers/food/snacks/rogue/chandpie
 
 /obj/item/reagent_containers/food/snacks/rogue/chandpie
 	name = "unbaked cheese field pie"
-	desc = "An uncooked field pie filled with cheese. Must be baked to become edible."
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpieuncooked"
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/cooked/chandpie
@@ -550,7 +550,7 @@
 	name = "cheese field pie"
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handcheesepie"
-	desc = "A field pie filled with melted cheese. A decent ration for long trips."
+	desc = ""
 	foodtype = GRAIN | SUGAR | DAIRY
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8)
 	tastes = list("baked dough with gooey cheese" = 1)
@@ -559,14 +559,14 @@
 /datum/crafting_recipe/roguetown/cooking/chhandpie
 	name = "chicken field pie"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/rogue/meat/poultry/cutlet = 2,
-		/obj/item/reagent_containers/food/snacks/rogue/doughslice = 1)
-	result = list(/obj/item/reagent_containers/food/snacks/rogue/chandpie, 
-					/obj/item/reagent_containers/food/snacks/rogue/chandpie)
+		/obj/item/reagent_containers/food/snacks/rogue/meat/poultry/cutlet = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/piedoughslice = 1)
+	parts = list(
+		/obj/item/reagent_containers/food/snacks/rogue/meat/poultry/cutlet = 1)
+	result = /obj/item/reagent_containers/food/snacks/rogue/chandpie
 
 /obj/item/reagent_containers/food/snacks/rogue/chhandpie
 	name = "unbaked chicken field pie"
-	desc = "An uncooked field pie filled with poultry. Must be baked to become edible."
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpieuncooked"
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/cooked/chhandpie
@@ -576,7 +576,7 @@
 	name = "chicken field pie"
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpotpie"
-	desc = "A field pie filled with delicious chicken. A decent ration for long trips."
+	desc = ""
 	foodtype = GRAIN | SUGAR
 	list_reagents = list(/datum/reagent/consumable/nutriment = 8)
 	tastes = list("baked dough with savoury chicken" = 1)
@@ -585,14 +585,14 @@
 /datum/crafting_recipe/roguetown/cooking/ahandpie
 	name = "apple field pie"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/grown/apple = 2,
-		/obj/item/reagent_containers/food/snacks/rogue/doughslice = 1)
-	result = list(/obj/item/reagent_containers/food/snacks/rogue/ahandpie, 
-				/obj/item/reagent_containers/food/snacks/rogue/ahandpie)
+		/obj/item/reagent_containers/food/snacks/grown/apple = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/piedoughslice = 1)
+	parts = list(
+		/obj/item/reagent_containers/food/snacks/grown/apple = 1)
+	result = /obj/item/reagent_containers/food/snacks/rogue/ahandpie
 
 /obj/item/reagent_containers/food/snacks/rogue/ahandpie
 	name = "unbaked apple field pie"
-	desc = "An uncooked field pie filled with apples. Must be baked to become edible."
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpieuncooked"
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/cooked/ahandpie
@@ -602,7 +602,7 @@
 	name = "apple field pie"
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handapplepie"
-	desc = "A field pie filled with apple jam. A sweet ration for long trips."
+	desc = ""
 	foodtype = GRAIN | SUGAR
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
 	tastes = list("baked dough with sweet apple" = 1)
@@ -611,14 +611,14 @@
 /datum/crafting_recipe/roguetown/cooking/bhandpie
 	name = "berry field pie"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2,
-		/obj/item/reagent_containers/food/snacks/rogue/doughslice = 1)
-	result = list(/obj/item/reagent_containers/food/snacks/rogue/bhandpie, 
-				/obj/item/reagent_containers/food/snacks/rogue/bhandpie)
+		/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 1,
+		/obj/item/reagent_containers/food/snacks/rogue/piedoughslice = 1)
+	parts = list(
+		/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 1)
+	result = /obj/item/reagent_containers/food/snacks/rogue/bhandpie
 
 /obj/item/reagent_containers/food/snacks/rogue/bhandpie
 	name = "unbaked berry field pie"
-	desc = "An uncooked field pie filled with hopefully non poisonous berries. Must be cooked to become edible."
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handpieuncooked"
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/cooked/bhandpie
@@ -628,7 +628,7 @@
 	name = "berry field pie"
 	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "handberrypie"
-	desc = "A field pie filled with berry jam. A sweet ration for long trips."
+	desc = ""
 	foodtype = GRAIN | SUGAR
 	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
 	tastes = list("baked dough with tart berries" = 1)
