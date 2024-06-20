@@ -9323,6 +9323,7 @@
 /area/rogue/outdoors/rtfield)
 "nAz" = (
 /obj/machinery/light/rogue/wallfire/candle/l,
+/obj/structure/fluff/walldeco/chains,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/garrison)
 "nBl" = (
@@ -9388,9 +9389,9 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/under/town/basement)
 "nGc" = (
-/obj/structure/fluff/walldeco/chains,
-/turf/open/floor/rogue/blocks,
-/area/rogue/indoors/town/garrison)
+/obj/effect/landmark/events/haunts,
+/turf/open/floor/rogue/blocks/stonered/tiny,
+/area/rogue/indoors/town/bath)
 "nGk" = (
 /obj/structure/roguewindow/openclose{
 	dir = 8;
@@ -58147,7 +58148,7 @@ oXi
 oXi
 jDC
 rrU
-hrS
+cMa
 aqp
 iUq
 iUq
@@ -58290,7 +58291,7 @@ jkv
 sUF
 nAz
 rrU
-nGc
+rrU
 kXt
 xbF
 qvm
@@ -58617,8 +58618,8 @@ wVe
 oXi
 tUt
 aqp
-cMa
 hrS
+cMa
 dtb
 iUq
 iUq
@@ -58931,8 +58932,8 @@ ykq
 oXi
 oXi
 eCr
-wuU
 lgu
+wuU
 pNk
 iUq
 iUq
@@ -61098,7 +61099,7 @@ bjg
 bjg
 qFZ
 vTl
-vTl
+nGc
 vTl
 vTl
 vTl
