@@ -415,7 +415,7 @@
 	debris = list(/obj/item/grown/log/tree/small = 2)
 	climb_offset = 10
 
-/obj/structure/table/wood/finer
+/obj/structure/table/wood/nice
 	name = "wooden table"
 	desc = ""
 	icon = 'icons/roguetown/misc/tables.dmi'
