@@ -36,20 +36,27 @@
 	id = /obj/item/clothing/ring/gold/protection
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 	beltr = /obj/item/keyring/mage
-	backl = /obj/item/rogueweapon/woodstaff
-	backpack_contents = list(/obj/item/scrying = 1)
-	switch(pick(1,2))
-		if (1)
-			shoes = /obj/item/clothing/shoes/roguetown/shalal	
-		if (2)
-			shoes = /obj/item/clothing/shoes/roguetown/shortboots
-
-/datum/outfit/job/roguetown/magician/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
-	if(visualsOnly)
-		return
-
-	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
+	r_hand = /obj/item/rogueweapon/woodstaff
+	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/magic/arcane, pick(6,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+		H.change_stat("strength", -2)
+		H.change_stat("intelligence", 5)
+		H.change_stat("constitution", -2)
+		H.change_stat("speed", -2)
+		if(H.age == AGE_OLD)
+			H.change_stat("speed", -1)
+			H.change_stat("intelligence", 1)
+			if(H.dna.species.id == "human")
+				belt = /obj/item/storage/belt/rogue/leather/plaquegold
+				cloak = null
+				head = /obj/item/clothing/head/roguetown/wizhat
+				armor = /obj/item/clothing/suit/roguetown/shirt/robe/wizard
+				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 
 	H.virginity = TRUE
