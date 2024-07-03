@@ -22,7 +22,7 @@
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	gripped_intents = list(/datum/intent/axe/chop/stone)
 	smeltresult = /obj/item/ingot/copper
-	axe_cut = 7
+	sellprice = 10
 
 /obj/item/rogueweapon/stoneaxe/getonmobprop(tag)
 	if(tag)
@@ -98,6 +98,7 @@
 	max_blade_int = 200
 	max_integrity = 300
 	wdefense = 3
+	sellprice = 60
 
 /obj/item/rogueweapon/battle/getonmobprop(tag)
 	if(tag)
@@ -129,7 +130,7 @@
 	associated_skill = /datum/skill/combat/axesmaces
 	wdefense = 2
 	minstr = 6
-	axe_cut = 10
+	sellprice = 20
 
 // Pickaxe-axe ; Technically both a tool and weapon, but it goes here due to weapon function. Subtype of steel axe.
 /obj/item/rogueweapon/woodcut/pick
@@ -160,6 +161,7 @@
 	associated_skill = /datum/skill/combat/axesmaces
 	wdefense = 3
 	minstr = 6
+	sellprice = 35
 
 /obj/item/rogueweapon/woodcut/getonmobprop(tag)
 	. = ..()
@@ -198,4 +200,4 @@
 	wlength = WLENGTH_SHORT
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	gripped_intents = list(/datum/intent/axe/chop/stone)
-	axe_cut = 8
+	sellprice = 15

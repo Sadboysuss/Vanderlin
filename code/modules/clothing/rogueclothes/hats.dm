@@ -387,6 +387,7 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	blocksound = PLATEHIT
 	max_integrity = 350
+	sellprice = 30
 
 /obj/item/clothing/head/roguetown/helmet/equipped(mob/user, slot)
 	. = ..()
@@ -405,6 +406,7 @@
 	armor = list("melee" = 70, "bullet" = 50, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	will_cover = HEAD|HAIR|EARS
 	max_integrity = 150
+	sellprice = 20
 
 /obj/item/clothing/head/roguetown/helmet/horned
 	name = "horned cap"
@@ -412,6 +414,7 @@
 	icon_state = "hornedcap"
 	max_integrity = 150
 	will_cover = HEAD|HAIR|EARS
+	sellprice = 20
 
 /obj/item/clothing/head/roguetown/helmet/winged
 	name = "winged cap"
@@ -437,6 +440,7 @@
 	will_cover = HEAD|HAIR|EARS
 	will_hide = HIDEEARS
 	max_integrity = 300
+	sellprice = 35
 
 /obj/item/clothing/head/roguetown/helmet/sallet/visored
 	name = "visored sallet"
@@ -450,6 +454,7 @@
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
 	block2add = FOV_BEHIND
 	max_integrity = 350
+	sellprice = 60
 
 /obj/item/clothing/head/roguetown/helmet/sallet/visored/AdjustClothes(mob/user)
 	if(loc == user)
@@ -481,6 +486,7 @@
 	item_state = "bascinet_novisor"
 	armor = list("melee" = 90, "bullet" = 80, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	color = COLOR_ASSEMBLY_GOLD
+	sellprice = 100
 
 /obj/item/clothing/head/roguetown/helmet/heavy
 	name = "barbute"
@@ -495,6 +501,7 @@
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
 	max_integrity = 250
+	sellprice = 100
 
 // VL's are already OP and the helm is made of iron, let's not give them too good of a helm
 /obj/item/clothing/head/roguetown/helmet/heavy/guard
@@ -533,6 +540,7 @@
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
 	smeltresult = /obj/item/ingot/steel
 	max_integrity = 350
+	sellprice = 65
 
 /obj/item/clothing/head/roguetown/helmet/heavy/knight/black
 	color = CLOTHING_BLACK
@@ -573,6 +581,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB) // Stab immunity as a treat for low FOV
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
+	sellprice = 60
 
 /obj/item/clothing/head/roguetown/helmet/heavy/hounskull
 	name = "hounskull helmet" // "Pigface" is a modern term, hounskull is a c.1400 term.
@@ -588,6 +597,7 @@
 	will_hide = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
+	sellprice = 90
 
 /obj/item/clothing/head/roguetown/helmet/heavy/hounskull/AdjustClothes(mob/user)
 	if(loc == user)
@@ -628,6 +638,7 @@
 	max_integrity = 200
 	sewrepair = TRUE
 	blocksound = SOFTHIT
+	sellprice = 20
 
 /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
@@ -643,6 +654,7 @@
 	anvilrepair = null
 	sewrepair = TRUE
 	blocksound = SOFTHIT
+	sellprice = 30
 
 /obj/item/clothing/head/roguetown/helmet/leather/minershelm
 	name = "leather miners helmet"
