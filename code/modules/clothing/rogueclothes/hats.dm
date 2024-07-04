@@ -71,7 +71,7 @@
 
 /obj/item/clothing/head/roguetown/roguehood/nochood
 	name = "moon hood"
-	desc = ""
+	desc = "Worn by the faitful of Noc."
 	color = null
 	icon_state = "nochood"
 	item_state = "nochood"
@@ -106,6 +106,7 @@
 
 /obj/item/clothing/head/roguetown/eoramask
 	name = "eoran mask"
+	desc = "A silver rabbet mask worn by the faithful of Eora, usually during their rituals."
 	color = null
 	icon_state = "eoramask"
 	item_state = "eoramask"
@@ -114,10 +115,11 @@
 	worn_y_dimension = 64
 	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDEHAIR
 	dynamic_hair_suffix = ""
+	resistance_flags = FIRE_PROOF // Made of metal
 
 /obj/item/clothing/head/roguetown/priestmask
 	name = "solar visage"
-	desc = "The sanctified helm of the most devoted. Thiefs beware."
+	desc = "The sanctified helm of the most devoted. Thieves beware."
 	color = null
 	icon_state = "priesthead"
 	item_state = "priesthead"
