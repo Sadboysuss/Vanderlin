@@ -11,6 +11,8 @@
 	dynamic_hair_suffix = "+generic"
 	bloody_icon_state = "helmetblood"
 	experimental_onhip = TRUE
+	sewrepair = TRUE
+	anvilrepair = null
 	smeltresult = /obj/item/ash // Helmets have pre-defined smeltresults, this is for hats
 	var/will_cover // used for avoiding issues when worn on hip, currently only helmets
 	var/will_hide
@@ -310,6 +312,7 @@
 	//dropshrink = 0
 	dynamic_hair_suffix = null
 	sellprice = 200
+	sewrepair = FALSE
 	resistance_flags = FIRE_PROOF|ACID_PROOF|LAVA_PROOF|UNACIDABLE|INDESTRUCTIBLE
 
 /obj/item/clothing/head/roguetown/crown/serpcrown/Initialize()
@@ -328,6 +331,7 @@
 	icon_state = "sparrowcrown"
 	//dropshrink = 0
 	dynamic_hair_suffix = null
+	sewrepair = FALSE
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 50
 
@@ -387,6 +391,7 @@
 	dynamic_hair_suffix = "+generic"
 	bloody_icon_state = "helmetblood"
 	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = FALSE
 	blocksound = PLATEHIT
 	max_integrity = 350
 	sellprice = 30
@@ -606,7 +611,7 @@
 		playsound(user, "sound/items/visor.ogg", 100, TRUE, -1)
 		if(adjustable == CAN_CADJUST)
 			adjustable = CADJUSTED
-			icon_state = "hounskull_open"
+			icon_state = "hounskull_raised"
 			body_parts_covered = HEAD|HAIR|EARS
 			flags_inv = HIDEEARS|HIDEHAIR
 			flags_cover = null
@@ -654,7 +659,6 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/ash
 	anvilrepair = null
-	sewrepair = TRUE
 	blocksound = SOFTHIT
 	sellprice = 30
 
@@ -733,6 +737,8 @@
 	dynamic_hair_suffix = null
 	sellprice = 100
 	resistance_flags = FIRE_PROOF
+	sewrepair = FALSE
+	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/head/roguetown/helmet/orc
 	name = "orc helmet"
@@ -761,6 +767,8 @@
 	colorgrenz = TRUE
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/ash
+	sewrepair = TRUE
+	anvilrepair = null
 
 /obj/item/clothing/head/roguetown/grenzelhofthat/update_icon()
 	cut_overlays()
@@ -778,6 +786,8 @@
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	armor_class = ARMOR_CLASS_HEAVY
 	resistance_flags = FIRE_PROOF // These are all metallic
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB, BCLASS_TWIST, BCLASS_BITE)
+	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/head/roguetown/rare/elfplate
 	icon_state = "elfhead"
@@ -787,12 +797,11 @@
 	desc = "A bizarrely lightweight helmet of alloyed elven steel, offering unparalleled protection for elite bladesingers."
 	body_parts_covered = HEAD|HAIR|NOSE
 	allowed_race = list("elf", "half-elf", "dark elf")
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	anvilrepair = /datum/skill/craft/armorsmithing
 	armor_class = ARMOR_CLASS_MEDIUM
 
 /obj/item/clothing/head/roguetown/rare/elfplate/welfplate
 	name = "elvish plate helmet"
+	desc = "A bizarrely lightweight helmet of alloyed elven steel, offering unparalleled protection for elite bladesingers."
 	icon_state = "welfhead"
 	item_state = "welfhead"
 	body_parts_covered = HEAD|HAIR|NOSE|EYES
@@ -809,8 +818,6 @@
 	flags_inv = HIDEEARS
 	experimental_onhip = FALSE
 	allowed_race = list("dwarf")
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/head/roguetown/rare/grenzelplate
 	icon_state = "human_swordhead"
@@ -823,8 +830,6 @@
 	body_parts_covered = HEAD|EARS|HAIR
 	flags_inv = HIDEEARS
 	allowed_race = list("human")
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/head/roguetown/rare/zybanplate
 	icon_state = "human_spearhead"
@@ -838,8 +843,6 @@
 	body_parts_covered = HEAD|EARS|HAIR
 	flags_inv = HIDEEARS
 	allowed_race = list("human")
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/head/roguetown/helmet/sallet/zybantine
 	name = "zybantine kulah khud"
