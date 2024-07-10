@@ -60,9 +60,18 @@
 		H.STALUC = rand(1, 20)
 	if(prob(5))
 		r_hand = /obj/item/rogueweapon/mace/woodclub
-	H.change_stat("intelligence", -3)
-	H.change_stat("constitution", -2)
-	H.change_stat("endurance", -2)
+	if(prob(5))
+		l_hand = /obj/item/rogueweapon/mace/woodclub
+	var/obj/item/bodypart/head/O = locate(/obj/item/bodypart/head) in H.bodyparts
+	if(O)
+		O.teeth_list.Cut()
+		var/obj/item/stack/teeth/T = new /obj/item/stack/teeth(O)
+		T.amount = rand(15, 31)
+		O.teeth_list += T
+	H.change_stat("strength", 2)
+	H.change_stat("intelligence", -4)
+	H.change_stat("constitution", -3)
+	H.change_stat("endurance", -3)
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"
