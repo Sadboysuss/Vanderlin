@@ -398,8 +398,14 @@
 	sleevetype = null
 	sleeved = null
 	armor_class = ARMOR_CLASS_LIGHT
+	color = "#584742"
 
-// Unique swashbuckler vest. Notice it doesn't cover arms.
+/obj/item/clothing/suit/roguetown/armor/leather/vest/butcher
+	name = "leather vest"
+	icon_state = "leathervest"
+	item_state = "leathervest"
+	color = null
+
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 	name = "sea jacket"
 	desc = "A sturdy jacket worn by daring seafarers. The leather it's made from has been tanned by the salt of Abyssor's seas."
