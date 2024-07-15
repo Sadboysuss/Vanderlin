@@ -61,7 +61,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/rogue/troll/blood/Initialize()
 	. = ..()
-	REMOVE_TRAIT(src, TRAIT_CRITICAL_WEAKNESS)
+	REMOVE_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 
 /mob/living/simple_animal/hostile/retaliate/rogue/troll/blood/ascended
 	name = "???"
@@ -87,8 +87,8 @@
 /mob/living/simple_animal/hostile/retaliate/rogue/troll/blood/ascended/Initialize()
 	. = ..()
 	set_light(5,5, LIGHT_COLOR_RED)
-	REMOVE_TRAIT(src, TRAIT_CRITICAL_WEAKNESS)
-	ADD_TRAIT(src, TRAIT_CRITICAL_RESISTANCE)
+	REMOVE_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 
 /mob/living/simple_animal/hostile/retaliate/rogue/troll/blood/ascended/get_sound(input)
 	switch(input)
