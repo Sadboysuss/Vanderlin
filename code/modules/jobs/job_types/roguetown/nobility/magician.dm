@@ -62,7 +62,7 @@
 	H.virginity = TRUE
 
 	H.change_stat("strength", -2)
-	H.change_stat("intelligence", 3)
+	H.change_stat("intelligence", 5)
 	H.change_stat("constitution", -2)
 	H.change_stat("speed", -2)
 
@@ -92,15 +92,45 @@
 	if(H.age == AGE_MIDDLEAGED)
 		cloak = /obj/item/clothing/cloak/black_cloak
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fetch)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball/greater)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock)
-	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile)
-	H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/repulse)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/repulse)
+		if(H.age == AGE_OLD)
+			armor = /obj/item/clothing/suit/roguetown/shirt/robe/courtmage
+			H.change_stat("speed", -1)
+			H.change_stat("intelligence", 1)
+			if(H.dna.species.id == "human")
+				belt = /obj/item/storage/belt/rogue/leather/plaquegold
+				head = /obj/item/clothing/head/roguetown/wizhat
+				armor = /obj/item/clothing/suit/roguetown/shirt/robe/wizard
+				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
+		if(H.age == AGE_MIDDLEAGED)
+			cloak = /obj/item/clothing/cloak/black_cloak
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock)
+
+/datum/outfit/job/roguetown/magician/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	..()
+	if(visualsOnly)
+		return
+
+	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/magic/arcane, pick(6,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+
 	if(H.patron != /datum/patron/divine/noc)
 		H.patron = GLOB.patronlist[/datum/patron/divine/noc]
 		to_chat(H, "<span class='warning'>My long studies of magicks has drawn me to [H.patron], no matter what other gods I might have preferred in the past.")
 
 
 //............... Unique Court Mage Stuff ...........................
+/*
 /obj/item/clothing/head/roguetown/wizhat/equipped(mob/living/user, slot)
 	. = ..()
 	if(user.mind && user.mind.assigned_role == "Court Magician")
@@ -143,3 +173,4 @@
 	desc = "<span class='nicegreen'>My hat deflects mind-clouding rays of Zizo...</span>\n"
 	icon = 'icons/mob/actions/roguespells.dmi'
 	icon_state = ""
+*/
