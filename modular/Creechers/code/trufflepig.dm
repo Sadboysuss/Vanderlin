@@ -50,7 +50,6 @@
 	color = "#ab7d6f"
 	tastes = list("mushroom" = 1)
 	sellprice = 30
-	rotprocess = null
 /obj/item/reagent_containers/food/snacks/rogue/truffles/cooked
 	eat_effect = /datum/status_effect/buff/foodbuff
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 3)
