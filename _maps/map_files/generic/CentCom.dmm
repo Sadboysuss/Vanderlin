@@ -287,7 +287,7 @@
 "mY" = (/obj/item/reagent_containers/food/snacks/rogue/meat/steak,/turf/open/floor/rogue/dirt,/area/rogue/outdoors/bog/inhumen_camp)
 "na" = (/obj/structure/table/wood{icon_state = "longtable"},/obj/item/clothing/head/roguetown/fancyhat,/obj/item/clothing/head/roguetown/fancyhat,/turf/open/floor/rogue/wood,/area/rogue)
 "nd" = (/obj/structure/rack/rogue/shelf/biggest,/obj/item/reagent_containers/glass/bottle/rogue/manapot,/obj/item/reagent_containers/glass/bottle/rogue/manapot,/obj/item/reagent_containers/glass/bottle/rogue/manapot,/obj/item/reagent_containers/glass/bottle/rogue/manapot,/turf/open/floor/rogue/wood,/area/rogue)
-"nh" = (/obj/structure/rack/rogue,/obj/item/clothing/neck/roguetown/coif,/turf/open/floor/rogue/ruinedwood/darker,/area/rogue/indoors/bandit_lair)
+"nh" = (/obj/structure/rack/rogue,/obj/item/clothing/head/roguetown/helmet/leather/bandithood,/obj/item/clothing/head/roguetown/helmet/leather/bandithood,/turf/open/floor/rogue/ruinedwood/darker,/area/rogue/indoors/bandit_lair)
 "ni" = (/turf/open/floor/rogue/tile{icon_state = "chess"},/area/rogue/indoors/vampire_manor)
 "nj" = (/obj/structure/table/wood{dir = 9; icon_state = "largetable"},/obj/item/reagent_containers/glass/cup/skull{pixel_x = 7; pixel_y = -5},/turf/open/floor/rogue/ruinedwood/darker,/area/rogue/indoors/bandit_lair)
 "ns" = (/obj/effect/landmark/start/bandit{dir = 4; icon_state = "arrow"},/obj/structure/chair/stool/rogue,/turf/open/floor/rogue/ruinedwood/darker,/area/rogue/indoors/bandit_lair)
