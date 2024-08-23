@@ -965,3 +965,50 @@
 		ADD_TRAIT(user, TRAIT_NOSTINK,"Dead Nose")
 	else
 		REMOVE_TRAIT(user, TRAIT_NOSTINK,"Dead Nose")
+
+// Aasimar hoplite helmet
+/obj/item/clothing/head/roguetown/rare/hoplite
+	icon = 'icons/roguetown/clothing/head.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	name = "ancient helmet"
+	desc = "A weathered bronze helmet topped with a symbol of Astrata's sun."
+	icon_state = "aasimarhead"
+	item_state = "aasimarhead"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	body_parts_covered = HEAD|EARS|HAIR
+	flags_inv = HIDEEARS
+	allowed_race = list("aasimar")
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
+
+/obj/item/clothing/head/roguetown/helmet/ironplate
+	icon = 'icons/roguetown/clothing/head.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	name = "iron plate helmet"
+	max_integrity = 350//isn't the same as a steel helmet but is better than a skullcap, costs 2 bars and protects the mouth
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_STAB) // Stab protection out of having faceplate
+	block2add = FOV_RIGHT|FOV_LEFT // Unremovable visor.
+	armor = list("melee" = 60, "bullet" = 60, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	icon_state = "ironplate"
+	item_state = "ironplate"
+	desc = "An iron masked helmet usually worn by armed men, it is a solid design yet antiquated and cheap."
+	will_cover = HEAD|HAIR|NOSE|MOUTH|EARS
+	flags_inv = HIDEEARS
+	smeltresult = /obj/item/ingot/iron
+
+/obj/item/clothing/head/roguetown/helmet/ironpot
+	icon = 'icons/roguetown/clothing/head.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	name = "iron plate helmet"
+	max_integrity = 250//isn't the same as a steel helmet but is better than a skullcap
+	armor = list("melee" = 50, "bullet" = 30, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	icon_state = "ironpot"
+	item_state = "ironpot"
+	desc = "A iron pot style helmet designed to protect the skull and the nose, designs like those are outdated but they are simple to make in big numbers."
+	will_cover = HEAD|HAIR|NOSE|EARS
+	flags_inv = HIDEEARS
+	smeltresult = /obj/item/ingot/iron
