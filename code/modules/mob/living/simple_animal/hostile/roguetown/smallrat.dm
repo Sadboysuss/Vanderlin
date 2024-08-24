@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	START_PROCESSING(SSobj, src)
 	if(dead)
 		icon_state = "srat1"
-		rotprocess = SHELFLIFE_SHORT
+		rotprocess = 15 MINUTES
 
 /obj/item/reagent_containers/food/snacks/smallrat/attack_hand(mob/user)
 	if(isliving(user))
