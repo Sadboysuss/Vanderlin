@@ -49,7 +49,7 @@
 	H.change_stat("speed", -1)
 
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, rand(1,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(2,2,3), TRUE)
