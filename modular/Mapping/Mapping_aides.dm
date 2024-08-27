@@ -726,26 +726,13 @@
 /area/rogue/indoors/vampire_manor
 	name = "lair (Vampire Lord)"
 
-/area/rogue/outdoors/bog/inhumen_camp
+/area/rogue/indoors/inhumen_camp
 	name = "lair (Inhumen)"
+/area/rogue/outdoors/bog/inhumen_camp
+	name = "dangerous area (inhumen camp)"
 	droning_sound = 'sound/music/area/decap.ogg'
 	first_time_text = "THE DEEP BOG"
 
-// Inhumen boss bed. Sleeping on a bear! Kinda comfy, sort of
-/obj/structure/bed/rogue/bear
-	desc = "A hide of a slain bear. It looks like someone sleeps on it often."
-	icon = 'icons/turf/floors/bear.dmi'
-	icon_state = "bear"
-	pixel_x = -16
-	pixel_y = -27
-
-/obj/structure/fluff/walldeco/skullspike // for ground really
-	icon = 'modular/Mapping/icons/decoration.dmi'
-	icon_state = "skullspike"
-	plane = -1
-	layer = ABOVE_MOB_LAYER
-	pixel_x = 8
-	pixel_y = 24
 
 /*	..................   Floors   ................... */
 /turf/open/floor/rogue/ruinedwood/darker
