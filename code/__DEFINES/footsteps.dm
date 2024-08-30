@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(footstep, list(
 		'sound/foley/footsteps/FTMUD (2).ogg',
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
-		'sound/foley/footsteps/FTMUD (5).ogg'), 80, 0),
+		'sound/foley/footsteps/FTMUD (5).ogg'), 90, 0),
 ))
 //bare footsteps lists
 GLOBAL_LIST_INIT(barefootstep, list(
@@ -152,7 +152,7 @@ GLOBAL_LIST_INIT(heavyfootstep, list(
 		'sound/foley/footsteps/bigwalk (1).ogg',
 		'sound/foley/footsteps/bigwalk (2).ogg',
 		'sound/foley/footsteps/bigwalk (3).ogg',
-		'sound/foley/footsteps/bigwalk (4).ogg'), 100, 0),
+		'sound/foley/footsteps/bigwalk (4).ogg'), 90, 0),
 	FOOTSTEP_WATER = list(list(
 		'sound/foley/footsteps/FTWAT_1.ogg',
 		'sound/foley/footsteps/FTWAT_2.ogg',
