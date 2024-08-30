@@ -12,9 +12,8 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
-
-/datum/outfit/job/roguetown/adventurer/rogue
-	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
+	min_pq = 0
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
 	..()
