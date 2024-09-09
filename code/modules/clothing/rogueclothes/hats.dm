@@ -1042,7 +1042,7 @@
 /obj/item/clothing/head/roguetown/helmet/decoratedknighthelm
 	name = "decorated knight helmet"
 	desc = "A lavish knight's helmet which allows a crest to be mounted on top."
-	block2add = FOV_BEHIND
+	block2add = FOV_RIGHT|FOV_LEFT
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	icon_state = "decorated_knight"
 	item_state = "decorated_knight"
@@ -1096,7 +1096,7 @@
 /obj/item/clothing/head/roguetown/helmet/decoratedhounskull
 	name = "decorated hounskull"
 	desc = "A lavish hounskull which allows a crest to be mounted on top."
-	block2add = FOV_BEHIND
+	block2add = FOV_RIGHT|FOV_LEFT
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	icon_state = "decorated_hounskull"
 	item_state = "decorated_hounskull"
@@ -1150,7 +1150,7 @@
 /obj/item/clothing/head/roguetown/helmet/heavy/decoratedbucket
 	name = "decorated greathelm"
 	desc = "A lavish greathelm which allows a crest to be mounted on top."
-	block2add = FOV_BEHIND
+	block2add = FOV_RIGHT|FOV_LEFT
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	icon_state = "decorated_bucket"
 	item_state = "decorated_bucket"
@@ -1204,7 +1204,7 @@
 /obj/item/clothing/head/roguetown/helmet/heavy/decoratedgbucket
 	name = "decorated goldhelm"
 	desc = "A lavish gold-trimmed greathelm which allows a crest to be mounted on top."
-	block2add = FOV_BEHIND
+	block2add = FOV_RIGHT|FOV_LEFT
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	icon_state = "decorated_gbucket"
 	item_state = "decorated_gbucket"
