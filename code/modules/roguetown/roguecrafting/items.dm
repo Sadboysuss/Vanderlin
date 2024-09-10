@@ -229,7 +229,6 @@
 				/obj/item/natural/cloth = 1)
 	tools = list(/obj/item/needle)
 	skillcraft = /datum/skill/misc/sewing
-	req_table = TRUE
 
 /obj/item/storage/roguebag/crafted
 	sellprice = 4
@@ -271,6 +270,20 @@
 				/obj/item/reagent_containers/food/snacks/rogue/meat = 2)
 	req_table = FALSE
 	subtype_reqs = TRUE
+
+/datum/crafting_recipe/roguetown/woodplatter
+	name = "wood platters (x2)"
+	result = list(/obj/item/cooking/platter,
+				/obj/item/cooking/platter)
+	reqs = list(/obj/item/grown/log/tree/small = 1)
+
+/datum/crafting_recipe/roguetown/pipe
+	name = "wood pipe"
+	result = /obj/item/clothing/mask/cigarette/pipe/crafted
+	reqs = list(/obj/item/grown/log/tree/stick = 2)
+
+/obj/item/clothing/mask/cigarette/pipe/crafted
+	sellprice = 6
 
 /datum/crafting_recipe/roguetown/rod
 	name = "fishing rod"
