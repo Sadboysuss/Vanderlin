@@ -902,6 +902,53 @@
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 
+/datum/emote/living/scream/painscream/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.has_flaw(/datum/charflaw/addiction/masochist))
+			H.sate_addiction()
+
+/datum/emote/living/scream/agony
+	key = "agony"
+	message = "screams in agony!"
+	emote_type = EMOTE_AUDIBLE
+	only_forced_audio = TRUE
+
+/datum/emote/living/screan/agony/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.has_flaw(/datum/charflaw/addiction/masochist))
+			H.sate_addiction()
+
+/datum/emote/living/scream/firescream
+	key = "firescream"
+	nomsg = TRUE
+	emote_type = EMOTE_AUDIBLE
+	only_forced_audio = TRUE
+
+/datum/emote/living/scream/firescream/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.has_flaw(/datum/charflaw/addiction/masochist))
+			H.sate_addiction()
+
+/datum/emote/living/aggro
+	key = "aggro"
+	emote_type = EMOTE_AUDIBLE
+	nomsg = TRUE
+	only_forced_audio = TRUE
+
+/datum/emote/living/death
+	key = "death"
+	emote_type = EMOTE_AUDIBLE
+	nomsg = TRUE
+	only_forced_audio = TRUE
+	stat_allowed = UNCONSCIOUS
+	mob_type_ignore_stat_typecache = list(/mob/living)
+
 /datum/emote/living/pain
 	key = "pain"
 	emote_type = EMOTE_AUDIBLE
@@ -1212,6 +1259,20 @@
 	key_third_person = "wsmiles"
 	message = "smiles weakly."
 
+// ............... Z ..................
+/datum/emote/living/zombiemoan // sort of bandaid since zombie voicepacks got issues, maybe related to new pitch or who knows
+	key = "zmoan"
+	key_third_person = "moans"
+	message = "moans."
+	emote_type = EMOTE_AUDIBLE
+/datum/emote/living/hmm/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(user.gender == MALE)
+		playsound(target.loc, pick('sound/vo/mobs/zombie/idle (1).ogg','sound/vo/mobs/zombie/idle (2).ogg','sound/vo/mobs/zombie/idle (3).ogg'), 90, FALSE, -1)
+	else
+		playsound(target.loc, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 90, FALSE, -1)
+
+
 // ............... Y ..................
 /datum/emote/living/yawn
 	key = "yawn"
@@ -1228,6 +1289,7 @@
 		var/mob/living/carbon/C = user
 		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled yawn."
+
 
 
 
