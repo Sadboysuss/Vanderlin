@@ -302,6 +302,28 @@
 /obj/item/fishingrod/crafted
 	sellprice = 8
 
+/datum/crafting_recipe/roguetown/woodspade
+	name = "wood spade"
+	result = /obj/item/rogueweapon/shovel/small
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+			/obj/item/grown/log/tree/stick = 1)
+
+/datum/crafting_recipe/roguetown/broom
+	name = "broom"
+	result = /obj/item/broom
+	reqs = list(/obj/item/natural/fibers = 1,
+			/obj/item/grown/log/tree/stick = 4)
+	craftdiff = 1
+
+/obj/item/rogueweapon/shovel/small/crafted
+	sellprice = 5
+
+/datum/crafting_recipe/roguetown/basket_wicker
+	name = "basket (wicker)"
+	result = /obj/structure/closet/crate/chest/wicker
+	reqs = list(/obj/item/natural/fibers = 4)
+	craftdiff = 1
+
 /datum/crafting_recipe/roguetown/book_crafting_kit
 	name = "book crafting kit"
 	result = /obj/item/book_crafting_kit
