@@ -45,29 +45,3 @@
 		"Matthios is my true lord, he WILL steal me away from YOU!",
 		"I am a devoted of Matthios, I will sooner martyr than REPENT!",
 	)
-
-/datum/patron/inhumen/ananshor
-	name = "Ananshor"
-	domain = "Spider-Empress, Demon Lord of Plots and Cruelty"
-	desc = "Cursed and cast out by her elven kin and lurking in the dark, she encourages elves to backstab each other."
-	flaws = "Spite, Arrogance, Pettiness"
-	worshippers = "Corrupted Elves, Schemers, Torturers"
-	sins = "Hesitation, Male Dominance, Mercy"
-	confess_lines = list(
-		"Ananshor be praised!",
-		"May Ananshor bind the world in her webs!",
-		"All are slaves to Ananshor!",
-	)
-
-/datum/patron/inhumen/zastaris
-	name = "Zastaris"
-	domain = "Queen of Swords, Demon Lord of Secret Murder and Ambition"
-	desc = "Patroness of succubi, soaked in blood and crowned with desire. She demands her followers kill the powerful and topple their thrones."
-	flaws = "Vindictiveness, Lack of Empathy, Manipulation"
-	worshippers = "Assassins, Anarchists, Would-Be Conquerors"
-	sins = "Timidity, Humility, Brutishness"
-	confess_lines = list(
-		"I prostrate myself to Zastaris alone!",
-		"Zastaris, take my blood and bone!",
-		"You will all bow before Zastaris!",
-	)
