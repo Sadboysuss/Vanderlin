@@ -18680,7 +18680,7 @@
 /area/rogue/indoors/town)
 "ufU" = (
 /obj/structure/stairs,
-/turf/closed,
+/turf/open/floor/rogue/blocks/green,
 /area/rogue/under/town/sewer)
 "ugj" = (
 /obj/structure/fluff/clock,
