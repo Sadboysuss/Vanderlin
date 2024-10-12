@@ -18557,6 +18557,10 @@
 	icon_state = "chess"
 	},
 /area/rogue/indoors/town/dwarfin)
+"tXp" = (
+/obj/structure/flora/roguegrass/bush,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/town)
 "tXC" = (
 /obj/structure/fluff/railing/border{
 	dir = 10;
@@ -63882,7 +63886,7 @@ xOC
 doE
 bKO
 doE
-uHq
+tiD
 cxb
 nko
 nko
@@ -64039,7 +64043,7 @@ xOC
 doE
 iwJ
 doE
-uHq
+tiD
 rqG
 nko
 nko
@@ -64071,7 +64075,7 @@ fmc
 jfK
 tVC
 cxb
-uHq
+tiD
 wze
 cxb
 cxb
@@ -64196,7 +64200,7 @@ xOC
 waT
 oyZ
 waT
-uHq
+tiD
 rqG
 cxb
 cxb
@@ -64228,7 +64232,7 @@ fmc
 tVC
 iiP
 tVC
-uHq
+tXp
 wze
 rqG
 cxb
@@ -64353,7 +64357,7 @@ xOC
 doE
 bKO
 doE
-uHq
+tiD
 cxb
 ndg
 cxb
@@ -64385,7 +64389,7 @@ fmc
 tVC
 qTv
 tVC
-uHq
+tXp
 pkG
 pzz
 cxb
@@ -64510,7 +64514,7 @@ xOC
 doE
 iwJ
 doE
-uHq
+tiD
 cxb
 cxb
 rqG
@@ -64854,7 +64858,7 @@ bUB
 snq
 jVR
 fmc
-uHq
+tXp
 tVC
 tVC
 wze
@@ -65011,7 +65015,7 @@ jSY
 fmc
 fmc
 fmc
-uHq
+tiD
 tVC
 tVC
 wze
@@ -65609,7 +65613,7 @@ xOC
 waT
 oyZ
 waT
-uHq
+tiD
 ndg
 pJn
 pJn
@@ -65766,7 +65770,7 @@ xOC
 doE
 bKO
 doE
-uHq
+tiD
 cxb
 pJn
 pJn
@@ -65923,7 +65927,7 @@ xOC
 doE
 iwJ
 doE
-uHq
+tiD
 djt
 pJn
 pJn
@@ -66080,7 +66084,7 @@ xOC
 waT
 oyZ
 waT
-uHq
+tiD
 cxb
 pJn
 pJn
@@ -67682,7 +67686,7 @@ fmc
 pJn
 pJn
 rqG
-uHq
+tXp
 doE
 iwJ
 doE
@@ -67839,7 +67843,7 @@ pJn
 pJn
 pJn
 cxb
-uHq
+tXp
 waT
 oyZ
 waT
@@ -67996,7 +68000,7 @@ pJn
 pJn
 bOa
 cxb
-uHq
+tXp
 doE
 bKO
 doE
@@ -68153,7 +68157,7 @@ pJn
 rqG
 ndg
 cxb
-uHq
+tXp
 doE
 iwJ
 doE
