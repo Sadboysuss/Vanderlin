@@ -1531,10 +1531,8 @@
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/outdoors/rtfield)
 "bzn" = (
-/obj/structure/closet/crate/chest/neu_iron{
-	name = "spare room keys"
-	},
 /obj/machinery/light/rogue/wallfire/candle,
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town)
 "bzt" = (
@@ -3083,6 +3081,10 @@
 /area/rogue/indoors/town)
 "ddE" = (
 /obj/structure/chair/wood/rogue,
+/obj/structure/fluff/walldeco/stone{
+	pixel_x = 0;
+	pixel_y = 32
+	},
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/town)
 "ddU" = (
@@ -5022,6 +5024,12 @@
 "fjC" = (
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town)
+"fkg" = (
+/obj/structure/roguemachine/atm{
+	pixel_y = 0
+	},
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town)
 "fkB" = (
 /obj/machinery/light/rogue/wallfire/candle/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -5957,9 +5965,6 @@
 /area/rogue/indoors/town/church/chapel)
 "gjG" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/roguemachine/stockpile{
-	pixel_y = -32
-	},
 /obj/structure/roguemachine/scomm/r,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/garrison)
@@ -8393,6 +8398,7 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
+/obj/item/roguekey/warehouse,
 /turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town)
 "iHZ" = (
@@ -9506,9 +9512,7 @@
 	},
 /area/rogue/indoors/soilsons)
 "jTe" = (
-/obj/structure/closet/crate/chest/neu_iron{
-	name = "spare room keys"
-	},
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town)
 "jTl" = (
@@ -11703,12 +11707,11 @@
 	},
 /area/rogue/indoors/town/manor)
 "lZW" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/roguemachine/atm{
-	pixel_y = -32
+/obj/structure/roguemachine/stockpile{
+	pixel_y = 0
 	},
-/turf/open/floor/rogue/herringbone,
-/area/rogue/indoors/town/garrison)
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town)
 "maa" = (
 /obj/structure/lever/wall{
 	dir = 8;
@@ -11930,7 +11933,7 @@
 	locked = 1;
 	lockid = "steward"
 	},
-/turf/open/floor/rogue/cobble,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
 "mrD" = (
 /obj/structure/chair/wood/rogue/chair3,
@@ -21228,7 +21231,7 @@
 /area/rogue/indoors/town)
 "wuw" = (
 /obj/structure/table/wood,
-/obj/item/candle/yellow/lit,
+/obj/item/candle/yellow,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town)
 "wuO" = (
@@ -39771,7 +39774,7 @@ heh
 heh
 cVE
 cVE
-qnd
+pmA
 pNQ
 pNQ
 qnd
@@ -40240,8 +40243,8 @@ pNQ
 pNQ
 pNQ
 pNQ
-pmA
-qnd
+ppJ
+oGK
 dIf
 fCv
 uyX
@@ -40397,7 +40400,7 @@ pNQ
 pNQ
 pNQ
 pNQ
-pmA
+qGI
 pNQ
 dIf
 qlv
@@ -63475,8 +63478,8 @@ dYs
 fYt
 hAS
 dGX
-lZW
-xqr
+oUq
+fkg
 tYY
 lHi
 llz
@@ -63633,7 +63636,7 @@ xXW
 hAS
 xXW
 gjG
-xqr
+lZW
 haW
 fjC
 llz
@@ -64267,7 +64270,7 @@ fLJ
 rjf
 rjf
 xqr
-tte
+xqr
 ddE
 wxB
 cep
@@ -89385,8 +89388,8 @@ ouw
 ouw
 ouw
 pMc
-nYY
-oyZ
+pMc
+waT
 oyZ
 oyZ
 waT
@@ -89707,7 +89710,7 @@ ett
 oyZ
 bOK
 oyZ
-doE
+waT
 lxg
 rjU
 gbn
@@ -89864,7 +89867,7 @@ xuI
 jpi
 jpi
 pAt
-waT
+doE
 ssc
 kfq
 lcS
