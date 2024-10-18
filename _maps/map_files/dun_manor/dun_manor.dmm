@@ -4544,7 +4544,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/indoors/town/manor)
 "eHX" = (
-/obj/structure/chair/wood/rogue/throne,
+/obj/structure/chair/bench/throne,
 /obj/effect/landmark/start/lady,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
@@ -6310,7 +6310,7 @@
 /turf/open/water/sewer,
 /area/rogue/under/town/basement)
 "gxd" = (
-/obj/structure/chair/wood/rogue/throne,
+/obj/structure/chair/bench/throne,
 /obj/effect/landmark/start/magician,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
@@ -13312,7 +13312,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town/roofs)
 "nSd" = (
-/obj/structure/chair/wood/rogue/throne,
+/obj/structure/chair/bench/throne,
 /obj/effect/landmark/start/prince,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
@@ -15578,7 +15578,7 @@
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
 	},
-/obj/structure/chair/wood/rogue/throne,
+/obj/structure/chair/bench/throne,
 /turf/open/floor/rogue/wood,
 /area/rogue/outdoors/town)
 "qeJ" = (
@@ -17822,7 +17822,7 @@
 	},
 /area/rogue/indoors/town/manor)
 "sBs" = (
-/obj/structure/chair/wood/rogue/throne,
+/obj/structure/chair/bench/throne,
 /turf/open/floor/rogue/grass,
 /area/rogue/indoors/town)
 "sBu" = (
