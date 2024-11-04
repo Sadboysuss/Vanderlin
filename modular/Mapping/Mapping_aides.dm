@@ -546,26 +546,45 @@
 	pixel_y = 32
 
 
-/obj/structure/fluff/walldeco/skullspike // for ground really
-	icon = 'modular/Mapping/icons/decoration.dmi'
-	icon_state = "skullspike"
-	plane = -1
-	layer = ABOVE_MOB_LAYER
-	pixel_x = 8
-	pixel_y = 24
+/*	..................   Innocent Bush   ................... */
+/obj/structure/innocent_bush
+	name = "bush"
+	desc = "These large bushes are known to be well-liked by silkworms who make their nests in their dark depths."
+	icon = 'icons/roguetown/mob/monster/Trolls.dmi'
+	icon_state = "Trolls"
+	pixel_x = -16
+	layer = ABOVE_ALL_MOB_LAYER
+	max_integrity = 500
+	density = TRUE
 
-/*	..................   Red brick Walls   ................... */
-/turf/closed/wall/mineral/rogue/stonebrick/reddish
-	color = "#e0b7af"
+/obj/structure/innocent_bush/attack_hand(mob/living/carbon/human/user)
+//	playsound(src.loc, "plantcross", 80, FALSE, -1)
+//	user.visible_message(span_noticesmall("[user] searches through [src]."))
+//	shake_camera(user, 2, 2)
+	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/trollbog (get_turf(src))
+	qdel(src)
 
-/turf/closed/wall/mineral/rogue/decostone/fluffstone/reddish
-	color = "#fbc5bc"
+/obj/structure/innocent_bush/attackby(obj/item, /mob/living/user, params)
+//	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+//	shake_camera(user, 2, 2)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/trollbog (get_turf(src))
+	qdel(src)
 
-/turf/closed/wall/mineral/rogue/decostone/cand/reddish
-	color = "#fbd2cb"
+/obj/structure/innocent_bush/Bumped(atom/movable/AM)
+	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/trollbog (get_turf(src))
+	qdel(src)
 
-/obj/structure/stairs/stone/reddish
-	color = "#ffddd7"
+/obj/structure/innocent_bush/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	sleep(4)
+	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/trollbog (get_turf(src))
+	qdel(src)
+
 
 
 /obj/machinery/light/rogue/wallfire/candle/lamp // cant get them to start unlit but they work as is
