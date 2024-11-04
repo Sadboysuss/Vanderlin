@@ -280,7 +280,7 @@
 	name = "sweetbait (b)"
 	result = /obj/item/bait/sweet
 	reqs = list(/obj/item/storage/roguebag = 1,
-				/obj/item/reagent_containers/food/snacks/produce/berries/rogue = 2)
+				/obj/item/reagent_containers/food/snacks/produce/jacksberry = 2)
 	req_table = FALSE
 	subtype_reqs = TRUE
 
@@ -370,7 +370,7 @@
 	name = "poison arrow"
 	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 1,
-				/obj/item/reagent_containers/food/snacks/produce/berries/rogue/poison = 1)
+				/obj/item/reagent_containers/food/snacks/produce/jacksberry/poison = 1)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/poisonarrow/alt
@@ -395,7 +395,7 @@
 	name = "poison bolt"
 	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 1,
-				/obj/item/reagent_containers/food/snacks/produce/berries/rogue/poison = 1)
+				/obj/item/reagent_containers/food/snacks/produce/jacksberry/poison = 1)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/poisonbolt/alt
