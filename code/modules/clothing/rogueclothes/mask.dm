@@ -220,5 +220,5 @@
 	slot_flags = ITEM_SLOT_MASK
 	experimental_onhip = TRUE
 
-	armor = ARMOR_MINOR
+	armor = ARMOR_WEAK
 	prevent_crits = CUT_AND_MINOR_CRITS
