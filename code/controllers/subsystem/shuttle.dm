@@ -58,6 +58,9 @@ SUBSYSTEM_DEF(shuttle)
 	ordernum = rand(1, 9000)
 
 	initial_load()
+
+	if(!emergency)
+		WARNING("No /obj/docking_port/mobile/emergency placed on the map!")
 	return ..()
 
 /datum/controller/subsystem/shuttle/proc/initial_load()
