@@ -59,8 +59,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	initial_load()
 
-	if(!emergency)
-		WARNING("No /obj/docking_port/mobile/emergency placed on the map!")
 	return ..()
 
 /datum/controller/subsystem/shuttle/proc/initial_load()
@@ -382,6 +380,9 @@ SUBSYSTEM_DEF(shuttle)
 
 	if (istype(SSshuttle.hostileEnvironments))
 		hostileEnvironments = SSshuttle.hostileEnvironments
+
+	if (istype(SSshuttle.supply))
+		supply = SSshuttle.supply
 
 	if (istype(SSshuttle.discoveredPlants))
 		discoveredPlants = SSshuttle.discoveredPlants
