@@ -131,6 +131,8 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 		return TRUE
 	if (istype(M, /mob/living/simple_animal/hostile/construct/wraith))
 		return TRUE
+	if(isrevenant(M))
+		return TRUE
 	return FALSE
 
 /datum/atom_hud/alternate_appearance/basic/onePerson
