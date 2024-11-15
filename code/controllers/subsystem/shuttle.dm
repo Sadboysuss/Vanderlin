@@ -58,7 +58,6 @@ SUBSYSTEM_DEF(shuttle)
 	ordernum = rand(1, 9000)
 
 	initial_load()
-
 	return ..()
 
 /datum/controller/subsystem/shuttle/proc/initial_load()
@@ -380,9 +379,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	if (istype(SSshuttle.hostileEnvironments))
 		hostileEnvironments = SSshuttle.hostileEnvironments
-
-	if (istype(SSshuttle.supply))
-		supply = SSshuttle.supply
 
 	if (istype(SSshuttle.discoveredPlants))
 		discoveredPlants = SSshuttle.discoveredPlants
