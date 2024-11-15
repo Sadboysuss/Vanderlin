@@ -293,6 +293,9 @@
 		return 0
 
 	if(..()) //successful monkey bite.
+		for(var/thing in M.diseases)
+			var/datum/disease/D = thing
+			ForceContractDisease(D)
 		return 1
 
 /mob/living/carbon/proc/dismembering_strike(mob/living/attacker, dam_zone)

@@ -600,7 +600,7 @@
 			if(4 to 5)
 				to_chat(src, span_notice("Oh, I actually feel quite alright!")) //you thought
 				physiology.damage_resistance = -20000
-			if(6 to 7)
+			if(6)
 				apply_status_effect(STATUS_EFFECT_GO_AWAY)
 			if(8)
 				var/list/elligible_organs = list()
