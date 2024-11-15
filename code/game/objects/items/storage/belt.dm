@@ -149,6 +149,7 @@
 		/obj/item/implantcase,
 		/obj/item/implant,
 		/obj/item/implanter,
+		/obj/item/pinpointer/crew,
 		))
 
 /obj/item/storage/belt/security
@@ -221,6 +222,7 @@
 		/obj/item/flashlight,
 		/obj/item/extinguisher/mini,
 		/obj/item/clothing/gloves,
+		/obj/item/pickaxe,
 		/obj/item/stack/sheet/animalhide,
 		/obj/item/stack/sheet/sinew,
 		/obj/item/stack/sheet/bone,
