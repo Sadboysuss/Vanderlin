@@ -1771,6 +1771,7 @@
 #include "code\modules\mob\living\simple_animal\rogue\creacher\mimic.dm"
 #include "code\modules\mob\living\simple_animal\rogue\creacher\minotaur.dm"
 #include "code\modules\mob\living\simple_animal\rogue\creacher\mole.dm"
+#include "code\modules\mob\living\simple_animal\rogue\creacher\orcs.dm"
 #include "code\modules\mob\living\simple_animal\rogue\creacher\poltergeist.dm"
 #include "code\modules\mob\living\simple_animal\rogue\creacher\shade.dm"
 #include "code\modules\mob\living\simple_animal\rogue\creacher\skeleton.dm"
