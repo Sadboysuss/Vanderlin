@@ -600,7 +600,7 @@
 			if(4 to 5)
 				to_chat(src, span_notice("Oh, I actually feel quite alright!")) //you thought
 				physiology.damage_resistance = -20000
-			if(6)
+			if(6 to 7)
 				apply_status_effect(STATUS_EFFECT_GO_AWAY)
 			if(8)
 				var/list/elligible_organs = list()
@@ -612,6 +612,8 @@
 					O.Remove(src)
 					visible_message(span_danger("[src] vomits up their [O.name]!"), "<span class='danger'>I vomit up my [O.name]") //no "vomit up my the heart"
 					O.forceMove(drop_location())
+					if(prob(20))
+						O.animate_atom_living()
 	else
 		switch(rand(0,5))
 			if(0)

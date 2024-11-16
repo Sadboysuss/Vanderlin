@@ -49,7 +49,7 @@
 		qdel(src)
 	COOLDOWN_START(src, wash_cooldown, 15 SECONDS)
 
-/obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases)
+/obj/effect/decal/cleanable/blood/Initialize(mapload)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .

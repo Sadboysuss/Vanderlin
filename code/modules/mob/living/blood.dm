@@ -342,7 +342,7 @@
 		W.water_volume = 10
 		W.update_icon()
 		return
-	new /obj/effect/decal/cleanable/blood/splatter(T, get_static_viruses())
+	new /obj/effect/decal/cleanable/blood/splatter(T)
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
 
 /mob/living/proc/add_drip_floor(turf/T, amt)
