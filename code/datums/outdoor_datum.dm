@@ -23,9 +23,6 @@ Sunlight System
 	var/weatherproof = FALSE
 	var/weather = FALSE
 
-/obj/proc/weather_act_on(weather_trait, severity)
-	return
-
 /atom/movable/outdoor_effect
 	name = ""
 	mouse_opacity = 0
