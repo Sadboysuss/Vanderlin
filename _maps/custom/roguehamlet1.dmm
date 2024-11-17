@@ -41,7 +41,7 @@
 /turf/closed/wall/mineral/rogue/decostone/fluffstone,
 /area/rogue/outdoors/town/roofs)
 "acA" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/wood/nosmooth,
 /area/rogue/indoors/town)
 "ada" = (
@@ -934,7 +934,7 @@
 	ambush_mobs = list(/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 50, /mob/living/carbon/human/species/human/northern/bum/ambush = 30)
 	})
 "bct" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/closed/wall/mineral/rogue/decowood,
 /area/rogue/indoors)
 "bcP" = (
@@ -1782,7 +1782,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/exposed/church)
 "bXK" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors/shelter/bog)
 "bXT" = (
@@ -1924,7 +1924,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/exposed/town)
 "ciJ" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/rtfield{
 	ambush_mobs = list(/mob/living/simple_animal/hostile/zombie = 50);
@@ -2396,7 +2396,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/cell)
 "cLh" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/woodturned/nosmooth,
 /area/rogue/indoors/town/shop)
 "cLS" = (
@@ -3645,7 +3645,7 @@
 	first_time_text = "PLAGUE DISTRICT"
 	})
 "ebW" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/wood/nosmooth,
 /area/rogue/indoors/town/shop)
 "ecu" = (
@@ -3720,7 +3720,7 @@
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/town)
 "egz" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/tavern)
 "ehg" = (
@@ -4741,11 +4741,11 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/indoors)
 "fgL" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/closed/wall/mineral/rogue/decowood,
 /area/rogue/indoors/town/tavern)
 "fgN" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/rtfield{
 	ambush_mobs = list(/mob/living/simple_animal/hostile/zombie = 50);
@@ -6700,7 +6700,7 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/mountains)
 "hyL" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/woodturned/nosmooth,
 /area/rogue/indoors/town)
 "hzg" = (
@@ -7291,7 +7291,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/exposed/town)
 "ibq" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/manor{
 	first_time_text = "Blackwine Manor"
@@ -8155,7 +8155,7 @@
 /turf/open/floor/rogue/tile/masonic/spiral,
 /area/rogue/indoors/town/bath)
 "iYv" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/garrison)
 "iYO" = (
@@ -8791,7 +8791,7 @@
 /turf/closed/mineral/rogue/bedrock,
 /area/rogue/outdoors/bog)
 "jGD" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/indoors/town)
@@ -8988,7 +8988,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
 "jUp" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/manor{
 	first_time_text = "Blackwine Manor"
@@ -10954,7 +10954,7 @@
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/indoors/shelter/rtfield)
 "lUI" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town)
 "lVe" = (
@@ -11555,7 +11555,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
 "mFh" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town)
 "mFn" = (
@@ -12025,7 +12025,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/bog)
 "ndb" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/indoors)
 "ndi" = (
@@ -13087,7 +13087,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "okj" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "oko" = (
@@ -13378,7 +13378,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/indoors/town/cell)
 "owy" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town)
 "owT" = (
@@ -13472,7 +13472,7 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/exposed/town)
 "oAV" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/bath)
 "oBO" = (
@@ -14137,7 +14137,7 @@
 	ambush_mobs = list(/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 50, /mob/living/carbon/human/species/human/northern/bum/ambush = 30)
 	})
 "pef" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "merchant"
 	},
@@ -15978,7 +15978,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/exposed/under/basement)
 "qZr" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "merchant"
 	},
@@ -16172,7 +16172,7 @@
 /turf/open/water/sewer,
 /area/rogue/outdoors/exposed/under/sewer)
 "rkT" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/grass,
 /area/rogue/indoors)
 "rlr" = (
@@ -17189,9 +17189,6 @@
 /obj/item/storage/bag/tray,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/tavern)
-"smY" = (
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/town)
 "snE" = (
 /obj/effect/spawner/roguemap/tree,
 /obj/structure/flora/roguegrass,
@@ -21656,7 +21653,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/shelter/town/dwarf)
 "wRi" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
 "wRr" = (
@@ -21765,7 +21762,7 @@
 	},
 /area/rogue/outdoors/exposed/manorgarri)
 "wUC" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow/solid,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/magician)
 "wUT" = (
@@ -56534,7 +56531,7 @@ rAW
 ogl
 rAW
 dvI
-smY
+jGc
 pov
 kTK
 nKA
@@ -56724,12 +56721,12 @@ xZX
 pKw
 pKw
 pKw
-smY
+jGc
 pKw
 pKw
-smY
+jGc
 pKw
-smY
+jGc
 nKA
 nKA
 nKA
@@ -58074,10 +58071,10 @@ lfI
 ozQ
 pms
 iLK
-smY
+jGc
 pKw
 xHC
-smY
+jGc
 pKw
 xHC
 kGQ
@@ -58101,7 +58098,7 @@ pKw
 pKw
 pKw
 pKw
-smY
+jGc
 xrF
 xrF
 xHC
@@ -58269,7 +58266,7 @@ pms
 pms
 cCn
 pKw
-smY
+jGc
 xHC
 pKw
 pKw
@@ -58286,8 +58283,8 @@ gey
 hUy
 nKA
 nKA
-smY
-smY
+jGc
+jGc
 pKw
 pKw
 kmR
@@ -58461,7 +58458,7 @@ slK
 lfI
 pms
 cCn
-smY
+jGc
 xrF
 tFN
 qer
@@ -59233,7 +59230,7 @@ ozQ
 pzz
 slK
 slK
-smY
+jGc
 lfI
 pms
 tEb
@@ -59244,7 +59241,7 @@ pgK
 gBZ
 pgK
 qer
-smY
+jGc
 nKA
 nZC
 nKA
@@ -59447,7 +59444,7 @@ dxB
 mFe
 pKw
 pKw
-smY
+jGc
 nKA
 iId
 mRE
@@ -59642,7 +59639,7 @@ mFe
 mFe
 pKw
 pKw
-smY
+jGc
 iId
 twz
 dTc
@@ -59836,7 +59833,7 @@ pKw
 pKw
 pKw
 pKw
-smY
+jGc
 iId
 kmR
 gcr
@@ -60225,7 +60222,7 @@ mFe
 pKw
 pKw
 pKw
-smY
+jGc
 nKA
 nKA
 nKA
@@ -60244,7 +60241,7 @@ pKw
 lfI
 ozQ
 nKz
-smY
+jGc
 xCC
 jgY
 wAB
@@ -60404,15 +60401,11 @@ vWg
 dxL
 heN
 pKw
-smY
+jGc
 pKw
 pKw
 pKw
-smY
-pKw
-pKw
-pKw
-pKw
+jGc
 pKw
 pKw
 pKw
@@ -60425,7 +60418,11 @@ pKw
 pKw
 pKw
 pKw
-smY
+pKw
+pKw
+pKw
+pKw
+jGc
 bOM
 pKw
 xHC
@@ -60437,7 +60434,7 @@ xHC
 pKw
 pKw
 pKw
-smY
+jGc
 pKw
 byF
 rij
@@ -60586,8 +60583,8 @@ xWa
 vfu
 vZm
 asj
-smY
-smY
+jGc
+jGc
 tZR
 gFs
 pKE
@@ -60595,43 +60592,43 @@ fGK
 tZR
 pCp
 nXK
-smY
-smY
-smY
+jGc
+jGc
+jGc
 pdq
-smY
+jGc
 pKw
-smY
+jGc
 pKw
-smY
-smY
-smY
+jGc
+jGc
+jGc
 pKw
-smY
+jGc
 pdq
-smY
-smY
-smY
+jGc
+jGc
+jGc
 pKw
-smY
+jGc
 pKw
-smY
-smY
-smY
-smY
-smY
+jGc
+jGc
+jGc
+jGc
+jGc
 pdq
-smY
-smY
+jGc
+jGc
 pKw
 pKw
-smY
-smY
-smY
-smY
-smY
-smY
-smY
+jGc
+jGc
+jGc
+jGc
+jGc
+jGc
+jGc
 pdq
 byF
 vxz
@@ -60793,7 +60790,7 @@ ygV
 vWg
 pKw
 pKw
-smY
+jGc
 pKw
 pKw
 pKw
@@ -60801,7 +60798,7 @@ pKw
 pKw
 pKw
 pKw
-smY
+jGc
 pKw
 pKw
 pKw
@@ -60822,10 +60819,10 @@ pKw
 pKw
 pKw
 pKw
-smY
+jGc
 ygV
 jFj
-smY
+jGc
 pKw
 mUT
 vTh
@@ -60994,7 +60991,7 @@ lfI
 uXz
 pKw
 pKw
-smY
+jGc
 rpx
 xrF
 awX
@@ -61188,7 +61185,7 @@ mwG
 rrI
 xIT
 pKw
-smY
+jGc
 rSm
 pSa
 pSa
@@ -61575,8 +61572,8 @@ mes
 iFi
 gvb
 nKA
-smY
-smY
+jGc
+jGc
 pSa
 rSm
 kFZ
@@ -61592,7 +61589,7 @@ tKP
 hZE
 pSa
 iUY
-smY
+jGc
 pKw
 pKw
 lVe
@@ -61964,7 +61961,7 @@ iIr
 mwG
 dTE
 nKA
-smY
+jGc
 rSm
 pSa
 gdc
@@ -62765,7 +62762,7 @@ dZd
 wwJ
 dZd
 pjU
-smY
+jGc
 pms
 bXs
 nAp
@@ -62956,10 +62953,10 @@ lfI
 lfI
 ozQ
 lfI
-smY
+jGc
 ozQ
-smY
-smY
+jGc
+jGc
 pms
 bXs
 xDL
@@ -63146,13 +63143,13 @@ bPA
 tZR
 tZR
 oFX
-smY
+jGc
 lfI
 lfI
-smY
+jGc
 lfI
 pKw
-smY
+jGc
 pms
 pms
 bXs
@@ -63340,7 +63337,7 @@ cjO
 vWe
 wks
 bHN
-smY
+jGc
 lfI
 jma
 pKw
@@ -63535,10 +63532,10 @@ lfI
 pKw
 mRF
 pKw
-smY
-smY
+jGc
+jGc
 lfI
-smY
+jGc
 mvo
 lfI
 pms
@@ -63724,14 +63721,14 @@ wpE
 kkq
 xPW
 xrF
-smY
+jGc
 pKw
-smY
+jGc
 odw
-smY
-smY
-smY
-smY
+jGc
+jGc
+jGc
+jGc
 lfI
 mFe
 ozQ
@@ -63925,7 +63922,7 @@ cDx
 cDx
 oII
 pKw
-smY
+jGc
 jGc
 oII
 oII
@@ -64119,7 +64116,7 @@ tcZ
 cDx
 wVF
 pKw
-smY
+jGc
 czT
 ePz
 ePz
@@ -64313,7 +64310,7 @@ geB
 oAV
 sCi
 vVI
-smY
+jGc
 pLb
 eSc
 aVL
@@ -64507,7 +64504,7 @@ hOu
 oAV
 bmb
 xQc
-smY
+jGc
 dFG
 frr
 frr
