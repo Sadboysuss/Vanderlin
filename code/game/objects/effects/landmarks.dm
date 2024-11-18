@@ -408,6 +408,41 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	GLOB.emergencyresponseteamspawn += loc
 	return INITIALIZE_HINT_QDEL
 
+/obj/effect/landmark/thunderdome/observe
+	name = "tdomeobserve"
+	icon_state = "tdome_observer"
+
+/obj/effect/landmark/thunderdome/observe/Initialize(mapload)
+	..()
+	GLOB.tdomeobserve += loc
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/thunderdome/one
+	name = "tdome1"
+	icon_state = "tdome_t1"
+
+/obj/effect/landmark/thunderdome/one/Initialize(mapload)
+	..()
+	GLOB.tdome1	+= loc
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/thunderdome/two
+	name = "tdome2"
+	icon_state = "tdome_t2"
+
+/obj/effect/landmark/thunderdome/two/Initialize(mapload)
+	..()
+	GLOB.tdome2 += loc
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/thunderdome/admin
+	name = "tdomeadmin"
+	icon_state = "tdome_admin"
+
+/obj/effect/landmark/thunderdome/admin/Initialize(mapload)
+	..()
+	GLOB.tdomeadmin += loc
+	return INITIALIZE_HINT_QDEL
 
 //generic event spawns
 /obj/effect/landmark/event_spawn
