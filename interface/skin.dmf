@@ -176,8 +176,8 @@ window "statwindow"
 		highlight-color = #f9bb00
 		tab-text-color = #d6dbd5
 		tab-background-color = #000000
-		tab-font-family = "Pterra"
-		tab-font-size = 16
+		tab-font-family = "Blackmoor LET"
+		tab-font-size = 14
 		prefix-color = #f9bb00
 		suffix-color = #d6dbd5
 
