@@ -35,10 +35,13 @@ GLOBAL_LIST_EMPTY(preference_patrons)
 	/// Final tier spell
 	var/t3
 
+	///our traits thats applied by set_patron and removed when changed
+	var/list/added_traits
+
 /datum/patron/proc/on_gain(mob/living/pious)
-	for(var/trait in mob_traits)
+	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 
-/datum/patron/proc/on_loss(mob/living/pious)
-	for(var/trait in mob_traits)
+/datum/patron/proc/on_remove(mob/living/pious)
+	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
