@@ -45,6 +45,7 @@
 #define TRAIT_SOUL_EXAMINE				"Blessing of Necra"  //can check bodies to see if they have departed
 #define TRAIT_ROT_EATER					"Blessing of Pestra" //can eat rotten food
 #define TRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor" //Can move through kneestingers.
+#define TRAIT_LEECHIMMUNE				"Unleechable" //leeches wont attach in bog squares + Abyssor boon.
 
 // Inhumen patron trait bonuses:
 #define TRAIT_ORGAN_EATER				"Blessing of Graggar"//Can eat organs (duh.)
@@ -116,7 +117,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_INTRAINING = "I'm going to be a knight someday! I can use training dummies more effectively than others.",
 	TRAIT_MALUMFIRE = "My hands are blessed by Malum to forge items of superb quality.",
-	TRAIT_DEATHSIGHT = span_info("I can feel when someone nearby draws the Undermaiden's attention."),
+	TRAIT_DEATHSIGHT = span_info("I can feel when someone nearby draws the Undermaiden's attention, a tiny voice whispering 'Someone has died,' in my ear."),
 	TRAIT_CABAL = span_info("In secret, I have studied the ways of Her ascension, and know of others of the Cabal."),
 	))
 
