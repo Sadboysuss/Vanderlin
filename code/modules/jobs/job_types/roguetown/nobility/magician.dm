@@ -46,7 +46,7 @@
 		H.mind?.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-		H.mind?.adjust_skillrank(/datum/skill/craft/alchemy, 3, TRUE)
+		H.mind?.adjust_skillrank(/datum/skill/craft/alchemy, 5, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball/greater)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt)
