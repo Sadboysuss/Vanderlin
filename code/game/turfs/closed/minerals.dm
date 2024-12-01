@@ -66,7 +66,7 @@
 
 /turf/closed/mineral/attackby(obj/item/I, mob/user, params)
 	if (!user.IsAdvancedToolUser())
-		to_chat(usr, "<span class='warning'>I don't have the dexterity to do this!</span>")
+		to_chat(user, span_warning("I don't have the dexterity to do this!"))
 		return
 	lastminer = user
 	var/olddam = turf_integrity
@@ -173,8 +173,9 @@
 	T.ChangeTurf(type)
 
 /turf/closed/mineral/random
+	///if this isn't empty, swaps to one of them via pickweight
 	var/list/mineralSpawnChanceList = list()
-		//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	///the chance to swap to something useful
 	var/mineralChance = 13
 	var/display_icon_state = "rock"
 
@@ -252,7 +253,6 @@
 
 
 /turf/closed/mineral/rogue/copper
-	desc = "seems rich in copper"
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/copper
 	rockType = /obj/item/natural/rock/copper
@@ -267,7 +267,6 @@
 	spread = 5
 
 /turf/closed/mineral/rogue/silver
-	desc = "seems rich in silver"
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/silver
 	rockType = /obj/item/natural/rock/silver
@@ -275,7 +274,6 @@
 	spread = 2
 
 /turf/closed/mineral/rogue/gold
-	desc = "seems rich in gold"
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/gold
 	rockType = /obj/item/natural/rock/gold
@@ -283,7 +281,6 @@
 	spread = 2
 
 /turf/closed/mineral/rogue/salt
-	desc = "seems rich in salt"
 	icon_state = "mingold"
 	mineralType = /obj/item/reagent_containers/powder/salt
 	rockType = /obj/item/natural/rock/salt
@@ -291,7 +288,6 @@
 	spread = 3
 
 /turf/closed/mineral/rogue/iron
-	desc = "seems rich in iron"
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/iron
 	rockType = /obj/item/natural/rock/iron
@@ -299,7 +295,6 @@
 	spread = 3
 
 /turf/closed/mineral/rogue/coal
-	desc = "seems rich in coal"
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/coal
 	rockType = /obj/item/natural/rock/coal
@@ -308,7 +303,6 @@
 
 /turf/closed/mineral/rogue/gemeralds
 	icon_state = "mingold"
-	desc = "there is an strange light on the stone?"
 	mineralType = /obj/item/roguegem
 	rockType = /obj/item/natural/rock/gemerald
 	spreadChance = 3
@@ -316,7 +310,7 @@
 
 /turf/closed/mineral/rogue/bedrock
 	name = "rock"
-	desc = "seems too hard"
+	desc = "seems barren, and nigh indestructable"
 	icon_state = "rockyashbed"
 //	smooth_icon = 'icons/turf/walls/hardrock.dmi'
 	max_integrity = 10000000
