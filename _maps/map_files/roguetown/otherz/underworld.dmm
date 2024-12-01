@@ -100,10 +100,10 @@
 /turf/open/floor/rogue/church,
 /area/rogue/underworld)
 "xS" = (
-/obj/structure/bars{
-	max_integrity = 700000
+/obj/structure/stairs/stone/church{
+	dir = 8
 	},
-/turf/open/floor/rogue/churchrough,
+/turf/open/floor/rogue/church,
 /area/rogue/underworld)
 "yn" = (
 /turf/closed/wall/mineral/rogue/underbrick{
@@ -146,9 +146,9 @@
 /area/rogue/underworld)
 "Df" = (
 /obj/structure/stairs/stone/church{
-	dir = 1
+	dir = 8
 	},
-/turf/open/floor/rogue/church,
+/turf/open/floor/rogue/churchrough,
 /area/rogue/underworld)
 "DM" = (
 /obj/machinery/light/rogue/wallfire/candle/blue{
@@ -201,7 +201,7 @@
 /area/rogue/underworld)
 "Kf" = (
 /obj/machinery/light/rogue/firebowl/standing/blue,
-/turf/open/floor/rogue/underworld/road,
+/turf/open/floor/rogue/church,
 /area/rogue/underworld)
 "KU" = (
 /turf/closed/indestructible/wooddark/mast,
@@ -9865,10 +9865,10 @@ sz
 sz
 sz
 sz
-Qn
-df
-Lk
-Lk
+sz
+sz
+sz
+sz
 sz
 sz
 sz
@@ -9995,11 +9995,11 @@ sz
 sz
 sz
 sz
-Qn
-df
-df
-Lk
-Lk
+sz
+sz
+sz
+sz
+sz
 sz
 sz
 sz
@@ -10125,11 +10125,11 @@ sz
 sz
 sz
 sz
-Qn
-df
-df
-df
-Lk
+Df
+Df
+Df
+sz
+sz
 sz
 sz
 Wt
@@ -10256,7 +10256,7 @@ sz
 sz
 sz
 Lk
-Lk
+df
 df
 df
 Lk
@@ -10386,10 +10386,10 @@ sz
 sz
 sz
 IP
-Lk
 df
 df
-Lk
+df
+df
 IP
 sz
 Wt
@@ -10516,11 +10516,11 @@ sz
 sz
 sz
 IP
-Lk
 df
 df
-Lk
-Lk
+df
+df
+IP
 sz
 Wt
 sz
@@ -10646,7 +10646,7 @@ sz
 sz
 sz
 Lk
-Lk
+df
 df
 df
 Lk
@@ -10778,7 +10778,7 @@ Lk
 Lk
 df
 df
-Lk
+df
 Lk
 PP
 sz
@@ -11037,7 +11037,7 @@ PP
 Lk
 df
 df
-Lk
+df
 Lk
 PP
 sz
@@ -11165,7 +11165,7 @@ sz
 PP
 Lk
 Lk
-Lk
+df
 df
 Lk
 Lk
@@ -26115,7 +26115,7 @@ PP
 PP
 PP
 PP
-xS
+yn
 sz
 Wt
 ol
@@ -26242,11 +26242,11 @@ xn
 xn
 PP
 PP
-Wt
-Wt
-Wt
-Wt
-Wt
+PP
+PP
+PP
+aC
+Kf
 Wt
 ol
 ol
@@ -26372,12 +26372,12 @@ xn
 xn
 xn
 PP
-Wt
-Lk
 PP
-sz
-sz
-sz
+PP
+PP
+aC
+Wt
+Wt
 Wt
 ol
 ol
@@ -26502,13 +26502,13 @@ xn
 xn
 xn
 PP
+PP
+PP
+PP
+aC
 Wt
 Wt
 Wt
-Df
-kH
-sz
-sz
 Wt
 ol
 ol
@@ -26631,14 +26631,14 @@ xn
 xn
 xn
 PP
-Kf
-Wt
-Wt
-Wt
-Df
-kH
-kH
-sz
+PP
+PP
+PP
+PP
+aC
+xS
+xS
+xS
 sz
 vI
 ol
@@ -26762,10 +26762,10 @@ xn
 xn
 PP
 PP
-Wt
-Wt
-Wt
-Df
+PP
+PP
+PP
+aC
 kH
 kH
 kH
@@ -26892,10 +26892,10 @@ xn
 xn
 PP
 PP
-Kf
 PP
-Lk
-yn
+PP
+PP
+aC
 kH
 kH
 kH
@@ -29091,7 +29091,7 @@ xn
 PP
 Lk
 Lk
-Lk
+Jx
 Lk
 PP
 PP
@@ -29608,12 +29608,12 @@ xn
 xn
 PP
 PP
-Lk
+Jx
 Lk
 PP
 PP
 Lk
-Lk
+Jx
 Lk
 PP
 kH
@@ -30777,7 +30777,7 @@ xn
 xn
 xn
 PP
-Lk
+Jx
 Lk
 Lk
 PP
@@ -30810,7 +30810,7 @@ Lk
 Lk
 Lk
 Lk
-Lk
+Jx
 Lk
 Lk
 Lk
@@ -31308,7 +31308,7 @@ PP
 Lk
 Lk
 Lk
-Lk
+Jx
 Lk
 Lk
 PP
@@ -31442,7 +31442,7 @@ Lk
 Lk
 Lk
 PP
-Lk
+Jx
 Lk
 Lk
 Lk
@@ -31982,7 +31982,7 @@ Jx
 Lk
 Lk
 PP
-Lk
+Jx
 Lk
 PP
 Lk
