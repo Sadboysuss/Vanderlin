@@ -7728,7 +7728,7 @@
 /obj/structure/mineral_door/wood/violet{
 	name = "IV Waterfront";
 	locked = 1;
-	lockid = 4waterfront
+	lockid = "4waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -8174,7 +8174,7 @@
 /obj/structure/mineral_door/wood/violet{
 	name = "V Waterfront";
 	locked = 1;
-	lockid = 5waterfront
+	lockid = "5waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -8333,7 +8333,7 @@
 /area/rogue/indoors/soilsons)
 "iNk" = (
 /obj/structure/mineral_door/wood/violet{
-	lockid = 3waterfront
+	lockid = "3waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -8941,7 +8941,7 @@
 /area/rogue/outdoors/town)
 "jvV" = (
 /obj/structure/mineral_door/wood/violet{
-	lockid = 2waterfront
+	lockid = "2waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -13099,7 +13099,7 @@
 /obj/structure/mineral_door/wood/violet{
 	name = "I Waterfront";
 	locked = 1;
-	lockid = s
+	lockid = "1waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -13905,7 +13905,7 @@
 /obj/structure/mineral_door/wood/violet{
 	name = "III Waterfront";
 	locked = 1;
-	lockid = 3waterfront
+	lockid = "3waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -17070,7 +17070,7 @@
 /area/rogue/indoors/butchershop)
 "sVE" = (
 /obj/structure/mineral_door/wood/violet{
-	lockid = 4waterfront
+	lockid = "4waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -19338,7 +19338,7 @@
 /area/rogue/indoors/town/clinic_large)
 "vuv" = (
 /obj/structure/mineral_door/wood/violet{
-	lockid = 5waterfront
+	lockid = "5waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -20241,7 +20241,7 @@
 /area/rogue/under/town/sewer)
 "wtO" = (
 /obj/structure/mineral_door/wood/violet{
-	lockid = 1waterfront
+	lockid = "1waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
@@ -20475,7 +20475,7 @@
 /obj/structure/mineral_door/wood/violet{
 	name = "II Waterfront";
 	locked = 1;
-	lockid = 2waterfront
+	lockid = "2waterfront"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
