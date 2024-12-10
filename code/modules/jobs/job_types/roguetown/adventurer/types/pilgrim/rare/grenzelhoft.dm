@@ -11,7 +11,7 @@
 	maximum_possible_slots = 1
 	pickprob = 30
 
-	cmode_music = 'sound/music/combat_grenzelhoft.ogg'
+	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/outfit/job/roguetown/adventurer/grenzelhoft/pre_equip(mob/living/carbon/human/H)
 	..()
