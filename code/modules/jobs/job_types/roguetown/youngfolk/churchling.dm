@@ -1,57 +1,50 @@
 /datum/job/roguetown/churchling
 	title = "Churchling"
-	flag = APPRENTICE
+	flag = CHURCHLING
 	department_flag = YOUNGFOLK
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 
-	allowed_races = list(
-		"Humen",
-		"Half-Elf"
-	)
+	allowed_races = ALL_PLAYER_RACES_BY_NAME
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = YOUNG_AGES_LIST
+	allowed_ages = list(AGE_CHILD)
 
-	tutorial = "Your family were zealots, they scolded you with a studded belt and prayed like sinners every waking hour of the day they weren’t toiling in the fields. You escaped them by becoming a churchling, and a guaranteed education isnt so bad"
+	tutorial = "Your family were zealots. They scolded you with a studded belt and prayed like sinners every waking hour of the day they weren’t toiling in the fields. You escaped them by becoming a churchling--and a guaranteed education isn't so bad."
 
 	outfit = /datum/outfit/job/roguetown/churchling
 	display_order = JDO_CHURCHLING
 	give_bank_account = TRUE
-	bypass_lastclass = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/churchling/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, rand(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	if(H.gender == MALE)
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		armor = /obj/item/clothing/suit/roguetown/shirt/robe
-	else
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+	neck = /obj/item/clothing/neck/roguetown/psycross
+	if(H.gender == FEMALE)
 		head = /obj/item/clothing/head/roguetown/armingcap
-	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(
-		/obj/item/needle = 1,
-		/obj/item/rogueweapon/surgery/scalpel = 1,
-		/obj/item/rogueweapon/surgery/saw = 1,
-		/obj/item/rogueweapon/surgery/hemostat = 2, //2 forceps so you can clamp bleeders AND manipulate organs
-		/obj/item/rogueweapon/surgery/retractor = 1,
-		/obj/item/rogueweapon/surgery/bonesetter = 1,
-		/obj/item/rogueweapon/surgery/cautery = 1,
-	)
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
+	else
+		armor = /obj/item/clothing/suit/roguetown/shirt/robe
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
+	pants = /obj/item/clothing/under/roguetown/tights
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+	beltl = /obj/item/keyring/priest
+
 
 	H.change_stat("perception", 1)
 	H.change_stat("speed", 2)
+
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
+	C.grant_spells_churchling(H)
+	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
