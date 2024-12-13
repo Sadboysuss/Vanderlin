@@ -41,6 +41,8 @@
 #define TRAIT_SHOCKIMMUNE				"Shock Immunity"
 #define TRAIT_LEGENDARY_ALCHEMIST		"Expert Herb Finder"
 #define TRAIT_LIGHT_STEP				"Light Step" //Can't trigger /obj/structure/trap/'s
+#define TRAIT_THIEVESGUILD				"Thieves Guild Member"
+#define TRAIT_MOB_FIRE_IMMUNE			"Fire Immune" //Just says no to fire_act()
 
 // Divine patron trait bonuses:
 #define TRAIT_SOUL_EXAMINE				"Blessing of Necra"  //can check bodies to see if they have departed
@@ -142,7 +144,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CABAL = span_info("In secret, I have studied the ways of Her ascension, and know of others of the Cabal."),
 	TRAIT_LEGENDARY_ALCHEMIST = span_info("An expert in the art of finding herbs in the wild."),
 	TRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
-	TRAIT_LIGHT_STEP = span_info("I will never trip a trap plate.")
+	TRAIT_THIEVESGUILD = "I am a member of the thieves guild!",
+	TRAIT_LEPROSY = span_necrosis("I'm a disgusting leper..."),
+	TRAIT_LIGHT_STEP = span_info("I will never trip a trap plate."),
+	TRAIT_MOB_FIRE_IMMUNE = span_info("I am immune to most scorching flames."),
 	))
 
 // trait accessor defines
