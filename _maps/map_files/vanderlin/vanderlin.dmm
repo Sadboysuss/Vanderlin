@@ -18119,7 +18119,6 @@
 	name = "kybraxor lever";
 	pixel_x = 0;
 	pixel_y = 9;
-	gid = "keepgatekybraxor"
 	},
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/manorgate)
