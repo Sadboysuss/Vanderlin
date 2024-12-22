@@ -88,7 +88,6 @@
 	H.change_stat("speed", 1)
 	H.change_stat("fortune", 5)
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
 
@@ -129,7 +128,6 @@
 	H.change_stat("speed", 1)
 	H.change_stat("fortune", 3)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 
 /datum/advclass/consort/lowborn
 	name = "Lowborn Consort"
@@ -168,7 +166,6 @@
 	H.change_stat("speed", -1)
 	H.change_stat("fortune", 1)
 	ADD_TRAIT(H, TRAIT_SEEDKNOW, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
 
