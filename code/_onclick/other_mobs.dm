@@ -651,7 +651,7 @@
 	if(dextrous && !ismob(A))
 		..()
 	else
-		AttackingTarget()
+		AttackingTarget(A)
 
 
 
