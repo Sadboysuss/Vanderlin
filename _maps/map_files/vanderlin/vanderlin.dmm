@@ -198,6 +198,13 @@
 /obj/item/book/rogue/yeoldecookingmanual,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
+"aiP" = (
+/obj/structure/flora/roguegrass/bush/wall/tall,
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/turf/open/floor/rogue/dirt,
+/area/rogue/outdoors/town)
 "ajJ" = (
 /obj/structure/bars/cemetery,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3665,13 +3672,6 @@
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/water/sewer,
 /area/rogue/under/town/basement)
-"cNT" = (
-/obj/structure/flora/roguegrass/bush/wall/tall,
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/town)
 "cNV" = (
 /obj/item/reagent_containers/glass/bowl,
 /obj/item/reagent_containers/glass/bowl,
@@ -5340,6 +5340,11 @@
 /obj/item/bedsheet/rogue/fabric,
 /turf/open/floor/rogue/tile/masonic/spiral,
 /area/rogue/under/town/basement)
+"ejt" = (
+/obj/structure/flora/roguegrass/bush_meagre,
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/rogue/dirt,
+/area/rogue/outdoors/town)
 "ejP" = (
 /obj/structure/stairs,
 /turf/open/floor/rogue/wood,
@@ -6888,6 +6893,15 @@
 "fwz" = (
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
+"fwB" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	icon_state = "woodrailing";
+	pixel_y = -1
+	},
+/obj/structure/flora/roguegrass,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/town)
 "fwT" = (
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/rogue/tile/masonic,
@@ -9093,13 +9107,9 @@
 	},
 /area/rogue/indoors/town/garrison)
 "hwZ" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	icon_state = "woodrailing";
-	pixel_y = -1
-	},
+/obj/structure/fluff/railing/wood,
 /obj/structure/flora/roguegrass,
-/turf/open/floor/rogue/grass,
+/turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/town)
 "hxl" = (
 /obj/structure/closet/crate/roguecloset{
@@ -12657,10 +12667,10 @@
 /turf/open/floor/rogue/church,
 /area/rogue/indoors/town/church/inquisition)
 "kiB" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/flora/roguegrass,
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/town)
+/obj/structure/rack/rogue/shelf/biggest,
+/obj/item/candle/yellow,
+/turf/open/floor/rogue/concrete,
+/area/rogue/indoors/town/shop)
 "kiQ" = (
 /obj/structure/mineral_door/wood{
 	locked = 1;
@@ -19676,11 +19686,6 @@
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/manor)
-"qCQ" = (
-/obj/structure/flora/roguegrass/bush_meagre,
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/town)
 "qDs" = (
 /obj/machinery/light/rogue/hearth,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -23998,11 +24003,6 @@
 /obj/structure/dock_bell,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/outdoors/river)
-"ugW" = (
-/obj/structure/rack/rogue/shelf/biggest,
-/obj/item/candle/yellow,
-/turf/open/floor/rogue/concrete,
-/area/rogue/indoors/town/shop)
 "uhE" = (
 /obj/machinery/light/rogue/wallfire/candle,
 /turf/open/floor/rogue/wood,
@@ -83357,7 +83357,7 @@ kRP
 kRP
 ehF
 paC
-hwZ
+fwB
 lDP
 elp
 elp
@@ -83560,7 +83560,7 @@ kRP
 lsl
 gId
 bUe
-qCQ
+ejt
 lsl
 elp
 elp
@@ -83762,7 +83762,7 @@ kRP
 lKX
 dEt
 nar
-kiB
+hwZ
 lKX
 ehF
 elp
@@ -84164,9 +84164,9 @@ elp
 elp
 lsl
 ehF
-cNT
+aiP
 gZV
-kiB
+hwZ
 vnF
 ehF
 vnF
@@ -94491,7 +94491,7 @@ ehF
 ehF
 ehF
 hiF
-ugW
+kiB
 uvg
 rcU
 lHp
@@ -94500,8 +94500,8 @@ jcc
 nnM
 brP
 sSD
-ugW
-ugW
+kiB
+kiB
 hsJ
 nWe
 nWe
@@ -94895,7 +94895,7 @@ ehF
 ehF
 ehF
 hiF
-ugW
+kiB
 hsJ
 mQm
 dzB
@@ -210046,7 +210046,7 @@ uVx
 lnG
 lnG
 qpv
-uXD
+lUN
 uXD
 uXD
 uXD
@@ -210248,7 +210248,7 @@ uVx
 lnG
 ebS
 sMY
-uXD
+lUN
 uXD
 uXD
 uXD
@@ -210450,7 +210450,7 @@ uVx
 lnG
 lnG
 cFY
-uXD
+lUN
 uXD
 uXD
 vHn
