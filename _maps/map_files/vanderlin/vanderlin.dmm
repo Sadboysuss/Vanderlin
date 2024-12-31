@@ -1813,13 +1813,6 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
-"btc" = (
-/obj/effect/landmark/tram/queued_path{
-	platform_code = "point_2";
-	next_path_id = "point_3"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/river)
 "btf" = (
 /obj/structure/table/wood{
 	icon_state = "longtable_mid"
@@ -21469,13 +21462,6 @@
 	},
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/garrison)
-"shy" = (
-/obj/effect/landmark/tram/queued_path{
-	platform_code = "cargo_exit_point_1";
-	next_path_id = "cargo_exit_point_3"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/river)
 "shM" = (
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/town/caverogue)
@@ -21573,9 +21559,8 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "smM" = (
-/obj/effect/landmark/tram/queued_path{
-	platform_code = "point_3";
-	next_path_id = "point_4"
+/obj/effect/landmark/tram/queued_path/cargo_exit{
+	next_path_id = "cargo_map_exit"
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/river)
@@ -24368,8 +24353,8 @@
 	},
 /area/rogue/indoors/town/tavern)
 "uvu" = (
-/obj/effect/landmark/tram/queued_path/cargo_exit{
-	next_path_id = "cargo_exit_point_1"
+/obj/effect/landmark/tram/queued_path/cargo_map_exit{
+	next_path_id = "cargo_return_1"
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/river)
@@ -70051,7 +70036,7 @@ xYa
 xYa
 xYa
 xYa
-shy
+xYa
 xYa
 xYa
 xYa
@@ -70260,7 +70245,7 @@ xYa
 xYa
 xYa
 xYa
-xYa
+uvu
 xYa
 xYa
 xYa
@@ -70664,10 +70649,10 @@ xYa
 xYa
 xYa
 xYa
-xYa
-xYa
-xYa
 hQv
+xYa
+xYa
+xYa
 xYa
 xYa
 xYa
@@ -71056,7 +71041,6 @@ xYa
 xYa
 xYa
 xYa
-uvu
 xYa
 xYa
 xYa
@@ -71065,6 +71049,7 @@ xYa
 xYa
 xYa
 xYa
+smM
 xYa
 xYa
 xYa
@@ -71200,10 +71185,10 @@ xYa
 xYa
 xYa
 xYa
-btc
 xYa
 xYa
-smM
+xYa
+xYa
 xYa
 xYa
 xYa
