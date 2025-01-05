@@ -15,8 +15,8 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/cheesemaker
 
-	category_tags = list(CTAG_PILGRIM)
-	apprentice_name = "Cheesemaker"
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	apprentice_name = "Cheesemaker Apprentice"
 
 /datum/outfit/job/roguetown/adventurer/cheesemaker/pre_equip(mob/living/carbon/human/H)
 	..()
