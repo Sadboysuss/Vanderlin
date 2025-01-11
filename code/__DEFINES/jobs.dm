@@ -150,7 +150,7 @@
 #define ADVENTURER	(1<<9)
 #define COOK		(1<<10)
 #define GRABBER		(1<<11)
-#define BARD	(1<<12)
+#define MERCENARY	(1<<12)
 #define MIGRANT		(1<<16)
 #define BANDIT		(1<<17)
 

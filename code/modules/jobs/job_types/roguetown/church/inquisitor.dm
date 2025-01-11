@@ -36,6 +36,7 @@
 /datum/outfit/job/roguetown/inquisitor
 	name = "Inquisitor"
 	jobtype = /datum/job/roguetown/inquisitor
+	allowed_patrons = list(/datum/patron/psydon)
 
 /datum/outfit/job/roguetown/inquisitor/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -221,8 +222,7 @@
 		if(length(confessions))
 			if(torture == TRUE) // Only scream your confession if it's due to torture.
 				say(pick(confessions), spans = list("torture"))
-			else
-				say(pick(confessions))
+
 
 			if(user.is_holding_item_of_type(/obj/item/paper/confession)) // This code is to process gettin a signed confession through torture.
 				testing("User is holding a confession.")
