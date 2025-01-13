@@ -1272,7 +1272,9 @@
 /turf/open/floor/rogue/ruinedwood/darker,
 /area/rogue/indoors/town/orphanage)
 "aOr" = (
-/obj/structure/floordoor/gatehatch/inner,
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "keepgatekybraxor"
+	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town)
 "aOs" = (
@@ -4453,7 +4455,7 @@
 /area/rogue/indoors/town)
 "dkS" = (
 /obj/structure/floordoor/gatehatch/outer{
-	redstone_id = "gatelava"
+	redstone_id = "keepgatekybraxor"
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town)
@@ -23452,7 +23454,9 @@
 	pixel_y = -32;
 	redstone_id = "keepgatekybraxor"
 	},
-/obj/structure/floordoor/gatehatch/inner,
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "keepgatekybraxor"
+	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town)
 "sgU" = (
