@@ -200,6 +200,10 @@
 	icon_state = "end"
 	},
 /area/rogue/underworld)
+"IK" = (
+/obj/structure/underworld/coinspawner,
+/turf/open/floor/rogue/churchrough,
+/area/rogue/underworld)
 "IP" = (
 /obj/machinery/light/rogue/firebowl/standing/blue,
 /turf/open/floor/rogue/churchrough,
@@ -23266,7 +23270,7 @@ sz
 sz
 PP
 PP
-df
+IK
 Lk
 PP
 PP
@@ -24589,7 +24593,7 @@ sz
 PP
 Lk
 Lk
-Lk
+PP
 PP
 PP
 PP
@@ -24718,8 +24722,8 @@ Qv
 sz
 sz
 PP
-Lk
-Lk
+PP
+PP
 PP
 PP
 PP
@@ -25367,7 +25371,7 @@ Bj
 ol
 ol
 Wt
-Bj
+df
 Lk
 Lk
 PP
@@ -25496,7 +25500,7 @@ Bj
 ol
 ol
 Wt
-Bj
+df
 Lk
 Lk
 df
@@ -25626,7 +25630,7 @@ Bj
 RL
 oq
 xG
-Bj
+df
 Lk
 Lk
 IP
@@ -25755,7 +25759,7 @@ Bj
 ol
 ol
 Wt
-Bj
+df
 Lk
 Lk
 df
@@ -25885,7 +25889,7 @@ Bj
 ol
 ol
 Wt
-Bj
+df
 Lk
 Lk
 PP
@@ -26148,7 +26152,7 @@ Wt
 NA
 Lk
 Lk
-PP
+Lk
 Lk
 PP
 sz
@@ -26538,8 +26542,8 @@ sz
 PP
 PP
 PP
-PP
-PP
+Lk
+Lk
 PP
 sz
 KU
@@ -26666,10 +26670,10 @@ sz
 sz
 PP
 PP
-Jx
 Lk
-PP
-PP
+Lk
+Lk
+Lk
 PP
 sz
 KU
@@ -26799,7 +26803,7 @@ PP
 Lk
 PP
 Lk
-PP
+Lk
 PP
 sz
 KU
@@ -27316,7 +27320,7 @@ PP
 Lk
 PP
 PP
-Lk
+Jx
 Lk
 Lk
 Lk
@@ -27575,7 +27579,7 @@ PP
 PP
 Lk
 Lk
-Lk
+Jx
 PP
 PP
 Lk
@@ -27689,7 +27693,7 @@ kH
 kH
 kH
 PP
-Lk
+Jx
 df
 Lk
 Lk
@@ -28737,7 +28741,7 @@ Lk
 Lk
 PP
 PP
-Lk
+Jx
 Lk
 PP
 Lk
@@ -28859,7 +28863,7 @@ kH
 kH
 kH
 PP
-Lk
+Jx
 Lk
 Lk
 PP
@@ -29264,7 +29268,7 @@ Lk
 Lk
 Lk
 PP
-Lk
+Jx
 PP
 Lk
 Lk
@@ -30030,7 +30034,7 @@ kH
 kH
 kH
 PP
-Lk
+Jx
 PP
 PP
 Lk
@@ -30298,7 +30302,7 @@ Lk
 Lk
 Lk
 PP
-Lk
+Jx
 Lk
 Lk
 Lk
@@ -31578,7 +31582,7 @@ Lk
 Lk
 Lk
 PP
-Lk
+Jx
 PP
 PP
 Lk
