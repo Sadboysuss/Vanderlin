@@ -13,9 +13,15 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Wooden Arm (L)"=/datum/charflaw/limbloss/arm_l,
 	"Bad Sight"=/datum/charflaw/badsight,
 	"Paranoid"=/datum/charflaw/paranoid,
-	"Random Flaw"=/datum/charflaw/randflaw,
-	"No Flaw (3 TRI)"=/datum/charflaw/noflaw,
-	"Hunted"=/datum/charflaw/hunted))
+	"Clingy"=/datum/charflaw/clingy,
+	"Isolationist"=/datum/charflaw/isolationist,
+	"Fire Servant"=/datum/charflaw/addiction/pyromaniac,
+	"Thief-Borne"=/datum/charflaw/addiction/kleptomaniac,
+	"Pain Freek"=/datum/charflaw/addiction/masochist,
+	"Hunted"=/datum/charflaw/hunted,
+	"Schizophrenic" = /datum/charflaw/schizophrenic,
+	"Random Flaw or No Flaw"=/datum/charflaw/randflaw,
+	"Guaranteed No Flaw (3 TRI)"=/datum/charflaw/noflaw,))
 
 /datum/charflaw
 	var/name
