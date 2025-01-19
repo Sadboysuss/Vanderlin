@@ -14,6 +14,8 @@
 	throwforce = 7
 	throw_range = 4
 	dropshrink = 0.8
+	grid_height = 64
+	grid_width = 32
 	var/datum/looping_sound/dmusloop/soundloop
 	var/list/song_list = list()
 	var/playing = FALSE
@@ -364,7 +366,7 @@
 	)
 
 /obj/item/rogue/instrument/harp
-	name = "harp"
+	name = "lyre"
 	desc = "An elven instrument of a great and proud heritage."
 	icon_state = "harp"
 	song_list = list(
