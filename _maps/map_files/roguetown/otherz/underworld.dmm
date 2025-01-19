@@ -125,8 +125,10 @@
 /turf/open/floor/rogue/churchrough,
 /area/rogue/underworld)
 "zx" = (
-/obj/structure/underworld/barrier,
-/turf/open/floor/rogue/church,
+/obj/structure/stairs/stone/church{
+	dir = 1
+	},
+/turf/open/transparent/openspace,
 /area/rogue/underworld)
 "AF" = (
 /obj/structure/underworld/carriage{
@@ -156,6 +158,9 @@
 /turf/open/floor/rogue/churchrough,
 /area/rogue/underworld)
 "DM" = (
+/obj/structure/stairs/stone/church{
+	dir = 1
+	},
 /obj/machinery/light/rogue/wallfire/candle/blue{
 	pixel_x = 32;
 	pixel_y = 0
@@ -223,6 +228,9 @@
 /turf/open/floor/rogue/underworld/road,
 /area/rogue/underworld)
 "LG" = (
+/obj/structure/stairs/stone/church{
+	dir = 1
+	},
 /obj/machinery/light/rogue/wallfire/candle/blue{
 	pixel_y = 0;
 	pixel_x = -32
@@ -8707,8 +8715,8 @@ KU
 sz
 sz
 sz
-Eh
-Eh
+sz
+sz
 Eh
 Eh
 Eh
@@ -8837,8 +8845,8 @@ KU
 sz
 sz
 sz
+sz
 Qn
-df
 dF
 df
 df
@@ -8967,8 +8975,8 @@ KU
 sz
 sz
 sz
+sz
 Qn
-df
 df
 df
 df
@@ -9097,8 +9105,8 @@ KU
 sz
 sz
 sz
+sz
 Qn
-df
 wY
 df
 df
@@ -9227,8 +9235,8 @@ KU
 sz
 sz
 sz
-Eh
-Eh
+sz
+sz
 Eh
 Eh
 Eh
@@ -25347,8 +25355,8 @@ IP
 Lk
 Lk
 Lk
+Lk
 Xt
-Eh
 Eh
 IH
 Sp
@@ -25476,9 +25484,10 @@ Wt
 Wt
 Wt
 Wt
-Df
+Wt
+Wt
 LG
-yd
+kH
 fC
 ol
 ol
@@ -25601,14 +25610,14 @@ xn
 xn
 xn
 xe
-zx
+Wt
 GV
 lw
 Wt
 Wt
-Df
+Wt
+zx
 kH
-yd
 fC
 ol
 ol
@@ -25735,9 +25744,10 @@ Wt
 Wt
 Wt
 Wt
-Df
+Wt
+Wt
 DM
-yd
+kH
 fC
 ol
 ol
@@ -25865,8 +25875,8 @@ IP
 Lk
 Lk
 Lk
+Lk
 Xt
-Eh
 Eh
 IH
 Sp

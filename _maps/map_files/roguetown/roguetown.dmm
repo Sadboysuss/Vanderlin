@@ -6190,6 +6190,9 @@
 	},
 /turf/open/floor/rogue/twig,
 /area/rogue/outdoors/town/roofs)
+"gLE" = (
+/turf/open/floor/rogue/dirt,
+/area/rogue/outdoors/rtfield)
 "gMj" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/key/manor,
@@ -10933,10 +10936,6 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
-"mdx" = (
-/obj/effect/landmark/start/barkeep,
-/turf/open/floor/rogue/ruinedwood,
-/area/rogue/indoors/town/tavern)
 "mdQ" = (
 /obj/machinery/light/rogue/torchholder{
 	dir = 8
@@ -11862,6 +11861,11 @@
 	},
 /turf/open/floor/rogue/wood/nosmooth,
 /area/rogue/indoors/town)
+"nbT" = (
+/turf/open/floor/rogue/ruinedwood{
+	icon_state = "weird1"
+	},
+/area/rogue/indoors/town/shop)
 "nbV" = (
 /obj/structure/chair/wood/rogue{
 	dir = 4
@@ -51157,7 +51161,7 @@ bFf
 bFf
 bFf
 bFf
-jSD
+gLE
 bFf
 bFf
 bFf
@@ -79933,7 +79937,7 @@ sUi
 sUi
 vQk
 hyI
-mdx
+nXZ
 dsA
 nNL
 gaU
