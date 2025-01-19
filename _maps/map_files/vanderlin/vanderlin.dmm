@@ -15681,7 +15681,6 @@
 /obj/machinery/light/rogue/wallfire{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/knight,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
 "lrZ" = (
@@ -17381,7 +17380,7 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
 "mMk" = (
-/obj/effect/landmark/start/barkeep,
+/obj/effect/landmark/start/innkeep,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/town/tavern)
 "mMm" = (
@@ -97783,8 +97782,8 @@ tzM
 quR
 toB
 toB
-toB
 mMk
+toB
 iUF
 kZH
 jZz
