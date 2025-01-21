@@ -295,7 +295,7 @@
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
 	)
-	output = list(/obj/item/clothing/suit/roguetown/armor/leather/jacket)
+	output = /obj/item/clothing/suit/roguetown/armor/leather/jacket
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/leather/brimmedhat
@@ -303,7 +303,7 @@
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
 	)
-	output = list(/obj/item/clothing/head/roguetown/brimmed)
+	output = list(/obj/item/clothing/head/roguetown/brimmed = 2)
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/leather/volfmantle

@@ -198,7 +198,7 @@
 	sellprice = 35
 	axe_cut = 15 // Better than iron
 
-/obj/item/rogueweapon/axe/iron/getonmobprop(tag)
+/obj/item/rogueweapon/axe/steel/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
