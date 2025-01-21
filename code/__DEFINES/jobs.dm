@@ -150,6 +150,8 @@
 #define ADVENTURER	(1<<9)
 #define COOK		(1<<10)
 #define GRABBER		(1<<11)
+#define BARD	(1<<12)
+#define CHEESEMAKER (1<<13)
 #define MIGRANT		(1<<16)
 #define BANDIT		(1<<17)
 
@@ -231,6 +233,7 @@
 #define JDO_HUNTER 28.4
 #define JDO_MINER 28.5
 #define JDO_CARPENTER 28.6
+#define JDO_CHEESEMAKER 28.7
 #define JDO_MATRON 28.7
 #define JDO_GRAVEMAN 29
 
