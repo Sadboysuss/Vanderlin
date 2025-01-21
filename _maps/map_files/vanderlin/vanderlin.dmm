@@ -2282,6 +2282,9 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
+/obj/effect/landmark/start/servant{
+	dir = 2
+	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
 "byA" = (
@@ -4380,6 +4383,9 @@
 /area/rogue/indoors/town/manor)
 "cVf" = (
 /obj/structure/chair/wood/rogue/chair3{
+	dir = 1
+	},
+/obj/effect/landmark/start/servant{
 	dir = 1
 	},
 /turf/open/floor/carpet/inn,
@@ -6578,6 +6584,7 @@
 /area/rogue/outdoors/town)
 "eBI" = (
 /obj/structure/chair/wood/rogue/chair3,
+/obj/effect/landmark/start/servant,
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
 "eCc" = (
@@ -6590,6 +6597,7 @@
 "eCw" = (
 /obj/structure/chair/wood/rogue/chair3,
 /obj/machinery/light/rogue/wallfire/candle,
+/obj/effect/landmark/start/servant,
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
 "eCG" = (
@@ -13467,6 +13475,9 @@
 	dir = 1;
 	icon_state = "chair2"
 	},
+/obj/effect/landmark/start/servant{
+	dir = 1
+	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
 "jCE" = (
@@ -16714,9 +16725,6 @@
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/outdoors/mountains)
 "mef" = (
-/obj/effect/landmark/start/servant{
-	dir = 4
-	},
 /obj/structure/bed/rogue/hay,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
@@ -19138,6 +19146,9 @@
 /area/rogue/indoors/town/manor)
 "nUz" = (
 /obj/structure/chair/wood/rogue,
+/obj/effect/landmark/start/servant{
+	dir = 2
+	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
 "nUR" = (
@@ -27416,9 +27427,6 @@
 /area/rogue/indoors/town)
 "udt" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/effect/landmark/start/servant{
-	dir = 8
-	},
 /obj/structure/bed/rogue/hay,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
@@ -29890,6 +29898,9 @@
 /obj/machinery/light/rogue/wallfire/candle{
 	pixel_x = 32;
 	pixel_y = 0
+	},
+/obj/effect/landmark/start/servant{
+	dir = 1
 	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/tavern)
