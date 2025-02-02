@@ -4947,10 +4947,6 @@
 	},
 /turf/open/water,
 /area/rogue/outdoors/river)
-"dsa" = (
-/obj/machinery/light/rogue/wallfire/candle/blue/l,
-/turf/closed/wall/mineral/rogue/stone/window,
-/area/rogue/indoors/town/shop)
 "dsg" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -24887,6 +24883,10 @@
 	icon_state = "glyph2"
 	},
 /area/rogue/indoors/town/vault)
+"rXB" = (
+/obj/machinery/light/rogue/wallfire/candle/blue/l,
+/turf/closed/wall/mineral/rogue/stone/window,
+/area/rogue/indoors/town/shop)
 "rXT" = (
 /turf/open/floor/rogue/rooftop{
 	dir = 4
@@ -30664,11 +30664,12 @@
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
 "vZi" = (
-/obj/structure/fluff/sellsign{
-	name = "Weaponsmith"
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 10
 	},
-/turf/open/floor/rogue/cobblerock,
-/area/rogue/outdoors/town)
+/turf/open/floor/rogue/hexstone,
+/area/rogue/indoors/town/shop)
 "vZC" = (
 /obj/structure/handcart{
 	dir = 4
@@ -32975,13 +32976,6 @@
 	},
 /turf/open/floor/rogue/tile/bfloorz,
 /area/rogue/indoors/town/manor)
-"xHJ" = (
-/obj/structure/table/wood{
-	icon_state = "largetable";
-	dir = 10
-	},
-/turf/open/floor/rogue/hexstone,
-/area/rogue/indoors/town/shop)
 "xHY" = (
 /turf/closed/wall/mineral/rogue/stonebrick,
 /area/rogue/outdoors/town)
@@ -94812,7 +94806,7 @@ iSk
 bDU
 lsl
 elp
-vZi
+ehF
 qBL
 lzw
 tTU
@@ -98053,7 +98047,7 @@ fGK
 ehF
 gZy
 nWe
-xHJ
+vZi
 lef
 lxU
 lxU
@@ -98254,7 +98248,7 @@ ryt
 fGK
 ehF
 ehF
-dsa
+rXB
 cqR
 cKz
 cKz
