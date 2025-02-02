@@ -961,10 +961,8 @@
 /turf/open/floor/rogue/woodturned/nosmooth,
 /area/rogue/indoors/town/merc_guild)
 "aFU" = (
-/obj/structure/fluff/sellsign{
-	name = "Armoursmith"
-	},
-/turf/open/floor/rogue/cobble,
+/obj/structure/fluff/walldeco/sign/armorsmithsign/left,
+/turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
 "aFX" = (
 /obj/structure/roguemachine/mail,
@@ -9851,10 +9849,8 @@
 /turf/open/floor/rogue/ruinedwood/spiralfade,
 /area/rogue/indoors/town/manorgate)
 "gOe" = (
-/obj/structure/fluff/sellsign{
-	name = "Armoursmith"
-	},
-/turf/open/floor/rogue/blocks,
+/obj/structure/fluff/walldeco/sign/merchantsign/left,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/town)
 "gOl" = (
 /turf/closed/wall/mineral/rogue/decostone,
@@ -14126,11 +14122,8 @@
 /turf/open/floor/rogue/churchmarble,
 /area/rogue/indoors/town/clinic_large)
 "jPc" = (
-/obj/structure/flora/roguegrass/bush,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/rogue/dirt,
+/obj/structure/fluff/walldeco/sign/apothecarysign/left,
+/turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
 "jPd" = (
 /obj/structure/fluff/railing/border{
@@ -15970,7 +15963,7 @@
 /obj/machinery/light/rogue/torchholder{
 	pixel_y = 26
 	},
-/obj/structure/fluff/walldeco/innsign/saiga{
+/obj/structure/fluff/walldeco/sign/saiga{
 	pixel_x = -3;
 	pixel_y = -7
 	},
@@ -21432,12 +21425,7 @@
 /area/rogue/indoors/soilsons)
 "prs" = (
 /obj/structure/flora/roguegrass/bush_meagre,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/walldeco/sign/weaponsmithsign,
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/town)
 "prv" = (
@@ -21468,7 +21456,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
 "psB" = (
-/obj/structure/fluff/walldeco/innsign/trophy{
+/obj/structure/fluff/walldeco/sign/trophy{
 	desc = "A somewhat unfitting sign for a physician's office.";
 	name = "Medicae Office"
 	},
@@ -27884,7 +27872,7 @@
 	},
 /area/rogue/indoors/town/theatre)
 "tXa" = (
-/obj/structure/fluff/walldeco/innsign/saiga,
+/obj/structure/fluff/walldeco/sign/saiga,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
 "tXh" = (
@@ -28364,7 +28352,7 @@
 	},
 /area/rogue/outdoors/town/roofs)
 "unF" = (
-/obj/structure/fluff/walldeco/innsign/trophy{
+/obj/structure/fluff/walldeco/sign/trophy{
 	desc = "A somewhat unfitting sign for a physician's office.";
 	name = "Medicae Office"
 	},
@@ -32215,15 +32203,8 @@
 /turf/open/floor/rogue/churchrough,
 /area/rogue/indoors/town/church/inquisition)
 "xdr" = (
-/obj/structure/flora/roguegrass,
-/obj/structure/flora/ausbushes/brflowers,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/machinery/light/rogue/lanternpost/fixed{
-	pixel_x = -2
-	},
-/turf/open/floor/rogue/grass,
+/obj/structure/fluff/walldeco/sign/weaponsmithsign/left,
+/turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
 "xei" = (
 /obj/item/roguebin/water/gross,
@@ -93611,7 +93592,7 @@ lsl
 lsl
 lsl
 lsl
-gpj
+jPc
 elp
 lsl
 elp
@@ -94628,7 +94609,7 @@ miV
 elp
 ehF
 fKH
-oXQ
+prs
 oqs
 lzw
 qnH
@@ -96045,10 +96026,10 @@ vee
 lMH
 aPk
 qBL
-fTF
-fTF
-fTF
 tTU
+fTF
+fTF
+fTF
 lQR
 tTU
 qBL
@@ -96247,9 +96228,9 @@ lsl
 ehF
 ehF
 lsl
-eYq
+xdr
 lsl
-vZi
+ehF
 lsl
 lsl
 lsl
@@ -96658,12 +96639,12 @@ ehF
 uSV
 lsl
 tRX
-gOe
 lsl
 lsl
-hsv
-bDv
-oXQ
+lsl
+elp
+aFU
+lsl
 hRa
 uOB
 oZO
@@ -96863,9 +96844,9 @@ elp
 elp
 lsl
 lsl
-prs
-xdr
-jPc
+lsl
+elp
+elp
 qBL
 jNK
 jNK
@@ -97069,13 +97050,13 @@ elp
 lsl
 elp
 bsR
-aFU
+elp
 elp
 lsl
 lsl
-eYq
+aFU
 lsl
-ehF
+cyv
 ehF
 ehF
 xOJ
@@ -97670,7 +97651,7 @@ uSV
 uSV
 uSV
 iSk
-iSk
+gOe
 iSk
 iSk
 iSk
