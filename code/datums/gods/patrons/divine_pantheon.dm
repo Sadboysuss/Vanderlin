@@ -37,7 +37,7 @@
 	t3 = /obj/effect/proc_holder/spell/invoked/projectile/moondagger
 	confess_lines = list(
 		"NOC IS NIGHT!",
-		"NOC SEES ALL!",
+		"NOC SEES THE TRUTH!",
 		"I SEEK THE MYSTERIES OF THE MOON!",
 	)
 
