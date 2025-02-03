@@ -19185,6 +19185,10 @@
 /obj/structure/chair/bench/throne,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/church/inquisition)
+"nGv" = (
+/obj/structure/fluff/statue/tdummy,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/town)
 "nGG" = (
 /obj/structure/fluff/railing/wood,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -24808,6 +24812,12 @@
 /obj/structure/chair/wood/rogue/chair_noble/red,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
+"rUl" = (
+/obj/machinery/light/rogue/firebowl{
+	pixel_x = -14
+	},
+/turf/open/floor/rogue/dirt,
+/area/rogue/outdoors/town)
 "rUE" = (
 /obj/machinery/light/rogue/wallfire/candle{
 	pixel_y = -32
@@ -26514,6 +26524,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/indoors/town/tavern)
+"teu" = (
+/obj/machinery/light/rogue/firebowl/standing,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/town)
 "teA" = (
 /obj/structure/stairs,
 /turf/open/floor/rogue/ruinedwood{
@@ -32054,6 +32068,10 @@
 /obj/item/bedsheet/rogue/cloth,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
+"wXQ" = (
+/obj/machinery/light/rogue/firebowl/standing,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/town)
 "wXX" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/rogue/wine,
@@ -97391,7 +97409,7 @@ oks
 qhM
 sWL
 cKJ
-sWL
+wXQ
 mpR
 vnF
 vnF
@@ -97990,7 +98008,7 @@ hPx
 bFc
 bJN
 jdk
-sWL
+nGv
 amM
 vnF
 vnF
@@ -98393,7 +98411,7 @@ mwT
 oAy
 oAy
 bJN
-jdk
+rUl
 sWL
 sWL
 vnF
@@ -98596,7 +98614,7 @@ ldm
 phh
 gOl
 jdk
-sWL
+nGv
 cKJ
 jdk
 vnF
@@ -98805,7 +98823,7 @@ cdP
 sWL
 gEL
 cdP
-cKJ
+teu
 mpR
 jdk
 vnF
