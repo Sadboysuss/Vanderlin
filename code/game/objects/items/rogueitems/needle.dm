@@ -99,6 +99,7 @@
 		if((armor_value == 0 && skill_level > 0) || (armor_value > 0 && skill_level > 1)) //If not armor but skill level at least 1 or Armor and skill level at least 2
 			user.visible_message(span_info("[user] repairs [I]!"))
 			I.obj_integrity = min(I.obj_integrity + skill_multiplied, I.max_integrity)
+			update_icon_state()
 		else
 			if(prob(20 - user.STALUC)) //Unlucky here!
 				I.take_damage(150, BRUTE, "slash")
