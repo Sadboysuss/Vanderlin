@@ -45,16 +45,14 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 
 /obj/item/reagent_containers/food/snacks/rogue/friedrat
 	name = "fried rat"
-	desc = ""
-	icon = 'icons/roguetown/items/food.dmi'
 	icon_state = "cookedrat"
 	bitesize = 2
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
-	eat_effect = null
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0
+	plateable = TRUE
 
 /obj/item/reagent_containers/food/snacks/smallrat/burning(input as num)
 	if(!dead)
