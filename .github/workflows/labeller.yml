@@ -36,16 +36,15 @@ jobs:
               if (file.filename.endsWith('.dmi')) {
                 labels.add('sprites');
               }
-              if (file.filename.endsWith('.dmm') {
+              if (file.filename.endsWith('.dmm')) {  // Fixed syntax error here
                 labels.add('mapping');
               }
               if (file.filename.endsWith('.dm')) {
                 labels.add('code');
               }
-	            if (file.filename.endsWith('.md')) {
+              if (file.filename.endsWith('.md')) {
                 labels.add('docs');
               }
-
             });
 
             if (labels.size > 0) {
