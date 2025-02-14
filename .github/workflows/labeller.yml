@@ -1,0 +1,58 @@
+name: "Label PRs Based on File Extensions and Title"
+
+on:
+  pull_request:
+    types: [opened, synchronize, edited]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply Labels Based on Changed Files and PR Title
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const title = pr.title.toLowerCase();
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number
+            });
+
+            const labels = new Set();
+
+            // Check title for keywords
+            if (title.includes("fix")) {
+              labels.add("fix");
+            }
+            if (title.includes("port")) {
+              labels.add("port");
+            }
+
+            // Check file extensions
+            files.forEach(file => {
+              if (file.filename.endsWith('.dmi')) {
+                labels.add('sprites');
+              }
+              if (file.filename.endsWith('.dmm') {
+                labels.add('mapping');
+              }
+              if (file.filename.endsWith('.dm')) {
+                labels.add('code');
+              }
+	            if (file.filename.endsWith('.md')) {
+                labels.add('docs');
+              }
+
+            });
+
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: Array.from(labels),
+              });
+            }
