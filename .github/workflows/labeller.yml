@@ -1,57 +1,28 @@
-name: "Label PRs Based on File Extensions and Title"
-
+name: Label and GBP
 on:
-  pull_request:
-    types: [opened, synchronize, edited]
-
+  pull_request_target:
+    types: [closed, opened, synchronize]
 jobs:
-  label:
+  # labeler must run before gbp because gbp calculates itself based on labels
+  labeler:
     runs-on: ubuntu-latest
+    if: github.event.action == 'opened' || github.event.action == 'synchronize'
+    permissions:
+      pull-requests: write # to apply labels
+      issues: write # to apply labels
     steps:
-      - name: Apply Labels Based on Changed Files and PR Title
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const pr = context.payload.pull_request;
-            const title = pr.title.toLowerCase();
-            const { data: files } = await github.rest.pulls.listFiles({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr.number
-            });
-
-            const labels = new Set();
-
-            // Check title for keywords
-            if (title.includes("fix")) {
-              labels.add("fix");
-            }
-            if (title.includes("port")) {
-              labels.add("port");
-            }
-
-            // Check file extensions
-            files.forEach(file => {
-              if (file.filename.endsWith('.dmi')) {
-                labels.add('sprites');
-              }
-              if (file.filename.endsWith('.dmm')) {  // Fixed syntax error here
-                labels.add('mapping');
-              }
-              if (file.filename.endsWith('.dm')) {
-                labels.add('code');
-              }
-              if (file.filename.endsWith('.md')) {
-                labels.add('docs');
-              }
-            });
-
-            if (labels.size > 0) {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: pr.number,
-                labels: Array.from(labels),
-              });
-            }
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Run Auto Labeler
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { get_updated_label_set } = await import('${{ github.workspace }}/tools/pull_request_hooks/autoLabel.js');
+          const new_labels = await get_updated_label_set({ github, context });
+          github.rest.issues.setLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: new_labels,
+          });
+          console.log(`Labels updated: ${new_labels}`);
