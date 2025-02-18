@@ -181,9 +181,9 @@ export async function get_updated_label_set({ github, context }) {
 		}
 	}
 	if(merge_conflict){
-		updated_labels.add('merge conflict');
+		updated_labels.add('MERGE CONFLICT');
 	} else {
-		updated_labels.delete('merge conflict');
+		updated_labels.delete('MERGE CONFLICT');
 	}
 
 	// return the labels to the action, which will apply it
