@@ -527,6 +527,7 @@
 
 	// The Assassin's profane dagger can sniff out their targets, even masked.
 	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
+		//TODO: move this to an examinate signal call
 		if(src == user)
 			return
 		if (iscarbon(user))
