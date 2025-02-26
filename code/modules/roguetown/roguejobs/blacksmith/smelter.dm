@@ -14,6 +14,7 @@
 	var/maxore = 1
 	var/cooking = 0
 	var/actively_smelting = FALSE // Are we currently smelting?
+	var/max_crucible_temperature = 1850
 	fueluse = 5 MINUTES
 	crossfire = FALSE
 
@@ -21,13 +22,13 @@
 	if(istype(W, /obj/item/rogueweapon/tongs))
 		if(!actively_smelting) // Prevents an exp gain exploit. - Foxtrot
 			var/obj/item/rogueweapon/tongs/T = W
-			if(ore.len && !T.hingot)
+			if(ore.len && !T.held_item)
 				var/obj/item/I = ore[ore.len]
 				ore -= I
 				I.forceMove(T)
-				T.hingot = I
-				if(user.mind && isliving(user) && T.hingot?.smeltresult) // Prevents an exploit with coal and runtimes with everything else
-					if(!istype(T.hingot, /obj/item/rogueore) && T.hingot?.smelted) // Burning items to ash won't level smelting.
+				T.held_item = I
+				if(user.mind && isliving(user) && T.held_item?:smeltresult) // Prevents an exploit with coal and runtimes with everything else
+					if(!istype(T.held_item, /obj/item/rogueore) && T.held_item?:smelted) // Burning items to ash won't level smelting.
 						var/mob/living/L = user
 						var/boon = user.mind.get_learning_boon(/datum/skill/craft/smelting)
 						var/amt2raise = L.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
@@ -37,9 +38,19 @@
 				if(on)
 					var/tyme = world.time
 					T.hott = tyme
+					T.proxy_heat(150, max_crucible_temperature)
 					addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/rogueweapon/tongs, make_unhot), tyme), 50)
 					if(istype(T, /obj/item/rogueweapon/tongs/stone))
 						T.take_damage(1, BRUTE, "blunt")
+				T.update_icon()
+				return
+
+			for(var/obj/item/storage/crucible/crucible in contents)
+				user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src]!")
+				if(!do_after(user, 1.5 SECONDS, src))
+					return
+				crucible.forceMove(T)
+				T.held_item = crucible
 				T.update_icon()
 				return
 			if(on)
@@ -52,6 +63,12 @@
 	if(istype(W, /obj/item/rogueore/coal))
 		if(alert(usr, "Fuel \the [src] with [W]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
 			return ..()
+
+	if(istype(W, /obj/item/storage/crucible))
+		W.forceMove(src)
+		user.visible_message("Loads a crucible into [src].", "You load a crucible into [src].")
+		return ..()
+
 	if(W.smeltresult)
 		if(ore.len < maxore)
 			if(!(W in user.held_items) || !user.temporarilyRemoveItemFromInventory(W))
@@ -148,6 +165,7 @@
 	maxore = 4
 	fueluse = 5 MINUTES
 	climbable = FALSE
+	max_crucible_temperature = 2000
 
 /obj/machinery/light/rogue/smelter/great/process()
 	..()
