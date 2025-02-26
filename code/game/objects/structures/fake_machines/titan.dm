@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 //	add_overlay(eye_lights)
 	set_light(5)
 
-/obj/structure/fake_machine/titan/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, original_message)
+/obj/structure/fake_machine/titan/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
 //	. = ..()
 	if(speaker == src)
 		return
