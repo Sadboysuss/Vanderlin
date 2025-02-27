@@ -38,6 +38,11 @@
 
 /obj/item
 	var/submitted_to_stockpile
+	var/datum/touch_logs/touch_logs = new()
+
+/obj/item/add_fingerprint(mob/M, ignoregloves = FALSE)
+	. = ..()
+	//touch_logs.add_to_log(M)
 
 /*
 * Weird proc that prevents
