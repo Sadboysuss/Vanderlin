@@ -89,6 +89,8 @@
 	///AI controller that controls this atom. type on init, then turned into an instance during runtime
 	var/datum/ai_controller/ai_controller
 
+	var/xyoverride = FALSE ///so we can 'face' the click catcher even though it doesn't have an x or a y
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -536,24 +538,13 @@
 		return null
 	return list("[dna.unique_enzymes]" = blood.type)
 
-///to add a mob's dna info into an object's blood_dna list.
-/atom/proc/transfer_mob_blood_dna(mob/living/L)
-	// Returns 0 if we have that blood already
-	var/new_blood_dna = L.get_blood_dna_list()
-	if(!new_blood_dna)
-		return FALSE
-	var/old_length = blood_DNA_length()
-	add_blood_DNA(new_blood_dna)
-	if(blood_DNA_length() == old_length)
-		return FALSE
-	return TRUE
 
 ///to add blood from a mob onto something, and transfer their dna info
 /atom/proc/add_mob_blood(mob/living/M)
 	var/list/blood_dna = M.get_blood_dna_list()
 	if(!blood_dna)
 		return FALSE
-	return add_blood_DNA(blood_dna)
+	return
 
 ///Called when gravity returns after floating I think
 /atom/proc/handle_fall()
@@ -1143,3 +1134,13 @@
 /atom/proc/InitializeAIController()
 	if(ai_controller)
 		ai_controller = new ai_controller(src)
+
+
+/atom/proc/add_fingerprint(mob/M, ignoregloves)
+	if(!isobj(src))
+		return
+	stack_trace("[src] is not an object but add_fingerprint was called on it! Please send this runtime to coders, specifically sadboysuss/grungususs.")
+
+/atom/obj/add_fingerprint(mob/M, ignoregloves)
+	. = ..()
+	touch_logs.add_to_log(M)

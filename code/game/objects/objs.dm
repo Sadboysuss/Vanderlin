@@ -48,6 +48,14 @@
 
 	vis_flags = VIS_INHERIT_PLANE
 
+	/// Touch logs of this object
+	var/datum/touch_logs/touch_logs = new()
+	/// Is this item bloody?
+	var/isbloody = FALSE
+
+	var/weatherproof = FALSE
+	var/weather = FALSE
+
 /obj/vv_edit_var(vname, vval)
 	switch(vname)
 		if("anchored")

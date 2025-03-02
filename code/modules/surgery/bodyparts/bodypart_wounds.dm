@@ -100,7 +100,7 @@
 	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return 0
 	var/bleed_rate = 0
-	if(bandage && !HAS_BLOOD_DNA(bandage))
+	if(bandage && !bandage.isbloody)
 		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += (wound.bleed_rate * owner.dna.species.bleed_mod)

@@ -32,9 +32,6 @@
 			user.visible_message("<span class='notice'>[user] sweeps \the [O.name].</span>", "<span class='notice'>I sweep \the [O.name].</span>")
 			playsound(user, "clothwipe", 100, TRUE)
 			qdel(O)
-		if(istype(O, /obj/effect/decal/cleanable/blood))
-			add_blood_DNA(O.return_blood_DNA())
-			return
 
 /obj/item/broom/attack_turf(turf/T, mob/living/user)
 	if(do_after(user, 3 SECONDS, T))
@@ -44,6 +41,3 @@
 			user.visible_message("<span class='notice'>[user] sweeps \the [T.name].</span>", "<span class='notice'>I sweep \the [T.name].</span>")
 			playsound(user, "clothwipe", 100, TRUE)
 			qdel(C)
-		for(var/obj/effect/decal/cleanable/blood/O in T)
-			add_blood_DNA(O.return_blood_DNA())
-			return

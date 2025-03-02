@@ -275,7 +275,6 @@
 		return
 	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T)
 
-	splatter.transfer_mob_blood_dna(src)
 	splatter.update_icon()
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
 
@@ -301,7 +300,6 @@
 	var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
 	if(P)
 		P.blood_vol += amt
-		P.transfer_mob_blood_dna(src)
 		P.update_icon()
 	else
 		var/obj/effect/decal/cleanable/blood/drip/D = locate() in T

@@ -10,10 +10,6 @@
 	blood_state = BLOOD_STATE_XENO
 	beauty = -250
 
-/obj/effect/decal/cleanable/xenoblood/Initialize()
-	. = ..()
-	add_blood_DNA(list("UNKNOWN DNA" = "X*"))
-
 /obj/effect/decal/cleanable/xenoblood/xsplatter
 	random_icon_states = list("xgibbl1", "xgibbl2", "xgibbl3", "xgibbl4", "xgibbl5")
 
@@ -74,7 +70,3 @@
 /obj/effect/decal/cleanable/blood/xtracks
 	icon_state = "xtracks"
 	random_icon_states = null
-
-/obj/effect/decal/cleanable/blood/xtracks/Initialize()
-	. = ..()
-	add_blood_DNA(list("Unknown DNA" = "X*"))

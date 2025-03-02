@@ -47,8 +47,6 @@
 				var/gibType = gibtypes[i]
 				gib = new gibType(loc)
 
-				gib.add_blood_DNA(dna_to_add)
-
 				var/list/directions = gibdirections[i]
 				if(isturf(loc))
 					if(directions.len)

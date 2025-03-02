@@ -42,7 +42,7 @@
 	var/obj/item/I
 	I = mob.get_active_held_item()
 	if(I)
-		if(I.return_blood_DNA())
+		if(I.isbloody)
 			testing("yep")
 		else
 			testing("nope")
@@ -101,7 +101,7 @@
 			if(!wet)
 				to_chat(user, span_warning("[src] is too dry to clean [O]!"))
 				cleanme = FALSE
-			add_blood_DNA(O.return_blood_DNA())
+			O.isbloody = TRUE
 		if(prob(40 + (wet*10)) && cleanme)
 			wet = max(wet-0.50, 0)
 			user.visible_message(span_info("[user] wipes \the [O.name] with [src]."), span_info("I wipe \the [O.name] with [src]."))
@@ -111,8 +111,6 @@
 		if(prob(40 + (wet*10)))
 			user.visible_message(span_info("[user] wipes \the [O.name] with [src]."), span_info("I wipe \the [O.name] with [src]."))
 
-			if(O.return_blood_DNA())
-				add_blood_DNA(O.return_blood_DNA())
 			for(var/obj/effect/decal/cleanable/C in O)
 				qdel(C)
 			if(!wet)

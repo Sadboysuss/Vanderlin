@@ -467,8 +467,6 @@
 //Return TRUE to cancel other attack hand effects that respect it.
 /atom/proc/attack_hand(mob/user, params)
 	. = FALSE
-	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
-		add_fingerprint(user)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_NO_ATTACK_HAND)
 		. |= TRUE
 	if(interaction_flags_atom & INTERACT_ATOM_ATTACK_HAND)
@@ -476,8 +474,6 @@
 
 /atom/proc/attack_right(mob/user)
 	. = FALSE
-	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
-		add_fingerprint(user)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_NO_ATTACK_HAND)
 		. = TRUE
 	if(interaction_flags_atom & INTERACT_ATOM_ATTACK_HAND)
@@ -514,10 +510,6 @@
 		return FALSE
 
 /atom/proc/interact(mob/user)
-	if(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_INTERACT)
-		add_hiddenprint(user)
-	else
-		add_fingerprint(user)
 	if(interaction_flags_atom & INTERACT_ATOM_UI_INTERACT)
 		return ui_interact(user)
 	return FALSE

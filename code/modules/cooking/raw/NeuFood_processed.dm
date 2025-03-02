@@ -298,7 +298,7 @@
 				new /obj/item/reagent_containers/food/snacks/cheese/gote(drop_location())
 
 		var/obj/item/natural/cloth/T = I
-		if(T.wet && !T.return_blood_DNA())
+		if(T.wet && !T.isbloody())
 			return
 		else
 			var/removereg = /datum/reagent/water

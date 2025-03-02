@@ -64,7 +64,7 @@
 	. = list()
 //	if(!isinhands)
 //		var/bloody = FALSE
-//		if(HAS_BLOOD_DNA(src))
+//		if(isbloody)
 //			bloody = TRUE
 //		else
 //			bloody = bloody_shoes[BLOOD_STATE_HUMAN]
