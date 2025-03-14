@@ -734,6 +734,10 @@
 	if(!GLOB.tinted_weldhelh)
 		return
 	tinttotal = 0
+	if(!getorganslot(ORGAN_SLOT_EYES))
+		become_blind(NO_EYES)
+	else
+		cure_blind(NO_EYES)
 	if(tinttotal >= TINT_BLIND)
 		become_blind(EYES_COVERED)
 	else if(tinttotal >= TINT_DARKENED)
