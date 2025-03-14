@@ -874,7 +874,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	winshow(user, "stonekeep_prefwin", TRUE)
 	winshow(user, "stonekeep_prefwin.character_preview_map", TRUE)
 	var/datum/browser/noclose/popup = new(user, "preferences_browser", "<div align='center'>[used_title]</div>")
-	popup.set_window_options("can_close=0")
+	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	update_preview_icon()
@@ -1113,7 +1113,7 @@ Slots: [job.spawn_positions]</span>
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>Reset</a></center>"
 
 	var/datum/browser/noclose/popup = new(user, "mob_occupation", "<div align='center'>Class Selection</div>", width, height)
-	popup.set_window_options("can_close=0")
+	popup.set_window_options(can_close = FALSE)
 	popup.set_content(HTML)
 	popup.open(FALSE)
 
@@ -1174,10 +1174,7 @@ Slots: [job.spawn_positions]</span>
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	var/choice = tgalert(user, "Use 2 Triumphs to play as this class again?", "Reset LastPlayed", "Do It", "Cancel")
-	if(choice == "Cancel")
-		return
-	if(!choice)
+	if(browser_alert(user, "Use 2 TRIUMPHS to play as this class again?", "OUROBOROS", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
 		return
 	if(user.client?.prefs)
 		if(user.client.prefs.lastclass)
@@ -1229,7 +1226,7 @@ Slots: [job.spawn_positions]</span>
 	dat += "</body>"
 
 	var/datum/browser/noclose/popup = new(user, "keybind_setup", "<div align='center'>Keybinds</div>", 600, 600) //no reason not to reuse the occupation window, as it's cleaner that way
-	popup.set_window_options("can_close=0")
+	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 
@@ -1263,7 +1260,7 @@ Slots: [job.spawn_positions]</span>
 	dat += "</body>"
 
 	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Role</div>", 250, 300) //no reason not to reuse the occupation window, as it's cleaner that way
-	popup.set_window_options("can_close=0")
+	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 
@@ -1427,18 +1424,17 @@ Slots: [job.spawn_positions]</span>
 				key_bindings[full_key] += list(kb_name)
 				key_bindings[full_key] = sortList(key_bindings[full_key])
 
-				user << browse(null, "window=capturekeypress")
+				DIRECT_OUTPUT(user, browse(null, "window=capturekeypress"))
 				user.client.update_movement_keys()
 				save_preferences()
 				SetKeybinds(user)
 
 			if("keybindings_reset")
-				var/choice = tgalert(user, "Do you really want to reset your keybindings?", "Setup keybindings", "Do It", "Cancel")
-				if(choice == "Cancel")
-					ShowChoices(user,3)
+				var/choice = browser_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
+				if(choice != CHOICE_CONFIRM)
 					return
-				hotkeys = (choice == "Do It")
-				key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
+				hotkeys = TRUE
+				key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key)
 				user.client.update_movement_keys()
 				SetKeybinds(user)
 			else
@@ -1517,6 +1513,7 @@ Slots: [job.spawn_positions]</span>
 				ask_for_custom_name(user,href_list["preference"])
 
 			switch(href_list["preference"])
+			/*
 				if("ghostform")
 					if(unlock_content)
 						var/new_form = input(user, "Thanks for supporting BYOND - Choose your ghostly form:","Thanks for supporting BYOND",null) as null|anything in GLOB.ghost_forms
@@ -1547,9 +1544,9 @@ Slots: [job.spawn_positions]</span>
 							ghost_others = GHOST_OTHERS_DEFAULT_SPRITE
 						if(GHOST_OTHERS_SIMPLE_NAME)
 							ghost_others = GHOST_OTHERS_SIMPLE
-
+			*/
 				if("name")
-					var/new_name = input(user, "Choose your character's name:", "Identity")  as text|null
+					var/new_name = browser_input_text(user, "DECIDE YOUR HERO'S IDENTITY", "THE SELF", real_name, MAX_NAME_LEN, encode = FALSE)
 					if(new_name)
 						new_name = reject_bad_name(new_name)
 						if(new_name)
@@ -1560,7 +1557,7 @@ Slots: [job.spawn_positions]</span>
 					log_character("[parent] changed their characters name to [new_name].")
 
 				if("age")
-					var/new_age = input(user, "Choose your character's age (Youngling-[pref_species.max_age])", "Yils Dead") as null|anything in pref_species.possible_ages
+					var/new_age = browser_input_list(user, "SELECT YOUR HERO'S AGE", "YILS DEAD", pref_species.possible_ages, age)
 					if(new_age)
 						age = new_age
 						var/list/hairs
@@ -1579,8 +1576,8 @@ Slots: [job.spawn_positions]</span>
 						var/datum/faith/faith = GLOB.faithlist[path]
 						if(!faith.name)
 							continue
-						faiths_named[faith.name] = faith
-					var/faith_input = input(user, "Choose your character's faith", "Faith") as null|anything in faiths_named
+						faiths_named["\The [faith.name]"] = faith
+					var/faith_input = browser_input_list(user, "SELECT YOUR HERO'S BELIEF", "PUPPETS ON STRINGS", faiths_named, "\The [selected_patron.associated_faith::name]")
 					if(faith_input)
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
@@ -1595,7 +1592,7 @@ Slots: [job.spawn_positions]</span>
 							continue
 						patrons_named[patron.name] = patron
 					var/datum/faith/current_faith = GLOB.faithlist[selected_patron?.associated_faith] || GLOB.faithlist[initial(default_patron.associated_faith)]
-					var/god_input = input(user, "Choose your character's patron god", "[current_faith.name]") as null|anything in patrons_named
+					var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
 					if(god_input)
 						selected_patron = patrons_named[god_input]
 						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
@@ -1611,10 +1608,9 @@ Slots: [job.spawn_positions]</span>
 					var/list/hairs
 					if(age == AGE_OLD && (OLDGREY in pref_species.species_traits))
 						hairs = pref_species.get_oldhc_list()
-						new_hair = input(user, "Choose your character's hair color:", "") as null|anything in hairs
 					else
 						hairs = pref_species.get_hairc_list()
-						new_hair = input(user, "Choose your character's hair color:", "") as null|anything in hairs
+					new_hair = browser_input_list(user, "SELECT YOUR HERO'S HAIR COLOR", "BARBER", hairs)
 					if(new_hair)
 						hair_color = hairs[new_hair]
 						facial_hair_color = hair_color
@@ -1625,7 +1621,7 @@ Slots: [job.spawn_positions]</span>
 					for(var/datum/sprite_accessory/X in spec_hair)
 						hairlist += X.name
 					var/new_hairstyle
-					new_hairstyle = input(user, "Choose your character's hairstyle:", "Barber")  as null|anything in hairlist
+					new_hairstyle = browser_input_list(user, "SELECT YOUR HERO'S HAIR STYLE", "BARBER", hairlist, hairstyle)
 					if(new_hairstyle)
 						hairstyle = new_hairstyle
 /*
@@ -1646,7 +1642,7 @@ Slots: [job.spawn_positions]</span>
 					for(var/datum/sprite_accessory/X in spec_hair)
 						hairlist += X.name
 					var/new_hairstyle
-					new_hairstyle = input(user, "Choose your character's beard:", "Barber")  as null|anything in hairlist
+					new_hairstyle = browser_input_list(user, "SELECT YOUR HERO'S FACIAL HAIR", "UNSHAVEN, UNCLEAN", hairlist, facial_hairstyle)
 					if(new_hairstyle)
 						facial_hairstyle = new_hairstyle
 
@@ -1684,7 +1680,7 @@ Slots: [job.spawn_positions]</span>
 					for(var/datum/sprite_accessory/X in spec_hair)
 						hairlist += X.name
 					var/new_hairstyle
-					new_hairstyle = input(user, "Choose your character's accessory:", "Jewelry and Trinkets")  as null|anything in hairlist //don't ask
+					new_hairstyle = browser_input_list(user, "SELECT YOUR HERO'S DECORUM", "JEWELRY AND TRINKETS", hairlist, accessory) //don't ask
 					if(new_hairstyle)
 						accessory = new_hairstyle
 
@@ -1699,14 +1695,9 @@ Slots: [job.spawn_positions]</span>
 					for(var/datum/sprite_accessory/X in spec_detail)
 						detaillist += X.name
 					var/new_detail
-					new_detail = input(user, "Choose your character's detail:", "Make me unique")  as null|anything in detaillist //don't ask
+					new_detail = browser_input_list(user, "SELECT YOUR HERO'S DETAIL", "CURIOSITY", detaillist, detail) //don't ask
 					if(new_detail)
 						detail = new_detail
-
-				if("bdetail")
-					var/list/loly = list("Not yet.","Work in progress.","Don't click me.","Stop clicking this.","Nope.","Be patient.","Sooner or later.")
-					to_chat(user, "<font color='red'>[pick(loly)]</font>")
-					return
 
 				if("socks")
 					var/new_socks
@@ -1715,12 +1706,12 @@ Slots: [job.spawn_positions]</span>
 						socks = new_socks
 
 				if("eyes")
-					var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference","#"+eye_color) as color|null
+					var/new_eyes = input(user, "SELECT YOUR HERO'S EYE COLOR", "THE WINDOW","#"+eye_color) as color|null
 					if(new_eyes)
 						eye_color = sanitize_hexcolor(new_eyes)
 
 				if("voice")
-					var/new_voice = input(user, "Choose your character's voice color:", "Character Preference","#"+voice_color) as color|null
+					var/new_voice = input(user, "SELECT YOUR HERO'S VOICE COLOR", "THE THROAT","#"+voice_color) as color|null
 					if(new_voice)
 						if(color_hex2num(new_voice) < 230)
 							to_chat(user, "<font color='red'>This voice color is too dark for mortals.</font>")
@@ -1728,7 +1719,6 @@ Slots: [job.spawn_positions]</span>
 						voice_color = sanitize_hexcolor(new_voice)
 
 				if("species")
-
 					var/list/crap = list()
 					for(var/A in GLOB.roundstart_races)
 						var/datum/species/bla = GLOB.species_list[A]
@@ -1740,7 +1730,7 @@ Slots: [job.spawn_positions]</span>
 							continue
 						crap += bla
 
-					var/result = input(user, "Select a species", "Vanderlin") as null|anything in crap
+					var/result = browser_input_list(user, "SELECT YOUR HERO'S PEOPLE:", "VANDERLIN FAUNA", crap, pref_species)
 
 					if(result)
 						pref_species = result
@@ -1755,8 +1745,6 @@ Slots: [job.spawn_positions]</span>
 							features["mcolor"] = pref_species.default_color
 						real_name = pref_species.random_name(gender,1)
 						ResetJobs()
-						if(pref_species.desc)
-							to_chat(user, "[pref_species.desc]")
 						age = pick(pref_species.possible_ages)
 						to_chat(user, "<font color='red'>Classes reset.</font>")
 						random_character(gender)
@@ -1764,7 +1752,7 @@ Slots: [job.spawn_positions]</span>
 
 				if("charflaw")
 					var/list/flawslist = GLOB.character_flaws.Copy()
-					var/result = input(user, "Select a flaw", "Vanderlin") as null|anything in flawslist
+					var/result = browser_input_list(user, "SELECT YOUR HERO'S FLAW", "PERFECTION IS IMPOSSIBLE", flawslist, FALSE)
 					if(result)
 						result = flawslist[result]
 						var/datum/charflaw/C = new result()
@@ -1783,12 +1771,6 @@ Slots: [job.spawn_positions]</span>
 							features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
 						else
 							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-
-				if("color_ethereal")
-					var/new_etherealcolor = input(user, "Choose your ethereal color", "Character Preference") as null|anything in GLOB.color_list_ethereal
-					if(new_etherealcolor)
-						features["ethcolor"] = GLOB.color_list_ethereal[new_etherealcolor]
-
 
 				if("tail_lizard")
 					var/new_tail
@@ -1816,7 +1798,7 @@ Slots: [job.spawn_positions]</span>
 
 				if("ears")
 					var/new_ears
-					new_ears = input(user, "Choose your character's ears:", "Character Preference") as null|anything in pref_species.ears_list()
+					new_ears = browser_input_list(user, "SELECT YOUR HERO'S EARS", "THE MIND", pref_species.ears_list())
 					if(new_ears)
 						features["ears"] = new_ears
 
@@ -1852,7 +1834,7 @@ Slots: [job.spawn_positions]</span>
 
 				if("s_tone")
 					var/listy = pref_species.get_skin_list()
-					var/new_s_tone = input(user, "Choose your character's skin tone:", "Sun")  as null|anything in listy
+					var/new_s_tone = browser_input_list(user, "CHOOSE YOUR HERO'S [uppertext(pref_species.skin_tone_wording)]", "THE SUN", listy)
 					if(new_s_tone)
 						skin_tone = listy[new_s_tone]
 
@@ -1873,7 +1855,7 @@ Slots: [job.spawn_positions]</span>
 					var/new_asaycolor = input(user, "Choose your ASAY color:", "Game Preference",asaycolor) as color|null
 					if(new_asaycolor)
 						asaycolor = sanitize_ooccolor(new_asaycolor)
-
+				/*
 				if ("preferred_map")
 					var/maplist = list()
 					var/default = "Default"
@@ -1891,7 +1873,7 @@ Slots: [job.spawn_positions]</span>
 					var/pickedmap = input(user, "Choose your preferred map. This will be used to help weight random map selection.", "Character Preference")  as null|anything in sortList(maplist)
 					if (pickedmap)
 						preferred_map = maplist[pickedmap]
-
+				*/
 				if ("clientfps")
 					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
 					if (!isnull(desiredfps))
@@ -1903,6 +1885,8 @@ Slots: [job.spawn_positions]</span>
 						UI_style = "Rogue"
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
+
+				/*
 				if("pda_style")
 					var/pickedPDAStyle = input(user, "Choose your PDA style.", "Character Preference", pda_style)  as null|anything in GLOB.pda_styles
 					if(pickedPDAStyle)
@@ -1916,6 +1900,7 @@ Slots: [job.spawn_positions]</span>
 					var/phobiaType = input(user, "What are you scared of?", "Character Preference", phobia) as null|anything in SStraumas.phobia_types
 					if(phobiaType)
 						phobia = phobiaType
+				*/
 
 		else
 			switch(href_list["preference"])
@@ -1945,7 +1930,7 @@ Slots: [job.spawn_positions]</span>
 						domhand = 1
 				if("family")
 					var/list/famtree_options_list = list(FAMILY_NONE, FAMILY_PARTIAL, FAMILY_NEWLYWED, FAMILY_FULL, "EXPLAIN THIS TO ME")
-					var/new_family = input(user, "Do you have relatives in the kingdom?", "The Major Houses") as null|anything in famtree_options_list
+					var/new_family = browser_input_list(user, "SELECT YOUR HERO'S BOND", "BLOOD IS THICKER THAN WATER", famtree_options_list, family)
 					if(new_family == "EXPLAIN THIS TO ME")
 						to_chat(user, span_purple("\
 						--[FAMILY_NONE] will disable this feature.<br>\
@@ -1958,14 +1943,13 @@ Slots: [job.spawn_positions]</span>
 						family = new_family
 				//Setspouse is part of the family subsystem. It will check existing families for this character and attempt to place you in this family.
 				if("setspouse")
-					var/newspouse = input(user, "Input the name of another player:","Rememberin your spouse") as text|null
+					var/newspouse = browser_input_text(user, "INPUT THE IDENTITY OF ANOTHER HERO", "TIL DEATH DO US PART")
 					if(newspouse)
 						setspouse = newspouse
 					else
 						setspouse = null
 				if("alignment")
-///					to_chat(user, "<font color='puple'>Alignment is how you communicate to the Game Masters if your character follows a certain set of behavior restrictions. This allows you to </font>")
-					var/new_alignment = input(user, "Alignment is how you communicate to the Game Masters and other players the intent of your character. Your character will be under less administrative scrutiny for evil actions if you choose evil alignments, but you will experience subtle disadvantages. Alignment is overwritten for antagonists.", "Alignment") as null|anything in ALL_ALIGNMENTS_LIST
+					var/new_alignment = browser_input_list(user, "SELECT YOUR HERO'S MORALITY", "CUT FROM THE SAME CLOTH", ALL_ALIGNMENTS_LIST, alignment)
 					if(new_alignment)
 						alignment = new_alignment
 				if("hotkeys")
@@ -2204,7 +2188,7 @@ Slots: [job.spawn_positions]</span>
 								if(!name)
 									name = "Slot[i]"
 								choices[name] = i
-					var/choice = input(user, "CHOOSE A HERO","VANDERLIN") as null|anything in choices
+					var/choice = browser_input_list(user, "WHO IS YOUR HERO?", "NECRA AWAITS", choices, real_name)
 					if(choice)
 						choice = choices[choice]
 						if(!load_character(choice))
