@@ -221,6 +221,21 @@
 	stressadd = 2
 	desc = "<span class='red'>They are plotting against me in evil tongues..</span>"
 
+/datum/stressevent/paraforeigner
+	timer = 2 MINUTES
+	stressadd = 2
+	desc = "<span class='red'>A foreigner... are they planning to invade us?</span>"
+
+/datum/stressevent/crowd
+	timer = 2 MINUTES
+	stressadd = 2
+	desc = "<span class='red'>Why is everyone here...? Are they trying to kill me?!</span>"
+
+/datum/stressevent/nopeople
+	timer = 2 MINUTES
+	stressadd = 2
+	desc = "<span class='red'>Where did everyone go? Did something happen?!</span>"
+
 /datum/stressevent/hunted // When a hunted character sees someone in a mask
 	timer = 2 MINUTES
 	stressadd = 2

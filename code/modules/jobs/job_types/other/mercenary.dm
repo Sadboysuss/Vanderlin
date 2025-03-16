@@ -28,7 +28,8 @@
 	min_pq = 5
 	outfit = null
 	outfit_female = null
-	advclass_cat_rolls = list(CTAG_MERCENARY = 6)
+	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
+	is_foreigner = TRUE
 
 /datum/job/mercenary/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
