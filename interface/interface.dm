@@ -104,6 +104,52 @@
 
 		concatable += ("&test-merges=" + all_tms_joined)
 
+	var/issue_title = input(src, "Please give the issue a title:","Issue Title") as text|null
+	if(!issue_title)
+		return //Consider it aborted
+	var/user_description = input(src, "Please describe the issue you are reporting:","Issue Body") as message|null
+	if(!user_description)
+		return
+
+	local_template = replacetext(local_template, "## Reproduction:\n", "## Reproduction:\n[user_description]")
+
+	var/client_info = "\
+	Client Information:\n\
+	BYOND:[byond_version].[byond_build]\n\
+	Key:[ckey]\n\
+	\
+	"
+	var/issue_body = "Reporting client info: [client_info]\n\n[local_template]"
+	var/list/body_structure = list(
+		"title" = issue_title,
+		"body" = issue_body
+	)
+	var/datum/http_request/issue_report = new
+	rustg_file_write(issue_body, "[GLOB.log_directory]/issue_reports/[ckey]-[world.time]-[SANITIZE_FILENAME(issue_title)].txt")
+	message_admins("BUGREPORT: Bug report filed by [ADMIN_LOOKUPFLW(src)], Title: [strip_html(issue_title)]")
+	issue_report.prepare(
+		RUSTG_HTTP_METHOD_POST,
+		"https://api.github.com/repos/[CONFIG_GET(string/issue_slug)]/issues",
+		json_encode(body_structure), //this is slow slow slow but no other options buckaroo
+		list(
+			"Accept"="application/vnd.github+json",
+			"Authorization"="Bearer [issue_key]",
+			"X-GitHub-Api-Version"="2022-11-28"
+		)
+	)
+	to_chat(src, span_notice("Sending issue report..."))
+	SEND_SOUND(src, 'sound/misc/compiler-stage1.ogg')
+	issue_report.begin_async()
+	UNTIL(issue_report.is_complete() || !src) //Client fuckery.
+	var/datum/http_response/issue_response = issue_report.into_response()
+	if(issue_response.errored || issue_response.status_code != 201)
+		SEND_SOUND(src, 'sound/misc/compiler-failure.ogg')
+		to_chat(src, "[span_alertwarning("Bug report FAILED!")]\n\
+		[span_warning("Please adminhelp immediately!")]\n\
+		[span_notice("Code:[issue_response.status_code || "9001 CATASTROPHIC ERROR"]")]")
+
+		return
+
 	DIRECT_OUTPUT(src, link(jointext(concatable, "")))
 
 /client/verb/list_test_merges()
