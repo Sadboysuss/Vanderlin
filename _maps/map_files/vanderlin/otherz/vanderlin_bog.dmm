@@ -712,6 +712,10 @@
 /obj/effect/spawner/map_spawner/treeorstump,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog)
+"iF" = (
+/obj/structure/fluff/walldeco/painting/skull,
+/turf/closed/wall/mineral/decostone,
+/area/rogue/indoors/shelter/bog)
 "iI" = (
 /obj/structure/fluff/railing/fence{
 	dir = 8
@@ -719,10 +723,6 @@
 /obj/structure/fluff/railing/fence,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/bog)
-"iN" = (
-/obj/structure/window/openclose,
-/turf/closed/wall/mineral/decowood/vert,
-/area/rogue/indoors/shelter/bog)
 "iO" = (
 /turf/open/floor/carpet,
 /area/rogue/indoors/shelter/bog)
@@ -1669,6 +1669,12 @@
 	},
 /turf/open/water/swamp/deep,
 /area/rogue/outdoors/bog)
+"wc" = (
+/obj/structure/window/openclose{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/rogue/indoors/shelter/bog)
 "wd" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -1768,10 +1774,6 @@
 	},
 /turf/open/water/swamp/deep,
 /area/rogue/outdoors/bog)
-"xv" = (
-/obj/structure/fluff/walldeco/painting/skull,
-/turf/closed/wall/mineral/decostone,
-/area/rogue/indoors/shelter/bog)
 "xx" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt,
@@ -1971,12 +1973,6 @@
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/carpet,
 /area/rogue/indoors/shelter/bog)
-"Ar" = (
-/obj/structure/window/openclose{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors/shelter/bog)
 "As" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 9
@@ -2094,10 +2090,6 @@
 /obj/effect/landmark/mapGenerator/mountain,
 /turf/closed/mineral/bedrock,
 /area/rogue/outdoors/mountains)
-"Cd" = (
-/obj/structure/window/openclose,
-/turf/closed/wall/mineral/decowood,
-/area/rogue/indoors/shelter/bog)
 "Ce" = (
 /obj/structure/stairs{
 	dir = 4
@@ -2927,6 +2919,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
+"Of" = (
+/obj/structure/window/openclose{
+	dir = 4
+	},
+/turf/open/floor/wood/nosmooth,
+/area/rogue/indoors/shelter/bog)
 "Ol" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -3498,6 +3496,12 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decostone,
 /area/rogue/indoors/shelter/bog)
+"VB" = (
+/obj/structure/window/openclose{
+	dir = 1
+	},
+/turf/open/floor/wood/nosmooth,
+/area/rogue/indoors/shelter/bog)
 "VC" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/water/swamp/deep,
@@ -3743,6 +3747,10 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned,
+/area/rogue/indoors/shelter/bog)
+"Zr" = (
+/obj/structure/window/openclose,
+/turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "Zs" = (
 /obj/machinery/light/fueled/torchholder/c,
@@ -40956,11 +40964,11 @@ Gh
 Gh
 Gh
 at
-iN
+Of
 at
 kc
 at
-iN
+Of
 at
 at
 at
@@ -42176,7 +42184,7 @@ ac
 ac
 ac
 Fw
-Cd
+VB
 sS
 sS
 MQ
@@ -42571,7 +42579,7 @@ gJ
 gJ
 gJ
 gJ
-Cd
+Zr
 ac
 ac
 WM
@@ -42580,7 +42588,7 @@ RQ
 ac
 qi
 Fw
-Cd
+VB
 sS
 sS
 MQ
@@ -42975,7 +42983,7 @@ La
 La
 La
 La
-Cd
+Zr
 RQ
 ac
 ac
@@ -45305,7 +45313,7 @@ Hl
 Hl
 Bz
 xK
-Ar
+wc
 hh
 hh
 hh
@@ -46315,7 +46323,7 @@ JF
 ro
 Xc
 OW
-Ar
+wc
 hh
 hh
 hh
@@ -53849,7 +53857,7 @@ OM
 rP
 rP
 Vd
-xv
+iF
 id
 rP
 Kw
@@ -82366,7 +82374,7 @@ hh
 hh
 hh
 hh
-Cd
+Zr
 WW
 rb
 oB
@@ -82375,7 +82383,7 @@ oB
 oB
 on
 WW
-Cd
+VB
 hh
 hh
 yK
@@ -82972,7 +82980,7 @@ hh
 hh
 hh
 hh
-Cd
+Zr
 WW
 rb
 oB
@@ -82981,7 +82989,7 @@ oB
 oB
 on
 WW
-Cd
+VB
 hh
 hh
 yK
