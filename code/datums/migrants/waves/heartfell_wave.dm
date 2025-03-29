@@ -215,6 +215,7 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/flashlight/flare/torch/lantern
+	beltr = /obj/item/book/granter/spellbook/expert
 	id = /obj/item/clothing/ring/gold
 	r_hand = /obj/item/weapon/polearm/woodstaff
 	backl = /obj/item/storage/backpack/satchel
