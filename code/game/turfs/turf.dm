@@ -260,11 +260,6 @@
 	target.zImpact(A, levels, src)
 	return TRUE
 
-/turf/attackby(obj/item/C, mob/user, params)
-	if(..())
-		return TRUE
-	return FALSE
-
 /turf/CanPass(atom/movable/mover, turf/target)
 	if(!target)
 		return FALSE
@@ -572,4 +567,3 @@
 //Should return new turf
 /turf/proc/Melt()
 	return ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-
