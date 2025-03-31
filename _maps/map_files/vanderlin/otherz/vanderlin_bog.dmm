@@ -163,13 +163,6 @@
 "cd" = (
 /turf/closed/mineral/coal,
 /area/rogue/outdoors/bog)
-"cf" = (
-/obj/structure/mineral_door/wood/donjon{
-	lockid = "forrestgarrison"
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/indoors/shelter/bog)
 "cg" = (
 /obj/structure/lever/wall{
 	dir = 8;
@@ -723,6 +716,12 @@
 /obj/structure/fluff/railing/fence,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/bog)
+"iN" = (
+/obj/structure/window/openclose{
+	dir = 4
+	},
+/turf/open/floor/wood/nosmooth,
+/area/rogue/indoors/shelter/bog)
 "iO" = (
 /turf/open/floor/carpet,
 /area/rogue/indoors/shelter/bog)
@@ -1360,6 +1359,10 @@
 	dir = 8
 	},
 /area/rogue/outdoors/bog)
+"si" = (
+/obj/structure/window/openclose,
+/turf/open/floor/wood/nosmooth,
+/area/rogue/indoors/shelter/bog)
 "sl" = (
 /obj/item/weapon/tongs,
 /turf/open/floor/dirt,
@@ -1528,6 +1531,11 @@
 /turf/open/floor/twig,
 /area/rogue/indoors/shelter/bog)
 "uo" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/shelter/bog)
+"up" = (
+/obj/structure/mineral_door/wood/green,
+/obj/effect/mapping_helpers/door/access/garrison/forest,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
 "us" = (
@@ -1919,10 +1927,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
-"zC" = (
-/obj/structure/mineral_door/wood/green,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/indoors/shelter/bog)
 "zD" = (
 /mob/living/carbon/human/species/human/northern/bum/ambush,
 /turf/open/floor/concrete,
@@ -2008,6 +2012,12 @@
 /obj/structure/bed/bear,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
+"AO" = (
+/obj/structure/mineral_door/wood/donjon,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/door/access/garrison/forest,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/shelter/bog)
 "AQ" = (
 /obj/structure/table/vtable,
 /obj/item/clothing/face/cigarette/rollie,
@@ -2090,6 +2100,12 @@
 /obj/effect/landmark/mapGenerator/mountain,
 /turf/closed/mineral/bedrock,
 /area/rogue/outdoors/mountains)
+"Cd" = (
+/obj/structure/window/openclose{
+	dir = 1
+	},
+/turf/open/floor/wood/nosmooth,
+/area/rogue/indoors/shelter/bog)
 "Ce" = (
 /obj/structure/stairs{
 	dir = 4
@@ -2538,6 +2554,12 @@
 "IB" = (
 /turf/open/water/cleanshallow,
 /area/rogue/indoors/shelter/bog)
+"IG" = (
+/obj/structure/mineral_door/wood/donjon,
+/obj/effect/mapping_helpers/door/access/garrison/forest,
+/obj/effect/mapping_helpers/door/locker,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/shelter/bog)
 "IM" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/churchmarble,
@@ -2919,12 +2941,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
-"Of" = (
-/obj/structure/window/openclose{
-	dir = 4
-	},
-/turf/open/floor/wood/nosmooth,
-/area/rogue/indoors/shelter/bog)
 "Ol" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -3002,13 +3018,6 @@
 /area/rogue/outdoors/bog)
 "Pk" = (
 /turf/closed/wall/mineral/stone/window/moss,
-/area/rogue/indoors/shelter/bog)
-"Pl" = (
-/obj/structure/mineral_door/wood/donjon{
-	locked = 1;
-	lockid = "forrestgarrison"
-	},
-/turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
 "Pm" = (
 /obj/structure/chair/wood/alt,
@@ -3496,12 +3505,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decostone,
 /area/rogue/indoors/shelter/bog)
-"VB" = (
-/obj/structure/window/openclose{
-	dir = 1
-	},
-/turf/open/floor/wood/nosmooth,
-/area/rogue/indoors/shelter/bog)
 "VC" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/water/swamp/deep,
@@ -3552,6 +3555,12 @@
 /obj/structure/fluff/walldeco/wantedposter,
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /obj/item/ammo_holder/quiver/arrows,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/shelter/bog)
+"VZ" = (
+/obj/structure/mineral_door/wood/green,
+/obj/effect/mapping_helpers/door/access/garrison/forest,
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
 "Wj" = (
@@ -3747,10 +3756,6 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors/shelter/bog)
-"Zr" = (
-/obj/structure/window/openclose,
-/turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "Zs" = (
 /obj/machinery/light/fueled/torchholder/c,
@@ -26448,7 +26453,7 @@ hf
 hf
 hf
 hf
-zC
+VZ
 hf
 hf
 hf
@@ -27047,7 +27052,7 @@ uo
 uo
 uo
 uo
-zC
+up
 uo
 uo
 uo
@@ -27458,7 +27463,7 @@ hf
 hf
 hf
 hf
-zC
+up
 hf
 hf
 hf
@@ -28060,7 +28065,7 @@ Xx
 fn
 fn
 Xx
-Pl
+IG
 uo
 uo
 uo
@@ -29475,7 +29480,7 @@ Xx
 YW
 YW
 Xx
-cf
+AO
 uo
 uo
 uo
@@ -29882,7 +29887,7 @@ Xx
 hf
 hf
 hf
-zC
+up
 hf
 hf
 hf
@@ -31498,7 +31503,7 @@ hf
 hf
 hf
 hf
-zC
+up
 hf
 hf
 La
@@ -32104,7 +32109,7 @@ Pk
 hf
 hf
 hf
-zC
+VZ
 hf
 hf
 hf
@@ -40964,11 +40969,11 @@ Gh
 Gh
 Gh
 at
-Of
+iN
 at
 kc
 at
-Of
+iN
 at
 at
 at
@@ -42184,7 +42189,7 @@ ac
 ac
 ac
 Fw
-VB
+Cd
 sS
 sS
 MQ
@@ -42579,7 +42584,7 @@ gJ
 gJ
 gJ
 gJ
-Zr
+si
 ac
 ac
 WM
@@ -42588,7 +42593,7 @@ RQ
 ac
 qi
 Fw
-VB
+Cd
 sS
 sS
 MQ
@@ -42983,7 +42988,7 @@ La
 La
 La
 La
-Zr
+si
 RQ
 ac
 ac
@@ -67446,12 +67451,12 @@ yK
 hf
 uo
 uo
-zC
+VZ
 uo
 uo
 uo
 uo
-zC
+up
 uo
 uo
 uo
@@ -67859,7 +67864,7 @@ hf
 hf
 hf
 hf
-zC
+VZ
 hf
 hf
 hf
@@ -70283,7 +70288,7 @@ Dh
 hf
 hf
 hf
-zC
+VZ
 hf
 hf
 hf
@@ -71491,7 +71496,7 @@ Tc
 lm
 lm
 Ep
-zC
+up
 Ep
 uo
 uo
@@ -71697,7 +71702,7 @@ uo
 Ep
 Ep
 Ep
-zC
+up
 Ep
 hf
 Dh
@@ -72300,7 +72305,7 @@ uo
 uo
 uo
 uo
-zC
+up
 uo
 uo
 uo
@@ -82374,7 +82379,7 @@ hh
 hh
 hh
 hh
-Zr
+si
 WW
 rb
 oB
@@ -82383,7 +82388,7 @@ oB
 oB
 on
 WW
-VB
+Cd
 hh
 hh
 yK
@@ -82980,7 +82985,7 @@ hh
 hh
 hh
 hh
-Zr
+si
 WW
 rb
 oB
@@ -82989,7 +82994,7 @@ oB
 oB
 on
 WW
-VB
+Cd
 hh
 hh
 yK
