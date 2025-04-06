@@ -1,15 +1,7 @@
 /datum/advclass/pilgrim/weaver
 	name = "Weaver"
-	tutorial = "Tailors, weavers and seamstresses, who make deft work of cloths and fiber \
-				in order to craft clothes fit for a King, or royalty in general."
-	allowed_sexes = list("Male", "female")
-	allowed_races = list("Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
-	)
+	allowed_sexes = list(MALE, FEMALE)
+
 	outfit = /datum/outfit/job/adventurer/seamstress
 	category_tags = list(CTAG_DISABLED)
 	apprentice_name = "Weaver"
