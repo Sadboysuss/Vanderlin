@@ -14,7 +14,7 @@
 	maximum_possible_slots = 1
 	pickprob = 30
 
-	cmode_music = 'sound/music/cmode/towner/combat_desertrider.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
 /datum/outfit/job/adventurer/zybantine/pre_equip(mob/living/carbon/human/H)
 	..()
