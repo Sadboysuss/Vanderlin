@@ -29,6 +29,7 @@
 
 	armor = ARMOR_PLATE
 	body_parts_covered = COVERAGE_FULL
+	item_weight = 12 * STEEL_MULTIPLIER
 
 //................ Iron Plate Armor ............... //
 /obj/item/clothing/armor/plate/iron
@@ -40,6 +41,7 @@
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 12 * IRON_MULTIPLIER
 
 //................ Rusted Half-plate ............... //
 /obj/item/clothing/armor/plate/rust
@@ -54,6 +56,7 @@
 	sellprice = VALUE_IRON_ARMOR/2
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 12 * IRON_MULTIPLIER
 
 /obj/item/clothing/armor/plate/blkknight
 	name = "blacksteel plate"
@@ -65,3 +68,4 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
+	item_weight = 12 * BLACKSTEEL_MULTIPLIER

@@ -27,6 +27,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	do_sound_plate = TRUE
+	item_weight = 9 * STEEL_MULTIPLIER
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"
