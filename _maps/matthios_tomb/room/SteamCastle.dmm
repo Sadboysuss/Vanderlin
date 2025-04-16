@@ -2055,6 +2055,10 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/hexstone,
 /area/rogue/under/cave)
+"wT" = (
+/obj/item/soap,
+/turf/open/transparent/openspace,
+/area/rogue/under/cave)
 "wW" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/wood/nosmooth/saiga,
@@ -2532,7 +2536,7 @@
 /area/rogue/under/cave)
 "Ch" = (
 /obj/effect/waterfall,
-/obj/item/bath/soap,
+/obj/item/soap/bath,
 /obj/structure/trap/shock,
 /turf/open/water/bath,
 /area/rogue/under/cave)
@@ -2791,7 +2795,7 @@
 /turf/open/floor/cobble,
 /area/rogue/under/cave)
 "EA" = (
-/obj/item/bath/soap,
+/obj/item/soap/bath,
 /turf/open/floor/tile/bath,
 /area/rogue/under/cave)
 "EC" = (
@@ -3639,7 +3643,7 @@
 /area/rogue/under/cave)
 "NX" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/bath/soap,
+/obj/item/soap,
 /turf/open/floor/tile/bath,
 /area/rogue/under/cave)
 "Oc" = (
@@ -9427,7 +9431,7 @@ xm
 ek
 Iu
 Ct
-QF
+wT
 QF
 fA
 iD

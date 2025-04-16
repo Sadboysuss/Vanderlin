@@ -379,8 +379,8 @@
 /area/rogue/indoors)
 "iC" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/bath/soap,
-/obj/item/bath/soap,
+/obj/item/soap,
+/obj/item/soap/bath,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
@@ -912,6 +912,13 @@
 "uy" = (
 /turf/open/floor/tile/masonic/single,
 /area/rogue/indoors)
+"uG" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/soap/bath,
+/obj/item/soap/bath,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/turf/open/floor/metal/barograte,
+/area/rogue/indoors)
 "uJ" = (
 /obj/structure/mineral_door/wood/donjon/stone,
 /obj/machinery/light/fueled/wallfire/candle/weak,
@@ -960,6 +967,7 @@
 /area/rogue/indoors)
 "wc" = (
 /obj/structure/rack/shelf/biggest,
+/obj/item/soap,
 /turf/open/floor/herringbone,
 /area/rogue/indoors)
 "wy" = (
@@ -1546,8 +1554,8 @@
 /area/rogue/indoors)
 "Ku" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/bath/soap,
-/obj/item/bath/soap,
+/obj/item/soap/bath,
+/obj/item/soap,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "KA" = (
@@ -1704,9 +1712,8 @@
 /area/rogue/indoors)
 "Od" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/bath/soap,
-/obj/item/bath/soap,
-/obj/item/bath/soap,
+/obj/item/soap,
+/obj/item/soap,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "Of" = (
@@ -2969,7 +2976,7 @@ Yu
 SA
 Yu
 Ap
-iC
+uG
 gj
 Ll
 ni
