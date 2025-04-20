@@ -21,7 +21,7 @@
 	owner.special_role = name
 	skele_look()
 	equip_lich()
-	greet()
+	move_to_spawnpoint()
 	return ..()
 
 /datum/antagonist/lich/greet()
