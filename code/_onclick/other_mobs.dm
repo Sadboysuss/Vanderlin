@@ -157,6 +157,7 @@
 			H.lastgibto = world.time
 			to_chat(src, span_notice("[H.name] offers [I] to me."))
 			to_chat(H, span_notice("I offer [I] to [src.name]."))
+			H.emote(message = "offers something")
 		else
 			to_chat(H, span_warning("[src.name]'s hands are full."))
 
