@@ -2269,7 +2269,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.socks = socks
 
 	/* V: */
-	
+
 	character.headshot_link = headshot_link
 	character.flavortext = flavortext
 
@@ -2375,7 +2375,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg", "gif")
 
 	if(!length(value))
-		return FALSE
+		return TRUE // so you can  clear headshot link if you like
 
 	// Ensure link starts with "https://"
 	if(findtext(value, "https://") != 1)
