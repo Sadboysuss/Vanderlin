@@ -767,10 +767,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/herringbone,
 /area/rogue/indoors/town)
-"auP" = (
-/obj/effect/landmark/start/gaffer_assistant,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/indoors/town/merc_guild)
 "auQ" = (
 /turf/closed,
 /area/rogue/outdoors/river)
@@ -8601,12 +8597,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
-"eIC" = (
-/obj/effect/landmark/start/tapster{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors/town/tavern)
 "eIN" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile,
@@ -13809,6 +13799,10 @@
 /obj/item/recipe_book/arcyne,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
+"hzK" = (
+/obj/effect/landmark/start/gaffer_assistant,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/merc_guild)
 "hzM" = (
 /obj/machinery/light/fueled/firebowl,
 /obj/effect/decal/cobbleedge{
@@ -15696,12 +15690,6 @@
 	desc = "You think you can climb this durable wall"
 	},
 /area/rogue/under/town/basement)
-"iBS" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/tapster,
-/turf/open/floor/carpet,
-/area/rogue/indoors/town/tavern)
 "iBY" = (
 /obj/structure/lever{
 	redstone_id = "thronegrille"
@@ -17119,6 +17107,12 @@
 	dir = 8
 	},
 /area/rogue/outdoors/town/roofs)
+"juZ" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/tapster,
+/turf/open/floor/carpet,
+/area/rogue/indoors/town/tavern)
 "jvi" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/wooddark,
@@ -17953,6 +17947,12 @@
 	},
 /turf/open/floor/wood,
 /area/rogue/indoors/town/manorgate)
+"jRD" = (
+/obj/effect/landmark/start/tapster{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/rogue/indoors/town/tavern)
 "jRS" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/cobblerock,
@@ -19609,13 +19609,6 @@
 	},
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/town)
-"kNQ" = (
-/obj/effect/decal/shadow_floor,
-/obj/effect/landmark/start/gaffer_assistant{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/indoors/town/merc_guild)
 "kOd" = (
 /turf/open/floor/blocks/stonered,
 /area/rogue/indoors/town/manor)
@@ -20389,11 +20382,6 @@
 /obj/item/instrument/harp,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/theatre)
-"lid" = (
-/obj/structure/bed/wool,
-/obj/effect/landmark/start/tapster,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/town/basement)
 "lir" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 4
@@ -20454,14 +20442,6 @@
 /obj/item/instrument/flute,
 /turf/open/floor/dirt,
 /area/rogue/indoors/town/cell)
-"ljD" = (
-/obj/structure/mineral_door/wood/deadbolt{
-	icon_state = "wooddir";
-	locked = 0;
-	name = "guest servant room"
-	},
-/turf/open/floor/ruinedwood,
-/area/rogue/indoors/town/manor)
 "lks" = (
 /obj/structure/fermentation_keg{
 	pixel_x = -6
@@ -21428,6 +21408,11 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/mountains)
+"lOV" = (
+/obj/structure/bed/wool,
+/obj/effect/landmark/start/tapster,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/rogue/under/town/basement)
 "lPe" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/kneestingers,
@@ -26675,6 +26660,13 @@
 /obj/effect/waterfall,
 /turf/open/floor/carpet/green,
 /area/rogue/indoors/town/bath)
+"oDr" = (
+/obj/effect/decal/shadow_floor,
+/obj/effect/landmark/start/gaffer_assistant{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/merc_guild)
 "oDx" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -27098,10 +27090,6 @@
 	},
 /turf/open/floor/woodturned/nosmooth,
 /area/rogue/indoors/town/manor)
-"oNr" = (
-/obj/effect/landmark/start/shophand,
-/turf/open/floor/churchbrick,
-/area/rogue/indoors/town/shop)
 "oNz" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/bookcase/random,
@@ -29214,6 +29202,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/manor)
+"pSX" = (
+/obj/effect/landmark/start/shophand,
+/turf/open/floor/churchbrick,
+/area/rogue/indoors/town/shop)
 "pSY" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/metal,
@@ -35412,6 +35404,12 @@
 	},
 /turf/open/floor/wood/nosmooth/saiga,
 /area/rogue/indoors/town)
+"tnR" = (
+/obj/structure/mineral_door/wood/deadbolt{
+	name = "guest servant room"
+	},
+/turf/open/floor/ruinedwood,
+/area/rogue/indoors/town/manor)
 "tnV" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -65644,7 +65642,7 @@ eOS
 nhc
 knK
 rLE
-lid
+lOV
 hEK
 hEK
 rLE
@@ -66048,7 +66046,7 @@ tuM
 aUd
 sMh
 rLE
-lid
+lOV
 lLO
 naM
 rLE
@@ -102205,7 +102203,7 @@ ibz
 gDj
 szV
 mLo
-eIC
+jRD
 sGt
 sGt
 sGt
@@ -102397,7 +102395,7 @@ mfO
 mfO
 mfO
 crx
-iBS
+juZ
 eZB
 eZB
 eZB
@@ -103013,7 +103011,7 @@ rCc
 gDj
 ylj
 mLo
-eIC
+jRD
 sGt
 sGt
 sGt
@@ -107054,7 +107052,7 @@ xup
 vWA
 jsR
 tIc
-oNr
+pSX
 tIc
 mIz
 qkH
@@ -110070,7 +110068,7 @@ rhj
 pmI
 dUE
 jEA
-kNQ
+oDr
 tRr
 frF
 tdh
@@ -110883,7 +110881,7 @@ mWh
 mWh
 mWh
 mWh
-auP
+hzK
 qkM
 oMH
 sWi
@@ -145736,7 +145734,7 @@ aLC
 cqc
 jyk
 uoa
-ljD
+tnR
 egE
 hFz
 abm
