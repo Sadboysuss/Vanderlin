@@ -35,7 +35,7 @@
 		if(!index)
 			index = H.real_name
 		S.name = "veteran cloak ([index])"
-
+	ADD_TRAIT(spawned, TRAIT_OLDPARTY, TRAIT_GENERIC)
 
 /datum/advclass/veteran/battlemaster
 	name = "Veteran Battlemaster"
