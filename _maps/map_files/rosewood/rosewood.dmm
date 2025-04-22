@@ -27098,6 +27098,10 @@
 	},
 /turf/open/floor/woodturned/nosmooth,
 /area/rogue/indoors/town/manor)
+"oNr" = (
+/obj/effect/landmark/start/shophand,
+/turf/open/floor/churchbrick,
+/area/rogue/indoors/town/shop)
 "oNz" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/bookcase/random,
@@ -107050,7 +107054,7 @@ xup
 vWA
 jsR
 tIc
-mIz
+oNr
 tIc
 mIz
 qkH
