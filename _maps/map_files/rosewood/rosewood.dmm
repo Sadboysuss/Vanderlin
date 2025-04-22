@@ -767,6 +767,10 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/herringbone,
 /area/rogue/indoors/town)
+"auP" = (
+/obj/effect/landmark/start/gaffer_assistant,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/merc_guild)
 "auQ" = (
 /turf/closed,
 /area/rogue/outdoors/river)
@@ -8597,6 +8601,12 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
+"eIC" = (
+/obj/effect/landmark/start/tapster{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/rogue/indoors/town/tavern)
 "eIN" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile,
@@ -14483,6 +14493,7 @@
 "hTi" = (
 /obj/structure/bed/wool,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/effect/landmark/start/tapster,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/town/basement)
 "hTF" = (
@@ -15685,6 +15696,12 @@
 	desc = "You think you can climb this durable wall"
 	},
 /area/rogue/under/town/basement)
+"iBS" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/tapster,
+/turf/open/floor/carpet,
+/area/rogue/indoors/town/tavern)
 "iBY" = (
 /obj/structure/lever{
 	redstone_id = "thronegrille"
@@ -19592,6 +19609,13 @@
 	},
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/town)
+"kNQ" = (
+/obj/effect/decal/shadow_floor,
+/obj/effect/landmark/start/gaffer_assistant{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/merc_guild)
 "kOd" = (
 /turf/open/floor/blocks/stonered,
 /area/rogue/indoors/town/manor)
@@ -19954,6 +19978,9 @@
 /area/rogue/indoors/town)
 "kXC" = (
 /obj/structure/chair/wood/alt/chair3{
+	dir = 8
+	},
+/obj/effect/landmark/start/matron_assistant{
 	dir = 8
 	},
 /turf/open/floor/carpet/royalblack,
@@ -20362,6 +20389,11 @@
 /obj/item/instrument/harp,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/theatre)
+"lid" = (
+/obj/structure/bed/wool,
+/obj/effect/landmark/start/tapster,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/rogue/under/town/basement)
 "lir" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 4
@@ -20553,6 +20585,9 @@
 /area/rogue/outdoors/town)
 "loT" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 1
+	},
+/obj/effect/landmark/start/matron_assistant{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/chevron,
@@ -35182,6 +35217,9 @@
 /area/rogue/indoors/town)
 "tju" = (
 /obj/structure/chair/wood/alt/chair3{
+	dir = 1
+	},
+/obj/effect/landmark/start/matron_assistant{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -65602,7 +65640,7 @@ eOS
 nhc
 knK
 rLE
-mIN
+lid
 hEK
 hEK
 rLE
@@ -66006,7 +66044,7 @@ tuM
 aUd
 sMh
 rLE
-mIN
+lid
 lLO
 naM
 rLE
@@ -102163,7 +102201,7 @@ ibz
 gDj
 szV
 mLo
-pfl
+eIC
 sGt
 sGt
 sGt
@@ -102355,7 +102393,7 @@ mfO
 mfO
 mfO
 crx
-rIn
+iBS
 eZB
 eZB
 eZB
@@ -102971,7 +103009,7 @@ rCc
 gDj
 ylj
 mLo
-pfl
+eIC
 sGt
 sGt
 sGt
@@ -110028,7 +110066,7 @@ rhj
 pmI
 dUE
 jEA
-bYw
+kNQ
 tRr
 frF
 tdh
@@ -110841,7 +110879,7 @@ mWh
 mWh
 mWh
 mWh
-mWh
+auP
 qkM
 oMH
 sWi
