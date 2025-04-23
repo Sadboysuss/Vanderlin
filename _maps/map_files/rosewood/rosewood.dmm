@@ -1509,6 +1509,7 @@
 /area/rogue/indoors/town/merc_guild)
 "aSK" = (
 /obj/structure/bed/hay,
+/obj/effect/landmark/start/gaffer_assistant,
 /turf/open/floor/cobble/alt,
 /area/rogue/indoors/town/merc_guild)
 "aSR" = (
@@ -2530,12 +2531,6 @@
 "bvf" = (
 /turf/open/floor/twig,
 /area/rogue/outdoors/town/roofs)
-"bvl" = (
-/mob/living/simple_animal/hostile/retaliate/troll/keep{
-	name = "Grigor"
-	},
-/turf/open/floor/blocks,
-/area/rogue/under/town/basement)
 "bvr" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/naturalstone,
@@ -8907,9 +8902,14 @@
 /area/rogue/outdoors/town)
 "eQR" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/powder/flour,
-/obj/item/reagent_containers/powder/flour,
 /obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/item/reagent_containers/food/snacks/produce/wheat,
+/obj/item/reagent_containers/food/snacks/produce/wheat,
+/obj/item/reagent_containers/food/snacks/produce/wheat,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/merc_guild)
 "eQT" = (
@@ -9638,12 +9638,6 @@
 	},
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/rogue/under/town/basement)
-"fkP" = (
-/mob/living/simple_animal/hostile/retaliate/troll/keep{
-	name = "Alma"
-	},
-/turf/open/floor/blocks,
-/area/rogue/under/town/basement)
 "fkS" = (
 /turf/closed/wall/mineral/wooddark/end,
 /area/rogue/outdoors/town)
@@ -10124,14 +10118,11 @@
 /area/rogue/outdoors)
 "fyP" = (
 /obj/structure/table/wood/plain,
-/obj/item/cooking/pan{
-	pixel_x = 4;
-	pixel_y = -2
-	},
 /obj/item/weapon/knife/villager{
 	pixel_x = -9;
 	pixel_y = 6
 	},
+/obj/structure/fluff/millstone,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/merc_guild)
 "fyS" = (
@@ -13320,6 +13311,10 @@
 "hmr" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/west,
+/obj/item/cooking/pan{
+	pixel_x = 4;
+	pixel_y = -2
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/town/merc_guild)
 "hmx" = (
@@ -16367,6 +16362,9 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/outdoors/town/roofs)
+"iWX" = (
+/turf/open/floor/greenstone,
+/area/rogue/under/cave)
 "iWZ" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/carpet/royalblack,
@@ -16391,8 +16389,8 @@
 /area/rogue/indoors/town/dwarfin)
 "iXx" = (
 /obj/structure/mineral_door/wood/green,
-/obj/effect/mapping_helpers/door/access/town/mercenary,
 /obj/effect/mapping_helpers/door/locker,
+/obj/effect/mapping_helpers/door/access/town/gaffer,
 /turf/open/floor/cobblerock,
 /area/rogue/indoors/town/merc_guild)
 "iXU" = (
@@ -20848,6 +20846,9 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/outdoors/town/roofs)
+"lxU" = (
+/turf/open/lava/acid,
+/area/rogue/under/cave)
 "lxV" = (
 /turf/open/water/bath,
 /area/rogue/under/town/basement)
@@ -23958,6 +23959,9 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/carpet/purple,
 /area/rogue/indoors/town)
+"neD" = (
+/turf/open/floor/blocks/paving,
+/area/rogue/under/cave)
 "neJ" = (
 /obj/structure/window/stained/yellow,
 /turf/open/floor/blocks,
@@ -28183,6 +28187,10 @@
 /obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/indoors/town)
+"ppn" = (
+/obj/structure/plasticflaps,
+/turf/open/floor/blocks/paving,
+/area/rogue/under/town/sewer)
 "ppx" = (
 /obj/structure/rack,
 /obj/item/clothing/gloves/chain,
@@ -34270,6 +34278,11 @@
 /obj/structure/curtain/bounty,
 /turf/open/floor/churchbrick,
 /area/rogue/indoors/town/church)
+"sLQ" = (
+/obj/structure/mineral_door/bars,
+/obj/effect/mapping_helpers/door/access/town/mercenary,
+/turf/open/floor/blocks/paving,
+/area/rogue/under/town/sewer)
 "sLW" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/snow,
@@ -42449,6 +42462,10 @@
 	desc = "You think you can climb this durable wall"
 	},
 /area/rogue/indoors/town)
+"xdw" = (
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
+/turf/open/floor/greenstone,
+/area/rogue/under/cave)
 "xdY" = (
 /obj/machinery/light/fueledstreet/blue/wall,
 /turf/open/floor/snow,
@@ -44244,7 +44261,7 @@
 /area/rogue/indoors/town/manorgate)
 "yeA" = (
 /obj/structure/table/wood/plain,
-/obj/item/candle/yellow,
+/obj/item/candle/yellow/lit,
 /turf/open/floor/cobblerock,
 /area/rogue/indoors/town/merc_guild)
 "yfr" = (
@@ -69276,14 +69293,14 @@ ids
 rbI
 qJl
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+iWX
+neD
+lxU
+xdw
+lxU
+lxU
+iWX
+neD
 qJl
 qJl
 fTm
@@ -69479,13 +69496,13 @@ rbI
 rbI
 aTe
 knK
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+iWX
+iWX
+lxU
+neD
+iWX
+lxU
+lxU
 qJl
 qJl
 fTm
@@ -69681,11 +69698,11 @@ tuM
 rbI
 rbI
 gGq
-qJl
-qJl
-qJl
-qJl
-qJl
+lxU
+lxU
+neD
+iWX
+lxU
 aUd
 nhc
 knK
@@ -69884,9 +69901,9 @@ tuM
 rbI
 eOS
 nhc
-nhc
-nhc
-nhc
+iRe
+sLQ
+ppn
 nhc
 iRe
 rbI
@@ -102103,7 +102120,7 @@ aZj
 jyq
 jyq
 jyq
-bvl
+aZj
 aZj
 aZj
 isX
@@ -102705,7 +102722,7 @@ hqJ
 jyq
 isX
 aZj
-fkP
+aZj
 aZj
 aZj
 aZj
