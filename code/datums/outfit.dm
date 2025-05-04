@@ -104,6 +104,9 @@
 	 */
 	var/list/chameleon_extras
 
+	/// assoc list of skills given to the mob when this outfit is applied. datum/skill = num
+	var/list/outfit_skills = list()
+
 /**
  * Called at the start of the equip proc
  *
@@ -133,6 +136,16 @@
 /datum/outfit/proc/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	//to be overridden for toggling internals, id binding, access etc
 	return
+
+/// Applies skills set in outfit_skills, returns null if there is no mind. You may override this proc, but it should call parent.
+/datum/outfit/proc/apply_skills(mob/living/carbon/human/H)
+	if(!.)
+		return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!H.mind)
+		return FALSE
+	for(var/datum/skill_given as anything in outfit_skills)
+		H.mind.adjust_skillrank(skill_given.type, skill_given)
 
 /**
  * Equips all defined types and paths to the mob passed in
