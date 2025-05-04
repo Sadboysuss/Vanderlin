@@ -108,11 +108,6 @@
 /obj/effect/waterfall,
 /turf/closed/wall/mineral/decostone,
 /area/rogue/indoors)
-"cx" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bucket/wooden,
-/turf/open/floor/herringbone,
-/area/rogue/indoors)
 "cB" = (
 /obj/structure/mirror,
 /obj/item/statue/silver,
@@ -377,13 +372,6 @@
 	},
 /turf/open/water/bath,
 /area/rogue/indoors)
-"iC" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/soap,
-/obj/item/soap/bath,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/turf/open/floor/metal/barograte,
-/area/rogue/indoors)
 "iO" = (
 /obj/item/instrument/vocals,
 /turf/open/floor/ruinedwood/chevron,
@@ -617,6 +605,11 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
 /area/rogue/indoors)
+"oj" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/herringbone,
+/area/rogue/indoors)
 "oz" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /obj/effect/decal/cleanable/blood,
@@ -649,6 +642,10 @@
 /area/rogue/indoors)
 "pa" = (
 /turf/closed/mineral/bedrock,
+/area/rogue/indoors)
+"pg" = (
+/obj/item/reagent_containers/glass/mortar,
+/turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "pn" = (
 /mob/living/carbon/human/species/rousman/ambush,
@@ -765,8 +762,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors)
-"rU" = (
-/obj/item/mortar,
+"rz" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/soap,
+/obj/item/soap,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "rW" = (
@@ -803,11 +802,6 @@
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/trap/shock,
 /turf/open/water/bath,
-/area/rogue/indoors)
-"sr" = (
-/obj/item/reagent_containers/glass/bucket/wooden,
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/floor/hexstone,
 /area/rogue/indoors)
 "sw" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -912,11 +906,10 @@
 "uy" = (
 /turf/open/floor/tile/masonic/single,
 /area/rogue/indoors)
-"uG" = (
+"uz" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/soap/bath,
-/obj/item/soap/bath,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/item/soap,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "uJ" = (
@@ -1552,10 +1545,11 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
 /area/rogue/indoors)
-"Ku" = (
+"Ki" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/soap/bath,
-/obj/item/soap,
+/obj/item/soap/bath,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "KA" = (
@@ -1710,12 +1704,6 @@
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/grass,
 /area/rogue/indoors)
-"Od" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/soap,
-/obj/item/soap,
-/turf/open/floor/metal/barograte,
-/area/rogue/indoors)
 "Of" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/item/reagent_containers/glass/cup/silver,
@@ -1843,6 +1831,13 @@
 "Ra" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
+/area/rogue/indoors)
+"Rp" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/soap,
+/obj/item/soap/bath,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "Rs" = (
 /obj/effect/dungeon_directional_helper/west,
@@ -2165,6 +2160,11 @@
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
 /area/rogue/indoors)
+"ZB" = (
+/obj/item/reagent_containers/glass/bucket/wooden,
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/hexstone,
+/area/rogue/indoors)
 "ZC" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/water/bath,
@@ -2270,7 +2270,7 @@ YK
 Nh
 tH
 qo
-cx
+oj
 Ap
 SR
 rW
@@ -2880,7 +2880,7 @@ jW
 uK
 Yu
 ni
-Ku
+uz
 QR
 oG
 sV
@@ -2912,12 +2912,12 @@ SR
 SR
 SA
 ni
-Od
+rz
 MY
 xK
 my
 Qd
-rU
+pg
 dW
 Kb
 zB
@@ -2944,7 +2944,7 @@ SR
 SR
 As
 ni
-iC
+Rp
 IG
 qz
 dX
@@ -2976,7 +2976,7 @@ Yu
 SA
 Yu
 Ap
-uG
+Ki
 gj
 Ll
 ni
@@ -3322,7 +3322,7 @@ yR
 Ix
 Ix
 Ix
-sr
+ZB
 DY
 xC
 yR
