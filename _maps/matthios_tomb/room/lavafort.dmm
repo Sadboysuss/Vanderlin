@@ -227,7 +227,7 @@
 /turf/open/floor/hexstone,
 /area/rogue/under/cavelava)
 "sc" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/cobble,
 /area/rogue/under/cavelava)
 "sv" = (
@@ -344,7 +344,7 @@
 /turf/open/floor/hexstone,
 /area/rogue/under/cavelava)
 "yN" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/cavelava)
 "yW" = (

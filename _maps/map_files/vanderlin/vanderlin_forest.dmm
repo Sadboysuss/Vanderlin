@@ -65,7 +65,7 @@
 	},
 /area/rogue/indoors)
 "bq" = (
-/obj/structure/mineral_door/wood/deadbolt,
+/obj/structure/door/weak/bolt,
 /turf/open/floor/grass,
 /area/rogue/indoors)
 "bu" = (
@@ -181,7 +181,7 @@
 "dx" = (
 /obj/effect/mapping_helpers/door/access/garrison/forest,
 /obj/effect/mapping_helpers/door/locker,
-/obj/structure/mineral_door/wood/green{
+/obj/structure/door/green{
 	name = "Thatchwood Barracks"
 	},
 /turf/open/floor/blocks,
@@ -308,13 +308,13 @@
 /turf/open/floor/wood,
 /area/rogue/indoors)
 "fq" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldfarm"
 	},
 /turf/open/floor/woodturned,
 /area/rogue/indoors)
 "ft" = (
-/obj/structure/mineral_door/swing_door,
+/obj/structure/door/swing,
 /obj/structure/fluff/walldeco/wantedposter,
 /turf/open/floor/ruinedwood{
 	icon_state = "vertw"
@@ -432,7 +432,7 @@
 /turf/open/floor/cobble,
 /area/rogue/indoors)
 "hm" = (
-/obj/structure/mineral_door/wood/window{
+/obj/structure/door/window{
 	name = "The Fermented Cackleberry Inn"
 	},
 /turf/open/floor/woodturned,
@@ -816,7 +816,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods)
 "nC" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldinn3";
 	name = "Side Room"
 	},
@@ -906,7 +906,7 @@
 /turf/closed/wall/mineral/stonebrick,
 /area/rogue/outdoors/woods)
 "oo" = (
-/obj/structure/mineral_door/wood/deadbolt,
+/obj/structure/door/weak/bolt,
 /turf/open/floor/ruinedwood{
 	icon_state = "horzw"
 	},
@@ -1048,7 +1048,7 @@
 "qG" = (
 /obj/effect/mapping_helpers/door/access/garrison/forest,
 /obj/effect/mapping_helpers/door/locker,
-/obj/structure/mineral_door/wood/donjon{
+/obj/structure/door/viewport{
 	dir = 8
 	},
 /turf/open/floor/blocks,
@@ -1394,7 +1394,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/outdoors/mountains)
 "xk" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/transparent/openspace,
@@ -1434,7 +1434,7 @@
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods)
 "xF" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 4
 	},
 /turf/open/transparent/openspace,
@@ -1484,13 +1484,13 @@
 "yE" = (
 /obj/effect/mapping_helpers/door/access/garrison/forest,
 /obj/effect/mapping_helpers/door/locker,
-/obj/structure/mineral_door/wood/green{
+/obj/structure/door/green{
 	name = "Thatchwood Garrison"
 	},
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "yL" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood{
@@ -1584,7 +1584,7 @@
 /turf/open/floor/wood,
 /area/rogue/indoors)
 "Ah" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/dirt,
@@ -1615,7 +1615,7 @@
 	},
 /area/rogue/indoors)
 "AI" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/twig,
@@ -1665,7 +1665,7 @@
 	},
 /area/rogue/indoors)
 "Bj" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldinn1";
 	name = "Room I"
 	},
@@ -1688,7 +1688,7 @@
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/woods)
 "Cj" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 8
 	},
 /turf/open/floor/twig{
@@ -1707,7 +1707,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/cave)
 "Cx" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldinn2";
 	name = "Room II"
 	},
@@ -1742,7 +1742,7 @@
 /turf/closed/mineral/random/high,
 /area/rogue/indoors/cave)
 "CV" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldsmith"
 	},
 /turf/open/floor/blocks,
@@ -1835,13 +1835,13 @@
 	},
 /area/rogue/indoors)
 "Ek" = (
-/obj/structure/mineral_door/wood/deadbolt,
+/obj/structure/door/weak/bolt,
 /turf/open/floor/twig{
 	dir = 4
 	},
 /area/rogue/indoors)
 "Ez" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	name = "Thatchwood Smithy";
 	lockid = "oldsmith"
 	},
@@ -2137,7 +2137,7 @@
 /turf/open/floor/wood,
 /area/rogue/indoors)
 "Ko" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "oldfarm"
 	},
 /obj/effect/mapping_helpers/door/locker,
@@ -2438,7 +2438,7 @@
 /turf/open/floor/twig,
 /area/rogue/indoors)
 "PV" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 8
 	},
 /turf/open/transparent/openspace,
@@ -2473,7 +2473,7 @@
 	},
 /area/rogue/indoors)
 "Qu" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/dirt,

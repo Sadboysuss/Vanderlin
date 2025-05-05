@@ -307,7 +307,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "fl" = (
-/obj/structure/mineral_door/wood/deadbolt,
+/obj/structure/door/weak/bolt,
 /turf/open/floor/grass/cold,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "fo" = (
@@ -579,7 +579,7 @@
 /turf/open/floor/blocks,
 /area/rogue/under/mountains/anvil/lower/building)
 "jg" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 8
 	},
 /turf/open/floor/twig,
@@ -1120,7 +1120,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower/building)
 "rf" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/lower)
 "rh" = (
@@ -1162,7 +1162,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/lower/building)
 "rM" = (
-/obj/structure/mineral_door/wood/donjon/stone{
+/obj/structure/door/stone{
 	door_opened = 1
 	},
 /turf/open/floor/blocks,
@@ -1204,7 +1204,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/lower/building)
 "sl" = (
-/obj/structure/mineral_door/swing_door,
+/obj/structure/door/swing,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "sp" = (
@@ -1317,7 +1317,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower)
 "tV" = (
-/obj/structure/mineral_door/bars,
+/obj/structure/door/iron/bars,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
 "ud" = (
@@ -1359,7 +1359,7 @@
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/lower)
 "uG" = (
-/obj/structure/mineral_door/bars,
+/obj/structure/door/iron/bars,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/blocks/green,
 /area/rogue/under/mountains/anvil/lower/building)
@@ -1697,7 +1697,7 @@
 /turf/open/water/cleanshallow,
 /area/rogue/under/mountains/anvil/lower/building)
 "AX" = (
-/obj/structure/mineral_door/bars,
+/obj/structure/door/iron/bars,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
 "AZ" = (
@@ -1917,7 +1917,7 @@
 /turf/closed/mineral/random/med_nonval,
 /area/rogue/under/mountains/anvil/lower)
 "Ee" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 8
 	},
 /turf/open/floor/wood/nosmooth/saiga,
@@ -2501,7 +2501,7 @@
 /turf/closed/indestructible/wooddark,
 /area/rogue/under/mountains/anvil/lower)
 "Np" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/wood/nosmooth/saiga,
@@ -2792,7 +2792,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/lower/building)
 "QR" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/wood/nosmooth/saiga,
@@ -3162,7 +3162,7 @@
 /turf/open/floor/blocks,
 /area/rogue/under/mountains/anvil/lower/building)
 "Xb" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/blocks,
 /area/rogue/under/mountains/anvil/lower/building)
 "Xd" = (
@@ -3209,7 +3209,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower)
 "XF" = (
-/obj/structure/mineral_door/wood,
+/obj/structure/door,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
 "XG" = (

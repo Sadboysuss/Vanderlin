@@ -274,10 +274,6 @@
 /obj/structure/chair/stool,
 /turf/open/floor/hexstone,
 /area/rogue/indoors)
-"aO" = (
-/obj/structure/mineral_door/wood/window,
-/turf/open/floor/cobble,
-/area/rogue/indoors)
 "aP" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/cloak/raincloak/furcloak,
@@ -492,7 +488,7 @@
 /turf/open/floor/cobble,
 /area/rogue/indoors)
 "bs" = (
-/obj/structure/mineral_door/wood/window,
+/obj/structure/door,
 /turf/open/floor/tile,
 /area/rogue/indoors)
 "bt" = (
@@ -571,7 +567,7 @@
 /turf/open/floor/cobble,
 /area/rogue/indoors)
 "bG" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "mansionvampire"
 	},
 /turf/open/floor/herringbone,
@@ -785,7 +781,7 @@
 /turf/open/floor/wood,
 /area/rogue/indoors)
 "cp" = (
-/obj/structure/mineral_door/wood,
+/obj/structure/door,
 /turf/open/floor/herringbone,
 /area/rogue/indoors/vampire_manor)
 "cq" = (
@@ -804,7 +800,7 @@
 /turf/open/floor/carpet,
 /area/rogue/indoors/vampire_manor)
 "cs" = (
-/obj/structure/mineral_door/wood,
+/obj/structure/door,
 /turf/open/floor/hexstone,
 /area/rogue/indoors/vampire_manor)
 "ct" = (
@@ -925,7 +921,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods_safe)
 "cK" = (
-/obj/structure/mineral_door/wood,
+/obj/structure/door,
 /turf/open/floor/ruinedwood{
 	icon_state = "weird1"
 	},
@@ -1055,11 +1051,11 @@
 /turf/open/floor/blocks,
 /area/rogue/indoors/vampire_manor)
 "di" = (
-/obj/structure/mineral_door/wood/donjon{
+/obj/structure/door/viewport{
 	dir = 1;
-	locked = 1;
 	lockid = "mansionvampire"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/blocks,
 /area/rogue/indoors/vampire_manor)
 "dj" = (
@@ -1206,7 +1202,7 @@
 /turf/closed/wall/mineral/stone/window,
 /area/rogue/outdoors/woods_safe)
 "dK" = (
-/obj/structure/mineral_door/bars,
+/obj/structure/door/iron/bars,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods_safe)
 "dL" = (
@@ -1244,10 +1240,10 @@
 /turf/open/floor/herringbone,
 /area/rogue/indoors/vampire_manor)
 "dS" = (
-/obj/structure/mineral_door/bars{
-	locked = 1;
+/obj/structure/door/iron/bars{
 	lockid = "mansionvampire"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/blocks,
 /area/rogue/indoors/vampire_manor)
 "dT" = (
@@ -1283,10 +1279,10 @@
 /turf/open/floor/blocks,
 /area/rogue/indoors/vampire_manor)
 "dY" = (
-/obj/structure/mineral_door/bars{
-	locked = 1;
+/obj/structure/door/iron/bars{
 	lockid = "mansionvampire"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/woods_safe)
 "ec" = (
@@ -1927,7 +1923,7 @@
 /turf/open/floor/carpet,
 /area/rogue/indoors)
 "kS" = (
-/obj/structure/mineral_door/wood,
+/obj/structure/door,
 /turf/open/floor/blocks,
 /area/rogue/indoors/vampire_manor)
 "kX" = (
@@ -1999,7 +1995,7 @@
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors)
 "lJ" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "mansionvampire"
 	},
 /turf/open/floor/dirt,
@@ -2351,7 +2347,7 @@
 	},
 /area/rogue/outdoors)
 "pL" = (
-/obj/structure/mineral_door/swing_door,
+/obj/structure/door/swing,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors)
 "pP" = (
@@ -3109,7 +3105,7 @@
 /turf/closed,
 /area/rogue/outdoors)
 "wS" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "mansionvampire"
 	},
 /turf/open/floor/hexstone,
@@ -3193,7 +3189,7 @@
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors)
 "xT" = (
-/obj/structure/mineral_door/wood/red{
+/obj/structure/door/red{
 	lockid = "banditcamp"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
@@ -3670,7 +3666,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog/inhumen_camp)
 "Dc" = (
-/obj/structure/mineral_door/wood/red{
+/obj/structure/door/red{
 	lockid = "banditcamp"
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -4362,8 +4358,7 @@
 /turf/open/floor/tile,
 /area/rogue/indoors/vampire_manor)
 "JU" = (
-/obj/structure/mineral_door/wood/window,
-/obj/structure/fake_machine/camera/right,
+/obj/structure/door/window,
 /turf/open/floor/cobble,
 /area/rogue/indoors)
 "JV" = (
@@ -4422,7 +4417,7 @@
 /turf/open/floor/wood,
 /area/rogue)
 "KM" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/dirt,
@@ -4628,7 +4623,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods_safe)
 "MM" = (
-/obj/structure/mineral_door/wood{
+/obj/structure/door{
 	lockid = "mansionvampire"
 	},
 /turf/open/floor/metal/barograte,
@@ -4942,7 +4937,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog/inhumen_camp)
 "Qm" = (
-/obj/structure/mineral_door/wood/window,
+/obj/structure/door,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors)
 "Qq" = (
@@ -5402,17 +5397,17 @@
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "Uu" = (
-/obj/structure/mineral_door/bars{
-	locked = 1;
+/obj/structure/door/iron/bars{
 	lockid = "banditcamp"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/dirt,
 /area/rogue/indoors/bandit_lair)
 "Uv" = (
-/obj/structure/mineral_door/bars{
-	locked = 1;
+/obj/structure/door/iron/bars{
 	lockid = "mansionvampire"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods_safe)
 "Uw" = (
@@ -5733,7 +5728,7 @@
 /turf/open/floor/cobble,
 /area/rogue/indoors)
 "Xj" = (
-/obj/structure/mineral_door,
+/obj/structure/door/window,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "Xk" = (
@@ -5751,10 +5746,10 @@
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/bandit_lair)
 "Xr" = (
-/obj/structure/mineral_door/wood/red{
-	locked = 1;
+/obj/structure/door/red{
 	lockid = "banditcamp"
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/indoors/bandit_lair)
 "XC" = (
@@ -5775,10 +5770,10 @@
 /turf/open/floor/grass,
 /area/rogue/outdoors/woods_safe)
 "XV" = (
-/obj/structure/mineral_door/wood/deadbolt{
-	dir = 1;
-	locked = 1
+/obj/structure/door/weak/bolt{
+	dir = 1
 	},
+/obj/effect/mapping_helpers/door/locker,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods_safe)
 "XY" = (
@@ -16949,8 +16944,8 @@ ag
 UN
 UN
 UN
-aO
-aO
+JU
+JU
 UN
 UN
 UN

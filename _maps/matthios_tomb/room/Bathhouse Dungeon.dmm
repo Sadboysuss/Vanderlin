@@ -55,7 +55,7 @@
 /turf/open/floor/grass,
 /area/rogue/indoors)
 "bB" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
@@ -555,7 +555,7 @@
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "ne" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors)
@@ -913,7 +913,7 @@
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "uJ" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /obj/structure/trap/saw_blades,
 /turf/open/floor/hexstone,
@@ -1260,7 +1260,7 @@
 /turf/open/floor/grass,
 /area/rogue/indoors)
 "DR" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/hexstone,
 /area/rogue/indoors)
 "DY" = (
@@ -1565,7 +1565,7 @@
 /turf/open/water/sewer,
 /area/rogue/indoors)
 "KF" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors)
 "KO" = (
@@ -1635,7 +1635,7 @@
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "Mx" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "MC" = (
@@ -1749,7 +1749,7 @@
 /turf/open/water/bath,
 /area/rogue/indoors)
 "Pn" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
@@ -1825,7 +1825,7 @@
 /turf/open/floor/metal/barograte,
 /area/rogue/indoors)
 "QZ" = (
-/obj/structure/mineral_door/swing_door,
+/obj/structure/door/swing,
 /turf/open/floor/herringbone,
 /area/rogue/indoors)
 "Ra" = (
@@ -1870,7 +1870,7 @@
 /turf/open/water/bath,
 /area/rogue/indoors)
 "Sd" = (
-/obj/structure/mineral_door/wood/donjon/stone,
+/obj/structure/door/stone,
 /turf/open/floor/blocks/green,
 /area/rogue/indoors)
 "Si" = (
@@ -2001,7 +2001,7 @@
 /turf/open/floor/tile/kitchen,
 /area/rogue/indoors)
 "UK" = (
-/obj/structure/mineral_door,
+/obj/structure/door,
 /turf/open/floor/herringbone,
 /area/rogue/indoors)
 "UP" = (
