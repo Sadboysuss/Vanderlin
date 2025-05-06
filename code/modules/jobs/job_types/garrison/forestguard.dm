@@ -20,8 +20,8 @@
 	selection_color = "#0d6929"
 
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	allowed_races = RACES_PLAYER_GUARD
 	give_bank_account = 30
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
