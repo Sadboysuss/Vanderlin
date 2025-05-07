@@ -141,7 +141,9 @@
 	..()
 
 /turf/proc/can_see_sky()
-	if(outdoor_effect?.state == SKY_VISIBLE)
+	if(!outdoor_effect)
+		return FALSE
+	if(outdoor_effect.state != SKY_BLOCKED)
 		return TRUE
 	return FALSE
 
