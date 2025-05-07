@@ -1,9 +1,5 @@
 /obj/structure/bearpelt
-	name = "Bearpelt"
-	desc = "A hide of a slayin bear. It looks poorly made."
-	icon = 'icons/turf/floors/bear.dmi'
+	name = "bearpelt"
+	desc = "A hide of a slain bear. It looks poorly made."
+	icon = 'icons/obj/bear.dmi'
 	icon_state = "bear"
-	density = FALSE
-	anchored = TRUE
-/////item carpets
-
