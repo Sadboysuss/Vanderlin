@@ -1,86 +1,84 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"ae" = (
-/obj/machinery/anvil,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"ai" = (
-/obj/structure/kneestingers,
-/turf/open/water/river,
-/area/rogue/under/cavewet)
-"aj" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"am" = (
-/obj/effect/dungeon_directional_helper/north,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"ay" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
+"ap" = (
+/obj/item/bin/water/gross,
 /obj/structure/spider/stickyweb,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"aV" = (
-/obj/structure/fluff/walldeco/painting/castle{
-	pixel_y = 32
-	},
-/obj/effect/decal/cleanable/blood/gibs/down,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"bk" = (
-/obj/structure/fluff/railing/border{
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"au" = (
+/obj/machinery/light/fueled/firebowl,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/structure/fluff/railing/border{
-	dir = 6
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"aC" = (
+/obj/machinery/light/fueled/forge,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"aF" = (
+/obj/structure/fluff/walldeco/stone{
+	icon_state = "walldec6"
 	},
-/obj/structure/fluff/walldeco/church/line{
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"aL" = (
+/obj/structure/trap/spike,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"bs" = (
+/obj/structure/rack/shelf/notdense,
+/obj/item/weapon/mace/steel/morningstar{
+	pixel_y = 32
+	},
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"bw" = (
+/obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"bB" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"bQ" = (
-/obj/item/natural/fur/rous,
-/obj/item/bodypart/r_arm/rousman,
-/obj/effect/decal/cleanable/blood/gibs/old,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"cE" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom2"
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"bJ" = (
+/obj/structure/door/viewport{
+	dir = 1
 	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"bS" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"cb" = (
+/turf/closed/wall/mineral/decostone/end,
+/area/rogue/under/tomb/cave/spider)
+"cf" = (
+/turf/open/water/bath,
+/area/rogue/under/tomb)
+"cp" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"cx" = (
+/obj/structure/bars,
+/turf/open/floor/metal,
+/area/rogue/under/tomb)
+"cF" = (
+/obj/structure/kneestingers,
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/under/cavewet)
-"cN" = (
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"cS" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"dH" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/item/clothing/shirt/shortshirt/random{
-	pixel_x = -8
+/area/rogue/under/tomb/cave/wet)
+"cP" = (
+/obj/structure/trap/wall_projectile{
+	dir = 8
 	},
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"dO" = (
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"dW" = (
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"eo" = (
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"de" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/storage/sack{
 	pixel_x = -3
@@ -90,344 +88,143 @@
 	pixel_y = -6
 	},
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"eO" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"fd" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom_A1"
-	},
-/turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"fh" = (
-/obj/item/clothing/pants/trou/leather{
-	pixel_x = -6
-	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"fr" = (
-/obj/structure/barricade/wooden,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"fs" = (
-/obj/structure/stairs/stone/church,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"fL" = (
-/obj/structure/fluff/walldeco/stone{
-	icon_state = "walldec6"
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"fS" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"fU" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"gc" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"go" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"gJ" = (
-/obj/item/bin/water/gross,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"gR" = (
-/obj/structure/trap/poison,
-/obj/item/weapon/pick/stone,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"gS" = (
-/obj/item/ingot/iron{
-	pixel_x = -6;
-	pixel_y = -1
-	},
-/obj/item/ingot/copper{
-	pixel_x = 5;
-	pixel_y = -7
-	},
-/obj/item/ingot/silver{
-	pixel_y = 2
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"ht" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"hy" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/item/weapon/tongs,
-/obj/item/weapon/hammer,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"hz" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"hC" = (
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"hH" = (
-/obj/structure/roguerock,
-/turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"hM" = (
-/obj/structure/table/stone_small,
-/obj/item/reagent_containers/glass/bowl/iron,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"ib" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/fluff/walldeco/skullspike{
-	pixel_x = -1;
-	pixel_y = 11
-	},
-/obj/item/clothing/pants/trou,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"ig" = (
-/obj/structure/door/viewport{
+/area/rogue/under/tomb/indoors)
+"do" = (
+/obj/structure/stairs/stone{
 	dir = 1
 	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"iv" = (
-/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb/cave)
+"dv" = (
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"ix" = (
-/obj/structure/bed{
-	pixel_y = 0
+/area/rogue/under/tomb/indoors)
+"dI" = (
+/turf/closed/wall/mineral/decostone/long,
+/area/rogue/under/tomb/cave/spider)
+"dV" = (
+/obj/item/natural/fur/rous,
+/obj/item/bodypart/r_arm/rousman,
+/obj/effect/decal/cleanable/blood/gibs/old,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"ed" = (
+/obj/structure/spider/stickyweb,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"ep" = (
+/obj/structure/stairs/stone/church,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"et" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
 	},
-/obj/structure/bed{
-	pixel_y = 10
-	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"iy" = (
-/obj/structure/fermentation_keg/water,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"iF" = (
-/obj/item/fishingrod/fisher,
-/turf/open/floor/dirt,
-/area/rogue/under/cavewet)
-"iL" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"ex" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"eA" = (
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb/cave)
+"eX" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"fi" = (
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"fq" = (
+/obj/item/reagent_containers/food/snacks/smallrat,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"fu" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"fy" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"fN" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"gD" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"hd" = (
+/obj/structure/chair/stool,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"hg" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"hq" = (
+/obj/structure/table/stone_small,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"hF" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"jt" = (
-/obj/structure/spider/stickyweb,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"jA" = (
-/obj/structure/chair/stool,
+/area/rogue/under/tomb/indoors)
+"it" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"jF" = (
-/obj/structure/stairs/stone/church,
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"jN" = (
-/obj/machinery/light/fueled/smelter/great,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"kc" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"kF" = (
-/obj/structure/lever/hidden{
-	redstone_id = "hctomb03sdA"
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"kJ" = (
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"kX" = (
-/turf/closed/wall/mineral/decostone/end{
-	dir = 8
-	},
-/area/rogue/under/cavewet)
-"kY" = (
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"lq" = (
-/turf/closed/wall/mineral/decostone/long{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"ml" = (
-/obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
-	name = "DF Secret Door";
-	redstone_id = "hctomb03sdC";
-	floor_turf = /turf/open/floor/churchrough
-	},
-/turf/closed/wall/mineral/decostone,
-/area/rogue/under/cavewet)
-"mt" = (
-/mob/living/simple_animal/hostile/retaliate/spider/mutated,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"mB" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"mC" = (
-/obj/machinery/light/fueled/smelter,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"mK" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"mR" = (
-/obj/machinery/light/fueled/forge,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"ng" = (
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"nu" = (
-/obj/structure/rack,
-/obj/item/clothing/head/rare/dwarfplate{
-	pixel_y = 5;
-	pixel_x = -6
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"nX" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/potion_vitals,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/spawner/map_spawner/loot/potion_stats,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"of" = (
-/obj/machinery/light/fueled/torchholder/l,
-/mob/living/simple_animal/hostile/retaliate/bigrat,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"oo" = (
-/obj/structure/trap/spike,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"ot" = (
-/obj/structure/stairs/stone/church{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"oT" = (
-/obj/structure/bars/passage/shutter/open{
-	redstone_id = "hctomb03trap"
-	},
-/turf/open/floor/metal,
-/area/rogue/under/cavewet)
-"oW" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"pC" = (
-/obj/item/reagent_containers/food/snacks/smallrat,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"pD" = (
-/obj/structure/fluff/walldeco/stone{
-	icon_state = "walldec3"
-	},
-/turf/closed/wall/mineral/decostone/long{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"pL" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"pZ" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"qy" = (
+/area/rogue/under/tomb/indoors)
+"iA" = (
 /obj/structure/bars,
 /turf/open/floor/metal{
 	icon_state = "plating2"
 	},
-/area/rogue/under/cavewet)
-"qC" = (
+/area/rogue/under/tomb)
+"iD" = (
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"iZ" = (
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"ja" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	vip_message = "Miner";
 	vips = list("Miner");
@@ -436,177 +233,210 @@
 	floor_turf = /turf/open/floor/blocks/stonered/tiny
 	},
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"qM" = (
-/turf/closed/mineral/bedrock,
-/area/rogue/under/cavewet)
-"qT" = (
-/obj/structure/spider/stickyweb,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"qW" = (
-/obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
-	name = "DF Secret Door";
-	redstone_id = "hctomb03sdD";
-	floor_turf = /turf/open/floor/blocks/stonered/tiny
+/area/rogue/under/tomb/indoors)
+"jx" = (
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/lever{
+	redstone_id = "hctomb03trap"
 	},
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"qX" = (
-/turf/open/transparent/openspace,
-/area/rogue/under/cavewet)
-"ri" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = -6
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"jJ" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = 9;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = 6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -1;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = -6
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = 7
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = 7
-	},
-/obj/item/natural/stone{
-	pixel_y = -11;
-	pixel_x = 7
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
 	},
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"rm" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"rq" = (
+/area/rogue/under/tomb/indoors)
+"jP" = (
+/turf/closed/mineral/bedrock,
+/area/rogue/under/tomb/cave/wet)
+"jW" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"ry" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = -8;
-	pixel_y = 10
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = 7;
-	pixel_y = 10
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = -8
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = -8;
-	pixel_y = -7
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = 7;
-	pixel_y = -7
-	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"si" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"sP" = (
+/mob/living/simple_animal/hostile/retaliate/spider/mutated,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"ki" = (
+/turf/closed/wall/mineral/pipe,
+/area/rogue/under/tomb)
+"kk" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/spider/stickyweb,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/obj/structure/closet/crate/chest/lootbox,
+/obj/item/clothing/armor/rare/dwarfplate,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"kO" = (
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"lk" = (
+/obj/structure/closet/crate/chest/gold,
+/obj/effect/spawner/map_spawner/loot/potion_vitals,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/map_spawner/loot/potion_stats,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"lp" = (
+/obj/structure/table/stone_small,
+/obj/item/kitchen/spoon/iron,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"lB" = (
+/turf/closed/mineral/bedrock,
+/area/rogue/under/tomb/cave)
+"lN" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"th" = (
-/obj/machinery/anvil,
-/obj/item/weapon/hammer/sledgehammer,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"to" = (
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"tR" = (
-/obj/structure/fluff/railing/border{
-	dir = 9
+/area/rogue/under/tomb/indoors)
+"mq" = (
+/turf/closed/wall/mineral/craftstone{
+	max_integrity = 400;
+	desc = "A weak, crumbling wall made from specially crafted stone.";
+	name = "weak craftstone wall"
 	},
+/area/rogue/under/tomb/indoors)
+"mV" = (
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave)
+"nA" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/handcart,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"tX" = (
-/obj/structure/spider/stickyweb,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"uG" = (
-/obj/machinery/light/fueled/torchholder/l,
+/area/rogue/under/tomb/indoors)
+"nC" = (
+/obj/structure/trap/poison,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"nV" = (
+/obj/structure/bars,
+/turf/open/floor/metal/barograte,
+/area/rogue/under/tomb/indoors)
+"ok" = (
+/obj/structure/table/stone_small,
+/obj/item/reagent_containers/glass/bowl/iron,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"oy" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom_A1"
+	},
+/turf/open/water/cleanshallow,
+/area/rogue/under/tomb/cave/wet)
+"oE" = (
+/obj/structure/table/stone_small,
+/obj/item/ammo_casing/caseless/bolt/pyro{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/obj/item/ammo_casing/caseless/bolt/pyro,
+/obj/item/ammo_casing/caseless/bolt/pyro{
+	pixel_x = 4;
+	pixel_y = 4
+	},
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"uV" = (
+/area/rogue/under/tomb/indoors)
+"oP" = (
+/obj/machinery/light/fueled/campfire,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"oQ" = (
+/obj/structure/stairs/stone/church{
+	dir = 8
+	},
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"pa" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"pm" = (
+/mob/living/simple_animal/hostile/retaliate/mimic,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/gem,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"pr" = (
+/turf/closed/mineral/bedrock,
+/area/rogue/under/tomb)
+"pw" = (
+/mob/living/simple_animal/hostile/retaliate/bigrat,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"pE" = (
+/obj/machinery/light/fueled/firebowl,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"pN" = (
+/obj/machinery/light/fueled/smelter,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"pY" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"qa" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"qe" = (
+/obj/structure/fluff/walldeco/sparrowflag,
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"qf" = (
+/obj/structure/chair/stool,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"qv" = (
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb)
+"rs" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"ru" = (
+/obj/structure/lever/hidden{
+	redstone_id = "hctomb03sdA"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"rv" = (
+/obj/structure/door/stone,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"rz" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/structure/fluff/walldeco/skullspike{
 	pixel_x = -10;
@@ -614,252 +444,70 @@
 	},
 /obj/item/reagent_containers/food/snacks/smallrat/dead,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"vg" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"vl" = (
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"vo" = (
-/obj/structure/fluff/railing/border,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"vs" = (
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"vu" = (
-/obj/structure/fluff/walldeco/stone{
-	icon_state = "walldec5"
-	},
-/turf/closed/wall/mineral/decostone/long{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"vv" = (
-/turf/open/water/river{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"vz" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"vX" = (
-/obj/machinery/light/fueled/firebowl,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"wx" = (
-/mob/living/simple_animal/hostile/retaliate/spider/mutated,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"wF" = (
-/obj/structure/trap/wall_projectile{
-	dir = 8
-	},
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"wH" = (
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"yS" = (
-/mob/living/simple_animal/hostile/retaliate/bigrat,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"yZ" = (
-/obj/item/reagent_containers/food/snacks/smallrat/dead,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"zd" = (
-/obj/structure/fluff/railing/border{
-	dir = 10
+/area/rogue/under/tomb/indoors)
+"rA" = (
+/obj/structure/closet/crate/chest,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"zo" = (
-/obj/structure/bars,
-/turf/open/floor/metal/barograte,
-/area/rogue/under/cavewet)
-"zz" = (
-/turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/cavewet)
-"Aa" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Ae" = (
-/obj/structure/chair/stool,
-/obj/item/reagent_containers/food/snacks/smallrat,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"AA" = (
-/turf/closed/wall/mineral/pipe,
-/area/rogue/under/cavewet)
-"AB" = (
-/obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
-	name = "DF Secret Door";
-	redstone_id = "hctomb03sdA";
-	floor_turf = /turf/open/floor/blocks/stonered/tiny
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"AG" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/weapon/shield/tower/metal,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"rC" = (
 /turf/closed/wall/mineral/decostone/end{
-	dir = 4
-	},
-/area/rogue/under/cavewet)
-"AS" = (
-/obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"Bc" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Bq" = (
+/area/rogue/under/tomb)
+"rT" = (
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb)
+"sh" = (
+/obj/structure/kneestingers,
 /turf/open/water/river,
-/area/rogue/under/cavewet)
-"BE" = (
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/dirt/dust,
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"BU" = (
-/obj/structure/table/stone_small,
-/obj/item/reagent_containers/glass/bowl/iron,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Ca" = (
-/obj/item/natural/fur/rous,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"Cn" = (
-/obj/machinery/light/fueled/smelter,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Cp" = (
-/obj/structure/door/stone,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"CX" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"CZ" = (
-/turf/open/water/river{
-	dir = 4
-	},
-/area/rogue/under/cavewet)
-"Da" = (
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/water/bath,
-/area/rogue/under/cavewet)
-"Dn" = (
-/obj/structure/chair/stool,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"DG" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"DX" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"DY" = (
+/area/rogue/under/tomb/cave/wet)
+"sj" = (
 /obj/structure/lever/hidden{
 	redstone_id = "hctomb03sdB"
 	},
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"Eq" = (
-/obj/structure/fermentation_keg/random/beer,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"EA" = (
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
+/area/rogue/under/tomb/indoors)
+"sy" = (
+/obj/structure/fluff/walldeco/painting/castle{
+	pixel_y = 32
 	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"EQ" = (
-/turf/open/floor/dirt/road,
-/area/rogue/under/cavewet)
-"EZ" = (
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"FN" = (
-/obj/structure/bars,
-/turf/open/floor/metal,
-/area/rogue/under/cavewet)
-"FQ" = (
-/obj/effect/decal/cleanable/blood/gibs/torso,
+/obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Ge" = (
-/obj/effect/dungeon_directional_helper/east,
+/area/rogue/under/tomb/indoors)
+"sz" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"sB" = (
+/obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"Gh" = (
-/obj/structure/spider/stickyweb/solo,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Gk" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
+/area/rogue/under/tomb/cave)
+"sC" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"tm" = (
+/obj/machinery/light/fueled/oven{
+	pixel_y = 31
 	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Gs" = (
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"ts" = (
+/obj/structure/giantfur{
+	layer = 2.7
+	},
+/obj/item/clothing/pants/trou,
+/obj/item/reagent_containers/food/snacks/smallrat/dead,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"ty" = (
 /obj/item/bomb{
 	pixel_x = 6;
 	pixel_y = -3
@@ -874,50 +522,310 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"GZ" = (
+/area/rogue/under/tomb/indoors)
+"tD" = (
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave/wet)
+"tJ" = (
+/obj/structure/lever/hidden{
+	redstone_id = "hctomb03sdD"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"tK" = (
+/obj/structure/fermentation_keg/random/beer,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"tN" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"tO" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/alch/bone{
+	pixel_x = -7;
+	pixel_y = -6
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"tY" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"uj" = (
+/obj/machinery/light/fueled/forge,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"uL" = (
+/obj/item/reagent_containers/powder/salt{
+	pixel_x = -7
+	},
+/obj/item/reagent_containers/powder/salt{
+	pixel_x = 5;
+	pixel_y = -6
+	},
+/obj/structure/closet/crate/chest/neu,
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb/cave/wet)
+"uM" = (
+/turf/closed/wall/mineral/decostone/end{
+	dir = 1
+	},
+/area/rogue/under/tomb/cave/spider)
+"uT" = (
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"va" = (
+/obj/structure/floordoor{
+	redstone_id = "hctomb03drop"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/under/tomb/cave/wet)
+"vc" = (
+/obj/machinery/light/fueled/smelter,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"vi" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"vm" = (
+/obj/structure/trap/poison,
+/obj/item/weapon/pick/stone,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"vC" = (
+/obj/structure/fluff/statue/gargoyle/candles,
+/obj/machinery/light/fueled/torchholder,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"wa" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"wD" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"xd" = (
+/obj/structure/table/stone_small,
+/obj/item/clothing/shirt/shortshirt/random{
+	pixel_x = 7;
+	pixel_y = -4
+	},
+/obj/item/clothing/shoes/boots/leather{
+	pixel_y = 7;
+	pixel_x = -4
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"xu" = (
+/turf/open/floor/dirt,
+/area/rogue/under/tomb/cave)
+"xx" = (
+/obj/structure/stairs/stone/church{
+	dir = 8
+	},
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"xE" = (
+/obj/structure/trap/saw_blades,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"xF" = (
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb/cave)
+"xG" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"ya" = (
+/obj/structure/table/stone_small,
+/obj/item/kitchen/spoon/iron,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Hh" = (
-/turf/closed/wall/mineral/decostone/end,
-/area/rogue/under/cavewet)
-"Hv" = (
+/area/rogue/under/tomb/indoors)
+"yc" = (
+/obj/item/natural/rock/salt,
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb/cave/wet)
+"yj" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"yk" = (
+/turf/open/transparent/openspace,
+/area/rogue/under/tomb/cave)
+"yl" = (
+/obj/item/natural/rock/salt,
+/turf/open/floor/dirt,
+/area/rogue/under/tomb/cave/wet)
+"ym" = (
+/obj/machinery/light/fueled/torchholder/l,
+/obj/structure/spider/cocoon,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"yn" = (
+/turf/closed/wall/mineral/decostone/end{
+	dir = 4
+	},
+/area/rogue/under/tomb)
+"yw" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/mob/living/carbon/human/species/rousman/ambush,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"yD" = (
+/obj/structure/bars/passage/shutter/open{
+	redstone_id = "hctomb03trap"
+	},
+/turf/open/floor/metal,
+/area/rogue/under/tomb)
+"yF" = (
+/obj/effect/mapping_helpers/secret_door_creator{
+	vip_message = "Miner";
+	vips = list("Miner");
+	name = "DF Secret Door";
+	redstone_id = "hctomb03sdD";
+	floor_turf = /turf/open/floor/blocks/stonered/tiny
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"yG" = (
+/obj/structure/fluff/walldeco/stone{
+	icon_state = "walldec3"
+	},
+/turf/closed/wall/mineral/decostone/long{
+	dir = 1
+	},
+/area/rogue/under/tomb/cave/spider)
+"yN" = (
+/obj/effect/decal/cleanable/blood/gibs/up,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"zb" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb)
+"zc" = (
+/obj/structure/stairs/stone/church{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"zg" = (
+/turf/open/floor/dirt,
+/area/rogue/under/tomb)
+"zn" = (
 /obj/structure/fluff/walldeco/masonflag{
 	pixel_y = 32
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"HF" = (
-/obj/structure/trap/spike,
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"HT" = (
-/obj/machinery/light/fueled/oven{
-	pixel_y = 31
-	},
+/area/rogue/under/tomb/cave/spider)
+"zp" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Iy" = (
+/area/rogue/under/tomb/indoors)
+"zw" = (
 /obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"zx" = (
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb)
+"Az" = (
+/obj/structure/chair/stool,
+/obj/item/reagent_containers/food/snacks/smallrat,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"AU" = (
+/mob/living/simple_animal/hostile/retaliate/spider/mutated,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"AX" = (
+/obj/structure/grindwheel,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Ba" = (
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"Bo" = (
+/turf/open/water/cleanshallow,
+/area/rogue/under/tomb/cave/wet)
+"Bv" = (
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cleanable/dirt/dust,
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"BJ" = (
+/obj/effect/mapping_helpers/secret_door_creator{
+	vip_message = "Miner";
+	vips = list("Miner");
+	name = "DF Secret Door";
+	redstone_id = "hctomb03sdC";
+	floor_turf = /turf/open/floor/churchrough
+	},
+/turf/closed/wall/mineral/decostone,
+/area/rogue/under/tomb/cave/spider)
+"Co" = (
+/obj/machinery/light/fueled/torchholder/l,
+/mob/living/simple_animal/hostile/retaliate/bigrat,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"CK" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom2"
+	},
+/turf/open/water/river{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"IE" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"IG" = (
-/turf/open/floor/dirt,
-/area/rogue/under/cavewet)
-"Je" = (
+/area/rogue/under/tomb/cave/wet)
+"CM" = (
 /obj/structure/rack,
 /obj/item/clothing/shoes/boots/rare/dwarfplate{
 	pixel_x = -6;
@@ -929,241 +837,294 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Jf" = (
-/obj/structure/giantfur{
-	layer = 2.7
+/area/rogue/under/tomb/cave/spider)
+"Dj" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/natural/rock{
+	pixel_y = -6;
+	pixel_x = 7
 	},
-/obj/item/clothing/pants/trou,
-/obj/item/reagent_containers/food/snacks/smallrat/dead,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Jj" = (
-/obj/structure/table/stone_small,
-/obj/item/clothing/shirt/shortshirt/random{
-	pixel_x = 7;
-	pixel_y = -4
+/obj/item/natural/rock{
+	pixel_y = -1;
+	pixel_x = 2
 	},
-/obj/item/clothing/shoes/boots/leather{
-	pixel_y = 7;
-	pixel_x = -4
+/obj/item/natural/rock{
+	pixel_y = 5;
+	pixel_x = -3
 	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"JM" = (
-/turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"Kj" = (
-/obj/machinery/tanningrack,
-/turf/open/floor/dirt/road,
-/area/rogue/under/cavewet)
-"Ld" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/mob/living/simple_animal/hostile/retaliate/spider/mutated,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Lg" = (
-/obj/effect/decal/cleanable/blood/old,
-/mob/living/simple_animal/hostile/retaliate/headless,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Lp" = (
-/obj/structure/stairs/stone/church{
-	dir = 8
+/obj/item/natural/rock{
+	pixel_y = -7;
+	pixel_x = -3
 	},
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"LB" = (
-/obj/machinery/light/fueled/forge,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"LG" = (
+/area/rogue/under/tomb/indoors)
+"Du" = (
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"Dv" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/weapon/tongs,
+/obj/item/weapon/hammer,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"DK" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"LM" = (
-/turf/closed/wall/mineral/decostone,
-/area/rogue/under/cavewet)
-"LP" = (
-/obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"LZ" = (
-/obj/structure/roguerock,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"Me" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
+/area/rogue/under/tomb/indoors)
+"El" = (
+/turf/open/water/river{
+	dir = 4
 	},
+/area/rogue/under/tomb/cave/wet)
+"Et" = (
 /mob/living/carbon/human/species/rousman/ambush,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"Mz" = (
-/turf/closed/wall/mineral/decostone/end{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"ME" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Ne" = (
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/lever{
-	redstone_id = "hctomb03trap"
-	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"Nr" = (
+/turf/open/water/bath,
+/area/rogue/under/tomb)
+"EP" = (
+/obj/structure/door/stone,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"Ff" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/clothing/pants/tights/random,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Ny" = (
-/obj/structure/grindwheel,
+/area/rogue/under/tomb/indoors)
+"Fx" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"FC" = (
+/obj/structure/fermentation_keg/water,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"NQ" = (
-/obj/structure/kneestingers,
-/turf/open/water/river{
-	dir = 1
-	},
-/area/rogue/under/cavewet)
-"NT" = (
+/area/rogue/under/tomb/indoors)
+"FG" = (
+/obj/machinery/anvil,
+/obj/item/weapon/hammer/sledgehammer,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"FH" = (
 /obj/structure/fluff/railing/border{
-	dir = 1
+	dir = 8
 	},
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"Oj" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/item/alch/bone{
-	pixel_x = -7;
-	pixel_y = -6
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Oo" = (
-/obj/structure/kneestingers,
-/turf/open/water/river{
+/obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/area/rogue/under/cavewet)
-"Oz" = (
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"OJ" = (
-/obj/structure/door/stone,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"OO" = (
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"Go" = (
+/obj/machinery/light/fueled/torchholder/r,
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"OX" = (
-/obj/structure/trap/poison,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"Pd" = (
-/obj/structure/lever/wall{
-	dir = 4;
-	redstone_id = "hctomb03drop"
-	},
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Pe" = (
-/obj/machinery/light/fueled/campfire,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"Pg" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/item/clothing/pants/trou,
-/obj/structure/rack/shelf/notdense,
-/obj/item/weapon/polearm/eaglebeak{
-	pixel_y = 16
-	},
+/area/rogue/under/tomb/indoors)
+"GC" = (
+/obj/machinery/light/fueled/smelter/great,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"GE" = (
+/obj/structure/barricade/wooden,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"PB" = (
-/obj/structure/spider/cocoon,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"PE" = (
+/area/rogue/under/tomb/indoors)
+"Hd" = (
 /mob/living/simple_animal/hostile/retaliate/mimic,
+/obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/gem,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"PH" = (
-/obj/item/natural/rock/salt,
+/area/rogue/under/tomb/cave/spider)
+"He" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"Hg" = (
+/mob/living/simple_animal/hostile/retaliate/spider/mutated,
+/obj/structure/spider/stickyweb,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"Hk" = (
+/obj/structure/kneestingers,
+/turf/open/water/cleanshallow,
+/area/rogue/under/tomb/cave/wet)
+"HP" = (
+/obj/structure/rack,
+/obj/item/clothing/head/rare/dwarfplate{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"HQ" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Id" = (
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/indoors)
+"It" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/fluff/walldeco/skullspike{
+	pixel_x = -1;
+	pixel_y = 11
+	},
+/obj/item/clothing/pants/trou,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Iz" = (
+/turf/open/water/river,
+/area/rogue/under/tomb/cave/wet)
+"IF" = (
+/obj/structure/kneestingers,
+/turf/open/water/river{
+	dir = 4
+	},
+/area/rogue/under/tomb/cave/wet)
+"Ji" = (
+/mob/living/simple_animal/hostile/retaliate/spider/mutated,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"Jo" = (
+/obj/structure/spider/cocoon,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"Jv" = (
+/obj/structure/spider/stickyweb/solo,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"Jy" = (
+/turf/closed/wall/mineral/decostone,
+/area/rogue/under/tomb)
+"JC" = (
+/obj/machinery/anvil,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"JL" = (
+/obj/item/fishingrod/fisher,
 /turf/open/floor/dirt,
-/area/rogue/under/cavewet)
-"PK" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
+/area/rogue/under/tomb/cave/wet)
+"Kg" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = -6
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = 9;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = 6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -1;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = -6
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = 7
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = 7
+	},
+/obj/item/natural/stone{
+	pixel_y = -11;
+	pixel_x = 7
 	},
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"PQ" = (
+/area/rogue/under/tomb/indoors)
+"Ki" = (
+/obj/item/natural/fur/rous,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"KE" = (
+/obj/structure/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"Ll" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"PX" = (
+/area/rogue/under/tomb/indoors)
+"Lq" = (
 /obj/structure/fluff/railing/border{
-	dir = 5
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Qe" = (
-/obj/structure/table/stone_small,
-/obj/item/kitchen/spoon/iron,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Qy" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"QM" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"QQ" = (
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"Ma" = (
+/obj/machinery/tanningrack,
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb/cave/wet)
+"Mk" = (
 /obj/structure/kneestingers{
 	icon_state = "glowshroom3"
 	},
 /turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"RH" = (
-/obj/item/natural/rock/salt,
-/turf/open/floor/dirt/road,
-/area/rogue/under/cavewet)
-"RL" = (
+/area/rogue/under/tomb/cave/wet)
+"Ms" = (
 /obj/item/grown/log/tree/small,
 /obj/item/grown/log/tree/small{
 	pixel_y = -3;
@@ -1174,142 +1135,201 @@
 	pixel_y = 3
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/cavewet)
-"RM" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/item/clothing/shoes/boots{
-	pixel_x = 6;
-	pixel_y = -9
+/area/rogue/under/tomb/cave/wet)
+"MB" = (
+/turf/closed/wall/mineral/decostone,
+/area/rogue/under/tomb/cave/spider)
+"MH" = (
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"Na" = (
+/obj/structure/bars,
+/turf/open/floor/metal/barograte,
+/area/rogue/under/tomb/cave/spider)
+"Nh" = (
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave/wet)
+"NH" = (
+/turf/closed/wall/mineral/decostone,
+/area/rogue/under/tomb/indoors)
+"NO" = (
+/obj/structure/bed{
+	pixel_y = 0
+	},
+/obj/structure/bed{
+	pixel_y = 10
 	},
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Sx" = (
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
+/area/rogue/under/tomb/indoors)
+"NP" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom2"
 	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Sy" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchmarble,
-/area/rogue/under/cavewet)
-"SB" = (
-/obj/machinery/light/fueled/torchholder/l,
-/obj/structure/spider/cocoon,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Tc" = (
-/obj/structure/chair/stool,
-/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/water/cleanshallow,
+/area/rogue/under/tomb/cave/wet)
+"NX" = (
+/obj/structure/fluff/statue/tdummy,
 /turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Ts" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"Tt" = (
-/obj/structure/table/stone_small,
-/obj/item/kitchen/spoon/iron,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"TC" = (
-/obj/structure/closet/crate/chest,
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
-	},
+/area/rogue/under/tomb/indoors)
+"NY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/weapon/shield/tower/metal,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/obj/structure/spider/stickyweb,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"TK" = (
-/obj/structure/fluff/walldeco/sparrowflag,
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"Ua" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/handcart,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Ug" = (
-/obj/structure/table/stone_small,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Un" = (
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Uo" = (
-/obj/structure/rack/shelf/notdense,
-/obj/item/weapon/mace/steel/morningstar{
-	pixel_y = 32
-	},
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"Up" = (
-/obj/structure/floordoor{
+/area/rogue/under/tomb/indoors)
+"Oc" = (
+/obj/structure/lever/wall{
+	dir = 4;
 	redstone_id = "hctomb03drop"
 	},
-/turf/open/transparent/openspace,
-/area/rogue/under/cavewet)
-"Uq" = (
-/obj/item/reagent_containers/food/snacks/cheese_wedge,
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/decal/remains/bigrat,
-/turf/open/floor/cobblerock,
-/area/rogue/under/cavewet)
-"Uu" = (
-/obj/structure/rousman_hole,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"UA" = (
+/area/rogue/under/tomb/indoors)
+"Ok" = (
+/obj/structure/table/stone_small,
+/obj/item/reagent_containers/glass/bowl/iron,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"Oq" = (
+/obj/effect/decal/cleanable/blood/gibs/torso,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Or" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"UC" = (
-/obj/item/storage/belt/leather{
-	pixel_x = 12;
-	pixel_y = 5
+/area/rogue/under/tomb/indoors)
+"OB" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"OU" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"OW" = (
+/turf/open/water/river{
+	dir = 1
+	},
+/area/rogue/under/tomb/cave/wet)
+"OZ" = (
+/obj/machinery/light/fueled/torchholder/r,
+/obj/structure/spider/cocoon,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"Ph" = (
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"Pj" = (
+/obj/item/clothing/pants/trou/leather{
+	pixel_x = -6
 	},
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"UP" = (
-/turf/closed/wall/mineral/craftstone{
-	max_integrity = 400;
-	desc = "A weak, crumbling wall made from specially crafted stone.";
-	name = "weak craftstone wall"
+/area/rogue/under/tomb/indoors)
+"Pp" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/item/clothing/shirt/shortshirt/random{
+	pixel_x = -8
 	},
-/area/rogue/under/cavewet)
-"UR" = (
-/mob/living/simple_animal/hostile/retaliate/mimic,
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"Ps" = (
+/obj/structure/stairs/stone/church,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"Pz" = (
+/obj/structure/chair/stool,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"PL" = (
+/obj/structure/fluff/walldeco/sparrowflag,
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/cave/wet)
+"PS" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/gem,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"PT" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = -8;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = -8
+	},
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = 7
+	},
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = -8;
+	pixel_y = -7
+	},
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = 7;
+	pixel_y = -7
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"PV" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"UZ" = (
+/area/rogue/under/tomb/cave/spider)
+"PY" = (
+/turf/open/floor/dirt,
+/area/rogue/under/tomb/cave/wet)
+"Qr" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/indoors)
+"Qw" = (
+/obj/item/bin/water/gross,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"QD" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"QH" = (
+/turf/closed/wall/mineral/decostone/long{
+	dir = 1
+	},
+/area/rogue/under/tomb/cave/spider)
+"QO" = (
+/obj/effect/decal/cleanable/blood/old,
+/mob/living/simple_animal/hostile/retaliate/headless,
+/turf/open/floor/blocks/stonered,
+/area/rogue/under/tomb/indoors)
+"Rb" = (
+/turf/closed/wall/mineral/decostone/long{
+	dir = 1
+	},
+/area/rogue/under/tomb)
+"RK" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fluff/walldeco/church/line{
@@ -1319,2097 +1339,2178 @@
 	dir = 8
 	},
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Ve" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/natural/rock{
-	pixel_y = -6;
-	pixel_x = 7
+/area/rogue/under/tomb/indoors)
+"RP" = (
+/obj/item/ingot/iron{
+	pixel_x = -6;
+	pixel_y = -1
 	},
-/obj/item/natural/rock{
-	pixel_y = -1;
-	pixel_x = 2
+/obj/item/ingot/copper{
+	pixel_x = 5;
+	pixel_y = -7
 	},
-/obj/item/natural/rock{
-	pixel_y = 5;
-	pixel_x = -3
+/obj/item/ingot/silver{
+	pixel_y = 2
 	},
-/obj/item/natural/rock{
-	pixel_y = -7;
-	pixel_x = -3
-	},
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Vm" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Vr" = (
-/obj/structure/trap/saw_blades,
-/turf/open/floor/herringbone,
-/area/rogue/under/cavewet)
-"Vx" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/natural/rock{
-	pixel_y = -6;
-	pixel_x = 7
-	},
-/obj/item/natural/rock{
-	pixel_y = -1;
-	pixel_x = 2
-	},
-/obj/item/natural/rock{
-	pixel_y = 5;
-	pixel_x = -3
-	},
-/obj/item/natural/rock{
-	pixel_y = -7;
-	pixel_x = -3
-	},
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"RS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Wf" = (
-/obj/structure/lever/hidden{
-	redstone_id = "hctomb03sdC"
+/area/rogue/under/tomb/cave/spider)
+"Se" = (
+/obj/effect/mapping_helpers/secret_door_creator{
+	vip_message = "Miner";
+	vips = list("Miner");
+	name = "DF Secret Door";
+	redstone_id = "hctomb03sdA";
+	floor_turf = /turf/open/floor/blocks/stonered/tiny
 	},
-/turf/closed/wall/mineral/decostone,
-/area/rogue/under/cavewet)
-"Wl" = (
-/turf/open/water/bath,
-/area/rogue/under/cavewet)
-"Wu" = (
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/indoors)
+"St" = (
+/turf/open/transparent/openspace,
+/area/rogue/under/tomb/indoors)
+"SC" = (
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave)
+"SL" = (
+/obj/structure/barricade/wooden,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"Td" = (
+/obj/structure/roguerock,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"Te" = (
+/obj/structure/rousman_hole,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Tk" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/clothing/pants/trou,
+/obj/structure/rack/shelf/notdense,
+/obj/item/weapon/polearm/eaglebeak{
+	pixel_y = 16
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Ty" = (
+/obj/effect/dungeon_directional_helper/east,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave/wet)
+"Tz" = (
 /obj/item/weapon/mace/warhammer{
 	pixel_y = 32
 	},
 /obj/effect/decal/cleanable/blood/old,
 /obj/structure/rack/shelf/notdense,
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"WI" = (
-/obj/structure/lever/hidden{
-	redstone_id = "hctomb03sdD"
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/rogue/under/cavewet)
-"WL" = (
-/obj/structure/fluff/statue/gargoyle/candles,
-/obj/machinery/light/fueled/torchholder,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"WP" = (
-/obj/machinery/light/fueled/firebowl,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"WW" = (
-/mob/living/simple_animal/hostile/retaliate/spider/mutated,
+/area/rogue/under/tomb/indoors)
+"TL" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave)
+"Ur" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/spider/stickyweb,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Xa" = (
-/obj/structure/table/stone_small,
-/obj/item/ammo_casing/caseless/bolt/pyro{
-	pixel_x = -4;
-	pixel_y = -4
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"UF" = (
+/obj/effect/dungeon_directional_helper/south,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave/wet)
+"UW" = (
+/obj/item/reagent_containers/food/snacks/cheese_wedge,
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/decal/remains/bigrat,
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb/cave/wet)
+"UX" = (
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/cave)
+"UY" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"Vd" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/natural/rock{
+	pixel_y = -6;
+	pixel_x = 7
 	},
-/obj/item/ammo_casing/caseless/bolt/pyro,
-/obj/item/ammo_casing/caseless/bolt/pyro{
-	pixel_x = 4;
-	pixel_y = 4
+/obj/item/natural/rock{
+	pixel_y = -1;
+	pixel_x = 2
 	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"Xr" = (
-/obj/machinery/light/fueled/torchholder/r,
-/obj/structure/spider/cocoon,
+/obj/item/natural/rock{
+	pixel_y = 5;
+	pixel_x = -3
+	},
+/obj/item/natural/rock{
+	pixel_y = -7;
+	pixel_x = -3
+	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"Xw" = (
+/area/rogue/under/tomb/indoors)
+"Vz" = (
+/obj/structure/door/stone,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"VM" = (
+/obj/structure/fluff/statue/gargoyle,
+/obj/machinery/light/fueled/torchholder,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"VP" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"VT" = (
+/obj/structure/lever/hidden{
+	redstone_id = "hctomb03sdC"
+	},
+/turf/closed/wall/mineral/decostone,
+/area/rogue/under/tomb/cave/spider)
+"Wk" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"Wv" = (
+/obj/item/reagent_containers/food/snacks/smallrat/dead,
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"WG" = (
 /obj/structure/fluff/railing/border{
-	dir = 10
+	dir = 9
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
 	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"Xh" = (
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Xx" = (
-/obj/item/bin/water/gross,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/church,
-/area/rogue/under/cavewet)
-"Xy" = (
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/churchrough,
-/area/rogue/under/cavewet)
-"XD" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/spider/stickyweb,
-/obj/machinery/light/fueled/wallfire/candle/blue/l,
-/obj/structure/closet/crate/chest/lootbox,
-/obj/item/clothing/armor/rare/dwarfplate,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"XS" = (
-/obj/item/reagent_containers/powder/salt{
-	pixel_x = -7
-	},
-/obj/item/reagent_containers/powder/salt{
-	pixel_x = 5;
-	pixel_y = -6
-	},
-/obj/structure/closet/crate/chest/neu,
-/turf/open/floor/dirt/road,
-/area/rogue/under/cavewet)
-"YB" = (
-/obj/effect/dungeon_directional_helper/south,
-/turf/open/floor/naturalstone,
-/area/rogue/under/cavewet)
-"Zn" = (
-/obj/structure/barricade/wooden,
-/turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
-"ZE" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom2"
-	},
+/area/rogue/under/tomb/cave/spider)
+"Xj" = (
+/obj/structure/roguerock,
 /turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
-"ZR" = (
-/obj/structure/fluff/statue/tdummy,
-/turf/open/floor/blocks/stonered,
-/area/rogue/under/cavewet)
-"ZS" = (
-/obj/structure/fluff/statue/gargoyle,
-/obj/machinery/light/fueled/torchholder,
+/area/rogue/under/tomb/cave/wet)
+"Xt" = (
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/cave/spider)
+"XN" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/churchrough,
+/area/rogue/under/tomb/indoors)
+"XR" = (
+/turf/open/transparent/openspace,
+/area/rogue/under/tomb/cave/wet)
+"XV" = (
+/turf/open/floor/cobblerock,
+/area/rogue/under/tomb)
+"Ye" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"Ym" = (
+/obj/item/storage/belt/leather{
+	pixel_x = 12;
+	pixel_y = 5
+	},
 /turf/open/floor/blocks/stonered/tiny,
-/area/rogue/under/cavewet)
+/area/rogue/under/tomb/indoors)
+"Yr" = (
+/obj/structure/trap/spike,
+/turf/open/floor/herringbone,
+/area/rogue/under/tomb)
+"Yw" = (
+/turf/open/floor/church,
+/area/rogue/under/tomb/cave/spider)
+"YA" = (
+/turf/closed/wall/mineral/craftstone,
+/area/rogue/under/tomb/cave/wet)
+"Zh" = (
+/obj/structure/fluff/walldeco/stone{
+	icon_state = "walldec5"
+	},
+/turf/closed/wall/mineral/decostone/long{
+	dir = 1
+	},
+/area/rogue/under/tomb/cave/spider)
+"Zl" = (
+/obj/effect/dungeon_directional_helper/north,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb)
+"Zm" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/naturalstone,
+/area/rogue/under/tomb/cave/wet)
+"Zr" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
+"Zy" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/item/clothing/shoes/boots{
+	pixel_x = 6;
+	pixel_y = -9
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/rogue/under/tomb/indoors)
+"ZF" = (
+/turf/open/floor/dirt/road,
+/area/rogue/under/tomb/cave/wet)
+"ZY" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/under/tomb/indoors)
 
 (1,1,1) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-wH
-wH
-fU
-wH
-qM
-qM
-qM
-kY
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+pr
+pr
+pr
+pr
+pr
+pr
+pr
+pr
+pr
+pr
+lB
+lB
+SC
+SC
+TL
+SC
+lB
+jP
+jP
+YA
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (2,1,1) = {"
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-qM
-qM
-kY
-wH
-EQ
-wH
-to
-to
-JM
-JM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+zx
+zx
+zx
+zx
+zx
+zx
+zx
+zx
+zx
+zx
+lB
+lB
+UX
+SC
+xF
+SC
+mV
+MH
+Bo
+Bo
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (3,1,1) = {"
-kY
-HF
-vs
-vs
-vs
-jF
-kY
-Vr
-Vr
-kY
-qM
-qM
-qM
-qM
-EQ
-IG
-to
-JM
-JM
-Bq
-Bq
-CZ
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+zx
+Yr
+Ba
+Ba
+Ba
+Ps
+zx
+xE
+xE
+zx
+lB
+lB
+lB
+lB
+xF
+xu
+mV
+Bo
+Bo
+Iz
+Iz
+El
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (4,1,1) = {"
-kY
-vs
-bB
-bB
-bB
-jF
-kY
-vs
-bB
-kY
-qM
-qM
-qM
-EQ
-EQ
-qM
-to
-LP
-qM
-qM
-Bq
-CZ
-CZ
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+zx
+Ba
+fy
+fy
+fy
+Ps
+zx
+Ba
+fy
+zx
+lB
+lB
+lB
+xF
+xF
+lB
+MH
+Hk
+jP
+jP
+Iz
+El
+El
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (5,1,1) = {"
-kY
-vs
-AA
-AA
-qy
-AA
-AA
-wF
-bB
-kY
-qM
-qM
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-Bq
-CZ
-CZ
-qM
-qM
-qM
-qM
-qM
-qM
+zx
+Ba
+ki
+ki
+iA
+ki
+ki
+cP
+fy
+zx
+lB
+lB
+SC
+SC
+lB
+lB
+jP
+jP
+jP
+jP
+jP
+Iz
+El
+El
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (6,1,1) = {"
-kY
-vs
-oT
-Wl
-Wl
-Wl
-oT
-bB
-vs
-kY
-wH
-wH
-wH
-wH
-qM
-LM
-zz
-zz
-zz
-zz
-LM
-qM
-Bq
-ai
-CZ
-qM
-qM
-qM
-qM
-qM
+zx
+Ba
+yD
+cf
+cf
+cf
+yD
+fy
+Ba
+zx
+SC
+SC
+SC
+SC
+lB
+MB
+dI
+dI
+dI
+dI
+MB
+jP
+Iz
+sh
+El
+jP
+jP
+jP
+jP
+jP
 "}
 (7,1,1) = {"
-kY
-rq
-FN
-Wl
-Da
-Wl
-FN
-bB
-wF
-kY
-vs
-wH
-ng
-qM
-qM
-lq
-nX
-PQ
-Je
-nu
-lq
-qM
-Bq
-CZ
-CZ
-qM
-qM
-qM
-qM
-qM
+zx
+tN
+cx
+cf
+Et
+cf
+cx
+fy
+cP
+zx
+Ba
+SC
+sB
+lB
+lB
+QH
+lk
+VP
+CM
+HP
+QH
+jP
+Iz
+El
+El
+jP
+jP
+jP
+jP
+jP
 "}
 (8,1,1) = {"
-kY
-bB
-oT
-Wl
-Wl
-Wl
-oT
-vs
-vs
-vs
-vs
-wH
-kY
-qM
-qM
-lq
-UR
-PQ
-Oj
-fS
-LM
-zz
-LM
-CZ
-CZ
-CZ
-qM
-qM
-qM
-qM
+zx
+fy
+yD
+cf
+cf
+cf
+yD
+Ba
+Ba
+Ba
+Ba
+SC
+UX
+lB
+lB
+QH
+Hd
+VP
+tO
+Xh
+MB
+dI
+MB
+El
+El
+El
+jP
+jP
+jP
+jP
 "}
 (9,1,1) = {"
-kY
-vs
-AA
-AA
-qy
-AA
-AA
-wF
-bB
-vs
-wH
-qM
-qM
-qM
-qM
-lq
-PE
-eO
-fS
-PQ
-ml
-hy
-lq
-CZ
-CZ
-CZ
-qM
-qM
-qM
-qM
+zx
+Ba
+ki
+ki
+iA
+ki
+ki
+cP
+fy
+Ba
+qv
+lB
+lB
+lB
+lB
+QH
+pm
+PV
+Xh
+VP
+BJ
+Dv
+QH
+El
+El
+El
+jP
+jP
+jP
+jP
 "}
 (10,1,1) = {"
-kY
-vs
-vs
-vs
-vs
-jF
-kY
-vs
-vs
-kY
-qM
-LM
-zz
-zz
-zz
-LM
-zz
-zz
-zz
-Wf
-Wf
-Ld
-lq
-CZ
-CZ
-CZ
-qM
-qM
-qM
-qM
+zx
+Ba
+Ba
+Ba
+Ba
+Ps
+zx
+Ba
+Ba
+zx
+pr
+MB
+dI
+dI
+dI
+MB
+dI
+dI
+dI
+VT
+VT
+jW
+QH
+El
+El
+El
+jP
+jP
+jP
+jP
 "}
 (11,1,1) = {"
-kY
-HF
-vs
-vs
-bB
-jF
-kY
-vs
-vs
-kY
-qM
-lq
-Cn
-SB
-gJ
-ae
-LB
-qT
-fS
-lq
-rm
-qT
-zo
-CZ
-CZ
-CZ
-qM
-qM
-qM
-qM
+zx
+Yr
+Ba
+Ba
+fy
+Ps
+zx
+Ba
+Ba
+zx
+pr
+QH
+vc
+ym
+Qw
+JC
+uj
+ex
+Xh
+QH
+UY
+ex
+Na
+El
+El
+El
+jP
+jP
+jP
+jP
 "}
 (12,1,1) = {"
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-vs
-vs
-kY
-qM
-vu
-gS
-dO
-jt
-sP
-tX
-mt
-wx
-Cp
-dO
-PB
-lq
-CZ
-CZ
-CZ
-qM
-qM
-IG
-qM
+zx
+zx
+zx
+zx
+zx
+zx
+zx
+Ba
+Ba
+zx
+pr
+Zh
+RP
+Xt
+vi
+KE
+ed
+Ji
+AU
+Vz
+Xt
+Jo
+QH
+El
+El
+El
+jP
+jP
+PY
+jP
 "}
 (13,1,1) = {"
-qM
-wH
-to
-to
-qM
-wH
-EQ
-vs
-vs
-qM
-qM
-pD
-jN
-qT
-WW
-qT
-tX
-OO
-jt
-lq
-qT
-qT
-zo
-CZ
-CZ
-CZ
-qM
-qM
-IG
-EQ
+pr
+qv
+XV
+XV
+pr
+qv
+rT
+Ba
+Ba
+pr
+pr
+yG
+GC
+ex
+Hg
+ex
+ed
+RS
+vi
+QH
+ex
+ex
+Na
+El
+El
+El
+jP
+jP
+PY
+ZF
 "}
 (14,1,1) = {"
-wH
-to
-EQ
-EQ
-EQ
-EQ
-EQ
-vs
-vs
-qM
-qM
-lq
-mC
-Xr
-mR
-th
-Xx
-OO
-jt
-lq
-mK
-Aa
-lq
-CZ
-Oo
-CZ
-qM
-LZ
-EQ
-EQ
+qv
+XV
+rT
+rT
+rT
+rT
+rT
+Ba
+Ba
+pr
+pr
+QH
+pN
+OZ
+aC
+FG
+ap
+RS
+vi
+QH
+OB
+hg
+QH
+El
+IF
+El
+jP
+Td
+ZF
+ZF
 "}
 (15,1,1) = {"
-wH
-wH
-to
-EQ
-EQ
-wH
-to
-vs
-vs
-wH
-qM
-LM
-zz
-LM
-Hh
-zz
-Mz
-Hv
-cN
-LM
-zz
-zz
-LM
-CZ
-CZ
-CZ
-qM
-to
-EQ
-wH
+qv
+qv
+XV
+rT
+rT
+qv
+XV
+Ba
+Ba
+qv
+pr
+MB
+dI
+MB
+cb
+dI
+uM
+zn
+Yw
+MB
+dI
+dI
+MB
+El
+El
+El
+jP
+MH
+ZF
+tD
 "}
 (16,1,1) = {"
-am
-wH
-AG
-Ts
-vs
-vs
-vs
-vs
-vs
-wH
-kY
-qM
-qM
-lq
-ot
-Lp
-ot
-dO
-cN
-lq
-qM
-qM
-qM
-CZ
-CZ
-vv
-qM
-wH
-wH
-YB
+Zl
+qv
+yn
+pa
+Ba
+Ba
+Ba
+Ba
+Ba
+qv
+zx
+pr
+pr
+Rb
+zc
+oQ
+zc
+Xt
+Yw
+QH
+jP
+jP
+jP
+El
+El
+OW
+jP
+tD
+tD
+UF
 "}
 (17,1,1) = {"
-qM
-EQ
-kX
-Ts
-vs
-vs
-vs
-vs
-vs
-qM
-kY
-qM
-qM
-lq
-cN
-OO
-fS
-dO
-Gh
-lq
-qM
-qM
-CZ
-CZ
-CZ
-vv
-to
-to
-wH
-wH
+pr
+rT
+rC
+pa
+Ba
+Ba
+Ba
+Ba
+Ba
+pr
+zx
+pr
+pr
+Rb
+Yw
+RS
+Xh
+Xt
+Jv
+QH
+jP
+jP
+El
+El
+El
+OW
+MH
+MH
+tD
+tD
 "}
 (18,1,1) = {"
-qM
-qM
-qM
-qM
-wH
-wH
-wH
-wH
-wH
-to
-qM
-qM
-qM
-lq
-jt
-ay
-fS
-oW
-cN
-lq
-qM
-qM
-CZ
-CZ
-CZ
-vv
-wH
-wH
-qM
-qM
+pr
+pr
+pr
+pr
+qv
+qv
+qv
+qv
+qv
+XV
+pr
+pr
+pr
+Rb
+vi
+Ur
+Xh
+pY
+Yw
+QH
+jP
+jP
+El
+El
+El
+OW
+tD
+tD
+jP
+jP
 "}
 (19,1,1) = {"
-qM
-qM
-qM
-qM
-IG
-qM
-wH
-ng
-to
-to
-qM
-qM
-qM
-LM
-zz
-zz
-zz
-zz
-zz
-LM
-qM
-CZ
-Oo
-CZ
-vv
-wH
-wH
-qM
-qM
-qM
+pr
+pr
+pr
+pr
+zg
+pr
+qv
+zb
+XV
+XV
+pr
+pr
+pr
+Jy
+dI
+dI
+dI
+dI
+dI
+MB
+jP
+El
+IF
+El
+OW
+tD
+tD
+jP
+jP
+jP
 "}
 (20,1,1) = {"
-qM
-qM
-qM
-IG
-IG
-IG
-wH
-kY
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-CZ
-CZ
-CZ
-vv
-to
-qM
-qM
-qM
-qM
+pr
+pr
+pr
+zg
+zg
+zg
+qv
+zx
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+El
+El
+El
+OW
+MH
+jP
+jP
+jP
+jP
 "}
 (21,1,1) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-wH
-QM
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-Oo
-CZ
-CZ
-vv
-vv
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+tD
+Zm
+tD
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+IF
+El
+El
+OW
+OW
+jP
+jP
+jP
+jP
+jP
 "}
 (22,1,1) = {"
-qM
-qM
-qM
-qM
-JM
-JM
-JM
-JM
-to
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-CZ
-CZ
-vv
-vv
-vv
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+Bo
+Bo
+Bo
+Bo
+MH
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+El
+El
+OW
+OW
+OW
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (23,1,1) = {"
-qM
-qM
-qM
-fd
-JM
-JM
-JM
-LP
-wH
-to
-qM
-qM
-qM
-qM
-Oo
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+oy
+Bo
+Bo
+Bo
+Hk
+tD
+MH
+jP
+jP
+jP
+jP
+IF
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (24,1,1) = {"
-qM
-qM
-QQ
-JM
-JM
-hH
-JM
-JM
-JM
-qM
-qM
-CZ
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+Mk
+Bo
+Bo
+Xj
+Bo
+Bo
+Bo
+jP
+jP
+El
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (25,1,1) = {"
-qM
-qM
-JM
-JM
-JM
-JM
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+Bo
+Bo
+Bo
+Bo
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (26,1,1) = {"
-qM
-qM
-JM
-hH
-JM
-cE
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-vv
-NQ
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+Bo
+Xj
+Bo
+CK
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+OW
+cF
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (27,1,1) = {"
-qM
-qM
-qM
-JM
-QQ
-JM
-hH
-JM
-JM
-JM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+Bo
+Mk
+Bo
+Xj
+Bo
+Bo
+Bo
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (28,1,1) = {"
-qM
-qM
-qM
-qM
-qM
-ZE
-JM
-JM
-JM
-EQ
-EQ
-EQ
-IG
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+NP
+Bo
+Bo
+Bo
+ZF
+ZF
+ZF
+PY
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (29,1,1) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-IG
-IG
-EQ
-EQ
-wH
-wH
-IG
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+PY
+PY
+ZF
+ZF
+tD
+tD
+PY
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (30,1,1) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-Ge
-wH
-to
-to
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+Ty
+tD
+MH
+MH
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 
 (1,1,2) = {"
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-Un
-Un
-Un
-kY
-kY
-kY
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+kO
+kO
+kO
+Du
+Du
+Du
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (2,1,2) = {"
-kY
-kY
-LG
-Qy
-hz
-PK
-PK
-PX
-LG
-WP
-kY
-HT
-pC
-Un
-Un
-go
-Un
-Un
-Eq
-kY
-wH
-wH
-to
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+Du
+Du
+DK
+eX
+bw
+Qr
+Qr
+jJ
+DK
+pE
+Du
+tm
+fq
+kO
+kO
+Wk
+kO
+kO
+tK
+Du
+tD
+tD
+MH
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (3,1,2) = {"
-kY
-Vm
-dO
-vo
-qX
-qX
-fs
-dO
-OO
-ri
-kY
-Oz
-Tc
-jA
-GZ
-go
-ZS
-go
-Eq
-kY
-qX
-qX
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
+Du
+Fx
+fi
+QD
+St
+St
+ep
+fi
+lN
+Kg
+Du
+uT
+qf
+hd
+qa
+Wk
+VM
+Wk
+tK
+Du
+XR
+XR
+tD
+tD
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (4,1,2) = {"
-kY
-dO
-pL
-vo
-qX
-qX
-fs
-OO
-dO
-eo
-kY
-jA
-Qe
-BU
-Tc
-Un
-go
-go
-iy
-kY
-qX
-qX
-qX
-wH
-wH
-dW
-qM
-qM
-qM
-qM
+Du
+fi
+fu
+QD
+St
+St
+ep
+lN
+fi
+de
+Du
+hd
+lp
+Ok
+qf
+kO
+Wk
+Wk
+FC
+Du
+XR
+XR
+XR
+tD
+tD
+Nh
+jP
+jP
+jP
+jP
 "}
 (5,1,2) = {"
-kY
-Me
-vz
-iL
-DX
-Sy
-CX
-gc
-EA
-Ua
-kY
-jA
-Tt
-BU
-jA
-Un
-Un
-go
-ry
-kY
-to
-qX
-qX
-qX
-to
-wH
-wH
-qM
-qM
-qM
+Du
+yw
+Zr
+xG
+wD
+tY
+FH
+rs
+yj
+nA
+Du
+hd
+ya
+Ok
+hd
+kO
+kO
+Wk
+PT
+Du
+Id
+XR
+XR
+XR
+MH
+tD
+tD
+jP
+jP
+jP
 "}
 (6,1,2) = {"
-kY
-EZ
-qX
-qX
-qX
-qX
-qX
-NT
-OO
-Ve
-kY
-Ae
-Qe
-hM
-Tc
-iv
-go
-go
-WI
-WI
-kY
-kY
-qX
-qX
-qX
-wH
-wH
-qM
-qM
-qM
+Du
+iZ
+St
+St
+St
+St
+St
+cp
+lN
+Dj
+Du
+Az
+lp
+ok
+qf
+Go
+Wk
+Wk
+tJ
+tJ
+Du
+Du
+XR
+XR
+XR
+tD
+tD
+jP
+jP
+jP
 "}
 (7,1,2) = {"
-kY
-Ne
-qX
-qX
-qX
-qX
-qX
-NT
-OO
-Ve
-kY
-GZ
-jA
-Tc
-cS
-kY
-OJ
-OJ
-qW
-mB
-TC
-kY
-qX
-qX
-qX
-wH
-wH
-to
-qM
-qM
+Du
+jx
+St
+St
+St
+St
+St
+cp
+lN
+Dj
+Du
+qa
+hd
+qf
+it
+Du
+rv
+rv
+yF
+dv
+rA
+Du
+XR
+XR
+XR
+tD
+tD
+MH
+jP
+jP
 "}
 (8,1,2) = {"
-kY
-BE
-qX
-qX
-qX
-qX
-qX
-Iy
-dO
-Vx
-kY
-kY
-kY
-kY
-kY
-kY
-Un
-go
-kY
-kY
-kY
-kY
-TK
-qX
-qX
-qX
-wH
-wH
-qM
-qM
+Du
+Bv
+St
+St
+St
+St
+St
+Ye
+fi
+Vd
+Du
+Du
+Du
+Du
+Du
+Du
+kO
+Wk
+Du
+Du
+Du
+Du
+PL
+XR
+XR
+XR
+tD
+tD
+jP
+jP
 "}
 (9,1,2) = {"
-kY
-zd
-kc
-bk
-AS
-AS
-DX
-kJ
-UZ
-ME
-Sx
-Cp
-go
-go
-yS
-uG
-go
-Un
-of
-ig
-Un
-uG
-ig
-Up
-Up
-Up
-wH
-wH
-vg
-qM
+Du
+Lq
+PS
+ZY
+et
+et
+wD
+WG
+RK
+fN
+Ll
+EP
+Wk
+Wk
+pw
+sC
+Wk
+kO
+Co
+bJ
+kO
+sC
+bJ
+va
+va
+va
+tD
+tD
+bS
+jP
 "}
 (10,1,2) = {"
-kY
-dO
-UA
-Xy
-qX
-qX
-fs
-dO
-OO
-OO
-dO
-Cp
-Un
-Un
-go
-go
-Un
-Un
-Un
-ig
-oo
-oo
-ig
-Up
-Up
-Up
-to
-wH
-wH
-qM
+Du
+fi
+Or
+Ph
+St
+St
+ep
+fi
+lN
+lN
+fi
+EP
+kO
+kO
+Wk
+Wk
+kO
+kO
+kO
+bJ
+aL
+aL
+bJ
+va
+va
+va
+MH
+tD
+tD
+jP
 "}
 (11,1,2) = {"
-kY
-Vm
-dO
-Xy
-qX
-qX
-fs
-OO
-UA
-dO
-kY
-kY
-kY
-fL
-yS
-Un
-go
-fL
-kY
-kY
-kY
-zo
-TK
-qX
-qX
-qX
-to
-wH
-qM
-qM
+Du
+Fx
+fi
+Ph
+St
+St
+ep
+lN
+Or
+fi
+Du
+Du
+Du
+aF
+pw
+kO
+Wk
+aF
+Du
+Du
+Du
+nV
+qe
+XR
+XR
+XR
+MH
+tD
+jP
+jP
 "}
 (12,1,2) = {"
-kY
-kY
-hC
-Xw
-Bc
-ht
-ht
-tR
-Gk
-vX
-kY
-IE
-XD
-kY
-go
-ZS
-Un
-OJ
-Un
-Un
-vl
-go
-zo
-qX
-qX
-qX
-wH
-to
-qM
-qM
+Du
+Du
+gD
+hF
+He
+wa
+wa
+zw
+OU
+au
+Du
+NY
+kk
+Du
+Wk
+VM
+kO
+rv
+kO
+kO
+iD
+Wk
+nV
+XR
+XR
+XR
+tD
+MH
+jP
+jP
 "}
 (13,1,2) = {"
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-kY
-OJ
-kY
-kY
-qC
-DY
-kY
-Cp
-LM
-Cp
-kY
-go
-Uu
-go
-Un
-kY
-qX
-qX
-qX
-wH
-wH
-wH
-qM
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+Du
+rv
+Du
+Du
+ja
+sj
+Du
+EP
+NH
+EP
+Du
+Wk
+Te
+Wk
+kO
+Du
+XR
+XR
+XR
+tD
+tD
+tD
+jP
 "}
 (14,1,2) = {"
-wH
-qX
-qX
-qX
-qX
-qX
-qX
-kY
-Zn
-Zn
-Ny
-Jf
-ix
-kY
-qT
-aj
-dO
-kY
-pZ
-go
-go
-Pd
-kY
-qX
-qX
-qX
-wH
-wH
-wH
-wH
+SC
+yk
+yk
+yk
+yk
+yk
+yk
+Du
+GE
+GE
+AX
+ts
+NO
+Du
+XN
+sz
+fi
+Du
+HQ
+Wk
+Wk
+Oc
+Du
+XR
+XR
+XR
+tD
+tD
+tD
+tD
 "}
 (15,1,2) = {"
-wH
-wH
-qX
-qX
-qX
-qX
-qX
-kY
-Wu
-Un
-Dn
-Un
-ix
-kY
-Lp
-Lp
-Lp
-kY
-Un
-Ug
-kY
-kY
-kY
-qX
-qX
-qX
-wH
-wH
-wH
-wH
+SC
+SC
+yk
+yk
+yk
+yk
+yk
+Du
+Tz
+kO
+Pz
+kO
+NO
+Du
+xx
+xx
+xx
+Du
+kO
+hq
+Du
+Du
+Du
+XR
+XR
+XR
+tD
+tD
+tD
+tD
 "}
 (16,1,2) = {"
-vs
-vs
-Ts
-qX
-qX
-qX
-qX
-kY
-Pg
-RM
-fh
-Nr
-ix
-kY
-qX
-qX
-qX
-kY
-go
-Xa
-kY
-to
-to
-qX
-qX
-qX
-wH
-wH
-wH
-wH
+eA
+eA
+do
+yk
+yk
+yk
+yk
+Du
+Tk
+Zy
+Pj
+Ff
+NO
+Du
+St
+St
+St
+Du
+Wk
+oE
+Du
+MH
+MH
+XR
+XR
+XR
+tD
+tD
+tD
+tD
 "}
 (17,1,2) = {"
-vs
-vs
-Ts
-qX
-qX
-qX
-qX
-kY
-uV
-Lg
-UC
-si
-ix
-kY
-qX
-qX
-qX
-kY
-AB
-kF
-kY
-to
-qX
-qX
-qX
-qX
-qX
-wH
-wH
-qM
+eA
+eA
+do
+yk
+yk
+yk
+yk
+Du
+rz
+QO
+Ym
+zp
+NO
+Du
+St
+St
+St
+Du
+Se
+ru
+Du
+MH
+XR
+XR
+XR
+XR
+XR
+tD
+tD
+jP
 "}
 (18,1,2) = {"
-wH
-qM
-qM
-qM
-wH
-qX
-qX
-kY
-Uo
-ZR
-dH
-FQ
-Jj
-kY
-qX
-qX
-qX
-kF
-mB
-kY
-to
-to
-qX
-qX
-qX
-qX
-qX
-qX
-wH
-qM
+SC
+jP
+jP
+jP
+SC
+yk
+yk
+Du
+bs
+NX
+Pp
+Oq
+xd
+Du
+St
+St
+St
+ru
+dv
+Du
+MH
+MH
+XR
+XR
+XR
+XR
+XR
+XR
+tD
+jP
 "}
 (19,1,2) = {"
-qM
-qM
-qM
-qM
-wH
-wH
-qX
-kY
-aV
-DG
-ib
-yZ
-WL
-kY
-kY
-UP
-kY
-kY
-Gs
-kY
-qM
-qX
-qX
-qX
-qX
-qX
-qX
-wH
-wH
-qM
+jP
+jP
+jP
+jP
+SC
+SC
+yk
+Du
+sy
+yN
+It
+Wv
+vC
+Du
+Du
+mq
+Du
+Du
+ty
+Du
+jP
+XR
+XR
+XR
+XR
+XR
+XR
+tD
+tD
+jP
 "}
 (20,1,2) = {"
-qM
-qM
-qM
-qM
-qM
-wH
-qX
-kY
-kY
-kY
-kY
-kY
-kY
-qM
-qM
-bQ
-qM
-kY
-kY
-kY
-qM
-qX
-qX
-qX
-qX
-qX
-wH
-wH
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+SC
+yk
+Du
+Du
+Du
+Du
+Du
+Du
+jP
+jP
+dV
+jP
+Du
+Du
+Du
+jP
+XR
+XR
+XR
+XR
+XR
+tD
+tD
+jP
+jP
 "}
 (21,1,2) = {"
-qM
-Kj
-XS
-qM
-qM
-wH
-qM
-qM
-qM
-qM
-qM
-to
-OX
-Ca
-gR
-Uq
-qM
-qM
-qM
-qM
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
+jP
+Ma
+uL
+jP
+jP
+tD
+jP
+jP
+jP
+jP
+jP
+MH
+nC
+Ki
+vm
+UW
+jP
+jP
+jP
+jP
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
 "}
 (22,1,2) = {"
-qM
-EQ
-to
-RL
-qM
-EQ
-qM
-qM
-qM
-qM
-qM
-fr
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+ZF
+MH
+Ms
+jP
+ZF
+jP
+jP
+jP
+jP
+jP
+SL
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (23,1,2) = {"
-qM
-to
-Pe
-to
-EQ
-RH
-qM
-qM
-qM
-qM
-IG
-IG
-qM
-qM
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+MH
+oP
+MH
+ZF
+yc
+jP
+jP
+jP
+jP
+PY
+PY
+jP
+jP
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (24,1,2) = {"
-qM
-IG
-to
-iF
-RH
-EQ
-qM
-qM
-qX
-IG
-IG
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+PY
+MH
+JL
+yc
+ZF
+jP
+jP
+XR
+PY
+PY
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (25,1,2) = {"
-qM
-IG
-IG
-IG
-EQ
-qX
-qM
-qM
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+PY
+PY
+PY
+ZF
+XR
+jP
+jP
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (26,1,2) = {"
-qM
-PH
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+yl
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (27,1,2) = {"
-qM
-qM
-qM
-qX
-qX
-qM
-qM
-qM
-qM
-qM
-IG
-IG
-IG
-IG
-wH
-wH
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+XR
+XR
+jP
+jP
+jP
+jP
+jP
+PY
+PY
+PY
+PY
+tD
+tD
+tD
+tD
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (28,1,2) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qX
-qX
-IG
-IG
-wH
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+XR
+XR
+PY
+PY
+tD
+tD
+tD
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (29,1,2) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qX
-qX
-qX
-qX
-wH
-wH
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+XR
+XR
+XR
+XR
+tD
+tD
+tD
+tD
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
 (30,1,2) = {"
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-wH
-wH
-wH
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
-qM
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+tD
+tD
+tD
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
+jP
 "}
