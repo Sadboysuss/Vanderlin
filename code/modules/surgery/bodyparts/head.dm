@@ -41,6 +41,10 @@
 	/// Brainkill means that this head is considered dead and revival is impossible
 	var/brainkill = FALSE
 
+	var/headprice = 0
+	var/headpricemin
+	var/headpricemax
+
 /obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
 	var/used_limb = precise
 	switch(used_limb)

@@ -39,6 +39,24 @@
 	var/heterochromia = FALSE
 	var/second_color = "#FFFFFF"
 
+	/// Do these eyes have blinking animations
+	var/blink_animation = TRUE
+	/// Should our blinking be synchronized or can separate eyes have (slightly) separate blinking times
+	var/synchronized_blinking = TRUE
+	// A pair of abstract eyelid objects (yes, really) used to animate blinking
+	var/obj/effect/abstract/eyelid_effect/eyelid_left
+	var/obj/effect/abstract/eyelid_effect/eyelid_right
+
+/obj/item/organ/eyes/Initialize(mapload)
+	. = ..()
+	if (blink_animation)
+		eyelid_left = new(src, "[eye_icon_state]_l")
+		eyelid_right = new(src, "[eye_icon_state]_r")
+
+/obj/item/organ/eyes/Destroy()
+	QDEL_NULL(eyelid_left)
+	QDEL_NULL(eyelid_right)
+	return ..()
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
@@ -76,7 +94,85 @@
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M) //updates eye icon
 
+#define BASE_BLINKING_DELAY 5 SECONDS
+#define RAND_BLINKING_DELAY 1 SECONDS
+#define BLINK_DURATION 0.15 SECONDS
+#define BLINK_LOOPS 5
 
+/// Modifies eye overlays to also act as eyelids, both for blinking and for when you're knocked out cold
+/obj/item/organ/eyes/proc/setup_eyelids(mutable_appearance/eye_left, mutable_appearance/eye_right, mob/living/carbon/human/parent)
+	var/obj/item/bodypart/head/my_head = parent.get_bodypart(BODY_ZONE_HEAD)
+
+	var/list/base_color = rgb2num(my_head.color, COLORSPACE_HSL)
+	base_color[2] *= 0.85
+	base_color[3] *= 0.85
+	var/eyelid_color = rgb(base_color[1], base_color[2], base_color[3], (length(base_color) >= 4 ? base_color[4] : null), COLORSPACE_HSL)
+	// If we're knocked out, just color the eyes
+	if (HAS_TRAIT(parent, TRAIT_KNOCKEDOUT))
+		eye_right.color = eyelid_color
+		eye_left.color = eyelid_color
+		return
+
+	if (!blink_animation)
+		return
+
+	eyelid_left.color = eyelid_color
+	eyelid_right.color = eyelid_color
+	eyelid_left.render_target = "*[REF(parent)]_eyelid_left"
+	eyelid_right.render_target = "*[REF(parent)]_eyelid_right"
+	parent.vis_contents += eyelid_left
+	parent.vis_contents += eyelid_right
+	var/sync_blinking = synchronized_blinking
+	// Randomize order for unsynched animations
+	if (sync_blinking || prob(50))
+		var/list/anim_times = animate_eyelid(eyelid_left, parent, sync_blinking)
+		animate_eyelid(eyelid_right, parent, sync_blinking, anim_times)
+	else
+		var/list/anim_times = animate_eyelid(eyelid_right, parent, sync_blinking)
+		animate_eyelid(eyelid_left, parent, sync_blinking, anim_times)
+
+	var/mutable_appearance/left_eyelid_overlay = mutable_appearance(layer = -BODY_LAYER)
+	var/mutable_appearance/right_eyelid_overlay = mutable_appearance(layer = -BODY_LAYER)
+	left_eyelid_overlay.render_source = "*[REF(parent)]_eyelid_left"
+	right_eyelid_overlay.render_source = "*[REF(parent)]_eyelid_right"
+	return list(left_eyelid_overlay, right_eyelid_overlay)
+
+/// Animates one eyelid at a time, thanks BYOND and thanks animation chains
+/obj/item/organ/eyes/proc/animate_eyelid(obj/effect/abstract/eyelid_effect/eyelid, mob/living/carbon/human/parent, sync_blinking = TRUE, list/anim_times = null)
+	. = list()
+	animate(eyelid, alpha = 0, time = 0, loop = (-1))
+	for (var/i in 1 to (BLINK_LOOPS))
+		var/wait_time = rand(BASE_BLINKING_DELAY - RAND_BLINKING_DELAY, BASE_BLINKING_DELAY + RAND_BLINKING_DELAY)
+		if (anim_times)
+			if (sync_blinking)
+				wait_time = anim_times[1]
+				anim_times.Cut(1, 2)
+			else
+				wait_time = rand(max(BASE_BLINKING_DELAY - RAND_BLINKING_DELAY, anim_times[1] - RAND_BLINKING_DELAY), anim_times[1])
+		. += wait_time
+		if (anim_times && !sync_blinking)
+			// Make sure that we're somewhat in sync with the other eye
+			animate(time = anim_times[1] - wait_time)
+			anim_times.Cut(1, 2)
+		animate(alpha = 255, time = 0)
+		animate(time = BLINK_DURATION)
+		animate(alpha = 0, time = 0)
+		animate(time = wait_time)
+
+/obj/effect/abstract/eyelid_effect
+	name = "eyelid"
+	icon = 'icons/mob/human_parts.dmi'
+	layer = -BODY_LAYER
+	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_PLANE | VIS_INHERIT_ID
+
+/obj/effect/abstract/eyelid_effect/Initialize(mapload, new_state)
+	. = ..()
+	icon_state = new_state
+
+#undef BASE_BLINKING_DELAY
+#undef RAND_BLINKING_DELAY
+#undef BLINK_DURATION
+#undef BLINK_LOOPS
 
 /obj/item/organ/eyes/Remove(mob/living/carbon/M, special = 0)
 	. = ..()

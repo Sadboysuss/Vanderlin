@@ -1800,10 +1800,7 @@ generate/load female uniform sprites matching all previously decided variables
 
 // Only renders the head of the human
 /mob/living/carbon/human/update_body_parts_head_only()
-	if (!dna)
-		return
-
-	if (!dna.species)
+	if (!dna?.species)
 		return
 
 	var/obj/item/bodypart/HD = get_bodypart("head")
@@ -1820,6 +1817,8 @@ generate/load female uniform sprites matching all previously decided variables
 
 	add_overlay(HD.get_limb_icon())
 	update_damage_overlays()
+	update_inv_head()
+	update_inv_wear_mask()
 
 	if(HD && !(HAS_TRAIT(src, TRAIT_HUSK)))
 

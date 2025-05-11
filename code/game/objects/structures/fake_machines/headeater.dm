@@ -16,11 +16,6 @@
 	if(headprice > 0 && (HAS_TRAIT(user, TRAIT_BURDEN) || is_gaffer_assistant_job(user.mind.assigned_role)))
 		. += "<span class='info'>HEADEATER value: [headprice]</span>"
 
-/obj/item/bodypart/head
-	var/headprice = 0
-	var/headpricemin
-	var/headpricemax
-
 /obj/item/bodypart/head/Initialize()
 	. = ..()
 	if(headpricemax)
