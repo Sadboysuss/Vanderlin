@@ -44,7 +44,7 @@
 
 /datum/emote/living/carbon/human/blink_r/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
-	var/obj/item/organ/eyes/eyes = user.get_organ_slot(ORGAN_SLOT_EYES)
+	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
 	for (var/i in 1 to 3)
 		addtimer(CALLBACK(eyes, TYPE_PROC_REF(/obj/item/organ/eyes, blink), 0.1 SECONDS, FALSE), i * 0.2 SECONDS)
 	eyes.animate_eyelids(user)

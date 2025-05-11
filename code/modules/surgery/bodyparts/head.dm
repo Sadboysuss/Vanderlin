@@ -173,13 +173,17 @@
 			. += lips_overlay
 
 		// eyes
-		var/image/eyes_overlay = image('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER, SOUTH)
+		var/mutable_appearance/eyes_overlay = mutable_appearance('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER, parent)
 		. += eyes_overlay
 		if(eyes)
 			eyes_overlay.icon_state = eyes.eye_icon_state
 
 			if(eyes.eye_color)
 				eyes_overlay.color = "#" + eyes.eye_color
+
+			var/list/eyelids = eyes.setup_eyelids(eyes_overlay, parent)
+			if (LAZYLEN(eyelids))
+				. += eyelids
 
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'
