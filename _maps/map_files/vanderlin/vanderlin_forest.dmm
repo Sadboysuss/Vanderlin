@@ -244,15 +244,6 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods_safe)
-"eF" = (
-/obj/structure/closet/crate/chest{
-	name = null
-	},
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
 "eG" = (
 /obj/structure/bed/hay,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -301,10 +292,6 @@
 	},
 /turf/open/floor/wood,
 /area/rogue/indoors)
-"fo" = (
-/obj/structure/flora/newtree,
-/turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
 "fz" = (
 /turf/closed,
 /area/rogue/outdoors/mountains)
@@ -325,6 +312,14 @@
 	pixel_x = -10
 	},
 /turf/open/floor/twig,
+/area/rogue/indoors)
+"fL" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/cobble,
 /area/rogue/indoors)
 "fR" = (
 /obj/structure/fluff/railing/fence{
@@ -412,6 +407,17 @@
 	icon_state = "horzw"
 	},
 /area/rogue/indoors)
+"hi" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	layer = 2.7;
+	pixel_x = 2;
+	pixel_y = 7
+	},
+/turf/open/floor/ruinedwood{
+	icon_state = "horzw"
+	},
+/area/rogue/outdoors/woods)
 "hk" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood{
@@ -535,12 +541,6 @@
 	},
 /turf/open/floor/blocks,
 /area/rogue/indoors)
-"jo" = (
-/obj/structure/fluff/signage{
-	name = "Bog - South"
-	},
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
 "jB" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -602,14 +602,6 @@
 /obj/structure/innocent_bush,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods)
-"kj" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/turf/open/floor/cobble,
-/area/rogue/indoors)
 "kl" = (
 /obj/structure/fluff/railing/border{
 	dir = 2
@@ -735,12 +727,6 @@
 "lR" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
-"me" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/ruinedwood{
-	icon_state = "horzw"
-	},
 /area/rogue/outdoors/woods)
 "mg" = (
 /obj/structure/roguerock{
@@ -909,21 +895,6 @@
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods_safe)
-"oi" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/machinery/light/fueled/wallfire/candle,
-/obj/item/reagent_containers/food/snacks/fish/eel,
-/obj/item/reagent_containers/food/snacks/butter,
-/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/item/reagent_containers/food/snacks/rotten/poultry,
-/turf/open/floor/cobble,
-/area/rogue/indoors)
 "ok" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/rogue/outdoors/woods)
@@ -947,6 +918,12 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors)
+"oN" = (
+/obj/structure/fluff/signage{
+	name = "Bog - South"
+	},
+/turf/open/floor/dirt/road,
+/area/rogue/outdoors/woods)
 "oO" = (
 /obj/structure/table/wood/counter,
 /turf/open/floor/ruinedwood,
@@ -1112,6 +1089,13 @@
 	dir = 1
 	},
 /area/rogue/indoors)
+"rw" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/turf/open/floor/cobble,
+/area/rogue/indoors)
 "rJ" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/grass,
@@ -1127,11 +1111,6 @@
 "rN" = (
 /obj/structure/fluff/traveltile/vampire,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
-"rR" = (
-/turf/open/floor/ruinedwood{
-	icon_state = "horzw"
-	},
 /area/rogue/outdoors/woods)
 "sc" = (
 /obj/structure/table/wood{
@@ -1285,6 +1264,13 @@
 "ut" = (
 /turf/closed/wall/mineral/tent,
 /area/rogue/indoors/cave)
+"uD" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-forest_bog-bog2";
+	aportalid = "vanderlin-forest_bog-forest2"
+	},
+/turf/open/floor/grass,
+/area/rogue/outdoors/woods)
 "uL" = (
 /obj/effect/mapping_helpers/door/access/garrison/forest,
 /obj/effect/mapping_helpers/door/locker,
@@ -1293,13 +1279,6 @@
 	},
 /turf/open/floor/blocks,
 /area/rogue/indoors)
-"uO" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-bog2";
-	aportalid = "vanderlin-forest_bog-forest2"
-	},
-/turf/open/floor/grass,
-/area/rogue/outdoors/woods)
 "vc" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/cloth,
@@ -1483,6 +1462,21 @@
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/woods)
+"xF" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/item/reagent_containers/food/snacks/fish/eel,
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/item/reagent_containers/food/snacks/rotten/poultry,
+/turf/open/floor/cobble,
+/area/rogue/indoors)
 "xJ" = (
 /obj/structure/fluff/railing/fence{
 	dir = 1
@@ -1504,6 +1498,12 @@
 "xV" = (
 /obj/structure/well,
 /turf/open/floor/dirt,
+/area/rogue/outdoors/woods)
+"xY" = (
+/obj/structure/fluff/signage{
+	name = "Bog - East"
+	},
+/turf/open/floor/grass,
 /area/rogue/outdoors/woods)
 "yc" = (
 /obj/machinery/light/fueled/firebowl/stump{
@@ -1580,8 +1580,11 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods)
-"zo" = (
-/turf/closed/basic,
+"zs" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/ruinedwood{
+	icon_state = "horzw"
+	},
 /area/rogue/outdoors/woods)
 "zu" = (
 /obj/structure/bed/sleepingbag,
@@ -1703,17 +1706,6 @@
 	dir = 8
 	},
 /area/rogue/indoors)
-"Bq" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	layer = 2.7;
-	pixel_x = 2;
-	pixel_y = 7
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue/outdoors/woods)
 "Bu" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/twig,
@@ -1725,6 +1717,10 @@
 	},
 /turf/open/floor/wood,
 /area/rogue/indoors)
+"BP" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/cobblerock,
+/area/rogue/outdoors/woods)
 "Cd" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
@@ -1819,6 +1815,9 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors)
+"DX" = (
+/turf/closed/basic,
+/area/rogue/outdoors/woods)
 "DY" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/hammer/copper{
@@ -1867,6 +1866,12 @@
 "EU" = (
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors)
+"Fo" = (
+/obj/structure/fluff/signage{
+	name = "Bog - East"
+	},
+/turf/open/floor/cobblerock,
+/area/rogue/outdoors/woods)
 "Fr" = (
 /obj/structure/toilet,
 /turf/open/floor/dirt,
@@ -1948,6 +1953,11 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/woods_safe)
+"GX" = (
+/turf/open/floor/ruinedwood{
+	icon_state = "horzw"
+	},
+/area/rogue/outdoors/woods)
 "GZ" = (
 /obj/effect/landmark/start/lich,
 /turf/open/floor/naturalstone,
@@ -2161,12 +2171,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/wood,
 /area/rogue/indoors)
-"Ku" = (
-/obj/structure/fluff/signage{
-	name = "Bog - East"
-	},
-/turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
 "Ky" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -2314,18 +2318,21 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
 /area/rogue/indoors)
-"Nj" = (
-/obj/structure/fluff/signage{
-	name = "Bog - East"
-	},
-/turf/open/floor/grass,
-/area/rogue/outdoors/woods)
 "Nn" = (
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/cave)
 "Nu" = (
 /turf/open/floor/wood,
 /area/rogue/indoors)
+"Nv" = (
+/obj/structure/closet/crate/chest{
+	name = null
+	},
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/naturalstone,
+/area/rogue/indoors/cave)
 "Nw" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -2345,13 +2352,6 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/outdoors/mountains)
-"Og" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/turf/open/floor/cobble,
-/area/rogue/indoors)
 "Oi" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 8
@@ -2526,13 +2526,6 @@
 "Rb" = (
 /obj/structure/roguerock,
 /turf/open/water/cleanshallow,
-/area/rogue/outdoors/woods)
-"Rc" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-bog2";
-	aportalid = "vanderlin-forest_bog-forest2"
-	},
-/turf/open/floor/dirt,
 /area/rogue/outdoors/woods)
 "Rd" = (
 /obj/structure/fluff/railing/border{
@@ -2778,6 +2771,13 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/indoors)
+"Vc" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-forest_bog-bog2";
+	aportalid = "vanderlin-forest_bog-forest2"
+	},
+/turf/open/floor/dirt,
+/area/rogue/outdoors/woods)
 "Vd" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/weapon/mace/woodclub/train_sword,
@@ -9806,7 +9806,7 @@ Nn
 GZ
 Nn
 Nn
-eF
+Nv
 Wh
 Wh
 Wh
@@ -28913,7 +28913,7 @@ Rs
 VE
 wo
 YE
-Og
+rw
 mH
 aP
 Tv
@@ -29106,7 +29106,7 @@ VY
 VY
 VY
 aP
-Og
+rw
 Mk
 jJ
 jJ
@@ -30723,7 +30723,7 @@ VY
 Tv
 JX
 WK
-kj
+fL
 WF
 WK
 Vq
@@ -35234,7 +35234,7 @@ Qd
 Xk
 wV
 cA
-fo
+BP
 UR
 wV
 UR
@@ -35529,7 +35529,7 @@ Qd
 cA
 cA
 Qd
-jo
+oN
 tR
 tR
 wV
@@ -35570,7 +35570,7 @@ Ic
 Ic
 SU
 VE
-oi
+xF
 fW
 fW
 AH
@@ -37645,7 +37645,7 @@ Xk
 Xk
 Xk
 tR
-Nj
+xY
 Qd
 cA
 UR
@@ -39462,9 +39462,9 @@ UR
 UR
 UR
 UR
-Bq
-rR
-me
+hi
+GX
+zs
 Aj
 Aj
 Aj
@@ -39664,9 +39664,9 @@ wV
 wV
 wV
 UR
-Bq
-rR
-me
+hi
+GX
+zs
 yg
 yg
 yg
@@ -39866,9 +39866,9 @@ Aj
 Aj
 Aj
 Aj
-Bq
-rR
-me
+hi
+GX
+zs
 yg
 yg
 yg
@@ -40068,9 +40068,9 @@ yg
 yg
 yg
 yg
-Bq
-rR
-me
+hi
+GX
+zs
 yg
 yg
 yg
@@ -40270,9 +40270,9 @@ yg
 yg
 yg
 yg
-Bq
-rR
-me
+hi
+GX
+zs
 Aj
 Aj
 Aj
@@ -40472,9 +40472,9 @@ yg
 yg
 sA
 Aj
-Bq
-rR
-me
+hi
+GX
+zs
 UR
 wV
 Xk
@@ -42694,7 +42694,7 @@ UR
 wV
 wV
 Jg
-Ku
+Fo
 cA
 cA
 Qd
@@ -42897,9 +42897,9 @@ wV
 wV
 UR
 Sy
-Rc
-uO
-uO
+Vc
+uD
+uD
 Sy
 Rr
 Rr
@@ -43099,9 +43099,9 @@ Sy
 Sy
 Sy
 Sy
-zo
-zo
-zo
+DX
+DX
+DX
 Sy
 Sy
 Sy

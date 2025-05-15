@@ -1717,6 +1717,26 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog/inhumen_camp)
+"hJ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/tile,
+/area/rogue/indoors/vampire_manor)
 "hK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /obj/structure/fluff/globe{
@@ -1901,18 +1921,6 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobble,
 /area/rogue/indoors/lich)
-"jd" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/turf/open/floor/tile{
-	icon_state = "tavern"
-	},
-/area/rogue/indoors/bandit_lair)
 "jf" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -2325,6 +2333,13 @@
 /area/rogue/outdoors/bog/inhumen_camp)
 "md" = (
 /turf/open/floor/carpet/stellar,
+/area/rogue/indoors/lich)
+"mi" = (
+/obj/structure/winch{
+	dir = 4;
+	pixel_x = -6
+	},
+/turf/open/floor/church,
 /area/rogue/indoors/lich)
 "ml" = (
 /obj/structure/table/wood/plain,
@@ -2804,23 +2819,6 @@
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors/bog/inhumen_camp)
-"pA" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/turf/open/floor/tile,
-/area/rogue/indoors/vampire_manor)
 "pD" = (
 /obj/structure/window/stained/zizo,
 /turf/open/floor/naturalstone,
@@ -3705,6 +3703,19 @@
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors)
+"vm" = (
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors)
 "vp" = (
 /obj/item/clothing/shirt/dress/gen/brown,
 /obj/item/clothing/shoes/shortboots,
@@ -3797,20 +3808,6 @@
 /obj/item/clothing/pants/chainlegs,
 /turf/open/floor/carpet,
 /area/rogue/indoors)
-"vQ" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/item/reagent_containers/food/snacks/produce/turnip,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/turf/open/floor/tile{
-	icon_state = "tavern"
-	},
-/area/rogue/indoors/bandit_lair)
 "vS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/fake_world,
@@ -3849,6 +3846,23 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/hexstone,
 /area/rogue/indoors/vampire_manor)
+"wg" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/truffles,
+/obj/item/reagent_containers/food/snacks/truffles,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/floor/ruinedwood/darker,
+/area/rogue/indoors/lich)
 "wi" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 6
@@ -4046,23 +4060,6 @@
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors)
-"xQ" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/truffles,
-/obj/item/reagent_containers/food/snacks/truffles,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/lich)
 "xU" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /obj/structure/fluff/walldeco/psybanner/red{
@@ -4797,13 +4794,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors)
-"Di" = (
-/obj/structure/winch{
-	dir = 4;
-	pixel_x = -6
-	},
-/turf/open/floor/church,
-/area/rogue/indoors/lich)
 "Dn" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 8
@@ -5162,19 +5152,6 @@
 /obj/item/clothing/armor/plate/orc,
 /obj/item/clothing/armor/plate/orc,
 /turf/open/floor/carpet,
-/area/rogue/indoors)
-"Gd" = (
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/onion,
-/obj/item/reagent_containers/food/snacks/produce/cabbage,
-/obj/item/reagent_containers/food/snacks/produce/cabbage,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/item/reagent_containers/food/snacks/produce/potato,
-/obj/structure/closet/crate/chest/wicker,
-/turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors)
 "Ge" = (
 /obj/structure/mannequin/male,
@@ -6059,6 +6036,23 @@
 /obj/item/reagent_containers/glass/bucket/pot/copper,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
+"Mq" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/turf/open/floor/tile,
+/area/rogue/indoors/vampire_manor)
 "Ms" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/chainmail/iron,
@@ -6481,6 +6475,18 @@
 /obj/item/clothing/armor/chainmail/iron/orc,
 /turf/open/floor/carpet,
 /area/rogue/indoors)
+"PU" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
+/area/rogue/indoors/bandit_lair)
 "PV" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fermentation_keg,
@@ -6854,6 +6860,20 @@
 /obj/structure/fluff/railing/fence,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/woods_safe)
+"Sp" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
+/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
+/area/rogue/indoors/bandit_lair)
 "Sq" = (
 /turf/closed/wall/mineral/decowood/vert,
 /area/rogue/indoors/bandit_lair)
@@ -7067,26 +7087,6 @@
 /obj/structure/rack,
 /obj/item/weapon/mace,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/vampire_manor)
-"TK" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/wheat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/item/reagent_containers/food/snacks/produce/oat,
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/tile,
 /area/rogue/indoors/vampire_manor)
 "TM" = (
 /obj/structure/rotation_piece,
@@ -9214,7 +9214,7 @@ Te
 Sq
 Pc
 Dz
-jd
+PU
 Rw
 Xe
 Xe
@@ -9344,7 +9344,7 @@ so
 Rw
 WB
 Dz
-vQ
+Sp
 Sq
 Xe
 Xe
@@ -14314,7 +14314,7 @@ ni
 ni
 ni
 ni
-pA
+Mq
 ct
 Qy
 xt
@@ -14444,7 +14444,7 @@ ni
 ni
 ni
 ni
-TK
+hJ
 yE
 xt
 Qy
@@ -18876,7 +18876,7 @@ Mx
 uW
 El
 Nx
-xQ
+wg
 gY
 tM
 wK
@@ -20039,7 +20039,7 @@ Qs
 jN
 jN
 jN
-Di
+mi
 Zx
 DF
 uQ
@@ -23082,7 +23082,7 @@ Ot
 aN
 HJ
 eD
-Gd
+vm
 aw
 Lq
 bo
