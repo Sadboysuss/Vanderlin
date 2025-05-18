@@ -15046,7 +15046,6 @@
 /area/rogue/indoors/town/manor)
 "jHh" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shirt/formal,
 /obj/item/clothing/shirt/undershirt/black,
 /obj/item/clothing/pants/tights/black,
 /obj/item/clothing/shoes/nobleboot,
@@ -17490,7 +17489,6 @@
 /area/rogue/indoors/town/merc_guild)
 "lka" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shirt/formal,
 /obj/item/clothing/shirt/undershirt/black,
 /obj/item/clothing/pants/tights/black,
 /turf/open/floor/wood,
@@ -34198,7 +34196,6 @@
 "wsM" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/pants/tights/black,
-/obj/item/clothing/shirt/formal,
 /obj/item/clothing/shoes/nobleboot,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
@@ -34726,7 +34723,6 @@
 "wKs" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
-/obj/item/clothing/shirt/formal,
 /obj/item/clothing/pants/tights/black,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
