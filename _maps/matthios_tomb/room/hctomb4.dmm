@@ -37,13 +37,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
-"bg" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/alch/bone,
-/turf/open/floor/blocks/newstone/alt,
-/area/rogue/under/tomb/indoors)
 "bw" = (
 /obj/structure/table/wood/plain,
 /obj/item/cooking/pan{
@@ -159,14 +152,6 @@
 "fk" = (
 /turf/closed/wall/mineral/decowood,
 /area/rogue/under/tomb/indoors/magic)
-"fz" = (
-/obj/structure/door/green{
-	name = "Room 3 - DO NOT ENTER"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/obj/structure/barricade/wooden/crude,
-/turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
 "ga" = (
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
@@ -222,6 +207,14 @@
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood,
+/area/rogue/under/tomb/indoors)
+"hG" = (
+/obj/structure/door/green{
+	name = "Room 3 - DO NOT ENTER"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/ruinedwood/chevron,
 /area/rogue/under/tomb/indoors)
 "hN" = (
 /obj/structure/fluff/railing/border{
@@ -295,6 +288,14 @@
 	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
+"kP" = (
+/obj/structure/door/fancy{
+	name = "Room 2 - VERY HAUNTED!!!"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
 "lc" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/structure/fluff/wallclock,
@@ -800,14 +801,6 @@
 /obj/structure/window/solid,
 /turf/open/floor/ruinedwood/chevron,
 /area/rogue/under/tomb/indoors)
-"DK" = (
-/obj/structure/door/fancy{
-	name = "Room 2 - VERY HAUNTED!!!"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/magic)
 "Eb" = (
 /obj/structure/window/solid,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -1071,13 +1064,6 @@
 "Qd" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/tomb)
-"Qf" = (
-/obj/structure/door/green{
-	name = "Room 4 - HAUNTED"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors/magic)
 "Qt" = (
 /obj/structure/bonepile,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1176,6 +1162,13 @@
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
+"TS" = (
+/obj/structure/door/green{
+	name = "Room 4 - HAUNTED"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/chevron,
+/area/rogue/under/tomb/indoors/magic)
 "TU" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1260,6 +1253,13 @@
 "WM" = (
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors)
+"WU" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/alch/bone,
+/turf/open/floor/blocks/newstone/alt,
 /area/rogue/under/tomb/indoors)
 "WV" = (
 /obj/structure/trap/poison,
@@ -1630,7 +1630,7 @@ lN
 nM
 lN
 lN
-bg
+WU
 AK
 VW
 VW
@@ -2686,7 +2686,7 @@ SR
 YH
 ie
 BJ
-DK
+kP
 BJ
 fk
 cy
@@ -2845,7 +2845,7 @@ wr
 wr
 GH
 rT
-fz
+hG
 mT
 jv
 AK
@@ -2941,7 +2941,7 @@ wr
 wr
 eB
 rT
-Qf
+TS
 pC
 BV
 fk

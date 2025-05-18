@@ -911,14 +911,6 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"lK" = (
-/obj/structure/door/stone{
-	lockid = "tomb";
-	max_integrity = 10000
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/church,
-/area/rogue/under/mountains/anvil/dungeon/lower)
 "lO" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
@@ -986,6 +978,18 @@
 "ni" = (
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/ruinedwood,
+/area/rogue/under/mountains/anvil/dungeon)
+"nk" = (
+/obj/item/storage/sack,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked{
+	pixel_x = -6
+	},
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = 5;
+	pixel_x = 7
+	},
+/turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/dungeon)
 "no" = (
 /obj/structure/closet/crate/chest/crafted,
@@ -1103,18 +1107,14 @@
 /obj/structure/barricade/wooden,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"ph" = (
-/obj/item/storage/sack,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked{
-	pixel_x = -6
+"oW" = (
+/obj/structure/door/iron/bars{
+	max_integrity = 10000;
+	lockid = "pitentrance"
 	},
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/glass/bottle{
-	pixel_y = 5;
-	pixel_x = 7
-	},
-/turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/dungeon)
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/churchrough,
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "pn" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup,
@@ -1753,13 +1753,6 @@
 "ym" = (
 /turf/open/floor/carpet/lord/right,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"yn" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
-/turf/open/floor/blocks{
-	icon_state = "bluestone"
-	},
-/area/rogue/under/mountains/anvil/dungeon/lower)
 "yv" = (
 /obj/effect/decal/cleanable/blood/old{
 	pixel_y = -6;
@@ -1778,14 +1771,6 @@
 	pixel_x = 22
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/mountains/anvil/dungeon/lower)
-"yz" = (
-/obj/structure/door/iron/bars{
-	max_integrity = 10000;
-	lockid = "pitentrance"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/churchrough,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "yB" = (
 /obj/structure/table/wood/large/corner{
@@ -1991,6 +1976,13 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"BH" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "BI" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/naturalstone,
@@ -2048,11 +2040,6 @@
 	wander = 0
 	},
 /turf/open/floor/wood/nosmooth,
-/area/rogue/under/mountains/anvil/dungeon)
-"CG" = (
-/obj/structure/door,
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/dungeon)
 "CK" = (
 /obj/effect/decal/cleanable/blood/gibs,
@@ -2206,6 +2193,13 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"EF" = (
+/obj/structure/door/iron/bars{
+	lockid = "armory"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/naturalstone,
+/area/rogue/under/mountains/anvil/dungeon)
 "EI" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/naturalstone,
@@ -2237,6 +2231,11 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"EX" = (
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/rogue/under/mountains/anvil/dungeon)
 "Fc" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 9
@@ -2670,13 +2669,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/rogue/under/mountains/anvil/dungeon)
-"LA" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/blocks{
-	icon_state = "bluestone"
-	},
-/area/rogue/under/mountains/anvil/dungeon/lower)
 "LI" = (
 /obj/structure/closet/crate/chest/crafted,
 /obj/item/clothing/head/hatfur,
@@ -2785,13 +2777,6 @@
 /obj/item/gear,
 /turf/open/floor/herringbone,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"Nf" = (
-/obj/structure/door/iron/bars{
-	lockid = "armory"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/dungeon)
 "Nh" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -3023,15 +3008,6 @@
 "Rm" = (
 /turf/open/floor/dirt,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"Rn" = (
-/obj/structure/door{
-	lockid = "dormroom";
-	max_integrity = 3000;
-	name = "Dormitories"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/mountains/anvil/dungeon)
 "Rt" = (
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/naturalstone,
@@ -3067,7 +3043,7 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/under/mountains/anvil/dungeon)
-"RD" = (
+"RF" = (
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato{
 	pixel_x = 10;
@@ -3078,6 +3054,15 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"RG" = (
+/obj/structure/door{
+	lockid = "dormroom";
+	max_integrity = 3000;
+	name = "Dormitories"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/rogue/under/mountains/anvil/dungeon)
 "RI" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/church,
@@ -3256,6 +3241,14 @@
 	},
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"UC" = (
+/obj/structure/door/stone{
+	lockid = "tomb";
+	max_integrity = 10000
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/church,
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "UD" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
@@ -3370,6 +3363,13 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood,
+/area/rogue/under/mountains/anvil/dungeon/lower)
+"VU" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "VV" = (
 /obj/item/grown/log/tree,
@@ -4425,7 +4425,7 @@ UD
 Yk
 Te
 Te
-yz
+oW
 rq
 rq
 rq
@@ -4520,9 +4520,9 @@ aV
 GT
 hT
 hT
-lK
+UC
 hT
-lK
+UC
 hT
 hT
 Ba
@@ -4586,9 +4586,9 @@ aV
 Dv
 hF
 hT
-lK
+UC
 hT
-lK
+UC
 hT
 hT
 aO
@@ -5418,8 +5418,8 @@ tF
 Xf
 LN
 VP
-yn
-LA
+BH
+VU
 Xx
 VP
 Xx
@@ -5815,7 +5815,7 @@ Xf
 Sd
 CY
 hc
-RD
+RF
 CY
 CY
 CY
@@ -8367,7 +8367,7 @@ dD
 (8,1,2) = {"
 Ho
 FU
-ph
+nk
 RT
 RT
 RT
@@ -9580,7 +9580,7 @@ go
 Hn
 go
 go
-Rn
+RG
 go
 go
 eU
@@ -10302,7 +10302,7 @@ uE
 gN
 FI
 Xc
-CG
+EX
 go
 go
 go
@@ -11772,7 +11772,7 @@ RT
 RT
 RT
 RT
-Nf
+EF
 WR
 WR
 FV

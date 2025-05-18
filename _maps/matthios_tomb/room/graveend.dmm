@@ -1,175 +1,74 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aa" = (
-/turf/closed/mineral/bedrock,
-/area/rogue/under/cave)
 "ab" = (
-/obj/structure/bars,
+/obj/structure/ladder,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"ac" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
-"ad" = (
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"ae" = (
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
 "af" = (
-/obj/structure/plasticflaps,
+/obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
 "ag" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"ah" = (
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"ai" = (
+"ak" = (
+/obj/structure/bars,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"al" = (
+/obj/structure/table/wood/plain/alt,
+/obj/item/storage/belt/leather/plaquegold,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"aD" = (
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"aL" = (
+/turf/closed/wall/mineral/stone/moss,
+/area/rogue/under/tomb)
+"aN" = (
+/obj/structure/closet/dirthole/closed/loot,
+/turf/open/floor/dirt,
+/area/rogue/under/tomb)
+"aO" = (
+/obj/structure/plasticflaps,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"aP" = (
 /obj/structure/door/viewport{
 	dir = 4
 	},
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"aj" = (
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"ak" = (
+"aR" = (
 /obj/structure/closet/dirthole/closed/loot,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"al" = (
+"aV" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/tomb)
-"am" = (
-/obj/effect/spawner/map_spawner/loot,
+"aY" = (
+/mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"an" = (
+/area/rogue/under/tomb)
+"aZ" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"ao" = (
-/obj/item/statue/gold/loot,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"ap" = (
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aq" = (
-/obj/effect/decal/cleanable/blood/tracks,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"ar" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"as" = (
-/obj/structure/chair/bench/throne,
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"at" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"au" = (
-/obj/effect/decal/cleanable/blood/footprints{
-	dir = 4
-	},
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"av" = (
-/obj/effect/decal/cleanable/blood/gibs/down,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aw" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
-"ax" = (
-/turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/cave)
-"ay" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"az" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aA" = (
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aB" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aC" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/storage/belt/leather/plaquegold,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aD" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"aE" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aF" = (
-/obj/structure/ladder,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aG" = (
-/obj/effect/decal/cleanable/blood/puddle,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aH" = (
-/obj/structure/plasticflaps,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aI" = (
-/obj/effect/decal/cleanable/blood/footprints{
-	dir = 8
-	},
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aJ" = (
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aK" = (
-/obj/structure/closet/crate/coffin,
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
-"aL" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/storage/belt/leather/plaquegold,
+"ci" = (
+/obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"aM" = (
+"cA" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aN" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"aO" = (
-/obj/structure/ladder,
-/turf/open/floor/hexstone,
+"fe" = (
+/obj/structure/closet/crate/coffin,
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"aP" = (
+"iE" = (
 /mob/living/simple_animal/hostile/demon{
 	name = "Bonetaker";
 	base_constitution = 15;
@@ -182,602 +81,529 @@
 	},
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aQ" = (
-/obj/structure/closet/crate/coffin,
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
-"aR" = (
-/turf/closed/wall/mineral/stone/moss,
 /area/rogue/under/tomb)
-"aS" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aT" = (
-/obj/structure/bars/cemetery,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aU" = (
-/obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/dirt,
-/area/rogue/under/cave)
-"aV" = (
-/obj/structure/door/viewport{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aW" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/reagent_containers/glass/cup/golden,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aX" = (
-/obj/structure/bars,
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aY" = (
-/obj/structure/door/viewport{
-	dir = 4
-	},
-/turf/open/floor/hexstone,
-/area/rogue/under/cave)
-"aZ" = (
+"lL" = (
+/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"bN" = (
-/obj/structure/closet/crate/coffin,
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/dirt,
-/area/rogue/under/tomb)
-"ca" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"gq" = (
-/obj/structure/closet/crate/coffin,
-/turf/open/floor/dirt,
-/area/rogue/under/tomb)
-"je" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"jK" = (
-/obj/structure/bars/cemetery,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"jO" = (
-/obj/effect/decal/cleanable/blood/tracks,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"nk" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"rX" = (
-/obj/effect/decal/cleanable/blood/footprints{
-	dir = 4
-	},
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"ty" = (
+"mg" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"vT" = (
+"oR" = (
+/obj/effect/decal/cleanable/blood/gibs/down,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"pZ" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"us" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"vC" = (
+/obj/item/statue/gold/loot,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"vN" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
 "wd" = (
-/obj/effect/decal/cleanable/blood/gibs/down,
+/obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"yr" = (
-/obj/item/statue/gold/loot,
+"wg" = (
+/obj/structure/bars/cemetery,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"zh" = (
+"BR" = (
+/obj/structure/door/viewport{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"Ev" = (
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/floor/dirt,
+/area/rogue/under/tomb)
+"FB" = (
 /obj/structure/chair/bench/throne,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"CK" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/reagent_containers/glass/cup/golden,
+"Hm" = (
+/obj/effect/decal/cleanable/blood/footprints{
+	dir = 4
+	},
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"Jl" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
+"JV" = (
+/obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"LL" = (
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"Ny" = (
+"LW" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
 	},
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"Pj" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
+"Nv" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"PU" = (
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"Qw" = (
-/obj/effect/decal/cleanable/blood/footprints,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"Us" = (
-/obj/structure/door/viewport{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"Xm" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
+"NQ" = (
+/obj/structure/closet/crate/coffin,
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"XK" = (
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+"RH" = (
+/obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"Yx" = (
-/mob/living/simple_animal/hostile/demon{
-	name = "Bonetaker";
-	base_constitution = 15;
-	base_endurance = 15;
-	base_intelligence = 15;
-	base_fortune = 15;
-	base_perception = 15;
-	base_speed = 18;
-	base_strength = 20
-	},
-/obj/effect/decal/cleanable/blood/gibs/up,
+"Ts" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb)
+"Zm" = (
+/obj/structure/table/wood/plain/alt,
+/obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
 
 (1,1,1) = {"
-al
-al
-al
-aN
-al
-al
-al
+aV
+aV
+aV
+af
+aV
+aV
+aV
 "}
 (2,1,1) = {"
-aR
-aR
-aR
-ai
-aR
-aR
-aR
+aL
+aL
+aL
+aP
+aL
+aL
+aL
 "}
 (3,1,1) = {"
-aR
-aZ
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aD
+aD
+aD
+aD
+aD
+aL
 "}
 (4,1,1) = {"
-aR
-aZ
-aR
-aR
-aR
-aZ
-aR
+aL
+aD
+aL
+aL
+aL
+aD
+aL
 "}
 (5,1,1) = {"
-aR
-ag
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aY
+aD
+aD
+aD
+aD
+aL
 "}
 (6,1,1) = {"
-aR
-aZ
-aR
-ab
-aR
-aR
-aR
+aL
+aD
+aL
+ak
+aL
+aL
+aL
 "}
 (7,1,1) = {"
-aR
-aZ
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aD
+aD
+aD
+aD
+aD
+aL
 "}
 (8,1,1) = {"
-aR
-aZ
-aR
-aR
-aR
-aZ
-aR
+aL
+aD
+aL
+aL
+aL
+aD
+aL
 "}
 (9,1,1) = {"
-aR
-aZ
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aD
+aD
+aD
+aD
+aD
+aL
 "}
 (10,1,1) = {"
-aR
-aR
-aR
-ab
-aR
-aR
-aR
+aL
+aL
+aL
+ak
+aL
+aL
+aL
 "}
 (11,1,1) = {"
-aZ
-aR
-aZ
-aZ
-aZ
-aR
-aZ
+aD
+aL
+aD
+aD
+aD
+aL
+aD
 "}
 (12,1,1) = {"
-aZ
-af
-aZ
-aR
-ag
-af
-aZ
+aD
+aO
+aD
+aL
+aY
+aO
+aD
 "}
 (13,1,1) = {"
-aZ
-aR
-aZ
-aR
-aZ
-aR
-aZ
+aD
+aL
+aD
+aL
+aD
+aL
+aD
 "}
 (14,1,1) = {"
-aZ
-aR
-aZ
-aZ
-aZ
-aR
-aZ
+aD
+aL
+aD
+aD
+aD
+aL
+aD
 "}
 (15,1,1) = {"
-aR
-aR
-aR
-aZ
-aR
-aR
-aR
+aL
+aL
+aL
+aD
+aL
+aL
+aL
 "}
 (16,1,1) = {"
-aR
-aj
-aR
+aL
 aZ
-aR
-aj
-aR
+aL
+aD
+aL
+aZ
+aL
 "}
 (17,1,1) = {"
-aR
-aZ
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aD
+aD
+aD
+aD
+aD
+aL
 "}
 (18,1,1) = {"
-aR
-Xm
-aZ
-aZ
-aZ
+aL
+Ev
 aD
-aR
+aD
+aD
+aN
+aL
 "}
 (19,1,1) = {"
-aR
-gq
-aZ
-aZ
-aZ
-ah
-aR
+aL
+NQ
+aD
+aD
+aD
+ag
+aL
 "}
 (20,1,1) = {"
-aR
-gq
-aZ
-aZ
-aZ
+aL
+NQ
 aD
-aR
+aD
+aD
+aN
+aL
 "}
 (21,1,1) = {"
+aL
+fe
+aD
+aD
+aD
 aR
-bN
-aZ
-aZ
-aZ
-ak
-aR
+aL
 "}
 (22,1,1) = {"
-aR
-aZ
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aD
+aD
+aD
+aD
+aD
+aL
 "}
 (23,1,1) = {"
-aR
-aZ
-CK
-zh
 aL
-aO
-aR
+aD
+Zm
+FB
+al
+ab
+aL
 "}
 (24,1,1) = {"
-aR
-aR
-aR
-aR
-aR
-aR
-aR
+aL
+aL
+aL
+aL
+aL
+aL
+aL
 "}
 
 (1,1,2) = {"
-al
-al
-al
-aZ
-al
-al
-al
+aV
+aV
+aV
+aD
+aV
+aV
+aV
 "}
 (2,1,2) = {"
-aR
-aR
-aR
-af
-aR
-aR
-aR
+aL
+aL
+aL
+aO
+aL
+aL
+aL
 "}
 (3,1,2) = {"
-aR
-Ny
-Qw
-nk
-Pj
-ty
-aR
+aL
+LW
+cA
+pZ
+ci
+mg
+aL
 "}
 (4,1,2) = {"
-aR
-Ny
-aR
-aR
-aR
-je
-aR
+aL
+LW
+aL
+aL
+aL
+JV
+aL
 "}
 (5,1,2) = {"
-aR
-rX
-Qw
-wd
-Yx
-aZ
-aR
+aL
+Hm
+cA
+oR
+iE
+aD
+aL
 "}
 (6,1,2) = {"
-aR
-aZ
-aR
-Pj
-aR
-aR
-aR
+aL
+aD
+aL
+ci
+aL
+aL
+aL
 "}
 (7,1,2) = {"
-aR
-aZ
-aZ
-ca
-aZ
-Jl
-aR
+aL
+aD
+aD
+us
+aD
+Ts
+aL
 "}
 (8,1,2) = {"
-aR
-ab
-aR
-aR
-aR
-aZ
-aR
+aL
+ak
+aL
+aL
+aL
+aD
+aL
 "}
 (9,1,2) = {"
-aR
-aZ
-aZ
-aZ
-jO
-aZ
-aR
+aL
+aD
+aD
+aD
+RH
+aD
+aL
 "}
 (10,1,2) = {"
-aR
-aR
-aZ
-aZ
-aZ
-aZ
-aR
+aL
+aL
+aD
+aD
+aD
+aD
+aL
 "}
 (11,1,2) = {"
-ab
-aZ
-aZ
-aZ
-aZ
-aZ
-ab
+ak
+aD
+aD
+aD
+aD
+aD
+ak
 "}
 (12,1,2) = {"
-af
-aZ
-aR
-aR
-aR
-aZ
-af
+aO
+aD
+aL
+aL
+aL
+aD
+aO
 "}
 (13,1,2) = {"
-af
-aZ
-aR
-LL
-aR
-aZ
-ab
+aO
+aD
+aL
+Nv
+aL
+aD
+ak
 "}
 (14,1,2) = {"
-ab
-aZ
-aZ
-aZ
-aZ
-aZ
-ab
+ak
+aD
+aD
+aD
+aD
+aD
+ak
 "}
 (15,1,2) = {"
-aR
-aR
-aR
-aR
-aR
-Us
-aR
+aL
+aL
+aL
+aL
+aL
+BR
+aL
 "}
 (16,1,2) = {"
-aR
-aZ
-aZ
-jK
-aZ
-aZ
-aR
+aL
+aD
+aD
+wg
+aD
+aD
+aL
 "}
 (17,1,2) = {"
-aR
-aZ
-PU
-jK
-aZ
-LL
-aR
+aL
+aD
+wd
+wg
+aD
+Nv
+aL
 "}
 (18,1,2) = {"
-aR
-XK
-aZ
-jK
-aZ
-aZ
-aR
+aL
+lL
+aD
+wg
+aD
+aD
+aL
 "}
 (19,1,2) = {"
-aR
-yr
+aL
+vC
+aD
+wg
 aZ
-jK
-aj
-aZ
-aR
+aD
+aL
 "}
 (20,1,2) = {"
-aR
-vT
-aZ
-jK
-aZ
-aZ
-aR
+aL
+vN
+aD
+wg
+aD
+aD
+aL
 "}
 (21,1,2) = {"
-aR
-PU
-aZ
-jK
-aZ
-XK
-aR
+aL
+wd
+aD
+wg
+aD
+lL
+aL
 "}
 (22,1,2) = {"
-aR
-aZ
-aZ
-jK
-aZ
-aZ
-aR
+aL
+aD
+aD
+wg
+aD
+aD
+aL
 "}
 (23,1,2) = {"
-aR
-aZ
-XK
-jK
-aZ
-aO
-aR
+aL
+aD
+lL
+wg
+aD
+ab
+aL
 "}
 (24,1,2) = {"
-aR
-aR
-aR
-aR
-aR
-aR
-aR
+aL
+aL
+aL
+aL
+aL
+aL
+aL
 "}

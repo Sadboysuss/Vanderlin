@@ -117,6 +117,12 @@
 	icon_state = "weird1"
 	},
 /area/rogue/under/tomb/indoors/royal)
+"dD" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb/indoors/royal)
 "dI" = (
 /obj/effect/decal/cleanable/food/mess/rotting,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
@@ -238,6 +244,11 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
+"jx" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/tile/checker,
+/area/rogue/under/tomb/indoors/royal)
 "jV" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -307,6 +318,14 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
+"mK" = (
+/obj/structure/door/violet{
+	lockid = "nightmaiden";
+	name = "Storage"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile,
+/area/rogue/under/tomb/indoors/royal)
 "mU" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/peppermill,
@@ -320,6 +339,14 @@
 	pixel_y = 6
 	},
 /turf/open/floor/tile,
+/area/rogue/under/tomb/indoors/royal)
+"nM" = (
+/obj/structure/door/violet{
+	name = "Bath";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/bath,
 /area/rogue/under/tomb/indoors/royal)
 "nN" = (
 /obj/structure/fluff/railing/wood{
@@ -414,14 +441,6 @@
 	icon_state = "weird1"
 	},
 /area/rogue/under/tomb/indoors/royal)
-"rp" = (
-/obj/structure/door/violet{
-	lockid = "nightmaiden";
-	name = "Storage"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/tile,
-/area/rogue/under/tomb/indoors/royal)
 "rE" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/tile,
@@ -468,17 +487,25 @@
 "tK" = (
 /turf/closed/wall/mineral/roofwall/center,
 /area/rogue/under/tomb)
+"tY" = (
+/obj/structure/door/violet{
+	name = "Bedroom";
+	lockid = "merchant"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/red,
+/area/rogue/under/tomb/indoors/royal)
 "un" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/carpet/red,
 /area/rogue/under/tomb/indoors/royal)
-"uq" = (
+"ux" = (
 /obj/structure/door/violet{
-	name = "Queens Retreat";
+	name = "Hall";
 	lockid = "manor"
 	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/carpet/lord/center,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/hexstone,
 /area/rogue/under/tomb/indoors/royal)
 "uA" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
@@ -490,12 +517,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
-"uL" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/royal)
 "uM" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -527,20 +548,20 @@
 	icon_state = "weird1"
 	},
 /area/rogue/under/tomb/indoors/royal)
+"vu" = (
+/obj/structure/door/violet{
+	name = "Queens Retreat";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/lord/center,
+/area/rogue/under/tomb/indoors/royal)
 "vK" = (
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/ruinedwood{
 	icon_state = "weird1"
 	},
-/area/rogue/under/tomb/indoors/royal)
-"vX" = (
-/obj/structure/door/violet{
-	name = "Reading Room";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/carpet/lord/center,
 /area/rogue/under/tomb/indoors/royal)
 "wt" = (
 /turf/open/floor/carpet/lord/center,
@@ -622,14 +643,6 @@
 /turf/open/floor/ruinedwood{
 	icon_state = "weird1"
 	},
-/area/rogue/under/tomb/indoors/royal)
-"AJ" = (
-/obj/structure/door/violet{
-	name = "Kitchen";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
 "Bn" = (
 /turf/closed/wall/mineral/roofwall/middle{
@@ -748,6 +761,14 @@
 "GA" = (
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
+"GG" = (
+/obj/structure/door/violet{
+	name = "Reading Room";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/lord/center,
+/area/rogue/under/tomb/indoors/royal)
 "GR" = (
 /turf/open/floor/ruinedwood{
 	icon_state = "weird1"
@@ -893,14 +914,6 @@
 /obj/structure/chair/bench,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
-"LA" = (
-/obj/structure/door/violet{
-	name = "Bath";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/tile/bath,
-/area/rogue/under/tomb/indoors/royal)
 "Mw" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood{
@@ -917,14 +930,6 @@
 /turf/open/floor/ruinedwood{
 	icon_state = "weird1"
 	},
-/area/rogue/under/tomb/indoors/royal)
-"MN" = (
-/obj/structure/door/violet{
-	name = "Hall";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/hexstone,
 /area/rogue/under/tomb/indoors/royal)
 "Na" = (
 /obj/structure/table/wood,
@@ -952,6 +957,14 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
+"Of" = (
+/obj/structure/door/violet{
+	name = "Kitchen";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile,
+/area/rogue/under/tomb/indoors/royal)
 "OJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/tile,
@@ -1084,11 +1097,6 @@
 	dir = 8
 	},
 /area/rogue/under/tomb)
-"Su" = (
-/obj/structure/table/wood,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/tile/checker,
-/area/rogue/under/tomb/indoors/royal)
 "SH" = (
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/cobble/mossy,
@@ -1146,14 +1154,6 @@
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
-"WO" = (
-/obj/structure/door/violet{
-	name = "Bedroom";
-	lockid = "merchant"
-	},
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/carpet/red,
-/area/rogue/under/tomb/indoors/royal)
 "WZ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -1582,7 +1582,7 @@ oA
 Uo
 bG
 bG
-Su
+jx
 oA
 Dm
 Dm
@@ -1649,7 +1649,7 @@ bG
 bG
 oA
 oA
-vX
+GG
 oA
 oA
 Dm
@@ -1679,11 +1679,11 @@ Zo
 Hh
 Hh
 dI
-AJ
+Of
 OT
 wt
 GY
-MN
+ux
 Hh
 Dm
 Dm
@@ -1709,7 +1709,7 @@ oA
 oA
 oA
 oA
-rp
+mK
 oA
 oA
 Ja
@@ -1718,7 +1718,7 @@ Vn
 oA
 oA
 oA
-LA
+nM
 oA
 oA
 oA
@@ -1838,10 +1838,10 @@ oA
 tv
 He
 HT
-uL
+dD
 oA
 oA
-uq
+vu
 oA
 oA
 QB
@@ -2645,8 +2645,8 @@ oA
 HP
 HP
 oA
-WO
-WO
+tY
+tY
 oA
 HP
 HP

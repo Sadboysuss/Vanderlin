@@ -339,15 +339,6 @@
 /mob/living/simple_animal/hostile/haunt,
 /turf/open/floor/carpet/stellar,
 /area/rogue/under/mountains/anvil/dungeon/lower)
-"fU" = (
-/obj/structure/rack/shelf/big,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/dungeon/lower)
 "fZ" = (
 /obj/structure/chair/bench/church/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2152,6 +2143,15 @@
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/dungeon)
+"DE" = (
+/obj/structure/rack/shelf/big,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/cobblerock,
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "DF" = (
 /obj/structure/door,
 /turf/open/floor/cobble,
@@ -2378,15 +2378,6 @@
 /obj/structure/rack,
 /obj/item/coin/gold/pile,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/dungeon/lower)
-"Gr" = (
-/obj/structure/rack/shelf/big,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Gt" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -3064,6 +3055,15 @@
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/carpet,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"OB" = (
+/obj/structure/rack/shelf/big,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/cobblerock,
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "OC" = (
 /obj/structure/chair/wood/alt,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -3256,6 +3256,11 @@
 "Ra" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
+/area/rogue/under/mountains/anvil/dungeon/lower)
+"Rf" = (
+/obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Rq" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3849,11 +3854,6 @@
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/dungeon)
-"YM" = (
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/dungeon/lower)
 "YP" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/cobble,
@@ -5314,7 +5314,7 @@ Xc
 Xc
 Xc
 FM
-YM
+Rf
 lJ
 eq
 Ds
@@ -5644,7 +5644,7 @@ Xc
 Xc
 Xc
 AG
-Gr
+DE
 eN
 FZ
 eN
@@ -5710,7 +5710,7 @@ XJ
 XJ
 Xc
 FM
-fU
+OB
 Af
 eU
 zU

@@ -18,18 +18,6 @@
 "bq" = (
 /turf/closed/wall/mineral/stone,
 /area/rogue/under/tomb)
-"bA" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/closet/crate/chest/neu,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/effect/spawner/map_spawner/loot/food,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
 "bN" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -369,6 +357,11 @@
 "vr" = (
 /turf/closed/wall/mineral/stone,
 /area/rogue/under/tomb/indoors)
+"vx" = (
+/obj/structure/door/green,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb/indoors)
 "vS" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobblerock,
@@ -541,11 +534,6 @@
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb/cave)
-"DK" = (
-/obj/structure/door/green,
-/obj/effect/mapping_helpers/door/locker,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
 "EH" = (
 /obj/structure/stairs/stone/reddish,
 /turf/open/floor/cobblerock/alt,
@@ -925,6 +913,18 @@
 	pixel_y = -11
 	},
 /turf/open/floor/ruinedwood/darker,
+/area/rogue/under/tomb/indoors)
+"Yn" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
+/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
+/obj/effect/spawner/map_spawner/loot/food,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
 "Yr" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -1349,7 +1349,7 @@ vr
 YK
 vr
 vr
-DK
+vx
 vr
 vr
 pT
@@ -2570,7 +2570,7 @@ aV
 ET
 xk
 iQ
-bA
+Yn
 YG
 RU
 TZ
