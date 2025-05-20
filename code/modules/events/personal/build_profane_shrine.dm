@@ -1,18 +1,19 @@
-/datum/round_event_control/zizo_torture
-	name = "Demand of Cruelty"
+
+/datum/round_event_control/zizo_shrines
+	name = "Profane Construction"
 	track = EVENT_TRACK_PERSONAL
-	typepath = /datum/round_event/zizo_torture
-	weight = 7
+	typepath = /datum/round_event/zizo_shrines
+	weight = 10
 	earliest_start = 20 MINUTES
 	max_occurrences = 1
-	min_players = 20
+	min_players = 25
 
 	tags = list(
-		TAG_BLOOD,
-		TAG_INSANITY,
+		TAG_CORRUPTION,
+		TAG_WORK,
 	)
 
-/datum/round_event_control/zizo_torture/canSpawnEvent(players_amt, gamemode, fake_check)
+/datum/round_event_control/zizo_shrines/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -22,17 +23,21 @@
 			continue
 		if(!H.patron || !istype(H.patron, /datum/patron/inhumen/zizo))
 			continue
+		if(H.get_skill_level(/datum/skill/craft/crafting) < 1)
+			continue
 		return TRUE
 
 	return FALSE
 
-/datum/round_event/zizo_torture/start()
+/datum/round_event/zizo_shrines/start()
 	var/list/valid_targets = list()
 
 	for(var/mob/living/carbon/human/human_mob in GLOB.player_list)
 		if(!istype(human_mob) || human_mob.stat == DEAD || !human_mob.client)
 			continue
 		if(!human_mob.patron || !istype(human_mob.patron, /datum/patron/inhumen/zizo))
+			continue
+		if(human_mob.get_skill_level(/datum/skill/craft/crafting) < 1)
 			continue
 		valid_targets += human_mob
 
@@ -41,15 +46,12 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/torture/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/build_zizo_shrine/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	chosen_one.verbs |= /mob/living/carbon/human/proc/torture_victim
-
 	to_chat(chosen_one, span_userdanger("YOU ARE GOD'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("Zizo demands suffering! Extract information through pain to earn Zizo's favor!"))
+	to_chat(chosen_one, span_biginfo("Zizo wants you to spread corruption! Construct [new_objective.target_count] profane shrines using your newly gained knowledge to complete Zizo's will!"))
+	to_chat(chosen_one, span_notice("You can construct unholy shrines with one small log, two stones and three wooden stakes."))
 	chosen_one.playsound_local(chosen_one, 'sound/ambience/noises/genspooky (1).ogg', 100)
-
-	to_chat(chosen_one, span_notice("You have gained an ability to <b>torture</b> others!"))
 
 	chosen_one.mind.announce_personal_objectives()

@@ -1,17 +1,18 @@
-/datum/round_event_control/necra_burials
-	name = "Burial Demand"
+/datum/round_event_control/matthios_hoard
+	name = "Golden Demand"
 	track = EVENT_TRACK_PERSONAL
-	typepath = /datum/round_event/necra_burials
+	typepath = /datum/round_event/matthios_hoard
 	weight = 10
-	earliest_start = 15 MINUTES
+	earliest_start = 5 MINUTES
 	max_occurrences = 1
-	min_players = 30
+	min_players = 20
 
 	tags = list(
-		TAG_HAUNTED,
+		TAG_LOOT,
+		TAG_CORRUPTION,
 	)
 
-/datum/round_event_control/necra_burials/canSpawnEvent(players_amt, gamemode, fake_check)
+/datum/round_event_control/matthios_hoard/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -19,7 +20,7 @@
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!istype(H) || H.stat == DEAD || !H.client)
 			continue
-		if(!H.patron || !istype(H.patron, /datum/patron/divine/necra))
+		if(!H.patron || !istype(H.patron, /datum/patron/inhumen/matthios))
 			continue
 		if(H.is_noble())
 			continue
@@ -27,13 +28,13 @@
 
 	return FALSE
 
-/datum/round_event/necra_burials/start()
+/datum/round_event/matthios_hoard/start()
 	var/list/valid_targets = list()
 
 	for(var/mob/living/carbon/human/human_mob in GLOB.player_list)
 		if(!istype(human_mob) || human_mob.stat == DEAD || !human_mob.client)
 			continue
-		if(!human_mob.patron || !istype(human_mob.patron, /datum/patron/divine/necra))
+		if(!human_mob.patron || !istype(human_mob.patron, /datum/patron/inhumen/matthios))
 			continue
 		if(human_mob.is_noble())
 			continue
@@ -44,11 +45,11 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/proper_burial/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/hoard_mammons/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
 	to_chat(chosen_one, span_userdanger("YOU ARE GOD'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Necra demands proper rites for the departed! Give enough corpses a proper burial to earn Necra's favor!"))
-	chosen_one.playsound_local(chosen_one, 'sound/ambience/noises/genspooky (1).ogg', 100)
+	to_chat(chosen_one, span_notice("Accumulate [new_objective.target_mammons] mammons to prove your greed to Matthios!"))
+	chosen_one.playsound_local(chosen_one, 'sound/items/matidol2.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()
