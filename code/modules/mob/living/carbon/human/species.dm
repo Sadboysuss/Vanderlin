@@ -1084,13 +1084,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			hunger_rate = 10 * HUNGER_FACTOR*/
 //		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_nutrition(-hunger_rate)
-
+		H?.pregnancy?.eat()
 
 	if (H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY HUNGER
 		var/hunger_rate = HUNGER_FACTOR
 //		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-hunger_rate)
+		H?.pregnancy?.drink()
 
 
 	if (H.nutrition > NUTRITION_LEVEL_FULL)

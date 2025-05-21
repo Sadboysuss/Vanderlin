@@ -203,6 +203,7 @@
 		next_attack_msg.Cut()
 		affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce, crit_message = TRUE)
 		apply_damage(statforce, I.damtype, affecting)
+		take_pregnancy_damage(statforce)
 		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
 			if(prob(statforce))
 				I.add_mob_blood(src)

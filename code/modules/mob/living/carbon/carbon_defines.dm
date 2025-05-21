@@ -77,3 +77,5 @@
 	var/next_smell = 0
 
 	var/advsetup = 0
+
+	var/datum/pregnancy/pregnancy

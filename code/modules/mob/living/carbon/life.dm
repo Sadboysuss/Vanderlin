@@ -22,6 +22,7 @@
 	handle_roguebreath()
 	update_stress()
 	handle_nausea()
+	handle_pregnancy()
 	if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 		if(!heart_attacking)
 			if(oxyloss)

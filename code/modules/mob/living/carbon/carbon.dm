@@ -569,6 +569,9 @@
 
 	add_nausea(-1)
 
+/mob/living/carbon/proc/handle_pregnancy()
+	pregnancy?.on_life()
+
 /mob/living/carbon/proc/vomit(lost_nutrition = 50, blood = FALSE, stun = TRUE, distance = 1, message = TRUE, toxic = FALSE, harm = FALSE, force = FALSE)
 	if(HAS_TRAIT(src, TRAIT_TOXINLOVER) && !force)
 		return TRUE
@@ -1390,3 +1393,21 @@
 
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(src)
+
+/// this mob becomes pregnant, pass the pregnancy datum into this as an argument.
+/mob/living/carbon/proc/become_pregnant(datum/pregnancy/pregnancy_datum)
+	if(!isnull(pregnancy))
+		return
+
+	pregnancy = new /datum/pregnancy(src)
+	to_chat(src, span_love("The seed of life grows in my body.."))
+
+/mob/living/carbon/proc/take_pregnancy_damage(damage)
+	if(isnull(pregnancy))
+		return
+
+	pregnancy?.take_damage(damage)
+
+/mob/living/carbon/proc/unbecome_pregnant()
+	pregnancy = null
+	span_danger("I'm no longer feel the seed of life in my belly...")

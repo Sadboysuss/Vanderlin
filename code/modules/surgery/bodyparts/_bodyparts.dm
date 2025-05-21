@@ -751,6 +751,10 @@
 	grid_width = 64
 	grid_height = 96
 
+/obj/item/bodypart/chest/receive_damage(brute, burn, blocked, updating_health, required_status)
+	. = ..()
+	owner.take_pregnancy_damage(brute + burn - blocked)
+
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()
 	if(!.)

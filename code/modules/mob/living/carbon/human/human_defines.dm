@@ -139,6 +139,9 @@
 	/// werewolf bullshit
 	var/mob/stored_mob = null
 
+	/// List of curses on this mob
+	var/list/curses = list()
+
 	fovangle = FOV_DEFAULT
 
 	var/mob/living/carbon/human/hostagetaker //Stores the person that took us hostage in a var, allows us to force them to attack the mob and such
