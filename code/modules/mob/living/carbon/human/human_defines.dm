@@ -129,6 +129,21 @@
 
 	rot_type = /datum/component/rot/corpse
 
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+
+	var/datum/charflaw/charflaw
+
+	/// List of minions that this mob has control over. Used for things like the Lich's "Command Undead" spell.
+	var/list/mob/minions = list()
+
+	/// werewolf bullshit
+	var/mob/stored_mob = null
+
+	fovangle = FOV_DEFAULT
+
+	var/mob/living/carbon/human/hostagetaker //Stores the person that took us hostage in a var, allows us to force them to attack the mob and such
+	var/mob/living/carbon/human/hostage //What hostage we have
+
 //Checking the highest armor class worn
 //Limb armors use the second highest armor class
 /mob/living/carbon/human/proc/check_armor_class()
