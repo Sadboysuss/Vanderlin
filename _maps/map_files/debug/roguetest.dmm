@@ -5,6 +5,15 @@
 "ac" = (
 /turf/closed,
 /area)
+"ad" = (
+/obj/structure/rotation_piece{
+	dir = 8
+	},
+/obj/effect/decal/carpet/square{
+	pixel_y = -13
+	},
+/turf/open/floor/blocks,
+/area/rogue/indoors)
 "ae" = (
 /obj/structure/apiary,
 /turf/open/floor/grass/yel,
@@ -1071,6 +1080,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors)
+"dH" = (
+/obj/structure/rotation_piece/cog/large,
+/turf/open/floor/grass/yel,
+/area/rogue/outdoors)
 "ef" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks{
@@ -2050,15 +2063,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors)
-"Od" = (
-/obj/structure/rotation_piece{
-	dir = 8
-	},
-/obj/effect/decal/carpet/square{
-	pixel_y = -13
-	},
-/turf/open/floor/blocks,
-/area/rogue/indoors)
 "Of" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -16178,7 +16182,7 @@ ac
 ax
 yB
 bq
-Od
+ad
 bq
 FV
 Wr
@@ -17723,7 +17727,7 @@ ac
 ac
 at
 qc
-QN
+dH
 xh
 hO
 ez
@@ -17980,7 +17984,7 @@ ac
 ac
 at
 at
-QN
+ez
 Ua
 Ua
 zA
@@ -18237,8 +18241,8 @@ ac
 ac
 ac
 at
-at
-at
+dH
+xh
 Ua
 QN
 QN
