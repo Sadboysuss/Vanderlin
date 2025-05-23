@@ -6,8 +6,8 @@
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_BANDIT
 	antag_hud_name = "bandit"
-	var/tri_amt
-	var/contrib
+	/// how much has this bandit given to the idol?
+	var/favor = 0
 	confess_lines = list("FREEDOM!!!", "I WILL NOT LIVE IN YOUR WALLS!", "I WILL NOT FOLLOW YOUR RULES!")
 
 	innate_traits = list(
@@ -19,7 +19,7 @@
 
 /datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/bandit))
-		return "<span class='boldnotice'>Another free man. My ally.</span>"
+		return span_boldnotice("Another free man. My ally.")
 
 /datum/antagonist/bandit/on_gain()
 	owner.special_role = "Bandit"
@@ -37,8 +37,8 @@
 	H.set_patron(/datum/patron/inhumen/matthios)
 
 /datum/antagonist/bandit/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
-	to_chat(owner.current, "<span class='info'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn.</span>")
+	to_chat(owner.current, span_alertsyndie("I am a BANDIT!"))
+	to_chat(owner.current, span_info("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn."))
 	owner.announce_objectives()
 	..()
 

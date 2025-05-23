@@ -431,9 +431,9 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		antag_datum_ref.on_removal()
 
 /**
- * remove an antag datum from a mind
+ * check if this mind has an antag datum, return the reference
  * Vars:
- ** datum_type - the type of antag datum to remove
+ ** datum_type - the type of antag datum to check
  ** check_subtypes - boolean, check if we count subtypes of the antag datum as TRUE
 */
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
