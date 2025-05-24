@@ -37,6 +37,10 @@
 "aR" = (
 /turf/open/transparent/openspace,
 /area/rogue/indoors)
+"aT" = (
+/obj/effect/traveltile_spawner/horizontal/vampire,
+/turf/open/floor/cobblerock,
+/area/rogue/outdoors/woods)
 "aU" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
@@ -64,10 +68,6 @@
 	icon_state = "horzw"
 	},
 /area/rogue/indoors)
-"bu" = (
-/obj/effect/landmark/start/lich,
-/turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
 "bz" = (
 /obj/structure/bed/shit,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -145,10 +145,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors)
-"cU" = (
-/obj/effect/traveltile_spawner/vertical/bandit,
-/turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
 "de" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
@@ -733,10 +729,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/woods_safe)
-"lB" = (
-/obj/effect/traveltile_spawner/horizontal/vampire,
-/turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
 "lI" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
@@ -1858,6 +1850,10 @@
 	icon_state = "horzw"
 	},
 /area/rogue/indoors)
+"Er" = (
+/obj/effect/traveltile_spawner/vertical/bandit,
+/turf/open/floor/dirt,
+/area/rogue/outdoors/woods)
 "EB" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
@@ -1963,10 +1959,6 @@
 	icon_state = "horzw"
 	},
 /area/rogue/outdoors/woods)
-"GZ" = (
-/obj/effect/landmark/start/lich,
-/turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
 "Hd" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -2582,10 +2574,6 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/indoors)
-"RM" = (
-/obj/effect/landmark/start/lich,
-/turf/open/floor/grass,
-/area/rogue/outdoors/woods)
 "Sb" = (
 /turf/open/floor/cobble,
 /area/rogue/outdoors/mountains)
@@ -2793,6 +2781,10 @@
 "VE" = (
 /turf/closed/wall/mineral/stone,
 /area/rogue/indoors)
+"VF" = (
+/obj/effect/traveltile_spawner/horizontal/bandit,
+/turf/open/floor/naturalstone,
+/area/rogue/indoors/cave)
 "VS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
@@ -2934,10 +2926,6 @@
 	},
 /turf/open/floor/twig,
 /area/rogue/indoors)
-"Yb" = (
-/obj/effect/traveltile_spawner/horizontal/bandit,
-/turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
 "Yg" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
@@ -3373,7 +3361,7 @@ Xw
 Xw
 Aj
 wV
-cU
+Er
 wV
 wV
 Aj
@@ -9807,7 +9795,7 @@ Wh
 Wh
 Nn
 Nn
-GZ
+Nn
 Nn
 Nn
 dk
@@ -14095,7 +14083,7 @@ wV
 UR
 UR
 UR
-RM
+UR
 UR
 tR
 tR
@@ -39598,7 +39586,7 @@ Zf
 (182,1,1) = {"
 Zf
 Sy
-lB
+aT
 cA
 cA
 Qd
@@ -42226,7 +42214,7 @@ Zf
 Sy
 cA
 QC
-bu
+cA
 QC
 Gh
 wV
@@ -59608,7 +59596,7 @@ Rh
 Wh
 Wh
 Wh
-Yb
+VF
 Nn
 Nn
 Nn
