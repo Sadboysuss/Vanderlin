@@ -8,7 +8,6 @@
 	if((resistance_flags & INDESTRUCTIBLE) || !max_integrity)
 		return
 	damage_amount = run_obj_armor(damage_amount, damage_type, damage_flag, attack_dir, armor_penetration)
-	testing("damamount [damage_amount]")
 	if(damage_amount < DAMAGE_PRECISION)
 		return
 	. = damage_amount
@@ -27,10 +26,8 @@
 ///returns the damage value of the attack after processing the obj's various armor protections
 /obj/proc/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir, armor_penetration = 0)
 	if(damage_flag == "blunt" && damage_amount < damage_deflection)
-		testing("damtest55")
 		return 0
 	if(damage_type != BRUTE && damage_type != BURN)
-		testing("damtest66")
 		return 0
 	var/armor_protection = 0
 	if(damage_flag)
