@@ -8,13 +8,6 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"ah" = (
-/obj/structure/table/wood/fine,
-/obj/item/book/law,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "aw" = (
 /turf/closed/wall/mineral/roofwall/innercorner{
 	dir = 1
@@ -49,18 +42,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
-"bi" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shirt/dress,
-/obj/item/clothing/head/crown/serpcrown/surplus,
-/obj/item/clothing/pants/tights/random,
-/obj/item/clothing/shirt/dress/gen/purple,
-/obj/item/clothing/shirt/dress/silkdress,
-/obj/item/clothing/armor/leather/jacket/silk_coat,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "bm" = (
 /turf/open/floor/cobblerock,
 /area/rogue/under/tomb/wilds)
@@ -82,16 +63,33 @@
 "bG" = (
 /turf/open/floor/tile/checker,
 /area/rogue/under/tomb/indoors/royal)
+"bH" = (
+/obj/structure/table/wood/fine,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "bO" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
 /area/rogue/under/tomb/indoors/royal)
+"bY" = (
+/obj/structure/door/violet{
+	name = "Queens Retreat";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/lord/center,
+/area/rogue/under/tomb/indoors/royal)
 "bZ" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobble/mossy,
 /area/rogue/under/tomb/wilds)
+"cq" = (
+/obj/structure/bookcase/random,
+/obj/machinery/light/fueled/wallfire/candle/weak,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "cS" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
@@ -106,22 +104,6 @@
 	},
 /obj/item/reagent_containers/glass/bottle/redwine,
 /turf/open/floor/carpet/red,
-/area/rogue/under/tomb/indoors/royal)
-"dh" = (
-/obj/structure/table/wood/fine,
-/obj/machinery/light/fueled/wallfire/candle/weak{
-	pixel_y = -32
-	},
-/obj/item/instrument/lute,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
-"dD" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/hexstone,
 /area/rogue/under/tomb/indoors/royal)
 "dI" = (
 /obj/effect/decal/cleanable/food/mess/rotting,
@@ -138,17 +120,37 @@
 	dir = 1
 	},
 /area/rogue/under/tomb/indoors/royal)
-"ed" = (
-/obj/machinery/light/fueled/wallfire/candle/weak/l,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "es" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
+/area/rogue/under/tomb/indoors/royal)
+"ev" = (
+/obj/machinery/light/fueled/wallfire/candle/weak{
+	pixel_y = -32
+	},
+/obj/structure/table/wood/fine,
+/obj/effect/spawner/map_spawner/loot/rare,
+/obj/item/gem,
+/obj/item/gem{
+	pixel_x = -9;
+	pixel_y = 5
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
+"eA" = (
+/obj/structure/table/wood/fine,
+/obj/item/reagent_containers/glass/cup/golden{
+	pixel_x = 9
+	},
+/obj/item/candle/yellow{
+	pixel_x = -9;
+	pixel_y = 6
+	},
+/obj/effect/spawner/map_spawner/loot/rare,
+/obj/item/reagent_containers/glass/bottle/redwine,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "eB" = (
 /obj/structure/well/fountain{
@@ -156,26 +158,39 @@
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/under/tomb/wilds)
+"eL" = (
+/obj/item/clothing/head/crown/circlet/vision,
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/item/clothing/shirt/dress/royal,
+/obj/item/clothing/wrists/royalsleeves,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/weapon/knife/dagger/silver,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "fd" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
+"fm" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb/indoors/royal)
 "fo" = (
 /obj/structure/chair/bench,
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"gq" = (
+"fN" = (
 /obj/structure/table/wood/fine,
-/obj/item/book/noc,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+/obj/item/clothing/head/crown/circlet,
+/obj/item/clothing/head/roguehood/eora,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
-"gO" = (
-/obj/structure/bookcase,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+"gQ" = (
+/obj/machinery/light/fueled/wallfire/candle/weak/l,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "he" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -204,25 +219,6 @@
 	},
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"hK" = (
-/obj/structure/closet/crate/chest,
-/obj/item/paper/scroll,
-/obj/item/paper/scroll{
-	pixel_x = -3;
-	pixel_y = 6
-	},
-/obj/item/paper/scroll{
-	pixel_x = -1;
-	pixel_y = 3
-	},
-/obj/item/paper/scroll{
-	pixel_x = -2;
-	pixel_y = 5
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "hQ" = (
 /obj/structure/fluff/telescope,
 /turf/open/floor/grass,
@@ -230,6 +226,11 @@
 "ig" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/tomb/wilds)
+"iA" = (
+/obj/structure/table/wood/fine,
+/obj/item/book/noc,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "iQ" = (
 /obj/structure/fluff/statue/small{
 	pixel_y = 37
@@ -244,7 +245,7 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
-"jx" = (
+"jp" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/tile/checker,
@@ -256,6 +257,11 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
+"jY" = (
+/obj/structure/table/wood/fine,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "ki" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt/road,
@@ -301,13 +307,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile/bath,
 /area/rogue/under/tomb/indoors/royal)
-"mc" = (
-/obj/structure/table/wood/fine,
-/obj/machinery/light/fueled/wallfire/candle/weak/r,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "mw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -318,14 +317,6 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"mK" = (
-/obj/structure/door/violet{
-	lockid = "nightmaiden";
-	name = "Storage"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/tile,
-/area/rogue/under/tomb/indoors/royal)
 "mU" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/peppermill,
@@ -339,14 +330,6 @@
 	pixel_y = 6
 	},
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors/royal)
-"nM" = (
-/obj/structure/door/violet{
-	name = "Bath";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/tile/bath,
 /area/rogue/under/tomb/indoors/royal)
 "nN" = (
 /obj/structure/fluff/railing/wood{
@@ -367,6 +350,30 @@
 	},
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
+"oq" = (
+/obj/structure/table/wood/fine,
+/obj/machinery/light/fueled/wallfire/candle/weak{
+	pixel_y = -32
+	},
+/obj/item/instrument/harp,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
+"ot" = (
+/obj/structure/door/violet{
+	name = "Kitchen";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile,
+/area/rogue/under/tomb/indoors/royal)
+"ox" = (
+/obj/structure/door/violet{
+	name = "Bath";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/bath,
+/area/rogue/under/tomb/indoors/royal)
 "oA" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/rogue/under/tomb/indoors/royal)
@@ -432,33 +439,37 @@
 /obj/item/storage/sack,
 /turf/open/floor/carpet/red,
 /area/rogue/under/tomb/indoors/royal)
-"qX" = (
+"rh" = (
 /obj/machinery/light/fueled/wallfire/candle/weak{
 	pixel_y = -32
 	},
-/obj/structure/fluff/clock,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "rE" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/tile,
+/area/rogue/under/tomb/indoors/royal)
+"rQ" = (
+/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "so" = (
 /obj/structure/fluff/railing/wood,
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"sL" = (
+"sG" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
+"sW" = (
 /obj/structure/table/wood/fine,
-/obj/machinery/light/fueled/wallfire/candle/weak{
-	pixel_y = -32
+/obj/structure/mirror/fancy{
+	pixel_y = 0;
+	pixel_x = -32
 	},
-/obj/item/instrument/harp,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+/obj/item/painting/queen,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "tk" = (
 /turf/closed/wall/mineral/roofwall/middle{
@@ -487,31 +498,9 @@
 "tK" = (
 /turf/closed/wall/mineral/roofwall/center,
 /area/rogue/under/tomb)
-"tY" = (
-/obj/structure/door/violet{
-	name = "Bedroom";
-	lockid = "merchant"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/carpet/red,
-/area/rogue/under/tomb/indoors/royal)
 "un" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/carpet/red,
-/area/rogue/under/tomb/indoors/royal)
-"ux" = (
-/obj/structure/door/violet{
-	name = "Hall";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/royal)
-"uA" = (
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
 /area/rogue/under/tomb/indoors/royal)
 "uD" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -533,36 +522,6 @@
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/dirt,
 /area/rogue/under/tomb/wilds)
-"uP" = (
-/obj/machinery/light/fueled/wallfire/candle/weak{
-	pixel_y = -32
-	},
-/obj/structure/table/wood/fine,
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/item/gem,
-/obj/item/gem{
-	pixel_x = -9;
-	pixel_y = 5
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
-"vu" = (
-/obj/structure/door/violet{
-	name = "Queens Retreat";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/indoors/royal)
-"vK" = (
-/obj/structure/bookcase/random,
-/obj/machinery/light/fueled/wallfire/candle/weak,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "wt" = (
 /turf/open/floor/carpet/lord/center,
 /area/rogue/under/tomb/indoors/royal)
@@ -602,6 +561,11 @@
 "yi" = (
 /turf/closed/wall/mineral/roofwall/middle,
 /area/rogue/under/tomb)
+"yr" = (
+/obj/structure/table/wood/fine,
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "ys" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -629,26 +593,17 @@
 "zz" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/rogue/under/tomb/wilds)
-"zI" = (
-/obj/structure/chair/wood/alt/fancy{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
-"Ao" = (
-/obj/structure/table/wood/fine,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "Bn" = (
 /turf/closed/wall/mineral/roofwall/middle{
 	dir = 1
 	},
 /area/rogue/under/tomb)
+"Br" = (
+/obj/structure/fluff/walldeco/painting/queen{
+	pixel_y = 32
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "BE" = (
 /obj/structure/well,
 /turf/open/floor/cobblerock,
@@ -672,14 +627,6 @@
 /area/rogue/under/tomb/wilds)
 "Ct" = (
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors/royal)
-"CF" = (
-/obj/structure/chair/wood/alt/fancy{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
 /area/rogue/under/tomb/indoors/royal)
 "CT" = (
 /obj/structure/flora/grass,
@@ -710,14 +657,6 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"DU" = (
-/obj/machinery/light/fueled/wallfire/candle/weak{
-	pixel_y = -32
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "Eq" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/tomb)
@@ -726,6 +665,14 @@
 	dir = 4
 	},
 /turf/open/floor/blocks,
+/area/rogue/under/tomb/indoors/royal)
+"EA" = (
+/obj/structure/door/violet{
+	lockid = "nightmaiden";
+	name = "Storage"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
 "EE" = (
 /obj/machinery/light/fueled/firebowl,
@@ -754,6 +701,14 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
+"Go" = (
+/obj/structure/door/violet{
+	name = "Hall";
+	lockid = "manor"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/hexstone,
+/area/rogue/under/tomb/indoors/royal)
 "Gv" = (
 /obj/structure/flora/grass/herb/artemisia,
 /turf/open/floor/grass,
@@ -761,19 +716,6 @@
 "GA" = (
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"GG" = (
-/obj/structure/door/violet{
-	name = "Reading Room";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/indoors/royal)
-"GR" = (
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "GV" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/carpet/lord/center,
@@ -783,6 +725,10 @@
 /turf/open/floor/carpet/lord/left{
 	dir = 1
 	},
+/area/rogue/under/tomb/indoors/royal)
+"Hc" = (
+/obj/structure/bookcase,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "He" = (
 /obj/structure/closet/crate/chest/crate,
@@ -805,12 +751,6 @@
 	},
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"HP" = (
-/obj/structure/bookcase/random,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "HT" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
@@ -827,17 +767,17 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"IC" = (
-/obj/item/clothing/head/crown/circlet/vision,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/obj/item/clothing/shirt/dress/royal,
-/obj/item/clothing/wrists/royalsleeves,
-/obj/item/clothing/shoes/nobleboot/thighboots,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/weapon/knife/dagger/silver,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
+"Iq" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 8
 	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
+"IA" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "IE" = (
 /obj/structure/window/openclose,
@@ -848,14 +788,6 @@
 	dir = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/royal)
-"IR" = (
-/obj/structure/fluff/walldeco/bigpainting/lake{
-	pixel_x = 0
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
 /area/rogue/under/tomb/indoors/royal)
 "Ja" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
@@ -898,43 +830,49 @@
 	},
 /turf/open/floor/blocks,
 /area/rogue/under/tomb/indoors/royal)
-"JD" = (
-/obj/structure/fluff/walldeco/painting/queen{
-	pixel_y = 32
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "Ko" = (
 /obj/structure/flora/grass/herb/artemisia,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
+"Kv" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shirt/dress,
+/obj/item/clothing/head/crown/serpcrown/surplus,
+/obj/item/clothing/pants/tights/random,
+/obj/item/clothing/shirt/dress/gen/purple,
+/obj/item/clothing/shirt/dress/silkdress,
+/obj/item/clothing/armor/leather/jacket/silk_coat,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "KO" = (
 /obj/structure/chair/bench,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
-"Mw" = (
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
+"LK" = (
+/obj/structure/fluff/walldeco/bigpainting/lake{
+	pixel_x = 0
 	},
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
-"MK" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shirt/dress,
-/obj/item/clothing/pants/tights/random,
-/obj/item/clothing/shirt/dress/gen/blue,
-/obj/item/clothing/shirt/dress/silkdress,
-/obj/item/clothing/armor/leather/jacket/silk_coat,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
+"LQ" = (
+/obj/machinery/light/fueled/wallfire/candle/weak{
+	pixel_y = -32
 	},
+/obj/structure/fluff/clock,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "Na" = (
 /obj/structure/table/wood,
 /obj/item/cooking/pan,
 /turf/open/floor/tile/checker,
+/area/rogue/under/tomb/indoors/royal)
+"NG" = (
+/obj/structure/door/violet{
+	name = "Bedroom";
+	lockid = "merchant"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/red,
 /area/rogue/under/tomb/indoors/royal)
 "NK" = (
 /obj/structure/flora/grass/bush/wall/tall,
@@ -957,14 +895,6 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"Of" = (
-/obj/structure/door/violet{
-	name = "Kitchen";
-	lockid = "manor"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/tile,
-/area/rogue/under/tomb/indoors/royal)
 "OJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/tile,
@@ -985,32 +915,13 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/grass,
 /area/rogue/under/tomb/wilds)
-"Pd" = (
-/obj/machinery/light/fueled/wallfire/candle/weak/r,
-/obj/structure/closet/crate/crafted_closet/lord,
-/obj/item/clothing/neck/psycross/noc,
-/obj/item/clothing/ring/silver/noc,
-/obj/item/reagent_containers/glass/bottle/stronghealthpot,
-/obj/item/reagent_containers/glass/bottle/stronghealthpot,
-/obj/item/reagent_containers/glass/bottle/strongmanapot,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
+"Pp" = (
+/obj/structure/door/violet{
+	name = "Reading Room";
+	lockid = "manor"
 	},
-/area/rogue/under/tomb/indoors/royal)
-"Pn" = (
-/obj/structure/table/wood/fine,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_x = 9
-	},
-/obj/item/candle/yellow{
-	pixel_x = -9;
-	pixel_y = 6
-	},
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/item/reagent_containers/glass/bottle/redwine,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/carpet/lord/center,
 /area/rogue/under/tomb/indoors/royal)
 "PG" = (
 /obj/structure/rack/shelf/notdense,
@@ -1028,6 +939,10 @@
 "PN" = (
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
+"PS" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "Ql" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
@@ -1035,6 +950,9 @@
 "Qt" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/carpet/red,
+/area/rogue/under/tomb/indoors/royal)
+"Qy" = (
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "QB" = (
 /obj/item/bin/water,
@@ -1066,26 +984,9 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt/road,
 /area/rogue/under/tomb/wilds)
-"Rm" = (
-/obj/structure/table/wood/fine,
-/obj/item/perfume/random,
-/obj/item/perfume/random{
-	pixel_y = 8;
-	pixel_x = 12
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "Rn" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/tile/checker,
-/area/rogue/under/tomb/indoors/royal)
-"RU" = (
-/obj/structure/table/wood/fine,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
 /area/rogue/under/tomb/indoors/royal)
 "RZ" = (
 /obj/structure/flora/grass,
@@ -1097,27 +998,41 @@
 	dir = 8
 	},
 /area/rogue/under/tomb)
+"Sq" = (
+/obj/structure/table/wood/fine,
+/obj/item/perfume/random,
+/obj/item/perfume/random{
+	pixel_y = 8;
+	pixel_x = 12
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "SH" = (
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/cobble/mossy,
 /area/rogue/under/tomb/wilds)
-"SN" = (
-/obj/structure/table/wood/fine,
-/obj/item/clothing/head/crown/circlet,
-/obj/item/clothing/head/roguehood/eora,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/under/tomb/indoors/royal)
 "SS" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/tile/checker,
 /area/rogue/under/tomb/indoors/royal)
+"Th" = (
+/obj/structure/table/wood/fine,
+/obj/machinery/light/fueled/wallfire/candle/weak{
+	pixel_y = -32
+	},
+/obj/item/instrument/lute,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "Tl" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble/mossy,
 /area/rogue/under/tomb/wilds)
+"Ue" = (
+/obj/structure/table/wood/fine,
+/obj/item/book/law,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
 "Uo" = (
 /obj/structure/table/wood,
 /obj/structure/fluff/millstone{
@@ -1134,6 +1049,23 @@
 /turf/open/floor/carpet/lord/left{
 	dir = 1
 	},
+/area/rogue/under/tomb/indoors/royal)
+"Vo" = (
+/obj/structure/closet/crate/chest,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/paper/scroll{
+	pixel_x = -1;
+	pixel_y = 3
+	},
+/obj/item/paper/scroll{
+	pixel_x = -2;
+	pixel_y = 5
+	},
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "Wc" = (
 /obj/effect/dungeon_directional_helper/east,
@@ -1180,16 +1112,24 @@
 /obj/item/bin/water,
 /turf/open/floor/tile,
 /area/rogue/under/tomb/indoors/royal)
-"Yg" = (
-/obj/structure/table/wood/fine,
-/obj/structure/mirror/fancy{
-	pixel_y = 0;
-	pixel_x = -32
-	},
-/obj/item/painting/queen,
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
+"XM" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shirt/dress,
+/obj/item/clothing/pants/tights/random,
+/obj/item/clothing/shirt/dress/gen/blue,
+/obj/item/clothing/shirt/dress/silkdress,
+/obj/item/clothing/armor/leather/jacket/silk_coat,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/under/tomb/indoors/royal)
+"XV" = (
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/neck/psycross/noc,
+/obj/item/clothing/ring/silver/noc,
+/obj/item/reagent_containers/glass/bottle/stronghealthpot,
+/obj/item/reagent_containers/glass/bottle/stronghealthpot,
+/obj/item/reagent_containers/glass/bottle/strongmanapot,
+/turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors/royal)
 "Yl" = (
 /turf/open/transparent/openspace,
@@ -1582,7 +1522,7 @@ oA
 Uo
 bG
 bG
-jx
+jp
 oA
 Dm
 Dm
@@ -1649,7 +1589,7 @@ bG
 bG
 oA
 oA
-GG
+Pp
 oA
 oA
 Dm
@@ -1679,11 +1619,11 @@ Zo
 Hh
 Hh
 dI
-Of
+ot
 OT
 wt
 GY
-ux
+Go
 Hh
 Dm
 Dm
@@ -1709,7 +1649,7 @@ oA
 oA
 oA
 oA
-mK
+EA
 oA
 oA
 Ja
@@ -1718,7 +1658,7 @@ Vn
 oA
 oA
 oA
-nM
+ox
 oA
 oA
 oA
@@ -1838,10 +1778,10 @@ oA
 tv
 He
 HT
-dD
+fm
 oA
 oA
-vu
+bY
 oA
 oA
 QB
@@ -2482,14 +2422,14 @@ Jm
 tK
 oA
 oA
-HP
-HP
+PS
+PS
 bO
 wt
 wt
 GY
-HP
-HP
+PS
+PS
 oA
 oA
 yi
@@ -2513,16 +2453,16 @@ tK
 tK
 tK
 oA
-vK
-GR
-GR
+cq
+Qy
+Qy
 OT
 Jy
 wA
 Vn
-GR
-Mw
-sL
+Qy
+sG
+oq
 oA
 yi
 Yl
@@ -2545,16 +2485,16 @@ tK
 tK
 tK
 IE
-RU
-GR
-Mw
+bH
+Qy
+sG
 OT
 bs
 yM
 Vn
-GR
-GR
-Ao
+Qy
+Qy
+jY
 JC
 yi
 Yl
@@ -2577,16 +2517,16 @@ tK
 tK
 tK
 IE
-ah
-GR
-GR
+Ue
+Qy
+Qy
 es
 wt
 wt
 Vn
-GR
-GR
-Ao
+Qy
+Qy
+jY
 JC
 yi
 Yl
@@ -2609,16 +2549,16 @@ tK
 tK
 tK
 oA
-vK
-GR
-GR
+cq
+Qy
+Qy
 dW
 Dm
 Dm
 Jv
-GR
-GR
-dh
+Qy
+Qy
+Th
 oA
 yi
 Yl
@@ -2642,14 +2582,14 @@ tK
 tK
 oA
 oA
-HP
-HP
+PS
+PS
 oA
-tY
-tY
+NG
+NG
 oA
-HP
-HP
+PS
+PS
 oA
 oA
 yi
@@ -2705,16 +2645,16 @@ tK
 tK
 tK
 oA
-RU
-Yg
-GR
+bH
+sW
+Qy
 oA
-JD
-GR
-ed
-hK
-gq
-uP
+Br
+Qy
+gQ
+Vo
+iA
+ev
 oA
 yi
 Yl
@@ -2737,13 +2677,13 @@ tK
 tK
 tK
 oA
-SN
-CF
-DU
+fN
+Iq
+rh
 oA
-uA
-GR
-GR
+rQ
+Qy
+Qy
 Dm
 Dm
 HB
@@ -2769,13 +2709,13 @@ tK
 tK
 tK
 oA
-IR
-IC
+LK
+eL
 Dm
 Dm
 Dm
-GR
-GR
+Qy
+Qy
 Dm
 zj
 qh
@@ -2801,13 +2741,13 @@ tK
 tK
 tK
 oA
-MK
-GR
+XM
+Qy
 lb
 Dm
 Dm
-uA
-GR
+rQ
+Qy
 Dm
 Dm
 HB
@@ -2833,16 +2773,16 @@ BM
 BM
 wJ
 oA
-bi
-GR
-DU
+Kv
+Qy
+rh
 oA
-gO
-zI
-GR
-GR
-GR
-qX
+Hc
+IA
+Qy
+Qy
+Qy
+LQ
 oA
 yi
 Yl
@@ -2866,14 +2806,14 @@ Yl
 Bn
 oA
 oA
-Rm
-Rm
+Sq
+Sq
 oA
-gO
-mc
-Pn
-GR
-Pd
+Hc
+yr
+eA
+Qy
+XV
 oA
 oA
 yi

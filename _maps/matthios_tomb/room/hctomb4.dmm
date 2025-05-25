@@ -1,9 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"ag" = (
-/obj/structure/chair/bench/couch/redright,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
+"al" = (
+/obj/item/ash{
+	pixel_y = -4;
+	pixel_x = -4
 	},
+/obj/item/ash{
+	pixel_y = 5;
+	pixel_x = 6
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors/magic)
 "ax" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -43,11 +49,6 @@
 	pixel_x = -6
 	},
 /turf/open/floor/tile/checker,
-/area/rogue/under/tomb/indoors)
-"by" = (
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "bz" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
@@ -119,6 +120,11 @@
 /obj/item/natural/rock/random,
 /turf/open/floor/cobblerock,
 /area/rogue/under/tomb/cave)
+"du" = (
+/obj/structure/rack,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "dw" = (
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/dirt,
@@ -152,6 +158,17 @@
 "fk" = (
 /turf/closed/wall/mineral/decowood,
 /area/rogue/under/tomb/indoors/magic)
+"fw" = (
+/obj/item/ash{
+	pixel_x = 5;
+	pixel_y = 7
+	},
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
+"fU" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "ga" = (
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
@@ -165,18 +182,20 @@
 	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
-"gp" = (
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
 "gr" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 1
 	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
+"gz" = (
+/obj/structure/door/fancy{
+	name = "Room 2 - VERY HAUNTED!!!"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
 "gD" = (
 /obj/structure/table/wood/plain/alt,
 /mob/living/simple_animal/hostile/retaliate/wolf,
@@ -208,14 +227,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood,
 /area/rogue/under/tomb/indoors)
-"hG" = (
-/obj/structure/door/green{
-	name = "Room 3 - DO NOT ENTER"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/structure/barricade/wooden/crude,
-/turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
 "hN" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -238,11 +249,11 @@
 	},
 /turf/open/floor/twig,
 /area/rogue/under/tomb/indoors)
-"ii" = (
-/obj/structure/chair/bench/couch/redleft,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
+"iT" = (
+/obj/structure/bonepile,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors/magic)
 "ji" = (
 /obj/structure/table/wood/large/corner_new{
@@ -254,15 +265,6 @@
 /mob/living/simple_animal/hostile/retaliate/wolf,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
-"jK" = (
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/structure/closet/crate/crafted_closet/inn,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "jL" = (
 /obj/structure/window/openclose{
@@ -288,14 +290,6 @@
 	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
-"kP" = (
-/obj/structure/door/fancy{
-	name = "Room 2 - VERY HAUNTED!!!"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/magic)
 "lc" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/structure/fluff/wallclock,
@@ -330,18 +324,6 @@
 "mr" = (
 /turf/open/floor/dirt,
 /area/rogue/under/tomb)
-"mt" = (
-/obj/structure/table/wood/reinforced_alt,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
-"mv" = (
-/obj/structure/chair/wood/alt/chair_noble/red,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
 "mC" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 5
@@ -396,6 +378,10 @@
 "nB" = (
 /turf/closed/wall/mineral/wooddark,
 /area/rogue/under/tomb/indoors/magic)
+"nG" = (
+/obj/structure/chair/bench/couch/redright,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "nM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/blocks/newstone/alt,
@@ -482,6 +468,14 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
+"qi" = (
+/obj/structure/door/green{
+	name = "Room 3 - DO NOT ENTER"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/ruinedwood/chevron,
+/area/rogue/under/tomb/indoors)
 "qD" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 10
@@ -517,13 +511,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
-"ta" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors/magic)
 "tc" = (
 /obj/structure/stairs{
 	dir = 8
@@ -557,10 +544,21 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
+"tW" = (
+/obj/structure/giantfur/small,
+/obj/structure/chair/wood/alt/chair_noble/red{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "tX" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
+"up" = (
+/obj/structure/chair/bench/couch/redleft,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "uq" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -588,20 +586,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb/cave)
-"vc" = (
-/obj/item/ash{
-	pixel_y = -4;
-	pixel_x = -4
-	},
-/obj/item/ash{
-	pixel_y = 5;
-	pixel_x = 6
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors/magic)
 "vu" = (
 /obj/structure/stairs,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -609,20 +593,6 @@
 /area/rogue/under/tomb/indoors)
 "vv" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb/indoors)
-"vC" = (
-/obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/armor{
-	pixel_x = -4;
-	pixel_y = 4
-	},
-/obj/effect/spawner/map_spawner/loot/armor{
-	pixel_x = 4;
-	pixel_y = -4
-	},
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "vO" = (
 /turf/open/floor/rooftop{
@@ -652,6 +622,13 @@
 /mob/living/simple_animal/hostile/retaliate/mole,
 /turf/open/floor/cobblerock,
 /area/rogue/under/tomb/cave)
+"wI" = (
+/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/spawner/map_spawner/loot/common,
+/obj/structure/closet/crate/crafted_closet/inn,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "wP" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
@@ -664,6 +641,18 @@
 	dir = 8
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
+"xQ" = (
+/obj/structure/rack,
+/obj/effect/spawner/map_spawner/loot/armor{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/effect/spawner/map_spawner/loot/armor{
+	pixel_x = 4;
+	pixel_y = -4
+	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
 "yP" = (
@@ -720,12 +709,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
-"Bz" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors/magic)
 "BG" = (
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
@@ -764,12 +747,6 @@
 "Cp" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb/indoors)
-"Cv" = (
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "Cy" = (
 /obj/structure/table/wood/plain/alt,
@@ -833,24 +810,19 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
-"EB" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
 "EL" = (
 /obj/structure/door/fancy{
 	name = "Room 6"
 	},
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
-"Fu" = (
-/obj/structure/chair/bench/couch/redleft,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
+"EZ" = (
+/obj/structure/door/green{
+	name = "Room 4 - HAUNTED"
 	},
-/area/rogue/under/tomb/indoors)
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/chevron,
+/area/rogue/under/tomb/indoors/magic)
 "Ge" = (
 /obj/structure/chair/wood/alt/chair3,
 /turf/open/floor/carpet,
@@ -876,15 +848,10 @@
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
-"GY" = (
-/obj/item/ash{
-	pixel_x = 5;
-	pixel_y = 7
-	},
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors/magic)
+"GW" = (
+/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "Hj" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter{
 	pixel_y = 15
@@ -928,15 +895,9 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
-"KE" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/item/alch/bone{
-	pixel_x = -5;
-	pixel_y = -5
-	},
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
+"KK" = (
+/obj/structure/chair/bench/couch/redleft,
+/turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors/magic)
 "KV" = (
 /obj/structure/fluff/railing/border{
@@ -949,6 +910,10 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/under/tomb/indoors)
+"Lk" = (
+/obj/structure/chair/bench/couch/redright,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
 "Ll" = (
 /obj/structure/table/wood/counter/end{
 	dir = 8
@@ -963,12 +928,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
-"Ma" = (
-/obj/structure/chair/bench/couch/redright,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
 "Mm" = (
 /obj/structure/table/wood/large/corner_alt,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -981,14 +940,6 @@
 /obj/structure/chair/wood/alt/chair_noble,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors)
-"Mv" = (
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
-	},
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "MC" = (
 /turf/open/floor/rooftop{
@@ -1041,6 +992,18 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/twig,
 /area/rogue/under/tomb/indoors)
+"Ol" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
+"OC" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/alch/bone,
+/turf/open/floor/blocks/newstone/alt,
+/area/rogue/under/tomb/indoors)
 "OZ" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 8
@@ -1064,14 +1027,6 @@
 "Qd" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/tomb)
-"Qt" = (
-/obj/structure/bonepile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors/magic)
 "Qy" = (
 /obj/structure/stairs{
 	dir = 4
@@ -1098,6 +1053,10 @@
 "QR" = (
 /obj/structure/chair/wood/alt/chair3,
 /turf/open/floor/ruinedwood,
+/area/rogue/under/tomb/indoors)
+"Rb" = (
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors)
 "RB" = (
 /turf/open/floor/cobblerock,
@@ -1142,6 +1101,14 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
+"Tt" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/alch/bone{
+	pixel_x = -5;
+	pixel_y = -5
+	},
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors/magic)
 "Tz" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
@@ -1162,13 +1129,6 @@
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
-"TS" = (
-/obj/structure/door/green{
-	name = "Room 4 - HAUNTED"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors/magic)
 "TU" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1254,13 +1214,6 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
-"WU" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/alch/bone,
-/turf/open/floor/blocks/newstone/alt,
-/area/rogue/under/tomb/indoors)
 "WV" = (
 /obj/structure/trap/poison,
 /turf/open/floor/ruinedwood/spiral,
@@ -1273,13 +1226,6 @@
 "XO" = (
 /obj/structure/window/solid,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
-"XU" = (
-/obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
 /area/rogue/under/tomb/indoors)
 "XV" = (
 /obj/structure/bed/inn,
@@ -1301,15 +1247,6 @@
 /obj/item/bedsheet/cloth,
 /turf/open/floor/ruinedwood/chevron,
 /area/rogue/under/tomb/indoors/magic)
-"Yv" = (
-/obj/structure/giantfur/small,
-/obj/structure/chair/wood/alt/chair_noble/red{
-	dir = 8
-	},
-/turf/open/floor/carpet/green{
-	icon_state = "carpet"
-	},
-/area/rogue/under/tomb/indoors)
 "YH" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/rogue/under/tomb/indoors)
@@ -1327,6 +1264,10 @@
 /obj/structure/bonepile,
 /turf/open/floor/carpet,
 /area/rogue/under/tomb/indoors/magic)
+"Zc" = (
+/obj/structure/chair/wood/alt/chair_noble/red,
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "Zj" = (
 /mob/living/carbon/human/species/rousman/npc,
 /turf/open/floor/ruinedwood/chevron,
@@ -1344,6 +1285,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb/cave)
+"ZT" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/carpet,
+/area/rogue/under/tomb/indoors)
 "ZU" = (
 /obj/structure/table/wood/large/corner_alt{
 	dir = 6
@@ -1630,7 +1577,7 @@ lN
 nM
 lN
 lN
-WU
+OC
 AK
 VW
 VW
@@ -2585,13 +2532,13 @@ sg
 sg
 vO
 AK
-gp
-by
-EB
+fU
+Ir
+sz
 ie
-Qt
-ta
-vc
+iT
+Ol
+al
 fk
 cy
 sg
@@ -2617,13 +2564,13 @@ sg
 sg
 vO
 AK
-Fu
-by
-by
+up
+Ir
+Ir
 ie
-ii
-GY
-KE
+KK
+fw
+Tt
 fk
 cy
 sg
@@ -2649,13 +2596,13 @@ MC
 MC
 MC
 AK
-Ma
-by
-by
+nG
+Ir
+Ir
 ie
-ag
-Bz
-Bz
+Lk
+Sr
+Sr
 fk
 cy
 sg
@@ -2686,7 +2633,7 @@ SR
 YH
 ie
 BJ
-kP
+gz
 BJ
 fk
 cy
@@ -2845,7 +2792,7 @@ wr
 wr
 GH
 rT
-hG
+qi
 mT
 jv
 AK
@@ -2928,12 +2875,12 @@ Qd
 Qd
 vO
 AK
-jK
-by
-EB
-by
-mv
-mt
+wI
+Ir
+sz
+Ir
+Zc
+Rb
 CR
 wr
 wr
@@ -2941,7 +2888,7 @@ wr
 wr
 eB
 rT
-TS
+EZ
 pC
 BV
 fk
@@ -2960,12 +2907,12 @@ Qd
 Qd
 vO
 oz
-by
-Cv
-by
-by
-by
-Yv
+Ir
+GW
+Ir
+Ir
+Ir
+tW
 CR
 wr
 wr
@@ -2996,8 +2943,8 @@ xE
 Qy
 Zr
 QH
-by
-Mv
+Ir
+ZT
 AK
 Yr
 Yr
@@ -3028,8 +2975,8 @@ XV
 aR
 Ir
 GP
-Cv
-by
+GW
+Ir
 EL
 rT
 oW
@@ -3060,8 +3007,8 @@ Cm
 Ir
 Ir
 GM
-XU
-vC
+du
+xQ
 AK
 rT
 rT

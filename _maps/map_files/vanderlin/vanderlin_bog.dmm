@@ -642,12 +642,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt,
 /area/rogue/indoors/shelter/bog)
-"hP" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/turf/open/transparent/openspace,
-/area/rogue/indoors/shelter/bog)
 "hQ" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 10
@@ -658,15 +652,6 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/dirt,
 /area/rogue/indoors/shelter/bog)
-"hU" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue/outdoors/bog)
 "ib" = (
 /obj/structure/stairs/stone/church,
 /turf/open/floor/churchmarble,
@@ -800,10 +785,6 @@
 	dir = 4
 	},
 /area/rogue/indoors/shelter/bog)
-"ky" = (
-/obj/effect/traveltile_spawner/horizontal/inhumen,
-/turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
 "kz" = (
 /turf/closed/wall/mineral/tent,
 /area/rogue/indoors/shelter/bog)
@@ -1121,6 +1102,10 @@
 /obj/item/ore/iron,
 /turf/open/floor/dirt,
 /area/rogue/indoors/shelter/bog)
+"oz" = (
+/obj/effect/traveltile_spawner/horizontal/bandit,
+/turf/open/floor/dirt,
+/area/rogue/outdoors/bog)
 "oB" = (
 /turf/open/transparent/openspace,
 /area/rogue/indoors/shelter/bog)
@@ -1130,13 +1115,6 @@
 /area/rogue/outdoors/bog)
 "oG" = (
 /turf/open/floor/cobblerock,
-/area/rogue/indoors/shelter/bog)
-"oH" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/mob/living/carbon/human/species/orc/warrior,
-/turf/open/transparent/openspace,
 /area/rogue/indoors/shelter/bog)
 "oJ" = (
 /obj/structure/window/solid,
@@ -1177,10 +1155,6 @@
 /obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage,
 /turf/open/floor/ruinedwood/turned,
 /area/rogue/indoors/shelter/bog)
-"pq" = (
-/obj/effect/traveltile_spawner/horizontal/bandit,
-/turf/open/floor/grass,
-/area/rogue/outdoors/bog)
 "pt" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1291,10 +1265,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
-"qB" = (
-/obj/effect/traveltile_spawner/horizontal/vampire,
-/turf/open/floor/grass,
-/area/rogue/outdoors/bog)
 "qE" = (
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/dirt/road,
@@ -1302,6 +1272,13 @@
 "qG" = (
 /obj/structure/noose,
 /turf/open/floor/churchmarble,
+/area/rogue/indoors/shelter/bog)
+"qK" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/mob/living/carbon/human/species/orc/warrior,
+/turf/open/floor/ruinedwood/turned,
 /area/rogue/indoors/shelter/bog)
 "qR" = (
 /obj/structure/door/red,
@@ -1323,6 +1300,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
+"re" = (
+/obj/effect/traveltile_spawner/vertical/bandit,
+/turf/open/floor/grass,
+/area/rogue/outdoors/bog)
 "rf" = (
 /obj/structure/bookcase/random{
 	name = "strange bookcase"
@@ -1367,6 +1348,10 @@
 /obj/structure/bed/shit,
 /turf/open/floor/woodturned/nosmooth,
 /area/rogue/indoors/shelter/bog)
+"rC" = (
+/obj/effect/traveltile_spawner/vertical/vampire,
+/turf/open/floor/dirt,
+/area/rogue/outdoors/bog)
 "rF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchmarble,
@@ -1451,6 +1436,10 @@
 /area/rogue/indoors/shelter/bog)
 "sS" = (
 /turf/open/floor/naturalstone,
+/area/rogue/outdoors/bog)
+"sZ" = (
+/obj/effect/traveltile_spawner/horizontal/bandit,
+/turf/open/floor/grass,
 /area/rogue/outdoors/bog)
 "td" = (
 /obj/structure/flora/grass/bush/wall/tall{
@@ -1577,10 +1566,20 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/turned,
 /area/rogue/indoors/shelter/bog)
+"uJ" = (
+/obj/effect/traveltile_spawner/vertical/inhumen,
+/turf/open/floor/dirt,
+/area/rogue/outdoors/bog)
 "uO" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchmarble,
 /area/rogue/outdoors/mountains)
+"uT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/rogue/outdoors/bog)
 "uX" = (
 /obj/structure/stairs,
 /turf/open/floor/wood/nosmooth,
@@ -2163,6 +2162,13 @@
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/indoors/shelter/bog)
+"CO" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/rogue/outdoors/bog)
 "CR" = (
 /turf/open/floor/naturalstone,
 /area/rogue/outdoors/mountains)
@@ -2443,10 +2449,6 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/mountains)
-"GA" = (
-/obj/effect/traveltile_spawner/vertical/vampire,
-/turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
 "GF" = (
 /obj/structure/chair/stool,
 /turf/open/floor/woodturned/nosmooth,
@@ -2765,6 +2767,10 @@
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
+"LV" = (
+/obj/effect/traveltile_spawner/horizontal/inhumen,
+/turf/open/floor/dirt,
+/area/rogue/outdoors/bog)
 "LX" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/spiral,
@@ -2773,10 +2779,6 @@
 /obj/machinery/light/fueled/oven,
 /turf/closed/wall/mineral/decowood,
 /area/rogue/indoors/shelter/bog)
-"Mf" = (
-/obj/effect/traveltile_spawner/vertical/bandit,
-/turf/open/floor/grass,
-/area/rogue/outdoors/bog)
 "Mg" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/leather,
@@ -3037,10 +3039,6 @@
 /obj/item/clothing/head/softcap,
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
-"PN" = (
-/obj/effect/traveltile_spawner/horizontal/bandit,
-/turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
 "PO" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt/road,
@@ -3340,14 +3338,6 @@
 "TJ" = (
 /turf/open/floor/blocks,
 /area/rogue/outdoors/bog)
-"TL" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue/outdoors/bog)
 "TM" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -3567,6 +3557,10 @@
 /obj/structure/bonepile,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
+"Wk" = (
+/obj/effect/traveltile_spawner/horizontal/vampire,
+/turf/open/floor/grass,
+/area/rogue/outdoors/bog)
 "Wn" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt/road,
@@ -3782,10 +3776,6 @@
 /obj/item/weapon/mace/steel/morningstar,
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
-"ZE" = (
-/obj/effect/traveltile_spawner/vertical/inhumen,
-/turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
 "ZF" = (
 /obj/structure/winch{
 	redstone_id = "s"
@@ -4070,7 +4060,7 @@ La
 La
 kZ
 kZ
-GA
+rC
 kZ
 La
 La
@@ -4227,7 +4217,7 @@ tg
 tg
 tg
 La
-ZE
+uJ
 La
 tg
 tg
@@ -8090,9 +8080,9 @@ Gh
 gJ
 gJ
 gJ
-hU
-hU
-hU
+CO
+CO
+CO
 gJ
 gJ
 gJ
@@ -8292,9 +8282,9 @@ Gh
 Gh
 gJ
 gJ
-TL
-TL
-TL
+uT
+uT
+uT
 gJ
 La
 gJ
@@ -13334,7 +13324,7 @@ MQ
 "}
 (48,1,1) = {"
 MQ
-pq
+sZ
 kZ
 La
 La
@@ -23227,7 +23217,7 @@ kZ
 La
 kZ
 kZ
-ky
+LV
 MQ
 "}
 (97,1,1) = {"
@@ -33534,7 +33524,7 @@ MQ
 "}
 (148,1,1) = {"
 MQ
-qB
+Wk
 La
 kZ
 Ue
@@ -35953,7 +35943,7 @@ kZ
 kZ
 kZ
 kZ
-PN
+oz
 MQ
 "}
 (160,1,1) = {"
@@ -43903,7 +43893,7 @@ La
 La
 kZ
 kZ
-Mf
+re
 La
 kZ
 kZ
@@ -46549,7 +46539,7 @@ hh
 hh
 hh
 ml
-oH
+qK
 Fd
 Xc
 Xc
@@ -84224,7 +84214,7 @@ hh
 ml
 dH
 ac
-hP
+wC
 oB
 on
 ac
@@ -84426,7 +84416,7 @@ hh
 ml
 Rx
 ac
-hP
+wC
 oB
 hv
 gd

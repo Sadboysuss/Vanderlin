@@ -63,6 +63,25 @@
 	},
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
+"cX" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/turf/open/floor/cobble,
+/area/rogue/under/tomb/indoors)
 "dc" = (
 /obj/item/natural/stone{
 	pixel_x = 10;
@@ -380,14 +399,6 @@
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
-"mi" = (
-/obj/structure/door/viewport{
-	lockid = "forrestgarrison";
-	dir = 4
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/cobble,
-/area/rogue/under/tomb/indoors)
 "mt" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/effect/decal/remains/human,
@@ -547,11 +558,6 @@
 	},
 /obj/structure/fluff/railing/border,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
-"sE" = (
-/turf/open/floor/metal{
-	icon_state = "plating2"
-	},
 /area/rogue/under/tomb)
 "sL" = (
 /obj/structure/bars,
@@ -789,6 +795,9 @@
 "BB" = (
 /turf/open/floor/cobble/alt,
 /area/rogue/under/tomb/indoors)
+"BD" = (
+/turf/open/floor/metal/alt,
+/area/rogue/under/tomb)
 "Ch" = (
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/grass,
@@ -914,25 +923,6 @@
 "GQ" = (
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/tomb/indoors)
-"Hf" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/turf/open/floor/cobble,
 /area/rogue/under/tomb/indoors)
 "Hh" = (
 /obj/machinery/light/fueled/hearth{
@@ -1094,6 +1084,14 @@
 	},
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
+"Qg" = (
+/obj/structure/door/viewport{
+	lockid = "forrestgarrison";
+	dir = 4
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/cobble,
+/area/rogue/under/tomb/indoors)
 "Ql" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /obj/structure/closet/crate/crafted_closet,
@@ -1616,7 +1614,7 @@ ZR
 fN
 ZR
 BB
-Hf
+cX
 Et
 vo
 vo
@@ -2061,7 +2059,7 @@ ON
 lS
 Et
 Bl
-mi
+Qg
 nE
 BB
 hT
@@ -2712,9 +2710,9 @@ MO
 MO
 dC
 ZH
-sE
+BD
 MO
-sE
+BD
 ZH
 ZH
 wc
@@ -2904,9 +2902,9 @@ MO
 MO
 dC
 ZH
-sE
-sE
-sE
+BD
+BD
+BD
 ZH
 ZH
 wc

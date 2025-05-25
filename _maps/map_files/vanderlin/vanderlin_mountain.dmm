@@ -102,12 +102,6 @@
 /obj/item/natural/worms,
 /turf/open/floor/greenstone,
 /area/rogue/under/mountains/anvil/lower)
-"cp" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "cy" = (
 /obj/structure/bed/mediocre,
 /obj/effect/decal/cleanable/blood/gibs/old,
@@ -133,6 +127,15 @@
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/lower)
+"cV" = (
+/obj/effect/decal/cleanable/blood,
+/obj/structure/closet/crate/chest/gold,
+/obj/effect/spawner/map_spawner/loot/magic,
+/obj/effect/spawner/map_spawner/loot/coin,
+/obj/effect/spawner/map_spawner/loot/coin,
+/obj/effect/spawner/map_spawner/loot/coin,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "cY" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
@@ -164,11 +167,6 @@
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower)
-"dx" = (
-/turf/open/floor/metal{
-	icon_state = "plating2"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "dy" = (
 /turf/open/floor/cobblerock,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
@@ -195,16 +193,6 @@
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
-"dS" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/obj/item/handheld_bell{
-	name = "Cursed Bell";
-	desc = "A small handheld bell. There is a picture of a chicken inscribed on the handle."
-	},
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "dX" = (
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -228,11 +216,6 @@
 /obj/item/chair,
 /turf/open/floor/church,
 /area/rogue/under/mountains/anvil/lower)
-"ep" = (
-/turf/open/floor/ruinedwood{
-	icon_state = "weird1"
-	},
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "es" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -290,6 +273,15 @@
 /obj/machinery/anvil/crafted,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
+"eT" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/obj/structure/fluff/railing/stonehedge{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "eU" = (
 /turf/closed/mineral/random/med,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
@@ -372,6 +364,14 @@
 /area/rogue/under/mountains/anvil/lower/building)
 "gc" = (
 /turf/closed/indestructible/wooddark,
+/area/rogue/under/mountains/anvil/lower/building)
+"gj" = (
+/obj/effect/decal/cleanable/blood/gibs/up,
+/obj/item/handheld_bell{
+	name = "Cursed Bell";
+	desc = "A small handheld bell. There is a picture of a chicken inscribed on the handle."
+	},
+/turf/open/floor/tile/bfloorz,
 /area/rogue/under/mountains/anvil/lower/building)
 "gm" = (
 /obj/machinery/light/fueled/campfire/densefire,
@@ -459,12 +459,6 @@
 	dir = 1
 	},
 /area/rogue/outdoors/mountains/anvil/snowyforest)
-"hi" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "hj" = (
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/naturalstone,
@@ -489,6 +483,9 @@
 /obj/structure/chair/wood/alt/chair3/crafted,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/rogue/indoors/mountains/anvil/surface/building)
+"hG" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "hI" = (
 /obj/structure/ladder,
 /turf/open/floor/metal/barograte,
@@ -580,6 +577,15 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
+"iO" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/obj/structure/fluff/railing/stonehedge{
+	dir = 8
+	},
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "iP" = (
 /obj/structure/fluff/railing/fence{
 	dir = 4
@@ -632,6 +638,10 @@
 /obj/structure/bed/shit,
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/lower)
+"jH" = (
+/obj/item/natural/rock,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "jL" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/water/cleanshallow,
@@ -671,12 +681,6 @@
 /obj/item/reagent_containers/food/snacks/rotten/meat,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower/building)
-"kf" = (
-/obj/structure/stairs{
-	dir = 8
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "kg" = (
 /obj/effect/decal/cleanable/blood,
 /obj/structure/stairs/stone{
@@ -721,13 +725,6 @@
 /obj/structure/roguetent/preopen,
 /turf/open/floor/twig,
 /area/rogue/under/mountains/anvil/lower/building)
-"kP" = (
-/obj/structure/stairs/stone,
-/obj/structure/fluff/railing/stonehedge{
-	dir = 4
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "kQ" = (
 /obj/structure/fluff/statue/tdummy,
 /obj/effect/decal/cleanable/blood,
@@ -764,10 +761,23 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower)
+"lw" = (
+/obj/structure/stairs/stone,
+/obj/structure/fluff/railing/stonehedge{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "lH" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
+"lN" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/twig,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "lO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
@@ -854,12 +864,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower/building)
-"mM" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "mS" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/darker,
@@ -892,16 +896,6 @@
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/dirt,
 /area/rogue/under/mountains/anvil/lower)
-"nl" = (
-/obj/effect/traveltile_spawner/vertical/bandit,
-/turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
-"no" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "np" = (
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
@@ -1023,18 +1017,19 @@
 	},
 /turf/open/floor/wood/nosmooth/saiga,
 /area/rogue/indoors/mountains/anvil/surface/building)
-"oO" = (
-/obj/effect/decal/cleanable/blood/gibs/down,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "oQ" = (
 /turf/open/floor/cobble,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
 "oR" = (
 /turf/open/floor/dirt,
 /area/rogue/under/mountains/anvil/lower/building)
+"oU" = (
+/obj/structure/stairs/stone,
+/obj/structure/fluff/railing/stonehedge{
+	dir = 8
+	},
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "oX" = (
 /turf/closed/wall/mineral/stone,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
@@ -1047,6 +1042,9 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/church,
 /area/rogue/under/mountains/anvil/lower)
+"pe" = (
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "pg" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/church,
@@ -1159,15 +1157,6 @@
 "qP" = (
 /turf/open/floor/blocks/green,
 /area/rogue/under/mountains/anvil/lower/building)
-"qQ" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/stonehedge{
-	dir = 4
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "qS" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
@@ -1365,6 +1354,10 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
+"tT" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "tU" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
@@ -1432,15 +1425,6 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
-"vc" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/stonehedge{
-	dir = 8
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "ve" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/rogue/under/mountains/anvil/lower/building)
@@ -1516,6 +1500,9 @@
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/blocks,
+/area/rogue/under/mountains/anvil/lower/building)
+"wu" = (
+/turf/open/floor/metal/alt,
 /area/rogue/under/mountains/anvil/lower/building)
 "wy" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
@@ -1677,9 +1664,23 @@
 "zg" = (
 /turf/closed/wall/mineral/wooddark,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
+"zj" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
+"zm" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "zq" = (
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/blocks,
+/area/rogue/under/mountains/anvil/lower/building)
+"zr" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/open/floor/tile/bfloorz,
 /area/rogue/under/mountains/anvil/lower/building)
 "zu" = (
 /turf/open/floor/cobblerock,
@@ -1713,10 +1714,6 @@
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower/building)
-"zW" = (
-/obj/effect/traveltile_spawner/horizontal/inhumen,
-/turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
 "zY" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
@@ -1751,17 +1748,6 @@
 "AW" = (
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/water/cleanshallow,
-/area/rogue/under/mountains/anvil/lower/building)
-"AZ" = (
-/obj/effect/decal/cleanable/blood,
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/magic,
-/obj/effect/spawner/map_spawner/loot/coin,
-/obj/effect/spawner/map_spawner/loot/coin,
-/obj/effect/spawner/map_spawner/loot/coin,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
 /area/rogue/under/mountains/anvil/lower/building)
 "Bg" = (
 /obj/item/natural/stone,
@@ -1811,6 +1797,10 @@
 /obj/structure/stairs/stone{
 	dir = 4
 	},
+/turf/open/floor/naturalstone,
+/area/rogue/under/mountains/anvil/lower)
+"BR" = (
+/obj/effect/traveltile_spawner/vertical/bandit,
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower)
 "BU" = (
@@ -2003,6 +1993,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
 /area/rogue/under/mountains/anvil/lower)
+"EK" = (
+/obj/effect/traveltile_spawner/horizontal/inhumen,
+/turf/open/floor/cobblerock,
+/area/rogue/under/mountains/anvil/lower)
 "EO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/wood/reinforced_alt,
@@ -2040,6 +2034,12 @@
 /area/rogue/under/mountains/anvil/lower)
 "FO" = (
 /turf/open/floor/tile/tilerg,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
+"FQ" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/twig,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
 "FS" = (
 /turf/closed/wall/mineral/wooddark/end,
@@ -2141,12 +2141,6 @@
 "Hn" = (
 /turf/closed/wall/mineral/stone/window,
 /area/rogue/under/mountains/anvil/lower)
-"Ho" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "Hv" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -2187,6 +2181,10 @@
 "HT" = (
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
+"HW" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/cobble,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "Ia" = (
 /obj/structure/chair/wood/alt{
 	dir = 8
@@ -2208,12 +2206,6 @@
 "Ik" = (
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower/building)
-"Is" = (
-/obj/item/natural/rock,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
 /area/rogue/under/mountains/anvil/lower/building)
 "Iu" = (
 /obj/structure/flora/shroom_tree,
@@ -2289,6 +2281,10 @@
 /obj/effect/decal/cleanable/ash,
 /turf/open/floor/plasteel/maniac,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
+"Jq" = (
+/obj/effect/decal/cleanable/blood/gibs/down,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "Js" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -2381,6 +2377,13 @@
 "KI" = (
 /turf/open/floor/snow,
 /area/rogue/indoors/mountains/anvil/surface/building)
+"KK" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/darker,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
 "KN" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/crafted_closet/inn,
@@ -2644,12 +2647,6 @@
 "Oq" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/lower)
-"Ow" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "Ox" = (
 /turf/closed/wall/mineral/roofwall/outercorner,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
@@ -2682,10 +2679,6 @@
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/rogue/under/mountains/anvil/lower/building)
-"OQ" = (
-/obj/effect/traveltile_spawner/horizontal/vampire,
-/turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
 "OS" = (
 /turf/closed/wall/mineral/tent,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
@@ -2762,18 +2755,16 @@
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/lower/building)
+"PR" = (
+/obj/effect/decal/cleanable/blood/gibs/body,
+/turf/open/floor/tile/bfloorz,
+/area/rogue/under/mountains/anvil/lower/building)
 "PS" = (
 /obj/structure/fluff/signage{
 	name = "Abandon all hope ye who enter here"
 	},
 /turf/open/floor/naturalstone,
 /area/rogue/under/mountains/anvil/lower/building)
-"PT" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "PU" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/spawner/map_spawner/loot/medium,
@@ -2814,12 +2805,6 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
-"Qs" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/turf/closed/mineral/random/med,
-/area/rogue/under/mountains/anvil/lower)
 "Qu" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -2990,12 +2975,6 @@
 "Tk" = (
 /turf/closed/wall/mineral/stone,
 /area/rogue/under/mountains/anvil/lower/building)
-"Tm" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "Tp" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /obj/effect/decal/cleanable/blood,
@@ -3030,17 +3009,14 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
+"TQ" = (
+/obj/effect/traveltile_spawner/horizontal/vampire,
+/turf/open/floor/cobblerock,
+/area/rogue/under/mountains/anvil/lower)
 "TT" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/dirt/road,
 /area/rogue/under/mountains/anvil/lower/building)
-"Uc" = (
-/obj/structure/stairs/stone,
-/obj/structure/fluff/railing/stonehedge{
-	dir = 8
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "Uk" = (
 /obj/item/chair,
 /obj/effect/decal/cleanable/blood,
@@ -3205,12 +3181,6 @@
 "WE" = (
 /turf/open/floor/churchrough,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
-"WF" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "WJ" = (
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_x = -1;
@@ -3246,10 +3216,6 @@
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "Xi" = (
-/turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
-"Xr" = (
-/obj/effect/traveltile_spawner/vertical/vampire,
 /turf/open/floor/dirt,
 /area/rogue/under/mountains/anvil/lower)
 "Xu" = (
@@ -3317,10 +3283,6 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/blocks/green,
 /area/rogue/under/mountains/anvil/lower/building)
-"Yp" = (
-/obj/effect/traveltile_spawner/vertical/bandit,
-/turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
 "Ys" = (
 /obj/structure/ladder,
 /turf/open/floor/naturalstone,
@@ -3370,15 +3332,14 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/under/mountains/anvil/lower/building)
-"YP" = (
-/turf/open/floor/tile{
-	icon_state = "bfloorz"
-	},
-/area/rogue/under/mountains/anvil/lower/building)
 "YS" = (
 /obj/item/clothing/ring/silver/makers_guild,
 /turf/open/floor/volcanic,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
+"YV" = (
+/obj/effect/traveltile_spawner/vertical/bandit,
+/turf/open/floor/cobblerock,
+/area/rogue/under/mountains/anvil/lower)
 "YZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bed/mediocre,
@@ -3417,6 +3378,17 @@
 /obj/item/natural/rock,
 /turf/open/floor/cobblerock,
 /area/rogue/under/mountains/anvil/lower)
+"Zq" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/darker,
+/area/rogue/outdoors/mountains/anvil/snowyforest)
+"Zs" = (
+/obj/effect/traveltile_spawner/vertical/vampire,
+/turf/open/floor/dirt,
+/area/rogue/under/mountains/anvil/lower)
 "Zu" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/rogue/under/mountains/anvil/lower/building)
@@ -3444,10 +3416,6 @@
 	},
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
-"ZX" = (
-/obj/structure/stairs/stone,
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains/anvil/snowyforest)
 "ZY" = (
 /obj/item/bin/water,
 /obj/structure/rack/shelf,
@@ -44065,7 +44033,7 @@ hl
 Oq
 Oq
 ko
-Yp
+YV
 ko
 Oq
 Oq
@@ -44340,7 +44308,7 @@ Oq
 Jv
 Jv
 Jv
-nl
+BR
 Jv
 Jv
 Oq
@@ -44582,7 +44550,7 @@ ko
 ko
 ko
 Xi
-Xr
+Zs
 Xi
 ko
 ko
@@ -45255,12 +45223,12 @@ PY
 PY
 Ji
 ve
-AZ
-Ow
-YP
-WF
-dS
-YP
+cV
+PR
+pe
+zm
+gj
+pe
 ev
 bO
 OJ
@@ -45457,12 +45425,12 @@ VB
 VB
 gr
 ME
-WF
-YP
+zm
+pe
 VP
 VP
-YP
-YP
+pe
+pe
 HF
 ve
 OJ
@@ -45659,12 +45627,12 @@ VB
 SY
 uB
 ve
-YP
-hi
+pe
+tT
 MO
 CR
-YP
-WF
+pe
+zm
 LT
 gr
 SY
@@ -45861,12 +45829,12 @@ VB
 OJ
 ve
 gr
-YP
-YP
+pe
+pe
 VP
 VP
-YP
-YP
+pe
+pe
 ve
 ve
 OJ
@@ -46063,12 +46031,12 @@ VB
 SY
 ve
 ve
-no
-YP
+zr
+pe
 VP
 VP
-YP
-YP
+pe
+pe
 Gm
 ve
 Ur
@@ -46265,12 +46233,12 @@ VB
 Gi
 Ka
 ve
-YP
-YP
+pe
+pe
 VP
 MO
-oO
-no
+Jq
+zr
 ve
 ve
 SY
@@ -46467,12 +46435,12 @@ SY
 OJ
 Ji
 ve
-YP
-YP
+pe
+pe
 eH
 VP
-Is
-YP
+jH
+pe
 rQ
 uQ
 SY
@@ -48445,7 +48413,7 @@ Ze
 dy
 Ze
 Ze
-zQ
+Ze
 IQ
 Xv
 OJ
@@ -48882,7 +48850,7 @@ ko
 ko
 ko
 ko
-zW
+EK
 VB
 VB
 sk
@@ -52143,7 +52111,7 @@ VB
 "}
 (42,1,2) = {"
 Oq
-OQ
+TQ
 ko
 ko
 ko
@@ -60086,11 +60054,11 @@ pQ
 Ly
 pQ
 qS
-dx
-dx
-dx
-dx
-dx
+wu
+wu
+wu
+wu
+wu
 pQ
 pQ
 Ly
@@ -60288,11 +60256,11 @@ pQ
 pQ
 Ly
 qS
-dx
-dx
-dx
-dx
-dx
+wu
+wu
+wu
+wu
+wu
 pQ
 Ly
 pQ
@@ -66679,7 +66647,7 @@ Jv
 Jv
 Jv
 Jv
-Qs
+BY
 lU
 DR
 DR
@@ -66881,7 +66849,7 @@ Jv
 Jv
 Jv
 Jv
-Qs
+BY
 lU
 DR
 DR
@@ -67083,7 +67051,7 @@ Jv
 Jv
 Jv
 Jv
-Qs
+BY
 lU
 DR
 DR
@@ -88645,7 +88613,7 @@ qx
 qx
 qx
 qx
-PT
+Zq
 Ez
 Ez
 Ez
@@ -89049,7 +89017,7 @@ qx
 qx
 qx
 qx
-Ho
+KK
 Ez
 SZ
 Ez
@@ -115583,10 +115551,10 @@ qx
 qx
 qx
 qx
-Uc
+oU
 DV
 DV
-vc
+iO
 qx
 qx
 qx
@@ -115785,10 +115753,10 @@ qx
 qx
 qx
 qx
-ZX
+HW
 uy
 uy
-Tm
+zj
 qx
 qx
 qx
@@ -115987,10 +115955,10 @@ qx
 qx
 qx
 qx
-kP
+lw
 mA
 mA
-qQ
+eT
 qx
 qx
 qx
@@ -121842,7 +121810,7 @@ qx
 qx
 qx
 qx
-ep
+hG
 bm
 qx
 qx
@@ -122044,8 +122012,8 @@ qx
 qx
 qx
 qx
-ep
-ep
+hG
+hG
 qx
 qx
 qx
@@ -122776,7 +122744,7 @@ qx
 qx
 qx
 qx
-mM
+lN
 aC
 aC
 qx
@@ -122965,7 +122933,7 @@ Pv
 qx
 qx
 hc
-kf
+jV
 aC
 aC
 hc
@@ -123784,7 +123752,7 @@ qx
 qx
 qx
 QJ
-cp
+FQ
 qx
 aC
 xR
