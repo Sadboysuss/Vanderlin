@@ -199,6 +199,7 @@ GLOBAL_LIST(teleport_runes)
 			else if(istype(src,/obj/effect/decal/cleanable/roguerune/arcyne))
 				rituals += GLOB.allowedrunerituallist
 			var/ritualnameinput = input(user, "Rituals", "Vanderlin") as null|anything in rituals
+			testing("ritualnameinput [ritualnameinput]")
 			var/datum/runerituals/pickritual1
 			pickritual1 = rituals[ritualnameinput]
 			if(!pickritual1 || pickritual1 == null)

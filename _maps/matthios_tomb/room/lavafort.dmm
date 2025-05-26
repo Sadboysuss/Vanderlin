@@ -126,7 +126,9 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/cave/lava)
 "kK" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -700,13 +702,17 @@
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb/indoors)
 "Ua" = (
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/cave/lava)
 "Un" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/cave/lava)
 "Uu" = (
 /obj/structure/flora/ausbushes/brflowers,

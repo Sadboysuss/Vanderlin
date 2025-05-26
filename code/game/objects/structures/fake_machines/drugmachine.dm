@@ -126,7 +126,7 @@
 	. = ..()
 	set_light(1, 1, 1, l_color =  "#8f06b5")
 
-/obj/structure/fake_machine/drugmachine/obj_break(damage_flag, silent)
+/obj/structure/fake_machine/drugmachine/obj_break(damage_flag)
 	. = ..()
 	budget2change(budget)
 	set_light(0)

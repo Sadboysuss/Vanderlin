@@ -73,7 +73,7 @@
 	var/list/allowed_sexes = list(MALE,FEMALE)
 	var/list/allowed_races
 	var/list/allowed_patrons
-	var/list/allowed_ages = ADULT_AGES_LIST
+	var/list/allowed_ages = ALL_AGES_LIST
 
 	/// Innate skill levels unlocked at roundstart. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
 	var/list/skills
@@ -370,7 +370,6 @@
 		H.mind?.job_bitflag = job_bitflag
 		if(H.familytree_pref != FAMILY_NONE && !visualsOnly && !H.family_datum)
 			SSfamilytree.AddLocal(H, H.familytree_pref)
-			H.ShowFamilyUI(TRUE)
 		if(H.ckey)
 			if(check_crownlist(H.ckey))
 				H.mind.special_items["Champion Circlet"] = /obj/item/clothing/head/crown/sparrowcrown

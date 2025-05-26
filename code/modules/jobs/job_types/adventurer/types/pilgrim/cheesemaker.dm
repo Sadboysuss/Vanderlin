@@ -9,7 +9,6 @@
 
 	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Cheesemaker Apprentice"
-	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 /datum/advclass/pilgrim/cheesemaker/post_equip(mob/living/carbon/human/H)
 	. = ..()

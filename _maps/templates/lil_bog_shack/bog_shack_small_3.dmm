@@ -22,7 +22,9 @@
 /area/rogue/outdoors/bog)
 "g" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
-/turf/open/floor/ruinedwood/turned,
+/turf/open/floor/ruinedwood{
+	icon_state = "wooden_floort"
+	},
 /area/rogue/outdoors/bog)
 "h" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -34,7 +36,9 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog)
 "j" = (
-/turf/open/floor/ruinedwood/turned,
+/turf/open/floor/ruinedwood{
+	icon_state = "wooden_floort"
+	},
 /area/rogue/outdoors/bog)
 "k" = (
 /obj/effect/decal/cleanable/blood/splatter,

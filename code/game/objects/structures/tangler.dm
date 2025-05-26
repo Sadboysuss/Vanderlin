@@ -30,7 +30,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/flora/grass/tangler/real/obj_break(damage_flag, silent)
+/obj/structure/flora/grass/tangler/real/obj_break(damage_flag)
 	..()
 	QDEL_NULL(proximity_monitor)
 	unbuckle_all_mobs()

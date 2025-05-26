@@ -68,6 +68,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		var/mob/living/carbon/human/vampdude = owner.current
 		vampdude.adv_hugboxing_cancel()
 
+
+
 	owner.current.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 	owner.current.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix)
 	vamp_look()

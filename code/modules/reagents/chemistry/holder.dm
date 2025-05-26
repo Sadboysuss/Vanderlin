@@ -111,6 +111,8 @@
 	var/total_transfered = 0
 	var/current_list_element = 1
 
+	//testing("removeany called")
+
 	current_list_element = rand(1, cached_reagents.len)
 
 	while(total_transfered != amount)
@@ -199,6 +201,8 @@
 			return
 		R = target.reagents
 		target_atom = target
+
+	//testing("trans to [target_atom]")
 
 	amount = min(min(amount, src.total_volume), R.maximum_volume-R.total_volume)
 	var/trans_data = null
@@ -289,6 +293,8 @@
 		return
 	if(amount < 0)
 		return
+
+	//testing("transidto")
 
 	var/datum/reagents/R = target.reagents
 	if(src.get_reagent_amount(reagent)<amount)
@@ -565,6 +571,7 @@
 		var/datum/reagent/R = reagent
 		del_reagent(R.type)
 	if(my_atom)
+		//testing("[src]  clear reagents [my_atom]")
 		my_atom.on_reagent_change(CLEAR_REAGENTS)
 	return 0
 

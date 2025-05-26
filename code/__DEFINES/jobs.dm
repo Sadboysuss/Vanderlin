@@ -178,7 +178,7 @@
 #define BARD		(1<<12)
 #define CHEESEMAKER (1<<13)
 
-#define APPRENTICES		(1<<6)
+#define APPRENTICES		(1<<5)
 
 #define APPRENTICE	(1<<0)
 #define SQUIRE		(1<<1)

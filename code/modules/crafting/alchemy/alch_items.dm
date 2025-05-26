@@ -26,6 +26,7 @@
 	so if your child has a per-transfer of 100, its putting all 100 in that thing. Be careful...
 */
 /obj/item/reagent_containers/glass/alchemical/attack(mob/M, mob/user, obj/target)
+	testing("a1")
 	if(istype(M))
 		if(user.used_intent.type == INTENT_GENERIC)
 			return ..()
@@ -72,9 +73,11 @@
 /obj/item/reagent_containers/glass/alchemical/attack_obj(obj/target, mob/living/user)
 	if(user.used_intent.type == INTENT_GENERIC)
 		return ..()
+	testing("attackobj1")
 	if(!spillable)
 		return
 	if(target.is_refillable() && (user.used_intent.type == INTENT_POUR)) //Something like a glass. Player probably wants to transfer TO it.
+		testing("attackobj2")
 		if(!reagents.total_volume)
 			to_chat(user, "<span class='warning'>[src] is empty!</span>")
 			return
@@ -98,6 +101,7 @@
 				break
 		return
 	if(target.is_drainable() && (user.used_intent.type == /datum/intent/fill)) //A dispenser. Transfer FROM it TO us.
+		testing("attackobj3")
 		if(!target.reagents.total_volume)
 			to_chat(user, "<span class='warning'>[target] is empty!</span>")
 			return

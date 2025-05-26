@@ -337,7 +337,7 @@
 				if(src.usable_legs < 2)
 					return
 				if(pulledby && pulledby != src)
-					to_chat(src, "<span class='warning'>I'm being grabbed.</span>")
+					to_chat(src, span_warning("I'm being grabbed."))
 					resist_grab()
 					return
 				if(IsOffBalanced())

@@ -689,7 +689,9 @@
 /area/rogue/under/tomb/cave/spider)
 "xQ" = (
 /obj/structure/bars,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb)
 "xT" = (
 /obj/structure/rack/shelf/biggest,

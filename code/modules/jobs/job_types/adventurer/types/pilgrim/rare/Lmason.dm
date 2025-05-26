@@ -11,7 +11,6 @@
 	maximum_possible_slots = 1
 	pickprob = 15
 	apprentice_name = "Mason Apprentice"
-	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/job/adventurer/grandmastermason/pre_equip(mob/living/carbon/human/H)
 	..()

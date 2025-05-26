@@ -96,7 +96,9 @@
 /turf/open/floor/cobblerock,
 /area/rogue/under/tomb/indoors)
 "me" = (
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/cave/lava)
 "mE" = (
 /turf/open/floor/cobblerock,

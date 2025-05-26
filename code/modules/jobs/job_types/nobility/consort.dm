@@ -134,6 +134,7 @@
 	H.change_stat(STATKEY_SPD, 1)
 	H.change_stat(STATKEY_LCK, 3)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
 
 /datum/advclass/consort/lowborn
 	name = "Lowborn Consort"

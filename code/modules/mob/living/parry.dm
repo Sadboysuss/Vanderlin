@@ -72,6 +72,7 @@
 			flash_fullscreen("blackflash2")
 			return TRUE
 
+		testing("failparry")
 		return FALSE
 
 /**

@@ -226,6 +226,7 @@
 	scent_description = "meat"
 
 /datum/reagent/buff/strength/on_mob_add(mob/living/carbon/M)
+	testing("str pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
 	if(M.reagents.has_reagent(/datum/reagent/buff/strength,4))
@@ -241,6 +242,7 @@
 	scent_description = "urine"
 
 /datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
+	testing("per pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/perception),4))
@@ -256,6 +258,7 @@
 	scent_description = "moss"
 
 /datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M)
+	testing("int pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence),4))
@@ -271,6 +274,7 @@
 	scent_description = "vomit"
 
 /datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M)
+	testing("con pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/constitution),4))
@@ -286,6 +290,7 @@
 	scent_description = "urine"
 
 /datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M)
+	testing("end pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/endurance),4))
@@ -301,6 +306,7 @@
 	scent_description = "sweat"
 
 /datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M)
+	testing("spd pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/speed),4))
@@ -316,6 +322,7 @@
 	scent_description = "urine"
 
 /datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M)
+	testing("luck pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		return ..()
 	if(M.reagents.has_reagent((/datum/reagent/buff/fortune),4))
@@ -362,6 +369,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
 
 /datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M)
+	testing("Someone was poisoned")
 	if(volume > 0.09)
 		if(isdwarf(M))
 			M.add_nausea(1)

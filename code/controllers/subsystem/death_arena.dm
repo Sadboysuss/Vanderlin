@@ -210,6 +210,7 @@ SUBSYSTEM_DEF(death_arena)
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 1000000000
+	resistance_flags = INDESTRUCTIBLE
 
 
 /obj/structure/underworld/necra
@@ -222,6 +223,7 @@ SUBSYSTEM_DEF(death_arena)
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 1000000000
+	resistance_flags = INDESTRUCTIBLE
 
 /obj/structure/underworld/necra/Initialize()
 	. = ..()

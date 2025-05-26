@@ -28,8 +28,6 @@ GLOBAL_LIST_EMPTY(preference_patrons) // Does not include patrons with preferenc
 	var/preference_accessible = TRUE
 	/// All gods have related confessions
 	var/list/confess_lines
-	/// Some patrons have related traits, why not?
-	var/list/mob_traits
 	/// Tier 0 spell
 	var/t0
 	/// Tier 1 spell

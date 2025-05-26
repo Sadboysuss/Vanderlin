@@ -529,7 +529,9 @@
 /area/rogue/under/tomb/indoors)
 "EJ" = (
 /obj/structure/door,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/indoors)
 "ET" = (
 /turf/open/floor/ruinedwood/spiralfade,
@@ -675,7 +677,9 @@
 /area/rogue/under/tomb/cave)
 "Og" = (
 /obj/structure/bars,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/indoors)
 "OL" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -815,7 +819,9 @@
 /area/rogue/under/tomb)
 "UV" = (
 /obj/structure/door/iron/bars,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/under/tomb/indoors)
 "UW" = (
 /obj/structure/fluff/railing/wood{

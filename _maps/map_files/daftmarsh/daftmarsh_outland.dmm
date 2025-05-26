@@ -1026,7 +1026,9 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/indoors/town/cell)
 "kf" = (
 /obj/machinery/light/fueled/campfire/densefire,
@@ -1126,7 +1128,9 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/turf/open/floor/metal/alt,
+/turf/open/floor/metal{
+	icon_state = "plating2"
+	},
 /area/rogue/indoors/town/cell)
 "li" = (
 /obj/structure/rack,
@@ -1458,6 +1462,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/outdoors/mountains)
+"ov" = (
+/obj/structure/stairs/stone,
+/turf/open/transparent/openspace,
+/area/rogue/under/mountains/anvil/lower)
 "oA" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
@@ -1758,7 +1766,7 @@
 /obj/structure/stairs/stone{
 	dir = 8
 	},
-/turf/open/floor/herringbone,
+/turf/open/transparent/openspace,
 /area/rogue/under/mountains/anvil/lower)
 "su" = (
 /obj/item/chair,
@@ -2759,7 +2767,7 @@
 /obj/structure/stairs/stone{
 	dir = 4
 	},
-/turf/open/floor/herringbone,
+/turf/open/transparent/openspace,
 /area/rogue/under/mountains/anvil/lower)
 "DR" = (
 /obj/structure/table/wood/plain_alt,
@@ -46427,7 +46435,7 @@ bv
 PF
 PF
 PF
-Mn
+ov
 GX
 GX
 GX
@@ -46629,7 +46637,7 @@ bv
 PF
 PF
 PF
-Mn
+ov
 GX
 kc
 GX

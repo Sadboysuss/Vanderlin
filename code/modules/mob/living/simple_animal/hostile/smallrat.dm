@@ -1,9 +1,3 @@
-GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
-	/obj/item/reagent_containers/food/snacks/smallrat,
-	/obj/item/reagent_containers/food/snacks/grown/onion/rogue,
-	/obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison
-	)))
-
 /obj/item/reagent_containers/food/snacks/smallrat
 	name = "rat"
 	desc = ""
@@ -73,6 +67,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 
 
 /obj/item/reagent_containers/food/snacks/smallrat/dead
+	icon_state = "srat1"
 	dead = TRUE
 	rotprocess = SHELFLIFE_SHORT
 
@@ -80,8 +75,8 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	if(dead)
-		icon_state = "sratl"
-		rotprocess = 15 MINUTES
+		icon_state = "srat1"
+		rotprocess = SHELFLIFE_SHORT
 
 /obj/item/reagent_containers/food/snacks/smallrat/attack_hand(mob/user)
 	if(isliving(user))
@@ -139,10 +134,9 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 /obj/item/reagent_containers/food/snacks/smallrat/obj_destruction(damage_flag)
 	//..()
 	if(!dead)
-		dead = TRUE
-		rotprocess = 15 MINUTES
+		new /obj/item/reagent_containers/food/snacks/smallrat/dead(src)
 		playsound(src, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
-		icon_state = "[icon_state]1"
+		qdel(src)
 		return 1
 	. = ..()
 

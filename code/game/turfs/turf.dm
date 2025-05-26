@@ -99,6 +99,8 @@
 	if(T)
 		T.multiz_turf_new(src, UP)
 		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, UP)
+	if(!mapload)
+		reassess_stack()
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -162,8 +164,10 @@
 	user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
+	reassess_stack()
 
 /turf/proc/multiz_turf_new(turf/T, dir)
+	reassess_stack()
 
 
 /turf/proc/is_blocked_turf(exclude_mobs = FALSE, source_atom = null, list/ignore_atoms, type_list = FALSE)

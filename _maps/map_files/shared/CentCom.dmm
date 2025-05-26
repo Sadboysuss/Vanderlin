@@ -1679,7 +1679,9 @@
 /area/rogue/outdoors)
 "hB" = (
 /obj/structure/door,
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/floor/ruinedwood{
+	icon_state = "weird1"
+	},
 /area/rogue/indoors/vampire_manor)
 "hC" = (
 /obj/effect/decal/cobbleedge{
@@ -2742,7 +2744,9 @@
 /area/rogue/outdoors/beach)
 "pe" = (
 /obj/structure/fermentation_keg/random/water,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "pf" = (
 /turf/open/floor/concrete,
@@ -3544,7 +3548,9 @@
 /area/rogue/outdoors/bog/inhumen_camp)
 "uB" = (
 /obj/structure/fermentation_keg/random/beer,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "uD" = (
 /obj/structure/bars/passage,
@@ -4135,7 +4141,9 @@
 /turf/closed/wall/mineral/craftstone,
 /area/rogue/indoors/vampire_manor)
 "yH" = (
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "yI" = (
 /obj/structure/table/wood{
@@ -5788,7 +5796,9 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "Le" = (
 /obj/structure/table/wood/reinforced,
@@ -6359,7 +6369,9 @@
 /obj/structure/stairs{
 	dir = 4
 	},
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/floor/ruinedwood{
+	icon_state = "weird1"
+	},
 /area/rogue/indoors/vampire_manor)
 "Pu" = (
 /obj/item/clothing/shirt/dress/gen/purple,
@@ -6883,7 +6895,9 @@
 /obj/item/reagent_containers/food/snacks/butter,
 /obj/item/reagent_containers/food/snacks/cheese,
 /obj/item/reagent_containers/food/snacks/cheese,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "SP" = (
 /obj/item/clothing/gloves/rare/elfplate,
@@ -7140,7 +7154,9 @@
 /obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/tile{
+	icon_state = "tavern"
+	},
 /area/rogue/indoors/bandit_lair)
 "Uz" = (
 /obj/structure/window/stained/yellow,

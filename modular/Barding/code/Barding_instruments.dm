@@ -10,9 +10,12 @@
 	experimental_inhand = FALSE
 	possible_item_intents = list(/datum/intent/use)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
-	can_parry = TRUE
-	force = 23
-	throwforce = 7
+	can_parry = FALSE
+	force = 0
+	minstr = 0
+	wbalance = 0
+	wdefense = 0
+	throwforce = 0
 	throw_range = 4
 	blade_dulling = DULLING_BASH
 	max_integrity = 80 // Flimsy instruments of wood.

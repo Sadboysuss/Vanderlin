@@ -7,6 +7,7 @@
 	category_tags = list(CTAG_PILGRIM)
 	maximum_possible_slots = 1
 	pickprob = 30
+	min_pq = 0
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 

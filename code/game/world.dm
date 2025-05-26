@@ -333,7 +333,6 @@ GLOBAL_PROTECT(tracy_init_reason)
 	'sound/roundend/intermission.ogg',
 	'sound/roundend/motherfuckers.ogg',
 	'sound/roundend/poppop.ogg',
-	'sound/roundend/cursedswords.ogg',
 	'sound/roundend/dwarfs.ogg')
 	for(var/client/thing in GLOB.clients)
 		if(!thing)
@@ -387,6 +386,7 @@ GLOBAL_PROTECT(tracy_init_reason)
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 
 	TgsReboot() // TGS can decide to kill us right here, so it's important to do it last
+	shutdown_byond_tracy()
 	..()
 
 /world/proc/update_status()

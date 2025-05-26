@@ -59,7 +59,7 @@
 /area/rogue)
 "C" = (
 /obj/structure/stairs,
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/transparent/openspace,
 /area/rogue)
 "D" = (
 /turf/closed/mineral/bedrock,
@@ -113,7 +113,7 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/transparent/openspace,
 /area/rogue)
 "Y" = (
 /obj/effect/dungeon_directional_helper/west,

@@ -191,7 +191,9 @@
 "bO" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "bT" = (
 /obj/structure/closet/crate/coffin,
@@ -922,7 +924,9 @@
 "lN" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/meat/steak,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "lO" = (
 /obj/effect/decal/cleanable/blood/tracks{
@@ -1359,7 +1363,9 @@
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "sc" = (
 /obj/structure/fermentation_keg/water,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "sd" = (
 /obj/machinery/light/fueled/oven/east,
@@ -1509,7 +1515,9 @@
 /area/rogue/under/mountains/anvil/dungeon)
 "un" = (
 /obj/structure/fermentation_keg/random,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "up" = (
 /obj/item/weapon/shovel,
@@ -1822,7 +1830,7 @@
 /area/rogue/under/mountains/anvil/dungeon)
 "yR" = (
 /obj/structure/stairs,
-/turf/open/floor/wood/nosmooth,
+/turf/open/transparent/openspace,
 /area/rogue/under/mountains/anvil/dungeon)
 "yU" = (
 /obj/item/clothing/shirt/undershirt/random,
@@ -1848,7 +1856,9 @@
 "zc" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "ze" = (
 /obj/effect/decal/cleanable/blood/tracks{
@@ -1883,7 +1893,9 @@
 "zL" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "zW" = (
 /turf/closed/wall/mineral/tent,
@@ -2074,7 +2086,9 @@
 "CO" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/redwine,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "CS" = (
 /obj/structure/chair/bench/church/smallbench,
@@ -2606,7 +2620,9 @@
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Kj" = (
 /obj/structure/fermentation_keg/random/beer,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Ko" = (
 /mob/living/carbon/human/species/orc/tribal,
@@ -2614,7 +2630,9 @@
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Kq" = (
 /obj/structure/fermentation_keg/beer,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Kz" = (
 /obj/structure/table/wood{
@@ -2962,7 +2980,9 @@
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "PT" = (
 /obj/structure/rack/shelf/biggest,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Qa" = (
 /obj/item/weapon/hammer/steel,
@@ -3113,7 +3133,9 @@
 /turf/open/floor/churchrough,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "Sy" = (
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "SJ" = (
 /obj/structure/rack/shelf/biggest,
@@ -3230,6 +3252,12 @@
 	},
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"Uz" = (
+/obj/structure/stairs/stone/church{
+	dir = 1
+	},
+/turf/closed/mineral/bedrock,
+/area/rogue/under/mountains/anvil/dungeon)
 "UD" = (
 /turf/closed/mineral/bedrock,
 /area/rogue/under/mountains/anvil/dungeon/lower)
@@ -3464,7 +3492,9 @@
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "XI" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks{
+	icon_state = "bluestone"
+	},
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "XK" = (
 /turf/open/floor/metal,
@@ -8682,7 +8712,7 @@ dD
 dD
 RT
 RT
-ff
+Uz
 gy
 dD
 dD

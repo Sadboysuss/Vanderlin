@@ -273,6 +273,9 @@
 /obj/item/alch/magicdust,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/under/tomb/indoors)
+"EU" = (
+/turf/open/floor/plank/h,
+/area/rogue/under/tomb/indoors)
 "Gd" = (
 /obj/structure/kneestingers{
 	pixel_y = 12
@@ -293,7 +296,7 @@
 /obj/structure/kneestingers{
 	pixel_y = 11
 	},
-/turf/open/floor/ruinedwood/turned/darker,
+/turf/open/floor/plank/h,
 /area/rogue/under/tomb/indoors)
 "Jp" = (
 /obj/structure/bed/hay,
@@ -410,7 +413,7 @@
 /obj/structure/stairs/d{
 	dir = 4
 	},
-/turf/open/floor/ruinedwood/turned/darker,
+/turf/closed,
 /area/rogue/under/tomb/indoors)
 "UM" = (
 /turf/closed/wall/mineral/stone,
@@ -1206,7 +1209,7 @@ Yi
 Yi
 UM
 UM
-iK
+EU
 UM
 UM
 Yi

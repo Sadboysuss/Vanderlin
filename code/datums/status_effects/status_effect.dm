@@ -30,6 +30,7 @@
 	on_creation(arglist(arguments))
 
 /datum/status_effect/proc/on_creation(mob/living/new_owner, ...)
+	testing("oncreation")
 	if(new_owner)
 		owner = new_owner
 	if(owner)

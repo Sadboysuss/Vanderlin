@@ -984,6 +984,12 @@
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/under/mountains/anvil/dungeon/lower)
+"hu" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/transparent/openspace,
+/area/rogue/under/mountains/anvil/dungeon/lower)
 "hv" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/cobblerock,
@@ -23795,7 +23801,7 @@ Oa
 dl
 SL
 SL
-de
+hu
 dl
 tA
 hI

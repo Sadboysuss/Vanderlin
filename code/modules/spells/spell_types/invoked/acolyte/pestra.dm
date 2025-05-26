@@ -157,6 +157,7 @@
 
 /obj/effect/proc_holder/spell/invoked/cure_rot/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
+		testing("curerot1")
 		var/mob/living/target = targets[1]
 		var/lux_state = target.get_lux_status()
 		if(lux_state != LUX_HAS_LUX)
@@ -174,6 +175,7 @@
 		if(!has_rot)
 			to_chat(user, "<span class='warning'>Nothing happens.</span>")
 			return FALSE
+		testing("curerot2")
 		if(was_zombie)
 			if(was_zombie.become_rotman && prob(5)) //5% chance to NOT become a rotman
 				was_zombie.become_rotman = FALSE

@@ -38,7 +38,7 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/fake_machine/vendor/obj_break(damage_flag, silent)
+/obj/structure/fake_machine/vendor/obj_break(damage_flag)
 	. = ..()
 	for(var/obj/item/I as anything in held_items)
 		I.forceMove(loc)

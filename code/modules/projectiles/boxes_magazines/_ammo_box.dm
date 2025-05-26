@@ -3,7 +3,7 @@
 	name = "ammo box (null_reference_exception)"
 	desc = ""
 	flags_1 = CONDUCT_1
-	slot_flags = ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_BELT
 	item_state = "syringe_kit"
 	throwforce = 2
 	w_class = WEIGHT_CLASS_TINY

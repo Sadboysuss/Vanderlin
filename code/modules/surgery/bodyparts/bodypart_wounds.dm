@@ -133,6 +133,7 @@
 			dam += 10
 		if(istype(user.rmb_intent, /datum/rmb_intent/weak))
 			do_crit = FALSE
+	testing("bodypart_attacked_by() dam [dam]")
 	var/added_wound
 	switch(bclass) //do stuff but only when we are a blade that adds wounds
 		if(BCLASS_SMASH, BCLASS_BLUNT)
@@ -151,7 +152,7 @@
 					added_wound = /datum/wound/slash
 				if(1 to 10)
 					added_wound = /datum/wound/slash/small
-		if(BCLASS_STAB, BCLASS_PICK, BCLASS_SHOT, BCLASS_PIERCE)
+		if(BCLASS_STAB, BCLASS_PICK, BCLASS_SHOT)
 			switch(dam)
 				if(20 to INFINITY)
 					added_wound = /datum/wound/puncture/large
@@ -526,6 +527,7 @@
 	return FALSE
 
 /obj/item/bodypart/proc/bandage_expire()
+	testing("expire bandage")
 	if(!owner)
 		return FALSE
 	if(!bandage)
