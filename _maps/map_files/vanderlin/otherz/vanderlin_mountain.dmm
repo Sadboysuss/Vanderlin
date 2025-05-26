@@ -2818,6 +2818,10 @@
 /obj/item/natural/stone,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/mountains/anvil/lavaexposed)
+"Rq" = (
+/obj/structure/fake_machine/hailerboard,
+/turf/open/floor/naturalstone,
+/area/rogue/under/mountains/anvil/lower/building)
 "Rw" = (
 /obj/item/clothing/neck/psycross/silver/malum,
 /turf/open/floor/naturalstone,
@@ -4886,8 +4890,8 @@ cB
 cB
 vV
 vV
-vV
-Ly
+VB
+Rq
 Ly
 Ly
 Ly

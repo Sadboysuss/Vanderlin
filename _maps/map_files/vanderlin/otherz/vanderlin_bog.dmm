@@ -2607,6 +2607,10 @@
 /obj/structure/gravemarker,
 /turf/open/floor/dirt,
 /area/rogue/indoors/shelter/bog)
+"Jj" = (
+/obj/structure/fake_machine/hailerboard/r,
+/turf/open/floor/dirt,
+/area/rogue/indoors/shelter/bog)
 "Jo" = (
 /obj/item/reagent_containers/food/snacks/cooked/frysteak,
 /turf/open/floor/dirt/road,
@@ -29882,7 +29886,7 @@ bj
 Xx
 YW
 YW
-Xx
+Jj
 Xx
 hf
 hf
