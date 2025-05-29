@@ -368,56 +368,21 @@
 
 /obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user = usr, proximity)
 	. = ..()
+
+	if(istype(user.used_intent, /datum/intent/peculate))
+		peculation(target, user)
+		return TRUE
+
 	if(!ishuman(target))
 		return
-	if(target.stat == DEAD || (target.health < target.crit_threshold)) // Trigger soul steal or identity theft if the target is either dead or in crit
-		if(istype(user.used_intent, /datum/intent/peculate))
-			if(!ishuman(user)) // carbons don't have all features of a human
-				to_chat(user, span_danger("You can't do that!"))
-				return
 
-			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_life", time = 6 SECONDS)
-
-			playsound(
-				user,
-				get_sfx("changeling_absorb"), //todo: turn sound keys into defines.
-				100,
-			)
-			to_chat(user, span_danger("I start absorbing [target]'s identity."))
-			if(!do_after(user, 3 SECONDS, target = target))
-				qdel(transfer_beam)
-				return
-
-			playsound( // and anotha one
-				user,
-				get_sfx("changeling_absorb"),
-				100,
-			)
-
-			if(!do_after(user, 3 SECONDS, target = target))
-				qdel(transfer_beam)
-				return
-
-			if(!user.client)
-				qdel(transfer_beam)
-				return
-			qdel(transfer_beam)
-
-			var/mob/living/carbon/human/human_user = user
-
-			human_user.copy_physical_features(target)
-			to_chat(user, span_purple("I take on a new face.."))
-			ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_PROFANE)
-
-			return
-
-		if(target.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // The profane dagger only thirsts for those who are hunted, by flaw or by zizoid curse.
-			if(target.client == null) //See if the target's soul has left their body
-				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse...you try to call it back!</span>")
-				get_profane_ghost(target,user) //Proc to capture a soul that has left the body.
-			else
-				user.adjust_triumphs(1)
-				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
+	if(target.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // The profane dagger only thirsts for those who are hunted, by flaw or by zizoid curse.
+		if(target.client == null) //See if the target's soul has left their body
+			to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse...you try to call it back!</span>")
+			get_profane_ghost(target,user) //Proc to capture a soul that has left the body.
+		else
+			user.adjust_triumphs(1)
+			init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
 
 /// try to steal the appearance of this mob
 /obj/item/weapon/knife/dagger/steel/profane/proc/peculation(mob/living/carbon/human/target, mob/living/user)
@@ -478,16 +443,18 @@
 	target.peculation_animation_end()
 	user.peculation_animation_end()
 
-#define PECULATION_FILTER_INDEX 50
-
 /mob/living/proc/peculation_animation_begin()
-	var/peculation_filter = filter("type" = "motion_blur", "x" = 1, "y" = 0)
-	animate(peculation_filter, y = 1, x = 3, time = 1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
-	animate(y = 0, x = 1, time = 1 SECONDS, flags = ANIMATION_PARALLEL)
+	var/peculation_filter = filter(type = "motion_blur", name = "peculation", x = 0, y = 0)
 	filters += peculation_filter
+	animate(peculation_filter, y = 5, x = 5, loop = -1, time = 1.5 SECONDS, flags = ANIMATION_PARALLEL)
+	animate(y = 0, x = 0, time = 1.5 SECONDS)
+
+/mob/living/proc/peculation_animation_pulse()
+
+	//spawn(1) // apparently a quirk of byond for animating filters
 
 /mob/living/proc/peculation_animation_end()
-	filters -= filters[PECULATION_FILTER_INDEX] // kinda bad, cry about it
+	filters -= filters["peculation"]
 
 /obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
