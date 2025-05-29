@@ -344,8 +344,14 @@
 			to_chat(M, "profane dagger whispers, \"[message]\"")
 
 /obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user = usr, params)
-	if(!istype(target))
-		return FALSE
+
+	if(istype(user.used_intent, /datum/intent/peculate))
+		peculation(target, user)
+
+		remove_filters(target, user)
+
+		return TRUE
+
 	if(target.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
 		force = 20
 	else
@@ -364,6 +370,76 @@
 			else
 				user.adjust_triumphs(1)
 				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
+
+/// try to steal the appearance of this mob
+/obj/item/weapon/knife/dagger/steel/profane/proc/peculation(mob/living/carbon/human/target, mob/living/user)
+	// peculation checks
+	if(!((target.stat == DEAD) || (target.health < target.crit_threshold))) // Trigger identity theft if the target is either dead or in crit
+		to_chat(user, span_danger("They need to be weakened!"))
+		return FALSE
+
+	if(!ishuman(user)) // carbons don't have all features of a human
+		to_chat(user, span_danger("I cannot peculate this creature..."))
+		return FALSE
+
+	if(!(target.dna.species.name in RACES_PLAYER_ALL))
+		to_chat(user, span_danger("This species is too dissimilar to me."))
+		return FALSE
+
+	var/datum/beam/transfer_beam = user.Beam(target, icon_state = "tentacle", time = 6 SECONDS)
+	apply_filters(target, user)
+
+	playsound(
+		user,
+		get_sfx("changeling_absorb"), //todo: turn sound keys into defines.
+		100,
+	)
+
+	to_chat(user, span_danger("I start absorbing [target]'s identity."))
+
+	if(!do_after(user, 3 SECONDS, target = target))
+		qdel(transfer_beam)
+		return FALSE
+
+	playsound( // and anotha one
+		user,
+		get_sfx("changeling_absorb"),
+		100,
+	)
+
+	if(!do_after(user, 3 SECONDS, target = target))
+		qdel(transfer_beam)
+		return FALSE
+
+	qdel(transfer_beam)
+
+	var/mob/living/carbon/human/human_user = user
+
+	human_user.copy_physical_features(target)
+
+	to_chat(user, span_purple("I take on a new face.."))
+	ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_PROFANE)
+
+	return TRUE
+
+/obj/item/weapon/knife/dagger/steel/profane/proc/apply_filters(mob/living/target, mob/living/user)
+	target.peculation_animation_begin()
+	user.peculation_animation_begin()
+
+/obj/item/weapon/knife/dagger/steel/profane/proc/remove_filters(mob/living/target, mob/living/user)
+	target.peculation_animation_end()
+	user.peculation_animation_end()
+
+#define PECULATION_FILTER_INDEX 50
+
+/mob/living/proc/peculation_animation_begin()
+	var/peculation_filter = filter("type" = "motion_blur", "x" = 1, "y" = 0)
+	animate(peculation_filter, y = 1, x = 3, time = 1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
+	animate(y = 0, x = 1, time = 1 SECONDS, flags = ANIMATION_PARALLEL)
+	filters += peculation_filter
+
+/mob/living/proc/peculation_animation_end()
+	filters -= filters[PECULATION_FILTER_INDEX] // kinda bad, cry about it
 
 /obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
