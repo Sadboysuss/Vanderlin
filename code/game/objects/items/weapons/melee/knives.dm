@@ -444,14 +444,10 @@
 	user.peculation_animation_end()
 
 /mob/living/proc/peculation_animation_begin()
-	var/peculation_filter = filter(type = "motion_blur", name = "peculation", x = 0, y = 0)
+	var/peculation_filter = filter(type = "ripple", name = "peculation", 2, flags = WAVE_BOUNDED, radius = 0, size = 2)
 	filters += peculation_filter
-	animate(peculation_filter, y = 5, x = 5, loop = -1, time = 1.5 SECONDS, flags = ANIMATION_PARALLEL)
-	animate(y = 0, x = 0, time = 1.5 SECONDS)
-
-/mob/living/proc/peculation_animation_pulse()
-
-	//spawn(1) // apparently a quirk of byond for animating filters
+	animate(peculation_filter, radius = 0, time = 0.2 SECONDS, size = 2, easing = JUMP_EASING, loop = -1, flags = ANIMATION_PARALLEL)
+	animate(radius = 32, time = 1.5 SECONDS, size = 0)
 
 /mob/living/proc/peculation_animation_end()
 	filters -= filters["peculation"]
