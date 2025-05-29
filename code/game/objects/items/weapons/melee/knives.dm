@@ -444,13 +444,13 @@
 	user.peculation_animation_end()
 
 /mob/living/proc/peculation_animation_begin()
-	var/peculation_filter = filter(type = "ripple", name = "peculation", 2, flags = WAVE_BOUNDED, radius = 0, size = 2)
-	filters += peculation_filter
-	animate(peculation_filter, radius = 0, time = 0.2 SECONDS, size = 2, easing = JUMP_EASING, loop = -1, flags = ANIMATION_PARALLEL)
-	animate(radius = 32, time = 1.5 SECONDS, size = 0)
+	add_filter("peculation", 2, list("type" = "ripple", "flags" = WAVE_BOUNDED, "radius" = 0, "size" = 3))
+	var/filter = get_filter("portal_ripple")
+	animate(filter, radius = 0, time = 0.2 SECONDS, size = 2, easing = JUMP_EASING, loop = -1, flags = ANIMATION_PARALLEL)
+	animate(radius = 32, time = 0.5 SECONDS, size = 0)
 
 /mob/living/proc/peculation_animation_end()
-	filters -= filters["peculation"]
+	remove_filter("peculation")
 
 /obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)

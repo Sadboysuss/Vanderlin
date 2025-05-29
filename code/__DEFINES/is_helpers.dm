@@ -11,6 +11,8 @@
 #define isweakref(D) (istype(D, /datum/weakref))
 
 #define isdatum(D) (istype(D, /datum))
+
+#define isimage(thing) (istype(thing, /image))
 //Turfs
 //#define isturf(A) (istype(A, /turf)) This is actually a byond built-in. Added here for completeness sake.
 

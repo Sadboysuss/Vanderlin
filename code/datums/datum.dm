@@ -49,6 +49,8 @@
 	var/list/cooldowns
 	var/abstract_type = /datum
 
+	var/list/filter_data //For handling persistent filters
+
 #ifdef TESTING
 	var/running_find_references
 	var/last_find_references = 0
@@ -261,3 +263,77 @@
 /// Returns whether a type is an abstract type.
 /proc/is_abstract(datum/datum_type)
 	return (initial(datum_type.abstract_type) == datum_type)
+
+/** Add a filter to the datum.
+ * This is on datum level, despite being most commonly / primarily used on atoms, so that filters can be applied to images / mutable appearances.
+ * Can also be used to assert a filter's existence. I.E. update a filter regardless if it exists or not.
+ *
+ * Arguments:
+ * * name - Filter name
+ * * priority - Priority used when sorting the filter.
+ * * params - Parameters of the filter.
+ */
+/datum/proc/add_filter(name, priority, list/params)
+	LAZYINITLIST(filter_data)
+	var/list/copied_parameters = params.Copy()
+	copied_parameters["priority"] = priority
+	filter_data[name] = copied_parameters
+	update_filters()
+
+///A version of add_filter that takes a list of filters to add rather than being individual, to limit calls to update_filters().
+/datum/proc/add_filters(list/list/filters)
+	LAZYINITLIST(filter_data)
+	for(var/list/individual_filter as anything in filters)
+		var/list/params = individual_filter["params"]
+		var/list/copied_parameters = params.Copy()
+		copied_parameters["priority"] = individual_filter["priority"]
+		filter_data[individual_filter["name"]] = copied_parameters
+	update_filters()
+
+/// Returns the filter associated with the passed key
+/datum/proc/get_filter(name)
+	ASSERT(isatom(src) || isimage(src))
+	if(filter_data && filter_data[name])
+		var/atom/atom_cast = src // filters only work with images or atoms.
+		return atom_cast.filters[filter_data.Find(name)]
+
+/// Returns the indice in filters of the given filter name.
+/// If it is not found, returns null.
+/datum/proc/get_filter_index(name)
+	return filter_data?.Find(name)
+
+/// Reapplies all the filters.
+/datum/proc/update_filters()
+	ASSERT(isatom(src) || isimage(src))
+	var/atom/atom_cast = src // filters only work with images or atoms.
+	atom_cast.filters = null
+	sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
+	for(var/filter_raw in filter_data)
+		var/list/data = filter_data[filter_raw]
+		var/list/arguments = data.Copy()
+		arguments -= "priority"
+		atom_cast.filters += filter(arglist(arguments))
+	UNSETEMPTY(filter_data)
+
+/// Removes the passed filter, or multiple filters, if supplied with a list.
+/datum/proc/remove_filter(name_or_names)
+	if(!filter_data)
+		return
+
+	var/list/names = islist(name_or_names) ? name_or_names : list(name_or_names)
+
+	. = FALSE
+	for(var/name in names)
+		if(filter_data[name])
+			filter_data -= name
+			. = TRUE
+
+	if(.)
+		update_filters()
+	return .
+
+/datum/proc/clear_filters()
+	ASSERT(isatom(src) || isimage(src))
+	var/atom/atom_cast = src // filters only work with images or atoms.
+	filter_data = null
+	atom_cast.filters = null
