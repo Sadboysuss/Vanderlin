@@ -1269,3 +1269,7 @@
 			if(!start.CanAtmosPass(adj))
 				continue
 			_propagate_turf_heat(source, adj, key, next_value, next_weight, falloff, max_depth, depth + 1, seen)
+
+
+/atom/movable/proc/debug_filter_add()
+	var/filter = filter(type = "displace", )
