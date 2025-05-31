@@ -1272,4 +1272,6 @@
 
 
 /atom/movable/proc/debug_filter_add()
-	var/filter = filter(type = "displace", )
+	filters += filter(type = "displace",name = "debug", icon = 'icons/displacement_maps/cool_filter.dmi', size = 32)
+	animate(filters["debug"], time = 2 SECONDS, loop = -1, size = 0)
+	animate(time = 2 SECONDS, size = 32)
