@@ -238,7 +238,7 @@
 				if(ishuman(user))
 					var/mob/living/carbon/H = user
 					H.update_inv_head()
-		user.update_fov_angles()
+		//user.update_fov_angles()
 	else // Failsafe.
 		to_chat(user, "<span class='warning'>Wear the helmet on your head to open and close the visor.</span>")
 		return

@@ -487,7 +487,7 @@ BLIND     // can't see anything
 		H.update_inv_cloak()
 		H.update_inv_neck()
 		H.update_inv_pants()
-		H.update_fov_angles()
+		//H.update_fov_angles()
 	else
 //		hood.forceMove(src)
 		hood.moveToNullspace()
@@ -521,6 +521,6 @@ BLIND     // can't see anything
 				H.update_inv_cloak()
 				H.update_inv_neck()
 				H.update_inv_pants()
-				H.update_fov_angles()
+				//H.update_fov_angles()
 	else
 		RemoveHood()

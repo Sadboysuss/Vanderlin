@@ -1584,10 +1584,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone)
 	// Allows you to put in item-specific reactions based on species
-	if(user != H)
-		if(H.can_see_cone(user))
-			if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armor_penetration))
-				return 0
+	//if(user != H)
+	//	if(H.can_see_cone(user))
+		//	if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armor_penetration))
+		//		return 0
 	if(H.check_block())
 		H.visible_message("<span class='warning'>[H] blocks [I]!</span>", \
 						"<span class='danger'>I block [I]!</span>")

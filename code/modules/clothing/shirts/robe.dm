@@ -223,7 +223,7 @@
 				H.update_inv_cloak()
 				H.update_inv_neck()
 				H.update_inv_pants()
-				H.update_fov_angles()
+			//	H.update_fov_angles()
 	else
 		RemoveHood()
 
@@ -244,7 +244,7 @@
 		H.update_inv_cloak()
 		H.update_inv_neck()
 		H.update_inv_pants()
-		H.update_fov_angles()
+		//H.update_fov_angles()
 	else
 		hood.moveToNullspace()
 	for(var/X in actions)

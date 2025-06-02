@@ -361,10 +361,10 @@
 	var/turf/post_turf = get_turf(pulling)
 	if(pre_turf.snow && !post_turf.snow)
 		SEND_SIGNAL(pre_turf.snow, COMSIG_MOB_OVERLAY_FORCE_REMOVE, pulling)
-		if(ismob(src))
-			var/mob/source = src
-			source.update_vision_cone()
-	return TRUE
+		//if(ismob(src))
+			//var/mob/source = src
+			//source.update_vision_cone()
+	//return TRUE
 
 /mob/living/Move_Pulled(atom/A)
 	. = ..()

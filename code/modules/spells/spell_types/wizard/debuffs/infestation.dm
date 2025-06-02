@@ -48,12 +48,12 @@
 	to_chat(owner, span_danger("I am suddenly surrounded by a cloud of bugs!"))
 	target.Jitter(20)
 	target.add_overlay(rotten)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 
 /datum/status_effect/buff/infestation5e/on_remove()
 	var/mob/living/target = owner
 	target.cut_overlay(rotten)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	. = ..()
 
 /datum/status_effect/buff/infestation5e/tick()

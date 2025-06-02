@@ -30,7 +30,7 @@
 		pixel_y = final_pixel_y
 		dir = final_dir
 		setMovetype(movement_type & ~FLOATING)  // If we were without gravity, the bouncing animation got stopped, so we make sure we restart it in next life().
-		update_vision_cone()
+		//update_vision_cone()
 	else
 		pixel_x = get_standard_pixel_x_offset()
 		pixel_y = get_standard_pixel_y_offset(lying_angle)
@@ -41,16 +41,16 @@
 /mob/living/proc/apply_overlay(cache_index)
 	if((. = overlays_standing[cache_index]))
 		add_overlay(.)
-	if(client)
-		update_vision_cone()
+	//if(client)
+		//update_vision_cone()
 
 /mob/living/proc/remove_overlay(cache_index)
 	var/I = overlays_standing[cache_index]
 	if(I)
 		cut_overlay(I)
 		overlays_standing[cache_index] = null
-	if(client)
-		update_vision_cone()
+	//if(client)
+		//update_vision_cone()
 
 /mob/living/carbon/regenerate_icons()
 	if(notransform)

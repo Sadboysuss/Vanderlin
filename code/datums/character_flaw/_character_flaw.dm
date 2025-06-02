@@ -280,7 +280,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/eyes/right/permanent)
-	H.update_fov_angles()
+	//H.update_fov_angles()
 
 /datum/charflaw/noeyel
 	name = "Cyclops (L)"
@@ -300,7 +300,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
-	H.update_fov_angles()
+	//H.update_fov_angles()
 
 /datum/charflaw/noeyerandom
 	name = "Cyclops (Random)"

@@ -34,12 +34,12 @@
 		RegisterSignal(user, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	else
 		UnregisterSignal(user, COMSIG_MOB_SAY)
-	user.update_fov_angles()
+	//user.update_fov_angles()
 
 /obj/item/clothing/face/dropped(mob/user)
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOB_SAY)
-	user.update_fov_angles()
+	//user.update_fov_angles()
 
 /obj/item/clothing/face/proc/handle_speech()
 

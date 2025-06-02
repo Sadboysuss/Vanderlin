@@ -136,13 +136,13 @@
 	mana_over.hud = src
 	static_inventory += mana_over
 
-	fov = new /atom/movable/screen/fov()
-	fov.hud = src
-	static_inventory += fov
+	//fov = new /atom/movable/screen/fov()
+	//fov.hud = src
+	//static_inventory += fov
 
-	fov_blocker = new /atom/movable/screen/fov_blocker()
-	fov_blocker.hud = src
-	static_inventory += fov_blocker
+	//fov_blocker = new /atom/movable/screen/fov_blocker()
+	//fov_blocker.hud = src
+	//static_inventory += fov_blocker
 
 	cdleft = new /atom/movable/screen/action_bar/clickdelay/left()
 	cdleft.hud = src

@@ -774,7 +774,7 @@
 /datum/status_effect/buff/frostbite/on_apply()
 	. = ..()
 	var/mob/living/target = owner
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	var/newcolor = rgb(136, 191, 255)
 	target.add_atom_colour(newcolor, TEMPORARY_COLOUR_PRIORITY)
 	addtimer(CALLBACK(target, TYPE_PROC_REF(/atom, remove_atom_colour), TEMPORARY_COLOUR_PRIORITY, newcolor), 20 SECONDS)
@@ -782,7 +782,7 @@
 
 /datum/status_effect/buff/frostbite/on_remove()
 	var/mob/living/target = owner
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	target.remove_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, TRUE)
 	. = ..()
 

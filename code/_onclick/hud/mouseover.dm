@@ -149,10 +149,10 @@
 		if(!p.client.mouseovertext)
 			p.client.genmouseobj()
 			return FALSE
-		if(isliving(p))
-			var/mob/living/L = p
-			if(!L.can_see_cone(src))
-				return FALSE
+		//if(isliving(p))
+			//var/mob/living/L = p
+			//if(!L.can_see_cone(src))
+			//	return FALSE
 		if(p.client.pixel_x || p.client.pixel_y)
 			return FALSE
 		if(alpha == 0)

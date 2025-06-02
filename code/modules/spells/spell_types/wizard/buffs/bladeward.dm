@@ -60,12 +60,12 @@
 	. = ..()
 	var/mob/living/target = owner
 	target.add_overlay(ward)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 
 /datum/status_effect/buff/duration_modification/bladeward5e/on_remove()
 	var/mob/living/target = owner
 	target.cut_overlay(ward)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	. = ..()
 
 /obj/effect/proc_holder/spell/self/bladeward5e/test

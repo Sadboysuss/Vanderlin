@@ -260,10 +260,10 @@
 	if(src && user)
 		prob2defend = 0
 
-	if(!can_see_cone(user))
-		if(d_intent == INTENT_PARRY)
-			return FALSE
-		prob2defend = max(prob2defend - 15, 0)
+	//if(!can_see_cone(user))
+	//	if(d_intent == INTENT_PARRY)
+	//		return FALSE
+	//	prob2defend = max(prob2defend - 15, 0)
 
 	if(m_intent == MOVE_INTENT_RUN)
 		prob2defend = max(prob2defend - 15, 0)

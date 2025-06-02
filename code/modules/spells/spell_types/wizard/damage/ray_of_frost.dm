@@ -66,7 +66,7 @@
 	. = ..()
 	var/mob/living/target = owner
 	target.add_overlay(frost)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	var/newcolor = rgb(136, 191, 255)
 	target.add_atom_colour(newcolor, TEMPORARY_COLOUR_PRIORITY)
 	addtimer(CALLBACK(target, TYPE_PROC_REF(/atom, remove_atom_colour), TEMPORARY_COLOUR_PRIORITY, newcolor), 6 SECONDS)
@@ -75,6 +75,6 @@
 /datum/status_effect/buff/rayoffrost5e/on_remove()
 	var/mob/living/target = owner
 	target.cut_overlay(frost)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	target.remove_movespeed_modifier(MOVESPEED_ID_ADMIN_VAREDIT, TRUE)
 	. = ..()

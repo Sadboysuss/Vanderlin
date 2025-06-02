@@ -69,11 +69,11 @@
 
 /obj/item/clothing/head/hooded/equipped(mob/user, slot)
 	. = ..()
-	user.update_fov_angles()
+	//user.update_fov_angles()
 
 /obj/item/clothing/head/hooded/dropped(mob/user)
 	. = ..()
-	user.update_fov_angles()
+	//user.update_fov_angles()
 
 /obj/item/clothing/cloak/raincloak/furcloak
 	name = "fur cloak"

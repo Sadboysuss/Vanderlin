@@ -311,7 +311,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	RegisterSignal(new_character, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		new_character.key = key		//now transfer the key to link the client to our new body
-	new_character.update_fov_angles()
+	//new_character.update_fov_angles()
 	SEND_SIGNAL(old_current, COMSIG_MIND_TRANSFER, new_character)
 
 /**

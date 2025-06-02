@@ -50,13 +50,13 @@
 	. = ..()
 	var/mob/living/target = owner
 	target.add_overlay(glow)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	start_pos = get_turf(target) //set buff starting position
 
 /datum/status_effect/buff/boomingblade5e/on_remove()
 	var/mob/living/target = owner
 	target.cut_overlay(glow)
-	target.update_vision_cone()
+	//target.update_vision_cone()
 	. = ..()
 
 /datum/status_effect/buff/boomingblade5e/tick()

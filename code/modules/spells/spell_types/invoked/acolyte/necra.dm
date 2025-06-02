@@ -93,7 +93,7 @@
 		capturedsoul.setDir(2)
 		capturedsoul.orbit(user, orbitsize, FALSE, 20, 36)
 
-		capturedsoul.update_cone()
+		//capturedsoul.update_cone()
 
 		addtimer(CALLBACK(src, PROC_REF(return_soul), user, capturedsoul, itemstore), 60 SECONDS)
 		addtimer(CALLBACK(src, PROC_REF(return_soul_warning), user, capturedsoul), 50 SECONDS)
@@ -125,7 +125,7 @@
 	soul.fully_heal(FALSE)
 	soul.invisibility = initial(soul.invisibility)
 	soul.status_flags &= ~GODMODE
-	soul.update_cone()
+	//soul.update_cone()
 	soul.density = initial(soul.density)
 	SSdeath_arena.add_fighter(soul, soul.mind?.last_death)
 

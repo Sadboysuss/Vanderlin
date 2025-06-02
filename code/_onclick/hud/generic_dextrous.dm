@@ -54,9 +54,9 @@
 	hsover.hud = src
 	static_inventory += hsover
 
-	fov = new /atom/movable/screen/fov()
-	fov.hud = src
-	static_inventory += fov
+	//fov = new /atom/movable/screen/fov()
+	//fov.hud = src
+	//static_inventory += fov
 
 	cdleft = new /atom/movable/screen/action_bar/clickdelay/left()
 	cdleft.hud = src

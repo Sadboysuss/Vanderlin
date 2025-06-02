@@ -1,3 +1,5 @@
+/*
+
 
 /client
 	var/list/hidden_atoms = list()
@@ -349,3 +351,5 @@
 	mouse_opacity = 0
 	layer = HUD_LAYER
 	plane = HUD_PLANE-1
+
+*/

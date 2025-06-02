@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(incone)
 			if (MC_TICK_CHECK)
 				return
 			continue
-		thing.update_cone()
+		//thing.update_cone()
 		STOP_PROCESSING(SSincone, thing)
 		if (MC_TICK_CHECK)
 			return

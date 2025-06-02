@@ -79,7 +79,7 @@
 	reflective_icon = MAM
 	reflective_icon.pixel_y = -32
 	add_overlay(reflective_icon)
-	update_vision_cone()
+	//update_vision_cone()
 
 /mob/living/carbon/human/dummy
 	has_reflection = FALSE
@@ -108,7 +108,7 @@
 	I.Flip(NORTH)
 	reflective_icon.filters += filter(type = "alpha", icon = I)
 	add_overlay(reflective_icon)
-	update_vision_cone()
+	//update_vision_cone()
 
 /mob/living/onZImpact(turf/T, levels)
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
@@ -997,8 +997,8 @@
 	..()
 	if(olddir != dir)
 		stop_looking()
-		if(client)
-			update_vision_cone()
+		//if(client)
+			//update_vision_cone()
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
 	if(!has_gravity())
@@ -1946,7 +1946,7 @@
 	else // From lying down to standing up.
 		on_standing_up()
 
-	update_cone_show()
+	//update_cone_show()
 
 /// Proc to append behavior to the condition of being floored. Called when the condition starts.
 /mob/living/proc/on_floored_start()
@@ -2081,7 +2081,7 @@
 	if(!do_after(src, ttime))
 		return
 	reset_perspective(ceiling)
-	update_cone_show()
+	//update_cone_show()
 	if(T.can_see_sky())
 		switch(GLOB.forecast)
 			if("prerain")
@@ -2118,7 +2118,7 @@
 		return
 	if(_y > 7 || _y < -7)
 		return
-	hide_cone()
+	//hide_cone()
 	var/ttime = 10
 	if(STAPER > 5)
 		ttime = 10 - (STAPER - 5)
@@ -2128,7 +2128,7 @@
 		visible_message("<span class='info'>[src] looks into the distance.</span>")
 	animate(client, pixel_x = world.icon_size*_x, pixel_y = world.icon_size*_y, ttime)
 //	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking))
-	update_cone_show()
+	//update_cone_show()
 
 /mob/proc/look_down(turf/T)
 	return
@@ -2163,7 +2163,7 @@
 
 	changeNext_move(CLICK_CD_MELEE)
 	reset_perspective(OS)
-	update_cone_show()
+	//update_cone_show()
 //	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking))
 
 /mob/living/proc/stop_looking()
@@ -2172,7 +2172,7 @@
 		client.pixel_x = 0
 		client.pixel_y = 0
 	reset_perspective()
-	update_cone_show()
+	//update_cone_show()
 //	UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE)
 
 /mob/living/set_stat(new_stat)

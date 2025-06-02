@@ -117,7 +117,7 @@
 				if(ishuman(user))
 					var/mob/living/carbon/H = user
 					H.update_inv_head()
-		user.update_fov_angles()
+		//user.update_fov_angles()
 		user.regenerate_clothes()
 
 

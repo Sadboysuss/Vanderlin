@@ -20,10 +20,10 @@
 /proc/rogueviewers(range, object)
 	. = list(viewers(range, object))
 	if(isliving(object))
-		var/mob/living/LI = object
+		//var/mob/living/LI = object
 		for(var/mob/living/L in .)
-			if(!L.can_see_cone(LI))
-				. -= L
+			//if(!L.can_see_cone(LI))
+			//	. -= L
 			if(HAS_TRAIT(L, TRAIT_BLIND))
 				. -= L
 

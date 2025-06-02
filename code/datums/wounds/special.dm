@@ -81,7 +81,7 @@
 /datum/wound/facial/eyes/right/on_mob_gain(mob/living/affected)
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
-	affected.update_fov_angles()
+	//affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
 		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
 		if(my_eyes)
@@ -91,7 +91,7 @@
 /datum/wound/facial/eyes/right/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
-	affected.update_fov_angles()
+	//affected.update_fov_angles()
 
 /datum/wound/facial/eyes/right/permanent
 	whp = null
@@ -116,7 +116,7 @@
 /datum/wound/facial/eyes/left/on_mob_gain(mob/living/affected)
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
-	affected.update_fov_angles()
+	//affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
 		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
 		if(my_eyes)
@@ -126,7 +126,7 @@
 /datum/wound/facial/eyes/left/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
-	affected.update_fov_angles()
+	//affected.update_fov_angles()
 
 /datum/wound/facial/eyes/left/permanent
 	whp = null
