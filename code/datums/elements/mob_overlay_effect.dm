@@ -1,3 +1,4 @@
+/*
 ///The alpha mask used on mobs submerged in liquid turfs or standing on high ground
 #define MOB_MOVING_EFFECT_MASK "mob_moving_effect_mask"
 ///mob_overlay_effect component. adds and removes
@@ -82,3 +83,5 @@
 	on_remove(src, source)
 
 #undef MOB_MOVING_EFFECT_MASK
+
+*/

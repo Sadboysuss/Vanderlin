@@ -230,9 +230,9 @@
 			contained_mobs += contained_machinery
 			SEND_SIGNAL(src, COMSIG_MOB_OVERLAY_FORCE_REMOVE, contained_machinery)
 
-	RemoveElement(/datum/element/mob_overlay_effect)
+	//RemoveElement(/datum/element/mob_overlay_effect)
 	if(replace)
-		AddElement(/datum/element/mob_overlay_effect, bleed_layer * 2.4, -6 + (bleed_layer * 3.5), 100)
+		//AddElement(/datum/element/mob_overlay_effect, bleed_layer * 2.4, -6 + (bleed_layer * 3.5), 100)
 		for(var/mob/living/contained_mob as anything in contained_mobs)
 			SEND_SIGNAL(src, COMSIG_MOB_OVERLAY_FORCE_UPDATE, contained_mob)
 		for(var/obj/structure/contained_structure in contained_mobs)
