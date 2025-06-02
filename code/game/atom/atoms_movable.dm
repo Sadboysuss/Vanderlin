@@ -1365,3 +1365,12 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	var/direction = get_dir(old_loc, new_loc)
 	loc = new_loc
 	Moved(old_loc, direction, TRUE)
+
+/atom/movable/proc/debug_anim()
+	add_filter("debug", 1, filter(type = "motion_blur", x = 1))
+	INVOKE_ASYNC(src, PROC_REF(actually_debug_anim))
+
+/atom/movable/proc/actually_debug_anim()
+	animate(get_filter("debug"), time = 10, loop = -1, x = 0, y = 1)
+	animate(time = 15, x = 1, y = 3)
+	animate(time = 15, x = 4, y = 1)
